@@ -11,9 +11,9 @@ RSpec.describe Mihari::Artifact do
         )
       }
 
-      it "returns 'hash'" do
+      it "returns hash" do
         values.each do |value|
-          expect(described_class.new(value).type).to eq("hash")
+          expect(described_class.new(value).data_type).to eq("hash")
         end
       end
     end
@@ -30,7 +30,23 @@ RSpec.describe Mihari::Artifact do
 
       it "returns ip" do
         values.each do |value|
-          expect(described_class.new(value).type).to eq("ip")
+          expect(described_class.new(value).data_type).to eq("ip")
+        end
+      end
+    end
+
+    context "when given a domain" do
+      let(:values) {
+        %w(
+          github.com
+          example.com
+          google.co.jp
+        )
+      }
+
+      it "returns domain" do
+        values.each do |value|
+          expect(described_class.new(value).data_type).to eq("domain")
         end
       end
     end
@@ -46,15 +62,30 @@ RSpec.describe Mihari::Artifact do
         )
       }
 
-      it "returns ip" do
+      it "returns url" do
         values.each do |value|
-          expect(described_class.new(value).type).to eq("url")
+          expect(described_class.new(value).data_type).to eq("url")
+        end
+      end
+    end
+
+    context "when given an email" do
+      let(:values) {
+        %w(
+          allen@google.com
+          ninoseki@gmail.com
+        )
+      }
+
+      it "returns mail" do
+        values.each do |value|
+          expect(described_class.new(value).data_type).to eq("mail")
         end
       end
     end
   end
 
-  describe "#initialize" do
+  describe "#valid?" do
     context "when given an invalid input" do
       let(:values) {
         %w(
@@ -64,9 +95,9 @@ RSpec.describe Mihari::Artifact do
         )
       }
 
-      it "raises an ArgumentError" do
+      it "return false" do
         values.each do |value|
-          expect { described_class.new(value) }.to raise_error(ArgumentError)
+          expect(described_class.new(value).valid?).to be false
         end
       end
     end

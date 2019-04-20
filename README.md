@@ -1,9 +1,7 @@
 # mihari
 
-mihari(`見張り`) is a tool for continuous C2 / landing page monitoring.
+mihari(`見張り`) is a framework for continuous malicious hosts (C2 / landing page / phishing, etc.) monitoring backended with [TheHive](https://github.com/TheHive-Project/TheHive).
 
-## Features
+## License
 
-## Supported services
-
-##
+The gem is available as open source under the terms of the [MIT License](https://opensource.org/licenses/MIT).

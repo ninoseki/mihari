@@ -32,7 +32,9 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency "webmock", "~> 3.5"
 
   spec.add_dependency "addressable", "~> 2.6"
+  spec.add_dependency "email_address", "~> 0.1"
   spec.add_dependency "hachi", "~> 0.1"
+  spec.add_dependency "mem", "~> 0.1"
   spec.add_dependency "public_suffix", "~> 3.0"
   spec.add_dependency "slack-incoming-webhooks", "~> 0.2"
 end

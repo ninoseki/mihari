@@ -1,0 +1,112 @@
+---
+http_interactions:
+- request:
+    method: post
+    uri: http://<API_ENDPOINT>:9000/api/case/artifact/_search?range=0-1
+    body:
+      encoding: UTF-8
+      string: '{"query":{"_and":[{"_field":"data","_value":"1.1.1.1"},{"_field":"dataType","_value":"ip"},{"_and":[{"_not":{"status":"Deleted"}},{"_not":{"_in":{"_field":"_type","_values":["dashboard","data","user","analyzer","caseTemplate","reportTemplate","action"]}}}]}]}}'
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+      Host:
+      - "<API_ENDPOINT>:9000"
+      Content-Type:
+      - application/json
+      Authorization:
+      - Bearer <API_KEY>
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      X-Total:
+      - '1'
+      Date:
+      - Sat, 20 Apr 2019 22:54:11 GMT
+      Transfer-Encoding:
+      - chunked
+      Content-Type:
+      - application/json
+    body:
+      encoding: UTF-8
+      string: '[{"_routing":"AWoZBct1H8Rbrc-EdGwH","reports":{},"data":"1.1.1.1","dataType":"ip","_type":"case_artifact","sighted":false,"message":"","tags":["test"],"createdAt":1555197983904,"_parent":"AWoZBct1H8Rbrc-EdGwH","createdBy":"test","tlp":2,"_id":"3838d1265112313b4bb3f55acae37ad5","id":"3838d1265112313b4bb3f55acae37ad5","ioc":false,"_version":1,"startDate":1555197983922,"status":"Ok"}]'
+    http_version: 
+  recorded_at: Sat, 20 Apr 2019 22:54:11 GMT
+- request:
+    method: post
+    uri: http://<API_ENDPOINT>:9000/api/case/artifact/_search?range=0-1
+    body:
+      encoding: UTF-8
+      string: '{"query":{"_and":[{"_field":"data","_value":"google.com"},{"_field":"dataType","_value":"domain"},{"_and":[{"_not":{"status":"Deleted"}},{"_not":{"_in":{"_field":"_type","_values":["dashboard","data","user","analyzer","caseTemplate","reportTemplate","action"]}}}]}]}}'
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+      Host:
+      - "<API_ENDPOINT>:9000"
+      Content-Type:
+      - application/json
+      Authorization:
+      - Bearer <API_KEY>
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      X-Total:
+      - '0'
+      Date:
+      - Sat, 20 Apr 2019 22:54:11 GMT
+      Transfer-Encoding:
+      - chunked
+      Content-Type:
+      - application/json
+    body:
+      encoding: UTF-8
+      string: "[]"
+    http_version: 
+  recorded_at: Sat, 20 Apr 2019 22:54:11 GMT
+- request:
+    method: post
+    uri: http://<API_ENDPOINT>:9000/api/alert
+    body:
+      encoding: UTF-8
+      string: '{"title":"Test","description":"test","type":"external","source":"mihari","sourceRef":"8c9ecaad550445f565e0","artifacts":[{"data":"google.com","dataType":"domain","message":"google.com"}]}'
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+      Host:
+      - "<API_ENDPOINT>:9000"
+      Content-Type:
+      - application/json
+      Authorization:
+      - Bearer <API_KEY>
+  response:
+    status:
+      code: 201
+      message: Created
+    headers:
+      Date:
+      - Sat, 20 Apr 2019 22:54:11 GMT
+      Content-Type:
+      - application/json
+      Content-Length:
+      - '521'
+    body:
+      encoding: UTF-8
+      string: '{"date":1555800851283,"severity":2,"_routing":"ed7c883fb41e87b249b551f9dc021418","customFields":{},"_type":"alert","description":"test","lastSyncDate":1555800851283,"source":"mihari","title":"Test","type":"external","follow":true,"createdAt":1555800851282,"_parent":null,"createdBy":"test","tlp":2,"_id":"ed7c883fb41e87b249b551f9dc021418","id":"ed7c883fb41e87b249b551f9dc021418","sourceRef":"8c9ecaad550445f565e0","_version":1,"status":"New","artifacts":[{"data":"google.com","dataType":"domain","message":"google.com"}]}'
+    http_version: 
+  recorded_at: Sat, 20 Apr 2019 22:54:11 GMT
+recorded_with: VCR 4.0.0

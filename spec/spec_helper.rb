@@ -2,6 +2,8 @@
 
 require "bundler/setup"
 
+require "vcr"
+
 require "simplecov"
 require "coveralls"
 SimpleCov.formatter = Coveralls::SimpleCov::Formatter
@@ -22,4 +24,15 @@ RSpec.configure do |config|
   config.expect_with :rspec do |c|
     c.syntax = :expect
   end
+end
+
+VCR.configure do |config|
+  config.cassette_library_dir = "spec/fixtures/vcr_cassettes"
+  config.configure_rspec_metadata!
+  config.hook_into :webmock
+  config.ignore_localhost = false
+
+  config.filter_sensitive_data("<API_KEY>") { ENV["THEHIVE_API_KEY"] }
+  uri = URI(ENV["THEHIVE_API_ENDPOINT"])
+  config.filter_sensitive_data("<API_ENDPOINT>") { uri.hostname }
 end

@@ -51,3 +51,6 @@ Gemfile.lock
 
 # rspec
 .rspec_status
+
+# solargraph
+.solargraph.yml

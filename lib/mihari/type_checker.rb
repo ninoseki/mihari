@@ -1,15 +1,16 @@
 # frozen_string_literal: true
 
 require "addressable/uri"
+require "email_address"
 require "ipaddr"
 require "public_suffix"
 
 module Mihari
   class TypeChecker
-    attr_reader :value
+    attr_reader :data
 
-    def initialize(value)
-      @value = value
+    def initialize(data)
+      @data = data
     end
 
     def hash?
@@ -17,21 +18,28 @@ module Mihari
     end
 
     def ip?
-      IPAddr.new value
+      IPAddr.new data
       true
     rescue IPAddr::InvalidAddressError => _
       false
     end
 
     def domain?
-      PublicSuffix.valid? value
+      uri = Addressable::URI.parse("http://#{data}")
+      uri.host == data && PublicSuffix.valid?(uri.host)
+    rescue Addressable::URI::InvalidURIError => _
+      false
     end
 
     def url?
-      uri = Addressable::URI.parse(value)
+      uri = Addressable::URI.parse(data)
       uri.scheme && uri.host && uri.path && PublicSuffix.valid?(uri.host)
     rescue Addressable::URI::InvalidURIError => _
       false
+    end
+
+    def mail?
+      EmailAddress.valid? data
     end
 
     def type
@@ -39,28 +47,29 @@ module Mihari
       return "ip" if ip?
       return "domain" if domain?
       return "url" if url?
+      return "mail" if mail?
     end
 
-    def self.type(value)
-      new(value).type
+    def self.type(data)
+      new(data).type
     end
 
     private
 
     def md5?
-      value.match? /^[A-Fa-f0-9]{32}$/
+      data.match? /^[A-Fa-f0-9]{32}$/
     end
 
     def sha1?
-      value.match? /^[A-Fa-f0-9]{40}$/
+      data.match? /^[A-Fa-f0-9]{40}$/
     end
 
     def sha256?
-      value.match? /^[A-Fa-f0-9]{64}$/
+      data.match? /^[A-Fa-f0-9]{64}$/
     end
 
     def sha512?
-      value.match? /^[A-Fa-f0-9]{128}$/
+      data.match? /^[A-Fa-f0-9]{128}$/
     end
   end
 end
