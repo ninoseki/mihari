@@ -27,3 +27,5 @@ require "mihari/analyzer"
 require "mihari/notifiers/base"
 require "mihari/notifiers/slack"
 require "mihari/notifiers/the_hive"
+
+require "mihari/cli"

@@ -14,9 +14,14 @@ module Mihari
       end
 
       def notify(title:, description:, artifacts:)
-        return if artifacts.empty?
+        if artifacts.empty?
+          puts "No unique artifacts given"
+          return
+        end
 
-        api.create_alert(title: title, description: description, artifacts: artifacts.map(&:to_h))
+        res = api.create_alert(title: title, description: description, artifacts: artifacts.map(&:to_h))
+        id = res.dig("id")
+        puts "A new alret is created: id = #{id}"
       end
     end
   end

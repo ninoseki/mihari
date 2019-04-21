@@ -20,17 +20,27 @@ module Mihari
       raise NotImplementedError, "You must implement #{self.class}##{__method__}"
     end
 
+    def with_error_handling
+      yield
+    rescue ArgumentError => e
+      raise e
+    rescue Hachi::Error => e
+      puts e
+    end
+
     def run(reject_exists_ones: true)
-      valid_artifacts = artifacts.select(&:valid?)
-      unique_artifacts = valid_artifacts.reject do |artifact|
-        reject_exists_ones & the_hive.valid? && the_hive.exists?(data: artifact.data, data_type: artifact.data_type)
-      end
+      with_error_handling do
+        valid_artifacts = artifacts.select(&:valid?)
+        unique_artifacts = valid_artifacts.reject do |artifact|
+          reject_exists_ones & the_hive.valid? && the_hive.exists?(data: artifact.data, data_type: artifact.data_type)
+        end
 
-      Mihari.notifiers.each do |notifier_class|
-        notifier = notifier_class.new
-        next unless notifier.valid?
+        Mihari.notifiers.each do |notifier_class|
+          notifier = notifier_class.new
+          next unless notifier.valid?
 
-        notifier.notify(title: title, description: description, artifacts: unique_artifacts)
+          notifier.notify(title: title, description: description, artifacts: unique_artifacts)
+        end
       end
     end
   end
