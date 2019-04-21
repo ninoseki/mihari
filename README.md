@@ -7,7 +7,7 @@ mihari(`見張り`) is a framework for continuous malicious hosts (C2 / landing 
 - mihari checks whether a TheHive instance contains a given artifact or not.
   - If it doesn't contain a given artifact:
     - mihari creates an alert on the TheHive instance.
-    - mihari sends a notifiaction to Slack. (optional)
+    - mihari sends a notification to Slack. (Optional)
 
 ## Installation
 
@@ -15,9 +15,30 @@ mihari(`見張り`) is a framework for continuous malicious hosts (C2 / landing 
 gem install mihari
 ```
 
+## Configuration
+
+All configuration is done via ENV variables.
+
+| Key                  | Desc.              | Required or optional           |
+|----------------------|--------------------|--------------------------------|
+| THEHIVE_API_ENDPOINT | TheHive URL        | Required                       |
+| THEHIVE_API_KEY      | TheHive API key    | Required                       |
+| SLACK_WEBHOOK_URL    | Slack Webhook URL  | Optional                       |
+| SLACK_CHANNEL        | Slack channel name | Optional (default: `#general`) |
+
 ## Basic usage
 
-### Input
+### Censys
+
+```bash
+mihari censys "YOUR_QUERY"
+```
+
+### Import from JSON
+
+```bash
+echo '{ "title": "test", "description": "test", "artifacts": ["1.1.1.1", "github.com", "2.2.2.2"] }' | mihari import_from_json
+```
 
 The input is a JSON data should have `title`, `description` and `artifacts` key.
 
@@ -33,7 +54,7 @@ The input is a JSON data should have `title`, `description` and `artifacts` key.
 |-------------|---------------------------------------------------------------------------|
 | title       | A title of an alert                                                       |
 | description | A description of an alert                                                 |
-| artifacts   | AN array of artifacts. Supported data types: ip, domain, url, email, hash |
+| artifacts   | An array of artifacts. Supported data types: ip, domain, url, email, hash |
 
 ```bash
 $ echo '{ "title": "test", "description": "test", "artifacts": ["1.1.1.1", "github.com"] }' | mihari
@@ -44,8 +65,8 @@ A new alret is created: id = 7585e892636419a25af2a327ae14c91b
 
 Create a class which:
 
-- extends `Mihari::Analyzer`
-- implements the following methods:
+- Extends `Mihari::Analyzers::Base`
+- Implements the following methods:
   - `#title`
   - `#description`
   - `#artifacts`
@@ -54,28 +75,26 @@ Create a class which:
 require "mihari"
 
 module Mihari
-  class ExampleAnalyzer < Analyzer
-    def title
-      "example"
-    end
+  module Analyzers
+    class Example < Base
+      def title
+        "example"
+      end
 
-    def description
-      "example"
-    end
+      def description
+        "example"
+      end
 
-    def artifacts
-      [
-        Aritfact.new("9.9.9.9"),
-        Artifact.new("example.com")
-      ]
+      def artifacts
+        ["9.9.9.9", "example.com"]
+      end
     end
   end
 end
 
-example_analyzer = Mihari::ExampleAnalyzer.new
-example_analyzer.run
+example = Mihari::Analyzers::Example.new
+example.run
 ```
-
 
 ## License
 

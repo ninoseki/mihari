@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
-RSpec.describe Mihari::Analyzer, :vcr do
-  class Test < Mihari::Analyzer
+RSpec.describe Mihari::Analyzers::Base, :vcr do
+  class Test < Mihari::Analyzers::Base
     def artifacts
       [Mihari::Artifact.new("1.1.1.1"), Mihari::Artifact.new("google.com")]
     end

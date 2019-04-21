@@ -22,7 +22,9 @@ require "mihari/artifact"
 
 require "mihari/the_hive"
 
-require "mihari/analyzer"
+require "mihari/analyzers/base"
+require "mihari/analyzers/basic"
+require "mihari/analyzers/censys"
 
 require "mihari/notifiers/base"
 require "mihari/notifiers/slack"

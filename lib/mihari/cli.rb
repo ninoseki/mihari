@@ -1,64 +1,52 @@
 # frozen_string_literal: true
 
+require "thor"
 require "json"
 
 module Mihari
-  class BasicAnalyzer < Analyzer
-    attr_reader :title
-    attr_reader :description
-
-    def initialize(title:, description:, artifacts:)
-      super()
-
-      @title = title
-      @description = description
-      @artifacts = artifacts
+  class CLI < Thor
+    desc "censys [QUERY]", "Censys lookup by a given query"
+    def censys(query)
+      with_error_handling do
+        censys = Analyzers::Censys.new(query)
+        censys.run
+      end
     end
 
-    def artifacts
-      @artifacts.map { |data| Artifact.new data }
-    end
-  end
+    desc "import_from_json", "Give a JSON input via STDIN"
+    def import_from_json(input = nil)
+      json = input || STDIN.gets.chomp
+      raise ArgumentError, "Input not found: please give an input in a JSON format" unless json
 
-  class CLI
-    REQUIRED_ATTRIBUTES = %w(title description artifacts).freeze
-
-    def initialize(input)
-      @input = input
-    end
-
-    def json
-      @json ||= parse_as_json(@input)
-    end
-
-    def valid?
-      return false unless json
-
-      REQUIRED_ATTRIBUTES.all? { |attr| json.key? attr }
-    end
-
-    def start
-      raise ArgumentError, "Input not found: please give an input in a JSON format" unless @input
-      raise ArgumentError, "Invalid input format" unless valid?
+      json = parse_as_json(json)
+      raise ArgumentError, "Invalid input format: an input JSON data should have title, description and artifacts key" unless valid_json?(json)
 
       title = json.dig("title")
       description = json.dig("description")
       artifacts = json.dig("artifacts")
 
-      basic_analyzer = BasicAnalyzer.new(title: title, description: description, artifacts: artifacts)
-      basic_analyzer.run
+      with_error_handling do
+        basic = Analyzers::Basic.new(title: title, description: description, artifacts: artifacts)
+        basic.run
+      end
     end
 
-    def self.start(input)
-      new(input).start
-    end
+    no_commands do
+      def with_error_handling
+        yield
+      rescue ArgumentError, Hachi::Error => e
+        puts "Warning: #{e}"
+      end
 
-    private
+      def parse_as_json(input)
+        JSON.parse input
+      rescue JSON::ParserError => _
+        nil
+      end
 
-    def parse_as_json(input)
-      JSON.parse input
-    rescue JSON::ParserError => _
-      nil
+      def valid_json?(json)
+        %w(title description artifacts).all? { |key| json.key? key }
+      end
     end
   end
 end
