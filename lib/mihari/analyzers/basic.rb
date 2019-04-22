@@ -5,6 +5,7 @@ module Mihari
     class Basic < Base
       attr_reader :title
       attr_reader :description
+      attr_reader :artifacts
 
       def initialize(title:, description:, artifacts:)
         super()
@@ -12,10 +13,6 @@ module Mihari
         @title = title
         @description = description
         @artifacts = artifacts
-      end
-
-      def artifacts
-        @artifacts.map { |artifact| Artifact.new artifact }
       end
     end
   end

@@ -1,0 +1,52 @@
+---
+http_interactions:
+- request:
+    method: post
+    uri: https://www.censys.io/api/v1/search/ipv4
+    body:
+      encoding: UTF-8
+      string: '{"query":"sagawa.apk"}'
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+      Host:
+      - www.censys.io
+      Authorization:
+      - "<CENSYS_AUTH>"
+      Content-Type:
+      - application/json
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - application/json
+      Access-Control-Allow-Origin:
+      - "*"
+      Strict-Transport-Security:
+      - max-age=31536000; includeSubDomains; preload
+      X-Cloud-Trace-Context:
+      - 363ee6653c4a9e2f957d01cde2287f34
+      Date:
+      - Sun, 21 Apr 2019 22:29:36 GMT
+      Server:
+      - Google Frontend
+      Content-Length:
+      - '480'
+    body:
+      encoding: UTF-8
+      string: '{"status": "ok", "results": [{"location.country": "United States",
+        "location.registered_country": "United States", "location.longitude": -97.822,
+        "location.continent": "North America", "ip": "45.199.183.186", "location.registered_country_code":
+        "US", "location.country_code": "US", "location.latitude": 37.751, "protocols":
+        ["80/http", "22/ssh"], "location.timezone": "America/Chicago"}], "metadata":
+        {"count": 1, "query": "sagawa.apk", "backend_time": 36, "page": 1, "pages":
+        1}}'
+    http_version: 
+  recorded_at: Sun, 21 Apr 2019 22:29:23 GMT
+recorded_with: VCR 4.0.0

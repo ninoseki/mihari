@@ -13,6 +13,7 @@ module Mihari
         @data_type = data_type
       end
 
+      # @return [String]
       def link
         case data_type
         when "hash"
@@ -30,6 +31,7 @@ module Mihari
         end
       end
 
+      # @return [Hash]
       def to_h
         {
           fallback: "VT link",
@@ -42,6 +44,7 @@ module Mihari
 
       private
 
+      # @return [String]
       def sha256
         Digest::SHA256.hexdigest data
       end

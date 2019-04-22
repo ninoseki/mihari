@@ -3,7 +3,7 @@
 RSpec.describe Mihari::Analyzers::Base, :vcr do
   class Test < Mihari::Analyzers::Base
     def artifacts
-      [Mihari::Artifact.new("1.1.1.1"), Mihari::Artifact.new("google.com")]
+      %w(1.1.1.1 google.com)
     end
 
     def description
@@ -19,9 +19,21 @@ RSpec.describe Mihari::Analyzers::Base, :vcr do
     end
   end
 
+  describe "#description" do
+    it do
+      expect(subject.description).to eq("test")
+    end
+  end
+
+  describe "#artifacts" do
+    it do
+      expect(subject.artifacts).to eq(%w(1.1.1.1 google.com))
+    end
+  end
+
   describe "#run" do
     it "doens't raise any error" do
-      subject.run
+      capture(:stdout) { subject.run }
     end
   end
 end

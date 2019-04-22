@@ -1,5 +1,8 @@
 # mihari
 
+[![Build Status](https://travis-ci.org/ninoseki/mihari.svg?branch=master)](https://travis-ci.org/ninoseki/mihari)
+[![Coverage Status](https://coveralls.io/repos/github/ninoseki/mihari/badge.svg?branch=master)](https://coveralls.io/github/ninoseki/mihari?branch=master)
+
 mihari(`見張り`) is a framework for continuous malicious hosts (C2 / landing page / phishing, etc.) monitoring backended with [TheHive](https://github.com/TheHive-Project/TheHive).
 
 ## How it works
@@ -50,26 +53,21 @@ The input is a JSON data should have `title`, `description` and `artifacts` key.
 }
 ```
 
-| Key         | Desc.                                                                     |
-|-------------|---------------------------------------------------------------------------|
-| title       | A title of an alert                                                       |
-| description | A description of an alert                                                 |
-| artifacts   | An array of artifacts. Supported data types: ip, domain, url, email, hash |
-
-```bash
-$ echo '{ "title": "test", "description": "test", "artifacts": ["1.1.1.1", "github.com"] }' | mihari
-A new alret is created: id = 7585e892636419a25af2a327ae14c91b
-```
+| Key         | Desc.                                                                      |
+|-------------|----------------------------------------------------------------------------|
+| title       | A title of an alert                                                        |
+| description | A description of an alert                                                  |
+| artifacts   | An array of artifacts (supported data types: ip, domain, url, email, hash) |
 
 ## How to create a custom analyzer
 
-Create a class which:
+Create a class which extends `Mihari::Analyzers::Base` and implements the following methods.
 
-- Extends `Mihari::Analyzers::Base`
-- Implements the following methods:
-  - `#title`
-  - `#description`
-  - `#artifacts`
+| Name           | Desc.                                                                      | @return       |
+|----------------|----------------------------------------------------------------------------|---------------|
+| `#title`       | A title of an alert                                                        | String        |
+| `#description` | A description of an alert                                                  | String        |
+| `#artifacts`   | An array of artifacts (supported data types: ip, domain, url, email, hash) | Array<String> |
 
 ```ruby
 require "mihari"

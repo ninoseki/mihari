@@ -36,6 +36,9 @@ module Mihari
         yield
       rescue ArgumentError, Hachi::Error => e
         puts "Warning: #{e}"
+      rescue StandardError => e
+        puts "Warning: #{e}"
+        puts e.backtrace.join('\n')
       end
 
       def parse_as_json(input)
@@ -44,6 +47,7 @@ module Mihari
         nil
       end
 
+      # @return [true, false]
       def valid_json?(json)
         %w(title description artifacts).all? { |key| json.key? key }
       end

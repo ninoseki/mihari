@@ -9,19 +9,17 @@ module Mihari
         @api = Mihari::TheHive.new
       end
 
+      # @return [true, false]
       def valid?
         api.valid?
       end
 
       def notify(title:, description:, artifacts:)
-        if artifacts.empty?
-          puts "No unique artifacts given"
-          return
-        end
+        return if artifacts.empty?
 
         res = api.create_alert(title: title, description: description, artifacts: artifacts.map(&:to_h))
         id = res.dig("id")
-        puts "A new alret is created: id = #{id}"
+        puts "A new alret is created. (id: #{id})"
       end
     end
   end

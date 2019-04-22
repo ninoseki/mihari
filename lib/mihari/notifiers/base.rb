@@ -7,6 +7,7 @@ module Mihari
         Mihari.notifiers << child
       end
 
+      # @return [true, false]
       def valid?
         raise NotImplementedError, "You must implement #{self.class}##{__method__}"
       end

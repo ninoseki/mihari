@@ -28,17 +28,20 @@ module Mihari
           page.each { |result| ipv4s << result.ip }
         end
 
-        ipv4s.map { |ipv4| Artifact.new ipv4 }
+        ipv4s
       end
 
+      # @return [true, false]
       def censys_id?
         ENV.key? "CENSYS_ID"
       end
 
+      # @return [true, false]
       def censys_secret?
         ENV.key? "CENSYS_SECRET"
       end
 
+      # @return [true, false]
       def valid?
         censys_id? && censys_secret?
       end

@@ -11,7 +11,7 @@ RSpec.describe Mihari::Artifact do
         )
       }
 
-      it "returns hash" do
+      it do
         values.each do |value|
           expect(described_class.new(value).data_type).to eq("hash")
         end
@@ -28,7 +28,7 @@ RSpec.describe Mihari::Artifact do
         )
       }
 
-      it "returns ip" do
+      it do
         values.each do |value|
           expect(described_class.new(value).data_type).to eq("ip")
         end
@@ -44,7 +44,7 @@ RSpec.describe Mihari::Artifact do
         )
       }
 
-      it "returns domain" do
+      it do
         values.each do |value|
           expect(described_class.new(value).data_type).to eq("domain")
         end
@@ -62,7 +62,7 @@ RSpec.describe Mihari::Artifact do
         )
       }
 
-      it "returns url" do
+      it do
         values.each do |value|
           expect(described_class.new(value).data_type).to eq("url")
         end
@@ -77,7 +77,7 @@ RSpec.describe Mihari::Artifact do
         )
       }
 
-      it "returns mail" do
+      it do
         values.each do |value|
           expect(described_class.new(value).data_type).to eq("mail")
         end
@@ -95,7 +95,7 @@ RSpec.describe Mihari::Artifact do
         )
       }
 
-      it "return false" do
+      it do
         values.each do |value|
           expect(described_class.new(value).valid?).to be false
         end
