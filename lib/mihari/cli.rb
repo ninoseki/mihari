@@ -13,6 +13,14 @@ module Mihari
       end
     end
 
+    desc "shodan [QUERY]", "Shodan lookup by a given query"
+    def shodan(query)
+      with_error_handling do
+        shodan = Analyzers::Shodan.new(query)
+        shodan.run
+      end
+    end
+
     desc "import_from_json", "Give a JSON input via STDIN"
     def import_from_json(input = nil)
       json = input || STDIN.gets.chomp
@@ -34,7 +42,7 @@ module Mihari
     no_commands do
       def with_error_handling
         yield
-      rescue ArgumentError, Hachi::Error => e
+      rescue ArgumentError, Hachi::Error, Censys::ResponseError => e
         puts "Warning: #{e}"
       rescue StandardError => e
         puts "Warning: #{e}"

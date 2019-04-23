@@ -25,6 +25,7 @@ require "mihari/the_hive"
 require "mihari/analyzers/base"
 require "mihari/analyzers/basic"
 require "mihari/analyzers/censys"
+require "mihari/analyzers/shodan"
 
 require "mihari/notifiers/base"
 require "mihari/notifiers/slack"

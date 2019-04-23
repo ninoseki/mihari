@@ -28,6 +28,9 @@ All configuration is done via ENV variables.
 | THEHIVE_API_KEY      | TheHive API key    | Required                       |
 | SLACK_WEBHOOK_URL    | Slack Webhook URL  | Optional                       |
 | SLACK_CHANNEL        | Slack channel name | Optional (default: `#general`) |
+| CENSYS_ID            | CENSYS API ID      | Optional                       |
+| CENSYS_SECRET        | CENSYS secret      | Optional                       |
+| SHODAN_API_KEY       | Shodan API key     | Optional                       |
 
 ## Basic usage
 
@@ -35,6 +38,12 @@ All configuration is done via ENV variables.
 
 ```bash
 mihari censys "YOUR_QUERY"
+```
+
+### Shodan
+
+```bash
+mihari shodan "YOUR QUERY"
 ```
 
 ### Import from JSON

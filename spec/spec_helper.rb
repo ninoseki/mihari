@@ -51,4 +51,7 @@ VCR.configure do |config|
   config.filter_sensitive_data("<CENSYS_AUTH>") { authorization_field }
   config.filter_sensitive_data("<CENSYS_ID>") { ENV["CENSYS_ID"] }
   config.filter_sensitive_data("<CENSYS_SECRET>") { ENV["CENSYS_SECRET"] }
+
+  # Shodan
+  config.filter_sensitive_data("<SHODAN_API_KEY>") { ENV["SHODAN_API_KEY"] }
 end
