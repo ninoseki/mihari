@@ -7,9 +7,9 @@ mihari(`見張り`) is a framework for continuous malicious hosts (C2 / landing 
 
 ## How it works
 
-- mihari checks whether a TheHive instance contains a given artifact or not.
-  - If it doesn't contain a given artifact:
-    - mihari creates an alert on the TheHive instance.
+- mihari checks whether a TheHive instance contains given artifacts or not.
+  - If it doesn't contain the artifacts:
+    - mihari creates an alert with the artifacts on the TheHive instance.
     - mihari sends a notification to Slack. (Optional)
 
 ## Installation
