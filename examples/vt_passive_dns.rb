@@ -35,7 +35,7 @@ module Mihari
         report = ip_report.report
         report.dig("resolutions")&.map do |resolution|
           resolution.dig("hostname")
-        end.compact
+        end&.compact
       end
     end
   end

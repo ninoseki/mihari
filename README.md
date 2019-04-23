@@ -103,6 +103,8 @@ example = Mihari::Analyzers::Example.new
 example.run
 ```
 
+See `/examples` for more.
+
 ## License
 
 The gem is available as open source under the terms of the [MIT License](https://opensource.org/licenses/MIT).
