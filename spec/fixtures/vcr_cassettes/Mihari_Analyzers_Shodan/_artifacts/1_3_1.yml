@@ -1,0 +1,137 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: https://api.shodan.io/shodan/host/search?key=<SHODAN_API_KEY>&query=dev.min.js
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - nginx
+      Date:
+      - Tue, 23 Apr 2019 13:01:50 GMT
+      Content-Type:
+      - application/json; charset=UTF-8
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+      Vary:
+      - Accept-Encoding
+      Access-Control-Allow-Origin:
+      - "*"
+      X-Frame-Options:
+      - DENY
+      X-Content-Type-Options:
+      - nosniff
+      X-Xss-Protection:
+      - 1; mode=block
+      Strict-Transport-Security:
+      - max-age=63072000; includeSubDomains
+      X-Hacker:
+      - If you're reading this then you should check out careers.shodan.io :)
+    body:
+      encoding: ASCII-8BIT
+      string: '{"matches": [{"product": "nginx", "hash": 2061835075, "ip": 3663394888,
+        "isp": "China Telecom", "transport": "tcp", "cpe": ["cpe:/a:igor_sysoev:nginx"],
+        "data": "HTTP/1.1 200 OK\r\nServer: nginx\r\nDate: Thu, 18 Apr 2019 05:12:52
+        GMT\r\nContent-Type: text/html\r\nContent-Length: 2093\r\nLast-Modified: Fri,
+        29 Mar 2019 07:53:53 GMT\r\nConnection: keep-alive\r\nETag: \"5c9dcf11-82d\"\r\nAccept-Ranges:
+        bytes\r\n\r\n<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n    <meta charset=\"UTF-8\">\n    <title>\u767b\u9646</title>\n    <link
+        rel=\"stylesheet\" href=\"css/login.css\">\n    <meta name=\"viewport\" content=\"width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no\"
+        />\n    <meta http-equiv=\"X-UA-Compatible\" content=\"ie=edge\">\n    <script
+        type=\"text/javascript\" src=\"js/rem.js\"></script>\n    <link rel=\"stylesheet\"
+        href=\"font-awesome-4.7.0/css/font-awesome.min.css\">\n</head>\n<body>\n<article
+        class=\"myArticle\">\n    <div class=\"header\">\n        <img src=\"images/logo.png\"
+        class=\"logo\"/>\n    </div>\n    <div class=\"connet\">\n        <div>\n            <span
+        class=\"fa fa-user\" style=\"font-size: 0.8rem\"></span>\n            <input
+        type=\"text\" id=\"account\" class=\"int\" title=\"\u8bf7\u8f93\u5165\u8d26\u53f7\"
+        >\n        </div>\n        <div class=\"paw\">\n            <span class=\"fa
+        fa-lock\" style=\"font-size: 0.8rem\"></span>\n            <input type=\"password\"
+        id=\"password\" class=\"int\" value=\"\" title=\"\u8bf7\u8f93\u5165\u5bc6\u7801\">\n        </div>\n    </div>\n    <div
+        class=\"login\">\n        <button class=\"btn\">\u767b\u5f55</button>\n    </div>\n    <!--<button
+        id=\"Btn\">\u6309\u94ae</button>-->\n    <!--<p class=\"forget\">\n        <a
+        href=\"\">\n            \u5fd8\u8bb0\u5bc6\u7801\uff1f\n        </a>\n    </p>-->\n</article>\n</body>\n<script
+        src=\"js/jquery-2.2.3.min.js\"></script>\n<script src=\"lib/sweetalert-dev.min.js\"></script>\n<link
+        rel=\"stylesheet\" href=\"css/sweetalert.css\">\n<script src=\"lib/jquery.cookie.js\"></script>\n<script
+        src=\"js/common.js\"></script>\n<script src=\"js/login.js\"></script>\n</html>\n<script>\n    $(function
+        () {\n        $(\"#Btn\").on(\"click\",function () {\n            $.ajax({\n                url:
+        sgn.appUrl + \"/track/updateApk\",\n                type: \"POST\",\n                data:
+        JSON.stringify({versionCode:\"1.0\"}),\n                contentType: \"application/json\",\n                success:
+        function (res) {\n\n                    console.log(res);\n                    //
+        window.location.href=res.data.path\n                },\n                error(err){\n                    sgn.sissionErr(data)\n                }\n            })\n        })\n    })\n</script>\n",
+        "asn": "AS4134", "port": 8081, "hostnames": [], "location": {"city": null,
+        "region_code": "04", "area_code": null, "longitude": 118.77780000000001, "country_code3":
+        "CHN", "latitude": 32.0617, "postal_code": null, "dma_code": null, "country_code":
+        "CN", "country_name": "China"}, "timestamp": "2019-04-18T05:09:54.128510",
+        "domains": [], "org": "China Telecom", "os": null, "_shodan": {"crawler":
+        "545144fc95e7a7ef13ece5dbceb98ee386b37950", "ptr": true, "id": "2c986dbc-b310-4b19-8b2a-af863dc5a72f",
+        "module": "https-simple-new", "options": {}}, "ip_str": "218.90.248.72"},
+        {"hash": -2128621643, "ip": 3178333006, "isp": "Telecall Telecomunicacoes",
+        "transport": "tcp", "data": "HTTP/1.1 200 OK\r\nX-Powered-By: Express\r\nAccept-Ranges:
+        bytes\r\nCache-Control: public, max-age=0\r\nLast-Modified: Wed, 03 Apr 2019
+        22:43:34 GMT\r\nETag: W/\"f3b-169e55f300d\"\r\nContent-Type: text/html; charset=UTF-8\r\nContent-Length:
+        3899\r\nDate: Mon, 15 Apr 2019 00:22:19 GMT\r\nConnection: keep-alive\r\n\r\n<html
+        xmlns=\"http://www.w3.org/1999/xhtml\" xml:lang=\"en\" lang=\"en\">\n<head>\n  <meta
+        http-equiv=\"Content-Type\" content=\"text/html; charset=utf-8\"/>\n\n  <title>SNOW</title>\n\n  <style
+        type=\"text/css\" media=\"screen\">\n    .form-signin {\n      width: 100%;\n      max-width:
+        420px;\n      padding: 15px;\n      margin: auto;\n    }\n  </style>\n  <link
+        rel=\"stylesheet\" href=\"https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css\"
+        integrity=\"sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4\"
+        crossorigin=\"anonymous\">\n  <!-- <link href=\"https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.min.css\"
+        rel=\"stylesheet\" /> -->\n  <link rel=\"stylesheet\" href=\"css/typeahead.css\">\n  <link
+        rel=\"stylesheet\" href=\"css/tree.css\">\n  <link rel=\"stylesheet\" href=\"css/addnewchild.css\">\n  <link
+        rel=\"stylesheet\" href=\"https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.0.1/sweetalert.min.css\">\n  <link
+        rel=\"shortcut icon\" type=\"image/png\" href=\"assets/favicon.png\"/>\n  <link
+        rel=\"stylesheet\" href=\"lib/opentip.css\">\n  <!-- JS -->\n  <script src=\"./node_modules/jquery/dist/jquery.min.js\"
+        type=\"text/javascript\" charset=\"utf-8\"></script>\n  <script src=\"./node_modules/sammy/lib/min/sammy-latest.min.js\"
+        type=\"text/javascript\" charset=\"utf-8\"></script>\n  <script src=\"./node_modules/sammy/lib/plugins/sammy.template.js\"
+        type=\"text/javascript\" charset=\"utf-8\"></script>\n  <script src=\"https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js\"
+        integrity=\"sha384-cs/chFZiN24E4KMATLdqdvsezGxaGsi4hLGOzlXwp5UZB1LY//20VyM2taTB4QvJ\"
+        crossorigin=\"anonymous\"></script>\n  <script src=\"https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js\"
+        integrity=\"sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm\"
+        crossorigin=\"anonymous\"></script>\n  <!-- jquery-ui -->\n  <script src=\"./node_modules/jquery-ui-dist/jquery-ui.min.js\"
+        type=\"text/javascript\"></script>\n<link href=\"./node_modules/jquery-ui/themes/base/all.css\"
+        rel=\"stylesheet\" />\n\n<!-- Sweet Alert 2 -->\n  <!-- <script src=\"./node_modules/sweetalert2/dist/sweetalert2.all.min.js\"
+        type=\"text/javascript\" charset=\"utf-8\"></script> -->\n  <!-- <link href=\"./node_modules/sweetalert2/dist/sweetalert2.min.css\"
+        rel=\"stylesheet\" /> -->\n\n  <!-- <script type=\"text/javascript\" src=\"https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.0.1/sweetalert-dev.min.js\"></script>
+        -->\n  <script type=\"text/javascript\" src=\"https://cdnjs.cloudflare.com/ajax/libs/typeahead.js/0.11.1/typeahead.bundle.min.js\"></script>      \n  <!--AngularJS-->\n  <script
+        type=\"text/javascript\" src=\"lib/angular.min.js\"></script>\n  <!--App usage-->\n  <!--
+        <script type=\"text/javascript\" src=\"lib/d3.min.js\"></script> -->\n  <script
+        type=\"text/javascript\" src=\"./node_modules/d3/dist/d3.min.js\"></script>\n  <script
+        type=\"text/javascript\" src=\"lib/d3.layout.cloud.js\"></script>\n  <script
+        type=\"text/javascript\" src=\"https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.0.1/sweetalert-dev.min.js\"></script>\n  <script
+        type=\"text/javascript\" src=\"https://cdnjs.cloudflare.com/ajax/libs/typeahead.js/0.11.1/typeahead.bundle.min.js\"></script>\n  <script
+        type=\"text/javascript\" src=\"lib/opentip-jquery.min.js\"></script>\n  <!--
+        selec2-->\n  <link href=\"./node_modules/select2/dist/css/select2.min.css\"
+        rel=\"stylesheet\" />\n  <link href=\"./css/select2-bootstrap4.min.css\" rel=\"stylesheet\"
+        />\n  <script src=\"./node_modules/select2/dist/js/select2.min.js\"></script>\n  <script
+        src=\"app.js\"></script>\n\n<!-- <link rel=\"stylesheet\" type=\"text/css\"
+        href=\"css/knowledgegraph.css\" >\n<script type=\"text/javascript\" src=\"js/knowledgegraph.js\"
+        ></script>\n\n</head>\n\n<body>\n  <div id=\"container\">\n    <!-- <ul id=\"link\">\n      <li><a
+        href=\"#/form\">Form!</a></li>\n      <li><a href=\"#/redirect\">Redirect!</a></li>\n      <li><a
+        href=\"#/\">Back</a></li>\n    </ul> -->\n    <div id=\"warning-msg\"></div>\n    <div
+        id=\"main\"/>\n  </div>\n</body>\n</html>", "asn": "AS52662", "port": 8081,
+        "hostnames": ["189-113-131-78.telecall.com.br"], "location": {"city": "Rio
+        De Janeiro", "region_code": "21", "area_code": null, "longitude": -43.2775,
+        "country_code3": "BRA", "latitude": -22.875100000000003, "postal_code": null,
+        "dma_code": null, "country_code": "BR", "country_name": "Brazil"}, "timestamp":
+        "2019-04-15T00:22:19.944995", "domains": ["telecall.com.br"], "org": "Telecall
+        Telecomunicacoes", "os": null, "_shodan": {"crawler": "70752434fdf0dcec35df6ae02b9703eaae035f7d",
+        "ptr": true, "id": "b6cf94ba-adff-4c53-99d9-a69df761c2ba", "module": "https-simple-new",
+        "options": {}}, "ip_str": "189.113.131.78"}], "total": 2}'
+    http_version: 
+  recorded_at: Tue, 23 Apr 2019 13:10:11 GMT
+recorded_with: VCR 4.0.0
