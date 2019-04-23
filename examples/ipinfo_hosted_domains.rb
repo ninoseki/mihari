@@ -40,5 +40,6 @@ module Mihari
   end
 end
 
-analyzer = Mihari::Analyzers::HostedDomains.new("216.239.38.21")
+ip = "TARGET_IP"
+analyzer = Mihari::Analyzers::HostedDomains.new(ip)
 analyzer.run
