@@ -10,10 +10,13 @@ module Mihari
       attr_reader :description
       attr_reader :query
 
+      CENSYS_ID_KEY = "CENSYS_ID"
+      CENSYS_SECRET_KEY = "CENSYS_SECRET"
+
       def initialize(query)
         super()
 
-        raise ArgumentError, "CENSYS_ID and CENSYS_SECRET are required" unless valid?
+        raise ArgumentError, "#{CENSYS_ID_KEY} and #{CENSYS_SECRET_KEY} are required" unless valid?
 
         @api = ::Censys::API.new
         @query = query
@@ -33,12 +36,12 @@ module Mihari
 
       # @return [true, false]
       def censys_id?
-        ENV.key? "CENSYS_ID"
+        ENV.key? CENSYS_ID_KEY
       end
 
       # @return [true, false]
       def censys_secret?
-        ENV.key? "CENSYS_SECRET"
+        ENV.key? CENSYS_SECRET_KEY
       end
 
       # @return [true, false]

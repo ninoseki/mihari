@@ -50,17 +50,20 @@ module Mihari
       end
     end
 
-    class Slack
+    class Slack < Base
+      SLACK_WEBHOOK_URL_KEY = "SLACK_WEBHOOK_URL"
+      SLACK_CHANNEL_KEY = "SLACK_CHANNEL"
+
       def slack_channel
-        ENV.fetch "SLACK_CHANNEL", "#general"
+        ENV.fetch SLACK_CHANNEL_KEY, "#general"
       end
 
       def slack_webhook_url
-        ENV.fetch "SLACK_WEBHOOK_URL"
+        ENV.fetch SLACK_WEBHOOK_URL_KEY
       end
 
       def slack_webhook_url?
-        ENV.key? "SLACK_WEBHOOK_URL"
+        ENV.key? SLACK_WEBHOOK_URL_KEY
       end
 
       def valid?
@@ -78,8 +81,8 @@ module Mihari
 
         attachments = to_attachments(artifacts)
 
-        slack = Slack::Incoming::Webhooks.new(slack_webhook_url, channel: slack_channel)
-        slack.post("#{title}: #{description}", attachments: attachments)
+        slack = ::Slack::Incoming::Webhooks.new(slack_webhook_url, channel: slack_channel)
+        slack.post("#{title} (#{description})", attachments: attachments)
       end
     end
   end
