@@ -17,7 +17,7 @@ RSpec.describe Mihari::Notifiers::Slack do
     it do
       attachments = subject.to_attachments(artifacts)
       attachments.each do |a|
-        expect(a.dig(:title_link)).to start_with("https://www.virustotal.com")
+        expect(a.dig(:title_link)).to start_with("https://www.virustotal.com").or start_with("https://urlscan.io")
       end
     end
   end
