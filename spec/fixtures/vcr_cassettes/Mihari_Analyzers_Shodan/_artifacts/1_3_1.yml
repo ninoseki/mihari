@@ -2,7 +2,7 @@
 http_interactions:
 - request:
     method: get
-    uri: https://api.shodan.io/shodan/host/search?key=<SHODAN_API_KEY>&query=dev.min.js
+    uri: https://api.shodan.io/shodan/host/search?facets=&key=<SHODAN_API_KEY>&minify=true&page=1&query=dev.min.js
     body:
       encoding: US-ASCII
       string: ''
@@ -13,6 +13,8 @@ http_interactions:
       - "*/*"
       User-Agent:
       - Ruby
+      Host:
+      - api.shodan.io
   response:
     status:
       code: 200
@@ -21,7 +23,7 @@ http_interactions:
       Server:
       - nginx
       Date:
-      - Tue, 23 Apr 2019 13:01:50 GMT
+      - Fri, 03 May 2019 08:39:38 GMT
       Content-Type:
       - application/json; charset=UTF-8
       Transfer-Encoding:
@@ -133,5 +135,5 @@ http_interactions:
         "ptr": true, "id": "b6cf94ba-adff-4c53-99d9-a69df761c2ba", "module": "https-simple-new",
         "options": {}}, "ip_str": "189.113.131.78"}], "total": 2}'
     http_version: 
-  recorded_at: Tue, 23 Apr 2019 13:10:11 GMT
+  recorded_at: Fri, 03 May 2019 08:48:09 GMT
 recorded_with: VCR 4.0.0
