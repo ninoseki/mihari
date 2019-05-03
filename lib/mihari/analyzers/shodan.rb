@@ -1,12 +1,11 @@
 # frozen_string_literal: true
 
-require "open-uri"
-require "json"
+require "shodan"
 
 module Mihari
   module Analyzers
     class Shodan < Base
-      attr_reader :api_key
+      attr_reader :api
       attr_reader :title
       attr_reader :description
       attr_reader :query
@@ -14,10 +13,7 @@ module Mihari
       def initialize(query)
         super()
 
-        api_key = ENV.fetch("SHODAN_API_KEY", nil)
-        raise ArgumentError, "SHODAN_API_KEY is required" unless api_key
-
-        @api_key = api_key
+        @api = ::Shodan::API.new
         @query = query
         @title = "Shodan lookup"
         @description = "Query: #{query}"
@@ -36,12 +32,9 @@ module Mihari
       private
 
       def search
-        uri = URI("https://api.shodan.io/shodan/host/search?key=#{api_key}&query=#{query}")
-        begin
-          JSON.parse uri.read
-        rescue OpenURI::HTTPError
-          nil
-        end
+        api.host.search(query)
+      rescue ::Shodan::Error => _e
+        nil
       end
     end
   end
