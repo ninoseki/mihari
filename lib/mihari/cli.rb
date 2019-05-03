@@ -5,7 +5,7 @@ require "json"
 
 module Mihari
   class CLI < Thor
-    desc "censys [QUERY]", "Censys lookup by a given query"
+    desc "censys [QUERY]", "Censys IPv4 lookup by a given query"
     def censys(query)
       with_error_handling do
         censys = Analyzers::Censys.new(query)
@@ -13,11 +13,19 @@ module Mihari
       end
     end
 
-    desc "shodan [QUERY]", "Shodan lookup by a given query"
+    desc "shodan [QUERY]", "Shodan host lookup by a given query"
     def shodan(query)
       with_error_handling do
         shodan = Analyzers::Shodan.new(query)
         shodan.run
+      end
+    end
+
+    desc "onyphe [QUERY]", "Onyphe datascan lookup by a given query"
+    def onyphe(query)
+      with_error_handling do
+        onyphe = Analyzers::Onyphe.new(query)
+        onyphe.run
       end
     end
 
@@ -51,7 +59,7 @@ module Mihari
 
       def parse_as_json(input)
         JSON.parse input
-      rescue JSON::ParserError => _
+      rescue JSON::ParserError => e
         nil
       end
 
