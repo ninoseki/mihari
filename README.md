@@ -12,6 +12,16 @@ mihari(`見張り`) is a framework for continuous malicious hosts (C2 / landing 
     - mihari creates an alert with the artifacts on the TheHive instance.
     - mihari sends a notification to Slack. (Optional)
 
+### Screenshots
+
+- TheHive alert example
+
+![img](./screenshots/alert.png)
+
+- Slack notification example
+
+![img](./screenshots/slack.png)
+
 ## Installation
 
 ```bash
