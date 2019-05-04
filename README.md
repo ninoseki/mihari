@@ -18,21 +18,19 @@ mihari(`見張り`) is a framework for continuous malicious hosts (C2 / landing 
 gem install mihari
 ```
 
-## Configuration
-
-All configuration is done via ENV variables.
-
-| Key                  | Desc.              | Required or optional           |
-|----------------------|--------------------|--------------------------------|
-| THEHIVE_API_ENDPOINT | TheHive URL        | Required                       |
-| THEHIVE_API_KEY      | TheHive API key    | Required                       |
-| SLACK_WEBHOOK_URL    | Slack Webhook URL  | Optional                       |
-| SLACK_CHANNEL        | Slack channel name | Optional (default: `#general`) |
-| CENSYS_ID            | CENSYS API ID      | Optional                       |
-| CENSYS_SECRET        | CENSYS secret      | Optional                       |
-| SHODAN_API_KEY       | Shodan API key     | Optional                       |
-
 ## Basic usage
+
+mihari supports Censys, Shodan and Onyphe by default.
+
+```bash
+$ mihari
+Commands:
+  mihari censys [QUERY]    # Censys IPv4 lookup by a given query
+  mihari help [COMMAND]    # Describe available commands or one specific command
+  mihari import_from_json  # Give a JSON input via STDIN
+  mihari onyphe [QUERY]    # Onyphe datascan lookup by a given query
+  mihari shodan [QUERY]    # Shodan host lookup by a given query
+```
 
 ### Censys
 
@@ -44,6 +42,12 @@ mihari censys "YOUR_QUERY"
 
 ```bash
 mihari shodan "YOUR QUERY"
+```
+
+### Onyphe
+
+```bash
+mihari onyphe "YOUR QUERY"
 ```
 
 ### Import from JSON
@@ -67,6 +71,21 @@ The input is a JSON data should have `title`, `description` and `artifacts` key.
 | title       | A title of an alert                                                        |
 | description | A description of an alert                                                  |
 | artifacts   | An array of artifacts (supported data types: ip, domain, url, email, hash) |
+
+## Configuration
+
+All configuration is done via ENV variables.
+
+| Key                  | Desc.              | Required or optional           |
+|----------------------|--------------------|--------------------------------|
+| THEHIVE_API_ENDPOINT | TheHive URL        | Required                       |
+| THEHIVE_API_KEY      | TheHive API key    | Required                       |
+| SLACK_WEBHOOK_URL    | Slack Webhook URL  | Optional                       |
+| SLACK_CHANNEL        | Slack channel name | Optional (default: `#general`) |
+| CENSYS_ID            | Censys API ID      | Optional                       |
+| CENSYS_SECRET        | Censys secret      | Optional                       |
+| SHODAN_API_KEY       | Shodan API key     | Optional                       |
+| ONYPHE_API_KEY       | Onyphe API key     | Optional                       |
 
 ## How to create a custom analyzer
 

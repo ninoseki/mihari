@@ -54,4 +54,7 @@ VCR.configure do |config|
 
   # Shodan
   config.filter_sensitive_data("<SHODAN_API_KEY>") { ENV["SHODAN_API_KEY"] }
+
+  # Onyphe
+  config.filter_sensitive_data("<ONYPHE_API_KEY>") { ENV["ONYPHE_API_KEY"] }
 end
