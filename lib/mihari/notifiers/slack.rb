@@ -16,15 +16,21 @@ module Mihari
         @data_type = data_type
       end
 
+      def fields
+        [vt_link, urlscan_link].compact
+      end
+
+      def actions
+        [vt_link, urlscan_link].compact
+      end
+
       def vt_link
         return nil unless _vt_link
 
         {
-          fallback: "VT link",
-          title: data,
-          title_link: _vt_link,
-          footer: "virustotal.com",
-          footer_icon: "http://www.google.com/s2/favicons?domain=virustotal.com"
+          type: "button",
+          text: "Lookup on VirusTotal",
+          url: _vt_link,
         }
       end
 
@@ -32,17 +38,21 @@ module Mihari
         return nil unless _urlscan_link
 
         {
-          fallback: "urlscan.io link",
-          title: data,
-          title_link: _urlscan_link,
-          footer: "urlscan.io",
-          footer_icon: "http://www.google.com/s2/favicons?domain=urlscan.io"
+          type: "button",
+          text: "Lookup on urlscan.io",
+          url: _urlscan_link,
         }
       end
 
       # @return [Array]
       def to_a
-        [vt_link, urlscan_link].compact
+        [
+          {
+            text: defanged_data,
+            fallback: "VT & urlscan.io links",
+            actions: actions
+          }
+        ]
       end
 
       private
@@ -81,6 +91,11 @@ module Mihari
       # @return [String]
       def sha256
         Digest::SHA256.hexdigest data
+      end
+
+      # @return [String]
+      def defanged_data
+        @defanged_data ||= data.to_s.gsub /\./, "[.]"
       end
     end
 
