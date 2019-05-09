@@ -24,6 +24,11 @@ module Mihari
         raise NotImplementedError, "You must implement #{self.class}##{__method__}"
       end
 
+      # @return [Array<String>]
+      def tags
+        []
+      end
+
       def run(reject_exists_ones: true)
         unique_artifacts = normalized_artifacts.reject do |artifact|
           reject_exists_ones & the_hive.valid? && the_hive.exists?(data: artifact.data, data_type: artifact.data_type)
@@ -33,7 +38,12 @@ module Mihari
           notifier = notifier_class.new
           next unless notifier.valid?
 
-          notifier.notify(title: title, description: description, artifacts: unique_artifacts)
+          notifier.notify(
+            title: title,
+            description: description,
+            artifacts: unique_artifacts,
+            tags: tags
+          )
         end
       end
 

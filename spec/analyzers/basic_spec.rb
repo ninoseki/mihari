@@ -4,8 +4,9 @@ RSpec.describe Mihari::Analyzers::Basic, :vcr do
   let(:title) { "test" }
   let(:description) { "test" }
   let(:artifacts) { %w(1.1.1.1) }
+  let(:tags) { %w(test) }
 
-  subject { described_class.new(title: title, description: description, artifacts: artifacts) }
+  subject { described_class.new(title: title, description: description, artifacts: artifacts, tags: tags) }
 
   describe "#title" do
     it do
@@ -22,6 +23,12 @@ RSpec.describe Mihari::Analyzers::Basic, :vcr do
   describe "#artifacts" do
     it do
       expect(subject.artifacts).to eq(artifacts)
+    end
+  end
+
+  describe "#tags" do
+    it do
+      expect(subject.tags).to eq(tags)
     end
   end
 end

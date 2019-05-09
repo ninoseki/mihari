@@ -14,10 +14,15 @@ module Mihari
         api.valid?
       end
 
-      def notify(title:, description:, artifacts:)
+      def notify(title:, description:, artifacts:, tags: [])
         return if artifacts.empty?
 
-        res = api.create_alert(title: title, description: description, artifacts: artifacts.map(&:to_h))
+        res = api.create_alert(
+          title: title,
+          description: description,
+          artifacts: artifacts.map(&:to_h),
+          tags: tags
+        )
         id = res.dig("id")
         puts "A new alret is created. (id: #{id})"
       end

@@ -66,21 +66,23 @@ mihari onyphe "YOUR QUERY"
 echo '{ "title": "test", "description": "test", "artifacts": ["1.1.1.1", "github.com", "2.2.2.2"] }' | mihari import_from_json
 ```
 
-The input is a JSON data should have `title`, `description` and `artifacts` key.
+The input is a JSON data should have `title`, `description` and `artifacts` key. `tags` key is an optional parameter.
 
 ```json
 {
   "title": "test",
   "description": "test",
-  "artifacts": ["1.1.1.1", "github.com"]
+  "artifacts": ["1.1.1.1", "github.com"],
+  "tags": ["test"]
 }
 ```
 
-| Key         | Desc.                                                                      |
-|-------------|----------------------------------------------------------------------------|
-| title       | A title of an alert                                                        |
-| description | A description of an alert                                                  |
-| artifacts   | An array of artifacts (supported data types: ip, domain, url, email, hash) |
+| Key         | Desc.                                                                      | Required or optional |
+|-------------|----------------------------------------------------------------------------|----------------------|
+| title       | A title of an alert                                                        | Required             |
+| description | A description of an alert                                                  | Required             |
+| artifacts   | An array of artifacts (supported data types: ip, domain, url, email, hash) | Required             |
+| tags        | An array of tags                                                           | Optional             |
 
 ## Configuration
 
@@ -101,11 +103,12 @@ All configuration is done via ENV variables.
 
 Create a class which extends `Mihari::Analyzers::Base` and implements the following methods.
 
-| Name           | Desc.                                                                      | @return       |
-|----------------|----------------------------------------------------------------------------|---------------|
-| `#title`       | A title of an alert                                                        | String        |
-| `#description` | A description of an alert                                                  | String        |
-| `#artifacts`   | An array of artifacts (supported data types: ip, domain, url, email, hash) | Array<String> |
+| Name           | Desc.                                                                      | @return       | Required or optional |
+|----------------|----------------------------------------------------------------------------|---------------|----------------------|
+| `#title`       | A title of an alert                                                        | String        | Required             |
+| `#description` | A description of an alert                                                  | String        | Required             |
+| `#artifacts`   | An array of artifacts (supported data types: ip, domain, url, email, hash) | Array<String> | Required             |
+| `#tags`        | An array of tags                                                           | Array<String> | Optional             |
 
 ```ruby
 require "mihari"
@@ -123,6 +126,10 @@ module Mihari
 
       def artifacts
         ["9.9.9.9", "example.com"]
+      end
+
+      def tags
+        ["example"]
       end
     end
   end
