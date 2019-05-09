@@ -34,8 +34,15 @@ module Mihari
     end
 
     # @return [Hash]
-    def create_alert(title:, description:, artifacts:)
-      api.alert.create(title: title, description: description, artifacts: artifacts, type: "external", source: "mihari")
+    def create_alert(title:, description:, artifacts:, tags: [])
+      api.alert.create(
+        title: title,
+        description: description,
+        artifacts: artifacts,
+        tags: tags,
+        type: "external",
+        source: "mihari"
+      )
     end
   end
 end

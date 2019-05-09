@@ -40,9 +40,10 @@ module Mihari
       title = json.dig("title")
       description = json.dig("description")
       artifacts = json.dig("artifacts")
+      tags = json.dig("tags") || []
 
       with_error_handling do
-        basic = Analyzers::Basic.new(title: title, description: description, artifacts: artifacts)
+        basic = Analyzers::Basic.new(title: title, description: description, artifacts: artifacts, tags: tags)
         basic.run
       end
     end
