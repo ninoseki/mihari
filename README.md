@@ -12,6 +12,8 @@ mihari(`見張り`) is a framework for continuous malicious hosts (C2 / landing 
     - mihari creates an alert with the artifacts on the TheHive instance.
     - mihari sends a notification to Slack. (Optional)
 
+Check this blog post for more detail: [Continuous C2 hunting with Censys, Shodan, Onyphe and TheHive](https://hackmd.io/s/SkUaSrqoE)
+
 ### Screenshots
 
 - TheHive alert example
