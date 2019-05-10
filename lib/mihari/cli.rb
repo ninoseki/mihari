@@ -6,25 +6,31 @@ require "json"
 module Mihari
   class CLI < Thor
     desc "censys [QUERY]", "Censys IPv4 lookup by a given query"
+    method_option :tags, type: :array, default: [], desc: "tags"
     def censys(query)
+      tags = options.dig("tags") || []
       with_error_handling do
-        censys = Analyzers::Censys.new(query)
+        censys = Analyzers::Censys.new(query, tags: tags)
         censys.run
       end
     end
 
     desc "shodan [QUERY]", "Shodan host lookup by a given query"
+    method_option :tags, type: :array, desc: "tags"
     def shodan(query)
+      tags = options.dig("tags") || []
       with_error_handling do
-        shodan = Analyzers::Shodan.new(query)
+        shodan = Analyzers::Shodan.new(query, tags: tags)
         shodan.run
       end
     end
 
     desc "onyphe [QUERY]", "Onyphe datascan lookup by a given query"
+    method_option :tags, type: :array, default: [], desc: "tags"
     def onyphe(query)
+      tags = options.dig("tags") || []
       with_error_handling do
-        onyphe = Analyzers::Onyphe.new(query)
+        onyphe = Analyzers::Onyphe.new(query, tags: tags)
         onyphe.run
       end
     end
