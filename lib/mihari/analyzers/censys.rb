@@ -9,11 +9,12 @@ module Mihari
       attr_reader :title
       attr_reader :description
       attr_reader :query
+      attr_reader :tags
 
       CENSYS_ID_KEY = "CENSYS_ID"
       CENSYS_SECRET_KEY = "CENSYS_SECRET"
 
-      def initialize(query)
+      def initialize(query, tags: [])
         super()
 
         raise ArgumentError, "#{CENSYS_ID_KEY} and #{CENSYS_SECRET_KEY} are required" unless valid?
@@ -22,6 +23,7 @@ module Mihari
         @query = query
         @title = "Censys lookup"
         @description = "Query: #{query}"
+        @tags = tags
       end
 
       def artifacts

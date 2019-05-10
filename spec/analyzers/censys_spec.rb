@@ -2,8 +2,9 @@
 
 RSpec.describe Mihari::Analyzers::Censys, :vcr do
   let(:query) { "sagawa.apk" }
+  let(:tags) { %w(test) }
 
-  subject { described_class.new(query) }
+  subject { described_class.new(query, tags: tags) }
 
   describe "#title" do
     it do
@@ -20,6 +21,12 @@ RSpec.describe Mihari::Analyzers::Censys, :vcr do
   describe "#artifacts" do
     it do
       expect(subject.artifacts).to be_an(Array)
+    end
+  end
+
+  describe "#tags" do
+    it do
+      expect(subject.tags).to eq(tags)
     end
   end
 end
