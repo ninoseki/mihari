@@ -41,7 +41,8 @@ module Mihari
           notifier.notify(
             title: title,
             description: description,
-            artifacts: unique_artifacts
+            artifacts: unique_artifacts,
+            tags: tags
           )
         end
       end

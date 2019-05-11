@@ -14,7 +14,7 @@ RSpec.describe Mihari::Analyzers::Onyphe, :vcr do
 
   describe "#description" do
     it do
-      expect(subject.description).to eq("Query: #{query}")
+      expect(subject.description).to eq("query = #{query}")
     end
   end
 
