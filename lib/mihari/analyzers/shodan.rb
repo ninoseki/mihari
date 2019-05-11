@@ -17,7 +17,7 @@ module Mihari
         @api = ::Shodan::API.new
         @query = query
         @title = "Shodan lookup"
-        @description = "Query: #{query}"
+        @description = "query = #{query}"
         @tags = tags
       end
 

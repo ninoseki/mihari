@@ -17,7 +17,7 @@ module Mihari
         @api = ::Onyphe::API.new
         @query = query
         @title = "Onyphe lookup"
-        @description = "Query: #{query}"
+        @description = "query = #{query}"
         @tags = tags
       end
 

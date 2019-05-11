@@ -22,7 +22,7 @@ module Mihari
         @api = ::Censys::API.new
         @query = query
         @title = "Censys lookup"
-        @description = "Query: #{query}"
+        @description = "query = #{query}"
         @tags = tags
       end
 
