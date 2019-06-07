@@ -38,12 +38,11 @@ module Mihari
           notifier = notifier_class.new
           next unless notifier.valid?
 
-          notifier.notify(
-            title: title,
-            description: description,
-            artifacts: unique_artifacts,
-            tags: tags
-          )
+          begin
+            notifier.notify( title: title, description: description, artifacts: unique_artifacts, tags: tags)
+          rescue StandardError => e
+            puts "Sending notification by #{notifier.class} is failed: #{e}"
+          end
         end
       end
 
