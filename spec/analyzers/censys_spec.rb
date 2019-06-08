@@ -1,10 +1,10 @@
 # frozen_string_literal: true
 
 RSpec.describe Mihari::Analyzers::Censys, :vcr do
+  subject { described_class.new(query, tags: tags) }
+
   let(:query) { "sagawa.apk" }
   let(:tags) { %w(test) }
-
-  subject { described_class.new(query, tags: tags) }
 
   describe "#title" do
     it do

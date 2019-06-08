@@ -1,10 +1,10 @@
 # frozen_string_literal: true
 
 RSpec.describe Mihari::Analyzers::Onyphe, :vcr do
+  subject { described_class.new(query, tags: tags) }
+
   let(:query) { "dev.min.js" }
   let(:tags) { %w(test) }
-
-  subject { described_class.new(query, tags: tags) }
 
   describe "#title" do
     it do

@@ -22,7 +22,7 @@ module Mihari
     def ip?
       IPAddr.new data
       true
-    rescue IPAddr::InvalidAddressError => _
+    rescue IPAddr::InvalidAddressError => _e
       false
     end
 
@@ -30,7 +30,7 @@ module Mihari
     def domain?
       uri = Addressable::URI.parse("http://#{data}")
       uri.host == data && PublicSuffix.valid?(uri.host)
-    rescue Addressable::URI::InvalidURIError => _
+    rescue Addressable::URI::InvalidURIError => _e
       false
     end
 
@@ -38,7 +38,7 @@ module Mihari
     def url?
       uri = Addressable::URI.parse(data)
       uri.scheme && uri.host && uri.path && PublicSuffix.valid?(uri.host)
-    rescue Addressable::URI::InvalidURIError => _
+    rescue Addressable::URI::InvalidURIError => _e
       false
     end
 
