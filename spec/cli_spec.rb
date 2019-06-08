@@ -1,10 +1,10 @@
 # frozen_string_literal: true
 
 RSpec.describe Mihari::CLI do
+  subject { described_class }
+
   let(:query) { "test" }
   let(:mock) { double("Analyzer") }
-
-  subject { described_class }
 
   before { allow(mock).to receive(:run) }
 
