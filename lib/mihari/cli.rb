@@ -35,6 +35,16 @@ module Mihari
       end
     end
 
+    desc "urlscan [QUERY]", "urlscan lookup by a given query"
+    method_option :tags, type: :array, desc: "tags"
+    def urlscan(query)
+      tags = options.dig("tags") || []
+      with_error_handling do
+        urlscan = Analyzers::Urlscan.new(query, tags: tags)
+        urlscan.run
+      end
+    end
+
     desc "import_from_json", "Give a JSON input via STDIN"
     def import_from_json(input = nil)
       json = input || STDIN.gets.chomp
