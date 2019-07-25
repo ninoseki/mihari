@@ -43,6 +43,7 @@ Commands:
   mihari import_from_json  # Give a JSON input via STDIN
   mihari onyphe [QUERY]    # Onyphe datascan lookup by a given query
   mihari shodan [QUERY]    # Shodan host lookup by a given query
+  mihari urlscan [QUERY]   # urlscan lookup by a given query
 ```
 
 ### Censys
@@ -61,6 +62,12 @@ mihari shodan "YOUR QUERY"
 
 ```bash
 mihari onyphe "YOUR QUERY"
+```
+
+### urlscan.io
+
+```bash
+mihari urlscan "YOUR QUERY"
 ```
 
 ### Import from JSON

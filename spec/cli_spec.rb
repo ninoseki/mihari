@@ -34,4 +34,13 @@ RSpec.describe Mihari::CLI do
       expect(mock).to have_received(:run).once
     end
   end
+
+  describe "#urlscan" do
+    before { allow(Mihari::Analyzers::Urlscan).to receive(:new).and_return(mock) }
+
+    it do
+      subject.start ["urlscan", query]
+      expect(mock).to have_received(:run).once
+    end
+  end
 end

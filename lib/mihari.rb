@@ -27,6 +27,7 @@ require "mihari/analyzers/basic"
 require "mihari/analyzers/censys"
 require "mihari/analyzers/onyphe"
 require "mihari/analyzers/shodan"
+require "mihari/analyzers/urlscan"
 
 require "mihari/notifiers/base"
 require "mihari/notifiers/slack"
