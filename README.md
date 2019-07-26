@@ -1,10 +1,11 @@
 # mihari
 
+[![Gem Version](https://badge.fury.io/rb/mihari.svg)](https://badge.fury.io/rb/mihari)
 [![Build Status](https://travis-ci.org/ninoseki/mihari.svg?branch=master)](https://travis-ci.org/ninoseki/mihari)
 [![Coverage Status](https://coveralls.io/repos/github/ninoseki/mihari/badge.svg?branch=master)](https://coveralls.io/github/ninoseki/mihari?branch=master)
 [![CodeFactor](https://www.codefactor.io/repository/github/ninoseki/mihari/badge)](https://www.codefactor.io/repository/github/ninoseki/mihari)
 
-mihari(`見張り`) is a framework for continuous malicious hosts (C2 / landing page / phishing, etc.) monitoring backended with [TheHive](https://github.com/TheHive-Project/TheHive).
+mihari(`見張り`) is a sidekick tool for [TheHive](https://github.com/TheHive-Project/TheHive) to monitor malicious hosts (C2 / landing page / phishing, etc.) continuously.
 
 ## How it works
 
