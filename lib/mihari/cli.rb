@@ -9,40 +9,32 @@ module Mihari
     method_option :tags, type: :array, desc: "tags"
     def censys(query)
       tags = options.dig("tags") || []
-      with_error_handling do
-        censys = Analyzers::Censys.new(query, tags: tags)
-        censys.run
-      end
+      censys = Analyzers::Censys.new(query, tags: tags)
+      run_analyzer censys
     end
 
     desc "shodan [QUERY]", "Shodan host lookup by a given query"
     method_option :tags, type: :array, desc: "tags"
     def shodan(query)
       tags = options.dig("tags") || []
-      with_error_handling do
-        shodan = Analyzers::Shodan.new(query, tags: tags)
-        shodan.run
-      end
+      shodan = Analyzers::Shodan.new(query, tags: tags)
+      run_analyzer shodan
     end
 
     desc "onyphe [QUERY]", "Onyphe datascan lookup by a given query"
     method_option :tags, type: :array, desc: "tags"
     def onyphe(query)
       tags = options.dig("tags") || []
-      with_error_handling do
-        onyphe = Analyzers::Onyphe.new(query, tags: tags)
-        onyphe.run
-      end
+      onyphe = Analyzers::Onyphe.new(query, tags: tags)
+      run_analyzer onyphe
     end
 
     desc "urlscan [QUERY]", "urlscan lookup by a given query"
     method_option :tags, type: :array, desc: "tags"
     def urlscan(query)
       tags = options.dig("tags") || []
-      with_error_handling do
-        urlscan = Analyzers::Urlscan.new(query, tags: tags)
-        urlscan.run
-      end
+      urlscan = Analyzers::Urlscan.new(query, tags: tags)
+      run_analyzer urlscan
     end
 
     desc "import_from_json", "Give a JSON input via STDIN"
@@ -58,10 +50,8 @@ module Mihari
       artifacts = json.dig("artifacts")
       tags = json.dig("tags") || []
 
-      with_error_handling do
-        basic = Analyzers::Basic.new(title: title, description: description, artifacts: artifacts, tags: tags)
-        basic.run
-      end
+      basic = Analyzers::Basic.new(title: title, description: description, artifacts: artifacts, tags: tags)
+      run_analyzer basic
     end
 
     no_commands do
@@ -72,6 +62,10 @@ module Mihari
       rescue StandardError => e
         puts "Warning: #{e}"
         puts e.backtrace.join('\n')
+      end
+
+      def run_analyzer(analyzer)
+        with_error_handling { analyzer.run }
       end
 
       def parse_as_json(input)
