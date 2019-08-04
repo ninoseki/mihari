@@ -36,7 +36,7 @@ Gem::Specification.new do |spec|
   spec.add_dependency "email_address", "~> 0.1"
   spec.add_dependency "hachi", "~> 0.1"
   spec.add_dependency "mem", "~> 0.1"
-  spec.add_dependency "net-ping"
+  spec.add_dependency "net-ping", "~> 2.0"
   spec.add_dependency "onyphe", "~> 0.2"
   spec.add_dependency "public_suffix", "~> 3.1"
   spec.add_dependency "shodanx", "~> 0.1"
