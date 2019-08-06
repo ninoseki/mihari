@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module Mihari
-  module Notifiers
+  module Emitters
     class TheHive < Base
       attr_reader :api
 
@@ -14,7 +14,7 @@ module Mihari
         api.valid?
       end
 
-      def notify(title:, description:, artifacts:, tags: [])
+      def emit(title:, description:, artifacts:, tags: [])
         return if artifacts.empty?
 
         res = api.create_alert(

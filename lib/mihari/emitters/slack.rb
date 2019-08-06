@@ -5,7 +5,7 @@ require "digest/sha2"
 require "mem"
 
 module Mihari
-  module Notifiers
+  module Emitters
     class Attachment
       include Mem
 
@@ -125,7 +125,7 @@ module Mihari
         end.flatten
       end
 
-      def notify(title:, description:, artifacts:, tags:)
+      def emit(title:, description:, artifacts:, tags:)
         return if artifacts.empty?
 
         attachments = to_attachments(artifacts)

@@ -1,10 +1,10 @@
 # frozen_string_literal: true
 
 module Mihari
-  module Notifiers
+  module Emitters
     class Base
       def self.inherited(child)
-        Mihari.notifiers << child
+        Mihari.emitters << child
       end
 
       # @return [true, false]
@@ -12,7 +12,7 @@ module Mihari
         raise NotImplementedError, "You must implement #{self.class}##{__method__}"
       end
 
-      def notify(title:, description:, artifacts:)
+      def emit(title:, description:, artifacts:)
         raise NotImplementedError, "You must implement #{self.class}##{__method__}"
       end
     end

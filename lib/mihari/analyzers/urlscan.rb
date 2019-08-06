@@ -28,7 +28,7 @@ module Mihari
         results = result.dig("results") || []
         results.map do |match|
           match.dig "task", "url"
-        end.compact
+        end.compact.uniq
       end
 
       private

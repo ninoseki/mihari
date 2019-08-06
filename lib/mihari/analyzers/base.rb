@@ -30,18 +30,16 @@ module Mihari
       end
 
       def run(reject_exists_ones: true)
-        unique_artifacts = normalized_artifacts.reject do |artifact|
-          reject_exists_ones & the_hive.valid? && the_hive.exists?(data: artifact.data, data_type: artifact.data_type)
-        end
+        artifacts = reject_exists_ones ? unique_artifacts : normalized_artifacts
 
-        Mihari.notifiers.each do |notifier_class|
-          notifier = notifier_class.new
-          next unless notifier.valid?
+        Mihari.emitters.each do |emitter_class|
+          emitter = emitter_class.new
+          next unless emitter.valid?
 
           begin
-            notifier.notify(title: title, description: description, artifacts: unique_artifacts, tags: tags)
+            emitter.emit(title: title, description: description, artifacts: artifacts, tags: tags)
           rescue StandardError => e
-            puts "Sending notification by #{notifier.class} is failed: #{e}"
+            puts "Sending notification by #{emitter.class} is failed: #{e}"
           end
         end
       end
@@ -53,6 +51,13 @@ module Mihari
         artifacts.map do |artifact|
           artifact.is_a?(Artifact) ? artifact : Artifact.new(artifact)
         end.select(&:valid?)
+      end
+
+      # @return [Array<Mihari::Artifact>]
+      def unique_artifacts
+        normalized_artifacts.reject do |artifact|
+          the_hive.valid? && the_hive.exists?(data: artifact.data, data_type: artifact.data_type)
+        end
       end
     end
   end

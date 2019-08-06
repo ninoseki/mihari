@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-RSpec.describe Mihari::Notifiers::Slack do
+RSpec.describe Mihari::Emitters::Slack do
   subject { described_class.new }
 
   describe "#to_attachments" do

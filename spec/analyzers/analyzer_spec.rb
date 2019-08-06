@@ -38,14 +38,14 @@ RSpec.describe Mihari::Analyzers::Base, :vcr do
 
     context "when a notifer raises an error" do
       before do
-        notifier = double("notifier_instance")
-        allow(notifier).to receive(:valid?).and_return(true)
-        allow(notifier).to receive(:notify).and_raise("error")
+        emitter = double("emitter_instance")
+        allow(emitter).to receive(:valid?).and_return(true)
+        allow(emitter).to receive(:emit).and_raise("error")
 
-        klass = double("notifier_class")
-        allow(klass).to receive(:new).and_return(notifier)
+        klass = double("emitter_class")
+        allow(klass).to receive(:new).and_return(emitter)
 
-        allow(Mihari).to receive(:notifiers).and_return([klass])
+        allow(Mihari).to receive(:emitters).and_return([klass])
 
         thehive = instance_double(Mihari::TheHive)
         allow(thehive).to receive(:valid?).and_return(false)
