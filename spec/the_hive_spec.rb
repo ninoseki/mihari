@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 RSpec.describe Mihari::TheHive, :vcr do
-  subject { Mihari::TheHive.new }
+  subject { described_class.new }
 
   describe "#exists?" do
     context "when give a not existing value" do
