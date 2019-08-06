@@ -6,10 +6,10 @@ module Mihari
   class << self
     include Mem
 
-    def notifiers
+    def emitters
       []
     end
-    memoize :notifiers
+    memoize :emitters
   end
 end
 
@@ -29,8 +29,8 @@ require "mihari/analyzers/onyphe"
 require "mihari/analyzers/shodan"
 require "mihari/analyzers/urlscan"
 
-require "mihari/notifiers/base"
-require "mihari/notifiers/slack"
-require "mihari/notifiers/the_hive"
+require "mihari/emitters/base"
+require "mihari/emitters/slack"
+require "mihari/emitters/the_hive"
 
 require "mihari/cli"
