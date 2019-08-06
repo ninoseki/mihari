@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require "slack/incoming/webhooks"
+require "slack-notifier"
 require "digest/sha2"
 require "mem"
 
@@ -131,8 +131,8 @@ module Mihari
         attachments = to_attachments(artifacts)
         tags << ["N/A"] if tags.empty?
 
-        slack = ::Slack::Incoming::Webhooks.new(slack_webhook_url, channel: slack_channel)
-        slack.post("#{title} (desc.: #{description} / tags: #{tags.join(', ')})", attachments: attachments)
+        notifier = ::Slack::Notifier.new(slack_webhook_url, channel: slack_channel)
+        notifier.post(text: "#{title} (desc.: #{description} / tags: #{tags.join(', ')})", attachments: attachments)
       end
     end
   end
