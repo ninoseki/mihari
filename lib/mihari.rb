@@ -32,6 +32,7 @@ require "mihari/analyzers/virustotal"
 
 require "mihari/emitters/base"
 require "mihari/emitters/slack"
+require "mihari/emitters/stdout"
 require "mihari/emitters/the_hive"
 
 require "mihari/cli"
