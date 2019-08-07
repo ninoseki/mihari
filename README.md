@@ -34,41 +34,18 @@ gem install mihari
 
 ## Basic usage
 
-mihari supports Censys, Shodan and Onyphe by default.
+mihari supports Censys, Shodan, Onyphe, urlscan and VirusTotal by default.
 
 ```bash
 $ mihari
 Commands:
-  mihari censys [QUERY]    # Censys IPv4 lookup by a given query
-  mihari help [COMMAND]    # Describe available commands or one specific command
-  mihari import_from_json  # Give a JSON input via STDIN
-  mihari onyphe [QUERY]    # Onyphe datascan lookup by a given query
-  mihari shodan [QUERY]    # Shodan host lookup by a given query
-  mihari urlscan [QUERY]   # urlscan lookup by a given query
-```
-
-### Censys
-
-```bash
-mihari censys "YOUR_QUERY"
-```
-
-### Shodan
-
-```bash
-mihari shodan "YOUR QUERY"
-```
-
-### Onyphe
-
-```bash
-mihari onyphe "YOUR QUERY"
-```
-
-### urlscan.io
-
-```bash
-mihari urlscan "YOUR QUERY"
+  mihari censys [QUERY]          # Censys IPv4 lookup by a given query
+  mihari help [COMMAND]          # Describe available commands or one specific command
+  mihari import_from_json        # Give a JSON input via STDIN
+  mihari onyphe [QUERY]          # Onyphe datascan lookup by a given query
+  mihari shodan [QUERY]          # Shodan host lookup by a given query
+  mihari urlscan [QUERY]         # urlscan lookup by a given query
+  mihari virustotal [IP|DOMAIN]  # VirusTotal resolutions lookup by a given ip or domain
 ```
 
 ### Import from JSON
@@ -109,6 +86,7 @@ All configuration is done via ENV variables.
 | CENSYS_SECRET        | Censys secret      | Optional                       |
 | SHODAN_API_KEY       | Shodan API key     | Optional                       |
 | ONYPHE_API_KEY       | Onyphe API key     | Optional                       |
+| VIRUSTOTAL_API_KEY   | VirusTotal API key | Optional                       |
 
 ## How to create a custom analyzer
 

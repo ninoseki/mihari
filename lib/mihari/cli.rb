@@ -37,6 +37,14 @@ module Mihari
       run_analyzer urlscan
     end
 
+    desc "virustotal [IP|DOMAIN]", "VirusTotal resolutions lookup by a given ip or domain"
+    method_option :tags, type: :array, desc: "tags"
+    def virustotal(indiactor)
+      tags = options.dig("tags") || []
+      virustotal = Analyzers::VirusTotal.new(indiactor, tags: tags)
+      run_analyzer virustotal
+    end
+
     desc "import_from_json", "Give a JSON input via STDIN"
     def import_from_json(input = nil)
       json = input || STDIN.gets.chomp

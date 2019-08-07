@@ -28,6 +28,7 @@ require "mihari/analyzers/censys"
 require "mihari/analyzers/onyphe"
 require "mihari/analyzers/shodan"
 require "mihari/analyzers/urlscan"
+require "mihari/analyzers/virustotal"
 
 require "mihari/emitters/base"
 require "mihari/emitters/slack"
