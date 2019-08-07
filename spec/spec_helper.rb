@@ -57,4 +57,7 @@ VCR.configure do |config|
 
   # Onyphe
   config.filter_sensitive_data("<ONYPHE_API_KEY>") { ENV["ONYPHE_API_KEY"] }
+
+  # VirusTotal
+  config.filter_sensitive_data("<VT_API_KEY>") { ENV["VIRUSTOTAL_API_KEY"] }
 end
