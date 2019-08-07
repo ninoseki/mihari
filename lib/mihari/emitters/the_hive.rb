@@ -17,14 +17,12 @@ module Mihari
       def emit(title:, description:, artifacts:, tags: [])
         return if artifacts.empty?
 
-        res = api.create_alert(
+        api.create_alert(
           title: title,
           description: description,
           artifacts: artifacts.map(&:to_h),
           tags: tags
         )
-        id = res.dig("id")
-        puts "A new alret is created. (id: #{id})"
       end
     end
   end
