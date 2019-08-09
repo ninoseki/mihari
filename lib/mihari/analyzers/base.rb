@@ -48,16 +48,16 @@ module Mihari
 
       # @return [Array<Mihari::Artifact>]
       def normalized_artifacts
-        artifacts.map do |artifact|
+        @normalized_artifacts ||= artifacts.map do |artifact|
           artifact.is_a?(Artifact) ? artifact : Artifact.new(artifact)
         end.select(&:valid?)
       end
 
       # @return [Array<Mihari::Artifact>]
       def unique_artifacts
-        normalized_artifacts.reject do |artifact|
-          the_hive.valid? && the_hive.exists?(data: artifact.data, data_type: artifact.data_type)
-        end
+        return normalized_artifacts unless the_hive.valid?
+
+        the_hive.find_non_existing_artifacts(normalized_artifacts)
       end
     end
   end
