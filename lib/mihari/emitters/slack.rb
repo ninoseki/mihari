@@ -125,11 +125,11 @@ module Mihari
         end.flatten
       end
 
-      def emit(title:, description:, artifacts:, tags:)
+      def emit(title:, description:, artifacts:, tags: [])
         return if artifacts.empty?
 
         attachments = to_attachments(artifacts)
-        tags << ["N/A"] if tags.empty?
+        tags = ["N/A"] if tags.empty?
 
         notifier = ::Slack::Notifier.new(slack_webhook_url, channel: slack_channel)
         notifier.post(text: "#{title} (desc.: #{description} / tags: #{tags.join(', ')})", attachments: attachments)
