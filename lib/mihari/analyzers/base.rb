@@ -57,7 +57,7 @@ module Mihari
       def unique_artifacts
         return normalized_artifacts unless the_hive.valid?
 
-        the_hive.find_non_existing_artifacts(normalized_artifacts)
+        the_hive.artifact.find_non_existing_artifacts(normalized_artifacts)
       end
     end
   end

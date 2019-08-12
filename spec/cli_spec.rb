@@ -43,4 +43,18 @@ RSpec.describe Mihari::CLI do
       expect(mock).to have_received(:run).once
     end
   end
+
+  describe "#alerts" do
+    let(:mock) { double("AlertViewer") }
+
+    before do
+      allow(Mihari::AlertViewer).to receive(:new).and_return(mock)
+      allow(mock).to receive(:list)
+    end
+
+    it do
+      subject.start ["alerts"]
+      expect(mock).to have_received(:list).once
+    end
+  end
 end

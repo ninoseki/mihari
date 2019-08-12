@@ -5,7 +5,7 @@ http_interactions:
     uri: http://<API_ENDPOINT>:9000/api/case/artifact/_search?range=0-1
     body:
       encoding: UTF-8
-      string: '{"query":{"_and":[{"_field":"data","_value":"null.example.com"},{"_field":"dataType","_value":"domain"},{"_and":[{"_not":{"status":"Deleted"}},{"_not":{"_in":{"_field":"_type","_values":["dashboard","data","user","analyzer","caseTemplate","reportTemplate","action"]}}}]}]}}'
+      string: '{"query":{"_and":[{"_string":"data:null.example.com"},{"_string":"dataType:domain"},{"_and":[{"_not":{"status":"Deleted"}},{"_not":{"_in":{"_field":"_type","_values":["dashboard","data","user","analyzer","caseTemplate","reportTemplate","action"]}}}]}]}}'
     headers:
       Accept-Encoding:
       - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
@@ -27,7 +27,7 @@ http_interactions:
       X-Total:
       - '0'
       Date:
-      - Sun, 21 Apr 2019 22:38:55 GMT
+      - Sun, 11 Aug 2019 14:32:17 GMT
       Transfer-Encoding:
       - chunked
       Content-Type:
@@ -36,5 +36,5 @@ http_interactions:
       encoding: UTF-8
       string: "[]"
     http_version: 
-  recorded_at: Sun, 21 Apr 2019 22:38:55 GMT
-recorded_with: VCR 4.0.0
+  recorded_at: Sun, 11 Aug 2019 14:32:18 GMT
+recorded_with: VCR 5.0.0

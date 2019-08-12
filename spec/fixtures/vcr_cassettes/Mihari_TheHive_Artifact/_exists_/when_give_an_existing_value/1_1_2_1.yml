@@ -1,0 +1,40 @@
+---
+http_interactions:
+- request:
+    method: post
+    uri: http://<API_ENDPOINT>:9000/api/case/artifact/_search?range=0-1
+    body:
+      encoding: UTF-8
+      string: '{"query":{"_and":[{"_string":"data:1.1.1.1"},{"_string":"dataType:ip"},{"_and":[{"_not":{"status":"Deleted"}},{"_not":{"_in":{"_field":"_type","_values":["dashboard","data","user","analyzer","caseTemplate","reportTemplate","action"]}}}]}]}}'
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+      Host:
+      - "<API_ENDPOINT>:9000"
+      Content-Type:
+      - application/json
+      Authorization:
+      - Bearer <API_KEY>
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      X-Total:
+      - '2'
+      Date:
+      - Sun, 11 Aug 2019 14:32:17 GMT
+      Transfer-Encoding:
+      - chunked
+      Content-Type:
+      - application/json
+    body:
+      encoding: UTF-8
+      string: '[{"_routing":"AWobTO2jH8Rbrc-EdGw2","reports":{},"data":"1.1.1.1","dataType":"ip","_type":"case_artifact","sighted":false,"message":"","tags":["test"],"createdAt":1558948397118,"_parent":"AWobTO2jH8Rbrc-EdGw2","createdBy":"test","tlp":2,"_id":"948180dde99f9ada756677978c2ffeb7","id":"948180dde99f9ada756677978c2ffeb7","ioc":false,"_version":1,"startDate":1558948397163,"status":"Ok"}]'
+    http_version: 
+  recorded_at: Sun, 11 Aug 2019 14:32:18 GMT
+recorded_with: VCR 5.0.0
