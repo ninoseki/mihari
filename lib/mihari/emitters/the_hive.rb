@@ -3,21 +3,21 @@
 module Mihari
   module Emitters
     class TheHive < Base
-      attr_reader :api
+      attr_reader :the_hive
 
       def initialize
-        @api = Mihari::TheHive.new
+        @the_hive = Mihari::TheHive.new
       end
 
       # @return [true, false]
       def valid?
-        api.valid?
+        the_hive.valid?
       end
 
       def emit(title:, description:, artifacts:, tags: [])
         return if artifacts.empty?
 
-        api.create_alert(
+        the_hive.alert.create(
           title: title,
           description: description,
           artifacts: artifacts.map(&:to_h),

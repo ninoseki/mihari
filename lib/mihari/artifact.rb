@@ -1,7 +1,5 @@
 # frozen_string_literal: true
 
-require "hachi"
-
 module Mihari
   class Artifact
     attr_reader :data

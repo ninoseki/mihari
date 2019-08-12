@@ -20,6 +20,9 @@ require "mihari/errors"
 require "mihari/type_checker"
 require "mihari/artifact"
 
+require "mihari/the_hive/base"
+require "mihari/the_hive/alert"
+require "mihari/the_hive/artifact"
 require "mihari/the_hive"
 
 require "mihari/analyzers/base"
@@ -34,5 +37,7 @@ require "mihari/emitters/base"
 require "mihari/emitters/slack"
 require "mihari/emitters/stdout"
 require "mihari/emitters/the_hive"
+
+require "mihari/alert_viewer"
 
 require "mihari/cli"

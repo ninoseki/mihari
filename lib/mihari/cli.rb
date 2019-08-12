@@ -62,10 +62,20 @@ module Mihari
       run_analyzer basic
     end
 
+    desc "alerts", "Show the alerts on TheHive"
+    method_option :limit, default: 5, desc: "Number of alerts to show (or 'all' to show all the alerts)"
+    def alerts
+      with_error_handling do
+        viewer = AlertViewer.new(limit: options["limit"])
+        alerts = viewer.list
+        puts JSON.pretty_generate(alerts)
+      end
+    end
+
     no_commands do
       def with_error_handling
         yield
-      rescue ArgumentError, Hachi::Error, Censys::ResponseError => e
+      rescue ArgumentError, Hachi::Error, Censys::ResponseError, Error => e
         puts "Warning: #{e}"
       rescue StandardError => e
         puts "Warning: #{e}"
