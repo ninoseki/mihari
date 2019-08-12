@@ -3,17 +3,17 @@
 RSpec.describe Mihari::Emitters::Slack do
   subject { described_class.new }
 
-  describe "#to_attachments" do
-    let(:artifacts) {
-      [
-        Mihari::Artifact.new("1.1.1.1"),
-        Mihari::Artifact.new("github.com"),
-        Mihari::Artifact.new("http://example.com"),
-        Mihari::Artifact.new("44d88612fea8a8f36de82e1278abb02f"),
-        Mihari::Artifact.new("example@gmail.com")
-      ]
-    }
+  let(:artifacts) {
+    [
+      Mihari::Artifact.new("1.1.1.1"),
+      Mihari::Artifact.new("github.com"),
+      Mihari::Artifact.new("http://example.com"),
+      Mihari::Artifact.new("44d88612fea8a8f36de82e1278abb02f"),
+      Mihari::Artifact.new("example@gmail.com")
+    ]
+  }
 
+  describe "#to_attachments" do
     it do
       attachments = subject.to_attachments(artifacts)
       attachments.each do |a|
@@ -45,6 +45,25 @@ RSpec.describe Mihari::Emitters::Slack do
       it do
         expect(subject.valid?).to be(false)
       end
+    end
+  end
+
+  describe "#emit" do
+    let(:title) { "test" }
+    let(:description) { "test" }
+    let(:mock) { double("notifier") }
+
+    before do
+      allow(Slack::Notifier).to receive(:new).and_return(mock)
+      allow(mock).to receive(:post)
+
+      allow(subject).to receive(:slack_channel)
+      allow(subject).to receive(:slack_webhook_url)
+    end
+
+    it do
+      subject.emit(title: title, description: description, artifacts: artifacts)
+      expect(mock).to have_received(:post).once
     end
   end
 end
