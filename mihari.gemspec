@@ -41,7 +41,7 @@ Gem::Specification.new do |spec|
   spec.add_dependency "public_suffix", "~> 3.1"
   spec.add_dependency "shodanx", "~> 0.1"
   spec.add_dependency "slack-notifier", "~> 2.3"
-  spec.add_dependency "thor", "~> 0.19"
+  spec.add_dependency "thor", "~> 0.20"
   spec.add_dependency "urlscan", "~> 0.2"
   spec.add_dependency "virustotalx", "~> 0.1"
 end
