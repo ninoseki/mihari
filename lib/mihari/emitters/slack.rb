@@ -100,23 +100,12 @@ module Mihari
     end
 
     class Slack < Base
-      SLACK_WEBHOOK_URL_KEY = "SLACK_WEBHOOK_URL"
-      SLACK_CHANNEL_KEY = "SLACK_CHANNEL"
-
-      def slack_channel
-        ENV.fetch SLACK_CHANNEL_KEY, "#general"
-      end
-
-      def slack_webhook_url
-        ENV.fetch SLACK_WEBHOOK_URL_KEY
-      end
-
-      def slack_webhook_url?
-        ENV.key? SLACK_WEBHOOK_URL_KEY
+      def notifier
+        @notifier ||= Notifiers::Slack.new
       end
 
       def valid?
-        slack_webhook_url?
+        notifier.valid?
       end
 
       def to_attachments(artifacts)
@@ -130,9 +119,9 @@ module Mihari
 
         attachments = to_attachments(artifacts)
         tags = ["N/A"] if tags.empty?
+        text = "#{title} (desc.: #{description} / tags: #{tags.join(', ')})"
 
-        notifier = ::Slack::Notifier.new(slack_webhook_url, channel: slack_channel)
-        notifier.post(text: "#{title} (desc.: #{description} / tags: #{tags.join(', ')})", attachments: attachments)
+        notifier.notify(text: text, attachments: attachments)
       end
     end
   end

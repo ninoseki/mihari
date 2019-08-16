@@ -54,16 +54,14 @@ RSpec.describe Mihari::Emitters::Slack do
     let(:mock) { double("notifier") }
 
     before do
-      allow(Slack::Notifier).to receive(:new).and_return(mock)
-      allow(mock).to receive(:post)
-
-      allow(subject).to receive(:slack_channel)
-      allow(subject).to receive(:slack_webhook_url)
+      allow(Mihari::Notifiers::Slack).to receive(:new).and_return(mock)
+      allow(mock).to receive(:notify)
+      allow(mock).to receive(:valid?).and_return(true)
     end
 
     it do
       subject.emit(title: title, description: description, artifacts: artifacts)
-      expect(mock).to have_received(:post).once
+      expect(mock).to have_received(:notify).once
     end
   end
 end

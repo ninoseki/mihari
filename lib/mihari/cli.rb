@@ -8,58 +8,70 @@ module Mihari
     desc "censys [QUERY]", "Censys IPv4 lookup by a given query"
     method_option :tags, type: :array, desc: "tags"
     def censys(query)
-      tags = options.dig("tags") || []
-      censys = Analyzers::Censys.new(query, tags: tags)
-      run_analyzer censys
+      with_error_handling do
+        tags = options.dig("tags") || []
+        censys = Analyzers::Censys.new(query, tags: tags)
+        censys.run
+      end
     end
 
     desc "shodan [QUERY]", "Shodan host lookup by a given query"
     method_option :tags, type: :array, desc: "tags"
     def shodan(query)
-      tags = options.dig("tags") || []
-      shodan = Analyzers::Shodan.new(query, tags: tags)
-      run_analyzer shodan
+      with_error_handling do
+        tags = options.dig("tags") || []
+        shodan = Analyzers::Shodan.new(query, tags: tags)
+        shodan.run
+      end
     end
 
     desc "onyphe [QUERY]", "Onyphe datascan lookup by a given query"
     method_option :tags, type: :array, desc: "tags"
     def onyphe(query)
-      tags = options.dig("tags") || []
-      onyphe = Analyzers::Onyphe.new(query, tags: tags)
-      run_analyzer onyphe
+      with_error_handling do
+        tags = options.dig("tags") || []
+        onyphe = Analyzers::Onyphe.new(query, tags: tags)
+        onyphe.run
+      end
     end
 
     desc "urlscan [QUERY]", "urlscan lookup by a given query"
     method_option :tags, type: :array, desc: "tags"
     def urlscan(query)
-      tags = options.dig("tags") || []
-      urlscan = Analyzers::Urlscan.new(query, tags: tags)
-      run_analyzer urlscan
+      with_error_handling do
+        tags = options.dig("tags") || []
+        urlscan = Analyzers::Urlscan.new(query, tags: tags)
+        urlscan.run
+      end
     end
 
     desc "virustotal [IP|DOMAIN]", "VirusTotal resolutions lookup by a given ip or domain"
     method_option :tags, type: :array, desc: "tags"
     def virustotal(indiactor)
-      tags = options.dig("tags") || []
-      virustotal = Analyzers::VirusTotal.new(indiactor, tags: tags)
-      run_analyzer virustotal
+      with_error_handling do
+        tags = options.dig("tags") || []
+        virustotal = Analyzers::VirusTotal.new(indiactor, tags: tags)
+        virustotal.run
+      end
     end
 
     desc "import_from_json", "Give a JSON input via STDIN"
     def import_from_json(input = nil)
-      json = input || STDIN.gets.chomp
-      raise ArgumentError, "Input not found: please give an input in a JSON format" unless json
+      with_error_handling do
+        json = input || STDIN.gets.chomp
+        raise ArgumentError, "Input not found: please give an input in a JSON format" unless json
 
-      json = parse_as_json(json)
-      raise ArgumentError, "Invalid input format: an input JSON data should have title, description and artifacts key" unless valid_json?(json)
+        json = parse_as_json(json)
+        raise ArgumentError, "Invalid input format: an input JSON data should have title, description and artifacts key" unless valid_json?(json)
 
-      title = json.dig("title")
-      description = json.dig("description")
-      artifacts = json.dig("artifacts")
-      tags = json.dig("tags") || []
+        title = json.dig("title")
+        description = json.dig("description")
+        artifacts = json.dig("artifacts")
+        tags = json.dig("tags") || []
 
-      basic = Analyzers::Basic.new(title: title, description: description, artifacts: artifacts, tags: tags)
-      run_analyzer basic
+        basic = Analyzers::Basic.new(title: title, description: description, artifacts: artifacts, tags: tags)
+        basic.run
+      end
     end
 
     desc "alerts", "Show the alerts on TheHive"
@@ -75,15 +87,9 @@ module Mihari
     no_commands do
       def with_error_handling
         yield
-      rescue ArgumentError, Hachi::Error, Censys::ResponseError, Error => e
-        puts "Warning: #{e}"
       rescue StandardError => e
-        puts "Warning: #{e}"
-        puts e.backtrace.join('\n')
-      end
-
-      def run_analyzer(analyzer)
-        with_error_handling { analyzer.run }
+        notifier = Notifiers::ExceptionNotifier.new
+        notifier.notify e
       end
 
       def parse_as_json(input)
