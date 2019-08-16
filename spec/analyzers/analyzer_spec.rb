@@ -54,7 +54,7 @@ RSpec.describe Mihari::Analyzers::Base, :vcr do
 
       it do
         output = capture(:stdout){ subject.run }
-        expect(output).to include("Sending notification by")
+        expect(output).to include("Emission by")
       end
     end
   end
