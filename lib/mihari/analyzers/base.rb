@@ -29,19 +29,19 @@ module Mihari
         []
       end
 
-      def run(reject_exists_ones: true)
-        artifacts = reject_exists_ones ? unique_artifacts : normalized_artifacts
-
+      def run
         Mihari.emitters.each do |emitter_class|
           emitter = emitter_class.new
           next unless emitter.valid?
 
-          begin
-            emitter.emit(title: title, description: description, artifacts: artifacts, tags: tags)
-          rescue StandardError => e
-            puts "Sending notification by #{emitter.class} is failed: #{e}"
-          end
+          run_emitter emitter
         end
+      end
+
+      def run_emitter(emitter)
+        emitter.emit(title: title, description: description, artifacts: unique_artifacts, tags: tags)
+      rescue StandardError => e
+        puts "Emission by #{emitter.class} is failed: #{e}"
       end
 
       private
