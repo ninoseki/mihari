@@ -33,6 +33,10 @@ require "mihari/analyzers/shodan"
 require "mihari/analyzers/urlscan"
 require "mihari/analyzers/virustotal"
 
+require "mihari/notifiers/base"
+require "mihari/notifiers/slack"
+require "mihari/notifiers/exception_notifier"
+
 require "mihari/emitters/base"
 require "mihari/emitters/slack"
 require "mihari/emitters/stdout"

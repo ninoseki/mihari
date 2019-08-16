@@ -88,11 +88,9 @@ module Mihari
     no_commands do
       def with_error_handling
         yield
-      rescue ArgumentError, Hachi::Error, Censys::ResponseError, Error => e
-        puts "Warning: #{e}"
       rescue StandardError => e
-        puts "Warning: #{e}"
-        puts e.backtrace.join('\n')
+        notifier = Notifiers::ExceptionNotifier.new
+        notifier.notify e
       end
 
       def parse_as_json(input)
