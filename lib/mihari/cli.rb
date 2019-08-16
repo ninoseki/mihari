@@ -30,7 +30,6 @@ module Mihari
     def onyphe(query)
       with_error_handling do
         tags = options.dig("tags") || []
-        tags = options.dig("tags") || []
         onyphe = Analyzers::Onyphe.new(query, tags: tags)
         onyphe.run
       end
