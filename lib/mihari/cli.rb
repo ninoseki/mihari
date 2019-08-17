@@ -6,52 +6,52 @@ require "json"
 module Mihari
   class CLI < Thor
     desc "censys [QUERY]", "Censys IPv4 lookup by a given query"
+    method_option :title, type: :string, desc: "title"
+    method_option :description, type: :string, desc: "description"
     method_option :tags, type: :array, desc: "tags"
     def censys(query)
       with_error_handling do
-        tags = options.dig("tags") || []
-        censys = Analyzers::Censys.new(query, tags: tags)
-        censys.run
+        run_analyzer Analyzers::Censys, query: query, options: options
       end
     end
 
     desc "shodan [QUERY]", "Shodan host lookup by a given query"
+    method_option :title, type: :string, desc: "title"
+    method_option :description, type: :string, desc: "description"
     method_option :tags, type: :array, desc: "tags"
     def shodan(query)
       with_error_handling do
-        tags = options.dig("tags") || []
-        shodan = Analyzers::Shodan.new(query, tags: tags)
-        shodan.run
+        run_analyzer Analyzers::Shodan, query: query, options: options
       end
     end
 
     desc "onyphe [QUERY]", "Onyphe datascan lookup by a given query"
+    method_option :title, type: :string, desc: "title"
+    method_option :description, type: :string, desc: "description"
     method_option :tags, type: :array, desc: "tags"
     def onyphe(query)
       with_error_handling do
-        tags = options.dig("tags") || []
-        onyphe = Analyzers::Onyphe.new(query, tags: tags)
-        onyphe.run
+        run_analyzer Analyzers::Onyphe, query: query, options: options
       end
     end
 
     desc "urlscan [QUERY]", "urlscan lookup by a given query"
+    method_option :title, type: :string, desc: "title"
+    method_option :description, type: :string, desc: "description"
     method_option :tags, type: :array, desc: "tags"
     def urlscan(query)
       with_error_handling do
-        tags = options.dig("tags") || []
-        urlscan = Analyzers::Urlscan.new(query, tags: tags)
-        urlscan.run
+        run_analyzer Analyzers::Urlscan, query: query, options: options
       end
     end
 
     desc "virustotal [IP|DOMAIN]", "VirusTotal resolutions lookup by a given ip or domain"
+    method_option :title, type: :string, desc: "title"
+    method_option :description, type: :string, desc: "description"
     method_option :tags, type: :array, desc: "tags"
     def virustotal(indiactor)
       with_error_handling do
-        tags = options.dig("tags") || []
-        virustotal = Analyzers::VirusTotal.new(indiactor, tags: tags)
-        virustotal.run
+        run_analyzer Analyzers::VirusTotal, query: indiactor, options: options
       end
     end
 
@@ -101,6 +101,15 @@ module Mihari
       # @return [true, false]
       def valid_json?(json)
         %w(title description artifacts).all? { |key| json.key? key }
+      end
+
+      def run_analyzer(analyzer_class, query:, options:)
+        title = options.dig("title")
+        description = options.dig("description")
+        tags = options.dig("tags") || []
+
+        analyzer = analyzer_class.new(query, title: title, description: description, tags: tags)
+        analyzer.run
       end
     end
   end

@@ -11,13 +11,13 @@ module Mihari
       attr_reader :query
       attr_reader :tags
 
-      def initialize(query, tags: [])
+      def initialize(query, title: nil, description: nil, tags: [])
         super()
 
         @api = ::UrlScan::API.new
         @query = query
-        @title = "urlscan lookup"
-        @description = "query = #{query}"
+        @title = title || "urlscan lookup"
+        @description = description || "query = #{query}"
         @tags = tags
       end
 

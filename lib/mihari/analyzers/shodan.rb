@@ -11,13 +11,13 @@ module Mihari
       attr_reader :query
       attr_reader :tags
 
-      def initialize(query, tags: [])
+      def initialize(query, title: nil, description: nil, tags: [])
         super()
 
         @api = ::Shodan::API.new
         @query = query
-        @title = "Shodan lookup"
-        @description = "query = #{query}"
+        @title = title || "Shodan lookup"
+        @description = description || "query = #{query}"
         @tags = tags
       end
 

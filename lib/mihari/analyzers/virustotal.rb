@@ -13,15 +13,15 @@ module Mihari
       attr_reader :description
       attr_reader :tags
 
-      def initialize(indicator, tags: [])
+      def initialize(indicator, title: nil, description: nil, tags: [])
         super()
 
         @api = ::VirusTotal::API.new
         @indicator = indicator
         @type = TypeChecker.type(indicator)
 
-        @title = "VirusTotal lookup"
-        @description = "indicator = #{indicator}"
+        @title = title || "VirusTotal lookup"
+        @description = description || "indicator = #{indicator}"
         @tags = tags
       end
 
