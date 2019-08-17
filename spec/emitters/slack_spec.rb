@@ -19,7 +19,7 @@ RSpec.describe Mihari::Emitters::Slack do
       attachments.each do |a|
         actions = a.dig(:actions) || []
         actions.each do |action|
-          expect(action.dig(:url)).to start_with("https://www.virustotal.com").or start_with("https://urlscan.io")
+          expect(action.dig(:url)).to match /virustotal|urlscan|censys/
         end
       end
     end
