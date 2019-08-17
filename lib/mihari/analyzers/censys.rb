@@ -14,15 +14,15 @@ module Mihari
       CENSYS_ID_KEY = "CENSYS_ID"
       CENSYS_SECRET_KEY = "CENSYS_SECRET"
 
-      def initialize(query, tags: [])
+      def initialize(query, title: nil, description: nil, tags: [])
         super()
 
         raise ArgumentError, "#{CENSYS_ID_KEY} and #{CENSYS_SECRET_KEY} are required" unless valid?
 
         @api = ::Censys::API.new
         @query = query
-        @title = "Censys lookup"
-        @description = "query = #{query}"
+        @title = title || "Censys lookup"
+        @description = description || "query = #{query}"
         @tags = tags
       end
 
