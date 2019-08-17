@@ -16,32 +16,26 @@ module Mihari
         @data_type = data_type
       end
 
-      def fields
-        [vt_link, urlscan_link].compact
-      end
-
       def actions
-        [vt_link, urlscan_link].compact
+        [vt_link, urlscan_link, censys_link].compact
       end
 
       def vt_link
         return nil unless _vt_link
 
-        {
-          type: "button",
-          text: "Lookup on VirusTotal",
-          url: _vt_link,
-        }
+        { type: "button", text: "Lookup on VirusTotal", url: _vt_link, }
       end
 
       def urlscan_link
         return nil unless _urlscan_link
 
-        {
-          type: "button",
-          text: "Lookup on urlscan.io",
-          url: _urlscan_link,
-        }
+        { type: "button", text: "Lookup on urlscan.io", url: _urlscan_link, }
+      end
+
+      def censys_link
+        return nil unless _censys_link
+
+        { type: "button", text: "Lookup on Censys", url: _censys_link, }
       end
 
       # @return [Array]
@@ -87,6 +81,11 @@ module Mihari
         end
       end
       memoize :_vt_link
+
+      def _censys_link
+        data_type == "ip" ? "https://censys.io/ipv4/#{data}" : nil
+      end
+      memoize :_censys_link
 
       # @return [String]
       def sha256
