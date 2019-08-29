@@ -10,8 +10,9 @@ module Mihari
       attr_reader :description
       attr_reader :query
       attr_reader :tags
+      attr_reader :target_type
 
-      def initialize(query, title: nil, description: nil, tags: [])
+      def initialize(query, title: nil, description: nil, tags: [], target_type: "url")
         super()
 
         @api = ::UrlScan::API.new
@@ -19,6 +20,9 @@ module Mihari
         @title = title || "urlscan lookup"
         @description = description || "query = #{query}"
         @tags = tags
+        @target_type = target_type
+
+        raise ArgumentError, "type should be url, domain or ip." unless valid_target_type?
       end
 
       def artifacts
@@ -27,7 +31,7 @@ module Mihari
 
         results = result.dig("results") || []
         results.map do |match|
-          match.dig "task", "url"
+          match.dig "page", target_type
         end.compact.uniq
       end
 
@@ -37,6 +41,10 @@ module Mihari
         api.search(query)
       rescue ::UrlScan::ResponseError => _e
         nil
+      end
+
+      def valid_target_type?
+        %w(url domain ip).include? target_type
       end
     end
   end

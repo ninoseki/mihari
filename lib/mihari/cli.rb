@@ -39,6 +39,7 @@ module Mihari
     method_option :title, type: :string, desc: "title"
     method_option :description, type: :string, desc: "description"
     method_option :tags, type: :array, desc: "tags"
+    method_option :target_type, type: :string, default: "url", desc: "target type to fetch from lookup results (target type should be 'url', 'domain' or 'ip')"
     def urlscan(query)
       with_error_handling do
         run_analyzer Analyzers::Urlscan, query: query, options: options
@@ -104,12 +105,14 @@ module Mihari
       end
 
       def run_analyzer(analyzer_class, query:, options:)
-        title = options.dig("title")
-        description = options.dig("description")
-        tags = options.dig("tags") || []
+        options = symbolize_hash_keys(options)
 
-        analyzer = analyzer_class.new(query, title: title, description: description, tags: tags)
+        analyzer = analyzer_class.new(query, **options)
         analyzer.run
+      end
+
+      def symbolize_hash_keys(hash)
+        hash.map{ |k, v| [k.to_sym, v] }.to_h
       end
     end
   end
