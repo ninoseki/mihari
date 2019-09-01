@@ -39,13 +39,16 @@ mihari supports Censys, Shodan, Onyphe, urlscan and VirusTotal by default.
 ```bash
 $ mihari
 Commands:
+  mihari alerts                  # Show the alerts on TheHive
   mihari censys [QUERY]          # Censys IPv4 lookup by a given query
   mihari help [COMMAND]          # Describe available commands or one specific command
   mihari import_from_json        # Give a JSON input via STDIN
   mihari onyphe [QUERY]          # Onyphe datascan lookup by a given query
   mihari shodan [QUERY]          # Shodan host lookup by a given query
+  mihari status                  # Show the current configuration status
   mihari urlscan [QUERY]         # urlscan lookup by a given query
   mihari virustotal [IP|DOMAIN]  # VirusTotal resolutions lookup by a given ip or domain
+
 ```
 
 ### Import from JSON
