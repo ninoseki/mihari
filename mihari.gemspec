@@ -29,9 +29,9 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency "rake", "~> 12.3"
   spec.add_development_dependency "rspec", "~> 3.8"
   spec.add_development_dependency "vcr", "~> 5.0"
-  spec.add_development_dependency "webmock", "~> 3.6"
+  spec.add_development_dependency "webmock", "~> 3.7"
 
-  spec.add_dependency "addressable", "~> 2.6"
+  spec.add_dependency "addressable", "~> 2.7"
   spec.add_dependency "censu", "~> 0.2"
   spec.add_dependency "email_address", "~> 0.1"
   spec.add_dependency "hachi", "~> 0.2"
@@ -42,6 +42,6 @@ Gem::Specification.new do |spec|
   spec.add_dependency "shodanx", "~> 0.1"
   spec.add_dependency "slack-notifier", "~> 2.3"
   spec.add_dependency "thor", "~> 0.20"
-  spec.add_dependency "urlscan", "~> 0.2"
+  spec.add_dependency "urlscan", "~> 0.3"
   spec.add_dependency "virustotalx", "~> 0.1"
 end
