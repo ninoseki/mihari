@@ -44,4 +44,6 @@ require "mihari/emitters/the_hive"
 
 require "mihari/alert_viewer"
 
+require "mihari/status"
+
 require "mihari/cli"
