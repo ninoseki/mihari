@@ -60,4 +60,7 @@ VCR.configure do |config|
 
   # VirusTotal
   config.filter_sensitive_data("<VT_API_KEY>") { ENV["VIRUSTOTAL_API_KEY"] }
+
+  # SecurityTrails
+  config.filter_sensitive_data("<ST_API_KEY>") { ENV["SECURITYTRAILS_API_KEY"] }
 end
