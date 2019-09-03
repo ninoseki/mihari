@@ -66,6 +66,16 @@ module Mihari
       end
     end
 
+    desc "crtsh [QUERY]", "crt.sh lookup by a given query"
+    method_option :title, type: :string, desc: "title"
+    method_option :description, type: :string, desc: "description"
+    method_option :tags, type: :array, desc: "tags"
+    def crtsh(query)
+      with_error_handling do
+        run_analyzer Analyzers::Crtsh, query: query, options: options
+      end
+    end
+
     desc "import_from_json", "Give a JSON input via STDIN"
     def import_from_json(input = nil)
       with_error_handling do
