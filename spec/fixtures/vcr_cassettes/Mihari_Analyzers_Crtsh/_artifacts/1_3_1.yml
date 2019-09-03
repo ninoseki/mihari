@@ -1,0 +1,131 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: https://crt.sh/?output=json&q=crt.sh
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+      Host:
+      - crt.sh
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - nginx
+      Date:
+      - Tue, 03 Sep 2019 10:58:51 GMT
+      Content-Type:
+      - application/json
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+      Strict-Transport-Security:
+      - max-age=15768000
+      - max-age=15768000; includeSubDomains; preload
+      Expect-Ct:
+      - preload
+      X-Ccacdn-Proxy-Id:
+      - scdpinlb3
+      X-Frame-Options:
+      - SAMEORIGIN
+    body:
+      encoding: UTF-8
+      string: '[{"issuer_ca_id":105492,"issuer_name":"C=GB, ST=Greater Manchester,
+        L=Salford, O=Sectigo Limited, CN=Sectigo RSA Extended Validation Secure Server
+        CA","name_value":"crt.sh","min_cert_id":1727279813,"min_entry_timestamp":"2019-07-31T22:10:46.578","not_before":"2019-07-31T00:00:00","not_after":"2021-07-30T23:59:59"},{"issuer_ca_id":105492,"issuer_name":"C=GB,
+        ST=Greater Manchester, L=Salford, O=Sectigo Limited, CN=Sectigo RSA Extended
+        Validation Secure Server CA","name_value":"crt.sh","min_cert_id":1727239898,"min_entry_timestamp":"2019-07-31T22:10:32.477","not_before":"2019-07-31T00:00:00","not_after":"2021-07-30T23:59:59"},{"issuer_ca_id":1582,"issuer_name":"C=GB,
+        ST=Greater Manchester, L=Salford, O=COMODO CA Limited, CN=COMODO ECC Domain
+        Validation Secure Server CA 2","name_value":"crt.sh","min_cert_id":1621787123,"min_entry_timestamp":"2019-06-29T01:51:08.007","not_before":"2019-06-29T00:00:00","not_after":"2020-01-05T23:59:59"},{"issuer_ca_id":1582,"issuer_name":"C=GB,
+        ST=Greater Manchester, L=Salford, O=COMODO CA Limited, CN=COMODO ECC Domain
+        Validation Secure Server CA 2","name_value":"crt.sh","min_cert_id":1621786355,"min_entry_timestamp":"2019-06-29T01:50:53.83","not_before":"2019-06-29T00:00:00","not_after":"2020-01-05T23:59:59"},{"issuer_ca_id":7967,"issuer_name":"C=GB,
+        ST=Greater Manchester, L=Salford, O=COMODO CA Limited, CN=COMODO RSA Domain
+        Validation Secure Server CA 2","name_value":"crt.sh","min_cert_id":1621784406,"min_entry_timestamp":"2019-06-29T01:50:07.136","not_before":"2019-06-29T00:00:00","not_after":"2020-01-05T23:59:59"},{"issuer_ca_id":7967,"issuer_name":"C=GB,
+        ST=Greater Manchester, L=Salford, O=COMODO CA Limited, CN=COMODO RSA Domain
+        Validation Secure Server CA 2","name_value":"crt.sh","min_cert_id":1621783618,"min_entry_timestamp":"2019-06-29T01:49:53.497","not_before":"2019-06-29T00:00:00","not_after":"2020-01-05T23:59:59"},{"issuer_ca_id":7967,"issuer_name":"C=GB,
+        ST=Greater Manchester, L=Salford, O=COMODO CA Limited, CN=COMODO RSA Domain
+        Validation Secure Server CA 2","name_value":"crt.sh","min_cert_id":1124216611,"min_entry_timestamp":"2019-01-19T07:11:02.341","not_before":"2019-01-19T00:00:00","not_after":"2019-07-28T23:59:59"},{"issuer_ca_id":7967,"issuer_name":"C=GB,
+        ST=Greater Manchester, L=Salford, O=COMODO CA Limited, CN=COMODO RSA Domain
+        Validation Secure Server CA 2","name_value":"crt.sh","min_cert_id":1124215070,"min_entry_timestamp":"2019-01-19T07:10:43.491","not_before":"2019-01-19T00:00:00","not_after":"2019-07-28T23:59:59"},{"issuer_ca_id":1582,"issuer_name":"C=GB,
+        ST=Greater Manchester, L=Salford, O=COMODO CA Limited, CN=COMODO ECC Domain
+        Validation Secure Server CA 2","name_value":"crt.sh","min_cert_id":1124187648,"min_entry_timestamp":"2019-01-19T06:57:18.374","not_before":"2019-01-19T00:00:00","not_after":"2019-07-28T23:59:59"},{"issuer_ca_id":1582,"issuer_name":"C=GB,
+        ST=Greater Manchester, L=Salford, O=COMODO CA Limited, CN=COMODO ECC Domain
+        Validation Secure Server CA 2","name_value":"crt.sh","min_cert_id":1124184976,"min_entry_timestamp":"2019-01-19T06:56:26.408","not_before":"2019-01-19T00:00:00","not_after":"2019-07-28T23:59:59"},{"issuer_ca_id":11000,"issuer_name":"C=GB,
+        ST=Greater Manchester, L=Salford, O=COMODO CA Limited, CN=COMODO Domain Validation
+        Legacy Server CA 2","name_value":"crt.sh","min_cert_id":1123412402,"min_entry_timestamp":"2019-01-19T00:48:25.337","not_before":"2019-01-19T00:00:00","not_after":"2019-06-23T23:59:59"},{"issuer_ca_id":11000,"issuer_name":"C=GB,
+        ST=Greater Manchester, L=Salford, O=COMODO CA Limited, CN=COMODO Domain Validation
+        Legacy Server CA 2","name_value":"crt.sh","min_cert_id":1123409885,"min_entry_timestamp":"2019-01-19T00:47:51.153","not_before":"2019-01-19T00:00:00","not_after":"2019-06-23T23:59:59"},{"issuer_ca_id":1478,"issuer_name":"C=GB,
+        ST=Greater Manchester, L=Salford, O=COMODO CA Limited, CN=COMODO RSA Organization
+        Validation Secure Server CA","name_value":"crt.sh","min_cert_id":893532698,"min_entry_timestamp":"2018-10-26T14:33:17.747","not_before":"2018-10-26T00:00:00","not_after":"2019-10-26T23:59:59"},{"issuer_ca_id":1478,"issuer_name":"C=GB,
+        ST=Greater Manchester, L=Salford, O=COMODO CA Limited, CN=COMODO RSA Organization
+        Validation Secure Server CA","name_value":"crt.sh","min_cert_id":893532620,"min_entry_timestamp":"2018-10-26T14:32:58.674","not_before":"2018-10-26T00:00:00","not_after":"2019-10-26T23:59:59"},{"issuer_ca_id":1113,"issuer_name":"C=GB,
+        ST=Greater Manchester, L=Salford, O=COMODO CA Limited, CN=COMODO RSA Extended
+        Validation Secure Server CA","name_value":"crt.sh","min_cert_id":802815326,"min_entry_timestamp":"2018-10-01T09:42:44.974","not_before":"2018-10-01T00:00:00","not_after":"2020-09-30T23:59:59"},{"issuer_ca_id":1113,"issuer_name":"C=GB,
+        ST=Greater Manchester, L=Salford, O=COMODO CA Limited, CN=COMODO RSA Extended
+        Validation Secure Server CA","name_value":"crt.sh","min_cert_id":802815291,"min_entry_timestamp":"2018-10-01T09:42:31.081","not_before":"2018-10-01T00:00:00","not_after":"2020-09-30T23:59:59"},{"issuer_ca_id":1455,"issuer_name":"C=GB,
+        ST=Greater Manchester, L=Salford, O=COMODO CA Limited, CN=COMODO RSA Domain
+        Validation Secure Server CA","name_value":"crt.sh","min_cert_id":801994874,"min_entry_timestamp":"2018-10-01T00:28:25.071","not_before":"2018-10-01T00:00:00","not_after":"2018-12-30T23:59:59"},{"issuer_ca_id":1455,"issuer_name":"C=GB,
+        ST=Greater Manchester, L=Salford, O=COMODO CA Limited, CN=COMODO RSA Domain
+        Validation Secure Server CA","name_value":"crt.sh","min_cert_id":801994560,"min_entry_timestamp":"2018-10-01T00:28:06.85","not_before":"2018-10-01T00:00:00","not_after":"2018-12-30T23:59:59"},{"issuer_ca_id":11000,"issuer_name":"C=GB,
+        ST=Greater Manchester, L=Salford, O=COMODO CA Limited, CN=COMODO Domain Validation
+        Legacy Server CA 2","name_value":"crt.sh","min_cert_id":639092023,"min_entry_timestamp":"2018-08-11T06:19:54.991","not_before":"2018-08-11T00:00:00","not_after":"2019-02-17T23:59:59"},{"issuer_ca_id":11000,"issuer_name":"C=GB,
+        ST=Greater Manchester, L=Salford, O=COMODO CA Limited, CN=COMODO Domain Validation
+        Legacy Server CA 2","name_value":"crt.sh","min_cert_id":639091980,"min_entry_timestamp":"2018-08-11T06:19:04.445","not_before":"2018-08-11T00:00:00","not_after":"2019-02-17T23:59:59"},{"issuer_ca_id":1582,"issuer_name":"C=GB,
+        ST=Greater Manchester, L=Salford, O=COMODO CA Limited, CN=COMODO ECC Domain
+        Validation Secure Server CA 2","name_value":"crt.sh","min_cert_id":639077415,"min_entry_timestamp":"2018-08-11T05:46:26.608","not_before":"2018-08-11T00:00:00","not_after":"2019-02-17T23:59:59"},{"issuer_ca_id":1582,"issuer_name":"C=GB,
+        ST=Greater Manchester, L=Salford, O=COMODO CA Limited, CN=COMODO ECC Domain
+        Validation Secure Server CA 2","name_value":"crt.sh","min_cert_id":639077144,"min_entry_timestamp":"2018-08-11T05:46:11.565","not_before":"2018-08-11T00:00:00","not_after":"2019-02-17T23:59:59"},{"issuer_ca_id":7967,"issuer_name":"C=GB,
+        ST=Greater Manchester, L=Salford, O=COMODO CA Limited, CN=COMODO RSA Domain
+        Validation Secure Server CA 2","name_value":"crt.sh","min_cert_id":638987433,"min_entry_timestamp":"2018-08-11T05:30:40.079","not_before":"2018-08-11T00:00:00","not_after":"2019-02-17T23:59:59"},{"issuer_ca_id":7967,"issuer_name":"C=GB,
+        ST=Greater Manchester, L=Salford, O=COMODO CA Limited, CN=COMODO RSA Domain
+        Validation Secure Server CA 2","name_value":"crt.sh","min_cert_id":638987370,"min_entry_timestamp":"2018-08-11T05:30:26.773","not_before":"2018-08-11T00:00:00","not_after":"2019-02-17T23:59:59"},{"issuer_ca_id":7967,"issuer_name":"C=GB,
+        ST=Greater Manchester, L=Salford, O=COMODO CA Limited, CN=COMODO RSA Domain
+        Validation Secure Server CA 2","name_value":"crt.sh","min_cert_id":346082288,"min_entry_timestamp":"2018-03-03T09:09:30.698","not_before":"2018-03-03T00:00:00","not_after":"2018-09-09T23:59:59"},{"issuer_ca_id":1582,"issuer_name":"C=GB,
+        ST=Greater Manchester, L=Salford, O=COMODO CA Limited, CN=COMODO ECC Domain
+        Validation Secure Server CA 2","name_value":"crt.sh","min_cert_id":346058299,"min_entry_timestamp":"2018-03-03T08:31:44.363","not_before":"2018-03-03T00:00:00","not_after":"2018-09-09T23:59:59"},{"issuer_ca_id":11000,"issuer_name":"C=GB,
+        ST=Greater Manchester, L=Salford, O=COMODO CA Limited, CN=COMODO Domain Validation
+        Legacy Server CA 2","name_value":"crt.sh","min_cert_id":346030553,"min_entry_timestamp":"2018-03-03T07:30:59.969","not_before":"2018-03-03T00:00:00","not_after":"2018-09-09T23:59:59"},{"issuer_ca_id":11000,"issuer_name":"C=GB,
+        ST=Greater Manchester, L=Salford, O=COMODO CA Limited, CN=COMODO Domain Validation
+        Legacy Server CA 2","name_value":"crt.sh","min_cert_id":212488950,"min_entry_timestamp":"2017-09-18T02:04:25.229","not_before":"2017-09-18T00:00:00","not_after":"2018-03-27T23:59:59"},{"issuer_ca_id":1582,"issuer_name":"C=GB,
+        ST=Greater Manchester, L=Salford, O=COMODO CA Limited, CN=COMODO ECC Domain
+        Validation Secure Server CA 2","name_value":"crt.sh","min_cert_id":212481016,"min_entry_timestamp":"2017-09-18T01:58:23.716","not_before":"2017-09-18T00:00:00","not_after":"2018-03-27T23:59:59"},{"issuer_ca_id":7967,"issuer_name":"C=GB,
+        ST=Greater Manchester, L=Salford, O=COMODO CA Limited, CN=COMODO RSA Domain
+        Validation Secure Server CA 2","name_value":"crt.sh","min_cert_id":212432073,"min_entry_timestamp":"2017-09-18T00:15:43.927","not_before":"2017-09-18T00:00:00","not_after":"2018-03-27T23:59:59"},{"issuer_ca_id":7967,"issuer_name":"C=GB,
+        ST=Greater Manchester, L=Salford, O=COMODO CA Limited, CN=COMODO RSA Domain
+        Validation Secure Server CA 2","name_value":"crt.sh","min_cert_id":115591929,"min_entry_timestamp":"2017-04-10T01:06:58.059","not_before":"2017-04-10T00:00:00","not_after":"2017-10-17T23:59:59"},{"issuer_ca_id":1582,"issuer_name":"C=GB,
+        ST=Greater Manchester, L=Salford, O=COMODO CA Limited, CN=COMODO ECC Domain
+        Validation Secure Server CA 2","name_value":"crt.sh","min_cert_id":115579346,"min_entry_timestamp":"2017-04-10T01:03:22.887","not_before":"2017-04-10T00:00:00","not_after":"2017-10-17T23:59:59"},{"issuer_ca_id":11000,"issuer_name":"C=GB,
+        ST=Greater Manchester, L=Salford, O=COMODO CA Limited, CN=COMODO Domain Validation
+        Legacy Server CA 2","name_value":"crt.sh","min_cert_id":115576003,"min_entry_timestamp":"2017-04-10T00:17:56.864","not_before":"2017-04-10T00:00:00","not_after":"2017-10-17T23:59:59"},{"issuer_ca_id":7967,"issuer_name":"C=GB,
+        ST=Greater Manchester, L=Salford, O=COMODO CA Limited, CN=COMODO RSA Domain
+        Validation Secure Server CA 2","name_value":"crt.sh","min_cert_id":107393713,"min_entry_timestamp":"2017-03-21T22:28:34.146","not_before":"2016-09-12T00:00:00","not_after":"2017-05-09T23:59:59"},{"issuer_ca_id":11000,"issuer_name":"C=GB,
+        ST=Greater Manchester, L=Salford, O=COMODO CA Limited, CN=COMODO Domain Validation
+        Legacy Server CA 2","name_value":"crt.sh","min_cert_id":104928653,"min_entry_timestamp":"2017-03-17T03:39:28.559","not_before":"2016-09-12T00:00:00","not_after":"2017-05-09T23:59:59"},{"issuer_ca_id":1582,"issuer_name":"C=GB,
+        ST=Greater Manchester, L=Salford, O=COMODO CA Limited, CN=COMODO ECC Domain
+        Validation Secure Server CA 2","name_value":"crt.sh","min_cert_id":42619974,"min_entry_timestamp":"2016-10-12T05:20:10.31","not_before":"2016-09-12T00:00:00","not_after":"2017-05-09T23:59:59"},{"issuer_ca_id":1113,"issuer_name":"C=GB,
+        ST=Greater Manchester, L=Salford, O=COMODO CA Limited, CN=COMODO RSA Extended
+        Validation Secure Server CA","name_value":"crt.sh","min_cert_id":23554136,"min_entry_timestamp":"2016-07-01T12:56:07.195","not_before":"2016-07-01T00:00:00","not_after":"2018-09-30T23:59:59"},{"issuer_ca_id":1113,"issuer_name":"C=GB,
+        ST=Greater Manchester, L=Salford, O=COMODO CA Limited, CN=COMODO RSA Extended
+        Validation Secure Server CA","name_value":"crt.sh","min_cert_id":23553203,"min_entry_timestamp":"2016-07-01T12:55:45.375","not_before":"2016-07-01T00:00:00","not_after":"2018-09-30T23:59:59"},{"issuer_ca_id":1113,"issuer_name":"C=GB,
+        ST=Greater Manchester, L=Salford, O=COMODO CA Limited, CN=COMODO RSA Extended
+        Validation Secure Server CA","name_value":"crt.sh","min_cert_id":7845393,"min_entry_timestamp":"2015-06-02T18:06:15.422","not_before":"2015-06-02T00:00:00","not_after":"2017-05-06T23:59:59"},{"issuer_ca_id":1113,"issuer_name":"C=GB,
+        ST=Greater Manchester, L=Salford, O=COMODO CA Limited, CN=COMODO RSA Extended
+        Validation Secure Server CA","name_value":"crt.sh","min_cert_id":7845381,"min_entry_timestamp":"2015-06-02T18:05:51.416","not_before":"2015-06-02T00:00:00","not_after":"2017-05-06T23:59:59"},{"issuer_ca_id":1113,"issuer_name":"C=GB,
+        ST=Greater Manchester, L=Salford, O=COMODO CA Limited, CN=COMODO RSA Extended
+        Validation Secure Server CA","name_value":"crt.sh","min_cert_id":7842948,"min_entry_timestamp":"2015-06-02T15:02:40.658","not_before":"2015-06-02T00:00:00","not_after":"2017-05-06T23:59:59"},{"issuer_ca_id":1113,"issuer_name":"C=GB,
+        ST=Greater Manchester, L=Salford, O=COMODO CA Limited, CN=COMODO RSA Extended
+        Validation Secure Server CA","name_value":"crt.sh","min_cert_id":7842942,"min_entry_timestamp":"2015-06-02T15:02:15.918","not_before":"2015-06-02T00:00:00","not_after":"2017-05-06T23:59:59"}]'
+    http_version: 
+  recorded_at: Tue, 03 Sep 2019 10:58:51 GMT
+recorded_with: VCR 5.0.0

@@ -62,6 +62,15 @@ RSpec.describe Mihari::CLI do
     end
   end
 
+  describe "#crtsh" do
+    before { allow(Mihari::Analyzers::Crtsh).to receive(:new).and_return(mock) }
+
+    it do
+      subject.start ["crtsh", query]
+      expect(mock).to have_received(:run).once
+    end
+  end
+
   describe "#alerts" do
     let(:mock) { double("AlertViewer") }
     let(:alerts) {
