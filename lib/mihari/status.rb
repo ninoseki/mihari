@@ -4,12 +4,13 @@ module Mihari
   class Status
     def check
       {
+        censys: { status: censys?, message: censys },
+        onyphe: { status: onyphe?, message: onyphe },
+        securitytrails: { status: securitytrails?, message: securitytrails },
         shodan: { status: shodan?, message: shodan },
         slack: { status: slack?, message: slack },
-        censys: { status: censys?, message: censys },
-        virustotal: { status: virustotal?, message: virustotal },
-        onyphe: { status: onyphe?, message: onyphe },
         the_hive: { status: the_hive?, message: the_hive },
+        virustotal: { status: virustotal?, message: virustotal },
       }.map do |key, value|
         [key, convert(value)]
       end.to_h
@@ -26,6 +27,14 @@ module Mihari
         status: status ? "OK" : "Bad",
         message: message
       }
+    end
+
+    def securitytrails?
+      ENV.key? "SECURITYTRAILS_API_KEY"
+    end
+
+    def securitytrails
+      securitytrails? ? "SECURITYTRAILS_API_KEY is found" : "SECURITYTRAILS_API_KEY is missing"
     end
 
     def virustotal?
