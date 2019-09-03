@@ -39,15 +39,17 @@ mihari supports Censys, Shodan, Onyphe, urlscan and VirusTotal by default.
 ```bash
 $ mihari
 Commands:
-  mihari alerts                  # Show the alerts on TheHive
-  mihari censys [QUERY]          # Censys IPv4 lookup by a given query
-  mihari help [COMMAND]          # Describe available commands or one specific command
-  mihari import_from_json        # Give a JSON input via STDIN
-  mihari onyphe [QUERY]          # Onyphe datascan lookup by a given query
-  mihari shodan [QUERY]          # Shodan host lookup by a given query
-  mihari status                  # Show the current configuration status
-  mihari urlscan [QUERY]         # urlscan lookup by a given query
-  mihari virustotal [IP|DOMAIN]  # VirusTotal resolutions lookup by a given ip or domain
+  mihari alerts                      # Show the alerts on TheHive
+  mihari censys [QUERY]              # Censys IPv4 lookup by a given query
+  mihari crtsh [QUERY]               # crt.sh lookup by a given query
+  mihari help [COMMAND]              # Describe available commands or one specific command
+  mihari import_from_json            # Give a JSON input via STDIN
+  mihari onyphe [QUERY]              # Onyphe datascan lookup by a given query
+  mihari securitytrails [IP|DOMAIN]  # SecurityTrails resolutions lookup by a given ip or domain
+  mihari shodan [QUERY]              # Shodan host lookup by a given query
+  mihari status                      # Show the current configuration status
+  mihari urlscan [QUERY]             # urlscan lookup by a given query
+  mihari virustotal [IP|DOMAIN]      # VirusTotal resolutions lookup by a given ip or domain
 
 ```
 
@@ -79,17 +81,18 @@ The input is a JSON data should have `title`, `description` and `artifacts` key.
 
 All configuration is done via ENV variables.
 
-| Key                  | Desc.              | Required or optional           |
-|----------------------|--------------------|--------------------------------|
-| THEHIVE_API_ENDPOINT | TheHive URL        | Required                       |
-| THEHIVE_API_KEY      | TheHive API key    | Required                       |
-| SLACK_WEBHOOK_URL    | Slack Webhook URL  | Optional                       |
-| SLACK_CHANNEL        | Slack channel name | Optional (default: `#general`) |
-| CENSYS_ID            | Censys API ID      | Optional                       |
-| CENSYS_SECRET        | Censys secret      | Optional                       |
-| SHODAN_API_KEY       | Shodan API key     | Optional                       |
-| ONYPHE_API_KEY       | Onyphe API key     | Optional                       |
-| VIRUSTOTAL_API_KEY   | VirusTotal API key | Optional                       |
+| Key                    | Desc.                  | Required or optional           |
+|------------------------|------------------------|--------------------------------|
+| THEHIVE_API_ENDPOINT   | TheHive URL            | Required                       |
+| THEHIVE_API_KEY        | TheHive API key        | Required                       |
+| SLACK_WEBHOOK_URL      | Slack Webhook URL      | Optional                       |
+| SLACK_CHANNEL          | Slack channel name     | Optional (default: `#general`) |
+| CENSYS_ID              | Censys API ID          | Optional                       |
+| CENSYS_SECRET          | Censys secret          | Optional                       |
+| ONYPHE_API_KEY         | Onyphe API key         | Optional                       |
+| SECURITYTRAILS_API_KEY | SecurityTrails API key | Optional                       |
+| SHODAN_API_KEY         | Shodan API key         | Optional                       |
+| VIRUSTOTAL_API_KEY     | VirusTotal API key     | Optional                       |
 
 ## How to create a custom analyzer
 
