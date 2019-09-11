@@ -65,6 +65,7 @@ module Mihari
         run_analyzer Analyzers::SecurityTrails, query: indiactor, options: options
       end
     end
+    map "st" => :securitytrails
 
     desc "securitytrails_domain_feed [REGEXP]", "SecurityTrails new domain feed lookup by a given regexp"
     method_option :title, type: :string, desc: "title"
@@ -75,6 +76,7 @@ module Mihari
         run_analyzer Analyzers::SecurityTrailsDomainFeed, query: regexp, options: options
       end
     end
+    map "st_domain_feed" => :securitytrails_domain_feed
 
     desc "crtsh [QUERY]", "crt.sh lookup by a given query"
     method_option :title, type: :string, desc: "title"
