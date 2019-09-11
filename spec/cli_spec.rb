@@ -62,6 +62,15 @@ RSpec.describe Mihari::CLI do
     end
   end
 
+  describe "#securitytrailsDomainFeed" do
+    before { allow(Mihari::Analyzers::SecurityTrailsDomainFeed).to receive(:new).and_return(mock) }
+
+    it do
+      subject.start ["securitytrails_domain_feed", query]
+      expect(mock).to have_received(:run).once
+    end
+  end
+
   describe "#crtsh" do
     before { allow(Mihari::Analyzers::Crtsh).to receive(:new).and_return(mock) }
 

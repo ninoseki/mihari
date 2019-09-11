@@ -66,6 +66,16 @@ module Mihari
       end
     end
 
+    desc "securitytrails_domain_feed [REGEXP]", "SecurityTrails new domain feed lookup by a given regexp"
+    method_option :title, type: :string, desc: "title"
+    method_option :description, type: :string, desc: "description"
+    method_option :tags, type: :array, desc: "tags"
+    def securitytrails_domain_feed(regexp)
+      with_error_handling do
+        run_analyzer Analyzers::SecurityTrailsDomainFeed, query: regexp, options: options
+      end
+    end
+
     desc "crtsh [QUERY]", "crt.sh lookup by a given query"
     method_option :title, type: :string, desc: "title"
     method_option :description, type: :string, desc: "description"
