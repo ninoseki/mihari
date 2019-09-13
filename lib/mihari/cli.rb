@@ -71,6 +71,7 @@ module Mihari
     method_option :title, type: :string, desc: "title"
     method_option :description, type: :string, desc: "description"
     method_option :tags, type: :array, desc: "tags"
+    method_option :type, type: :string, default: "registered", desc: "A type of domain feed ('all', 'new' or 'registered')"
     def securitytrails_domain_feed(regexp)
       with_error_handling do
         run_analyzer Analyzers::SecurityTrailsDomainFeed, query: regexp, options: options
