@@ -12,13 +12,15 @@ module Mihari
       attr_reader :description
       attr_reader :tags
 
-      def initialize(regexp, title: nil, description: nil, tags: [])
+      def initialize(regexp, type: "registered", title: nil, description: nil, tags: [])
         super()
 
         @api = ::SecurityTrails::API.new
         @_regexp = regexp
+        @type = type
 
         raise ArgumentError, "#{@_regexp} is not a valid regexp" unless regexp
+        raise ArgumentError, "#{type} is not a valid type" unless valid_type?
 
         @title = title || "SecurityTrails domain feed lookup"
         @description = description || "Regexp = /#{@_regexp}/"
@@ -30,6 +32,10 @@ module Mihari
       end
 
       private
+
+      def valid_type?
+        %w(all new registered).include? type
+      end
 
       def regexp
         @regexp ||= Regexp.compile(@_regexp)
@@ -46,7 +52,7 @@ module Mihari
       end
 
       def new_domains
-        api.feeds.domains("new")
+        api.feeds.domains type
       end
     end
   end
