@@ -35,8 +35,6 @@ module Mihari
 
           run_emitter emitter
         end
-
-        save_as_cache unique_artifacts.map(&:data)
       end
 
       def run_emitter(emitter)
@@ -65,10 +63,6 @@ module Mihari
         return uncached_artifacts unless @the_hive.valid?
 
         @unique_artifacts ||= @the_hive.artifact.find_non_existing_artifacts(uncached_artifacts)
-      end
-
-      def save_as_cache(data)
-        @cache.save data
       end
     end
   end
