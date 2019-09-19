@@ -5,7 +5,7 @@
 [![Coverage Status](https://coveralls.io/repos/github/ninoseki/mihari/badge.svg?branch=master)](https://coveralls.io/github/ninoseki/mihari?branch=master)
 [![CodeFactor](https://www.codefactor.io/repository/github/ninoseki/mihari/badge)](https://www.codefactor.io/repository/github/ninoseki/mihari)
 
-mihari(`見張り`) is a sidekick tool for [TheHive](https://github.com/TheHive-Project/TheHive) to monitor malicious hosts (C2 / landing page / phishing, etc.) continuously.
+mihari(`見張り`) is a sidekick tool for [TheHive](https://github.com/TheHive-Project/TheHive) for monitoring malicious hosts (C2 / landing page / phishing, etc.) continuously.
 
 ## How it works
 
@@ -13,6 +13,8 @@ mihari(`見張り`) is a sidekick tool for [TheHive](https://github.com/TheHive-
   - If it doesn't contain the artifacts:
     - mihari creates an alert with the artifacts on the TheHive instance.
     - mihari sends a notification to Slack. (Optional)
+
+![img](./screenshots/eyecatch.png)
 
 Check this blog post for more detail: [Continuous C2 hunting with Censys, Shodan, Onyphe and TheHive](https://hackmd.io/s/SkUaSrqoE)
 
