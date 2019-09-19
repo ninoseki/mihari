@@ -2,6 +2,8 @@
 
 require "bundler/setup"
 
+require "fakefs/safe"
+require "timecop"
 require "vcr"
 
 require "simplecov"

@@ -17,8 +17,9 @@ require "mihari/version"
 
 require "mihari/errors"
 
-require "mihari/type_checker"
 require "mihari/artifact"
+require "mihari/cache"
+require "mihari/type_checker"
 
 require "mihari/the_hive/base"
 require "mihari/the_hive/alert"

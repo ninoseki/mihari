@@ -139,6 +139,10 @@ example.run
 
 See `/examples` for more.
 
+## Caching
+
+mihari caches execution results in `/tmp/mihari` and the default cache duration is 7 days. If you want to clear the cache, please clear `/tmp/mihari`.
+
 ## License
 
 The gem is available as open source under the terms of the [MIT License](https://opensource.org/licenses/MIT).

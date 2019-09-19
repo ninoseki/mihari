@@ -3,10 +3,9 @@
 module Mihari
   module Analyzers
     class Base
-      attr_reader :the_hive
-
       def initialize
         @the_hive = TheHive.new
+        @cache = Cache.new
       end
 
       # @return [Array<String>, Array<Mihari::Artifact>]
@@ -36,6 +35,8 @@ module Mihari
 
           run_emitter emitter
         end
+
+        save_as_cache unique_artifacts.map(&:data)
       end
 
       def run_emitter(emitter)
@@ -53,11 +54,21 @@ module Mihari
         end.select(&:valid?)
       end
 
+      def uncached_artifacts
+        @uncached_artifacts ||= normalized_artifacts.reject do |artifact|
+          @cache.cached? artifact.data
+        end
+      end
+
       # @return [Array<Mihari::Artifact>]
       def unique_artifacts
-        return normalized_artifacts unless the_hive.valid?
+        return uncached_artifacts unless @the_hive.valid?
 
-        the_hive.artifact.find_non_existing_artifacts(normalized_artifacts)
+        @unique_artifacts ||= @the_hive.artifact.find_non_existing_artifacts(uncached_artifacts)
+      end
+
+      def save_as_cache(data)
+        @cache.save data
       end
     end
   end
