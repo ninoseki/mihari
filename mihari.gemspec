@@ -26,8 +26,10 @@ Gem::Specification.new do |spec|
 
   spec.add_development_dependency "bundler", "~> 2.0"
   spec.add_development_dependency "coveralls", "~> 0.8"
+  spec.add_development_dependency "fakefs", "~> 0.20"
   spec.add_development_dependency "rake", "~> 12.3"
   spec.add_development_dependency "rspec", "~> 3.8"
+  spec.add_development_dependency "timecop", "~> 0.9"
   spec.add_development_dependency "vcr", "~> 5.0"
   spec.add_development_dependency "webmock", "~> 3.7"
 
@@ -36,6 +38,7 @@ Gem::Specification.new do |spec|
   spec.add_dependency "crtsh-rb", "~> 0.1"
   spec.add_dependency "email_address", "~> 0.1"
   spec.add_dependency "hachi", "~> 0.2"
+  spec.add_dependency "lightly", "~> 0.3"
   spec.add_dependency "mem", "~> 0.1"
   spec.add_dependency "net-ping", "~> 2.0"
   spec.add_dependency "onyphe", "~> 0.2"

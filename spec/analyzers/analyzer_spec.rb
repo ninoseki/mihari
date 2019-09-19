@@ -32,6 +32,10 @@ RSpec.describe Mihari::Analyzers::Base, :vcr do
   end
 
   describe "#run" do
+    before { FakeFS.activate! }
+
+    after { FakeFS.deactivate! }
+
     it "doens't raise any error" do
       capture(:stdout) { subject.run }
     end
