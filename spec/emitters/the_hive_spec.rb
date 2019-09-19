@@ -38,6 +38,12 @@ RSpec.describe Mihari::Emitters::TheHive, :vcr do
       allow(subject).to receive(:the_hive).and_return(mock_thehie)
       allow(mock_thehie).to receive(:alert).and_return(mock_alert)
       allow(mock_alert).to receive(:create)
+
+      FakeFS.activate!
+    end
+
+    after do
+      FakeFS.deactivate!
     end
 
     it do

@@ -7,6 +7,7 @@ module Mihari
 
       def initialize
         @the_hive = Mihari::TheHive.new
+        @cache = Cache.new
       end
 
       # @return [true, false]
@@ -23,6 +24,14 @@ module Mihari
           artifacts: artifacts.map(&:to_h),
           tags: tags
         )
+
+        save_as_cache artifacts.map(&:data)
+      end
+
+      private
+
+      def save_as_cache(data)
+        @cache.save data
       end
     end
   end
