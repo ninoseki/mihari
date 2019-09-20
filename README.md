@@ -9,7 +9,8 @@ mihari(`見張り`) is a sidekick tool for [TheHive](https://github.com/TheHive-
 
 ## How it works
 
-- mihari checks whether a TheHive instance contains given artifacts or not.
+- mihari makes a query against Shodan, Censys, VirusTotal, SecurityTrails, etc. and extracts artifacts from the query results.
+- mihari checks whether a TheHive instance contains the artifacts or not.
   - If it doesn't contain the artifacts:
     - mihari creates an alert with the artifacts on the TheHive instance.
     - mihari sends a notification to Slack. (Optional)
@@ -56,6 +57,52 @@ Commands:
 
 ```
 
+### Example usages
+
+```bash
+# Censys lookup for PANDA C2
+$ mihari censys '("PANDA" AND "SMAdmin" AND "layui")' --title "PANDA C2"
+{
+  "title": "PANDA C2",
+  "description": "query = (\"PANDA\" AND \"SMAdmin\" AND \"layui\")",
+  "artifacts": [
+    "154.223.165.223",
+    "154.194.2.31",
+    "45.114.127.119",
+    "..."
+  ],
+  "tags": []
+}
+
+# VirusTotal passive DNS lookup for a FAKESPY host
+$ mihari virustotal "jppost-hi.top" --title "FAKESPY host passive DNS results"
+{
+  "title": "FAKESPY host passive DNS results",
+  "description": "indicator = jppost-hi.top",
+  "artifacts": [
+    "185.22.152.28",
+    "192.236.200.44",
+    "193.148.69.12",
+    "..."
+  ],
+  "tags": []
+}
+
+# SecurityTrails domain feed lookup for finding (possibly) Apple phishing websites
+mihari securitytrails_domain_feed "apple-" --type new
+{
+  "title": "SecurityTrails domain feed lookup",
+  "description": "Regexp = /apple-/",
+  "artifacts": [
+    "apple-sign.online",
+    "apple-log-in.com",
+    "apple-locator-id.info",
+    "..."
+  ],
+  "tags": []
+}
+```
+
 ### Import from JSON
 
 ```bash
@@ -97,7 +144,7 @@ All configuration is done via ENV variables.
 | SHODAN_API_KEY         | Shodan API key         | Optional                       |
 | VIRUSTOTAL_API_KEY     | VirusTotal API key     | Optional                       |
 
-## How to create a custom analyzer
+## How to create a custom script
 
 Create a class which extends `Mihari::Analyzers::Base` and implements the following methods.
 
