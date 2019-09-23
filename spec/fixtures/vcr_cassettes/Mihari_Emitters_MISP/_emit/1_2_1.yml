@@ -2,7 +2,7 @@
 http_interactions:
 - request:
     method: post
-    uri: http://<API_ENDPOINT>:5000/events/add
+    uri: "<MISP_API_ENDPOINT>/events/add"
     body:
       encoding: UTF-8
       string: '{"Event":{"info":"test","published":false,"locked":false,"Attribute":[{"type":"ip-dst","value":"1.1.1.1","SharingGroup":[],"ShadowAttribute":[],"Tag":[]}]}}'
@@ -19,16 +19,16 @@ http_interactions:
       message: OK
     headers:
       Date:
-      - Mon, 23 Sep 2019 22:37:39 GMT
+      - Mon, 23 Sep 2019 22:51:24 GMT
       Server:
       - Apache/2.4.29 (Ubuntu)
       Set-Cookie:
-      - MISP-5d84de75-5a54-4be3-aafc-19ac21b86aea=22gtt3pupee141vjcambff5mah; expires=Mon,
-        23-Sep-2019 23:37:39 GMT; Max-Age=3600; path=/; HttpOnly
-      - MISP-5d84de75-5a54-4be3-aafc-19ac21b86aea=22gtt3pupee141vjcambff5mah; expires=Mon,
-        23-Sep-2019 23:37:39 GMT; Max-Age=3600; path=/; HttpOnly
+      - MISP-5d84de75-5a54-4be3-aafc-19ac21b86aea=50msk29kkvq5qbr0ql7dq7be03; expires=Mon,
+        23-Sep-2019 23:51:24 GMT; Max-Age=3600; path=/; HttpOnly
+      - MISP-5d84de75-5a54-4be3-aafc-19ac21b86aea=50msk29kkvq5qbr0ql7dq7be03; expires=Mon,
+        23-Sep-2019 23:51:24 GMT; Max-Age=3600; path=/; HttpOnly
       Content-Length:
-      - '7393'
+      - '12063'
       Content-Type:
       - application/json; charset=UTF-8
     body:
@@ -36,17 +36,17 @@ http_interactions:
       string: |-
         {
             "Event": {
-                "id": "45",
+                "id": "50",
                 "orgc_id": "1",
                 "org_id": "1",
                 "date": "2019-09-23",
                 "threat_level_id": "4",
                 "info": "test",
                 "published": false,
-                "uuid": "5d894933-a528-46b7-9032-67670a00020f",
+                "uuid": "5d894c6c-5468-4bd3-bcef-1c310a00020f",
                 "attribute_count": "1",
                 "analysis": "0",
-                "timestamp": "1569278259",
+                "timestamp": "1569279084",
                 "distribution": "1",
                 "proposal_email_lock": false,
                 "locked": false,
@@ -69,14 +69,14 @@ http_interactions:
                 },
                 "Attribute": [
                     {
-                        "id": "30",
+                        "id": "35",
                         "type": "ip-dst",
                         "category": "Network activity",
                         "to_ids": true,
-                        "uuid": "5d894933-5738-4e52-ab77-67670a00020f",
-                        "event_id": "45",
+                        "uuid": "5d894c6c-b4d0-4acc-a5c4-1c310a00020f",
+                        "event_id": "50",
                         "distribution": "5",
-                        "timestamp": "1569278259",
+                        "timestamp": "1569279084",
                         "comment": "",
                         "sharing_group_id": "0",
                         "deleted": false,
@@ -192,6 +192,131 @@ http_interactions:
                     },
                     {
                         "Event": {
+                            "id": "45",
+                            "date": "2019-09-23",
+                            "threat_level_id": "4",
+                            "info": "test",
+                            "published": false,
+                            "uuid": "5d894933-a528-46b7-9032-67670a00020f",
+                            "analysis": "0",
+                            "timestamp": "1569278259",
+                            "distribution": "1",
+                            "org_id": "1",
+                            "orgc_id": "1",
+                            "Org": {
+                                "id": "1",
+                                "name": "ORGNAME",
+                                "uuid": "5d84de75-ddd0-4b00-865a-19b521b86aea"
+                            },
+                            "Orgc": {
+                                "id": "1",
+                                "name": "ORGNAME",
+                                "uuid": "5d84de75-ddd0-4b00-865a-19b521b86aea"
+                            }
+                        }
+                    },
+                    {
+                        "Event": {
+                            "id": "46",
+                            "date": "2019-09-23",
+                            "threat_level_id": "4",
+                            "info": "test",
+                            "published": false,
+                            "uuid": "5d894ba6-49c8-4c25-90bd-19d20a00020f",
+                            "analysis": "0",
+                            "timestamp": "1569278886",
+                            "distribution": "1",
+                            "org_id": "1",
+                            "orgc_id": "1",
+                            "Org": {
+                                "id": "1",
+                                "name": "ORGNAME",
+                                "uuid": "5d84de75-ddd0-4b00-865a-19b521b86aea"
+                            },
+                            "Orgc": {
+                                "id": "1",
+                                "name": "ORGNAME",
+                                "uuid": "5d84de75-ddd0-4b00-865a-19b521b86aea"
+                            }
+                        }
+                    },
+                    {
+                        "Event": {
+                            "id": "47",
+                            "date": "2019-09-23",
+                            "threat_level_id": "4",
+                            "info": "test",
+                            "published": false,
+                            "uuid": "5d894bd8-2ee4-40b9-8730-217b0a00020f",
+                            "analysis": "0",
+                            "timestamp": "1569278936",
+                            "distribution": "1",
+                            "org_id": "1",
+                            "orgc_id": "1",
+                            "Org": {
+                                "id": "1",
+                                "name": "ORGNAME",
+                                "uuid": "5d84de75-ddd0-4b00-865a-19b521b86aea"
+                            },
+                            "Orgc": {
+                                "id": "1",
+                                "name": "ORGNAME",
+                                "uuid": "5d84de75-ddd0-4b00-865a-19b521b86aea"
+                            }
+                        }
+                    },
+                    {
+                        "Event": {
+                            "id": "48",
+                            "date": "2019-09-23",
+                            "threat_level_id": "4",
+                            "info": "test",
+                            "published": false,
+                            "uuid": "5d894c48-7378-46fe-99bc-67660a00020f",
+                            "analysis": "0",
+                            "timestamp": "1569279048",
+                            "distribution": "1",
+                            "org_id": "1",
+                            "orgc_id": "1",
+                            "Org": {
+                                "id": "1",
+                                "name": "ORGNAME",
+                                "uuid": "5d84de75-ddd0-4b00-865a-19b521b86aea"
+                            },
+                            "Orgc": {
+                                "id": "1",
+                                "name": "ORGNAME",
+                                "uuid": "5d84de75-ddd0-4b00-865a-19b521b86aea"
+                            }
+                        }
+                    },
+                    {
+                        "Event": {
+                            "id": "49",
+                            "date": "2019-09-23",
+                            "threat_level_id": "4",
+                            "info": "test",
+                            "published": false,
+                            "uuid": "5d894c4b-40c4-4444-9030-67690a00020f",
+                            "analysis": "0",
+                            "timestamp": "1569279051",
+                            "distribution": "1",
+                            "org_id": "1",
+                            "orgc_id": "1",
+                            "Org": {
+                                "id": "1",
+                                "name": "ORGNAME",
+                                "uuid": "5d84de75-ddd0-4b00-865a-19b521b86aea"
+                            },
+                            "Orgc": {
+                                "id": "1",
+                                "name": "ORGNAME",
+                                "uuid": "5d84de75-ddd0-4b00-865a-19b521b86aea"
+                            }
+                        }
+                    },
+                    {
+                        "Event": {
                             "id": "17",
                             "date": "2019-09-22",
                             "threat_level_id": "4",
@@ -246,5 +371,5 @@ http_interactions:
             }
         }
     http_version: 
-  recorded_at: Mon, 23 Sep 2019 22:37:39 GMT
+  recorded_at: Mon, 23 Sep 2019 22:51:24 GMT
 recorded_with: VCR 5.0.0

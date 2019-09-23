@@ -1,85 +1,86 @@
 ---
 http_interactions:
-- request:
-    method: head
-    uri: http://<API_ENDPOINT>:9000/index.html
-    body:
-      encoding: US-ASCII
-      string: ''
-    headers:
-      Accept:
-      - "*/*"
-      User-Agent:
-      - Ruby
-  response:
-    status:
-      code: 200
-      message: OK
-    headers:
-      Etag:
-      - '"c5146054a57556c01d92c800a66de1ee32c81d55"'
-      Accept-Ranges:
-      - bytes
-      Cache-Control:
-      - public, max-age=3600
-      Last-Modified:
-      - Tue, 19 Mar 2019 10:00:42 GMT
-      Date:
-      - Mon, 12 Aug 2019 02:40:20 GMT
-      Content-Type:
-      - text/html; charset=UTF-8
-      Content-Length:
-      - '1171'
-    body:
-      encoding: UTF-8
-      string: ''
-    http_version: 
-  recorded_at: Mon, 12 Aug 2019 02:40:22 GMT
-- request:
-    method: post
-    uri: http://<API_ENDPOINT>:9000/api/alert/_search?range=0-5&sort=-date
-    body:
-      encoding: UTF-8
-      string: '{"query":{"_and":[{"_string":"source:mihari"},{"_and":[{"_not":{"status":"Deleted"}},{"_not":{"_in":{"_field":"_type","_values":["dashboard","data","user","analyzer","caseTemplate","reportTemplate","action"]}}}]}]}}'
-    headers:
-      Accept-Encoding:
-      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
-      Accept:
-      - "*/*"
-      User-Agent:
-      - Ruby
-      Host:
-      - "<API_ENDPOINT>:9000"
-      Content-Type:
-      - application/json
-      Authorization:
-      - Bearer <API_KEY>
-  response:
-    status:
-      code: 200
-      message: OK
-    headers:
-      X-Total:
-      - '97'
-      Date:
-      - Mon, 12 Aug 2019 02:40:20 GMT
-      Transfer-Encoding:
-      - chunked
-      Content-Type:
-      - application/json
-    body:
-      encoding: UTF-8
-      string: '[{"date":1565576768715,"severity":2,"_routing":"58308a830f937ffe005fb1507d92d4fb","customFields":{},"_type":"alert","description":"query
-        = hash:35936362d78a4ff3c13e7fd175a74a0af5651f11aa851844888a6a715ca4dbd6","lastSyncDate":1565576768715,"source":"mihari","title":"urlscan
-        lookup","type":"external","follow":true,"tags":["xbalti"],"createdAt":1565576768713,"_parent":null,"createdBy":"test","tlp":2,"_id":"58308a830f937ffe005fb1507d92d4fb","id":"58308a830f937ffe005fb1507d92d4fb","sourceRef":"0d61eb1f584b59a62390","_version":1,"artifacts":[{"data":"http://www.amazonzennyj1.com/mazon/admin/","dataType":"url","message":"http://www.amazonzennyj1.com/mazon/admin/"},{"data":"https://amaz-known.com/INPUT/mazon/admin/","dataType":"url","message":"https://amaz-known.com/INPUT/mazon/admin/"},{"data":"http://www.amazonhelpcenter2.com/mazon/admin/","dataType":"url","message":"http://www.amazonhelpcenter2.com/mazon/admin/"}],"status":"New"},{"severity":2,"date":1565576736975,"_routing":"97fd7d60c5b6b8be9bd6021a94505a57","customFields":{},"_type":"alert","description":"query
-        = hash:35936362d78a4ff3c13e7fd175a74a0af5651f11aa851844888a6a715ca4dbd6","lastSyncDate":1565576736975,"source":"mihari","title":"urlscan
-        lookup","type":"external","follow":true,"tags":[],"createdAt":1565576736974,"_parent":null,"createdBy":"test","tlp":2,"_id":"97fd7d60c5b6b8be9bd6021a94505a57","id":"97fd7d60c5b6b8be9bd6021a94505a57","sourceRef":"f751f1c495e2a886efb5","_version":1,"artifacts":[{"data":"http://www.amazonzennyj1.com/mazon/admin/","dataType":"url","message":"http://www.amazonzennyj1.com/mazon/admin/"},{"data":"https://amaz-known.com/INPUT/mazon/admin/","dataType":"url","message":"https://amaz-known.com/INPUT/mazon/admin/"},{"data":"http://www.amazonhelpcenter2.com/mazon/admin/","dataType":"url","message":"http://www.amazonhelpcenter2.com/mazon/admin/"}],"status":"New"},{"date":1565564341916,"severity":2,"_routing":"bc1468ec1477bcb27c5102dfd0d3092c","customFields":{},"_type":"alert","description":"query
-        = dev.min.js","lastSyncDate":1565564341916,"source":"mihari","title":"Shodan
-        lookup","type":"external","follow":true,"tags":[],"createdAt":1565564341909,"_parent":null,"createdBy":"test","tlp":2,"_id":"bc1468ec1477bcb27c5102dfd0d3092c","id":"bc1468ec1477bcb27c5102dfd0d3092c","sourceRef":"071a7676cc9739a88b0c","_version":1,"status":"New","artifacts":[{"data":"218.90.248.72","dataType":"ip","message":"218.90.248.72"},{"data":"43.240.64.34","dataType":"ip","message":"43.240.64.34"}]},{"date":1565410168072,"severity":2,"_routing":"36943c6c98b520844fa2e680ce259633","updatedBy":"test","customFields":{},"_type":"alert","description":"MoqHao
-        passive dns watcher","lastSyncDate":1565410168072,"source":"mihari","title":"MoqHao
-        passive dns watcher","type":"external","follow":true,"tags":["phishing"],"createdAt":1565410168068,"_parent":null,"createdBy":"test","tlp":2,"_id":"36943c6c98b520844fa2e680ce259633","id":"36943c6c98b520844fa2e680ce259633","sourceRef":"c78123d6963ebc8b8173","_version":2,"artifacts":[{"data":"3131358.com","dataType":"domain","message":"3131358.com"},{"data":"5288a8.com","dataType":"domain","message":"5288a8.com"},{"data":"lhbd666.com","dataType":"domain","message":"lhbd666.com"},{"data":"www.lhbd666.com","dataType":"domain","message":"www.lhbd666.com"},{"data":"www.xn--666-xw1e1b58vhor.com","dataType":"domain","message":"www.xn--666-xw1e1b58vhor.com"},{"data":"xn--666-xw1e1b58vhor.com","dataType":"domain","message":"xn--666-xw1e1b58vhor.com"},{"data":"234.88mu.cc","dataType":"domain","message":"234.88mu.cc"},{"data":"amg666.net","dataType":"domain","message":"amg666.net"},{"data":"bet365.a1-anti-ddos.com","dataType":"domain","message":"bet365.a1-anti-ddos.com"},{"data":"m.ad369.net","dataType":"domain","message":"m.ad369.net"},{"data":"mu2222.com","dataType":"domain","message":"mu2222.com"},{"data":"nbdrives.com","dataType":"domain","message":"nbdrives.com"},{"data":"www.3653888.com","dataType":"domain","message":"www.3653888.com"},{"data":"www.nbdrives.com","dataType":"domain","message":"www.nbdrives.com"},{"data":"117077.com","dataType":"domain","message":"117077.com"},{"data":"117077a.com","dataType":"domain","message":"117077a.com"},{"data":"117077b.com","dataType":"domain","message":"117077b.com"},{"data":"117077c.com","dataType":"domain","message":"117077c.com"},{"data":"117077d.com","dataType":"domain","message":"117077d.com"},{"data":"117077e.com","dataType":"domain","message":"117077e.com"},{"data":"117077f.com","dataType":"domain","message":"117077f.com"},{"data":"117077g.com","dataType":"domain","message":"117077g.com"},{"data":"117077h.com","dataType":"domain","message":"117077h.com"},{"data":"117077j.com","dataType":"domain","message":"117077j.com"},{"data":"117077m.com","dataType":"domain","message":"117077m.com"},{"data":"117077v.com","dataType":"domain","message":"117077v.com"},{"data":"1553.cc","dataType":"domain","message":"1553.cc"},{"data":"1553a.cc","dataType":"domain","message":"1553a.cc"},{"data":"1553aa.cc","dataType":"domain","message":"1553aa.cc"},{"data":"1553bb.cc","dataType":"domain","message":"1553bb.cc"},{"data":"1553c.cc","dataType":"domain","message":"1553c.cc"},{"data":"1553cc.cc","dataType":"domain","message":"1553cc.cc"},{"data":"1553dd.cc","dataType":"domain","message":"1553dd.cc"},{"data":"1553ee.cc","dataType":"domain","message":"1553ee.cc"},{"data":"1553ff.cc","dataType":"domain","message":"1553ff.cc"},{"data":"1553ii.cc","dataType":"domain","message":"1553ii.cc"},{"data":"1553ll.cc","dataType":"domain","message":"1553ll.cc"},{"data":"1553nn.cc","dataType":"domain","message":"1553nn.cc"},{"data":"1553pp.cc","dataType":"domain","message":"1553pp.cc"},{"data":"1553qq.cc","dataType":"domain","message":"1553qq.cc"},{"data":"1553rr.cc","dataType":"domain","message":"1553rr.cc"},{"data":"1553ss.cc","dataType":"domain","message":"1553ss.cc"},{"data":"1553tt.cc","dataType":"domain","message":"1553tt.cc"},{"data":"1553yy.cc","dataType":"domain","message":"1553yy.cc"},{"data":"www.117077.com","dataType":"domain","message":"www.117077.com"},{"data":"f1888.com.b2-anti-ddos.com","dataType":"domain","message":"f1888.com.b2-anti-ddos.com"},{"data":"play.starminergames.com","dataType":"domain","message":"play.starminergames.com"},{"data":"starminergames.com","dataType":"domain","message":"starminergames.com"},{"data":"starspacegames.com","dataType":"domain","message":"starspacegames.com"},{"data":"vip.starminergames.com","dataType":"domain","message":"vip.starminergames.com"},{"data":"www.play.starminergames.com","dataType":"domain","message":"www.play.starminergames.com"},{"data":"www.starminergames.com","dataType":"domain","message":"www.starminergames.com"},{"data":"www.vip.starminergames.com","dataType":"domain","message":"www.vip.starminergames.com"},{"data":"329393.com","dataType":"domain","message":"329393.com"},{"data":"162678.com","dataType":"domain","message":"162678.com"},{"data":"162678a.com","dataType":"domain","message":"162678a.com"},{"data":"162678b.com","dataType":"domain","message":"162678b.com"},{"data":"162678c.com","dataType":"domain","message":"162678c.com"},{"data":"162678e.com","dataType":"domain","message":"162678e.com"},{"data":"162678f.com","dataType":"domain","message":"162678f.com"},{"data":"162678g.com","dataType":"domain","message":"162678g.com"},{"data":"162678h.com","dataType":"domain","message":"162678h.com"},{"data":"162678i.com","dataType":"domain","message":"162678i.com"},{"data":"162678j.com","dataType":"domain","message":"162678j.com"},{"data":"162678k.com","dataType":"domain","message":"162678k.com"},{"data":"162678l.com","dataType":"domain","message":"162678l.com"},{"data":"162678m.com","dataType":"domain","message":"162678m.com"},{"data":"162678n.com","dataType":"domain","message":"162678n.com"},{"data":"162678o.com","dataType":"domain","message":"162678o.com"},{"data":"162678p.com","dataType":"domain","message":"162678p.com"},{"data":"162678q.com","dataType":"domain","message":"162678q.com"},{"data":"162678r.com","dataType":"domain","message":"162678r.com"},{"data":"162678s.com","dataType":"domain","message":"162678s.com"},{"data":"162678t.com","dataType":"domain","message":"162678t.com"},{"data":"162678u.com","dataType":"domain","message":"162678u.com"},{"data":"162678v.com","dataType":"domain","message":"162678v.com"},{"data":"162678w.com","dataType":"domain","message":"162678w.com"},{"data":"162678x.com","dataType":"domain","message":"162678x.com"},{"data":"162678y.com","dataType":"domain","message":"162678y.com"},{"data":"162678z.com","dataType":"domain","message":"162678z.com"},{"data":"27723a.com","dataType":"domain","message":"27723a.com"},{"data":"27723b.com.0129737.com","dataType":"domain","message":"27723b.com.0129737.com"},{"data":"27723f.com","dataType":"domain","message":"27723f.com"},{"data":"27723k.com.0129737.com","dataType":"domain","message":"27723k.com.0129737.com"},{"data":"27731a.com.0129737.com","dataType":"domain","message":"27731a.com.0129737.com"},{"data":"27735a.com","dataType":"domain","message":"27735a.com"},{"data":"27735a.com.0129737.com","dataType":"domain","message":"27735a.com.0129737.com"},{"data":"27735f.com.0129737.com","dataType":"domain","message":"27735f.com.0129737.com"},{"data":"27735g.com.0129737.com","dataType":"domain","message":"27735g.com.0129737.com"},{"data":"27792b.com.0129737.com","dataType":"domain","message":"27792b.com.0129737.com"},{"data":"27792g.com","dataType":"domain","message":"27792g.com"},{"data":"27792k.0129737.com","dataType":"domain","message":"27792k.0129737.com"},{"data":"38665w.com","dataType":"domain","message":"38665w.com"},{"data":"38665w.com.0129737.com","dataType":"domain","message":"38665w.com.0129737.com"},{"data":"tiantianshixun.com","dataType":"domain","message":"tiantianshixun.com"},{"data":"www.27792g.com","dataType":"domain","message":"www.27792g.com"},{"data":"www.38665w.com","dataType":"domain","message":"www.38665w.com"}],"status":"Ignored","updatedAt":1565532175546},{"severity":2,"date":1565332161153,"_routing":"1a473c4600d0b279fa047020a5a08f8c","updatedBy":"test","customFields":{},"_type":"alert","description":"indicator
-        = jppost-hi.top","lastSyncDate":1565332161146,"source":"mihari","title":"VirusTotal
-        lookup","type":"external","follow":true,"tags":["fakespy"],"createdAt":1565332161130,"_parent":null,"createdBy":"test","tlp":2,"_id":"1a473c4600d0b279fa047020a5a08f8c","id":"1a473c4600d0b279fa047020a5a08f8c","sourceRef":"d530552c1ea38cc87a41","_version":2,"status":"Ignored","artifacts":[{"data":"185.22.152.28","dataType":"ip","message":"185.22.152.28"},{"data":"192.236.200.44","dataType":"ip","message":"192.236.200.44"},{"data":"193.148.69.9","dataType":"ip","message":"193.148.69.9"},{"data":"45.12.206.233","dataType":"ip","message":"45.12.206.233"},{"data":"45.14.148.103","dataType":"ip","message":"45.14.148.103"},{"data":"45.83.140.132","dataType":"ip","message":"45.83.140.132"},{"data":"45.83.140.140","dataType":"ip","message":"45.83.140.140"},{"data":"51.68.251.30","dataType":"ip","message":"51.68.251.30"}],"updatedAt":1565532184909}]'
-    http_version: 
-  recorded_at: Mon, 12 Aug 2019 02:40:22 GMT
+  - request:
+      method: head
+      uri: <THEHIVE_API_ENDPOINT>/index.html
+      body:
+        encoding: US-ASCII
+        string: ""
+      headers:
+        Accept:
+          - "*/*"
+        User-Agent:
+          - Ruby
+    response:
+      status:
+        code: 200
+        message: OK
+      headers:
+        Etag:
+          - '"c5146054a57556c01d92c800a66de1ee32c81d55"'
+        Accept-Ranges:
+          - bytes
+        Cache-Control:
+          - public, max-age=3600
+        Last-Modified:
+          - Tue, 19 Mar 2019 10:00:42 GMT
+        Date:
+          - Mon, 12 Aug 2019 02:40:20 GMT
+        Content-Type:
+          - text/html; charset=UTF-8
+        Content-Length:
+          - "1171"
+      body:
+        encoding: UTF-8
+        string: ""
+      http_version:
+    recorded_at: Mon, 12 Aug 2019 02:40:22 GMT
+  - request:
+      method: post
+      uri: <THEHIVE_API_ENDPOINT>/api/alert/_search?range=0-5&sort=-date
+      body:
+        encoding: UTF-8
+        string: '{"query":{"_and":[{"_string":"source:mihari"},{"_and":[{"_not":{"status":"Deleted"}},{"_not":{"_in":{"_field":"_type","_values":["dashboard","data","user","analyzer","caseTemplate","reportTemplate","action"]}}}]}]}}'
+      headers:
+        Accept-Encoding:
+          - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+        Accept:
+          - "*/*"
+        User-Agent:
+          - Ruby
+        Host:
+          - "<THEHIVE_API_ENDPOINT>"
+        Content-Type:
+          - application/json
+        Authorization:
+          - Bearer <API_KEY>
+    response:
+      status:
+        code: 200
+        message: OK
+      headers:
+        X-Total:
+          - "97"
+        Date:
+          - Mon, 12 Aug 2019 02:40:20 GMT
+        Transfer-Encoding:
+          - chunked
+        Content-Type:
+          - application/json
+      body:
+        encoding: UTF-8
+        string:
+          '[{"date":1565576768715,"severity":2,"_routing":"58308a830f937ffe005fb1507d92d4fb","customFields":{},"_type":"alert","description":"query
+          = hash:35936362d78a4ff3c13e7fd175a74a0af5651f11aa851844888a6a715ca4dbd6","lastSyncDate":1565576768715,"source":"mihari","title":"urlscan
+          lookup","type":"external","follow":true,"tags":["xbalti"],"createdAt":1565576768713,"_parent":null,"createdBy":"test","tlp":2,"_id":"58308a830f937ffe005fb1507d92d4fb","id":"58308a830f937ffe005fb1507d92d4fb","sourceRef":"0d61eb1f584b59a62390","_version":1,"artifacts":[{"data":"http://www.amazonzennyj1.com/mazon/admin/","dataType":"url","message":"http://www.amazonzennyj1.com/mazon/admin/"},{"data":"https://amaz-known.com/INPUT/mazon/admin/","dataType":"url","message":"https://amaz-known.com/INPUT/mazon/admin/"},{"data":"http://www.amazonhelpcenter2.com/mazon/admin/","dataType":"url","message":"http://www.amazonhelpcenter2.com/mazon/admin/"}],"status":"New"},{"severity":2,"date":1565576736975,"_routing":"97fd7d60c5b6b8be9bd6021a94505a57","customFields":{},"_type":"alert","description":"query
+          = hash:35936362d78a4ff3c13e7fd175a74a0af5651f11aa851844888a6a715ca4dbd6","lastSyncDate":1565576736975,"source":"mihari","title":"urlscan
+          lookup","type":"external","follow":true,"tags":[],"createdAt":1565576736974,"_parent":null,"createdBy":"test","tlp":2,"_id":"97fd7d60c5b6b8be9bd6021a94505a57","id":"97fd7d60c5b6b8be9bd6021a94505a57","sourceRef":"f751f1c495e2a886efb5","_version":1,"artifacts":[{"data":"http://www.amazonzennyj1.com/mazon/admin/","dataType":"url","message":"http://www.amazonzennyj1.com/mazon/admin/"},{"data":"https://amaz-known.com/INPUT/mazon/admin/","dataType":"url","message":"https://amaz-known.com/INPUT/mazon/admin/"},{"data":"http://www.amazonhelpcenter2.com/mazon/admin/","dataType":"url","message":"http://www.amazonhelpcenter2.com/mazon/admin/"}],"status":"New"},{"date":1565564341916,"severity":2,"_routing":"bc1468ec1477bcb27c5102dfd0d3092c","customFields":{},"_type":"alert","description":"query
+          = dev.min.js","lastSyncDate":1565564341916,"source":"mihari","title":"Shodan
+          lookup","type":"external","follow":true,"tags":[],"createdAt":1565564341909,"_parent":null,"createdBy":"test","tlp":2,"_id":"bc1468ec1477bcb27c5102dfd0d3092c","id":"bc1468ec1477bcb27c5102dfd0d3092c","sourceRef":"071a7676cc9739a88b0c","_version":1,"status":"New","artifacts":[{"data":"218.90.248.72","dataType":"ip","message":"218.90.248.72"},{"data":"43.240.64.34","dataType":"ip","message":"43.240.64.34"}]},{"date":1565410168072,"severity":2,"_routing":"36943c6c98b520844fa2e680ce259633","updatedBy":"test","customFields":{},"_type":"alert","description":"MoqHao
+          passive dns watcher","lastSyncDate":1565410168072,"source":"mihari","title":"MoqHao
+          passive dns watcher","type":"external","follow":true,"tags":["phishing"],"createdAt":1565410168068,"_parent":null,"createdBy":"test","tlp":2,"_id":"36943c6c98b520844fa2e680ce259633","id":"36943c6c98b520844fa2e680ce259633","sourceRef":"c78123d6963ebc8b8173","_version":2,"artifacts":[{"data":"3131358.com","dataType":"domain","message":"3131358.com"},{"data":"5288a8.com","dataType":"domain","message":"5288a8.com"},{"data":"lhbd666.com","dataType":"domain","message":"lhbd666.com"},{"data":"www.lhbd666.com","dataType":"domain","message":"www.lhbd666.com"},{"data":"www.xn--666-xw1e1b58vhor.com","dataType":"domain","message":"www.xn--666-xw1e1b58vhor.com"},{"data":"xn--666-xw1e1b58vhor.com","dataType":"domain","message":"xn--666-xw1e1b58vhor.com"},{"data":"234.88mu.cc","dataType":"domain","message":"234.88mu.cc"},{"data":"amg666.net","dataType":"domain","message":"amg666.net"},{"data":"bet365.a1-anti-ddos.com","dataType":"domain","message":"bet365.a1-anti-ddos.com"},{"data":"m.ad369.net","dataType":"domain","message":"m.ad369.net"},{"data":"mu2222.com","dataType":"domain","message":"mu2222.com"},{"data":"nbdrives.com","dataType":"domain","message":"nbdrives.com"},{"data":"www.3653888.com","dataType":"domain","message":"www.3653888.com"},{"data":"www.nbdrives.com","dataType":"domain","message":"www.nbdrives.com"},{"data":"117077.com","dataType":"domain","message":"117077.com"},{"data":"117077a.com","dataType":"domain","message":"117077a.com"},{"data":"117077b.com","dataType":"domain","message":"117077b.com"},{"data":"117077c.com","dataType":"domain","message":"117077c.com"},{"data":"117077d.com","dataType":"domain","message":"117077d.com"},{"data":"117077e.com","dataType":"domain","message":"117077e.com"},{"data":"117077f.com","dataType":"domain","message":"117077f.com"},{"data":"117077g.com","dataType":"domain","message":"117077g.com"},{"data":"117077h.com","dataType":"domain","message":"117077h.com"},{"data":"117077j.com","dataType":"domain","message":"117077j.com"},{"data":"117077m.com","dataType":"domain","message":"117077m.com"},{"data":"117077v.com","dataType":"domain","message":"117077v.com"},{"data":"1553.cc","dataType":"domain","message":"1553.cc"},{"data":"1553a.cc","dataType":"domain","message":"1553a.cc"},{"data":"1553aa.cc","dataType":"domain","message":"1553aa.cc"},{"data":"1553bb.cc","dataType":"domain","message":"1553bb.cc"},{"data":"1553c.cc","dataType":"domain","message":"1553c.cc"},{"data":"1553cc.cc","dataType":"domain","message":"1553cc.cc"},{"data":"1553dd.cc","dataType":"domain","message":"1553dd.cc"},{"data":"1553ee.cc","dataType":"domain","message":"1553ee.cc"},{"data":"1553ff.cc","dataType":"domain","message":"1553ff.cc"},{"data":"1553ii.cc","dataType":"domain","message":"1553ii.cc"},{"data":"1553ll.cc","dataType":"domain","message":"1553ll.cc"},{"data":"1553nn.cc","dataType":"domain","message":"1553nn.cc"},{"data":"1553pp.cc","dataType":"domain","message":"1553pp.cc"},{"data":"1553qq.cc","dataType":"domain","message":"1553qq.cc"},{"data":"1553rr.cc","dataType":"domain","message":"1553rr.cc"},{"data":"1553ss.cc","dataType":"domain","message":"1553ss.cc"},{"data":"1553tt.cc","dataType":"domain","message":"1553tt.cc"},{"data":"1553yy.cc","dataType":"domain","message":"1553yy.cc"},{"data":"www.117077.com","dataType":"domain","message":"www.117077.com"},{"data":"f1888.com.b2-anti-ddos.com","dataType":"domain","message":"f1888.com.b2-anti-ddos.com"},{"data":"play.starminergames.com","dataType":"domain","message":"play.starminergames.com"},{"data":"starminergames.com","dataType":"domain","message":"starminergames.com"},{"data":"starspacegames.com","dataType":"domain","message":"starspacegames.com"},{"data":"vip.starminergames.com","dataType":"domain","message":"vip.starminergames.com"},{"data":"www.play.starminergames.com","dataType":"domain","message":"www.play.starminergames.com"},{"data":"www.starminergames.com","dataType":"domain","message":"www.starminergames.com"},{"data":"www.vip.starminergames.com","dataType":"domain","message":"www.vip.starminergames.com"},{"data":"329393.com","dataType":"domain","message":"329393.com"},{"data":"162678.com","dataType":"domain","message":"162678.com"},{"data":"162678a.com","dataType":"domain","message":"162678a.com"},{"data":"162678b.com","dataType":"domain","message":"162678b.com"},{"data":"162678c.com","dataType":"domain","message":"162678c.com"},{"data":"162678e.com","dataType":"domain","message":"162678e.com"},{"data":"162678f.com","dataType":"domain","message":"162678f.com"},{"data":"162678g.com","dataType":"domain","message":"162678g.com"},{"data":"162678h.com","dataType":"domain","message":"162678h.com"},{"data":"162678i.com","dataType":"domain","message":"162678i.com"},{"data":"162678j.com","dataType":"domain","message":"162678j.com"},{"data":"162678k.com","dataType":"domain","message":"162678k.com"},{"data":"162678l.com","dataType":"domain","message":"162678l.com"},{"data":"162678m.com","dataType":"domain","message":"162678m.com"},{"data":"162678n.com","dataType":"domain","message":"162678n.com"},{"data":"162678o.com","dataType":"domain","message":"162678o.com"},{"data":"162678p.com","dataType":"domain","message":"162678p.com"},{"data":"162678q.com","dataType":"domain","message":"162678q.com"},{"data":"162678r.com","dataType":"domain","message":"162678r.com"},{"data":"162678s.com","dataType":"domain","message":"162678s.com"},{"data":"162678t.com","dataType":"domain","message":"162678t.com"},{"data":"162678u.com","dataType":"domain","message":"162678u.com"},{"data":"162678v.com","dataType":"domain","message":"162678v.com"},{"data":"162678w.com","dataType":"domain","message":"162678w.com"},{"data":"162678x.com","dataType":"domain","message":"162678x.com"},{"data":"162678y.com","dataType":"domain","message":"162678y.com"},{"data":"162678z.com","dataType":"domain","message":"162678z.com"},{"data":"27723a.com","dataType":"domain","message":"27723a.com"},{"data":"27723b.com.0129737.com","dataType":"domain","message":"27723b.com.0129737.com"},{"data":"27723f.com","dataType":"domain","message":"27723f.com"},{"data":"27723k.com.0129737.com","dataType":"domain","message":"27723k.com.0129737.com"},{"data":"27731a.com.0129737.com","dataType":"domain","message":"27731a.com.0129737.com"},{"data":"27735a.com","dataType":"domain","message":"27735a.com"},{"data":"27735a.com.0129737.com","dataType":"domain","message":"27735a.com.0129737.com"},{"data":"27735f.com.0129737.com","dataType":"domain","message":"27735f.com.0129737.com"},{"data":"27735g.com.0129737.com","dataType":"domain","message":"27735g.com.0129737.com"},{"data":"27792b.com.0129737.com","dataType":"domain","message":"27792b.com.0129737.com"},{"data":"27792g.com","dataType":"domain","message":"27792g.com"},{"data":"27792k.0129737.com","dataType":"domain","message":"27792k.0129737.com"},{"data":"38665w.com","dataType":"domain","message":"38665w.com"},{"data":"38665w.com.0129737.com","dataType":"domain","message":"38665w.com.0129737.com"},{"data":"tiantianshixun.com","dataType":"domain","message":"tiantianshixun.com"},{"data":"www.27792g.com","dataType":"domain","message":"www.27792g.com"},{"data":"www.38665w.com","dataType":"domain","message":"www.38665w.com"}],"status":"Ignored","updatedAt":1565532175546},{"severity":2,"date":1565332161153,"_routing":"1a473c4600d0b279fa047020a5a08f8c","updatedBy":"test","customFields":{},"_type":"alert","description":"indicator
+          = jppost-hi.top","lastSyncDate":1565332161146,"source":"mihari","title":"VirusTotal
+          lookup","type":"external","follow":true,"tags":["fakespy"],"createdAt":1565332161130,"_parent":null,"createdBy":"test","tlp":2,"_id":"1a473c4600d0b279fa047020a5a08f8c","id":"1a473c4600d0b279fa047020a5a08f8c","sourceRef":"d530552c1ea38cc87a41","_version":2,"status":"Ignored","artifacts":[{"data":"185.22.152.28","dataType":"ip","message":"185.22.152.28"},{"data":"192.236.200.44","dataType":"ip","message":"192.236.200.44"},{"data":"193.148.69.9","dataType":"ip","message":"193.148.69.9"},{"data":"45.12.206.233","dataType":"ip","message":"45.12.206.233"},{"data":"45.14.148.103","dataType":"ip","message":"45.14.148.103"},{"data":"45.83.140.132","dataType":"ip","message":"45.83.140.132"},{"data":"45.83.140.140","dataType":"ip","message":"45.83.140.140"},{"data":"51.68.251.30","dataType":"ip","message":"51.68.251.30"}],"updatedAt":1565532184909}]'
+      http_version:
+    recorded_at: Mon, 12 Aug 2019 02:40:22 GMT
 recorded_with: VCR 5.0.0

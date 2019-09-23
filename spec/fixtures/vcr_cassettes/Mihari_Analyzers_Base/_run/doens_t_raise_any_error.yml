@@ -1,215 +1,215 @@
 ---
 http_interactions:
-- request:
-    method: head
-    uri: http://<API_ENDPOINT>:9000/index.html
-    body:
-      encoding: US-ASCII
-      string: ''
-    headers:
-      Accept:
-      - "*/*"
-      User-Agent:
-      - Ruby
-  response:
-    status:
-      code: 200
-      message: OK
-    headers:
-      Etag:
-      - '"c5146054a57556c01d92c800a66de1ee32c81d55"'
-      Accept-Ranges:
-      - bytes
-      Cache-Control:
-      - public, max-age=3600
-      Last-Modified:
-      - Tue, 19 Mar 2019 10:00:42 GMT
-      Date:
-      - Thu, 19 Sep 2019 07:35:29 GMT
-      Content-Type:
-      - text/html; charset=UTF-8
-      Content-Length:
-      - '1171'
-    body:
-      encoding: UTF-8
-      string: ''
-    http_version: 
-  recorded_at: Thu, 19 Sep 2019 07:35:29 GMT
-- request:
-    method: post
-    uri: http://<API_ENDPOINT>:9000/api/case/artifact/_search?range=all
-    body:
-      encoding: UTF-8
-      string: '{"query":{"_and":[{"_or":[{"_field":"data","_value":"1.1.1.1"},{"_field":"data","_value":"google.com"}]},{"_and":[{"_not":{"status":"Deleted"}},{"_not":{"_in":{"_field":"_type","_values":["dashboard","data","user","analyzer","caseTemplate","reportTemplate","action"]}}}]}]}}'
-    headers:
-      Accept-Encoding:
-      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
-      Accept:
-      - "*/*"
-      User-Agent:
-      - Ruby
-      Host:
-      - "<API_ENDPOINT>:9000"
-      Content-Type:
-      - application/json
-      Authorization:
-      - Bearer <API_KEY>
-  response:
-    status:
-      code: 200
-      message: OK
-    headers:
-      X-Total:
-      - '2'
-      Date:
-      - Thu, 19 Sep 2019 07:35:29 GMT
-      Transfer-Encoding:
-      - chunked
-      Content-Type:
-      - application/json
-    body:
-      encoding: UTF-8
-      string: '[{"_routing":"AWobTO2jH8Rbrc-EdGw2","reports":{},"data":"1.1.1.1","dataType":"ip","_type":"case_artifact","sighted":false,"message":"","tags":["test"],"createdAt":1558948397118,"_parent":"AWobTO2jH8Rbrc-EdGw2","createdBy":"test","tlp":2,"_id":"948180dde99f9ada756677978c2ffeb7","id":"948180dde99f9ada756677978c2ffeb7","ioc":false,"_version":1,"startDate":1558948397163,"status":"Ok"},{"_routing":"AWoZBct1H8Rbrc-EdGwH","reports":{},"data":"1.1.1.1","dataType":"ip","_type":"case_artifact","sighted":false,"message":"","tags":["test"],"createdAt":1555197983904,"_parent":"AWoZBct1H8Rbrc-EdGwH","createdBy":"test","tlp":2,"_id":"3838d1265112313b4bb3f55acae37ad5","id":"3838d1265112313b4bb3f55acae37ad5","ioc":false,"_version":1,"startDate":1555197983922,"status":"Ok"}]'
-    http_version: 
-  recorded_at: Thu, 19 Sep 2019 07:35:29 GMT
-- request:
-    method: head
-    uri: http://<API_ENDPOINT>:9000/index.html
-    body:
-      encoding: US-ASCII
-      string: ''
-    headers:
-      Accept:
-      - "*/*"
-      User-Agent:
-      - Ruby
-  response:
-    status:
-      code: 200
-      message: OK
-    headers:
-      Etag:
-      - '"c5146054a57556c01d92c800a66de1ee32c81d55"'
-      Accept-Ranges:
-      - bytes
-      Cache-Control:
-      - public, max-age=3600
-      Last-Modified:
-      - Tue, 19 Mar 2019 10:00:42 GMT
-      Date:
-      - Thu, 19 Sep 2019 07:35:29 GMT
-      Content-Type:
-      - text/html; charset=UTF-8
-      Content-Length:
-      - '1171'
-    body:
-      encoding: UTF-8
-      string: ''
-    http_version: 
-  recorded_at: Thu, 19 Sep 2019 07:35:29 GMT
-- request:
-    method: head
-    uri: http://<API_ENDPOINT>:9000/index.html
-    body:
-      encoding: US-ASCII
-      string: ''
-    headers:
-      Accept:
-      - "*/*"
-      User-Agent:
-      - Ruby
-  response:
-    status:
-      code: 200
-      message: OK
-    headers:
-      Etag:
-      - '"c5146054a57556c01d92c800a66de1ee32c81d55"'
-      Accept-Ranges:
-      - bytes
-      Cache-Control:
-      - public, max-age=3600
-      Last-Modified:
-      - Tue, 19 Mar 2019 10:00:42 GMT
-      Date:
-      - Thu, 19 Sep 2019 07:35:29 GMT
-      Content-Type:
-      - text/html; charset=UTF-8
-      Content-Length:
-      - '1171'
-    body:
-      encoding: UTF-8
-      string: ''
-    http_version: 
-  recorded_at: Thu, 19 Sep 2019 07:35:29 GMT
-- request:
-    method: post
-    uri: http://<API_ENDPOINT>:9000/api/alert
-    body:
-      encoding: UTF-8
-      string: '{"title":"Test","description":"test","tags":[],"type":"external","source":"mihari","sourceRef":"accb54c6dbbca231a564","artifacts":[{"data":"google.com","dataType":"domain","message":"google.com"}]}'
-    headers:
-      Accept-Encoding:
-      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
-      Accept:
-      - "*/*"
-      User-Agent:
-      - Ruby
-      Host:
-      - "<API_ENDPOINT>:9000"
-      Content-Type:
-      - application/json
-      Authorization:
-      - Bearer <API_KEY>
-  response:
-    status:
-      code: 201
-      message: Created
-    headers:
-      Date:
-      - Thu, 19 Sep 2019 07:35:30 GMT
-      Content-Type:
-      - application/json
-      Content-Length:
-      - '531'
-    body:
-      encoding: UTF-8
-      string: '{"date":1568878529577,"severity":2,"_routing":"95cc80a2558d796a6e2b7b0ac4e88724","customFields":{},"_type":"alert","description":"test","lastSyncDate":1568878529577,"source":"mihari","title":"Test","type":"external","follow":true,"tags":[],"createdAt":1568878529576,"_parent":null,"createdBy":"test","tlp":2,"_id":"95cc80a2558d796a6e2b7b0ac4e88724","id":"95cc80a2558d796a6e2b7b0ac4e88724","sourceRef":"accb54c6dbbca231a564","_version":1,"status":"New","artifacts":[{"data":"google.com","dataType":"domain","message":"google.com"}]}'
-    http_version: 
-  recorded_at: Thu, 19 Sep 2019 07:35:30 GMT
-- request:
-    method: head
-    uri: http://<API_ENDPOINT>:9000/index.html
-    body:
-      encoding: US-ASCII
-      string: ''
-    headers:
-      Accept:
-      - "*/*"
-      User-Agent:
-      - Ruby
-  response:
-    status:
-      code: 200
-      message: OK
-    headers:
-      Etag:
-      - '"c5146054a57556c01d92c800a66de1ee32c81d55"'
-      Accept-Ranges:
-      - bytes
-      Cache-Control:
-      - public, max-age=3600
-      Last-Modified:
-      - Tue, 19 Mar 2019 10:00:42 GMT
-      Date:
-      - Thu, 19 Sep 2019 07:35:30 GMT
-      Content-Type:
-      - text/html; charset=UTF-8
-      Content-Length:
-      - '1171'
-    body:
-      encoding: UTF-8
-      string: ''
-    http_version: 
-  recorded_at: Thu, 19 Sep 2019 07:35:30 GMT
+  - request:
+      method: head
+      uri: <THEHIVE_API_ENDPOINT>/index.html
+      body:
+        encoding: US-ASCII
+        string: ""
+      headers:
+        Accept:
+          - "*/*"
+        User-Agent:
+          - Ruby
+    response:
+      status:
+        code: 200
+        message: OK
+      headers:
+        Etag:
+          - '"c5146054a57556c01d92c800a66de1ee32c81d55"'
+        Accept-Ranges:
+          - bytes
+        Cache-Control:
+          - public, max-age=3600
+        Last-Modified:
+          - Tue, 19 Mar 2019 10:00:42 GMT
+        Date:
+          - Thu, 19 Sep 2019 07:35:29 GMT
+        Content-Type:
+          - text/html; charset=UTF-8
+        Content-Length:
+          - "1171"
+      body:
+        encoding: UTF-8
+        string: ""
+      http_version:
+    recorded_at: Thu, 19 Sep 2019 07:35:29 GMT
+  - request:
+      method: post
+      uri: <THEHIVE_API_ENDPOINT>/api/case/artifact/_search?range=all
+      body:
+        encoding: UTF-8
+        string: '{"query":{"_and":[{"_or":[{"_field":"data","_value":"1.1.1.1"},{"_field":"data","_value":"google.com"}]},{"_and":[{"_not":{"status":"Deleted"}},{"_not":{"_in":{"_field":"_type","_values":["dashboard","data","user","analyzer","caseTemplate","reportTemplate","action"]}}}]}]}}'
+      headers:
+        Accept-Encoding:
+          - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+        Accept:
+          - "*/*"
+        User-Agent:
+          - Ruby
+        Host:
+          - "<THEHIVE_API_ENDPOINT>"
+        Content-Type:
+          - application/json
+        Authorization:
+          - Bearer <API_KEY>
+    response:
+      status:
+        code: 200
+        message: OK
+      headers:
+        X-Total:
+          - "2"
+        Date:
+          - Thu, 19 Sep 2019 07:35:29 GMT
+        Transfer-Encoding:
+          - chunked
+        Content-Type:
+          - application/json
+      body:
+        encoding: UTF-8
+        string: '[{"_routing":"AWobTO2jH8Rbrc-EdGw2","reports":{},"data":"1.1.1.1","dataType":"ip","_type":"case_artifact","sighted":false,"message":"","tags":["test"],"createdAt":1558948397118,"_parent":"AWobTO2jH8Rbrc-EdGw2","createdBy":"test","tlp":2,"_id":"948180dde99f9ada756677978c2ffeb7","id":"948180dde99f9ada756677978c2ffeb7","ioc":false,"_version":1,"startDate":1558948397163,"status":"Ok"},{"_routing":"AWoZBct1H8Rbrc-EdGwH","reports":{},"data":"1.1.1.1","dataType":"ip","_type":"case_artifact","sighted":false,"message":"","tags":["test"],"createdAt":1555197983904,"_parent":"AWoZBct1H8Rbrc-EdGwH","createdBy":"test","tlp":2,"_id":"3838d1265112313b4bb3f55acae37ad5","id":"3838d1265112313b4bb3f55acae37ad5","ioc":false,"_version":1,"startDate":1555197983922,"status":"Ok"}]'
+      http_version:
+    recorded_at: Thu, 19 Sep 2019 07:35:29 GMT
+  - request:
+      method: head
+      uri: <THEHIVE_API_ENDPOINT>/index.html
+      body:
+        encoding: US-ASCII
+        string: ""
+      headers:
+        Accept:
+          - "*/*"
+        User-Agent:
+          - Ruby
+    response:
+      status:
+        code: 200
+        message: OK
+      headers:
+        Etag:
+          - '"c5146054a57556c01d92c800a66de1ee32c81d55"'
+        Accept-Ranges:
+          - bytes
+        Cache-Control:
+          - public, max-age=3600
+        Last-Modified:
+          - Tue, 19 Mar 2019 10:00:42 GMT
+        Date:
+          - Thu, 19 Sep 2019 07:35:29 GMT
+        Content-Type:
+          - text/html; charset=UTF-8
+        Content-Length:
+          - "1171"
+      body:
+        encoding: UTF-8
+        string: ""
+      http_version:
+    recorded_at: Thu, 19 Sep 2019 07:35:29 GMT
+  - request:
+      method: head
+      uri: <THEHIVE_API_ENDPOINT>/index.html
+      body:
+        encoding: US-ASCII
+        string: ""
+      headers:
+        Accept:
+          - "*/*"
+        User-Agent:
+          - Ruby
+    response:
+      status:
+        code: 200
+        message: OK
+      headers:
+        Etag:
+          - '"c5146054a57556c01d92c800a66de1ee32c81d55"'
+        Accept-Ranges:
+          - bytes
+        Cache-Control:
+          - public, max-age=3600
+        Last-Modified:
+          - Tue, 19 Mar 2019 10:00:42 GMT
+        Date:
+          - Thu, 19 Sep 2019 07:35:29 GMT
+        Content-Type:
+          - text/html; charset=UTF-8
+        Content-Length:
+          - "1171"
+      body:
+        encoding: UTF-8
+        string: ""
+      http_version:
+    recorded_at: Thu, 19 Sep 2019 07:35:29 GMT
+  - request:
+      method: post
+      uri: <THEHIVE_API_ENDPOINT>/api/alert
+      body:
+        encoding: UTF-8
+        string: '{"title":"Test","description":"test","tags":[],"type":"external","source":"mihari","sourceRef":"accb54c6dbbca231a564","artifacts":[{"data":"google.com","dataType":"domain","message":"google.com"}]}'
+      headers:
+        Accept-Encoding:
+          - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+        Accept:
+          - "*/*"
+        User-Agent:
+          - Ruby
+        Host:
+          - "<THEHIVE_API_ENDPOINT>"
+        Content-Type:
+          - application/json
+        Authorization:
+          - Bearer <API_KEY>
+    response:
+      status:
+        code: 201
+        message: Created
+      headers:
+        Date:
+          - Thu, 19 Sep 2019 07:35:30 GMT
+        Content-Type:
+          - application/json
+        Content-Length:
+          - "531"
+      body:
+        encoding: UTF-8
+        string: '{"date":1568878529577,"severity":2,"_routing":"95cc80a2558d796a6e2b7b0ac4e88724","customFields":{},"_type":"alert","description":"test","lastSyncDate":1568878529577,"source":"mihari","title":"Test","type":"external","follow":true,"tags":[],"createdAt":1568878529576,"_parent":null,"createdBy":"test","tlp":2,"_id":"95cc80a2558d796a6e2b7b0ac4e88724","id":"95cc80a2558d796a6e2b7b0ac4e88724","sourceRef":"accb54c6dbbca231a564","_version":1,"status":"New","artifacts":[{"data":"google.com","dataType":"domain","message":"google.com"}]}'
+      http_version:
+    recorded_at: Thu, 19 Sep 2019 07:35:30 GMT
+  - request:
+      method: head
+      uri: <THEHIVE_API_ENDPOINT>/index.html
+      body:
+        encoding: US-ASCII
+        string: ""
+      headers:
+        Accept:
+          - "*/*"
+        User-Agent:
+          - Ruby
+    response:
+      status:
+        code: 200
+        message: OK
+      headers:
+        Etag:
+          - '"c5146054a57556c01d92c800a66de1ee32c81d55"'
+        Accept-Ranges:
+          - bytes
+        Cache-Control:
+          - public, max-age=3600
+        Last-Modified:
+          - Tue, 19 Mar 2019 10:00:42 GMT
+        Date:
+          - Thu, 19 Sep 2019 07:35:30 GMT
+        Content-Type:
+          - text/html; charset=UTF-8
+        Content-Length:
+          - "1171"
+      body:
+        encoding: UTF-8
+        string: ""
+      http_version:
+    recorded_at: Thu, 19 Sep 2019 07:35:30 GMT
 recorded_with: VCR 5.0.0

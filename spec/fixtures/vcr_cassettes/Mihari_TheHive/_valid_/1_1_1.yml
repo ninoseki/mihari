@@ -1,38 +1,38 @@
 ---
 http_interactions:
-- request:
-    method: head
-    uri: http://<API_ENDPOINT>:9000/index.html
-    body:
-      encoding: US-ASCII
-      string: ''
-    headers:
-      Accept:
-      - "*/*"
-      User-Agent:
-      - Ruby
-  response:
-    status:
-      code: 200
-      message: OK
-    headers:
-      Etag:
-      - '"c5146054a57556c01d92c800a66de1ee32c81d55"'
-      Accept-Ranges:
-      - bytes
-      Cache-Control:
-      - public, max-age=3600
-      Last-Modified:
-      - Tue, 19 Mar 2019 10:00:42 GMT
-      Date:
-      - Sun, 11 Aug 2019 23:07:08 GMT
-      Content-Type:
-      - text/html; charset=UTF-8
-      Content-Length:
-      - '1171'
-    body:
-      encoding: UTF-8
-      string: ''
-    http_version: 
-  recorded_at: Sun, 11 Aug 2019 23:07:08 GMT
+  - request:
+      method: head
+      uri: <THEHIVE_API_ENDPOINT>/index.html
+      body:
+        encoding: US-ASCII
+        string: ""
+      headers:
+        Accept:
+          - "*/*"
+        User-Agent:
+          - Ruby
+    response:
+      status:
+        code: 200
+        message: OK
+      headers:
+        Etag:
+          - '"c5146054a57556c01d92c800a66de1ee32c81d55"'
+        Accept-Ranges:
+          - bytes
+        Cache-Control:
+          - public, max-age=3600
+        Last-Modified:
+          - Tue, 19 Mar 2019 10:00:42 GMT
+        Date:
+          - Sun, 11 Aug 2019 23:07:08 GMT
+        Content-Type:
+          - text/html; charset=UTF-8
+        Content-Length:
+          - "1171"
+      body:
+        encoding: UTF-8
+        string: ""
+      http_version:
+    recorded_at: Sun, 11 Aug 2019 23:07:08 GMT
 recorded_with: VCR 5.0.0

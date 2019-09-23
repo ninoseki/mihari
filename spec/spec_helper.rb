@@ -44,30 +44,20 @@ VCR.configure do |config|
   config.hook_into :webmock
   config.ignore_localhost = false
 
-  # The Hive
-  config.filter_sensitive_data("<API_KEY>") { ENV["THEHIVE_API_KEY"] }
-  uri = URI(ENV["THEHIVE_API_ENDPOINT"])
-  config.filter_sensitive_data("<API_ENDPOINT>") { uri.hostname }
+  keys = %w(
+    THEHIVE_API_KEY THEHIVE_API_ENDPOINT
+    MISP_API_KEY MISP_API_ENDPOINT
+    CENSYS_AUTH CENSYS_ID CENSYS_SECRET
+    SHODAN_API_KEY
+    ONYPHE_API_KEY
+    VIRUSTOTAL_API_KEY
+    SECURITYTRAILS_API_KEY
+  )
 
-  # MISP
-  config.filter_sensitive_data("<MISP_API_KEY>") { ENV["MISP_API_KEY"] }
-  uri = URI(ENV["MISP_API_ENDPOINT"])
-  config.filter_sensitive_data("<MISP_API_ENDPOINT>") { uri.hostname }
+  keys.each do |key|
+    config.filter_sensitive_data("<#{key}>") { ENV.fetch(key, "http://localhost") }
+  end
 
   # Censys
   config.filter_sensitive_data("<CENSYS_AUTH>") { authorization_field }
-  config.filter_sensitive_data("<CENSYS_ID>") { ENV["CENSYS_ID"] }
-  config.filter_sensitive_data("<CENSYS_SECRET>") { ENV["CENSYS_SECRET"] }
-
-  # Shodan
-  config.filter_sensitive_data("<SHODAN_API_KEY>") { ENV["SHODAN_API_KEY"] }
-
-  # Onyphe
-  config.filter_sensitive_data("<ONYPHE_API_KEY>") { ENV["ONYPHE_API_KEY"] }
-
-  # VirusTotal
-  config.filter_sensitive_data("<VT_API_KEY>") { ENV["VIRUSTOTAL_API_KEY"] }
-
-  # SecurityTrails
-  config.filter_sensitive_data("<ST_API_KEY>") { ENV["SECURITYTRAILS_API_KEY"] }
 end
