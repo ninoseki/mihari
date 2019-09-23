@@ -49,6 +49,11 @@ VCR.configure do |config|
   uri = URI(ENV["THEHIVE_API_ENDPOINT"])
   config.filter_sensitive_data("<API_ENDPOINT>") { uri.hostname }
 
+  # MISP
+  config.filter_sensitive_data("<MISP_API_KEY>") { ENV["MISP_API_KEY"] }
+  uri = URI(ENV["MISP_API_ENDPOINT"])
+  config.filter_sensitive_data("<MISP_API_ENDPOINT>") { uri.hostname }
+
   # Censys
   config.filter_sensitive_data("<CENSYS_AUTH>") { authorization_field }
   config.filter_sensitive_data("<CENSYS_ID>") { ENV["CENSYS_ID"] }
