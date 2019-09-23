@@ -25,14 +25,6 @@ RSpec.describe Mihari::Emitters::MISP, :vcr do
     let(:description) { "test" }
     let(:artifacts) { [Mihari::Artifact.new("1.1.1.1")] }
 
-    before do
-      FakeFS.activate!
-    end
-
-    after do
-      FakeFS.deactivate!
-    end
-
     it do
       event = subject.emit(title: title, description: description, artifacts: artifacts)
       expect(event).to be_a(MISP::Event)
