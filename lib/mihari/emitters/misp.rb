@@ -5,17 +5,21 @@ require "net/ping"
 
 module Mihari
   module Emitters
-    class MISP
+    class MISP < Base
       # @return [true, false]
       def valid?
         api_endpoint? && api_key? && ping?
       end
 
-      def emit(title:, description:, artifacts:)
+      def emit(title:, description:, artifacts:, tags: [])
         event = ::MISP::Event.new(info: title)
 
         artifacts.each do |artifact|
           event.attributes << build_attribute(artifact)
+        end
+
+        tags.each do |tag|
+          event.add_tag name: tag
         end
 
         event.create
