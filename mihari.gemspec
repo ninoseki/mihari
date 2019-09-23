@@ -42,6 +42,7 @@ Gem::Specification.new do |spec|
   spec.add_dependency "mem", "~> 0.1"
   spec.add_dependency "net-ping", "~> 2.0"
   spec.add_dependency "onyphe", "~> 0.2"
+  spec.add_dependency "parallel", "~> 1.17"
   spec.add_dependency "public_suffix", "~> 4.0"
   spec.add_dependency "securitytrails", "~> 0.2"
   spec.add_dependency "shodanx", "~> 0.2"
