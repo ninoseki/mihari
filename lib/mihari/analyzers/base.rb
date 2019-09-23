@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require "parallel"
+
 module Mihari
   module Analyzers
     class Base
@@ -29,7 +31,9 @@ module Mihari
       end
 
       def run
-        Mihari.emitters.each do |emitter_class|
+        set_unique_artifacts
+
+        Parallel.each(Mihari.emitters) do |emitter_class|
           emitter = emitter_class.new
           next unless emitter.valid?
 
@@ -63,6 +67,12 @@ module Mihari
         return uncached_artifacts unless @the_hive.valid?
 
         @unique_artifacts ||= @the_hive.artifact.find_non_existing_artifacts(uncached_artifacts)
+      end
+
+      private
+
+      def set_unique_artifacts
+        unique_artifacts
       end
     end
   end
