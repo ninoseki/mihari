@@ -1,0 +1,99 @@
+---
+http_interactions:
+    - request:
+          method: post
+          uri: "<MISP_API_ENDPOINT>/events/add"
+          body:
+              encoding: UTF-8
+              string: '{"Event":{"info":"test","published":false,"locked":false,"Attribute":[{"type":"ip-dst","value":"1.1.1.1","SharingGroup":[],"ShadowAttribute":[],"Tag":[]}]}}'
+          headers:
+              Content-Type:
+                  - application/json
+              Accept:
+                  - application/json
+              Authorization:
+                  - "<MISP_API_KEY>"
+      response:
+          status:
+              code: 200
+              message: OK
+          headers:
+              Date:
+                  - Mon, 23 Sep 2019 23:04:05 GMT
+              Server:
+                  - Apache/2.4.29 (Ubuntu)
+              Set-Cookie:
+                  - MISP-5d84de75-5a54-4be3-aafc-19ac21b86aea=j7g57i0b5cpepvifk72jidfjd2; expires=Tue,
+                    24-Sep-2019 00:04:05 GMT; Max-Age=3600; path=/; HttpOnly
+                  - MISP-5d84de75-5a54-4be3-aafc-19ac21b86aea=j7g57i0b5cpepvifk72jidfjd2; expires=Tue,
+                    24-Sep-2019 00:04:05 GMT; Max-Age=3600; path=/; HttpOnly
+              Content-Length:
+                  - "14865"
+              Content-Type:
+                  - application/json; charset=UTF-8
+          body:
+              encoding: UTF-8
+              string: |-
+                  {
+                      "Event": {
+                          "id": "53",
+                          "orgc_id": "1",
+                          "org_id": "1",
+                          "date": "2019-09-23",
+                          "threat_level_id": "4",
+                          "info": "test",
+                          "published": false,
+                          "uuid": "5d894f65-c30c-4c7f-a5bb-217e0a00020f",
+                          "attribute_count": "1",
+                          "analysis": "0",
+                          "timestamp": "1569279845",
+                          "distribution": "1",
+                          "proposal_email_lock": false,
+                          "locked": false,
+                          "publish_timestamp": "0",
+                          "sharing_group_id": "0",
+                          "disable_correlation": false,
+                          "extends_uuid": "",
+                          "event_creator_email": "admin@admin.test",
+                          "Org": {
+                              "id": "1",
+                              "name": "ORGNAME",
+                              "uuid": "5d84de75-ddd0-4b00-865a-19b521b86aea",
+                              "local": true
+                          },
+                          "Orgc": {
+                              "id": "1",
+                              "name": "ORGNAME",
+                              "uuid": "5d84de75-ddd0-4b00-865a-19b521b86aea",
+                              "local": true
+                          },
+                          "Attribute": [
+                              {
+                                  "id": "38",
+                                  "type": "ip-dst",
+                                  "category": "Network activity",
+                                  "to_ids": true,
+                                  "uuid": "5d894f65-7ab8-4f9a-b4a1-217e0a00020f",
+                                  "event_id": "53",
+                                  "distribution": "5",
+                                  "timestamp": "1569279845",
+                                  "comment": "",
+                                  "sharing_group_id": "0",
+                                  "deleted": false,
+                                  "disable_correlation": false,
+                                  "object_id": "0",
+                                  "object_relation": null,
+                                  "value": "1.1.1.1",
+                                  "Galaxy": [],
+                                  "ShadowAttribute": []
+                              }
+                          ],
+                          "ShadowAttribute": [],
+                          "RelatedEvent": [],
+                          "Galaxy": [],
+                          "Object": []
+                      }
+                  }
+          http_version:
+      recorded_at: Mon, 23 Sep 2019 23:04:05 GMT
+recorded_with: VCR 5.0.0

@@ -40,6 +40,7 @@ Gem::Specification.new do |spec|
   spec.add_dependency "hachi", "~> 0.2"
   spec.add_dependency "lightly", "~> 0.3"
   spec.add_dependency "mem", "~> 0.1"
+  spec.add_dependency "misp", "~> 0.1"
   spec.add_dependency "net-ping", "~> 2.0"
   spec.add_dependency "onyphe", "~> 0.2"
   spec.add_dependency "parallel", "~> 1.17"
