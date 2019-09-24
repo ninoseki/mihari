@@ -18,7 +18,9 @@ mihari(`見張り`) is a sidekick tool for [TheHive](https://github.com/TheHive-
 
 ![img](./screenshots/eyecatch.png)
 
-Check this blog post for more detail: [Continuous C2 hunting with Censys, Shodan, Onyphe and TheHive](https://hackmd.io/s/SkUaSrqoE)
+Check this blog post for more detail: [Continuous C2 hunting with Censys, Shodan, Onyphe and TheHive](https://hackmd.io/s/SkUaSrqoE).
+
+You can use mihari without TheHive. But note that mihari depends on TheHive to manage artifacts. It means mihari might make duplications when without TheHive.
 
 ### Screenshots
 
@@ -132,7 +134,7 @@ The input is a JSON data should have `title`, `description` and `artifacts` key.
 ```
 
 | Key         | Desc.                                                                      | Required or optional |
-| ----------- | -------------------------------------------------------------------------- | -------------------- |
+|-------------|----------------------------------------------------------------------------|----------------------|
 | title       | A title of an alert                                                        | Required             |
 | description | A description of an alert                                                  | Required             |
 | artifacts   | An array of artifacts (supported data types: ip, domain, url, email, hash) | Required             |
@@ -143,9 +145,11 @@ The input is a JSON data should have `title`, `description` and `artifacts` key.
 All configuration is done via ENV variables.
 
 | Key                    | Desc.                  | Required or optional           |
-| ---------------------- | ---------------------- | ------------------------------ |
+|------------------------|------------------------|--------------------------------|
 | THEHIVE_API_ENDPOINT   | TheHive URL            | Required                       |
 | THEHIVE_API_KEY        | TheHive API key        | Required                       |
+| MISP_API_ENDPOINT      | MISP URL               | Optional                       |
+| MISP_API_KEY           | MISP API key           | Optional                       |
 | SLACK_WEBHOOK_URL      | Slack Webhook URL      | Optional                       |
 | SLACK_CHANNEL          | Slack channel name     | Optional (default: `#general`) |
 | CENSYS_ID              | Censys API ID          | Optional                       |
@@ -160,7 +164,7 @@ All configuration is done via ENV variables.
 Create a class which extends `Mihari::Analyzers::Base` and implements the following methods.
 
 | Name           | Desc.                                                                      | @return       | Required or optional |
-| -------------- | -------------------------------------------------------------------------- | ------------- | -------------------- |
+|----------------|----------------------------------------------------------------------------|---------------|----------------------|
 | `#title`       | A title of an alert                                                        | String        | Required             |
 | `#description` | A description of an alert                                                  | String        | Required             |
 | `#artifacts`   | An array of artifacts (supported data types: ip, domain, url, email, hash) | Array<String> | Required             |
