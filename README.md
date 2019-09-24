@@ -14,6 +14,7 @@ mihari(`見張り`) is a sidekick tool for [TheHive](https://github.com/TheHive-
   - If it doesn't contain the artifacts:
     - mihari creates an alert with the artifacts on the TheHive instance.
     - mihari sends a notification to Slack. (Optional)
+    - mihari creates an event on MISP. (Optional)
 
 ![img](./screenshots/eyecatch.png)
 
@@ -29,10 +30,20 @@ Check this blog post for more detail: [Continuous C2 hunting with Censys, Shodan
 
 ![img](./screenshots/slack.png)
 
+- MISP event example
+
+![img](./screenshots/misp.png)
+
 ## Installation
 
 ```bash
 gem install mihari
+```
+
+Or you can use this tool with Docker.
+
+```bash
+docker pull ninoseki/mihari
 ```
 
 ## Basic usage
@@ -121,7 +132,7 @@ The input is a JSON data should have `title`, `description` and `artifacts` key.
 ```
 
 | Key         | Desc.                                                                      | Required or optional |
-|-------------|----------------------------------------------------------------------------|----------------------|
+| ----------- | -------------------------------------------------------------------------- | -------------------- |
 | title       | A title of an alert                                                        | Required             |
 | description | A description of an alert                                                  | Required             |
 | artifacts   | An array of artifacts (supported data types: ip, domain, url, email, hash) | Required             |
@@ -132,7 +143,7 @@ The input is a JSON data should have `title`, `description` and `artifacts` key.
 All configuration is done via ENV variables.
 
 | Key                    | Desc.                  | Required or optional           |
-|------------------------|------------------------|--------------------------------|
+| ---------------------- | ---------------------- | ------------------------------ |
 | THEHIVE_API_ENDPOINT   | TheHive URL            | Required                       |
 | THEHIVE_API_KEY        | TheHive API key        | Required                       |
 | SLACK_WEBHOOK_URL      | Slack Webhook URL      | Optional                       |
@@ -149,7 +160,7 @@ All configuration is done via ENV variables.
 Create a class which extends `Mihari::Analyzers::Base` and implements the following methods.
 
 | Name           | Desc.                                                                      | @return       | Required or optional |
-|----------------|----------------------------------------------------------------------------|---------------|----------------------|
+| -------------- | -------------------------------------------------------------------------- | ------------- | -------------------- |
 | `#title`       | A title of an alert                                                        | String        | Required             |
 | `#description` | A description of an alert                                                  | String        | Required             |
 | `#artifacts`   | An array of artifacts (supported data types: ip, domain, url, email, hash) | Array<String> | Required             |
@@ -189,6 +200,30 @@ See `/examples` for more.
 ## Caching
 
 mihari caches execution results in `/tmp/mihari` and the default cache duration is 7 days. If you want to clear the cache, please clear `/tmp/mihari`.
+
+## Using it with Docker
+
+```bash
+$ docker run --rm ninoseki/mihari
+Commands:
+  mihari alerts                               # Show the alerts on TheHive
+  mihari censys [QUERY]                       # Censys IPv4 lookup by a given...
+  mihari crtsh [QUERY]                        # crt.sh lookup by a given query
+  mihari help [COMMAND]                       # Describe available commands o...
+  mihari import_from_json                     # Give a JSON input via STDIN
+  mihari onyphe [QUERY]                       # Onyphe datascan lookup by a g...
+  mihari securitytrails [IP|DOMAIN]           # SecurityTrails resolutions lo...
+  mihari securitytrails_domain_feed [REGEXP]  # SecurityTrails new domain fee...
+  mihari shodan [QUERY]                       # Shodan host lookup by a given...
+  mihari status                               # Show the current configuratio...
+  mihari urlscan [QUERY]                      # urlscan lookup by a given query
+  mihari virustotal [IP|DOMAIN]               # VirusTotal resolutions lookup...
+
+# Note that you should pass configurations via environment variables
+$ docker run --rm ninoseki/mihari -e THEHIVE_API_ENDPOINT="http://THEHIVE_URL" -e THEHIVE_API_KEY="API KEY" mihari
+# or
+$ docker run --rm ninoseki/mihari --env-file ~/.mihari.env mihari
+```
 
 ## License
 
