@@ -1,10 +1,12 @@
-FROM ruby:2.6
-
-RUN cd /tmp/ \
+FROM ruby:2.6-alpine3.10
+RUN apk --update add git build-base ruby-dev \
+  && cd /tmp/ \
   && git clone https://github.com/ninoseki/mihari.git \
   && cd mihari \
   && gem build mihari.gemspec -o mihari.gem \
-  && gem install mihari.gem
+  && gem install mihari.gem \
+  && rm -rf /tmp/mihari \
+  && apk del git build-base ruby-dev
 
 ENTRYPOINT ["mihari"]
 
