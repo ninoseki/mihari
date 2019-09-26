@@ -1,111 +1,127 @@
 ---
 http_interactions:
-  - request:
-      method: get
-      uri: https://www.virustotal.com/vtapi/v2/domain/report?apikey=<VIRUSTOTAL_API_KEY>&domain=jppost-ge.top
-      body:
-        encoding: US-ASCII
-        string: ""
-      headers:
-        Accept-Encoding:
-          - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
-        Accept:
-          - "*/*"
-        User-Agent:
-          - Ruby
-        Host:
-          - www.virustotal.com
-    response:
-      status:
-        code: 200
-        message: OK
-      headers:
-        Cache-Control:
-          - no-cache
-        Content-Type:
-          - application/json
-        X-Cloud-Trace-Context:
-          - 11abec404725eb1d1eb2816dbbe8f360
-        Date:
-          - Wed, 07 Aug 2019 00:43:34 GMT
-        Server:
-          - Google Frontend
-        Content-Length:
-          - "6454"
-      body:
-        encoding: UTF-8
-        string:
-          '{"domain_siblings": [], "undetected_urls": [["http://jppost-ge.top:81/fi.html",
-          "d8095185277dfffbcf226983282f137a13d42e8759686722414fa7b7952ce5df", 0, 70,
-          "2019-07-03 07:40:50"], ["http://jppost-ge.top:81/jppost.apk", "1bb85d6516a5c7d9700d5b348d8aa87fe770ad45639b66ac7c431a0e0e4cd42d",
-          0, 70, "2019-07-03 07:39:45"]], "undetected_downloaded_samples": [{"date":
-          "2019-04-25 05:31:21", "positives": 0, "total": 70, "sha256": "972022c92c51aba47b80eb3f4e8e4202ba50244fb400e69ce0bd2370e30b907e"},
-          {"date": "2019-07-22 13:10:27", "positives": 0, "total": 71, "sha256": "e4a7a06900088dffa36050f93d6422a46d85fc15348872f925e7192efe09ff59"},
-          {"date": "2019-07-22 13:10:13", "positives": 0, "total": 0, "sha256": "d650bb9544eb435899c49155e1600cc76b84bf0cecd1fc02b5efaedf1c3ad1f0"},
-          {"date": "2019-05-15 10:30:19", "positives": 0, "total": 73, "sha256": "4bb113275ebe28479f6e52a1ed8ca0fde79b66c551700e73825b8ea4d1ad0fac"}],
-          "whois": "Creation Date: 2019-07-03T03:40:08Z\nCreation Date: 2019-07-03T11:40:10Z\nDNSSEC:
-          unsigned\nDNSSEC: unsignedDelegation\nDomain Name: jppost-ge.top\nDomain Status:
-          clientDeleteProhibited (http://www.icann.org/epp#clientDeleteProhibited)\nDomain
-          Status: clientTransferProhibited (http://www.icann.org/epp#clientTransferProhibited)\nDomain
-          Status: clientTransferProhibited https://icann.org/epp#clientTransferProhibited\nDomain
-          name: jppost-ge.top\nName Server: ns1.bdydns.cn\nName Server: ns2.bdydns.cn\nRegistrant
-          City: 3432650ec337c945\nRegistrant Country:\nRegistrant Country: cn\nRegistrant
-          Fax Ext: 3432650ec337c945\nRegistrant Fax: 3432650ec337c945\nRegistrant Name:
-          3432650ec337c945\nRegistrant Organization: 3432650ec337c945\nRegistrant Phone
-          Ext: 3432650ec337c945\nRegistrant Phone: 3432650ec337c945\nRegistrant Postal
-          Code: 3432650ec337c945\nRegistrant State/Province: 3432650ec337c945\nRegistrant
-          State/Province: a299de50c02b8868\nRegistrant Street: 3432650ec337c945\nRegistrar
-          Abuse Contact Email: abuse@bizcn.com\nRegistrar Abuse Contact Phone: +86.5922577888\nRegistrar
-          IANA ID: 471\nRegistrar Registration Expiration Date: 2020-07-03T11:40:10Z\nRegistrar
-          URL: http://www.bizcn.com\nRegistrar WHOIS Server: whois.bizcn.com\nRegistrar:
-          BIZCN COM INC\nRegistrar: Bizcn.com,Inc.\nRegistry Admin ID: C20190703C_42238685-top\nRegistry
-          Domain ID: 20190703G10001G-13310881\nRegistry Domain ID: D20190703G10001G_13310881-top\nRegistry
-          Expiry Date: 2020-07-03T03:40:08Z\nRegistry Registrant ID: C20190627C_42051461-top\nRegistry
-          Tech ID: C20190703C_42238686-top\nUpdated Date: 2019-07-03T03:40:10Z\nUpdated
-          Date: 2019-07-03T03:50:10Z", "whois_timestamp": 1565063924, "dns_records_date":
-          1565063924, "detected_downloaded_samples": [{"date": "2019-08-06 13:16:00",
-          "positives": 29, "total": 72, "sha256": "5d9a34930d6cdb31fddac914409ce52820aa3c0492bbd1e364d8c874451a9ce7"},
-          {"date": "2019-08-06 11:22:12", "positives": 26, "total": 56, "sha256": "1c09b34af0d9398d344e84445f527f5f878c7cb95e0f04972f217e4b42348fb7"},
-          {"date": "2019-08-05 07:46:29", "positives": 4, "total": 72, "sha256": "46bf96031e8b7ce4912249896295b389559f180a300598852279a668f8b2c03a"},
-          {"date": "2019-07-22 03:17:55", "positives": 24, "total": 68, "sha256": "eaa0179793f5a1d81edc69bfccac9fd8062f0e53b5cd9b213182f19d0b9e3974"},
-          {"date": "2019-07-04 11:56:55", "positives": 23, "total": 73, "sha256": "d9df99b338268a0004f418df418d853d252fea442b88e26ab44f61f476aa17f7"},
-          {"date": "2019-07-03 16:55:23", "positives": 21, "total": 73, "sha256": "c0bfa71b8d21a95bb380f24fa0749412902d008baf9816821abee38ef91ecd7e"},
-          {"date": "2019-07-03 06:38:50", "positives": 23, "total": 72, "sha256": "60ec86109285a431757e5e23a262dd5e5f5e0e94a5c71b15ad53ef11e0a4e197"}],
-          "response_code": 1, "detected_urls": [{"url": "https://jppost-ge.top/", "positives":
-          9, "total": 71, "scan_date": "2019-08-06 22:00:14"}, {"url": "http://jppost-ge.top/jppost.apk",
-          "positives": 11, "total": 71, "scan_date": "2019-08-06 21:55:58"}, {"url":
-          "http://jppost-ge.top/nh.html", "positives": 13, "total": 71, "scan_date":
-          "2019-08-06 21:53:26"}, {"url": "http://jppost-ge.top/", "positives": 10,
-          "total": 71, "scan_date": "2019-08-06 17:15:44"}, {"url": "http://jppost-ge.top/static3",
-          "positives": 9, "total": 71, "scan_date": "2019-08-06 15:02:35"}, {"url":
-          "http://jppost-ge.top/static", "positives": 10, "total": 71, "scan_date":
-          "2019-08-06 14:21:18"}, {"url": "http://jppost-ge.top/img", "positives": 8,
-          "total": 71, "scan_date": "2019-08-06 07:45:45"}, {"url": "http://jppost-ge.top/img/step",
-          "positives": 9, "total": 71, "scan_date": "2019-07-30 15:02:40"}, {"url":
-          "http://jppost-ge.top/static/css", "positives": 10, "total": 71, "scan_date":
-          "2019-07-30 14:34:14"}, {"url": "http://jppost-ge.top/static3/picture", "positives":
-          8, "total": 71, "scan_date": "2019-07-30 08:06:56"}, {"url": "http://jppost-ge.top:81/static3/picture/bnr_top_slide_ochugen2019.jpg",
-          "positives": 6, "total": 70, "scan_date": "2019-07-22 20:35:07"}, {"url":
-          "http://jppost-ge.top:81/fr.html", "positives": 7, "total": 70, "scan_date":
-          "2019-07-22 13:37:04"}, {"url": "http://jppost-ge.top:81/img/step/step5.png",
-          "positives": 5, "total": 70, "scan_date": "2019-07-22 13:10:07"}, {"url":
-          "http://jppost-ge.top:81/static/css/sp_topstyle.css", "positives": 5, "total":
-          70, "scan_date": "2019-07-22 05:17:41"}, {"url": "http://jppost-ge.top:81/jppost.apk",
-          "positives": 6, "total": 70, "scan_date": "2019-07-22 03:26:40"}, {"url":
-          "http://jppost-ge.top:81/", "positives": 8, "total": 70, "scan_date": "2019-07-05
-          07:59:09"}, {"url": "http://jppost-ge.top:81/fi.html", "positives": 12, "total":
-          71, "scan_date": "2019-07-04 17:57:11"}], "verbose_msg": "Domain found in
-          dataset", "resolutions": [{"last_resolved": "2019-07-04 09:25:34", "ip_address":
-          "185.25.50.132"}, {"last_resolved": "2019-08-06 13:55:52", "ip_address": "193.148.69.9"},
-          {"last_resolved": "2019-07-22 11:23:21", "ip_address": "45.12.206.233"}, {"last_resolved":
-          "2019-07-22 21:37:38", "ip_address": "45.83.140.132"}, {"last_resolved": "2019-08-06
-          11:20:28", "ip_address": "45.83.140.140"}, {"last_resolved": "2019-07-03 13:44:44",
-          "ip_address": "51.68.251.30"}], "favicon": {"raw_md5": "ee2ca91f9a4dd3906199d20c2b59b9be",
-          "dhash": "804a4a6a6b4b4995"}, "dns_records": [{"rname": "sa.dudns.com", "retry":
-          300, "refresh": 3600, "minimum": 120, "value": "ns1.bdydns.cn", "expire":
-          2592000, "ttl": 21599, "serial": 2018080111, "type": "SOA"}, {"type": "NS",
-          "value": "ns2.bdydns.cn", "ttl": 21599}, {"type": "NS", "value": "ns1.bdydns.cn",
-          "ttl": 21599}]}'
-      http_version:
-    recorded_at: Wed, 07 Aug 2019 00:43:34 GMT
+- request:
+    method: get
+    uri: https://www.virustotal.com/api/v3/domains/jppost-ge.top/resolutions
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+      Host:
+      - www.virustotal.com
+      X-Apikey:
+      - "<VIRUSTOTAL_API_KEY>"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Cache-Control:
+      - no-cache
+      Content-Type:
+      - application/json; charset=utf-8
+      X-Cloud-Trace-Context:
+      - acef861e5485ca9ce97e3ee7a1b6258e
+      Date:
+      - Thu, 26 Sep 2019 22:54:26 GMT
+      Server:
+      - Google Frontend
+      Content-Length:
+      - '2845'
+    body:
+      encoding: UTF-8
+      string: |-
+        {
+            "data": [
+                {
+                    "attributes": {
+                        "date": 1565223148,
+                        "host_name": "jppost-ge.top",
+                        "ip_address": "193.148.69.9",
+                        "resolver": "VirusTotal"
+                    },
+                    "id": "193.148.69.9jppost-ge.top",
+                    "links": {
+                        "self": "https://www.virustotal.com/api/v3/resolutions/193.148.69.9jppost-ge.top"
+                    },
+                    "type": "resolution"
+                },
+                {
+                    "attributes": {
+                        "date": 1565090428,
+                        "host_name": "jppost-ge.top",
+                        "ip_address": "45.83.140.140",
+                        "resolver": "VirusTotal"
+                    },
+                    "id": "45.83.140.140jppost-ge.top",
+                    "links": {
+                        "self": "https://www.virustotal.com/api/v3/resolutions/45.83.140.140jppost-ge.top"
+                    },
+                    "type": "resolution"
+                },
+                {
+                    "attributes": {
+                        "date": 1563831458,
+                        "host_name": "jppost-ge.top",
+                        "ip_address": "45.83.140.132",
+                        "resolver": "VirusTotal"
+                    },
+                    "id": "45.83.140.132jppost-ge.top",
+                    "links": {
+                        "self": "https://www.virustotal.com/api/v3/resolutions/45.83.140.132jppost-ge.top"
+                    },
+                    "type": "resolution"
+                },
+                {
+                    "attributes": {
+                        "date": 1563794601,
+                        "host_name": "jppost-ge.top",
+                        "ip_address": "45.12.206.233",
+                        "resolver": "VirusTotal"
+                    },
+                    "id": "45.12.206.233jppost-ge.top",
+                    "links": {
+                        "self": "https://www.virustotal.com/api/v3/resolutions/45.12.206.233jppost-ge.top"
+                    },
+                    "type": "resolution"
+                },
+                {
+                    "attributes": {
+                        "date": 1562232334,
+                        "host_name": "jppost-ge.top",
+                        "ip_address": "185.25.50.132",
+                        "resolver": "VirusTotal"
+                    },
+                    "id": "185.25.50.132jppost-ge.top",
+                    "links": {
+                        "self": "https://www.virustotal.com/api/v3/resolutions/185.25.50.132jppost-ge.top"
+                    },
+                    "type": "resolution"
+                },
+                {
+                    "attributes": {
+                        "date": 1562161484,
+                        "host_name": "jppost-ge.top",
+                        "ip_address": "51.68.251.30",
+                        "resolver": "VirusTotal"
+                    },
+                    "id": "51.68.251.30jppost-ge.top",
+                    "links": {
+                        "self": "https://www.virustotal.com/api/v3/resolutions/51.68.251.30jppost-ge.top"
+                    },
+                    "type": "resolution"
+                }
+            ],
+            "links": {
+                "self": "https://www.virustotal.com/api/v3/domains/jppost-ge.top/resolutions?limit=10"
+            }
+        }
+    http_version: 
+  recorded_at: Thu, 26 Sep 2019 22:54:25 GMT
 recorded_with: VCR 5.0.0

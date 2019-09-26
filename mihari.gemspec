@@ -50,5 +50,5 @@ Gem::Specification.new do |spec|
   spec.add_dependency "slack-notifier", "~> 2.3"
   spec.add_dependency "thor", "~> 0.20"
   spec.add_dependency "urlscan", "~> 0.4"
-  spec.add_dependency "virustotalx", "~> 0.1"
+  spec.add_dependency "virustotalx", "~> 1.0"
 end

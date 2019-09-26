@@ -51,22 +51,28 @@ module Mihari
       end
 
       def domain_lookup
-        report = api.domain.report(indicator)
-        return nil unless report
+        begin
+          res = api.domain.resolutions(indicator)
+        rescue ::VirusTotal::Error => _e
+          return nil
+        end
 
-        resolutions = report.dig("resolutions") || []
-        resolutions.map do |resolution|
-          resolution.dig("ip_address")
+        data = res.dig("data") || []
+        data.map do |item|
+          item.dig("attributes", "ip_address")
         end.compact.uniq
       end
 
       def ip_lookup
-        report = api.ip_address.report(indicator)
-        return nil unless report
+        begin
+          res = api.ip_address.resolutions(indicator)
+        rescue ::VirusTotal::Error => _e
+          return nil
+        end
 
-        resolutions = report.dig("resolutions") || []
-        resolutions.map do |resolution|
-          resolution.dig("hostname")
+        data = res.dig("data") || []
+        data.map do |item|
+          item.dig("attributes", "host_name")
         end.compact.uniq
       end
     end
