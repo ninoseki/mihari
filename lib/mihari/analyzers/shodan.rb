@@ -5,7 +5,6 @@ require "shodan"
 module Mihari
   module Analyzers
     class Shodan < Base
-      attr_reader :api
       attr_reader :title
       attr_reader :description
       attr_reader :query
@@ -14,7 +13,6 @@ module Mihari
       def initialize(query, title: nil, description: nil, tags: [])
         super()
 
-        @api = ::Shodan::API.new
         @query = query
         @title = title || "Shodan lookup"
         @description = description || "query = #{query}"
@@ -32,6 +30,10 @@ module Mihari
       end
 
       private
+
+      def api
+        @api ||= ::Shodan::API.new
+      end
 
       def search
         api.host.search(query)

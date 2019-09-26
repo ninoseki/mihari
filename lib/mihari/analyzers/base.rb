@@ -69,10 +69,11 @@ module Mihari
         @unique_artifacts ||= @the_hive.artifact.find_non_existing_artifacts(uncached_artifacts)
       end
 
-      private
-
       def set_unique_artifacts
         unique_artifacts
+      rescue ArgumentError => _e
+        klass = self.class.to_s.split("::").last.to_s
+        raise Error, "Please configure #{klass} API settings properly"
       end
     end
   end

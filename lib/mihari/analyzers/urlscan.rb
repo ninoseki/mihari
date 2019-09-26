@@ -5,7 +5,6 @@ require "urlscan"
 module Mihari
   module Analyzers
     class Urlscan < Base
-      attr_reader :api
       attr_reader :title
       attr_reader :description
       attr_reader :query
@@ -15,7 +14,6 @@ module Mihari
       def initialize(query, title: nil, description: nil, tags: [], target_type: "url")
         super()
 
-        @api = ::UrlScan::API.new
         @query = query
         @title = title || "urlscan lookup"
         @description = description || "query = #{query}"
@@ -36,6 +34,10 @@ module Mihari
       end
 
       private
+
+      def api
+        @api ||= ::UrlScan::API.new
+      end
 
       def search
         api.search(query)

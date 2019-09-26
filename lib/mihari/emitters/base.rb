@@ -12,7 +12,7 @@ module Mihari
         raise NotImplementedError, "You must implement #{self.class}##{__method__}"
       end
 
-      def emit(title:, description:, artifacts:)
+      def emit(*)
         raise NotImplementedError, "You must implement #{self.class}##{__method__}"
       end
     end

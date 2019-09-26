@@ -11,7 +11,7 @@ module Mihari
         api_endpoint? && api_key? && ping?
       end
 
-      def emit(title:, description:, artifacts:, tags: [])
+      def emit(title:, artifacts:, tags: [], **_options)
         event = ::MISP::Event.new(info: title)
 
         artifacts.each do |artifact|
