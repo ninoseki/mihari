@@ -5,6 +5,7 @@ module Mihari
     def check
       {
         censys: { status: censys?, message: censys },
+        misp: { status: misp?, message: misp },
         onyphe: { status: onyphe?, message: onyphe },
         securitytrails: { status: securitytrails?, message: securitytrails },
         shodan: { status: shodan?, message: shodan },
@@ -83,6 +84,14 @@ module Mihari
 
     def the_hive
       the_hive? ? "THEHIVE_API_ENDPOINT and THEHIVE_API_KEY are found" : "THEHIVE_API_ENDPOINT and THEHIVE_API_KEY are are missing"
+    end
+
+    def misp?
+      ENV.key?("MISP_API_ENDPOINT") && ENV.key?("MISP_API_KEY")
+    end
+
+    def misp
+      misp? ? "MISP_API_ENDPOINT and MISP_API_KEY are found" : "MISP_API_ENDPOINT and MISP_API_KEY are are missing"
     end
   end
 end

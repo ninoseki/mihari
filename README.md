@@ -160,6 +160,12 @@ All configuration is done via ENV variables.
 | SHODAN_API_KEY         | Shodan API key         | Optional                       |
 | VIRUSTOTAL_API_KEY     | VirusTotal API key     | Optional                       |
 
+You can check the configuration status via `status` command.
+
+```bash
+mihari status
+```
+
 ## How to create a custom script
 
 Create a class which extends `Mihari::Analyzers::Base` and implements the following methods.

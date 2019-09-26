@@ -44,9 +44,9 @@ VCR.configure do |config|
   config.hook_into :webmock
   config.ignore_localhost = false
 
-  keys = %w(
-    THEHIVE_API_KEY THEHIVE_API_ENDPOINT
-    MISP_API_KEY MISP_API_ENDPOINT
+  api_keys = %w(
+    THEHIVE_API_KEY
+    MISP_API_KEY
     CENSYS_AUTH CENSYS_ID CENSYS_SECRET
     SHODAN_API_KEY
     ONYPHE_API_KEY
@@ -54,8 +54,19 @@ VCR.configure do |config|
     SECURITYTRAILS_API_KEY
   )
 
-  keys.each do |key|
-    config.filter_sensitive_data("<#{key}>") { ENV.fetch(key, "http://localhost") }
+  api_endpoints = %w(
+    THEHIVE_API_ENDPOINT
+    MISP_API_ENDPOINT
+  )
+
+  api_keys.each do |key|
+    ENV[key] = "foo bar" unless ENV.key?(key)
+    config.filter_sensitive_data("<#{key}>") { ENV[key] }
+  end
+
+  api_endpoints.each do |key|
+    ENV[key] = "http://localhost" unless ENV.key?(key)
+    config.filter_sensitive_data("<#{key}>") { ENV[key] }
   end
 
   # Censys

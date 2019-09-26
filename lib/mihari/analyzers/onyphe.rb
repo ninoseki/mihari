@@ -5,7 +5,6 @@ require "onyphe"
 module Mihari
   module Analyzers
     class Onyphe < Base
-      attr_reader :api
       attr_reader :title
       attr_reader :description
       attr_reader :query
@@ -14,7 +13,6 @@ module Mihari
       def initialize(query, title: nil, description: nil, tags: [])
         super()
 
-        @api = ::Onyphe::API.new
         @query = query
         @title = title || "Onyphe lookup"
         @description = description || "query = #{query}"
@@ -31,10 +29,12 @@ module Mihari
 
       private
 
+      def api
+        @api ||= ::Onyphe::API.new
+      end
+
       def search
         api.datascan(query)
-      rescue ::Onyphe::Error => _e
-        nil
       end
     end
   end

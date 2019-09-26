@@ -135,7 +135,7 @@ module Mihari
 
       def parse_as_json(input)
         JSON.parse input
-      rescue JSON::ParserError => e
+      rescue JSON::ParserError => _e
         nil
       end
 

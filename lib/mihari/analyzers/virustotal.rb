@@ -5,7 +5,6 @@ require "virustotal"
 module Mihari
   module Analyzers
     class VirusTotal < Base
-      attr_reader :api
       attr_reader :indicator
       attr_reader :type
 
@@ -16,7 +15,6 @@ module Mihari
       def initialize(indicator, title: nil, description: nil, tags: [])
         super()
 
-        @api = ::VirusTotal::API.new
         @indicator = indicator
         @type = TypeChecker.type(indicator)
 
@@ -30,6 +28,10 @@ module Mihari
       end
 
       private
+
+      def api
+        @api = ::VirusTotal::API.new
+      end
 
       def valid_type?
         %w(ip domain).include? type

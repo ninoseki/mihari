@@ -5,7 +5,6 @@ require "censu"
 module Mihari
   module Analyzers
     class Censys < Base
-      attr_reader :api
       attr_reader :title
       attr_reader :description
       attr_reader :query
@@ -17,9 +16,6 @@ module Mihari
       def initialize(query, title: nil, description: nil, tags: [])
         super()
 
-        raise ArgumentError, "#{CENSYS_ID_KEY} and #{CENSYS_SECRET_KEY} are required" unless valid?
-
-        @api = ::Censys::API.new
         @query = query
         @title = title || "Censys lookup"
         @description = description || "query = #{query}"
@@ -37,6 +33,13 @@ module Mihari
       end
 
       # @return [true, false]
+      def valid?
+        censys_id? && censys_secret?
+      end
+
+      private
+
+      # @return [true, false]
       def censys_id?
         ENV.key? CENSYS_ID_KEY
       end
@@ -46,9 +49,10 @@ module Mihari
         ENV.key? CENSYS_SECRET_KEY
       end
 
-      # @return [true, false]
-      def valid?
-        censys_id? && censys_secret?
+      def api
+        raise ArgumentError, "#{CENSYS_ID_KEY} and #{CENSYS_SECRET_KEY} are required" unless valid?
+
+        @api ||= ::Censys::API.new
       end
     end
   end
