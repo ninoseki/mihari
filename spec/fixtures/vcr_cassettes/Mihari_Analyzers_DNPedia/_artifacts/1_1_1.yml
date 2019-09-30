@@ -1,0 +1,53 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: https://dnpedia.com/tlds/ajax.php?_search=false&cmd=search&columns=id,name,zoneid,length,idn,thedate,&days=2&ecf=name&ecv=~%25apple%25&mode=added&nd=1569842920216&page=1&rows=500&sidx=length&sord=asc
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip
+      Referer:
+      - https://dnpedia.com/tlds/search.php
+      X-Requested-With:
+      - XMLHttpRequest
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+      Host:
+      - dnpedia.com
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Mon, 30 Sep 2019 22:29:01 GMT
+      Server:
+      - Apache/2.4.25 (Debian)
+      Set-Cookie:
+      - PHPSESSID=na6fsehcafcfkr1nns0o4648uh; path=/
+      Expires:
+      - Thu, 19 Nov 1981 08:52:00 GMT
+      Cache-Control:
+      - no-store, no-cache, must-revalidate
+      Pragma:
+      - no-cache
+      Vary:
+      - Accept-Encoding
+      Content-Encoding:
+      - gzip
+      Content-Length:
+      - '3220'
+      Content-Type:
+      - text/html; charset=UTF-8
+    body:
+      encoding: ASCII-8BIT
+      string: !binary |-
+        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
+    http_version: 
+  recorded_at: Mon, 30 Sep 2019 22:29:01 GMT
+recorded_with: VCR 5.0.0
