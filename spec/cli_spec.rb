@@ -80,6 +80,15 @@ RSpec.describe Mihari::CLI do
     end
   end
 
+  describe "#dnpedia" do
+    before { allow(Mihari::Analyzers::DNPedia).to receive(:new).and_return(mock) }
+
+    it do
+      subject.start ["dnpedia", query]
+      expect(mock).to have_received(:run).once
+    end
+  end
+
   describe "#alerts" do
     let(:mock) { double("AlertViewer") }
     let(:alerts) {
