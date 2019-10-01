@@ -1,0 +1,51 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: https://www.circl.lu/v2pssl/cquery/7c552ab044c76d1df4f5ddf358807bfdcd07fa57
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+      Host:
+      - www.circl.lu
+      Authorization:
+      - "<CIRCL_AUTH>"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Tue, 01 Oct 2019 11:51:28 GMT
+      Server:
+      - SSL Certificate API - https://github.com/adulau/crl-monitor
+      Strict-Transport-Security:
+      - max-age=15768000
+      Content-Length:
+      - '158'
+      Etag:
+      - '"7c76023728eef18e70b199228bfcd7e816aa1189"'
+      Content-Type:
+      - application/json
+      Content-Security-Policy:
+      - default-src 'self' circl.lu www.circl.lu www.gstatic.com;
+      X-Content-Type-Options:
+      - nosniff
+      X-Frame-Options:
+      - DENY
+      X-Xss-Protection:
+      - 1; mode=block;
+    body:
+      encoding: UTF-8
+      string: '{"seen": ["149.13.33.13", "149.13.33.11", "149.13.33.4", "149.13.33.15",
+        "149.13.33.9"], "hits": 5, "certificate": "7c552ab044c76d1df4f5ddf358807bfdcd07fa57"}'
+    http_version: 
+  recorded_at: Tue, 01 Oct 2019 11:51:28 GMT
+recorded_with: VCR 5.0.0

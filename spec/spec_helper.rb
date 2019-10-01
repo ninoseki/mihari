@@ -2,6 +2,7 @@
 
 require "bundler/setup"
 
+require "base64"
 require "fakefs/safe"
 require "timecop"
 require "vcr"
@@ -32,9 +33,8 @@ RSpec.configure do |config|
   config.include Spec::Support::Helpers
 end
 
-def authorization_field
-  require "base64"
-  token = "#{ENV['CENSYS_ID']}:#{ENV['CENSYS_SECRET']}"
+def authorization_field(username, password)
+  token = "#{username}:#{password}"
   "Basic #{Base64.strict_encode64(token)}"
 end
 
@@ -70,5 +70,11 @@ VCR.configure do |config|
   end
 
   # Censys
-  config.filter_sensitive_data("<CENSYS_AUTH>") { authorization_field }
+  config.filter_sensitive_data("<CENSYS_AUTH>") {
+    authorization_field ENV["CENSYS_ID"] || "foo", ENV["CENSYS_SECRET"] || "bar"
+  }
+  # CIRCL
+  config.filter_sensitive_data("<CIRCL_AUTH>") {
+    authorization_field ENV["CIRCL_PASSIVE_USERNAME"] || "foo", ENV["CIRCL_PASSIVE_PASSWORD"] || "bar"
+  }
 end
