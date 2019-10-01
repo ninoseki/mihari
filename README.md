@@ -51,14 +51,16 @@ docker pull ninoseki/mihari
 
 ## Basic usage
 
-mihari supports Censys, Shodan, Onyphe, urlscan, SecurityTrails, crt.sh and VirusTotal by default.
+mihari supports Censys, Shodan, Onyphe, urlscan, SecurityTrails, crt.sh, CIRCL passive DNS/SSL and VirusTotal by default.
 
 ```bash
 $ mihari
 Commands:
   mihari alerts                               # Show the alerts on TheHive
   mihari censys [QUERY]                       # Censys IPv4 lookup by a given query
+  mihari circl [DOMAIN|SHA1]                  # CIRCL passive DNS/SSL lookup by a given domain / SHA1 certificate fingerprint
   mihari crtsh [QUERY]                        # crt.sh lookup by a given query
+  mihari dnpedia [QUERY]                      # DNPedia domain lookup by a given query
   mihari help [COMMAND]                       # Describe available commands or one specific command
   mihari import_from_json                     # Give a JSON input via STDIN
   mihari onyphe [QUERY]                       # Onyphe datascan lookup by a given query
@@ -145,20 +147,22 @@ The input is a JSON data should have `title`, `description` and `artifacts` key.
 
 All configuration is done via ENV variables.
 
-| Key                    | Desc.                  | Required or optional           |
-|------------------------|------------------------|--------------------------------|
-| THEHIVE_API_ENDPOINT   | TheHive URL            | Required                       |
-| THEHIVE_API_KEY        | TheHive API key        | Required                       |
-| MISP_API_ENDPOINT      | MISP URL               | Optional                       |
-| MISP_API_KEY           | MISP API key           | Optional                       |
-| SLACK_WEBHOOK_URL      | Slack Webhook URL      | Optional                       |
-| SLACK_CHANNEL          | Slack channel name     | Optional (default: `#general`) |
-| CENSYS_ID              | Censys API ID          | Optional                       |
-| CENSYS_SECRET          | Censys secret          | Optional                       |
-| ONYPHE_API_KEY         | Onyphe API key         | Optional                       |
-| SECURITYTRAILS_API_KEY | SecurityTrails API key | Optional                       |
-| SHODAN_API_KEY         | Shodan API key         | Optional                       |
-| VIRUSTOTAL_API_KEY     | VirusTotal API key     | Optional                       |
+| Key                    | Desc.                          | Required or optional           |
+|------------------------|--------------------------------|--------------------------------|
+| THEHIVE_API_ENDPOINT   | TheHive URL                    | Required                       |
+| THEHIVE_API_KEY        | TheHive API key                | Required                       |
+| MISP_API_ENDPOINT      | MISP URL                       | Optional                       |
+| MISP_API_KEY           | MISP API key                   | Optional                       |
+| SLACK_WEBHOOK_URL      | Slack Webhook URL              | Optional                       |
+| SLACK_CHANNEL          | Slack channel name             | Optional (default: `#general`) |
+| CENSYS_ID              | Censys API ID                  | Optional                       |
+| CENSYS_SECRET          | Censys secret                  | Optional                       |
+| CIRCL_PASSIVE_USERNAME | CIRCL passive DNS/SSL username | Optional                       |
+| CIRCL_PASSIVE_PASSWORD | CIRC_ passive DNS/SSL password | Optional                       |
+| ONYPHE_API_KEY         | Onyphe API key                 | Optional                       |
+| SECURITYTRAILS_API_KEY | SecurityTrails API key         | Optional                       |
+| SHODAN_API_KEY         | Shodan API key                 | Optional                       |
+| VIRUSTOTAL_API_KEY     | VirusTotal API key             | Optional                       |
 
 You can check the configuration status via `status` command.
 
