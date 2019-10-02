@@ -21,12 +21,13 @@ module Mihari
 
       def artifacts
         ipv4s = []
+
         res = api.ipv4.search(query: query)
         res.each_page do |page|
-          page.each { |result| ipv4s << result.ip }
+          ipv4s << page.map(&:ip)
         end
 
-        ipv4s
+        ipv4s.flatten
       end
 
       private
@@ -36,8 +37,6 @@ module Mihari
       end
 
       def api
-        raise ArgumentError, configuration_status unless configured?
-
         @api ||= ::Censys::API.new
       end
     end
