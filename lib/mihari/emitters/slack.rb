@@ -122,6 +122,12 @@ module Mihari
 
         notifier.notify(text: text, attachments: attachments)
       end
+
+      private
+
+      def config_keys
+        %w(SLACK_WEBHOOK_URL)
+      end
     end
   end
 end

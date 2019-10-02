@@ -26,6 +26,10 @@ module Mihari
 
       private
 
+      def config_keys
+        %w(CIRCL_PASSIVE_USERNAME CIRCL_PASSIVE_PASSWORD)
+      end
+
       def api
         @api ||= ::PassiveCIRCL::API.new
       end

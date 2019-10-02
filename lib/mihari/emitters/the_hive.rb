@@ -3,13 +3,6 @@
 module Mihari
   module Emitters
     class TheHive < Base
-      attr_reader :the_hive
-
-      def initialize
-        @the_hive = Mihari::TheHive.new
-        @cache = Cache.new
-      end
-
       # @return [true, false]
       def valid?
         the_hive.valid?
@@ -30,8 +23,20 @@ module Mihari
 
       private
 
+      def config_keys
+        %w(THEHIVE_API_ENDPOINT THEHIVE_API_KEY)
+      end
+
+      def the_hive
+        @the_hive ||= Mihari::TheHive.new
+      end
+
+      def cache
+        @cache ||= Cache.new
+      end
+
       def save_as_cache(data)
-        @cache.save data
+        cache.save data
       end
     end
   end

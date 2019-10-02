@@ -29,6 +29,10 @@ module Mihari
 
       private
 
+      def config_keys
+        %w(VIRUSTOTAL_API_KEY)
+      end
+
       def api
         @api = ::VirusTotal::API.new
       end

@@ -27,6 +27,10 @@ module Mihari
 
       private
 
+      def config_keys
+        %w(MISP_API_ENDPOINT MISP_API_KEY)
+      end
+
       def build_attribute(artifact)
         ::MISP::Attribute.new(value: artifact.data, type: to_misp_type(type: artifact.data_type, value: artifact.data))
       end

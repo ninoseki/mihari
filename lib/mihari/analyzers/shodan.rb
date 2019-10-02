@@ -31,6 +31,10 @@ module Mihari
 
       private
 
+      def config_keys
+        %w(SHODAN_API_KEY)
+      end
+
       def api
         @api ||= ::Shodan::API.new
       end

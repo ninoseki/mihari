@@ -3,6 +3,8 @@
 module Mihari
   module Emitters
     class Base
+      include Configurable
+
       def self.inherited(child)
         Mihari.emitters << child
       end
