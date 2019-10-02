@@ -5,21 +5,21 @@ require "securitytrails"
 module Mihari
   module Analyzers
     class SecurityTrails < Base
-      attr_reader :indicator
+      attr_reader :query
       attr_reader :type
 
       attr_reader :title
       attr_reader :description
       attr_reader :tags
 
-      def initialize(indicator, title: nil, description: nil, tags: [])
+      def initialize(query, title: nil, description: nil, tags: [])
         super()
 
-        @indicator = indicator
-        @type = TypeChecker.type(indicator)
+        @query = query
+        @type = TypeChecker.type(query)
 
         @title = title || "SecurityTrails lookup"
-        @description = description || "indicator = #{indicator}"
+        @description = description || "query = #{query}"
         @tags = tags
       end
 
@@ -38,7 +38,7 @@ module Mihari
       end
 
       def valid_type?
-        %w(ip domain).include? type
+        %w(ip domain mail).include? type
       end
 
       def lookup
@@ -47,28 +47,33 @@ module Mihari
           domain_lookup
         when "ip"
           ip_lookup
+        when "mail"
+          mail_lookup
         else
-          raise ArgumentError, "#{indicator}(type: #{type || 'unknown'}) is not supported." unless valid_type?
+          raise ArgumentError, "#{query}(type: #{type || 'unknown'}) is not supported." unless valid_type?
         end
       rescue ::SecurityTrails::Error => _e
         nil
       end
 
       def domain_lookup
-        result = api.history.get_all_dns_history(indicator, "a").to_h
-        records = result.dig(:records) || []
+        result = api.history.get_all_dns_history(query, "a")
+        records = result.records || []
         records.map do |record|
-          values = record.dig(:values) || []
-          values.map { |value| value.dig(:ip) }
-        end.compact.flatten.uniq
+          (record.values || []).map(&:ip)
+        end.flatten.compact.uniq
       end
 
       def ip_lookup
-        result = api.domains.search( filter: { ipv4: indicator }).to_h
-        records = result.dig(:records) || []
-        records.map do |record|
-          record.dig(:hostname)
-        end.compact.uniq
+        result = api.domains.search( filter: { ipv4: query })
+        records = result.records || []
+        records.map(&:hostname).compact.uniq
+      end
+
+      def mail_lookup
+        result = api.domains.search( filter: { whois_email: query })
+        records = result.records || []
+        records.map(&:hostname).compact.uniq
       end
     end
   end
