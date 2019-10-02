@@ -29,7 +29,7 @@ module Mihari
 
       private
 
-      def keys
+      def config_keys
         %w(VIRUSTOTAL_API_KEY)
       end
 

@@ -26,7 +26,7 @@ module Mihari
 
       private
 
-      def keys
+      def config_keys
         %w(CIRCL_PASSIVE_USERNAME CIRCL_PASSIVE_PASSWORD)
       end
 

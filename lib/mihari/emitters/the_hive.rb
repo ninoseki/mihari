@@ -23,7 +23,7 @@ module Mihari
 
       private
 
-      def keys
+      def config_keys
         %w(THEHIVE_API_ENDPOINT THEHIVE_API_KEY)
       end
 

@@ -125,7 +125,7 @@ module Mihari
 
       private
 
-      def keys
+      def config_keys
         %w(SLACK_WEBHOOK_URL)
       end
     end

@@ -31,12 +31,12 @@ module Mihari
 
       private
 
-      def keys
+      def config_keys
         %w(CENSYS_ID CENSYS_SECRET)
       end
 
       def api
-        raise ArgumentError, configuration_status unless valid?
+        raise ArgumentError, configuration_status unless configured?
 
         @api ||= ::Censys::API.new
       end

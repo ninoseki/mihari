@@ -1,23 +1,21 @@
 # frozen_string_literal: true
 
 module Mihari
-  class Configurable
-    def valid?
-      keys.all? { |key| ENV.key? key }
+  module Configurable
+    def configured?
+      config_keys.all? { |key| ENV.key? key }
     end
 
     def configuration_status
-      return nil if keys.empty?
+      return nil if config_keys.empty?
 
-      names = keys.join(" and ")
-      be_verb = keys.length == 1 ? "is" : "are"
-      status = valid? ? "found" : "missing"
+      names = config_keys.join(" and ")
+      be_verb = config_keys.length == 1 ? "is" : "are"
+      status = configured? ? "found" : "missing"
       "#{names} #{be_verb} #{status}"
     end
 
-    private
-
-    def keys
+    def config_keys
       []
     end
   end

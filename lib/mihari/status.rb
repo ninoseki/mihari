@@ -27,7 +27,7 @@ module Mihari
         name = full_name.split("::").last.to_s
 
         instance = full_name.include?("analyzers") ? klass.new("dummy") : klass.new
-        status = instance.valid?
+        status = instance.configured?
         message = instance.configuration_status
 
         message ? [name, { status: status, message: message }] : nil

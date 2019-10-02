@@ -31,7 +31,7 @@ module Mihari
 
       private
 
-      def keys
+      def config_keys
         %w(SECURITYTRAILS_API_KEY)
       end
 

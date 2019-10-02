@@ -4,7 +4,9 @@ require "parallel"
 
 module Mihari
   module Analyzers
-    class Base < Configurable
+    class Base
+      include Configurable
+
       # @return [Array<String>, Array<Mihari::Artifact>]
       def artifacts
         raise NotImplementedError, "You must implement #{self.class}##{__method__}"
