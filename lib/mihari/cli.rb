@@ -56,7 +56,7 @@ module Mihari
       end
     end
 
-    desc "securitytrails [IP|DOMAIN]", "SecurityTrails resolutions lookup by a given ip or domain"
+    desc "securitytrails [IP|DOMAIN|EMAIL]", "SecurityTrails lookup by a given ip, domain or email"
     method_option :title, type: :string, desc: "title"
     method_option :description, type: :string, desc: "description"
     method_option :tags, type: :array, desc: "tags"

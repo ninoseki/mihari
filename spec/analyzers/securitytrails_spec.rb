@@ -3,10 +3,10 @@
 RSpec.describe Mihari::Analyzers::SecurityTrails, :vcr do
   let(:tags) { %w(test) }
 
-  context "ipv4" do
-    subject { described_class.new(indicator, tags: tags) }
+  context "when given an ipv4" do
+    subject { described_class.new(query, tags: tags) }
 
-    let(:indicator) { "89.35.39.84" }
+    let(:query) { "89.35.39.84" }
 
     describe "#title" do
       it do
@@ -16,7 +16,7 @@ RSpec.describe Mihari::Analyzers::SecurityTrails, :vcr do
 
     describe "#description" do
       it do
-        expect(subject.description).to eq("indicator = #{indicator}")
+        expect(subject.description).to eq("query = #{query}")
       end
     end
 
@@ -33,10 +33,22 @@ RSpec.describe Mihari::Analyzers::SecurityTrails, :vcr do
     end
   end
 
-  context "domain" do
-    subject { described_class.new(indicator, tags: tags) }
+  context "when given a domain" do
+    subject { described_class.new(query, tags: tags) }
 
-    let(:indicator) { "jppost-tu.top" }
+    let(:query) { "jppost-tu.top" }
+
+    describe "#artifacts" do
+      it do
+        expect(subject.artifacts).to be_an(Array)
+      end
+    end
+  end
+
+  context "when given a mail" do
+    subject { described_class.new(query, tags: tags) }
+
+    let(:query) { "test@test.com" }
 
     describe "#artifacts" do
       it do
@@ -46,9 +58,9 @@ RSpec.describe Mihari::Analyzers::SecurityTrails, :vcr do
   end
 
   context "when given an invalid input" do
-    subject { described_class.new(indicator, tags: tags) }
+    subject { described_class.new(query, tags: tags) }
 
-    let(:indicator) { "foo bar" }
+    let(:query) { "foo bar" }
 
     describe "#artifacts" do
       it do
