@@ -23,15 +23,22 @@ module Mihari
 
     def statuses
       (Mihari.analyzers + Mihari.emitters).map do |klass|
-        full_name = klass.to_s.downcase
-        name = full_name.split("::").last.to_s
+        name = klass.to_s.downcase.split("::").last.to_s
 
-        instance = full_name.include?("analyzers") ? klass.new("dummy") : klass.new
-        status = instance.configured?
-        message = instance.configuration_status
+        [name, build_status(klass)]
+      end.to_h.compact
+    end
 
-        message ? [name, { status: status, message: message }] : nil
-      end.compact.to_h
+    def build_status(klass)
+      is_analyzer = klass.ancestors.include?(Mihari::Analyzers::Base)
+
+      instance = is_analyzer ? klass.new("dummy") : klass.new
+      status = instance.configured?
+      message = instance.configuration_status
+
+      message ? { status: status, message: message } : nil
+    rescue ArgumentError => _e
+      nil
     end
   end
 end
