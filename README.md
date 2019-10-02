@@ -10,10 +10,10 @@ mihari(`見張り`) is a sidekick tool for [TheHive](https://github.com/TheHive-
 
 ## How it works
 
-- mihari makes a query against Shodan, Censys, VirusTotal, SecurityTrails, etc. and extracts artifacts from the query results.
-- mihari checks whether a TheHive instance contains the artifacts or not.
+- mihari makes a query against Shodan, Censys, VirusTotal, SecurityTrails, etc. and extracts artifacts from the results.
+- mihari checks whether TheHive contains the artifacts or not.
   - If it doesn't contain the artifacts:
-    - mihari creates an alert with the artifacts on the TheHive instance.
+    - mihari creates an alert on TheHive.
     - mihari sends a notification to Slack. (Optional)
     - mihari creates an event on MISP. (Optional)
 
