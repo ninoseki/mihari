@@ -2,7 +2,7 @@
 
 module Mihari
   module Emitters
-    class Base
+    class Base < Configurable
       def self.inherited(child)
         Mihari.emitters << child
       end

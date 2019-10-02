@@ -29,6 +29,10 @@ module Mihari
 
       private
 
+      def keys
+        %w(SECURITYTRAILS_API_KEY)
+      end
+
       def api
         @api ||= ::SecurityTrails::API.new
       end

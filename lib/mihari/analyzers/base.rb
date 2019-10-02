@@ -4,12 +4,7 @@ require "parallel"
 
 module Mihari
   module Analyzers
-    class Base
-      def initialize
-        @the_hive = TheHive.new
-        @cache = Cache.new
-      end
-
+    class Base < Configurable
       # @return [Array<String>, Array<Mihari::Artifact>]
       def artifacts
         raise NotImplementedError, "You must implement #{self.class}##{__method__}"
@@ -47,7 +42,19 @@ module Mihari
         puts "Emission by #{emitter.class} is failed: #{e}"
       end
 
+      def self.inherited(child)
+        Mihari.analyzers << child
+      end
+
       private
+
+      def the_hive
+        @the_hive ||= TheHive.new
+      end
+
+      def cache
+        @cache ||= Cache.new
+      end
 
       # @return [Array<Mihari::Artifact>]
       def normalized_artifacts
@@ -58,15 +65,15 @@ module Mihari
 
       def uncached_artifacts
         @uncached_artifacts ||= normalized_artifacts.reject do |artifact|
-          @cache.cached? artifact.data
+          cache.cached? artifact.data
         end
       end
 
       # @return [Array<Mihari::Artifact>]
       def unique_artifacts
-        return uncached_artifacts unless @the_hive.valid?
+        return uncached_artifacts unless the_hive.valid?
 
-        @unique_artifacts ||= @the_hive.artifact.find_non_existing_artifacts(uncached_artifacts)
+        @unique_artifacts ||= the_hive.artifact.find_non_existing_artifacts(uncached_artifacts)
       end
 
       def set_unique_artifacts

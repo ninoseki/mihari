@@ -29,6 +29,10 @@ module Mihari
 
       private
 
+      def keys
+        %w(ONYPHE_API_KEY)
+      end
+
       def api
         @api ||= ::Onyphe::API.new
       end

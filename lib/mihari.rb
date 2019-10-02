@@ -10,6 +10,11 @@ module Mihari
       []
     end
     memoize :emitters
+
+    def analyzers
+      []
+    end
+    memoize :analyzers
   end
 end
 
@@ -21,13 +26,14 @@ require "mihari/artifact"
 require "mihari/cache"
 require "mihari/type_checker"
 
+require "mihari/configurable"
+
 require "mihari/the_hive/base"
 require "mihari/the_hive/alert"
 require "mihari/the_hive/artifact"
 require "mihari/the_hive"
 
 require "mihari/analyzers/base"
-require "mihari/analyzers/basic"
 require "mihari/analyzers/censys"
 require "mihari/analyzers/circl"
 require "mihari/analyzers/crtsh"
