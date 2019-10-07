@@ -19,7 +19,7 @@ mihari(`見張り`) is a sidekick tool for [TheHive](https://github.com/TheHive-
 
 ![img](./screenshots/eyecatch.png)
 
-Check this blog post for more detail: [Continuous C2 hunting with Censys, Shodan, Onyphe and TheHive](https://hackmd.io/s/SkUaSrqoE).
+Check this blog post for more details: [Continuous C2 hunting with Censys, Shodan, Onyphe and TheHive](https://hackmd.io/s/SkUaSrqoE).
 
 You can use mihari without TheHive. But note that mihari depends on TheHive to manage artifacts. It means mihari might make duplications when without TheHive.
 
@@ -91,7 +91,7 @@ $ mihari censys '("PANDA" AND "SMAdmin" AND "layui")' --title "PANDA C2"
   "tags": []
 }
 
-# VirusTotal passive DNS lookup for a FAKESPY host
+# VirusTotal passive DNS lookup of a FAKESPY host
 $ mihari virustotal "jppost-hi.top" --title "FAKESPY host passive DNS results"
 {
   "title": "FAKESPY host passive DNS results",
@@ -161,7 +161,7 @@ All configuration is done via ENV variables.
 | SLACK_CHANNEL          | Slack channel name             | Optional (default: `#general`) |
 | CENSYS_ID              | Censys API ID                  | Optional                       |
 | CENSYS_SECRET          | Censys secret                  | Optional                       |
-| CIRCL_PASSIVE_PASSWORD | CIRC_ passive DNS/SSL password | Optional                       |
+| CIRCL_PASSIVE_PASSWORD | CIRCL passive DNS/SSL password | Optional                       |
 | CIRCL_PASSIVE_USERNAME | CIRCL passive DNS/SSL username | Optional                       |
 | ONYPHE_API_KEY         | Onyphe API key                 | Optional                       |
 | PASSIVETOTAL_API_KEY   | PassiveTotal API key           | Optional                       |
