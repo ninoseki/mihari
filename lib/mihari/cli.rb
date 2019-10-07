@@ -52,7 +52,7 @@ module Mihari
     method_option :tags, type: :array, desc: "tags"
     def virustotal(indiactor)
       with_error_handling do
-        run_analyzer Analyzers::VirusTotal, query: indiactor, options: options
+        run_analyzer Analyzers::VirusTotal, query: refang(indiactor), options: options
       end
     end
 
@@ -62,7 +62,7 @@ module Mihari
     method_option :tags, type: :array, desc: "tags"
     def securitytrails(indiactor)
       with_error_handling do
-        run_analyzer Analyzers::SecurityTrails, query: indiactor, options: options
+        run_analyzer Analyzers::SecurityTrails, query: refang(indiactor), options: options
       end
     end
     map "st" => :securitytrails
@@ -113,9 +113,9 @@ module Mihari
     method_option :title, type: :string, desc: "title"
     method_option :description, type: :string, desc: "description"
     method_option :tags, type: :array, desc: "tags"
-    def passivetotal(query)
+    def passivetotal(indicator)
       with_error_handling do
-        run_analyzer Analyzers::PassiveTotal, query: query, options: options
+        run_analyzer Analyzers::PassiveTotal, query: refang(indicator), options: options
       end
     end
 
@@ -183,6 +183,10 @@ module Mihari
 
       def symbolize_hash_keys(hash)
         hash.map{ |k, v| [k.to_sym, v] }.to_h
+      end
+
+      def refang(indicator)
+        indicator.gsub("[.]", ".").gsub("(.)", ".")
       end
     end
   end
