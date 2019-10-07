@@ -77,4 +77,8 @@ VCR.configure do |config|
   config.filter_sensitive_data("<CIRCL_AUTH>") {
     authorization_field ENV["CIRCL_PASSIVE_USERNAME"] || "foo", ENV["CIRCL_PASSIVE_PASSWORD"] || "bar"
   }
+  # PassiveTotal
+  config.filter_sensitive_data("<PASSIVETOTAL_AUTH>") {
+    authorization_field ENV["PASSIVETOTAL_USERNAME"] || "foo", ENV["PASSIVETOTAL_API_KEY"] || "bar"
+  }
 end

@@ -1,0 +1,56 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: https://api.passivetotal.org/v2/ssl-certificate/history?query=7c552ab044c76d1df4f5ddf358807bfdcd07fa57
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+      Host:
+      - api.passivetotal.org
+      Authorization:
+      - "<PASSIVETOTAL_AUTH>"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Mon, 07 Oct 2019 09:04:25 GMT
+      Content-Type:
+      - application/json
+      Content-Length:
+      - '233'
+      Connection:
+      - keep-alive
+      Server:
+      - nginx/1.4.6 (Ubuntu)
+      Cache-Control:
+      - no-store, no-cache
+      Expires:
+      - Thu, 01 Jan 1970 00:00:00 GMT
+      Access-Control-Allow-Origin:
+      - "*"
+      Access-Control-Allow-Credentials:
+      - 'true'
+      Access-Control-Allow-Methods:
+      - GET, POST, PUT, DELETE, OPTIONS
+      Access-Control-Allow-Headers:
+      - Accept,Authorization,Cache-Control,Content-Type,DNT,If-Modified-Since,Keep-Alive,Origin,User-Agent,X-Requested-With
+    body:
+      encoding: UTF-8
+      string: '{"results": [{"ipAddresses": ["149.13.33.11", "149.13.33.13", "149.13.33.15",
+        "149.13.33.4", "149.13.33.9"], "sha1": "7c552ab044c76d1df4f5ddf358807bfdcd07fa57",
+        "firstSeen": "2014-07-28", "lastSeen": "2015-12-14"}], "success": true}
+
+        '
+    http_version: 
+  recorded_at: Mon, 07 Oct 2019 09:04:25 GMT
+recorded_with: VCR 5.0.0

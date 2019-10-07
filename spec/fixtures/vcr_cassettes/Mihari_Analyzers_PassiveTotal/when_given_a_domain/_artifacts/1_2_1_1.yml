@@ -1,0 +1,59 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: https://api.passivetotal.org/v2/dns/passive/unique?query=jppost-tu.top
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+      Host:
+      - api.passivetotal.org
+      Authorization:
+      - "<PASSIVETOTAL_AUTH>"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Mon, 07 Oct 2019 09:04:22 GMT
+      Content-Type:
+      - application/json
+      Content-Length:
+      - '461'
+      Connection:
+      - keep-alive
+      Server:
+      - nginx/1.4.6 (Ubuntu)
+      Cache-Control:
+      - no-cache, no-store
+      Expires:
+      - Thu, 01 Jan 1970 00:00:00 GMT
+      Access-Control-Allow-Origin:
+      - "*"
+      Access-Control-Allow-Credentials:
+      - 'true'
+      Access-Control-Allow-Methods:
+      - GET, POST, PUT, DELETE, OPTIONS
+      Access-Control-Allow-Headers:
+      - Accept,Authorization,Cache-Control,Content-Type,DNT,If-Modified-Since,Keep-Alive,Origin,User-Agent,X-Requested-With
+    body:
+      encoding: UTF-8
+      string: '{"queryType": "domain", "pager": null, "queryValue": "jppost-tu.top",
+        "total": 9, "results": ["45.134.145.17", "193.148.69.9", "193.148.69.37",
+        "45.14.148.103", "193.148.69.230", "192.236.200.43", "45.83.140.140", "192.154.214.94",
+        "89.35.39.84"], "frequency": [["45.134.145.17", 1], ["193.148.69.9", 1], ["193.148.69.37",
+        1], ["45.14.148.103", 1], ["193.148.69.230", 1], ["192.236.200.43", 1], ["45.83.140.140",
+        1], ["192.154.214.94", 1], ["89.35.39.84", 1]]}
+
+        '
+    http_version: 
+  recorded_at: Mon, 07 Oct 2019 09:04:22 GMT
+recorded_with: VCR 5.0.0

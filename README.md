@@ -51,7 +51,7 @@ docker pull ninoseki/mihari
 
 ## Basic usage
 
-mihari supports Censys, Shodan, Onyphe, urlscan, SecurityTrails, crt.sh, CIRCL passive DNS/SSL and VirusTotal by default.
+mihari supports Censys, Shodan, Onyphe, urlscan, SecurityTrails, crt.sh, CIRCL passive DNS/SSL, PassiveTotal and VirusTotal by default.
 
 ```bash
 $ mihari
@@ -64,7 +64,8 @@ Commands:
   mihari help [COMMAND]                       # Describe available commands or one specific command
   mihari import_from_json                     # Give a JSON input via STDIN
   mihari onyphe [QUERY]                       # Onyphe datascan lookup by a given query
-  mihari securitytrails [IP|DOMAIN]           # SecurityTrails resolutions lookup by a given ip or domain
+  mihari passivetotal [IP|DOMAIN|EMAIL|SHA1]  # PassiveTotal lookup by a given ip / domain / email / SHA1 certificate fingerprint
+  mihari securitytrails [IP|DOMAIN|EMAIL]     # SecurityTrails lookup by a given ip, domain or email
   mihari securitytrails_domain_feed [REGEXP]  # SecurityTrails new domain feed lookup by a given regexp
   mihari shodan [QUERY]                       # Shodan host lookup by a given query
   mihari status                               # Show the current configuration status
@@ -157,9 +158,11 @@ All configuration is done via ENV variables.
 | SLACK_CHANNEL          | Slack channel name             | Optional (default: `#general`) |
 | CENSYS_ID              | Censys API ID                  | Optional                       |
 | CENSYS_SECRET          | Censys secret                  | Optional                       |
-| CIRCL_PASSIVE_USERNAME | CIRCL passive DNS/SSL username | Optional                       |
 | CIRCL_PASSIVE_PASSWORD | CIRC_ passive DNS/SSL password | Optional                       |
+| CIRCL_PASSIVE_USERNAME | CIRCL passive DNS/SSL username | Optional                       |
 | ONYPHE_API_KEY         | Onyphe API key                 | Optional                       |
+| PASSIVETOTAL_API_KEY   | PassiveTotal API key           | Optional                       |
+| PASSIVETOTAL_USERNAME  | PassiveTotal username          | Optional                       |
 | SECURITYTRAILS_API_KEY | SecurityTrails API key         | Optional                       |
 | SHODAN_API_KEY         | Shodan API key                 | Optional                       |
 | VIRUSTOTAL_API_KEY     | VirusTotal API key             | Optional                       |
@@ -220,20 +223,6 @@ mihari caches execution results in `/tmp/mihari` and the default cache duration 
 
 ```bash
 $ docker run --rm ninoseki/mihari
-Commands:
-  mihari alerts                               # Show the alerts on TheHive
-  mihari censys [QUERY]                       # Censys IPv4 lookup by a given...
-  mihari crtsh [QUERY]                        # crt.sh lookup by a given query
-  mihari help [COMMAND]                       # Describe available commands o...
-  mihari import_from_json                     # Give a JSON input via STDIN
-  mihari onyphe [QUERY]                       # Onyphe datascan lookup by a g...
-  mihari securitytrails [IP|DOMAIN]           # SecurityTrails resolutions lo...
-  mihari securitytrails_domain_feed [REGEXP]  # SecurityTrails new domain fee...
-  mihari shodan [QUERY]                       # Shodan host lookup by a given...
-  mihari status                               # Show the current configuratio...
-  mihari urlscan [QUERY]                      # urlscan lookup by a given query
-  mihari virustotal [IP|DOMAIN]               # VirusTotal resolutions lookup...
-
 # Note that you should pass configurations via environment variables
 $ docker run --rm ninoseki/mihari -e THEHIVE_API_ENDPOINT="http://THEHIVE_URL" -e THEHIVE_API_KEY="API KEY" mihari
 # or
