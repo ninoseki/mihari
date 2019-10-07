@@ -105,6 +105,9 @@ $ mihari virustotal "jppost-hi.top" --title "FAKESPY host passive DNS results"
   "tags": []
 }
 
+# You can pass a "defanged" indicator as an input
+$ mihari virustotal "jppost-hi[.]top" --title "FAKESPY host passive DNS results"
+
 # SecurityTrails domain feed lookup for finding (possibly) Apple phishing websites
 mihari securitytrails_domain_feed "apple-" --type new
 {
