@@ -1,0 +1,75 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: https://api.passivetotal.org/v2/dns/passive/unique?query=89.35.39.84
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+      Host:
+      - api.passivetotal.org
+      Authorization:
+      - "<PASSIVETOTAL_AUTH>"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Mon, 07 Oct 2019 09:04:24 GMT
+      Content-Type:
+      - application/json
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+      Server:
+      - nginx/1.4.6 (Ubuntu)
+      Cache-Control:
+      - no-cache, no-store
+      Expires:
+      - Thu, 01 Jan 1970 00:00:00 GMT
+      Access-Control-Allow-Origin:
+      - "*"
+      Access-Control-Allow-Credentials:
+      - 'true'
+      Access-Control-Allow-Methods:
+      - GET, POST, PUT, DELETE, OPTIONS
+      Access-Control-Allow-Headers:
+      - Accept,Authorization,Cache-Control,Content-Type,DNT,If-Modified-Since,Keep-Alive,Origin,User-Agent,X-Requested-With
+    body:
+      encoding: ASCII-8BIT
+      string: '{"queryValue": "89.35.39.84", "frequency": [["jppost-btu.top", 1],
+        ["jppost-tu.top", 1], ["jppost-bhu.top", 1], ["jppost-bse.top", 1], ["jppost-su.top",
+        1], ["jppost-bma.top", 1], ["jppost-ahu.top", 1], ["jppost-bsa.top", 1], ["jppost-bto.top",
+        1], ["jppost-bya.top", 1], ["jppost-bko.top", 1], ["nittsu-si.com", 1], ["jppost-yu.com",
+        1], ["jppost-hi.top", 1], ["jppost-byu.top", 1], ["kuronekoyamat.com", 1],
+        ["jppost-bho.top", 1], ["jppost-bme.top", 1], ["jppost-bmo.top", 1], ["jppost-pe.com",
+        1], ["jppost-bri.top", 1], ["jppost-aho.top", 1], ["jppost-bmu.top", 1], ["jppost-bru.top",
+        1], ["jppost-bsu.top", 1], ["techhightitans.org", 1], ["jppost-byo.top", 1],
+        ["jppost-bhe.top", 1], ["jppost-bre.top", 1], ["jppost-ga.co", 1], ["jppost-bfu.top",
+        1], ["jppost-bro.top", 1], ["jppost-bra.top", 1], ["jppost-ane.top", 1], ["jppost-bhi.top",
+        1], ["kuronekoamato.com", 1], ["jppost-ahi.top", 1], ["jppost-gu.co", 1],
+        ["open.demonii.si", 1], ["jppost-gi.co", 1], ["jppost-aki.com", 1], ["jppost-bha.top",
+        1], ["jppost-bmi.top", 1]], "total": 43, "results": ["jppost-btu.top", "jppost-tu.top",
+        "jppost-bhu.top", "jppost-bse.top", "jppost-su.top", "jppost-bma.top", "jppost-ahu.top",
+        "jppost-bsa.top", "jppost-bto.top", "jppost-bya.top", "jppost-bko.top", "nittsu-si.com",
+        "jppost-yu.com", "jppost-hi.top", "jppost-byu.top", "kuronekoyamat.com", "jppost-bho.top",
+        "jppost-bme.top", "jppost-bmo.top", "jppost-pe.com", "jppost-bri.top", "jppost-aho.top",
+        "jppost-bmu.top", "jppost-bru.top", "jppost-bsu.top", "techhightitans.org",
+        "jppost-byo.top", "jppost-bhe.top", "jppost-bre.top", "jppost-ga.co", "jppost-bfu.top",
+        "jppost-bro.top", "jppost-bra.top", "jppost-ane.top", "jppost-bhi.top", "kuronekoamato.com",
+        "jppost-ahi.top", "jppost-gu.co", "open.demonii.si", "jppost-gi.co", "jppost-aki.com",
+        "jppost-bha.top", "jppost-bmi.top"], "queryType": "ip", "pager": null}
+
+        '
+    http_version: 
+  recorded_at: Mon, 07 Oct 2019 09:04:24 GMT
+recorded_with: VCR 5.0.0

@@ -109,6 +109,16 @@ module Mihari
       end
     end
 
+    desc "passivetotal [IP|DOMAIN|EMAIL|SHA1]", "PassiveTotal lookup by a given ip / domain / email / SHA1 certificate fingerprint"
+    method_option :title, type: :string, desc: "title"
+    method_option :description, type: :string, desc: "description"
+    method_option :tags, type: :array, desc: "tags"
+    def passivetotal(query)
+      with_error_handling do
+        run_analyzer Analyzers::PassiveTotal, query: query, options: options
+      end
+    end
+
     desc "import_from_json", "Give a JSON input via STDIN"
     def import_from_json(input = nil)
       with_error_handling do
