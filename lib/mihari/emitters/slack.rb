@@ -113,12 +113,21 @@ module Mihari
         end.flatten
       end
 
+      def to_text(title:, description:, tags: [])
+        tags = ["N/A"] if tags.empty?
+
+        [
+          "*#{title}*",
+          "*Desc.*: #{description}",
+          "*Tags*: #{tags.join(', ')}",
+        ].join("\n")
+      end
+
       def emit(title:, description:, artifacts:, tags: [])
         return if artifacts.empty?
 
         attachments = to_attachments(artifacts)
-        tags = ["N/A"] if tags.empty?
-        text = "#{title} (desc.: #{description} / tags: #{tags.join(', ')})"
+        text = to_text(title: title, description: description, tags: tags)
 
         notifier.notify(text: text, attachments: attachments)
       end

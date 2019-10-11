@@ -25,6 +25,27 @@ RSpec.describe Mihari::Emitters::Slack do
     end
   end
 
+  describe "#to_text" do
+    let(:title) { "test" }
+    let(:description) { "test" }
+
+    context "when not given tags" do
+      it do
+        text = subject.to_text(title: title, description: description)
+        expect(text).to eq("*test*\n*Desc.*: test\n*Tags*: N/A")
+      end
+    end
+
+    context "when given tags" do
+      let(:tags) { %w(foo bar) }
+
+      it do
+        text = subject.to_text(title: title, description: description, tags: tags)
+        expect(text).to eq("*test*\n*Desc.*: test\n*Tags*: foo, bar")
+      end
+    end
+  end
+
   describe "#valid?" do
     context "when SLAC_WEBHOOK_URL is given" do
       before do
