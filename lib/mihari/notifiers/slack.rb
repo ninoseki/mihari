@@ -5,6 +5,7 @@ module Mihari
     class Slack < Base
       SLACK_WEBHOOK_URL_KEY = "SLACK_WEBHOOK_URL"
       SLACK_CHANNEL_KEY = "SLACK_CHANNEL"
+      DEFAULT_USERNAME = "mihari"
 
       def slack_channel
         ENV.fetch SLACK_CHANNEL_KEY, "#general"
@@ -22,9 +23,9 @@ module Mihari
         slack_webhook_url?
       end
 
-      def notify(text:, attachments: [])
-        notifier = ::Slack::Notifier.new(slack_webhook_url, channel: slack_channel)
-        notifier.post(text: text, attachments: attachments)
+      def notify(text:, attachments: [], mrkdwn: true)
+        notifier = ::Slack::Notifier.new(slack_webhook_url, channel: slack_channel, username: DEFAULT_USERNAME)
+        notifier.post(text: text, attachments: attachments, mrkdwn: true)
       end
     end
   end
