@@ -52,8 +52,18 @@ RSpec.describe Mihari::Analyzers::VirusTotal, :vcr do
 
     describe "#artifacts" do
       it do
-        expect { subject.artifacts }.to raise_error(ArgumentError)
+        expect { subject.artifacts }.to raise_error(TypeError)
       end
+    end
+  end
+
+  context "when api config is not given" do
+    before do
+      allow(ENV).to receive(:[]).with("VIRUSTOTAL_API_KEY").and_return(nil)
+    end
+
+    it do
+      expect { subject.artifacts }.to raise_error(ArgumentError)
     end
   end
 end

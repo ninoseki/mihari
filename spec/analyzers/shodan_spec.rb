@@ -29,4 +29,14 @@ RSpec.describe Mihari::Analyzers::Shodan, :vcr do
       expect(subject.tags).to eq(tags)
     end
   end
+
+  context "when api config is not given" do
+    before do
+      allow(ENV).to receive(:fetch).with("SHODAN_API_KEY", nil).and_return(nil)
+    end
+
+    it do
+      expect { subject.artifacts }.to raise_error(ArgumentError)
+    end
+  end
 end

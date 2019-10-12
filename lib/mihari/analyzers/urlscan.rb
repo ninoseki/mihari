@@ -20,7 +20,7 @@ module Mihari
         @tags = tags
         @target_type = target_type
 
-        raise ArgumentError, "type should be url, domain or ip." unless valid_target_type?
+        raise TypeError, "type should be url, domain or ip." unless valid_target_type?
       end
 
       def artifacts
