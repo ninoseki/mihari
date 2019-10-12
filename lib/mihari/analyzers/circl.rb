@@ -41,7 +41,7 @@ module Mihari
         when "hash"
           passive_ssl_lookup
         else
-          raise ArgumentError, "#{@query}(type: #{@type || 'unknown'}) is not supported."
+          raise TypeError, "#{@query}(type: #{@type || 'unknown'}) is not supported."
         end
       rescue ::PassiveCIRCL::Error => _e
         nil

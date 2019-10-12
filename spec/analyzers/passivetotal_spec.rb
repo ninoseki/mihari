@@ -68,8 +68,21 @@ RSpec.describe Mihari::Analyzers::PassiveTotal, :vcr do
 
     describe "#artifacts" do
       it do
-        expect { subject.artifacts }.to raise_error(ArgumentError)
+        expect { subject.artifacts }.to raise_error(TypeError)
       end
+    end
+  end
+
+  context "when api config is not given" do
+    let(:query) { "89.35.39.84" }
+
+    before do
+      allow(ENV).to receive(:[]).with("PASSIVETOTAL_API_KEY").and_return(nil)
+      allow(ENV).to receive(:[]).with("PASSIVETOTAL_USERNAME").and_return(nil)
+    end
+
+    it do
+      expect { subject.artifacts }.to raise_error(ArgumentError)
     end
   end
 end

@@ -55,4 +55,15 @@ RSpec.describe Mihari::Analyzers::Censys, :vcr do
       end
     end
   end
+
+  context "when api config is not given" do
+    before do
+      allow(ENV).to receive(:[]).with("CENSYS_ID").and_return(nil)
+      allow(ENV).to receive(:[]).with("CENSYS_SECRET").and_return(nil)
+    end
+
+    it do
+      expect { subject.artifacts }.to raise_error(ArgumentError)
+    end
+  end
 end

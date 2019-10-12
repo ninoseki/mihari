@@ -48,7 +48,7 @@ module Mihari
         when "ip"
           ip_lookup
         else
-          raise ArgumentError, "#{indicator}(type: #{type || 'unknown'}) is not supported." unless valid_type?
+          raise TypeError, "#{indicator}(type: #{type || 'unknown'}) is not supported." unless valid_type?
         end
       rescue ::VirusTotal::Error => _e
         nil
