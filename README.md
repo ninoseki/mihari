@@ -71,7 +71,7 @@ Commands:
   mihari status                               # Show the current configuration status
   mihari urlscan [QUERY]                      # urlscan lookup by a given query
   mihari virustotal [IP|DOMAIN]               # VirusTotal resolutions lookup by a given ip or domain
-  mihari zoommeye [QUERY]                     # ZoomEye lookup by a given query
+  mihari zoomeye [QUERY]                     # ZoomEye lookup by a given query
 
 ```
 
