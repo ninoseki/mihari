@@ -20,13 +20,15 @@ module Mihari
       end
 
       def artifacts
-        result = search
-        return [] unless result
+        results = search
+        return [] unless results || results.empty?
 
-        matches = result.dig("matches") || []
-        matches.map do |match|
-          match.dig "ip_str"
-        end.compact
+        results.map do |result|
+          matches = result.dig("matches") || []
+          matches.map do |match|
+            match.dig "ip_str"
+          end.compact
+        end.flatten.compact.uniq
       end
 
       private
@@ -39,10 +41,22 @@ module Mihari
         @api ||= ::Shodan::API.new
       end
 
-      def search
-        api.host.search(query)
+      def search_with_page(query, page: 1)
+        api.host.search(query, page: page)
       rescue ::Shodan::Error => _e
         nil
+      end
+
+      def search
+        responses = []
+        (1..Float::INFINITY).each do |page|
+          res = search_with_page(query, page: page)
+          break unless res
+
+          responses << res
+          break if res.dig("total").to_i <= page * 100
+        end
+        responses
       end
     end
   end
