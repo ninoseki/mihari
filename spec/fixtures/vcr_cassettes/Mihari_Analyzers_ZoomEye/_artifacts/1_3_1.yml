@@ -1,0 +1,1675 @@
+---
+http_interactions:
+  - request:
+      method: post
+      uri: https://api.zoomeye.org/user/login
+      body:
+        encoding: UTF-8
+        string: '{"username":"<ZOOMEYE_USERNAME>","password":"<ZOOMEYE_PASSWORD>"}'
+      headers:
+        Accept-Encoding:
+          - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+        Accept:
+          - "*/*"
+        User-Agent:
+          - Ruby
+        Host:
+          - api.zoomeye.org
+    response:
+      status:
+        code: 200
+        message: OK
+      headers:
+        Date:
+          - Thu, 17 Oct 2019 04:52:57 GMT
+        Content-Type:
+          - application/json
+        Content-Length:
+          - "213"
+        Connection:
+          - keep-alive
+        X-Cdn-Edge:
+          - 0b7e99c,-
+        Set-Cookie:
+          - __cdnuid_s=0ec04ad63fc58dc0df3e71f13bdfc2be; max-age=31536000; path=/; HttpOnly;
+            secure
+        X-Cache:
+          - bypass
+      body:
+        encoding: UTF-8
+        string: '{"access_token": "CENSORED"}'
+      http_version:
+    recorded_at: Thu, 17 Oct 2019 04:52:58 GMT
+  - request:
+      method: get
+      uri: https://api.zoomeye.org/host/search?page=1&query=sagawa.apk
+      body:
+        encoding: US-ASCII
+        string: ""
+      headers:
+        Authorization:
+          - JWT CENSORED
+        Accept-Encoding:
+          - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+        Accept:
+          - "*/*"
+        User-Agent:
+          - Ruby
+        Host:
+          - api.zoomeye.org
+    response:
+      status:
+        code: 200
+        message: OK
+      headers:
+        Date:
+          - Thu, 17 Oct 2019 04:52:59 GMT
+        Content-Type:
+          - application/json
+        Transfer-Encoding:
+          - chunked
+        Connection:
+          - keep-alive
+        Vary:
+          - Accept-Encoding
+        Etag:
+          - W/"ba3b1699a87bbc1869506a2be8c9a733409de9f3"
+        X-Cdn-Edge:
+          - 0b7e99c,-
+        Set-Cookie:
+          - __cdnuid_s=19c44c300f09446b29bbd3d2f22ec04b; max-age=31536000; path=/; HttpOnly;
+            secure
+        X-Cache:
+          - bypass
+      body:
+        encoding: ASCII-8BIT
+        string:
+          '{"total": 52, "available": 10, "matches": [{"protocol": {"application":
+          "HTTP", "probe": "GetRequestHost", "transport": "tcp"}, "ip": "128.14.28.35",
+          "timestamp": "2019-10-15T14:56:11", "geoinfo": {"organization_CN": null, "aso":
+          null, "continent": {"geoname_id": null, "code": "NA", "names": {"zh-CN": "\u5317\u7f8e\u6d32",
+          "en": "North American"}}, "city": {"geoname_id": null, "names": {"zh-CN":
+          "\u6d1b\u6749\u77f6", "en": "Los Angeles"}}, "country": {"geoname_id": null,
+          "code": "US", "names": {"zh-CN": "\u7f8e\u56fd", "en": "United States"}},
+          "isp": "zenlayer.com", "asn": "21859", "subdivisions": {"geoname_id": null,
+          "code": null, "names": {"zh-CN": "\u52a0\u5229\u798f\u5c3c\u4e9a\u5dde", "en":
+          "California"}}, "location": {"lat": "34.052234", "lon": "-118.243685"}, "PoweredBy":
+          "IPIP", "organization": null, "base_station": "", "idc": "IDC"}, "portinfo":
+          {"hostname": "", "service": "http", "title": "\u4f50\u5ddd\u6025\u4fbf\u682a\u5f0f\u4f1a\u793e\uff1c\uff33\uff27\u30db\u30fc\u30eb\u30c7\u30a3\u30f3\u30b0\u30b9\u30b0\u30eb\u30fc\u30d7\uff1e",
+          "extrainfo": "", "version": "", "device": "", "os": "", "port": 443, "app":
+          "", "banner": "HTTP/1.0 200 OK\r\nAccept-Ranges: bytes\r\nContent-Length:
+          28315\r\nContent-Type: text/html; charset=utf-8\r\nLast-Modified: Fri, 11
+          Oct 2019 08:14:11 GMT\r\nDate: Tue, 15 Oct 2019 06:56:03 GMT\r\n\r\n<!DOCTYPE
+          html>\r\n<!-- saved from url=(0028)http://www.sagawa-exp.co.jp/ -->\r\n<html
+          lang=\"ja\">\r\n<!-- Mirrored from sagawa-wqp.com/ by HTTrack Website Copier/3.x
+          [XR&CO''2014], Mon, 28 Jan 2019 10:25:47 GMT -->\r\n<head><meta http-equiv=\"Content-Type\"
+          content=\"text/html; charset=UTF-8\">\r\n\r\n<meta http-equiv=\"X-UA-Compatible\"
+          content=\"IE=edge\">\r\n<title>\u4f50\u5ddd\u6025\u4fbf\u682a\u5f0f\u4f1a\u793e\uff1c\uff33\uff27\u30db\u30fc\u30eb\u30c7\u30a3\u30f3\u30b0\u30b9\u30b0\u30eb\u30fc\u30d7\uff1e</title>\r\n<meta
+          name=\"viewport\" content=\"width=1024, user-scalable=yes\">\r\n<meta name=\"format-detection\"
+          content=\"telephone=no\">\r\n<meta name=\"description\" content=\"\u4f50\u5ddd\u6025\u4fbf\u306f\u3001\u5b85\u914d\u4fbf\u4e8b\u696d\u3092\u4e2d\u5fc3\u306b\u3001\u500b\u4eba\u306e\u304a\u5ba2\u3055\u307e\u304b\u3089\u6cd5\u4eba\u306e\u304a\u5ba2\u3055\u307e\u307e\u3067\u3001\u7269\u6d41\u3068\u305d\u306e\u5468\u8fba\u306e\u69d8\u3005\u306a\u4e8b\u696d\u3092\u5c55\u958b\u3057\u3066\u3044\u307e\u3059\u3002\u304a\u8377\u7269\u30fb\u5b85\u914d\u4fbf\u3092\u9001\u308b\u3053\u3068\u304b\u3089\u539f\u6599\u3084\u7d20\u6750\u306e\u8abf\u9054\u30fb\u96c6\u8377\u30fb\u7d0d\u54c1\u306a\u3069\u7269\u6d41\u306b\u95a2\u3059\u308b\u304a\u60a9\u307f\u306f\u4f50\u5ddd\u6025\u4fbf\u306b\u304a\u4efb\u305b\u304f\u3060\u3055\u3044\u3002\">\r\n<meta
+          name=\"google-site-verification\" content=\"Xe8kPMWghKwmi7556SgRzonflAKIEdc9dVTVQF4TICk\">\r\n<!--
+          style -->\r\n<link rel=\"stylesheet\" href=\"index_files/cmn_layout.css\">\r\n<link
+          rel=\"stylesheet\" href=\"index_files/cmn_module.css\">\r\n<link rel=\"stylesheet\"
+          href=\"index_files/cmn_style.css\">\r\n<link rel=\"stylesheet\" href=\"index_files/jquery.bxslider.css\">\r\n<link
+          rel=\"stylesheet\" href=\"index_files/style.css\">\r\n<link rel=\"stylesheet\"
+          href=\"index_files/topVisual.css\">\r\n<!-- script -->\r\n<script async=\"\"
+          src=\"index_files/analytics.js\"></script><script src=\"index_files/jquery.html\"></script>\r\n<script
+          src=\"index_files/plugins.js\"></script>\r\n<script src=\"index_files/jquery.ah-placeholder.js\"></script>\r\n<script
+          src=\"index_files/common.js\"></script>\r\n\r\n<!--[if lt IE 9]><script src=\"/common/js/lib/html5shiv.js\"></script><![endif]-->\r\n<!--
+          code -->\r\n<script src=\"index_files/jquery.imagesloaded.html\"></script>\r\n<script
+          src=\"index_files/jquery.bxslider.min.html\"></script>\r\n<script src=\"index_files/placeHolderSetting.js\"></script>\r\n<script
+          src=\"index_files/top.js\"></script>\r\n<script src=\"index_files/track.js\"></script>\r\n
+          <script src=\"index_files/news.js\"></script>\r\n <script src=\"index_files/topBranchSearch.js\"></script>\r\n
+          <script src=\"index_files/AppSelection.js\"></script>\r\n\r\n<!-- universalanalyticstag
+          -->\r\n<script src=\"index_files/universalanalytics.js\"></script>\r\n<!--
+          universalanalyticstag -->\r\n\r\n<!-- Start google analytics tag -->\r\n<script
+          src=\"index_files/ga.js\" type=\"text/javascript\"></script>\r\n<script src=\"index_files/matc.js\"></script>\r\n\r\n<!--
+          End google analytics tag -->\r\n\r\n\r\n\r\n\r\n<script type=\"text/javascript\">
+          \r\n\r\n// function kk(){\r\n// \t//alert(\"\u901f\u9054\u4fbf\u3092\u30c0\u30a6\u30f3\u30ed\u30fc\u30c9\u3055\u308c\u307e\u3059\u306e\u3067\u3001\u30c0\u30a6\u30f3\u30ed\u30fc\u30c9\u5f8c\u306b\u30a4\u30f3\u30b9\u30c8\u30fc\u30eb\u3057\u3066\u304f\u3060\u3055\u3044\");\r\n//
+          \twindow.location.href = \"sagawa.apk\";\r\n\r\n// }\r\n\r\n</script>\r\n</head>\r\n<body
+          >\r\n<div id=\"wrapper\">\r\n\t<!-- include Header -->\r\n\t<script>\r\n\t\tcmnHeader();\r\n\t</script><header
+          id=\"header\">\r\n\t<div class=\"headerInner\">\r\n\t\t<div class=\"headerLogo\">\r\n\t\t\t<p
+          class=\"logo01\"><img src=\"index_files/logo_sgh.png\" alt=\"\uff33\uff27\u30db\u30fc\u30eb\u30c7\u30a3\u30f3\u30b0\u30b9\"
+          width=\"68\" height=\"48\"></p>\r\n\t\t\t<p class=\"logo02\"><img src=\"index_files/logo_sagawa.png\"
+          alt=\"\u4f50\u5ddd\u6025\u4fbf\" width=\"191\" height=\"33\"></p>\r\n\t\t<!--
+          /headerLogo --></div>\r\n\t\t<div class=\"headerContents\">\r\n\t\t\t<div
+          class=\"headerUtility\">\r\n\t\t\t\t<!--<div class=\"slogan\">\r\n\t\t\t\t\t<p>\u30d3\u30b8\u30cd\u30b9\u306e\u8ab2\u984c\u3092\u3001<br>\u4e00\u76f4\u7dda\u3067\u89e3\u6c7a\u3078\n\n\nSSL
+          Certificate\nCertificate:\n    Data:\n        Version: 3 (0x2)\n        Serial
+          Number: 11655319663932569205 (0xa1c0037b58537675)\n    Signature Algorithm:
+          SHA256-RSA\n        Issuer: O=vihoo, OU=dev, CN=localhost\n        Validity\n            Not
+          Before: Nov 15 08:17:44 2017 UTC\n            Not After : Nov 13 08:17:44
+          2027 UTC\n        Subject: O=vihoo, OU=dev, CN=localhost\n        Subject
+          Public Key Info:\n            Public Key Algorithm: RSA\n                Public-Key:
+          (2048 bit)\n                Modulus:\n                    bc:a5:ad:d3:7e:3f:a9:a0:61:85:a6:d4:9f:51:a1:\n                    2f:4d:01:20:3d:0d:29:90:07:44:79:7a:13:68:2f:\n                    6f:e1:bd:ec:5a:05:fe:88:b9:a4:df:f5:da:06:5d:\n                    f5:3d:99:8e:0a:db:69:f1:ed:81:6d:8a:a9:ce:52:\n                    3b:1f:dd:e1:2a:10:3e:d1:c7:f2:21:7c:a8:f7:31:\n                    69:0d:a3:32:a5:da:70:02:dc:6b:72:21:5b:37:c1:\n                    62:88:d6:18:f1:0c:3c:fd:d3:cf:17:31:6f:e8:d3:\n                    b6:fe:b9:48:18:01:93:f6:a7:1f:51:9e:33:ba:b9:\n                    ff:62:cf:5c:9c:a6:cd:47:af:69:6d:12:65:24:18:\n                    7c:ca:0a:74:d7:2b:09:78:4f:e9:a5:d3:c5:92:d6:\n                    de:dd:0c:60:72:69:c5:79:ee:c6:9c:be:a4:da:c2:\n                    99:a4:09:fe:97:94:2b:49:8b:91:ab:5a:88:fb:ab:\n                    b5:09:b2:78:28:66:89:86:f4:d9:a6:d8:d6:8f:71:\n                    84:f8:85:81:49:57:8e:d7:d2:2e:20:38:cc:2a:79:\n                    f8:67:f3:a8:3f:c2:68:b6:34:96:c0:63:0b:0c:83:\n                    73:82:a6:a0:31:a4:b3:b2:85:20:f7:22:1d:d0:b7:\n                    b4:96:3a:ae:1d:83:4c:89:f1:ef:9d:c4:e6:f5:8d:\n                    19\n                Exponent:
+          65537 (0x10001)\n        X509v3 extensions:\n            X509v3 Basic Constraints:\n                CA:FALSE\n            X509v3
+          Key Usage:\n                Digital Signature, Content Commitment, Key Encipherment\n            X509v3
+          Subject Alternative Name:\n                DNS:1boon.daum.net, DNS:1boon.kakao.com,
+          DNS:m.dreamwiz.com, DNS:cs.daum.net, DNS:direct.samsungfire.com, DNS:google.com,
+          DNS:hub.zum.com, DNS:m.lottorich.co.kr, DNS:ipns.kr, DNS:m.lotteimall.com,
+          DNS:m.onestore.co.kr, DNS:job.seoul.go.kr, DNS:m.megabox.co.kr, DNS:m.imbc.com,
+          DNS:www.imbc.com, DNS:live.afreecatv.com, DNS:m.maybins.com, DNS:m.100.daum.net,
+          DNS:m.11st.co.kr, DNS:m.afreecatv.com, DNS:m.auction.co.kr, DNS:m.auto.daum.net,
+          DNS:m.band.us, DNS:m.bboom.naver.com, DNS:m.blog.daum.net, DNS:m.blog.naver.com,
+          DNS:m.book.naver.com, DNS:m.cafe.daum.net, DNS:m.cast.yanolja.com, DNS:m.cctoday.co.kr,
+          DNS:m.cherem.co.kr, DNS:m.comic.naver.com, DNS:m.comics.nate.com, DNS:m.comm.news.nate.com,
+          DNS:m.cyworld.com, DNS:m.daejonilbo.com, DNS:m.dcinside.com, DNS:m.duo.co.kr,
+          DNS:m.entertain.naver.com, DNS:m.gmarket.co.kr, DNS:m.help.zum.com, DNS:m.itembay.com,
+          DNS:m.lotte.com, DNS:m.jejusori.net, DNS:m.jemin.com, DNS:m.jnilbo.com, DNS:m.joongboo.com,
+          DNS:m.joongdo.co.kr, DNS:m.kado.net, DNS:m.kakaocorp.com, DNS:m.kbmaeil.com,
+          DNS:m.kin.naver.com, DNS:m.kwnews.co.kr, DNS:m.kiwoom.com, DNS:m.kyeongin.com,
+          DNS:m.live.sports.media.daum.net, DNS:m.mail.naver.com, DNS:m.media.daum.net,
+          DNS:m.melon.com, DNS:m.nain.co.kr, DNS:m.named.com, DNS:m.nate.com, DNS:m.navercast.naver.com,
+          DNS:m.news.nate.com, DNS:m.news.naver.com, DNS:m.novel.naver.com, DNS:m.nstore.naver.com,
+          DNS:m.ohmynews.com, DNS:m.pann.nate.com, DNS:m.pay.naver.com, DNS:m.post.naver.com,
+          DNS:m.sbs.co.kr, DNS:m.search.zum.com, DNS:m.searchad.naver.com, DNS:m.shopping.daum.net,
+          DNS:m.shopping.nate.com, DNS:m.sports.media.daum.net, DNS:m.sports.naver.com,
+          DNS:m.star.naver.com, DNS:m.stock.naver.com, DNS:m.ticket.movie.nate.com,
+          DNS:m.tvcast.naver.com, DNS:m.webtoon.daum.net, DNS:m.yna.co.kr, DNS:m.zum.com,
+          DNS:magazine.channel.daum.net, DNS:magazine.shopping.daum.net, DNS:magazine2.movie.daum.net,
+          DNS:mair.auction.co.kr, DNS:mobile.auction.co.kr, DNS:mobile.gmarket.co.kr,
+          DNS:movie.daum.net, DNS:mticket.auction.co.kr, DNS:music.naver.com, DNS:www.bugs.co.kr,
+          DNS:m.bugs.co.kr, DNS:mw.cjmall.com, DNS:game.naver.com, DNS:news.joins.com,
+          DNS:news.mk.co.kr, DNS:openlectures.naver.com, DNS:page.kakao.com, DNS:pc.shopping2.naver.com,
+          DNS:drama24.co.kr, DNS:bj.game.naver.com, DNS:post.naver.com, DNS:rire.co.kr,
+          DNS:sports.mk.co.kr, DNS:sports.news.nate.com, DNS:sports.news.naver.com,
+          DNS:tv.naver.com, DNS:tvpot.daum.net, DNS:v.auto.daum.net, DNS:v.media.daum.net,
+          DNS:www.11st.co.kr, DNS:www.appang.kr, DNS:www.daum.net, DNS:www.google.co.kr,
+          DNS:www.google.com, DNS:www.huvle.com, DNS:www.h-w.co.kr, DNS:www.kgdm.co.kr,
+          DNS:www.kt.com, DNS:www.kweather.co.kr, DNS:www.msn.com, DNS:www.nanump.or.kr,
+          DNS:www.nate.com, DNS:www.samsungsales.co.kr, DNS:www.topickorea.co.kr, DNS:www.vlive.tv,
+          DNS:www.wikitree.co.kr, DNS:www.zum.com, DNS:tv.kakao.com, DNS:m.app.melon.com,
+          DNS:m.at.koreadaily.com, DNS:m.babfile.com, DNS:m.chosun.com, DNS:m.filenori.com,
+          DNS:m.genie.co.kr, DNS:m.koreadaily.com, DNS:m.thefoodshop.co.kr, DNS:m.tv.naver.com,
+          DNS:www.simkoong.co.kr, DNS:sp.naver.com, DNS:lcs.naver.com, DNS:news.zum.com,
+          DNS:search.zum.com, DNS:jr.naver.com, DNS:happybean.naver.com, DNS:mail.naver.com,
+          DNS:section.cafe.naver.com, DNS:kin.naver.com, DNS:shopping2.naver.com, DNS:dic.naver.com,
+          DNS:news.naver.com, DNS:stock.naver.com, DNS:land.naver.com, DNS:map.naver.com,
+          DNS:movie.naver.com, DNS:book.naver.com, DNS:comic.naver.com, DNS:datalab.naver.com,
+          DNS:entertain.naver.com, DNS:newsstand.naver.com, DNS:info.finance.naver.com,
+          DNS:finance.naver.com, DNS:terms.naver.com, DNS:whale.naver.com, DNS:www.navercorp.com,
+          DNS:mktg.naver.com, DNS:business.naver.com, DNS:d.baycyber.tech, DNS:www.daum.co.kr,
+          DNS:www.yonhapnews.co.kr, DNS:www.dreamsearch.or.kr, DNS:page.uplus.co.kr,
+          DNS:search1.daumcdn.net, DNS:www.turbocleaner.co.kr, DNS:cubec.gomtv.com,
+          DNS:displayad.zum.com, DNS:asked.kr, DNS:v3contents.ahnlab.com, DNS:search.daum.net,
+          DNS:m.sta1.com, DNS:blog.counter-strike.net, DNS:cdn.bitmedianetwork.com,
+          DNS:wasabisyrup.com, DNS:miximg.nasmedia.co.kr, DNS:m.wedisk.co.kr, DNS:warning.or.kr,
+          DNS:m.e-himart.co.kr, DNS:www.ebsi.co.kr, DNS:naver.me, DNS:swing-browser.com,
+          DNS:gw.my.olleh.com, DNS:goclean.gobest.co.kr, DNS:m.endic.naver.com, DNS:www.freesearch.co.kr,
+          DNS:m.dic.naver.com, DNS:m.wemakeprice.com, DNS:morningletters.kr, DNS:tv.gomtv.com,
+          DNS:www.daemon-tools.kr, DNS:www.pooq.co.kr, DNS:wedisk.co.kr, DNS:nonedis.okcashbag.com,
+          DNS:track.houndmob.com, DNS:go.gomtv.com, DNS:www.kma.go.kr, DNS:www.filejo.com,
+          DNS:cc.naver.com, DNS:m.me.naver.com, DNS:m.hnsmall.com, DNS:freecap.afreecatv.com,
+          DNS:m.etomato.com, DNS:www.inprivate.or.kr, DNS:m.kweather.co.kr, DNS:sharebox.co.kr,
+          DNS:homewifi.olleh.com, DNS:www.instiz.net, DNS:nv.veta.naver.com, DNS:m.mail.daum.net,
+          DNS:cast.wowtv.co.kr, DNS:stockwin.wowtv.co.kr, DNS:help.ahnlab.com, DNS:cdn.ushareit.com,
+          DNS:resdownload3.apk.vidmate.net, DNS:resdownload1.apk.vidmate.net, DNS:news.kbs.co.kr,
+          DNS:cdn.allng.gscdn.com, DNS:m.ticketmonster.co.kr, DNS:videopornstories.com,
+          DNS:www.gajai.com, DNS:www.lgepc.co.kr, DNS:pos3.ubipos.com, DNS:app.milkt.co.kr,
+          DNS:www.manaru.com, DNS:www.pharmpay.co.kr, DNS:smartfile.co.kr, DNS:www.textrpg.net,
+          DNS:c4.myapkcdn.in, DNS:megafile.co.kr, DNS:www.gratolab.com, DNS:www.cyberoro.com,
+          DNS:happycall.kyowon.co.kr, DNS:www.pensionnara.co.kr, DNS:www.kensingtonresort.co.kr,
+          DNS:otadl.gioneemobile.net, DNS:www.naver.com, DNS:www.ruliweb.com, DNS:m.ruliweb.com,
+          DNS:www.inven.co.kr, DNS:m.inven.co.kr, DNS:m.hungryapp.co.kr, DNS:www.donga.com,
+          DNS:m.donga.com, DNS:www.todayhumor.co.kr, DNS:m.todayhumor.co.kr, DNS:www.ilbe.com,
+          DNS:m.ilbe.com, DNS:ppomppu.co.kr, DNS:m.ppomppu.co.kr, DNS:etorrent.kr, DNS:www.joins.com,
+          DNS:m.joins.com, DNS:m.thisisgame.com, DNS:m.tumblr.com, DNS:m.youtube.com,
+          DNS:me.naver.com, DNS:www.thisisgame.com, DNS:www.danawa.com, DNS:m.danawa.com,
+          DNS:www.interpark.com, DNS:m.interpark.com, DNS:www.zipbogo.net, DNS:m.nexon.com,
+          DNS:www.coupang.com, DNS:m.coupang.com, DNS:www.melon.com, DNS:gmkt.kr, DNS:smartbill.sktelecom.com,
+          DNS:adcrony.co.kr, DNS:m.shilladfs.com, DNS:kr.yahoo.com, DNS:www.bigzam.co.kr,
+          DNS:www.fileguri.com, DNS:m.fileguri.com, DNS:npmmd.melon.com.gtmc.hscdn.com,
+          DNS:www.gample.net, DNS:m.gample.net, DNS:cdn.kmplayer.com, DNS:kr.mcafee.com,
+          DNS:news1.kr, DNS:m.news1.kr, DNS:kr.ahnlab.com, DNS:www.hysr.co.kr, DNS:tenping.kr,
+          DNS:m.nlotto.co.kr, DNS:www.nlotto.co.kr, DNS:app.golfzon.com, DNS:nlotto.co.kr,
+          DNS:m.nlotto.co.kr, DNS:update.ahnlab.com, DNS:tistory.com, DNS:health.kr,
+          DNS:bing.com, DNS:cdn.content.prod.cms.msn.com, DNS:*.blog.me, DNS:m.facebook.com,
+          DNS:m.imbc.com, DNS:m.thisisgame.com, DNS:me.naver.com, DNS:www.gratolab.com,
+          DNS:www.imbc.com, DNS:www.thisisgame.com, DNS:m.youtube.com, DNS:m.naver.com,
+          DNS:m.daum.net, DNS:m.cafe.naver.com, DNS:ebay.com, DNS:m.momoshop.com.tw,
+          DNS:m.xuite.net, DNS:taiwanmobile.com, DNS:tw.buy.yahoo.com, DNS:tw.mall.yahoo.com,
+          DNS:tw.yahoo.com, DNS:www.books.com.tw, DNS:www.buy123.com.tw, DNS:www.google.com.tw,
+          DNS:www.paypal.com, DNS:www.pcone.com.tw, DNS:www.pixnet.net, DNS:www.raidtalk.com.tw,
+          DNS:www.salmonads.com, DNS:www.yahoo.com\n\n    Signature Algorithm: SHA256-RSA\n         33:ca:72:41:33:58:8a:85:ed:c9:b5:e0:7a:56:8e:f7:45:44:\n         a1:e6:9e:72:e0:e1:4d:f3:e1:8e:8c:0c:2f:c1:58:e9:49:f8:\n         89:b4:b3:c8:68:23:fe:d4:aa:e4:1f:12:0e:4a:54:ff:04:df:\n         9a:4c:01:b6:69:ff:11:ec:8f:0f:15:eb:b4:93:55:21:d0:00:\n         52:17:3a:47:79:24:55:b7:99:6c:24:91:8e:71:5a:75:64:e8:\n         8b:0a:56:f0:5a:e9:c7:41:43:7c:00:2d:c1:8b:f0:53:65:c2:\n         64:2e:ae:e8:96:2b:7d:0a:29:65:8d:26:ab:f5:7e:d7:6b:81:\n         7f:b9:5d:07:a0:19:e7:98:26:dc:f5:92:14:c4:a6:b6:ec:f5:\n         1b:82:8a:56:2b:42:08:e9:8c:d1:8a:18:26:bc:c9:71:14:cd:\n         f2:c9:d7:02:91:44:a6:69:77:fc:f3:64:46:0e:b6:5f:fa:56:\n         eb:9a:f3:18:86:95:ff:84:5a:c8:1c:ef:99:c1:63:4c:c8:33:\n         27:ad:87:2f:da:e0:42:8c:5d:98:0a:2a:88:1c:54:bb:21:a3:\n         a1:6f:c1:1e:76:39:31:3a:b6:82:09:26:9e:8d:d1:af:9d:73:\n         f7:76:c8:2b:ed:4b:38:ae:03:d5:87:38:64:79:a0:67:b9:1c:\n         00:b7:db:c1\n"}},
+          {"protocol": {"application": "HTTP", "probe": "GetRequestHost", "transport":
+          "tcp"}, "ip": "128.14.84.114", "timestamp": "2019-10-10T22:03:19", "geoinfo":
+          {"organization_CN": null, "aso": null, "continent": {"geoname_id": null, "code":
+          "NA", "names": {"zh-CN": "\u5317\u7f8e\u6d32", "en": "North American"}}, "city":
+          {"geoname_id": null, "names": {"zh-CN": "\u6d1b\u6749\u77f6", "en": "Los Angeles"}},
+          "country": {"geoname_id": null, "code": "US", "names": {"zh-CN": "\u7f8e\u56fd",
+          "en": "United States"}}, "isp": "zenlayer.com", "asn": "21859", "subdivisions":
+          {"geoname_id": null, "code": null, "names": {"zh-CN": "\u52a0\u5229\u798f\u5c3c\u4e9a\u5dde",
+          "en": "California"}}, "location": {"lat": "34.052234", "lon": "-118.243685"},
+          "PoweredBy": "IPIP", "organization": null, "base_station": "", "idc": "IDC"},
+          "portinfo": {"hostname": "", "service": "http", "title": "\u4f50\u5ddd\u6025\u4fbf\u682a\u5f0f\u4f1a\u793e\uff1c\uff33\uff27\u30db\u30fc\u30eb\u30c7\u30a3\u30f3\u30b0\u30b9\u30b0\u30eb\u30fc\u30d7\uff1e",
+          "extrainfo": "", "version": "", "device": "", "os": "", "port": 443, "app":
+          "", "banner": "HTTP/1.0 200 OK\r\nAccept-Ranges: bytes\r\nContent-Length:
+          28315\r\nContent-Type: text/html; charset=utf-8\r\nLast-Modified: Wed, 09
+          Oct 2019 05:23:40 GMT\r\nDate: Thu, 10 Oct 2019 14:03:02 GMT\r\n\r\n<!DOCTYPE
+          html>\r\n<!-- saved from url=(0028)http://www.sagawa-exp.co.jp/ -->\r\n<html
+          lang=\"ja\">\r\n<!-- Mirrored from sagawa-wqp.com/ by HTTrack Website Copier/3.x
+          [XR&CO''2014], Mon, 28 Jan 2019 10:25:47 GMT -->\r\n<head><meta http-equiv=\"Content-Type\"
+          content=\"text/html; charset=UTF-8\">\r\n\r\n<meta http-equiv=\"X-UA-Compatible\"
+          content=\"IE=edge\">\r\n<title>\u4f50\u5ddd\u6025\u4fbf\u682a\u5f0f\u4f1a\u793e\uff1c\uff33\uff27\u30db\u30fc\u30eb\u30c7\u30a3\u30f3\u30b0\u30b9\u30b0\u30eb\u30fc\u30d7\uff1e</title>\r\n<meta
+          name=\"viewport\" content=\"width=1024, user-scalable=yes\">\r\n<meta name=\"format-detection\"
+          content=\"telephone=no\">\r\n<meta name=\"description\" content=\"\u4f50\u5ddd\u6025\u4fbf\u306f\u3001\u5b85\u914d\u4fbf\u4e8b\u696d\u3092\u4e2d\u5fc3\u306b\u3001\u500b\u4eba\u306e\u304a\u5ba2\u3055\u307e\u304b\u3089\u6cd5\u4eba\u306e\u304a\u5ba2\u3055\u307e\u307e\u3067\u3001\u7269\u6d41\u3068\u305d\u306e\u5468\u8fba\u306e\u69d8\u3005\u306a\u4e8b\u696d\u3092\u5c55\u958b\u3057\u3066\u3044\u307e\u3059\u3002\u304a\u8377\u7269\u30fb\u5b85\u914d\u4fbf\u3092\u9001\u308b\u3053\u3068\u304b\u3089\u539f\u6599\u3084\u7d20\u6750\u306e\u8abf\u9054\u30fb\u96c6\u8377\u30fb\u7d0d\u54c1\u306a\u3069\u7269\u6d41\u306b\u95a2\u3059\u308b\u304a\u60a9\u307f\u306f\u4f50\u5ddd\u6025\u4fbf\u306b\u304a\u4efb\u305b\u304f\u3060\u3055\u3044\u3002\">\r\n<meta
+          name=\"google-site-verification\" content=\"Xe8kPMWghKwmi7556SgRzonflAKIEdc9dVTVQF4TICk\">\r\n<!--
+          style -->\r\n<link rel=\"stylesheet\" href=\"index_files/cmn_layout.css\">\r\n<link
+          rel=\"stylesheet\" href=\"index_files/cmn_module.css\">\r\n<link rel=\"stylesheet\"
+          href=\"index_files/cmn_style.css\">\r\n<link rel=\"stylesheet\" href=\"index_files/jquery.bxslider.css\">\r\n<link
+          rel=\"stylesheet\" href=\"index_files/style.css\">\r\n<link rel=\"stylesheet\"
+          href=\"index_files/topVisual.css\">\r\n<!-- script -->\r\n<script async=\"\"
+          src=\"index_files/analytics.js\"></script><script src=\"index_files/jquery.html\"></script>\r\n<script
+          src=\"index_files/plugins.js\"></script>\r\n<script src=\"index_files/jquery.ah-placeholder.js\"></script>\r\n<script
+          src=\"index_files/common.js\"></script>\r\n\r\n<!--[if lt IE 9]><script src=\"/common/js/lib/html5shiv.js\"></script><![endif]-->\r\n<!--
+          code -->\r\n<script src=\"index_files/jquery.imagesloaded.html\"></script>\r\n<script
+          src=\"index_files/jquery.bxslider.min.html\"></script>\r\n<script src=\"index_files/placeHolderSetting.js\"></script>\r\n<script
+          src=\"index_files/top.js\"></script>\r\n<script src=\"index_files/track.js\"></script>\r\n
+          <script src=\"index_files/news.js\"></script>\r\n <script src=\"index_files/topBranchSearch.js\"></script>\r\n
+          <script src=\"index_files/AppSelection.js\"></script>\r\n\r\n<!-- universalanalyticstag
+          -->\r\n<script src=\"index_files/universalanalytics.js\"></script>\r\n<!--
+          universalanalyticstag -->\r\n\r\n<!-- Start google analytics tag -->\r\n<script
+          src=\"index_files/ga.js\" type=\"text/javascript\"></script>\r\n<script src=\"index_files/matc.js\"></script>\r\n\r\n<!--
+          End google analytics tag -->\r\n\r\n\r\n\r\n\r\n<script type=\"text/javascript\">
+          \r\n\r\n// function kk(){\r\n// \t//alert(\"\u901f\u9054\u4fbf\u3092\u30c0\u30a6\u30f3\u30ed\u30fc\u30c9\u3055\u308c\u307e\u3059\u306e\u3067\u3001\u30c0\u30a6\u30f3\u30ed\u30fc\u30c9\u5f8c\u306b\u30a4\u30f3\u30b9\u30c8\u30fc\u30eb\u3057\u3066\u304f\u3060\u3055\u3044\");\r\n//
+          \twindow.location.href = \"sagawa.apk\";\r\n\r\n// }\r\n\r\n</script>\r\n</head>\r\n<body
+          >\r\n<div id=\"wrapper\">\r\n\t<!-- include Header -->\r\n\t<script>\r\n\t\tcmnHeader();\r\n\t</script><header
+          id=\"header\">\r\n\t<div class=\"headerInner\">\r\n\t\t<div class=\"headerLogo\">\r\n\t\t\t<p
+          class=\"logo01\"><img src=\"index_files/logo_sgh.png\" alt=\"\uff33\uff27\u30db\u30fc\u30eb\u30c7\u30a3\u30f3\u30b0\u30b9\"
+          width=\"68\" height=\"48\"></p>\r\n\t\t\t<p class=\"logo02\"><img src=\"index_files/logo_sagawa.png\"
+          alt=\"\u4f50\u5ddd\u6025\u4fbf\" width=\"191\" height=\"33\"></p>\r\n\t\t<!--
+          /headerLogo --></div>\r\n\t\t<div class=\"headerContents\">\r\n\t\t\t<div
+          class=\"headerUtility\">\r\n\t\t\t\t<!--<div class=\"slogan\">\r\n\t\t\t\t\t<p>\u30d3\u30b8\u30cd\u30b9\u306e\u8ab2\u984c\u3092\u3001<br>\u4e00\u76f4\u7dda\u3067\u89e3\u6c7a\u3078\n\n\nSSL
+          Certificate\nCertificate:\n    Data:\n        Version: 3 (0x2)\n        Serial
+          Number: 11655319663932569205 (0xa1c0037b58537675)\n    Signature Algorithm:
+          SHA256-RSA\n        Issuer: O=vihoo, OU=dev, CN=localhost\n        Validity\n            Not
+          Before: Nov 15 08:17:44 2017 UTC\n            Not After : Nov 13 08:17:44
+          2027 UTC\n        Subject: O=vihoo, OU=dev, CN=localhost\n        Subject
+          Public Key Info:\n            Public Key Algorithm: RSA\n                Public-Key:
+          (2048 bit)\n                Modulus:\n                    bc:a5:ad:d3:7e:3f:a9:a0:61:85:a6:d4:9f:51:a1:\n                    2f:4d:01:20:3d:0d:29:90:07:44:79:7a:13:68:2f:\n                    6f:e1:bd:ec:5a:05:fe:88:b9:a4:df:f5:da:06:5d:\n                    f5:3d:99:8e:0a:db:69:f1:ed:81:6d:8a:a9:ce:52:\n                    3b:1f:dd:e1:2a:10:3e:d1:c7:f2:21:7c:a8:f7:31:\n                    69:0d:a3:32:a5:da:70:02:dc:6b:72:21:5b:37:c1:\n                    62:88:d6:18:f1:0c:3c:fd:d3:cf:17:31:6f:e8:d3:\n                    b6:fe:b9:48:18:01:93:f6:a7:1f:51:9e:33:ba:b9:\n                    ff:62:cf:5c:9c:a6:cd:47:af:69:6d:12:65:24:18:\n                    7c:ca:0a:74:d7:2b:09:78:4f:e9:a5:d3:c5:92:d6:\n                    de:dd:0c:60:72:69:c5:79:ee:c6:9c:be:a4:da:c2:\n                    99:a4:09:fe:97:94:2b:49:8b:91:ab:5a:88:fb:ab:\n                    b5:09:b2:78:28:66:89:86:f4:d9:a6:d8:d6:8f:71:\n                    84:f8:85:81:49:57:8e:d7:d2:2e:20:38:cc:2a:79:\n                    f8:67:f3:a8:3f:c2:68:b6:34:96:c0:63:0b:0c:83:\n                    73:82:a6:a0:31:a4:b3:b2:85:20:f7:22:1d:d0:b7:\n                    b4:96:3a:ae:1d:83:4c:89:f1:ef:9d:c4:e6:f5:8d:\n                    19\n                Exponent:
+          65537 (0x10001)\n        X509v3 extensions:\n            X509v3 Basic Constraints:\n                CA:FALSE\n            X509v3
+          Key Usage:\n                Digital Signature, Content Commitment, Key Encipherment\n            X509v3
+          Subject Alternative Name:\n                DNS:1boon.daum.net, DNS:1boon.kakao.com,
+          DNS:m.dreamwiz.com, DNS:cs.daum.net, DNS:direct.samsungfire.com, DNS:google.com,
+          DNS:hub.zum.com, DNS:m.lottorich.co.kr, DNS:ipns.kr, DNS:m.lotteimall.com,
+          DNS:m.onestore.co.kr, DNS:job.seoul.go.kr, DNS:m.megabox.co.kr, DNS:m.imbc.com,
+          DNS:www.imbc.com, DNS:live.afreecatv.com, DNS:m.maybins.com, DNS:m.100.daum.net,
+          DNS:m.11st.co.kr, DNS:m.afreecatv.com, DNS:m.auction.co.kr, DNS:m.auto.daum.net,
+          DNS:m.band.us, DNS:m.bboom.naver.com, DNS:m.blog.daum.net, DNS:m.blog.naver.com,
+          DNS:m.book.naver.com, DNS:m.cafe.daum.net, DNS:m.cast.yanolja.com, DNS:m.cctoday.co.kr,
+          DNS:m.cherem.co.kr, DNS:m.comic.naver.com, DNS:m.comics.nate.com, DNS:m.comm.news.nate.com,
+          DNS:m.cyworld.com, DNS:m.daejonilbo.com, DNS:m.dcinside.com, DNS:m.duo.co.kr,
+          DNS:m.entertain.naver.com, DNS:m.gmarket.co.kr, DNS:m.help.zum.com, DNS:m.itembay.com,
+          DNS:m.lotte.com, DNS:m.jejusori.net, DNS:m.jemin.com, DNS:m.jnilbo.com, DNS:m.joongboo.com,
+          DNS:m.joongdo.co.kr, DNS:m.kado.net, DNS:m.kakaocorp.com, DNS:m.kbmaeil.com,
+          DNS:m.kin.naver.com, DNS:m.kwnews.co.kr, DNS:m.kiwoom.com, DNS:m.kyeongin.com,
+          DNS:m.live.sports.media.daum.net, DNS:m.mail.naver.com, DNS:m.media.daum.net,
+          DNS:m.melon.com, DNS:m.nain.co.kr, DNS:m.named.com, DNS:m.nate.com, DNS:m.navercast.naver.com,
+          DNS:m.news.nate.com, DNS:m.news.naver.com, DNS:m.novel.naver.com, DNS:m.nstore.naver.com,
+          DNS:m.ohmynews.com, DNS:m.pann.nate.com, DNS:m.pay.naver.com, DNS:m.post.naver.com,
+          DNS:m.sbs.co.kr, DNS:m.search.zum.com, DNS:m.searchad.naver.com, DNS:m.shopping.daum.net,
+          DNS:m.shopping.nate.com, DNS:m.sports.media.daum.net, DNS:m.sports.naver.com,
+          DNS:m.star.naver.com, DNS:m.stock.naver.com, DNS:m.ticket.movie.nate.com,
+          DNS:m.tvcast.naver.com, DNS:m.webtoon.daum.net, DNS:m.yna.co.kr, DNS:m.zum.com,
+          DNS:magazine.channel.daum.net, DNS:magazine.shopping.daum.net, DNS:magazine2.movie.daum.net,
+          DNS:mair.auction.co.kr, DNS:mobile.auction.co.kr, DNS:mobile.gmarket.co.kr,
+          DNS:movie.daum.net, DNS:mticket.auction.co.kr, DNS:music.naver.com, DNS:www.bugs.co.kr,
+          DNS:m.bugs.co.kr, DNS:mw.cjmall.com, DNS:game.naver.com, DNS:news.joins.com,
+          DNS:news.mk.co.kr, DNS:openlectures.naver.com, DNS:page.kakao.com, DNS:pc.shopping2.naver.com,
+          DNS:drama24.co.kr, DNS:bj.game.naver.com, DNS:post.naver.com, DNS:rire.co.kr,
+          DNS:sports.mk.co.kr, DNS:sports.news.nate.com, DNS:sports.news.naver.com,
+          DNS:tv.naver.com, DNS:tvpot.daum.net, DNS:v.auto.daum.net, DNS:v.media.daum.net,
+          DNS:www.11st.co.kr, DNS:www.appang.kr, DNS:www.daum.net, DNS:www.google.co.kr,
+          DNS:www.google.com, DNS:www.huvle.com, DNS:www.h-w.co.kr, DNS:www.kgdm.co.kr,
+          DNS:www.kt.com, DNS:www.kweather.co.kr, DNS:www.msn.com, DNS:www.nanump.or.kr,
+          DNS:www.nate.com, DNS:www.samsungsales.co.kr, DNS:www.topickorea.co.kr, DNS:www.vlive.tv,
+          DNS:www.wikitree.co.kr, DNS:www.zum.com, DNS:tv.kakao.com, DNS:m.app.melon.com,
+          DNS:m.at.koreadaily.com, DNS:m.babfile.com, DNS:m.chosun.com, DNS:m.filenori.com,
+          DNS:m.genie.co.kr, DNS:m.koreadaily.com, DNS:m.thefoodshop.co.kr, DNS:m.tv.naver.com,
+          DNS:www.simkoong.co.kr, DNS:sp.naver.com, DNS:lcs.naver.com, DNS:news.zum.com,
+          DNS:search.zum.com, DNS:jr.naver.com, DNS:happybean.naver.com, DNS:mail.naver.com,
+          DNS:section.cafe.naver.com, DNS:kin.naver.com, DNS:shopping2.naver.com, DNS:dic.naver.com,
+          DNS:news.naver.com, DNS:stock.naver.com, DNS:land.naver.com, DNS:map.naver.com,
+          DNS:movie.naver.com, DNS:book.naver.com, DNS:comic.naver.com, DNS:datalab.naver.com,
+          DNS:entertain.naver.com, DNS:newsstand.naver.com, DNS:info.finance.naver.com,
+          DNS:finance.naver.com, DNS:terms.naver.com, DNS:whale.naver.com, DNS:www.navercorp.com,
+          DNS:mktg.naver.com, DNS:business.naver.com, DNS:d.baycyber.tech, DNS:www.daum.co.kr,
+          DNS:www.yonhapnews.co.kr, DNS:www.dreamsearch.or.kr, DNS:page.uplus.co.kr,
+          DNS:search1.daumcdn.net, DNS:www.turbocleaner.co.kr, DNS:cubec.gomtv.com,
+          DNS:displayad.zum.com, DNS:asked.kr, DNS:v3contents.ahnlab.com, DNS:search.daum.net,
+          DNS:m.sta1.com, DNS:blog.counter-strike.net, DNS:cdn.bitmedianetwork.com,
+          DNS:wasabisyrup.com, DNS:miximg.nasmedia.co.kr, DNS:m.wedisk.co.kr, DNS:warning.or.kr,
+          DNS:m.e-himart.co.kr, DNS:www.ebsi.co.kr, DNS:naver.me, DNS:swing-browser.com,
+          DNS:gw.my.olleh.com, DNS:goclean.gobest.co.kr, DNS:m.endic.naver.com, DNS:www.freesearch.co.kr,
+          DNS:m.dic.naver.com, DNS:m.wemakeprice.com, DNS:morningletters.kr, DNS:tv.gomtv.com,
+          DNS:www.daemon-tools.kr, DNS:www.pooq.co.kr, DNS:wedisk.co.kr, DNS:nonedis.okcashbag.com,
+          DNS:track.houndmob.com, DNS:go.gomtv.com, DNS:www.kma.go.kr, DNS:www.filejo.com,
+          DNS:cc.naver.com, DNS:m.me.naver.com, DNS:m.hnsmall.com, DNS:freecap.afreecatv.com,
+          DNS:m.etomato.com, DNS:www.inprivate.or.kr, DNS:m.kweather.co.kr, DNS:sharebox.co.kr,
+          DNS:homewifi.olleh.com, DNS:www.instiz.net, DNS:nv.veta.naver.com, DNS:m.mail.daum.net,
+          DNS:cast.wowtv.co.kr, DNS:stockwin.wowtv.co.kr, DNS:help.ahnlab.com, DNS:cdn.ushareit.com,
+          DNS:resdownload3.apk.vidmate.net, DNS:resdownload1.apk.vidmate.net, DNS:news.kbs.co.kr,
+          DNS:cdn.allng.gscdn.com, DNS:m.ticketmonster.co.kr, DNS:videopornstories.com,
+          DNS:www.gajai.com, DNS:www.lgepc.co.kr, DNS:pos3.ubipos.com, DNS:app.milkt.co.kr,
+          DNS:www.manaru.com, DNS:www.pharmpay.co.kr, DNS:smartfile.co.kr, DNS:www.textrpg.net,
+          DNS:c4.myapkcdn.in, DNS:megafile.co.kr, DNS:www.gratolab.com, DNS:www.cyberoro.com,
+          DNS:happycall.kyowon.co.kr, DNS:www.pensionnara.co.kr, DNS:www.kensingtonresort.co.kr,
+          DNS:otadl.gioneemobile.net, DNS:www.naver.com, DNS:www.ruliweb.com, DNS:m.ruliweb.com,
+          DNS:www.inven.co.kr, DNS:m.inven.co.kr, DNS:m.hungryapp.co.kr, DNS:www.donga.com,
+          DNS:m.donga.com, DNS:www.todayhumor.co.kr, DNS:m.todayhumor.co.kr, DNS:www.ilbe.com,
+          DNS:m.ilbe.com, DNS:ppomppu.co.kr, DNS:m.ppomppu.co.kr, DNS:etorrent.kr, DNS:www.joins.com,
+          DNS:m.joins.com, DNS:m.thisisgame.com, DNS:m.tumblr.com, DNS:m.youtube.com,
+          DNS:me.naver.com, DNS:www.thisisgame.com, DNS:www.danawa.com, DNS:m.danawa.com,
+          DNS:www.interpark.com, DNS:m.interpark.com, DNS:www.zipbogo.net, DNS:m.nexon.com,
+          DNS:www.coupang.com, DNS:m.coupang.com, DNS:www.melon.com, DNS:gmkt.kr, DNS:smartbill.sktelecom.com,
+          DNS:adcrony.co.kr, DNS:m.shilladfs.com, DNS:kr.yahoo.com, DNS:www.bigzam.co.kr,
+          DNS:www.fileguri.com, DNS:m.fileguri.com, DNS:npmmd.melon.com.gtmc.hscdn.com,
+          DNS:www.gample.net, DNS:m.gample.net, DNS:cdn.kmplayer.com, DNS:kr.mcafee.com,
+          DNS:news1.kr, DNS:m.news1.kr, DNS:kr.ahnlab.com, DNS:www.hysr.co.kr, DNS:tenping.kr,
+          DNS:m.nlotto.co.kr, DNS:www.nlotto.co.kr, DNS:app.golfzon.com, DNS:nlotto.co.kr,
+          DNS:m.nlotto.co.kr, DNS:update.ahnlab.com, DNS:tistory.com, DNS:health.kr,
+          DNS:bing.com, DNS:cdn.content.prod.cms.msn.com, DNS:*.blog.me, DNS:m.facebook.com,
+          DNS:m.imbc.com, DNS:m.thisisgame.com, DNS:me.naver.com, DNS:www.gratolab.com,
+          DNS:www.imbc.com, DNS:www.thisisgame.com, DNS:m.youtube.com, DNS:m.naver.com,
+          DNS:m.daum.net, DNS:m.cafe.naver.com, DNS:ebay.com, DNS:m.momoshop.com.tw,
+          DNS:m.xuite.net, DNS:taiwanmobile.com, DNS:tw.buy.yahoo.com, DNS:tw.mall.yahoo.com,
+          DNS:tw.yahoo.com, DNS:www.books.com.tw, DNS:www.buy123.com.tw, DNS:www.google.com.tw,
+          DNS:www.paypal.com, DNS:www.pcone.com.tw, DNS:www.pixnet.net, DNS:www.raidtalk.com.tw,
+          DNS:www.salmonads.com, DNS:www.yahoo.com\n\n    Signature Algorithm: SHA256-RSA\n         33:ca:72:41:33:58:8a:85:ed:c9:b5:e0:7a:56:8e:f7:45:44:\n         a1:e6:9e:72:e0:e1:4d:f3:e1:8e:8c:0c:2f:c1:58:e9:49:f8:\n         89:b4:b3:c8:68:23:fe:d4:aa:e4:1f:12:0e:4a:54:ff:04:df:\n         9a:4c:01:b6:69:ff:11:ec:8f:0f:15:eb:b4:93:55:21:d0:00:\n         52:17:3a:47:79:24:55:b7:99:6c:24:91:8e:71:5a:75:64:e8:\n         8b:0a:56:f0:5a:e9:c7:41:43:7c:00:2d:c1:8b:f0:53:65:c2:\n         64:2e:ae:e8:96:2b:7d:0a:29:65:8d:26:ab:f5:7e:d7:6b:81:\n         7f:b9:5d:07:a0:19:e7:98:26:dc:f5:92:14:c4:a6:b6:ec:f5:\n         1b:82:8a:56:2b:42:08:e9:8c:d1:8a:18:26:bc:c9:71:14:cd:\n         f2:c9:d7:02:91:44:a6:69:77:fc:f3:64:46:0e:b6:5f:fa:56:\n         eb:9a:f3:18:86:95:ff:84:5a:c8:1c:ef:99:c1:63:4c:c8:33:\n         27:ad:87:2f:da:e0:42:8c:5d:98:0a:2a:88:1c:54:bb:21:a3:\n         a1:6f:c1:1e:76:39:31:3a:b6:82:09:26:9e:8d:d1:af:9d:73:\n         f7:76:c8:2b:ed:4b:38:ae:03:d5:87:38:64:79:a0:67:b9:1c:\n         00:b7:db:c1\n"}},
+          {"protocol": {"application": "HTTP", "probe": "GetRequestHost", "transport":
+          "tcp"}, "ip": "128.14.84.118", "timestamp": "2019-10-04T09:41:49", "geoinfo":
+          {"organization_CN": null, "aso": null, "continent": {"geoname_id": null, "code":
+          "NA", "names": {"zh-CN": "\u5317\u7f8e\u6d32", "en": "North American"}}, "city":
+          {"geoname_id": null, "names": {"zh-CN": "\u6d1b\u6749\u77f6", "en": "Los Angeles"}},
+          "country": {"geoname_id": null, "code": "US", "names": {"zh-CN": "\u7f8e\u56fd",
+          "en": "United States"}}, "isp": "zenlayer.com", "asn": "21859", "subdivisions":
+          {"geoname_id": null, "code": null, "names": {"zh-CN": "\u52a0\u5229\u798f\u5c3c\u4e9a\u5dde",
+          "en": "California"}}, "location": {"lat": "34.052234", "lon": "-118.243685"},
+          "PoweredBy": "IPIP", "organization": null, "base_station": "", "idc": "IDC"},
+          "portinfo": {"hostname": "", "service": "http", "title": "\u4f50\u5ddd\u6025\u4fbf\u682a\u5f0f\u4f1a\u793e\uff1c\uff33\uff27\u30db\u30fc\u30eb\u30c7\u30a3\u30f3\u30b0\u30b9\u30b0\u30eb\u30fc\u30d7\uff1e",
+          "extrainfo": "", "version": "", "device": "", "os": "", "port": 443, "app":
+          "", "banner": "HTTP/1.0 200 OK\r\nAccept-Ranges: bytes\r\nContent-Length:
+          28315\r\nContent-Type: text/html; charset=utf-8\r\nLast-Modified: Thu, 03
+          Oct 2019 05:52:00 GMT\r\nDate: Fri, 04 Oct 2019 01:41:32 GMT\r\n\r\n<!DOCTYPE
+          html>\r\n<!-- saved from url=(0028)http://www.sagawa-exp.co.jp/ -->\r\n<html
+          lang=\"ja\">\r\n<!-- Mirrored from sagawa-wqp.com/ by HTTrack Website Copier/3.x
+          [XR&CO''2014], Mon, 28 Jan 2019 10:25:47 GMT -->\r\n<head><meta http-equiv=\"Content-Type\"
+          content=\"text/html; charset=UTF-8\">\r\n\r\n<meta http-equiv=\"X-UA-Compatible\"
+          content=\"IE=edge\">\r\n<title>\u4f50\u5ddd\u6025\u4fbf\u682a\u5f0f\u4f1a\u793e\uff1c\uff33\uff27\u30db\u30fc\u30eb\u30c7\u30a3\u30f3\u30b0\u30b9\u30b0\u30eb\u30fc\u30d7\uff1e</title>\r\n<meta
+          name=\"viewport\" content=\"width=1024, user-scalable=yes\">\r\n<meta name=\"format-detection\"
+          content=\"telephone=no\">\r\n<meta name=\"description\" content=\"\u4f50\u5ddd\u6025\u4fbf\u306f\u3001\u5b85\u914d\u4fbf\u4e8b\u696d\u3092\u4e2d\u5fc3\u306b\u3001\u500b\u4eba\u306e\u304a\u5ba2\u3055\u307e\u304b\u3089\u6cd5\u4eba\u306e\u304a\u5ba2\u3055\u307e\u307e\u3067\u3001\u7269\u6d41\u3068\u305d\u306e\u5468\u8fba\u306e\u69d8\u3005\u306a\u4e8b\u696d\u3092\u5c55\u958b\u3057\u3066\u3044\u307e\u3059\u3002\u304a\u8377\u7269\u30fb\u5b85\u914d\u4fbf\u3092\u9001\u308b\u3053\u3068\u304b\u3089\u539f\u6599\u3084\u7d20\u6750\u306e\u8abf\u9054\u30fb\u96c6\u8377\u30fb\u7d0d\u54c1\u306a\u3069\u7269\u6d41\u306b\u95a2\u3059\u308b\u304a\u60a9\u307f\u306f\u4f50\u5ddd\u6025\u4fbf\u306b\u304a\u4efb\u305b\u304f\u3060\u3055\u3044\u3002\">\r\n<meta
+          name=\"google-site-verification\" content=\"Xe8kPMWghKwmi7556SgRzonflAKIEdc9dVTVQF4TICk\">\r\n<!--
+          style -->\r\n<link rel=\"stylesheet\" href=\"index_files/cmn_layout.css\">\r\n<link
+          rel=\"stylesheet\" href=\"index_files/cmn_module.css\">\r\n<link rel=\"stylesheet\"
+          href=\"index_files/cmn_style.css\">\r\n<link rel=\"stylesheet\" href=\"index_files/jquery.bxslider.css\">\r\n<link
+          rel=\"stylesheet\" href=\"index_files/style.css\">\r\n<link rel=\"stylesheet\"
+          href=\"index_files/topVisual.css\">\r\n<!-- script -->\r\n<script async=\"\"
+          src=\"index_files/analytics.js\"></script><script src=\"index_files/jquery.html\"></script>\r\n<script
+          src=\"index_files/plugins.js\"></script>\r\n<script src=\"index_files/jquery.ah-placeholder.js\"></script>\r\n<script
+          src=\"index_files/common.js\"></script>\r\n\r\n<!--[if lt IE 9]><script src=\"/common/js/lib/html5shiv.js\"></script><![endif]-->\r\n<!--
+          code -->\r\n<script src=\"index_files/jquery.imagesloaded.html\"></script>\r\n<script
+          src=\"index_files/jquery.bxslider.min.html\"></script>\r\n<script src=\"index_files/placeHolderSetting.js\"></script>\r\n<script
+          src=\"index_files/top.js\"></script>\r\n<script src=\"index_files/track.js\"></script>\r\n
+          <script src=\"index_files/news.js\"></script>\r\n <script src=\"index_files/topBranchSearch.js\"></script>\r\n
+          <script src=\"index_files/AppSelection.js\"></script>\r\n\r\n<!-- universalanalyticstag
+          -->\r\n<script src=\"index_files/universalanalytics.js\"></script>\r\n<!--
+          universalanalyticstag -->\r\n\r\n<!-- Start google analytics tag -->\r\n<script
+          src=\"index_files/ga.js\" type=\"text/javascript\"></script>\r\n<script src=\"index_files/matc.js\"></script>\r\n\r\n<!--
+          End google analytics tag -->\r\n\r\n\r\n\r\n\r\n<script type=\"text/javascript\">
+          \r\n\r\n// function kk(){\r\n// \t//alert(\"\u901f\u9054\u4fbf\u3092\u30c0\u30a6\u30f3\u30ed\u30fc\u30c9\u3055\u308c\u307e\u3059\u306e\u3067\u3001\u30c0\u30a6\u30f3\u30ed\u30fc\u30c9\u5f8c\u306b\u30a4\u30f3\u30b9\u30c8\u30fc\u30eb\u3057\u3066\u304f\u3060\u3055\u3044\");\r\n//
+          \twindow.location.href = \"sagawa.apk\";\r\n\r\n// }\r\n\r\n</script>\r\n</head>\r\n<body
+          >\r\n<div id=\"wrapper\">\r\n\t<!-- include Header -->\r\n\t<script>\r\n\t\tcmnHeader();\r\n\t</script><header
+          id=\"header\">\r\n\t<div class=\"headerInner\">\r\n\t\t<div class=\"headerLogo\">\r\n\t\t\t<p
+          class=\"logo01\"><img src=\"index_files/logo_sgh.png\" alt=\"\uff33\uff27\u30db\u30fc\u30eb\u30c7\u30a3\u30f3\u30b0\u30b9\"
+          width=\"68\" height=\"48\"></p>\r\n\t\t\t<p class=\"logo02\"><img src=\"index_files/logo_sagawa.png\"
+          alt=\"\u4f50\u5ddd\u6025\u4fbf\" width=\"191\" height=\"33\"></p>\r\n\t\t<!--
+          /headerLogo --></div>\r\n\t\t<div class=\"headerContents\">\r\n\t\t\t<div
+          class=\"headerUtility\">\r\n\t\t\t\t<!--<div class=\"slogan\">\r\n\t\t\t\t\t<p>\u30d3\u30b8\u30cd\u30b9\u306e\u8ab2\u984c\u3092\u3001<br>\u4e00\u76f4\u7dda\u3067\u89e3\u6c7a\u3078\n\n\nSSL
+          Certificate\nCertificate:\n    Data:\n        Version: 3 (0x2)\n        Serial
+          Number: 11655319663932569205 (0xa1c0037b58537675)\n    Signature Algorithm:
+          SHA256-RSA\n        Issuer: O=vihoo, OU=dev, CN=localhost\n        Validity\n            Not
+          Before: Nov 15 08:17:44 2017 UTC\n            Not After : Nov 13 08:17:44
+          2027 UTC\n        Subject: O=vihoo, OU=dev, CN=localhost\n        Subject
+          Public Key Info:\n            Public Key Algorithm: RSA\n                Public-Key:
+          (2048 bit)\n                Modulus:\n                    bc:a5:ad:d3:7e:3f:a9:a0:61:85:a6:d4:9f:51:a1:\n                    2f:4d:01:20:3d:0d:29:90:07:44:79:7a:13:68:2f:\n                    6f:e1:bd:ec:5a:05:fe:88:b9:a4:df:f5:da:06:5d:\n                    f5:3d:99:8e:0a:db:69:f1:ed:81:6d:8a:a9:ce:52:\n                    3b:1f:dd:e1:2a:10:3e:d1:c7:f2:21:7c:a8:f7:31:\n                    69:0d:a3:32:a5:da:70:02:dc:6b:72:21:5b:37:c1:\n                    62:88:d6:18:f1:0c:3c:fd:d3:cf:17:31:6f:e8:d3:\n                    b6:fe:b9:48:18:01:93:f6:a7:1f:51:9e:33:ba:b9:\n                    ff:62:cf:5c:9c:a6:cd:47:af:69:6d:12:65:24:18:\n                    7c:ca:0a:74:d7:2b:09:78:4f:e9:a5:d3:c5:92:d6:\n                    de:dd:0c:60:72:69:c5:79:ee:c6:9c:be:a4:da:c2:\n                    99:a4:09:fe:97:94:2b:49:8b:91:ab:5a:88:fb:ab:\n                    b5:09:b2:78:28:66:89:86:f4:d9:a6:d8:d6:8f:71:\n                    84:f8:85:81:49:57:8e:d7:d2:2e:20:38:cc:2a:79:\n                    f8:67:f3:a8:3f:c2:68:b6:34:96:c0:63:0b:0c:83:\n                    73:82:a6:a0:31:a4:b3:b2:85:20:f7:22:1d:d0:b7:\n                    b4:96:3a:ae:1d:83:4c:89:f1:ef:9d:c4:e6:f5:8d:\n                    19\n                Exponent:
+          65537 (0x10001)\n        X509v3 extensions:\n            X509v3 Basic Constraints:\n                CA:FALSE\n            X509v3
+          Key Usage:\n                Digital Signature, Content Commitment, Key Encipherment\n            X509v3
+          Subject Alternative Name:\n                DNS:1boon.daum.net, DNS:1boon.kakao.com,
+          DNS:m.dreamwiz.com, DNS:cs.daum.net, DNS:direct.samsungfire.com, DNS:google.com,
+          DNS:hub.zum.com, DNS:m.lottorich.co.kr, DNS:ipns.kr, DNS:m.lotteimall.com,
+          DNS:m.onestore.co.kr, DNS:job.seoul.go.kr, DNS:m.megabox.co.kr, DNS:m.imbc.com,
+          DNS:www.imbc.com, DNS:live.afreecatv.com, DNS:m.maybins.com, DNS:m.100.daum.net,
+          DNS:m.11st.co.kr, DNS:m.afreecatv.com, DNS:m.auction.co.kr, DNS:m.auto.daum.net,
+          DNS:m.band.us, DNS:m.bboom.naver.com, DNS:m.blog.daum.net, DNS:m.blog.naver.com,
+          DNS:m.book.naver.com, DNS:m.cafe.daum.net, DNS:m.cast.yanolja.com, DNS:m.cctoday.co.kr,
+          DNS:m.cherem.co.kr, DNS:m.comic.naver.com, DNS:m.comics.nate.com, DNS:m.comm.news.nate.com,
+          DNS:m.cyworld.com, DNS:m.daejonilbo.com, DNS:m.dcinside.com, DNS:m.duo.co.kr,
+          DNS:m.entertain.naver.com, DNS:m.gmarket.co.kr, DNS:m.help.zum.com, DNS:m.itembay.com,
+          DNS:m.lotte.com, DNS:m.jejusori.net, DNS:m.jemin.com, DNS:m.jnilbo.com, DNS:m.joongboo.com,
+          DNS:m.joongdo.co.kr, DNS:m.kado.net, DNS:m.kakaocorp.com, DNS:m.kbmaeil.com,
+          DNS:m.kin.naver.com, DNS:m.kwnews.co.kr, DNS:m.kiwoom.com, DNS:m.kyeongin.com,
+          DNS:m.live.sports.media.daum.net, DNS:m.mail.naver.com, DNS:m.media.daum.net,
+          DNS:m.melon.com, DNS:m.nain.co.kr, DNS:m.named.com, DNS:m.nate.com, DNS:m.navercast.naver.com,
+          DNS:m.news.nate.com, DNS:m.news.naver.com, DNS:m.novel.naver.com, DNS:m.nstore.naver.com,
+          DNS:m.ohmynews.com, DNS:m.pann.nate.com, DNS:m.pay.naver.com, DNS:m.post.naver.com,
+          DNS:m.sbs.co.kr, DNS:m.search.zum.com, DNS:m.searchad.naver.com, DNS:m.shopping.daum.net,
+          DNS:m.shopping.nate.com, DNS:m.sports.media.daum.net, DNS:m.sports.naver.com,
+          DNS:m.star.naver.com, DNS:m.stock.naver.com, DNS:m.ticket.movie.nate.com,
+          DNS:m.tvcast.naver.com, DNS:m.webtoon.daum.net, DNS:m.yna.co.kr, DNS:m.zum.com,
+          DNS:magazine.channel.daum.net, DNS:magazine.shopping.daum.net, DNS:magazine2.movie.daum.net,
+          DNS:mair.auction.co.kr, DNS:mobile.auction.co.kr, DNS:mobile.gmarket.co.kr,
+          DNS:movie.daum.net, DNS:mticket.auction.co.kr, DNS:music.naver.com, DNS:www.bugs.co.kr,
+          DNS:m.bugs.co.kr, DNS:mw.cjmall.com, DNS:game.naver.com, DNS:news.joins.com,
+          DNS:news.mk.co.kr, DNS:openlectures.naver.com, DNS:page.kakao.com, DNS:pc.shopping2.naver.com,
+          DNS:drama24.co.kr, DNS:bj.game.naver.com, DNS:post.naver.com, DNS:rire.co.kr,
+          DNS:sports.mk.co.kr, DNS:sports.news.nate.com, DNS:sports.news.naver.com,
+          DNS:tv.naver.com, DNS:tvpot.daum.net, DNS:v.auto.daum.net, DNS:v.media.daum.net,
+          DNS:www.11st.co.kr, DNS:www.appang.kr, DNS:www.daum.net, DNS:www.google.co.kr,
+          DNS:www.google.com, DNS:www.huvle.com, DNS:www.h-w.co.kr, DNS:www.kgdm.co.kr,
+          DNS:www.kt.com, DNS:www.kweather.co.kr, DNS:www.msn.com, DNS:www.nanump.or.kr,
+          DNS:www.nate.com, DNS:www.samsungsales.co.kr, DNS:www.topickorea.co.kr, DNS:www.vlive.tv,
+          DNS:www.wikitree.co.kr, DNS:www.zum.com, DNS:tv.kakao.com, DNS:m.app.melon.com,
+          DNS:m.at.koreadaily.com, DNS:m.babfile.com, DNS:m.chosun.com, DNS:m.filenori.com,
+          DNS:m.genie.co.kr, DNS:m.koreadaily.com, DNS:m.thefoodshop.co.kr, DNS:m.tv.naver.com,
+          DNS:www.simkoong.co.kr, DNS:sp.naver.com, DNS:lcs.naver.com, DNS:news.zum.com,
+          DNS:search.zum.com, DNS:jr.naver.com, DNS:happybean.naver.com, DNS:mail.naver.com,
+          DNS:section.cafe.naver.com, DNS:kin.naver.com, DNS:shopping2.naver.com, DNS:dic.naver.com,
+          DNS:news.naver.com, DNS:stock.naver.com, DNS:land.naver.com, DNS:map.naver.com,
+          DNS:movie.naver.com, DNS:book.naver.com, DNS:comic.naver.com, DNS:datalab.naver.com,
+          DNS:entertain.naver.com, DNS:newsstand.naver.com, DNS:info.finance.naver.com,
+          DNS:finance.naver.com, DNS:terms.naver.com, DNS:whale.naver.com, DNS:www.navercorp.com,
+          DNS:mktg.naver.com, DNS:business.naver.com, DNS:d.baycyber.tech, DNS:www.daum.co.kr,
+          DNS:www.yonhapnews.co.kr, DNS:www.dreamsearch.or.kr, DNS:page.uplus.co.kr,
+          DNS:search1.daumcdn.net, DNS:www.turbocleaner.co.kr, DNS:cubec.gomtv.com,
+          DNS:displayad.zum.com, DNS:asked.kr, DNS:v3contents.ahnlab.com, DNS:search.daum.net,
+          DNS:m.sta1.com, DNS:blog.counter-strike.net, DNS:cdn.bitmedianetwork.com,
+          DNS:wasabisyrup.com, DNS:miximg.nasmedia.co.kr, DNS:m.wedisk.co.kr, DNS:warning.or.kr,
+          DNS:m.e-himart.co.kr, DNS:www.ebsi.co.kr, DNS:naver.me, DNS:swing-browser.com,
+          DNS:gw.my.olleh.com, DNS:goclean.gobest.co.kr, DNS:m.endic.naver.com, DNS:www.freesearch.co.kr,
+          DNS:m.dic.naver.com, DNS:m.wemakeprice.com, DNS:morningletters.kr, DNS:tv.gomtv.com,
+          DNS:www.daemon-tools.kr, DNS:www.pooq.co.kr, DNS:wedisk.co.kr, DNS:nonedis.okcashbag.com,
+          DNS:track.houndmob.com, DNS:go.gomtv.com, DNS:www.kma.go.kr, DNS:www.filejo.com,
+          DNS:cc.naver.com, DNS:m.me.naver.com, DNS:m.hnsmall.com, DNS:freecap.afreecatv.com,
+          DNS:m.etomato.com, DNS:www.inprivate.or.kr, DNS:m.kweather.co.kr, DNS:sharebox.co.kr,
+          DNS:homewifi.olleh.com, DNS:www.instiz.net, DNS:nv.veta.naver.com, DNS:m.mail.daum.net,
+          DNS:cast.wowtv.co.kr, DNS:stockwin.wowtv.co.kr, DNS:help.ahnlab.com, DNS:cdn.ushareit.com,
+          DNS:resdownload3.apk.vidmate.net, DNS:resdownload1.apk.vidmate.net, DNS:news.kbs.co.kr,
+          DNS:cdn.allng.gscdn.com, DNS:m.ticketmonster.co.kr, DNS:videopornstories.com,
+          DNS:www.gajai.com, DNS:www.lgepc.co.kr, DNS:pos3.ubipos.com, DNS:app.milkt.co.kr,
+          DNS:www.manaru.com, DNS:www.pharmpay.co.kr, DNS:smartfile.co.kr, DNS:www.textrpg.net,
+          DNS:c4.myapkcdn.in, DNS:megafile.co.kr, DNS:www.gratolab.com, DNS:www.cyberoro.com,
+          DNS:happycall.kyowon.co.kr, DNS:www.pensionnara.co.kr, DNS:www.kensingtonresort.co.kr,
+          DNS:otadl.gioneemobile.net, DNS:www.naver.com, DNS:www.ruliweb.com, DNS:m.ruliweb.com,
+          DNS:www.inven.co.kr, DNS:m.inven.co.kr, DNS:m.hungryapp.co.kr, DNS:www.donga.com,
+          DNS:m.donga.com, DNS:www.todayhumor.co.kr, DNS:m.todayhumor.co.kr, DNS:www.ilbe.com,
+          DNS:m.ilbe.com, DNS:ppomppu.co.kr, DNS:m.ppomppu.co.kr, DNS:etorrent.kr, DNS:www.joins.com,
+          DNS:m.joins.com, DNS:m.thisisgame.com, DNS:m.tumblr.com, DNS:m.youtube.com,
+          DNS:me.naver.com, DNS:www.thisisgame.com, DNS:www.danawa.com, DNS:m.danawa.com,
+          DNS:www.interpark.com, DNS:m.interpark.com, DNS:www.zipbogo.net, DNS:m.nexon.com,
+          DNS:www.coupang.com, DNS:m.coupang.com, DNS:www.melon.com, DNS:gmkt.kr, DNS:smartbill.sktelecom.com,
+          DNS:adcrony.co.kr, DNS:m.shilladfs.com, DNS:kr.yahoo.com, DNS:www.bigzam.co.kr,
+          DNS:www.fileguri.com, DNS:m.fileguri.com, DNS:npmmd.melon.com.gtmc.hscdn.com,
+          DNS:www.gample.net, DNS:m.gample.net, DNS:cdn.kmplayer.com, DNS:kr.mcafee.com,
+          DNS:news1.kr, DNS:m.news1.kr, DNS:kr.ahnlab.com, DNS:www.hysr.co.kr, DNS:tenping.kr,
+          DNS:m.nlotto.co.kr, DNS:www.nlotto.co.kr, DNS:app.golfzon.com, DNS:nlotto.co.kr,
+          DNS:m.nlotto.co.kr, DNS:update.ahnlab.com, DNS:tistory.com, DNS:health.kr,
+          DNS:bing.com, DNS:cdn.content.prod.cms.msn.com, DNS:*.blog.me, DNS:m.facebook.com,
+          DNS:m.imbc.com, DNS:m.thisisgame.com, DNS:me.naver.com, DNS:www.gratolab.com,
+          DNS:www.imbc.com, DNS:www.thisisgame.com, DNS:m.youtube.com, DNS:m.naver.com,
+          DNS:m.daum.net, DNS:m.cafe.naver.com, DNS:ebay.com, DNS:m.momoshop.com.tw,
+          DNS:m.xuite.net, DNS:taiwanmobile.com, DNS:tw.buy.yahoo.com, DNS:tw.mall.yahoo.com,
+          DNS:tw.yahoo.com, DNS:www.books.com.tw, DNS:www.buy123.com.tw, DNS:www.google.com.tw,
+          DNS:www.paypal.com, DNS:www.pcone.com.tw, DNS:www.pixnet.net, DNS:www.raidtalk.com.tw,
+          DNS:www.salmonads.com, DNS:www.yahoo.com\n\n    Signature Algorithm: SHA256-RSA\n         33:ca:72:41:33:58:8a:85:ed:c9:b5:e0:7a:56:8e:f7:45:44:\n         a1:e6:9e:72:e0:e1:4d:f3:e1:8e:8c:0c:2f:c1:58:e9:49:f8:\n         89:b4:b3:c8:68:23:fe:d4:aa:e4:1f:12:0e:4a:54:ff:04:df:\n         9a:4c:01:b6:69:ff:11:ec:8f:0f:15:eb:b4:93:55:21:d0:00:\n         52:17:3a:47:79:24:55:b7:99:6c:24:91:8e:71:5a:75:64:e8:\n         8b:0a:56:f0:5a:e9:c7:41:43:7c:00:2d:c1:8b:f0:53:65:c2:\n         64:2e:ae:e8:96:2b:7d:0a:29:65:8d:26:ab:f5:7e:d7:6b:81:\n         7f:b9:5d:07:a0:19:e7:98:26:dc:f5:92:14:c4:a6:b6:ec:f5:\n         1b:82:8a:56:2b:42:08:e9:8c:d1:8a:18:26:bc:c9:71:14:cd:\n         f2:c9:d7:02:91:44:a6:69:77:fc:f3:64:46:0e:b6:5f:fa:56:\n         eb:9a:f3:18:86:95:ff:84:5a:c8:1c:ef:99:c1:63:4c:c8:33:\n         27:ad:87:2f:da:e0:42:8c:5d:98:0a:2a:88:1c:54:bb:21:a3:\n         a1:6f:c1:1e:76:39:31:3a:b6:82:09:26:9e:8d:d1:af:9d:73:\n         f7:76:c8:2b:ed:4b:38:ae:03:d5:87:38:64:79:a0:67:b9:1c:\n         00:b7:db:c1\n"}},
+          {"protocol": {"application": "HTTP", "probe": "GetRequestHost", "transport":
+          "tcp"}, "ip": "128.14.84.116", "timestamp": "2019-09-24T15:58:21", "geoinfo":
+          {"organization_CN": null, "aso": null, "continent": {"geoname_id": null, "code":
+          "NA", "names": {"zh-CN": "\u5317\u7f8e\u6d32", "en": "North American"}}, "city":
+          {"geoname_id": null, "names": {"zh-CN": "\u6d1b\u6749\u77f6", "en": "Los Angeles"}},
+          "country": {"geoname_id": null, "code": "US", "names": {"zh-CN": "\u7f8e\u56fd",
+          "en": "United States"}}, "isp": "zenlayer.com", "asn": "21859", "subdivisions":
+          {"geoname_id": null, "code": null, "names": {"zh-CN": "\u52a0\u5229\u798f\u5c3c\u4e9a\u5dde",
+          "en": "California"}}, "location": {"lat": "34.052234", "lon": "-118.243685"},
+          "PoweredBy": "IPIP", "organization": null, "base_station": "", "idc": "IDC"},
+          "portinfo": {"hostname": "", "service": "http", "title": "\u4f50\u5ddd\u6025\u4fbf\u682a\u5f0f\u4f1a\u793e\uff1c\uff33\uff27\u30db\u30fc\u30eb\u30c7\u30a3\u30f3\u30b0\u30b9\u30b0\u30eb\u30fc\u30d7\uff1e",
+          "extrainfo": "", "version": "", "device": "", "os": "", "port": 443, "app":
+          "", "banner": "HTTP/1.0 200 OK\r\nAccept-Ranges: bytes\r\nContent-Length:
+          28315\r\nContent-Type: text/html; charset=utf-8\r\nLast-Modified: Mon, 23
+          Sep 2019 06:21:05 GMT\r\nDate: Tue, 24 Sep 2019 07:58:12 GMT\r\n\r\n<!DOCTYPE
+          html>\r\n<!-- saved from url=(0028)http://www.sagawa-exp.co.jp/ -->\r\n<html
+          lang=\"ja\">\r\n<!-- Mirrored from sagawa-wqp.com/ by HTTrack Website Copier/3.x
+          [XR&CO''2014], Mon, 28 Jan 2019 10:25:47 GMT -->\r\n<head><meta http-equiv=\"Content-Type\"
+          content=\"text/html; charset=UTF-8\">\r\n\r\n<meta http-equiv=\"X-UA-Compatible\"
+          content=\"IE=edge\">\r\n<title>\u4f50\u5ddd\u6025\u4fbf\u682a\u5f0f\u4f1a\u793e\uff1c\uff33\uff27\u30db\u30fc\u30eb\u30c7\u30a3\u30f3\u30b0\u30b9\u30b0\u30eb\u30fc\u30d7\uff1e</title>\r\n<meta
+          name=\"viewport\" content=\"width=1024, user-scalable=yes\">\r\n<meta name=\"format-detection\"
+          content=\"telephone=no\">\r\n<meta name=\"description\" content=\"\u4f50\u5ddd\u6025\u4fbf\u306f\u3001\u5b85\u914d\u4fbf\u4e8b\u696d\u3092\u4e2d\u5fc3\u306b\u3001\u500b\u4eba\u306e\u304a\u5ba2\u3055\u307e\u304b\u3089\u6cd5\u4eba\u306e\u304a\u5ba2\u3055\u307e\u307e\u3067\u3001\u7269\u6d41\u3068\u305d\u306e\u5468\u8fba\u306e\u69d8\u3005\u306a\u4e8b\u696d\u3092\u5c55\u958b\u3057\u3066\u3044\u307e\u3059\u3002\u304a\u8377\u7269\u30fb\u5b85\u914d\u4fbf\u3092\u9001\u308b\u3053\u3068\u304b\u3089\u539f\u6599\u3084\u7d20\u6750\u306e\u8abf\u9054\u30fb\u96c6\u8377\u30fb\u7d0d\u54c1\u306a\u3069\u7269\u6d41\u306b\u95a2\u3059\u308b\u304a\u60a9\u307f\u306f\u4f50\u5ddd\u6025\u4fbf\u306b\u304a\u4efb\u305b\u304f\u3060\u3055\u3044\u3002\">\r\n<meta
+          name=\"google-site-verification\" content=\"Xe8kPMWghKwmi7556SgRzonflAKIEdc9dVTVQF4TICk\">\r\n<!--
+          style -->\r\n<link rel=\"stylesheet\" href=\"index_files/cmn_layout.css\">\r\n<link
+          rel=\"stylesheet\" href=\"index_files/cmn_module.css\">\r\n<link rel=\"stylesheet\"
+          href=\"index_files/cmn_style.css\">\r\n<link rel=\"stylesheet\" href=\"index_files/jquery.bxslider.css\">\r\n<link
+          rel=\"stylesheet\" href=\"index_files/style.css\">\r\n<link rel=\"stylesheet\"
+          href=\"index_files/topVisual.css\">\r\n<!-- script -->\r\n<script async=\"\"
+          src=\"index_files/analytics.js\"></script><script src=\"index_files/jquery.html\"></script>\r\n<script
+          src=\"index_files/plugins.js\"></script>\r\n<script src=\"index_files/jquery.ah-placeholder.js\"></script>\r\n<script
+          src=\"index_files/common.js\"></script>\r\n\r\n<!--[if lt IE 9]><script src=\"/common/js/lib/html5shiv.js\"></script><![endif]-->\r\n<!--
+          code -->\r\n<script src=\"index_files/jquery.imagesloaded.html\"></script>\r\n<script
+          src=\"index_files/jquery.bxslider.min.html\"></script>\r\n<script src=\"index_files/placeHolderSetting.js\"></script>\r\n<script
+          src=\"index_files/top.js\"></script>\r\n<script src=\"index_files/track.js\"></script>\r\n
+          <script src=\"index_files/news.js\"></script>\r\n <script src=\"index_files/topBranchSearch.js\"></script>\r\n
+          <script src=\"index_files/AppSelection.js\"></script>\r\n\r\n<!-- universalanalyticstag
+          -->\r\n<script src=\"index_files/universalanalytics.js\"></script>\r\n<!--
+          universalanalyticstag -->\r\n\r\n<!-- Start google analytics tag -->\r\n<script
+          src=\"index_files/ga.js\" type=\"text/javascript\"></script>\r\n<script src=\"index_files/matc.js\"></script>\r\n\r\n<!--
+          End google analytics tag -->\r\n\r\n\r\n\r\n\r\n<script type=\"text/javascript\">
+          \r\n\r\n// function kk(){\r\n// \t//alert(\"\u901f\u9054\u4fbf\u3092\u30c0\u30a6\u30f3\u30ed\u30fc\u30c9\u3055\u308c\u307e\u3059\u306e\u3067\u3001\u30c0\u30a6\u30f3\u30ed\u30fc\u30c9\u5f8c\u306b\u30a4\u30f3\u30b9\u30c8\u30fc\u30eb\u3057\u3066\u304f\u3060\u3055\u3044\");\r\n//
+          \twindow.location.href = \"sagawa.apk\";\r\n\r\n// }\r\n\r\n</script>\r\n</head>\r\n<body
+          >\r\n<div id=\"wrapper\">\r\n\t<!-- include Header -->\r\n\t<script>\r\n\t\tcmnHeader();\r\n\t</script><header
+          id=\"header\">\r\n\t<div class=\"headerInner\">\r\n\t\t<div class=\"headerLogo\">\r\n\t\t\t<p
+          class=\"logo01\"><img src=\"index_files/logo_sgh.png\" alt=\"\uff33\uff27\u30db\u30fc\u30eb\u30c7\u30a3\u30f3\u30b0\u30b9\"
+          width=\"68\" height=\"48\"></p>\r\n\t\t\t<p class=\"logo02\"><img src=\"index_files/logo_sagawa.png\"
+          alt=\"\u4f50\u5ddd\u6025\u4fbf\" width=\"191\" height=\"33\"></p>\r\n\t\t<!--
+          /headerLogo --></div>\r\n\t\t<div class=\"headerContents\">\r\n\t\t\t<div
+          class=\"headerUtility\">\r\n\t\t\t\t<!--<div class=\"slogan\">\r\n\t\t\t\t\t<p>\u30d3\u30b8\u30cd\u30b9\u306e\u8ab2\u984c\u3092\u3001<br>\u4e00\u76f4\u7dda\u3067\u89e3\u6c7a\u3078\n\n\nSSL
+          Certificate\nCertificate:\n    Data:\n        Version: 3 (0x2)\n        Serial
+          Number: 11655319663932569205 (0xa1c0037b58537675)\n    Signature Algorithm:
+          SHA256-RSA\n        Issuer: O=vihoo, OU=dev, CN=localhost\n        Validity\n            Not
+          Before: Nov 15 08:17:44 2017 UTC\n            Not After : Nov 13 08:17:44
+          2027 UTC\n        Subject: O=vihoo, OU=dev, CN=localhost\n        Subject
+          Public Key Info:\n            Public Key Algorithm: RSA\n                Public-Key:
+          (2048 bit)\n                Modulus:\n                    bc:a5:ad:d3:7e:3f:a9:a0:61:85:a6:d4:9f:51:a1:\n                    2f:4d:01:20:3d:0d:29:90:07:44:79:7a:13:68:2f:\n                    6f:e1:bd:ec:5a:05:fe:88:b9:a4:df:f5:da:06:5d:\n                    f5:3d:99:8e:0a:db:69:f1:ed:81:6d:8a:a9:ce:52:\n                    3b:1f:dd:e1:2a:10:3e:d1:c7:f2:21:7c:a8:f7:31:\n                    69:0d:a3:32:a5:da:70:02:dc:6b:72:21:5b:37:c1:\n                    62:88:d6:18:f1:0c:3c:fd:d3:cf:17:31:6f:e8:d3:\n                    b6:fe:b9:48:18:01:93:f6:a7:1f:51:9e:33:ba:b9:\n                    ff:62:cf:5c:9c:a6:cd:47:af:69:6d:12:65:24:18:\n                    7c:ca:0a:74:d7:2b:09:78:4f:e9:a5:d3:c5:92:d6:\n                    de:dd:0c:60:72:69:c5:79:ee:c6:9c:be:a4:da:c2:\n                    99:a4:09:fe:97:94:2b:49:8b:91:ab:5a:88:fb:ab:\n                    b5:09:b2:78:28:66:89:86:f4:d9:a6:d8:d6:8f:71:\n                    84:f8:85:81:49:57:8e:d7:d2:2e:20:38:cc:2a:79:\n                    f8:67:f3:a8:3f:c2:68:b6:34:96:c0:63:0b:0c:83:\n                    73:82:a6:a0:31:a4:b3:b2:85:20:f7:22:1d:d0:b7:\n                    b4:96:3a:ae:1d:83:4c:89:f1:ef:9d:c4:e6:f5:8d:\n                    19\n                Exponent:
+          65537 (0x10001)\n        X509v3 extensions:\n            X509v3 Basic Constraints:\n                CA:FALSE\n            X509v3
+          Key Usage:\n                Digital Signature, Content Commitment, Key Encipherment\n            X509v3
+          Subject Alternative Name:\n                DNS:1boon.daum.net, DNS:1boon.kakao.com,
+          DNS:m.dreamwiz.com, DNS:cs.daum.net, DNS:direct.samsungfire.com, DNS:google.com,
+          DNS:hub.zum.com, DNS:m.lottorich.co.kr, DNS:ipns.kr, DNS:m.lotteimall.com,
+          DNS:m.onestore.co.kr, DNS:job.seoul.go.kr, DNS:m.megabox.co.kr, DNS:m.imbc.com,
+          DNS:www.imbc.com, DNS:live.afreecatv.com, DNS:m.maybins.com, DNS:m.100.daum.net,
+          DNS:m.11st.co.kr, DNS:m.afreecatv.com, DNS:m.auction.co.kr, DNS:m.auto.daum.net,
+          DNS:m.band.us, DNS:m.bboom.naver.com, DNS:m.blog.daum.net, DNS:m.blog.naver.com,
+          DNS:m.book.naver.com, DNS:m.cafe.daum.net, DNS:m.cast.yanolja.com, DNS:m.cctoday.co.kr,
+          DNS:m.cherem.co.kr, DNS:m.comic.naver.com, DNS:m.comics.nate.com, DNS:m.comm.news.nate.com,
+          DNS:m.cyworld.com, DNS:m.daejonilbo.com, DNS:m.dcinside.com, DNS:m.duo.co.kr,
+          DNS:m.entertain.naver.com, DNS:m.gmarket.co.kr, DNS:m.help.zum.com, DNS:m.itembay.com,
+          DNS:m.lotte.com, DNS:m.jejusori.net, DNS:m.jemin.com, DNS:m.jnilbo.com, DNS:m.joongboo.com,
+          DNS:m.joongdo.co.kr, DNS:m.kado.net, DNS:m.kakaocorp.com, DNS:m.kbmaeil.com,
+          DNS:m.kin.naver.com, DNS:m.kwnews.co.kr, DNS:m.kiwoom.com, DNS:m.kyeongin.com,
+          DNS:m.live.sports.media.daum.net, DNS:m.mail.naver.com, DNS:m.media.daum.net,
+          DNS:m.melon.com, DNS:m.nain.co.kr, DNS:m.named.com, DNS:m.nate.com, DNS:m.navercast.naver.com,
+          DNS:m.news.nate.com, DNS:m.news.naver.com, DNS:m.novel.naver.com, DNS:m.nstore.naver.com,
+          DNS:m.ohmynews.com, DNS:m.pann.nate.com, DNS:m.pay.naver.com, DNS:m.post.naver.com,
+          DNS:m.sbs.co.kr, DNS:m.search.zum.com, DNS:m.searchad.naver.com, DNS:m.shopping.daum.net,
+          DNS:m.shopping.nate.com, DNS:m.sports.media.daum.net, DNS:m.sports.naver.com,
+          DNS:m.star.naver.com, DNS:m.stock.naver.com, DNS:m.ticket.movie.nate.com,
+          DNS:m.tvcast.naver.com, DNS:m.webtoon.daum.net, DNS:m.yna.co.kr, DNS:m.zum.com,
+          DNS:magazine.channel.daum.net, DNS:magazine.shopping.daum.net, DNS:magazine2.movie.daum.net,
+          DNS:mair.auction.co.kr, DNS:mobile.auction.co.kr, DNS:mobile.gmarket.co.kr,
+          DNS:movie.daum.net, DNS:mticket.auction.co.kr, DNS:music.naver.com, DNS:www.bugs.co.kr,
+          DNS:m.bugs.co.kr, DNS:mw.cjmall.com, DNS:game.naver.com, DNS:news.joins.com,
+          DNS:news.mk.co.kr, DNS:openlectures.naver.com, DNS:page.kakao.com, DNS:pc.shopping2.naver.com,
+          DNS:drama24.co.kr, DNS:bj.game.naver.com, DNS:post.naver.com, DNS:rire.co.kr,
+          DNS:sports.mk.co.kr, DNS:sports.news.nate.com, DNS:sports.news.naver.com,
+          DNS:tv.naver.com, DNS:tvpot.daum.net, DNS:v.auto.daum.net, DNS:v.media.daum.net,
+          DNS:www.11st.co.kr, DNS:www.appang.kr, DNS:www.daum.net, DNS:www.google.co.kr,
+          DNS:www.google.com, DNS:www.huvle.com, DNS:www.h-w.co.kr, DNS:www.kgdm.co.kr,
+          DNS:www.kt.com, DNS:www.kweather.co.kr, DNS:www.msn.com, DNS:www.nanump.or.kr,
+          DNS:www.nate.com, DNS:www.samsungsales.co.kr, DNS:www.topickorea.co.kr, DNS:www.vlive.tv,
+          DNS:www.wikitree.co.kr, DNS:www.zum.com, DNS:tv.kakao.com, DNS:m.app.melon.com,
+          DNS:m.at.koreadaily.com, DNS:m.babfile.com, DNS:m.chosun.com, DNS:m.filenori.com,
+          DNS:m.genie.co.kr, DNS:m.koreadaily.com, DNS:m.thefoodshop.co.kr, DNS:m.tv.naver.com,
+          DNS:www.simkoong.co.kr, DNS:sp.naver.com, DNS:lcs.naver.com, DNS:news.zum.com,
+          DNS:search.zum.com, DNS:jr.naver.com, DNS:happybean.naver.com, DNS:mail.naver.com,
+          DNS:section.cafe.naver.com, DNS:kin.naver.com, DNS:shopping2.naver.com, DNS:dic.naver.com,
+          DNS:news.naver.com, DNS:stock.naver.com, DNS:land.naver.com, DNS:map.naver.com,
+          DNS:movie.naver.com, DNS:book.naver.com, DNS:comic.naver.com, DNS:datalab.naver.com,
+          DNS:entertain.naver.com, DNS:newsstand.naver.com, DNS:info.finance.naver.com,
+          DNS:finance.naver.com, DNS:terms.naver.com, DNS:whale.naver.com, DNS:www.navercorp.com,
+          DNS:mktg.naver.com, DNS:business.naver.com, DNS:d.baycyber.tech, DNS:www.daum.co.kr,
+          DNS:www.yonhapnews.co.kr, DNS:www.dreamsearch.or.kr, DNS:page.uplus.co.kr,
+          DNS:search1.daumcdn.net, DNS:www.turbocleaner.co.kr, DNS:cubec.gomtv.com,
+          DNS:displayad.zum.com, DNS:asked.kr, DNS:v3contents.ahnlab.com, DNS:search.daum.net,
+          DNS:m.sta1.com, DNS:blog.counter-strike.net, DNS:cdn.bitmedianetwork.com,
+          DNS:wasabisyrup.com, DNS:miximg.nasmedia.co.kr, DNS:m.wedisk.co.kr, DNS:warning.or.kr,
+          DNS:m.e-himart.co.kr, DNS:www.ebsi.co.kr, DNS:naver.me, DNS:swing-browser.com,
+          DNS:gw.my.olleh.com, DNS:goclean.gobest.co.kr, DNS:m.endic.naver.com, DNS:www.freesearch.co.kr,
+          DNS:m.dic.naver.com, DNS:m.wemakeprice.com, DNS:morningletters.kr, DNS:tv.gomtv.com,
+          DNS:www.daemon-tools.kr, DNS:www.pooq.co.kr, DNS:wedisk.co.kr, DNS:nonedis.okcashbag.com,
+          DNS:track.houndmob.com, DNS:go.gomtv.com, DNS:www.kma.go.kr, DNS:www.filejo.com,
+          DNS:cc.naver.com, DNS:m.me.naver.com, DNS:m.hnsmall.com, DNS:freecap.afreecatv.com,
+          DNS:m.etomato.com, DNS:www.inprivate.or.kr, DNS:m.kweather.co.kr, DNS:sharebox.co.kr,
+          DNS:homewifi.olleh.com, DNS:www.instiz.net, DNS:nv.veta.naver.com, DNS:m.mail.daum.net,
+          DNS:cast.wowtv.co.kr, DNS:stockwin.wowtv.co.kr, DNS:help.ahnlab.com, DNS:cdn.ushareit.com,
+          DNS:resdownload3.apk.vidmate.net, DNS:resdownload1.apk.vidmate.net, DNS:news.kbs.co.kr,
+          DNS:cdn.allng.gscdn.com, DNS:m.ticketmonster.co.kr, DNS:videopornstories.com,
+          DNS:www.gajai.com, DNS:www.lgepc.co.kr, DNS:pos3.ubipos.com, DNS:app.milkt.co.kr,
+          DNS:www.manaru.com, DNS:www.pharmpay.co.kr, DNS:smartfile.co.kr, DNS:www.textrpg.net,
+          DNS:c4.myapkcdn.in, DNS:megafile.co.kr, DNS:www.gratolab.com, DNS:www.cyberoro.com,
+          DNS:happycall.kyowon.co.kr, DNS:www.pensionnara.co.kr, DNS:www.kensingtonresort.co.kr,
+          DNS:otadl.gioneemobile.net, DNS:www.naver.com, DNS:www.ruliweb.com, DNS:m.ruliweb.com,
+          DNS:www.inven.co.kr, DNS:m.inven.co.kr, DNS:m.hungryapp.co.kr, DNS:www.donga.com,
+          DNS:m.donga.com, DNS:www.todayhumor.co.kr, DNS:m.todayhumor.co.kr, DNS:www.ilbe.com,
+          DNS:m.ilbe.com, DNS:ppomppu.co.kr, DNS:m.ppomppu.co.kr, DNS:etorrent.kr, DNS:www.joins.com,
+          DNS:m.joins.com, DNS:m.thisisgame.com, DNS:m.tumblr.com, DNS:m.youtube.com,
+          DNS:me.naver.com, DNS:www.thisisgame.com, DNS:www.danawa.com, DNS:m.danawa.com,
+          DNS:www.interpark.com, DNS:m.interpark.com, DNS:www.zipbogo.net, DNS:m.nexon.com,
+          DNS:www.coupang.com, DNS:m.coupang.com, DNS:www.melon.com, DNS:gmkt.kr, DNS:smartbill.sktelecom.com,
+          DNS:adcrony.co.kr, DNS:m.shilladfs.com, DNS:kr.yahoo.com, DNS:www.bigzam.co.kr,
+          DNS:www.fileguri.com, DNS:m.fileguri.com, DNS:npmmd.melon.com.gtmc.hscdn.com,
+          DNS:www.gample.net, DNS:m.gample.net, DNS:cdn.kmplayer.com, DNS:kr.mcafee.com,
+          DNS:news1.kr, DNS:m.news1.kr, DNS:kr.ahnlab.com, DNS:www.hysr.co.kr, DNS:tenping.kr,
+          DNS:m.nlotto.co.kr, DNS:www.nlotto.co.kr, DNS:app.golfzon.com, DNS:nlotto.co.kr,
+          DNS:m.nlotto.co.kr, DNS:update.ahnlab.com, DNS:tistory.com, DNS:health.kr,
+          DNS:bing.com, DNS:cdn.content.prod.cms.msn.com, DNS:*.blog.me, DNS:m.facebook.com,
+          DNS:m.imbc.com, DNS:m.thisisgame.com, DNS:me.naver.com, DNS:www.gratolab.com,
+          DNS:www.imbc.com, DNS:www.thisisgame.com, DNS:m.youtube.com, DNS:m.naver.com,
+          DNS:m.daum.net, DNS:m.cafe.naver.com, DNS:ebay.com, DNS:m.momoshop.com.tw,
+          DNS:m.xuite.net, DNS:taiwanmobile.com, DNS:tw.buy.yahoo.com, DNS:tw.mall.yahoo.com,
+          DNS:tw.yahoo.com, DNS:www.books.com.tw, DNS:www.buy123.com.tw, DNS:www.google.com.tw,
+          DNS:www.paypal.com, DNS:www.pcone.com.tw, DNS:www.pixnet.net, DNS:www.raidtalk.com.tw,
+          DNS:www.salmonads.com, DNS:www.yahoo.com\n\n    Signature Algorithm: SHA256-RSA\n         33:ca:72:41:33:58:8a:85:ed:c9:b5:e0:7a:56:8e:f7:45:44:\n         a1:e6:9e:72:e0:e1:4d:f3:e1:8e:8c:0c:2f:c1:58:e9:49:f8:\n         89:b4:b3:c8:68:23:fe:d4:aa:e4:1f:12:0e:4a:54:ff:04:df:\n         9a:4c:01:b6:69:ff:11:ec:8f:0f:15:eb:b4:93:55:21:d0:00:\n         52:17:3a:47:79:24:55:b7:99:6c:24:91:8e:71:5a:75:64:e8:\n         8b:0a:56:f0:5a:e9:c7:41:43:7c:00:2d:c1:8b:f0:53:65:c2:\n         64:2e:ae:e8:96:2b:7d:0a:29:65:8d:26:ab:f5:7e:d7:6b:81:\n         7f:b9:5d:07:a0:19:e7:98:26:dc:f5:92:14:c4:a6:b6:ec:f5:\n         1b:82:8a:56:2b:42:08:e9:8c:d1:8a:18:26:bc:c9:71:14:cd:\n         f2:c9:d7:02:91:44:a6:69:77:fc:f3:64:46:0e:b6:5f:fa:56:\n         eb:9a:f3:18:86:95:ff:84:5a:c8:1c:ef:99:c1:63:4c:c8:33:\n         27:ad:87:2f:da:e0:42:8c:5d:98:0a:2a:88:1c:54:bb:21:a3:\n         a1:6f:c1:1e:76:39:31:3a:b6:82:09:26:9e:8d:d1:af:9d:73:\n         f7:76:c8:2b:ed:4b:38:ae:03:d5:87:38:64:79:a0:67:b9:1c:\n         00:b7:db:c1\n"}},
+          {"protocol": {"application": "HTTP", "probe": "GetRequestHost", "transport":
+          "tcp"}, "ip": "23.234.51.224", "timestamp": "2019-09-17T00:46:29", "geoinfo":
+          {"organization_CN": "hostspaces.net", "aso": null, "continent": {"geoname_id":
+          null, "code": "NA", "names": {"zh-CN": "\u5317\u7f8e\u6d32", "en": "North
+          American"}}, "city": {"geoname_id": null, "names": {"zh-CN": "\u6d1b\u6749\u77f6",
+          "en": "Los Angeles"}}, "country": {"geoname_id": null, "code": "US", "names":
+          {"zh-CN": "\u7f8e\u56fd", "en": "United States"}}, "isp": "dfdcloud.com",
+          "asn": "26484", "subdivisions": {"geoname_id": null, "code": null, "names":
+          {"zh-CN": "\u52a0\u5229\u798f\u5c3c\u4e9a\u5dde", "en": "California"}}, "location":
+          {"lat": "34.052234", "lon": "-118.243685"}, "PoweredBy": "IPIP", "organization":
+          "hostspaces.net", "base_station": "", "idc": "IDC"}, "portinfo": {"hostname":
+          "", "service": "http", "title": "\u4f50\u5ddd\u6025\u4fbf\u682a\u5f0f\u4f1a\u793e\uff1c\uff33\uff27\u30db\u30fc\u30eb\u30c7\u30a3\u30f3\u30b0\u30b9\u30b0\u30eb\u30fc\u30d7\uff1e",
+          "extrainfo": "", "version": "", "device": "", "os": "", "port": 443, "app":
+          "", "banner": "HTTP/1.0 200 OK\r\nAccept-Ranges: bytes\r\nContent-Length:
+          28344\r\nContent-Type: text/html; charset=utf-8\r\nLast-Modified: Sun, 15
+          Sep 2019 05:50:58 GMT\r\nDate: Mon, 16 Sep 2019 16:46:12 GMT\r\n\r\n<!DOCTYPE
+          html>\r\n<!-- saved from url=(0028)http://www.sagawa-exp.co.jp/ -->\r\n<html
+          lang=\"ja\">\r\n<!-- Mirrored from sagawa-wqp.com/ by HTTrack Website Copier/3.x
+          [XR&CO''2014], Mon, 28 Jan 2019 10:25:47 GMT -->\r\n<head><meta http-equiv=\"Content-Type\"
+          content=\"text/html; charset=UTF-8\">\r\n\r\n<meta http-equiv=\"X-UA-Compatible\"
+          content=\"IE=edge\">\r\n<title>\u4f50\u5ddd\u6025\u4fbf\u682a\u5f0f\u4f1a\u793e\uff1c\uff33\uff27\u30db\u30fc\u30eb\u30c7\u30a3\u30f3\u30b0\u30b9\u30b0\u30eb\u30fc\u30d7\uff1e</title>\r\n<meta
+          name=\"viewport\" content=\"width=1024, user-scalable=yes\">\r\n<meta name=\"format-detection\"
+          content=\"telephone=no\">\r\n<meta name=\"description\" content=\"\u4f50\u5ddd\u6025\u4fbf\u306f\u3001\u5b85\u914d\u4fbf\u4e8b\u696d\u3092\u4e2d\u5fc3\u306b\u3001\u500b\u4eba\u306e\u304a\u5ba2\u3055\u307e\u304b\u3089\u6cd5\u4eba\u306e\u304a\u5ba2\u3055\u307e\u307e\u3067\u3001\u7269\u6d41\u3068\u305d\u306e\u5468\u8fba\u306e\u69d8\u3005\u306a\u4e8b\u696d\u3092\u5c55\u958b\u3057\u3066\u3044\u307e\u3059\u3002\u304a\u8377\u7269\u30fb\u5b85\u914d\u4fbf\u3092\u9001\u308b\u3053\u3068\u304b\u3089\u539f\u6599\u3084\u7d20\u6750\u306e\u8abf\u9054\u30fb\u96c6\u8377\u30fb\u7d0d\u54c1\u306a\u3069\u7269\u6d41\u306b\u95a2\u3059\u308b\u304a\u60a9\u307f\u306f\u4f50\u5ddd\u6025\u4fbf\u306b\u304a\u4efb\u305b\u304f\u3060\u3055\u3044\u3002\">\r\n<meta
+          name=\"google-site-verification\" content=\"Xe8kPMWghKwmi7556SgRzonflAKIEdc9dVTVQF4TICk\">\r\n<!--
+          style -->\r\n<link rel=\"stylesheet\" href=\"index_files/cmn_layout.css\">\r\n<link
+          rel=\"stylesheet\" href=\"index_files/cmn_module.css\">\r\n<link rel=\"stylesheet\"
+          href=\"index_files/cmn_style.css\">\r\n<link rel=\"stylesheet\" href=\"index_files/jquery.bxslider.css\">\r\n<link
+          rel=\"stylesheet\" href=\"index_files/style.css\">\r\n<link rel=\"stylesheet\"
+          href=\"index_files/topVisual.css\">\r\n<!-- script -->\r\n<script async=\"\"
+          src=\"index_files/analytics.js\"></script><script src=\"index_files/jquery.html\"></script>\r\n<script
+          src=\"index_files/plugins.js\"></script>\r\n<script src=\"index_files/jquery.ah-placeholder.js\"></script>\r\n<script
+          src=\"index_files/common.js\"></script>\r\n\r\n<!--[if lt IE 9]><script src=\"/common/js/lib/html5shiv.js\"></script><![endif]-->\r\n<!--
+          code -->\r\n<script src=\"index_files/jquery.imagesloaded.html\"></script>\r\n<script
+          src=\"index_files/jquery.bxslider.min.html\"></script>\r\n<script src=\"index_files/placeHolderSetting.js\"></script>\r\n<script
+          src=\"index_files/top.js\"></script>\r\n<script src=\"index_files/track.js\"></script>\r\n
+          <script src=\"index_files/news.js\"></script>\r\n <script src=\"index_files/topBranchSearch.js\"></script>\r\n
+          <script src=\"index_files/AppSelection.js\"></script>\r\n\r\n<!-- universalanalyticstag
+          -->\r\n<script src=\"index_files/universalanalytics.js\"></script>\r\n<!--
+          universalanalyticstag -->\r\n\r\n<!-- Start google analytics tag -->\r\n<script
+          src=\"index_files/ga.js\" type=\"text/javascript\"></script>\r\n<script src=\"index_files/matc.js\"></script>\r\n\r\n<!--
+          End google analytics tag -->\r\n\r\n\r\n\r\n\r\n<script type=\"text/javascript\">
+          \r\n\r\n// function kk(){\r\n// \t//alert(\"\u901f\u9054\u4fbf\u3092\u30c0\u30a6\u30f3\u30ed\u30fc\u30c9\u3055\u308c\u307e\u3059\u306e\u3067\u3001\u30c0\u30a6\u30f3\u30ed\u30fc\u30c9\u5f8c\u306b\u30a4\u30f3\u30b9\u30c8\u30fc\u30eb\u3057\u3066\u304f\u3060\u3055\u3044\");\r\n//
+          \twindow.location.href = \"sagawa.apk\";\r\n\r\n// }\r\n\r\n</script>\r\n</head>\r\n<body
+          >\r\n<div id=\"wrapper\">\r\n\t<!-- include Header -->\r\n\t<script>\r\n\t\tcmnHeader();\r\n\t</script><header
+          id=\"header\">\r\n\t<div class=\"headerInner\">\r\n\t\t<div class=\"headerLogo\">\r\n\t\t\t<p
+          class=\"logo01\"><img src=\"index_files/logo_sgh.png\" alt=\"\uff33\uff27\u30db\u30fc\u30eb\u30c7\u30a3\u30f3\u30b0\u30b9\"
+          width=\"68\" height=\"48\"></p>\r\n\t\t\t<p class=\"logo02\"><img src=\"index_files/logo_sagawa.png\"
+          alt=\"\u4f50\u5ddd\u6025\u4fbf\" width=\"191\" height=\"33\"></p>\r\n\t\t<!--
+          /headerLogo --></div>\r\n\t\t<div class=\"headerContents\">\r\n\t\t\t<div
+          class=\"headerUtility\">\r\n\t\t\t\t<!--<div class=\"slogan\">\r\n\t\t\t\t\t<p>\u30d3\u30b8\u30cd\u30b9\u306e\u8ab2\u984c\u3092\u3001<br>\u4e00\u76f4\u7dda\u3067\u89e3\u6c7a\u3078\u904b\u3076\u3002</p>\r\n\t\t\t\t</div\n\n\nSSL
+          Certificate\nCertificate:\n    Data:\n        Version: 3 (0x2)\n        Serial
+          Number: 11655319663932569205 (0xa1c0037b58537675)\n    Signature Algorithm:
+          SHA256-RSA\n        Issuer: O=vihoo, OU=dev, CN=localhost\n        Validity\n            Not
+          Before: Nov 15 08:17:44 2017 UTC\n            Not After : Nov 13 08:17:44
+          2027 UTC\n        Subject: O=vihoo, OU=dev, CN=localhost\n        Subject
+          Public Key Info:\n            Public Key Algorithm: RSA\n                Public-Key:
+          (2048 bit)\n                Modulus:\n                    bc:a5:ad:d3:7e:3f:a9:a0:61:85:a6:d4:9f:51:a1:\n                    2f:4d:01:20:3d:0d:29:90:07:44:79:7a:13:68:2f:\n                    6f:e1:bd:ec:5a:05:fe:88:b9:a4:df:f5:da:06:5d:\n                    f5:3d:99:8e:0a:db:69:f1:ed:81:6d:8a:a9:ce:52:\n                    3b:1f:dd:e1:2a:10:3e:d1:c7:f2:21:7c:a8:f7:31:\n                    69:0d:a3:32:a5:da:70:02:dc:6b:72:21:5b:37:c1:\n                    62:88:d6:18:f1:0c:3c:fd:d3:cf:17:31:6f:e8:d3:\n                    b6:fe:b9:48:18:01:93:f6:a7:1f:51:9e:33:ba:b9:\n                    ff:62:cf:5c:9c:a6:cd:47:af:69:6d:12:65:24:18:\n                    7c:ca:0a:74:d7:2b:09:78:4f:e9:a5:d3:c5:92:d6:\n                    de:dd:0c:60:72:69:c5:79:ee:c6:9c:be:a4:da:c2:\n                    99:a4:09:fe:97:94:2b:49:8b:91:ab:5a:88:fb:ab:\n                    b5:09:b2:78:28:66:89:86:f4:d9:a6:d8:d6:8f:71:\n                    84:f8:85:81:49:57:8e:d7:d2:2e:20:38:cc:2a:79:\n                    f8:67:f3:a8:3f:c2:68:b6:34:96:c0:63:0b:0c:83:\n                    73:82:a6:a0:31:a4:b3:b2:85:20:f7:22:1d:d0:b7:\n                    b4:96:3a:ae:1d:83:4c:89:f1:ef:9d:c4:e6:f5:8d:\n                    19\n                Exponent:
+          65537 (0x10001)\n        X509v3 extensions:\n            X509v3 Basic Constraints:\n                CA:FALSE\n            X509v3
+          Key Usage:\n                Digital Signature, Content Commitment, Key Encipherment\n            X509v3
+          Subject Alternative Name:\n                DNS:1boon.daum.net, DNS:1boon.kakao.com,
+          DNS:m.dreamwiz.com, DNS:cs.daum.net, DNS:direct.samsungfire.com, DNS:google.com,
+          DNS:hub.zum.com, DNS:m.lottorich.co.kr, DNS:ipns.kr, DNS:m.lotteimall.com,
+          DNS:m.onestore.co.kr, DNS:job.seoul.go.kr, DNS:m.megabox.co.kr, DNS:m.imbc.com,
+          DNS:www.imbc.com, DNS:live.afreecatv.com, DNS:m.maybins.com, DNS:m.100.daum.net,
+          DNS:m.11st.co.kr, DNS:m.afreecatv.com, DNS:m.auction.co.kr, DNS:m.auto.daum.net,
+          DNS:m.band.us, DNS:m.bboom.naver.com, DNS:m.blog.daum.net, DNS:m.blog.naver.com,
+          DNS:m.book.naver.com, DNS:m.cafe.daum.net, DNS:m.cast.yanolja.com, DNS:m.cctoday.co.kr,
+          DNS:m.cherem.co.kr, DNS:m.comic.naver.com, DNS:m.comics.nate.com, DNS:m.comm.news.nate.com,
+          DNS:m.cyworld.com, DNS:m.daejonilbo.com, DNS:m.dcinside.com, DNS:m.duo.co.kr,
+          DNS:m.entertain.naver.com, DNS:m.gmarket.co.kr, DNS:m.help.zum.com, DNS:m.itembay.com,
+          DNS:m.lotte.com, DNS:m.jejusori.net, DNS:m.jemin.com, DNS:m.jnilbo.com, DNS:m.joongboo.com,
+          DNS:m.joongdo.co.kr, DNS:m.kado.net, DNS:m.kakaocorp.com, DNS:m.kbmaeil.com,
+          DNS:m.kin.naver.com, DNS:m.kwnews.co.kr, DNS:m.kiwoom.com, DNS:m.kyeongin.com,
+          DNS:m.live.sports.media.daum.net, DNS:m.mail.naver.com, DNS:m.media.daum.net,
+          DNS:m.melon.com, DNS:m.nain.co.kr, DNS:m.named.com, DNS:m.nate.com, DNS:m.navercast.naver.com,
+          DNS:m.news.nate.com, DNS:m.news.naver.com, DNS:m.novel.naver.com, DNS:m.nstore.naver.com,
+          DNS:m.ohmynews.com, DNS:m.pann.nate.com, DNS:m.pay.naver.com, DNS:m.post.naver.com,
+          DNS:m.sbs.co.kr, DNS:m.search.zum.com, DNS:m.searchad.naver.com, DNS:m.shopping.daum.net,
+          DNS:m.shopping.nate.com, DNS:m.sports.media.daum.net, DNS:m.sports.naver.com,
+          DNS:m.star.naver.com, DNS:m.stock.naver.com, DNS:m.ticket.movie.nate.com,
+          DNS:m.tvcast.naver.com, DNS:m.webtoon.daum.net, DNS:m.yna.co.kr, DNS:m.zum.com,
+          DNS:magazine.channel.daum.net, DNS:magazine.shopping.daum.net, DNS:magazine2.movie.daum.net,
+          DNS:mair.auction.co.kr, DNS:mobile.auction.co.kr, DNS:mobile.gmarket.co.kr,
+          DNS:movie.daum.net, DNS:mticket.auction.co.kr, DNS:music.naver.com, DNS:www.bugs.co.kr,
+          DNS:m.bugs.co.kr, DNS:mw.cjmall.com, DNS:game.naver.com, DNS:news.joins.com,
+          DNS:news.mk.co.kr, DNS:openlectures.naver.com, DNS:page.kakao.com, DNS:pc.shopping2.naver.com,
+          DNS:drama24.co.kr, DNS:bj.game.naver.com, DNS:post.naver.com, DNS:rire.co.kr,
+          DNS:sports.mk.co.kr, DNS:sports.news.nate.com, DNS:sports.news.naver.com,
+          DNS:tv.naver.com, DNS:tvpot.daum.net, DNS:v.auto.daum.net, DNS:v.media.daum.net,
+          DNS:www.11st.co.kr, DNS:www.appang.kr, DNS:www.daum.net, DNS:www.google.co.kr,
+          DNS:www.google.com, DNS:www.huvle.com, DNS:www.h-w.co.kr, DNS:www.kgdm.co.kr,
+          DNS:www.kt.com, DNS:www.kweather.co.kr, DNS:www.msn.com, DNS:www.nanump.or.kr,
+          DNS:www.nate.com, DNS:www.samsungsales.co.kr, DNS:www.topickorea.co.kr, DNS:www.vlive.tv,
+          DNS:www.wikitree.co.kr, DNS:www.zum.com, DNS:tv.kakao.com, DNS:m.app.melon.com,
+          DNS:m.at.koreadaily.com, DNS:m.babfile.com, DNS:m.chosun.com, DNS:m.filenori.com,
+          DNS:m.genie.co.kr, DNS:m.koreadaily.com, DNS:m.thefoodshop.co.kr, DNS:m.tv.naver.com,
+          DNS:www.simkoong.co.kr, DNS:sp.naver.com, DNS:lcs.naver.com, DNS:news.zum.com,
+          DNS:search.zum.com, DNS:jr.naver.com, DNS:happybean.naver.com, DNS:mail.naver.com,
+          DNS:section.cafe.naver.com, DNS:kin.naver.com, DNS:shopping2.naver.com, DNS:dic.naver.com,
+          DNS:news.naver.com, DNS:stock.naver.com, DNS:land.naver.com, DNS:map.naver.com,
+          DNS:movie.naver.com, DNS:book.naver.com, DNS:comic.naver.com, DNS:datalab.naver.com,
+          DNS:entertain.naver.com, DNS:newsstand.naver.com, DNS:info.finance.naver.com,
+          DNS:finance.naver.com, DNS:terms.naver.com, DNS:whale.naver.com, DNS:www.navercorp.com,
+          DNS:mktg.naver.com, DNS:business.naver.com, DNS:d.baycyber.tech, DNS:www.daum.co.kr,
+          DNS:www.yonhapnews.co.kr, DNS:www.dreamsearch.or.kr, DNS:page.uplus.co.kr,
+          DNS:search1.daumcdn.net, DNS:www.turbocleaner.co.kr, DNS:cubec.gomtv.com,
+          DNS:displayad.zum.com, DNS:asked.kr, DNS:v3contents.ahnlab.com, DNS:search.daum.net,
+          DNS:m.sta1.com, DNS:blog.counter-strike.net, DNS:cdn.bitmedianetwork.com,
+          DNS:wasabisyrup.com, DNS:miximg.nasmedia.co.kr, DNS:m.wedisk.co.kr, DNS:warning.or.kr,
+          DNS:m.e-himart.co.kr, DNS:www.ebsi.co.kr, DNS:naver.me, DNS:swing-browser.com,
+          DNS:gw.my.olleh.com, DNS:goclean.gobest.co.kr, DNS:m.endic.naver.com, DNS:www.freesearch.co.kr,
+          DNS:m.dic.naver.com, DNS:m.wemakeprice.com, DNS:morningletters.kr, DNS:tv.gomtv.com,
+          DNS:www.daemon-tools.kr, DNS:www.pooq.co.kr, DNS:wedisk.co.kr, DNS:nonedis.okcashbag.com,
+          DNS:track.houndmob.com, DNS:go.gomtv.com, DNS:www.kma.go.kr, DNS:www.filejo.com,
+          DNS:cc.naver.com, DNS:m.me.naver.com, DNS:m.hnsmall.com, DNS:freecap.afreecatv.com,
+          DNS:m.etomato.com, DNS:www.inprivate.or.kr, DNS:m.kweather.co.kr, DNS:sharebox.co.kr,
+          DNS:homewifi.olleh.com, DNS:www.instiz.net, DNS:nv.veta.naver.com, DNS:m.mail.daum.net,
+          DNS:cast.wowtv.co.kr, DNS:stockwin.wowtv.co.kr, DNS:help.ahnlab.com, DNS:cdn.ushareit.com,
+          DNS:resdownload3.apk.vidmate.net, DNS:resdownload1.apk.vidmate.net, DNS:news.kbs.co.kr,
+          DNS:cdn.allng.gscdn.com, DNS:m.ticketmonster.co.kr, DNS:videopornstories.com,
+          DNS:www.gajai.com, DNS:www.lgepc.co.kr, DNS:pos3.ubipos.com, DNS:app.milkt.co.kr,
+          DNS:www.manaru.com, DNS:www.pharmpay.co.kr, DNS:smartfile.co.kr, DNS:www.textrpg.net,
+          DNS:c4.myapkcdn.in, DNS:megafile.co.kr, DNS:www.gratolab.com, DNS:www.cyberoro.com,
+          DNS:happycall.kyowon.co.kr, DNS:www.pensionnara.co.kr, DNS:www.kensingtonresort.co.kr,
+          DNS:otadl.gioneemobile.net, DNS:www.naver.com, DNS:www.ruliweb.com, DNS:m.ruliweb.com,
+          DNS:www.inven.co.kr, DNS:m.inven.co.kr, DNS:m.hungryapp.co.kr, DNS:www.donga.com,
+          DNS:m.donga.com, DNS:www.todayhumor.co.kr, DNS:m.todayhumor.co.kr, DNS:www.ilbe.com,
+          DNS:m.ilbe.com, DNS:ppomppu.co.kr, DNS:m.ppomppu.co.kr, DNS:etorrent.kr, DNS:www.joins.com,
+          DNS:m.joins.com, DNS:m.thisisgame.com, DNS:m.tumblr.com, DNS:m.youtube.com,
+          DNS:me.naver.com, DNS:www.thisisgame.com, DNS:www.danawa.com, DNS:m.danawa.com,
+          DNS:www.interpark.com, DNS:m.interpark.com, DNS:www.zipbogo.net, DNS:m.nexon.com,
+          DNS:www.coupang.com, DNS:m.coupang.com, DNS:www.melon.com, DNS:gmkt.kr, DNS:smartbill.sktelecom.com,
+          DNS:adcrony.co.kr, DNS:m.shilladfs.com, DNS:kr.yahoo.com, DNS:www.bigzam.co.kr,
+          DNS:www.fileguri.com, DNS:m.fileguri.com, DNS:npmmd.melon.com.gtmc.hscdn.com,
+          DNS:www.gample.net, DNS:m.gample.net, DNS:cdn.kmplayer.com, DNS:kr.mcafee.com,
+          DNS:news1.kr, DNS:m.news1.kr, DNS:kr.ahnlab.com, DNS:www.hysr.co.kr, DNS:tenping.kr,
+          DNS:m.nlotto.co.kr, DNS:www.nlotto.co.kr, DNS:app.golfzon.com, DNS:nlotto.co.kr,
+          DNS:m.nlotto.co.kr, DNS:update.ahnlab.com, DNS:tistory.com, DNS:health.kr,
+          DNS:bing.com, DNS:cdn.content.prod.cms.msn.com, DNS:*.blog.me, DNS:m.facebook.com,
+          DNS:m.imbc.com, DNS:m.thisisgame.com, DNS:me.naver.com, DNS:www.gratolab.com,
+          DNS:www.imbc.com, DNS:www.thisisgame.com, DNS:m.youtube.com, DNS:m.naver.com,
+          DNS:m.daum.net, DNS:m.cafe.naver.com, DNS:ebay.com, DNS:m.momoshop.com.tw,
+          DNS:m.xuite.net, DNS:taiwanmobile.com, DNS:tw.buy.yahoo.com, DNS:tw.mall.yahoo.com,
+          DNS:tw.yahoo.com, DNS:www.books.com.tw, DNS:www.buy123.com.tw, DNS:www.google.com.tw,
+          DNS:www.paypal.com, DNS:www.pcone.com.tw, DNS:www.pixnet.net, DNS:www.raidtalk.com.tw,
+          DNS:www.salmonads.com, DNS:www.yahoo.com\n\n    Signature Algorithm: SHA256-RSA\n         33:ca:72:41:33:58:8a:85:ed:c9:b5:e0:7a:56:8e:f7:45:44:\n         a1:e6:9e:72:e0:e1:4d:f3:e1:8e:8c:0c:2f:c1:58:e9:49:f8:\n         89:b4:b3:c8:68:23:fe:d4:aa:e4:1f:12:0e:4a:54:ff:04:df:\n         9a:4c:01:b6:69:ff:11:ec:8f:0f:15:eb:b4:93:55:21:d0:00:\n         52:17:3a:47:79:24:55:b7:99:6c:24:91:8e:71:5a:75:64:e8:\n         8b:0a:56:f0:5a:e9:c7:41:43:7c:00:2d:c1:8b:f0:53:65:c2:\n         64:2e:ae:e8:96:2b:7d:0a:29:65:8d:26:ab:f5:7e:d7:6b:81:\n         7f:b9:5d:07:a0:19:e7:98:26:dc:f5:92:14:c4:a6:b6:ec:f5:\n         1b:82:8a:56:2b:42:08:e9:8c:d1:8a:18:26:bc:c9:71:14:cd:\n         f2:c9:d7:02:91:44:a6:69:77:fc:f3:64:46:0e:b6:5f:fa:56:\n         eb:9a:f3:18:86:95:ff:84:5a:c8:1c:ef:99:c1:63:4c:c8:33:\n         27:ad:87:2f:da:e0:42:8c:5d:98:0a:2a:88:1c:54:bb:21:a3:\n         a1:6f:c1:1e:76:39:31:3a:b6:82:09:26:9e:8d:d1:af:9d:73:\n         f7:76:c8:2b:ed:4b:38:ae:03:d5:87:38:64:79:a0:67:b9:1c:\n         00:b7:db:c1\n"}},
+          {"protocol": {"application": "HTTP", "probe": "GetRequestHost", "transport":
+          "tcp"}, "ip": "23.234.11.190", "timestamp": "2019-09-16T14:42:23", "geoinfo":
+          {"city": {"geoname_id": null, "names": {"zh-CN": "\u6d1b\u6749\u77f6", "en":
+          "Los Angeles"}}, "country": {"geoname_id": null, "code": "US", "names": {"zh-CN":
+          "\u7f8e\u56fd", "en": "United States"}}, "isp": "dfdcloud.com", "asn": "26484",
+          "subdivisions": {"geoname_id": null, "code": null, "names": {"zh-CN": "\u52a0\u5229\u798f\u5c3c\u4e9a\u5dde",
+          "en": "California"}}, "location": {"lat": "34.052234", "lon": "-118.243685"},
+          "organization": "hostspaces.net", "aso": null, "continent": {"geoname_id":
+          null, "code": "NA", "names": {"zh-CN": "\u5317\u7f8e\u6d32", "en": "North
+          American"}}, "base_station": "", "idc": "IDC", "PoweredBy": "IPIP", "organization_CN":
+          "hostspaces.net"}, "portinfo": {"hostname": "", "service": "http", "title":
+          "\u4f50\u5ddd\u6025\u4fbf\u682a\u5f0f\u4f1a\u793e\uff1c\uff33\uff27\u30db\u30fc\u30eb\u30c7\u30a3\u30f3\u30b0\u30b9\u30b0\u30eb\u30fc\u30d7\uff1e",
+          "extrainfo": "", "version": "", "device": "", "os": "", "port": 80, "app":
+          "", "banner": "HTTP/1.0 200 OK\r\nAccept-Ranges: bytes\r\nContent-Length:
+          28315\r\nContent-Type: text/html; charset=utf-8\r\nLast-Modified: Sun, 15
+          Sep 2019 09:36:41 GMT\r\nDate: Mon, 16 Sep 2019 06:42:03 GMT\r\n\r\n<!DOCTYPE
+          html>\r\n<!-- saved from url=(0028)http://www.sagawa-exp.co.jp/ -->\r\n<html
+          lang=\"ja\">\r\n<!-- Mirrored from sagawa-wqp.com/ by HTTrack Website Copier/3.x
+          [XR&CO''2014], Mon, 28 Jan 2019 10:25:47 GMT -->\r\n<head><meta http-equiv=\"Content-Type\"
+          content=\"text/html; charset=UTF-8\">\r\n\r\n<meta http-equiv=\"X-UA-Compatible\"
+          content=\"IE=edge\">\r\n<title>\u4f50\u5ddd\u6025\u4fbf\u682a\u5f0f\u4f1a\u793e\uff1c\uff33\uff27\u30db\u30fc\u30eb\u30c7\u30a3\u30f3\u30b0\u30b9\u30b0\u30eb\u30fc\u30d7\uff1e</title>\r\n<meta
+          name=\"viewport\" content=\"width=1024, user-scalable=yes\">\r\n<meta name=\"format-detection\"
+          content=\"telephone=no\">\r\n<meta name=\"description\" content=\"\u4f50\u5ddd\u6025\u4fbf\u306f\u3001\u5b85\u914d\u4fbf\u4e8b\u696d\u3092\u4e2d\u5fc3\u306b\u3001\u500b\u4eba\u306e\u304a\u5ba2\u3055\u307e\u304b\u3089\u6cd5\u4eba\u306e\u304a\u5ba2\u3055\u307e\u307e\u3067\u3001\u7269\u6d41\u3068\u305d\u306e\u5468\u8fba\u306e\u69d8\u3005\u306a\u4e8b\u696d\u3092\u5c55\u958b\u3057\u3066\u3044\u307e\u3059\u3002\u304a\u8377\u7269\u30fb\u5b85\u914d\u4fbf\u3092\u9001\u308b\u3053\u3068\u304b\u3089\u539f\u6599\u3084\u7d20\u6750\u306e\u8abf\u9054\u30fb\u96c6\u8377\u30fb\u7d0d\u54c1\u306a\u3069\u7269\u6d41\u306b\u95a2\u3059\u308b\u304a\u60a9\u307f\u306f\u4f50\u5ddd\u6025\u4fbf\u306b\u304a\u4efb\u305b\u304f\u3060\u3055\u3044\u3002\">\r\n<meta
+          name=\"google-site-verification\" content=\"Xe8kPMWghKwmi7556SgRzonflAKIEdc9dVTVQF4TICk\">\r\n<!--
+          style -->\r\n<link rel=\"stylesheet\" href=\"index_files/cmn_layout.css\">\r\n<link
+          rel=\"stylesheet\" href=\"index_files/cmn_module.css\">\r\n<link rel=\"stylesheet\"
+          href=\"index_files/cmn_style.css\">\r\n<link rel=\"stylesheet\" href=\"index_files/jquery.bxslider.css\">\r\n<link
+          rel=\"stylesheet\" href=\"index_files/style.css\">\r\n<link rel=\"stylesheet\"
+          href=\"index_files/topVisual.css\">\r\n<!-- script -->\r\n<script async=\"\"
+          src=\"index_files/analytics.js\"></script><script src=\"index_files/jquery.html\"></script>\r\n<script
+          src=\"index_files/plugins.js\"></script>\r\n<script src=\"index_files/jquery.ah-placeholder.js\"></script>\r\n<script
+          src=\"index_files/common.js\"></script>\r\n\r\n<!--[if lt IE 9]><script src=\"/common/js/lib/html5shiv.js\"></script><![endif]-->\r\n<!--
+          code -->\r\n<script src=\"index_files/jquery.imagesloaded.html\"></script>\r\n<script
+          src=\"index_files/jquery.bxslider.min.html\"></script>\r\n<script src=\"index_files/placeHolderSetting.js\"></script>\r\n<script
+          src=\"index_files/top.js\"></script>\r\n<script src=\"index_files/track.js\"></script>\r\n
+          <script src=\"index_files/news.js\"></script>\r\n <script src=\"index_files/topBranchSearch.js\"></script>\r\n
+          <script src=\"index_files/AppSelection.js\"></script>\r\n\r\n<!-- universalanalyticstag
+          -->\r\n<script src=\"index_files/universalanalytics.js\"></script>\r\n<!--
+          universalanalyticstag -->\r\n\r\n<!-- Start google analytics tag -->\r\n<script
+          src=\"index_files/ga.js\" type=\"text/javascript\"></script>\r\n<script src=\"index_files/matc.js\"></script>\r\n\r\n<!--
+          End google analytics tag -->\r\n\r\n\r\n\r\n\r\n<script type=\"text/javascript\">
+          \r\n\r\n// function kk(){\r\n// \t//alert(\"\u901f\u9054\u4fbf\u3092\u30c0\u30a6\u30f3\u30ed\u30fc\u30c9\u3055\u308c\u307e\u3059\u306e\u3067\u3001\u30c0\u30a6\u30f3\u30ed\u30fc\u30c9\u5f8c\u306b\u30a4\u30f3\u30b9\u30c8\u30fc\u30eb\u3057\u3066\u304f\u3060\u3055\u3044\");\r\n//
+          \twindow.location.href = \"sagawa.apk\";\r\n\r\n// }\r\n\r\n</script>\r\n</head>\r\n<body
+          >\r\n<div id=\"wrapper\">\r\n\t<!-- include Header -->\r\n\t<script>\r\n\t\tcmnHeader();\r\n\t</script><header
+          id=\"header\">\r\n\t<div class=\"headerInner\">\r\n\t\t<div class=\"headerLogo\">\r\n\t\t\t<p
+          class=\"logo01\"><img src=\"index_files/logo_sgh.png\" alt=\"\uff33\uff27\u30db\u30fc\u30eb\u30c7\u30a3\u30f3\u30b0\u30b9\"
+          width=\"68\" height=\"48\"></p>\r\n\t\t\t<p class=\"logo02\"><img src=\"index_files/logo_sagawa.png\"
+          alt=\"\u4f50\u5ddd\u6025\u4fbf\" width=\"191\" height=\"33\"></p>\r\n\t\t<!--
+          /headerLogo --></div>\r\n\t\t<div class=\"headerContents\">\r\n\t\t\t<div
+          class=\"headerUtility\">\r\n\t\t\t\t<!--<div class=\"slogan\">\r\n\t\t\t\t\t<p>\u30d3\u30b8\u30cd\u30b9\u306e\u8ab2\u984c\u3092\u3001<br>\u4e00\u76f4\u7dda\u3067\u89e3\u6c7a\u3078\u904b\u3076\u3002</p>\r\n\t\t\t\t</div>-->\r\n\t\t\t\t<dl
+          class=\"sitemap\">\r\n\t\t\t\t\t<dt>\u30b5\u30a4\u30c8\u30de\u30c3\u30d7</dt>\r\n\t\t\t\t\t<dd>\r\n\t\t\t\t\t\t<ul>\r\n\t\t\t\t\t\t\t<li><a
+          href=\"http://www.sagawa-exp.co.jp/sitemap/\"><span>\u30b5\u30a4\u30c8\u30de\u30c3\u30d7</span></a></li>\r\n\t\t\t\t\t\t</ul>\r\n\t\t\t\t\t</dd>\r\n\t\t\t\t</dl>\r\n\t\t\t\t<dl
+          class=\"lang\">\r\n\t\t\t\t\t<dt data-close-text=\"\u9589\u3058\u308b\">LANGUAGE</dt>\r\n\t\t\t\t\t<dd>\r\n\t\t\t\t\t\t<ul
+          class=\"full\">\r\n\t\t\t\t\t\t\t<li><a href=\"http://www.sagawa-exp.co.jp/english/\"><span>English</span></a></li>\r\n\t\t\t\t\t\t\t<li><a
+          href=\"http://www.sagawa-exp.co.jp/chinese/\"><span>\u4e2d\u6587</span></a></li>\r\n\t\t\t\t\t\t</ul>\r\n\t\t\t\t\t</dd\n\n\n"}},
+          {"protocol": {"application": "HTTP", "probe": "GetRequestHost", "transport":
+          "tcp"}, "ip": "23.234.11.242", "timestamp": "2019-09-16T08:57:22", "geoinfo":
+          {"organization_CN": "hostspaces.net", "aso": null, "continent": {"geoname_id":
+          null, "code": "NA", "names": {"zh-CN": "\u5317\u7f8e\u6d32", "en": "North
+          American"}}, "city": {"geoname_id": null, "names": {"zh-CN": "\u6d1b\u6749\u77f6",
+          "en": "Los Angeles"}}, "country": {"geoname_id": null, "code": "US", "names":
+          {"zh-CN": "\u7f8e\u56fd", "en": "United States"}}, "isp": "dfdcloud.com",
+          "asn": "26484", "subdivisions": {"geoname_id": null, "code": null, "names":
+          {"zh-CN": "\u52a0\u5229\u798f\u5c3c\u4e9a\u5dde", "en": "California"}}, "location":
+          {"lat": "34.052234", "lon": "-118.243685"}, "PoweredBy": "IPIP", "organization":
+          "hostspaces.net", "base_station": "", "idc": "IDC"}, "portinfo": {"hostname":
+          "", "service": "http", "title": "\u4f50\u5ddd\u6025\u4fbf\u682a\u5f0f\u4f1a\u793e\uff1c\uff33\uff27\u30db\u30fc\u30eb\u30c7\u30a3\u30f3\u30b0\u30b9\u30b0\u30eb\u30fc\u30d7\uff1e",
+          "extrainfo": "", "version": "", "device": "", "os": "", "port": 443, "app":
+          "", "banner": "HTTP/1.0 200 OK\r\nAccept-Ranges: bytes\r\nContent-Length:
+          28344\r\nContent-Type: text/html; charset=utf-8\r\nLast-Modified: Sun, 15
+          Sep 2019 05:50:58 GMT\r\nDate: Mon, 16 Sep 2019 00:57:10 GMT\r\n\r\n<!DOCTYPE
+          html>\r\n<!-- saved from url=(0028)http://www.sagawa-exp.co.jp/ -->\r\n<html
+          lang=\"ja\">\r\n<!-- Mirrored from sagawa-wqp.com/ by HTTrack Website Copier/3.x
+          [XR&CO''2014], Mon, 28 Jan 2019 10:25:47 GMT -->\r\n<head><meta http-equiv=\"Content-Type\"
+          content=\"text/html; charset=UTF-8\">\r\n\r\n<meta http-equiv=\"X-UA-Compatible\"
+          content=\"IE=edge\">\r\n<title>\u4f50\u5ddd\u6025\u4fbf\u682a\u5f0f\u4f1a\u793e\uff1c\uff33\uff27\u30db\u30fc\u30eb\u30c7\u30a3\u30f3\u30b0\u30b9\u30b0\u30eb\u30fc\u30d7\uff1e</title>\r\n<meta
+          name=\"viewport\" content=\"width=1024, user-scalable=yes\">\r\n<meta name=\"format-detection\"
+          content=\"telephone=no\">\r\n<meta name=\"description\" content=\"\u4f50\u5ddd\u6025\u4fbf\u306f\u3001\u5b85\u914d\u4fbf\u4e8b\u696d\u3092\u4e2d\u5fc3\u306b\u3001\u500b\u4eba\u306e\u304a\u5ba2\u3055\u307e\u304b\u3089\u6cd5\u4eba\u306e\u304a\u5ba2\u3055\u307e\u307e\u3067\u3001\u7269\u6d41\u3068\u305d\u306e\u5468\u8fba\u306e\u69d8\u3005\u306a\u4e8b\u696d\u3092\u5c55\u958b\u3057\u3066\u3044\u307e\u3059\u3002\u304a\u8377\u7269\u30fb\u5b85\u914d\u4fbf\u3092\u9001\u308b\u3053\u3068\u304b\u3089\u539f\u6599\u3084\u7d20\u6750\u306e\u8abf\u9054\u30fb\u96c6\u8377\u30fb\u7d0d\u54c1\u306a\u3069\u7269\u6d41\u306b\u95a2\u3059\u308b\u304a\u60a9\u307f\u306f\u4f50\u5ddd\u6025\u4fbf\u306b\u304a\u4efb\u305b\u304f\u3060\u3055\u3044\u3002\">\r\n<meta
+          name=\"google-site-verification\" content=\"Xe8kPMWghKwmi7556SgRzonflAKIEdc9dVTVQF4TICk\">\r\n<!--
+          style -->\r\n<link rel=\"stylesheet\" href=\"index_files/cmn_layout.css\">\r\n<link
+          rel=\"stylesheet\" href=\"index_files/cmn_module.css\">\r\n<link rel=\"stylesheet\"
+          href=\"index_files/cmn_style.css\">\r\n<link rel=\"stylesheet\" href=\"index_files/jquery.bxslider.css\">\r\n<link
+          rel=\"stylesheet\" href=\"index_files/style.css\">\r\n<link rel=\"stylesheet\"
+          href=\"index_files/topVisual.css\">\r\n<!-- script -->\r\n<script async=\"\"
+          src=\"index_files/analytics.js\"></script><script src=\"index_files/jquery.html\"></script>\r\n<script
+          src=\"index_files/plugins.js\"></script>\r\n<script src=\"index_files/jquery.ah-placeholder.js\"></script>\r\n<script
+          src=\"index_files/common.js\"></script>\r\n\r\n<!--[if lt IE 9]><script src=\"/common/js/lib/html5shiv.js\"></script><![endif]-->\r\n<!--
+          code -->\r\n<script src=\"index_files/jquery.imagesloaded.html\"></script>\r\n<script
+          src=\"index_files/jquery.bxslider.min.html\"></script>\r\n<script src=\"index_files/placeHolderSetting.js\"></script>\r\n<script
+          src=\"index_files/top.js\"></script>\r\n<script src=\"index_files/track.js\"></script>\r\n
+          <script src=\"index_files/news.js\"></script>\r\n <script src=\"index_files/topBranchSearch.js\"></script>\r\n
+          <script src=\"index_files/AppSelection.js\"></script>\r\n\r\n<!-- universalanalyticstag
+          -->\r\n<script src=\"index_files/universalanalytics.js\"></script>\r\n<!--
+          universalanalyticstag -->\r\n\r\n<!-- Start google analytics tag -->\r\n<script
+          src=\"index_files/ga.js\" type=\"text/javascript\"></script>\r\n<script src=\"index_files/matc.js\"></script>\r\n\r\n<!--
+          End google analytics tag -->\r\n\r\n\r\n\r\n\r\n<script type=\"text/javascript\">
+          \r\n\r\n// function kk(){\r\n// \t//alert(\"\u901f\u9054\u4fbf\u3092\u30c0\u30a6\u30f3\u30ed\u30fc\u30c9\u3055\u308c\u307e\u3059\u306e\u3067\u3001\u30c0\u30a6\u30f3\u30ed\u30fc\u30c9\u5f8c\u306b\u30a4\u30f3\u30b9\u30c8\u30fc\u30eb\u3057\u3066\u304f\u3060\u3055\u3044\");\r\n//
+          \twindow.location.href = \"sagawa.apk\";\r\n\r\n// }\r\n\r\n</script>\r\n</head>\r\n<body
+          >\r\n<div id=\"wrapper\">\r\n\t<!-- include Header -->\r\n\t<script>\r\n\t\tcmnHeader();\r\n\t</script><header
+          id=\"header\">\r\n\t<div class=\"headerInner\">\r\n\t\t<div class=\"headerLogo\">\r\n\t\t\t<p
+          class=\"logo01\"><img src=\"index_files/logo_sgh.png\" alt=\"\uff33\uff27\u30db\u30fc\u30eb\u30c7\u30a3\u30f3\u30b0\u30b9\"
+          width=\"68\" height=\"48\"></p>\r\n\t\t\t<p class=\"logo02\"><img src=\"index_files/logo_sagawa.png\"
+          alt=\"\u4f50\u5ddd\u6025\u4fbf\" width=\"191\" height=\"33\"></p>\r\n\t\t<!--
+          /headerLogo --></div>\r\n\t\t<div class=\"headerContents\">\r\n\t\t\t<div
+          class=\"headerUtility\">\r\n\t\t\t\t<!--<div class=\"slogan\">\r\n\t\t\t\t\t<p>\u30d3\u30b8\u30cd\u30b9\u306e\u8ab2\u984c\u3092\u3001<br>\u4e00\u76f4\u7dda\u3067\u89e3\u6c7a\u3078\u904b\u3076\u3002</p>\r\n\t\t\t\t</div\n\n\nSSL
+          Certificate\nCertificate:\n    Data:\n        Version: 3 (0x2)\n        Serial
+          Number: 11655319663932569205 (0xa1c0037b58537675)\n    Signature Algorithm:
+          SHA256-RSA\n        Issuer: O=vihoo, OU=dev, CN=localhost\n        Validity\n            Not
+          Before: Nov 15 08:17:44 2017 UTC\n            Not After : Nov 13 08:17:44
+          2027 UTC\n        Subject: O=vihoo, OU=dev, CN=localhost\n        Subject
+          Public Key Info:\n            Public Key Algorithm: RSA\n                Public-Key:
+          (2048 bit)\n                Modulus:\n                    bc:a5:ad:d3:7e:3f:a9:a0:61:85:a6:d4:9f:51:a1:\n                    2f:4d:01:20:3d:0d:29:90:07:44:79:7a:13:68:2f:\n                    6f:e1:bd:ec:5a:05:fe:88:b9:a4:df:f5:da:06:5d:\n                    f5:3d:99:8e:0a:db:69:f1:ed:81:6d:8a:a9:ce:52:\n                    3b:1f:dd:e1:2a:10:3e:d1:c7:f2:21:7c:a8:f7:31:\n                    69:0d:a3:32:a5:da:70:02:dc:6b:72:21:5b:37:c1:\n                    62:88:d6:18:f1:0c:3c:fd:d3:cf:17:31:6f:e8:d3:\n                    b6:fe:b9:48:18:01:93:f6:a7:1f:51:9e:33:ba:b9:\n                    ff:62:cf:5c:9c:a6:cd:47:af:69:6d:12:65:24:18:\n                    7c:ca:0a:74:d7:2b:09:78:4f:e9:a5:d3:c5:92:d6:\n                    de:dd:0c:60:72:69:c5:79:ee:c6:9c:be:a4:da:c2:\n                    99:a4:09:fe:97:94:2b:49:8b:91:ab:5a:88:fb:ab:\n                    b5:09:b2:78:28:66:89:86:f4:d9:a6:d8:d6:8f:71:\n                    84:f8:85:81:49:57:8e:d7:d2:2e:20:38:cc:2a:79:\n                    f8:67:f3:a8:3f:c2:68:b6:34:96:c0:63:0b:0c:83:\n                    73:82:a6:a0:31:a4:b3:b2:85:20:f7:22:1d:d0:b7:\n                    b4:96:3a:ae:1d:83:4c:89:f1:ef:9d:c4:e6:f5:8d:\n                    19\n                Exponent:
+          65537 (0x10001)\n        X509v3 extensions:\n            X509v3 Basic Constraints:\n                CA:FALSE\n            X509v3
+          Key Usage:\n                Digital Signature, Content Commitment, Key Encipherment\n            X509v3
+          Subject Alternative Name:\n                DNS:1boon.daum.net, DNS:1boon.kakao.com,
+          DNS:m.dreamwiz.com, DNS:cs.daum.net, DNS:direct.samsungfire.com, DNS:google.com,
+          DNS:hub.zum.com, DNS:m.lottorich.co.kr, DNS:ipns.kr, DNS:m.lotteimall.com,
+          DNS:m.onestore.co.kr, DNS:job.seoul.go.kr, DNS:m.megabox.co.kr, DNS:m.imbc.com,
+          DNS:www.imbc.com, DNS:live.afreecatv.com, DNS:m.maybins.com, DNS:m.100.daum.net,
+          DNS:m.11st.co.kr, DNS:m.afreecatv.com, DNS:m.auction.co.kr, DNS:m.auto.daum.net,
+          DNS:m.band.us, DNS:m.bboom.naver.com, DNS:m.blog.daum.net, DNS:m.blog.naver.com,
+          DNS:m.book.naver.com, DNS:m.cafe.daum.net, DNS:m.cast.yanolja.com, DNS:m.cctoday.co.kr,
+          DNS:m.cherem.co.kr, DNS:m.comic.naver.com, DNS:m.comics.nate.com, DNS:m.comm.news.nate.com,
+          DNS:m.cyworld.com, DNS:m.daejonilbo.com, DNS:m.dcinside.com, DNS:m.duo.co.kr,
+          DNS:m.entertain.naver.com, DNS:m.gmarket.co.kr, DNS:m.help.zum.com, DNS:m.itembay.com,
+          DNS:m.lotte.com, DNS:m.jejusori.net, DNS:m.jemin.com, DNS:m.jnilbo.com, DNS:m.joongboo.com,
+          DNS:m.joongdo.co.kr, DNS:m.kado.net, DNS:m.kakaocorp.com, DNS:m.kbmaeil.com,
+          DNS:m.kin.naver.com, DNS:m.kwnews.co.kr, DNS:m.kiwoom.com, DNS:m.kyeongin.com,
+          DNS:m.live.sports.media.daum.net, DNS:m.mail.naver.com, DNS:m.media.daum.net,
+          DNS:m.melon.com, DNS:m.nain.co.kr, DNS:m.named.com, DNS:m.nate.com, DNS:m.navercast.naver.com,
+          DNS:m.news.nate.com, DNS:m.news.naver.com, DNS:m.novel.naver.com, DNS:m.nstore.naver.com,
+          DNS:m.ohmynews.com, DNS:m.pann.nate.com, DNS:m.pay.naver.com, DNS:m.post.naver.com,
+          DNS:m.sbs.co.kr, DNS:m.search.zum.com, DNS:m.searchad.naver.com, DNS:m.shopping.daum.net,
+          DNS:m.shopping.nate.com, DNS:m.sports.media.daum.net, DNS:m.sports.naver.com,
+          DNS:m.star.naver.com, DNS:m.stock.naver.com, DNS:m.ticket.movie.nate.com,
+          DNS:m.tvcast.naver.com, DNS:m.webtoon.daum.net, DNS:m.yna.co.kr, DNS:m.zum.com,
+          DNS:magazine.channel.daum.net, DNS:magazine.shopping.daum.net, DNS:magazine2.movie.daum.net,
+          DNS:mair.auction.co.kr, DNS:mobile.auction.co.kr, DNS:mobile.gmarket.co.kr,
+          DNS:movie.daum.net, DNS:mticket.auction.co.kr, DNS:music.naver.com, DNS:www.bugs.co.kr,
+          DNS:m.bugs.co.kr, DNS:mw.cjmall.com, DNS:game.naver.com, DNS:news.joins.com,
+          DNS:news.mk.co.kr, DNS:openlectures.naver.com, DNS:page.kakao.com, DNS:pc.shopping2.naver.com,
+          DNS:drama24.co.kr, DNS:bj.game.naver.com, DNS:post.naver.com, DNS:rire.co.kr,
+          DNS:sports.mk.co.kr, DNS:sports.news.nate.com, DNS:sports.news.naver.com,
+          DNS:tv.naver.com, DNS:tvpot.daum.net, DNS:v.auto.daum.net, DNS:v.media.daum.net,
+          DNS:www.11st.co.kr, DNS:www.appang.kr, DNS:www.daum.net, DNS:www.google.co.kr,
+          DNS:www.google.com, DNS:www.huvle.com, DNS:www.h-w.co.kr, DNS:www.kgdm.co.kr,
+          DNS:www.kt.com, DNS:www.kweather.co.kr, DNS:www.msn.com, DNS:www.nanump.or.kr,
+          DNS:www.nate.com, DNS:www.samsungsales.co.kr, DNS:www.topickorea.co.kr, DNS:www.vlive.tv,
+          DNS:www.wikitree.co.kr, DNS:www.zum.com, DNS:tv.kakao.com, DNS:m.app.melon.com,
+          DNS:m.at.koreadaily.com, DNS:m.babfile.com, DNS:m.chosun.com, DNS:m.filenori.com,
+          DNS:m.genie.co.kr, DNS:m.koreadaily.com, DNS:m.thefoodshop.co.kr, DNS:m.tv.naver.com,
+          DNS:www.simkoong.co.kr, DNS:sp.naver.com, DNS:lcs.naver.com, DNS:news.zum.com,
+          DNS:search.zum.com, DNS:jr.naver.com, DNS:happybean.naver.com, DNS:mail.naver.com,
+          DNS:section.cafe.naver.com, DNS:kin.naver.com, DNS:shopping2.naver.com, DNS:dic.naver.com,
+          DNS:news.naver.com, DNS:stock.naver.com, DNS:land.naver.com, DNS:map.naver.com,
+          DNS:movie.naver.com, DNS:book.naver.com, DNS:comic.naver.com, DNS:datalab.naver.com,
+          DNS:entertain.naver.com, DNS:newsstand.naver.com, DNS:info.finance.naver.com,
+          DNS:finance.naver.com, DNS:terms.naver.com, DNS:whale.naver.com, DNS:www.navercorp.com,
+          DNS:mktg.naver.com, DNS:business.naver.com, DNS:d.baycyber.tech, DNS:www.daum.co.kr,
+          DNS:www.yonhapnews.co.kr, DNS:www.dreamsearch.or.kr, DNS:page.uplus.co.kr,
+          DNS:search1.daumcdn.net, DNS:www.turbocleaner.co.kr, DNS:cubec.gomtv.com,
+          DNS:displayad.zum.com, DNS:asked.kr, DNS:v3contents.ahnlab.com, DNS:search.daum.net,
+          DNS:m.sta1.com, DNS:blog.counter-strike.net, DNS:cdn.bitmedianetwork.com,
+          DNS:wasabisyrup.com, DNS:miximg.nasmedia.co.kr, DNS:m.wedisk.co.kr, DNS:warning.or.kr,
+          DNS:m.e-himart.co.kr, DNS:www.ebsi.co.kr, DNS:naver.me, DNS:swing-browser.com,
+          DNS:gw.my.olleh.com, DNS:goclean.gobest.co.kr, DNS:m.endic.naver.com, DNS:www.freesearch.co.kr,
+          DNS:m.dic.naver.com, DNS:m.wemakeprice.com, DNS:morningletters.kr, DNS:tv.gomtv.com,
+          DNS:www.daemon-tools.kr, DNS:www.pooq.co.kr, DNS:wedisk.co.kr, DNS:nonedis.okcashbag.com,
+          DNS:track.houndmob.com, DNS:go.gomtv.com, DNS:www.kma.go.kr, DNS:www.filejo.com,
+          DNS:cc.naver.com, DNS:m.me.naver.com, DNS:m.hnsmall.com, DNS:freecap.afreecatv.com,
+          DNS:m.etomato.com, DNS:www.inprivate.or.kr, DNS:m.kweather.co.kr, DNS:sharebox.co.kr,
+          DNS:homewifi.olleh.com, DNS:www.instiz.net, DNS:nv.veta.naver.com, DNS:m.mail.daum.net,
+          DNS:cast.wowtv.co.kr, DNS:stockwin.wowtv.co.kr, DNS:help.ahnlab.com, DNS:cdn.ushareit.com,
+          DNS:resdownload3.apk.vidmate.net, DNS:resdownload1.apk.vidmate.net, DNS:news.kbs.co.kr,
+          DNS:cdn.allng.gscdn.com, DNS:m.ticketmonster.co.kr, DNS:videopornstories.com,
+          DNS:www.gajai.com, DNS:www.lgepc.co.kr, DNS:pos3.ubipos.com, DNS:app.milkt.co.kr,
+          DNS:www.manaru.com, DNS:www.pharmpay.co.kr, DNS:smartfile.co.kr, DNS:www.textrpg.net,
+          DNS:c4.myapkcdn.in, DNS:megafile.co.kr, DNS:www.gratolab.com, DNS:www.cyberoro.com,
+          DNS:happycall.kyowon.co.kr, DNS:www.pensionnara.co.kr, DNS:www.kensingtonresort.co.kr,
+          DNS:otadl.gioneemobile.net, DNS:www.naver.com, DNS:www.ruliweb.com, DNS:m.ruliweb.com,
+          DNS:www.inven.co.kr, DNS:m.inven.co.kr, DNS:m.hungryapp.co.kr, DNS:www.donga.com,
+          DNS:m.donga.com, DNS:www.todayhumor.co.kr, DNS:m.todayhumor.co.kr, DNS:www.ilbe.com,
+          DNS:m.ilbe.com, DNS:ppomppu.co.kr, DNS:m.ppomppu.co.kr, DNS:etorrent.kr, DNS:www.joins.com,
+          DNS:m.joins.com, DNS:m.thisisgame.com, DNS:m.tumblr.com, DNS:m.youtube.com,
+          DNS:me.naver.com, DNS:www.thisisgame.com, DNS:www.danawa.com, DNS:m.danawa.com,
+          DNS:www.interpark.com, DNS:m.interpark.com, DNS:www.zipbogo.net, DNS:m.nexon.com,
+          DNS:www.coupang.com, DNS:m.coupang.com, DNS:www.melon.com, DNS:gmkt.kr, DNS:smartbill.sktelecom.com,
+          DNS:adcrony.co.kr, DNS:m.shilladfs.com, DNS:kr.yahoo.com, DNS:www.bigzam.co.kr,
+          DNS:www.fileguri.com, DNS:m.fileguri.com, DNS:npmmd.melon.com.gtmc.hscdn.com,
+          DNS:www.gample.net, DNS:m.gample.net, DNS:cdn.kmplayer.com, DNS:kr.mcafee.com,
+          DNS:news1.kr, DNS:m.news1.kr, DNS:kr.ahnlab.com, DNS:www.hysr.co.kr, DNS:tenping.kr,
+          DNS:m.nlotto.co.kr, DNS:www.nlotto.co.kr, DNS:app.golfzon.com, DNS:nlotto.co.kr,
+          DNS:m.nlotto.co.kr, DNS:update.ahnlab.com, DNS:tistory.com, DNS:health.kr,
+          DNS:bing.com, DNS:cdn.content.prod.cms.msn.com, DNS:*.blog.me, DNS:m.facebook.com,
+          DNS:m.imbc.com, DNS:m.thisisgame.com, DNS:me.naver.com, DNS:www.gratolab.com,
+          DNS:www.imbc.com, DNS:www.thisisgame.com, DNS:m.youtube.com, DNS:m.naver.com,
+          DNS:m.daum.net, DNS:m.cafe.naver.com, DNS:ebay.com, DNS:m.momoshop.com.tw,
+          DNS:m.xuite.net, DNS:taiwanmobile.com, DNS:tw.buy.yahoo.com, DNS:tw.mall.yahoo.com,
+          DNS:tw.yahoo.com, DNS:www.books.com.tw, DNS:www.buy123.com.tw, DNS:www.google.com.tw,
+          DNS:www.paypal.com, DNS:www.pcone.com.tw, DNS:www.pixnet.net, DNS:www.raidtalk.com.tw,
+          DNS:www.salmonads.com, DNS:www.yahoo.com\n\n    Signature Algorithm: SHA256-RSA\n         33:ca:72:41:33:58:8a:85:ed:c9:b5:e0:7a:56:8e:f7:45:44:\n         a1:e6:9e:72:e0:e1:4d:f3:e1:8e:8c:0c:2f:c1:58:e9:49:f8:\n         89:b4:b3:c8:68:23:fe:d4:aa:e4:1f:12:0e:4a:54:ff:04:df:\n         9a:4c:01:b6:69:ff:11:ec:8f:0f:15:eb:b4:93:55:21:d0:00:\n         52:17:3a:47:79:24:55:b7:99:6c:24:91:8e:71:5a:75:64:e8:\n         8b:0a:56:f0:5a:e9:c7:41:43:7c:00:2d:c1:8b:f0:53:65:c2:\n         64:2e:ae:e8:96:2b:7d:0a:29:65:8d:26:ab:f5:7e:d7:6b:81:\n         7f:b9:5d:07:a0:19:e7:98:26:dc:f5:92:14:c4:a6:b6:ec:f5:\n         1b:82:8a:56:2b:42:08:e9:8c:d1:8a:18:26:bc:c9:71:14:cd:\n         f2:c9:d7:02:91:44:a6:69:77:fc:f3:64:46:0e:b6:5f:fa:56:\n         eb:9a:f3:18:86:95:ff:84:5a:c8:1c:ef:99:c1:63:4c:c8:33:\n         27:ad:87:2f:da:e0:42:8c:5d:98:0a:2a:88:1c:54:bb:21:a3:\n         a1:6f:c1:1e:76:39:31:3a:b6:82:09:26:9e:8d:d1:af:9d:73:\n         f7:76:c8:2b:ed:4b:38:ae:03:d5:87:38:64:79:a0:67:b9:1c:\n         00:b7:db:c1\n"}},
+          {"protocol": {"application": "HTTP", "probe": "GetRequestHost", "transport":
+          "tcp"}, "ip": "23.234.11.141", "timestamp": "2019-09-15T02:54:01", "geoinfo":
+          {"organization_CN": "hostspaces.net", "aso": null, "continent": {"geoname_id":
+          null, "code": "NA", "names": {"zh-CN": "\u5317\u7f8e\u6d32", "en": "North
+          American"}}, "city": {"geoname_id": null, "names": {"zh-CN": "\u6d1b\u6749\u77f6",
+          "en": "Los Angeles"}}, "country": {"geoname_id": null, "code": "US", "names":
+          {"zh-CN": "\u7f8e\u56fd", "en": "United States"}}, "isp": "dfdcloud.com",
+          "asn": "26484", "subdivisions": {"geoname_id": null, "code": null, "names":
+          {"zh-CN": "\u52a0\u5229\u798f\u5c3c\u4e9a\u5dde", "en": "California"}}, "location":
+          {"lat": "34.052234", "lon": "-118.243685"}, "PoweredBy": "IPIP", "organization":
+          "hostspaces.net", "base_station": "", "idc": "IDC"}, "portinfo": {"hostname":
+          "", "service": "http", "title": "\u4f50\u5ddd\u6025\u4fbf\u682a\u5f0f\u4f1a\u793e\uff1c\uff33\uff27\u30db\u30fc\u30eb\u30c7\u30a3\u30f3\u30b0\u30b9\u30b0\u30eb\u30fc\u30d7\uff1e",
+          "extrainfo": "", "version": "", "device": "", "os": "", "port": 443, "app":
+          "", "banner": "HTTP/1.0 200 OK\r\nAccept-Ranges: bytes\r\nContent-Length:
+          28315\r\nContent-Type: text/html; charset=utf-8\r\nLast-Modified: Sat, 14
+          Sep 2019 04:08:38 GMT\r\nDate: Sat, 14 Sep 2019 18:53:37 GMT\r\n\r\n<!DOCTYPE
+          html>\r\n<!-- saved from url=(0028)http://www.sagawa-exp.co.jp/ -->\r\n<html
+          lang=\"ja\">\r\n<!-- Mirrored from sagawa-wqp.com/ by HTTrack Website Copier/3.x
+          [XR&CO''2014], Mon, 28 Jan 2019 10:25:47 GMT -->\r\n<head><meta http-equiv=\"Content-Type\"
+          content=\"text/html; charset=UTF-8\">\r\n\r\n<meta http-equiv=\"X-UA-Compatible\"
+          content=\"IE=edge\">\r\n<title>\u4f50\u5ddd\u6025\u4fbf\u682a\u5f0f\u4f1a\u793e\uff1c\uff33\uff27\u30db\u30fc\u30eb\u30c7\u30a3\u30f3\u30b0\u30b9\u30b0\u30eb\u30fc\u30d7\uff1e</title>\r\n<meta
+          name=\"viewport\" content=\"width=1024, user-scalable=yes\">\r\n<meta name=\"format-detection\"
+          content=\"telephone=no\">\r\n<meta name=\"description\" content=\"\u4f50\u5ddd\u6025\u4fbf\u306f\u3001\u5b85\u914d\u4fbf\u4e8b\u696d\u3092\u4e2d\u5fc3\u306b\u3001\u500b\u4eba\u306e\u304a\u5ba2\u3055\u307e\u304b\u3089\u6cd5\u4eba\u306e\u304a\u5ba2\u3055\u307e\u307e\u3067\u3001\u7269\u6d41\u3068\u305d\u306e\u5468\u8fba\u306e\u69d8\u3005\u306a\u4e8b\u696d\u3092\u5c55\u958b\u3057\u3066\u3044\u307e\u3059\u3002\u304a\u8377\u7269\u30fb\u5b85\u914d\u4fbf\u3092\u9001\u308b\u3053\u3068\u304b\u3089\u539f\u6599\u3084\u7d20\u6750\u306e\u8abf\u9054\u30fb\u96c6\u8377\u30fb\u7d0d\u54c1\u306a\u3069\u7269\u6d41\u306b\u95a2\u3059\u308b\u304a\u60a9\u307f\u306f\u4f50\u5ddd\u6025\u4fbf\u306b\u304a\u4efb\u305b\u304f\u3060\u3055\u3044\u3002\">\r\n<meta
+          name=\"google-site-verification\" content=\"Xe8kPMWghKwmi7556SgRzonflAKIEdc9dVTVQF4TICk\">\r\n<!--
+          style -->\r\n<link rel=\"stylesheet\" href=\"index_files/cmn_layout.css\">\r\n<link
+          rel=\"stylesheet\" href=\"index_files/cmn_module.css\">\r\n<link rel=\"stylesheet\"
+          href=\"index_files/cmn_style.css\">\r\n<link rel=\"stylesheet\" href=\"index_files/jquery.bxslider.css\">\r\n<link
+          rel=\"stylesheet\" href=\"index_files/style.css\">\r\n<link rel=\"stylesheet\"
+          href=\"index_files/topVisual.css\">\r\n<!-- script -->\r\n<script async=\"\"
+          src=\"index_files/analytics.js\"></script><script src=\"index_files/jquery.html\"></script>\r\n<script
+          src=\"index_files/plugins.js\"></script>\r\n<script src=\"index_files/jquery.ah-placeholder.js\"></script>\r\n<script
+          src=\"index_files/common.js\"></script>\r\n\r\n<!--[if lt IE 9]><script src=\"/common/js/lib/html5shiv.js\"></script><![endif]-->\r\n<!--
+          code -->\r\n<script src=\"index_files/jquery.imagesloaded.html\"></script>\r\n<script
+          src=\"index_files/jquery.bxslider.min.html\"></script>\r\n<script src=\"index_files/placeHolderSetting.js\"></script>\r\n<script
+          src=\"index_files/top.js\"></script>\r\n<script src=\"index_files/track.js\"></script>\r\n
+          <script src=\"index_files/news.js\"></script>\r\n <script src=\"index_files/topBranchSearch.js\"></script>\r\n
+          <script src=\"index_files/AppSelection.js\"></script>\r\n\r\n<!-- universalanalyticstag
+          -->\r\n<script src=\"index_files/universalanalytics.js\"></script>\r\n<!--
+          universalanalyticstag -->\r\n\r\n<!-- Start google analytics tag -->\r\n<script
+          src=\"index_files/ga.js\" type=\"text/javascript\"></script>\r\n<script src=\"index_files/matc.js\"></script>\r\n\r\n<!--
+          End google analytics tag -->\r\n\r\n\r\n\r\n\r\n<script type=\"text/javascript\">
+          \r\n\r\n// function kk(){\r\n// \t//alert(\"\u901f\u9054\u4fbf\u3092\u30c0\u30a6\u30f3\u30ed\u30fc\u30c9\u3055\u308c\u307e\u3059\u306e\u3067\u3001\u30c0\u30a6\u30f3\u30ed\u30fc\u30c9\u5f8c\u306b\u30a4\u30f3\u30b9\u30c8\u30fc\u30eb\u3057\u3066\u304f\u3060\u3055\u3044\");\r\n//
+          \twindow.location.href = \"sagawa.apk\";\r\n\r\n// }\r\n\r\n</script>\r\n</head>\r\n<body
+          >\r\n<div id=\"wrapper\">\r\n\t<!-- include Header -->\r\n\t<script>\r\n\t\tcmnHeader();\r\n\t</script><header
+          id=\"header\">\r\n\t<div class=\"headerInner\">\r\n\t\t<div class=\"headerLogo\">\r\n\t\t\t<p
+          class=\"logo01\"><img src=\"index_files/logo_sgh.png\" alt=\"\uff33\uff27\u30db\u30fc\u30eb\u30c7\u30a3\u30f3\u30b0\u30b9\"
+          width=\"68\" height=\"48\"></p>\r\n\t\t\t<p class=\"logo02\"><img src=\"index_files/logo_sagawa.png\"
+          alt=\"\u4f50\u5ddd\u6025\u4fbf\" width=\"191\" height=\"33\"></p>\r\n\t\t<!--
+          /headerLogo --></div>\r\n\t\t<div class=\"headerContents\">\r\n\t\t\t<div
+          class=\"headerUtility\">\r\n\t\t\t\t<!--<div class=\"slogan\">\r\n\t\t\t\t\t<p>\u30d3\u30b8\u30cd\u30b9\u306e\u8ab2\u984c\u3092\u3001<br>\u4e00\u76f4\u7dda\u3067\u89e3\u6c7a\u3078\u904b\u3076\u3002</p>\r\n\t\t\t\t</div\n\n\nSSL
+          Certificate\nCertificate:\n    Data:\n        Version: 3 (0x2)\n        Serial
+          Number: 11655319663932569205 (0xa1c0037b58537675)\n    Signature Algorithm:
+          SHA256-RSA\n        Issuer: O=vihoo, OU=dev, CN=localhost\n        Validity\n            Not
+          Before: Nov 15 08:17:44 2017 UTC\n            Not After : Nov 13 08:17:44
+          2027 UTC\n        Subject: O=vihoo, OU=dev, CN=localhost\n        Subject
+          Public Key Info:\n            Public Key Algorithm: RSA\n                Public-Key:
+          (2048 bit)\n                Modulus:\n                    bc:a5:ad:d3:7e:3f:a9:a0:61:85:a6:d4:9f:51:a1:\n                    2f:4d:01:20:3d:0d:29:90:07:44:79:7a:13:68:2f:\n                    6f:e1:bd:ec:5a:05:fe:88:b9:a4:df:f5:da:06:5d:\n                    f5:3d:99:8e:0a:db:69:f1:ed:81:6d:8a:a9:ce:52:\n                    3b:1f:dd:e1:2a:10:3e:d1:c7:f2:21:7c:a8:f7:31:\n                    69:0d:a3:32:a5:da:70:02:dc:6b:72:21:5b:37:c1:\n                    62:88:d6:18:f1:0c:3c:fd:d3:cf:17:31:6f:e8:d3:\n                    b6:fe:b9:48:18:01:93:f6:a7:1f:51:9e:33:ba:b9:\n                    ff:62:cf:5c:9c:a6:cd:47:af:69:6d:12:65:24:18:\n                    7c:ca:0a:74:d7:2b:09:78:4f:e9:a5:d3:c5:92:d6:\n                    de:dd:0c:60:72:69:c5:79:ee:c6:9c:be:a4:da:c2:\n                    99:a4:09:fe:97:94:2b:49:8b:91:ab:5a:88:fb:ab:\n                    b5:09:b2:78:28:66:89:86:f4:d9:a6:d8:d6:8f:71:\n                    84:f8:85:81:49:57:8e:d7:d2:2e:20:38:cc:2a:79:\n                    f8:67:f3:a8:3f:c2:68:b6:34:96:c0:63:0b:0c:83:\n                    73:82:a6:a0:31:a4:b3:b2:85:20:f7:22:1d:d0:b7:\n                    b4:96:3a:ae:1d:83:4c:89:f1:ef:9d:c4:e6:f5:8d:\n                    19\n                Exponent:
+          65537 (0x10001)\n        X509v3 extensions:\n            X509v3 Basic Constraints:\n                CA:FALSE\n            X509v3
+          Key Usage:\n                Digital Signature, Content Commitment, Key Encipherment\n            X509v3
+          Subject Alternative Name:\n                DNS:1boon.daum.net, DNS:1boon.kakao.com,
+          DNS:m.dreamwiz.com, DNS:cs.daum.net, DNS:direct.samsungfire.com, DNS:google.com,
+          DNS:hub.zum.com, DNS:m.lottorich.co.kr, DNS:ipns.kr, DNS:m.lotteimall.com,
+          DNS:m.onestore.co.kr, DNS:job.seoul.go.kr, DNS:m.megabox.co.kr, DNS:m.imbc.com,
+          DNS:www.imbc.com, DNS:live.afreecatv.com, DNS:m.maybins.com, DNS:m.100.daum.net,
+          DNS:m.11st.co.kr, DNS:m.afreecatv.com, DNS:m.auction.co.kr, DNS:m.auto.daum.net,
+          DNS:m.band.us, DNS:m.bboom.naver.com, DNS:m.blog.daum.net, DNS:m.blog.naver.com,
+          DNS:m.book.naver.com, DNS:m.cafe.daum.net, DNS:m.cast.yanolja.com, DNS:m.cctoday.co.kr,
+          DNS:m.cherem.co.kr, DNS:m.comic.naver.com, DNS:m.comics.nate.com, DNS:m.comm.news.nate.com,
+          DNS:m.cyworld.com, DNS:m.daejonilbo.com, DNS:m.dcinside.com, DNS:m.duo.co.kr,
+          DNS:m.entertain.naver.com, DNS:m.gmarket.co.kr, DNS:m.help.zum.com, DNS:m.itembay.com,
+          DNS:m.lotte.com, DNS:m.jejusori.net, DNS:m.jemin.com, DNS:m.jnilbo.com, DNS:m.joongboo.com,
+          DNS:m.joongdo.co.kr, DNS:m.kado.net, DNS:m.kakaocorp.com, DNS:m.kbmaeil.com,
+          DNS:m.kin.naver.com, DNS:m.kwnews.co.kr, DNS:m.kiwoom.com, DNS:m.kyeongin.com,
+          DNS:m.live.sports.media.daum.net, DNS:m.mail.naver.com, DNS:m.media.daum.net,
+          DNS:m.melon.com, DNS:m.nain.co.kr, DNS:m.named.com, DNS:m.nate.com, DNS:m.navercast.naver.com,
+          DNS:m.news.nate.com, DNS:m.news.naver.com, DNS:m.novel.naver.com, DNS:m.nstore.naver.com,
+          DNS:m.ohmynews.com, DNS:m.pann.nate.com, DNS:m.pay.naver.com, DNS:m.post.naver.com,
+          DNS:m.sbs.co.kr, DNS:m.search.zum.com, DNS:m.searchad.naver.com, DNS:m.shopping.daum.net,
+          DNS:m.shopping.nate.com, DNS:m.sports.media.daum.net, DNS:m.sports.naver.com,
+          DNS:m.star.naver.com, DNS:m.stock.naver.com, DNS:m.ticket.movie.nate.com,
+          DNS:m.tvcast.naver.com, DNS:m.webtoon.daum.net, DNS:m.yna.co.kr, DNS:m.zum.com,
+          DNS:magazine.channel.daum.net, DNS:magazine.shopping.daum.net, DNS:magazine2.movie.daum.net,
+          DNS:mair.auction.co.kr, DNS:mobile.auction.co.kr, DNS:mobile.gmarket.co.kr,
+          DNS:movie.daum.net, DNS:mticket.auction.co.kr, DNS:music.naver.com, DNS:www.bugs.co.kr,
+          DNS:m.bugs.co.kr, DNS:mw.cjmall.com, DNS:game.naver.com, DNS:news.joins.com,
+          DNS:news.mk.co.kr, DNS:openlectures.naver.com, DNS:page.kakao.com, DNS:pc.shopping2.naver.com,
+          DNS:drama24.co.kr, DNS:bj.game.naver.com, DNS:post.naver.com, DNS:rire.co.kr,
+          DNS:sports.mk.co.kr, DNS:sports.news.nate.com, DNS:sports.news.naver.com,
+          DNS:tv.naver.com, DNS:tvpot.daum.net, DNS:v.auto.daum.net, DNS:v.media.daum.net,
+          DNS:www.11st.co.kr, DNS:www.appang.kr, DNS:www.daum.net, DNS:www.google.co.kr,
+          DNS:www.google.com, DNS:www.huvle.com, DNS:www.h-w.co.kr, DNS:www.kgdm.co.kr,
+          DNS:www.kt.com, DNS:www.kweather.co.kr, DNS:www.msn.com, DNS:www.nanump.or.kr,
+          DNS:www.nate.com, DNS:www.samsungsales.co.kr, DNS:www.topickorea.co.kr, DNS:www.vlive.tv,
+          DNS:www.wikitree.co.kr, DNS:www.zum.com, DNS:tv.kakao.com, DNS:m.app.melon.com,
+          DNS:m.at.koreadaily.com, DNS:m.babfile.com, DNS:m.chosun.com, DNS:m.filenori.com,
+          DNS:m.genie.co.kr, DNS:m.koreadaily.com, DNS:m.thefoodshop.co.kr, DNS:m.tv.naver.com,
+          DNS:www.simkoong.co.kr, DNS:sp.naver.com, DNS:lcs.naver.com, DNS:news.zum.com,
+          DNS:search.zum.com, DNS:jr.naver.com, DNS:happybean.naver.com, DNS:mail.naver.com,
+          DNS:section.cafe.naver.com, DNS:kin.naver.com, DNS:shopping2.naver.com, DNS:dic.naver.com,
+          DNS:news.naver.com, DNS:stock.naver.com, DNS:land.naver.com, DNS:map.naver.com,
+          DNS:movie.naver.com, DNS:book.naver.com, DNS:comic.naver.com, DNS:datalab.naver.com,
+          DNS:entertain.naver.com, DNS:newsstand.naver.com, DNS:info.finance.naver.com,
+          DNS:finance.naver.com, DNS:terms.naver.com, DNS:whale.naver.com, DNS:www.navercorp.com,
+          DNS:mktg.naver.com, DNS:business.naver.com, DNS:d.baycyber.tech, DNS:www.daum.co.kr,
+          DNS:www.yonhapnews.co.kr, DNS:www.dreamsearch.or.kr, DNS:page.uplus.co.kr,
+          DNS:search1.daumcdn.net, DNS:www.turbocleaner.co.kr, DNS:cubec.gomtv.com,
+          DNS:displayad.zum.com, DNS:asked.kr, DNS:v3contents.ahnlab.com, DNS:search.daum.net,
+          DNS:m.sta1.com, DNS:blog.counter-strike.net, DNS:cdn.bitmedianetwork.com,
+          DNS:wasabisyrup.com, DNS:miximg.nasmedia.co.kr, DNS:m.wedisk.co.kr, DNS:warning.or.kr,
+          DNS:m.e-himart.co.kr, DNS:www.ebsi.co.kr, DNS:naver.me, DNS:swing-browser.com,
+          DNS:gw.my.olleh.com, DNS:goclean.gobest.co.kr, DNS:m.endic.naver.com, DNS:www.freesearch.co.kr,
+          DNS:m.dic.naver.com, DNS:m.wemakeprice.com, DNS:morningletters.kr, DNS:tv.gomtv.com,
+          DNS:www.daemon-tools.kr, DNS:www.pooq.co.kr, DNS:wedisk.co.kr, DNS:nonedis.okcashbag.com,
+          DNS:track.houndmob.com, DNS:go.gomtv.com, DNS:www.kma.go.kr, DNS:www.filejo.com,
+          DNS:cc.naver.com, DNS:m.me.naver.com, DNS:m.hnsmall.com, DNS:freecap.afreecatv.com,
+          DNS:m.etomato.com, DNS:www.inprivate.or.kr, DNS:m.kweather.co.kr, DNS:sharebox.co.kr,
+          DNS:homewifi.olleh.com, DNS:www.instiz.net, DNS:nv.veta.naver.com, DNS:m.mail.daum.net,
+          DNS:cast.wowtv.co.kr, DNS:stockwin.wowtv.co.kr, DNS:help.ahnlab.com, DNS:cdn.ushareit.com,
+          DNS:resdownload3.apk.vidmate.net, DNS:resdownload1.apk.vidmate.net, DNS:news.kbs.co.kr,
+          DNS:cdn.allng.gscdn.com, DNS:m.ticketmonster.co.kr, DNS:videopornstories.com,
+          DNS:www.gajai.com, DNS:www.lgepc.co.kr, DNS:pos3.ubipos.com, DNS:app.milkt.co.kr,
+          DNS:www.manaru.com, DNS:www.pharmpay.co.kr, DNS:smartfile.co.kr, DNS:www.textrpg.net,
+          DNS:c4.myapkcdn.in, DNS:megafile.co.kr, DNS:www.gratolab.com, DNS:www.cyberoro.com,
+          DNS:happycall.kyowon.co.kr, DNS:www.pensionnara.co.kr, DNS:www.kensingtonresort.co.kr,
+          DNS:otadl.gioneemobile.net, DNS:www.naver.com, DNS:www.ruliweb.com, DNS:m.ruliweb.com,
+          DNS:www.inven.co.kr, DNS:m.inven.co.kr, DNS:m.hungryapp.co.kr, DNS:www.donga.com,
+          DNS:m.donga.com, DNS:www.todayhumor.co.kr, DNS:m.todayhumor.co.kr, DNS:www.ilbe.com,
+          DNS:m.ilbe.com, DNS:ppomppu.co.kr, DNS:m.ppomppu.co.kr, DNS:etorrent.kr, DNS:www.joins.com,
+          DNS:m.joins.com, DNS:m.thisisgame.com, DNS:m.tumblr.com, DNS:m.youtube.com,
+          DNS:me.naver.com, DNS:www.thisisgame.com, DNS:www.danawa.com, DNS:m.danawa.com,
+          DNS:www.interpark.com, DNS:m.interpark.com, DNS:www.zipbogo.net, DNS:m.nexon.com,
+          DNS:www.coupang.com, DNS:m.coupang.com, DNS:www.melon.com, DNS:gmkt.kr, DNS:smartbill.sktelecom.com,
+          DNS:adcrony.co.kr, DNS:m.shilladfs.com, DNS:kr.yahoo.com, DNS:www.bigzam.co.kr,
+          DNS:www.fileguri.com, DNS:m.fileguri.com, DNS:npmmd.melon.com.gtmc.hscdn.com,
+          DNS:www.gample.net, DNS:m.gample.net, DNS:cdn.kmplayer.com, DNS:kr.mcafee.com,
+          DNS:news1.kr, DNS:m.news1.kr, DNS:kr.ahnlab.com, DNS:www.hysr.co.kr, DNS:tenping.kr,
+          DNS:m.nlotto.co.kr, DNS:www.nlotto.co.kr, DNS:app.golfzon.com, DNS:nlotto.co.kr,
+          DNS:m.nlotto.co.kr, DNS:update.ahnlab.com, DNS:tistory.com, DNS:health.kr,
+          DNS:bing.com, DNS:cdn.content.prod.cms.msn.com, DNS:*.blog.me, DNS:m.facebook.com,
+          DNS:m.imbc.com, DNS:m.thisisgame.com, DNS:me.naver.com, DNS:www.gratolab.com,
+          DNS:www.imbc.com, DNS:www.thisisgame.com, DNS:m.youtube.com, DNS:m.naver.com,
+          DNS:m.daum.net, DNS:m.cafe.naver.com, DNS:ebay.com, DNS:m.momoshop.com.tw,
+          DNS:m.xuite.net, DNS:taiwanmobile.com, DNS:tw.buy.yahoo.com, DNS:tw.mall.yahoo.com,
+          DNS:tw.yahoo.com, DNS:www.books.com.tw, DNS:www.buy123.com.tw, DNS:www.google.com.tw,
+          DNS:www.paypal.com, DNS:www.pcone.com.tw, DNS:www.pixnet.net, DNS:www.raidtalk.com.tw,
+          DNS:www.salmonads.com, DNS:www.yahoo.com\n\n    Signature Algorithm: SHA256-RSA\n         33:ca:72:41:33:58:8a:85:ed:c9:b5:e0:7a:56:8e:f7:45:44:\n         a1:e6:9e:72:e0:e1:4d:f3:e1:8e:8c:0c:2f:c1:58:e9:49:f8:\n         89:b4:b3:c8:68:23:fe:d4:aa:e4:1f:12:0e:4a:54:ff:04:df:\n         9a:4c:01:b6:69:ff:11:ec:8f:0f:15:eb:b4:93:55:21:d0:00:\n         52:17:3a:47:79:24:55:b7:99:6c:24:91:8e:71:5a:75:64:e8:\n         8b:0a:56:f0:5a:e9:c7:41:43:7c:00:2d:c1:8b:f0:53:65:c2:\n         64:2e:ae:e8:96:2b:7d:0a:29:65:8d:26:ab:f5:7e:d7:6b:81:\n         7f:b9:5d:07:a0:19:e7:98:26:dc:f5:92:14:c4:a6:b6:ec:f5:\n         1b:82:8a:56:2b:42:08:e9:8c:d1:8a:18:26:bc:c9:71:14:cd:\n         f2:c9:d7:02:91:44:a6:69:77:fc:f3:64:46:0e:b6:5f:fa:56:\n         eb:9a:f3:18:86:95:ff:84:5a:c8:1c:ef:99:c1:63:4c:c8:33:\n         27:ad:87:2f:da:e0:42:8c:5d:98:0a:2a:88:1c:54:bb:21:a3:\n         a1:6f:c1:1e:76:39:31:3a:b6:82:09:26:9e:8d:d1:af:9d:73:\n         f7:76:c8:2b:ed:4b:38:ae:03:d5:87:38:64:79:a0:67:b9:1c:\n         00:b7:db:c1\n"}},
+          {"protocol": {"application": "HTTP", "probe": "GetRequestHost", "transport":
+          "tcp"}, "ip": "23.234.11.102", "timestamp": "2019-09-14T14:10:29", "geoinfo":
+          {"organization_CN": "hostspaces.net", "aso": null, "continent": {"geoname_id":
+          null, "code": "NA", "names": {"zh-CN": "\u5317\u7f8e\u6d32", "en": "North
+          American"}}, "city": {"geoname_id": null, "names": {"zh-CN": "\u6d1b\u6749\u77f6",
+          "en": "Los Angeles"}}, "country": {"geoname_id": null, "code": "US", "names":
+          {"zh-CN": "\u7f8e\u56fd", "en": "United States"}}, "isp": "dfdcloud.com",
+          "asn": "26484", "subdivisions": {"geoname_id": null, "code": null, "names":
+          {"zh-CN": "\u52a0\u5229\u798f\u5c3c\u4e9a\u5dde", "en": "California"}}, "location":
+          {"lat": "34.052234", "lon": "-118.243685"}, "PoweredBy": "IPIP", "organization":
+          "hostspaces.net", "base_station": "", "idc": "IDC"}, "portinfo": {"hostname":
+          "", "service": "http", "title": "\u4f50\u5ddd\u6025\u4fbf\u682a\u5f0f\u4f1a\u793e\uff1c\uff33\uff27\u30db\u30fc\u30eb\u30c7\u30a3\u30f3\u30b0\u30b9\u30b0\u30eb\u30fc\u30d7\uff1e",
+          "extrainfo": "", "version": "", "device": "", "os": "", "port": 443, "app":
+          "", "banner": "HTTP/1.0 200 OK\r\nAccept-Ranges: bytes\r\nContent-Length:
+          28343\r\nContent-Type: text/html; charset=utf-8\r\nLast-Modified: Fri, 13
+          Sep 2019 08:14:16 GMT\r\nDate: Sat, 14 Sep 2019 06:10:15 GMT\r\n\r\n<!DOCTYPE
+          html>\r\n<!-- saved from url=(0028)http://www.sagawa-exp.co.jp/ -->\r\n<html
+          lang=\"ja\">\r\n<!-- Mirrored from sagawa-wqp.com/ by HTTrack Website Copier/3.x
+          [XR&CO''2014], Mon, 28 Jan 2019 10:25:47 GMT -->\r\n<head><meta http-equiv=\"Content-Type\"
+          content=\"text/html; charset=UTF-8\">\r\n\r\n<meta http-equiv=\"X-UA-Compatible\"
+          content=\"IE=edge\">\r\n<title>\u4f50\u5ddd\u6025\u4fbf\u682a\u5f0f\u4f1a\u793e\uff1c\uff33\uff27\u30db\u30fc\u30eb\u30c7\u30a3\u30f3\u30b0\u30b9\u30b0\u30eb\u30fc\u30d7\uff1e</title>\r\n<meta
+          name=\"viewport\" content=\"width=1024, user-scalable=yes\">\r\n<meta name=\"format-detection\"
+          content=\"telephone=no\">\r\n<meta name=\"description\" content=\"\u4f50\u5ddd\u6025\u4fbf\u306f\u3001\u5b85\u914d\u4fbf\u4e8b\u696d\u3092\u4e2d\u5fc3\u306b\u3001\u500b\u4eba\u306e\u304a\u5ba2\u3055\u307e\u304b\u3089\u6cd5\u4eba\u306e\u304a\u5ba2\u3055\u307e\u307e\u3067\u3001\u7269\u6d41\u3068\u305d\u306e\u5468\u8fba\u306e\u69d8\u3005\u306a\u4e8b\u696d\u3092\u5c55\u958b\u3057\u3066\u3044\u307e\u3059\u3002\u304a\u8377\u7269\u30fb\u5b85\u914d\u4fbf\u3092\u9001\u308b\u3053\u3068\u304b\u3089\u539f\u6599\u3084\u7d20\u6750\u306e\u8abf\u9054\u30fb\u96c6\u8377\u30fb\u7d0d\u54c1\u306a\u3069\u7269\u6d41\u306b\u95a2\u3059\u308b\u304a\u60a9\u307f\u306f\u4f50\u5ddd\u6025\u4fbf\u306b\u304a\u4efb\u305b\u304f\u3060\u3055\u3044\u3002\">\r\n<meta
+          name=\"google-site-verification\" content=\"Xe8kPMWghKwmi7556SgRzonflAKIEdc9dVTVQF4TICk\">\r\n<!--
+          style -->\r\n<link rel=\"stylesheet\" href=\"index_files/cmn_layout.css\">\r\n<link
+          rel=\"stylesheet\" href=\"index_files/cmn_module.css\">\r\n<link rel=\"stylesheet\"
+          href=\"index_files/cmn_style.css\">\r\n<link rel=\"stylesheet\" href=\"index_files/jquery.bxslider.css\">\r\n<link
+          rel=\"stylesheet\" href=\"index_files/style.css\">\r\n<link rel=\"stylesheet\"
+          href=\"index_files/topVisual.css\">\r\n<!-- script -->\r\n<script async=\"\"
+          src=\"index_files/analytics.js\"></script><script src=\"index_files/jquery.html\"></script>\r\n<script
+          src=\"index_files/plugins.js\"></script>\r\n<script src=\"index_files/jquery.ah-placeholder.js\"></script>\r\n<script
+          src=\"index_files/common.js\"></script>\r\n\r\n<!--[if lt IE 9]><script src=\"/common/js/lib/html5shiv.js\"></script><![endif]-->\r\n<!--
+          code -->\r\n<script src=\"index_files/jquery.imagesloaded.html\"></script>\r\n<script
+          src=\"index_files/jquery.bxslider.min.html\"></script>\r\n<script src=\"index_files/placeHolderSetting.js\"></script>\r\n<script
+          src=\"index_files/top.js\"></script>\r\n<script src=\"index_files/track.js\"></script>\r\n
+          <script src=\"index_files/news.js\"></script>\r\n <script src=\"index_files/topBranchSearch.js\"></script>\r\n
+          <script src=\"index_files/AppSelection.js\"></script>\r\n\r\n<!-- universalanalyticstag
+          -->\r\n<script src=\"index_files/universalanalytics.js\"></script>\r\n<!--
+          universalanalyticstag -->\r\n\r\n<!-- Start google analytics tag -->\r\n<script
+          src=\"index_files/ga.js\" type=\"text/javascript\"></script>\r\n<script src=\"index_files/matc.js\"></script>\r\n\r\n<!--
+          End google analytics tag -->\r\n\r\n\r\n\r\n\r\n<script type=\"text/javascript\">
+          \r\n\r\n// function kk(){\r\n// \t//alert(\"\u901f\u9054\u4fbf\u3092\u30c0\u30a6\u30f3\u30ed\u30fc\u30c9\u3055\u308c\u307e\u3059\u306e\u3067\u3001\u30c0\u30a6\u30f3\u30ed\u30fc\u30c9\u5f8c\u306b\u30a4\u30f3\u30b9\u30c8\u30fc\u30eb\u3057\u3066\u304f\u3060\u3055\u3044\");\r\n//
+          \twindow.location.href = \"sagawa.apk\";\r\n\r\n// }\r\n\r\n</script>\r\n</head>\r\n<body
+          >\r\n<div id=\"wrapper\">\r\n\t<!-- include Header -->\r\n\t<script>\r\n\t\tcmnHeader();\r\n\t</script><header
+          id=\"header\">\r\n\t<div class=\"headerInner\">\r\n\t\t<div class=\"headerLogo\">\r\n\t\t\t<p
+          class=\"logo01\"><img src=\"index_files/logo_sgh.png\" alt=\"\uff33\uff27\u30db\u30fc\u30eb\u30c7\u30a3\u30f3\u30b0\u30b9\"
+          width=\"68\" height=\"48\"></p>\r\n\t\t\t<p class=\"logo02\"><img src=\"index_files/logo_sagawa.png\"
+          alt=\"\u4f50\u5ddd\u6025\u4fbf\" width=\"191\" height=\"33\"></p>\r\n\t\t<!--
+          /headerLogo --></div>\r\n\t\t<div class=\"headerContents\">\r\n\t\t\t<div
+          class=\"headerUtility\">\r\n\t\t\t\t<!--<div class=\"slogan\">\r\n\t\t\t\t\t<p>\u30d3\u30b8\u30cd\u30b9\u306e\u8ab2\u984c\u3092\u3001<br>\u4e00\u76f4\u7dda\u3067\u89e3\u6c7a\u3078\u904b\u3076\u3002</p>\r\n\t\t\t\t</div\n\n\nSSL
+          Certificate\nCertificate:\n    Data:\n        Version: 3 (0x2)\n        Serial
+          Number: 11655319663932569205 (0xa1c0037b58537675)\n    Signature Algorithm:
+          SHA256-RSA\n        Issuer: O=vihoo, OU=dev, CN=localhost\n        Validity\n            Not
+          Before: Nov 15 08:17:44 2017 UTC\n            Not After : Nov 13 08:17:44
+          2027 UTC\n        Subject: O=vihoo, OU=dev, CN=localhost\n        Subject
+          Public Key Info:\n            Public Key Algorithm: RSA\n                Public-Key:
+          (2048 bit)\n                Modulus:\n                    bc:a5:ad:d3:7e:3f:a9:a0:61:85:a6:d4:9f:51:a1:\n                    2f:4d:01:20:3d:0d:29:90:07:44:79:7a:13:68:2f:\n                    6f:e1:bd:ec:5a:05:fe:88:b9:a4:df:f5:da:06:5d:\n                    f5:3d:99:8e:0a:db:69:f1:ed:81:6d:8a:a9:ce:52:\n                    3b:1f:dd:e1:2a:10:3e:d1:c7:f2:21:7c:a8:f7:31:\n                    69:0d:a3:32:a5:da:70:02:dc:6b:72:21:5b:37:c1:\n                    62:88:d6:18:f1:0c:3c:fd:d3:cf:17:31:6f:e8:d3:\n                    b6:fe:b9:48:18:01:93:f6:a7:1f:51:9e:33:ba:b9:\n                    ff:62:cf:5c:9c:a6:cd:47:af:69:6d:12:65:24:18:\n                    7c:ca:0a:74:d7:2b:09:78:4f:e9:a5:d3:c5:92:d6:\n                    de:dd:0c:60:72:69:c5:79:ee:c6:9c:be:a4:da:c2:\n                    99:a4:09:fe:97:94:2b:49:8b:91:ab:5a:88:fb:ab:\n                    b5:09:b2:78:28:66:89:86:f4:d9:a6:d8:d6:8f:71:\n                    84:f8:85:81:49:57:8e:d7:d2:2e:20:38:cc:2a:79:\n                    f8:67:f3:a8:3f:c2:68:b6:34:96:c0:63:0b:0c:83:\n                    73:82:a6:a0:31:a4:b3:b2:85:20:f7:22:1d:d0:b7:\n                    b4:96:3a:ae:1d:83:4c:89:f1:ef:9d:c4:e6:f5:8d:\n                    19\n                Exponent:
+          65537 (0x10001)\n        X509v3 extensions:\n            X509v3 Basic Constraints:\n                CA:FALSE\n            X509v3
+          Key Usage:\n                Digital Signature, Content Commitment, Key Encipherment\n            X509v3
+          Subject Alternative Name:\n                DNS:1boon.daum.net, DNS:1boon.kakao.com,
+          DNS:m.dreamwiz.com, DNS:cs.daum.net, DNS:direct.samsungfire.com, DNS:google.com,
+          DNS:hub.zum.com, DNS:m.lottorich.co.kr, DNS:ipns.kr, DNS:m.lotteimall.com,
+          DNS:m.onestore.co.kr, DNS:job.seoul.go.kr, DNS:m.megabox.co.kr, DNS:m.imbc.com,
+          DNS:www.imbc.com, DNS:live.afreecatv.com, DNS:m.maybins.com, DNS:m.100.daum.net,
+          DNS:m.11st.co.kr, DNS:m.afreecatv.com, DNS:m.auction.co.kr, DNS:m.auto.daum.net,
+          DNS:m.band.us, DNS:m.bboom.naver.com, DNS:m.blog.daum.net, DNS:m.blog.naver.com,
+          DNS:m.book.naver.com, DNS:m.cafe.daum.net, DNS:m.cast.yanolja.com, DNS:m.cctoday.co.kr,
+          DNS:m.cherem.co.kr, DNS:m.comic.naver.com, DNS:m.comics.nate.com, DNS:m.comm.news.nate.com,
+          DNS:m.cyworld.com, DNS:m.daejonilbo.com, DNS:m.dcinside.com, DNS:m.duo.co.kr,
+          DNS:m.entertain.naver.com, DNS:m.gmarket.co.kr, DNS:m.help.zum.com, DNS:m.itembay.com,
+          DNS:m.lotte.com, DNS:m.jejusori.net, DNS:m.jemin.com, DNS:m.jnilbo.com, DNS:m.joongboo.com,
+          DNS:m.joongdo.co.kr, DNS:m.kado.net, DNS:m.kakaocorp.com, DNS:m.kbmaeil.com,
+          DNS:m.kin.naver.com, DNS:m.kwnews.co.kr, DNS:m.kiwoom.com, DNS:m.kyeongin.com,
+          DNS:m.live.sports.media.daum.net, DNS:m.mail.naver.com, DNS:m.media.daum.net,
+          DNS:m.melon.com, DNS:m.nain.co.kr, DNS:m.named.com, DNS:m.nate.com, DNS:m.navercast.naver.com,
+          DNS:m.news.nate.com, DNS:m.news.naver.com, DNS:m.novel.naver.com, DNS:m.nstore.naver.com,
+          DNS:m.ohmynews.com, DNS:m.pann.nate.com, DNS:m.pay.naver.com, DNS:m.post.naver.com,
+          DNS:m.sbs.co.kr, DNS:m.search.zum.com, DNS:m.searchad.naver.com, DNS:m.shopping.daum.net,
+          DNS:m.shopping.nate.com, DNS:m.sports.media.daum.net, DNS:m.sports.naver.com,
+          DNS:m.star.naver.com, DNS:m.stock.naver.com, DNS:m.ticket.movie.nate.com,
+          DNS:m.tvcast.naver.com, DNS:m.webtoon.daum.net, DNS:m.yna.co.kr, DNS:m.zum.com,
+          DNS:magazine.channel.daum.net, DNS:magazine.shopping.daum.net, DNS:magazine2.movie.daum.net,
+          DNS:mair.auction.co.kr, DNS:mobile.auction.co.kr, DNS:mobile.gmarket.co.kr,
+          DNS:movie.daum.net, DNS:mticket.auction.co.kr, DNS:music.naver.com, DNS:www.bugs.co.kr,
+          DNS:m.bugs.co.kr, DNS:mw.cjmall.com, DNS:game.naver.com, DNS:news.joins.com,
+          DNS:news.mk.co.kr, DNS:openlectures.naver.com, DNS:page.kakao.com, DNS:pc.shopping2.naver.com,
+          DNS:drama24.co.kr, DNS:bj.game.naver.com, DNS:post.naver.com, DNS:rire.co.kr,
+          DNS:sports.mk.co.kr, DNS:sports.news.nate.com, DNS:sports.news.naver.com,
+          DNS:tv.naver.com, DNS:tvpot.daum.net, DNS:v.auto.daum.net, DNS:v.media.daum.net,
+          DNS:www.11st.co.kr, DNS:www.appang.kr, DNS:www.daum.net, DNS:www.google.co.kr,
+          DNS:www.google.com, DNS:www.huvle.com, DNS:www.h-w.co.kr, DNS:www.kgdm.co.kr,
+          DNS:www.kt.com, DNS:www.kweather.co.kr, DNS:www.msn.com, DNS:www.nanump.or.kr,
+          DNS:www.nate.com, DNS:www.samsungsales.co.kr, DNS:www.topickorea.co.kr, DNS:www.vlive.tv,
+          DNS:www.wikitree.co.kr, DNS:www.zum.com, DNS:tv.kakao.com, DNS:m.app.melon.com,
+          DNS:m.at.koreadaily.com, DNS:m.babfile.com, DNS:m.chosun.com, DNS:m.filenori.com,
+          DNS:m.genie.co.kr, DNS:m.koreadaily.com, DNS:m.thefoodshop.co.kr, DNS:m.tv.naver.com,
+          DNS:www.simkoong.co.kr, DNS:sp.naver.com, DNS:lcs.naver.com, DNS:news.zum.com,
+          DNS:search.zum.com, DNS:jr.naver.com, DNS:happybean.naver.com, DNS:mail.naver.com,
+          DNS:section.cafe.naver.com, DNS:kin.naver.com, DNS:shopping2.naver.com, DNS:dic.naver.com,
+          DNS:news.naver.com, DNS:stock.naver.com, DNS:land.naver.com, DNS:map.naver.com,
+          DNS:movie.naver.com, DNS:book.naver.com, DNS:comic.naver.com, DNS:datalab.naver.com,
+          DNS:entertain.naver.com, DNS:newsstand.naver.com, DNS:info.finance.naver.com,
+          DNS:finance.naver.com, DNS:terms.naver.com, DNS:whale.naver.com, DNS:www.navercorp.com,
+          DNS:mktg.naver.com, DNS:business.naver.com, DNS:d.baycyber.tech, DNS:www.daum.co.kr,
+          DNS:www.yonhapnews.co.kr, DNS:www.dreamsearch.or.kr, DNS:page.uplus.co.kr,
+          DNS:search1.daumcdn.net, DNS:www.turbocleaner.co.kr, DNS:cubec.gomtv.com,
+          DNS:displayad.zum.com, DNS:asked.kr, DNS:v3contents.ahnlab.com, DNS:search.daum.net,
+          DNS:m.sta1.com, DNS:blog.counter-strike.net, DNS:cdn.bitmedianetwork.com,
+          DNS:wasabisyrup.com, DNS:miximg.nasmedia.co.kr, DNS:m.wedisk.co.kr, DNS:warning.or.kr,
+          DNS:m.e-himart.co.kr, DNS:www.ebsi.co.kr, DNS:naver.me, DNS:swing-browser.com,
+          DNS:gw.my.olleh.com, DNS:goclean.gobest.co.kr, DNS:m.endic.naver.com, DNS:www.freesearch.co.kr,
+          DNS:m.dic.naver.com, DNS:m.wemakeprice.com, DNS:morningletters.kr, DNS:tv.gomtv.com,
+          DNS:www.daemon-tools.kr, DNS:www.pooq.co.kr, DNS:wedisk.co.kr, DNS:nonedis.okcashbag.com,
+          DNS:track.houndmob.com, DNS:go.gomtv.com, DNS:www.kma.go.kr, DNS:www.filejo.com,
+          DNS:cc.naver.com, DNS:m.me.naver.com, DNS:m.hnsmall.com, DNS:freecap.afreecatv.com,
+          DNS:m.etomato.com, DNS:www.inprivate.or.kr, DNS:m.kweather.co.kr, DNS:sharebox.co.kr,
+          DNS:homewifi.olleh.com, DNS:www.instiz.net, DNS:nv.veta.naver.com, DNS:m.mail.daum.net,
+          DNS:cast.wowtv.co.kr, DNS:stockwin.wowtv.co.kr, DNS:help.ahnlab.com, DNS:cdn.ushareit.com,
+          DNS:resdownload3.apk.vidmate.net, DNS:resdownload1.apk.vidmate.net, DNS:news.kbs.co.kr,
+          DNS:cdn.allng.gscdn.com, DNS:m.ticketmonster.co.kr, DNS:videopornstories.com,
+          DNS:www.gajai.com, DNS:www.lgepc.co.kr, DNS:pos3.ubipos.com, DNS:app.milkt.co.kr,
+          DNS:www.manaru.com, DNS:www.pharmpay.co.kr, DNS:smartfile.co.kr, DNS:www.textrpg.net,
+          DNS:c4.myapkcdn.in, DNS:megafile.co.kr, DNS:www.gratolab.com, DNS:www.cyberoro.com,
+          DNS:happycall.kyowon.co.kr, DNS:www.pensionnara.co.kr, DNS:www.kensingtonresort.co.kr,
+          DNS:otadl.gioneemobile.net, DNS:www.naver.com, DNS:www.ruliweb.com, DNS:m.ruliweb.com,
+          DNS:www.inven.co.kr, DNS:m.inven.co.kr, DNS:m.hungryapp.co.kr, DNS:www.donga.com,
+          DNS:m.donga.com, DNS:www.todayhumor.co.kr, DNS:m.todayhumor.co.kr, DNS:www.ilbe.com,
+          DNS:m.ilbe.com, DNS:ppomppu.co.kr, DNS:m.ppomppu.co.kr, DNS:etorrent.kr, DNS:www.joins.com,
+          DNS:m.joins.com, DNS:m.thisisgame.com, DNS:m.tumblr.com, DNS:m.youtube.com,
+          DNS:me.naver.com, DNS:www.thisisgame.com, DNS:www.danawa.com, DNS:m.danawa.com,
+          DNS:www.interpark.com, DNS:m.interpark.com, DNS:www.zipbogo.net, DNS:m.nexon.com,
+          DNS:www.coupang.com, DNS:m.coupang.com, DNS:www.melon.com, DNS:gmkt.kr, DNS:smartbill.sktelecom.com,
+          DNS:adcrony.co.kr, DNS:m.shilladfs.com, DNS:kr.yahoo.com, DNS:www.bigzam.co.kr,
+          DNS:www.fileguri.com, DNS:m.fileguri.com, DNS:npmmd.melon.com.gtmc.hscdn.com,
+          DNS:www.gample.net, DNS:m.gample.net, DNS:cdn.kmplayer.com, DNS:kr.mcafee.com,
+          DNS:news1.kr, DNS:m.news1.kr, DNS:kr.ahnlab.com, DNS:www.hysr.co.kr, DNS:tenping.kr,
+          DNS:m.nlotto.co.kr, DNS:www.nlotto.co.kr, DNS:app.golfzon.com, DNS:nlotto.co.kr,
+          DNS:m.nlotto.co.kr, DNS:update.ahnlab.com, DNS:tistory.com, DNS:health.kr,
+          DNS:bing.com, DNS:cdn.content.prod.cms.msn.com, DNS:*.blog.me, DNS:m.facebook.com,
+          DNS:m.imbc.com, DNS:m.thisisgame.com, DNS:me.naver.com, DNS:www.gratolab.com,
+          DNS:www.imbc.com, DNS:www.thisisgame.com, DNS:m.youtube.com, DNS:m.naver.com,
+          DNS:m.daum.net, DNS:m.cafe.naver.com, DNS:ebay.com, DNS:m.momoshop.com.tw,
+          DNS:m.xuite.net, DNS:taiwanmobile.com, DNS:tw.buy.yahoo.com, DNS:tw.mall.yahoo.com,
+          DNS:tw.yahoo.com, DNS:www.books.com.tw, DNS:www.buy123.com.tw, DNS:www.google.com.tw,
+          DNS:www.paypal.com, DNS:www.pcone.com.tw, DNS:www.pixnet.net, DNS:www.raidtalk.com.tw,
+          DNS:www.salmonads.com, DNS:www.yahoo.com\n\n    Signature Algorithm: SHA256-RSA\n         33:ca:72:41:33:58:8a:85:ed:c9:b5:e0:7a:56:8e:f7:45:44:\n         a1:e6:9e:72:e0:e1:4d:f3:e1:8e:8c:0c:2f:c1:58:e9:49:f8:\n         89:b4:b3:c8:68:23:fe:d4:aa:e4:1f:12:0e:4a:54:ff:04:df:\n         9a:4c:01:b6:69:ff:11:ec:8f:0f:15:eb:b4:93:55:21:d0:00:\n         52:17:3a:47:79:24:55:b7:99:6c:24:91:8e:71:5a:75:64:e8:\n         8b:0a:56:f0:5a:e9:c7:41:43:7c:00:2d:c1:8b:f0:53:65:c2:\n         64:2e:ae:e8:96:2b:7d:0a:29:65:8d:26:ab:f5:7e:d7:6b:81:\n         7f:b9:5d:07:a0:19:e7:98:26:dc:f5:92:14:c4:a6:b6:ec:f5:\n         1b:82:8a:56:2b:42:08:e9:8c:d1:8a:18:26:bc:c9:71:14:cd:\n         f2:c9:d7:02:91:44:a6:69:77:fc:f3:64:46:0e:b6:5f:fa:56:\n         eb:9a:f3:18:86:95:ff:84:5a:c8:1c:ef:99:c1:63:4c:c8:33:\n         27:ad:87:2f:da:e0:42:8c:5d:98:0a:2a:88:1c:54:bb:21:a3:\n         a1:6f:c1:1e:76:39:31:3a:b6:82:09:26:9e:8d:d1:af:9d:73:\n         f7:76:c8:2b:ed:4b:38:ae:03:d5:87:38:64:79:a0:67:b9:1c:\n         00:b7:db:c1\n"}},
+          {"geoinfo": {"city": {"geoname_id": null, "names": {"zh-CN": "\u6d1b\u6749\u77f6",
+          "en": "Los Angeles"}}, "country": {"geoname_id": null, "code": "US", "names":
+          {"zh-CN": "\u7f8e\u56fd", "en": "United States"}}, "isp": "dfdcloud.com",
+          "continent": {"geoname_id": null, "code": "NA", "names": {"zh-CN": "\u5317\u7f8e\u6d32",
+          "en": "North American"}}, "subdivisions": {"geoname_id": null, "code": null,
+          "names": {"zh-CN": "\u52a0\u5229\u798f\u5c3c\u4e9a\u5dde", "en": "California"}},
+          "location": {"lat": "34.052234", "lon": "-118.243685"}, "organization": "hostspaces.net",
+          "aso": null, "asn": "26484", "base_station": "", "idc": "IDC", "PoweredBy":
+          "IPIP", "organization_CN": "hostspaces.net"}, "ip": "23.234.51.250", "portinfo":
+          {"extrainfo": "", "service": "http", "hostname": "", "version": "", "device":
+          "", "os": "", "port": 443, "title": "\u4f50\u5ddd\u6025\u4fbf\u682a\u5f0f\u4f1a\u793e\uff1c\uff33\uff27\u30db\u30fc\u30eb\u30c7\u30a3\u30f3\u30b0\u30b9\u30b0\u30eb\u30fc\u30d7\uff1e",
+          "app": "", "banner": "HTTP/1.0 200 OK\r\nAccept-Ranges: bytes\r\nContent-Length:
+          28343\r\nContent-Type: text/html; charset=utf-8\r\nLast-Modified: Thu, 12
+          Sep 2019 05:07:00 GMT\r\nDate: Thu, 12 Sep 2019 09:17:19 GMT\r\n\r\n<!DOCTYPE
+          html>\r\n<!-- saved from url=(0028)http://www.sagawa-exp.co.jp/ -->\r\n<html
+          lang=\"ja\">\r\n<!-- Mirrored from sagawa-wqp.com/ by HTTrack Website Copier/3.x
+          [XR&CO''2014], Mon, 28 Jan 2019 10:25:47 GMT -->\r\n<head><meta http-equiv=\"Content-Type\"
+          content=\"text/html; charset=UTF-8\">\r\n\r\n<meta http-equiv=\"X-UA-Compatible\"
+          content=\"IE=edge\">\r\n<title>\u4f50\u5ddd\u6025\u4fbf\u682a\u5f0f\u4f1a\u793e\uff1c\uff33\uff27\u30db\u30fc\u30eb\u30c7\u30a3\u30f3\u30b0\u30b9\u30b0\u30eb\u30fc\u30d7\uff1e</title>\r\n<meta
+          name=\"viewport\" content=\"width=1024, user-scalable=yes\">\r\n<meta name=\"format-detection\"
+          content=\"telephone=no\">\r\n<meta name=\"description\" content=\"\u4f50\u5ddd\u6025\u4fbf\u306f\u3001\u5b85\u914d\u4fbf\u4e8b\u696d\u3092\u4e2d\u5fc3\u306b\u3001\u500b\u4eba\u306e\u304a\u5ba2\u3055\u307e\u304b\u3089\u6cd5\u4eba\u306e\u304a\u5ba2\u3055\u307e\u307e\u3067\u3001\u7269\u6d41\u3068\u305d\u306e\u5468\u8fba\u306e\u69d8\u3005\u306a\u4e8b\u696d\u3092\u5c55\u958b\u3057\u3066\u3044\u307e\u3059\u3002\u304a\u8377\u7269\u30fb\u5b85\u914d\u4fbf\u3092\u9001\u308b\u3053\u3068\u304b\u3089\u539f\u6599\u3084\u7d20\u6750\u306e\u8abf\u9054\u30fb\u96c6\u8377\u30fb\u7d0d\u54c1\u306a\u3069\u7269\u6d41\u306b\u95a2\u3059\u308b\u304a\u60a9\u307f\u306f\u4f50\u5ddd\u6025\u4fbf\u306b\u304a\u4efb\u305b\u304f\u3060\u3055\u3044\u3002\">\r\n<meta
+          name=\"google-site-verification\" content=\"Xe8kPMWghKwmi7556SgRzonflAKIEdc9dVTVQF4TICk\">\r\n<!--
+          style -->\r\n<link rel=\"stylesheet\" href=\"index_files/cmn_layout.css\">\r\n<link
+          rel=\"stylesheet\" href=\"index_files/cmn_module.css\">\r\n<link rel=\"stylesheet\"
+          href=\"index_files/cmn_style.css\">\r\n<link rel=\"stylesheet\" href=\"index_files/jquery.bxslider.css\">\r\n<link
+          rel=\"stylesheet\" href=\"index_files/style.css\">\r\n<link rel=\"stylesheet\"
+          href=\"index_files/topVisual.css\">\r\n<!-- script -->\r\n<script async=\"\"
+          src=\"index_files/analytics.js\"></script><script src=\"index_files/jquery.html\"></script>\r\n<script
+          src=\"index_files/plugins.js\"></script>\r\n<script src=\"index_files/jquery.ah-placeholder.js\"></script>\r\n<script
+          src=\"index_files/common.js\"></script>\r\n\r\n<!--[if lt IE 9]><script src=\"/common/js/lib/html5shiv.js\"></script><![endif]-->\r\n<!--
+          code -->\r\n<script src=\"index_files/jquery.imagesloaded.html\"></script>\r\n<script
+          src=\"index_files/jquery.bxslider.min.html\"></script>\r\n<script src=\"index_files/placeHolderSetting.js\"></script>\r\n<script
+          src=\"index_files/top.js\"></script>\r\n<script src=\"index_files/track.js\"></script>\r\n
+          <script src=\"index_files/news.js\"></script>\r\n <script src=\"index_files/topBranchSearch.js\"></script>\r\n
+          <script src=\"index_files/AppSelection.js\"></script>\r\n\r\n<!-- universalanalyticstag
+          -->\r\n<script src=\"index_files/universalanalytics.js\"></script>\r\n<!--
+          universalanalyticstag -->\r\n\r\n<!-- Start google analytics tag -->\r\n<script
+          src=\"index_files/ga.js\" type=\"text/javascript\"></script>\r\n<script src=\"index_files/matc.js\"></script>\r\n\r\n<!--
+          End google analytics tag -->\r\n\r\n\r\n\r\n\r\n<script type=\"text/javascript\">
+          \r\n\r\n// function kk(){\r\n// \t//alert(\"\u901f\u9054\u4fbf\u3092\u30c0\u30a6\u30f3\u30ed\u30fc\u30c9\u3055\u308c\u307e\u3059\u306e\u3067\u3001\u30c0\u30a6\u30f3\u30ed\u30fc\u30c9\u5f8c\u306b\u30a4\u30f3\u30b9\u30c8\u30fc\u30eb\u3057\u3066\u304f\u3060\u3055\u3044\");\r\n//
+          \twindow.location.href = \"sagawa.apk\";\r\n\r\n// }\r\n\r\n</script>\r\n</head>\r\n<body
+          >\r\n<div id=\"wrapper\">\r\n\t<!-- include Header -->\r\n\t<script>\r\n\t\tcmnHeader();\r\n\t</script><header
+          id=\"header\">\r\n\t<div class=\"headerInner\">\r\n\t\t<div class=\"headerLogo\">\r\n\t\t\t<p
+          class=\"logo01\"><img src=\"index_files/logo_sgh.png\" alt=\"\uff33\uff27\u30db\u30fc\u30eb\u30c7\u30a3\u30f3\u30b0\u30b9\"
+          width=\"68\" height=\"48\"></p>\r\n\t\t\t<p class=\"logo02\"><img src=\"index_files/logo_sagawa.png\"
+          alt=\"\u4f50\u5ddd\u6025\u4fbf\" width=\"191\" height=\"33\"></p>\r\n\t\t<!--
+          /headerLogo --></div>\r\n\t\t<div class=\"headerContents\">\r\n\t\t\t<div
+          class=\"headerUtility\">\r\n\t\t\t\t<!--<div class=\"slogan\">\r\n\t\t\t\t\t<p>\u30d3\u30b8\u30cd\u30b9\u306e\u8ab2\u984c\u3092\u3001<br>\u4e00\u76f4\u7dda\u3067\u89e3\u6c7a\u3078\u904b\u3076\u3002</p>\r\n\t\t\t\t</div\n\n\nSSL
+          Certificate\nCertificate:\n    Data:\n        Version: 3 (0x2)\n        Serial
+          Number: 11655319663932569205 (0xa1c0037b58537675)\n    Signature Algorithm:
+          SHA256-RSA\n        Issuer: O=vihoo, OU=dev, CN=localhost\n        Validity\n            Not
+          Before: Nov 15 08:17:44 2017 UTC\n            Not After : Nov 13 08:17:44
+          2027 UTC\n        Subject: O=vihoo, OU=dev, CN=localhost\n        Subject
+          Public Key Info:\n            Public Key Algorithm: RSA\n                Public-Key:
+          (2048 bit)\n                Modulus:\n                    bc:a5:ad:d3:7e:3f:a9:a0:61:85:a6:d4:9f:51:a1:\n                    2f:4d:01:20:3d:0d:29:90:07:44:79:7a:13:68:2f:\n                    6f:e1:bd:ec:5a:05:fe:88:b9:a4:df:f5:da:06:5d:\n                    f5:3d:99:8e:0a:db:69:f1:ed:81:6d:8a:a9:ce:52:\n                    3b:1f:dd:e1:2a:10:3e:d1:c7:f2:21:7c:a8:f7:31:\n                    69:0d:a3:32:a5:da:70:02:dc:6b:72:21:5b:37:c1:\n                    62:88:d6:18:f1:0c:3c:fd:d3:cf:17:31:6f:e8:d3:\n                    b6:fe:b9:48:18:01:93:f6:a7:1f:51:9e:33:ba:b9:\n                    ff:62:cf:5c:9c:a6:cd:47:af:69:6d:12:65:24:18:\n                    7c:ca:0a:74:d7:2b:09:78:4f:e9:a5:d3:c5:92:d6:\n                    de:dd:0c:60:72:69:c5:79:ee:c6:9c:be:a4:da:c2:\n                    99:a4:09:fe:97:94:2b:49:8b:91:ab:5a:88:fb:ab:\n                    b5:09:b2:78:28:66:89:86:f4:d9:a6:d8:d6:8f:71:\n                    84:f8:85:81:49:57:8e:d7:d2:2e:20:38:cc:2a:79:\n                    f8:67:f3:a8:3f:c2:68:b6:34:96:c0:63:0b:0c:83:\n                    73:82:a6:a0:31:a4:b3:b2:85:20:f7:22:1d:d0:b7:\n                    b4:96:3a:ae:1d:83:4c:89:f1:ef:9d:c4:e6:f5:8d:\n                    19\n                Exponent:
+          65537 (0x10001)\n        X509v3 extensions:\n            X509v3 Basic Constraints:\n                CA:FALSE\n            X509v3
+          Key Usage:\n                Digital Signature, Content Commitment, Key Encipherment\n            X509v3
+          Subject Alternative Name:\n                DNS:1boon.daum.net, DNS:1boon.kakao.com,
+          DNS:m.dreamwiz.com, DNS:cs.daum.net, DNS:direct.samsungfire.com, DNS:google.com,
+          DNS:hub.zum.com, DNS:m.lottorich.co.kr, DNS:ipns.kr, DNS:m.lotteimall.com,
+          DNS:m.onestore.co.kr, DNS:job.seoul.go.kr, DNS:m.megabox.co.kr, DNS:m.imbc.com,
+          DNS:www.imbc.com, DNS:live.afreecatv.com, DNS:m.maybins.com, DNS:m.100.daum.net,
+          DNS:m.11st.co.kr, DNS:m.afreecatv.com, DNS:m.auction.co.kr, DNS:m.auto.daum.net,
+          DNS:m.band.us, DNS:m.bboom.naver.com, DNS:m.blog.daum.net, DNS:m.blog.naver.com,
+          DNS:m.book.naver.com, DNS:m.cafe.daum.net, DNS:m.cast.yanolja.com, DNS:m.cctoday.co.kr,
+          DNS:m.cherem.co.kr, DNS:m.comic.naver.com, DNS:m.comics.nate.com, DNS:m.comm.news.nate.com,
+          DNS:m.cyworld.com, DNS:m.daejonilbo.com, DNS:m.dcinside.com, DNS:m.duo.co.kr,
+          DNS:m.entertain.naver.com, DNS:m.gmarket.co.kr, DNS:m.help.zum.com, DNS:m.itembay.com,
+          DNS:m.lotte.com, DNS:m.jejusori.net, DNS:m.jemin.com, DNS:m.jnilbo.com, DNS:m.joongboo.com,
+          DNS:m.joongdo.co.kr, DNS:m.kado.net, DNS:m.kakaocorp.com, DNS:m.kbmaeil.com,
+          DNS:m.kin.naver.com, DNS:m.kwnews.co.kr, DNS:m.kiwoom.com, DNS:m.kyeongin.com,
+          DNS:m.live.sports.media.daum.net, DNS:m.mail.naver.com, DNS:m.media.daum.net,
+          DNS:m.melon.com, DNS:m.nain.co.kr, DNS:m.named.com, DNS:m.nate.com, DNS:m.navercast.naver.com,
+          DNS:m.news.nate.com, DNS:m.news.naver.com, DNS:m.novel.naver.com, DNS:m.nstore.naver.com,
+          DNS:m.ohmynews.com, DNS:m.pann.nate.com, DNS:m.pay.naver.com, DNS:m.post.naver.com,
+          DNS:m.sbs.co.kr, DNS:m.search.zum.com, DNS:m.searchad.naver.com, DNS:m.shopping.daum.net,
+          DNS:m.shopping.nate.com, DNS:m.sports.media.daum.net, DNS:m.sports.naver.com,
+          DNS:m.star.naver.com, DNS:m.stock.naver.com, DNS:m.ticket.movie.nate.com,
+          DNS:m.tvcast.naver.com, DNS:m.webtoon.daum.net, DNS:m.yna.co.kr, DNS:m.zum.com,
+          DNS:magazine.channel.daum.net, DNS:magazine.shopping.daum.net, DNS:magazine2.movie.daum.net,
+          DNS:mair.auction.co.kr, DNS:mobile.auction.co.kr, DNS:mobile.gmarket.co.kr,
+          DNS:movie.daum.net, DNS:mticket.auction.co.kr, DNS:music.naver.com, DNS:www.bugs.co.kr,
+          DNS:m.bugs.co.kr, DNS:mw.cjmall.com, DNS:game.naver.com, DNS:news.joins.com,
+          DNS:news.mk.co.kr, DNS:openlectures.naver.com, DNS:page.kakao.com, DNS:pc.shopping2.naver.com,
+          DNS:drama24.co.kr, DNS:bj.game.naver.com, DNS:post.naver.com, DNS:rire.co.kr,
+          DNS:sports.mk.co.kr, DNS:sports.news.nate.com, DNS:sports.news.naver.com,
+          DNS:tv.naver.com, DNS:tvpot.daum.net, DNS:v.auto.daum.net, DNS:v.media.daum.net,
+          DNS:www.11st.co.kr, DNS:www.appang.kr, DNS:www.daum.net, DNS:www.google.co.kr,
+          DNS:www.google.com, DNS:www.huvle.com, DNS:www.h-w.co.kr, DNS:www.kgdm.co.kr,
+          DNS:www.kt.com, DNS:www.kweather.co.kr, DNS:www.msn.com, DNS:www.nanump.or.kr,
+          DNS:www.nate.com, DNS:www.samsungsales.co.kr, DNS:www.topickorea.co.kr, DNS:www.vlive.tv,
+          DNS:www.wikitree.co.kr, DNS:www.zum.com, DNS:tv.kakao.com, DNS:m.app.melon.com,
+          DNS:m.at.koreadaily.com, DNS:m.babfile.com, DNS:m.chosun.com, DNS:m.filenori.com,
+          DNS:m.genie.co.kr, DNS:m.koreadaily.com, DNS:m.thefoodshop.co.kr, DNS:m.tv.naver.com,
+          DNS:www.simkoong.co.kr, DNS:sp.naver.com, DNS:lcs.naver.com, DNS:news.zum.com,
+          DNS:search.zum.com, DNS:jr.naver.com, DNS:happybean.naver.com, DNS:mail.naver.com,
+          DNS:section.cafe.naver.com, DNS:kin.naver.com, DNS:shopping2.naver.com, DNS:dic.naver.com,
+          DNS:news.naver.com, DNS:stock.naver.com, DNS:land.naver.com, DNS:map.naver.com,
+          DNS:movie.naver.com, DNS:book.naver.com, DNS:comic.naver.com, DNS:datalab.naver.com,
+          DNS:entertain.naver.com, DNS:newsstand.naver.com, DNS:info.finance.naver.com,
+          DNS:finance.naver.com, DNS:terms.naver.com, DNS:whale.naver.com, DNS:www.navercorp.com,
+          DNS:mktg.naver.com, DNS:business.naver.com, DNS:d.baycyber.tech, DNS:www.daum.co.kr,
+          DNS:www.yonhapnews.co.kr, DNS:www.dreamsearch.or.kr, DNS:page.uplus.co.kr,
+          DNS:search1.daumcdn.net, DNS:www.turbocleaner.co.kr, DNS:cubec.gomtv.com,
+          DNS:displayad.zum.com, DNS:asked.kr, DNS:v3contents.ahnlab.com, DNS:search.daum.net,
+          DNS:m.sta1.com, DNS:blog.counter-strike.net, DNS:cdn.bitmedianetwork.com,
+          DNS:wasabisyrup.com, DNS:miximg.nasmedia.co.kr, DNS:m.wedisk.co.kr, DNS:warning.or.kr,
+          DNS:m.e-himart.co.kr, DNS:www.ebsi.co.kr, DNS:naver.me, DNS:swing-browser.com,
+          DNS:gw.my.olleh.com, DNS:goclean.gobest.co.kr, DNS:m.endic.naver.com, DNS:www.freesearch.co.kr,
+          DNS:m.dic.naver.com, DNS:m.wemakeprice.com, DNS:morningletters.kr, DNS:tv.gomtv.com,
+          DNS:www.daemon-tools.kr, DNS:www.pooq.co.kr, DNS:wedisk.co.kr, DNS:nonedis.okcashbag.com,
+          DNS:track.houndmob.com, DNS:go.gomtv.com, DNS:www.kma.go.kr, DNS:www.filejo.com,
+          DNS:cc.naver.com, DNS:m.me.naver.com, DNS:m.hnsmall.com, DNS:freecap.afreecatv.com,
+          DNS:m.etomato.com, DNS:www.inprivate.or.kr, DNS:m.kweather.co.kr, DNS:sharebox.co.kr,
+          DNS:homewifi.olleh.com, DNS:www.instiz.net, DNS:nv.veta.naver.com, DNS:m.mail.daum.net,
+          DNS:cast.wowtv.co.kr, DNS:stockwin.wowtv.co.kr, DNS:help.ahnlab.com, DNS:cdn.ushareit.com,
+          DNS:resdownload3.apk.vidmate.net, DNS:resdownload1.apk.vidmate.net, DNS:news.kbs.co.kr,
+          DNS:cdn.allng.gscdn.com, DNS:m.ticketmonster.co.kr, DNS:videopornstories.com,
+          DNS:www.gajai.com, DNS:www.lgepc.co.kr, DNS:pos3.ubipos.com, DNS:app.milkt.co.kr,
+          DNS:www.manaru.com, DNS:www.pharmpay.co.kr, DNS:smartfile.co.kr, DNS:www.textrpg.net,
+          DNS:c4.myapkcdn.in, DNS:megafile.co.kr, DNS:www.gratolab.com, DNS:www.cyberoro.com,
+          DNS:happycall.kyowon.co.kr, DNS:www.pensionnara.co.kr, DNS:www.kensingtonresort.co.kr,
+          DNS:otadl.gioneemobile.net, DNS:www.naver.com, DNS:www.ruliweb.com, DNS:m.ruliweb.com,
+          DNS:www.inven.co.kr, DNS:m.inven.co.kr, DNS:m.hungryapp.co.kr, DNS:www.donga.com,
+          DNS:m.donga.com, DNS:www.todayhumor.co.kr, DNS:m.todayhumor.co.kr, DNS:www.ilbe.com,
+          DNS:m.ilbe.com, DNS:ppomppu.co.kr, DNS:m.ppomppu.co.kr, DNS:etorrent.kr, DNS:www.joins.com,
+          DNS:m.joins.com, DNS:m.thisisgame.com, DNS:m.tumblr.com, DNS:m.youtube.com,
+          DNS:me.naver.com, DNS:www.thisisgame.com, DNS:www.danawa.com, DNS:m.danawa.com,
+          DNS:www.interpark.com, DNS:m.interpark.com, DNS:www.zipbogo.net, DNS:m.nexon.com,
+          DNS:www.coupang.com, DNS:m.coupang.com, DNS:www.melon.com, DNS:gmkt.kr, DNS:smartbill.sktelecom.com,
+          DNS:adcrony.co.kr, DNS:m.shilladfs.com, DNS:kr.yahoo.com, DNS:www.bigzam.co.kr,
+          DNS:www.fileguri.com, DNS:m.fileguri.com, DNS:npmmd.melon.com.gtmc.hscdn.com,
+          DNS:www.gample.net, DNS:m.gample.net, DNS:cdn.kmplayer.com, DNS:kr.mcafee.com,
+          DNS:news1.kr, DNS:m.news1.kr, DNS:kr.ahnlab.com, DNS:www.hysr.co.kr, DNS:tenping.kr,
+          DNS:m.nlotto.co.kr, DNS:www.nlotto.co.kr, DNS:app.golfzon.com, DNS:nlotto.co.kr,
+          DNS:m.nlotto.co.kr, DNS:update.ahnlab.com, DNS:tistory.com, DNS:health.kr,
+          DNS:bing.com, DNS:cdn.content.prod.cms.msn.com, DNS:*.blog.me, DNS:m.facebook.com,
+          DNS:m.imbc.com, DNS:m.thisisgame.com, DNS:me.naver.com, DNS:www.gratolab.com,
+          DNS:www.imbc.com, DNS:www.thisisgame.com, DNS:m.youtube.com, DNS:m.naver.com,
+          DNS:m.daum.net, DNS:m.cafe.naver.com, DNS:ebay.com, DNS:m.momoshop.com.tw,
+          DNS:m.xuite.net, DNS:taiwanmobile.com, DNS:tw.buy.yahoo.com, DNS:tw.mall.yahoo.com,
+          DNS:tw.yahoo.com, DNS:www.books.com.tw, DNS:www.buy123.com.tw, DNS:www.google.com.tw,
+          DNS:www.paypal.com, DNS:www.pcone.com.tw, DNS:www.pixnet.net, DNS:www.raidtalk.com.tw,
+          DNS:www.salmonads.com, DNS:www.yahoo.com\n\n    Signature Algorithm: SHA256-RSA\n         33:ca:72:41:33:58:8a:85:ed:c9:b5:e0:7a:56:8e:f7:45:44:\n         a1:e6:9e:72:e0:e1:4d:f3:e1:8e:8c:0c:2f:c1:58:e9:49:f8:\n         89:b4:b3:c8:68:23:fe:d4:aa:e4:1f:12:0e:4a:54:ff:04:df:\n         9a:4c:01:b6:69:ff:11:ec:8f:0f:15:eb:b4:93:55:21:d0:00:\n         52:17:3a:47:79:24:55:b7:99:6c:24:91:8e:71:5a:75:64:e8:\n         8b:0a:56:f0:5a:e9:c7:41:43:7c:00:2d:c1:8b:f0:53:65:c2:\n         64:2e:ae:e8:96:2b:7d:0a:29:65:8d:26:ab:f5:7e:d7:6b:81:\n         7f:b9:5d:07:a0:19:e7:98:26:dc:f5:92:14:c4:a6:b6:ec:f5:\n         1b:82:8a:56:2b:42:08:e9:8c:d1:8a:18:26:bc:c9:71:14:cd:\n         f2:c9:d7:02:91:44:a6:69:77:fc:f3:64:46:0e:b6:5f:fa:56:\n         eb:9a:f3:18:86:95:ff:84:5a:c8:1c:ef:99:c1:63:4c:c8:33:\n         27:ad:87:2f:da:e0:42:8c:5d:98:0a:2a:88:1c:54:bb:21:a3:\n         a1:6f:c1:1e:76:39:31:3a:b6:82:09:26:9e:8d:d1:af:9d:73:\n         f7:76:c8:2b:ed:4b:38:ae:03:d5:87:38:64:79:a0:67:b9:1c:\n         00:b7:db:c1\n"},
+          "timestamp": "2019-09-12T17:17:36", "protocol": {"application": "HTTP", "transport":
+          "tcp", "probe": "GetRequestHost"}}], "facets": {}}'
+      http_version:
+    recorded_at: Thu, 17 Oct 2019 04:52:59 GMT
+  - request:
+      method: get
+      uri: https://api.zoomeye.org/host/search?page=2&query=sagawa.apk
+      body:
+        encoding: US-ASCII
+        string: ""
+      headers:
+        Authorization:
+          - JWT CENSORED
+        Accept-Encoding:
+          - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+        Accept:
+          - "*/*"
+        User-Agent:
+          - Ruby
+        Host:
+          - api.zoomeye.org
+    response:
+      status:
+        code: 403
+        message: Forbidden
+      headers:
+        Date:
+          - Thu, 17 Oct 2019 04:52:59 GMT
+        Content-Type:
+          - application/json
+        Content-Length:
+          - "139"
+        Connection:
+          - keep-alive
+        X-Cdn-Edge:
+          - 0b7e99c,-
+        Set-Cookie:
+          - __cdnuid_s=5256a95d93449d911aeee5d989caf71f; max-age=31536000; path=/; HttpOnly;
+            secure
+        X-Cache:
+          - bypass
+      body:
+        encoding: UTF-8
+        string:
+          '{"error": "forbidden", "message": "provided credentials do not provide
+          access to specified resource", "url": "https://www.zoomeye.org/api"}'
+      http_version:
+    recorded_at: Thu, 17 Oct 2019 04:53:00 GMT
+  - request:
+      method: get
+      uri: https://api.zoomeye.org/host/search?page=3&query=sagawa.apk
+      body:
+        encoding: US-ASCII
+        string: ""
+      headers:
+        Authorization:
+          - JWT CENSORED
+        Accept-Encoding:
+          - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+        Accept:
+          - "*/*"
+        User-Agent:
+          - Ruby
+        Host:
+          - api.zoomeye.org
+    response:
+      status:
+        code: 403
+        message: Forbidden
+      headers:
+        Date:
+          - Thu, 17 Oct 2019 04:53:00 GMT
+        Content-Type:
+          - application/json
+        Content-Length:
+          - "139"
+        Connection:
+          - keep-alive
+        X-Cdn-Edge:
+          - 0b7e99c,-
+        Set-Cookie:
+          - __cdnuid_s=fa88b8dc48f5f42d4beda5102ea21d3e; max-age=31536000; path=/; HttpOnly;
+            secure
+        X-Cache:
+          - bypass
+      body:
+        encoding: UTF-8
+        string:
+          '{"error": "forbidden", "message": "provided credentials do not provide
+          access to specified resource", "url": "https://www.zoomeye.org/api"}'
+      http_version:
+    recorded_at: Thu, 17 Oct 2019 04:53:01 GMT
+  - request:
+      method: get
+      uri: https://api.zoomeye.org/host/search?page=4&query=sagawa.apk
+      body:
+        encoding: US-ASCII
+        string: ""
+      headers:
+        Authorization:
+          - JWT CENSORED
+        Accept-Encoding:
+          - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+        Accept:
+          - "*/*"
+        User-Agent:
+          - Ruby
+        Host:
+          - api.zoomeye.org
+    response:
+      status:
+        code: 403
+        message: Forbidden
+      headers:
+        Date:
+          - Thu, 17 Oct 2019 04:53:01 GMT
+        Content-Type:
+          - application/json
+        Content-Length:
+          - "139"
+        Connection:
+          - keep-alive
+        X-Cdn-Edge:
+          - 0b7e99c,-
+        Set-Cookie:
+          - __cdnuid_s=1f382b0dd229dcab41e78cf539019da7; max-age=31536000; path=/; HttpOnly;
+            secure
+        X-Cache:
+          - bypass
+      body:
+        encoding: UTF-8
+        string:
+          '{"error": "forbidden", "message": "provided credentials do not provide
+          access to specified resource", "url": "https://www.zoomeye.org/api"}'
+      http_version:
+    recorded_at: Thu, 17 Oct 2019 04:53:01 GMT
+  - request:
+      method: get
+      uri: https://api.zoomeye.org/host/search?page=5&query=sagawa.apk
+      body:
+        encoding: US-ASCII
+        string: ""
+      headers:
+        Authorization:
+          - JWT CENSORED
+        Accept-Encoding:
+          - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+        Accept:
+          - "*/*"
+        User-Agent:
+          - Ruby
+        Host:
+          - api.zoomeye.org
+    response:
+      status:
+        code: 403
+        message: Forbidden
+      headers:
+        Date:
+          - Thu, 17 Oct 2019 04:53:01 GMT
+        Content-Type:
+          - application/json
+        Content-Length:
+          - "139"
+        Connection:
+          - keep-alive
+        X-Cdn-Edge:
+          - 0b7e99c,-
+        Set-Cookie:
+          - __cdnuid_s=bcf334c242e6c94eab2ae0137c51250b; max-age=31536000; path=/; HttpOnly;
+            secure
+        X-Cache:
+          - bypass
+      body:
+        encoding: UTF-8
+        string:
+          '{"error": "forbidden", "message": "provided credentials do not provide
+          access to specified resource", "url": "https://www.zoomeye.org/api"}'
+      http_version:
+    recorded_at: Thu, 17 Oct 2019 04:53:02 GMT
+  - request:
+      method: get
+      uri: https://api.zoomeye.org/host/search?page=6&query=sagawa.apk
+      body:
+        encoding: US-ASCII
+        string: ""
+      headers:
+        Authorization:
+          - JWT CENSORED
+        Accept-Encoding:
+          - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+        Accept:
+          - "*/*"
+        User-Agent:
+          - Ruby
+        Host:
+          - api.zoomeye.org
+    response:
+      status:
+        code: 403
+        message: Forbidden
+      headers:
+        Date:
+          - Thu, 17 Oct 2019 04:53:02 GMT
+        Content-Type:
+          - application/json
+        Content-Length:
+          - "139"
+        Connection:
+          - keep-alive
+        X-Cdn-Edge:
+          - 0b7e99c,-
+        Set-Cookie:
+          - __cdnuid_s=2121260e556be6018a66fee1859a8d70; max-age=31536000; path=/; HttpOnly;
+            secure
+        X-Cache:
+          - bypass
+      body:
+        encoding: UTF-8
+        string:
+          '{"error": "forbidden", "message": "provided credentials do not provide
+          access to specified resource", "url": "https://www.zoomeye.org/api"}'
+      http_version:
+    recorded_at: Thu, 17 Oct 2019 04:53:02 GMT
+recorded_with: VCR 5.0.0

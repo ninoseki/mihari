@@ -46,6 +46,7 @@ require "mihari/analyzers/securitytrails"
 require "mihari/analyzers/shodan"
 require "mihari/analyzers/urlscan"
 require "mihari/analyzers/virustotal"
+require "mihari/analyzers/zoomeye"
 
 require "mihari/notifiers/base"
 require "mihari/notifiers/slack"

@@ -51,7 +51,7 @@ docker pull ninoseki/mihari
 
 ## Basic usage
 
-mihari supports Censys, Shodan, Onyphe, urlscan, SecurityTrails, crt.sh, CIRCL passive DNS/SSL, PassiveTotal and VirusTotal by default.
+mihari supports Censys, Shodan, Onyphe, urlscan, SecurityTrails, crt.sh, CIRCL passive DNS/SSL, PassiveTotal, VirusTotal and ZoomEye by default.
 
 ```bash
 $ mihari
@@ -71,6 +71,7 @@ Commands:
   mihari status                               # Show the current configuration status
   mihari urlscan [QUERY]                      # urlscan lookup by a given query
   mihari virustotal [IP|DOMAIN]               # VirusTotal resolutions lookup by a given ip or domain
+  mihari zoommeye [QUERY]                     # ZoomEye lookup by a given query
 
 ```
 
@@ -169,6 +170,8 @@ All configuration is done via ENV variables.
 | SECURITYTRAILS_API_KEY | SecurityTrails API key         | Optional                       |
 | SHODAN_API_KEY         | Shodan API key                 | Optional                       |
 | VIRUSTOTAL_API_KEY     | VirusTotal API key             | Optional                       |
+| ZOOMEYE_USERNAMME      | ZoomEye username               | Optional                       |
+| ZOOMEYE_PASSWORD       | ZoomEye password               | Optional                       |
 
 You can check the configuration status via `status` command.
 
