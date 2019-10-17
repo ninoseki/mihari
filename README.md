@@ -51,7 +51,18 @@ docker pull ninoseki/mihari
 
 ## Basic usage
 
-mihari supports Censys, Shodan, Onyphe, urlscan, SecurityTrails, crt.sh, CIRCL passive DNS/SSL, PassiveTotal, VirusTotal and ZoomEye by default.
+mihari supports the following services by default.
+
+- [Censys](http://censys.io)
+- [CIRCL passive DNS](https://www.circl.lu/services/passive-dns/) / [passive SSL](https://www.circl.lu/services/passive-ssl/)
+- [crt.sh](https://crt.sh/)
+- [Onyphe](https://onyphe.io)
+- [PassiveTotal](https://community.riskiq.com/)
+- [SecurityTrails](https://securitytrails.com/)
+- [Shodan](https://shodan.io)
+- [urlscan.io](https://urlscan.io)
+- [VirusTotal](http://virustotal.com)
+- [ZoomEye](https://zoomeye.org)
 
 ```bash
 $ mihari
