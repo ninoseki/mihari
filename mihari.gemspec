@@ -54,4 +54,5 @@ Gem::Specification.new do |spec|
   spec.add_dependency "thor", "~> 0.20"
   spec.add_dependency "urlscan", "~> 0.4"
   spec.add_dependency "virustotalx", "~> 1.0"
+  spec.add_dependency "zoomeye-rb", "~> 0.1"
 end

@@ -52,6 +52,8 @@ VCR.configure do |config|
     ONYPHE_API_KEY
     VIRUSTOTAL_API_KEY
     SECURITYTRAILS_API_KEY
+    ZOOMEYE_USERNAME
+    ZOOMEYE_PASSWORD
   )
 
   api_endpoints = %w(

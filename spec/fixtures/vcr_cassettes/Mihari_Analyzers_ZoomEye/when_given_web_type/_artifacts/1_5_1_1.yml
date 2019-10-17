@@ -1,0 +1,248 @@
+---
+http_interactions:
+  - request:
+      method: post
+      uri: https://api.zoomeye.org/user/login
+      body:
+        encoding: UTF-8
+        string: '{"username":"<ZOOMEYE_USERNAME>","password":"<ZOOMEYE_PASSWORD>"}'
+      headers:
+        Accept-Encoding:
+          - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+        Accept:
+          - "*/*"
+        User-Agent:
+          - Ruby
+        Host:
+          - api.zoomeye.org
+    response:
+      status:
+        code: 200
+        message: OK
+      headers:
+        Date:
+          - Thu, 17 Oct 2019 05:00:02 GMT
+        Content-Type:
+          - application/json
+        Content-Length:
+          - "213"
+        Connection:
+          - keep-alive
+        X-Cdn-Edge:
+          - 0b7e99c,-
+        Set-Cookie:
+          - __cdnuid_s=b99fca3d9c9b9daab793dccc40eb4ba1; max-age=31536000; path=/; HttpOnly;
+            secure
+        X-Cache:
+          - bypass
+      body:
+        encoding: UTF-8
+        string: '{"access_token": "CENSORED"}'
+      http_version:
+    recorded_at: Thu, 17 Oct 2019 05:00:02 GMT
+  - request:
+      method: get
+      uri: https://api.zoomeye.org/web/search?page=1&query=wordpress%20%2Bfoo%20%2Bbar
+      body:
+        encoding: US-ASCII
+        string: ""
+      headers:
+        Authorization:
+          - JWT CENSORED
+        Accept-Encoding:
+          - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+        Accept:
+          - "*/*"
+        User-Agent:
+          - Ruby
+        Host:
+          - api.zoomeye.org
+    response:
+      status:
+        code: 200
+        message: OK
+      headers:
+        Date:
+          - Thu, 17 Oct 2019 05:00:03 GMT
+        Content-Type:
+          - application/json
+        Transfer-Encoding:
+          - chunked
+        Connection:
+          - keep-alive
+        Vary:
+          - Accept-Encoding
+        Etag:
+          - W/"c9d249a9d9658f1b0d1492d2a73c831298f57df2"
+        X-Cdn-Edge:
+          - 0b7e99c,-
+        Set-Cookie:
+          - __cdnuid_s=1ac4560f5203c20dfecb203adff6b4b9; max-age=31536000; path=/; HttpOnly;
+            secure
+        X-Cache:
+          - bypass
+      body:
+        encoding: ASCII-8BIT
+        string:
+          '{"total": 16, "available": 3, "matches": [{"geoinfo": {"city": {"geoname_id":
+          null, "names": {"zh-CN": "\u829d\u52a0\u54e5", "en": "Chicago"}}, "country":
+          {"geoname_id": null, "code": "US", "names": {"zh-CN": "\u7f8e\u56fd", "en":
+          "United States"}}, "isp": "rackspace.com", "asn": "19994", "subdivisions":
+          {"geoname_id": null, "code": null, "names": {"zh-CN": "\u4f0a\u5229\u8bfa\u4f0a\u5dde",
+          "en": "Illinois"}}, "location": {"lat": "41.878114", "lon": "-87.629798"},
+          "organization": null, "aso": null, "continent": {"geoname_id": null, "code":
+          "NA", "names": {"zh-CN": "\u5317\u7f8e\u6d32", "en": "North American"}}, "PoweredBy":
+          "IPIP", "base_station": "", "organization_CN": null, "idc": "IDC"}, "description":
+          "Arlo Leach builds  database-driven\n\t\twebsites and custom mobile apps for
+          clients nationwide.", "language": ["PHP"], "title": "Arlo Leach: Custom Web,
+          Database and Mobile     \t\t\tApp Development in Portland, Oregon", "ip":
+          ["23.253.218.237"], "waf": [], "component": [{"chinese": "PHP", "name": "PHP",
+          "version": "5.4.16"}, {"chinese": "openssl", "name": "openssl", "version":
+          "1.0.2k"}], "system": [{"chinese": "CentOS", "distrib": "CentOS", "release":
+          null, "name": "Linux"}], "site": "www.arlomedia.com", "db": [], "headers":
+          "HTTP/1.1 200 OK\r\nDate: Wed, 25 Sep 2019 09:25:06 GMT\r\nServer: Apache/2.4.6
+          (CentOS) OpenSSL/1.0.2k-fips PHP/5.4.16\r\nX-Powered-By: PHP/5.4.16\r\nFoo:
+          bar\r\nSet-Cookie: Contemplate=visitor_ID%3DFNQgt90jG53dbrpn-20190925022506;
+          Expires=Sat, 22 Sep 2029 00:00:00 GMT; Path=/; Version=1\r\nContent-Length:
+          5482\r\nKeep-Alive: timeout=15, max=100\r\nConnection: Keep-Alive\r\nContent-Type:
+          text/html; charset=UTF-8\r\n", "framework": [], "timestamp": "2019-09-25T17:28:34.973622",
+          "keywords": "website, web development, web programming,\n\t\t\t\tdatabase
+          development, custom, iPhone, iPad, apps, iOS, Android, PHP, MySQL,\n\t\t\t\tLinux,
+          Apache, HTML, JavaScript, CSS, content management, e-commerce,\n\t\t\t\tPortland,
+          Oregon, Chicago", "webapp": [{"chinese": "WordPress", "name": "WordPress",
+          "rules": ["http://www.arlomedia.com/blog/"], "version": "3.0.1", "url": "http://www.arlomedia.com/blog/"}],
+          "server": [{"chinese": "Apache httpd", "name": "Apache httpd", "version":
+          "2.4.6"}], "domains": ["wordpress.org", "www.commoncraft.com", "www.businessweek.com",
+          "www.bdavis-designs.com"]}, {"description": "", "language": ["PHP"], "title":
+          "</title> \t<!--[if lte IE 8]><script type=\"text/javascript\" src=\"http://c-star.com/wp-content/themes/Avada/assets/js/html5shiv.js\"></script><![endif]-->
+          \t<link href=''https://fonts.googleapis.com/css?family=Playfair+Display:400,400italic''
+          rel=''stylesheet'' type=''text/css''>\t<!-- <link href=''https://fonts.googleapis.com/css?family=Marcellus''
+          rel=''stylesheet'' type=''text/css''> --> \t\t\t\t\t\t\t<meta name=\"viewport\"
+          content=\"width=device-width, initial-scale=1\" /> \t\t\t\t\t\t<link rel=\"shortcut
+          icon\" href=\"http://c-star.com/wp-content/uploads/2016/01/logo.png\" type=\"image/x-icon\"
+          /> \t\t\t\t\t\t<title>Cstar Property Management &#8211; Just one more <CENSYS_AUTH>",
+          "ip": ["192.185.154.25"], "waf": [], "component": [], "system": [], "site":
+          "c-star.com", "db": [{"chinese": "MySQL", "name": "MySQL", "version": null}],
+          "headers": "HTTP/1.1 200 OK\r\nDate: Thu, 12 Sep 2019 02:25:03 GMT\r\nServer:
+          nginx/1.17.3\r\nContent-Type: text/html; charset=UTF-8\r\nP3P: CP=\"ALL DSP
+          NID CURa ADMa DEVa HISa OTPa OUR NOR NAV DEM\"\r\nLink: <http://c-star.com/wp-json/>;
+          rel=\"https://api.w.org/\", <http://c-star.com/>; rel=shortlink\r\nExpires:
+          Wed, 11 Jan 1984 05:00:00 GMT\r\nCache-Control: no-cache, must-revalidate,
+          max-age=0\r\nVary: Accept-Encoding\r\nContent-Encoding: gzip\r\nX-Endurance-Cache-Level:
+          2\r\nX-Server-Cache: true\r\nX-Proxy-Cache: MISS\r\nAccept-Ranges: none\r\nTransfer-Encoding:
+          chunked\r\n", "keywords": "", "framework": [], "timestamp": "2019-09-12T10:25:32.482996",
+          "geoinfo": {"city": {"geoname_id": null, "names": {"zh-CN": "\u4f11\u65af\u987f",
+          "en": "Houston"}}, "country": {"geoname_id": null, "code": "US", "names":
+          {"zh-CN": "\u7f8e\u56fd", "en": "United States"}}, "isp": "websitewelcome.com",
+          "continent": {"geoname_id": null, "code": "NA", "names": {"zh-CN": "\u5317\u7f8e\u6d32",
+          "en": "North American"}}, "subdivisions": {"geoname_id": null, "code": null,
+          "names": {"zh-CN": "\u5fb7\u514b\u8428\u65af\u5dde", "en": "Texas"}}, "location":
+          {"lat": "29.760427", "lon": "-95.369803"}, "organization": null, "aso": null,
+          "asn": "46606", "PoweredBy": "IPIP", "base_station": "", "organization_CN":
+          null, "idc": "IDC"}, "webapp": [{"chinese": "WordPress", "name": "WordPress",
+          "rules": ["http://c-star.com/"], "version": "5.2.3", "url": "http://c-star.com/"}],
+          "server": [{"chinese": "Nginx", "name": "Nginx", "version": "1.17.3"}], "domains":
+          ["kmjwebdesign.com", "www.theflatsonarcher.com", "www.northcountrycommons.com",
+          "www.westbrookplaceapartments.com", "www.twincreeknorman.com", "www.southwindsapts.com",
+          "liveattudorcrossing.com", "liveatlindenpark.com", "property.onesite.realpage.com",
+          "liveatcedaroaks.com", "www.monticellovillageapts.com", "www.lightningcreekapartments.com",
+          "www.cowboytownapartments.com", "liveathuntingtonplace.com", "3568888.onlineleasing.realpage.com",
+          "oakwoodwestapartments.com", "www.enclaveatcoppercreek.com", "3568889.onlineleasing.realpage.com"]},
+          {"geoinfo": {"city": {"geoname_id": null, "names": {"zh-CN": "\u5927\u962a",
+          "en": "Osaka"}}, "country": {"geoname_id": null, "code": "JP", "names": {"zh-CN":
+          "\u65e5\u672c", "en": "Japan"}}, "isp": "sakura.ad.jp", "asn": "9371", "subdivisions":
+          {"geoname_id": null, "code": null, "names": {"zh-CN": "\u5927\u962a\u5e9c",
+          "en": "Osaka"}}, "location": {"lat": "34.693738", "lon": "135.502165"}, "organization":
+          null, "aso": null, "continent": {"geoname_id": null, "code": "AP", "names":
+          {"zh-CN": "\u4e9a\u6d32", "en": "Asia"}}, "PoweredBy": "IPIP", "base_station":
+          "", "organization_CN": null, "idc": "IDC"}, "description": "\u30d5\u30a3\u30ae\u30e5\u30a2\u30ec\u30d3\u30e5\u30fc\uff0c\u8cb7\u3044\u7269\u8a18\u9332\uff0c\u8a18\u4e8b\u611f\u60f3\uff0c\u305d\u306e\u4ed6\u622f\u308c\u8a00",
+          "language": ["PHP"], "title": "foo-bar-baz", "ip": ["219.94.207.237"], "waf":
+          [], "component": [], "system": [], "site": "www.foobarbaz.jp", "db": [{"chinese":
+          "MySQL", "name": "MySQL", "version": null}], "headers": "HTTP/1.1 200 OK\r\nServer:
+          nginx\r\nDate: Wed, 28 Aug 2019 22:30:14 GMT\r\nContent-Type: text/html\r\nTransfer-Encoding:
+          chunked\r\nConnection: keep-alive\r\nLast-Modified: Wed, 28 Aug 2019 22:25:08
+          GMT\r\nVary: Cookie\r\n", "framework": [], "timestamp": "2019-08-29T06:32:39.934633",
+          "keywords": "\u30ec\u30d3\u30e5\u30fc,\u30d5\u30a3\u30ae\u30e5\u30a2,\u30a4\u30d9\u30f3\u30c8\u30ec\u30dd\u30fc\u30c8,\u8cb7\u3044\u7269",
+          "webapp": [{"chinese": "WordPress", "name": "WordPress", "rules": ["http://www.foobarbaz.jp/"],
+          "version": "3.1.1", "url": "http://www.foobarbaz.jp/"}], "server": [{"chinese":
+          "Nginx", "name": "Nginx", "version": null}], "domains": ["ameblo.jp", "www.jttk.zaq.ne.jp",
+          "bakaneko.way-nifty.com", "yotsubatofigure.net", "whitemania.jp", "www004.upp.so-net.ne.jp",
+          "oempire.livedoor.biz", "www.theg0.info", "www.moeyo.com", "px.a8.net", "akibahobby.net",
+          "blog.so-net.ne.jp", "vicuna.jp", "www.ikibata.net", "logicerror.sakura.ne.jp",
+          "kimagureman.net", "snowcolors.web.fc2.com", "blog.aozoraschool.net", "shishioh.info",
+          "rranking11.ziyu.net", "wordpress.org", "hk.dmz-plus.com", "blog.livedoor.jp",
+          "blog.amiami.com", "kyuusai2nd.net", "0taku.livedoor.biz", "anicomi.livedoor.biz",
+          "moemoedoll.blog95.fc2.com", "turnscope.yu-nagi.com", "taitan-no.net", "beyyang128.no-blog.jp",
+          "ccf-square.blogspot.com", "toloveru.blog73.fc2.com", "kotoblog.kotobukiya.co.jp",
+          "www.goodsmile.info", "www.gachamoe.com", "prohibit-nullpo.seesaa.net", "otac.exblog.jp",
+          "caf-aholic.seesaa.net", "www.1999.co.jp", "konton.sakura.ne.jp", "ga.sbcr.jp",
+          "taste.style.coocan.jp", "fuyukawa.blog115.fc2.com", "kaijin.akiba.coocan.jp",
+          "hobby-channel.net", "www.rakugakidou.net", "www.native-web.jp", "apsy.blog.shinobi.jp",
+          "n-exceed.net", "www.yujin-figure.com", "www113.sakura.ne.jp", "www.shakaijin.org",
+          "www.akibaos.com", "wawawawasuremono.com", "superdollfie.tea-nifty.com", "blog.goo.ne.jp",
+          "www5b.biglobe.ne.jp", "cattleya.konjiki.jp", "dorayaki.mariobros.net", "tyodai.blog47.fc2.com",
+          "unjustarea.hp.infoseek.co.jp", "tr.my-affiliate.com", "d.hatena.ne.jp", "www.yamato-toys.com",
+          "www.tategamiya.net", "toyplablog.blog72.fc2.com", "www.happysoda.com", "www.vitaminless.sakura.ne.jp",
+          "figupla.blog47.fc2.com", "www.toybu.net", "kent3583.cocolog-nifty.com", "www.ziyu.net",
+          "holoblog.seesaa.net", "kurosiromoko.blog69.fc2.com", "sim-aki--orz.spaces.live.com",
+          "www.dannychoo.com", "www.geocities.jp", "www.mudana.net", "www.new-akiba.com",
+          "www.daikikougyou.com", "webclap.simplecgi.com", "nitroyss.jp", "panther.clanbluepanthers.org",
+          "goodsmile.ecq.sc", "emd2nd.blog47.fc2.com", "www.good-design-review.com",
+          "pillow100.blog114.fc2.com", "bogaboga.blog87.fc2.com", "www.urban.ne.jp",
+          "prorom.sakura.ne.jp", "figuephoto.blog34.fc2.com", "doradora999.blog104.fc2.com",
+          "nijimoe.org", "wp.vicuna.jp", "littlenymphet.blog45.fc2.com", "tenplant.blog82.fc2.com",
+          "www.senakablog.com", "takicorp.exblog.jp", "hobbydog.sakura.ne.jp", "bbb-sutareya.sakura.ne.jp",
+          "volkshobby.blog50.fc2.com", "www.cutanews.com", "www.gamekult.com", "www.mukyaa.com",
+          "www6.ocn.ne.jp", "citz.blog.shinobi.jp", "figureclip.posterous.com", "ct2.mikosi.com",
+          "www.ne.jp", "theicingonthecake.blog55.fc2.com", "chokuhan.nicovideo.jp",
+          "fu-min.sblo.jp", "asallin.blog109.fc2.com", "coordination.dtiblog.com", "pureneemo.dtiblog.com",
+          "tonytaka.blog134.fc2.com", "fatebakayudoufu.cocolog-nifty.com", "tenra.at.webry.info",
+          "blog.hobbystock.jp", "point.ninja.co.jp", "www.howagirlfigures.com", "www.kodomut.com",
+          "twitter.com", "hobby.moe.hm", "www.asdfigure.com"]}], "facets": {}}'
+      http_version:
+    recorded_at: Thu, 17 Oct 2019 05:00:03 GMT
+  - request:
+      method: get
+      uri: https://api.zoomeye.org/web/search?page=2&query=wordpress%20%2Bfoo%20%2Bbar
+      body:
+        encoding: US-ASCII
+        string: ""
+      headers:
+        Authorization:
+          - JWT CENSORED
+        Accept-Encoding:
+          - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+        Accept:
+          - "*/*"
+        User-Agent:
+          - Ruby
+        Host:
+          - api.zoomeye.org
+    response:
+      status:
+        code: 403
+        message: Forbidden
+      headers:
+        Date:
+          - Thu, 17 Oct 2019 05:00:03 GMT
+        Content-Type:
+          - application/json
+        Content-Length:
+          - "139"
+        Connection:
+          - keep-alive
+        X-Cdn-Edge:
+          - 0b7e99c,-
+        Set-Cookie:
+          - __cdnuid_s=f0463c07f8dd76b941a6d3a9f889cf34; max-age=31536000; path=/; HttpOnly;
+            secure
+        X-Cache:
+          - bypass
+      body:
+        encoding: UTF-8
+        string:
+          '{"error": "forbidden", "message": "provided credentials do not provide
+          access to specified resource", "url": "https://www.zoomeye.org/api"}'
+      http_version:
+    recorded_at: Thu, 17 Oct 2019 05:00:04 GMT
+recorded_with: VCR 5.0.0
