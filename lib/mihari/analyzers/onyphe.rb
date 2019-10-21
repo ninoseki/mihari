@@ -20,11 +20,14 @@ module Mihari
       end
 
       def artifacts
-        result = search
-        return [] unless result
+        results = search
+        return [] unless results
 
-        results = result.dig("results") || []
-        results.map { |e| e.dig("ip") }.compact.uniq
+        flat_results = results.map do |result|
+          result.dig("results")
+        end.flatten.compact
+
+        flat_results.map { |result| result.dig("ip") }.compact.uniq
       end
 
       private
@@ -37,8 +40,19 @@ module Mihari
         @api ||= ::Onyphe::API.new
       end
 
+      def search_with_page(query, page: 1)
+        api.datascan(query, page: page)
+      end
+
       def search
-        api.datascan(query)
+        responses = []
+        (1..Float::INFINITY).each do |page|
+          res = search_with_page(query, page: page)
+          responses << res
+          total = res.dig("total").to_i
+          break if total <= page * 10
+        end
+        responses
       end
     end
   end
