@@ -24,7 +24,7 @@ module Mihari
         return [] unless result
 
         results = result.dig("results") || []
-        results.map { |e| e.dig("ip") }.compact
+        results.map { |e| e.dig("ip") }.compact.uniq
       end
 
       private

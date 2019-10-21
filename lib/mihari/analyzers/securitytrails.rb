@@ -57,23 +57,23 @@ module Mihari
       end
 
       def domain_lookup
-        result = api.history.get_all_dns_history(query, "a")
-        records = result.records || []
+        result = api.history.get_all_dns_history(query, type: "a")
+        records = result.dig("records") || []
         records.map do |record|
-          (record.values || []).map(&:ip)
+          (record.dig("values") || []).map { |value| value.dig("ip") }
         end.flatten.compact.uniq
       end
 
       def ip_lookup
         result = api.domains.search( filter: { ipv4: query })
-        records = result.records || []
-        records.map(&:hostname).compact.uniq
+        records = result.dig("records") || []
+        records.map { |record| record.dig("hostname") }.compact.uniq
       end
 
       def mail_lookup
         result = api.domains.search( filter: { whois_email: query })
-        records = result.records || []
-        records.map(&:hostname).compact.uniq
+        records = result.dig("records") || []
+        records.map { |record| record.dig("hostname") }.compact.uniq
       end
     end
   end
