@@ -34,6 +34,8 @@ module Mihari
 
       private
 
+      PAGE_SIZE = 10
+
       def valid_type?
         %w(host web).include? type
       end
@@ -63,14 +65,13 @@ module Mihari
 
       def host_lookup
         responses = []
+        (1..Float::INFINITY).each do |page|
+          res = _host_lookup(query, page: page)
+          break unless res
 
-        res = _host_lookup(query)
-        total = res.dig("total").to_f
-        max = (total / 10.0).ceil
-        responses << res
-
-        (2..max).each do |page|
-          responses << _host_lookup(query, page: page)
+          total = res.dig("total").to_i
+          responses << res
+          break if total <= page * PAGE_SIZE
         end
         convert_responses responses.compact
       end
@@ -83,14 +84,13 @@ module Mihari
 
       def web_lookup
         responses = []
+        (1..Float::INFINITY).each do |page|
+          res = _web_lookup(query, page: page)
+          break unless res
 
-        res = _web_lookup(query)
-        total = res.dig("total").to_f
-        max = (total / 10.0).ceil
-        responses << res
-
-        (2..max).each do |page|
-          responses << _web_lookup(query, page: page)
+          total = res.dig("total").to_i
+          responses << res
+          break if total <= page * PAGE_SIZE
         end
         convert_responses responses.compact
       end

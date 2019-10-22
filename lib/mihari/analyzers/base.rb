@@ -60,7 +60,7 @@ module Mihari
 
       # @return [Array<Mihari::Artifact>]
       def normalized_artifacts
-        @normalized_artifacts ||= artifacts.map do |artifact|
+        @normalized_artifacts ||= artifacts.compact.uniq.map do |artifact|
           artifact.is_a?(Artifact) ? artifact : Artifact.new(artifact)
         end.select(&:valid?)
       end
