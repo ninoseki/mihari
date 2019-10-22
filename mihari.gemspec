@@ -34,6 +34,7 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency "webmock", "~> 3.7"
 
   spec.add_dependency "addressable", "~> 2.7"
+  spec.add_dependency "binaryedge", "~> 0.1"
   spec.add_dependency "censu", "~> 0.2"
   spec.add_dependency "crtsh-rb", "~> 0.1"
   spec.add_dependency "dnpedia", "~> 0.1"

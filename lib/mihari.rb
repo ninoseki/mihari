@@ -35,6 +35,8 @@ require "mihari/the_hive"
 
 require "mihari/analyzers/base"
 require "mihari/analyzers/basic"
+
+require "mihari/analyzers/binaryedge"
 require "mihari/analyzers/censys"
 require "mihari/analyzers/circl"
 require "mihari/analyzers/crtsh"
