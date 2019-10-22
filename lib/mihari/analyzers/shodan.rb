@@ -33,6 +33,8 @@ module Mihari
 
       private
 
+      PAGE_SIZE = 100
+
       def config_keys
         %w(SHODAN_API_KEY)
       end
@@ -54,7 +56,7 @@ module Mihari
           break unless res
 
           responses << res
-          break if res.dig("total").to_i <= page * 100
+          break if res.dig("total").to_i <= page * PAGE_SIZE
         end
         responses
       end

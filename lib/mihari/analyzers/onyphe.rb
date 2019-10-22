@@ -32,6 +32,8 @@ module Mihari
 
       private
 
+      PAGE_SIZE = 10
+
       def config_keys
         %w(ONYPHE_API_KEY)
       end
@@ -50,7 +52,7 @@ module Mihari
           res = search_with_page(query, page: page)
           responses << res
           total = res.dig("total").to_i
-          break if total <= page * 10
+          break if total <= page * PAGE_SIZE
         end
         responses
       end
