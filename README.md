@@ -53,6 +53,7 @@ docker pull ninoseki/mihari
 
 mihari supports the following services by default.
 
+- [BinaryEdge](https://www.binaryedge.io/)
 - [Censys](http://censys.io)
 - [CIRCL passive DNS](https://www.circl.lu/services/passive-dns/) / [passive SSL](https://www.circl.lu/services/passive-ssl/)
 - [crt.sh](https://crt.sh/)
@@ -68,6 +69,7 @@ mihari supports the following services by default.
 $ mihari
 Commands:
   mihari alerts                               # Show the alerts on TheHive
+  mihari binaryedge [QUERY]                   # BinaryEdge lookup by a given query
   mihari censys [QUERY]                       # Censys IPv4 lookup by a given query
   mihari circl [DOMAIN|SHA1]                  # CIRCL passive DNS/SSL lookup by a given domain / SHA1 certificate fingerprint
   mihari crtsh [QUERY]                        # crt.sh lookup by a given query
@@ -82,7 +84,7 @@ Commands:
   mihari status                               # Show the current configuration status
   mihari urlscan [QUERY]                      # urlscan lookup by a given query
   mihari virustotal [IP|DOMAIN]               # VirusTotal resolutions lookup by a given ip or domain
-  mihari zoomeye [QUERY]                     # ZoomEye lookup by a given query
+  mihari zoomeye [QUERY]                      # ZoomEye lookup by a given query
 
 ```
 
@@ -171,6 +173,7 @@ All configuration is done via ENV variables.
 | MISP_API_KEY           | MISP API key                   | Optional                       |
 | SLACK_WEBHOOK_URL      | Slack Webhook URL              | Optional                       |
 | SLACK_CHANNEL          | Slack channel name             | Optional (default: `#general`) |
+| BINARYEDGE_API_KEY     | BinaryEdge API key             | Optional                       |
 | CENSYS_ID              | Censys API ID                  | Optional                       |
 | CENSYS_SECRET          | Censys secret                  | Optional                       |
 | CIRCL_PASSIVE_PASSWORD | CIRCL passive DNS/SSL password | Optional                       |

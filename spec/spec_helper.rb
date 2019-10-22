@@ -54,6 +54,7 @@ VCR.configure do |config|
     SECURITYTRAILS_API_KEY
     ZOOMEYE_USERNAME
     ZOOMEYE_PASSWORD
+    BINARYEDGE_API_KEY
   )
 
   api_endpoints = %w(

@@ -116,6 +116,15 @@ RSpec.describe Mihari::CLI do
     end
   end
 
+  describe "#binaryedge" do
+    before { allow(Mihari::Analyzers::BinaryEdge).to receive(:new).and_return(mock) }
+
+    it do
+      subject.start ["binaryedge", query]
+      expect(mock).to have_received(:run).once
+    end
+  end
+
   describe "#alerts" do
     let(:mock) { double("AlertViewer") }
     let(:alerts) {
