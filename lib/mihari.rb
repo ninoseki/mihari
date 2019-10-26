@@ -27,6 +27,7 @@ require "mihari/cache"
 require "mihari/type_checker"
 
 require "mihari/configurable"
+require "mihari/retriable"
 
 require "mihari/the_hive/base"
 require "mihari/the_hive/alert"
