@@ -6,6 +6,7 @@ module Mihari
   module Analyzers
     class Base
       include Configurable
+      include Retriable
 
       # @return [Array<String>, Array<Mihari::Artifact>]
       def artifacts
@@ -39,7 +40,7 @@ module Mihari
       end
 
       def run_emitter(emitter)
-        emitter.emit(title: title, description: description, artifacts: unique_artifacts, tags: tags)
+        emitter.run(title: title, description: description, artifacts: unique_artifacts, tags: tags)
       rescue StandardError => e
         puts "Emission by #{emitter.class} is failed: #{e}"
       end
@@ -79,7 +80,7 @@ module Mihari
       end
 
       def set_unique_artifacts
-        unique_artifacts
+        retry_on_timeout { unique_artifacts }
       rescue ArgumentError => _e
         klass = self.class.to_s.split("::").last.to_s
         raise Error, "Please configure #{klass} API settings properly"

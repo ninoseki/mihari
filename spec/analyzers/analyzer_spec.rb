@@ -40,7 +40,7 @@ RSpec.describe Mihari::Analyzers::Base, :vcr do
       before do
         emitter = double("emitter_instance")
         allow(emitter).to receive(:valid?).and_return(true)
-        allow(emitter).to receive(:emit).and_raise("error")
+        allow(emitter).to receive(:run).and_raise("error")
 
         klass = double("emitter_class")
         allow(klass).to receive(:new).and_return(emitter)
