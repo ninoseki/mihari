@@ -17,8 +17,8 @@ module Mihari
         @_regexp = regexp
         @type = type
 
-        raise TypeError, "#{@_regexp} is not a valid regexp" unless regexp
-        raise TypeError, "#{type} is not a valid type" unless valid_type?
+        raise InvalidInputError, "#{@_regexp} is not a valid regexp" unless regexp
+        raise InvalidInputError, "#{type} is not a valid type" unless valid_type?
 
         @title = title || "SecurityTrails domain feed lookup"
         @description = description || "Regexp = /#{@_regexp}/"
@@ -45,7 +45,7 @@ module Mihari
 
       def regexp
         @regexp ||= Regexp.compile(@_regexp)
-      rescue TypeError => _e
+      rescue InvalidInputError => _e
         nil
       end
 

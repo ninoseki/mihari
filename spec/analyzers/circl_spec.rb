@@ -52,7 +52,7 @@ RSpec.describe Mihari::Analyzers::CIRCL, :vcr do
 
     describe "#artifacts" do
       it do
-        expect { subject.artifacts }.to raise_error(TypeError)
+        expect { subject.artifacts }.to raise_error()
       end
     end
   end

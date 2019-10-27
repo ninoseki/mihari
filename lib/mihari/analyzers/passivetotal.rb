@@ -52,7 +52,7 @@ module Mihari
         when "hash"
           ssl_lookup
         else
-          raise TypeError, "#{query}(type: #{type || 'unknown'}) is not supported." unless valid_type?
+          raise InvalidInputError, "#{query}(type: #{type || 'unknown'}) is not supported." unless valid_type?
         end
       rescue ::PassiveTotal::Error => _e
         nil

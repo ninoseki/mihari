@@ -68,7 +68,7 @@ RSpec.describe Mihari::Analyzers::PassiveTotal, :vcr do
 
     describe "#artifacts" do
       it do
-        expect { subject.artifacts }.to raise_error(TypeError)
+        expect { subject.artifacts }.to raise_error(Mihari::InvalidInputError)
       end
     end
   end

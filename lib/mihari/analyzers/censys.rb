@@ -30,7 +30,7 @@ module Mihari
         when "certificates"
           certificates_lookup
         else
-          raise TypeError, "#{type} type is not supported." unless valid_type?
+          raise InvalidInputError, "#{type} type is not supported." unless valid_type?
         end
       end
 
