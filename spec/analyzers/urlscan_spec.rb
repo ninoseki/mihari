@@ -41,7 +41,7 @@ RSpec.describe Mihari::Analyzers::Urlscan, :vcr do
   describe "#initialize" do
     context "when given an invalid target_type" do
       it do
-        expect { described_class.new(query, tags: tags, target_type: "foo bar") }.to raise_error(TypeError)
+        expect { described_class.new(query, tags: tags, target_type: "foo bar") }.to raise_error(Mihari::InvalidInputError)
       end
     end
   end

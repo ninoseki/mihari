@@ -50,7 +50,7 @@ module Mihari
         when "mail"
           mail_lookup
         else
-          raise TypeError, "#{query}(type: #{type || 'unknown'}) is not supported." unless valid_type?
+          raise InvalidInputError, "#{query}(type: #{type || 'unknown'}) is not supported." unless valid_type?
         end
       rescue ::SecurityTrails::Error => _e
         nil

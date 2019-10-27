@@ -22,7 +22,7 @@ RSpec.describe Mihari::Analyzers::SecurityTrailsDomainFeed do
   context "when given an invalid regex" do
     describe "#initialize" do
       it do
-        expect { described_class.new(nil) }.to raise_error(TypeError)
+        expect { described_class.new(nil) }.to raise_error(Mihari::InvalidInputError)
       end
     end
   end
@@ -30,7 +30,7 @@ RSpec.describe Mihari::Analyzers::SecurityTrailsDomainFeed do
   context "when given an invalid type" do
     describe "#initialize" do
       it do
-        expect { described_class.new(regexp, tags: tags, type: "foo bar") }.to raise_error(TypeError)
+        expect { described_class.new(regexp, tags: tags, type: "foo bar") }.to raise_error(Mihari::InvalidInputError)
       end
     end
   end
