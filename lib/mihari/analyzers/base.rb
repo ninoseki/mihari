@@ -31,10 +31,7 @@ module Mihari
       def run
         set_unique_artifacts
 
-        Parallel.each(Mihari.emitters) do |emitter_class|
-          emitter = emitter_class.new
-          next unless emitter.valid?
-
+        Parallel.each(valid_emitters) do |emitter|
           run_emitter emitter
         end
       end
@@ -84,6 +81,13 @@ module Mihari
       rescue ArgumentError => _e
         klass = self.class.to_s.split("::").last.to_s
         raise Error, "Please configure #{klass} API settings properly"
+      end
+
+      def valid_emitters
+        @valid_emitters ||= Mihari.emitters.map do |klass|
+          emitter = klass.new
+          emitter.valid? ? emitter : nil
+        end.compact
       end
     end
   end
