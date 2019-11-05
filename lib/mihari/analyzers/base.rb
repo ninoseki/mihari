@@ -77,7 +77,7 @@ module Mihari
       end
 
       def set_unique_artifacts
-        retry_on_timeout { unique_artifacts }
+        retry_on_error { unique_artifacts }
       rescue ArgumentError => _e
         klass = self.class.to_s.split("::").last.to_s
         raise Error, "Please configure #{klass} API settings properly"

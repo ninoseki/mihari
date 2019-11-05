@@ -12,7 +12,7 @@ class Test
   end
 
   def foo
-    retry_on_timeout(times: times, interval: interval) do
+    retry_on_error(times: times, interval: interval) do
       @count += 1
       bar
     end
@@ -30,7 +30,7 @@ RSpec.describe Mihari::Retriable do
     allow(Net::HTTP).to receive(:get).and_raise(Net::OpenTimeout)
   end
 
-  describe "#retry_on_timeout" do
+  describe "#retry_on_error" do
     it do
       expect { subject.foo }.to raise_error(Net::OpenTimeout)
       expect(subject.count).to eq(subject.times)
