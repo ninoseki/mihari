@@ -69,22 +69,22 @@ mihari supports the following services by default.
 $ mihari
 Commands:
   mihari alerts                               # Show the alerts on TheHive
-  mihari binaryedge [QUERY]                   # BinaryEdge lookup by a given query
-  mihari censys [QUERY]                       # Censys IPv4 lookup by a given query
-  mihari circl [DOMAIN|SHA1]                  # CIRCL passive DNS/SSL lookup by a given domain / SHA1 certificate fingerprint
-  mihari crtsh [QUERY]                        # crt.sh lookup by a given query
-  mihari dnpedia [QUERY]                      # DNPedia domain lookup by a given query
+  mihari binaryedge [QUERY]                   # BinaryEdge host search by a query
+  mihari censys [QUERY]                       # Censys IPv4 search by a query
+  mihari circl [DOMAIN|SHA1]                  # CIRCL passive DNS/SSL lookup by a domain / SHA1 certificate fingerprint
+  mihari crtsh [QUERY]                        # crt.sh search by a query
+  mihari dnpedia [QUERY]                      # DNPedia domain search by a query
   mihari help [COMMAND]                       # Describe available commands or one specific command
   mihari import_from_json                     # Give a JSON input via STDIN
-  mihari onyphe [QUERY]                       # Onyphe datascan lookup by a given query
-  mihari passivetotal [IP|DOMAIN|EMAIL|SHA1]  # PassiveTotal lookup by a given ip / domain / email / SHA1 certificate fingerprint
-  mihari securitytrails [IP|DOMAIN|EMAIL]     # SecurityTrails lookup by a given ip, domain or email
-  mihari securitytrails_domain_feed [REGEXP]  # SecurityTrails new domain feed lookup by a given regexp
-  mihari shodan [QUERY]                       # Shodan host lookup by a given query
+  mihari onyphe [QUERY]                       # Onyphe datascan search by a query
+  mihari passivetotal [IP|DOMAIN|EMAIL|SHA1]  # PassiveTotal lookup by an ip / domain / email / SHA1 certificate fingerprint
+  mihari securitytrails [IP|DOMAIN|EMAIL]     # SecurityTrails lookup by an ip, domain or email
+  mihari securitytrails_domain_feed [REGEXP]  # SecurityTrails new domain feed search by a regexp
+  mihari shodan [QUERY]                       # Shodan host search by a query
   mihari status                               # Show the current configuration status
-  mihari urlscan [QUERY]                      # urlscan lookup by a given query
-  mihari virustotal [IP|DOMAIN]               # VirusTotal resolutions lookup by a given ip or domain
-  mihari zoomeye [QUERY]                      # ZoomEye lookup by a given query
+  mihari urlscan [QUERY]                      # urlscan search by a given query
+  mihari virustotal [IP|DOMAIN]               # VirusTotal resolutions lookup by an ip or domain
+  mihari zoomeye [QUERY]                      # ZoomEye search by a query
 
 ```
 

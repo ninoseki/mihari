@@ -5,7 +5,7 @@ require "json"
 
 module Mihari
   class CLI < Thor
-    desc "censys [QUERY]", "Censys IPv4 lookup by a given query"
+    desc "censys [QUERY]", "Censys IPv4 search by a query"
     method_option :title, type: :string, desc: "title"
     method_option :description, type: :string, desc: "description"
     method_option :tags, type: :array, desc: "tags"
@@ -16,7 +16,7 @@ module Mihari
       end
     end
 
-    desc "shodan [QUERY]", "Shodan host lookup by a given query"
+    desc "shodan [QUERY]", "Shodan host search by a query"
     method_option :title, type: :string, desc: "title"
     method_option :description, type: :string, desc: "description"
     method_option :tags, type: :array, desc: "tags"
@@ -26,7 +26,7 @@ module Mihari
       end
     end
 
-    desc "onyphe [QUERY]", "Onyphe datascan lookup by a given query"
+    desc "onyphe [QUERY]", "Onyphe datascan search by a query"
     method_option :title, type: :string, desc: "title"
     method_option :description, type: :string, desc: "description"
     method_option :tags, type: :array, desc: "tags"
@@ -36,7 +36,7 @@ module Mihari
       end
     end
 
-    desc "urlscan [QUERY]", "urlscan lookup by a given query"
+    desc "urlscan [QUERY]", "urlscan search by a given query"
     method_option :title, type: :string, desc: "title"
     method_option :description, type: :string, desc: "description"
     method_option :tags, type: :array, desc: "tags"
@@ -47,7 +47,7 @@ module Mihari
       end
     end
 
-    desc "virustotal [IP|DOMAIN]", "VirusTotal resolutions lookup by a given ip or domain"
+    desc "virustotal [IP|DOMAIN]", "VirusTotal resolutions lookup by an ip or domain"
     method_option :title, type: :string, desc: "title"
     method_option :description, type: :string, desc: "description"
     method_option :tags, type: :array, desc: "tags"
@@ -57,7 +57,7 @@ module Mihari
       end
     end
 
-    desc "securitytrails [IP|DOMAIN|EMAIL]", "SecurityTrails lookup by a given ip, domain or email"
+    desc "securitytrails [IP|DOMAIN|EMAIL]", "SecurityTrails lookup by an ip, domain or email"
     method_option :title, type: :string, desc: "title"
     method_option :description, type: :string, desc: "description"
     method_option :tags, type: :array, desc: "tags"
@@ -68,7 +68,7 @@ module Mihari
     end
     map "st" => :securitytrails
 
-    desc "securitytrails_domain_feed [REGEXP]", "SecurityTrails new domain feed lookup by a given regexp"
+    desc "securitytrails_domain_feed [REGEXP]", "SecurityTrails new domain feed search by a regexp"
     method_option :title, type: :string, desc: "title"
     method_option :description, type: :string, desc: "description"
     method_option :tags, type: :array, desc: "tags"
@@ -80,7 +80,7 @@ module Mihari
     end
     map "st_domain_feed" => :securitytrails_domain_feed
 
-    desc "crtsh [QUERY]", "crt.sh lookup by a given query"
+    desc "crtsh [QUERY]", "crt.sh search by a query"
     method_option :title, type: :string, desc: "title"
     method_option :description, type: :string, desc: "description"
     method_option :tags, type: :array, desc: "tags"
@@ -90,7 +90,7 @@ module Mihari
       end
     end
 
-    desc "dnpedia [QUERY]", "DNPedia domain lookup by a given query"
+    desc "dnpedia [QUERY]", "DNPedia domain search by a query"
     method_option :title, type: :string, desc: "title"
     method_option :description, type: :string, desc: "description"
     method_option :tags, type: :array, desc: "tags"
@@ -100,7 +100,7 @@ module Mihari
       end
     end
 
-    desc "circl [DOMAIN|SHA1]", "CIRCL passive DNS/SSL lookup by a given domain / SHA1 certificate fingerprint"
+    desc "circl [DOMAIN|SHA1]", "CIRCL passive DNS/SSL lookup by a domain / SHA1 certificate fingerprint"
     method_option :title, type: :string, desc: "title"
     method_option :description, type: :string, desc: "description"
     method_option :tags, type: :array, desc: "tags"
@@ -110,7 +110,7 @@ module Mihari
       end
     end
 
-    desc "passivetotal [IP|DOMAIN|EMAIL|SHA1]", "PassiveTotal lookup by a given ip / domain / email / SHA1 certificate fingerprint"
+    desc "passivetotal [IP|DOMAIN|EMAIL|SHA1]", "PassiveTotal lookup by an ip / domain / email / SHA1 certificate fingerprint"
     method_option :title, type: :string, desc: "title"
     method_option :description, type: :string, desc: "description"
     method_option :tags, type: :array, desc: "tags"
@@ -120,7 +120,7 @@ module Mihari
       end
     end
 
-    desc "zoomeye [QUERY]", "ZoomEye lookup by a given query"
+    desc "zoomeye [QUERY]", "ZoomEye search by a query"
     method_option :title, type: :string, desc: "title"
     method_option :description, type: :string, desc: "description"
     method_option :tags, type: :array, desc: "tags"
@@ -131,7 +131,7 @@ module Mihari
       end
     end
 
-    desc "binaryedge [QUERY]", "BinaryEdge lookup by a given query"
+    desc "binaryedge [QUERY]", "BinaryEdge host search by a query"
     method_option :title, type: :string, desc: "title"
     method_option :description, type: :string, desc: "description"
     method_option :tags, type: :array, desc: "tags"
