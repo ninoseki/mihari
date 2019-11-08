@@ -40,7 +40,7 @@ module Mihari
       end
 
       def search
-        api.search(query)
+        api.search(query, size: 10_000)
       rescue ::UrlScan::ResponseError => _e
         nil
       end
