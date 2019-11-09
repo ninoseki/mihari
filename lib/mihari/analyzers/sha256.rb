@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require "parallel"
+
 module Mihari
   module Analyzers
     class SHA256 < Base
@@ -27,7 +29,7 @@ module Mihari
       end
 
       def artifacts
-        analyzers.map do |analyzer|
+        Parallel.map(analyzers) do |analyzer|
           run_analyzer analyzer
         end.flatten
       end
