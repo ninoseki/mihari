@@ -34,4 +34,18 @@ RSpec.describe Mihari::TypeChecker do
       end
     end
   end
+
+  describe ".detailed_type" do
+    context "when given a sha256" do
+      it do
+        expect(subject.detailed_type("275a021bbfb6489e54d471899f7db9d1663fc695ec2fe2a2c4538aabf651fd0f")).to eq("sha256")
+      end
+    end
+
+    context "when given a md5" do
+      it do
+        expect(subject.detailed_type("44d88612fea8a8f36de82e1278abb02f")).to eq("md5")
+      end
+    end
+  end
 end
