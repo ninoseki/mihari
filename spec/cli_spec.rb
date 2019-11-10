@@ -125,6 +125,42 @@ RSpec.describe Mihari::CLI do
     end
   end
 
+  describe "#passive_dns" do
+    before { allow(Mihari::Analyzers::PassiveDNS).to receive(:new).and_return(mock) }
+
+    it do
+      subject.start ["passive_dns", query]
+      expect(mock).to have_received(:run).once
+    end
+  end
+
+  describe "#passive_ssl" do
+    before { allow(Mihari::Analyzers::PassiveSSL).to receive(:new).and_return(mock) }
+
+    it do
+      subject.start ["passive_ssl", query]
+      expect(mock).to have_received(:run).once
+    end
+  end
+
+  describe "#revese_whois" do
+    before { allow(Mihari::Analyzers::ReveseWhois).to receive(:new).and_return(mock) }
+
+    it do
+      subject.start ["reverse_whois", query]
+      expect(mock).to have_received(:run).once
+    end
+  end
+
+  describe "#sha256" do
+    before { allow(Mihari::Analyzers::SHA256).to receive(:new).and_return(mock) }
+
+    it do
+      subject.start ["sha256", query]
+      expect(mock).to have_received(:run).once
+    end
+  end
+
   describe "#alerts" do
     let(:mock) { double("AlertViewer") }
     let(:alerts) {

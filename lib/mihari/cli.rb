@@ -141,6 +141,46 @@ module Mihari
       end
     end
 
+    desc "passive_dns [IP|Domain]", "Cross search with passive DNS services by an ip / domain"
+    method_option :title, type: :string, desc: "title"
+    method_option :description, type: :string, desc: "description"
+    method_option :tags, type: :array, desc: "tags"
+    def passive_dns(query)
+      with_error_handling do
+        run_analyzer Analyzers::PassiveDNS, query: query, options: options
+      end
+    end
+
+    desc "passive_ssl [SHA1]", "Cross search with passive SSL services by an SHA1 certificate fingerprint"
+    method_option :title, type: :string, desc: "title"
+    method_option :description, type: :string, desc: "description"
+    method_option :tags, type: :array, desc: "tags"
+    def passive_ssl(query)
+      with_error_handling do
+        run_analyzer Analyzers::PassiveSSL, query: query, options: options
+      end
+    end
+
+    desc "reverse_whois [email]", "Cross search with reverse whois services by an email"
+    method_option :title, type: :string, desc: "title"
+    method_option :description, type: :string, desc: "description"
+    method_option :tags, type: :array, desc: "tags"
+    def reverse_whois(query)
+      with_error_handling do
+        run_analyzer Analyzers::ReveseWhois, query: query, options: options
+      end
+    end
+
+    desc "sha256 [SHA256]", "Cross search with search engines by an SHA256 hash"
+    method_option :title, type: :string, desc: "title"
+    method_option :description, type: :string, desc: "description"
+    method_option :tags, type: :array, desc: "tags"
+    def sha256(query)
+      with_error_handling do
+        run_analyzer Analyzers::SHA256, query: query, options: options
+      end
+    end
+
     desc "import_from_json", "Give a JSON input via STDIN"
     def import_from_json(input = nil)
       with_error_handling do

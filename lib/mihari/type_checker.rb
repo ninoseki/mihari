@@ -57,8 +57,23 @@ module Mihari
     end
 
     # @return [String, nil]
+    def detailed_type
+      return "md5" if md5?
+      return "sha1" if sha1?
+      return "sha256" if sha256?
+      return "sha512" if sha512?
+
+      type
+    end
+
+    # @return [String, nil]
     def self.type(data)
       new(data).type
+    end
+
+    # @return [String, nil]
+    def self.detailed_type(data)
+      new(data).detailed_type
     end
 
     private

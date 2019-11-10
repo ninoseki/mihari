@@ -77,9 +77,13 @@ Commands:
   mihari help [COMMAND]                       # Describe available commands or one specific command
   mihari import_from_json                     # Give a JSON input via STDIN
   mihari onyphe [QUERY]                       # Onyphe datascan search by a query
+  mihari passive_dns [IP|Domain]              # Cross search with passive DNS services by an ip / domain
+  mihari passive_ssl [SHA1]                   # Cross search with passive SSL services by an SHA1 certificate fingerprint
   mihari passivetotal [IP|DOMAIN|EMAIL|SHA1]  # PassiveTotal lookup by an ip / domain / email / SHA1 certificate fingerprint
+  mihari reverse_whois [email]                # Cross search with reverse whois services by an email
   mihari securitytrails [IP|DOMAIN|EMAIL]     # SecurityTrails lookup by an ip, domain or email
   mihari securitytrails_domain_feed [REGEXP]  # SecurityTrails new domain feed search by a regexp
+  mihari sha256 [SHA256]                      # Cross search with search engines by an SHA256 hash
   mihari shodan [QUERY]                       # Shodan host search by a query
   mihari status                               # Show the current configuration status
   mihari urlscan [QUERY]                      # urlscan search by a given query
@@ -87,6 +91,19 @@ Commands:
   mihari zoomeye [QUERY]                      # ZoomEye search by a query
 
 ```
+
+### Cross searches
+
+mihari has cross search features. A cross search is a search across a number of services.
+
+You can get aggregated results by using the following commands.
+
+| Command       | Desc.                                                                                  |
+|---------------|----------------------------------------------------------------------------------------|
+| passive_dns   | Passive DNS lookup with CIRCL passive DNS, PassiveTotal, SecurityTrails and VirusTotal |
+| passive_ssl   | Passive SSL lookup with CIRCL passive SSL and PassiveTotal                             |
+| reverse_whois | Revese Whois lookup with PassiveTotal and SecurityTrails                               |
+| sha256        | SHA256 hash search with BinaryEdge and Censys                                          |
 
 ### Example usages
 
