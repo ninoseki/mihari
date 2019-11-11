@@ -17,7 +17,7 @@ mihari(`見張り`) is a sidekick tool for [TheHive](https://github.com/TheHive-
     - mihari sends a notification to Slack. (Optional)
     - mihari creates an event on MISP. (Optional)
 
-![img](./screenshots/eyecatch.png)
+![img(https://github.com/ninoseki/mihari/blob/master/screenshots/eyecatch.png)
 
 Check this blog post for more details: [Continuous C2 hunting with Censys, Shodan, Onyphe and TheHive](https://hackmd.io/s/SkUaSrqoE).
 
