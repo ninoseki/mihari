@@ -74,6 +74,7 @@ Commands:
   mihari circl [DOMAIN|SHA1]                  # CIRCL passive DNS/SSL lookup by a domain / SHA1 certificate fingerprint
   mihari crtsh [QUERY]                        # crt.sh search by a query
   mihari dnpedia [QUERY]                      # DNPedia domain search by a query
+  mihari free_text [TEXT]                     # Cross search with search engines by a free text
   mihari help [COMMAND]                       # Describe available commands or one specific command
   mihari http_hash                            # Cross search with search engines by a hash of an HTTP response (SHA256, MD5 and MurmurHash3)
   mihari import_from_json                     # Give a JSON input via STDIN
@@ -104,6 +105,7 @@ You can get aggregated results by using the following commands.
 | passive_ssl   | Passive SSL lookup with CIRCL passive SSL and PassiveTotal                                              |
 | reverse_whois | Revese Whois lookup with PassiveTotal and SecurityTrails                                                |
 | http_hash     | HTTP response hash lookup with BinaryEdge(SHA256), Censys(SHA256), Onyphpe(MD5) and Shodan(MurmurHash3) |
+| free_text     | Free text lookup with BinaryEdge and Censys                                                             |
 
 ### Example usages
 
