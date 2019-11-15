@@ -180,7 +180,7 @@ module Mihari
     method_option :mmh3, type: :numeric, desc: "MurmurHash3 hash"
     def http_hash
       with_error_handling do
-        run_analyzer Analyzers::HttpHash, query: nil, options: options
+        run_analyzer Analyzers::HTTPHash, query: nil, options: options
       end
     end
 

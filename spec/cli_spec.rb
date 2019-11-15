@@ -153,7 +153,7 @@ RSpec.describe Mihari::CLI do
   end
 
   describe "#http_hash" do
-    before { allow(Mihari::Analyzers::HttpHash).to receive(:new).and_return(mock) }
+    before { allow(Mihari::Analyzers::HTTPHash).to receive(:new).and_return(mock) }
 
     it do
       subject.start ["http_hash"]

@@ -4,7 +4,7 @@ require "parallel"
 
 module Mihari
   module Analyzers
-    class HttpHash < Base
+    class HTTPHash < Base
       attr_reader :md5
       attr_reader :sha256
       attr_reader :mmh3

@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-RSpec.describe Mihari::Analyzers::HttpHash do
+RSpec.describe Mihari::Analyzers::HTTPHash do
   subject { described_class.new(nil, md5: md5, sha256: sha256, mmh3: mmh3, tags: tags) }
 
   let(:tags) { %w(test) }
