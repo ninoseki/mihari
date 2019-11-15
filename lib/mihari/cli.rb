@@ -171,13 +171,16 @@ module Mihari
       end
     end
 
-    desc "sha256 [SHA256]", "Cross search with search engines by an SHA256 hash"
+    desc "http_hash", "Cross search with search engines by a hash of an HTTP response (SHA256, MD5 and MurmurHash3)"
     method_option :title, type: :string, desc: "title"
     method_option :description, type: :string, desc: "description"
     method_option :tags, type: :array, desc: "tags"
-    def sha256(query)
+    method_option :md5, type: :string, desc: "MD5 hash"
+    method_option :sha256, type: :string, desc: "SHA256 hash"
+    method_option :mmh3, type: :numeric, desc: "MurmurHash3 hash"
+    def http_hash
       with_error_handling do
-        run_analyzer Analyzers::SHA256, query: query, options: options
+        run_analyzer Analyzers::HttpHash, query: nil, options: options
       end
     end
 

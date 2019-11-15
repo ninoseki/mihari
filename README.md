@@ -75,6 +75,7 @@ Commands:
   mihari crtsh [QUERY]                        # crt.sh search by a query
   mihari dnpedia [QUERY]                      # DNPedia domain search by a query
   mihari help [COMMAND]                       # Describe available commands or one specific command
+  mihari http_hash                            # Cross search with search engines by a hash of an HTTP response (SHA256, MD5 and MurmurHash3)
   mihari import_from_json                     # Give a JSON input via STDIN
   mihari onyphe [QUERY]                       # Onyphe datascan search by a query
   mihari passive_dns [IP|Domain]              # Cross search with passive DNS services by an ip / domain
@@ -83,7 +84,6 @@ Commands:
   mihari reverse_whois [email]                # Cross search with reverse whois services by an email
   mihari securitytrails [IP|DOMAIN|EMAIL]     # SecurityTrails lookup by an ip, domain or email
   mihari securitytrails_domain_feed [REGEXP]  # SecurityTrails new domain feed search by a regexp
-  mihari sha256 [SHA256]                      # Cross search with search engines by an SHA256 hash
   mihari shodan [QUERY]                       # Shodan host search by a query
   mihari status                               # Show the current configuration status
   mihari urlscan [QUERY]                      # urlscan search by a given query
@@ -98,12 +98,12 @@ mihari has cross search features. A cross search is a search across a number of 
 
 You can get aggregated results by using the following commands.
 
-| Command       | Desc.                                                                                  |
-|---------------|----------------------------------------------------------------------------------------|
-| passive_dns   | Passive DNS lookup with CIRCL passive DNS, PassiveTotal, SecurityTrails and VirusTotal |
-| passive_ssl   | Passive SSL lookup with CIRCL passive SSL and PassiveTotal                             |
-| reverse_whois | Revese Whois lookup with PassiveTotal and SecurityTrails                               |
-| sha256        | SHA256 hash search with BinaryEdge and Censys                                          |
+| Command       | Desc.                                                                                                   |
+| ------------- | ------------------------------------------------------------------------------------------------------- |
+| passive_dns   | Passive DNS lookup with CIRCL passive DNS, PassiveTotal, SecurityTrails and VirusTotal                  |
+| passive_ssl   | Passive SSL lookup with CIRCL passive SSL and PassiveTotal                                              |
+| reverse_whois | Revese Whois lookup with PassiveTotal and SecurityTrails                                                |
+| http_hash     | HTTP response hash lookup with BinaryEdge(SHA256), Censys(SHA256), Onyphpe(MD5) and Shodan(MurmurHash3) |
 
 ### Example usages
 
@@ -172,7 +172,7 @@ The input is a JSON data should have `title`, `description` and `artifacts` key.
 ```
 
 | Key         | Desc.                                                                      | Required or optional |
-|-------------|----------------------------------------------------------------------------|----------------------|
+| ----------- | -------------------------------------------------------------------------- | -------------------- |
 | title       | A title of an alert                                                        | Required             |
 | description | A description of an alert                                                  | Required             |
 | artifacts   | An array of artifacts (supported data types: ip, domain, url, email, hash) | Required             |
@@ -183,7 +183,7 @@ The input is a JSON data should have `title`, `description` and `artifacts` key.
 All configuration is done via ENV variables.
 
 | Key                    | Desc.                          | Required or optional           |
-|------------------------|--------------------------------|--------------------------------|
+| ---------------------- | ------------------------------ | ------------------------------ |
 | THEHIVE_API_ENDPOINT   | TheHive URL                    | Required                       |
 | THEHIVE_API_KEY        | TheHive API key                | Required                       |
 | MISP_API_ENDPOINT      | MISP URL                       | Optional                       |
@@ -215,7 +215,7 @@ mihari status
 Create a class which extends `Mihari::Analyzers::Base` and implements the following methods.
 
 | Name           | Desc.                                                                      | @return       | Required or optional |
-|----------------|----------------------------------------------------------------------------|---------------|----------------------|
+| -------------- | -------------------------------------------------------------------------- | ------------- | -------------------- |
 | `#title`       | A title of an alert                                                        | String        | Required             |
 | `#description` | A description of an alert                                                  | String        | Required             |
 | `#artifacts`   | An array of artifacts (supported data types: ip, domain, url, email, hash) | Array<String> | Required             |
