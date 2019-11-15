@@ -86,6 +86,7 @@ Commands:
   mihari securitytrails [IP|DOMAIN|EMAIL]     # SecurityTrails lookup by an ip, domain or email
   mihari securitytrails_domain_feed [REGEXP]  # SecurityTrails new domain feed search by a regexp
   mihari shodan [QUERY]                       # Shodan host search by a query
+  mihari ssh_fingerprint [FINGERPRINT]        # Cross search with search engines by an SSH fingerprint
   mihari status                               # Show the current configuration status
   mihari urlscan [QUERY]                      # urlscan search by a given query
   mihari virustotal [IP|DOMAIN]               # VirusTotal resolutions lookup by an ip or domain
@@ -99,13 +100,14 @@ mihari has cross search features. A cross search is a search across a number of 
 
 You can get aggregated results by using the following commands.
 
-| Command       | Desc.                                                                                                   |
-| ------------- | ------------------------------------------------------------------------------------------------------- |
-| passive_dns   | Passive DNS lookup with CIRCL passive DNS, PassiveTotal, SecurityTrails and VirusTotal                  |
-| passive_ssl   | Passive SSL lookup with CIRCL passive SSL and PassiveTotal                                              |
-| reverse_whois | Revese Whois lookup with PassiveTotal and SecurityTrails                                                |
-| http_hash     | HTTP response hash lookup with BinaryEdge(SHA256), Censys(SHA256), Onyphpe(MD5) and Shodan(MurmurHash3) |
-| free_text     | Free text lookup with BinaryEdge and Censys                                                             |
+| Command         | Desc.                                                                                                   |
+| --------------- | ------------------------------------------------------------------------------------------------------- |
+| passive_dns     | Passive DNS lookup with CIRCL passive DNS, PassiveTotal, SecurityTrails and VirusTotal                  |
+| passive_ssl     | Passive SSL lookup with CIRCL passive SSL and PassiveTotal                                              |
+| reverse_whois   | Revese Whois lookup with PassiveTotal and SecurityTrails                                                |
+| http_hash       | HTTP response hash lookup with BinaryEdge(SHA256), Censys(SHA256), Onyphpe(MD5) and Shodan(MurmurHash3) |
+| free_text       | Free text lookup with BinaryEdge and Censys                                                             |
+| ssh_fingerprint | SSH fingerprint lookup with BinaryEdge and Shodan                                                       |
 
 ### Example usages
 
@@ -142,7 +144,7 @@ $ mihari virustotal "jppost-hi.top" --title "FAKESPY host passive DNS results"
 $ mihari virustotal "jppost-hi[.]top" --title "FAKESPY host passive DNS results"
 
 # SecurityTrails domain feed lookup for finding (possibly) Apple phishing websites
-mihari securitytrails_domain_feed "apple-" --type new
+$ mihari securitytrails_domain_feed "apple-" --type new
 {
   "title": "SecurityTrails domain feed lookup",
   "description": "Regexp = /apple-/",
