@@ -161,6 +161,15 @@ RSpec.describe Mihari::CLI do
     end
   end
 
+  describe "#http_hash" do
+    before { allow(Mihari::Analyzers::SSHFingerprint).to receive(:new).and_return(mock) }
+
+    it do
+      subject.start ["ssh_fingerprint", query]
+      expect(mock).to have_received(:run).once
+    end
+  end
+
   describe "#alerts" do
     let(:mock) { double("AlertViewer") }
     let(:alerts) {
