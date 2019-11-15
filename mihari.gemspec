@@ -45,7 +45,7 @@ Gem::Specification.new do |spec|
   spec.add_dependency "misp", "~> 0.1"
   spec.add_dependency "net-ping", "~> 2.0"
   spec.add_dependency "onyphe", "~> 1.0"
-  spec.add_dependency "parallel", "~> 1.18"
+  spec.add_dependency "parallel", "~> 1.19"
   spec.add_dependency "passive_circl", "~> 0.1"
   spec.add_dependency "passivetotalx", "~> 0.1"
   spec.add_dependency "public_suffix", "~> 4.0"
