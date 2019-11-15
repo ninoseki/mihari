@@ -51,10 +51,10 @@ require "mihari/analyzers/urlscan"
 require "mihari/analyzers/virustotal"
 require "mihari/analyzers/zoomeye"
 
+require "mihari/analyzers/http_hash"
 require "mihari/analyzers/passive_dns"
 require "mihari/analyzers/passive_ssl"
 require "mihari/analyzers/reverse_whois"
-require "mihari/analyzers/sha256"
 
 require "mihari/notifiers/base"
 require "mihari/notifiers/slack"

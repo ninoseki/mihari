@@ -152,11 +152,11 @@ RSpec.describe Mihari::CLI do
     end
   end
 
-  describe "#sha256" do
-    before { allow(Mihari::Analyzers::SHA256).to receive(:new).and_return(mock) }
+  describe "#http_hash" do
+    before { allow(Mihari::Analyzers::HttpHash).to receive(:new).and_return(mock) }
 
     it do
-      subject.start ["sha256", query]
+      subject.start ["http_hash"]
       expect(mock).to have_received(:run).once
     end
   end
