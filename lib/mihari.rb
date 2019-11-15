@@ -51,6 +51,7 @@ require "mihari/analyzers/urlscan"
 require "mihari/analyzers/virustotal"
 require "mihari/analyzers/zoomeye"
 
+require "mihari/analyzers/free_text"
 require "mihari/analyzers/http_hash"
 require "mihari/analyzers/passive_dns"
 require "mihari/analyzers/passive_ssl"
