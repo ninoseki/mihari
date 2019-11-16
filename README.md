@@ -17,7 +17,7 @@ mihari(`見張り`) is a sidekick tool for [TheHive](https://github.com/TheHive-
     - mihari sends a notification to Slack. (Optional)
     - mihari creates an event on MISP. (Optional)
 
-![img](https://github.com/ninoseki/mihari/blob/master/screenshots/eyecatch.png)
+![img](https://github.com/ninoseki/mihari/raw/master/screenshots/eyecatch.png)
 
 Check this blog post for more details: [Continuous C2 hunting with Censys, Shodan, Onyphe and TheHive](https://hackmd.io/s/SkUaSrqoE).
 
@@ -140,7 +140,7 @@ mihari http_hash --md5=881191f7736b5b8cfad5959ca99d2a51 --sha256=b064187ebdc5172
 
 Another one is passing `--html` parameter. In this case, hashes of an HTML file are automatically calculated.
 
-````bash
+```bash
 wget http://example.com -O /tmp/index.html
 mihari http_hash --html /tmp/index.html
 ```
@@ -192,7 +192,7 @@ $ mihari securitytrails_domain_feed "apple-" --type new
   ],
   "tags": []
 }
-````
+```
 
 ### Import from JSON
 
