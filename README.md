@@ -109,6 +109,42 @@ You can get aggregated results by using the following commands.
 | free_text       | Free text lookup with BinaryEdge and Censys                                                             |
 | ssh_fingerprint | SSH fingerprint lookup with BinaryEdge and Shodan                                                       |
 
+#### http_hash command
+
+The usage of `http_hash` command is little bit tricky.
+
+```bash
+$ mihari help http_hash
+Usage:
+  mihari http_hash
+
+Options:
+  [--title=TITLE]              # title
+  [--description=DESCRIPTION]  # description
+  [--tags=one two three]       # tags
+  [--md5=MD5]                  # MD5 hash
+  [--sha256=SHA256]            # SHA256 hash
+  [--mmh3=N]                   # MurmurHash3 hash
+
+Cross search with search engines by a hash of an HTTP response (SHA256, MD5 and MurmurHash3)
+
+```
+
+There are 2 ways to use this command.
+
+First one is passing `--md5`, `--sha256` and `--mmh3` parameters.
+
+```bash
+mihari http_hash --md5=881191f7736b5b8cfad5959ca99d2a51 --sha256=b064187ebdc51721708ad98cd89dacc346017cb0fb0457d530032d387f1ff20e --mmh3=-1467534799
+```
+
+Another one is passing `--html` parameter. In this case, hashes of an HTML file are automatically calculated.
+
+````bash
+wget http://example.com -O /tmp/index.html
+mihari http_hash --html /tmp/index.html
+```
+
 ### Example usages
 
 ```bash
@@ -156,7 +192,7 @@ $ mihari securitytrails_domain_feed "apple-" --type new
   ],
   "tags": []
 }
-```
+````
 
 ### Import from JSON
 

@@ -26,6 +26,8 @@ require "mihari/artifact"
 require "mihari/cache"
 require "mihari/type_checker"
 
+require "mihari/html"
+
 require "mihari/configurable"
 require "mihari/retriable"
 
