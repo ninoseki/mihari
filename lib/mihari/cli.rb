@@ -178,6 +178,7 @@ module Mihari
     method_option :md5, type: :string, desc: "MD5 hash"
     method_option :sha256, type: :string, desc: "SHA256 hash"
     method_option :mmh3, type: :numeric, desc: "MurmurHash3 hash"
+    method_option :html, type: :string, desc: "path to an HTML file"
     def http_hash
       with_error_handling do
         run_analyzer Analyzers::HTTPHash, query: nil, options: options

@@ -9,16 +9,21 @@ module Mihari
       attr_reader :sha256
       attr_reader :mmh3
 
+      attr_reader :html
+
       attr_reader :title
       attr_reader :description
       attr_reader :tags
 
-      def initialize(_query, md5: nil, sha256: nil, mmh3: nil, title: nil, description: nil, tags: [])
+      def initialize(_query, md5: nil, sha256: nil, mmh3: nil, html: nil, title: nil, description: nil, tags: [])
         super()
 
         @md5 = md5
         @sha256 = sha256
         @mmh3 = mmh3
+
+        @html = html
+        load_from_html
 
         @title = title || "HTTP hash cross search"
         @description = description || "query = #{query}"
@@ -35,6 +40,17 @@ module Mihari
 
       def valid_query?
         [md5, sha256, mmh3].compact.any?
+      end
+
+      def load_from_html
+        return unless html
+
+        html_file = HTML.new(html)
+        return unless html_file.exists?
+
+        @md5 = html_file.md5
+        @sha256 = html_file.sha256
+        @mmh3 = html_file.mmh3
       end
 
       def query

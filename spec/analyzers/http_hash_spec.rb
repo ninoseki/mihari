@@ -46,4 +46,16 @@ RSpec.describe Mihari::Analyzers::HTTPHash do
       expect(subject.tags).to eq(tags)
     end
   end
+
+  context "when given --html option" do
+    subject { described_class.new(nil, html: html) }
+
+    let(:html) { File.expand_path("../fixtures/test.html", __dir__) }
+
+    describe "#description" do
+      it do
+        expect(subject.description).to eq("query = md5:86dc3ed0a52d7368996b098efcc6fdfe,sha256:243d33d1c08d00f373ae490a99f58d4a3b1251a017d7e3baea95f412391615d0,mmh3:-576284617")
+      end
+    end
+  end
 end
