@@ -141,7 +141,7 @@ module Mihari
       end
     end
 
-    desc "passive_dns [IP|Domain]", "Cross search with passive DNS services by an ip / domain"
+    desc "passive_dns [IP|DOMAIN]", "Cross search with passive DNS services by an ip / domain"
     method_option :title, type: :string, desc: "title"
     method_option :description, type: :string, desc: "description"
     method_option :tags, type: :array, desc: "tags"
@@ -161,7 +161,7 @@ module Mihari
       end
     end
 
-    desc "reverse_whois [email]", "Cross search with reverse whois services by an email"
+    desc "reverse_whois [EMAIL]", "Cross search with reverse whois services by an email"
     method_option :title, type: :string, desc: "title"
     method_option :description, type: :string, desc: "description"
     method_option :tags, type: :array, desc: "tags"
@@ -195,7 +195,7 @@ module Mihari
       end
     end
 
-    desc "ssh_fingerprint [FINGERPRINT]", "Cross search with search engines by an SSH fingerprint"
+    desc "ssh_fingerprint [FINGERPRINT]", "Cross search with search engines by an SSH fingerprint (e.g. dc:14:de:8e:d7:c1:15:43:23:82:25:81:d2:59:e8:c0)"
     method_option :title, type: :string, desc: "title"
     method_option :description, type: :string, desc: "description"
     method_option :tags, type: :array, desc: "tags"
