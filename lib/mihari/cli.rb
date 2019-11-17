@@ -100,7 +100,7 @@ module Mihari
       end
     end
 
-    desc "circl [DOMAIN|SHA1]", "CIRCL passive DNS/SSL lookup by a domain / SHA1 certificate fingerprint"
+    desc "circl [DOMAIN|SHA1]", "CIRCL passive DNS/SSL lookup by a domain or SHA1 certificate fingerprint"
     method_option :title, type: :string, desc: "title"
     method_option :description, type: :string, desc: "description"
     method_option :tags, type: :array, desc: "tags"
@@ -110,7 +110,7 @@ module Mihari
       end
     end
 
-    desc "passivetotal [IP|DOMAIN|EMAIL|SHA1]", "PassiveTotal lookup by an ip / domain / email / SHA1 certificate fingerprint"
+    desc "passivetotal [IP|DOMAIN|EMAIL|SHA1]", "PassiveTotal lookup by an ip, domain, email or SHA1 certificate fingerprint"
     method_option :title, type: :string, desc: "title"
     method_option :description, type: :string, desc: "description"
     method_option :tags, type: :array, desc: "tags"
@@ -151,7 +151,7 @@ module Mihari
       end
     end
 
-    desc "passive_dns [IP|DOMAIN]", "Cross search with passive DNS services by an ip / domain"
+    desc "passive_dns [IP|DOMAIN]", "Cross search with passive DNS services by an ip or domain"
     method_option :title, type: :string, desc: "title"
     method_option :description, type: :string, desc: "description"
     method_option :tags, type: :array, desc: "tags"

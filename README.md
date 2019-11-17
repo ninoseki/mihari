@@ -71,7 +71,7 @@ Commands:
   mihari alerts                               # Show the alerts on TheHive
   mihari binaryedge [QUERY]                   # BinaryEdge host search by a query
   mihari censys [QUERY]                       # Censys IPv4 search by a query
-  mihari circl [DOMAIN|SHA1]                  # CIRCL passive DNS/SSL lookup by a domain / SHA1 certificate fingerprint
+  mihari circl [DOMAIN|SHA1]                  # CIRCL passive DNS/SSL lookup by a domain or SHA1 certificate fingerprint
   mihari crtsh [QUERY]                        # crt.sh search by a query
   mihari dnpedia [QUERY]                      # DNPedia domain search by a query
   mihari free_text [TEXT]                     # Cross search with search engines by a free text
@@ -79,9 +79,9 @@ Commands:
   mihari http_hash                            # Cross search with search engines by a hash of an HTTP response (SHA256, MD5 and MurmurHash3)
   mihari import_from_json                     # Give a JSON input via STDIN
   mihari onyphe [QUERY]                       # Onyphe datascan search by a query
-  mihari passive_dns [IP|DOMAIN]              # Cross search with passive DNS services by an ip / domain
+  mihari passive_dns [IP|DOMAIN]              # Cross search with passive DNS services by an ip or domain
   mihari passive_ssl [SHA1]                   # Cross search with passive SSL services by an SHA1 certificate fingerprint
-  mihari passivetotal [IP|DOMAIN|EMAIL|SHA1]  # PassiveTotal lookup by an ip / domain / email / SHA1 certificate fingerprint
+  mihari passivetotal [IP|DOMAIN|EMAIL|SHA1]  # PassiveTotal lookup by an ip, domain, email or SHA1 certificate fingerprint
   mihari pulsedive [IP|DOMAIN]                # Pulsedive lookup by an ip or domain
   mihari reverse_whois [EMAIL]                # Cross search with reverse whois services by an email
   mihari securitytrails [IP|DOMAIN|EMAIL]     # SecurityTrails lookup by an ip, domain or email
