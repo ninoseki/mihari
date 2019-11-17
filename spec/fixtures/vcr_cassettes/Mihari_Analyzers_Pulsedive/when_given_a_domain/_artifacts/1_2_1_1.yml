@@ -1,0 +1,183 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: https://pulsedive.com/api/info.php?indicator=one.one.one.one&key=<PULSEDIVE_API_KEY>
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+      Host:
+      - pulsedive.com
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Sun, 17 Nov 2019 00:54:47 GMT
+      Server:
+      - Apache
+      Strict-Transport-Security:
+      - max-age=31536000; includeSubDomains
+      X-Content-Type-Options:
+      - nosniff
+      X-Xss-Protection:
+      - 1; mode=block
+      Set-Cookie:
+      - PHPSESSID=49312dd55198a420516b2133c36341ee; expires=Sun, 24-Nov-2019 00:54:47
+        GMT; Max-Age=604800; path=/
+      Expires:
+      - '0'
+      Cache-Control:
+      - no-store, no-cache, must-revalidate
+      Pragma:
+      - no-cache
+      X-Robots-Tag:
+      - noindex
+      X-Request-Id:
+      - '0'
+      X-Frame-Options:
+      - SAMEORIGIN
+      Transfer-Encoding:
+      - chunked
+      Content-Type:
+      - application/json
+    body:
+      encoding: UTF-8
+      string: '{"iid":7274049,"type":"domain","indicator":"one.one.one.one","risk":"unknown","risk_recommended":"unknown","manualrisk":0,"retired":null,"stamp_added":"2019-11-14
+        02:25:18","stamp_updated":"2019-11-15 23:40:28","stamp_seen":"2019-11-15 23:40:29","stamp_probed":null,"stamp_retired":null,"recent":0,"domain":"one.one","domainiid":"7307079","attributes":{"hosttype":["Subdomain"]},"properties":{"dns":{"A":["1.0.0.1","1.1.1.1"],"AAAA":["2606:4700:4700::1001","2606:4700:4700::1111"]},"geo":{"country":"Denmark","countrycode":"dk","org":"One.com
+        A\/S"},"whois":{"++email":"Please query the RDDS service of the Registrar
+        of Record identified in this output for information on how to contact the
+        Registrant, Admin, or Tech contact of the queried domain name.","++expires":"2020-05-20
+        00:00:00","++registered":"2015-05-20 00:00:00","++registrant":"Please query
+        the RDDS service of the Registrar of Record identified in this output for
+        information on how to contact the Registrant, Admin, or Tech contact of the
+        queried domain name.","++registrar":"One.com A\/S - ONE","++updated":"2019-07-04
+        00:00:00","Admin Email":"Please query the RDDS service of the Registrar of
+        Record identified in this output for information on how to contact the Registrant,
+        Admin, or Tech contact of the queried domain name.","Creation Date":"2015-05-20T12:15:44Z","DNSSEC":"signedDelegation","Domain
+        Name":"one.one","Domain Status":"ok https:\/\/icann.org\/eppRegistry Registrant
+        ID:","Name Server":["a.b-one-dns.net","b.b-one-dns.net"],"Registrant Country":"dk","Registrant
+        Email":"Please query the RDDS service of the Registrar of Record identified
+        in this output for information on how to contact the Registrant, Admin, or
+        Tech contact of the queried domain name.","Registrant Organization":"One.com
+        A\/S","Registrar":"One.com A\/S - ONE","Registrar IANA ID":"9998","Registry
+        Domain ID":"DB8D9612E99A84235AF9133FBE4EB27D5-ARI","Registry Expiry Date":"2020-05-20T12:15:44Z","Tech
+        Email":"Please query the RDDS service of the Registrar of Record identified
+        in this output for information on how to contact the Registrant, Admin, or
+        Tech contact of the queried domain name.","The above WHOIS results have been
+        redacted to remove potential personal data. The full WHOIS output may be available
+        to individuals and organisations with a legitimate interest in accessing this
+        data not outweighed by the fundamental privacy rights of the data subject.
+        To find out more, or to make a request for access, please visit":"RDDSrequest.nic.one.","Updated
+        Date":"2019-07-04T12:15:45Z","URL of the ICANN Whois Inaccuracy Complaint
+        Form":"https:\/\/www.icann.org\/wicf\/"}},"umbrella_rank":131771,"umbrella_domain":"one.one.one.one"}'
+    http_version: 
+  recorded_at: Sun, 17 Nov 2019 00:54:48 GMT
+- request:
+    method: get
+    uri: https://pulsedive.com/api/info.php?get=properties&iid=7274049&key=<PULSEDIVE_API_KEY>
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+      Host:
+      - pulsedive.com
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Sun, 17 Nov 2019 00:54:49 GMT
+      Server:
+      - Apache
+      Strict-Transport-Security:
+      - max-age=31536000; includeSubDomains
+      X-Content-Type-Options:
+      - nosniff
+      X-Xss-Protection:
+      - 1; mode=block
+      Set-Cookie:
+      - PHPSESSID=ac7e298976e6fd7a4c72dfc4c498cd73; expires=Sun, 24-Nov-2019 00:54:49
+        GMT; Max-Age=604800; path=/
+      Expires:
+      - '0'
+      Cache-Control:
+      - no-store, no-cache, must-revalidate
+      Pragma:
+      - no-cache
+      X-Robots-Tag:
+      - noindex
+      X-Request-Id:
+      - '0'
+      X-Frame-Options:
+      - SAMEORIGIN
+      Transfer-Encoding:
+      - chunked
+      Content-Type:
+      - application/json
+    body:
+      encoding: UTF-8
+      string: '{"dns":[{"pid":14739687,"stamp_seen":"2019-11-15 23:40:27","name":"A","value":"1.1.1.1","latest":1},{"pid":36362828,"stamp_seen":"2019-11-15
+        23:40:27","name":"A","value":"1.0.0.1","latest":1},{"pid":36333905,"stamp_seen":"2019-11-15
+        23:40:27","name":"AAAA","value":"2606:4700:4700::1001","latest":1},{"pid":36362829,"stamp_seen":"2019-11-15
+        23:40:27","name":"AAAA","value":"2606:4700:4700::1111","latest":1}],"geo":[{"pid":27558,"stamp_seen":"2019-11-15
+        23:40:28","name":"country","value":"Denmark","latest":1},{"pid":35668012,"stamp_seen":"2019-11-15
+        23:40:28","name":"countrycode","value":"dk","latest":1},{"pid":2858,"stamp_seen":"2019-11-15
+        23:40:28","name":"org","value":"One.com A\/S","latest":1}],"whois":[{"pid":14188908,"stamp_seen":"2019-11-15
+        23:40:28","name":"++email","value":"Please query the RDDS service of the Registrar
+        of Record identified in this output for information on how to contact the
+        Registrant, Admin, or Tech contact of the queried domain name.","latest":1},{"pid":4040012,"stamp_seen":"2019-11-15
+        23:40:28","name":"++expires","value":"2020-05-20 00:00:00","latest":1},{"pid":26005,"stamp_seen":"2019-11-15
+        23:40:28","name":"++registered","value":"2015-05-20 00:00:00","latest":1},{"pid":26225640,"stamp_seen":"2019-11-15
+        23:40:28","name":"++registrant","value":"Please query the RDDS service of
+        the Registrar of Record identified in this output for information on how to
+        contact the Registrant, Admin, or Tech contact of the queried domain name.","latest":1},{"pid":36362839,"stamp_seen":"2019-11-15
+        23:40:28","name":"++registrar","value":"One.com A\/S - ONE","latest":1},{"pid":30276783,"stamp_seen":"2019-11-15
+        23:40:28","name":"++updated","value":"2019-07-04 00:00:00","latest":1},{"pid":14188906,"stamp_seen":"2019-11-15
+        23:40:28","name":"Admin Email","value":"Please query the RDDS service of the
+        Registrar of Record identified in this output for information on how to contact
+        the Registrant, Admin, or Tech contact of the queried domain name.","latest":1},{"pid":36362834,"stamp_seen":"2019-11-15
+        23:40:28","name":"Creation Date","value":"2015-05-20T12:15:44Z","latest":1},{"pid":585969,"stamp_seen":"2019-11-15
+        23:40:28","name":"DNSSEC","value":"signedDelegation","latest":1},{"pid":36362833,"stamp_seen":"2019-11-15
+        23:40:28","name":"Domain Name","value":"one.one","latest":1},{"pid":2616,"stamp_seen":"2019-11-15
+        23:40:28","name":"Domain Status","value":"ok https:\/\/icann.org\/eppRegistry
+        Registrant ID:","latest":1},{"pid":9363941,"stamp_seen":"2019-11-15 23:40:28","name":"Name
+        Server","value":"b.b-one-dns.net","latest":1},{"pid":17466477,"stamp_seen":"2019-11-15
+        23:40:28","name":"Name Server","value":"a.b-one-dns.net","latest":1},{"pid":36362838,"stamp_seen":"2019-11-15
+        23:40:28","name":"Registrant Country","value":"dk","latest":1},{"pid":14188903,"stamp_seen":"2019-11-15
+        23:40:28","name":"Registrant Email","value":"Please query the RDDS service
+        of the Registrar of Record identified in this output for information on how
+        to contact the Registrant, Admin, or Tech contact of the queried domain name.","latest":1},{"pid":36362832,"stamp_seen":"2019-11-15
+        23:40:28","name":"Registrant Organization","value":"One.com A\/S","latest":1},{"pid":36362831,"stamp_seen":"2019-11-15
+        23:40:28","name":"Registrar","value":"One.com A\/S - ONE","latest":1},{"pid":7933431,"stamp_seen":"2019-11-15
+        23:40:28","name":"Registrar IANA ID","value":"9998","latest":1},{"pid":36362837,"stamp_seen":"2019-11-15
+        23:40:28","name":"Registry Domain ID","value":"DB8D9612E99A84235AF9133FBE4EB27D5-ARI","latest":1},{"pid":36362836,"stamp_seen":"2019-11-15
+        23:40:28","name":"Registry Expiry Date","value":"2020-05-20T12:15:44Z","latest":1},{"pid":14188905,"stamp_seen":"2019-11-15
+        23:40:28","name":"Tech Email","value":"Please query the RDDS service of the
+        Registrar of Record identified in this output for information on how to contact
+        the Registrant, Admin, or Tech contact of the queried domain name.","latest":1},{"pid":35176545,"stamp_seen":"2019-11-15
+        23:40:28","name":"The above WHOIS results have been redacted to remove potential
+        personal data. The full WHOIS output may be available to individuals and organisations
+        with a legitimate interest in accessing this data not outweighed by the fundamental
+        privacy rights of the data subject. To find out more, or to make a request
+        for access, please visit","value":"RDDSrequest.nic.one.","latest":1},{"pid":36362835,"stamp_seen":"2019-11-15
+        23:40:28","name":"Updated Date","value":"2019-07-04T12:15:45Z","latest":1},{"pid":160265,"stamp_seen":"2019-11-15
+        23:40:28","name":"URL of the ICANN Whois Inaccuracy Complaint Form","value":"https:\/\/www.icann.org\/wicf\/","latest":1}]}'
+    http_version: 
+  recorded_at: Sun, 17 Nov 2019 00:54:49 GMT
+recorded_with: VCR 5.0.0
