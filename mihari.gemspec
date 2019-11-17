@@ -50,6 +50,7 @@ Gem::Specification.new do |spec|
   spec.add_dependency "passive_circl", "~> 0.1"
   spec.add_dependency "passivetotalx", "~> 0.1"
   spec.add_dependency "public_suffix", "~> 4.0"
+  spec.add_dependency "pulsedive", "~> 0.1"
   spec.add_dependency "securitytrails", "~> 1.0"
   spec.add_dependency "shodanx", "~> 0.2"
   spec.add_dependency "slack-notifier", "~> 2.3"

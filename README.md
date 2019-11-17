@@ -79,14 +79,15 @@ Commands:
   mihari http_hash                            # Cross search with search engines by a hash of an HTTP response (SHA256, MD5 and MurmurHash3)
   mihari import_from_json                     # Give a JSON input via STDIN
   mihari onyphe [QUERY]                       # Onyphe datascan search by a query
-  mihari passive_dns [IP|Domain]              # Cross search with passive DNS services by an ip / domain
+  mihari passive_dns [IP|DOMAIN]              # Cross search with passive DNS services by an ip / domain
   mihari passive_ssl [SHA1]                   # Cross search with passive SSL services by an SHA1 certificate fingerprint
   mihari passivetotal [IP|DOMAIN|EMAIL|SHA1]  # PassiveTotal lookup by an ip / domain / email / SHA1 certificate fingerprint
-  mihari reverse_whois [email]                # Cross search with reverse whois services by an email
+  mihari pulsedive [IP|DOMAIN]                # Pulsedive lookup by an ip or domain
+  mihari reverse_whois [EMAIL]                # Cross search with reverse whois services by an email
   mihari securitytrails [IP|DOMAIN|EMAIL]     # SecurityTrails lookup by an ip, domain or email
   mihari securitytrails_domain_feed [REGEXP]  # SecurityTrails new domain feed search by a regexp
   mihari shodan [QUERY]                       # Shodan host search by a query
-  mihari ssh_fingerprint [FINGERPRINT]        # Cross search with search engines by an SSH fingerprint
+  mihari ssh_fingerprint [FINGERPRINT]        # Cross search with search engines by an SSH fingerprint (e.g. dc:14:de:8e:d7:c1:15:43:23:82:25:81:d2:59:e8:c0)
   mihari status                               # Show the current configuration status
   mihari urlscan [QUERY]                      # urlscan search by a given query
   mihari virustotal [IP|DOMAIN]               # VirusTotal resolutions lookup by an ip or domain
@@ -238,6 +239,7 @@ All configuration is done via ENV variables.
 | ONYPHE_API_KEY         | Onyphe API key                 | Optional                       |
 | PASSIVETOTAL_API_KEY   | PassiveTotal API key           | Optional                       |
 | PASSIVETOTAL_USERNAME  | PassiveTotal username          | Optional                       |
+| PULSEDIVE_API_KEY      | Pulsedive API key              | Optional                       |
 | SECURITYTRAILS_API_KEY | SecurityTrails API key         | Optional                       |
 | SHODAN_API_KEY         | Shodan API key                 | Optional                       |
 | VIRUSTOTAL_API_KEY     | VirusTotal API key             | Optional                       |
