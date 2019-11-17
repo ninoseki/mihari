@@ -103,7 +103,7 @@ You can get aggregated results by using the following commands.
 
 | Command         | Desc.                                                                                                   |
 | --------------- | ------------------------------------------------------------------------------------------------------- |
-| passive_dns     | Passive DNS lookup with CIRCL passive DNS, PassiveTotal, SecurityTrails and VirusTotal                  |
+| passive_dns     | Passive DNS lookup with CIRCL passive DNS, PassiveTotal, Pulsedive, SecurityTrails and VirusTotal       |
 | passive_ssl     | Passive SSL lookup with CIRCL passive SSL and PassiveTotal                                              |
 | reverse_whois   | Revese Whois lookup with PassiveTotal and SecurityTrails                                                |
 | http_hash       | HTTP response hash lookup with BinaryEdge(SHA256), Censys(SHA256), Onyphpe(MD5) and Shodan(MurmurHash3) |
