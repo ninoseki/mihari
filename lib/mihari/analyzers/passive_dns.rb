@@ -15,6 +15,7 @@ module Mihari
       ANALYZERS = [
         Mihari::Analyzers::CIRCL,
         Mihari::Analyzers::PassiveTotal,
+        Mihari::Analyzers::Pulsedive,
         Mihari::Analyzers::SecurityTrails,
         Mihari::Analyzers::VirusTotal,
       ].freeze
@@ -54,7 +55,7 @@ module Mihari
         analyzer.artifacts
       rescue ArgumentError, InvalidInputError => _e
         nil
-      rescue ::PassiveCIRCL::Error, ::PassiveTotal::Error, ::SecurityTrails::Error, ::VirusTotal::Error => _e
+      rescue ::PassiveCIRCL::Error, ::PassiveTotal::Error, ::Pulsedive::ResponseError, ::SecurityTrails::Error, ::VirusTotal::Error => _e
         nil
       end
     end
