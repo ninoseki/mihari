@@ -147,7 +147,7 @@ module Mihari
     method_option :tags, type: :array, desc: "tags"
     def pulsedive(indiactor)
       with_error_handling do
-        run_analyzer Analyzers::Pulsedive, query: indiactor, options: options
+        run_analyzer Analyzers::Pulsedive, query: refang(indiactor), options: options
       end
     end
 
@@ -157,7 +157,7 @@ module Mihari
     method_option :tags, type: :array, desc: "tags"
     def passive_dns(query)
       with_error_handling do
-        run_analyzer Analyzers::PassiveDNS, query: query, options: options
+        run_analyzer Analyzers::PassiveDNS, query: refang(query), options: options
       end
     end
 
