@@ -112,7 +112,7 @@ You can get aggregated results by using the following commands.
 
 #### http_hash command
 
-The usage of `http_hash` command is little bit tricky.
+The usage of `http_hash` command is a little bit tricky.
 
 ```bash
 $ mihari help http_hash
