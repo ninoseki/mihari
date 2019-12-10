@@ -57,6 +57,7 @@ mihari supports the following services by default.
 - [Censys](http://censys.io)
 - [CIRCL passive DNS](https://www.circl.lu/services/passive-dns/) / [passive SSL](https://www.circl.lu/services/passive-ssl/)
 - [crt.sh](https://crt.sh/)
+- [dnstwister](https://dnstwister.report/)
 - [Onyphe](https://onyphe.io)
 - [PassiveTotal](https://community.riskiq.com/)
 - [SecurityTrails](https://securitytrails.com/)
@@ -74,6 +75,7 @@ Commands:
   mihari circl [DOMAIN|SHA1]                  # CIRCL passive DNS/SSL lookup by a domain or SHA1 certificate fingerprint
   mihari crtsh [QUERY]                        # crt.sh search by a query
   mihari dnpedia [QUERY]                      # DNPedia domain search by a query
+  mihari dnstwister [DOMAIN]                  # dnstwister lookup by a domain
   mihari free_text [TEXT]                     # Cross search with search engines by a free text
   mihari help [COMMAND]                       # Describe available commands or one specific command
   mihari http_hash                            # Cross search with search engines by a hash of an HTTP response (SHA256, MD5 and MurmurHash3)

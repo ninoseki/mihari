@@ -134,6 +134,15 @@ RSpec.describe Mihari::CLI do
     end
   end
 
+  describe "#dnstwister" do
+    before { allow(Mihari::Analyzers::DNSTwister).to receive(:new).and_return(mock) }
+
+    it do
+      subject.start ["dnstwister", query]
+      expect(mock).to have_received(:run).once
+    end
+  end
+
   describe "#passive_dns" do
     before { allow(Mihari::Analyzers::PassiveDNS).to receive(:new).and_return(mock) }
 
