@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 require "dnstwister"
+require "resolv"
+require "parallel"
 
 module Mihari
   module Analyzers
@@ -37,12 +39,22 @@ module Mihari
         @api ||= ::DNSTwister::API.new
       end
 
+      def resolvable?(domain)
+        Resolv.getaddress domain
+        true
+      rescue Resolv::ResolvError => _e
+        false
+      end
+
       def lookup
         raise InvalidInputError, "#{query}(type: #{type || 'unknown'}) is not supported." unless valid_type?
 
         res = api.fuzz(query)
         fuzzy_domains = res.dig("fuzzy_domains") || []
-        fuzzy_domains.map { |domain| domain.dig("domain") }
+        domains = fuzzy_domains.map { |domain| domain.dig("domain") }
+        Parallel.map(domains) do |domain|
+          resolvable?(domain) ? domain : nil
+        end.compact
       rescue ::DNSTwister::Error => _e
         nil
       end
