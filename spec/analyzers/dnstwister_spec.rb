@@ -11,4 +11,16 @@ RSpec.describe Mihari::Analyzers::DNSTwister, :vcr do
       expect(subject.artifacts).to be_an(Array)
     end
   end
+
+  describe "#title" do
+    it do
+      expect(subject.title).to eq("dnstwister domain lookup")
+    end
+  end
+
+  describe "#description" do
+    it do
+      expect(subject.description).to eq("query = #{query}")
+    end
+  end
 end

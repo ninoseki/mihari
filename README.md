@@ -57,6 +57,7 @@ mihari supports the following services by default.
 - [Censys](http://censys.io)
 - [CIRCL passive DNS](https://www.circl.lu/services/passive-dns/) / [passive SSL](https://www.circl.lu/services/passive-ssl/)
 - [crt.sh](https://crt.sh/)
+- [DN Pedia](https://dnpedia.com/)
 - [dnstwister](https://dnstwister.report/)
 - [Onyphe](https://onyphe.io)
 - [PassiveTotal](https://community.riskiq.com/)
