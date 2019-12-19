@@ -55,8 +55,6 @@ module Mihari
         Parallel.map(domains) do |domain|
           resolvable?(domain) ? domain : nil
         end.compact
-      rescue ::DNSTwister::Error => _e
-        nil
       end
     end
   end

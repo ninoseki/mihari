@@ -35,8 +35,6 @@ module Mihari
         rows.map do |row|
           [row.dig("name"), row.dig("zoneid")].join(".")
         end
-      rescue ::DNPedia::Error => _e
-        nil
       end
     end
   end

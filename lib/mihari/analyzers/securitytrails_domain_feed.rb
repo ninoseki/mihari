@@ -53,8 +53,6 @@ module Mihari
         new_domains.select do |domain|
           regexp.match? domain
         end
-      rescue ::SecurityTrails::Error => _e
-        nil
       end
 
       def new_domains

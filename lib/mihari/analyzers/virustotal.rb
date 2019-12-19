@@ -50,16 +50,10 @@ module Mihari
         else
           raise InvalidInputError, "#{indicator}(type: #{type || 'unknown'}) is not supported." unless valid_type?
         end
-      rescue ::VirusTotal::Error => _e
-        nil
       end
 
       def domain_lookup
-        begin
-          res = api.domain.resolutions(indicator)
-        rescue ::VirusTotal::Error => _e
-          return nil
-        end
+        res = api.domain.resolutions(indicator)
 
         data = res.dig("data") || []
         data.map do |item|
@@ -68,11 +62,7 @@ module Mihari
       end
 
       def ip_lookup
-        begin
-          res = api.ip_address.resolutions(indicator)
-        rescue ::VirusTotal::Error => _e
-          return nil
-        end
+        res = api.ip_address.resolutions(indicator)
 
         data = res.dig("data") || []
         data.map do |item|

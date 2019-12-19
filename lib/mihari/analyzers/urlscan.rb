@@ -41,8 +41,6 @@ module Mihari
 
       def search
         api.search(query, size: 10_000)
-      rescue ::UrlScan::ResponseError => _e
-        nil
       end
 
       def valid_target_type?
