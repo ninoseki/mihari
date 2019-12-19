@@ -24,6 +24,7 @@ require "mihari/errors"
 
 require "mihari/artifact"
 require "mihari/cache"
+require "mihari/config"
 require "mihari/type_checker"
 
 require "mihari/html"
