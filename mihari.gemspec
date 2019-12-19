@@ -24,7 +24,7 @@ Gem::Specification.new do |spec|
   spec.executables   = spec.files.grep(%r{^exe/}) { |f| File.basename(f) }
   spec.require_paths = ["lib"]
 
-  spec.add_development_dependency "bundler", "~> 2.0"
+  spec.add_development_dependency "bundler", "~> 2.1"
   spec.add_development_dependency "coveralls", "~> 0.8"
   spec.add_development_dependency "fakefs", "~> 0.20"
   spec.add_development_dependency "rake", "~> 13.0"
@@ -46,7 +46,7 @@ Gem::Specification.new do |spec|
   spec.add_dependency "misp", "~> 0.1"
   spec.add_dependency "murmurhash3", "~> 0.1"
   spec.add_dependency "net-ping", "~> 2.0"
-  spec.add_dependency "onyphe", "~> 1.0"
+  spec.add_dependency "onyphe", "~> 1.1"
   spec.add_dependency "parallel", "~> 1.19"
   spec.add_dependency "passive_circl", "~> 0.1"
   spec.add_dependency "passivetotalx", "~> 0.1"
@@ -55,8 +55,8 @@ Gem::Specification.new do |spec|
   spec.add_dependency "securitytrails", "~> 1.0"
   spec.add_dependency "shodanx", "~> 0.2"
   spec.add_dependency "slack-notifier", "~> 2.3"
-  spec.add_dependency "thor", "~> 0.20"
-  spec.add_dependency "urlscan", "~> 0.4"
+  spec.add_dependency "thor", "~> 1.0"
+  spec.add_dependency "urlscan", "~> 0.5"
   spec.add_dependency "virustotalx", "~> 1.1"
   spec.add_dependency "zoomeye-rb", "~> 0.1"
 end
