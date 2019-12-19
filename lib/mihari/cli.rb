@@ -5,6 +5,8 @@ require "json"
 
 module Mihari
   class CLI < Thor
+    class_option :config, type: :string, desc: "path to config file"
+
     desc "censys [QUERY]", "Censys IPv4 search by a query"
     method_option :title, type: :string, desc: "title"
     method_option :description, type: :string, desc: "description"
@@ -280,15 +282,29 @@ module Mihari
         %w(title description artifacts).all? { |key| json.key? key }
       end
 
+      def load_configuration
+        config = options["config"]
+        Config.load_from_yaml(config) if config
+      end
+
       def run_analyzer(analyzer_class, query:, options:)
+        load_configuration
+
         options = symbolize_hash_keys(options)
+        options = normalize_options(options)
 
         analyzer = analyzer_class.new(query, **options)
         analyzer.run
       end
 
       def symbolize_hash_keys(hash)
-        hash.map{ |k, v| [k.to_sym, v] }.to_h
+        hash.map { |k, v| [k.to_sym, v] }.to_h
+      end
+
+      def normalize_options(options)
+       # Delete :config because it is not intended to use for running an analyzer
+       options.delete(:config)
+       options
       end
 
       def refang(indicator)
