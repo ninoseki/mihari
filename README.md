@@ -6,22 +6,22 @@
 [![Coverage Status](https://coveralls.io/repos/github/ninoseki/mihari/badge.svg?branch=master)](https://coveralls.io/github/ninoseki/mihari?branch=master)
 [![CodeFactor](https://www.codefactor.io/repository/github/ninoseki/mihari/badge)](https://www.codefactor.io/repository/github/ninoseki/mihari)
 
-mihari(`見張り`) is a sidekick tool for [TheHive](https://github.com/TheHive-Project/TheHive) for monitoring malicious hosts (C2 / landing page / phishing, etc.) continuously.
+Mihari is a sidekick tool for [TheHive](https://github.com/TheHive-Project/TheHive) for monitoring malicious hosts (C2 / landing page / phishing, etc.) continuously.
 
 ## How it works
 
-- mihari makes a query against Shodan, Censys, VirusTotal, SecurityTrails, etc. and extracts artifacts from the results.
-- mihari checks whether TheHive contains the artifacts or not.
+- Mihari makes a query against Shodan, Censys, VirusTotal, SecurityTrails, etc. and extracts artifacts from the results.
+- Mihari checks whether TheHive contains the artifacts or not.
   - If it doesn't contain the artifacts:
-    - mihari creates an alert on TheHive.
-    - mihari sends a notification to Slack. (Optional)
-    - mihari creates an event on MISP. (Optional)
+    - Mihari creates an alert on TheHive.
+    - Mihari sends a notification to Slack. (Optional)
+    - Mihari creates an event on MISP. (Optional)
 
 ![img](https://github.com/ninoseki/mihari/raw/master/screenshots/eyecatch.png)
 
 Check this blog post for more details: [Continuous C2 hunting with Censys, Shodan, Onyphe and TheHive](https://hackmd.io/s/SkUaSrqoE).
 
-You can use mihari without TheHive. But note that mihari depends on TheHive to manage artifacts. It means mihari might make duplications when without TheHive.
+You can use mihari without TheHive but note that mihari depends on TheHive to manage artifacts. It means mihari might make duplications when without TheHive.
 
 ### Screenshots
 
@@ -51,7 +51,7 @@ docker pull ninoseki/mihari
 
 ## Basic usage
 
-mihari supports the following services by default.
+Mihari supports the following services by default.
 
 - [BinaryEdge](https://www.binaryedge.io/)
 - [Censys](http://censys.io)
@@ -96,11 +96,14 @@ Commands:
   mihari virustotal [IP|DOMAIN]               # VirusTotal resolutions lookup by an ip or domain
   mihari zoomeye [QUERY]                      # ZoomEye search by a query
 
+Options:
+  [--config=CONFIG]  # path to config file
+
 ```
 
 ### Cross searches
 
-mihari has cross search features. A cross search is a search across a number of services.
+Mihari has cross search features. A cross search is a search across a number of services.
 
 You can get aggregated results by using the following commands.
 
@@ -224,7 +227,7 @@ The input is a JSON data should have `title`, `description` and `artifacts` key.
 
 ## Configuration
 
-All configuration is done via ENV variables.
+Configuration can be done via environment variables or a YAML file.
 
 | Key                    | Desc.                          | Required or optional           |
 |------------------------|--------------------------------|--------------------------------|
@@ -248,6 +251,20 @@ All configuration is done via ENV variables.
 | VIRUSTOTAL_API_KEY     | VirusTotal API key             | Optional                       |
 | ZOOMEYE_USERNAMME      | ZoomEye username               | Optional                       |
 | ZOOMEYE_PASSWORD       | ZoomEye password               | Optional                       |
+
+Instead of using environment variables, you can use a YAML file for configuration.
+
+```bash
+mihari virustotal 1.1.1.1 --config /path/to/yaml.yml
+```
+
+The YAML file should be a hash like below:
+
+```yaml
+thehive_api_endpoint: https://localhost
+thehive_api_key: foo
+virustotal_api_key: foo
+```
 
 You can check the configuration status via `status` command.
 
@@ -299,7 +316,7 @@ See `/examples` for more.
 
 ## Caching
 
-mihari caches execution results in `/tmp/mihari` and the default cache duration is 7 days. If you want to clear the cache, please clear `/tmp/mihari`.
+Mihari caches execution results in `/tmp/mihari` and the default cache duration is 7 days. If you want to clear the cache, please clear `/tmp/mihari`.
 
 ## Using it with Docker
 
