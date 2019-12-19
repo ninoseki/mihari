@@ -43,8 +43,6 @@ module Mihari
         else
           raise InvalidInputError, "#{@query}(type: #{@type || 'unknown'}) is not supported."
         end
-      rescue ::PassiveCIRCL::Error => _e
-        nil
       end
 
       def passive_dns_lookup

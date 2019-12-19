@@ -52,8 +52,6 @@ module Mihari
         else
           raise InvalidInputError, "#{query}(type: #{type || 'unknown'}) is not supported." unless valid_type?
         end
-      rescue ::SecurityTrails::Error => _e
-        nil
       end
 
       def domain_lookup

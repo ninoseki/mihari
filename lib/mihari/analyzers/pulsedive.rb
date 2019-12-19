@@ -51,8 +51,6 @@ module Mihari
         (properties.dig("dns") || []).map do |property|
           property.dig("value") if ["A", "PTR"].include?(property.dig("name"))
         end.compact
-      rescue ::Pulsedive::ResponseError => _e
-        nil
       end
     end
   end

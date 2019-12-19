@@ -45,8 +45,6 @@ module Mihari
 
       def search_with_page(query, page: 1)
         api.host.search(query, page: page)
-      rescue ::Shodan::Error => _e
-        nil
       end
 
       def search
