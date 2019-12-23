@@ -302,9 +302,9 @@ module Mihari
       end
 
       def normalize_options(options)
-       # Delete :config because it is not intended to use for running an analyzer
-       options.delete(:config)
-       options
+        # Delete :config because it is not intended to use for running an analyzer
+        options.delete(:config)
+        options
       end
 
       def refang(indicator)
