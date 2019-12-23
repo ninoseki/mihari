@@ -259,6 +259,7 @@ module Mihari
     desc "status", "Show the current configuration status"
     def status
       with_error_handling do
+        load_configuration
         puts JSON.pretty_generate(Status.check)
       end
     end
