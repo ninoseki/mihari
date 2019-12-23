@@ -108,7 +108,7 @@ module Mihari
     method_option :tags, type: :array, desc: "tags"
     def circl(query)
       with_error_handling do
-        run_analyzer Analyzers::CIRCL, query: query, options: options
+        run_analyzer Analyzers::CIRCL, query: refang(query), options: options
       end
     end
 
@@ -159,7 +159,7 @@ module Mihari
     method_option :tags, type: :array, desc: "tags"
     def dnstwister(domain)
       with_error_handling do
-        run_analyzer Analyzers::DNSTwister, query: domain, options: options
+        run_analyzer Analyzers::DNSTwister, query: refang(domain), options: options
       end
     end
 
@@ -189,7 +189,7 @@ module Mihari
     method_option :tags, type: :array, desc: "tags"
     def reverse_whois(query)
       with_error_handling do
-        run_analyzer Analyzers::ReveseWhois, query: query, options: options
+        run_analyzer Analyzers::ReveseWhois, query: refang(query), options: options
       end
     end
 
@@ -259,6 +259,7 @@ module Mihari
     desc "status", "Show the current configuration status"
     def status
       with_error_handling do
+        load_configuration
         puts JSON.pretty_generate(Status.check)
       end
     end
@@ -302,9 +303,9 @@ module Mihari
       end
 
       def normalize_options(options)
-       # Delete :config because it is not intended to use for running an analyzer
-       options.delete(:config)
-       options
+        # Delete :config because it is not intended to use for running an analyzer
+        options.delete(:config)
+        options
       end
 
       def refang(indicator)
