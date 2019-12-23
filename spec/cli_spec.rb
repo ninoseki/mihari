@@ -269,4 +269,26 @@ RSpec.describe Mihari::CLI do
       expect(subject.refang("1.1.1(.)1")).to eq("1.1.1.1")
     end
   end
+
+  describe "#symbolize_hash_keys" do
+    subject { described_class.new }
+
+    let(:hash) { { "a" => 1 } }
+
+    it do
+      res = subject.symbolize_hash_keys(hash)
+      expect(res).to eq(a: 1)
+    end
+  end
+
+  describe "#normalize_options" do
+    subject { described_class.new }
+
+    let(:hash) { { a: 1, config: "foo" } }
+
+    it do
+      res = subject.normalize_options(hash)
+      expect(res).to eq(a: 1)
+    end
+  end
 end
