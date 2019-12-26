@@ -6,12 +6,12 @@
 [![Coverage Status](https://coveralls.io/repos/github/ninoseki/mihari/badge.svg?branch=master)](https://coveralls.io/github/ninoseki/mihari?branch=master)
 [![CodeFactor](https://www.codefactor.io/repository/github/ninoseki/mihari/badge)](https://www.codefactor.io/repository/github/ninoseki/mihari)
 
-Mihari is a sidekick tool for [TheHive](https://github.com/TheHive-Project/TheHive) for monitoring malicious hosts (C2 / landing page / phishing, etc.) continuously.
+Mihari is a helper to run queries & manage results continuously. Mihari can be used for C2, landing page and phishing hunting.
 
 ## How it works
 
 - Mihari makes a query against Shodan, Censys, VirusTotal, SecurityTrails, etc. and extracts artifacts from the results.
-- Mihari checks whether TheHive contains the artifacts or not.
+- Mihari checks whether [TheHive](https://thehive-project.org/) contains the artifacts or not.
   - If it doesn't contain the artifacts:
     - Mihari creates an alert on TheHive.
     - Mihari sends a notification to Slack. (Optional)
@@ -229,10 +229,10 @@ The input is a JSON data should have `title`, `description` and `artifacts` key.
 
 Configuration can be done via environment variables or a YAML file.
 
-| Key                    | Desc.                          | Required or optional           |
+| Key                    | Desc.                          | Recommended or optional        |
 |------------------------|--------------------------------|--------------------------------|
-| THEHIVE_API_ENDPOINT   | TheHive URL                    | Required                       |
-| THEHIVE_API_KEY        | TheHive API key                | Required                       |
+| THEHIVE_API_ENDPOINT   | TheHive URL                    | Recommended                    |
+| THEHIVE_API_KEY        | TheHive API key                | Recommended                    |
 | MISP_API_ENDPOINT      | MISP URL                       | Optional                       |
 | MISP_API_KEY           | MISP API key                   | Optional                       |
 | SLACK_WEBHOOK_URL      | Slack Webhook URL              | Optional                       |
