@@ -258,7 +258,7 @@ Instead of using environment variables, you can use a YAML file for configuratio
 mihari virustotal 1.1.1.1 --config /path/to/yaml.yml
 ```
 
-The YAML file should be a hash like below:
+The YAML file should be a YAML hash like below:
 
 ```yaml
 thehive_api_endpoint: https://localhost
