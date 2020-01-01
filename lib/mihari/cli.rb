@@ -247,7 +247,7 @@ module Mihari
     end
 
     desc "alerts", "Show the alerts on TheHive"
-    method_option :limit, default: 5, desc: "Number of alerts to show (or 'all' to show all the alerts)"
+    method_option :limit, type: :string, default: "5", desc: "Number of alerts to show (or 'all' to show all the alerts)"
     def alerts
       with_error_handling do
         viewer = AlertViewer.new(limit: options["limit"])
