@@ -26,7 +26,7 @@ Gem::Specification.new do |spec|
 
   spec.add_development_dependency "bundler", "~> 2.1"
   spec.add_development_dependency "coveralls", "~> 0.8"
-  spec.add_development_dependency "fakefs", "~> 0.20"
+  spec.add_development_dependency "fakefs", "~> 1.0"
   spec.add_development_dependency "rake", "~> 13.0"
   spec.add_development_dependency "rspec", "~> 3.9"
   spec.add_development_dependency "timecop", "~> 0.9"
@@ -40,7 +40,7 @@ Gem::Specification.new do |spec|
   spec.add_dependency "dnpedia", "~> 0.1"
   spec.add_dependency "dnstwister", "~> 0.1"
   spec.add_dependency "email_address", "~> 0.1"
-  spec.add_dependency "hachi", "~> 0.2"
+  spec.add_dependency "hachi", "~> 0.3"
   spec.add_dependency "lightly", "~> 0.3"
   spec.add_dependency "mem", "~> 0.1"
   spec.add_dependency "misp", "~> 0.1"
