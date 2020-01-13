@@ -9,19 +9,23 @@ module Mihari
       attr_reader :description
       attr_reader :query
       attr_reader :tags
+      attr_reader :exclude_expired
 
-      def initialize(query, title: nil, description: nil, tags: [])
+      def initialize(query, title: nil, description: nil, tags: [], exclude_expired: nil)
         super()
 
         @query = query
         @title = title || "crt.sh lookup"
         @description = description || "query = #{query}"
         @tags = tags
+
+        @exclude_expired = exclude_expired.nil? ? true : exclude_expired
       end
 
       def artifacts
         results = search
-        results.map { |result| result.dig("name_value") }.compact.uniq
+        name_values = results.map { |result| result.dig("name_value") }.compact
+        name_values.map(&:lines).flatten.uniq.map(&:chomp)
       end
 
       private
@@ -31,7 +35,8 @@ module Mihari
       end
 
       def search
-        api.search(query)
+        exclude = exclude_expired ? "expired" : nil
+        api.search(query, exclude: exclude)
       rescue ::Crtsh::Error => _e
         []
       end
