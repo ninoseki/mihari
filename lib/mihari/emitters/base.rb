@@ -16,7 +16,7 @@ module Mihari
       end
 
       def run(**params)
-        retry_on_error { emit(params) }
+        retry_on_error { emit(**params) }
       end
 
       def emit(*)
