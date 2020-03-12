@@ -4,7 +4,7 @@ module Mihari
   class Status
     def check
       statuses.map do |key, value|
-        [key, convert(value)]
+        [key, convert(**value)]
       end.to_h
     end
 
