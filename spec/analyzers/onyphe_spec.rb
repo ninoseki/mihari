@@ -3,7 +3,7 @@
 RSpec.describe Mihari::Analyzers::Onyphe, :vcr do
   subject { described_class.new(query, tags: tags) }
 
-  let(:query) { "sagawa.apk" }
+  let(:query) { "4299114377898569169" }
   let(:tags) { %w(test) }
 
   describe "#title" do
