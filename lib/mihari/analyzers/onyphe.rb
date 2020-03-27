@@ -43,7 +43,7 @@ module Mihari
       end
 
       def search_with_page(query, page: 1)
-        api.datascan(query, page: page)
+        api.simple.datascan(query, page: page)
       end
 
       def search
