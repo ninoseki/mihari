@@ -32,7 +32,7 @@ RSpec.describe Mihari::Analyzers::Shodan, :vcr do
 
   context "when api config is not given" do
     before do
-      allow(ENV).to receive(:fetch).with("SHODAN_API_KEY", nil).and_return(nil)
+      allow(Mihari.config).to receive(:shodan_api_key).and_return(nil)
     end
 
     it do

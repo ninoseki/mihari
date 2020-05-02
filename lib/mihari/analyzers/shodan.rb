@@ -36,11 +36,11 @@ module Mihari
       PAGE_SIZE = 100
 
       def config_keys
-        %w(SHODAN_API_KEY)
+        [Mihari.config.shodan_api_key]
       end
 
       def api
-        @api ||= ::Shodan::API.new
+        @api ||= ::Shodan::API.new(key: Mihari.config.shodan_api_key)
       end
 
       def search_with_page(query, page: 1)

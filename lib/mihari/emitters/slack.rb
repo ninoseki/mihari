@@ -135,7 +135,7 @@ module Mihari
       private
 
       def config_keys
-        %w(SLACK_WEBHOOK_URL)
+        [Mihari.config.slack_webhook_url]
       end
     end
   end

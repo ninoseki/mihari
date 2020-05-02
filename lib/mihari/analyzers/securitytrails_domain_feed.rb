@@ -32,11 +32,11 @@ module Mihari
       private
 
       def config_keys
-        %w(SECURITYTRAILS_API_KEY)
+        [Mihari.config.securitytrails_api_key]
       end
 
       def api
-        @api ||= ::SecurityTrails::API.new
+        @api ||= ::SecurityTrails::API.new(Mihari.config.securitytrails_api_key)
       end
 
       def valid_type?

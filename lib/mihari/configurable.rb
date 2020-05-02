@@ -3,7 +3,7 @@
 module Mihari
   module Configurable
     def configured?
-      config_keys.all? { |key| ENV.key? key }
+      config_keys.all? { |key| !key.nil? }
     end
 
     def configuration_status

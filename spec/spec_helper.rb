@@ -85,4 +85,5 @@ VCR.configure do |config|
   config.filter_sensitive_data("<PASSIVETOTAL_AUTH>") {
     authorization_field ENV["PASSIVETOTAL_USERNAME"] || "foo", ENV["PASSIVETOTAL_API_KEY"] || "bar"
   }
+  Mihari.config.load_from_env
 end

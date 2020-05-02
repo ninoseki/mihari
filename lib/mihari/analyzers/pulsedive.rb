@@ -30,11 +30,11 @@ module Mihari
       private
 
       def config_keys
-        %w(PULSEDIVE_API_KEY)
+        [Mihari.config.pulsedive_api_key]
       end
 
       def api
-        @api ||= ::Pulsedive::API.new
+        @api ||= ::Pulsedive::API.new(Mihari.config.pulsedive_api_key)
       end
 
       def valid_type?

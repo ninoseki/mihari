@@ -58,8 +58,8 @@ RSpec.describe Mihari::Analyzers::Censys, :vcr do
 
   context "when api config is not given" do
     before do
-      allow(ENV).to receive(:[]).with("CENSYS_ID").and_return(nil)
-      allow(ENV).to receive(:[]).with("CENSYS_SECRET").and_return(nil)
+      allow(Mihari.config).to receive(:censys_id).and_return(nil)
+      allow(Mihari.config).to receive(:censys_secret).and_return(nil)
     end
 
     it do
