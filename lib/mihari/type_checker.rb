@@ -44,7 +44,7 @@ module Mihari
 
     # @return [true, false]
     def mail?
-      EmailAddress.valid? data
+      EmailAddress.valid? data, host_validation: :syntax
     end
 
     # @return [String, nil]
