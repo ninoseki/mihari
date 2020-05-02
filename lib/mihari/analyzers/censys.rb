@@ -86,11 +86,11 @@ module Mihari
       end
 
       def config_keys
-        %w(CENSYS_ID CENSYS_SECRET)
+        [Mihari.config.censys_id, Mihari.config.censys_secret]
       end
 
       def api
-        @api ||= ::Censys::API.new
+        @api ||= ::Censys::API.new(Mihari.config.censys_id, Mihari.config.censys_secret)
       end
     end
   end

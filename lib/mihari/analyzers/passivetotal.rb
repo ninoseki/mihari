@@ -30,11 +30,11 @@ module Mihari
       private
 
       def config_keys
-        %w(PASSIVETOTAL_USERNAME PASSIVETOTAL_API_KEY)
+        [Mihari.config.passivetotal_username, Mihari.config.passivetotal_api_key]
       end
 
       def api
-        @api ||= ::PassiveTotal::API.new
+        @api ||= ::PassiveTotal::API.new(username: Mihari.config.passivetotal_username, api_key: Mihari.config.passivetotal_api_key)
       end
 
       def valid_type?

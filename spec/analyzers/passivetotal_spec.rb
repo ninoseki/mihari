@@ -77,8 +77,8 @@ RSpec.describe Mihari::Analyzers::PassiveTotal, :vcr do
     let(:query) { "89.35.39.84" }
 
     before do
-      allow(ENV).to receive(:[]).with("PASSIVETOTAL_API_KEY").and_return(nil)
-      allow(ENV).to receive(:[]).with("PASSIVETOTAL_USERNAME").and_return(nil)
+      allow(Mihari.config).to receive(:passivetotal_api_key).and_return(nil)
+      allow(Mihari.config).to receive(:passivetotal_username).and_return(nil)
     end
 
     it do

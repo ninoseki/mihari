@@ -30,11 +30,11 @@ module Mihari
       private
 
       def config_keys
-        %w(VIRUSTOTAL_API_KEY)
+        [Mihari.config.virustotal_api_key]
       end
 
       def api
-        @api = ::VirusTotal::API.new
+        @api = ::VirusTotal::API.new(key: Mihari.config.virustotal_api_key)
       end
 
       def valid_type?

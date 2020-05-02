@@ -60,7 +60,7 @@ RSpec.describe Mihari::Emitters::Slack do
 
     context "when SLAC_WEBHOOK_URL is not given" do
       before do
-        allow(ENV).to receive(:key?).with("SLACK_WEBHOOK_URL").and_return(false)
+        allow(Mihari.config).to receive(:slack_webhook_url).and_return(nil)
       end
 
       it do

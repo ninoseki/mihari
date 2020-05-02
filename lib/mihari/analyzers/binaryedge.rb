@@ -52,11 +52,11 @@ module Mihari
       end
 
       def config_keys
-        %w(BINARYEDGE_API_KEY)
+        [Mihari.config.binaryedge_api_key]
       end
 
       def api
-        @api ||= ::BinaryEdge::API.new
+        @api ||= ::BinaryEdge::API.new(Mihari.config.binaryedge_api_key)
       end
     end
   end

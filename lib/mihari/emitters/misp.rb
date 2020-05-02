@@ -6,6 +6,13 @@ require "net/ping"
 module Mihari
   module Emitters
     class MISP < Base
+      def initialize
+        ::MISP.configure do |config|
+          config.api_endpoint = Mihari.config.misp_api_endpoint
+          config.api_key = Mihari.config.misp_api_key
+        end
+      end
+
       # @return [true, false]
       def valid?
         api_endpoint? && api_key? && ping?
@@ -28,7 +35,7 @@ module Mihari
       private
 
       def config_keys
-        %w(MISP_API_ENDPOINT MISP_API_KEY)
+        [Mihari.config.misp_api_endpoint, Mihari.config.misp_api_key]
       end
 
       def build_attribute(artifact)

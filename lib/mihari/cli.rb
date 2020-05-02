@@ -286,7 +286,7 @@ module Mihari
 
       def load_configuration
         config = options["config"]
-        Config.load_from_yaml(config) if config
+        Config.load_configuration(config) if config
       end
 
       def run_analyzer(analyzer_class, query:, options:)

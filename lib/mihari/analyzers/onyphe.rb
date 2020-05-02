@@ -35,11 +35,11 @@ module Mihari
       PAGE_SIZE = 10
 
       def config_keys
-        %w(ONYPHE_API_KEY)
+        [Mihari.config.onyphe_api_key]
       end
 
       def api
-        @api ||= ::Onyphe::API.new
+        @api ||= ::Onyphe::API.new(Mihari.config.onyphe_api_key)
       end
 
       def search_with_page(query, page: 1)
