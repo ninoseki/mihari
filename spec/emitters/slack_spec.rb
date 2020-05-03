@@ -49,8 +49,7 @@ RSpec.describe Mihari::Emitters::Slack do
   describe "#valid?" do
     context "when SLAC_WEBHOOK_URL is given" do
       before do
-        allow(ENV).to receive(:key?).with("SLACK_WEBHOOK_URL").and_return(true)
-        allow(ENV).to receive(:fetch).with("SLACK_WEBHOOK_URL").and_return("http://example.com")
+        allow(Mihari.config).to receive(:slack_webhook_url).and_return("http://example.com")
       end
 
       it do

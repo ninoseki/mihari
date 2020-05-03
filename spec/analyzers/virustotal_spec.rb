@@ -59,7 +59,7 @@ RSpec.describe Mihari::Analyzers::VirusTotal, :vcr do
 
   context "when api config is not given" do
     before do
-      allow(ENV).to receive(:[]).with("VIRUSTOTAL_API_KEY").and_return(nil)
+      allow(Mihari.config).to receive(:virustotal_api_key).and_return(nil)
     end
 
     it do
