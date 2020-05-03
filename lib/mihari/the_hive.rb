@@ -22,16 +22,16 @@ module Mihari
 
     # @return [true, false]
     def api_endpont?
-      ENV.key? "THEHIVE_API_ENDPOINT"
+      !Mihari.config.thehive_api_endpoint.nil?
     end
 
     # @return [true, false]
     def api_key?
-      ENV.key? "THEHIVE_API_KEY"
+      !Mihari.config.thehive_api_key.nil?
     end
 
     def ping?
-      base_url = ENV.fetch("THEHIVE_API_ENDPOINT")
+      base_url = Mihari.config.thehive_api_endpoint
       base_url = base_url.end_with?("/") ? base_url[0..-2] : base_url
       url = "#{base_url}/index.html"
 
