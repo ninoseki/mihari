@@ -6,9 +6,9 @@ RSpec.describe Mihari::Config do
   describe ".load_from_yaml" do
     it do
       path = File.expand_path("./fixtures/test.yml", __dir__)
-      subject.load_from_yaml path
+      described_class.load_from_yaml path
 
-      expect(ENV["VIRUSTOTAL_API_KEY"]).to eq("foo bar")
+      expect(Mihari.config.virustotal_api_key).to eq("foo bar")
     end
   end
 end

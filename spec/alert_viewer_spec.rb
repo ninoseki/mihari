@@ -17,7 +17,7 @@ RSpec.describe Mihari::AlertViewer, :vcr do
     it do
       alerts = subject.list
       alerts.each do |alert|
-        expect(alert.keys.sort).to eq(%w(title description artifacts tags createdAt status).sort)
+        expect(alert.keys.sort).to eq([:artifacts, :created_at, :description, :source, :tags, :title])
       end
     end
   end

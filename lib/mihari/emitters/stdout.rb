@@ -9,11 +9,12 @@ module Mihari
         true
       end
 
-      def emit(title:, description:, artifacts:, tags:)
+      def emit(title:, description:, artifacts:, source:, tags:)
         h = {
           title: title,
           description: description,
           artifacts: artifacts.map(&:data),
+          source: source,
           tags: tags
         }
         puts JSON.pretty_generate(h)

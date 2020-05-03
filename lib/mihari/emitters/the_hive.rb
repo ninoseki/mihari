@@ -1,42 +1,56 @@
 # frozen_string_literal: true
 
+require "hachi"
+require "net/ping"
+
 module Mihari
   module Emitters
     class TheHive < Base
       # @return [true, false]
       def valid?
-        the_hive.valid?
+        api_endpont? && api_key? && ping?
       end
 
-      def emit(title:, description:, artifacts:, tags: [])
+      def emit(title:, description:, artifacts:, tags: [], **_options)
         return if artifacts.empty?
 
-        the_hive.alert.create(
+        api.alert.create(
           title: title,
           description: description,
-          artifacts: artifacts.map(&:to_h),
-          tags: tags
+          artifacts: artifacts.map { |artifact| { data: artifact.data, data_type: artifact.data_type, message: description } },
+          tags: tags,
+          type: "external",
+          source: "mihari"
         )
-
-        save_as_cache artifacts.map(&:data)
       end
 
       private
 
       def config_keys
-        %w(THEHIVE_API_ENDPOINT THEHIVE_API_KEY)
+        [Mihari.config.thehive_api_endpoint, Mihari.config.thehive_api_key]
       end
 
-      def the_hive
-        @the_hive ||= Mihari::TheHive.new
+      def api
+        @api ||= Hachi::API.new(api_endpoint: Mihari.config.thehive_api_endpoint, api_key: Mihari.config.thehive_api_key)
       end
 
-      def cache
-        @cache ||= Cache.new
+      # @return [true, false]
+      def api_endpont?
+        !Mihari.config.thehive_api_endpoint.nil?
       end
 
-      def save_as_cache(data)
-        cache.save data
+      # @return [true, false]
+      def api_key?
+        !Mihari.config.thehive_api_key.nil?
+      end
+
+      def ping?
+        base_url = Mihari.config.thehive_api_endpoint
+        base_url = base_url.end_with?("/") ? base_url[0..-2] : base_url
+        url = "#{base_url}/index.html"
+
+        http = Net::Ping::HTTP.new(url)
+        http.ping?
       end
     end
   end

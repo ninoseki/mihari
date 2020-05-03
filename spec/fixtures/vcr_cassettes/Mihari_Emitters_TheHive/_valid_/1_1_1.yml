@@ -16,23 +16,31 @@ http_interactions:
         code: 200
         message: OK
       headers:
-        Etag:
-          - '"c5146054a57556c01d92c800a66de1ee32c81d55"'
         Accept-Ranges:
           - bytes
+        Age:
+          - "217342"
         Cache-Control:
-          - public, max-age=3600
-        Last-Modified:
-          - Tue, 19 Mar 2019 10:00:42 GMT
-        Date:
-          - Fri, 26 Jul 2019 22:56:54 GMT
+          - max-age=604800
         Content-Type:
           - text/html; charset=UTF-8
+        Date:
+          - Sun, 03 May 2020 00:27:12 GMT
+        Etag:
+          - '"3147526947"'
+        Expires:
+          - Sun, 10 May 2020 00:27:12 GMT
+        Last-Modified:
+          - Thu, 17 Oct 2019 07:18:26 GMT
+        Server:
+          - ECS (sec/96EC)
+        X-Cache:
+          - HIT
         Content-Length:
-          - "1171"
+          - "1256"
       body:
         encoding: UTF-8
         string: ""
-      http_version:
-    recorded_at: Fri, 26 Jul 2019 22:56:56 GMT
-recorded_with: VCR 5.0.0
+      http_version: null
+    recorded_at: Sun, 03 May 2020 00:27:12 GMT
+recorded_with: VCR 5.1.0

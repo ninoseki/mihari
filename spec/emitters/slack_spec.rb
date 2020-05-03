@@ -5,11 +5,11 @@ RSpec.describe Mihari::Emitters::Slack do
 
   let(:artifacts) {
     [
-      Mihari::Artifact.new("1.1.1.1"),
-      Mihari::Artifact.new("github.com"),
-      Mihari::Artifact.new("http://example.com"),
-      Mihari::Artifact.new("44d88612fea8a8f36de82e1278abb02f"),
-      Mihari::Artifact.new("example@gmail.com")
+      Mihari::Artifact.new(data: "1.1.1.1"),
+      Mihari::Artifact.new(data: "github.com"),
+      Mihari::Artifact.new(data: "http://example.com"),
+      Mihari::Artifact.new(data: "44d88612fea8a8f36de82e1278abb02f"),
+      Mihari::Artifact.new(data: "example@gmail.com")
     ]
   }
 
@@ -49,8 +49,7 @@ RSpec.describe Mihari::Emitters::Slack do
   describe "#valid?" do
     context "when SLAC_WEBHOOK_URL is given" do
       before do
-        allow(ENV).to receive(:key?).with("SLACK_WEBHOOK_URL").and_return(true)
-        allow(ENV).to receive(:fetch).with("SLACK_WEBHOOK_URL").and_return("http://example.com")
+        allow(Mihari.config).to receive(:slack_webhook_url).and_return("http://example.com")
       end
 
       it do
@@ -60,7 +59,7 @@ RSpec.describe Mihari::Emitters::Slack do
 
     context "when SLAC_WEBHOOK_URL is not given" do
       before do
-        allow(ENV).to receive(:key?).with("SLACK_WEBHOOK_URL").and_return(false)
+        allow(Mihari.config).to receive(:slack_webhook_url).and_return(nil)
       end
 
       it do

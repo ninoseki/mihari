@@ -45,8 +45,8 @@ RSpec.describe Mihari::Analyzers::ZoomEye, :vcr do
 
   context "when api config is not given" do
     before do
-      allow(ENV).to receive(:[]).with("ZOOMEYE_USERNAME").and_return(nil)
-      allow(ENV).to receive(:[]).with("ZOOMEYE_PASSWORD").and_return(nil)
+      allow(Mihari.config).to receive(:zoomeye_usernamme).and_return(nil)
+      allow(Mihari.config).to receive(:zoomeye_password).and_return(nil)
     end
 
     it do

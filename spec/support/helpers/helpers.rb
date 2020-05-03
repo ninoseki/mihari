@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+# rubocop:disable Style/EvalWithLocation, Security/Eval
 module Spec
   module Support
     module Helpers
@@ -17,3 +18,4 @@ module Spec
     end
   end
 end
+# rubocop:enable Style/EvalWithLocation, Security/Eval
