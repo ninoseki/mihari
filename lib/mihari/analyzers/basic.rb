@@ -6,12 +6,14 @@ module Mihari
       attr_accessor :title
       attr_reader :description
       attr_reader :artifacts
+      attr_reader :source
       attr_reader :tags
 
-      def initialize(title:, description:, artifacts:, tags: [])
+      def initialize(title:, description:, artifacts:, source:, tags: [])
         @title = title
         @description = description
         @artifacts = artifacts
+        @source = source
         @tags = tags
       end
     end

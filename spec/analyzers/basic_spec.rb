@@ -1,11 +1,12 @@
 # frozen_string_literal: true
 
 RSpec.describe Mihari::Analyzers::Basic, :vcr do
-  subject { described_class.new(title: title, description: description, artifacts: artifacts, tags: tags) }
+  subject { described_class.new(title: title, description: description, artifacts: artifacts, source: source, tags: tags) }
 
   let(:title) { "test" }
   let(:description) { "test" }
   let(:artifacts) { %w(1.1.1.1) }
+  let(:source) { "test" }
   let(:tags) { %w(test) }
 
   describe "#title" do

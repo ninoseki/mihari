@@ -19,7 +19,7 @@ RSpec.describe Mihari::Emitters::MISP, :vcr do
   describe "#emit" do
     let(:title) { "test" }
     let(:description) { "test" }
-    let(:artifacts) { [Mihari::Artifact.new("1.1.1.1")] }
+    let(:artifacts) { [Mihari::Artifact.new(data: "1.1.1.1")] }
     let(:tags) { %w(test) }
 
     it do

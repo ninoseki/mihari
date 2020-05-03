@@ -25,6 +25,8 @@ module Mihari
     attr_accessor :zoomeye_password
     attr_accessor :zoomeye_username
 
+    attr_accessor :database
+
     def initialize
       load_from_env
     end
@@ -50,6 +52,8 @@ module Mihari
       @virustotal_api_key = ENV["VIRUSTOTAL_API_KEY"]
       @zoomeye_password = ENV["ZOOMEYE_PASSWORD"]
       @zoomeye_username = ENV["ZOOMEYE_USERNAME"]
+
+      @database = ENV["DATABASE"] || "mihari.db"
     end
 
     class << self

@@ -123,7 +123,7 @@ module Mihari
         ].join("\n")
       end
 
-      def emit(title:, description:, artifacts:, tags: [])
+      def emit(title:, description:, artifacts:, tags: [], **_options)
         return if artifacts.empty?
 
         attachments = to_attachments(artifacts)

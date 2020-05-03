@@ -19,23 +19,26 @@ module Mihari
 end
 
 require "mihari/version"
-
 require "mihari/errors"
 
-require "mihari/artifact"
-require "mihari/cache"
 require "mihari/config"
+
+require "mihari/database"
 require "mihari/type_checker"
+
+require "mihari/models/alert"
+require "mihari/models/artifact"
+require "mihari/models/tag"
+require "mihari/models/tagging"
+
+require "mihari/serializers/alert"
+require "mihari/serializers/artifact"
+require "mihari/serializers/tag"
 
 require "mihari/html"
 
 require "mihari/configurable"
 require "mihari/retriable"
-
-require "mihari/the_hive/base"
-require "mihari/the_hive/alert"
-require "mihari/the_hive/artifact"
-require "mihari/the_hive"
 
 require "mihari/analyzers/base"
 require "mihari/analyzers/basic"
@@ -70,6 +73,7 @@ require "mihari/notifiers/exception_notifier"
 require "mihari/emitters/base"
 require "mihari/emitters/misp"
 require "mihari/emitters/slack"
+require "mihari/emitters/sqlite"
 require "mihari/emitters/stdout"
 require "mihari/emitters/the_hive"
 

@@ -58,9 +58,9 @@ RSpec.describe Mihari::Analyzers::Base, :vcr do
 
         allow(Mihari).to receive(:emitters).and_return([klass])
 
-        thehive = instance_double(Mihari::TheHive)
+        thehive = instance_double(Mihari::Emitters::TheHive)
         allow(thehive).to receive(:valid?).and_return(false)
-        allow(Mihari::TheHive).to receive(:new).and_return(thehive)
+        allow(Mihari::Emitters::TheHive).to receive(:new).and_return(thehive)
 
         allow(Parallel).to receive(:processor_count).and_return(0)
       end
