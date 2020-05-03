@@ -242,7 +242,7 @@ module Mihari
         artifacts = json.dig("artifacts")
         tags = json.dig("tags") || []
 
-        basic = Analyzers::Basic.new(title: title, description: description, artifacts: artifacts, tags: tags)
+        basic = Analyzers::Basic.new(title: title, description: description, artifacts: artifacts, source: "json", tags: tags)
         basic.run
       end
     end
