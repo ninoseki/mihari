@@ -2,11 +2,6 @@
 
 require "active_record"
 
-ActiveRecord::Base.establish_connection(
-  adapter: "sqlite3",
-  database: Mihari.config.database
-)
-
 class InitialSchema < ActiveRecord::Migration[6.0]
   def change
     create_table :tags, if_not_exists: true do |t|
@@ -37,9 +32,22 @@ class InitialSchema < ActiveRecord::Migration[6.0]
   end
 end
 
-begin
-  ActiveRecord::Migration.verbose = false
-  InitialSchema.migrate(:up)
-rescue StandardError
-  # Do nothing
+module Mihari
+  class Database
+    class << self
+      def connect
+        ActiveRecord::Base.establish_connection(
+          adapter: "sqlite3",
+          database: Mihari.config.database
+        )
+
+        ActiveRecord::Migration.verbose = false
+        InitialSchema.migrate(:up)
+      rescue StandardError
+        # Do nothing
+      end
+    end
+  end
 end
+
+Mihari::Database.connect

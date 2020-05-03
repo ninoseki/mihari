@@ -251,6 +251,8 @@ module Mihari
     method_option :limit, type: :string, default: "5", desc: "Number of alerts to show (or 'all' to show all the alerts)"
     def alerts
       with_error_handling do
+        load_configuration
+
         viewer = AlertViewer.new(limit: options["limit"])
         alerts = viewer.list
         puts JSON.pretty_generate(alerts)
@@ -261,6 +263,7 @@ module Mihari
     def status
       with_error_handling do
         load_configuration
+
         puts JSON.pretty_generate(Status.check)
       end
     end
@@ -289,8 +292,7 @@ module Mihari
         return unless config
 
         Config.load_from_yaml(config)
-        # reload database settings
-        load File.expand_path("./database.rb", __dir__)
+        Database.connect
       end
 
       def run_analyzer(analyzer_class, query:, options:)
