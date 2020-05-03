@@ -10,18 +10,14 @@ Mihari is a helper to run queries & manage results continuously. Mihari can be u
 
 ## How it works
 
-- Mihari makes a query against Shodan, Censys, VirusTotal, SecurityTrails, etc. and extracts artifacts from the results.
-- Mihari checks whether [TheHive](https://thehive-project.org/) contains the artifacts or not.
+- Mihari makes a query against Shodan, Censys, VirusTotal, SecurityTrails, etc. and extracts artifacts (IP addresses, domains, URLs and hashes) from the results.
+- Mihari checks whether a DB (SQLite3) contains the artifacts or not.
   - If it doesn't contain the artifacts:
-    - Mihari creates an alert on TheHive.
+    - Mihari creates an alert on TheHive. (Optional)
     - Mihari sends a notification to Slack. (Optional)
     - Mihari creates an event on MISP. (Optional)
 
 ![img](https://github.com/ninoseki/mihari/raw/master/screenshots/eyecatch.png)
-
-Check this blog post for more details: [Continuous C2 hunting with Censys, Shodan, Onyphe and TheHive](https://hackmd.io/s/SkUaSrqoE).
-
-You can use mihari without TheHive but note that mihari depends on TheHive to manage artifacts. It means mihari might make duplications when without TheHive.
 
 ### Screenshots
 
@@ -156,49 +152,13 @@ mihari http_hash --html /tmp/index.html
 
 ```bash
 # Censys lookup for PANDA C2
-$ mihari censys '("PANDA" AND "SMAdmin" AND "layui")' --title "PANDA C2"
-{
-  "title": "PANDA C2",
-  "description": "query = (\"PANDA\" AND \"SMAdmin\" AND \"layui\")",
-  "artifacts": [
-    "154.223.165.223",
-    "154.194.2.31",
-    "45.114.127.119",
-    "..."
-  ],
-  "tags": []
-}
+mihari censys '("PANDA" AND "SMAdmin" AND "layui")' --title "PANDA C2"
 
 # VirusTotal passive DNS lookup of a FAKESPY host
-$ mihari virustotal "jppost-hi.top" --title "FAKESPY host passive DNS results"
-{
-  "title": "FAKESPY host passive DNS results",
-  "description": "indicator = jppost-hi.top",
-  "artifacts": [
-    "185.22.152.28",
-    "192.236.200.44",
-    "193.148.69.12",
-    "..."
-  ],
-  "tags": []
-}
+mihari virustotal "jppost-hi.top" --title "FAKESPY passive DNS"
 
 # You can pass a "defanged" indicator as an input
-$ mihari virustotal "jppost-hi[.]top" --title "FAKESPY host passive DNS results"
-
-# SecurityTrails domain feed lookup for finding (possibly) Apple phishing websites
-$ mihari securitytrails_domain_feed "apple-" --type new
-{
-  "title": "SecurityTrails domain feed lookup",
-  "description": "Regexp = /apple-/",
-  "artifacts": [
-    "apple-sign.online",
-    "apple-log-in.com",
-    "apple-locator-id.info",
-    "..."
-  ],
-  "tags": []
-}
+mihari virustotal "jppost-hi[.]top" --title "FAKESPY passive DNS"
 ```
 
 ### Import from JSON
@@ -229,28 +189,29 @@ The input is a JSON data should have `title`, `description` and `artifacts` key.
 
 Configuration can be done via environment variables or a YAML file.
 
-| Key                    | Desc.                          | Recommended or optional        |
-|------------------------|--------------------------------|--------------------------------|
-| THEHIVE_API_ENDPOINT   | TheHive URL                    | Recommended                    |
-| THEHIVE_API_KEY        | TheHive API key                | Recommended                    |
-| MISP_API_ENDPOINT      | MISP URL                       | Optional                       |
-| MISP_API_KEY           | MISP API key                   | Optional                       |
-| SLACK_WEBHOOK_URL      | Slack Webhook URL              | Optional                       |
-| SLACK_CHANNEL          | Slack channel name             | Optional (default: `#general`) |
-| BINARYEDGE_API_KEY     | BinaryEdge API key             | Optional                       |
-| CENSYS_ID              | Censys API ID                  | Optional                       |
-| CENSYS_SECRET          | Censys secret                  | Optional                       |
-| CIRCL_PASSIVE_PASSWORD | CIRCL passive DNS/SSL password | Optional                       |
-| CIRCL_PASSIVE_USERNAME | CIRCL passive DNS/SSL username | Optional                       |
-| ONYPHE_API_KEY         | Onyphe API key                 | Optional                       |
-| PASSIVETOTAL_API_KEY   | PassiveTotal API key           | Optional                       |
-| PASSIVETOTAL_USERNAME  | PassiveTotal username          | Optional                       |
-| PULSEDIVE_API_KEY      | Pulsedive API key              | Optional                       |
-| SECURITYTRAILS_API_KEY | SecurityTrails API key         | Optional                       |
-| SHODAN_API_KEY         | Shodan API key                 | Optional                       |
-| VIRUSTOTAL_API_KEY     | VirusTotal API key             | Optional                       |
-| ZOOMEYE_USERNAMME      | ZoomEye username               | Optional                       |
-| ZOOMEYE_PASSWORD       | ZoomEye password               | Optional                       |
+| Key                    | Description                    | Default     |
+|------------------------|--------------------------------|-------------|
+| DATABASE               | A path to the SQLite database  | `mihari.db` |
+| BINARYEDGE_API_KEY     | BinaryEdge API key             |             |
+| CENSYS_ID              | Censys API ID                  |             |
+| CENSYS_SECRET          | Censys secret                  |             |
+| CIRCL_PASSIVE_PASSWORD | CIRCL passive DNS/SSL password |             |
+| CIRCL_PASSIVE_USERNAME | CIRCL passive DNS/SSL username |             |
+| MISP_API_ENDPOINT      | MISP URL                       |             |
+| MISP_API_KEY           | MISP API key                   |             |
+| ONYPHE_API_KEY         | Onyphe API key                 |             |
+| PASSIVETOTAL_API_KEY   | PassiveTotal API key           |             |
+| PASSIVETOTAL_USERNAME  | PassiveTotal username          |             |
+| PULSEDIVE_API_KEY      | Pulsedive API key              |             |
+| SECURITYTRAILS_API_KEY | SecurityTrails API key         |             |
+| SHODAN_API_KEY         | Shodan API key                 |             |
+| SLACK_CHANNEL          | Slack channel name             | `#general`  |
+| SLACK_WEBHOOK_URL      | Slack Webhook URL              |             |
+| THEHIVE_API_ENDPOINT   | TheHive URL                    |             |
+| THEHIVE_API_KEY        | TheHive API key                |             |
+| VIRUSTOTAL_API_KEY     | VirusTotal API key             |             |
+| ZOOMEYE_PASSWORD       | ZoomEye password               |             |
+| ZOOMEYE_USERNAMME      | ZoomEye username               |             |
 
 Instead of using environment variables, you can use a YAML file for configuration.
 
@@ -261,6 +222,7 @@ mihari virustotal 1.1.1.1 --config /path/to/yaml.yml
 The YAML file should be a YAML hash like below:
 
 ```yaml
+database: /tmp/mihari.db
 thehive_api_endpoint: https://localhost
 thehive_api_key: foo
 virustotal_api_key: foo
@@ -313,10 +275,6 @@ example.run
 ```
 
 See `/examples` for more.
-
-## Caching
-
-Mihari caches execution results in `/tmp/mihari` and the default cache duration is 7 days. If you want to clear the cache, please clear `/tmp/mihari`.
 
 ## Using it with Docker
 
