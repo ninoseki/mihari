@@ -25,7 +25,7 @@ module Mihari
 
       def notify(text:, attachments: [], mrkdwn: true)
         notifier = ::Slack::Notifier.new(slack_webhook_url, channel: slack_channel, username: DEFAULT_USERNAME)
-        notifier.post(text: text, attachments: attachments, mrkdwn: true)
+        notifier.post(text: text, attachments: attachments, mrkdwn: mrkdwn)
       end
     end
   end
