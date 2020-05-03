@@ -26,9 +26,13 @@ Gem::Specification.new do |spec|
 
   spec.add_development_dependency "bundler", "~> 2.1"
   spec.add_development_dependency "coveralls", "~> 0.8"
+  spec.add_development_dependency "execjs", "~> 2.0"
   spec.add_development_dependency "fakefs", "~> 1.2"
+  spec.add_development_dependency "pre-commit", "~> 0.39"
   spec.add_development_dependency "rake", "~> 13.0"
   spec.add_development_dependency "rspec", "~> 3.9"
+  spec.add_development_dependency "rubocop", "~> 0.82"
+  spec.add_development_dependency "rubocop-performance", "~> 1.5"
   spec.add_development_dependency "timecop", "~> 0.9"
   spec.add_development_dependency "vcr", "~> 5.1"
   spec.add_development_dependency "webmock", "~> 3.8"
