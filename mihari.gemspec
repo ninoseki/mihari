@@ -37,6 +37,8 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency "vcr", "~> 5.1"
   spec.add_development_dependency "webmock", "~> 3.8"
 
+  spec.add_dependency "active_model_serializers", "~> 0.10"
+  spec.add_dependency "activerecord", "~> 6.0"
   spec.add_dependency "addressable", "~> 2.7"
   spec.add_dependency "binaryedge", "~> 0.1"
   spec.add_dependency "censu", "~> 0.2"
@@ -59,6 +61,7 @@ Gem::Specification.new do |spec|
   spec.add_dependency "securitytrails", "~> 1.0"
   spec.add_dependency "shodanx", "~> 0.2"
   spec.add_dependency "slack-notifier", "~> 2.3"
+  spec.add_dependency "sqlite3", "~> 1.4"
   spec.add_dependency "thor", "~> 1.0"
   spec.add_dependency "urlscan", "~> 0.5"
   spec.add_dependency "virustotalx", "~> 1.1"

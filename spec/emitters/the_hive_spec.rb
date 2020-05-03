@@ -22,21 +22,15 @@ RSpec.describe Mihari::Emitters::TheHive, :vcr do
   describe "#emit" do
     let(:title) { "test" }
     let(:description) { "test" }
-    let(:artifacts) { [Mihari::Artifact.new("1.1.1.1")] }
+    let(:artifacts) { [Mihari::Artifact.new(data: "1.1.1.1")] }
 
-    let(:mock_thehie) { double("thehive") }
+    let(:mock_thehive) { double("thehive") }
     let(:mock_alert) { double("alert") }
 
     before do
-      allow(subject).to receive(:the_hive).and_return(mock_thehie)
-      allow(mock_thehie).to receive(:alert).and_return(mock_alert)
+      allow(subject).to receive(:api).and_return(mock_thehive)
+      allow(mock_thehive).to receive(:alert).and_return(mock_alert)
       allow(mock_alert).to receive(:create)
-
-      FakeFS.activate!
-    end
-
-    after do
-      FakeFS.deactivate!
     end
 
     it do

@@ -54,3 +54,6 @@ Gemfile.lock
 
 # solargraph
 .solargraph.yml
+
+# SQLite
+*.db

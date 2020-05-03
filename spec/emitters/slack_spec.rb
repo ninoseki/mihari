@@ -5,11 +5,11 @@ RSpec.describe Mihari::Emitters::Slack do
 
   let(:artifacts) {
     [
-      Mihari::Artifact.new("1.1.1.1"),
-      Mihari::Artifact.new("github.com"),
-      Mihari::Artifact.new("http://example.com"),
-      Mihari::Artifact.new("44d88612fea8a8f36de82e1278abb02f"),
-      Mihari::Artifact.new("example@gmail.com")
+      Mihari::Artifact.new(data: "1.1.1.1"),
+      Mihari::Artifact.new(data: "github.com"),
+      Mihari::Artifact.new(data: "http://example.com"),
+      Mihari::Artifact.new(data: "44d88612fea8a8f36de82e1278abb02f"),
+      Mihari::Artifact.new(data: "example@gmail.com")
     ]
   }
 

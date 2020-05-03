@@ -23,6 +23,10 @@ module Mihari
         raise NotImplementedError, "You must implement #{self.class}##{__method__}"
       end
 
+      def source
+        self.class.to_s.split("::").last
+      end
+
       # @return [Array<String>]
       def tags
         []
@@ -37,7 +41,7 @@ module Mihari
       end
 
       def run_emitter(emitter)
-        emitter.run(title: title, description: description, artifacts: unique_artifacts, tags: tags)
+        emitter.run(title: title, description: description, artifacts: unique_artifacts, source: source, tags: tags)
       rescue StandardError => e
         puts "Emission by #{emitter.class} is failed: #{e}"
       end
@@ -48,32 +52,16 @@ module Mihari
 
       private
 
-      def the_hive
-        @the_hive ||= TheHive.new
-      end
-
-      def cache
-        @cache ||= Cache.new
-      end
-
       # @return [Array<Mihari::Artifact>]
       def normalized_artifacts
         @normalized_artifacts ||= artifacts.compact.uniq.sort.map do |artifact|
-          artifact.is_a?(Artifact) ? artifact : Artifact.new(artifact)
+          artifact.is_a?(Artifact) ? artifact : Artifact.new(data: artifact)
         end.select(&:valid?)
-      end
-
-      def uncached_artifacts
-        @uncached_artifacts ||= normalized_artifacts.reject do |artifact|
-          cache.cached? artifact.data
-        end
       end
 
       # @return [Array<Mihari::Artifact>]
       def unique_artifacts
-        return uncached_artifacts unless the_hive.valid?
-
-        @unique_artifacts ||= the_hive.artifact.find_non_existing_artifacts(uncached_artifacts)
+        @unique_artifacts ||= normalized_artifacts.select(&:unique?)
       end
 
       def set_unique_artifacts
