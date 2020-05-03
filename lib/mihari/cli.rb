@@ -286,7 +286,11 @@ module Mihari
 
       def load_configuration
         config = options["config"]
-        Config.load_configuration(config) if config
+        return unless config
+
+        Config.load_from_yaml(config)
+        # reload database settings
+        load File.expand_path("./database.rb", __dir__)
       end
 
       def run_analyzer(analyzer_class, query:, options:)
