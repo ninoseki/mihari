@@ -3,6 +3,7 @@
 require "bundler/setup"
 
 require "base64"
+require "database_cleaner/active_record"
 require "fakefs/safe"
 require "timecop"
 require "vcr"
@@ -14,9 +15,6 @@ SimpleCov.start do
   add_filter "/spec"
 end
 Coveralls.wear!
-
-# Set database url for test
-ENV["DATABASE"] = ":memory:"
 
 require "mihari"
 

@@ -32,19 +32,34 @@ class InitialSchema < ActiveRecord::Migration[6.0]
   end
 end
 
+def adapter
+  return "postgresql" if Mihari.config.database.start_with?("postgresql://")
+
+  "sqlite3"
+end
+
 module Mihari
   class Database
     class << self
       def connect
-        ActiveRecord::Base.establish_connection(
-          adapter: "sqlite3",
-          database: Mihari.config.database
-        )
+        case adapter
+        when "postgresql"
+          ActiveRecord::Base.establish_connection(Mihari.config.database)
+        else
+          ActiveRecord::Base.establish_connection(
+            adapter: adapter,
+            database: Mihari.config.database
+          )
+        end
 
         ActiveRecord::Migration.verbose = false
         InitialSchema.migrate(:up)
       rescue StandardError
         # Do nothing
+      end
+
+      def destroy!
+        InitialSchema.migrate(:down) if ActiveRecord::Base.connected?
       end
     end
   end
