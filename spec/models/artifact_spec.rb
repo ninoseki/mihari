@@ -11,6 +11,7 @@ RSpec.describe Mihari::Artifact do
 
   describe "#unique?" do
     before do
+      described_class.delete_all
       described_class.create(data: "1.1.1.1")
     end
 

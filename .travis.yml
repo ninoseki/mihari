@@ -1,8 +1,13 @@
 ---
-sudo: false
 language: ruby
 cache: bundler
+services:
+  - postgresql
 rvm:
   - 2.6
   - 2.7
+env:
+  - DATABASE=":memory:"
+  - DATABASE="postgresql://postgres@0.0.0.0:5432/travis_ci_test"
 before_install: gem install bundler -v 2.1
+before_script: psql -c 'create database travis_ci_test;' -U postgres

@@ -15,9 +15,6 @@ SimpleCov.start do
 end
 Coveralls.wear!
 
-# Set database url for test
-ENV["DATABASE"] = ":memory:"
-
 require "mihari"
 
 require_relative "./support/helpers/helpers"
