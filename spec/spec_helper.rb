@@ -3,7 +3,6 @@
 require "bundler/setup"
 
 require "base64"
-require "database_cleaner/active_record"
 require "fakefs/safe"
 require "timecop"
 require "vcr"
