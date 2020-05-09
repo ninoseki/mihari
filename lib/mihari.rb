@@ -71,9 +71,9 @@ require "mihari/notifiers/slack"
 require "mihari/notifiers/exception_notifier"
 
 require "mihari/emitters/base"
+require "mihari/emitters/database"
 require "mihari/emitters/misp"
 require "mihari/emitters/slack"
-require "mihari/emitters/sqlite"
 require "mihari/emitters/stdout"
 require "mihari/emitters/the_hive"
 

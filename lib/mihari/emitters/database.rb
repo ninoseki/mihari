@@ -2,7 +2,7 @@
 
 module Mihari
   module Emitters
-    class SQLite < Base
+    class Database < Base
       def valid?
         true
       end
