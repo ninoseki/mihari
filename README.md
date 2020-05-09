@@ -11,7 +11,7 @@ Mihari is a helper to run queries & manage results continuously. Mihari can be u
 ## How it works
 
 - Mihari makes a query against Shodan, Censys, VirusTotal, SecurityTrails, etc. and extracts artifacts (IP addresses, domains, URLs and hashes) from the results.
-- Mihari checks whether a DB (SQLite3) contains the artifacts or not.
+- Mihari checks whether a DB (SQLite3 or PostgreSQL) contains the artifacts or not.
   - If it doesn't contain the artifacts:
     - Mihari creates an alert on TheHive. (Optional)
     - Mihari sends a notification to Slack. (Optional)
@@ -189,29 +189,29 @@ The input is a JSON data should have `title`, `description` and `artifacts` key.
 
 Configuration can be done via environment variables or a YAML file.
 
-| Key                    | Description                    | Default     |
-|------------------------|--------------------------------|-------------|
-| DATABASE               | A path to the SQLite database  | `mihari.db` |
-| BINARYEDGE_API_KEY     | BinaryEdge API key             |             |
-| CENSYS_ID              | Censys API ID                  |             |
-| CENSYS_SECRET          | Censys secret                  |             |
-| CIRCL_PASSIVE_PASSWORD | CIRCL passive DNS/SSL password |             |
-| CIRCL_PASSIVE_USERNAME | CIRCL passive DNS/SSL username |             |
-| MISP_API_ENDPOINT      | MISP URL                       |             |
-| MISP_API_KEY           | MISP API key                   |             |
-| ONYPHE_API_KEY         | Onyphe API key                 |             |
-| PASSIVETOTAL_API_KEY   | PassiveTotal API key           |             |
-| PASSIVETOTAL_USERNAME  | PassiveTotal username          |             |
-| PULSEDIVE_API_KEY      | Pulsedive API key              |             |
-| SECURITYTRAILS_API_KEY | SecurityTrails API key         |             |
-| SHODAN_API_KEY         | Shodan API key                 |             |
-| SLACK_CHANNEL          | Slack channel name             | `#general`  |
-| SLACK_WEBHOOK_URL      | Slack Webhook URL              |             |
-| THEHIVE_API_ENDPOINT   | TheHive URL                    |             |
-| THEHIVE_API_KEY        | TheHive API key                |             |
-| VIRUSTOTAL_API_KEY     | VirusTotal API key             |             |
-| ZOOMEYE_PASSWORD       | ZoomEye password               |             |
-| ZOOMEYE_USERNAMME      | ZoomEye username               |             |
+| Key                    | Description                                                                                     | Default     |
+|------------------------|-------------------------------------------------------------------------------------------------|-------------|
+| DATABASE               | A path to the SQLite database or a DB URL (e.g. `postgres://postgres:pass@db.host:5432/somedb`) | `mihari.db` |
+| BINARYEDGE_API_KEY     | BinaryEdge API key                                                                              |             |
+| CENSYS_ID              | Censys API ID                                                                                   |             |
+| CENSYS_SECRET          | Censys secret                                                                                   |             |
+| CIRCL_PASSIVE_PASSWORD | CIRCL passive DNS/SSL password                                                                  |             |
+| CIRCL_PASSIVE_USERNAME | CIRCL passive DNS/SSL username                                                                  |             |
+| MISP_API_ENDPOINT      | MISP URL                                                                                        |             |
+| MISP_API_KEY           | MISP API key                                                                                    |             |
+| ONYPHE_API_KEY         | Onyphe API key                                                                                  |             |
+| PASSIVETOTAL_API_KEY   | PassiveTotal API key                                                                            |             |
+| PASSIVETOTAL_USERNAME  | PassiveTotal username                                                                           |             |
+| PULSEDIVE_API_KEY      | Pulsedive API key                                                                               |             |
+| SECURITYTRAILS_API_KEY | SecurityTrails API key                                                                          |             |
+| SHODAN_API_KEY         | Shodan API key                                                                                  |             |
+| SLACK_CHANNEL          | Slack channel name                                                                              | `#general`  |
+| SLACK_WEBHOOK_URL      | Slack Webhook URL                                                                               |             |
+| THEHIVE_API_ENDPOINT   | TheHive URL                                                                                     |             |
+| THEHIVE_API_KEY        | TheHive API key                                                                                 |             |
+| VIRUSTOTAL_API_KEY     | VirusTotal API key                                                                              |             |
+| ZOOMEYE_PASSWORD       | ZoomEye password                                                                                |             |
+| ZOOMEYE_USERNAMME      | ZoomEye username                                                                                |             |
 
 Instead of using environment variables, you can use a YAML file for configuration.
 
