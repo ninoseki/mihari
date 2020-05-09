@@ -33,7 +33,7 @@ class InitialSchema < ActiveRecord::Migration[6.0]
 end
 
 def adapter
-  return "postgresql" if Mihari.config.database.start_with?("postgresql://")
+  return "postgresql" if Mihari.config.database.start_with?("postgresql://", "postgres://")
 
   "sqlite3"
 end
