@@ -30,7 +30,7 @@ module Mihari
       private
 
       def config_keys
-        [Mihari.config.virustotal_api_key]
+        %w(virustotal_api_key)
       end
 
       def api

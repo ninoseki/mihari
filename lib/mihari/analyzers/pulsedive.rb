@@ -30,7 +30,7 @@ module Mihari
       private
 
       def config_keys
-        [Mihari.config.pulsedive_api_key]
+        %w(pulsedive_api_key)
       end
 
       def api
