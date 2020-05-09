@@ -86,7 +86,7 @@ module Mihari
       end
 
       def config_keys
-        [Mihari.config.censys_id, Mihari.config.censys_secret]
+        %w(censys_id censys_secret)
       end
 
       def api

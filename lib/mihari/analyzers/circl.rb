@@ -27,7 +27,7 @@ module Mihari
       private
 
       def config_keys
-        [Mihari.config.circl_passive_password, Mihari.config.circl_passive_username]
+        %w(circl_passive_password circl_passive_username)
       end
 
       def api

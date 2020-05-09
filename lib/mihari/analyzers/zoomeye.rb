@@ -41,7 +41,7 @@ module Mihari
       end
 
       def config_keys
-        [Mihari.config.zoomeye_password, Mihari.config.zoomeye_username]
+        %w(zoomeye_password zoomeye_username)
       end
 
       def api

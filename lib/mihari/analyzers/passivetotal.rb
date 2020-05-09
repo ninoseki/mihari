@@ -30,7 +30,7 @@ module Mihari
       private
 
       def config_keys
-        [Mihari.config.passivetotal_username, Mihari.config.passivetotal_api_key]
+        %w(passivetotal_username passivetotal_api_key)
       end
 
       def api

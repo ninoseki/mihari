@@ -36,7 +36,7 @@ module Mihari
       PAGE_SIZE = 100
 
       def config_keys
-        [Mihari.config.shodan_api_key]
+        %w(shodan_api_key)
       end
 
       def api

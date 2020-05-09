@@ -27,7 +27,7 @@ module Mihari
       private
 
       def config_keys
-        [Mihari.config.thehive_api_endpoint, Mihari.config.thehive_api_key]
+        %w(thehive_api_endpoint thehive_api_key)
       end
 
       def api

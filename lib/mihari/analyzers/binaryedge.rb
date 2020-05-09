@@ -52,7 +52,7 @@ module Mihari
       end
 
       def config_keys
-        [Mihari.config.binaryedge_api_key]
+        %w(binaryedge_api_key)
       end
 
       def api

@@ -32,7 +32,7 @@ module Mihari
       private
 
       def config_keys
-        [Mihari.config.securitytrails_api_key]
+        %w(securitytrails_api_key)
       end
 
       def api

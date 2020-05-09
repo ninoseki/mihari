@@ -35,7 +35,7 @@ module Mihari
       private
 
       def config_keys
-        [Mihari.config.misp_api_endpoint, Mihari.config.misp_api_key]
+        %w(misp_api_endpoint misp_api_key)
       end
 
       def build_attribute(artifact)
