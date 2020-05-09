@@ -15,9 +15,15 @@ SimpleCov.start do
 end
 Coveralls.wear!
 
+# Use in-memory SQLite in local test
+unless ENV["DATABASE"]
+  ENV["DATABASE"] = ":memory:"
+end
+
 require "mihari"
 
 require_relative "./support/helpers/helpers"
+require_relative "./support/shared_contexts/database_context"
 
 RSpec.configure do |config|
   # Enable flags like --only-failures and --next-failure
@@ -31,6 +37,7 @@ RSpec.configure do |config|
   end
 
   config.include Spec::Support::Helpers
+  config.include_context "with database"
 end
 
 def authorization_field(username, password)

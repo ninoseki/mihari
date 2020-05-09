@@ -249,12 +249,15 @@ module Mihari
 
     desc "alerts", "Show the alerts on TheHive"
     method_option :limit, type: :string, default: "5", desc: "Number of alerts to show (or 'all' to show all the alerts)"
+    method_option :title, type: :string, desc: "Title to filter"
+    method_option :source, type: :string, desc: "Source to filter"
+    method_option :tag, type: :string, desc: "Tag to filter"
     def alerts
       with_error_handling do
         load_configuration
 
-        viewer = AlertViewer.new(limit: options["limit"])
-        alerts = viewer.list
+        viewer = AlertViewer.new
+        alerts = viewer.list(limit: options["limit"], title: options["title"], source: options["source"], tag: options[:tag])
         puts JSON.pretty_generate(alerts)
       end
     end
