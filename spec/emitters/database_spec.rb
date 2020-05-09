@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-RSpec.describe Mihari::Emitters::SQLite, :vcr do
+RSpec.describe Mihari::Emitters::Database do
   subject { described_class.new }
 
   describe "#emit" do
