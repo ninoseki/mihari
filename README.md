@@ -33,6 +33,17 @@ Mihari is a helper to run queries & manage results continuously. Mihari can be u
 
 ![img](https://github.com/ninoseki/mihari/raw/master/screenshots/misp.png)
 
+## Requirements
+
+- Ruby 2.6+
+- SQLite3
+- libpq
+
+```bash
+# For Debian / Ubuntu
+apt-get install sqlite3 libsqlite3-dev libpq-dev
+```
+
 ## Installation
 
 ```bash
