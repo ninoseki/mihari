@@ -4,6 +4,8 @@ require "slack-notifier"
 require "digest/sha2"
 require "mem"
 
+require "mihari/slack_monkeypatch"
+
 module Mihari
   module Emitters
     class Attachment

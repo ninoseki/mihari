@@ -1,5 +1,8 @@
 # frozen_string_literal: true
 
+require "slack-notifier"
+require "mihari/slack_monkeypatch"
+
 module Mihari
   module Notifiers
     class Slack < Base
