@@ -67,6 +67,7 @@ Mihari supports the following services by default.
 - [DN Pedia](https://dnpedia.com/)
 - [dnstwister](https://dnstwister.report/)
 - [Onyphe](https://onyphe.io)
+- [OTX](https://otx.alienvault.com/)
 - [PassiveTotal](https://community.riskiq.com/)
 - [SecurityTrails](https://securitytrails.com/)
 - [Shodan](https://shodan.io)
@@ -89,6 +90,7 @@ Commands:
   mihari http_hash                            # Cross search with search engines by a hash of an HTTP response (SHA256, MD5 and MurmurHash3)
   mihari import_from_json                     # Give a JSON input via STDIN
   mihari onyphe [QUERY]                       # Onyphe datascan search by a query
+  mihari otx [IP|DOMAIN]                      # OTX lookup by an IP or domain
   mihari passive_dns [IP|DOMAIN]              # Cross search with passive DNS services by an ip or domain
   mihari passive_ssl [SHA1]                   # Cross search with passive SSL services by an SHA1 certificate fingerprint
   mihari passivetotal [IP|DOMAIN|EMAIL|SHA1]  # PassiveTotal lookup by an ip, domain, email or SHA1 certificate fingerprint
@@ -116,7 +118,7 @@ You can get aggregated results by using the following commands.
 
 | Command         | Desc.                                                                                                   |
 |-----------------|---------------------------------------------------------------------------------------------------------|
-| passive_dns     | Passive DNS lookup with CIRCL passive DNS, PassiveTotal, Pulsedive, SecurityTrails and VirusTotal       |
+| passive_dns     | Passive DNS lookup with CIRCL passive DNS, OTX, PassiveTotal, Pulsedive, SecurityTrails and VirusTotal  |
 | passive_ssl     | Passive SSL lookup with CIRCL passive SSL and PassiveTotal                                              |
 | reverse_whois   | Revese Whois lookup with PassiveTotal and SecurityTrails                                                |
 | http_hash       | HTTP response hash lookup with BinaryEdge(SHA256), Censys(SHA256), Onyphpe(MD5) and Shodan(MurmurHash3) |
@@ -211,6 +213,7 @@ Configuration can be done via environment variables or a YAML file.
 | MISP_API_ENDPOINT      | MISP URL                                                                                        |             |
 | MISP_API_KEY           | MISP API key                                                                                    |             |
 | ONYPHE_API_KEY         | Onyphe API key                                                                                  |             |
+| OTX_API_KEY            | OTX API key                                                                                     |             |
 | PASSIVETOTAL_API_KEY   | PassiveTotal API key                                                                            |             |
 | PASSIVETOTAL_USERNAME  | PassiveTotal username                                                                           |             |
 | PULSEDIVE_API_KEY      | Pulsedive API key                                                                               |             |
