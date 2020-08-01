@@ -12,6 +12,7 @@ module Mihari
     attr_accessor :misp_api_endpoint
     attr_accessor :misp_api_key
     attr_accessor :onyphe_api_key
+    attr_accessor :otx_api_key
     attr_accessor :passivetotal_api_key
     attr_accessor :passivetotal_username
     attr_accessor :pulsedive_api_key
@@ -40,6 +41,7 @@ module Mihari
       @misp_api_endpoint = ENV["MISP_API_ENDPOINT"]
       @misp_api_key = ENV["MISP_API_KEY"]
       @onyphe_api_key = ENV["ONYPHE_API_KEY"]
+      @otx_api_key = ENV["OTX_API_KEY"]
       @passivetotal_api_key = ENV["PASSIVETOTAL_API_KEY"]
       @passivetotal_username = ENV["PASSIVETOTAL_USERNAME"]
       @pulsedive_api_key = ENV["PULSEDIVE_API_KEY"]

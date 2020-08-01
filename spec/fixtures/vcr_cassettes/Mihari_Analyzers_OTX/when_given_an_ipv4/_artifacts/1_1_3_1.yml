@@ -1,0 +1,159 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: https://otx.alienvault.com/api/v1/indicators/IPv4/89.35.39.84/passive_dns
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Faraday v0.17.3
+      X-Otx-Api-Key:
+      - "<OTX_API_KEY>"
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - application/json
+      Content-Length:
+      - '776'
+      Connection:
+      - keep-alive
+      Cache-Control:
+      - max-age=600
+      Date:
+      - Sat, 01 Aug 2020 00:14:53 GMT
+      Server:
+      - nginx
+      Set-Cookie:
+      - authkeys="api_key:<OTX_API_KEY>:1k1fAr:12EHotfFpg1jtuF5QfRAcUVGLyY"; expires=Sat,
+        01-Aug-2020 03:14:53 GMT; Max-Age=10800; Path=/
+      X-Frame-Options:
+      - SAMEORIGIN
+      X-Otx-Active:
+      - '1'
+      Vary:
+      - Accept-Encoding
+      X-Cache:
+      - Miss from cloudfront
+      Via:
+      - 1.1 ece495703bac6f634e6e16b4037affae.cloudfront.net (CloudFront)
+      X-Amz-Cf-Pop:
+      - NRT57-C4
+      X-Amz-Cf-Id:
+      - vqmqK0Bl-0fyjT13kmWCUOMQ4ahGUZh_qxS7Q3G2bQlr8TkV58hBmg==
+    body:
+      encoding: ASCII-8BIT
+      string: '{"passive_dns": [{"flag_url": "assets/images/ro.png", "record_type":
+        "A", "last": "2019-09-02T15:09:30+00:00", "flag_title": "Romania", "address":
+        "89.35.39.84", "indicator_link": "/indicator/domain/jppost-gu.co", "hostname":
+        "jppost-gu.co", "asset_type": "domain", "first": "2019-09-02T15:09:30+00:00"},
+        {"flag_url": "assets/images/ro.png", "record_type": "A", "last": "2019-09-02T20:18:23+00:00",
+        "flag_title": "Romania", "address": "89.35.39.84", "indicator_link": "/indicator/domain/jppost-ga.co",
+        "hostname": "jppost-ga.co", "asset_type": "domain", "first": "2019-09-02T15:09:30+00:00"},
+        {"flag_url": "assets/images/ro.png", "record_type": "A", "last": "2019-09-02T16:14:59+00:00",
+        "flag_title": "Romania", "address": "89.35.39.84", "indicator_link": "/indicator/domain/jppost-gi.co",
+        "hostname": "jppost-gi.co", "asset_type": "domain", "first": "2019-09-02T14:53:30+00:00"},
+        {"flag_url": "assets/images/ro.png", "record_type": "A", "last": "2019-09-02T20:00:39+00:00",
+        "flag_title": "Romania", "address": "89.35.39.84", "indicator_link": "/indicator/domain/jppost-bri.top",
+        "hostname": "jppost-bri.top", "asset_type": "domain", "first": "2019-09-02T14:50:32+00:00"},
+        {"flag_url": "assets/images/ro.png", "record_type": "A", "last": "2019-09-02T14:51:15+00:00",
+        "flag_title": "Romania", "address": "89.35.39.84", "indicator_link": "/indicator/domain/jppost-bre.top",
+        "hostname": "jppost-bre.top", "asset_type": "domain", "first": "2019-09-02T14:49:17+00:00"},
+        {"flag_url": "assets/images/ro.png", "record_type": "A", "last": "2019-09-02T07:43:36+00:00",
+        "flag_title": "Romania", "address": "89.35.39.84", "indicator_link": "/indicator/domain/jppost-bru.top",
+        "hostname": "jppost-bru.top", "asset_type": "domain", "first": "2019-09-02T03:52:39+00:00"},
+        {"flag_url": "assets/images/ro.png", "record_type": "A", "last": "2019-09-02T07:43:57+00:00",
+        "flag_title": "Romania", "address": "89.35.39.84", "indicator_link": "/indicator/domain/jppost-byu.top",
+        "hostname": "jppost-byu.top", "asset_type": "domain", "first": "2019-09-02T03:52:39+00:00"},
+        {"flag_url": "assets/images/ro.png", "record_type": "A", "last": "2019-09-02T16:23:18+00:00",
+        "flag_title": "Romania", "address": "89.35.39.84", "indicator_link": "/indicator/domain/jppost-bra.top",
+        "hostname": "jppost-bra.top", "asset_type": "domain", "first": "2019-09-02T03:52:39+00:00"},
+        {"flag_url": "assets/images/ro.png", "record_type": "A", "last": "2019-09-02T07:43:25+00:00",
+        "flag_title": "Romania", "address": "89.35.39.84", "indicator_link": "/indicator/domain/jppost-bya.top",
+        "hostname": "jppost-bya.top", "asset_type": "domain", "first": "2019-09-02T03:52:38+00:00"},
+        {"flag_url": "assets/images/ro.png", "record_type": "A", "last": "2019-09-02T07:43:49+00:00",
+        "flag_title": "Romania", "address": "89.35.39.84", "indicator_link": "/indicator/domain/jppost-byo.top",
+        "hostname": "jppost-byo.top", "asset_type": "domain", "first": "2019-09-02T02:33:49+00:00"},
+        {"flag_url": "assets/images/ro.png", "record_type": "A", "last": "2019-09-02T07:44:12+00:00",
+        "flag_title": "Romania", "address": "89.35.39.84", "indicator_link": "/indicator/domain/jppost-bro.top",
+        "hostname": "jppost-bro.top", "asset_type": "domain", "first": "2019-09-02T02:33:41+00:00"},
+        {"flag_url": "assets/images/ro.png", "record_type": "A", "last": "2019-09-02T01:30:07+00:00",
+        "flag_title": "Romania", "address": "89.35.39.84", "indicator_link": "/indicator/domain/jppost-su.top",
+        "hostname": "jppost-su.top", "asset_type": "domain", "first": "2019-09-02T01:30:07+00:00"},
+        {"flag_url": "assets/images/ro.png", "record_type": "A", "last": "2019-09-02T01:30:07+00:00",
+        "flag_title": "Romania", "address": "89.35.39.84", "indicator_link": "/indicator/domain/jppost-hi.top",
+        "hostname": "jppost-hi.top", "asset_type": "domain", "first": "2019-09-02T01:30:07+00:00"},
+        {"flag_url": "assets/images/ro.png", "record_type": "A", "last": "2019-09-02T01:30:07+00:00",
+        "flag_title": "Romania", "address": "89.35.39.84", "indicator_link": "/indicator/domain/jppost-tu.top",
+        "hostname": "jppost-tu.top", "asset_type": "domain", "first": "2019-09-02T01:30:07+00:00"},
+        {"flag_url": "assets/images/ro.png", "record_type": "A", "last": "2019-08-31T15:55:41+00:00",
+        "flag_title": "Romania", "address": "89.35.39.84", "indicator_link": "/indicator/domain/jppost-bha.top",
+        "hostname": "jppost-bha.top", "asset_type": "domain", "first": "2019-08-30T14:12:40+00:00"},
+        {"flag_url": "assets/images/ro.png", "record_type": "A", "last": "2019-08-30T14:12:35+00:00",
+        "flag_title": "Romania", "address": "89.35.39.84", "indicator_link": "/indicator/domain/jppost-bme.top",
+        "hostname": "jppost-bme.top", "asset_type": "domain", "first": "2019-08-30T14:12:35+00:00"},
+        {"flag_url": "assets/images/ro.png", "record_type": "A", "last": "2019-08-30T14:12:41+00:00",
+        "flag_title": "Romania", "address": "89.35.39.84", "indicator_link": "/indicator/domain/jppost-bmu.top",
+        "hostname": "jppost-bmu.top", "asset_type": "domain", "first": "2019-08-30T14:12:35+00:00"},
+        {"flag_url": "assets/images/ro.png", "record_type": "A", "last": "2019-08-30T14:12:36+00:00",
+        "flag_title": "Romania", "address": "89.35.39.84", "indicator_link": "/indicator/domain/jppost-bko.top",
+        "hostname": "jppost-bko.top", "asset_type": "domain", "first": "2019-08-30T14:12:35+00:00"},
+        {"flag_url": "assets/images/ro.png", "record_type": "A", "last": "2019-08-30T10:22:29+00:00",
+        "flag_title": "Romania", "address": "89.35.39.84", "indicator_link": "/indicator/domain/jppost-bmo.top",
+        "hostname": "jppost-bmo.top", "asset_type": "domain", "first": "2019-08-30T01:06:17+00:00"},
+        {"flag_url": "assets/images/ro.png", "record_type": "A", "last": "2019-08-30T01:06:13+00:00",
+        "flag_title": "Romania", "address": "89.35.39.84", "indicator_link": "/indicator/domain/jppost-bhu.top",
+        "hostname": "jppost-bhu.top", "asset_type": "domain", "first": "2019-08-30T01:06:13+00:00"},
+        {"flag_url": "assets/images/ro.png", "record_type": "A", "last": "2019-08-30T10:22:39+00:00",
+        "flag_title": "Romania", "address": "89.35.39.84", "indicator_link": "/indicator/domain/jppost-bho.top",
+        "hostname": "jppost-bho.top", "asset_type": "domain", "first": "2019-08-30T01:06:13+00:00"},
+        {"flag_url": "assets/images/ro.png", "record_type": "A", "last": "2019-08-30T10:22:42+00:00",
+        "flag_title": "Romania", "address": "89.35.39.84", "indicator_link": "/indicator/domain/jppost-bma.top",
+        "hostname": "jppost-bma.top", "asset_type": "domain", "first": "2019-08-30T01:06:12+00:00"},
+        {"flag_url": "assets/images/ro.png", "record_type": "A", "last": "2019-08-29T04:02:13+00:00",
+        "flag_title": "Romania", "address": "89.35.39.84", "indicator_link": "/indicator/domain/jppost-aki.com",
+        "hostname": "jppost-aki.com", "asset_type": "domain", "first": "2019-08-29T04:02:13+00:00"},
+        {"flag_url": "assets/images/ro.png", "record_type": "A", "last": "2019-08-29T04:02:10+00:00",
+        "flag_title": "Romania", "address": "89.35.39.84", "indicator_link": "/indicator/domain/jppost-bfu.top",
+        "hostname": "jppost-bfu.top", "asset_type": "domain", "first": "2019-08-29T04:02:10+00:00"},
+        {"flag_url": "assets/images/ro.png", "record_type": "A", "last": "2019-08-29T04:01:54+00:00",
+        "flag_title": "Romania", "address": "89.35.39.84", "indicator_link": "/indicator/domain/jppost-pe.com",
+        "hostname": "jppost-pe.com", "asset_type": "domain", "first": "2019-08-29T04:01:54+00:00"},
+        {"flag_url": "assets/images/ro.png", "record_type": "A", "last": "2019-08-30T01:06:14+00:00",
+        "flag_title": "Romania", "address": "89.35.39.84", "indicator_link": "/indicator/domain/jppost-bhi.top",
+        "hostname": "jppost-bhi.top", "asset_type": "domain", "first": "2019-08-29T04:01:21+00:00"},
+        {"flag_url": "assets/images/ro.png", "record_type": "A", "last": "2019-08-30T01:06:13+00:00",
+        "flag_title": "Romania", "address": "89.35.39.84", "indicator_link": "/indicator/domain/jppost-bmi.top",
+        "hostname": "jppost-bmi.top", "asset_type": "domain", "first": "2019-08-29T04:00:14+00:00"},
+        {"flag_url": "assets/images/ro.png", "record_type": "A", "last": "2019-09-02T01:30:07+00:00",
+        "flag_title": "Romania", "address": "89.35.39.84", "indicator_link": "/indicator/domain/jppost-bse.top",
+        "hostname": "jppost-bse.top", "asset_type": "domain", "first": "2019-08-27T19:41:32+00:00"},
+        {"flag_url": "assets/images/ro.png", "record_type": "A", "last": "2019-08-27T19:41:31+00:00",
+        "flag_title": "Romania", "address": "89.35.39.84", "indicator_link": "/indicator/domain/jppost-bsu.top",
+        "hostname": "jppost-bsu.top", "asset_type": "domain", "first": "2019-08-27T16:06:18+00:00"},
+        {"flag_url": "assets/images/ro.png", "record_type": "A", "last": "2019-08-27T16:06:16+00:00",
+        "flag_title": "Romania", "address": "89.35.39.84", "indicator_link": "/indicator/domain/jppost-yu.com",
+        "hostname": "jppost-yu.com", "asset_type": "domain", "first": "2019-08-27T16:06:16+00:00"},
+        {"flag_url": "assets/images/ro.png", "record_type": "A", "last": "2019-08-27T19:41:31+00:00",
+        "flag_title": "Romania", "address": "89.35.39.84", "indicator_link": "/indicator/domain/jppost-btu.top",
+        "hostname": "jppost-btu.top", "asset_type": "domain", "first": "2019-08-27T16:06:13+00:00"},
+        {"flag_url": "assets/images/ro.png", "record_type": "A", "last": "2019-08-27T19:41:31+00:00",
+        "flag_title": "Romania", "address": "89.35.39.84", "indicator_link": "/indicator/domain/jppost-bto.top",
+        "hostname": "jppost-bto.top", "asset_type": "domain", "first": "2019-08-27T16:06:13+00:00"},
+        {"flag_url": "assets/images/ro.png", "record_type": "A", "last": "2019-08-27T19:41:31+00:00",
+        "flag_title": "Romania", "address": "89.35.39.84", "indicator_link": "/indicator/domain/jppost-bsa.top",
+        "hostname": "jppost-bsa.top", "asset_type": "domain", "first": "2019-08-27T16:06:12+00:00"},
+        {"flag_url": "assets/images/ro.png", "record_type": "A", "last": "2019-08-27T13:25:10+00:00",
+        "flag_title": "Romania", "address": "89.35.39.84", "indicator_link": "/indicator/domain/jppost-ahi.top",
+        "hostname": "jppost-ahi.top", "asset_type": "domain", "first": "2019-08-27T13:19:20+00:00"}],
+        "count": 34}'
+  recorded_at: Sat, 01 Aug 2020 00:14:53 GMT
+recorded_with: VCR 6.0.0

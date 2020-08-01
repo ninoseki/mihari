@@ -1,0 +1,69 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: https://otx.alienvault.com/api/v1/indicators/domain/jppost-tu.top/passive_dns
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Faraday v0.17.3
+      X-Otx-Api-Key:
+      - "<OTX_API_KEY>"
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - application/json
+      Content-Length:
+      - '316'
+      Connection:
+      - keep-alive
+      Cache-Control:
+      - max-age=600
+      Date:
+      - Sat, 01 Aug 2020 00:14:53 GMT
+      Server:
+      - nginx
+      Set-Cookie:
+      - authkeys="api_key:<OTX_API_KEY>:1k1fAr:12EHotfFpg1jtuF5QfRAcUVGLyY"; expires=Sat,
+        01-Aug-2020 03:14:53 GMT; Max-Age=10800; Path=/
+      X-Frame-Options:
+      - SAMEORIGIN
+      X-Otx-Active:
+      - '1'
+      Vary:
+      - Accept-Encoding
+      X-Cache:
+      - Miss from cloudfront
+      Via:
+      - 1.1 efb99d3a822380f07a607f1aad7468f7.cloudfront.net (CloudFront)
+      X-Amz-Cf-Pop:
+      - NRT57-C4
+      X-Amz-Cf-Id:
+      - nWxlml669JSjyTON5lzIvIaT3CCT0W9jpDE2DXG5XERFlsdlbcriTw==
+    body:
+      encoding: ASCII-8BIT
+      string: '{"passive_dns": [{"flag_url": "assets/images/ro.png", "record_type":
+        "A", "last": "2019-09-04T18:16:07+00:00", "flag_title": "Romania", "address":
+        "193.148.69.37", "indicator_link": "/indicator/domain/jppost-tu.top", "hostname":
+        "jppost-tu.top", "asset_type": "domain", "first": "2019-09-04T05:32:29+00:00"},
+        {"flag_url": "assets/images/ro.png", "record_type": "A", "last": "2019-09-02T01:30:07+00:00",
+        "flag_title": "Romania", "address": "89.35.39.84", "indicator_link": "/indicator/domain/jppost-tu.top",
+        "hostname": "jppost-tu.top", "asset_type": "domain", "first": "2019-09-02T01:30:07+00:00"},
+        {"flag_url": "assets/images/ro.png", "record_type": "A", "last": "2019-08-31T07:14:45+00:00",
+        "flag_title": "Romania", "address": "193.148.69.230", "indicator_link": "/indicator/domain/jppost-tu.top",
+        "hostname": "jppost-tu.top", "asset_type": "domain", "first": "2019-08-31T07:14:45+00:00"},
+        {"flag_url": "assets/images/fr.png", "record_type": "A", "last": "2019-07-02T14:17:10+00:00",
+        "flag_title": "France", "address": "51.68.251.30", "indicator_link": "/indicator/domain/jppost-tu.top",
+        "hostname": "jppost-tu.top", "asset_type": "domain", "first": "2019-07-02T14:17:10+00:00"}],
+        "count": 4}'
+  recorded_at: Sat, 01 Aug 2020 00:14:53 GMT
+recorded_with: VCR 6.0.0

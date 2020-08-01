@@ -68,6 +68,7 @@ VCR.configure do |config|
     ZOOMEYE_PASSWORD
     BINARYEDGE_API_KEY
     PULSEDIVE_API_KEY
+    OTX_API_KEY
   )
 
   api_endpoints = %w(
