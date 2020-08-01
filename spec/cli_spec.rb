@@ -143,6 +143,15 @@ RSpec.describe Mihari::CLI do
     end
   end
 
+  describe "#otx" do
+    before { allow(Mihari::Analyzers::OTX).to receive(:new).and_return(mock) }
+
+    it do
+      subject.start ["otx", query]
+      expect(mock).to have_received(:run).once
+    end
+  end
+
   describe "#passive_dns" do
     before { allow(Mihari::Analyzers::PassiveDNS).to receive(:new).and_return(mock) }
 

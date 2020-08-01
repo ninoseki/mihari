@@ -12,6 +12,7 @@ RSpec.describe Mihari::Analyzers::PassiveDNS do
     allow(mock).to receive(:artifacts).and_return([])
 
     allow(Mihari::Analyzers::CIRCL).to receive(:new).and_return(mock)
+    allow(Mihari::Analyzers::OTX).to receive(:new).and_return(mock)
     allow(Mihari::Analyzers::PassiveTotal).to receive(:new).and_return(mock)
     allow(Mihari::Analyzers::Pulsedive).to receive(:new).and_return(mock)
     allow(Mihari::Analyzers::SecurityTrails).to receive(:new).and_return(mock)
