@@ -1,4 +1,4 @@
-FROM ruby:2.6-alpine3.10
+FROM ruby:2.7-alpine3.10
 RUN apk --no-cache add git build-base ruby-dev sqlite-dev postgresql-dev \
   && cd /tmp/ \
   && git clone https://github.com/ninoseki/mihari.git \
