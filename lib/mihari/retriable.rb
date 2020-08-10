@@ -7,10 +7,10 @@ module Mihari
       begin
         try += 1
         yield
-      rescue Errno::ECONNRESET, Errno::ECONNABORTED, Errno::EPIPE, OpenSSL::SSL::SSLError, Timeout::Error => _e
+      rescue Errno::ECONNRESET, Errno::ECONNABORTED, Errno::EPIPE, OpenSSL::SSL::SSLError, Timeout::Error, ::Shodan::Error => e
         sleep interval
         retry if try < times
-        raise
+        raise e
       end
     end
   end
