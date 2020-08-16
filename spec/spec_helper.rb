@@ -69,6 +69,7 @@ VCR.configure do |config|
     BINARYEDGE_API_KEY
     PULSEDIVE_API_KEY
     OTX_API_KEY
+    SPYSE_API_KEY
   )
 
   api_endpoints = %w(

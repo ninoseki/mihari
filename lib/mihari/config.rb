@@ -20,6 +20,7 @@ module Mihari
     attr_accessor :shodan_api_key
     attr_accessor :slack_channel
     attr_accessor :slack_webhook_url
+    attr_accessor :spyse_api_key
     attr_accessor :thehive_api_endpoint
     attr_accessor :thehive_api_key
     attr_accessor :virustotal_api_key
@@ -49,6 +50,7 @@ module Mihari
       @shodan_api_key = ENV["SHODAN_API_KEY"]
       @slack_channel = ENV["SLACK_CHANNEL"]
       @slack_webhook_url = ENV["SLACK_WEBHOOK_URL"]
+      @spyse_api_key = ENV["SPYSE_API_KEY"]
       @thehive_api_endpoint = ENV["THEHIVE_API_ENDPOINT"]
       @thehive_api_key = ENV["THEHIVE_API_KEY"]
       @virustotal_api_key = ENV["VIRUSTOTAL_API_KEY"]
