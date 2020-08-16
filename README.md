@@ -71,6 +71,7 @@ Mihari supports the following services by default.
 - [PassiveTotal](https://community.riskiq.com/)
 - [SecurityTrails](https://securitytrails.com/)
 - [Shodan](https://shodan.io)
+- [Spyse](https://spyse.com)
 - [urlscan.io](https://urlscan.io)
 - [VirusTotal](http://virustotal.com)
 - [ZoomEye](https://zoomeye.org)
@@ -99,6 +100,7 @@ Commands:
   mihari securitytrails [IP|DOMAIN|EMAIL]     # SecurityTrails lookup by an ip, domain or email
   mihari securitytrails_domain_feed [REGEXP]  # SecurityTrails new domain feed search by a regexp
   mihari shodan [QUERY]                       # Shodan host search by a query
+  mihari spyse [QUERY]                        # Spyse search by a query
   mihari ssh_fingerprint [FINGERPRINT]        # Cross search with search engines by an SSH fingerprint (e.g. dc:14:de:8e:d7:c1:15:43:23:82:25:81:d2:59:e8:c0)
   mihari status                               # Show the current configuration status
   mihari urlscan [QUERY]                      # urlscan search by a given query
@@ -221,6 +223,7 @@ Configuration can be done via environment variables or a YAML file.
 | SHODAN_API_KEY         | Shodan API key                                                                                  |             |
 | SLACK_CHANNEL          | Slack channel name                                                                              | `#general`  |
 | SLACK_WEBHOOK_URL      | Slack Webhook URL                                                                               |             |
+| SPYSE_API_KEY          | Spyse API key                                                                                   |             |
 | THEHIVE_API_ENDPOINT   | TheHive URL                                                                                     |             |
 | THEHIVE_API_KEY        | TheHive API key                                                                                 |             |
 | VIRUSTOTAL_API_KEY     | VirusTotal API key                                                                              |             |

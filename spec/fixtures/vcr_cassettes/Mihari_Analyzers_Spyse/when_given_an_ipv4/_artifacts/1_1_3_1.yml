@@ -1,0 +1,89 @@
+---
+http_interactions:
+- request:
+    method: post
+    uri: https://api.spyse.com/v3/data/ip/search
+    body:
+      encoding: UTF-8
+      string: '{"search_params":[{"ip_domain":{"operator":"eq","value":"example.com"}}],"limit":100}'
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+      Host:
+      - api.spyse.com
+      Content-Type:
+      - application/json
+      Authorization:
+      - Bearer <SPYSE_API_KEY>
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Sun, 16 Aug 2020 02:28:06 GMT
+      Content-Type:
+      - application/json
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+      Set-Cookie:
+      - __cfduid=d05af1fb96c869f5c9f28df5f75dba1141597544885; expires=Tue, 15-Sep-20
+        02:28:05 GMT; path=/; domain=.spyse.com; HttpOnly; SameSite=Lax; Secure
+      Vary:
+      - Accept-Encoding
+      - Accept-Encoding
+      Strict-Transport-Security:
+      - max-age=31536000; includeSubDomains; preload
+      Access-Control-Allow-Origin:
+      - https://spyse.com
+      Access-Control-Allow-Credentials:
+      - 'true'
+      Access-Control-Allow-Methods:
+      - GET, PUT, POST, DELETE, PATCH, OPTIONS
+      Access-Control-Allow-Headers:
+      - DNT,X-CustomHeader,Keep-Alive,User-Agent,X-Requested-With,If-Modified-Since,Cache-Control,Content-Type,Authorization
+      Cf-Cache-Status:
+      - DYNAMIC
+      Cf-Request-Id:
+      - '0496b184080000f8a3b1334200000001'
+      Expect-Ct:
+      - max-age=604800, report-uri="https://report-uri.cloudflare.com/cdn-cgi/beacon/expect-ct"
+      Server:
+      - cloudflare
+      Cf-Ray:
+      - 5c37b84cde9ff8a3-NRT
+    body:
+      encoding: ASCII-8BIT
+      string: '{"data":{"items":[{"cve_list":null,"ip":"93.184.216.34","geo_data":{"city_name":"Norwell","country":"United
+        States","country_iso_code":"US","location":{"lat":42.1596,"lon":-70.8217},"postal_code":"02061","region_iso_code":"MA","region_name":"Massachusetts","tz":"America/New_York","updated_at":"2020-07-23T07:38:30.812089138Z"},"isp_data":{"as_num":15133,"as_org":"EDGECAST","isp":"Verizon
+        Business","org":"Verizon Business","updated_at":"2020-07-23T07:38:30.81208828Z"},"ptr_record":{"value":"","updated_at":null},"ports":[{"banner":"HTTP/1.1
+        404 Not Found\r\nServer: ECS (dcb/7FA5)\r\nDate: Tue, 28 Jul 2020 02:26:59
+        GMT\r\nContent-Type: text/html\r\nContent-Length: 345\r\n\r\n\u003c?xml version=\"1.0\"
+        encoding=\"iso-8859-1\"?\u003e\n\u003c!DOCTYPE html PUBLIC \"-//W3C//DTD XHTML
+        1.0 Transitional//EN\"\n         \"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd\"\u003e\n\u003chtml
+        xmlns=\"http://www.w3.org/1999/xhtml\" xml:lang=\"en\" lang=\"en\"\u003e\n\t\u003chead\u003e\n\t\t\u003ctitle\u003e404
+        - Not Found\u003c/title\u003e\n\t\u003c/head\u003e\n\t\u003cbody\u003e\n\t\t\u003ch1\u003e404
+        - Not Found\u003c/h1\u003e\n\t\u003c/body\u003e\n\u003c/html\u003e\n","cpe_application":"","cpe_hardware":"","cpe_os":"","device_type":"","extract":{"cookies":null,"description":"","emails":null,"external_redirect_uri":{"full_uri":"","host":"","path":""},"extracted_at":"2020-07-28T02:26:59.987219711Z","favicon_uri_sha256":"","favicon_uri":{"full_uri":"","host":"","path":""},"http_headers":[{"name":"Content-Length","value":"345"},{"name":"Content-Type","value":"text/html"},{"name":"Server","value":"ECS
+        (dcb/7FA5)"},{"name":"Date","value":"Tue, 28 Jul 2020 02:26:59 GMT"}],"http_status_code":404,"links":null,"meta_tags":null,"robots_txt":"","scripts":null,"styles":null,"title":"404
+        - Not Found"},"hostname":"","operation_system":"","port":80,"product":"Edgecast
+        CDN httpd","service":"http","updated_at":null,"version":"","info":"dcb/7FA5"},{"banner":"HTTP/1.1
+        404 Not Found\r\nServer: ECS (dcb/7FA3)\r\nDate: Tue, 28 Jul 2020 02:26:59
+        GMT\r\nContent-Type: text/html\r\nContent-Length: 345\r\n\r\n\u003c?xml version=\"1.0\"
+        encoding=\"iso-8859-1\"?\u003e\n\u003c!DOCTYPE html PUBLIC \"-//W3C//DTD XHTML
+        1.0 Transitional//EN\"\n         \"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd\"\u003e\n\u003chtml
+        xmlns=\"http://www.w3.org/1999/xhtml\" xml:lang=\"en\" lang=\"en\"\u003e\n\t\u003chead\u003e\n\t\t\u003ctitle\u003e404
+        - Not Found\u003c/title\u003e\n\t\u003c/head\u003e\n\t\u003cbody\u003e\n\t\t\u003ch1\u003e404
+        - Not Found\u003c/h1\u003e\n\t\u003c/body\u003e\n\u003c/html\u003e\n","cpe_application":"","cpe_hardware":"","cpe_os":"","device_type":"","extract":{"cookies":null,"description":"","emails":null,"external_redirect_uri":{"full_uri":"","host":"","path":""},"extracted_at":"2020-07-28T02:27:00.474227222Z","favicon_uri_sha256":"","favicon_uri":{"full_uri":"","host":"","path":""},"http_headers":[{"name":"Content-Length","value":"345"},{"name":"Content-Type","value":"text/html"},{"name":"Server","value":"ECS
+        (dcb/7FA3)"},{"name":"Date","value":"Tue, 28 Jul 2020 02:26:59 GMT"}],"http_status_code":404,"links":null,"meta_tags":null,"robots_txt":"","scripts":null,"styles":null,"title":"404
+        - Not Found"},"hostname":"","operation_system":"","port":443,"product":"Edgecast
+        CDN httpd","service":"http","updated_at":null,"version":"","info":"dcb/7FA3"}],"score":{"score":100},"severity_details":{"HIGH":0,"MEDIUM":0,"LOW":0},"updated_at":"2020-07-28T14:35:32.235386985Z","osh":63,"cidr":""}],"total_count":1,"max_view_count":10000,"offset":0,"limit":100}}
+
+        '
+  recorded_at: Sun, 16 Aug 2020 02:28:06 GMT
+recorded_with: VCR 6.0.0

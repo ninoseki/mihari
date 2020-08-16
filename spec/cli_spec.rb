@@ -152,6 +152,15 @@ RSpec.describe Mihari::CLI do
     end
   end
 
+  describe "#spyse" do
+    before { allow(Mihari::Analyzers::Spyse).to receive(:new).and_return(mock) }
+
+    it do
+      subject.start ["spyse", query]
+      expect(mock).to have_received(:run).once
+    end
+  end
+
   describe "#passive_dns" do
     before { allow(Mihari::Analyzers::PassiveDNS).to receive(:new).and_return(mock) }
 
