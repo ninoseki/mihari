@@ -70,6 +70,7 @@ VCR.configure do |config|
     PULSEDIVE_API_KEY
     OTX_API_KEY
     SPYSE_API_KEY
+    URLSCAN_API_KEY
   )
 
   api_endpoints = %w(
