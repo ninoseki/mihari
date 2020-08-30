@@ -45,6 +45,10 @@ module Mihari
 
       def search_with_page(query, page: 1)
         api.host.search(query, page: page)
+      rescue ::Shodan::Error => e
+        raise RetryableError, e if e.message.include?("request timed out")
+
+        raise e
       end
 
       def search

@@ -37,6 +37,10 @@ module Mihari
 
       def search_with_page(query, page: 1)
         api.host.search(query, page: page)
+      rescue ::BinaryEdge::Error => e
+        raise RetryableError, e if e.message.include?("Request time limit exceeded")
+
+        raise e
       end
 
       def search
