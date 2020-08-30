@@ -23,6 +23,7 @@ module Mihari
     attr_accessor :spyse_api_key
     attr_accessor :thehive_api_endpoint
     attr_accessor :thehive_api_key
+    attr_accessor :urlscan_api_key
     attr_accessor :virustotal_api_key
     attr_accessor :zoomeye_password
     attr_accessor :zoomeye_username
@@ -53,6 +54,7 @@ module Mihari
       @spyse_api_key = ENV["SPYSE_API_KEY"]
       @thehive_api_endpoint = ENV["THEHIVE_API_ENDPOINT"]
       @thehive_api_key = ENV["THEHIVE_API_KEY"]
+      @urlscan_api_key = ENV["URLSCAN_API_KEY"]
       @virustotal_api_key = ENV["VIRUSTOTAL_API_KEY"]
       @zoomeye_password = ENV["ZOOMEYE_PASSWORD"]
       @zoomeye_username = ENV["ZOOMEYE_USERNAME"]

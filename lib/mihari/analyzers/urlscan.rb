@@ -35,8 +35,12 @@ module Mihari
 
       private
 
+      def config_keys
+        %w(urlscan_api_key)
+      end
+
       def api
-        @api ||= ::UrlScan::API.new
+        @api ||= ::UrlScan::API.new(Mihari.config.urlscan_api_key)
       end
 
       def search

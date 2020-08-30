@@ -226,6 +226,7 @@ Configuration can be done via environment variables or a YAML file.
 | SPYSE_API_KEY          | Spyse API key                                                                                   |             |
 | THEHIVE_API_ENDPOINT   | TheHive URL                                                                                     |             |
 | THEHIVE_API_KEY        | TheHive API key                                                                                 |             |
+| URLSCAN_API_KEY        | urlscan.io API key                                                                              |             |
 | VIRUSTOTAL_API_KEY     | VirusTotal API key                                                                              |             |
 | ZOOMEYE_PASSWORD       | ZoomEye password                                                                                |             |
 | ZOOMEYE_USERNAMME      | ZoomEye username                                                                                |             |
