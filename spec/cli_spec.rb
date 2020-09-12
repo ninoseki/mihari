@@ -8,6 +8,12 @@ RSpec.describe Mihari::CLI do
 
   before { allow(mock).to receive(:run) }
 
+  describe ".exit_on_failure?" do
+    it do
+      expect(subject.exit_on_failure?).to eq(true)
+    end
+  end
+
   describe "#censys" do
     before { allow(Mihari::Analyzers::Censys).to receive(:new).and_return(mock) }
 

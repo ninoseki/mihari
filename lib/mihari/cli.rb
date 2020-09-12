@@ -7,6 +7,10 @@ module Mihari
   class CLI < Thor
     class_option :config, type: :string, desc: "path to config file"
 
+    def self.exit_on_failure?
+      true
+    end
+
     desc "censys [QUERY]", "Censys IPv4 search by a query"
     method_option :title, type: :string, desc: "title"
     method_option :description, type: :string, desc: "description"
