@@ -30,6 +30,24 @@ RSpec.describe Mihari::Analyzers::Urlscan, :vcr do
         expect(subject.artifacts.none? { |artifact| artifact.start_with? "http" }).to eq(true)
       end
     end
+
+    context "when use similarity" do
+      let(:query) { "a731f865-6a2d-480f-ab06-d9415014015e" }
+      subject { described_class.new(query, tags: tags, use_similarity: true) }
+
+      it do
+        expect(subject.artifacts.all? { |artifact| artifact.start_with? "http" }).to eq(true)
+      end
+    end
+
+    context "when use pro" do
+      let(:filter) { "$phishing_all" }
+      subject { described_class.new(query, tags: tags, filter: filter, use_pro: true) }
+
+      it do
+        expect(subject.artifacts.all? { |artifact| artifact.start_with? "http" }).to eq(true)
+      end
+    end
   end
 
   describe "#tags" do
