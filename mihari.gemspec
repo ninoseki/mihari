@@ -35,7 +35,7 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency "rubocop-performance", "~> 1.8"
   spec.add_development_dependency "timecop", "~> 0.9"
   spec.add_development_dependency "vcr", "~> 6.0"
-  spec.add_development_dependency "webmock", "~> 3.8"
+  spec.add_development_dependency "webmock", "~> 3.9"
 
   spec.add_dependency "active_model_serializers", "~> 0.10"
   spec.add_dependency "activerecord", "~> 6.0"
@@ -65,7 +65,7 @@ Gem::Specification.new do |spec|
   spec.add_dependency "spysex", "~> 0.1"
   spec.add_dependency "sqlite3", "~> 1.4"
   spec.add_dependency "thor", "~> 1.0"
-  spec.add_dependency "urlscan", "~> 0.5"
+  spec.add_dependency "urlscan", "~> 0.6"
   spec.add_dependency "virustotalx", "~> 1.1"
   spec.add_dependency "zoomeye-rb", "~> 0.1"
 end
