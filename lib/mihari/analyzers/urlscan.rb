@@ -10,8 +10,9 @@ module Mihari
       attr_reader :query
       attr_reader :tags
       attr_reader :target_type
+      attr_reader :use_similarity
 
-      def initialize(query, title: nil, description: nil, tags: [], target_type: "url")
+      def initialize(query, title: nil, description: nil, tags: [], target_type: "url", use_similarity: false)
         super()
 
         @query = query
@@ -19,6 +20,8 @@ module Mihari
         @description = description || "query = #{query}"
         @tags = tags
         @target_type = target_type
+
+        @use_similarity = use_similarity
 
         raise InvalidInputError, "type should be url, domain or ip." unless valid_target_type?
       end
@@ -44,6 +47,8 @@ module Mihari
       end
 
       def search
+        return api.pro.similar(query) if use_similarity
+
         api.search(query, size: 10_000)
       end
 

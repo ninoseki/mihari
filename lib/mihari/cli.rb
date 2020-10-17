@@ -47,6 +47,7 @@ module Mihari
     method_option :description, type: :string, desc: "description"
     method_option :tags, type: :array, desc: "tags"
     method_option :target_type, type: :string, default: "url", desc: "target type to fetch from lookup results (target type should be 'url', 'domain' or 'ip')"
+    method_option :use_similarity, type: :boolean, default: false, desc: "use similarity API or not"
     def urlscan(query)
       with_error_handling do
         run_analyzer Analyzers::Urlscan, query: query, options: options
