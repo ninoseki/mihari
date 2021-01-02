@@ -6,7 +6,7 @@ class ArtifactValidator < ActiveModel::Validator
   def validate(record)
     return if record.data_type
 
-    record.errors[:data] << "#{record.data} is not supported"
+    record.errors.add :data, "#{record.data} is not supported"
   end
 end
 
