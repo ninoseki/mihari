@@ -6,6 +6,7 @@ require "base64"
 require "fakefs/safe"
 require "timecop"
 require "vcr"
+require "digest"
 
 require "simplecov"
 require "coveralls"
@@ -71,6 +72,10 @@ VCR.configure do |config|
     OTX_API_KEY
     SPYSE_API_KEY
     URLSCAN_API_KEY
+    CIRCL_PASSIVE_USERNAME
+    CIRCL_PASSIVE_PASSWORD
+    PASSIVETOTAL_USERNAME
+    PASSIVETOTAL_API_KEY
   )
 
   api_endpoints = %w(
@@ -79,12 +84,12 @@ VCR.configure do |config|
   )
 
   api_keys.each do |key|
-    ENV[key] = "foo bar" unless ENV.key?(key)
+    ENV[key] = Digest::MD5.hexdigest(key) unless ENV.key?(key)
     config.filter_sensitive_data("<#{key}>") { ENV[key] }
   end
 
   api_endpoints.each do |key|
-    ENV[key] = "http://localhost" unless ENV.key?(key)
+    ENV[key] = "http://#{Digest::MD5.hexdigest(key)}" unless ENV.key?(key)
     config.filter_sensitive_data("<#{key}>") { ENV[key] }
   end
 
@@ -100,5 +105,6 @@ VCR.configure do |config|
   config.filter_sensitive_data("<PASSIVETOTAL_AUTH>") {
     authorization_field ENV["PASSIVETOTAL_USERNAME"] || "foo", ENV["PASSIVETOTAL_API_KEY"] || "bar"
   }
+
   Mihari.config.load_from_env
 end
