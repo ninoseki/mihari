@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 RSpec.describe Mihari::Analyzers::CIRCL, :vcr do
-  let(:tags) { %w(test) }
+  let(:tags) { %w[test] }
 
   context "when given a domain" do
     subject { described_class.new(query, tags: tags) }

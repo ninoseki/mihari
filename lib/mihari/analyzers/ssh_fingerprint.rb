@@ -5,11 +5,7 @@ require "parallel"
 module Mihari
   module Analyzers
     class SSHFingerprint < Base
-      attr_reader :fingerprint
-
-      attr_reader :title
-      attr_reader :description
-      attr_reader :tags
+      attr_reader :fingerprint, :title, :description, :tags
 
       def initialize(fingerprint, title: nil, description: nil, tags: [])
         super()
@@ -46,7 +42,7 @@ module Mihari
 
         [
           binary_edge,
-          shodan,
+          shodan
         ].compact
       end
 

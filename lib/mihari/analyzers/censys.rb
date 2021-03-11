@@ -5,11 +5,7 @@ require "censu"
 module Mihari
   module Analyzers
     class Censys < Base
-      attr_reader :title
-      attr_reader :description
-      attr_reader :query
-      attr_reader :tags
-      attr_reader :type
+      attr_reader :title, :description, :query, :tags, :type
 
       def initialize(query, title: nil, description: nil, tags: [], type: "ipv4")
         super()
@@ -37,7 +33,7 @@ module Mihari
       private
 
       def valid_type?
-        %w(ipv4 websites certificates).include? type
+        %w[ipv4 websites certificates].include? type
       end
 
       def normalize(domain)
@@ -86,7 +82,7 @@ module Mihari
       end
 
       def config_keys
-        %w(censys_id censys_secret)
+        %w[censys_id censys_secret]
       end
 
       def api

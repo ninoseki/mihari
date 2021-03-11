@@ -4,7 +4,7 @@ RSpec.describe Mihari::Analyzers::Urlscan, :vcr do
   subject { described_class.new(query, tags: tags) }
 
   let(:query) { "e07f9491ce7429e8eee6d00df76b8cc1ffefc010050bba24fa994a74813276fb" }
-  let(:tags) { %w(test) }
+  let(:tags) { %w[test] }
 
   describe "#title" do
     it do

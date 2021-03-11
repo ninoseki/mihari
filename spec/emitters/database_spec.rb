@@ -8,7 +8,7 @@ RSpec.describe Mihari::Emitters::Database do
     let(:description) { "test" }
     let(:artifacts) { [Mihari::Artifact.new(data: "1.1.1.1")] }
     let(:source) { "test" }
-    let(:tags) { %w(test) }
+    let(:tags) { %w[test] }
 
     it do
       alert = subject.emit(title: title, description: description, artifacts: artifacts, source: source, tags: tags)

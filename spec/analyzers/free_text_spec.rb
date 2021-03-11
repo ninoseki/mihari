@@ -3,7 +3,7 @@
 RSpec.describe Mihari::Analyzers::FreeText do
   subject { described_class.new(query, tags: tags) }
 
-  let(:tags) { %w(test) }
+  let(:tags) { %w[test] }
   let(:query) { "foo bar" }
 
   let(:mock) { instance_double("Analyzer") }

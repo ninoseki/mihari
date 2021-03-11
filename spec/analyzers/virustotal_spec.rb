@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 RSpec.describe Mihari::Analyzers::VirusTotal, :vcr do
-  let(:tags) { %w(test) }
+  let(:tags) { %w[test] }
 
   context "ipv4" do
     subject { described_class.new(indicator, tags: tags) }

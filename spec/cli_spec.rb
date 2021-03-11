@@ -233,7 +233,7 @@ RSpec.describe Mihari::CLI do
     end
 
     it do
-      stdout = capture(:stdout){ subject.start ["alerts"] }.chomp
+      stdout = capture(:stdout) { subject.start ["alerts"] }.chomp
       expect(stdout).to eq(JSON.pretty_generate(alerts))
     end
   end
@@ -297,7 +297,7 @@ RSpec.describe Mihari::CLI do
   describe "#symbolize_hash_keys" do
     subject { described_class.new }
 
-    let(:hash) { { "a" => 1 } }
+    let(:hash) { {"a" => 1} }
 
     it do
       res = subject.symbolize_hash_keys(hash)
@@ -308,7 +308,7 @@ RSpec.describe Mihari::CLI do
   describe "#normalize_options" do
     subject { described_class.new }
 
-    let(:hash) { { a: 1, config: "foo" } }
+    let(:hash) { {a: 1, config: "foo"} }
 
     it do
       res = subject.normalize_options(hash)

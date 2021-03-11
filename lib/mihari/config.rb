@@ -4,31 +4,7 @@ require "yaml"
 
 module Mihari
   class Config
-    attr_accessor :binaryedge_api_key
-    attr_accessor :censys_id
-    attr_accessor :censys_secret
-    attr_accessor :circl_passive_password
-    attr_accessor :circl_passive_username
-    attr_accessor :misp_api_endpoint
-    attr_accessor :misp_api_key
-    attr_accessor :onyphe_api_key
-    attr_accessor :otx_api_key
-    attr_accessor :passivetotal_api_key
-    attr_accessor :passivetotal_username
-    attr_accessor :pulsedive_api_key
-    attr_accessor :securitytrails_api_key
-    attr_accessor :shodan_api_key
-    attr_accessor :slack_channel
-    attr_accessor :slack_webhook_url
-    attr_accessor :spyse_api_key
-    attr_accessor :thehive_api_endpoint
-    attr_accessor :thehive_api_key
-    attr_accessor :urlscan_api_key
-    attr_accessor :virustotal_api_key
-    attr_accessor :zoomeye_password
-    attr_accessor :zoomeye_username
-
-    attr_accessor :database
+    attr_accessor :binaryedge_api_key, :censys_id, :censys_secret, :circl_passive_password, :circl_passive_username, :misp_api_endpoint, :misp_api_key, :onyphe_api_key, :otx_api_key, :passivetotal_api_key, :passivetotal_username, :pulsedive_api_key, :securitytrails_api_key, :shodan_api_key, :slack_channel, :slack_webhook_url, :spyse_api_key, :thehive_api_endpoint, :thehive_api_key, :urlscan_api_key, :virustotal_api_key, :zoomeye_password, :zoomeye_username, :database
 
     def initialize
       load_from_env

@@ -9,7 +9,7 @@ module Mihari
       relation = Alert.includes(:tags, :artifacts)
       relation = relation.where(title: title) if title
       relation = relation.where(source: source) if source
-      relation = relation.where(tags: { name: tag } ) if tag
+      relation = relation.where(tags: {name: tag}) if tag
 
       alerts = relation.limit(limit).order(id: :desc)
       alerts.map do |alert|

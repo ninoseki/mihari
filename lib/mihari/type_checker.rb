@@ -80,22 +80,22 @@ module Mihari
 
     # @return [true, false]
     def md5?
-      data.match? /^[A-Fa-f0-9]{32}$/
+      data.match?(/^[A-Fa-f0-9]{32}$/)
     end
 
     # @return [true, false]
     def sha1?
-      data.match? /^[A-Fa-f0-9]{40}$/
+      data.match?(/^[A-Fa-f0-9]{40}$/)
     end
 
     # @return [true, false]
     def sha256?
-      data.match? /^[A-Fa-f0-9]{64}$/
+      data.match?(/^[A-Fa-f0-9]{64}$/)
     end
 
     # @return [true, false]
     def sha512?
-      data.match? /^[A-Fa-f0-9]{128}$/
+      data.match?(/^[A-Fa-f0-9]{128}$/)
     end
   end
 end

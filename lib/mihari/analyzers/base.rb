@@ -42,7 +42,7 @@ module Mihari
 
       def run_emitter(emitter)
         emitter.run(title: title, description: description, artifacts: unique_artifacts, source: source, tags: tags)
-      rescue StandardError => e
+      rescue => e
         puts "Emission by #{emitter.class} is failed: #{e}"
       end
 

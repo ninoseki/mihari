@@ -3,7 +3,7 @@
 RSpec.describe Mihari::Analyzers::PassiveDNS do
   subject { described_class.new(query, tags: tags) }
 
-  let(:tags) { %w(test) }
+  let(:tags) { %w[test] }
 
   let(:query) { "test" }
   let(:mock) { instance_double("Analyzer") }

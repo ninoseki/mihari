@@ -54,7 +54,7 @@ module Mihari
 
         ActiveRecord::Migration.verbose = false
         InitialSchema.migrate(:up)
-      rescue StandardError
+      rescue
         # Do nothing
       end
 

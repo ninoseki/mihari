@@ -5,12 +5,7 @@ require "virustotal"
 module Mihari
   module Analyzers
     class VirusTotal < Base
-      attr_reader :indicator
-      attr_reader :type
-
-      attr_reader :title
-      attr_reader :description
-      attr_reader :tags
+      attr_reader :indicator, :type, :title, :description, :tags
 
       def initialize(indicator, title: nil, description: nil, tags: [])
         super()
@@ -30,7 +25,7 @@ module Mihari
       private
 
       def config_keys
-        %w(virustotal_api_key)
+        %w[virustotal_api_key]
       end
 
       def api
@@ -38,7 +33,7 @@ module Mihari
       end
 
       def valid_type?
-        %w(ip domain).include? type
+        %w[ip domain].include? type
       end
 
       def lookup
@@ -48,7 +43,7 @@ module Mihari
         when "ip"
           ip_lookup
         else
-          raise InvalidInputError, "#{indicator}(type: #{type || 'unknown'}) is not supported." unless valid_type?
+          raise InvalidInputError, "#{indicator}(type: #{type || "unknown"}) is not supported." unless valid_type?
         end
       end
 

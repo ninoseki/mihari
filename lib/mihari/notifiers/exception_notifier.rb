@@ -19,7 +19,7 @@ module Mihari
       def notify(exception)
         notify_to_stdout exception
 
-        clean_message = exception.message.tr('`', "'")
+        clean_message = exception.message.tr("`", "'")
         attachments = to_attachments(exception, clean_message)
         notify_to_slack(text: clean_message, attachments: attachments) if @slack.valid?
       end
@@ -51,20 +51,20 @@ module Mihari
 
       def to_fields(clean_message, backtrace)
         fields = [
-          { title: "Exception", value: clean_message },
-          { title: "Hostname", value: hostname }
+          {title: "Exception", value: clean_message},
+          {title: "Hostname", value: hostname}
         ]
 
         if backtrace
           formatted_backtrace = format_backtrace(backtrace)
-          fields << { title: "Backtrace", value: formatted_backtrace }
+          fields << {title: "Backtrace", value: formatted_backtrace}
         end
         fields
       end
 
       def hostname
         Socket.gethostname
-      rescue StandardError => _e
+      rescue => _e
         "N/A"
       end
 

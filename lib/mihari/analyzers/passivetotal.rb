@@ -5,12 +5,7 @@ require "passivetotal"
 module Mihari
   module Analyzers
     class PassiveTotal < Base
-      attr_reader :query
-      attr_reader :type
-
-      attr_reader :title
-      attr_reader :description
-      attr_reader :tags
+      attr_reader :query, :type, :title, :description, :tags
 
       def initialize(query, title: nil, description: nil, tags: [])
         super()
@@ -30,7 +25,7 @@ module Mihari
       private
 
       def config_keys
-        %w(passivetotal_username passivetotal_api_key)
+        %w[passivetotal_username passivetotal_api_key]
       end
 
       def api
@@ -38,7 +33,7 @@ module Mihari
       end
 
       def valid_type?
-        %w(ip domain mail).include? type
+        %w[ip domain mail].include? type
       end
 
       def lookup
@@ -52,7 +47,7 @@ module Mihari
         when "hash"
           ssl_lookup
         else
-          raise InvalidInputError, "#{query}(type: #{type || 'unknown'}) is not supported." unless valid_type?
+          raise InvalidInputError, "#{query}(type: #{type || "unknown"}) is not supported." unless valid_type?
         end
       end
 

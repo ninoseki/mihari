@@ -3,10 +3,10 @@
 RSpec.describe Mihari::Analyzers::SecurityTrailsDomainFeed do
   subject { described_class.new(regexp, tags: tags) }
 
-  let(:tags) { %w(test) }
+  let(:tags) { %w[test] }
   let(:regexp) { "test" }
   let(:mock) { double("ST API") }
-  let(:domains) { %w(test.example.com example.com) }
+  let(:domains) { %w[test.example.com example.com] }
 
   describe "#artifacts" do
     before do

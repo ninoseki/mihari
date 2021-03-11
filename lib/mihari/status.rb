@@ -36,7 +36,7 @@ module Mihari
       status = instance.configured?
       message = instance.configuration_status
 
-      message ? { status: status, message: message } : nil
+      message ? {status: status, message: message} : nil
     rescue ArgumentError => _e
       nil
     end

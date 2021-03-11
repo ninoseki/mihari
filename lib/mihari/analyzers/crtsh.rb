@@ -5,11 +5,7 @@ require "crtsh"
 module Mihari
   module Analyzers
     class Crtsh < Base
-      attr_reader :title
-      attr_reader :description
-      attr_reader :query
-      attr_reader :tags
-      attr_reader :exclude_expired
+      attr_reader :title, :description, :query, :tags, :exclude_expired
 
       def initialize(query, title: nil, description: nil, tags: [], exclude_expired: nil)
         super()

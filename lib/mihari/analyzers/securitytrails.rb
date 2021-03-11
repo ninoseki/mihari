@@ -5,12 +5,7 @@ require "securitytrails"
 module Mihari
   module Analyzers
     class SecurityTrails < Base
-      attr_reader :query
-      attr_reader :type
-
-      attr_reader :title
-      attr_reader :description
-      attr_reader :tags
+      attr_reader :query, :type, :title, :description, :tags
 
       def initialize(query, title: nil, description: nil, tags: [])
         super()
@@ -30,7 +25,7 @@ module Mihari
       private
 
       def config_keys
-        %w(securitytrails_api_key)
+        %w[securitytrails_api_key]
       end
 
       def api
@@ -38,7 +33,7 @@ module Mihari
       end
 
       def valid_type?
-        %w(ip domain mail).include? type
+        %w[ip domain mail].include? type
       end
 
       def lookup
@@ -50,7 +45,7 @@ module Mihari
         when "mail"
           mail_lookup
         else
-          raise InvalidInputError, "#{query}(type: #{type || 'unknown'}) is not supported." unless valid_type?
+          raise InvalidInputError, "#{query}(type: #{type || "unknown"}) is not supported." unless valid_type?
         end
       end
 
@@ -63,13 +58,13 @@ module Mihari
       end
 
       def ip_lookup
-        result = api.domains.search( filter: { ipv4: query })
+        result = api.domains.search(filter: {ipv4: query})
         records = result.dig("records") || []
         records.map { |record| record.dig("hostname") }.compact.uniq
       end
 
       def mail_lookup
-        result = api.domains.search( filter: { whois_email: query })
+        result = api.domains.search(filter: {whois_email: query})
         records = result.dig("records") || []
         records.map { |record| record.dig("hostname") }.compact.uniq
       end

@@ -5,11 +5,7 @@ require "zoomeye"
 module Mihari
   module Analyzers
     class ZoomEye < Base
-      attr_reader :title
-      attr_reader :description
-      attr_reader :query
-      attr_reader :tags
-      attr_reader :type
+      attr_reader :title, :description, :query, :tags, :type
 
       def initialize(query, title: nil, description: nil, tags: [], type: "host")
         super()
@@ -37,11 +33,11 @@ module Mihari
       PAGE_SIZE = 10
 
       def valid_type?
-        %w(host web).include? type
+        %w[host web].include? type
       end
 
       def config_keys
-        %w(zoomeye_password zoomeye_username)
+        %w[zoomeye_password zoomeye_username]
       end
 
       def api

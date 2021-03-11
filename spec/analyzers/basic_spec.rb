@@ -5,9 +5,9 @@ RSpec.describe Mihari::Analyzers::Basic, :vcr do
 
   let(:title) { "test" }
   let(:description) { "test" }
-  let(:artifacts) { %w(1.1.1.1) }
+  let(:artifacts) { %w[1.1.1.1] }
   let(:source) { "test" }
-  let(:tags) { %w(test) }
+  let(:tags) { %w[test] }
 
   describe "#title" do
     it do

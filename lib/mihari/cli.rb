@@ -302,7 +302,7 @@ module Mihari
     no_commands do
       def with_error_handling
         yield
-      rescue StandardError => e
+      rescue => e
         notifier = Notifiers::ExceptionNotifier.new
         notifier.notify e
       end
@@ -315,7 +315,7 @@ module Mihari
 
       # @return [true, false]
       def valid_json?(json)
-        %w(title description artifacts).all? { |key| json.key? key }
+        %w[title description artifacts].all? { |key| json.key? key }
       end
 
       def load_configuration

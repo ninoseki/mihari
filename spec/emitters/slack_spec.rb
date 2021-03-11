@@ -19,7 +19,7 @@ RSpec.describe Mihari::Emitters::Slack do
       attachments.each do |a|
         actions = a.dig(:actions) || []
         actions.each do |action|
-          expect(action.dig(:url)).to match /virustotal|urlscan|censys/
+          expect(action.dig(:url)).to match(/virustotal|urlscan|censys/)
         end
       end
     end
@@ -37,7 +37,7 @@ RSpec.describe Mihari::Emitters::Slack do
     end
 
     context "when given tags" do
-      let(:tags) { %w(foo bar) }
+      let(:tags) { %w[foo bar] }
 
       it do
         text = subject.to_text(title: title, description: description, tags: tags)

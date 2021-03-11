@@ -3,7 +3,7 @@
 RSpec.describe Mihari::Analyzers::HTTPHash do
   subject { described_class.new(nil, md5: md5, sha256: sha256, mmh3: mmh3, tags: tags) }
 
-  let(:tags) { %w(test) }
+  let(:tags) { %w[test] }
 
   let(:md5) { "44d88612fea8a8f36de82e1278abb02f" }
   let(:sha256) { "275a021bbfb6489e54d471899f7db9d1663fc695ec2fe2a2c4538aabf651fd0f" }

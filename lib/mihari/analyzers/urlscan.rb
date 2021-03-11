@@ -5,15 +5,7 @@ require "urlscan"
 module Mihari
   module Analyzers
     class Urlscan < Base
-      attr_reader :title
-      attr_reader :description
-      attr_reader :query
-      attr_reader :tags
-
-      attr_reader :filter
-      attr_reader :target_type
-      attr_reader :use_pro
-      attr_reader :use_similarity
+      attr_reader :title, :description, :query, :tags, :filter, :target_type, :use_pro, :use_similarity
 
       def initialize(
         query,
@@ -53,7 +45,7 @@ module Mihari
       private
 
       def config_keys
-        %w(urlscan_api_key)
+        %w[urlscan_api_key]
       end
 
       def api
@@ -68,7 +60,7 @@ module Mihari
       end
 
       def valid_target_type?
-        %w(url domain ip).include? target_type
+        %w[url domain ip].include? target_type
       end
     end
   end

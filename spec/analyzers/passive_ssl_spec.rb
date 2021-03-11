@@ -3,7 +3,7 @@
 RSpec.describe Mihari::Analyzers::PassiveSSL do
   subject { described_class.new(query, tags: tags) }
 
-  let(:tags) { %w(test) }
+  let(:tags) { %w[test] }
 
   let(:query) { "7c552ab044c76d1df4f5ddf358807bfdcd07fa57" }
   let(:mock) { instance_double("Analyzer") }

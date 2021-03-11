@@ -57,7 +57,7 @@ VCR.configure do |config|
   config.hook_into :webmock
   config.ignore_localhost = false
 
-  api_keys = %w(
+  api_keys = %w[
     THEHIVE_API_KEY
     MISP_API_KEY
     CENSYS_AUTH CENSYS_ID CENSYS_SECRET
@@ -76,12 +76,12 @@ VCR.configure do |config|
     CIRCL_PASSIVE_PASSWORD
     PASSIVETOTAL_USERNAME
     PASSIVETOTAL_API_KEY
-  )
+  ]
 
-  api_endpoints = %w(
+  api_endpoints = %w[
     THEHIVE_API_ENDPOINT
     MISP_API_ENDPOINT
-  )
+  ]
 
   api_keys.each do |key|
     ENV[key] = Digest::MD5.hexdigest(key) unless ENV.key?(key)
