@@ -5,15 +5,11 @@ require "parallel"
 module Mihari
   module Analyzers
     class FreeText < Base
-      attr_reader :query
-
-      attr_reader :title
-      attr_reader :description
-      attr_reader :tags
+      attr_reader :query, :title, :description, :tags
 
       ANALYZERS = [
         Mihari::Analyzers::BinaryEdge,
-        Mihari::Analyzers::Censys,
+        Mihari::Analyzers::Censys
       ].freeze
 
       def initialize(query, title: nil, description: nil, tags: [])

@@ -5,10 +5,7 @@ require "shodan"
 module Mihari
   module Analyzers
     class Shodan < Base
-      attr_reader :title
-      attr_reader :description
-      attr_reader :query
-      attr_reader :tags
+      attr_reader :title, :description, :query, :tags
 
       def initialize(query, title: nil, description: nil, tags: [])
         super()
@@ -36,7 +33,7 @@ module Mihari
       PAGE_SIZE = 100
 
       def config_keys
-        %w(shodan_api_key)
+        %w[shodan_api_key]
       end
 
       def api

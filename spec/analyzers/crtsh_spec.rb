@@ -4,7 +4,7 @@ RSpec.describe Mihari::Analyzers::Crtsh, :vcr do
   subject { described_class.new(query, tags: tags) }
 
   let(:query) { "crt.sh" }
-  let(:tags) { %w(test) }
+  let(:tags) { %w[test] }
 
   describe "#title" do
     it do

@@ -1,13 +1,13 @@
 # frozen_string_literal: true
 
 RSpec.describe Mihari::Analyzers::Spyse, :vcr do
-  let(:tags) { %w(test) }
+  let(:tags) { %w[test] }
 
   context "when given an ipv4" do
     subject { described_class.new(query, tags: tags, type: "ip") }
 
     let(:query) {
-      JSON.generate([{ ip_domain: { operator: "eq", value: "example.com" } }])
+      JSON.generate([{ip_domain: {operator: "eq", value: "example.com"}}])
     }
 
     describe "#title" do
@@ -39,7 +39,7 @@ RSpec.describe Mihari::Analyzers::Spyse, :vcr do
   context "when given a domain" do
     subject { described_class.new(query, tags: tags, type: "domain") }
 
-    let(:query) { JSON.generate([domain_dns_a: { operator: "eq", value: "8.8.8.8" }]) }
+    let(:query) { JSON.generate([domain_dns_a: {operator: "eq", value: "8.8.8.8"}]) }
 
     describe "#artifacts" do
       it do

@@ -5,16 +5,11 @@ require "parallel"
 module Mihari
   module Analyzers
     class ReveseWhois < Base
-      attr_reader :query
-      attr_reader :type
-
-      attr_reader :title
-      attr_reader :description
-      attr_reader :tags
+      attr_reader :query, :type, :title, :description, :tags
 
       ANALYZERS = [
         Mihari::Analyzers::PassiveTotal,
-        Mihari::Analyzers::SecurityTrails,
+        Mihari::Analyzers::SecurityTrails
       ].freeze
 
       def initialize(query, title: nil, description: nil, tags: [])
@@ -37,11 +32,11 @@ module Mihari
       private
 
       def valid_type?
-        %w(mail).include? type
+        %w[mail].include? type
       end
 
       def analyzers
-        raise InvalidInputError, "#{query}(type: #{type || 'unknown'}) is not supported." unless valid_type?
+        raise InvalidInputError, "#{query}(type: #{type || "unknown"}) is not supported." unless valid_type?
 
         ANALYZERS.map do |klass|
           klass.new(query)

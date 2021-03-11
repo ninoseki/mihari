@@ -35,7 +35,7 @@ module Mihari
       private
 
       def config_keys
-        %w(misp_api_endpoint misp_api_key)
+        %w[misp_api_endpoint misp_api_key]
       end
 
       def build_attribute(artifact)
@@ -61,7 +61,7 @@ module Mihari
           ip: "ip-dst",
           mail: "email-dst",
           url: "url",
-          domain: "domain",
+          domain: "domain"
         }
         return table[type] if table.key?(type)
 

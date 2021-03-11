@@ -25,19 +25,19 @@ module Mihari
       def vt_link
         return nil unless _vt_link
 
-        { type: "button", text: "Lookup on VirusTotal", url: _vt_link, }
+        {type: "button", text: "Lookup on VirusTotal", url: _vt_link}
       end
 
       def urlscan_link
         return nil unless _urlscan_link
 
-        { type: "button", text: "Lookup on urlscan.io", url: _urlscan_link, }
+        {type: "button", text: "Lookup on urlscan.io", url: _urlscan_link}
       end
 
       def censys_link
         return nil unless _censys_link
 
-        { type: "button", text: "Lookup on Censys", url: _censys_link, }
+        {type: "button", text: "Lookup on Censys", url: _censys_link}
       end
 
       # @return [Array]
@@ -96,7 +96,7 @@ module Mihari
 
       # @return [String]
       def defanged_data
-        @defanged_data ||= data.to_s.gsub /\./, "[.]"
+        @defanged_data ||= data.to_s.gsub(/\./, "[.]")
       end
     end
 
@@ -121,7 +121,7 @@ module Mihari
         [
           "*#{title}*",
           "*Desc.*: #{description}",
-          "*Tags*: #{tags.join(', ')}",
+          "*Tags*: #{tags.join(", ")}"
         ].join("\n")
       end
 
@@ -137,7 +137,7 @@ module Mihari
       private
 
       def config_keys
-        %w(slack_webhook_url)
+        %w[slack_webhook_url]
       end
     end
   end

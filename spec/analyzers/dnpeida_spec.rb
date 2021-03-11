@@ -3,7 +3,7 @@
 RSpec.describe Mihari::Analyzers::DNPedia, :vcr do
   subject { described_class.new(query, tags: tags) }
 
-  let(:tags) { %w(test) }
+  let(:tags) { %w[test] }
   let(:query) { "%apple%" }
 
   describe "#artifacts" do

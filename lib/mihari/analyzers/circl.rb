@@ -5,9 +5,7 @@ require "passive_circl"
 module Mihari
   module Analyzers
     class CIRCL < Base
-      attr_reader :title
-      attr_reader :description
-      attr_reader :tags
+      attr_reader :title, :description, :tags
 
       def initialize(query, title: nil, description: nil, tags: [])
         super()
@@ -27,7 +25,7 @@ module Mihari
       private
 
       def config_keys
-        %w(circl_passive_password circl_passive_username)
+        %w[circl_passive_password circl_passive_username]
       end
 
       def api
@@ -41,7 +39,7 @@ module Mihari
         when "hash"
           passive_ssl_lookup
         else
-          raise InvalidInputError, "#{@query}(type: #{@type || 'unknown'}) is not supported."
+          raise InvalidInputError, "#{@query}(type: #{@type || "unknown"}) is not supported."
         end
       end
 

@@ -4,7 +4,7 @@ RSpec.describe Mihari::Analyzers::Shodan, :vcr do
   subject { described_class.new(query, tags: tags) }
 
   let(:query) { "dev.min.js" }
-  let(:tags) { %w(test) }
+  let(:tags) { %w[test] }
 
   describe "#title" do
     it do

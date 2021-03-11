@@ -5,10 +5,7 @@ require "binaryedge"
 module Mihari
   module Analyzers
     class BinaryEdge < Base
-      attr_reader :title
-      attr_reader :description
-      attr_reader :query
-      attr_reader :tags
+      attr_reader :title, :description, :query, :tags
 
       def initialize(query, title: nil, description: nil, tags: [])
         super()
@@ -56,7 +53,7 @@ module Mihari
       end
 
       def config_keys
-        %w(binaryedge_api_key)
+        %w[binaryedge_api_key]
       end
 
       def api

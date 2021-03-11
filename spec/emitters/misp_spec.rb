@@ -20,7 +20,7 @@ RSpec.describe Mihari::Emitters::MISP, :vcr do
     let(:title) { "test" }
     let(:description) { "test" }
     let(:artifacts) { [Mihari::Artifact.new(data: "1.1.1.1")] }
-    let(:tags) { %w(test) }
+    let(:tags) { %w[test] }
 
     it do
       event = subject.emit(title: title, description: description, artifacts: artifacts, tags: tags)

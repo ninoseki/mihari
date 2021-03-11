@@ -5,11 +5,7 @@ require "securitytrails"
 module Mihari
   module Analyzers
     class SecurityTrailsDomainFeed < Base
-      attr_reader :type
-
-      attr_reader :title
-      attr_reader :description
-      attr_reader :tags
+      attr_reader :type, :title, :description, :tags
 
       def initialize(regexp, type: "registered", title: nil, description: nil, tags: [])
         super()
@@ -32,7 +28,7 @@ module Mihari
       private
 
       def config_keys
-        %w(securitytrails_api_key)
+        %w[securitytrails_api_key]
       end
 
       def api
@@ -40,7 +36,7 @@ module Mihari
       end
 
       def valid_type?
-        %w(all new registered).include? type
+        %w[all new registered].include? type
       end
 
       def regexp

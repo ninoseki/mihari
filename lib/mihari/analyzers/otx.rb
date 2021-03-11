@@ -5,12 +5,7 @@ require "otx_ruby"
 module Mihari
   module Analyzers
     class OTX < Base
-      attr_reader :query
-      attr_reader :type
-
-      attr_reader :title
-      attr_reader :description
-      attr_reader :tags
+      attr_reader :query, :type, :title, :description, :tags
 
       def initialize(query, title: nil, description: nil, tags: [])
         super()
@@ -30,7 +25,7 @@ module Mihari
       private
 
       def config_keys
-        %w(otx_api_key)
+        %w[otx_api_key]
       end
 
       def domain_client
@@ -42,7 +37,7 @@ module Mihari
       end
 
       def valid_type?
-        %w(ip domain).include? type
+        %w[ip domain].include? type
       end
 
       def lookup
@@ -52,7 +47,7 @@ module Mihari
         when "ip"
           ip_lookup
         else
-          raise InvalidInputError, "#{query}(type: #{type || 'unknown'}) is not supported." unless valid_type?
+          raise InvalidInputError, "#{query}(type: #{type || "unknown"}) is not supported." unless valid_type?
         end
       end
 

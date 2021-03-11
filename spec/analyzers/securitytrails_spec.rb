@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 RSpec.describe Mihari::Analyzers::SecurityTrails, :vcr do
-  let(:tags) { %w(test) }
+  let(:tags) { %w[test] }
 
   context "when given an ipv4" do
     subject { described_class.new(query, tags: tags) }

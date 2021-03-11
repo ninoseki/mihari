@@ -3,7 +3,7 @@
 RSpec.describe Mihari::Analyzers::SSHFingerprint do
   subject { described_class.new(fingerprint, tags: tags) }
 
-  let(:tags) { %w(test) }
+  let(:tags) { %w[test] }
 
   let(:fingerprint) { "62:5e:b9:fd:3a:70:eb:37:99:e9:12:e3:d9:3f:4e:6c" }
 

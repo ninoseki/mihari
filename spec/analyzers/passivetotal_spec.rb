@@ -3,7 +3,7 @@
 RSpec.describe Mihari::Analyzers::PassiveTotal, :vcr do
   subject { described_class.new(query, tags: tags) }
 
-  let(:tags) { %w(test) }
+  let(:tags) { %w[test] }
 
   context "when given an ipv4" do
     let(:query) { "89.35.39.84" }

@@ -5,15 +5,7 @@ require "parallel"
 module Mihari
   module Analyzers
     class HTTPHash < Base
-      attr_reader :md5
-      attr_reader :sha256
-      attr_reader :mmh3
-
-      attr_reader :html
-
-      attr_reader :title
-      attr_reader :description
-      attr_reader :tags
+      attr_reader :md5, :sha256, :mmh3, :html, :title, :description, :tags
 
       def initialize(_query, md5: nil, sha256: nil, mmh3: nil, html: nil, title: nil, description: nil, tags: [])
         super()
@@ -57,7 +49,7 @@ module Mihari
         [
           md5 ? "md5:#{md5}" : nil,
           sha256 ? "sha256:#{sha256}" : nil,
-          mmh3 ? "mmh3:#{mmh3}" : nil,
+          mmh3 ? "mmh3:#{mmh3}" : nil
         ].compact.join(",")
       end
 
@@ -92,7 +84,7 @@ module Mihari
           binary_edge,
           censys,
           onyphe,
-          shodan,
+          shodan
         ].compact
       end
 

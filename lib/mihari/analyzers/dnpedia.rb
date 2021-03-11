@@ -5,10 +5,7 @@ require "dnpedia"
 module Mihari
   module Analyzers
     class DNPedia < Base
-      attr_reader :query
-      attr_reader :title
-      attr_reader :description
-      attr_reader :tags
+      attr_reader :query, :title, :description, :tags
 
       def initialize(query, title: nil, description: nil, tags: [])
         super()

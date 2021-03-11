@@ -7,12 +7,7 @@ require "parallel"
 module Mihari
   module Analyzers
     class DNSTwister < Base
-      attr_reader :query
-      attr_reader :type
-
-      attr_reader :title
-      attr_reader :description
-      attr_reader :tags
+      attr_reader :query, :type, :title, :description, :tags
 
       def initialize(query, title: nil, description: nil, tags: [])
         super()
@@ -47,7 +42,7 @@ module Mihari
       end
 
       def lookup
-        raise InvalidInputError, "#{query}(type: #{type || 'unknown'}) is not supported." unless valid_type?
+        raise InvalidInputError, "#{query}(type: #{type || "unknown"}) is not supported." unless valid_type?
 
         res = api.fuzz(query)
         fuzzy_domains = res.dig("fuzzy_domains") || []
