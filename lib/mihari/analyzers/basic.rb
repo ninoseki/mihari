@@ -7,6 +7,8 @@ module Mihari
       attr_reader :description, :artifacts, :source, :tags
 
       def initialize(title:, description:, artifacts:, source:, tags: [])
+        super()
+
         @title = title
         @description = description
         @artifacts = artifacts

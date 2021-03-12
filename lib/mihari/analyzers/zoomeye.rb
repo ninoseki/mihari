@@ -46,9 +46,9 @@ module Mihari
 
       def convert_responses(responses)
         responses.map do |res|
-          matches = res.dig("matches") || []
+          matches = res["matches"] || []
           matches.map do |match|
-            match.dig "ip"
+            match["ip"]
           end
         end.flatten.compact.uniq
       end
@@ -65,7 +65,7 @@ module Mihari
           res = _host_lookup(query, page: page)
           break unless res
 
-          total = res.dig("total").to_i
+          total = res["total"].to_i
           responses << res
           break if total <= page * PAGE_SIZE
         end
@@ -84,7 +84,7 @@ module Mihari
           res = _web_lookup(query, page: page)
           break unless res
 
-          total = res.dig("total").to_i
+          total = res["total"].to_i
           responses << res
           break if total <= page * PAGE_SIZE
         end

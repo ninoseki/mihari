@@ -40,11 +40,11 @@ module Mihari
         raise InvalidInputError, "#{query}(type: #{type || "unknown"}) is not supported." unless valid_type?
 
         indicator = api.indicator.get_by_value(query)
-        iid = indicator.dig("iid")
+        iid = indicator["iid"]
 
         properties = api.indicator.get_properties_by_id(iid)
-        (properties.dig("dns") || []).map do |property|
-          property.dig("value") if ["A", "PTR"].include?(property.dig("name"))
+        (properties["dns"] || []).map do |property|
+          property["value"] if ["A", "PTR"].include?(property["name"])
         end.compact
       end
     end

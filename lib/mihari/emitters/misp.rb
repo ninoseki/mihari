@@ -7,6 +7,8 @@ module Mihari
   module Emitters
     class MISP < Base
       def initialize
+        super()
+
         ::MISP.configure do |config|
           config.api_endpoint = Mihari.config.misp_api_endpoint
           config.api_key = Mihari.config.misp_api_key

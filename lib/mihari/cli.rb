@@ -259,16 +259,16 @@ module Mihari
     desc "import_from_json", "Give a JSON input via STDIN"
     def import_from_json(input = nil)
       with_error_handling do
-        json = input || STDIN.gets.chomp
+        json = input || $stdin.gets.chomp
         raise ArgumentError, "Input not found: please give an input in a JSON format" unless json
 
         json = parse_as_json(json)
         raise ArgumentError, "Invalid input format: an input JSON data should have title, description and artifacts key" unless valid_json?(json)
 
-        title = json.dig("title")
-        description = json.dig("description")
-        artifacts = json.dig("artifacts")
-        tags = json.dig("tags") || []
+        title = json["title"]
+        description = json["description"]
+        artifacts = json["artifacts"]
+        tags = json["tags"] || []
 
         basic = Analyzers::Basic.new(title: title, description: description, artifacts: artifacts, source: "json", tags: tags)
         basic.run

@@ -28,9 +28,9 @@ module Mihari
 
       def lookup
         res = api.search(query)
-        rows = res.dig("rows") || []
+        rows = res["rows"] || []
         rows.map do |row|
-          [row.dig("name"), row.dig("zoneid")].join(".")
+          [row["name"], row["zoneid"]].join(".")
         end
       end
     end
