@@ -19,25 +19,31 @@ module Mihari
       end
 
       def actions
-        [vt_link, urlscan_link, censys_link].compact
+        [vt_link, urlscan_link, censys_link, shodan_link].compact
       end
 
       def vt_link
         return nil unless _vt_link
 
-        {type: "button", text: "Lookup on VirusTotal", url: _vt_link}
+        { type: "button", text: "VirusTotal", url: _vt_link }
       end
 
       def urlscan_link
         return nil unless _urlscan_link
 
-        {type: "button", text: "Lookup on urlscan.io", url: _urlscan_link}
+        { type: "button", text: "urlscan.io", url: _urlscan_link }
       end
 
       def censys_link
         return nil unless _censys_link
 
-        {type: "button", text: "Lookup on Censys", url: _censys_link}
+        { type: "button", text: "Censys", url: _censys_link }
+      end
+
+      def shodan_link
+        return nil unless _shodan_link
+
+        { type: "button", text: "Shodan", url: _shodan_link }
       end
 
       # @return [Array]
@@ -89,6 +95,11 @@ module Mihari
       end
       memoize :_censys_link
 
+      def _shodan_link
+        data_type == "ip" ? "https://www.shodan.io/host/#{data}" : nil
+      end
+      memoize :_shodan_link
+
       # @return [String]
       def sha256
         Digest::SHA256.hexdigest data
@@ -121,7 +132,7 @@ module Mihari
         [
           "*#{title}*",
           "*Desc.*: #{description}",
-          "*Tags*: #{tags.join(", ")}"
+          "*Tags*: #{tags.join(', ')}"
         ].join("\n")
       end
 
