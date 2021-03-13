@@ -10,12 +10,12 @@ Mihari is a helper to run queries & manage results continuously. Mihari can be u
 
 ## How it works
 
-- Mihari makes a query against Shodan, Censys, VirusTotal, SecurityTrails, etc. and extracts artifacts (IP addresses, domains, URLs and hashes) from the results.
+- Mihari makes a query against Shodan, Censys, VirusTotal, SecurityTrails, etc. and extracts artifacts (IP addresses, domains, URLs and hashes).
 - Mihari checks whether a DB (SQLite3 or PostgreSQL) contains the artifacts or not.
   - If it doesn't contain the artifacts:
-    - Mihari creates an alert on TheHive. (Optional)
-    - Mihari sends a notification to Slack. (Optional)
-    - Mihari creates an event on MISP. (Optional)
+    - Mihari creates an alert on TheHive.
+    - Mihari sends a notification to Slack.
+    - Mihari creates an event on MISP.
 
 ![img](https://github.com/ninoseki/mihari/raw/master/screenshots/eyecatch.png)
 
@@ -35,9 +35,8 @@ Mihari is a helper to run queries & manage results continuously. Mihari can be u
 
 ## Requirements
 
-- Ruby 2.6+
-- SQLite3
-- libpq
+- Ruby (2.7 or 3.0)
+- SQLite3 or PostgreSQL
 
 ```bash
 # For Debian / Ubuntu
