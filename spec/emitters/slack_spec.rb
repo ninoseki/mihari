@@ -17,9 +17,9 @@ RSpec.describe Mihari::Emitters::Slack do
     it do
       attachments = subject.to_attachments(artifacts)
       attachments.each do |a|
-        actions = a.dig(:actions) || []
+        actions = a[:actions] || []
         actions.each do |action|
-          expect(action.dig(:url)).to match(/virustotal|urlscan|censys/)
+          expect(action[:url]).to match(/virustotal|urlscan|censys|shodan/)
         end
       end
     end
