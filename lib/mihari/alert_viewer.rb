@@ -14,8 +14,8 @@ module Mihari
       alerts = relation.limit(limit).order(id: :desc)
       alerts.map do |alert|
         json = AlertSerializer.new(alert).as_json
-        json[:artifacts] = (json.dig(:artifacts) || []).map { |artifact_| artifact_.dig(:data) }
-        json[:tags] = (json.dig(:tags) || []).map { |tag_| tag_.dig(:name) }
+        json[:artifacts] = (json[:artifacts] || []).map { |artifact_| artifact_[:data] }
+        json[:tags] = (json[:tags] || []).map { |tag_| tag_[:name] }
         json
       end
     end

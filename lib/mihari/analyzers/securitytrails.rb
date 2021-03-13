@@ -51,22 +51,22 @@ module Mihari
 
       def domain_lookup
         result = api.history.get_all_dns_history(query, type: "a")
-        records = result.dig("records") || []
+        records = result["records"] || []
         records.map do |record|
-          (record.dig("values") || []).map { |value| value.dig("ip") }
+          (record["values"] || []).map { |value| value["ip"] }
         end.flatten.compact.uniq
       end
 
       def ip_lookup
         result = api.domains.search(filter: {ipv4: query})
-        records = result.dig("records") || []
-        records.map { |record| record.dig("hostname") }.compact.uniq
+        records = result["records"] || []
+        records.map { |record| record["hostname"] }.compact.uniq
       end
 
       def mail_lookup
         result = api.domains.search(filter: {whois_email: query})
-        records = result.dig("records") || []
-        records.map { |record| record.dig("hostname") }.compact.uniq
+        records = result["records"] || []
+        records.map { |record| record["hostname"] }.compact.uniq
       end
     end
   end

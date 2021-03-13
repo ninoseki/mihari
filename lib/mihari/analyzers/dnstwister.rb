@@ -45,8 +45,8 @@ module Mihari
         raise InvalidInputError, "#{query}(type: #{type || "unknown"}) is not supported." unless valid_type?
 
         res = api.fuzz(query)
-        fuzzy_domains = res.dig("fuzzy_domains") || []
-        domains = fuzzy_domains.map { |domain| domain.dig("domain") }
+        fuzzy_domains = res["fuzzy_domains"] || []
+        domains = fuzzy_domains.map { |domain| domain["domain"] }
         Parallel.map(domains) do |domain|
           resolvable?(domain) ? domain : nil
         end.compact

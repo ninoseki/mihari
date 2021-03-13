@@ -53,22 +53,22 @@ module Mihari
 
       def passive_dns_lookup
         res = api.dns.passive_unique(query)
-        res.dig("results") || []
+        res["results"] || []
       end
 
       def reverse_whois_lookup
         res = api.whois.search(query: query, field: "email")
-        results = res.dig("results") || []
+        results = res["results"] || []
         results.map do |result|
-          result.dig("domain")
+          result["domain"]
         end.flatten.compact.uniq
       end
 
       def ssl_lookup
         res = api.ssl.history(query)
-        results = res.dig("results") || []
+        results = res["results"] || []
         results.map do |result|
-          result.dig("ipAddresses")
+          result["ipAddresses"]
         end.flatten.compact.uniq
       end
     end

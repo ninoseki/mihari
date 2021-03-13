@@ -21,9 +21,9 @@ module Mihari
         return [] unless results || results.empty?
 
         results.map do |result|
-          matches = result.dig("matches") || []
+          matches = result["matches"] || []
           matches.map do |match|
-            match.dig "ip_str"
+            match["ip_str"]
           end.compact
         end.flatten.compact.uniq
       end
@@ -55,7 +55,7 @@ module Mihari
           break unless res
 
           responses << res
-          break if res.dig("total").to_i <= page * PAGE_SIZE
+          break if res["total"].to_i <= page * PAGE_SIZE
         end
         responses
       end

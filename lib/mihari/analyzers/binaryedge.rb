@@ -21,7 +21,7 @@ module Mihari
         return [] unless results || results.empty?
 
         results.map do |result|
-          events = result.dig("events") || []
+          events = result["events"] || []
           events.map do |event|
             event.dig "target", "ip"
           end.compact
@@ -44,7 +44,7 @@ module Mihari
         responses = []
         (1..Float::INFINITY).each do |page|
           res = search_with_page(query, page: page)
-          total = res.dig("total").to_i
+          total = res["total"].to_i
 
           responses << res
           break if total <= page * PAGE_SIZE

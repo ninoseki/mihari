@@ -50,7 +50,7 @@ module Mihari
       def domain_lookup
         res = api.domain.resolutions(indicator)
 
-        data = res.dig("data") || []
+        data = res["data"] || []
         data.map do |item|
           item.dig("attributes", "ip_address")
         end.compact.uniq
@@ -59,7 +59,7 @@ module Mihari
       def ip_lookup
         res = api.ip_address.resolutions(indicator)
 
-        data = res.dig("data") || []
+        data = res["data"] || []
         data.map do |item|
           item.dig("attributes", "host_name")
         end.compact.uniq

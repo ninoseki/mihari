@@ -48,7 +48,7 @@ module Mihari
         (1..Float::INFINITY).each do |page|
           res = search_with_page(query, page: page)
           responses << res
-          total = res.dig("total").to_i
+          total = res["total"].to_i
           break if total <= page * PAGE_SIZE
         end
         responses

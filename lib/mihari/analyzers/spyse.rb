@@ -45,7 +45,7 @@ module Mihari
         res = api.domain.search(search_params, limit: 100)
         items = res.dig("data", "items") || []
         items.map do |item|
-          item.dig("name")
+          item["name"]
         end.uniq.compact
       end
 
@@ -53,7 +53,7 @@ module Mihari
         res = api.ip.search(search_params, limit: 100)
         items = res.dig("data", "items") || []
         items.map do |item|
-          item.dig("ip")
+          item["ip"]
         end.uniq.compact
       end
 

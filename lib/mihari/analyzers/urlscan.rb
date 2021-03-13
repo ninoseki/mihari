@@ -36,7 +36,7 @@ module Mihari
         result = search
         return [] unless result
 
-        results = result.dig("results") || []
+        results = result["results"] || []
         results.map do |match|
           match.dig "page", target_type
         end.compact.uniq
