@@ -1,7 +1,7 @@
 # mihari
 
 [![Gem Version](https://badge.fury.io/rb/mihari.svg)](https://badge.fury.io/rb/mihari)
-[![Build Status](https://travis-ci.com/ninoseki/mihari.svg?branch=master)](https://travis-ci.com/ninoseki/mihari)
+[![Ruby CI](https://github.com/ninoseki/mihari/actions/workflows/test.yml/badge.svg)](https://github.com/ninoseki/mihari/actions/workflows/test.yml)
 [![Docker Cloud Build Status](https://img.shields.io/docker/cloud/build/ninoseki/mihari)](https://hub.docker.com/r/ninoseki/mihari)
 [![Coverage Status](https://coveralls.io/repos/github/ninoseki/mihari/badge.svg?branch=master)](https://coveralls.io/github/ninoseki/mihari?branch=master)
 [![CodeFactor](https://www.codefactor.io/repository/github/ninoseki/mihari/badge)](https://www.codefactor.io/repository/github/ninoseki/mihari)
