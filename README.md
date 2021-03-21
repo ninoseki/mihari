@@ -6,6 +6,8 @@
 [![Coverage Status](https://coveralls.io/repos/github/ninoseki/mihari/badge.svg?branch=master)](https://coveralls.io/github/ninoseki/mihari?branch=master)
 [![CodeFactor](https://www.codefactor.io/repository/github/ninoseki/mihari/badge)](https://www.codefactor.io/repository/github/ninoseki/mihari)
 
+![img](https://github.com/ninoseki/mihari/raw/master/images/logo.png)
+
 Mihari is a helper to run queries & manage results continuously. Mihari can be used for C2, landing page and phishing hunting.
 
 ## How it works
@@ -17,21 +19,21 @@ Mihari is a helper to run queries & manage results continuously. Mihari can be u
     - Mihari sends a notification to Slack.
     - Mihari creates an event on MISP.
 
-![img](https://github.com/ninoseki/mihari/raw/master/screenshots/eyecatch.png)
+![img](https://github.com/ninoseki/mihari/raw/master/images/eyecatch.png)
 
 ### Screenshots
 
 - TheHive alert example
 
-![img](https://github.com/ninoseki/mihari/raw/master/screenshots/alert.png)
+![img](https://github.com/ninoseki/mihari/raw/master/images/alert.png)
 
 - Slack notification example
 
-![img](https://github.com/ninoseki/mihari/raw/master/screenshots/slack.png)
+![img](https://github.com/ninoseki/mihari/raw/master/images/slack.png)
 
 - MISP event example
 
-![img](https://github.com/ninoseki/mihari/raw/master/screenshots/misp.png)
+![img](https://github.com/ninoseki/mihari/raw/master/images/misp.png)
 
 ## Requirements
 
@@ -68,6 +70,7 @@ Mihari supports the following services by default.
 - [Onyphe](https://onyphe.io)
 - [OTX](https://otx.alienvault.com/)
 - [PassiveTotal](https://community.riskiq.com/)
+- [Pulsedive](https://pulsedive.com/)
 - [SecurityTrails](https://securitytrails.com/)
 - [Shodan](https://shodan.io)
 - [Spyse](https://spyse.com)
