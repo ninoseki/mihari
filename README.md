@@ -45,6 +45,15 @@ Mihari is a helper to run queries & manage results continuously. Mihari can be u
 apt-get install sqlite3 libsqlite3-dev libpq-dev
 ```
 
+## Supported platforms & databases
+
+| Name       | Supported versions |
+|------------|--------------------|
+| PostgreSQL | v12                |
+| SQLite     | v3                 |
+| MISP       | v2.4               |
+| TheHive    | v3.x & v4.x        |
+
 ## Installation
 
 ```bash

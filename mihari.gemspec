@@ -44,7 +44,7 @@ Gem::Specification.new do |spec|
   spec.add_dependency "dnpedia", "~> 0.1"
   spec.add_dependency "dnstwister", "~> 0.1"
   spec.add_dependency "email_address", "~> 0.1"
-  spec.add_dependency "hachi", "~> 0.3"
+  spec.add_dependency "hachi", "~> 1.0"
   spec.add_dependency "mem", "~> 0.1"
   spec.add_dependency "misp", "~> 0.1"
   spec.add_dependency "murmurhash3", "~> 0.1"
