@@ -56,6 +56,10 @@ module Mihari
 
           responses << res
           break if res["total"].to_i <= page * PAGE_SIZE
+        rescue JSON::ParserError
+          # ignore JSON::ParserError
+          # ref. https://github.com/ninoseki/mihari/issues/197
+          next
         end
         responses
       end
