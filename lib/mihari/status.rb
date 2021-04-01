@@ -3,9 +3,7 @@
 module Mihari
   class Status
     def check
-      statuses.map do |key, value|
-        [key, convert(**value)]
-      end.to_h
+      statuses.transform_values { |value| convert(**value) }
     end
 
     def self.check
@@ -14,16 +12,17 @@ module Mihari
 
     private
 
-    def convert(status:, message:)
+    def convert(is_configured:, values:, type:)
       {
-        status: status ? "OK" : "Bad",
-        message: message
+        is_configured: is_configured,
+        values: values,
+        type: type
       }
     end
 
     def statuses
       (Mihari.analyzers + Mihari.emitters).map do |klass|
-        name = klass.to_s.downcase.split("::").last.to_s
+        name = klass.to_s.split("::").last.to_s
 
         [name, build_status(klass)]
       end.to_h.compact
@@ -33,10 +32,11 @@ module Mihari
       is_analyzer = klass.ancestors.include?(Mihari::Analyzers::Base)
 
       instance = is_analyzer ? klass.new("dummy") : klass.new
-      status = instance.configured?
-      message = instance.configuration_status
+      is_configured = instance.configured?
+      values = instance.configuration_values
+      type = is_analyzer ? "Analyzer" : "Emitter"
 
-      message ? {status: status, message: message} : nil
+      values ? {is_configured: is_configured, values: values, type: type} : nil
     rescue ArgumentError => _e
       nil
     end

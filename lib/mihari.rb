@@ -79,8 +79,8 @@ require "mihari/emitters/slack"
 require "mihari/emitters/stdout"
 require "mihari/emitters/the_hive"
 
-require "mihari/alert_viewer"
-
 require "mihari/status"
+
+require "mihari/web/app"
 
 require "mihari/cli"

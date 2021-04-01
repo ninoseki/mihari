@@ -6,7 +6,7 @@ RSpec.describe Mihari::TagSerializer do
   describe "#as_json" do
     it do
       json = described_class.new(tag).as_json
-      expect(json).to eq({name: "foo"})
+      expect(json[:name]).to eq("foo")
     end
   end
 end

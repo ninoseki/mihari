@@ -58,6 +58,11 @@ module Mihari
         # Do nothing
       end
 
+      def close
+        ActiveRecord::Base.clear_active_connections!
+        ActiveRecord::Base.connection.close
+      end
+
       def destroy!
         InitialSchema.migrate(:down) if ActiveRecord::Base.connected?
       end

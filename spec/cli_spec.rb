@@ -212,32 +212,6 @@ RSpec.describe Mihari::CLI do
     end
   end
 
-  describe "#alerts" do
-    let(:mock) { double("AlertViewer") }
-    let(:alerts) {
-      [
-        {
-          "description": "test",
-          "title": "test",
-          "tags": ["test"],
-          "createdAt": "2019-08-12 11:45:24 +0900",
-          "artifacts": ["1.1.1.1"],
-          "status": "New"
-        }
-      ]
-    }
-
-    before do
-      allow(Mihari::AlertViewer).to receive(:new).and_return(mock)
-      allow(mock).to receive(:list).and_return(alerts)
-    end
-
-    it do
-      stdout = capture(:stdout) { subject.start ["alerts"] }.chomp
-      expect(stdout).to eq(JSON.pretty_generate(alerts))
-    end
-  end
-
   describe "#parse_as_json" do
     subject { described_class.new }
 

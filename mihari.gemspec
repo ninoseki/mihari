@@ -37,7 +37,9 @@ Gem::Specification.new do |spec|
 
   spec.add_dependency "active_model_serializers", "~> 0.10"
   spec.add_dependency "activerecord", "~> 6.1"
+  spec.add_dependency "activerecord-filter", "~> 6.1"
   spec.add_dependency "addressable", "~> 2.7"
+  spec.add_dependency "awrence", "~> 1.2"
   spec.add_dependency "binaryedge", "~> 0.1"
   spec.add_dependency "censu", "~> 0.2"
   spec.add_dependency "crtsh-rb", "~> 0.3"
@@ -45,6 +47,7 @@ Gem::Specification.new do |spec|
   spec.add_dependency "dnstwister", "~> 0.1"
   spec.add_dependency "email_address", "~> 0.1"
   spec.add_dependency "hachi", "~> 1.0"
+  spec.add_dependency "launchy", "~> 2.5"
   spec.add_dependency "mem", "~> 0.1"
   spec.add_dependency "misp", "~> 0.1"
   spec.add_dependency "murmurhash3", "~> 0.1"
@@ -59,6 +62,8 @@ Gem::Specification.new do |spec|
   spec.add_dependency "pulsedive", "~> 0.1"
   spec.add_dependency "securitytrails", "~> 1.0"
   spec.add_dependency "shodanx", "~> 0.2"
+  spec.add_dependency "sinatra", "~> 2.1"
+  spec.add_dependency "sinatra-contrib", "~> 2.1"
   spec.add_dependency "slack-notifier", "~> 2.3"
   spec.add_dependency "spysex", "~> 0.1"
   spec.add_dependency "sqlite3", "~> 1.4"
@@ -66,5 +71,6 @@ Gem::Specification.new do |spec|
   spec.add_dependency "thread_safe", "~> 0.3"
   spec.add_dependency "urlscan", "~> 0.6"
   spec.add_dependency "virustotalx", "~> 1.1"
+  spec.add_dependency "webrick", "~> 1.7"
   spec.add_dependency "zoomeye-rb", "~> 0.1"
 end
