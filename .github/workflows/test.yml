@@ -63,6 +63,6 @@ jobs:
 
       - name: Test with MySQL
         env:
-          DATABASE: mysql2://mysql:mysql@mysql:3306/test
+          DATABASE: mysql2://mysql:mysql@localhost:3306/test
         run: |
           bundle exec rake
