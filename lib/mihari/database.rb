@@ -34,6 +34,7 @@ end
 
 def adapter
   return "postgresql" if Mihari.config.database.start_with?("postgresql://", "postgres://")
+  return "mysql2" if Mihari.config.database.start_with?("mysql2://")
 
   "sqlite3"
 end
@@ -43,7 +44,7 @@ module Mihari
     class << self
       def connect
         case adapter
-        when "postgresql"
+        when "postgresql", "mysql2"
           ActiveRecord::Base.establish_connection(Mihari.config.database)
         else
           ActiveRecord::Base.establish_connection(
@@ -54,7 +55,7 @@ module Mihari
 
         ActiveRecord::Migration.verbose = false
         InitialSchema.migrate(:up)
-      rescue
+      rescue StandardError
         # Do nothing
       end
 
