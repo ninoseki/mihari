@@ -6,7 +6,7 @@ RSpec.describe Mihari::Status do
   describe "#check?" do
     it do
       result = subject.check
-      expect(result.all? { |_k, v| v.key?(:status) && v.key?(:message) }).to eq(true)
+      expect(result.all? { |_k, v| v.key?(:is_configured) && v.key?(:values) && v.key?(:type) }).to eq(true)
     end
   end
 end

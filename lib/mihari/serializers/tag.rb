@@ -4,6 +4,6 @@ require "active_model_serializers"
 
 module Mihari
   class TagSerializer < ActiveModel::Serializer
-    attributes :name
+    attributes :id, :name
   end
 end

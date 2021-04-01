@@ -1,7 +1,9 @@
 # frozen_string_literal: true
 
-require "thor"
 require "json"
+require "rack/builder"
+require "rack/handler/webrick"
+require "thor"
 
 module Mihari
   class CLI < Thor
@@ -275,34 +277,21 @@ module Mihari
       end
     end
 
-    desc "alerts", "Show the alerts on TheHive"
-    method_option :limit, type: :string, default: "5", desc: "Number of alerts to show (or 'all' to show all the alerts)"
-    method_option :title, type: :string, desc: "Title to filter"
-    method_option :source, type: :string, desc: "Source to filter"
-    method_option :tag, type: :string, desc: "Tag to filter"
-    def alerts
-      with_error_handling do
-        load_configuration
+    desc "web", "Launch the web app"
+    method_option :port, type: :numeric, default: 9292
+    method_option :host, type: :string, default: "localhost"
+    def web
+      port = options["port"].to_i || 9292
+      host = options["host"] || "localhost"
 
-        viewer = AlertViewer.new
-        alerts = viewer.list(limit: options["limit"], title: options["title"], source: options["source"], tag: options[:tag])
-        puts JSON.pretty_generate(alerts)
-      end
-    end
-
-    desc "status", "Show the current configuration status"
-    def status
-      with_error_handling do
-        load_configuration
-
-        puts JSON.pretty_generate(Status.check)
-      end
+      load_configuration
+      Mihari::App.run!(port: port, host: host)
     end
 
     no_commands do
       def with_error_handling
         yield
-      rescue => e
+      rescue StandardError => e
         notifier = Notifiers::ExceptionNotifier.new
         notifier.notify e
       end

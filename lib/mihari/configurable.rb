@@ -6,13 +6,12 @@ module Mihari
       config_keys.all? { |key| Mihari.config.send(key) }
     end
 
-    def configuration_status
+    def configuration_values
       return nil if config_keys.empty?
 
-      names = config_keys.join(" and ")
-      be_verb = config_keys.length == 1 ? "is" : "are"
-      status = configured? ? "found" : "missing"
-      "#{names} #{be_verb} #{status}"
+      config_keys.map do |key|
+        {key: key.upcase, value: Mihari.config.send(key)}
+      end
     end
 
     def config_keys

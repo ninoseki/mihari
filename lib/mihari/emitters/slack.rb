@@ -25,25 +25,25 @@ module Mihari
       def vt_link
         return nil unless _vt_link
 
-        { type: "button", text: "VirusTotal", url: _vt_link }
+        {type: "button", text: "VirusTotal", url: _vt_link}
       end
 
       def urlscan_link
         return nil unless _urlscan_link
 
-        { type: "button", text: "urlscan.io", url: _urlscan_link }
+        {type: "button", text: "urlscan.io", url: _urlscan_link}
       end
 
       def censys_link
         return nil unless _censys_link
 
-        { type: "button", text: "Censys", url: _censys_link }
+        {type: "button", text: "Censys", url: _censys_link}
       end
 
       def shodan_link
         return nil unless _shodan_link
 
-        { type: "button", text: "Shodan", url: _shodan_link }
+        {type: "button", text: "Shodan", url: _shodan_link}
       end
 
       # @return [Array]
@@ -132,7 +132,7 @@ module Mihari
         [
           "*#{title}*",
           "*Desc.*: #{description}",
-          "*Tags*: #{tags.join(', ')}"
+          "*Tags*: #{tags.join(", ")}"
         ].join("\n")
       end
 
