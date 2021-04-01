@@ -4,11 +4,10 @@ on: [pull_request]
 
 jobs:
   build:
-
     runs-on: ubuntu-latest
 
     services:
-      db:
+      postgres:
         image: postgres:12
         env:
           POSTGRES_USER: postgres
@@ -22,23 +21,43 @@ jobs:
         ports:
           - 5432:5432
 
+      mysql:
+        image: mysql:8.0
+        env:
+          MYSQL_USER: mysql
+          MYSQL_PASSWORD: mysql
+          MYSQL_DATABASE: test
+        ports:
+          - 3306:3306
+        options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=5s --health-retries=3
+
     strategy:
       fail-fast: false
       matrix:
-        ruby: [2.7, '3.0']
+        ruby: [2.7, "3.0"]
 
     steps:
-    - uses: actions/checkout@v2
-    - name: Set up Ruby 2.7
-      uses: ruby/setup-ruby@v1
-      with:
-        ruby-version: ${{ matrix.ruby }}
-        bundler-cache: true
-    - name: Build and test with Rake
-      env:
-        DATABASE: postgresql://postgres:postgres@localhost:5432/test
-      run: |
-        sudo apt-get -yqq install libpq-dev
-        gem install bundler
-        bundle install
-        bundle exec rake
+      - uses: actions/checkout@v2
+      - name: Set up Ruby 2.7
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: ${{ matrix.ruby }}
+          bundler-cache: true
+
+      - name: Install dependencies
+        run: |
+          sudo apt-get -yqq install libpq-dev libmysqlclient-dev
+          gem install bundler
+          bundle install
+
+      - name: Test with PostgreSQL
+        env:
+          DATABASE: postgresql://postgres:postgres@localhost:5432/test
+        run: |
+          bundle exec rake
+
+      - name: Test with MySQL
+        env:
+          DATABASE: mysql2://mysql:mysql@mysql:3306/test
+        run: |
+          bundle exec rake
