@@ -63,7 +63,6 @@ jobs:
 
       - name: Test with MySQL
         env:
-          DATABASE: mysql2://mysql:mysql@localhost:3306/test
+          DATABASE: mysql2://mysql:mysql@127.0.0.1:3306/test
         run: |
-          sudo /etc/init.d/mysql start
           bundle exec rake
