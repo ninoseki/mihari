@@ -1,6 +1,7 @@
 FROM ruby:3.0.0-alpine3.13
 
-RUN apk --no-cache add git build-base ruby-dev sqlite-dev postgresql-dev \
+RUN apk --no-cache add git build-base ruby-dev sqlite-dev postgresql-dev mysql-client mysql-dev \
+  && gem install pg mysql2 \
   && cd /tmp/ \
   && git clone https://github.com/ninoseki/mihari.git \
   && cd mihari \
