@@ -55,6 +55,18 @@ module Mihari
           end
         end
       end
+
+      def initialize_yaml(filename)
+        keys = new.instance_variables.map do |key|
+          key.to_s[1..-1]
+        end
+
+        config = keys.map do |key|
+          [key, nil]
+        end.to_h
+
+        YAML.dump(config, File.open(filename, "w"))
+      end
     end
   end
 
