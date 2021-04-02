@@ -10,8 +10,7 @@ Gem::Specification.new do |spec|
   spec.authors = ["Manabu Niseki"]
   spec.email = ["manabu.niseki@gmail.com"]
 
-  spec.summary = "A framework for continuous malicious hosts monitoring."
-  spec.description = "A framework for continuous malicious hosts monitoring."
+  spec.summary = "A framework for continuous malicious hosts monitoring"
   spec.homepage = "https://github.com/ninoseki/mihari"
   spec.license = "MIT"
 
@@ -29,6 +28,7 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency "execjs", "~> 2.7"
   spec.add_development_dependency "fakefs", "~> 1.3"
   spec.add_development_dependency "mysql2", "~> 0.5"
+  spec.add_development_dependency "pg", "~> 1.2"
   spec.add_development_dependency "rake", "~> 13.0"
   spec.add_development_dependency "rspec", "~> 3.10"
   spec.add_development_dependency "standard", "~> 1.0"
@@ -58,7 +58,6 @@ Gem::Specification.new do |spec|
   spec.add_dependency "parallel", "~> 1.20"
   spec.add_dependency "passive_circl", "~> 0.1"
   spec.add_dependency "passivetotalx", "~> 0.1"
-  spec.add_dependency "pg", "~> 1.2"
   spec.add_dependency "public_suffix", "~> 4.0"
   spec.add_dependency "pulsedive", "~> 0.1"
   spec.add_dependency "securitytrails", "~> 1.0"
