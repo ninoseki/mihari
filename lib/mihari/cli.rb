@@ -7,7 +7,7 @@ require "thor"
 
 module Mihari
   class CLI < Thor
-    class_option :config, type: :string, desc: "path to config file"
+    class_option :config, type: :string, desc: "path to the config file"
 
     def self.exit_on_failure?
       true
@@ -286,6 +286,18 @@ module Mihari
 
       load_configuration
       Mihari::App.run!(port: port, host: host)
+    end
+
+    desc "init_config", "Create a config file"
+    method_option :filename, type: :string, default: "mihari.yml"
+    def init_config
+      filename = options["filename"]
+
+      if File.exist?(filename) && !(yes? "#{filename} exists. Do you want to overwrite it? (y/n)")
+        return
+      end
+
+      Mihari::Config.initialize_yaml filename
     end
 
     no_commands do
