@@ -53,7 +53,7 @@ module Mihari
         to_at: to_at
       )
 
-      json = {alerts: alerts, total: total, current_page: page, page_size: limit}
+      json = { alerts: alerts, total: total, current_page: page, page_size: limit }
       json json.to_camelback_keys
     end
 
@@ -70,7 +70,7 @@ module Mihari
       rescue ActiveRecord::RecordNotFound
         status 404
 
-        message = {message: "ID:#{id} is not found"}
+        message = { message: "ID:#{id} is not found" }
         json message
       end
     end
@@ -88,7 +88,23 @@ module Mihari
       rescue ActiveRecord::RecordNotFound
         status 404
 
-        message = {message: "ID:#{id} is not found"}
+        message = { message: "ID:#{id} is not found" }
+        json message
+      end
+    end
+
+    delete "/api/tags/:name" do
+      name = params["name"]
+
+      begin
+        Mihari::Tag.where(name: name).destroy_all
+
+        status 204
+        body ""
+      rescue ActiveRecord::RecordNotFound
+        status 404
+
+        message = { message: "Name:#{name} is not found" }
         json message
       end
     end
