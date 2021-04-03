@@ -36,7 +36,7 @@ module Mihari
       values = instance.configuration_values
       type = is_analyzer ? "Analyzer" : "Emitter"
 
-      values ? {is_configured: is_configured, values: values, type: type} : nil
+      values ? { is_configured: is_configured, values: values, type: type } : nil
     rescue ArgumentError => _e
       nil
     end

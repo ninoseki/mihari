@@ -17,7 +17,7 @@ module Mihari
         api.alert.create(
           title: title,
           description: description,
-          artifacts: artifacts.map { |artifact| {data: artifact.data, data_type: artifact.data_type, message: description} },
+          artifacts: artifacts.map { |artifact| { data: artifact.data, data_type: artifact.data_type, message: description } },
           tags: tags,
           type: "external",
           source: "mihari"
