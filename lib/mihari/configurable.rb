@@ -10,7 +10,7 @@ module Mihari
       return nil if config_keys.empty?
 
       config_keys.map do |key|
-        {key: key.upcase, value: Mihari.config.send(key)}
+        { key: key.upcase, value: Mihari.config.send(key) }
       end
     end
 

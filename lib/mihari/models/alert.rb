@@ -44,16 +44,16 @@ module Mihari
         relation = joins(:tags) if tag_name
         relation = joins(:artifacts) if artifact_data
 
-        relation = relation.where(artifacts: {data: artifact_data}) if artifact_data
-        relation = relation.where(tags: {name: tag_name}) if tag_name
+        relation = relation.where(artifacts: { data: artifact_data }) if artifact_data
+        relation = relation.where(tags: { name: tag_name }) if tag_name
 
         relation = relation.where(source: source) if source
         relation = relation.where(title: title) if title
 
-        relation = relation.filter(description: {like: "%#{description}%"}) if description
+        relation = relation.filter(description: { like: "%#{description}%" }) if description
 
-        relation = relation.filter(created_at: {gte: from_at}) if from_at
-        relation = relation.filter(created_at: {lte: to_at}) if to_at
+        relation = relation.filter(created_at: { gte: from_at }) if from_at
+        relation = relation.filter(created_at: { lte: to_at }) if to_at
 
         relation
       end

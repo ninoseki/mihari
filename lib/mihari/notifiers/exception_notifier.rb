@@ -51,20 +51,20 @@ module Mihari
 
       def to_fields(clean_message, backtrace)
         fields = [
-          {title: "Exception", value: clean_message},
-          {title: "Hostname", value: hostname}
+          { title: "Exception", value: clean_message },
+          { title: "Hostname", value: hostname }
         ]
 
         if backtrace
           formatted_backtrace = format_backtrace(backtrace)
-          fields << {title: "Backtrace", value: formatted_backtrace}
+          fields << { title: "Backtrace", value: formatted_backtrace }
         end
         fields
       end
 
       def hostname
         Socket.gethostname
-      rescue => _e
+      rescue StandardError => _e
         "N/A"
       end
 
