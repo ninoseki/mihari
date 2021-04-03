@@ -5,13 +5,13 @@ module Mihari
     module ReverseWhois
       def self.included(thor)
         thor.class_eval do
-          desc "pulsedive [IP|DOMAIN]", "Pulsedive lookup by an ip or domain"
+          desc "reverse_whois [EMAIL]", "Cross search with reverse whois services by an email"
           method_option :title, type: :string, desc: "title"
           method_option :description, type: :string, desc: "description"
           method_option :tags, type: :array, desc: "tags"
-          def pulsedive(indiactor)
+          def reverse_whois(query)
             with_error_handling do
-              run_analyzer Analyzers::Pulsedive, query: refang(indiactor), options: options
+              run_analyzer Analyzers::ReveseWhois, query: refang(query), options: options
             end
           end
         end

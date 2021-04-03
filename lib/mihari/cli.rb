@@ -50,7 +50,7 @@ module Mihari
     include Mihari::Commands::PassiveDNS
     include Mihari::Commands::PassiveSSL
     include Mihari::Commands::PassiveTotal
-    include Mihari::Commands::ReverseWhois
+    include Mihari::Commands::Pulsedive
     include Mihari::Commands::ReverseWhois
     include Mihari::Commands::SecurityTrails
     include Mihari::Commands::SecurityTrailsDomainFeed
