@@ -1,4 +1,5 @@
 require "awrence"
+require "colorize"
 require "launchy"
 require "rack"
 require "safe_shell"
@@ -145,9 +146,14 @@ module Mihari
 
     class << self
       def run!(port: 9292, host: "localhost")
-        Launchy.open "http://#{host}:#{port}"
+        url =  "http://#{host}:#{port}"
+
+        puts "The app will be available at #{url}.".colorize(:blue)
+        puts "(Press Ctrl+C to quit)".colorize(:blue)
 
         Rack::Handler::WEBrick.run self, Port: port, Host: host do |server|
+          Launchy.open url
+
           [:INT, :TERM].each do |sig|
             trap(sig) do
               server.shutdown
