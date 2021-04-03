@@ -1,6 +1,7 @@
 require "awrence"
 require "launchy"
 require "rack"
+require "safe_shell"
 require "sinatra"
 require "sinatra/json"
 require "sinatra/reloader"
@@ -10,7 +11,7 @@ module Mihari
     register Sinatra::Reloader
 
     set :root, File.dirname(__FILE__)
-    set :public_folder, proc { File.join(root, "public") }
+    set :public_folder, File.join(root, "public")
 
     get "/" do
       send_file File.join(settings.public_folder, "index.html")
@@ -123,6 +124,23 @@ module Mihari
       report = Status.check
 
       json report.to_camelback_keys
+    end
+
+    post "/api/command" do
+      payload = JSON.parse(request.body.read)
+
+      command = payload["command"]
+      if command.nil?
+        status 400
+        return json( { message: "command is required" })
+      end
+
+      command = command.split
+
+      output = SafeShell.execute("mihari", *command)
+      success = $?.success?
+
+      json({ output: output, success: success })
     end
 
     class << self
