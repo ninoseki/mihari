@@ -12,6 +12,8 @@ Mihari is a framework for continuous OSINT based threat hunting.
 
 ## How it works
 
+![img](https://github.com/ninoseki/mihari/raw/master/images/overview.png)
+
 - Mihari makes a query against Shodan, Censys, VirusTotal, SecurityTrails, etc. and extracts artifacts (IP addresses, domains, URLs or hashes).
 - Mihari checks whether a DB (SQLite3, PostgreSQL or MySQL) contains the artifacts or not.
   - If it doesn't contain the artifacts:
