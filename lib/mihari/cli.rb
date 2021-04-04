@@ -100,7 +100,7 @@ module Mihari
       end
 
       def symbolize_hash_keys(hash)
-        hash.map { |k, v| [k.to_sym, v] }.to_h
+        hash.transform_keys(&:to_sym)
       end
 
       def normalize_options(options)

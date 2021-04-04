@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Mihari
   module Commands
     module Config
@@ -8,11 +10,13 @@ module Mihari
           def init_config
             filename = options["filename"]
 
-            if File.exist?(filename) && !(yes? "#{filename} exists. Do you want to overwrite it? (y/n)")
+            warning =  "#{filename} exists. Do you want to overwrite it? (y/n)"
+            if File.exist?(filename) && !(yes? warning)
               return
             end
 
             Mihari::Config.initialize_yaml filename
+            puts "The config file is initialized as #{filename}.".colorize(:blue)
           end
         end
       end

@@ -3,7 +3,7 @@
 module Mihari
   class Status
     def check
-      statuses.transform_values { |value| convert(**value) }
+      statuses
     end
 
     def self.check
@@ -11,14 +11,6 @@ module Mihari
     end
 
     private
-
-    def convert(is_configured:, values:, type:)
-      {
-        is_configured: is_configured,
-        values: values,
-        type: type
-      }
-    end
 
     def statuses
       (Mihari.analyzers + Mihari.emitters).map do |klass|

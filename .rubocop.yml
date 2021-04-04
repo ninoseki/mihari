@@ -4,6 +4,9 @@
 require:
   - rubocop-performance
 
+AllCops:
+  NewCops: enable
+
 Style/Alias:
   Enabled: false
   StyleGuide: https://relaxed.ruby.style/#stylealias
@@ -149,6 +152,9 @@ Lint/AssignmentInCondition:
   StyleGuide: https://relaxed.ruby.style/#lintassignmentincondition
 
 Layout/LineLength:
+  Enabled: false
+
+Style/StringLiteralsInInterpolation:
   Enabled: false
 
 Metrics:
