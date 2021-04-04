@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Mihari
   module Commands
     module VirusTotal

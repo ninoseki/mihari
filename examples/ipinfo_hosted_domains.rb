@@ -34,7 +34,7 @@ module Mihari
         uri = URI("#{IPINFO_API_ENDPOINT}/domains/#{ip}?token=#{token}")
         res = uri.read
         json = JSON.parse(res)
-        json.dig("domains") || []
+        json["domains"] || []
       end
     end
   end

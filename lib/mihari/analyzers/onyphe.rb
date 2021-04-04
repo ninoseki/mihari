@@ -21,10 +21,10 @@ module Mihari
         return [] unless results
 
         flat_results = results.map do |result|
-          result.dig("results")
+          result["results"]
         end.flatten.compact
 
-        flat_results.map { |result| result.dig("ip") }.compact.uniq
+        flat_results.map { |result| result["ip"] }.compact.uniq
       end
 
       private

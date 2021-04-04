@@ -58,7 +58,7 @@ module Mihari
 
       def initialize_yaml(filename)
         keys = new.instance_variables.map do |key|
-          key.to_s[1..-1]
+          key.to_s[1..]
         end
 
         config = keys.map do |key|
