@@ -10,7 +10,7 @@ module Mihari
           def init_config
             filename = options["filename"]
 
-            warning =  "#{filename} exists. Do you want to overwrite it? (y/n)"
+            warning = "#{filename} exists. Do you want to overwrite it? (y/n)"
             if File.exist?(filename) && !(yes? warning)
               return
             end

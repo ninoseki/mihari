@@ -1,6 +1,6 @@
-ENV['APP_ENV'] = 'test'
+ENV["APP_ENV"] = "test"
 
-require 'rack/test'
+require "rack/test"
 
 RSpec.describe Mihari::App do
   include Rack::Test::Methods
@@ -10,7 +10,7 @@ RSpec.describe Mihari::App do
   end
 
   it "returns 200" do
-    paths = %w(/ /api/alerts /api/tags /api/sources /api/config)
+    paths = %w[/ /api/alerts /api/tags /api/sources /api/config]
     paths.each do |path|
       get path
       expect(last_response).to be_ok

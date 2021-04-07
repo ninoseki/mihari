@@ -8,6 +8,13 @@ module Mihari
       include Configurable
       include Retriable
 
+      attr_accessor :ignore_old_artifacts, :ignore_threshold
+
+      def initialize
+        @ignore_old_artifacts = false
+        @ignore_threshold = 0
+      end
+
       # @return [Array<String>, Array<Mihari::Artifact>]
       def artifacts
         raise NotImplementedError, "You must implement #{self.class}##{__method__}"
@@ -61,7 +68,9 @@ module Mihari
 
       # @return [Array<Mihari::Artifact>]
       def unique_artifacts
-        @unique_artifacts ||= normalized_artifacts.select(&:unique?)
+        @unique_artifacts ||= normalized_artifacts.select do |artifact|
+          artifact.unique?(ignore_old_artifacts: ignore_old_artifacts, ignore_threshold: ignore_threshold)
+        end
       end
 
       def set_unique_artifacts

@@ -20,6 +20,10 @@ module Mihari
               tags = json["tags"] || []
 
               basic = Analyzers::Basic.new(title: title, description: description, artifacts: artifacts, source: "json", tags: tags)
+
+              basic.ignore_old_artifacts = options["ignore_old_artifacts"] || false
+              basic.ignore_threshold = options["ignore_threshold"] || 0
+
               basic.run
             end
           end

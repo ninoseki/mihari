@@ -33,7 +33,10 @@ require "mihari/commands/web"
 
 module Mihari
   class CLI < Thor
-    class_option :config, type: :string, desc: "path to the config file"
+    class_option :config, type: :string, desc: "Path to the config file"
+
+    class_option :ignore_old_artifacts, type: :boolean, default: false, desc: "Whether to ignore old artifacts from checking or not. Only affects with analyze commands."
+    class_option :ignore_threshold, type: :numeric, default: 0, desc: "Number of days to define whether an artifact is old or not. Only affects with analyze commands."
 
     include Mihari::Commands::BinaryEdge
     include Mihari::Commands::Censys
@@ -96,6 +99,10 @@ module Mihari
         options = normalize_options(options)
 
         analyzer = analyzer_class.new(query, **options)
+
+        analyzer.ignore_old_artifacts = options["ignore_old_artifacts"] || false
+        analyzer.ignore_threshold = options["ignore_threshold"] || 0
+
         analyzer.run
       end
 

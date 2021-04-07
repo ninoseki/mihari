@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require "timecop"
+
 RSpec.describe Mihari::Artifact do
   describe "#validate" do
     it do
@@ -23,6 +25,31 @@ RSpec.describe Mihari::Artifact do
     it do
       artifact = described_class.new(data: "2.2.2.2")
       expect(artifact).to be_unique
+    end
+
+    context "with --ignore-old-artifacts" do
+      let(:days) { 2 }
+      let(:data) { "1.1.1.1" }
+
+      before do
+        Timecop.freeze((-days).days.from_now)
+
+        described_class.delete_all
+        described_class.create(data: data)
+
+        Timecop.return
+      end
+
+      it do
+        artifact = described_class.new(data: data)
+
+        (0..days).each do |day|
+          expect(artifact.unique?(ignore_old_artifacts: true, ignore_threshold: day)).to eq(true)
+        end
+
+        expect(artifact.unique?(ignore_old_artifacts: true, ignore_threshold: days + 1)).to eq(false)
+        expect(artifact.unique?(ignore_old_artifacts: true, ignore_threshold: days + 2)).to eq(false)
+      end
     end
   end
 end
