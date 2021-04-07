@@ -6,7 +6,11 @@ RSpec.describe Mihari::CLI do
   let(:query) { "test" }
   let(:mock) { double("Analyzer") }
 
-  before { allow(mock).to receive(:run) }
+  before do
+    allow(mock).to receive(:run)
+    allow(mock).to receive(:ignore_threshold=)
+    allow(mock).to receive(:ignore_old_artifacts=)
+  end
 
   describe ".exit_on_failure?" do
     it do

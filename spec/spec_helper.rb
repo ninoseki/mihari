@@ -4,7 +4,6 @@ require "bundler/setup"
 
 require "base64"
 require "fakefs/safe"
-require "timecop"
 require "vcr"
 require "digest"
 

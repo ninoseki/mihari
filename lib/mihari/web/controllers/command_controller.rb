@@ -12,7 +12,7 @@ module Mihari
         command = payload["command"]
         if command.nil?
           status 400
-          return json( { message: "command is required" })
+          return json({ message: "command is required" })
         end
 
         command = command.split

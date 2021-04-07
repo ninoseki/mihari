@@ -1,6 +1,9 @@
 # frozen_string_literal: true
 
 require "active_record"
+require "active_record/filter"
+require "active_support/core_ext/integer/time"
+require "active_support/core_ext/numeric/time"
 
 class ArtifactValidator < ActiveModel::Validator
   def validate(record)
@@ -20,8 +23,16 @@ module Mihari
       self.data_type = TypeChecker.type(data)
     end
 
-    def unique?
-      self.class.find_by(data: data).nil?
+    def unique?(ignore_old_artifacts: false, ignore_threshold: 0)
+      artifact = self.class.where(data: data).order(created_at: :desc).first
+      return true if artifact.nil?
+
+      return false unless ignore_old_artifacts
+
+      days_before = (-ignore_threshold).days.from_now
+      # if an artifact is created before {ignore_threshold} days, ignore it
+      #                           within {ignore_threshold} days, do not ignore it
+      artifact.created_at < days_before
     end
   end
 end
