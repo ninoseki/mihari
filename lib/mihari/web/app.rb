@@ -1,13 +1,11 @@
 # frozen_string_literal: true
 
-require "awrence"
-require "colorize"
 require "launchy"
 require "rack"
-require "safe_shell"
+require "rack/handler/puma"
 require "sinatra"
-require "sinatra/json"
-require "sinatra/reloader"
+
+require "mihari/web/helpers/json"
 
 require "mihari/web/controllers/alerts_controller"
 require "mihari/web/controllers/artifacts_controller"
@@ -25,8 +23,6 @@ module Mihari
       send_file File.join(settings.public_folder, "index.html")
     end
 
-    register Sinatra::Reloader
-
     use Mihari::Controllers::AlertsController
     use Mihari::Controllers::ArtifactsController
     use Mihari::Controllers::CommandController
@@ -38,10 +34,7 @@ module Mihari
       def run!(port: 9292, host: "localhost")
         url = "http://#{host}:#{port}"
 
-        puts "The app will be available at #{url}.".colorize(:blue)
-        puts "(Press Ctrl+C to quit)".colorize(:blue)
-
-        Rack::Handler::WEBrick.run self, Port: port, Host: host do |server|
+        Rack::Handler::Puma.run self, Port: port, Host: host do |server|
           Launchy.open url
 
           [:INT, :TERM].each do |sig|

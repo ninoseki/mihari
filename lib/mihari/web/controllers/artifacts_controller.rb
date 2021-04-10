@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 require "sinatra"
-require "sinatra/json"
 
 module Mihari
   module Controllers
@@ -19,8 +18,7 @@ module Mihari
         rescue ActiveRecord::RecordNotFound
           status 404
 
-          message = { message: "ID:#{id} is not found" }
-          json message
+          json({ message: "ID:#{id} is not found" })
         end
       end
     end

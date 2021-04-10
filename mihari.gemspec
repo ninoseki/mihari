@@ -62,6 +62,7 @@ Gem::Specification.new do |spec|
   spec.add_dependency "passivetotalx", "~> 0.1"
   spec.add_dependency "public_suffix", "~> 4.0"
   spec.add_dependency "pulsedive", "~> 0.1"
+  spec.add_dependency "puma", "~> 5.2"
   spec.add_dependency "safe_shell", "~> 1.1"
   spec.add_dependency "securitytrails", "~> 1.0"
   spec.add_dependency "shodanx", "~> 0.2"
@@ -74,6 +75,5 @@ Gem::Specification.new do |spec|
   spec.add_dependency "thread_safe", "~> 0.3"
   spec.add_dependency "urlscan", "~> 0.6"
   spec.add_dependency "virustotalx", "~> 1.1"
-  spec.add_dependency "webrick", "~> 1.7"
   spec.add_dependency "zoomeye-rb", "~> 0.1"
 end

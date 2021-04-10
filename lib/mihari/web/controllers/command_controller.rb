@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
+require "safe_shell"
 require "sinatra"
-require "sinatra/json"
 
 module Mihari
   module Controllers
