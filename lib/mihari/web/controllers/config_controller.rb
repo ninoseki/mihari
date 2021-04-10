@@ -1,8 +1,6 @@
 # frozen_string_literal: true
 
-require "awrence"
 require "sinatra"
-require "sinatra/json"
 
 module Mihari
   module Controllers

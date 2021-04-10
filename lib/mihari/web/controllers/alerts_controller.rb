@@ -1,8 +1,6 @@
 # frozen_string_literal: true
 
-require "awrence"
 require "sinatra"
-require "sinatra/json"
 
 module Mihari
   module Controllers
@@ -44,8 +42,7 @@ module Mihari
           to_at: to_at
         )
 
-        json = { alerts: alerts, total: total, current_page: page, page_size: limit }
-        json json.to_camelback_keys
+        json({ alerts: alerts, total: total, current_page: page, page_size: limit })
       end
 
       delete "/api/alerts/:id" do
@@ -61,8 +58,7 @@ module Mihari
         rescue ActiveRecord::RecordNotFound
           status 404
 
-          message = { message: "ID:#{id} is not found" }
-          json message
+          json({ message: "ID:#{id} is not found" })
         end
       end
     end
