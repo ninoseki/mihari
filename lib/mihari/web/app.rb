@@ -7,6 +7,8 @@ require "sinatra"
 
 require "mihari/web/helpers/json"
 
+require "mihari/web/controllers/base_controller"
+
 require "mihari/web/controllers/alerts_controller"
 require "mihari/web/controllers/artifacts_controller"
 require "mihari/web/controllers/command_controller"

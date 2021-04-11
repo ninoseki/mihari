@@ -1,10 +1,8 @@
 # frozen_string_literal: true
 
-require "sinatra"
-
 module Mihari
   module Controllers
-    class SourcesController < Sinatra::Base
+    class SourcesController < BaseController
       get "/api/sources" do
         tags = Mihari::Alert.distinct.pluck(:source)
         json tags

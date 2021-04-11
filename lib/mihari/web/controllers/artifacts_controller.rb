@@ -1,10 +1,8 @@
 # frozen_string_literal: true
 
-require "sinatra"
-
 module Mihari
   module Controllers
-    class ArtifactsController < Sinatra::Base
+    class ArtifactsController < BaseController
       delete "/api/artifacts/:id" do
         id = params["id"]
         id = id.to_i
