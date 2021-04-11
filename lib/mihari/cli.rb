@@ -100,8 +100,8 @@ module Mihari
 
         analyzer = analyzer_class.new(query, **options)
 
-        analyzer.ignore_old_artifacts = options["ignore_old_artifacts"] || false
-        analyzer.ignore_threshold = options["ignore_threshold"] || 0
+        analyzer.ignore_old_artifacts = options[:ignore_old_artifacts] || false
+        analyzer.ignore_threshold = options[:ignore_threshold] || 0
 
         analyzer.run
       end
@@ -112,7 +112,9 @@ module Mihari
 
       def normalize_options(options)
         # Delete :config because it is not intended to use for running an analyzer
-        options.delete(:config)
+        [:config, :ignore_old_artifacts, :ignore_threshold].each do |ignore_key|
+          options.delete(ignore_key)
+        end
         options
       end
 
