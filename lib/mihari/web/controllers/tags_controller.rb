@@ -1,10 +1,8 @@
 # frozen_string_literal: true
 
-require "sinatra"
-
 module Mihari
   module Controllers
-    class TagsController < Sinatra::Base
+    class TagsController < BaseController
       get "/api/tags" do
         tags = Mihari::Tag.distinct.pluck(:name)
         json tags

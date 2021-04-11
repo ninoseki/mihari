@@ -1,10 +1,8 @@
 # frozen_string_literal: true
 
-require "sinatra"
-
 module Mihari
   module Controllers
-    class ConfigController < Sinatra::Base
+    class ConfigController < BaseController
       get "/api/config" do
         report = Status.check
 

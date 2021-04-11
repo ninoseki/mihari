@@ -1,15 +1,14 @@
 # frozen_string_literal: true
 
 require "safe_shell"
-require "sinatra"
 
 module Mihari
   module Controllers
-    class CommandController < Sinatra::Base
+    class CommandController < BaseController
       post "/api/command" do
-        payload = JSON.parse(request.body.read)
+        param :command, String, required: true
 
-        command = payload["command"]
+        command = params["command"]
         if command.nil?
           status 400
           return json({ message: "command is required" })

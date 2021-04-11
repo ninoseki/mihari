@@ -1,11 +1,20 @@
 # frozen_string_literal: true
 
-require "sinatra"
-
 module Mihari
   module Controllers
-    class AlertsController < Sinatra::Base
+    class AlertsController < BaseController
       get "/api/alerts" do
+        param :page, Integer
+        param :artifact, String
+        param :description, String
+        param :source, String
+        param :tag, String
+
+        param :from_at, DateTime
+        param :fromAt, DateTime
+        param :to_at, DateTime
+        param :toAt, DateTime
+
         page = params["page"] || 1
         page = page.to_i
         limit = 10
