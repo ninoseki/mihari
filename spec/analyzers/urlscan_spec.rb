@@ -39,15 +39,6 @@ RSpec.describe Mihari::Analyzers::Urlscan, :vcr do
         expect(subject.artifacts.all? { |artifact| artifact.start_with? "http" }).to eq(true)
       end
     end
-
-    context "when use pro" do
-      let(:filter) { "$phishing_all" }
-      subject { described_class.new(query, tags: tags, filter: filter, use_pro: true) }
-
-      it do
-        expect(subject.artifacts.all? { |artifact| artifact.start_with? "http" }).to eq(true)
-      end
-    end
   end
 
   describe "#tags" do

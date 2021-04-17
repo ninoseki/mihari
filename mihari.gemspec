@@ -76,7 +76,7 @@ Gem::Specification.new do |spec|
   spec.add_dependency "sqlite3", "~> 1.4"
   spec.add_dependency "thor", "~> 1.1"
   spec.add_dependency "thread_safe", "~> 0.3"
-  spec.add_dependency "urlscan", "~> 0.6"
+  spec.add_dependency "urlscan", "~> 0.7"
   spec.add_dependency "virustotalx", "~> 1.1"
   spec.add_dependency "zoomeye-rb", "~> 0.1"
 end
