@@ -8,6 +8,8 @@
 
 ![img](https://github.com/ninoseki/mihari/raw/master/images/logo.png)
 
+[![](images/tines.png)](https://tines.io?utm_source=github&utm_medium=sponsorship&utm_campaign=ninoseki)
+
 Mihari is a framework for continuous OSINT based threat hunting.
 
 ## How it works
@@ -61,3 +63,7 @@ See [Usage](https://github.com/ninoseki/mihari/wiki/Usage) for more information.
 ## License
 
 The gem is available as open source under the terms of the [MIT License](https://opensource.org/licenses/MIT).
+
+## Acknowledgement
+
+Mihari is proudly supported by [Tines.io](https://tines.io?utm_source=github&utm_medium=sponsorship&utm_campaign=ninoseki), The SOAR Platform for Enterprise Security Teams.
