@@ -4,7 +4,7 @@ require "yaml"
 
 module Mihari
   class Config
-    attr_accessor :binaryedge_api_key, :censys_id, :censys_secret, :circl_passive_password, :circl_passive_username, :misp_api_endpoint, :misp_api_key, :onyphe_api_key, :otx_api_key, :passivetotal_api_key, :passivetotal_username, :pulsedive_api_key, :securitytrails_api_key, :shodan_api_key, :slack_channel, :slack_webhook_url, :spyse_api_key, :thehive_api_endpoint, :thehive_api_key, :urlscan_api_key, :virustotal_api_key, :zoomeye_password, :zoomeye_username, :database
+    attr_accessor :binaryedge_api_key, :censys_id, :censys_secret, :circl_passive_password, :circl_passive_username, :misp_api_endpoint, :misp_api_key, :onyphe_api_key, :otx_api_key, :passivetotal_api_key, :passivetotal_username, :pulsedive_api_key, :securitytrails_api_key, :shodan_api_key, :slack_channel, :slack_webhook_url, :spyse_api_key, :thehive_api_endpoint, :thehive_api_key, :urlscan_api_key, :virustotal_api_key, :zoomeye_api_key, :database
 
     def initialize
       load_from_env
@@ -32,8 +32,7 @@ module Mihari
       @thehive_api_key = ENV["THEHIVE_API_KEY"]
       @urlscan_api_key = ENV["URLSCAN_API_KEY"]
       @virustotal_api_key = ENV["VIRUSTOTAL_API_KEY"]
-      @zoomeye_password = ENV["ZOOMEYE_PASSWORD"]
-      @zoomeye_username = ENV["ZOOMEYE_USERNAME"]
+      @zoomeye_api_key = ENV["ZOOMEYE_API_KEY"]
 
       @database = ENV["DATABASE"] || "mihari.db"
     end

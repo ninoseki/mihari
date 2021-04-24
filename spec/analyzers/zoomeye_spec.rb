@@ -33,7 +33,7 @@ RSpec.describe Mihari::Analyzers::ZoomEye, :vcr do
   context "when given web type" do
     subject { described_class.new(query, type: type) }
 
-    let(:query) { "wordpress +foo +bar" }
+    let(:query) { "wordpress +wooo +en-US" }
     let(:type) { "web" }
 
     describe "#artifacts" do
@@ -45,8 +45,7 @@ RSpec.describe Mihari::Analyzers::ZoomEye, :vcr do
 
   context "when api config is not given" do
     before do
-      allow(Mihari.config).to receive(:zoomeye_usernamme).and_return(nil)
-      allow(Mihari.config).to receive(:zoomeye_password).and_return(nil)
+      allow(Mihari.config).to receive(:zoomeye_api_key).and_return(nil)
     end
 
     it do
