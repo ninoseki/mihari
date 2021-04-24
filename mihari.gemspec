@@ -78,5 +78,5 @@ Gem::Specification.new do |spec|
   spec.add_dependency "thread_safe", "~> 0.3"
   spec.add_dependency "urlscan", "~> 0.7"
   spec.add_dependency "virustotalx", "~> 1.1"
-  spec.add_dependency "zoomeye-rb", "~> 0.1"
+  spec.add_dependency "zoomeye-rb", "~> 0.2"
 end

@@ -37,11 +37,11 @@ module Mihari
       end
 
       def config_keys
-        %w[zoomeye_password zoomeye_username]
+        %w[zoomeye_api_key]
       end
 
       def api
-        @api ||= ::ZoomEye::API.new(username: Mihari.config.zoomeye_username, password: Mihari.config.zoomeye_password)
+        @api ||= ::ZoomEye::API.new(api_key: Mihari.config.zoomeye_api_key)
       end
 
       def convert_responses(responses)
