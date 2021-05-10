@@ -2,7 +2,7 @@
 http_interactions:
   - request:
       method: post
-      uri: "<WEBHOOK_URL>"
+      uri: "<WEBHOOK_URL>/"
       body:
         encoding: UTF-8
         string: '{"title":"title","description":"description","artifacts":["1.1.1.1","github.com"],"source":"test","tags":[]}'
@@ -15,8 +15,6 @@ http_interactions:
           - "*/*"
         User-Agent:
           - Ruby
-        Host:
-          - localhost
     response:
       status:
         code: 201
