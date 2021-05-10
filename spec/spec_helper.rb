@@ -80,6 +80,7 @@ VCR.configure do |config|
   api_endpoints = %w[
     THEHIVE_API_ENDPOINT
     MISP_API_ENDPOINT
+    WEBHOOK_URL
   ]
 
   api_keys.each do |key|

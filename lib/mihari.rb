@@ -78,6 +78,7 @@ require "mihari/emitters/misp"
 require "mihari/emitters/slack"
 require "mihari/emitters/stdout"
 require "mihari/emitters/the_hive"
+require "mihari/emitters/webhook"
 
 require "mihari/status"
 
