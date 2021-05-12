@@ -88,7 +88,7 @@ module Mihari
         config = options["config"]
         return unless config
 
-        Config.load_from_yaml(config)
+        Mihari.load_config_from_yaml config
         Database.connect
       end
 

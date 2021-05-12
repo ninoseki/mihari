@@ -46,14 +46,7 @@ module Mihari
       end
 
       def use_json_body
-        @use_json_body ||= truthy?(Mihari.config.webhook_use_json_body || 'false')
-      end
-
-      def truthy?(value)
-        return true if value == "true"
-        return true if value == true
-
-        false
+        @use_json_body ||= Mihari.config.webhook_use_json_body
       end
     end
   end
