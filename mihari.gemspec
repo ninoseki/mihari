@@ -48,6 +48,7 @@ Gem::Specification.new do |spec|
   spec.add_dependency "crtsh-rb", "~> 0.3"
   spec.add_dependency "dnpedia", "~> 0.1"
   spec.add_dependency "dnstwister", "~> 0.1"
+  spec.add_dependency "dry-configurable", "~> 0.12"
   spec.add_dependency "email_address", "~> 0.1"
   spec.add_dependency "hachi", "~> 1.0"
   spec.add_dependency "launchy", "~> 2.5"

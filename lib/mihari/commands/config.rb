@@ -17,7 +17,7 @@ module Mihari
               return
             end
 
-            Mihari::Config.initialize_yaml filename
+            Mihari.initialize_config_yaml filename
             puts "The config file is initialized as #{filename}.".colorize(:blue)
           end
         end
