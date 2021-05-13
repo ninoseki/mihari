@@ -20,8 +20,8 @@ RSpec.describe Mihari do
       filename = "/tmp/foo.yml"
       Mihari.initialize_config_yaml(filename, files)
 
-      data = YAML.load(files.read(filename))
-      Mihari.config.values.keys.each do |key|
+      data = YAML.safe_load(files.read(filename))
+      Mihari.config.values.each_key do |key|
         expect(data).to have_key(key.to_s)
       end
     end
