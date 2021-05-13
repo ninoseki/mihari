@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require "dry/configurable"
+require "dry/files"
 require "mem"
 require "yaml"
 
@@ -68,12 +69,12 @@ module Mihari
       end
     end
 
-    def k(filename)
+    def initialize_config_yaml(filename, files = Dry::Files.new)
       config = Mihari.config.values.keys.map do |key|
         [key.to_s, nil]
       end.to_h
 
-      YAML.dump(config, File.open(filename, "w"))
+      files.write(filename, YAML.dump(config))
     end
   end
 end
