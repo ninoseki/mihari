@@ -15,7 +15,6 @@ module Mihari
         Mihari::Analyzers::Censys
       ].freeze
 
-
       def artifacts
         Parallel.map(analyzers) do |analyzer|
           run_analyzer analyzer
