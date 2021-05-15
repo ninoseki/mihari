@@ -5,25 +5,15 @@ require "urlscan"
 module Mihari
   module Analyzers
     class Urlscan < Base
-      attr_reader :title, :description, :query, :tags, :target_type, :use_similarity
+      param :query
+      option :title, default: proc { "urlscan lookup" }
+      option :description, default: proc { "query = #{query}" }
+      option :tags, default: proc { [] }
+      option :target_type, default: proc { "url" }
+      option :use_similarity, default: proc { false }
 
-      def initialize(
-        query,
-        description: nil,
-        tags: [],
-        target_type: "url",
-        title: nil,
-        use_similarity: false
-      )
-        super()
-
-        @query = query
-        @title = title || "urlscan lookup"
-        @description = description || "query = #{query}"
-        @tags = tags
-
-        @target_type = target_type
-        @use_similarity = use_similarity
+      def initialize(*args, **kwargs)
+        super
 
         raise InvalidInputError, "type should be url, domain or ip." unless valid_target_type?
       end

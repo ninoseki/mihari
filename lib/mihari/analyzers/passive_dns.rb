@@ -5,7 +5,12 @@ require "parallel"
 module Mihari
   module Analyzers
     class PassiveDNS < Base
-      attr_reader :query, :type, :title, :description, :tags
+      param :query
+      option :title, default: proc { "PassiveDNS cross search" }
+      option :description, default: proc { "query = #{query}" }
+      option :tags, default: proc { [] }
+
+      attr_reader :type
 
       ANALYZERS = [
         Mihari::Analyzers::CIRCL,
@@ -16,15 +21,10 @@ module Mihari
         Mihari::Analyzers::VirusTotal
       ].freeze
 
-      def initialize(query, title: nil, description: nil, tags: [])
-        super()
+      def initialize(*args, **kwargs)
+        super
 
-        @query = query
         @type = TypeChecker.type(query)
-
-        @title = title || "PassiveDNS cross search"
-        @description = description || "query = #{query}"
-        @tags = tags
       end
 
       def artifacts

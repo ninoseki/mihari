@@ -5,17 +5,11 @@ require "zoomeye"
 module Mihari
   module Analyzers
     class ZoomEye < Base
-      attr_reader :title, :description, :query, :tags, :type
-
-      def initialize(query, title: nil, description: nil, tags: [], type: "host")
-        super()
-
-        @query = query
-        @title = title || "ZoomEye lookup"
-        @description = description || "query = #{query}"
-        @tags = tags
-        @type = type
-      end
+      param :query
+      option :title, default: proc { "ZoomEye lookup" }
+      option :description, default: proc { "query = #{query}" }
+      option :tags, default: proc { [] }
+      option :type, default: proc { "host" }
 
       def artifacts
         case type

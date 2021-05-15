@@ -1,17 +1,16 @@
 # frozen_string_literal: true
 
 require "addressable/uri"
+require "dry-initializer"
 require "email_address"
 require "ipaddr"
 require "public_suffix"
 
 module Mihari
   class TypeChecker
-    attr_reader :data
+    extend Dry::Initializer
 
-    def initialize(data)
-      @data = data
-    end
+    param :data
 
     # @return [true, false]
     def hash?

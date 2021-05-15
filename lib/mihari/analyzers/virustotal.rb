@@ -5,17 +5,17 @@ require "virustotal"
 module Mihari
   module Analyzers
     class VirusTotal < Base
-      attr_reader :indicator, :type, :title, :description, :tags
+      param :indicator
+      option :title, default: proc { "VirusTotal lookup" }
+      option :description, default: proc { "indicator = #{indicator}" }
+      option :tags, default: proc { [] }
 
-      def initialize(indicator, title: nil, description: nil, tags: [])
-        super()
+      attr_reader :type
 
-        @indicator = indicator
+      def initialize(*args, **kwargs)
+        super
+
         @type = TypeChecker.type(indicator)
-
-        @title = title || "VirusTotal lookup"
-        @description = description || "indicator = #{indicator}"
-        @tags = tags
       end
 
       def artifacts

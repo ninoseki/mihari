@@ -5,17 +5,17 @@ require "securitytrails"
 module Mihari
   module Analyzers
     class SecurityTrails < Base
-      attr_reader :query, :type, :title, :description, :tags
+      param :query
+      option :title, default: proc { "SecurityTrails lookup" }
+      option :description, default: proc { "query = #{query}" }
+      option :tags, default: proc { [] }
 
-      def initialize(query, title: nil, description: nil, tags: [])
-        super()
+      attr_reader :type
 
-        @query = query
+      def initialize(*args, **kwargs)
+        super
+
         @type = TypeChecker.type(query)
-
-        @title = title || "SecurityTrails lookup"
-        @description = description || "query = #{query}"
-        @tags = tags
       end
 
       def artifacts

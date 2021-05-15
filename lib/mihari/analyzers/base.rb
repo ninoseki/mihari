@@ -1,16 +1,21 @@
 # frozen_string_literal: true
 
+require "dry-initializer"
 require "parallel"
 
 module Mihari
   module Analyzers
     class Base
+      extend Dry::Initializer
+
       include Configurable
       include Retriable
 
       attr_accessor :ignore_old_artifacts, :ignore_threshold
 
-      def initialize
+      def initialize(*args, **kwargs)
+        super
+
         @ignore_old_artifacts = false
         @ignore_threshold = 0
       end

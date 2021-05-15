@@ -5,16 +5,10 @@ require "shodan"
 module Mihari
   module Analyzers
     class Shodan < Base
-      attr_reader :title, :description, :query, :tags
-
-      def initialize(query, title: nil, description: nil, tags: [])
-        super()
-
-        @query = query
-        @title = title || "Shodan lookup"
-        @description = description || "query = #{query}"
-        @tags = tags
-      end
+      param :query
+      option :title, default: proc { "Shodan lookup" }
+      option :description, default: proc { "query = #{query}" }
+      option :tags, default: proc { [] }
 
       def artifacts
         results = search

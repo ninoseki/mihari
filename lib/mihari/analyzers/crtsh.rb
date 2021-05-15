@@ -5,18 +5,11 @@ require "crtsh"
 module Mihari
   module Analyzers
     class Crtsh < Base
-      attr_reader :title, :description, :query, :tags, :exclude_expired
-
-      def initialize(query, title: nil, description: nil, tags: [], exclude_expired: nil)
-        super()
-
-        @query = query
-        @title = title || "crt.sh lookup"
-        @description = description || "query = #{query}"
-        @tags = tags
-
-        @exclude_expired = exclude_expired.nil? ? true : exclude_expired
-      end
+      param :query
+      option :title, default: proc { "crt.sh lookup" }
+      option :description, default: proc { "query = #{query}" }
+      option :tags, default: proc { [] }
+      option :exclude_expired, default: proc { true }
 
       def artifacts
         results = search

@@ -6,18 +6,11 @@ require "json"
 module Mihari
   module Analyzers
     class Spyse < Base
-      attr_reader :query, :type, :title, :description, :tags
-
-      def initialize(query, title: nil, description: nil, tags: [], type: "domain")
-        super()
-
-        @query = query
-
-        @title = title || "Spyse lookup"
-        @description = description || "query = #{query}"
-        @tags = tags
-        @type = type
-      end
+      param :query
+      option :title, default: proc { "Spyse lookup" }
+      option :description, default: proc {  "query = #{query}" }
+      option :type, default: proc { "domain" }
+      option :tags, default: proc { [] }
 
       def artifacts
         lookup || []
