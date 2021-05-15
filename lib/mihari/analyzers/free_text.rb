@@ -5,22 +5,15 @@ require "parallel"
 module Mihari
   module Analyzers
     class FreeText < Base
-      attr_reader :query, :title, :description, :tags
+      param :query
+      option :title, default: proc { "Free text cross search" }
+      option :description, default: proc { "query = #{query}" }
+      option :tags, default: proc { [] }
 
       ANALYZERS = [
         Mihari::Analyzers::BinaryEdge,
         Mihari::Analyzers::Censys
       ].freeze
-
-      def initialize(query, title: nil, description: nil, tags: [])
-        super()
-
-        @query = query
-
-        @title = title || "Free text cross search"
-        @description = description || "query = #{query}"
-        @tags = tags
-      end
 
       def artifacts
         Parallel.map(analyzers) do |analyzer|

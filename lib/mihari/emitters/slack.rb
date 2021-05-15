@@ -2,18 +2,17 @@
 
 require "slack-notifier"
 require "digest/sha2"
+require "dry-initializer"
 
 module Mihari
   module Emitters
     class Attachment
       include Mem
 
-      attr_reader :data, :data_type
+      extend Dry::Initializer
 
-      def initialize(data:, data_type:)
-        @data = data
-        @data_type = data_type
-      end
+      option :data
+      option :data_type
 
       def actions
         [vt_link, urlscan_link, censys_link, shodan_link].compact

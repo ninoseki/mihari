@@ -5,17 +5,10 @@ require "parallel"
 module Mihari
   module Analyzers
     class SSHFingerprint < Base
-      attr_reader :fingerprint, :title, :description, :tags
-
-      def initialize(fingerprint, title: nil, description: nil, tags: [])
-        super()
-
-        @fingerprint = fingerprint
-
-        @title = title || "SSH fingerprint cross search"
-        @description = description || "fingerprint = #{fingerprint}"
-        @tags = tags
-      end
+      param :fingerprint
+      option :title, default: proc { "SSH fingerprint cross search" }
+      option :description, default: proc { "fingerprint = #{fingerprint}" }
+      option :tags, default: proc { [] }
 
       def artifacts
         Parallel.map(analyzers) do |analyzer|

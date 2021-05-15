@@ -5,16 +5,10 @@ require "dnpedia"
 module Mihari
   module Analyzers
     class DNPedia < Base
-      attr_reader :query, :title, :description, :tags
-
-      def initialize(query, title: nil, description: nil, tags: [])
-        super()
-
-        @query = query
-        @title = title || "DNPedia domain lookup"
-        @description = description || "query = #{query}"
-        @tags = tags
-      end
+      param :query
+      option :title, default: proc { "DNPedia domain lookup" }
+      option :description, default: proc { "query = #{query}" }
+      option :tags, default: proc { [] }
 
       def artifacts
         lookup || []

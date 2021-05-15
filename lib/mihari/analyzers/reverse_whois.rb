@@ -5,22 +5,22 @@ require "parallel"
 module Mihari
   module Analyzers
     class ReveseWhois < Base
-      attr_reader :query, :type, :title, :description, :tags
+      param :query
+      option :title, default: proc { "ReveseWhois cross search" }
+      option :description, default: proc { "query = #{query}" }
+      option :tags, default: proc { [] }
+
+      attr_reader :type
 
       ANALYZERS = [
         Mihari::Analyzers::PassiveTotal,
         Mihari::Analyzers::SecurityTrails
       ].freeze
 
-      def initialize(query, title: nil, description: nil, tags: [])
-        super()
+      def initialize(*args, **kwargs)
+        super
 
-        @query = query
         @type = TypeChecker.type(query)
-
-        @title = title || "ReveseWhois cross search"
-        @description = description || "query = #{query}"
-        @tags = tags
       end
 
       def artifacts

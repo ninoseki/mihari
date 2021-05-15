@@ -5,17 +5,17 @@ require "otx_ruby"
 module Mihari
   module Analyzers
     class OTX < Base
-      attr_reader :query, :type, :title, :description, :tags
+      param :query
+      option :title, default: proc { "OTX lookup" }
+      option :description, default: proc { "query = #{query}" }
+      option :tags, default: proc { [] }
 
-      def initialize(query, title: nil, description: nil, tags: [])
-        super()
+      attr_reader :type
 
-        @query = query
+      def initialize(*args, **kwargs)
+        super
+
         @type = TypeChecker.type(query)
-
-        @title = title || "OTX lookup"
-        @description = description || "query = #{query}"
-        @tags = tags
       end
 
       def artifacts

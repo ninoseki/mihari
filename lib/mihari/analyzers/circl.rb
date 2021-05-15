@@ -5,17 +5,17 @@ require "passive_circl"
 module Mihari
   module Analyzers
     class CIRCL < Base
-      attr_reader :title, :description, :tags
+      param :query
+      option :title, default: proc { "CIRCL passive lookup" }
+      option :description, default: proc { "query = #{query}" }
+      option :tags, default: proc { [] }
 
-      def initialize(query, title: nil, description: nil, tags: [])
-        super()
+      attr_reader :type
 
-        @query = query
+      def initialize(*args, **kwargs)
+        super
+
         @type = TypeChecker.type(query)
-
-        @title = title || "CIRCL passive lookup"
-        @description = description || "query = #{query}"
-        @tags = tags
       end
 
       def artifacts

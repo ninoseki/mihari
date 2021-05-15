@@ -5,17 +5,11 @@ require "censu"
 module Mihari
   module Analyzers
     class Censys < Base
-      attr_reader :title, :description, :query, :tags, :type
-
-      def initialize(query, title: nil, description: nil, tags: [], type: "ipv4")
-        super()
-
-        @query = query
-        @title = title || "Censys lookup"
-        @description = description || "query = #{query}"
-        @tags = tags
-        @type = type
-      end
+      param :query
+      option :title, default: proc { "Censys lookup" }
+      option :description, default: proc { "query = #{query}" }
+      option :tags, default: proc { [] }
+      option :type, default: proc { "ipv4" }
 
       def artifacts
         case type

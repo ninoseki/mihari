@@ -5,22 +5,22 @@ require "parallel"
 module Mihari
   module Analyzers
     class PassiveSSL < Base
-      attr_reader :query, :type, :title, :description, :tags
+      param :query
+      option :title, default: proc { "PassiveSSL cross search" }
+      option :description, default: proc { "query = #{query}" }
+      option :tags, default: proc { [] }
+
+      attr_reader :type
 
       ANALYZERS = [
         Mihari::Analyzers::CIRCL,
         Mihari::Analyzers::PassiveTotal
       ].freeze
 
-      def initialize(query, title: nil, description: nil, tags: [])
-        super()
+      def initialize(*args, **kwargs)
+        super
 
-        @query = query
         @type = TypeChecker.detailed_type(query)
-
-        @title = title || "PassiveSSL cross search"
-        @description = description || "query = #{query}"
-        @tags = tags
       end
 
       def artifacts
