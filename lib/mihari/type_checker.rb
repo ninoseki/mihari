@@ -12,6 +12,12 @@ module Mihari
 
     param :data
 
+    def initialize(*args, **kwargs)
+      super
+
+      raise ArgumentError if data.is_a?(Hash)
+    end
+
     # @return [true, false]
     def hash?
       md5? || sha1? || sha256? || sha512?
