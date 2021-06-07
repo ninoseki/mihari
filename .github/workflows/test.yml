@@ -58,13 +58,11 @@ jobs:
       - name: Test with PostgreSQL
         env:
           DATABASE: postgresql://postgres:postgres@localhost:5432/test
-          COVERALLS_REPO_TOKEN: ${{ secrets.COVERALLS_REPO_TOKEN }}
         run: |
           bundle exec rake
 
       - name: Test with MySQL
         env:
           DATABASE: mysql2://mysql:mysql@127.0.0.1:3306/test
-          COVERALLS_REPO_TOKEN: ${{ secrets.COVERALLS_REPO_TOKEN }}
         run: |
           bundle exec rake

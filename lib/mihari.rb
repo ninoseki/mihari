@@ -21,8 +21,6 @@ def show_errors(errors)
     path = message.path.map(&:to_s).join
     puts "- #{path} #{message.text}".colorize(:red)
   end
-
-  exit false
 end
 
 module Mihari
