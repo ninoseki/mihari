@@ -5,11 +5,22 @@ require "dry/files"
 require "mem"
 require "yaml"
 
+require "mihari/schemas/configuration"
+
 def truthy?(value)
   return true if value == "true"
   return true if value == true
 
   false
+end
+
+def show_errors(errors)
+  puts "There are errors in the configuration file!".colorize(:red)
+
+  errors.messages.each do |message|
+    path = message.path.map(&:to_s).join
+    puts "- #{path} #{message.text}".colorize(:red)
+  end
 end
 
 module Mihari
@@ -63,6 +74,11 @@ module Mihari
       rescue TypeError => _e
         return
       end
+
+      # validate loaded yaml data
+      contract = Schemas::ConfigurationContract.new
+      result = contract.call(yaml)
+      show_errors(result.errors) unless result.errors.empty?
 
       yaml.each do |key, value|
         Mihari.config.send("#{key.downcase}=".to_sym, value)

@@ -24,11 +24,12 @@ Gem::Specification.new do |spec|
   spec.require_paths = ["lib"]
 
   spec.add_development_dependency "bundler", "~> 2.2"
-  spec.add_development_dependency "coveralls", "~> 0.8"
+  spec.add_development_dependency "coveralls_reborn", "~> 0.22"
   spec.add_development_dependency "execjs", "~> 2.8"
   spec.add_development_dependency "fakefs", "~> 1.3"
   spec.add_development_dependency "mysql2", "~> 0.5"
   spec.add_development_dependency "pg", "~> 1.2"
+  spec.add_development_dependency "prmd", "~> 0.14"
   spec.add_development_dependency "rack-test", "~> 1.1"
   spec.add_development_dependency "rake", "~> 13.0"
   spec.add_development_dependency "rspec", "~> 3.10"
@@ -51,6 +52,7 @@ Gem::Specification.new do |spec|
   spec.add_dependency "dry-configurable", "~> 0.12"
   spec.add_dependency "dry-files", "~> 0.1"
   spec.add_dependency "dry-initializer", "~> 3.0"
+  spec.add_dependency "dry-validation", "~> 1.6"
   spec.add_dependency "email_address", "~> 0.1"
   spec.add_dependency "hachi", "~> 1.0"
   spec.add_dependency "launchy", "~> 2.5"
