@@ -24,7 +24,7 @@ Gem::Specification.new do |spec|
   spec.require_paths = ["lib"]
 
   spec.add_development_dependency "bundler", "~> 2.2"
-  spec.add_development_dependency "coveralls", "~> 0.8"
+  spec.add_development_dependency "coveralls_reborn", "~> 0.22"
   spec.add_development_dependency "execjs", "~> 2.8"
   spec.add_development_dependency "fakefs", "~> 1.3"
   spec.add_development_dependency "mysql2", "~> 0.5"
