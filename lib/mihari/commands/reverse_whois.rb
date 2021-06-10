@@ -11,7 +11,7 @@ module Mihari
           method_option :tags, type: :array, desc: "tags"
           def reverse_whois(query)
             with_error_handling do
-              run_analyzer Analyzers::ReveseWhois, query: refang(query), options: options
+              run_analyzer Analyzers::ReveseWhois, query: query, options: options
             end
           end
         end

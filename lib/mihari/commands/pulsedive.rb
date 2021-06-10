@@ -11,7 +11,7 @@ module Mihari
           method_option :tags, type: :array, desc: "tags"
           def pulsedive(indiactor)
             with_error_handling do
-              run_analyzer Analyzers::Pulsedive, query: refang(indiactor), options: options
+              run_analyzer Analyzers::Pulsedive, query: indiactor, options: options
             end
           end
         end

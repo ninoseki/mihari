@@ -11,7 +11,7 @@ module Mihari
           method_option :tags, type: :array, desc: "tags"
           def virustotal(indiactor)
             with_error_handling do
-              run_analyzer Analyzers::VirusTotal, query: refang(indiactor), options: options
+              run_analyzer Analyzers::VirusTotal, query: indiactor, options: options
             end
           end
         end

@@ -5,6 +5,8 @@ require "passive_circl"
 module Mihari
   module Analyzers
     class CIRCL < Base
+      include Mixins::Utils
+
       param :query
       option :title, default: proc { "CIRCL passive lookup" }
       option :description, default: proc { "query = #{query}" }
@@ -15,6 +17,7 @@ module Mihari
       def initialize(*args, **kwargs)
         super
 
+        @query = refang(query)
         @type = TypeChecker.type(query)
       end
 

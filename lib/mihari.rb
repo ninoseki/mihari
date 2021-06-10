@@ -118,6 +118,8 @@ require "mihari/retriable"
 require "mihari/analyzers/base"
 require "mihari/analyzers/basic"
 
+require "mihari/analyzers/mixins/utils"
+
 require "mihari/analyzers/binaryedge"
 require "mihari/analyzers/censys"
 require "mihari/analyzers/circl"

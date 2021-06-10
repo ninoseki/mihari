@@ -11,7 +11,7 @@ module Mihari
           method_option :tags, type: :array, desc: "tags"
           def passivetotal(indicator)
             with_error_handling do
-              run_analyzer Analyzers::PassiveTotal, query: refang(indicator), options: options
+              run_analyzer Analyzers::PassiveTotal, query: indicator, options: options
             end
           end
         end

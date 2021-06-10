@@ -117,10 +117,6 @@ module Mihari
         end
         options
       end
-
-      def refang(indicator)
-        indicator.gsub("[.]", ".").gsub("(.)", ".")
-      end
     end
   end
 end
