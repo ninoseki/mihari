@@ -11,7 +11,7 @@ module Mihari
           method_option :tags, type: :array, desc: "tags"
           def dnstwister(domain)
             with_error_handling do
-              run_analyzer Analyzers::DNSTwister, query: refang(domain), options: options
+              run_analyzer Analyzers::DNSTwister, query: domain, options: options
             end
           end
         end

@@ -5,9 +5,11 @@ require "virustotal"
 module Mihari
   module Analyzers
     class VirusTotal < Base
-      param :indicator
+      include Mixins::Utils
+
+      param :query
       option :title, default: proc { "VirusTotal lookup" }
-      option :description, default: proc { "indicator = #{indicator}" }
+      option :description, default: proc { "query = #{query}" }
       option :tags, default: proc { [] }
 
       attr_reader :type
@@ -15,7 +17,8 @@ module Mihari
       def initialize(*args, **kwargs)
         super
 
-        @type = TypeChecker.type(indicator)
+        @query = refang(query)
+        @type = TypeChecker.type(query)
       end
 
       def artifacts
@@ -43,12 +46,12 @@ module Mihari
         when "ip"
           ip_lookup
         else
-          raise InvalidInputError, "#{indicator}(type: #{type || "unknown"}) is not supported." unless valid_type?
+          raise InvalidInputError, "#{query}(type: #{type || "unknown"}) is not supported." unless valid_type?
         end
       end
 
       def domain_lookup
-        res = api.domain.resolutions(indicator)
+        res = api.domain.resolutions(query)
 
         data = res["data"] || []
         data.map do |item|
@@ -57,7 +60,7 @@ module Mihari
       end
 
       def ip_lookup
-        res = api.ip_address.resolutions(indicator)
+        res = api.ip_address.resolutions(query)
 
         data = res["data"] || []
         data.map do |item|

@@ -5,6 +5,8 @@ require "pulsedive"
 module Mihari
   module Analyzers
     class Pulsedive < Base
+      include Mixins::Utils
+
       param :query
       option :title, default: proc { "Pulsedive lookup" }
       option :description, default: proc { "query = #{query}" }
@@ -15,6 +17,7 @@ module Mihari
       def initialize(*args, **kwargs)
         super
 
+        @query = refang(query)
         @type = TypeChecker.type(query)
       end
 

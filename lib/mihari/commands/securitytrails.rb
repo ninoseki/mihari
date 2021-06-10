@@ -11,7 +11,7 @@ module Mihari
           method_option :tags, type: :array, desc: "tags"
           def securitytrails(indiactor)
             with_error_handling do
-              run_analyzer Analyzers::SecurityTrails, query: refang(indiactor), options: options
+              run_analyzer Analyzers::SecurityTrails, query: indiactor, options: options
             end
           end
           map "st" => :securitytrails

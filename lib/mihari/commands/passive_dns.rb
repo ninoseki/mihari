@@ -11,7 +11,7 @@ module Mihari
           method_option :tags, type: :array, desc: "tags"
           def passive_dns(query)
             with_error_handling do
-              run_analyzer Analyzers::PassiveDNS, query: refang(query), options: options
+              run_analyzer Analyzers::PassiveDNS, query: query, options: options
             end
           end
         end
