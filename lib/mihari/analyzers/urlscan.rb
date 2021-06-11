@@ -23,9 +23,9 @@ module Mihari
         return [] unless result
 
         results = result["results"] || []
-        results.map do |match|
+        results.filter_map do |match|
           match.dig "page", target_type
-        end.compact.uniq
+        end.uniq
       end
 
       private

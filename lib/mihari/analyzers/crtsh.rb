@@ -13,7 +13,7 @@ module Mihari
 
       def artifacts
         results = search
-        name_values = results.map { |result| result["name_value"] }.compact
+        name_values = results.filter_map { |result| result["name_value"] }
         name_values.map(&:lines).flatten.uniq.map(&:chomp)
       end
 

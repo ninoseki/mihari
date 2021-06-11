@@ -54,18 +54,18 @@ module Mihari
         res = api.domain.resolutions(query)
 
         data = res["data"] || []
-        data.map do |item|
+        data.filter_map do |item|
           item.dig("attributes", "ip_address")
-        end.compact.uniq
+        end.uniq
       end
 
       def ip_lookup
         res = api.ip_address.resolutions(query)
 
         data = res["data"] || []
-        data.map do |item|
+        data.filter_map do |item|
           item.dig("attributes", "host_name")
-        end.compact.uniq
+        end.uniq
       end
     end
   end

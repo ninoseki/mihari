@@ -8,7 +8,7 @@ module Mihari
     class Spyse < Base
       param :query
       option :title, default: proc { "Spyse lookup" }
-      option :description, default: proc {  "query = #{query}" }
+      option :description, default: proc { "query = #{query}" }
       option :type, default: proc { "domain" }
       option :tags, default: proc { [] }
 
