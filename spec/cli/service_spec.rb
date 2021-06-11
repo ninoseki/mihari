@@ -73,15 +73,6 @@ RSpec.describe Mihari::CLI::Service do
     end
   end
 
-  describe "#securitytrailsDomainFeed" do
-    before { allow(Mihari::Analyzers::SecurityTrailsDomainFeed).to receive(:new).and_return(mock) }
-
-    it do
-      subject.start ["securitytrails_domain_feed", query]
-      expect(mock).to have_received(:run).once
-    end
-  end
-
   describe "#crtsh" do
     before { allow(Mihari::Analyzers::Crtsh).to receive(:new).and_return(mock) }
 
@@ -168,51 +159,6 @@ RSpec.describe Mihari::CLI::Service do
 
     it do
       subject.start ["spyse", query]
-      expect(mock).to have_received(:run).once
-    end
-  end
-
-  describe "#passive_dns" do
-    before { allow(Mihari::Analyzers::PassiveDNS).to receive(:new).and_return(mock) }
-
-    it do
-      subject.start ["passive_dns", query]
-      expect(mock).to have_received(:run).once
-    end
-  end
-
-  describe "#passive_ssl" do
-    before { allow(Mihari::Analyzers::PassiveSSL).to receive(:new).and_return(mock) }
-
-    it do
-      subject.start ["passive_ssl", query]
-      expect(mock).to have_received(:run).once
-    end
-  end
-
-  describe "#revese_whois" do
-    before { allow(Mihari::Analyzers::ReveseWhois).to receive(:new).and_return(mock) }
-
-    it do
-      subject.start ["reverse_whois", query]
-      expect(mock).to have_received(:run).once
-    end
-  end
-
-  describe "#http_hash" do
-    before { allow(Mihari::Analyzers::HTTPHash).to receive(:new).and_return(mock) }
-
-    it do
-      subject.start ["http_hash"]
-      expect(mock).to have_received(:run).once
-    end
-  end
-
-  describe "#http_hash" do
-    before { allow(Mihari::Analyzers::SSHFingerprint).to receive(:new).and_return(mock) }
-
-    it do
-      subject.start ["ssh_fingerprint", query]
       expect(mock).to have_received(:run).once
     end
   end
