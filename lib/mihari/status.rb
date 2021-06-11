@@ -21,6 +21,8 @@ module Mihari
     end
 
     def build_status(klass)
+      return nil if klass == Mihari::Analyzers::Rule
+
       is_analyzer = klass.ancestors.include?(Mihari::Analyzers::Base)
 
       instance = is_analyzer ? klass.new("dummy") : klass.new

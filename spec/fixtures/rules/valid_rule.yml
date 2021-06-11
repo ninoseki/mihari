@@ -1,0 +1,5 @@
+title: "foo"
+description: "foo"
+queries:
+  - service: "shodan"
+    query: "foo"

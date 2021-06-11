@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-RSpec.describe Mihari::CLI do
+RSpec.describe Mihari::CLI::Service do
   subject { described_class }
 
   let(:query) { "test" }
@@ -257,13 +257,13 @@ RSpec.describe Mihari::CLI do
     end
   end
 
-  describe "#symbolize_hash_keys" do
+  describe "#symbolize_hash" do
     subject { described_class.new }
 
     let(:hash) { { "a" => 1 } }
 
     it do
-      res = subject.symbolize_hash_keys(hash)
+      res = subject.symbolize_hash(hash)
       expect(res).to eq(a: 1)
     end
   end

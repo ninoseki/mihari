@@ -1,20 +1,18 @@
 # frozen_string_literal: true
 
-RSpec.describe Mihari::Analyzers::Base, :vcr do
-  class Test < Mihari::Analyzers::Base
-    def artifacts
-      %w[1.1.1.1 google.com 2.2.2.2 example.com nil]
-    end
+class Test < Mihari::Analyzers::Base
+  public :normalized_artifacts
 
-    def description
-      "test"
-    end
-
-    def normalized_artifacts
-      super
-    end
+  def artifacts
+    %w[1.1.1.1 google.com 2.2.2.2 example.com nil]
   end
 
+  def description
+    "test"
+  end
+end
+
+RSpec.describe Mihari::Analyzers::Base, :vcr do
   subject { Test.new }
 
   describe "#title" do

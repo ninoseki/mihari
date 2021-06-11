@@ -47,6 +47,7 @@ Gem::Specification.new do |spec|
   spec.add_dependency "censu", "~> 0.2"
   spec.add_dependency "colorize", "~> 0.8"
   spec.add_dependency "crtsh-rb", "~> 0.3"
+  spec.add_dependency "cymbal", "~> 2.0"
   spec.add_dependency "dnpedia", "~> 0.1"
   spec.add_dependency "dnstwister", "~> 0.1"
   spec.add_dependency "dry-configurable", "~> 0.12"
@@ -82,6 +83,7 @@ Gem::Specification.new do |spec|
   spec.add_dependency "thor", "~> 1.1"
   spec.add_dependency "thread_safe", "~> 0.3"
   spec.add_dependency "urlscan", "~> 0.7"
+  spec.add_dependency "uuidtools", "~> 2.2"
   spec.add_dependency "virustotalx", "~> 1.1"
   spec.add_dependency "zoomeye-rb", "~> 0.2"
 end
