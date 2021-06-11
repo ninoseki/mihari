@@ -1,0 +1,755 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: https://api.shodan.io/shodan/host/search?facets=&key=<SHODAN_API_KEY>&minify=true&page=1&query=ip:1.1.1.1
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+      Host:
+      - api.shodan.io
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Thu, 10 Jun 2021 00:05:42 GMT
+      Content-Type:
+      - application/json; charset=UTF-8
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+      Vary:
+      - Accept-Encoding
+      Access-Control-Allow-Origin:
+      - "*"
+      X-Frame-Options:
+      - DENY
+      X-Content-Type-Options:
+      - nosniff
+      X-Xss-Protection:
+      - 1; mode=block
+      Strict-Transport-Security:
+      - max-age=63072000; includeSubDomains
+      Permissions-Policy:
+      - interest-cohort=()
+      Cf-Cache-Status:
+      - DYNAMIC
+      Cf-Request-Id:
+      - 0a94d6404a00001d9390bc9000000001
+      Expect-Ct:
+      - max-age=604800, report-uri="https://report-uri.cloudflare.com/cdn-cgi/beacon/expect-ct"
+      Report-To:
+      - '{"endpoints":[{"url":"https:\/\/a.nel.cloudflare.com\/report\/v2?s=7OsO4wk3AkwL6DgNufTHFpUIGOMKhLU0sXjYdOemHav5ZzWtcHYJIRYmN04HuAxhZxWhmJqZQlNUKGBhKzD5p7vXcfYKFlOWXceujC340JTPDIfAB7ODqcyD"}],"group":"cf-nel","max_age":604800}'
+      Nel:
+      - '{"report_to":"cf-nel","max_age":604800}'
+      Server:
+      - cloudflare
+      Cf-Ray:
+      - 65ce597a0e441d93-NRT
+      Alt-Svc:
+      - h3-27=":443"; ma=86400, h3-28=":443"; ma=86400, h3-29=":443"; ma=86400, h3=":443";
+        ma=86400
+    body:
+      encoding: ASCII-8BIT
+      string: '{"matches": [{"product": "mDNS", "hash": 1807775173, "timestamp": "2021-05-15T12:35:13.187722",
+        "isp": "Cloudflare, Inc.", "transport": "udp", "mdns": {"answers": {"PTR":
+        ["_workstation._tcp.local"]}}, "data": "mDNS:\n  answers:\n    PTR:\n      _workstation._tcp.local",
+        "asn": "AS13335", "port": 5353, "hostnames": ["one.one.one.one"], "location":
+        {"city": "Miami", "region_code": "FL", "area_code": null, "longitude": -80.18,
+        "country_code3": null, "latitude": 25.7867, "postal_code": null, "dma_code":
+        null, "country_code": "US", "country_name": "United States"}, "ip": 16843009,
+        "domains": ["one.one"], "org": "APNIC and Cloudflare DNS Resolver project",
+        "_id": "64e3cbeb-458f-4d96-9cf4-4be02ad72fd4", "os": null, "_shodan": {"crawler":
+        "621591a63b031d098ca76175401cfed505d8b4a7", "ptr": true, "id": "b460fb7b-c338-48ea-8ba3-86f3ac8a6f43",
+        "module": "mdns", "options": {}}, "ip_str": "1.1.1.1"}, {"asn": "AS13335",
+        "http": {"robots_hash": null, "redirects": [], "securitytxt": null, "title":
+        "301 Moved Permanently", "sitemap_hash": null, "robots": null, "favicon":
+        {"data": "AAABAAMAMDAAAAEAIACoJQAANgAAACAgAAABACAAqBAAAN4lAAAQEAAAAQAgAGgEAACGNgAAKAAA\nADAAAABgAAAAAQAgAAAAAAAAJAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA\nXFXBBGhg2jFtZOJ7b2bmuHBn6NxwZ+nwcWjq+XFo6v1xaOr/cWjq/3Bo6v9ob+v/Vnzs/0GL7f8y\nmO3/K57t/yqf7f8rnu3/K5/t/yyg7f8soO3/LaHt/y2i7P8touz/LqLt/y6j7f8uo+z/LqPs/y+k\n7f8vpez+L6Xr/S+l7PkvpevwL6Tq3C+j6LguoeR7LJzcMSeJwgQAAAAAAAAAAAAAAAAAAAAAAAAA\nAAAAAAAAAAAAAAAAAAAAAABoYNklbmXlknFo6+Ryae79c2rv/3Nq7/9zau//c2rv/3Nq7/9zau//\nc2rv/3Nq7/9zau//c2rv/3Bs7/9ldfD/UoTx/zyV8v8vn/L/K6Py/yyj8v8to/L/LqXx/y6l8f8u\npfH/L6by/y+m8f8vpvH/L6bx/zCn8f8wqPH/MKjw/zCp8f8xqfH/Manx/zGq8f8xqvD9MKjt5C+k\n5pIsnNslAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAGlj3kdvaOnTcmru/3Jq7/9yau//cmrv\n/3Jr7/9yau//cmvv/3Jr7/9ya+//cmrv/3Jq7/9ya+//cmrv/3Jq7/9zau//c2rv/25u7/9eevD/\nRo7x/zOe8v8spPL/LaXx/y6l8f8upfH/L6bx/y+m8f8vpvH/L6bx/zCn8f8wqPD/MKjw/zCp8f8w\nqfH/Manx/zGq8f8xq/H/Mavx/zGr8f8wqOzULqDgRwAAAAAAAAAAAAAAAAAAAAAAAAAAaWPeSG9p\n6uNxa+//cWvv/3Fr7/9xa+//cWvv/3Fr7/9xa+//cWvv/3Fr7/9xa+//cWvv/3Fr7/9xa+//cWvv\n/3Fr7/9xa+//cWvv/3Fr7/9yau//cGzv/2N38P9JjPD/NJ/x/y2m8f8upfH/L6Xx/y+m8f8vpvH/\nL6bx/zCn8v8wqPD/MKjw/zCp8f8xqfH/Manx/zGq8v8xq/H/Mavx/zGr8f8yrPL/Mars4y6g30gA\nAAAAAAAAAAAAAABlYdklbmjp03Fr7/9xa+//cWvv/3Fr7/9xa+//cWvv/3Fr7/9xa+//cWvv/3Fr\n7/9xa+//cWvv/3Fr7/9xa+//cWvv/3Fr7/9xa+//cWvv/3Fr7/9xa+//cWvv/3Jq7/9wa+//Y3fv\n/0eP8P8yovH/Lqbx/y+m8f8vpvH/L6bx/zCn8v8wqPD/MKjw/zGp8f8xqfH/Manx/zGq8f8xq/H/\nMavx/zGr8f8yrPH/Mq3x/zCp69MqndwlAAAAAElGngNrZuSRcGvu/3Br7/9wa+//cGvv/3Br7/9w\na+//cGvv/3Br7/9wa+//cGvv/3Br7/9wa+//cGvv/3Br7/9wa+//cGvv/3Br7/9wa+//cGvv/3Br\n7/9wa+//cGvv/3Br7/9wa+//cWrv/29s7/9ee/D/QJbx/zCl8f8upvH/L6bx/zCn8f8wqPD/MKjw\n/zCp8f8xqfH/Manx/zGq8f8xq/H/Mavx/zGr8f8yrPH/Mq3x/zKs8P8vpueSGnakA2Vh2jFuaevj\ncGvv/3Br7/9wa+//cGvv/3Br7/9wa+//cGvv/3Br7/9wa+//cGvv/3Br7/9wa+//cGvv/3Br7/9w\na+//cGvv/3Br7/9wa+//cGvv/3Br7/9wa+//cGvv/3Br7/9wa+//cGvv/3Br7/9xau//bG/v/1OF\n8P82oPH/Lqfx/zCn8f8wqPD/MKjw/zCo8P8wqfH/Manx/zGq8f8xq/L/Mavx/zGr8f8yrfH/Mq3x\n/zKt8f8yqu3jLZ7dMWpl4npwa+79cGvv/3Br7/9wa+//cGvv/3Br7/9wa+//cGvv/3Br7/9wa+//\ncGvv/3Br7/9wa+//cGvv/3Br7/9wa+//cGvv/3Br7/9wa+//cGvv/29r7/9vau//b2vv/29q7/9v\nau//cGvv/3Fr7/9wa+//cWvv/3Fr7/9jd/D/Q5Tx/zCn8f8wqPD/MKjw/zCo8P8wqfH/Manx/zGq\n8f8xq/H/Mavx/zGr8f8yrPL/Mq3x/zKt8f8yrfH9MKTle2xo57dwbPD/cGzw/3Bs8P9wbPD/cGzw\n/3Bs8P9wbPD/cGzw/3Bs8P9wbPD/cGzw/3Bs8P9wbPD/cGzw/3Bs8P9wbPD/cGzw/3Bs8P9wa/D/\ndnLw/7Sy9//Ew/n/w8L4/8PC+P/Dwvj/j43z/29q8P9wbPD/cGzw/3Bs8P9xa/D/bG/w/1GI8P81\no/D/L6nw/zCp8f8xqfH/Manx/zGq8f8xq/H/Mavx/zGr8f8yrPL/Mq3x/zKt8f8zrfH/Mafpt2xp\n6dtvbPD/b2zw/29s8P9vbPD/b2zw/29s8P9vbPD/b2zw/29s8P9vbPD/b2zw/29s8P9vbPD/b2zw\n/29s8P9vbPD/b2zw/29s8P9ua/L/eHb0/+Xk/f//////////////////////pqX1/21p8P9vbPD/\nb2zw/29s8P9vbPD/b2zw/29s8P9dffD/O53w/zCp8f8xqfH/Manx/zGq8v8xq/H/Mavx/zGr8f8y\nrPL/Mq3x/zKt8f8zrvL/Manr3Gxq6vBubPD/bmzw/29s8P9ubPD/b2zw/25s8P9vbPD/b2zw/25s\n8P9ubPD/bmzw/29s8P9ubPD/bmzw/25s8P9ubfD/bmzx/25s8v93c9b/kY2n/+vq6P//////////\n////////////pqT1/2xp8v9vbPD/b2zw/25s8P9vbPD/b2zw/25s8P9vbPD/ZXXw/0OX8f8xqfH/\nManx/zKq8v8xq/H/Mavx/zGr8f8yrPH/Mq3x/zKt8f8zrvL/Mqrs8Gtr6/ltbfD/bW3w/21t8P9t\nbfD/bW3w/21t8P9tbfD/bW3w/21t8P9tbfD/bW3w/21t8P9tbfD/bW3w/21t8P9sbfH/cG/o/46I\nlP+upTT/vbUl//Lx1P////////////////////7/u76k/3x+r/9ubu3/bWzy/21t8P9tbfD/bW3w\n/21t8P9tbfD/bmzw/2lx8P9KkPH/Mqjx/zGq8v8xqvL/Mavx/zGr8f8yrPL/Mq3x/zKt8f8zrvL/\nMqvt+Wpr6/1sbfD/bG3w/2xt8P9sbfD/bG3w/2xt8P9sbfD/bG3w/2xt8P9sbfD/bG3w/2xt8P9s\nbfD/bG3w/2tt8v9yceL/nZRs/7yvFf+8sA7/vrYj//Lx1P//////////////////////yc9u/6Cs\nH/+MlHP/cnTZ/2ts8/9sbfD/bG3w/2xt8P9sbfD/bG3w/2xt8P9qb/D/T4vx/zOn8f8xq/H/Mavx\n/zGr8f8yrPL/Mq3x/zKt8f8zrvL/Mqvt/Whr6/5qbfD/am3w/2tt8P9qbfD/am3w/2tt8P9rbfD/\na23w/2tt8P9qbfD/am3w/2pt8P9rbfD/am3x/29w5f+glWj/v7AQ/72wEf+7sBH/vbYj//Lx1P//\n////////////////////yM5w/6OwFP+isRj/k6FM/3V7xP9qbPL/a23w/2pt8P9rbfD/a23w/2tt\n8P9rbfD/am7w/1KH8f80p/H/Mavx/zGr8f8yrPL/Mq3x/zKt8f8zrvL/Mqvt/2dr6/9pbfD/aW3w\n/2lt8P9pbfD/aW3w/2lt8P9pbfD/aW3w/2lt8P9pbfD/aW3w/2lt8P9pbfH/bG/o/52Scv/DrxD/\nv7AQ/72wEv+7sBH/vbYk//Lx1P//////////////////////yM5w/6KwFf+isRr/n7IY/5WnO/92\nf7n/aWzy/2lt8P9pbfD/aW3w/2lt8P9pbfD/aW3w/2lt8P9UhfD/Nafx/zGs8f8yrPL/Mq3x/zKt\n8f8zrvL/Mqvt/2ds6/9pbu//aW7v/2lu7/9pbu//aW7v/2lu7/9pbu//aW7v/2lu7/9pbu//aW7v\n/2ht8P9scOn/mpB5/8StEf/DsA7/v7AQ/72wEv+7sBH/vrYj//Lx1P//////////////////////\nyM5w/6KwFf+isRr/n7Eb/52yGf+TqTf/dX+5/2ht8v9pbu//aW7v/2lu7/9pbu//aW7v/2lu7/9p\nbu//VIXw/zWn8f8yrfH/Mq3x/zKt8f8zrvL/Mqvt/2ds6/9pb/D/aW/w/2lv8P9pbvD/aW/w/2lv\n8P9pbvD/aW7w/2hv8P9pb/D/aG7x/2tw6v+aj3z/xa0S/8auDf/Drw//v7AQ/72wEv+7sBH/vbYj\n//Lx1P//////////////////////yM9x/6KwFf+isRr/n7Eb/5yxG/+Zshn/j6c9/3J8xf9obvP/\naW7v/2hu8P9pb/D/aW/w/2lu8P9pbvD/aW7w/1OH8f81qvH/Mq3x/zKt8f8zrvL/Mqvt/2Zt7P9o\nb/H/aG/x/2hv8f9ob/H/aG/x/2hv8f9ob/H/aG/x/2dv8f9nb/L/anHr/5uPfP/IrRH/yK8M/8Wu\nDv/Drw//v7AQ/72wEv+7sBH/vbYj//Lx1P//////////////////////yM5w/6KwFf+isRr/n7Eb\n/5yxG/+ZsRz/l7Ia/4qiTv9sd9j/Z27z/2dv8f9ob/H/aG/x/2hv8f9ob/H/aG/x/2dv8f9PivH/\nNKvx/zKt8f8zrvL/Mqvu/2Rt7P9mcPH/Zm/w/2Zv8P9mb/H/Zm/x/2Zv8f9mb/H/Zm/w/2Vv8v9q\ncen/nZB5/8utEP/Lrwv/x68N/8WuDv/DsA//v7AQ/72wEv+7sBH/vrYj//Lx1P//////////////\n////////yM5w/6KwFf+isRr/n7Eb/5yxHP+ZsRz/lrEd/5WyG/+Bmmr/aHLo/2Zv8v9mb/H/Zm/x\n/2Zv8f9mb/D/Zm/x/2Zv8f9lcPD/S4/x/zOs8f8zrvL/Mqvu/2Nu7P9lcfH/ZXDw/2Vw8P9kcPD/\nZHDw/2Vw8P9lcPD/ZHDy/2lz5/+hknP/z60O/86uCv/Krgz/x68N/8WuDv/Drw//v7AQ/72wEv+7\nsBH/vrYk//Lx1P//////////////////////yM9x/6KwFf+isRr/n7Eb/5yxHP+ZsRz/lrEd/5Wy\nHf+QsSL/eI2T/2Rw8f9lcPH/ZXDx/2Rw8P9kcPD/ZXDw/2Vw8P9lcPD/Y3Px/0aV8f8zrvL/Mqvu\n/2Fw7P9jcvH/Y3Lx/2Ny8f9jcvH/Y3Lx/2Ny8f9icfP/anXk/6WUav/Srgz/0q8J/82uC//Krgz/\nx68N/8WuDv/DsA//v7AR/7utEP+2pgz/uagd//Ht0///////////////////////ysxu/6SuE/+h\nsRr/nrEb/5yxHP+ZsRz/lrEd/5WxHf+Rsh3/iqs0/22Awf9jcfT/Y3Lx/2Ny8f9jcvH/Y3Lx/2Ny\n8f9jcvH/ZHHx/1938f9AnfL/Mqzu/2Fw7P9jcvH/Y3Lx/2Ny8f9jcvH/Y3Lx/2Fx8/9sd97/rJdf\n/9WuCv/Urgn/0a8K/82uC//Krgz/x68N/8WuDv+/qg3/tZ4J/6+TBP+tjgD/tZcU//Hr0f//////\n////////////////1b9j/7ibAv+wpA7/pK0X/5yxHP+Yshz/lrEd/5WxHf+RsR//j7Id/4GgW/9l\nduX/YnLy/2Ny8f9jcvH/Y3Lx/2Ny8f9jcvH/Y3Lx/2Nx8f9affH/O6Dt/19w7f9hc/L/YXPy/2Fy\n8f9hcvH/YHL0/2951/+0m1L/2a4H/9WuCP/Trgn/0a8K/82uC//Lrwz/xKsM/7acB/+tkAP/q4wB\n/6yNAP+vjwD/uJgU//Hr0v//////////////////////2L5i/8CVAP/CmAH/v5wE/7KlDv+erxn/\nlrId/5SxHf+Rsh//jrEg/4yyI/9zjpf/YXLz/2Fz8v9hc/L/YXLx/2Fy8f9hc/L/YXPy/2Fz8v9i\ncvL/VX3t/15x7f9gc/L/YHPy/2Bz8v9ecvX/dHzN/72eRP/crgX/2a4H/9WuCf/Trgn/0a8K/82u\nC//Aown/r5ID/6qLAP+rjAD/rY4B/6+PAf+ykAD/uZkU//Hr0v//////////////////////2b5i\n/8GWAP/EmQD/x5oB/8mbAf/CoAb/qKsU/5WxHf+Rsh//jrEg/4yzH/+Eqj//ZnzT/2By9P9gc/L/\nYHPy/2Bz8v9gc/L/YHPy/2Bz8v9gc/L/XnDt/1xy7f9edPL/XXTy/1xz9f96gL//xqI1/+CuA//b\nrgf/2K4H/9WuCf/Trwn/zqwK/7qcBv+qjQH/qYsA/6yNAf+tjgH/r48B/7KQAf+zkQD/u5oU//Lr\n0v//////////////////////2b9j/8KXAP/GmgH/yZsB/8ucAf/OnAD/zJ8C/7OoD/+UsR7/jrIg\n/4yzIf+KtCD/dZd9/1508f9edPL/XnTy/1508v9edPL/XnTy/1508v9edPL/XHLt/1py7f9cdPP/\nW3T0/4KEr//Ppif/4q4D/96tBv/brgf/2K4H/9auCf/Oqgj/tZYE/6iLAP+qiwD/q4wB/62OAf+w\njwH/spAB/7SRAf+1kQD/vZoU//Lr0f//////////////////////28Bj/8WYAP/JmwH/y5wB/82c\nAP/PngH/0p8B/9OgAf+6pw3/k7Ae/4uzIf+KsyH/g601/2SBx/9bc/T/XHTy/1x08v9cdPL/XHTy\n/1x08v9cdPL/WnLt/1dz7v9adfL/jYme/9ioG//krgL/4K4F/96tBv/brgf/2a4H/82oB/+xkwP/\np4oA/6qMAP+rjAH/rY4B/6+PAf+ykAH/tJEB/7aSAP+3kwD/v5wU//Ps0v//////////////////\n////3MBj/8iaAP/LnAH/zZwA/8+dAP/RnwH/06AB/9WhAP/XogD/vqgN/5GyH/+JsyP/iLQh/3Sb\ndf9advD/WnXy/1p18v9adfL/WnXy/1p18v9adfL/WHPt/1t25/+aj4n/4aoS/+euAf/jrQX/4K0F\n/96tBv/crgf/z6cG/7CRA/+nigD/qowA/6uNAf+tjgH/r48A/7KQAP+zkQD/tZEA/7eTAP+6lAD/\nwpwT//Ps0f//////////////////////3sFj/8qaAP/NnAD/z54B/9GfAf/ToAH/1aEA/9eiAP/a\nowD/26MA/7uqDv+NsyH/h7Mj/4GuNf9hg8f/WHb0/1h38v9Yd/L/WHfy/1h38v9Zd/L/V3Xt/62U\nYf/mqwv/660B/+atA//irgX/4K4F/9+uBv/Rpwb/sJEC/6eKAP+qjAD/rI0B/62OAf+wkAT/tZYN\n/7eWDf+5lw3/u5gN/72aDf/Amgz/xqIg//Tt1P//////////////////////38Ji/8ybAP/PngH/\n0Z8B/9OgAf/VoQD/16IA/9umC//erBj/36kM/9+mAf+zrRP/h7Mj/4W0If9vmnv/Vnjx/1Z38v9W\nd/L/Vnfy/1Z38v9WePL/VHXt/+mqAv/srQH/6q0D/+atA//irQX/4a4G/9aoBf+ykgL/p4oA/6qM\nAP+sjQH/rY4B/6+OAP++oiz/6uG7/+3mx//u5sb/7+bG/+/nxv/w58b/8enK//z79f//////////\n////////////4MJi/86cAP/SnwH/06AB/9WhAP/XogH/2qIA/+jFYP/68tz/7c1x/+KmAP/eqAP/\no7AZ/4O0I/98rD3/XIHS/1V49P9VePL/VXjy/1V48v9VePP/U3bu/+iqAf/srQL/6q0D/+atA//j\nrgX/26oF/7aUAv+nigD/qowA/6uNAf+tjgH/r48B/7GPAP/EqTf/+/nx////////////////////\n////////////////////////////////////////371l/8+bAP/UoQD/1aEA/9ehAP/aogD/26IA\n/+vMcf//////8dSG/+SmAP/oqAH/1asI/5CyIP+AsyT/aJSS/1R49f9UefP/VHnz/1R58/9UefT/\nUnfv/+iqAf/srQL/6a0D/+atA//grAX/vZgD/6eKAP+qjAD/rI0B/6yOAf+wjwH/s5IA/7KMAP+/\nl0D/+vfy////////////////////////////////////////////////////////////1aRw/8F2\nDv/OkQv/5cVo/+7Ylv/v2JT/8NiS//bpw///////+O3N//HQd//prQv/6qsA/76vEP+CtCL/dadR\n/1V+5f9SevX/U3r0/1N69P9TevT/UXjv/+iqAf/srQL/6a0D/+WtA//GnAP/qIsB/6qMAP+sjQH/\nrY4B/6+PAf+ykQH/r4EJ/6NYGf+vZU3/69rV//Xr6P/69fP//v39////////////////////////\n////////////////////1KFx/7pmFf/BcRz/7da5///////9+/P//frz//78+P///////v78//nr\nxf/rsBH/7KwA/+atBP+dshz/e7Is/16Mtv9Qevf/UHv0/1B79P9Qe/T/T3jv/+iqAf/srQL/6q0D\n/9OiAv+rjQH/qosA/6yNAf+tjgH/sI8B/7GPAf+qchD/nkgl/5s+Kf+eRCz/p1U7/61eQ/+2b1T/\nxY11/929rf/27ur/////////////////////////////////1KFx/7tnFf+/bRf/4LqQ//379//r\nyXj/5rQt//LXjf//////9d6e/+23J//srQT/7K0B/+6tBP/LsBH/hLQh/2qdeP9NfPL/TXzz/018\n8/9NfPP/THnu/+ipAf7srQL/36cD/7KRAf+piwD/rI0B/6yNAf+wkAH/sY4D/6ZnFf+bQCj/mz0q\n/5w/Kf+dQCj/nkIm/6BEJP+hRiP/okgg/6hQJf+5c07/48i5//79/f//////////////////////\n1KFx/7tnFf+/bBb/xn0s/+/bxP/05s3/3aEg/+/Lb///////9NaF/+uqAP/srQH/7K0F/+uuCf/l\nsA3/oLMd/3SrRf9Qg9z/Sn30/0t98/9LfvP/SXvu/+mpAf3prAL/v5cC/6mLAf+sjQH/rY4B/6+P\nAf+xjgP/pGQY/5k8Kf+aPCr/mz4q/5w/Kv+dQCj/nkMn/6BGJv+iSCb/pEsk/6dOI/+nTh//r14w\n/+DBrv//////////////////////1KFx/7tnFf+/bRj/wW8U/9CRR//37uT/68+j/+jCgf//////\n9deG/+ysAP/srQX/6q4J/+iwDf/nsRH/xrIa/3+yKv9YkLD/SH73/0h/8/9Jf/T/R3zv/empAfnR\nnwL/q4wB/6uMAf+sjgH/r48B/7GQAf+lZxX/lzsq/5g6Kv+aPCr/mz4q/5w/Kf+dQSj/nkMn/6FG\nJv+iSCb/pEsk/6dOI/+pUCL/qlEf/7htQP/z6OD/////////////////1KFy/7tnFf+/bRj/wXAX\n/8NyFP/bq2//+vTs//Tp1v//////9deG/+ysAf/qrgn/6LAN/+axEf/ksRb/3bIa/5i0If9jn3v/\nRYD0/0WA9P9FgPT/RH3v+dmiAvC0kAH/q4wB/62OAf+wjwH/s5EB/6hxEf+XOyr/ljkr/5g6Kv+a\nPCr/mz4q/5w/Kf+dQSj/nkMn/6FGJv+iSCb/pEsk/6dOI/+pUCL/q1Mi/65WIf/Vqo3/7NnL/+zY\nyP/t2cf/zZNc/7tnFv+/bRj/wXEW/8RzFf/Hexn/58eb////////////9NaI/+qtBv/osA3/5rER\n/+OxFv/gshr/4LQe/7i1If9wqk3/RoXk/0KC9f9CgvT/QH/u8LOOAdurjQH/rY4B/6+PAf+zkgH/\nroAJ/5hBJ/+VNSz/ljkr/5g7Kv+aPCn/mz0q/5w/Kf+dQCj/nkMn/6FGJv+iSCb/pEsk/6dOI/+p\nUCL/q1Mi/61VIP+wWyT/tGIn/7ZmJv+6aSX/umge/7xqGf+/bRj/wXEX/8R0Fv/GdxL/z4gp//He\nwv/+/v7/7cuH/+SoCv/msRH/47EW/+GyGv/etB7/3bQi/9C1Jf+EsjL/S47F/z6D9/8/g/T/Pn/t\n3KWHAbesjQH/r48B/7KRAf+yjQP/nlIf/5Q0Lf+VNiz/ljkr/5g7Kv+aPCr/mz4q/5w/Kf+dQCf/\nnkMl/6BGJP+iSCP/pEsh/6dOIP+pUCH/q1Mi/61VIP+vWB//sVse/7NfHf+3Yhv/uWYa/7xqGf+/\nbhj/wnEX/8R0Ff/HeBT/ynsR/9OQL//dp1H/2pov/9yZDf/jsBX/4bIa/960Hv/ctSL/2rYn/9i3\nK/+gtSn/VJmd/zuE+P88hPT/On/rt6OGAHuujgH9spAB/7SSAP+nbBP/lDYs/5Q1LP+VNiz/ljkr\n/5g7Kv+aPCn/mz0p/5w/KP+eQzr/oEhd/6JJdf+iSHr/okhq/6VKT/+nTjT/qlMk/61WHf+vWB7/\nsVwe/7NfHf+3Yhz/uWYa/7xqGf+/bRj/wXAX/8R0Ff/HeBT/y3wT/82AD//Qgwv/1IkL/9iPDP/e\nphT/3rQe/9y1Iv/atif/2Lcr/9e3L/+6tyz/Y6N0/zmG9P85hfT9Nn7oe6CCADGvjgHjtJIA/7GH\nBv+aRCb/lDMu/5Q1LP+VNiz/lzkr/5g6Kv+aPCj/mz8v/6FLav+lU6z/pVHG/6RNzP+jSM//oUPP\n/6A/yf+fPbj/oT+V/6ZIYf+tVDH/sVwc/7NfHP+3Yhz/uWYa/7xqGf+/bhj/wXAX/8R0Fv/HeBT/\nynwT/82BEf/RhQ//1IoN/9iOC//bmQ7/3LEf/9q2J//Ytyv/1rcu/9S4M//KuTP/eKxV/zmL6P80\nhfHjMXvfMXNeAAOsiwCStZIB/6ZkF/+UMy7/lDQt/5Q1LP+VNiz/lzkr/5g6Kv+aPjD/o1F//6hb\nwf+mV8f/pVLI/6RNyv+jSM3/oUPO/58+0P+dOdP/mzPY/5ow1P+cMrj/pUN1/7BZMP+3Yxr/uWYa\n/7xqGf+/bRj/wXAX/8R0Ff/HeBT/y3wT/86BEf/RhQ//1IoN/9iOC//bkwn/26cZ/9i3K//Wty//\n1Lgz/9G5OP/Puzr/kLNE/zuQ1f8vg+6SI1qjAwAAAACmiAAlrYAI05lDJ/+UMy7/lDQt/5Q1LP+V\nNiz/lzkr/5g7K/+hT3P/qWDA/6hcw/+mV8X/pVLH/6RNyv+jSMz/oUPO/58+0P+dOdL/nDTV/5kv\n1v+XKdv/liXb/5sutv+sTVf/uWUc/7xqGf+/bRj/wXAX/8R0Fv/HeBT/y3wT/82BEf/RhQ//1IoN\n/9iPC//ckwn/3Z0O/9e0Kv/TuDP/0bk4/8+7PP/Ou0D/prdA/0SVrNMjefMmAAAAAAAAAAAAAAAA\nlEwcSJE0LOOUNC7/lDQt/5Q1LP+VNiz/lzgp/51GUf+pY7X/qWHC/6hcw/+mV8X/pVLI/6RNyv+j\nSM3/oUPO/58+0P+dOdL/nDTV/5kv1v+XKtn/liXb/5Ug3/+WINT/p0J2/7tnHv+/bhf/wnAX/8Rz\nFv/GeBT/y3wT/86BEf/RhQ//1IoN/9iPC//bkwn/35gI/9msIf/Rujj/z7s8/827QP/KvEX/trdD\n42efWUgAAAAAAAAAAAAAAAAAAAAAAAAAAIkwKkeQMy3UlDQt/5Q1LP+VNiv/lzow/6Zbkf+rZsH/\nqWHB/6hcw/+mV8X/pVLI/6RNyv+jSMz/oUPO/58+0P+dOdL/nDTV/5kv1v+XKtn/liXb/5Uh3f+T\nG+D/kxnc/6dAfP++bBv/wnEW/8R0Ff/GeBT/ynwT/86BEf/RhQ//1IoN/9iPC//ckwr/35gH/92j\nE//QuTn/zbtA/8m7RP/DuEbUubBESAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACGLikljTIr\nkpE0K+SUNSr9nUdU/6xot/+rZsD/qWHB/6hcw/+nV8X/pVLI/6RNyv+jSM3/oUPO/6A+0P+eOdL/\nnDTV/5kv1v+XKtn/lyXb/5Yg3f+UHN//khbi/5MV3P+tSmX/wnEV/8R0Fv/GeBT/ynwT/86BEf/R\nhQ//1IoN/9iPC//ckwn/35gI/+GeCf/RszH9xrlE5L+0RJK1q0IlAAAAAAAAAAAAAAAAAAAAAAAA\nAAAAAAAAAAAAAAAAAAAAAAAAdioiBIYwKDGMMiZ7nVN4uKhoudynY7vwpV+9+qRav/2jVcH/olDE\n/6FLxv+gRsn/nULK/5w9zP+aOM7/mTPR/5Yu0v+UKdX/kyTX/5Ig2f+RG9r/kBbd/40Q4f+UHb//\nuGMv/8ByFP/DdRT/x3oS/8p+EP/Ngg7/0IcN/dSMC/rWkAnw2JQH3NmXBrjMoyB7ta1CMaGZOgQA\nAAAAAAAAAAAAAAAAAAAAAAAAAP8AAAAA/wAA+AAAAAAfAADwAAAAAA8AAOAAAAAABwAAwAAAAAAD\nAACAAAAAAAEAAIAAAAAAAQAAgAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA\nAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA\nAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA\nAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA\nAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgAAA\nAAABAACAAAAAAAEAAIAAAAAAAQAAwAAAAAADAADgAAAAAAcAAPAAAAAADwAA+AAAAAAfAAD/AAAA\nAP8AACgAAAAgAAAAQAAAAAEAIAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABr\nYt8kb2bmgXBo6spxaOvscmns+nJp7P5yaez/cGrs/2Rz7f9Pg+7/OpTu/y2e7/8roe//LKHv/y2i\n7/8to+7/LqPu/y6k7v8upO7/L6Xu/y+m7f4wp+76MKbt7DCm7MovpeiBLZ/gJQAAAAAAAAAAAAAA\nAAAAAABXU7sCbGbkUnBp69Nyau79cmrv/3Jq7/9yau//cmrv/3Jq7/9yau//c2rv/3Jr7/9scO//\nW33w/0OQ8f8xn/L/LaXy/y6l8f8upvH/L6bx/y+m8f8wp/H/MKjw/zCp8f8xqfH/Marx/zGq8P0w\nqe7TL6XmUiaIvAIAAAAAAAAAAGtm5FJwau3rcWvv/3Fr7/9xa+//cWvv/3Fr7/9xa+//cWvv/3Fr\n7/9xa+//cWvv/3Fr7/9yau//b2zv/2F48P9Hj/D/MqHx/y2m8f8vpvH/L6bx/zCn8f8wqPD/Manx\n/zGp8f8xqvH/Mavx/zGs8f8xq+/rL6XmUwAAAABoY94lbmnr0nBr7/9wa+//cGvv/3Br7/9wa+//\ncGvv/3Br7/9wa+//cGvv/3Br7/9wa+//cGvv/3Br7/9wa+//cWrv/29s7/9fevD/QZXx/zCl8f8v\np/H/MKfx/zCo8P8wqfH/Manx/zGq8f8xq/H/Mazx/zKt8f8xqu7SLaLhJWxn5oBwa+79cGvv/3Br\n7/9wa+//cGvv/3Br7/9wa+//cGvv/3Br7/9wa+//cGvv/3Br7/9wa+//bmnv/25p7/9uaO//b2nv\n/3Fq7/9tbu//VYTw/zef8f8vqPH/MKjw/zCp8f8xqfH/Marx/zGr8f8xrPH/Mq3x/zKt8f0xp+mB\nbmnqyXBs8P9wbPD/cGzw/3Bs8P9wbPD/cGzw/3Bs8P9wbPD/cGzw/3Bs8P9wbPD/cGvw/3Vx8f+h\nnvX/q6j2/6up9v+RjvP/cGvw/3Br8P9xa/D/ZHfw/0OV8f8wqPD/MKnx/zGp8f8xqvH/Mavx/zKs\n8f8yrfH/Mq3x/zKq7cltauzrb2zw/29s8P9vbPD/b2zw/29s8P9vbPD/b2zw/29s8P9vbPD/b2zw\n/29s8f9ta/L/f3zn/+np+f///////////8C/+v9tavL/b2zw/29s8P9wa/D/a3Dw/06L8P8zpvH/\nMarx/zGq8v8xq/H/Mazx/zKt8f8yrfH/Mqvu7Gxr7fptbfD/bm3w/25t8P9ubfD/bm3w/21t8P9t\nbfD/bm3w/21t8P9tbPH/cG/p/4yGmf+vqFj/8vHd////////////yszR/3d3yf9tbPH/bW3x/25t\n8P9ubPD/bW3w/1eD8P83o/H/Mavy/zGr8f8xrPH/Mq3x/zKt8f8yrO/6amzt/mxt8P9sbfD/a23w\n/2xt8P9sbfD/bG3w/2tt8P9rbfD/a23x/3Bw5v+bk3L/uq4V/8C4JP/08tn////////////Z3Zr/\nnKgx/4GImf9tb+v/a23x/2tt8P9sbfD/bGzw/1t+8P85ofH/MKzx/zGs8f8yrfH/Mq3x/zKs7/5o\nbO3/am3w/2pt8P9pbfD/am3w/2pt8P9qbfD/aW3w/2lt8f9sb+n/nJF0/8CvEv+8sBD/v7cn//Py\n2f///////////9jdm/+jsRX/nq8g/4WSfv9scOf/aW3x/2pt8P9qbfD/amzw/1178P87ofH/Mazx\n/zKt8f8yrfH/Mqzv/2ht7f9pbvD/aW7v/2lu7/9pbu//aW7v/2lu7/9obvH/a3Dq/5mPe//DrRL/\nwbAP/7ywEP+/tyf/8/LZ////////////2d2b/6OwF/+gsRr/m7Ed/4OTe/9qcOn/aW7w/2lu7/9p\nbvD/am3v/1178P87ovH/Ma7x/zKt8v8yrO//Z23u/2hv8f9ob/H/aG/x/2hv8f9ob/H/Z2/y/2px\n6/+aj33/xq0S/8WvDf/AsBD/vLAQ/7+3J//z8tn////////////Z3Zv/o7AX/5+xG/+bshv/lrAg\n/32Ojv9ob/D/aG/x/2hv8f9ob/H/aW7x/1t98f85pPH/Mq7x/zKs7/9kbu7/ZnDx/2Zw8f9lcPH/\nZnDx/2Vv8v9pcun/nZB6/8qtEf/Irwz/xa8O/8CwEP+8sBH/v7cn//Py2f///////////9jdm/+j\nsBf/oLEb/5uxHP+Xshv/ka4q/3OEr/9lb/P/ZnDx/2Zw8P9mcPH/Zm/w/1aC8f83qPH/Mq3v/2Jw\n7v9kcfH/ZHHx/2Rx8f9jcfP/aXTm/6GScv/QrQ7/za4L/8iuDf/Frw7/wLAQ/7qrDv+8riP/8/DY\n////////////2tua/6SvFv+fsRv/m7Ec/5exHf+Ushv/iKZD/2l61P9jcfP/ZHHx/2Rx8f9kcfH/\nZHHx/1CJ8f81qe//YXHu/2Jy8f9icvH/YXLz/2p24v+plmf/1K4L/9KvCf/Nrgz/yK4N/7+oDP+0\nmwf/rpEC/7aZGP/y7df////////////i0pL/uZwF/6+mD/+frxn/lrId/5OxHv+Psh3/e5l0/2Nz\n7f9icvL/YnLx/2Jy8f9icvH/YXPx/0uM7/9fcu//YHPy/19y9P9tedr/splY/9muB//Vrgj/0q8K\n/8qsC/+4nQf/rY8C/6yNAP+vjgD/uZoY//Pt1////////////+TSkf/ClwD/xZoB/8CfBv+pqhP/\nlLEd/4+yH/+JsCv/bIa0/2By9f9gc/L/YHPy/2Bz8v9hc/L/XnPv/1xy7/9cc/X/cXzP/7ydR//e\nrgX/2a4H/9WuCf/KqAj/spQE/6qMAP+sjQH/sI8B/7KQAP+8mxf/8+7X////////////5dKS/8SZ\nAP/JmwH/zZwA/82eAv+0qA//krEe/4u0H/99oln/X3jm/1108/9ddPL/XnTy/1108v9ccu//V3Py\n/3eAwv/HoTf/4q4D/96tBv/argf/yaUH/66QAv+piwD/rI0B/6+PAf+zkQH/tZEA/7+dF//07tf/\n///////////m05L/yJoA/8ycAf/PngD/06AB/9WhAf+6qQ7/j7If/4eyJ/9qi6f/WnT1/1p18v9a\ndfL/W3Xy/1lz7/+GhqT/06Qp/+euAf/hrQX/3q4G/8ukBv+tjwL/qYsA/6yNAf+vjgD/spAA/7WR\nAP+4kgD/wp0X//Xu1////////////+jUkv/LmwD/z54B/9KgAf/VoQD/2aIA/9ukAf+4rBD/irQg\n/3mkVv9ae+b/V3fz/1h38v9Yd/L/V3Xv/+GoEP/rrQH/5a0E/+GuBf/PpAX/rY8C/6mLAP+sjQD/\nsJEF/9C8Zv/dzo//3s6N/+DPjP/k1Jf/+vft////////////6dWR/8+dAP/SnwD/1aAA/9ihAP/o\nxWH/7Mpp/9+nA/+srxb/gbIq/2OLsP9Vd/X/VXjy/1V48v9Ud+//6qsB/+qtAv/mrQT/1qcF/7CQ\nAv+piwD/rI0B/7CQAP+1kwj/6t+6///////////////////////////////////////my5b/zZQD\n/9inFP/esSn/4bIo//Tir//357v/6LAa/9yqBf+Xshr/cKBp/1V77/9UefT/VHr0/1N48P/pqwH/\n6q0C/9+qA/+2kwL/qYsA/6yNAf+vkAD/sIYG/6lnHP/bvKz/9u7r//v49v//////////////////\n/////////+G9nP+9bRL/4Ll7//v14//579L//Pnu//379P/z0nv/7KsA/8ivDf9+rzX/WYbM/1B6\n9v9Re/T/UHnx/+qrAf/orAP/wZkC/6mLAP+sjQH/sJAB/6x8C/+gTiL/nD8p/6VQOP+uYUX/undb\n/9Ook//z6OL/////////////////4b2c/7xnFP/SmV3/9urU/+e7T//24q7/+Oi8/+20HP/trQH/\n564I/5+zHP9ilpL/THv1/0188/9Me/D/6qsB/tGgAv+sjQH/rI0B/6+QAf+qdw7/nEUl/5s8Kv+c\nPyn/nUIm/6BFJP+iRyH/p00g/7pzTf/t3NL////////////hvZz/vGkX/8FxGf/hu47/7dGe//Ha\nq//45Kv/7K0D/+uuBv/prw3/yLIW/3SmWf9Lger/SX70/0h98P7cpAH6tJEB/6uNAf+wkAD/q3sL\n/5pEJv+YOir/mz0q/5w/Kf+eQyf/oUYm/6NKJf+nTiP/qU8d/8aKZv/69fH//fz7/9+6l/+8aRf/\nwG8V/8h+Jf/r07L/+/fy//jjqv/rrgn/6K8N/+WxE//dsxn/krAz/02KzP9EgPf/Q3/x+reRAeys\njQH/sJAB/6+GBv+bSSP/ljcs/5k7Kv+bPSr/nD8p/55CJ/+hRiX/pEok/6hPIv+qUSH/sV0p/8KB\nU//HiVf/w3s8/71qGf/BcBf/xHMS/9KSPf/26tr/89qk/+asD//ksRP/4bIa/9+0IP+1tSX/WJef\n/z+C9/8/gfDsqIoBya+PAf+yjwL/oVwa/5Q0LP+WOCv/mDsq/5s9Kf+cPyf/nkMv/6FHOf+jSjX/\np04o/6pSIP+uVh3/r1kb/7NeGv+4ZBn/vWsZ/8FwF//EdRX/yXsT/9WTMv/ZmjD/3Z0Q/+GyGf/d\ntCD/27Yn/8y3KP9to3T/O4X0/zqC8MmpigGAs5IA/ax4Df+WOSv/lDUs/5Y4K/+ZOyn/mz4u/6BJ\nZf+jT6D/o0u2/6JFtP+hQqD/o0R6/6lNSP+wWST/tWEb/7llG/+9axj/wXAX/8R1Ff/JexP/zoEO\n/9OHC//Zkgz/3Kwa/9q2J//Xty3/07kw/4qtVv85iuf9NILugaeJACWxiwPSn1Eg/5MzLv+UNSz/\nljgr/5k8Lv+iUHr/p1rB/6ZTyf+kTMz/oUTP/5890/+cNdb/mjDL/584nf+tUUv/uGUb/71rGP/B\nbxf/xHUV/8l7E//PghH/04kO/9mPCv/coBP/17Yr/9S4M//Sujn/o7RJ/z6QydIpfPQlAAAAAKBj\nFFKUOCvrlDQu/5Q1LP+WOCr/n0ti/6lhvf+nW8T/plPH/6RMy/+hRM7/nz3Q/5w11P+YLtj/liXd\n/5clzv+oQ3P/vGge/8FwFv/EdRX/yXsT/8+CEP/TiQ7/2ZAL/92YCv/XsSj/0Lo6/867QP+3uEXr\nXZyBUwAAAAAAAAAAaxosAo0xLFKSMyzTlDUr/Zg9Ov+oYKP/qmPC/6dbxP+mU8f/pEzL/6FEzv+f\nPdD/nDXU/5ku1/+XJtr/lR/f/5Ma3P+oQXr/wG4a/8R1Ff/JexP/z4IQ/9SJDf/ZkAv/3pcH/9qo\nHP/Muj/9xrlE0760RVKLlTUCAAAAAAAAAAAAAAAAAAAAAIkxKSWOMiaBm0hbyqlmuOynYb76pVnB\n/qNSxf+iS8j/n0PL/508zv+aNdH/ly3U/5Um2P+TH9v/kRff/5IX0/+zVkn/w3QT/8d6E//MgBD/\n0YcN/taOC/rblAjs2Z4PysWyO4G5sEQlAAAAAAAAAAAAAAAA8AAAD+AAAAfAAAADgAAAAQAAAAAA\nAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA\nAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIAAAAHAAAAD4AAAB/AAAA8oAAAAEAAA\nACAAAAABACAAAAAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAaGPdBm9o6mNxae3Vcmrt+XJq7v9ubO7/\nXXrv/0OO7/8xn/D/LaXw/y+l8P8wp+//MKjv+TGp79YwqOxjLqHfBm5o6mNwau7ucWvv/3Fr7/9x\na+//cWvv/3Fq7/9sa+//XXnw/0KT8f8xpfH/L6jx/zGp8f8xqvH/Mavw7jGp7GNvau3UcGvv/3Br\n7/9wa+//cGvv/3Br8P9zbvP/j4vz/4uG8/9ub/H/VoPw/zig8P8wqvH/Marx/zKs8f8yrO/UbWzu\n+G5s8P9ubPD/bmzw/25s8f9wbun/ko21/+3s7v/a2u//d3bg/25r8v9hefD/P5rx/zGr8f8yrPH/\nMqzw+Wps7/9rbfD/a23w/2pt8f9tb+r/mJB5/8C2Mf/39eH/6OvH/5ijVf91e8X/a2zy/2R08P9D\nmPH/Ma3x/zKt8P9obu//aG7w/2hu8f9rcOv/mY99/8CuEv/DuSn/9vXi/+nsxv+ltR7/kaVB/3B6\nyv9obfL/Y3Tw/0Ka8f8yrfD/ZHDv/2Rw8v9ocun/nZB6/8itEf/Crgz/wLQo//b04f/p68X/prIg\n/5myGf+Gn1n/aHXi/2Vv8v9eePH/QJzw/19x8v9oduX/pZRu/9KuDf/FqAn/tJgE/7meHf/18eD/\n7+bB/7yiEP+pqhL/krEe/3WRj/9hcvP/YnLy/1p68P9retf/sZhd/9utCP/FogX/ro8C/62MAP+8\nmxr/9vHf//HmwP/Lngn/zZ4B/7SpC/+Hqjr/Yn7R/1x09P9cc/H/yKA5/+OtBf/JoAT/rI4A/7id\nIP/MtFD/1b1i//n26v/y5r//0aEJ/9aiBP/gtC//tK8W/2+Whv9Wd/P/Vnfx/+utAf/TowP/ro8B\n/6yHAP/Ho2H/9e3o//37+f//////79zA/9OeNv/rz3v/9+a4/+a6Lf+Vpzr/VoDe/1F59P/epgL/\ntZMB/6uEBv+iVx3/okox/7FlR//NmoH/+PLv/+3YxP/Igz7/6syZ//bgqf/vth3/yK8V/2CQrP9J\nfPb/vJUB+K2JBP+fVB7/mTsq/51AJf+hRiD/qFAe/82YdP/XqoH/wG8a/9SaVP/y2aX/6LIZ/92z\nFv9+oHf/QIHy+a6OAdSlZxX/lTcr/5o9Lv+gR1v/okh2/6VJXv+sUzP/tmIa/79tF//HeRf/1pIm\n/92kFv/ctiT/n61X/z6J39SpeAxjmEEn7pU2Lf+hTnL/plbB/6JIz/+eOdD/nDK8/6lHbf+9ah7/\nx3gT/9GEDf/alw//1rUu/7i2Se5Wl6hjiCwsBpAxKWOXPkHWp16t+aZXxv+hR8v/nDnR/5Yp2v+U\nHtj/rUpm/8Z4Ev/QhA//2pMK+dOtKNbDuUVjnq1ABsADAACAAQAAAAAAAAAAAAAAAAAAAAAAAAAA\nAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgAEAAMADAAA=\n",
+        "hash": 1456990795, "location": "http://1.1.1.1:80/favicon.ico"}, "host":
+        "1.1.1.1", "html": "<html>\r\n<head><title>301 Moved Permanently</title></head>\r\n<body>\r\n<center><h1>301
+        Moved Permanently</h1></center>\r\n<hr><center>cloudflare</center>\r\n</body>\r\n</html>\r\n",
+        "location": "/", "components": {}, "securitytxt_hash": null, "server": "cloudflare",
+        "sitemap": null, "html_hash": -1903558660}, "timestamp": "2021-06-09T23:31:56.459074",
+        "org": "APNIC and Cloudflare DNS Resolver project", "isp": "Cloudflare, Inc.",
+        "transport": "tcp", "data": "HTTP/1.1 301 Moved Permanently\r\nDate: Wed,
+        09 Jun 2021 23:31:56 GMT\r\nContent-Type: text/html\r\nContent-Length: 167\r\nConnection:
+        keep-alive\r\nLocation: https://1.1.1.1/\r\ncf-request-id: 0a94b7578f0000256049123000000001\r\nVary:
+        Accept-Encoding\r\nServer: cloudflare\r\nCF-RAY: 65ce2805bb982560-SJC\r\n\r\n",
+        "port": 80, "hostnames": ["one.one.one.one"], "location": {"city": "Miami",
+        "region_code": "FL", "area_code": null, "longitude": -80.18, "country_code3":
+        null, "latitude": 25.7867, "postal_code": null, "dma_code": null, "country_code":
+        "US", "country_name": "United States"}, "ip": 16843009, "domains": ["one.one"],
+        "hash": 233716795, "_id": "4d7ad3bc-0838-41ac-b02e-4212575c29f8", "os": null,
+        "_shodan": {"crawler": "1fbfdc1b0315df33fa363e4b960720395dff69c6", "ptr":
+        true, "id": "41b92b08-ba07-40db-8359-e20b8fb878b1", "module": "http", "options":
+        {"scan": "RGPZCVv7s2Kdvb38"}}, "ip_str": "1.1.1.1"}, {"asn": "AS13335", "http":
+        {"robots_hash": null, "redirects": [], "securitytxt": null, "title": "1.1.1.1
+        \u2014 The free app that makes your Internet faster.", "sitemap_hash": null,
+        "robots": null, "favicon": {"data": "AAABAAMAMDAAAAEAIACoJQAANgAAACAgAAABACAAqBAAAN4lAAAQEAAAAQAgAGgEAACGNgAAKAAA\nADAAAABgAAAAAQAgAAAAAAAAJAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA\nXFXBBGhg2jFtZOJ7b2bmuHBn6NxwZ+nwcWjq+XFo6v1xaOr/cWjq/3Bo6v9ob+v/Vnzs/0GL7f8y\nmO3/K57t/yqf7f8rnu3/K5/t/yyg7f8soO3/LaHt/y2i7P8touz/LqLt/y6j7f8uo+z/LqPs/y+k\n7f8vpez+L6Xr/S+l7PkvpevwL6Tq3C+j6LguoeR7LJzcMSeJwgQAAAAAAAAAAAAAAAAAAAAAAAAA\nAAAAAAAAAAAAAAAAAAAAAABoYNklbmXlknFo6+Ryae79c2rv/3Nq7/9zau//c2rv/3Nq7/9zau//\nc2rv/3Nq7/9zau//c2rv/3Bs7/9ldfD/UoTx/zyV8v8vn/L/K6Py/yyj8v8to/L/LqXx/y6l8f8u\npfH/L6by/y+m8f8vpvH/L6bx/zCn8f8wqPH/MKjw/zCp8f8xqfH/Manx/zGq8f8xqvD9MKjt5C+k\n5pIsnNslAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAGlj3kdvaOnTcmru/3Jq7/9yau//cmrv\n/3Jr7/9yau//cmvv/3Jr7/9ya+//cmrv/3Jq7/9ya+//cmrv/3Jq7/9zau//c2rv/25u7/9eevD/\nRo7x/zOe8v8spPL/LaXx/y6l8f8upfH/L6bx/y+m8f8vpvH/L6bx/zCn8f8wqPD/MKjw/zCp8f8w\nqfH/Manx/zGq8f8xq/H/Mavx/zGr8f8wqOzULqDgRwAAAAAAAAAAAAAAAAAAAAAAAAAAaWPeSG9p\n6uNxa+//cWvv/3Fr7/9xa+//cWvv/3Fr7/9xa+//cWvv/3Fr7/9xa+//cWvv/3Fr7/9xa+//cWvv\n/3Fr7/9xa+//cWvv/3Fr7/9yau//cGzv/2N38P9JjPD/NJ/x/y2m8f8upfH/L6Xx/y+m8f8vpvH/\nL6bx/zCn8v8wqPD/MKjw/zCp8f8xqfH/Manx/zGq8v8xq/H/Mavx/zGr8f8yrPL/Mars4y6g30gA\nAAAAAAAAAAAAAABlYdklbmjp03Fr7/9xa+//cWvv/3Fr7/9xa+//cWvv/3Fr7/9xa+//cWvv/3Fr\n7/9xa+//cWvv/3Fr7/9xa+//cWvv/3Fr7/9xa+//cWvv/3Fr7/9xa+//cWvv/3Jq7/9wa+//Y3fv\n/0eP8P8yovH/Lqbx/y+m8f8vpvH/L6bx/zCn8v8wqPD/MKjw/zGp8f8xqfH/Manx/zGq8f8xq/H/\nMavx/zGr8f8yrPH/Mq3x/zCp69MqndwlAAAAAElGngNrZuSRcGvu/3Br7/9wa+//cGvv/3Br7/9w\na+//cGvv/3Br7/9wa+//cGvv/3Br7/9wa+//cGvv/3Br7/9wa+//cGvv/3Br7/9wa+//cGvv/3Br\n7/9wa+//cGvv/3Br7/9wa+//cWrv/29s7/9ee/D/QJbx/zCl8f8upvH/L6bx/zCn8f8wqPD/MKjw\n/zCp8f8xqfH/Manx/zGq8f8xq/H/Mavx/zGr8f8yrPH/Mq3x/zKs8P8vpueSGnakA2Vh2jFuaevj\ncGvv/3Br7/9wa+//cGvv/3Br7/9wa+//cGvv/3Br7/9wa+//cGvv/3Br7/9wa+//cGvv/3Br7/9w\na+//cGvv/3Br7/9wa+//cGvv/3Br7/9wa+//cGvv/3Br7/9wa+//cGvv/3Br7/9xau//bG/v/1OF\n8P82oPH/Lqfx/zCn8f8wqPD/MKjw/zCo8P8wqfH/Manx/zGq8f8xq/L/Mavx/zGr8f8yrfH/Mq3x\n/zKt8f8yqu3jLZ7dMWpl4npwa+79cGvv/3Br7/9wa+//cGvv/3Br7/9wa+//cGvv/3Br7/9wa+//\ncGvv/3Br7/9wa+//cGvv/3Br7/9wa+//cGvv/3Br7/9wa+//cGvv/29r7/9vau//b2vv/29q7/9v\nau//cGvv/3Fr7/9wa+//cWvv/3Fr7/9jd/D/Q5Tx/zCn8f8wqPD/MKjw/zCo8P8wqfH/Manx/zGq\n8f8xq/H/Mavx/zGr8f8yrPL/Mq3x/zKt8f8yrfH9MKTle2xo57dwbPD/cGzw/3Bs8P9wbPD/cGzw\n/3Bs8P9wbPD/cGzw/3Bs8P9wbPD/cGzw/3Bs8P9wbPD/cGzw/3Bs8P9wbPD/cGzw/3Bs8P9wa/D/\ndnLw/7Sy9//Ew/n/w8L4/8PC+P/Dwvj/j43z/29q8P9wbPD/cGzw/3Bs8P9xa/D/bG/w/1GI8P81\no/D/L6nw/zCp8f8xqfH/Manx/zGq8f8xq/H/Mavx/zGr8f8yrPL/Mq3x/zKt8f8zrfH/Mafpt2xp\n6dtvbPD/b2zw/29s8P9vbPD/b2zw/29s8P9vbPD/b2zw/29s8P9vbPD/b2zw/29s8P9vbPD/b2zw\n/29s8P9vbPD/b2zw/29s8P9ua/L/eHb0/+Xk/f//////////////////////pqX1/21p8P9vbPD/\nb2zw/29s8P9vbPD/b2zw/29s8P9dffD/O53w/zCp8f8xqfH/Manx/zGq8v8xq/H/Mavx/zGr8f8y\nrPL/Mq3x/zKt8f8zrvL/Manr3Gxq6vBubPD/bmzw/29s8P9ubPD/b2zw/25s8P9vbPD/b2zw/25s\n8P9ubPD/bmzw/29s8P9ubPD/bmzw/25s8P9ubfD/bmzx/25s8v93c9b/kY2n/+vq6P//////////\n////////////pqT1/2xp8v9vbPD/b2zw/25s8P9vbPD/b2zw/25s8P9vbPD/ZXXw/0OX8f8xqfH/\nManx/zKq8v8xq/H/Mavx/zGr8f8yrPH/Mq3x/zKt8f8zrvL/Mqrs8Gtr6/ltbfD/bW3w/21t8P9t\nbfD/bW3w/21t8P9tbfD/bW3w/21t8P9tbfD/bW3w/21t8P9tbfD/bW3w/21t8P9sbfH/cG/o/46I\nlP+upTT/vbUl//Lx1P////////////////////7/u76k/3x+r/9ubu3/bWzy/21t8P9tbfD/bW3w\n/21t8P9tbfD/bmzw/2lx8P9KkPH/Mqjx/zGq8v8xqvL/Mavx/zGr8f8yrPL/Mq3x/zKt8f8zrvL/\nMqvt+Wpr6/1sbfD/bG3w/2xt8P9sbfD/bG3w/2xt8P9sbfD/bG3w/2xt8P9sbfD/bG3w/2xt8P9s\nbfD/bG3w/2tt8v9yceL/nZRs/7yvFf+8sA7/vrYj//Lx1P//////////////////////yc9u/6Cs\nH/+MlHP/cnTZ/2ts8/9sbfD/bG3w/2xt8P9sbfD/bG3w/2xt8P9qb/D/T4vx/zOn8f8xq/H/Mavx\n/zGr8f8yrPL/Mq3x/zKt8f8zrvL/Mqvt/Whr6/5qbfD/am3w/2tt8P9qbfD/am3w/2tt8P9rbfD/\na23w/2tt8P9qbfD/am3w/2pt8P9rbfD/am3x/29w5f+glWj/v7AQ/72wEf+7sBH/vbYj//Lx1P//\n////////////////////yM5w/6OwFP+isRj/k6FM/3V7xP9qbPL/a23w/2pt8P9rbfD/a23w/2tt\n8P9rbfD/am7w/1KH8f80p/H/Mavx/zGr8f8yrPL/Mq3x/zKt8f8zrvL/Mqvt/2dr6/9pbfD/aW3w\n/2lt8P9pbfD/aW3w/2lt8P9pbfD/aW3w/2lt8P9pbfD/aW3w/2lt8P9pbfH/bG/o/52Scv/DrxD/\nv7AQ/72wEv+7sBH/vbYk//Lx1P//////////////////////yM5w/6KwFf+isRr/n7IY/5WnO/92\nf7n/aWzy/2lt8P9pbfD/aW3w/2lt8P9pbfD/aW3w/2lt8P9UhfD/Nafx/zGs8f8yrPL/Mq3x/zKt\n8f8zrvL/Mqvt/2ds6/9pbu//aW7v/2lu7/9pbu//aW7v/2lu7/9pbu//aW7v/2lu7/9pbu//aW7v\n/2ht8P9scOn/mpB5/8StEf/DsA7/v7AQ/72wEv+7sBH/vrYj//Lx1P//////////////////////\nyM5w/6KwFf+isRr/n7Eb/52yGf+TqTf/dX+5/2ht8v9pbu//aW7v/2lu7/9pbu//aW7v/2lu7/9p\nbu//VIXw/zWn8f8yrfH/Mq3x/zKt8f8zrvL/Mqvt/2ds6/9pb/D/aW/w/2lv8P9pbvD/aW/w/2lv\n8P9pbvD/aW7w/2hv8P9pb/D/aG7x/2tw6v+aj3z/xa0S/8auDf/Drw//v7AQ/72wEv+7sBH/vbYj\n//Lx1P//////////////////////yM9x/6KwFf+isRr/n7Eb/5yxG/+Zshn/j6c9/3J8xf9obvP/\naW7v/2hu8P9pb/D/aW/w/2lu8P9pbvD/aW7w/1OH8f81qvH/Mq3x/zKt8f8zrvL/Mqvt/2Zt7P9o\nb/H/aG/x/2hv8f9ob/H/aG/x/2hv8f9ob/H/aG/x/2dv8f9nb/L/anHr/5uPfP/IrRH/yK8M/8Wu\nDv/Drw//v7AQ/72wEv+7sBH/vbYj//Lx1P//////////////////////yM5w/6KwFf+isRr/n7Eb\n/5yxG/+ZsRz/l7Ia/4qiTv9sd9j/Z27z/2dv8f9ob/H/aG/x/2hv8f9ob/H/aG/x/2dv8f9PivH/\nNKvx/zKt8f8zrvL/Mqvu/2Rt7P9mcPH/Zm/w/2Zv8P9mb/H/Zm/x/2Zv8f9mb/H/Zm/w/2Vv8v9q\ncen/nZB5/8utEP/Lrwv/x68N/8WuDv/DsA//v7AQ/72wEv+7sBH/vrYj//Lx1P//////////////\n////////yM5w/6KwFf+isRr/n7Eb/5yxHP+ZsRz/lrEd/5WyG/+Bmmr/aHLo/2Zv8v9mb/H/Zm/x\n/2Zv8f9mb/D/Zm/x/2Zv8f9lcPD/S4/x/zOs8f8zrvL/Mqvu/2Nu7P9lcfH/ZXDw/2Vw8P9kcPD/\nZHDw/2Vw8P9lcPD/ZHDy/2lz5/+hknP/z60O/86uCv/Krgz/x68N/8WuDv/Drw//v7AQ/72wEv+7\nsBH/vrYk//Lx1P//////////////////////yM9x/6KwFf+isRr/n7Eb/5yxHP+ZsRz/lrEd/5Wy\nHf+QsSL/eI2T/2Rw8f9lcPH/ZXDx/2Rw8P9kcPD/ZXDw/2Vw8P9lcPD/Y3Px/0aV8f8zrvL/Mqvu\n/2Fw7P9jcvH/Y3Lx/2Ny8f9jcvH/Y3Lx/2Ny8f9icfP/anXk/6WUav/Srgz/0q8J/82uC//Krgz/\nx68N/8WuDv/DsA//v7AR/7utEP+2pgz/uagd//Ht0///////////////////////ysxu/6SuE/+h\nsRr/nrEb/5yxHP+ZsRz/lrEd/5WxHf+Rsh3/iqs0/22Awf9jcfT/Y3Lx/2Ny8f9jcvH/Y3Lx/2Ny\n8f9jcvH/ZHHx/1938f9AnfL/Mqzu/2Fw7P9jcvH/Y3Lx/2Ny8f9jcvH/Y3Lx/2Fx8/9sd97/rJdf\n/9WuCv/Urgn/0a8K/82uC//Krgz/x68N/8WuDv+/qg3/tZ4J/6+TBP+tjgD/tZcU//Hr0f//////\n////////////////1b9j/7ibAv+wpA7/pK0X/5yxHP+Yshz/lrEd/5WxHf+RsR//j7Id/4GgW/9l\nduX/YnLy/2Ny8f9jcvH/Y3Lx/2Ny8f9jcvH/Y3Lx/2Nx8f9affH/O6Dt/19w7f9hc/L/YXPy/2Fy\n8f9hcvH/YHL0/2951/+0m1L/2a4H/9WuCP/Trgn/0a8K/82uC//Lrwz/xKsM/7acB/+tkAP/q4wB\n/6yNAP+vjwD/uJgU//Hr0v//////////////////////2L5i/8CVAP/CmAH/v5wE/7KlDv+erxn/\nlrId/5SxHf+Rsh//jrEg/4yyI/9zjpf/YXLz/2Fz8v9hc/L/YXLx/2Fy8f9hc/L/YXPy/2Fz8v9i\ncvL/VX3t/15x7f9gc/L/YHPy/2Bz8v9ecvX/dHzN/72eRP/crgX/2a4H/9WuCf/Trgn/0a8K/82u\nC//Aown/r5ID/6qLAP+rjAD/rY4B/6+PAf+ykAD/uZkU//Hr0v//////////////////////2b5i\n/8GWAP/EmQD/x5oB/8mbAf/CoAb/qKsU/5WxHf+Rsh//jrEg/4yzH/+Eqj//ZnzT/2By9P9gc/L/\nYHPy/2Bz8v9gc/L/YHPy/2Bz8v9gc/L/XnDt/1xy7f9edPL/XXTy/1xz9f96gL//xqI1/+CuA//b\nrgf/2K4H/9WuCf/Trwn/zqwK/7qcBv+qjQH/qYsA/6yNAf+tjgH/r48B/7KQAf+zkQD/u5oU//Lr\n0v//////////////////////2b9j/8KXAP/GmgH/yZsB/8ucAf/OnAD/zJ8C/7OoD/+UsR7/jrIg\n/4yzIf+KtCD/dZd9/1508f9edPL/XnTy/1508v9edPL/XnTy/1508v9edPL/XHLt/1py7f9cdPP/\nW3T0/4KEr//Ppif/4q4D/96tBv/brgf/2K4H/9auCf/Oqgj/tZYE/6iLAP+qiwD/q4wB/62OAf+w\njwH/spAB/7SRAf+1kQD/vZoU//Lr0f//////////////////////28Bj/8WYAP/JmwH/y5wB/82c\nAP/PngH/0p8B/9OgAf+6pw3/k7Ae/4uzIf+KsyH/g601/2SBx/9bc/T/XHTy/1x08v9cdPL/XHTy\n/1x08v9cdPL/WnLt/1dz7v9adfL/jYme/9ioG//krgL/4K4F/96tBv/brgf/2a4H/82oB/+xkwP/\np4oA/6qMAP+rjAH/rY4B/6+PAf+ykAH/tJEB/7aSAP+3kwD/v5wU//Ps0v//////////////////\n////3MBj/8iaAP/LnAH/zZwA/8+dAP/RnwH/06AB/9WhAP/XogD/vqgN/5GyH/+JsyP/iLQh/3Sb\ndf9advD/WnXy/1p18v9adfL/WnXy/1p18v9adfL/WHPt/1t25/+aj4n/4aoS/+euAf/jrQX/4K0F\n/96tBv/crgf/z6cG/7CRA/+nigD/qowA/6uNAf+tjgH/r48A/7KQAP+zkQD/tZEA/7eTAP+6lAD/\nwpwT//Ps0f//////////////////////3sFj/8qaAP/NnAD/z54B/9GfAf/ToAH/1aEA/9eiAP/a\nowD/26MA/7uqDv+NsyH/h7Mj/4GuNf9hg8f/WHb0/1h38v9Yd/L/WHfy/1h38v9Zd/L/V3Xt/62U\nYf/mqwv/660B/+atA//irgX/4K4F/9+uBv/Rpwb/sJEC/6eKAP+qjAD/rI0B/62OAf+wkAT/tZYN\n/7eWDf+5lw3/u5gN/72aDf/Amgz/xqIg//Tt1P//////////////////////38Ji/8ybAP/PngH/\n0Z8B/9OgAf/VoQD/16IA/9umC//erBj/36kM/9+mAf+zrRP/h7Mj/4W0If9vmnv/Vnjx/1Z38v9W\nd/L/Vnfy/1Z38v9WePL/VHXt/+mqAv/srQH/6q0D/+atA//irQX/4a4G/9aoBf+ykgL/p4oA/6qM\nAP+sjQH/rY4B/6+OAP++oiz/6uG7/+3mx//u5sb/7+bG/+/nxv/w58b/8enK//z79f//////////\n////////////4MJi/86cAP/SnwH/06AB/9WhAP/XogH/2qIA/+jFYP/68tz/7c1x/+KmAP/eqAP/\no7AZ/4O0I/98rD3/XIHS/1V49P9VePL/VXjy/1V48v9VePP/U3bu/+iqAf/srQL/6q0D/+atA//j\nrgX/26oF/7aUAv+nigD/qowA/6uNAf+tjgH/r48B/7GPAP/EqTf/+/nx////////////////////\n////////////////////////////////////////371l/8+bAP/UoQD/1aEA/9ehAP/aogD/26IA\n/+vMcf//////8dSG/+SmAP/oqAH/1asI/5CyIP+AsyT/aJSS/1R49f9UefP/VHnz/1R58/9UefT/\nUnfv/+iqAf/srQL/6a0D/+atA//grAX/vZgD/6eKAP+qjAD/rI0B/6yOAf+wjwH/s5IA/7KMAP+/\nl0D/+vfy////////////////////////////////////////////////////////////1aRw/8F2\nDv/OkQv/5cVo/+7Ylv/v2JT/8NiS//bpw///////+O3N//HQd//prQv/6qsA/76vEP+CtCL/dadR\n/1V+5f9SevX/U3r0/1N69P9TevT/UXjv/+iqAf/srQL/6a0D/+WtA//GnAP/qIsB/6qMAP+sjQH/\nrY4B/6+PAf+ykQH/r4EJ/6NYGf+vZU3/69rV//Xr6P/69fP//v39////////////////////////\n////////////////////1KFx/7pmFf/BcRz/7da5///////9+/P//frz//78+P///////v78//nr\nxf/rsBH/7KwA/+atBP+dshz/e7Is/16Mtv9Qevf/UHv0/1B79P9Qe/T/T3jv/+iqAf/srQL/6q0D\n/9OiAv+rjQH/qosA/6yNAf+tjgH/sI8B/7GPAf+qchD/nkgl/5s+Kf+eRCz/p1U7/61eQ/+2b1T/\nxY11/929rf/27ur/////////////////////////////////1KFx/7tnFf+/bRf/4LqQ//379//r\nyXj/5rQt//LXjf//////9d6e/+23J//srQT/7K0B/+6tBP/LsBH/hLQh/2qdeP9NfPL/TXzz/018\n8/9NfPP/THnu/+ipAf7srQL/36cD/7KRAf+piwD/rI0B/6yNAf+wkAH/sY4D/6ZnFf+bQCj/mz0q\n/5w/Kf+dQCj/nkIm/6BEJP+hRiP/okgg/6hQJf+5c07/48i5//79/f//////////////////////\n1KFx/7tnFf+/bBb/xn0s/+/bxP/05s3/3aEg/+/Lb///////9NaF/+uqAP/srQH/7K0F/+uuCf/l\nsA3/oLMd/3SrRf9Qg9z/Sn30/0t98/9LfvP/SXvu/+mpAf3prAL/v5cC/6mLAf+sjQH/rY4B/6+P\nAf+xjgP/pGQY/5k8Kf+aPCr/mz4q/5w/Kv+dQCj/nkMn/6BGJv+iSCb/pEsk/6dOI/+nTh//r14w\n/+DBrv//////////////////////1KFx/7tnFf+/bRj/wW8U/9CRR//37uT/68+j/+jCgf//////\n9deG/+ysAP/srQX/6q4J/+iwDf/nsRH/xrIa/3+yKv9YkLD/SH73/0h/8/9Jf/T/R3zv/empAfnR\nnwL/q4wB/6uMAf+sjgH/r48B/7GQAf+lZxX/lzsq/5g6Kv+aPCr/mz4q/5w/Kf+dQSj/nkMn/6FG\nJv+iSCb/pEsk/6dOI/+pUCL/qlEf/7htQP/z6OD/////////////////1KFy/7tnFf+/bRj/wXAX\n/8NyFP/bq2//+vTs//Tp1v//////9deG/+ysAf/qrgn/6LAN/+axEf/ksRb/3bIa/5i0If9jn3v/\nRYD0/0WA9P9FgPT/RH3v+dmiAvC0kAH/q4wB/62OAf+wjwH/s5EB/6hxEf+XOyr/ljkr/5g6Kv+a\nPCr/mz4q/5w/Kf+dQSj/nkMn/6FGJv+iSCb/pEsk/6dOI/+pUCL/q1Mi/65WIf/Vqo3/7NnL/+zY\nyP/t2cf/zZNc/7tnFv+/bRj/wXEW/8RzFf/Hexn/58eb////////////9NaI/+qtBv/osA3/5rER\n/+OxFv/gshr/4LQe/7i1If9wqk3/RoXk/0KC9f9CgvT/QH/u8LOOAdurjQH/rY4B/6+PAf+zkgH/\nroAJ/5hBJ/+VNSz/ljkr/5g7Kv+aPCn/mz0q/5w/Kf+dQCj/nkMn/6FGJv+iSCb/pEsk/6dOI/+p\nUCL/q1Mi/61VIP+wWyT/tGIn/7ZmJv+6aSX/umge/7xqGf+/bRj/wXEX/8R0Fv/GdxL/z4gp//He\nwv/+/v7/7cuH/+SoCv/msRH/47EW/+GyGv/etB7/3bQi/9C1Jf+EsjL/S47F/z6D9/8/g/T/Pn/t\n3KWHAbesjQH/r48B/7KRAf+yjQP/nlIf/5Q0Lf+VNiz/ljkr/5g7Kv+aPCr/mz4q/5w/Kf+dQCf/\nnkMl/6BGJP+iSCP/pEsh/6dOIP+pUCH/q1Mi/61VIP+vWB//sVse/7NfHf+3Yhv/uWYa/7xqGf+/\nbhj/wnEX/8R0Ff/HeBT/ynsR/9OQL//dp1H/2pov/9yZDf/jsBX/4bIa/960Hv/ctSL/2rYn/9i3\nK/+gtSn/VJmd/zuE+P88hPT/On/rt6OGAHuujgH9spAB/7SSAP+nbBP/lDYs/5Q1LP+VNiz/ljkr\n/5g7Kv+aPCn/mz0p/5w/KP+eQzr/oEhd/6JJdf+iSHr/okhq/6VKT/+nTjT/qlMk/61WHf+vWB7/\nsVwe/7NfHf+3Yhz/uWYa/7xqGf+/bRj/wXAX/8R0Ff/HeBT/y3wT/82AD//Qgwv/1IkL/9iPDP/e\nphT/3rQe/9y1Iv/atif/2Lcr/9e3L/+6tyz/Y6N0/zmG9P85hfT9Nn7oe6CCADGvjgHjtJIA/7GH\nBv+aRCb/lDMu/5Q1LP+VNiz/lzkr/5g6Kv+aPCj/mz8v/6FLav+lU6z/pVHG/6RNzP+jSM//oUPP\n/6A/yf+fPbj/oT+V/6ZIYf+tVDH/sVwc/7NfHP+3Yhz/uWYa/7xqGf+/bhj/wXAX/8R0Fv/HeBT/\nynwT/82BEf/RhQ//1IoN/9iOC//bmQ7/3LEf/9q2J//Ytyv/1rcu/9S4M//KuTP/eKxV/zmL6P80\nhfHjMXvfMXNeAAOsiwCStZIB/6ZkF/+UMy7/lDQt/5Q1LP+VNiz/lzkr/5g6Kv+aPjD/o1F//6hb\nwf+mV8f/pVLI/6RNyv+jSM3/oUPO/58+0P+dOdP/mzPY/5ow1P+cMrj/pUN1/7BZMP+3Yxr/uWYa\n/7xqGf+/bRj/wXAX/8R0Ff/HeBT/y3wT/86BEf/RhQ//1IoN/9iOC//bkwn/26cZ/9i3K//Wty//\n1Lgz/9G5OP/Puzr/kLNE/zuQ1f8vg+6SI1qjAwAAAACmiAAlrYAI05lDJ/+UMy7/lDQt/5Q1LP+V\nNiz/lzkr/5g7K/+hT3P/qWDA/6hcw/+mV8X/pVLH/6RNyv+jSMz/oUPO/58+0P+dOdL/nDTV/5kv\n1v+XKdv/liXb/5sutv+sTVf/uWUc/7xqGf+/bRj/wXAX/8R0Fv/HeBT/y3wT/82BEf/RhQ//1IoN\n/9iPC//ckwn/3Z0O/9e0Kv/TuDP/0bk4/8+7PP/Ou0D/prdA/0SVrNMjefMmAAAAAAAAAAAAAAAA\nlEwcSJE0LOOUNC7/lDQt/5Q1LP+VNiz/lzgp/51GUf+pY7X/qWHC/6hcw/+mV8X/pVLI/6RNyv+j\nSM3/oUPO/58+0P+dOdL/nDTV/5kv1v+XKtn/liXb/5Ug3/+WINT/p0J2/7tnHv+/bhf/wnAX/8Rz\nFv/GeBT/y3wT/86BEf/RhQ//1IoN/9iPC//bkwn/35gI/9msIf/Rujj/z7s8/827QP/KvEX/trdD\n42efWUgAAAAAAAAAAAAAAAAAAAAAAAAAAIkwKkeQMy3UlDQt/5Q1LP+VNiv/lzow/6Zbkf+rZsH/\nqWHB/6hcw/+mV8X/pVLI/6RNyv+jSMz/oUPO/58+0P+dOdL/nDTV/5kv1v+XKtn/liXb/5Uh3f+T\nG+D/kxnc/6dAfP++bBv/wnEW/8R0Ff/GeBT/ynwT/86BEf/RhQ//1IoN/9iPC//ckwr/35gH/92j\nE//QuTn/zbtA/8m7RP/DuEbUubBESAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACGLikljTIr\nkpE0K+SUNSr9nUdU/6xot/+rZsD/qWHB/6hcw/+nV8X/pVLI/6RNyv+jSM3/oUPO/6A+0P+eOdL/\nnDTV/5kv1v+XKtn/lyXb/5Yg3f+UHN//khbi/5MV3P+tSmX/wnEV/8R0Fv/GeBT/ynwT/86BEf/R\nhQ//1IoN/9iPC//ckwn/35gI/+GeCf/RszH9xrlE5L+0RJK1q0IlAAAAAAAAAAAAAAAAAAAAAAAA\nAAAAAAAAAAAAAAAAAAAAAAAAdioiBIYwKDGMMiZ7nVN4uKhoudynY7vwpV+9+qRav/2jVcH/olDE\n/6FLxv+gRsn/nULK/5w9zP+aOM7/mTPR/5Yu0v+UKdX/kyTX/5Ig2f+RG9r/kBbd/40Q4f+UHb//\nuGMv/8ByFP/DdRT/x3oS/8p+EP/Ngg7/0IcN/dSMC/rWkAnw2JQH3NmXBrjMoyB7ta1CMaGZOgQA\nAAAAAAAAAAAAAAAAAAAAAAAAAP8AAAAA/wAA+AAAAAAfAADwAAAAAA8AAOAAAAAABwAAwAAAAAAD\nAACAAAAAAAEAAIAAAAAAAQAAgAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA\nAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA\nAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA\nAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA\nAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgAAA\nAAABAACAAAAAAAEAAIAAAAAAAQAAwAAAAAADAADgAAAAAAcAAPAAAAAADwAA+AAAAAAfAAD/AAAA\nAP8AACgAAAAgAAAAQAAAAAEAIAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABr\nYt8kb2bmgXBo6spxaOvscmns+nJp7P5yaez/cGrs/2Rz7f9Pg+7/OpTu/y2e7/8roe//LKHv/y2i\n7/8to+7/LqPu/y6k7v8upO7/L6Xu/y+m7f4wp+76MKbt7DCm7MovpeiBLZ/gJQAAAAAAAAAAAAAA\nAAAAAABXU7sCbGbkUnBp69Nyau79cmrv/3Jq7/9yau//cmrv/3Jq7/9yau//c2rv/3Jr7/9scO//\nW33w/0OQ8f8xn/L/LaXy/y6l8f8upvH/L6bx/y+m8f8wp/H/MKjw/zCp8f8xqfH/Marx/zGq8P0w\nqe7TL6XmUiaIvAIAAAAAAAAAAGtm5FJwau3rcWvv/3Fr7/9xa+//cWvv/3Fr7/9xa+//cWvv/3Fr\n7/9xa+//cWvv/3Fr7/9yau//b2zv/2F48P9Hj/D/MqHx/y2m8f8vpvH/L6bx/zCn8f8wqPD/Manx\n/zGp8f8xqvH/Mavx/zGs8f8xq+/rL6XmUwAAAABoY94lbmnr0nBr7/9wa+//cGvv/3Br7/9wa+//\ncGvv/3Br7/9wa+//cGvv/3Br7/9wa+//cGvv/3Br7/9wa+//cWrv/29s7/9fevD/QZXx/zCl8f8v\np/H/MKfx/zCo8P8wqfH/Manx/zGq8f8xq/H/Mazx/zKt8f8xqu7SLaLhJWxn5oBwa+79cGvv/3Br\n7/9wa+//cGvv/3Br7/9wa+//cGvv/3Br7/9wa+//cGvv/3Br7/9wa+//bmnv/25p7/9uaO//b2nv\n/3Fq7/9tbu//VYTw/zef8f8vqPH/MKjw/zCp8f8xqfH/Marx/zGr8f8xrPH/Mq3x/zKt8f0xp+mB\nbmnqyXBs8P9wbPD/cGzw/3Bs8P9wbPD/cGzw/3Bs8P9wbPD/cGzw/3Bs8P9wbPD/cGvw/3Vx8f+h\nnvX/q6j2/6up9v+RjvP/cGvw/3Br8P9xa/D/ZHfw/0OV8f8wqPD/MKnx/zGp8f8xqvH/Mavx/zKs\n8f8yrfH/Mq3x/zKq7cltauzrb2zw/29s8P9vbPD/b2zw/29s8P9vbPD/b2zw/29s8P9vbPD/b2zw\n/29s8f9ta/L/f3zn/+np+f///////////8C/+v9tavL/b2zw/29s8P9wa/D/a3Dw/06L8P8zpvH/\nMarx/zGq8v8xq/H/Mazx/zKt8f8yrfH/Mqvu7Gxr7fptbfD/bm3w/25t8P9ubfD/bm3w/21t8P9t\nbfD/bm3w/21t8P9tbPH/cG/p/4yGmf+vqFj/8vHd////////////yszR/3d3yf9tbPH/bW3x/25t\n8P9ubPD/bW3w/1eD8P83o/H/Mavy/zGr8f8xrPH/Mq3x/zKt8f8yrO/6amzt/mxt8P9sbfD/a23w\n/2xt8P9sbfD/bG3w/2tt8P9rbfD/a23x/3Bw5v+bk3L/uq4V/8C4JP/08tn////////////Z3Zr/\nnKgx/4GImf9tb+v/a23x/2tt8P9sbfD/bGzw/1t+8P85ofH/MKzx/zGs8f8yrfH/Mq3x/zKs7/5o\nbO3/am3w/2pt8P9pbfD/am3w/2pt8P9qbfD/aW3w/2lt8f9sb+n/nJF0/8CvEv+8sBD/v7cn//Py\n2f///////////9jdm/+jsRX/nq8g/4WSfv9scOf/aW3x/2pt8P9qbfD/amzw/1178P87ofH/Mazx\n/zKt8f8yrfH/Mqzv/2ht7f9pbvD/aW7v/2lu7/9pbu//aW7v/2lu7/9obvH/a3Dq/5mPe//DrRL/\nwbAP/7ywEP+/tyf/8/LZ////////////2d2b/6OwF/+gsRr/m7Ed/4OTe/9qcOn/aW7w/2lu7/9p\nbvD/am3v/1178P87ovH/Ma7x/zKt8v8yrO//Z23u/2hv8f9ob/H/aG/x/2hv8f9ob/H/Z2/y/2px\n6/+aj33/xq0S/8WvDf/AsBD/vLAQ/7+3J//z8tn////////////Z3Zv/o7AX/5+xG/+bshv/lrAg\n/32Ojv9ob/D/aG/x/2hv8f9ob/H/aW7x/1t98f85pPH/Mq7x/zKs7/9kbu7/ZnDx/2Zw8f9lcPH/\nZnDx/2Vv8v9pcun/nZB6/8qtEf/Irwz/xa8O/8CwEP+8sBH/v7cn//Py2f///////////9jdm/+j\nsBf/oLEb/5uxHP+Xshv/ka4q/3OEr/9lb/P/ZnDx/2Zw8P9mcPH/Zm/w/1aC8f83qPH/Mq3v/2Jw\n7v9kcfH/ZHHx/2Rx8f9jcfP/aXTm/6GScv/QrQ7/za4L/8iuDf/Frw7/wLAQ/7qrDv+8riP/8/DY\n////////////2tua/6SvFv+fsRv/m7Ec/5exHf+Ushv/iKZD/2l61P9jcfP/ZHHx/2Rx8f9kcfH/\nZHHx/1CJ8f81qe//YXHu/2Jy8f9icvH/YXLz/2p24v+plmf/1K4L/9KvCf/Nrgz/yK4N/7+oDP+0\nmwf/rpEC/7aZGP/y7df////////////i0pL/uZwF/6+mD/+frxn/lrId/5OxHv+Psh3/e5l0/2Nz\n7f9icvL/YnLx/2Jy8f9icvH/YXPx/0uM7/9fcu//YHPy/19y9P9tedr/splY/9muB//Vrgj/0q8K\n/8qsC/+4nQf/rY8C/6yNAP+vjgD/uZoY//Pt1////////////+TSkf/ClwD/xZoB/8CfBv+pqhP/\nlLEd/4+yH/+JsCv/bIa0/2By9f9gc/L/YHPy/2Bz8v9hc/L/XnPv/1xy7/9cc/X/cXzP/7ydR//e\nrgX/2a4H/9WuCf/KqAj/spQE/6qMAP+sjQH/sI8B/7KQAP+8mxf/8+7X////////////5dKS/8SZ\nAP/JmwH/zZwA/82eAv+0qA//krEe/4u0H/99oln/X3jm/1108/9ddPL/XnTy/1108v9ccu//V3Py\n/3eAwv/HoTf/4q4D/96tBv/argf/yaUH/66QAv+piwD/rI0B/6+PAf+zkQH/tZEA/7+dF//07tf/\n///////////m05L/yJoA/8ycAf/PngD/06AB/9WhAf+6qQ7/j7If/4eyJ/9qi6f/WnT1/1p18v9a\ndfL/W3Xy/1lz7/+GhqT/06Qp/+euAf/hrQX/3q4G/8ukBv+tjwL/qYsA/6yNAf+vjgD/spAA/7WR\nAP+4kgD/wp0X//Xu1////////////+jUkv/LmwD/z54B/9KgAf/VoQD/2aIA/9ukAf+4rBD/irQg\n/3mkVv9ae+b/V3fz/1h38v9Yd/L/V3Xv/+GoEP/rrQH/5a0E/+GuBf/PpAX/rY8C/6mLAP+sjQD/\nsJEF/9C8Zv/dzo//3s6N/+DPjP/k1Jf/+vft////////////6dWR/8+dAP/SnwD/1aAA/9ihAP/o\nxWH/7Mpp/9+nA/+srxb/gbIq/2OLsP9Vd/X/VXjy/1V48v9Ud+//6qsB/+qtAv/mrQT/1qcF/7CQ\nAv+piwD/rI0B/7CQAP+1kwj/6t+6///////////////////////////////////////my5b/zZQD\n/9inFP/esSn/4bIo//Tir//357v/6LAa/9yqBf+Xshr/cKBp/1V77/9UefT/VHr0/1N48P/pqwH/\n6q0C/9+qA/+2kwL/qYsA/6yNAf+vkAD/sIYG/6lnHP/bvKz/9u7r//v49v//////////////////\n/////////+G9nP+9bRL/4Ll7//v14//579L//Pnu//379P/z0nv/7KsA/8ivDf9+rzX/WYbM/1B6\n9v9Re/T/UHnx/+qrAf/orAP/wZkC/6mLAP+sjQH/sJAB/6x8C/+gTiL/nD8p/6VQOP+uYUX/undb\n/9Ook//z6OL/////////////////4b2c/7xnFP/SmV3/9urU/+e7T//24q7/+Oi8/+20HP/trQH/\n564I/5+zHP9ilpL/THv1/0188/9Me/D/6qsB/tGgAv+sjQH/rI0B/6+QAf+qdw7/nEUl/5s8Kv+c\nPyn/nUIm/6BFJP+iRyH/p00g/7pzTf/t3NL////////////hvZz/vGkX/8FxGf/hu47/7dGe//Ha\nq//45Kv/7K0D/+uuBv/prw3/yLIW/3SmWf9Lger/SX70/0h98P7cpAH6tJEB/6uNAf+wkAD/q3sL\n/5pEJv+YOir/mz0q/5w/Kf+eQyf/oUYm/6NKJf+nTiP/qU8d/8aKZv/69fH//fz7/9+6l/+8aRf/\nwG8V/8h+Jf/r07L/+/fy//jjqv/rrgn/6K8N/+WxE//dsxn/krAz/02KzP9EgPf/Q3/x+reRAeys\njQH/sJAB/6+GBv+bSSP/ljcs/5k7Kv+bPSr/nD8p/55CJ/+hRiX/pEok/6hPIv+qUSH/sV0p/8KB\nU//HiVf/w3s8/71qGf/BcBf/xHMS/9KSPf/26tr/89qk/+asD//ksRP/4bIa/9+0IP+1tSX/WJef\n/z+C9/8/gfDsqIoBya+PAf+yjwL/oVwa/5Q0LP+WOCv/mDsq/5s9Kf+cPyf/nkMv/6FHOf+jSjX/\np04o/6pSIP+uVh3/r1kb/7NeGv+4ZBn/vWsZ/8FwF//EdRX/yXsT/9WTMv/ZmjD/3Z0Q/+GyGf/d\ntCD/27Yn/8y3KP9to3T/O4X0/zqC8MmpigGAs5IA/ax4Df+WOSv/lDUs/5Y4K/+ZOyn/mz4u/6BJ\nZf+jT6D/o0u2/6JFtP+hQqD/o0R6/6lNSP+wWST/tWEb/7llG/+9axj/wXAX/8R1Ff/JexP/zoEO\n/9OHC//Zkgz/3Kwa/9q2J//Xty3/07kw/4qtVv85iuf9NILugaeJACWxiwPSn1Eg/5MzLv+UNSz/\nljgr/5k8Lv+iUHr/p1rB/6ZTyf+kTMz/oUTP/5890/+cNdb/mjDL/584nf+tUUv/uGUb/71rGP/B\nbxf/xHUV/8l7E//PghH/04kO/9mPCv/coBP/17Yr/9S4M//Sujn/o7RJ/z6QydIpfPQlAAAAAKBj\nFFKUOCvrlDQu/5Q1LP+WOCr/n0ti/6lhvf+nW8T/plPH/6RMy/+hRM7/nz3Q/5w11P+YLtj/liXd\n/5clzv+oQ3P/vGge/8FwFv/EdRX/yXsT/8+CEP/TiQ7/2ZAL/92YCv/XsSj/0Lo6/867QP+3uEXr\nXZyBUwAAAAAAAAAAaxosAo0xLFKSMyzTlDUr/Zg9Ov+oYKP/qmPC/6dbxP+mU8f/pEzL/6FEzv+f\nPdD/nDXU/5ku1/+XJtr/lR/f/5Ma3P+oQXr/wG4a/8R1Ff/JexP/z4IQ/9SJDf/ZkAv/3pcH/9qo\nHP/Muj/9xrlE0760RVKLlTUCAAAAAAAAAAAAAAAAAAAAAIkxKSWOMiaBm0hbyqlmuOynYb76pVnB\n/qNSxf+iS8j/n0PL/508zv+aNdH/ly3U/5Um2P+TH9v/kRff/5IX0/+zVkn/w3QT/8d6E//MgBD/\n0YcN/taOC/rblAjs2Z4PysWyO4G5sEQlAAAAAAAAAAAAAAAA8AAAD+AAAAfAAAADgAAAAQAAAAAA\nAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA\nAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIAAAAHAAAAD4AAAB/AAAA8oAAAAEAAA\nACAAAAABACAAAAAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAaGPdBm9o6mNxae3Vcmrt+XJq7v9ubO7/\nXXrv/0OO7/8xn/D/LaXw/y+l8P8wp+//MKjv+TGp79YwqOxjLqHfBm5o6mNwau7ucWvv/3Fr7/9x\na+//cWvv/3Fq7/9sa+//XXnw/0KT8f8xpfH/L6jx/zGp8f8xqvH/Mavw7jGp7GNvau3UcGvv/3Br\n7/9wa+//cGvv/3Br8P9zbvP/j4vz/4uG8/9ub/H/VoPw/zig8P8wqvH/Marx/zKs8f8yrO/UbWzu\n+G5s8P9ubPD/bmzw/25s8f9wbun/ko21/+3s7v/a2u//d3bg/25r8v9hefD/P5rx/zGr8f8yrPH/\nMqzw+Wps7/9rbfD/a23w/2pt8f9tb+r/mJB5/8C2Mf/39eH/6OvH/5ijVf91e8X/a2zy/2R08P9D\nmPH/Ma3x/zKt8P9obu//aG7w/2hu8f9rcOv/mY99/8CuEv/DuSn/9vXi/+nsxv+ltR7/kaVB/3B6\nyv9obfL/Y3Tw/0Ka8f8yrfD/ZHDv/2Rw8v9ocun/nZB6/8itEf/Crgz/wLQo//b04f/p68X/prIg\n/5myGf+Gn1n/aHXi/2Vv8v9eePH/QJzw/19x8v9oduX/pZRu/9KuDf/FqAn/tJgE/7meHf/18eD/\n7+bB/7yiEP+pqhL/krEe/3WRj/9hcvP/YnLy/1p68P9retf/sZhd/9utCP/FogX/ro8C/62MAP+8\nmxr/9vHf//HmwP/Lngn/zZ4B/7SpC/+Hqjr/Yn7R/1x09P9cc/H/yKA5/+OtBf/JoAT/rI4A/7id\nIP/MtFD/1b1i//n26v/y5r//0aEJ/9aiBP/gtC//tK8W/2+Whv9Wd/P/Vnfx/+utAf/TowP/ro8B\n/6yHAP/Ho2H/9e3o//37+f//////79zA/9OeNv/rz3v/9+a4/+a6Lf+Vpzr/VoDe/1F59P/epgL/\ntZMB/6uEBv+iVx3/okox/7FlR//NmoH/+PLv/+3YxP/Igz7/6syZ//bgqf/vth3/yK8V/2CQrP9J\nfPb/vJUB+K2JBP+fVB7/mTsq/51AJf+hRiD/qFAe/82YdP/XqoH/wG8a/9SaVP/y2aX/6LIZ/92z\nFv9+oHf/QIHy+a6OAdSlZxX/lTcr/5o9Lv+gR1v/okh2/6VJXv+sUzP/tmIa/79tF//HeRf/1pIm\n/92kFv/ctiT/n61X/z6J39SpeAxjmEEn7pU2Lf+hTnL/plbB/6JIz/+eOdD/nDK8/6lHbf+9ah7/\nx3gT/9GEDf/alw//1rUu/7i2Se5Wl6hjiCwsBpAxKWOXPkHWp16t+aZXxv+hR8v/nDnR/5Yp2v+U\nHtj/rUpm/8Z4Ev/QhA//2pMK+dOtKNbDuUVjnq1ABsADAACAAQAAAAAAAAAAAAAAAAAAAAAAAAAA\nAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgAEAAMADAAA=\n",
+        "hash": 1456990795, "location": "https://1.1.1.1:443/favicon.ico"}, "host":
+        "1.1.1.1", "html": "<!DOCTYPE html><html theme=\"light\" lang=\"en-US\" prefix=\"og:
+        http://ogp.me/ns#\"><head><meta charset=\"utf-8\"><title>1.1.1.1 \u2014 The
+        free app that makes your Internet faster.</title><!-- Early iOS detection--><script>if
+        (/iPad|iPhone|iPod/.test(navigator.userAgent)) {\n  document.documentElement.setAttribute(''is-ios'',
+        '''')\n}\n</script><!-- Google Tag Manager--><script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({''gtm.start'':\nnew
+        Date().getTime(),event:''gtm.js''});var f=d.getElementsByTagName(s)[0],\nj=d.createElement(s),dl=l!=''dataLayer''?''&l=''+l:'''';j.async=true;j.src=\n''https://www.googletagmanager.com/gtm.js?id=''+i+dl;f.parentNode.insertBefore(j,f);\n})(window,document,''script'',''cfDataLayer'',''GTM-PKQFGQB'');\n</script><!--|\n............................................................\n.........1............1............1............1...........\n........11...........11...........11...........11...........\n.......111..........111..........111..........111...........\n......1111.........1111.........1111.........1111...........\n........11...........11...........11...........11...........\n........11...........11...........11...........11...........\n........11...........11...........11...........11...........\n........11...........11...........11...........11...........\n........11...........11...........11...........11...........\n........11...........11...........11...........11...........\n........11...........11...........11...........11...........\n........11...........11...........11...........11...........\n........11...........11...........11...........11...........\n........11....ooo....11....ooo....11....ooo....11...........\n......111111..ooo..111111..ooo..111111..ooo..111111.........\n............................................................\n--><link
+        href=\"favicon.ico\" rel=\"icon\" type=\"image/x-icon\"><meta property=\"og:title\"
+        content=\"1.1.1.1 \u2014 The free app that makes your Internet faster.\"><meta
+        name=\"twitter:title\" content=\"1.1.1.1 \u2014 The free app that makes your
+        Internet faster.\"><meta name=\"author\" content=\"1.1.1.1\"><meta name=\"generator\"
+        content=\"1.1.1.1\"><meta http-equiv=\"X-UA-Compatible\" content=\"IE=edge,
+        chrome=1\"><meta name=\"description\" content=\"Install the free app that
+        makes your phone\u2019s Internet more fast, private, and reliable.\"><meta
+        name=\"og:description\" content=\"Install the free app that makes your phone\u2019s
+        Internet more fast, private, and reliable.\"><meta property=\"og:url\" content=\"https://1.1.1.1\"><meta
+        property=\"og:image\" content=\"https://1.1.1.1/media/social-share.png\"><meta
+        property=\"og:video\" content=\"https://1.1.1.1/media/open-graph.mp4\"><meta
+        name=\"twitter:site\" content=\"@Cloudflare\"><meta name=\"twitter:creator\"
+        content=\"@Cloudflare\"><meta name=\"twitter:card\" content=\"summary_large_image\"><meta
+        name=\"twitter:title\" content=\"1.1.1.1 \u2014 The free app that makes your
+        Internet faster.\"><meta name=\"twitter:description\" content=\"Install the
+        free app that makes your phone\u2019s Internet more fast, private, and reliable.\"><meta
+        name=\"twitter:image\" content=\"https://1.1.1.1/media/social-share.png\"><meta
+        name=\"apple-itunes-app\" content=\"app-id=1423538627\"><link rel=\"manifest\"
+        href=\"/media/manifest.json\"><meta name=\"viewport\" content=\"initial-scale=1,
+        width=device-width\"><link rel=\"canonical\" href=\"https://1.1.1.1\"><link
+        rel=\"shortcut icon\" href=\"/favicon.ico\"><link href=\"/site-9da64590d1d96e26cb8f.css\"
+        rel=\"stylesheet\"></head><body><style>html {\n  --section-gutter-size: 8em;\n}\n.PerformanceSection--familiy-disclaimer
+        {\n  display: none;\n}</style><noscript><iframe src=\"https://www.googletagmanager.com/ns.html?id=GTM-PKQFGQB\"
+        height=\"0\" width=\"0\" style=\"display:none;visibility:hidden\"></iframe></noscript><div
+        class=\"Surface\"><header class=\"Header\"><nav class=\"Nav\"><a class=\"Nav--link\"
+        href=\"https://cloudflare.com\" target=\"_blank\" rel=\"noopener\"><div class=\"CloudflareLogo\"><svg
+        aria-label=\"Cloudflare logo\" xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"70
+        70 744 257\"><path d=\"M790.6 271.9c-3.4 0-6.1-2.7-6.1-6.1 0-3.3 2.7-6.1 6.1-6.1
+        3.3 0 6.1 2.7 6.1 6.1 0 3.3-2.8 6.1-6.1 6.1m0-11c-2.7 0-4.9 2.2-4.9 4.9s2.2
+        4.9 4.9 4.9 4.9-2.2 4.9-4.9-2.2-4.9-4.9-4.9m3.1 8.1h-1.4l-1.2-2.3h-1.6v2.3h-1.3v-6.7h3.2c1.4
+        0 2.3.9 2.3 2.2 0 1-.6 1.7-1.4 2l1.4 2.5zm-2.4-3.5c.5 0 1-.3 1-1 0-.8-.4-1-1-1h-2v2h2zm-636.2-6.4h15.6v42.5h27.1v13.6h-42.7zm58.8
+        28.2v-.2c0-16.1 13-29.2 30.3-29.2s30.1 12.9 30.1 29v.2c0 16.1-13 29.2-30.3
+        29.2s-30.1-12.9-30.1-29m44.6 0v-.2c0-8.1-5.8-15.1-14.4-15.1-8.5 0-14.2 6.9-14.2
+        15v.2c0 8.1 5.8 15.1 14.3 15.1 8.6 0 14.3-6.9 14.3-15m34.9 3.3v-31.5h15.8v31.2c0
+        8.1 4.1 11.9 10.3 11.9s10.3-3.7 10.3-11.5v-31.6h15.8v31.1c0 18.1-10.3 26-26.3
+        26-15.9 0-25.9-8-25.9-25.6m76-31.5H391c20 0 31.7 11.5 31.7 27.7v.2c0 16.2-11.8
+        28.2-32 28.2h-21.3v-56.1zm21.9 42.3c9.3 0 15.5-5.1 15.5-14.2v-.2c0-9-6.2-14.2-15.5-14.2H385v28.5h6.3v.1zm54-42.3h44.9v13.6h-29.4v9.6h26.6v12.9h-26.6v20h-15.5zm66.5
+        0h15.5v42.5h27.2v13.6h-42.7zm83.3-.4h15l23.9 56.5h-16.7l-4.1-10h-21.6l-4 10h-16.3l23.8-56.5zm13.7
+        34.4l-6.2-15.9-6.3 15.9h12.5zm45.2-34h26.5c8.6 0 14.5 2.2 18.3 6.1 3.3 3.2
+        5 7.5 5 13.1v.2c0 8.6-4.6 14.3-11.5 17.2l13.4 19.6h-18l-11.3-17h-6.8v17H654v-56.2zm25.8
+        26.9c5.3 0 8.3-2.6 8.3-6.6v-.2c0-4.4-3.2-6.6-8.4-6.6h-10.2V286h10.3zm46.4-26.9h45.1v13.2h-29.7v8.5h26.9v12.3h-26.9v8.9h30.1v13.2h-45.5zm-605.1
+        34.8c-2.2 4.9-6.8 8.4-12.8 8.4-8.5 0-14.3-7.1-14.3-15.1v-.2c0-8.1 5.7-15 14.2-15
+        6.4 0 11.3 3.9 13.3 9.3h16.4c-2.6-13.4-14.4-23.3-29.6-23.3C91 258 78 271.1
+        78 287.2v.2c0 16.1 12.8 29 30.1 29 14.8 0 26.4-9.6 29.4-22.4l-16.4-.1z\" fill=\"currentColor\"></path><path
+        d=\"M752.9 169.7L710 145.1l-7.4-3.2-175.5 1.2v89.1h225.8z\" fill=\"#fff\"></path><path
+        d=\"M674.8 223.9c2.1-7.2 1.3-13.8-2.2-18.7-3.2-4.5-8.6-7.1-15.1-7.4l-123.1-1.6c-.8
+        0-1.5-.4-1.9-1s-.5-1.4-.3-2.2c.4-1.2 1.6-2.1 2.9-2.2l124.2-1.6c14.7-.7 30.7-12.6
+        36.3-27.2l7.1-18.5c.3-.8.4-1.6.2-2.4-8-36.2-40.3-63.2-78.9-63.2-35.6 0-65.8
+        23-76.6 54.9-7-5.2-15.9-8-25.5-7.1-17.1 1.7-30.8 15.4-32.5 32.5-.4 4.4-.1
+        8.7.9 12.7-27.9.8-50.2 23.6-50.2 51.7 0 2.5.2 5 .5 7.5.2 1.2 1.2 2.1 2.4 2.1h227.2c1.3
+        0 2.5-.9 2.9-2.2l1.7-6.1z\" fill=\"#f38020\"></path><path d=\"M714 145c-1.1
+        0-2.3 0-3.4.1-.8 0-1.5.6-1.8 1.4l-4.8 16.7c-2.1 7.2-1.3 13.8 2.2 18.7 3.2
+        4.5 8.6 7.1 15.1 7.4l26.2 1.6c.8 0 1.5.4 1.9 1s.5 1.5.3 2.2c-.4 1.2-1.6 2.1-2.9
+        2.2l-27.3 1.6c-14.8.7-30.7 12.6-36.3 27.2l-2 5.1c-.4 1 .3 2 1.4 2h93.8c1.1
+        0 2.1-.7 2.4-1.8 1.6-5.8 2.5-11.9 2.5-18.2 0-37-30.2-67.2-67.3-67.2\" fill=\"#faae40\"></path></svg></div></a><a
+        class=\"Nav--link\" href=\"/dns/\"><span>DNS</span></a><a class=\"Nav--link\"
+        href=\"/family/\"><span>Families</span></a></nav></header><div class=\"HeroSection\"><div
+        class=\"HeroSection--content\"><div class=\"HeroSection--logo\"><div class=\"OneDotLogoAnimated
+        OneDotLogoAnimated-is-large OneDotLogoAnimated-is-centered\"><div class=\"OneDotLogoAnimated--aspect-ratio-container\"
+        style=\"--aspect-ratio: .293454\"><canvas class=\"OneDotLogoAnimated--canvas\"></canvas></div></div></div><div
+        class=\"HeroSection--title-wrapper\"><h1 class=\"HeroSection--title\" data-js-balance-text>The
+        free app that makes your Internet&nbsp;safer.</h1><h2 class=\"HeroSection--subtitle\"
+        data-js-balance-text>Now available for even more devices.</h2></div><div class=\"HeroSection--actions\"><a
+        class=\"Button Button-is-primary Button-with-icon\" href=\"https://itunes.apple.com/us/app/1-1-1-1-faster-internet/id1423538627\"><svg
+        class=\"Button--icon\" viewBox=\"0 0 170 170\" fill=\"currentColor\"><path
+        d=\"M150.4 130.3a88 88 0 0 1-8.7 15.6c-4.6 6.5-8.4 11-11.3 13.6a21.8 21.8
+        0 0 1-14.4 6.3c-3.7 0-8.1-1-13.3-3.2-5.2-2-10-3.1-14.3-3.1-4.6 0-9.5 1-14.8
+        3.1A39.7 39.7 0 0 1 61 166c-5 .2-9.9-2-14.8-6.5a97.1 97.1 0 0 1-29.4-68c0-11
+        2.4-20.3 7.1-28.2a41.3 41.3 0 0 1 34.7-20.5c4 0 9 1.2 15.4 3.6A49.6 49.6 0
+        0 0 86.2 50c1.3 0 5.9-1.4 13.6-4.3a44.9 44.9 0 0 1 18.4-3.2 39.2 39.2 0 0
+        1 30.7 16.1 34.1 34.1 0 0 0-18.1 31c0 10.3 3.8 19 11.2 25.8 3.3 3.1 7 5.6
+        11.2 7.3l-2.8 7.5zM119 7.3c0 8-3 15.6-8.8 22.6C103 38.2 94.5 43 85.2 42.3l-.2-3c0-7.9
+        3.4-16.2 9.4-23 3-3.4 6.8-6.3 11.4-8.6 4.7-2.2 9-3.5 13.1-3.7.2 1 .2 2.2.2
+        3.2z\"></path></svg><span class=\"Button--text\">App Store</span></a><a class=\"Button
+        Button-is-primary Button-with-icon Button-google-play-store\" href=\"https://play.google.com/store/apps/details?id=com.cloudflare.onedotonedotonedotone\"><svg
+        class=\"Button--icon\" viewBox=\"0 0 236 256\" fill=\"currentColor\"><path
+        d=\"M138.52 123.58L16.78 0c1.99.46 4.08 1.26 6.25 2.46l152.16 84.31-36.67
+        36.8zm42 42.62l-36.84-37.39 38.2-38.33 44.62 24.73c12.67 7.01 12.67 18.5 0
+        25.51l-45.99 25.48zM7.32.9l126 127.9L7.46 255.1C2.88 252.82 0 247.5 0 239.87V16.05C0
+        8.48 2.83 3.21 7.33.9zM138.5 134.02l35.35 35.88-150.81 83.56a24.36 24.36 0
+        0 1-5.94 2.4l121.4-121.84z\"></path></svg><span class=\"Button--text\">Google
+        Play</span></a></div><div class=\"HeroSection--actions HeroSection--download-actions\"><a
+        class=\"Button Button-is-primary Button-with-icon\" href=\"/Cloudflare_WARP.zip\"><svg
+        class=\"Button--icon\" viewBox=\"0 0 170 170\" fill=\"currentColor\"><path
+        d=\"M150.4 130.3a88 88 0 0 1-8.7 15.6c-4.6 6.5-8.4 11-11.3 13.6a21.8 21.8
+        0 0 1-14.4 6.3c-3.7 0-8.1-1-13.3-3.2-5.2-2-10-3.1-14.3-3.1-4.6 0-9.5 1-14.8
+        3.1A39.7 39.7 0 0 1 61 166c-5 .2-9.9-2-14.8-6.5a97.1 97.1 0 0 1-29.4-68c0-11
+        2.4-20.3 7.1-28.2a41.3 41.3 0 0 1 34.7-20.5c4 0 9 1.2 15.4 3.6A49.6 49.6 0
+        0 0 86.2 50c1.3 0 5.9-1.4 13.6-4.3a44.9 44.9 0 0 1 18.4-3.2 39.2 39.2 0 0
+        1 30.7 16.1 34.1 34.1 0 0 0-18.1 31c0 10.3 3.8 19 11.2 25.8 3.3 3.1 7 5.6
+        11.2 7.3l-2.8 7.5zM119 7.3c0 8-3 15.6-8.8 22.6C103 38.2 94.5 43 85.2 42.3l-.2-3c0-7.9
+        3.4-16.2 9.4-23 3-3.4 6.8-6.3 11.4-8.6 4.7-2.2 9-3.5 13.1-3.7.2 1 .2 2.2.2
+        3.2z\"></path></svg><p class=\"Button--text\">macOS</p></a><a class=\"Button
+        Button-is-primary Button-with-icon\" href=\"/Cloudflare_WARP_Release-x64.msi\"><svg
+        class=\"Button--icon\" viewBox=\"0 0 100 100\" fill=\"currentColor\"><path
+        d=\"m0,12.402,35.687-4.8602,0.0156,34.423-35.67,0.20313zm35.67,33.529,0.0277,34.453-35.67-4.9041-0.002-29.78zm4.3261-39.025,47.318-6.906,0,41.527-47.318,0.37565zm47.329,39.349-0.0111,41.34-47.318-6.6784-0.0663-34.739z\"></path></svg><p
+        class=\"Button--text\">Windows</p></a></div><a class=\"CopyLink--small CopyLink-with-margin--small\"
+        href=\"https://developers.cloudflare.com/warpclient/setting-up/macOS/\" target=\"_blank\">macOS
+        Installation Instructions</a><a class=\"CopyLink--small\" href=\"https://developers.cloudflare.com/warpclient/setting-up/windows/\"
+        target=\"_blank\">Windows Installation Instructions</a></div><div class=\"HeroSection--scroll-indicator\"><svg
+        viewBox=\"0 0 70 40\"><path fill=\"#e52b90\" d=\"M61.46 1.46a5 5 0 1 1 7.08
+        7.08l-6.92 6.9L50 12.95 61.46 1.46z\"></path><path fill=\"#1966b9\" d=\"M64.21
+        12.86L38.54 38.54a5 5 0 0 1-7.08 0l-30-30a5 5 0 0 1 7.08-7.08L35 27.93 54.54
+        8.39l9.67 4.47z\"></path><path fill=\"#f2973a\" d=\"M58.68 18.4L38.54 38.53a5
+        5 0 0 1-7.08 0l-30-30a5 5 0 0 1 7.08-7.08L35 27.93 38.93 24l19.75-5.6z\"></path><path
+        fill=\"#1cb29e\" d=\"M26.78 33.85L7.57 14.64l11.34-2.8 7.08 7.08z\"></path><path
+        fill=\"#ee2e4c\" d=\"M10.4 17.47L1.46 8.54a5 5 0 0 1 7.08-7.08l13.64 13.65-11.78
+        2.36z\"></path></svg></div></div><div class=\"AppOverviewSection\" data-depth-perspective-root><div
+        class=\"AppOverviewSection--column\"><div class=\"AppOverviewSection--content\"><div
+        class=\"SectionCopy\" data-depth=\"3\"><div class=\"SectionCopy--content\"><h2
+        class=\"SectionCopy--title\" data-js-balance-text>You\u2019re one tap away
+        from a safer Internet.</h2><div class=\"SectionCopy--description\" data-js-balance-text><p>When
+        the Internet was built, computers weren\u2019t mobile. They sat in offices
+        next to data centers. The Internet has changed but the assumptions made 30
+        years ago are making your experience slower and less secure.</p><p>1.1.1.1
+        with WARP replaces the connection between your device and the Internet with
+        a modern, optimized, protocol.</p><p><a class=\"CopyLink\" href=\"https://blog.cloudflare.com/warp-for-desktop\"
+        target=\"_blank\">Learn more</a></p></div></div></div></div><div class=\"AppOverviewSection--device-mockup\"><div
+        class=\"DeviceMockup desktop\" data-depth-perspective-scroll-anchor><div class=\"DeviceMockup--backdrop
+        DeviceMockup--backdrop-blob1\" data-depth=\"2\"><svg class=\"SVG-Blob1\" viewBox=\"0
+        0 1280 1505\"><defs><lineargradient id=\"SVG-Blob1-a\" x1=\"-10212.03\" x2=\"-10212.03\"
+        y1=\"23858.67\" y2=\"25358.17\" gradientTransform=\"rotate(177.07 -4480.889
+        12823.21)\" gradientUnits=\"userSpaceOnUse\"><stop offset=\"0\" stop-color=\"rgb(150,
+        130, 210)\" stop-opacity=\"0\"></stop><stop offset=\"1\" stop-color=\"rgb(150,
+        130, 210)\" stop-opacity=\".1\"></stop></lineargradient><lineargradient id=\"SVG-Blob1-c\"
+        x1=\"-10686.38\" x2=\"-9606.71\" y1=\"24628.21\" y2=\"24628.21\" gradientTransform=\"rotate(180
+        -4780.22 12685.205)\" gradientUnits=\"userSpaceOnUse\"><stop offset=\"0\"
+        stop-color=\"#f16137\"></stop><stop offset=\".19\" stop-color=\"#f16637\"></stop><stop
+        offset=\".43\" stop-color=\"#f17637\"></stop><stop offset=\".69\" stop-color=\"#f08f36\"></stop><stop
+        offset=\".96\" stop-color=\"#f0b236\"></stop><stop offset=\".99\" stop-color=\"#f0b636\"></stop></lineargradient><lineargradient
+        id=\"SVG-Blob1-d\" x1=\"-11102.17\" x2=\"-10236.2\" y1=\"24395.25\" y2=\"24395.25\"
+        gradientTransform=\"matrix(-1 .09 -.09 -1 -7931.55 25953.3)\" gradientUnits=\"userSpaceOnUse\"><stop
+        offset=\".02\" stop-color=\"#ed1c24\"></stop><stop offset=\".22\" stop-color=\"#f16137\"></stop><stop
+        offset=\".36\" stop-color=\"#f16837\"></stop><stop offset=\".57\" stop-color=\"#f17b37\"></stop><stop
+        offset=\".82\" stop-color=\"#f09b36\"></stop><stop offset=\".99\" stop-color=\"#f0b636\"></stop></lineargradient><lineargradient
+        id=\"SVG-Blob1-e\" x1=\"-10509.31\" x2=\"-9846.06\" y1=\"24605.82\" y2=\"24605.82\"
+        gradientTransform=\"rotate(180 -4780.22 12685.205)\" gradientUnits=\"userSpaceOnUse\"><stop
+        offset=\".38\" stop-color=\"#f48120\"></stop><stop offset=\"1\" stop-color=\"#fcee21\"></stop></lineargradient><lineargradient
+        id=\"SVG-Blob1-f\" x1=\"-10341.73\" x2=\"-9919.97\" y1=\"24501.32\" y2=\"24501.32\"
+        gradientTransform=\"rotate(180 -4780.22 12685.205)\" gradientUnits=\"userSpaceOnUse\"><stop
+        offset=\".22\" stop-color=\"#f16137\"></stop><stop offset=\".36\" stop-color=\"#f16737\"></stop><stop
+        offset=\".56\" stop-color=\"#f17a37\"></stop><stop offset=\".79\" stop-color=\"#f09736\"></stop><stop
+        offset=\".99\" stop-color=\"#f0b636\"></stop></lineargradient><lineargradient
+        id=\"SVG-Blob1-g\" x1=\"440.99\" x2=\"667.85\" y1=\"880.13\" y2=\"880.13\"
+        gradientUnits=\"userSpaceOnUse\"><stop offset=\"0\" stop-color=\"#f45376\"></stop><stop
+        offset=\".43\" stop-color=\"#f5714d\"></stop><stop offset=\".89\" stop-color=\"#f7931e\"></stop><stop
+        offset=\".99\" stop-color=\"#f6925b\"></stop></lineargradient></defs><path
+        fill=\"url(#SVG-Blob1-a)\" d=\"M1.64 761.13C13.7 526.05 264.62 477 360.93
+        436.62c139.46-58.5 162-158.07 200.69-290.44 55.73-190.64 718.16-353 718.16
+        591.61 0 607-460.32 901.21-673 707C235.49 1105.75-23.15 1244.41 1.64 761.13z\"></path><path
+        fill=\"url(#SVG-Blob1-c)\" d=\"M50.2 742.28C74.07 550.48 295.49 568.06 393
+        539.05 534 497 548 344.94 636.07 262.68 952.57-33 1159.38 382.94 1121.47 641c-58.17
+        395.88-297.14 824-497.58 637.83C423.87 1093 1.13 1136.59 50.2 742.28z\"></path><path
+        fill=\"url(#SVG-Blob1-d)\" d=\"M147.48 822.77C158.29 647.42 344.87 653 423
+        620.4c162.54-67.85 283.63-403.73 370.17-345.14 328.29 222.24 219.6 831.26
+        16.27 858-134.94 17.74-684.19 50-661.96-310.49z\"></path><path fill=\"url(#SVG-Blob1-e)\"
+        d=\"M288.23 792.19c20.89-160.19 177.39-154.6 247.48-154.6 128.14 0 164.34-228.81
+        265.13-196.16 173.17 56.11 205.53 467 37.48 608.24-93 78.13-593.03 71.92-550.09-257.48z\"></path><path
+        fill=\"url(#SVG-Blob1-f)\" d=\"M361.52 838.66C377 727.05 496.69 708.4 544.34
+        731 646.25 779.27 851.63 918.73 757 979.89c-69.36 44.82-427.2 88.21-395.48-141.23z\"></path><path
+        fill=\"url(#SVG-Blob1-g)\" d=\"M442 855.47c8.09-58.56 70.92-68.35 95.92-56.5
+        53.47 25.34 169.56 73.24 116.32 146.46-27.6 37.92-228.92 30.42-212.24-89.96z\"></path></svg></div><div
+        class=\"DeviceMockup--device DeviceMockup--device-monitor\" data-depth=\"1\"><div
+        class=\"DeviceMockup--device-display\"><img src=\"/media/warp-desktop.png\"></div></div></div></div></div></div><div
+        class=\"PrivacySection\" data-depth-perspective-root><div class=\"PrivacySection--column\"><div
+        class=\"PrivacySection--device-mockup\"><div class=\"DeviceMockup desktop\"
+        data-depth-perspective-scroll-anchor><div class=\"DeviceMockup--backdrop DeviceMockup--backdrop-blob2\"
+        data-depth=\"2\"><svg class=\"SVG-Blob2\" viewBox=\"0 0 1592 2422\"><defs><lineargradient
+        id=\"SVG-Blob2-b\" x1=\"-1974.19\" x2=\"-594.15\" y1=\"21495.65\" y2=\"21495.65\"
+        gradientTransform=\"matrix(.84 .03 .03 -.95 1365.83 21773.75)\" gradientUnits=\"userSpaceOnUse\"><stop
+        offset=\"0\" stop-color=\"rgb(150, 130, 210)\" stop-opacity=\"0\"></stop><stop
+        offset=\"1\" stop-color=\"rgb(150, 130, 210)\" stop-opacity=\".1\"></stop></lineargradient><lineargradient
+        id=\"SVG-Blob2-c\" x1=\"-2522.59\" x2=\"-1586.36\" y1=\"21044.32\" y2=\"21044.32\"
+        gradientTransform=\"matrix(1.01 .04 .04 -1 2352.44 22444.75)\" gradientUnits=\"userSpaceOnUse\"><stop
+        offset=\"0\" stop-color=\"#0089a4\"></stop><stop offset=\".06\" stop-color=\"#008faf\"></stop><stop
+        offset=\".41\" stop-color=\"#00adee\"></stop><stop offset=\".49\" stop-color=\"#23b5dc\"></stop><stop
+        offset=\".59\" stop-color=\"#46bdc9\"></stop><stop offset=\".69\" stop-color=\"#61c3bb\"></stop><stop
+        offset=\".79\" stop-color=\"#74c7b0\"></stop><stop offset=\".89\" stop-color=\"#80caaa\"></stop><stop
+        offset=\"1\" stop-color=\"#84cba8\"></stop></lineargradient><lineargradient
+        id=\"SVG-Blob2-d\" x1=\"-2397.9\" x2=\"-1662.73\" y1=\"21015.86\" y2=\"21015.86\"
+        gradientTransform=\"matrix(1 .04 .04 -1 2334.68 22444.12)\" gradientUnits=\"userSpaceOnUse\"><stop
+        offset=\"0\" stop-color=\"#2251a9\"></stop><stop offset=\".17\" stop-color=\"#1d5db2\"></stop><stop
+        offset=\".48\" stop-color=\"#117ecb\"></stop><stop offset=\".85\" stop-color=\"#00adee\"></stop></lineargradient><lineargradient
+        id=\"SVG-Blob2-e\" x1=\"-1860.67\" x2=\"-1276.29\" y1=\"20741.07\" y2=\"20741.07\"
+        gradientTransform=\"matrix(.83 .03 .04 -1.04 1527.84 23023.93)\" gradientUnits=\"userSpaceOnUse\"><stop
+        offset=\"0\" stop-color=\"#114c97\"></stop><stop offset=\".25\" stop-color=\"#0a76bd\"></stop><stop
+        offset=\".53\" stop-color=\"#039ee0\"></stop><stop offset=\".68\" stop-color=\"#00adee\"></stop><stop
+        offset=\"1\" stop-color=\"#5ac593\"></stop></lineargradient><lineargradient
+        id=\"SVG-Blob2-f\" x1=\"-2208.26\" x2=\"-1922.01\" y1=\"20998.37\" y2=\"20998.37\"
+        gradientTransform=\"matrix(1 .04 .04 -1 2334.68 22444.12)\" gradientUnits=\"userSpaceOnUse\"><stop
+        offset=\"0\" stop-color=\"#2e3191\"></stop><stop offset=\".08\" stop-color=\"#2a3b98\"></stop><stop
+        offset=\".71\" stop-color=\"#0f86d1\"></stop><stop offset=\"1\" stop-color=\"#04a3e7\"></stop></lineargradient><lineargradient
+        id=\"SVG-Blob2-g\" x1=\"0\" x2=\"5\" y1=\"0\" y2=\"5000\" gradientUnits=\"userSpaceOnUse\"><stop
+        offset=\"0\" stop-color=\"#45bbb7\"></stop><stop offset=\"1\" stop-color=\"#1da2e2\"></stop></lineargradient><lineargradient
+        id=\"SVG-Blob2-i\" x1=\"15104.79\" x2=\"15305.41\" y1=\"17113.92\" y2=\"17113.92\"
+        gradientTransform=\"matrix(-.35 -.4 -.55 .48 14834.63 -213.25)\" gradientUnits=\"userSpaceOnUse\"><stop
+        offset=\"0\" stop-color=\"#1b1464\"></stop><stop offset=\".07\" stop-color=\"#1d1869\"></stop><stop
+        offset=\".4\" stop-color=\"#27267f\"></stop><stop offset=\".71\" stop-color=\"#2c2e8d\"></stop><stop
+        offset=\"1\" stop-color=\"#2e3191\"></stop></lineargradient><lineargradient
+        id=\"SVG-Blob2-j\" x1=\"-3686.72\" x2=\"-3203.11\" y1=\"22154.89\" y2=\"22154.89\"
+        gradientTransform=\"matrix(.19 .52 .47 -.17 -9211.04 5917.76)\" gradientUnits=\"userSpaceOnUse\"><stop
+        offset=\"0\" stop-color=\"#00adee\"></stop><stop offset=\".14\" stop-color=\"#23b5dc\"></stop><stop
+        offset=\".31\" stop-color=\"#46bdc9\"></stop><stop offset=\".48\" stop-color=\"#61c3bb\"></stop><stop
+        offset=\".65\" stop-color=\"#74c7b0\"></stop><stop offset=\".82\" stop-color=\"#80caaa\"></stop><stop
+        offset=\"1\" stop-color=\"#84cba8\"></stop></lineargradient><lineargradient
+        id=\"SVG-Blob2-k\" x1=\"544.52\" x2=\"608.52\" y1=\"508.53\" y2=\"508.53\"
+        gradientUnits=\"userSpaceOnUse\"><stop offset=\"0\" stop-color=\"#31b8d4\"></stop><stop
+        offset=\".13\" stop-color=\"#3fbbcc\"></stop><stop offset=\".5\" stop-color=\"#65c4b9\"></stop><stop
+        offset=\".81\" stop-color=\"#7cc9ac\"></stop><stop offset=\"1\" stop-color=\"#84cba8\"></stop></lineargradient></defs><path
+        fill=\"url(#SVG-Blob2-b)\" d=\"M1470.18 1749.64c188-88.6 183.55-469.4-203.47-753.92-325.91-239.59-613-813.16-793.12-53.92-86.73
+        365.52 88.51 1008.94 316.85 1093 211.44 77.88 274.87-94.34 679.74-285.16z\"></path><path
+        fill=\"url(#SVG-Blob2-c)\" d=\"M1447.37 1574.18c126.65-168.11 39-370.64-184.84-470.4-128-57-990.73-964.71-572.1
+        592.07 56.57 210.32 429.24 313.3 756.94-121.67z\"></path><path fill=\"url(#SVG-Blob2-d)\"
+        d=\"M1422 1387.77c14.93-179-167.09-171.76-232.24-190.76-140.86-41.08-148.54-274.51-267.42-266.71-260.72
+        17.08-245.53 372.18-215.95 535.44 46 254 156.18 288.71 193.3 311.33 136.79
+        83.4 493.46-43.69 522.31-389.3z\"></path><path fill=\"url(#SVG-Blob2-e)\"
+        d=\"M1243.93 1353.94c-5.52-137.17-116-124.63-166.25-164.16C732 917.9 706.36
+        1512.65 824.07 1633c101.93 104.25 433.27 54.65 419.86-279.06z\"></path><path
+        fill=\"url(#SVG-Blob2-f)\" d=\"M1164.51 1338.37c7.62-115.19-110.49-141.4-149.44-117.82-374.21
+        226.61 119.65 568.23 149.44 117.82z\"></path><path fill=\"url(#SVG-Blob2-g)\"
+        d=\"M1133.05 1362.25c-7.23-73.42-77.54-89-106-75.6-60.91 28.68-104.44 130.63-82.6
+        159.62 23.72 31.52 203.47 66.9 188.6-84.02z\"></path><path fill=\"url(#SVG-Blob2-i)\"
+        d=\"M73.16 1938.32c-18.83 31.4-7.7 68.41 15.88 85.46 30.26 21.87 53.9 3.36
+        60.23-47.08 3.19-25.44-37.41-102.92-76.11-38.38z\"></path><path fill=\"url(#SVG-Blob2-j)\"
+        d=\"M650.16 396.68c58.44-18 30.48-80.72 27.27-106-6.95-54.6 65.44-87.56 46.21-128.13-42.17-89-122.81-37.61-170-6.09-73.46
+        49-68.84 92.08-70.72 108-6.92 58.69 54.38 166.96 167.24 132.22z\"></path><circle
+        cx=\"576.52\" cy=\"508.53\" r=\"32\" fill=\"url(#SVG-Blob2-k)\"></circle></svg></div><div
+        class=\"DeviceMockup--device DeviceMockup--device-monitor\" data-depth=\"1\"><div
+        class=\"DeviceMockup--device-display\"><img src=\"/media/warp-desktop-3.png\"></div></div></div></div><div
+        class=\"PrivacySection--content\"><div class=\"SectionCopy SectionCopy-is-right\"
+        data-depth=\"3\"><div class=\"SectionCopy--content\"><h2 class=\"SectionCopy--title\"
+        data-js-balance-text>Fast. Free. Private.</h2><div class=\"SectionCopy--description\"
+        data-js-balance-text><p>Your Internet service provider can see every site
+        and app you use\u2014even if they\u2019re encrypted. Some providers even sell
+        this data, or use it to target you with ads.</p><p>1.1.1.1 with WARP prevents
+        anyone from snooping on you by encrypting more of the traffic leaving your
+        device.</p><p>We believe privacy is a right. We won''t sell your data, ever.</p><p><a
+        class=\"CopyLink\" href=\"https://twitter.com/intent/tweet?text=ISPs%20spy%20on%20your%20Internet%20traffic%20and%20sell%20the%20data.%20I%27m%20using%201.1.1.1%20with%20WARP%2C%20a%20free%20app%20which%20makes%20the%20Internet%20on%20my%20phone%20faster%20and%20more%20private.%20You%20should%20get%20the%20app%20too%3A%20https%3A//one.one.one.one\"
+        target=\"_blank\" rel=\"noreferrer\">Share with Twitter</a></p></div></div></div></div></div></div><div
+        class=\"WarpSection\" data-depth-perspective-root><div class=\"WarpSection--column\"><div
+        class=\"WarpSection--content\"><div class=\"SectionCopy\" data-depth=\"3\"><div
+        class=\"SectionCopy--content\"><h2 class=\"SectionCopy--title\" data-js-balance-text>Use
+        the Internet fast-lane</h2><div class=\"SectionCopy--description\" data-js-balance-text><p>WARP+
+        subscriptions extend WARP by sending all of your Internet traffic over Cloudflare''s
+        optimized Internet routes which make thousands of websites 30% faster on average.
+        WARP+ combines millions of Internet route measurements with Cloudflare\u2019s
+        private Internet backbone to deliver a better Internet directly to your device.</p></div></div></div></div><div
+        class=\"WarpSection--device-mockup\"><div class=\"DeviceMockup desktop\" data-depth-perspective-scroll-anchor><div
+        class=\"DeviceMockup--backdrop DeviceMockup--backdrop-blob3\" data-depth=\"2\"><svg
+        class=\"SVG-Blob3\" viewBox=\"0 0 1185 2396\"><defs><lineargradient id=\"SVG-Blob3-d\"
+        x1=\"-10240.77\" x2=\"-10240.77\" y1=\"8357.93\" y2=\"6706.45\" gradientTransform=\"matrix(-1
+        0 0 1 -9648.66 -6254.45)\" gradientUnits=\"userSpaceOnUse\"><stop offset=\"0\"
+        stop-color=\"rgb(150, 130, 210)\" stop-opacity=\"0\"></stop><stop offset=\"1\"
+        stop-color=\"rgb(150, 130, 210)\" stop-opacity=\".1\"></stop></lineargradient><lineargradient
+        id=\"SVG-Blob3-a\" x1=\"-10659.13\" x2=\"-9829.61\" y1=\"7668.16\" y2=\"7668.16\"
+        gradientTransform=\"matrix(-1 0 0 1 -9648.66 -6254.45)\" gradientUnits=\"userSpaceOnUse\"><stop
+        offset=\"0\" stop-color=\"#f16137\"></stop><stop offset=\".19\" stop-color=\"#f16637\"></stop><stop
+        offset=\".43\" stop-color=\"#f17637\"></stop><stop offset=\".69\" stop-color=\"#f08f36\"></stop><stop
+        offset=\".96\" stop-color=\"#f0b236\"></stop><stop offset=\".99\" stop-color=\"#f0b636\"></stop></lineargradient><lineargradient
+        id=\"SVG-Blob3-e\" x1=\"-11142.29\" x2=\"-11142.29\" y1=\"8796.32\" y2=\"7834.58\"
+        gradientTransform=\"matrix(-.98 .2 .2 .98 -12009.92 -4460.58)\" gradientUnits=\"userSpaceOnUse\"><stop
+        offset=\".33\" stop-color=\"#ed1d54\"></stop><stop offset=\".69\" stop-color=\"#ef4444\"></stop><stop
+        offset=\"1\" stop-color=\"#f16137\"></stop></lineargradient><lineargradient
+        id=\"SVG-Blob3-f\" x1=\"283.17\" x2=\"843.11\" y1=\"1377.3\" y2=\"1377.3\"
+        gradientUnits=\"userSpaceOnUse\"><stop offset=\".21\" stop-color=\"#f16137\"></stop><stop
+        offset=\".31\" stop-color=\"#f15b39\"></stop><stop offset=\".43\" stop-color=\"#f04b41\"></stop><stop
+        offset=\".57\" stop-color=\"#ee2f4c\"></stop><stop offset=\".64\" stop-color=\"#ed1d54\"></stop><stop
+        offset=\".92\" stop-color=\"#ed1c24\"></stop></lineargradient><lineargradient
+        id=\"SVG-Blob3-g\" x1=\"-6161.44\" x2=\"-5895.84\" y1=\"7242.74\" y2=\"7242.74\"
+        gradientTransform=\"matrix(-.72 -.69 -.69 .72 1235.37 -8048.85)\" gradientUnits=\"userSpaceOnUse\"><stop
+        offset=\"0\" stop-color=\"#f16137\"></stop><stop offset=\".99\" stop-color=\"#f0b636\"></stop></lineargradient><lineargradient
+        id=\"SVG-Blob3-h\" x1=\"-4240.98\" x2=\"-4127.53\" y1=\"8166.74\" y2=\"8166.74\"
+        gradientTransform=\"matrix(-.43 -.9 -.9 .43 6146.33 -5946.72)\" gradientUnits=\"userSpaceOnUse\"><stop
+        offset=\".01\" stop-color=\"#f0b636\"></stop><stop offset=\".19\" stop-color=\"#f0b036\"></stop><stop
+        offset=\".45\" stop-color=\"#f09e36\"></stop><stop offset=\".74\" stop-color=\"#f18037\"></stop><stop
+        offset=\"1\" stop-color=\"#f16137\"></stop></lineargradient><lineargradient
+        id=\"SVG-Blob3-i\" x1=\"-17119.23\" x2=\"-16960.03\" y1=\"19708.79\" y2=\"19708.79\"
+        gradientTransform=\"rotate(138.6 -4620.668 13279.045)\" gradientUnits=\"userSpaceOnUse\"><stop
+        offset=\"0\" stop-color=\"rgb(150, 130, 210)\" stop-opacity=\"0\"></stop><stop
+        offset=\"1\" stop-color=\"rgb(150, 130, 210)\" stop-opacity=\".1\"></stop></lineargradient><lineargradient
+        id=\"SVG-Blob3-j\" x1=\"300.71\" x2=\"262.83\" y1=\"5103.48\" y2=\"4804.23\"
+        gradientTransform=\"matrix(1.11 -.5 .41 .91 -1489.76 -4225.98)\" xlink:href=\"#a\"></lineargradient><lineargradient
+        id=\"SVG-Blob3-b\" x1=\"1971.71\" x2=\"1956.5\" y1=\"4603.92\" y2=\"4483.8\"
+        gradientTransform=\"matrix(1.21 .13 -.15 1.36 -843.44 -5995.21)\" gradientUnits=\"userSpaceOnUse\"><stop
+        offset=\".08\" stop-color=\"#ec1557\"></stop><stop offset=\"1\" stop-color=\"#f16137\"></stop></lineargradient><lineargradient
+        id=\"SVG-Blob3-k\" x1=\"2225.33\" x2=\"2210.13\" y1=\"5856.46\" y2=\"5736.33\"
+        gradientTransform=\"matrix(.93 .79 -.89 1.05 3867.91 -5569.87)\" xlink:href=\"#b\"></lineargradient></defs><path
+        fill=\"url(#SVG-Blob3-d)\" d=\"M4.32 1607.3C25 1838.17 287.31 1924.43 354.64
+        1977c334.41 261.34 644 136.35 817-551.65C1283 982.49 618.34 177.71 546.49
+        545.68 455.57 1011.32-51.81 981.42 4.32 1607.3z\"></path><path fill=\"url(#SVG-Blob3-a)\"
+        d=\"M184 1516.21c14.12 162.63 139.37 203.35 238.89 260.45 227.78 130.73 139.78
+        292.73 233.11 290.58 270.15-6.22 333-488.58 348.68-594.85 58.95-400.91-350-843-409-676-111.21
+        314.74-450.01 278.94-411.68 719.82z\"></path><path fill=\"url(#SVG-Blob3-e)\"
+        d=\"M213.54 1478.58c32.91 160.35 138.19 161.94 194 180.52 169.11 56.29 170.72
+        303.35 312.12 244.76 96.6-40 191.56-473.24 187-610.47-10.29-309.06-220.21-397.72-278-342-114.55
+        110.45-477.13 225.09-415.12 527.19z\"></path><path fill=\"url(#SVG-Blob3-f)\"
+        d=\"M283.74 1424.78C295.5 1571.86 514.57 1559.3 541.06 1656c22.39 81.77 292.61
+        3.39 301.61-247.61 9.56-266.55-137.34-381.77-198-328-88 78-375.95 156.66-360.93
+        344.39z\"></path><path fill=\"url(#SVG-Blob3-g)\" d=\"M405.79 1314.16c-93
+        101.69-47 172.1-1.5 174.67 97.3 5.5 393.44-142.75 375.38-200.44-29.59-94.49-182.67-183.28-373.88
+        25.77z\"></path><path fill=\"url(#SVG-Blob3-h)\" d=\"M488.61 1300.1c-66.6
+        34.32-58.54 76.57-36.76 85.45 46.61 19 155.27-9.19 222.82-50.16 45.03-27.31-49.15-105.84-186.06-35.29z\"></path><path
+        class=\"DeviceMockup--backdrop-blob3-desktop-only-blog\" fill=\"url(#SVG-Blob3-i)\"
+        d=\"M400.47 291.71c-15.64-25.46-3.56-66.95 16.93-91.12s70.86-47.67 83.87-34.78c12.18
+        12.07-1.76 92.57-33 129-20.52 23.9-57.67 13.39-67.8-3.1z\" opacity=\".48\"></path><path
+        fill=\"url(#SVG-Blob3-j)\" d=\"M980.16 94.9c33.76 76.75-1 167.82-77.7 203.4s-285.72-177.85-122.25-278c72.03-44.08
+        166.19-2.16 199.95 74.6z\"></path><path fill=\"url(#SVG-Blob3-b)\" d=\"M924.6
+        469.73c-4.8 45.87-35.74 80.07-69.12 76.39S796.58 383.78 872.85 380c33.61-1.64
+        56.54 43.87 51.75 89.73z\"></path><path fill=\"url(#SVG-Blob3-k)\" d=\"M810.38
+        2278.56c-29.79 35.21-74.61 46.05-100.12 24.21s42.74-167.33 107.87-127.49c28.71
+        17.55 22.04 68.07-7.75 103.28z\"></path></svg></div><div class=\"DeviceMockup--device
+        DeviceMockup--device-monitor\" data-depth=\"1\"><div class=\"DeviceMockup--device-display\"><img
+        src=\"/media/warp-plus.png\"></div></div></div></div></div></div><div class=\"PerformanceSection\"
+        data-depth-perspective-root><div class=\"PerformanceSection--column\"><div
+        class=\"PerformanceSection--content\"><div class=\"SectionCopy SectionCopy-is-centered\"
+        data-depth-perspective-scroll-anchor data-depth=\"3\"><div class=\"SectionCopy--content\"><h2
+        class=\"SectionCopy--title\" data-js-balance-text>Built on a massive network.</h2><div
+        class=\"SectionCopy--description\" data-js-balance-text><p>WARP is built on
+        the same network that has made 1.1.1.1 the <a class=''CopyLink'' href=''https://www.dnsperf.com/#!dns-resolvers''
+        target=''_blank'' rel=''noreferrer''>fastest DNS resolver</a> on Earth.</p><p>Your
+        connection to WARP is fast and reliable wherever you live and wherever you
+        go.</p></div></div></div></div><div class=\"PerformanceSection--figure\" data-depth=\"3\"><div
+        class=\"PerformanceSection--figure-item PerformanceSection--figure-item-one-dot\"
+        style=\"--bar-width: 0.30\"><div class=\"PerformanceSection--figure-item-bar\"></div><div
+        class=\"PerformanceSection--figure-item-time\">13.66ms</div><div class=\"PerformanceSection--figure-item-label\">1.1.1.1</div></div><div
+        class=\"PerformanceSection--figure-item\" style=\"--bar-width: 0.38\"><div
+        class=\"PerformanceSection--figure-item-bar\"></div><div class=\"PerformanceSection--figure-item-time\">22.78ms</div><div
+        class=\"PerformanceSection--figure-item-label\">Google</div></div><div class=\"PerformanceSection--figure-item\"
+        style=\"--bar-width: 0.40\"><div class=\"PerformanceSection--figure-item-bar\"></div><div
+        class=\"PerformanceSection--figure-item-time\">23.19ms</div><div class=\"PerformanceSection--figure-item-label\">OpenDNS</div></div><div
+        class=\"PerformanceSection--figure-item\" style=\"--bar-width: 1.00\"><div
+        class=\"PerformanceSection--figure-item-bar\"></div><div class=\"PerformanceSection--figure-item-time\">64.43ms</div><div
+        class=\"PerformanceSection--figure-item-label\">Verisign</div></div></div><p
+        style=\"font-size:12px; font-style:italic; margin-top:30px\">October, 2020</p></div></div><div
+        class=\"PrivacySection\" data-depth-perspective-root><div class=\"PrivacySection--column
+        PrivacySection--column-less-pad\"><div class=\"PrivacySection--device-mockup\"><div
+        class=\"DeviceMockup desktop\" data-depth-perspective-scroll-anchor><div class=\"DeviceMockup--device
+        DeviceMockup--device-monitor\" data-depth=\"1\"><div class=\"DeviceMockup--device-display\"><img
+        src=\"/media/warp-desktop-2.png\"></div></div></div></div><div class=\"PrivacySection--content\"><div
+        class=\"SectionCopy\" data-depth=\"3\"><div class=\"SectionCopy--content\"><h2
+        class=\"SectionCopy--title\" data-js-balance-text>Now available for macOS
+        and Windows</h2><div class=\"SectionCopy--description\" data-js-balance-text><div><p>Millions
+        of people secure their phone Internet connections with the WARP app today.</p><p>We\u2019ve
+        extended the same protection to macOS and Windows.</p></div></div></div></div></div></div></div><div
+        class=\"DevicesSection\" data-depth-perspective-root><div class=\"DevicesSection--column\"><div
+        class=\"DevicesSection--content\"><div class=\"SectionCopy\" data-depth=\"3\"><div
+        class=\"SectionCopy--content\"><h2 class=\"SectionCopy--title\" data-js-balance-text>New:
+        use WARP with your team</h2><div class=\"SectionCopy--description\" data-js-balance-text><p>Bring
+        the power of WARP to your business by integrating WARP with Gateway. Enroll
+        user devices in your organization and protect your remote workforce from threats
+        online.</p><a class=\"CopyLink\" href=\"https://blog.cloudflare.com/warp-for-desktop\"
+        target=\"_blank\">Learn more</a></div></div></div></div><div class=\"DevicesSection--device-mockup\"><div
+        class=\"DeviceMockup desktop\" data-depth-perspective-scroll-anchor><div class=\"DeviceMockup--device
+        DeviceMockup--device-monitor\" data-depth=\"1\"><div class=\"DeviceMockup--device-display\"><img
+        src=\"/media/lighthouse.svg\"></div></div></div></div></div></div><div class=\"FooterSection\"
+        data-depth-perspective-root><div class=\"FooterSection--column\" style=\"padding-bottom:2em;\"><div
+        class=\"FooterSection--content\" data-depth-perspective-scroll-anchor data-depth=\"3\"><div
+        class=\"FooterSection--icon\"><svg id=\"SVG-IOS-app-icon\" viewBox=\"0 0 465.95
+        466.55\"><defs><clipPath id=\"SVG-IOS-app-icon-clip-path\"><rect width=\"465.41\"
+        height=\"465.41\" x=\".85\" y=\".65\" rx=\"104.5\" fill=\"none\"></rect></clipPath><linearGradient
+        id=\"SVG-IOS-app-icon-linear-gradient\" x1=\"-1946.56\" x2=\"-1218.16\" y1=\"-5061.71\"
+        y2=\"-5061.71\" gradientTransform=\"rotate(-90 1978.4 -3270.79)\" gradientUnits=\"userSpaceOnUse\"><stop
+        offset=\"0\" stop-color=\"#ef6876\"></stop><stop offset=\".28\" stop-color=\"#ef6974\"></stop><stop
+        offset=\".4\" stop-color=\"#f06c6d\"></stop><stop offset=\".48\" stop-color=\"#f17261\"></stop><stop
+        offset=\".56\" stop-color=\"#f37b4f\"></stop><stop offset=\".62\" stop-color=\"#f58638\"></stop><stop
+        offset=\".67\" stop-color=\"#f7931e\"></stop><stop offset=\".99\" stop-color=\"#f6925b\"></stop></linearGradient><linearGradient
+        id=\"SVG-IOS-app-icon-linear-gradient-2\" x1=\"42.16\" x2=\"486.65\" y1=\"773.41\"
+        y2=\"3.53\" gradientTransform=\"rotate(180 274.4 339.58)\" gradientUnits=\"userSpaceOnUse\"><stop
+        offset=\"0\" stop-color=\"#fcee21\"></stop><stop offset=\".88\" stop-color=\"#f48120\"></stop></linearGradient><linearGradient
+        id=\"SVG-IOS-app-icon-linear-gradient-3\" x1=\"226.49\" x2=\"226.49\" y1=\"688.23\"
+        y2=\"-68.38\" gradientTransform=\"rotate(180 274.4 339.58)\" gradientUnits=\"userSpaceOnUse\"><stop
+        offset=\".45\" stop-color=\"#f0b636\"></stop><stop offset=\".68\" stop-color=\"#f16137\"></stop><stop
+        offset=\".99\" stop-color=\"#f0b636\"></stop></linearGradient><linearGradient
+        id=\"SVG-IOS-app-icon-linear-gradient-4\" x1=\"101.89\" x2=\"635.43\" y1=\"523.23\"
+        y2=\"523.23\" gradientTransform=\"rotate(180 274.4 339.58)\" gradientUnits=\"userSpaceOnUse\"><stop
+        offset=\"0\" stop-color=\"#29b473\"></stop><stop offset=\".64\" stop-color=\"#00adee\"></stop><stop
+        offset=\".67\" stop-color=\"#1ca5e5\"></stop><stop offset=\".73\" stop-color=\"#4c97d5\"></stop><stop
+        offset=\".78\" stop-color=\"#738cc8\"></stop><stop offset=\".84\" stop-color=\"#9283be\"></stop><stop
+        offset=\".9\" stop-color=\"#a87db7\"></stop><stop offset=\".95\" stop-color=\"#b679b2\"></stop><stop
+        offset=\"1\" stop-color=\"#ba78b1\"></stop></linearGradient><linearGradient
+        id=\"SVG-IOS-app-icon-linear-gradient-5\" x1=\"204.19\" x2=\"487.03\" y1=\"783.39\"
+        y2=\"500.55\" gradientTransform=\"rotate(180 274.4 339.58)\" gradientUnits=\"userSpaceOnUse\"><stop
+        offset=\".23\" stop-color=\"#84cba8\"></stop><stop offset=\".59\" stop-color=\"#00adee\"></stop><stop
+        offset=\".94\" stop-color=\"#008faf\"></stop><stop offset=\"1\" stop-color=\"#0089a4\"></stop></linearGradient><linearGradient
+        id=\"SVG-IOS-app-icon-linear-gradient-6\" x1=\"138.4\" x2=\"548.4\" y1=\"663.76\"
+        y2=\"663.76\" gradientTransform=\"rotate(180 274.4 339.58)\" gradientUnits=\"userSpaceOnUse\"><stop
+        offset=\"0\" stop-color=\"#00adee\"></stop><stop offset=\".06\" stop-color=\"#059fe3\"></stop><stop
+        offset=\".26\" stop-color=\"#1477c6\"></stop><stop offset=\".46\" stop-color=\"#1f59af\"></stop><stop
+        offset=\".65\" stop-color=\"#27439e\"></stop><stop offset=\".83\" stop-color=\"#2c3594\"></stop><stop
+        offset=\"1\" stop-color=\"#2e3191\"></stop></linearGradient><linearGradient
+        id=\"SVG-IOS-app-icon-linear-gradient-7\" x1=\"239.07\" x2=\"476.4\" y1=\"726.49\"
+        y2=\"726.49\" gradientTransform=\"rotate(180 274.4 339.58)\" gradientUnits=\"userSpaceOnUse\"><stop
+        offset=\"0\" stop-color=\"#eb008b\"></stop><stop offset=\"1\" stop-color=\"#b778b1\"></stop></linearGradient></defs><g
+        clip-path=\"url(#SVG-IOS-app-icon-clip-path)\"><path fill=\"url(#SVG-IOS-app-icon-linear-gradient)\"
+        d=\"M187.75-74.23C490-74.23 735 88.83 735 290S490 654.2 187.8 654.2s-561.38-.31-547.19-364.2C-347.6-14-114.46-74.23
+        187.75-74.23z\"></path><path fill=\"#ffdc00\" d=\"M569.53 119.37C566.39 88.24
+        557 43 527.7-3.16c-86.53-136.55-273.16-165.93-280.06-153.51C242.85-148 325.5-120.54
+        410.33-30a561 561 0 0 1 106.91 164.7\"></path><path fill=\"#f6d10c\" d=\"M592.77
+        119.37C589.63 88.24 580.2 43 550.93-3.16c-86.53-136.55-273.15-165.93-280-153.51C266.08-148
+        348.74-120.54 433.56-30a560.76 560.76 0 0 1 106.91 164.7\"></path><path fill=\"url(#SVG-IOS-app-icon-linear-gradient-2)\"
+        d=\"M262.4 618C698.17 434.44 636.4 37.3 607.12-8.89c-86.53-136.56-379.31-160.2-386.21-147.78-4.79
+        8.63 40.65 12 142.49 82.84 115.29 80.21 275 393-242 562C71.59 504.45-18.6
+        524-70.6 599\"></path><path fill=\"url(#SVG-IOS-app-icon-linear-gradient-3)\"
+        d=\"M594.11-9.06c33.51 156.24 2.95 214.22 1.44 255.59C592.4 333 483 518.7
+        313.4 489c-177-31-367.14 186.54-338.85 229.21 13.89 20.95 245.2 85.87 406.05-87.83
+        15.5-16.74 109.87-48.29 146.34-83.22C653.61 425.86 621.29 410.75 654.77 369c41.05-51.25
+        2.31-166.28-18-263.66\"></path><path fill=\"url(#SVG-IOS-app-icon-linear-gradient-4)\"
+        d=\"M-86.62 69.47C-86.62-42.9 76.36-51 179.2-51s286.19-44.38 266.2 66.2c-45
+        249-194.65 409-266.2 340.74C69.09 250.88-86.62 181.84-86.62 69.47z\"></path><path
+        fill=\"url(#SVG-IOS-app-icon-linear-gradient-5)\" d=\"M-35.6-2.83c0-112.37
+        169.31-87.41 252.93-87.41S431.4-85.2 431.4 27.17s-125.38 249-209 249-258-166.63-258-279z\"></path><path
+        fill=\"url(#SVG-IOS-app-icon-linear-gradient-6)\" d=\"M-35.6-2.83c0-112.37,169.31-87.41,252.93-87.41S431.4-85.2,431.4,27.17s-125.38,249-209,249S-35.6,109.54-35.6-2.83Z\"></path><path
+        fill=\"url(#SVG-IOS-app-icon-linear-gradient-7)\" d=\"M72.4-37.83c0-52.81
+        50-132.17 97-132.17s133.24 66.73 140 119.17c6.34 49.13-78 127-149.26 126.19C113.24
+        74.82 72.4 15 72.4-37.83z\"></path></g><path d=\"M-223.93-456.05h925.85V855h-925.85z\"
+        fill=\"none\" transform=\"rotate(180 239 199.48)\"></path><path d=\"M130.4
+        190.5V152q27.66-1.2 38.73-3.57 17.64-3.78 28.7-15.09 7.57-7.74 11.48-20.65
+        2.25-7.74 2.25-11.51h48.91V389h-60V190.5zM285.54 167.13v-18.7l43.72-58.68h18.27v60.55h13.37v16.83h-13.37v23.3h-19.42v-23.3zm42.14-51.78l-26
+        35h26.46v-35z\" fill=\"#fff\"></path></svg></div><div class=\"FooterSection--content-section-copy-wrapper\"><div
+        class=\"SectionCopy SectionCopy-is-centered\"><div class=\"SectionCopy--content\"><h2
+        class=\"SectionCopy--title\" data-js-balance-text>Brought to you by Cloudflare.</h2><div
+        class=\"SectionCopy--description\" data-js-balance-text><p><a class=''CopyLink''
+        href=''https://cloudflare.com'' target=''_blank''>Cloudflare</a> provides
+        security and performance to over 25 million Internet properties\u2014and now
+        this technology is available to the rest of us.</p></div></div></div></div><div
+        class=\"FooterSection--actions\"><a class=\"Button Button-is-primary Button-with-icon\"
+        href=\"https://itunes.apple.com/us/app/1-1-1-1-faster-internet/id1423538627\"><svg
+        class=\"Button--icon\" viewBox=\"0 0 170 170\" fill=\"currentColor\"><path
+        d=\"M150.4 130.3a88 88 0 0 1-8.7 15.6c-4.6 6.5-8.4 11-11.3 13.6a21.8 21.8
+        0 0 1-14.4 6.3c-3.7 0-8.1-1-13.3-3.2-5.2-2-10-3.1-14.3-3.1-4.6 0-9.5 1-14.8
+        3.1A39.7 39.7 0 0 1 61 166c-5 .2-9.9-2-14.8-6.5a97.1 97.1 0 0 1-29.4-68c0-11
+        2.4-20.3 7.1-28.2a41.3 41.3 0 0 1 34.7-20.5c4 0 9 1.2 15.4 3.6A49.6 49.6 0
+        0 0 86.2 50c1.3 0 5.9-1.4 13.6-4.3a44.9 44.9 0 0 1 18.4-3.2 39.2 39.2 0 0
+        1 30.7 16.1 34.1 34.1 0 0 0-18.1 31c0 10.3 3.8 19 11.2 25.8 3.3 3.1 7 5.6
+        11.2 7.3l-2.8 7.5zM119 7.3c0 8-3 15.6-8.8 22.6C103 38.2 94.5 43 85.2 42.3l-.2-3c0-7.9
+        3.4-16.2 9.4-23 3-3.4 6.8-6.3 11.4-8.6 4.7-2.2 9-3.5 13.1-3.7.2 1 .2 2.2.2
+        3.2z\"></path></svg><span class=\"Button--text\">App Store</span></a><a class=\"Button
+        Button-is-primary Button-with-icon Button-google-play-store\" href=\"https://play.google.com/store/apps/details?id=com.cloudflare.onedotonedotonedotone\"><svg
+        class=\"Button--icon\" viewBox=\"0 0 236 256\" fill=\"currentColor\"><path
+        d=\"M138.52 123.58L16.78 0c1.99.46 4.08 1.26 6.25 2.46l152.16 84.31-36.67
+        36.8zm42 42.62l-36.84-37.39 38.2-38.33 44.62 24.73c12.67 7.01 12.67 18.5 0
+        25.51l-45.99 25.48zM7.32.9l126 127.9L7.46 255.1C2.88 252.82 0 247.5 0 239.87V16.05C0
+        8.48 2.83 3.21 7.33.9zM138.5 134.02l35.35 35.88-150.81 83.56a24.36 24.36 0
+        0 1-5.94 2.4l121.4-121.84z\"></path></svg><span class=\"Button--text\">Google
+        Play</span></a></div><div class=\"FooterSection--actions\"><a class=\"Button
+        Button-is-primary Button-with-icon\" href=\"/Cloudflare_WARP.zip\"><svg class=\"Button--icon\"
+        viewBox=\"0 0 170 170\" fill=\"currentColor\"><path d=\"M150.4 130.3a88 88
+        0 0 1-8.7 15.6c-4.6 6.5-8.4 11-11.3 13.6a21.8 21.8 0 0 1-14.4 6.3c-3.7 0-8.1-1-13.3-3.2-5.2-2-10-3.1-14.3-3.1-4.6
+        0-9.5 1-14.8 3.1A39.7 39.7 0 0 1 61 166c-5 .2-9.9-2-14.8-6.5a97.1 97.1 0 0
+        1-29.4-68c0-11 2.4-20.3 7.1-28.2a41.3 41.3 0 0 1 34.7-20.5c4 0 9 1.2 15.4
+        3.6A49.6 49.6 0 0 0 86.2 50c1.3 0 5.9-1.4 13.6-4.3a44.9 44.9 0 0 1 18.4-3.2
+        39.2 39.2 0 0 1 30.7 16.1 34.1 34.1 0 0 0-18.1 31c0 10.3 3.8 19 11.2 25.8
+        3.3 3.1 7 5.6 11.2 7.3l-2.8 7.5zM119 7.3c0 8-3 15.6-8.8 22.6C103 38.2 94.5
+        43 85.2 42.3l-.2-3c0-7.9 3.4-16.2 9.4-23 3-3.4 6.8-6.3 11.4-8.6 4.7-2.2 9-3.5
+        13.1-3.7.2 1 .2 2.2.2 3.2z\"></path></svg><span class=\"Button--text\">macOS</span></a><a
+        class=\"Button Button-is-primary Button-with-icon\" href=\"/Cloudflare_WARP_Release-x64.msi\"><svg
+        class=\"Button--icon\" viewBox=\"0 0 100 100\" fill=\"currentColor\"><path
+        d=\"m0,12.402,35.687-4.8602,0.0156,34.423-35.67,0.20313zm35.67,33.529,0.0277,34.453-35.67-4.9041-0.002-29.78zm4.3261-39.025,47.318-6.906,0,41.527-47.318,0.37565zm47.329,39.349-0.0111,41.34-47.318-6.6784-0.0663-34.739z\"></path></svg><span
+        class=\"Button--text\">Windows</span></a></div></div></div></div><div class=\"FooterSection\"
+        id=\"subscription-form\" data-depth-perspective-root><div class=\"FooterSection--column\"><div
+        class=\"FooterSection--backdrop-blob4\" data-depth=\"2\"><svg class=\"SVG-Blob4\"
+        viewBox=\"0 0 3120 4353\"><defs><lineargradient id=\"SVG-Blob4-a\" x1=\"50%\"
+        x2=\"48.5%\" y1=\"0%\" y2=\"72%\"><stop offset=\"0\" stop-color=\"#1b1464\"></stop><stop
+        offset=\".7\" stop-color=\"#0e055b\"></stop><stop offset=\"1\" stop-color=\"#0f0f36\"></stop></lineargradient><lineargradient
+        id=\"SVG-Blob4-b\" x1=\"4.4%\" x2=\"92.2%\" y1=\"6.3%\" y2=\"54.8%\"><stop
+        offset=\"0\" stop-color=\"rgb(150, 130, 210)\" stop-opacity=\"0\"></stop><stop
+        offset=\"1\" stop-color=\"rgb(150, 130, 210)\" stop-opacity=\".1\"></stop></lineargradient><lineargradient
+        id=\"SVG-Blob4-c\" x1=\"33.7%\" x2=\"90.2%\" y1=\"92.5%\" y2=\"18.8%\"><stop
+        offset=\"0\" stop-color=\"#2e3191\"></stop><stop offset=\".17\" stop-color=\"#2c3594\"></stop><stop
+        offset=\".35\" stop-color=\"#27439e\"></stop><stop offset=\".54\" stop-color=\"#1f59af\"></stop><stop
+        offset=\".74\" stop-color=\"#1477c6\"></stop><stop offset=\".94\" stop-color=\"#059fe3\"></stop><stop
+        offset=\"1\" stop-color=\"#00adee\"></stop></lineargradient><lineargradient
+        id=\"SVG-Blob4-d\" x1=\"54.6%\" x2=\"161.4%\" y1=\"50%\" y2=\"311%\"><stop
+        offset=\"0\" stop-color=\"#1b1464\"></stop><stop offset=\"1\" stop-color=\"#673ee0\"></stop></lineargradient><lineargradient
+        id=\"SVG-Blob4-e\" x1=\"44.1%\" x2=\"0%\" y1=\"106.1%\" y2=\"35.1%\"><stop
+        offset=\"0\" stop-color=\"#2057ad\"></stop><stop offset=\"1\" stop-color=\"#1b1464\"></stop></lineargradient><lineargradient
+        id=\"SVG-Blob4-f\" x1=\"113.4%\" x2=\"-110.1%\" y1=\"-20.7%\" y2=\"194.4%\"><stop
+        offset=\"0\" stop-color=\"#2e3191\"></stop><stop offset=\"1\" stop-color=\"#00adee\"></stop></lineargradient><lineargradient
+        id=\"SVG-Blob4-g\" x1=\"50%\" x2=\"18.7%\" y1=\"0%\" y2=\"100%\"><stop offset=\"0\"
+        stop-color=\"#1b1464\"></stop><stop offset=\"1\" stop-color=\"#251880\"></stop></lineargradient><lineargradient
+        id=\"SVG-Blob4-h\" x1=\"-60.3%\" x2=\"99.3%\" y1=\"-51.1%\" y2=\"84.2%\"><stop
+        offset=\"0\" stop-color=\"#0995dc\"></stop><stop offset=\"1\" stop-color=\"#3b2e91\"></stop></lineargradient><lineargradient
+        id=\"SVG-Blob4-i\" x1=\"40.8%\" x2=\"52.5%\" y1=\"82.2%\" y2=\"17.4%\"><stop
+        offset=\"0\" stop-color=\"#251880\"></stop><stop offset=\"1\" stop-color=\"#1b1464\"></stop></lineargradient><lineargradient
+        id=\"SVG-Blob4-j\" x1=\"72.5%\" x2=\"27.4%\" y1=\"57.6%\" y2=\"19%\"><stop
+        offset=\"0\" stop-color=\"#1a1d75\"></stop><stop offset=\"1\" stop-color=\"#322189\"></stop></lineargradient><lineargradient
+        id=\"SVG-Blob4-k\" x1=\"34.7%\" x2=\"34.7%\" y1=\"100%\" y2=\"-16.7%\"><stop
+        offset=\"0\" stop-color=\"#10105e\"></stop><stop offset=\"1\" stop-color=\"#271a77\"></stop></lineargradient></defs><path
+        fill=\"url(#SVG-Blob4-a)\" d=\"M2209.9 4247c198.5-86.1 370.3-291.4 512.9-595.6
+        125.8-268.7 225.9-608.9 295.4-985.8 62-336.1 97-688.5 101.1-992.9 4-292.8-21.3-517.5-70.1-616.7-25.4-51.7-56-82.4-93.3-95-34.5-11.7-75.1-8-125.4
+        9.8-42.5 15-90 39.1-160.5 79.7l-45.9 26.8-48.3 28.5c-41 24-72.1 42-104 59.6-99.7
+        55.2-189.3 97.7-282.1 131.4a1294 1294 0 0 1-341.3 76 1249.5 1249.5 0 0 1-404.6-35c-152.3-38-309.4-104.2-472.1-201.5-298.2-178.1-534.4-203.7-701.6-91.4-150.8
+        101.4-240.6 313.3-263.8 600.6-22 271.9 17.5 598 110.1 916.6 95.8 329.1 242.2
+        630.8 420.7 856.1 368.6 465.4 654.9 731.2 915.4 850.7 127 58.3 250 83 376.8
+        76.8 118.6-5.8 241.6-38.4 380.6-98.7z\"></path><path fill=\"url(#SVG-Blob4-b)\"
+        d=\"M723.3 1678.2c-599.5-254.5-607-1448-308-1607.4 244-130.2 301.6 112.6 471.9
+        512 159.8 374.8 654.1 508.7 885 390.8 134.7-68.9 368.2-422.7 816-422.7 118.5
+        0 398.2 178 287.4 297.9-348.9 377.5-1697.3 1022.6-2152.3 829.4z\"></path><path
+        fill=\"url(#SVG-Blob4-c)\" d=\"M2828.1 662.8c-374.4-362-813.9 303.1-997.7
+        406.5C1450 1283 920.3 936.3 791.8 560.9 709.7 321 617 14.9 366.4 182.7c-250.6
+        167.8-128.8 1020.5 0 1443.6 64.6 212.4 731.2 1506 1620.5 1508.6 349 1 613.5-601
+        729.9-1069.7 116.3-468.8 372.4-1150 111.3-1402.4z\"></path><path fill=\"url(#SVG-Blob4-d)\"
+        d=\"M2647.6 2370c-451 1448.9-1401.9 775.8-2020.4-192.2C230 1556.2 191 740.3
+        660.4 740.3c171 0 567 671.4 1194.7 375.9C2061.4 1019 2444.7 414.8 2773 698c249.6
+        215.3 157.3 764-125.3 1672z\"></path><path fill=\"url(#SVG-Blob4-e)\" d=\"M1711.5
+        1270.8c146-42.6 178.4 134.2 261.2 315.4 890.8 1949.4-404.7 1619-737.4 1138.7-228.3-329.6
+        540.8-533.7 371.2-1093.7-45.7-150.9-41-317.8 105-360.4z\" opacity=\".4\"></path><path
+        fill=\"url(#SVG-Blob4-f)\" d=\"M1762.8 1564.7c69.8-60 141 38 156.3 112 19.6
+        94.8 538.8 1224.8-43.3 1039.6-582-185.1-105.7-526-91-688.8 17.5-193.2-130.6-369.6-22-462.8z\"
+        opacity=\".6\"></path><path fill=\"url(#SVG-Blob4-g)\" d=\"M1896.2 1918.9c34.8-12.4
+        175 474.3 122.1 661-28.7 101.2-294.6-85.3-279.8-150.4 14.8-65.2 93.4-32.7
+        138.6-133 41.5-92.3-32-359.4 19.1-377.6z\"></path><path fill=\"url(#SVG-Blob4-h)\"
+        d=\"M1497.7 1776.8c-86.8 646.2-717.3 410-953.6.5C334.6 1414.6 477.5 709 754.8
+        950.1c221.4 192.6 793 454 742.9 826.7z\" opacity=\".7\"></path><path fill=\"url(#SVG-Blob4-i)\"
+        d=\"M1144.5 1954c91-318.3-435.5-813-576.8-560.8-141.4 252.2 485.9 879.2 576.8
+        560.9zM2467.4 874.6c-410.2 247-448.6 1230-61.5 1096.5 387.1-133.6 471.6-1343.5
+        61.5-1096.5z\"></path><path fill=\"url(#SVG-Blob4-j)\" d=\"M1910.1 3397.7c-99.8
+        53.7-129 171-93.3 255 45.6 107.8 137.8 96.5 234.6-28.6 48.9-63.1 64-337-141.3-226.4z\"
+        opacity=\".8\"></path><path fill=\"url(#SVG-Blob4-k)\" d=\"M1730.8 3802.7a66.6
+        66.6 0 0 0-32 83.7c15.2 35.2 81.3 18.8 114.2-22.4 16.6-20.8-12.8-97.9-82.2-61.3z\"
+        opacity=\".6\"></path></svg></div></div></div><a class=\"EasterEggSection\"
+        href=\"https://www.cloudflare.com/careers/departments/\" target=\"_blank\"><div
+        class=\"EasterEggSection--column\"><div class=\"EasterEggSection--content\"><svg
+        class=\"SVG-EEM\" viewBox=\"0 0 443 172\"><defs><linearGradient id=\"SVG-EEM-a\"
+        x1=\"15.9%\" x2=\"90.6%\" y1=\"12.9%\" y2=\"76.1%\"><stop offset=\"0%\" stop-color=\"#ff9a00\"></stop><stop
+        offset=\"100%\" stop-color=\"#e92257\"></stop></linearGradient><radialGradient
+        id=\"SVG-EEM-b\" cx=\"53.14%\" cy=\"63.55%\" r=\"65.8%\" fx=\"53.14%\" fy=\"63.55%\"
+        gradientTransform=\"matrix(.59021 .27562 -.16923 .96127 .33 -.12)\"><stop
+        offset=\"4%\" stop-color=\"#fff\"></stop><stop offset=\"69%\" stop-color=\"#fff\"></stop><stop
+        offset=\"100%\" stop-color=\"#f5f7f8\"></stop></radialGradient></defs><path
+        fill=\"url(#SVG-EEM-a)\" d=\"M437.1 126.66a70.5 70.5 0 0 0-95.27-89.98c-8
+        3.7-60.5-3-111-11.4-26-4.2-52-8.4-73-10.7-23.8-2.6 45.9 17.3 44.1 22.1-.7
+        2-196.2-38.4-201.8-36.6-4.1 1.4 93 29.7 159 48.3 13.3 3.7 24.7 9 34.2 14.8
+        7 4.2-225.5-55.6-21 10.8 16.3 5.3 48.5 17.7 52.6 19 32.8 9.6 80.5 35.5 88
+        46.7a70.5 70.5 0 0 0 124.18-13.02z\"></path><path fill=\"url(#SVG-EEM-b)\"
+        d=\"M325.7 131.87c-2.3-2.6-4.7-5.5-7.2-8.8-12.8-16.7-54.9-26.6-61.2-29.2-3-1.3-5.8-3-8.5-4.8-1.8-1.4-4.6-5.4-1.2-6.4
+        11-2.7 18.7 10.3 24.9-.2 1.3-3.6 9.6 2.5 12.9.9 6-3-14.8-7.4-12.2-13.3 2.2-5
+        46.2 13.2 45.3 8.3-.2-.6-.1-1.3.1-1.9.3-.5.7-1 1.2-1.2 1.2-.8 3-1.6 4.3-2.6l1.1-1.8c0-.7-.2-1.5-1-2.4-2.6-3.2-20.4-9.1-23-11.6-1.6-1.4-2-4.1.5-4.2
+        12.5-.2 30.7 3 42.3-.4l2.7-1a56 56 0 1 1-21 80.6z\"></path></svg></div></div></a></div><script
+        type=\"text/javascript\" src=\"/site-9da64590d1d96e26cb8f.js\"></script></body></html>",
+        "location": "/", "components": {"Google Tag Manager": {"categories": []},
+        "Amazon Web Services": {"categories": []}}, "securitytxt_hash": null, "server":
+        "cloudflare", "sitemap": null, "html_hash": -2076163317}, "timestamp": "2021-06-09T23:31:56.519415",
+        "org": "APNIC and Cloudflare DNS Resolver project", "isp": "Cloudflare, Inc.",
+        "transport": "tcp", "data": "HTTP/1.1 200 OK\r\nDate: Wed, 09 Jun 2021 23:31:56
+        GMT\r\nContent-Type: text/html\r\nTransfer-Encoding: chunked\r\nConnection:
+        keep-alive\r\nLast-Modified: Wed, 14 Apr 2021 17:34:58 GMT\r\nx-amz-request-id:
+        tx000000000000009168b3c-0060c14f43-4a5af6f-default\r\nStrict-Transport-Security:
+        max-age=31536000\r\nServed-In-Seconds: 0.005\r\nCache-Control: public, max-age=14400\r\nCF-Cache-Status:
+        HIT\r\nAge: 41\r\nExpires: Thu, 10 Jun 2021 03:31:56 GMT\r\ncf-request-id:
+        0a94b7579700009bc147a23000000001\r\nExpect-CT: max-age=604800, report-uri=\"https://report-uri.cloudflare.com/cdn-cgi/beacon/expect-ct\"\r\nVary:
+        Accept-Encoding\r\nServer: cloudflare\r\nCF-RAY: 65ce2805bff49bc1-SJC\r\n\r\n",
+        "port": 443, "ssl": {"chain_sha256": ["fb444eb8e68437bae06232b9f5091bccff62a768ca09e92eb5c9c2cf9d17c426",
+        "d79a2d5e03295c0e9feae36d021ebd5209700ab1a9e817a43f30fa3c66f78d21", "4348a0e9444c78cb265e058d5e8944b4d84f9662bd26db257f8934a443c70161"],
+        "jarm": "27d3ed3ed0003ed1dc42d43d00041d6183ff1bfae51ebd88d70384363d525c",
+        "chain": ["-----BEGIN CERTIFICATE-----\nMIIFhjCCBQ2gAwIBAgIQBQdvZtEbaSJWzKzVRv/sUzAKBggqhkjOPQQDAzBWMQsw\nCQYDVQQGEwJVUzEVMBMGA1UEChMMRGlnaUNlcnQgSW5jMTAwLgYDVQQDEydEaWdp\nQ2VydCBUTFMgSHlicmlkIEVDQyBTSEEzODQgMjAyMCBDQTEwHhcNMjEwMTExMDAw\nMDAwWhcNMjIwMTE4MjM1OTU5WjByMQswCQYDVQQGEwJVUzETMBEGA1UECBMKQ2Fs\naWZvcm5pYTEWMBQGA1UEBxMNU2FuIEZyYW5jaXNjbzEZMBcGA1UEChMQQ2xvdWRm\nbGFyZSwgSW5jLjEbMBkGA1UEAxMSY2xvdWRmbGFyZS1kbnMuY29tMFkwEwYHKoZI\nzj0CAQYIKoZIzj0DAQcDQgAEF60f6DWvcNONnJ5k/UceW5cMCtEQqCYyETZmTRKZ\nw+Exu/UhY3PdpcHBoPBtpMRe4cLb2vkNNIAa97ngOvLVdKOCA58wggObMB8GA1Ud\nIwQYMBaAFAq8CCkXjKU5bXoOzjPHLrPt+8N6MB0GA1UdDgQWBBThtvwG+bmLBfTB\n4kibArkLwbU9eTCBpgYDVR0RBIGeMIGbghJjbG91ZGZsYXJlLWRucy5jb22CFCou\nY2xvdWRmbGFyZS1kbnMuY29tgg9vbmUub25lLm9uZS5vbmWHBAEBAQGHBAEAAAGH\nBKKfJAGHBKKfLgGHECYGRwBHAAAAAAAAAAAAERGHECYGRwBHAAAAAAAAAAAAEAGH\nECYGRwBHAAAAAAAAAAAAAGSHECYGRwBHAAAAAAAAAAAAZAAwDgYDVR0PAQH/BAQD\nAgeAMB0GA1UdJQQWMBQGCCsGAQUFBwMBBggrBgEFBQcDAjCBlwYDVR0fBIGPMIGM\nMESgQqBAhj5odHRwOi8vY3JsMy5kaWdpY2VydC5jb20vRGlnaUNlcnRUTFNIeWJy\naWRFQ0NTSEEzODQyMDIwQ0ExLmNybDBEoEKgQIY+aHR0cDovL2NybDQuZGlnaWNl\ncnQuY29tL0RpZ2lDZXJ0VExTSHlicmlkRUNDU0hBMzg0MjAyMENBMS5jcmwwSwYD\nVR0gBEQwQjA2BglghkgBhv1sAQEwKTAnBggrBgEFBQcCARYbaHR0cDovL3d3dy5k\naWdpY2VydC5jb20vQ1BTMAgGBmeBDAECAjCBgwYIKwYBBQUHAQEEdzB1MCQGCCsG\nAQUFBzABhhhodHRwOi8vb2NzcC5kaWdpY2VydC5jb20wTQYIKwYBBQUHMAKGQWh0\ndHA6Ly9jYWNlcnRzLmRpZ2ljZXJ0LmNvbS9EaWdpQ2VydFRMU0h5YnJpZEVDQ1NI\nQTM4NDIwMjBDQTEuY3J0MAwGA1UdEwEB/wQCMAAwggEEBgorBgEEAdZ5AgQCBIH1\nBIHyAPAAdgApeb7wnjk5IfBWc59jpXflvld9nGAK+PlNXSZcJV3HhAAAAXby6BKo\nAAAEAwBHMEUCIQDRsvaM+FOVneTUUwY0ggKKCuqKp7wnHvtWHtEUZB+uZwIgJbGG\n3Rsq548BxED2wxZ4q2G/9jo0/EeIEwdl9GC7NEIAdgAiRUUHWVUkVpY/oS/x922G\n4CMmY63AS39dxoNcbuIPAgAAAXby6BMPAAAEAwBHMEUCIQCV3RpnSizsrJ1vi/48\n/qT1PoclZYI3N51mveRdD2gkWQIgdWX+MLuAa8ziuKGIlqjoAiaOvs/4IfqthaAN\nh6HW8TQwCgYIKoZIzj0EAwMDZwAwZAIwJMLPbL32rtHJ1R9KdC48PdHAPtzXG9OU\ncVv+pYYWJoIBItMKbvyYtdLiueUHaXeWAjBFe2+Cpn22YsMxhdW1NV1PTISIrBoA\nPQyEQNywp8ocEycVHjf5RsOu2f35uSOLfyo=\n-----END
+        CERTIFICATE-----\n", "-----BEGIN CERTIFICATE-----\nMIIEQzCCAyugAwIBAgIQCidf5wTW7ssj1c1bSxpOBDANBgkqhkiG9w0BAQwFADBh\nMQswCQYDVQQGEwJVUzEVMBMGA1UEChMMRGlnaUNlcnQgSW5jMRkwFwYDVQQLExB3\nd3cuZGlnaWNlcnQuY29tMSAwHgYDVQQDExdEaWdpQ2VydCBHbG9iYWwgUm9vdCBD\nQTAeFw0yMDA5MjMwMDAwMDBaFw0zMDA5MjIyMzU5NTlaMFYxCzAJBgNVBAYTAlVT\nMRUwEwYDVQQKEwxEaWdpQ2VydCBJbmMxMDAuBgNVBAMTJ0RpZ2lDZXJ0IFRMUyBI\neWJyaWQgRUNDIFNIQTM4NCAyMDIwIENBMTB2MBAGByqGSM49AgEGBSuBBAAiA2IA\nBMEbxppbmNmkKaDp1AS12+umsmxVwP/tmMZJLwYnUcu/cMEFesOxnYeJuq20ExfJ\nqLSDyLiQ0cx0NTY8g3KwtdD3ImnI8YDEe0CPz2iHJlw5ifFNkU3aiYvkA8ND5b8v\nc6OCAa4wggGqMB0GA1UdDgQWBBQKvAgpF4ylOW16Ds4zxy6z7fvDejAfBgNVHSME\nGDAWgBQD3lA1VtFMu2bwo+IbG8OXsj3RVTAOBgNVHQ8BAf8EBAMCAYYwHQYDVR0l\nBBYwFAYIKwYBBQUHAwEGCCsGAQUFBwMCMBIGA1UdEwEB/wQIMAYBAf8CAQAwdgYI\nKwYBBQUHAQEEajBoMCQGCCsGAQUFBzABhhhodHRwOi8vb2NzcC5kaWdpY2VydC5j\nb20wQAYIKwYBBQUHMAKGNGh0dHA6Ly9jYWNlcnRzLmRpZ2ljZXJ0LmNvbS9EaWdp\nQ2VydEdsb2JhbFJvb3RDQS5jcnQwewYDVR0fBHQwcjA3oDWgM4YxaHR0cDovL2Ny\nbDMuZGlnaWNlcnQuY29tL0RpZ2lDZXJ0R2xvYmFsUm9vdENBLmNybDA3oDWgM4Yx\naHR0cDovL2NybDQuZGlnaWNlcnQuY29tL0RpZ2lDZXJ0R2xvYmFsUm9vdENBLmNy\nbDAwBgNVHSAEKTAnMAcGBWeBDAEBMAgGBmeBDAECATAIBgZngQwBAgIwCAYGZ4EM\nAQIDMA0GCSqGSIb3DQEBDAUAA4IBAQDeOpcbhb17jApY4+PwCwYAeq9EYyp/3YFt\nERim+vc4YLGwOWK9uHsu8AjJkltz32WQt960V6zALxyZZ02LXvIBoa33llPN1d9R\nJzcGRvJvPDGJLEoWKRGC5+23QhST4Nlg+j8cZMsywzEXJNmvPlVv/w+AbxsBCMqk\nBGPI2lNM8hkmxPad31z6n58SXqJdH/bYF462YvgdgbYKOytobPAyTgr3mYI5sUje\nCzqJx1+NLyc8nAK8Ib2HxnC+IrrWzfRLvVNve8KaN9EtBH7TuMwNW4SpDCmGr6fY\n1h3tDjHhkTb9PA36zoaJzu0cIw265vZt6hCmYWJC+/j+fgZwcPwL\n-----END
+        CERTIFICATE-----\n", "-----BEGIN CERTIFICATE-----\nMIIDrzCCApegAwIBAgIQCDvgVpBCRrGhdWrJWZHHSjANBgkqhkiG9w0BAQUFADBh\nMQswCQYDVQQGEwJVUzEVMBMGA1UEChMMRGlnaUNlcnQgSW5jMRkwFwYDVQQLExB3\nd3cuZGlnaWNlcnQuY29tMSAwHgYDVQQDExdEaWdpQ2VydCBHbG9iYWwgUm9vdCBD\nQTAeFw0wNjExMTAwMDAwMDBaFw0zMTExMTAwMDAwMDBaMGExCzAJBgNVBAYTAlVT\nMRUwEwYDVQQKEwxEaWdpQ2VydCBJbmMxGTAXBgNVBAsTEHd3dy5kaWdpY2VydC5j\nb20xIDAeBgNVBAMTF0RpZ2lDZXJ0IEdsb2JhbCBSb290IENBMIIBIjANBgkqhkiG\n9w0BAQEFAAOCAQ8AMIIBCgKCAQEA4jvhEXLeqKTTo1eqUKKPC3eQyaKl7hLOllsB\nCSDMAZOnTjC3U/dDxGkAV53ijSLdhwZAAIEJzs4bg7/fzTtxRuLWZscFs3YnFo97\nnh6Vfe63SKMI2tavegw5BmV/Sl0fvBf4q77uKNd0f3p4mVmFaG5cIzJLv07A6Fpt\n43C/dxC//AH2hdmoRBBYMql1GNXRor5H4idq9Joz+EkIYIvUX7Q6hL+hqkpMfT7P\nT19sdl6gSzeRntwi5m3OFBqOasv+zbMUZBfHWymeMr/y7vrTC0LUq7dBMtoM1O/4\ngdW7jVg/tRvoSSiicNoxBN33shbyTApOB6jtSj1etX+jkMOvJwIDAQABo2MwYTAO\nBgNVHQ8BAf8EBAMCAYYwDwYDVR0TAQH/BAUwAwEB/zAdBgNVHQ4EFgQUA95QNVbR\nTLtm8KPiGxvDl7I90VUwHwYDVR0jBBgwFoAUA95QNVbRTLtm8KPiGxvDl7I90VUw\nDQYJKoZIhvcNAQEFBQADggEBAMucN6pIExIK+t1EnE9SsPTfrgT1eXkIoyQY/Esr\nhMAtudXH/vTBH1jLuG2cenTnmCmrEbXjcKChzUyImZOMkXDiqw8cvpOp/2PV5Adg\n06O/nVsJ8dWO41P0jmP6P6fbtGbfYmbW0W5BjfIttep3Sp+dWOIrWcBAI+0tKIJF\nPnlUkiaY4IBIqDfv8NZ5YBberOgOzW6sRBc4L0na4UU+Krk2U886UAb3LujEV0ls\nYSEY1QSteDwsOoBrp+uvFRTp2InBuThs4pFsiv9kuXclVzDAGySj4dzp30d8tbQk\nCAUw7C29C79Fv1C5qfPrmAESrciIxpg0X40KPMbp1ZWVbd4=\n-----END
+        CERTIFICATE-----\n"], "dhparams": null, "versions": ["TLSv1", "-SSLv2", "-SSLv3",
+        "TLSv1.1", "TLSv1.2", "TLSv1.3"], "acceptable_cas": [], "tlsext": [{"id":
+        65281, "name": "renegotiation_info"}, {"id": 11, "name": "ec_point_formats"},
+        {"id": 35, "name": "session_ticket"}, {"id": 5, "name": "status_request"}],
+        "alpn": ["h2", "http/1.1"], "cert": {"sig_alg": "ecdsa-with-SHA384", "issued":
+        "20210111000000Z", "expires": "20220118235959Z", "pubkey": {"bits": 256, "type":
+        "dsa"}, "version": 2, "extensions": [{"data": "0\\x16\\x80\\x14\\n\\xbc\\x08)\\x17\\x8c\\xa59mz\\x0e\\xce3\\xc7.\\xb3\\xed\\xfb\\xc3z",
+        "name": "authorityKeyIdentifier"}, {"data": "\\x04\\x14\\xe1\\xb6\\xfc\\x06\\xf9\\xb9\\x8b\\x05\\xf4\\xc1\\xe2H\\x9b\\x02\\xb9\\x0b\\xc1\\xb5=y",
+        "name": "subjectKeyIdentifier"}, {"data": "0\\x81\\x9b\\x82\\x12cloudflare-dns.com\\x82\\x14*.cloudflare-dns.com\\x82\\x0fone.one.one.one\\x87\\x04\\x01\\x01\\x01\\x01\\x87\\x04\\x01\\x00\\x00\\x01\\x87\\x04\\xa2\\x9f$\\x01\\x87\\x04\\xa2\\x9f.\\x01\\x87\\x10&\\x06G\\x00G\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x11\\x11\\x87\\x10&\\x06G\\x00G\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x10\\x01\\x87\\x10&\\x06G\\x00G\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00d\\x87\\x10&\\x06G\\x00G\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00d\\x00",
+        "name": "subjectAltName"}, {"critical": true, "data": "\\x03\\x02\\x07\\x80",
+        "name": "keyUsage"}, {"data": "0\\x14\\x06\\x08+\\x06\\x01\\x05\\x05\\x07\\x03\\x01\\x06\\x08+\\x06\\x01\\x05\\x05\\x07\\x03\\x02",
+        "name": "extendedKeyUsage"}, {"data": "0\\x81\\x8c0D\\xa0B\\xa0@\\x86>http://crl3.digicert.com/DigiCertTLSHybridECCSHA3842020CA1.crl0D\\xa0B\\xa0@\\x86>http://crl4.digicert.com/DigiCertTLSHybridECCSHA3842020CA1.crl",
+        "name": "crlDistributionPoints"}, {"data": "0B06\\x06\\t`\\x86H\\x01\\x86\\xfdl\\x01\\x010)0\\''\\x06\\x08+\\x06\\x01\\x05\\x05\\x07\\x02\\x01\\x16\\x1bhttp://www.digicert.com/CPS0\\x08\\x06\\x06g\\x81\\x0c\\x01\\x02\\x02",
+        "name": "certificatePolicies"}, {"data": "0u0$\\x06\\x08+\\x06\\x01\\x05\\x05\\x070\\x01\\x86\\x18http://ocsp.digicert.com0M\\x06\\x08+\\x06\\x01\\x05\\x05\\x070\\x02\\x86Ahttp://cacerts.digicert.com/DigiCertTLSHybridECCSHA3842020CA1.crt",
+        "name": "authorityInfoAccess"}, {"critical": true, "data": "0\\x00", "name":
+        "basicConstraints"}, {"data": "\\x04\\x81\\xf2\\x00\\xf0\\x00v\\x00)y\\xbe\\xf0\\x9e99!\\xf0Vs\\x9fc\\xa5w\\xe5\\xbeW}\\x9c`\\n\\xf8\\xf9M]&\\\\%]\\xc7\\x84\\x00\\x00\\x01v\\xf2\\xe8\\x12\\xa8\\x00\\x00\\x04\\x03\\x00G0E\\x02!\\x00\\xd1\\xb2\\xf6\\x8c\\xf8S\\x95\\x9d\\xe4\\xd4S\\x064\\x82\\x02\\x8a\\n\\xea\\x8a\\xa7\\xbc\\''\\x1e\\xfbV\\x1e\\xd1\\x14d\\x1f\\xaeg\\x02
+        %\\xb1\\x86\\xdd\\x1b*\\xe7\\x8f\\x01\\xc4@\\xf6\\xc3\\x16x\\xaba\\xbf\\xf6:4\\xfcG\\x88\\x13\\x07e\\xf4`\\xbb4B\\x00v\\x00\"EE\\x07YU$V\\x96?\\xa1/\\xf1\\xf7m\\x86\\xe0#&c\\xad\\xc0K\\x7f]\\xc6\\x83\\\\n\\xe2\\x0f\\x02\\x00\\x00\\x01v\\xf2\\xe8\\x13\\x0f\\x00\\x00\\x04\\x03\\x00G0E\\x02!\\x00\\x95\\xdd\\x1agJ,\\xec\\xac\\x9do\\x8b\\xfe<\\xfe\\xa4\\xf5>\\x87%e\\x8277\\x9df\\xbd\\xe4]\\x0fh$Y\\x02
+        ue\\xfe0\\xbb\\x80k\\xcc\\xe2\\xb8\\xa1\\x88\\x96\\xa8\\xe8\\x02&\\x8e\\xbe\\xcf\\xf8!\\xfa\\xad\\x85\\xa0\\r\\x87\\xa1\\xd6\\xf14",
+        "name": "ct_precert_scts"}], "fingerprint": {"sha256": "fb444eb8e68437bae06232b9f5091bccff62a768ca09e92eb5c9c2cf9d17c426",
+        "sha1": "f1b38143b992645497cf452f8c1ac84249794282"}, "serial": 6684745550388409480013519646680411219,
+        "issuer": {"C": "US", "CN": "DigiCert TLS Hybrid ECC SHA384 2020 CA1", "O":
+        "DigiCert Inc"}, "expired": false, "subject": {"C": "US", "ST": "California",
+        "CN": "cloudflare-dns.com", "O": "Cloudflare, Inc.", "L": "San Francisco"}},
+        "cipher": {"version": "TLSv1/SSLv3", "bits": 128, "name": "ECDHE-ECDSA-AES128-GCM-SHA256"},
+        "trust": {"revoked": false, "browser": {"mozilla": true, "apple": true, "microsoft":
+        true}}, "ja3s": "3e550ebb68779faf39d733b83fd38332", "ocsp": {"version": "1",
+        "response_status": "successful", "responder_id": "0ABC0829178CA5396D7A0ECE33C72EB3EDFBC37A",
+        "cert_status": "good", "produced_at": "2021-06-08 12:24:33", "signature_algorithm":
+        "ecdsa-with-SHA384", "next_update": "2021-06-15 11:24:01", "this_update":
+        "2021-06-08 12:09:01", "certificate_id": {"hash_algorithm": "sha1", "issuer_name_hash":
+        "2B1D1E98CCF37604D6C1C8BD15A224C804130038", "issuer_name_key": "0ABC0829178CA5396D7A0ECE33C72EB3EDFBC37A",
+        "serial_number": "05076F66D11B692256CCACD546FFEC53"}}}, "hostnames": ["one.one.one.one"],
+        "location": {"city": "Miami", "region_code": "FL", "area_code": null, "longitude":
+        -80.18, "country_code3": null, "latitude": 25.7867, "postal_code": null, "dma_code":
+        null, "country_code": "US", "country_name": "United States"}, "ip": 16843009,
+        "domains": ["one.one"], "hash": -631582292, "_id": "c4778a8b-9f7b-43ed-af95-f3d39101ce5c",
+        "os": null, "_shodan": {"crawler": "1fbfdc1b0315df33fa363e4b960720395dff69c6",
+        "ptr": true, "id": "dc9f9136-2a55-4fab-a5d5-4b8f70f9a80e", "module": "https",
+        "options": {"scan": "RGPZCVv7s2Kdvb38"}}, "ip_str": "1.1.1.1"}, {"hash": 421537210,
+        "timestamp": "2021-06-10T00:03:29.460540", "isp": "Cloudflare, Inc.", "transport":
+        "udp", "data": "\nRecursion: enabled\nResolver ID: LAX", "asn": "AS13335",
+        "port": 53, "hostnames": ["one.one.one.one"], "location": {"city": "Miami",
+        "region_code": "FL", "area_code": null, "longitude": -80.18, "country_code3":
+        null, "latitude": 25.7867, "postal_code": null, "dma_code": null, "country_code":
+        "US", "country_name": "United States"}, "dns": {"software": null, "recursive":
+        true, "resolver_id": "LAX", "resolver_hostname": null}, "ip": 16843009, "domains":
+        ["one.one"], "org": "APNIC and Cloudflare DNS Resolver project", "_id": "427a40fa-3e6a-44f9-ba15-da37f8c8d5a5",
+        "os": null, "_shodan": {"crawler": "ee2ca87eda2faa9cbd554af69719b1fed0f4f462",
+        "ptr": true, "id": "c827a567-96ab-49e1-8dae-693c2ab64ad8", "module": "dns-udp",
+        "options": {}}, "ip_str": "1.1.1.1"}], "total": 4}'
+  recorded_at: Thu, 10 Jun 2021 00:05:41 GMT
+- request:
+    method: get
+    uri: https://crt.sh/?exclude=expired&identity=www.example.org&output=json
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+      Host:
+      - crt.sh
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - nginx
+      Date:
+      - Thu, 10 Jun 2021 00:05:44 GMT
+      Content-Type:
+      - application/json
+      Content-Length:
+      - '683'
+      Connection:
+      - keep-alive
+      Strict-Transport-Security:
+      - max-age=15768000; includeSubDomains; preload
+      Expect-Ct:
+      - preload
+    body:
+      encoding: UTF-8
+      string: '[{"issuer_ca_id":185756,"issuer_name":"C=US, O=DigiCert Inc, CN=DigiCert
+        TLS RSA SHA256 2020 CA1","common_name":"www.example.org","name_value":"www.example.org","id":3704614715,"entry_timestamp":"2020-11-27T13:49:06.706","not_before":"2020-11-24T00:00:00","not_after":"2021-12-25T23:59:59","serial_number":"0fbe08b0854d05738ab0cce1c9afeec9"},{"issuer_ca_id":185756,"issuer_name":"C=US,
+        O=DigiCert Inc, CN=DigiCert TLS RSA SHA256 2020 CA1","common_name":"www.example.org","name_value":"www.example.org","id":3692510597,"entry_timestamp":"2020-11-24T19:32:04.319","not_before":"2020-11-24T00:00:00","not_after":"2021-12-25T23:59:59","serial_number":"0fbe08b0854d05738ab0cce1c9afeec9"}]'
+  recorded_at: Thu, 10 Jun 2021 00:05:43 GMT
+recorded_with: VCR 6.0.0
