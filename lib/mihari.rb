@@ -114,8 +114,6 @@ require "mihari/serializers/alert"
 require "mihari/serializers/artifact"
 require "mihari/serializers/tag"
 
-require "mihari/html"
-
 require "mihari/configurable"
 require "mihari/retriable"
 
@@ -134,20 +132,12 @@ require "mihari/analyzers/onyphe"
 require "mihari/analyzers/otx"
 require "mihari/analyzers/passivetotal"
 require "mihari/analyzers/pulsedive"
-require "mihari/analyzers/securitytrails_domain_feed"
 require "mihari/analyzers/securitytrails"
 require "mihari/analyzers/shodan"
 require "mihari/analyzers/spyse"
 require "mihari/analyzers/urlscan"
 require "mihari/analyzers/virustotal"
 require "mihari/analyzers/zoomeye"
-
-require "mihari/analyzers/free_text"
-require "mihari/analyzers/http_hash"
-require "mihari/analyzers/passive_dns"
-require "mihari/analyzers/passive_ssl"
-require "mihari/analyzers/reverse_whois"
-require "mihari/analyzers/ssh_fingerprint"
 
 require "mihari/analyzers/rule"
 
