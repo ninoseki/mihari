@@ -16,9 +16,9 @@ module Mihari
 
         results.map do |result|
           matches = result["matches"] || []
-          matches.map do |match|
+          matches.filter_map do |match|
             match["ip_str"]
-          end.compact
+          end
         end.flatten.compact.uniq
       end
 

@@ -15,7 +15,7 @@ module Mihari
       set :raise_sinatra_param_exceptions, true
 
       error Sinatra::Param::InvalidParameterError do
-        json({ error: "#{env['sinatra.error'].param} is invalid" })
+        json({ error: "#{env["sinatra.error"].param} is invalid" })
       end
     end
   end

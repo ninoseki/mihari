@@ -86,10 +86,10 @@ module Mihari
       end
 
       def valid_emitters
-        @valid_emitters ||= Mihari.emitters.map do |klass|
+        @valid_emitters ||= Mihari.emitters.filter_map do |klass|
           emitter = klass.new
           emitter.valid? ? emitter : nil
-        end.compact
+        end
       end
     end
   end

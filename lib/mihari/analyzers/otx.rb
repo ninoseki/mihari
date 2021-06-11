@@ -56,16 +56,16 @@ module Mihari
 
       def domain_lookup
         records = domain_client.get_passive_dns(query)
-        records.map do |record|
+        records.filter_map do |record|
           record.address if record.record_type == "A"
-        end.compact.uniq
+        end.uniq
       end
 
       def ip_lookup
         records = ip_client.get_passive_dns(query)
-        records.map do |record|
+        records.filter_map do |record|
           record.hostname if record.record_type == "A"
-        end.compact.uniq
+        end.uniq
       end
     end
   end

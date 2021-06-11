@@ -48,10 +48,10 @@ module Mihari
 
       def passive_dns_lookup
         results = api.dns.query(@query)
-        results.map do |result|
+        results.filter_map do |result|
           type = result["rrtype"]
           type == "A" ? result["rdata"] : nil
-        end.compact.uniq
+        end.uniq
       end
 
       def passive_ssl_lookup

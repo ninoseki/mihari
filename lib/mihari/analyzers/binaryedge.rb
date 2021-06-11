@@ -16,9 +16,9 @@ module Mihari
 
         results.map do |result|
           events = result["events"] || []
-          events.map do |event|
+          events.filter_map do |event|
             event.dig "target", "ip"
-          end.compact
+          end
         end.flatten.compact.uniq
       end
 

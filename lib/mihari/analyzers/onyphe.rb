@@ -18,7 +18,7 @@ module Mihari
           result["results"]
         end.flatten.compact
 
-        flat_results.map { |result| result["ip"] }.compact.uniq
+        flat_results.filter_map { |result| result["ip"] }.uniq
       end
 
       private

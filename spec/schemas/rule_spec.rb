@@ -28,7 +28,7 @@ RSpec.describe Mihari::Schemas::Rule do
         queries: [
           { service: "shodan", query: "foo" },
           { service: "crtsh", query: "foo", exclude_expired: true },
-          { service: "zoomeye", query: "foo", type: "host" },
+          { service: "zoomeye", query: "foo", type: "host" }
         ]
       )
       expect(result.errors.empty?).to eq(true)
@@ -39,7 +39,7 @@ RSpec.describe Mihari::Schemas::Rule do
         description: "foo",
         title: "foo",
         queries: [
-          { service: "shodan", query: "foo" },
+          { service: "shodan", query: "foo" }
         ],
         allowed_data_types: ["ip"]
       )
@@ -60,7 +60,7 @@ RSpec.describe Mihari::Schemas::Rule do
           queries: [
             { service: "shodan", query: "foo" },
             { service: "crtsh", query: "foo", exclude_expired: 1 }, # should be bool
-            { service: "zoomeye", query: "foo", type: "bar" }, # should be any of host or web
+            { service: "zoomeye", query: "foo", type: "bar" } # should be any of host or web
           ]
         )
       end.to raise_error(NoMethodError)
@@ -71,7 +71,7 @@ RSpec.describe Mihari::Schemas::Rule do
         description: "foo",
         title: "foo",
         queries: [
-          { service: "shodan", query: "foo" },
+          { service: "shodan", query: "foo" }
         ],
         allowed_data_types: ["foo"] # should be any of ip, domain, mail, url or hash
       )

@@ -25,7 +25,7 @@ RSpec.describe Mihari::Emitters::Webhook, :vcr do
     let(:artifacts) {
       [
         Mihari::Artifact.new(data: "1.1.1.1"),
-        Mihari::Artifact.new(data: "github.com"),
+        Mihari::Artifact.new(data: "github.com")
       ]
     }
     let(:source) { "test" }

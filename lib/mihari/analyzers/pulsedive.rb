@@ -46,9 +46,9 @@ module Mihari
         iid = indicator["iid"]
 
         properties = api.indicator.get_properties_by_id(iid)
-        (properties["dns"] || []).map do |property|
+        (properties["dns"] || []).filter_map do |property|
           property["value"] if ["A", "PTR"].include?(property["name"])
-        end.compact
+        end
       end
     end
   end

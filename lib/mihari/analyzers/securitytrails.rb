@@ -63,13 +63,13 @@ module Mihari
       def ip_lookup
         result = api.domains.search(filter: { ipv4: query })
         records = result["records"] || []
-        records.map { |record| record["hostname"] }.compact.uniq
+        records.filter_map { |record| record["hostname"] }.uniq
       end
 
       def mail_lookup
         result = api.domains.search(filter: { whois_email: query })
         records = result["records"] || []
-        records.map { |record| record["hostname"] }.compact.uniq
+        records.filter_map { |record| record["hostname"] }.uniq
       end
     end
   end

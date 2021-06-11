@@ -39,7 +39,7 @@ module Mihari
   setting :misp_api_key, ENV["MISP_API_KEY"]
   setting :onyphe_api_key, ENV["ONYPHE_API_KEY"]
   setting :otx_api_key, ENV["OTX_API_KEY"]
-  setting :passivetotal_api_key,  ENV["PASSIVETOTAL_API_KEY"]
+  setting :passivetotal_api_key, ENV["PASSIVETOTAL_API_KEY"]
   setting :passivetotal_username, ENV["PASSIVETOTAL_USERNAME"]
   setting :pulsedive_api_key, ENV["PULSEDIVE_API_KEY"]
   setting :securitytrails_api_key, ENV["SECURITYTRAILS_API_KEY"]
