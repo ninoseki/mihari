@@ -1,11 +1,15 @@
 # frozen_string_literal: true
 
+require "colorize"
 require "dry/configurable"
 require "dry/files"
 require "mem"
 require "yaml"
 
+require "mihari/constraints"
+
 require "mihari/schemas/configuration"
+require "mihari/schemas/rule"
 
 def truthy?(value)
   return true if value == "true"
@@ -145,6 +149,8 @@ require "mihari/analyzers/passive_ssl"
 require "mihari/analyzers/reverse_whois"
 require "mihari/analyzers/ssh_fingerprint"
 
+require "mihari/analyzers/rule"
+
 require "mihari/notifiers/base"
 require "mihari/notifiers/slack"
 require "mihari/notifiers/exception_notifier"
@@ -161,4 +167,4 @@ require "mihari/status"
 
 require "mihari/web/app"
 
-require "mihari/cli"
+require "mihari/cli/main"
