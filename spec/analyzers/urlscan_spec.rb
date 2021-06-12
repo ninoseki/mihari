@@ -24,10 +24,11 @@ RSpec.describe Mihari::Analyzers::Urlscan, :vcr do
     end
 
     context "when given a type option" do
-      subject { described_class.new(query, tags: tags, target_type: "domain") }
+      subject { described_class.new(query, tags: tags, allowed_data_types: %w[domain]) }
 
       it do
-        expect(subject.artifacts.none? { |artifact| artifact.start_with? "http" }).to eq(true)
+        artifacts = subject.artifacts
+        expect(artifacts.none? { |artifact| artifact.start_with?("http", "https") }).to eq(true)
       end
     end
 
@@ -36,7 +37,7 @@ RSpec.describe Mihari::Analyzers::Urlscan, :vcr do
       subject { described_class.new(query, tags: tags, use_similarity: true) }
 
       it do
-        expect(subject.artifacts.all? { |artifact| artifact.start_with? "http" }).to eq(true)
+        expect(subject.artifacts.length).to be > 0
       end
     end
   end
@@ -50,7 +51,7 @@ RSpec.describe Mihari::Analyzers::Urlscan, :vcr do
   describe "#initialize" do
     context "when given an invalid target_type" do
       it do
-        expect { described_class.new(query, tags: tags, target_type: "foo bar") }.to raise_error(Mihari::InvalidInputError)
+        expect { described_class.new(query, tags: tags, allowed_data_types: %w[foo bar]) }.to raise_error(Mihari::InvalidInputError)
       end
     end
   end
