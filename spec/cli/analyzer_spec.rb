@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-RSpec.describe Mihari::CLI::Service do
+RSpec.describe Mihari::CLI::Analyzer do
   subject { described_class }
 
   let(:query) { "test" }

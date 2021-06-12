@@ -17,7 +17,7 @@ RSpec.describe Mihari::Schemas::Rule do
 
   context "with valid rule" do
     it do
-      result = contract.call(description: "foo", title: "foo", queries: [{ service: "shodan", query: "foo" }])
+      result = contract.call(description: "foo", title: "foo", queries: [{ analyzer: "shodan", query: "foo" }])
       expect(result.errors.empty?).to eq(true)
     end
 
@@ -26,9 +26,9 @@ RSpec.describe Mihari::Schemas::Rule do
         description: "foo",
         title: "foo",
         queries: [
-          { service: "shodan", query: "foo" },
-          { service: "crtsh", query: "foo", exclude_expired: true },
-          { service: "zoomeye", query: "foo", type: "host" }
+          { analyzer: "shodan", query: "foo" },
+          { analyzer: "crtsh", query: "foo", exclude_expired: true },
+          { analyzer: "zoomeye", query: "foo", type: "host" }
         ]
       )
       expect(result.errors.empty?).to eq(true)
@@ -39,7 +39,7 @@ RSpec.describe Mihari::Schemas::Rule do
         description: "foo",
         title: "foo",
         queries: [
-          { service: "shodan", query: "foo" }
+          { analyzer: "shodan", query: "foo" }
         ],
         allowed_data_types: ["ip"]
       )
@@ -49,7 +49,7 @@ RSpec.describe Mihari::Schemas::Rule do
 
   context "with invalid service name" do
     it do
-      expect { contract.call(description: "foo", title: "foo", queries: [{ service: "foo", query: "foo" }]) }.to raise_error(NoMethodError)
+      expect { contract.call(description: "foo", title: "foo", queries: [{ analyzer: "foo", query: "foo" }]) }.to raise_error(NoMethodError)
     end
 
     it do
@@ -58,9 +58,9 @@ RSpec.describe Mihari::Schemas::Rule do
           description: "foo",
           title: "foo",
           queries: [
-            { service: "shodan", query: "foo" },
-            { service: "crtsh", query: "foo", exclude_expired: 1 }, # should be bool
-            { service: "zoomeye", query: "foo", type: "bar" } # should be any of host or web
+            { analyzer: "shodan", query: "foo" },
+            { analyzer: "crtsh", query: "foo", exclude_expired: 1 }, # should be bool
+            { analyzer: "zoomeye", query: "foo", type: "bar" } # should be any of host or web
           ]
         )
       end.to raise_error(NoMethodError)
@@ -71,7 +71,7 @@ RSpec.describe Mihari::Schemas::Rule do
         description: "foo",
         title: "foo",
         queries: [
-          { service: "shodan", query: "foo" }
+          { analyzer: "shodan", query: "foo" }
         ],
         allowed_data_types: ["foo"] # should be any of ip, domain, mail, url or hash
       )

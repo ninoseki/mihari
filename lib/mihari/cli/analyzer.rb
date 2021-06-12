@@ -21,7 +21,7 @@ require "mihari/commands/json"
 
 module Mihari
   module CLI
-    class Service < Base
+    class Analyzer < Base
       include Mihari::Mixins::Hash
       include Mixins::Utils
 

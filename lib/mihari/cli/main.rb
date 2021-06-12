@@ -1,6 +1,5 @@
 # frozen_string_literal: true
 
-require "cymbal"
 require "thor"
 
 require "mihari/commands/config"
@@ -20,8 +19,8 @@ module Mihari
       include Mihari::Commands::Search
       include Mihari::Commands::Web
 
-      desc "service", "Sub commands to run a service"
-      subcommand "service", Service
+      desc "analyzer", "Sub commands to run an analyzer"
+      subcommand "analyzer", Analyzer
     end
   end
 end
