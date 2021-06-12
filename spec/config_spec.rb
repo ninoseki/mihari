@@ -6,6 +6,16 @@ RSpec.describe Mihari do
   subject { described_class }
 
   describe ".load_from_yaml" do
+    before do
+      # memo VT API key
+      @virustotal_api_key = Mihari.config.virustotal_api_key
+    end
+
+    after do
+      # restore VT API key
+      Mihari.config.virustotal_api_key = @virustotal_api_key
+    end
+
     it do
       path = File.expand_path("./fixtures/valid_config.yml", __dir__)
       described_class.load_config_from_yaml path
