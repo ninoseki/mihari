@@ -2,6 +2,8 @@
 
 require "urlscan"
 
+SUPPORTED_DATA_TYPES = %w[url domain ip].freeze
+
 module Mihari
   module Analyzers
     class Urlscan < Base
@@ -9,13 +11,13 @@ module Mihari
       option :title, default: proc { "urlscan lookup" }
       option :description, default: proc { "query = #{query}" }
       option :tags, default: proc { [] }
-      option :target_type, default: proc { "url" }
+      option :allowed_data_types, default: proc { SUPPORTED_DATA_TYPES }
       option :use_similarity, default: proc { false }
 
       def initialize(*args, **kwargs)
         super
 
-        raise InvalidInputError, "type should be url, domain or ip." unless valid_target_type?
+        raise InvalidInputError, "allowed_data_types should be any of url, domain and ip." unless valid_alllowed_data_types?
       end
 
       def artifacts
@@ -23,9 +25,12 @@ module Mihari
         return [] unless result
 
         results = result["results"] || []
-        results.filter_map do |match|
-          match.dig "page", target_type
-        end.uniq
+
+        allowed_data_types.map do |type|
+          results.filter_map do |match|
+            match.dig "page", type
+          end.uniq
+        end.flatten
       end
 
       private
@@ -44,8 +49,8 @@ module Mihari
         api.search(query, size: 10_000)
       end
 
-      def valid_target_type?
-        %w[url domain ip].include? target_type
+      def valid_alllowed_data_types?
+        allowed_data_types.all? { |type| SUPPORTED_DATA_TYPES.include? type }
       end
     end
   end
