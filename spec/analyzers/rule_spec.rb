@@ -5,8 +5,8 @@ RSpec.describe Mihari::Analyzers::Rule, :vcr do
   let(:description) { "test" }
   let(:queries) {
     [
-      { service: "shodan", query: "ip:1.1.1.1" },
-      { service: "crtsh", query: "www.example.org", exclude_expired: true }
+      { analyzer: "shodan", query: "ip:1.1.1.1" },
+      { analyzer: "crtsh", query: "www.example.org", exclude_expired: true }
     ]
   }
   let(:tags) { %w[test] }

@@ -21,30 +21,30 @@ module Mihari
 
   module Schemas
     Analyzer = Dry::Schema.Params do
-      required(:service).value(AnalyzerTypes)
+      required(:analyzer).value(AnalyzerTypes)
       required(:query).value(:string)
     end
 
     Spyse = Dry::Schema.Params do
-      required(:service).value(Types::String.enum("spyse"))
+      required(:analyzer).value(Types::String.enum("spyse"))
       required(:query).value(:string)
       required(:type).value(Types::String.enum("ip", "domain"))
     end
 
     ZoomEye = Dry::Schema.Params do
-      required(:service).value(Types::String.enum("zoomeye"))
+      required(:analyzer).value(Types::String.enum("zoomeye"))
       required(:query).value(:string)
       required(:type).value(Types::String.enum("host", "web"))
     end
 
     Crtsh = Dry::Schema.Params do
-      required(:service).value(Types::String.enum("crtsh"))
+      required(:analyzer).value(Types::String.enum("crtsh"))
       required(:query).value(:string)
       optional(:exclude_expired).value(:bool).default(true)
     end
 
     Urlscan = Dry::Schema.Params do
-      required(:service).value(Types::String.enum("urlscan"))
+      required(:analyzer).value(Types::String.enum("urlscan"))
       required(:query).value(:string)
       optional(:use_similarity).value(:bool).default(true)
     end

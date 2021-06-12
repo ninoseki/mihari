@@ -23,7 +23,7 @@ module Mihari
         @source = id || UUIDTools::UUID.md5_create(UUIDTools::UUID_URL_NAMESPACE, title + description).to_s
       end
 
-      SERVICE_TO_ANALYZER = {
+      ANALYZER_TO_CLASS = {
         "binaryedge" => BinaryEdge,
         "censys" => Censys,
         "circl" => CIRCL,
@@ -51,8 +51,8 @@ module Mihari
         artifacts = []
 
         queries.each do |params|
-          service = params[:service]
-          klass = service_to_analzer(service)
+          analyzer_name = params[:analyzer]
+          klass = get_analyzer_class(analyzer_name)
 
           query = params[:query]
           analyzer = klass.new(query, **params)
@@ -65,17 +65,17 @@ module Mihari
       private
 
       #
-      # Convert service to analyzer class
+      # Get analyzer class
       #
-      # @param [String] service
+      # @param [String] analyzer_name
       #
-      # @return [Class] analyzer class
+      # @return [Class<Mihari::Analyzers::Base>] analyzer class
       #
-      def service_to_analzer(service)
-        analyzer = SERVICE_TO_ANALYZER[service]
+      def get_analyzer_class(analyzer_name)
+        analyzer = ANALYZER_TO_CLASS[analyzer_name]
         return analyzer if analyzer
 
-        raise ArgumentError, "#{service} is not supported"
+        raise ArgumentError, "#{analyzer_name} is not supported"
       end
 
       #
