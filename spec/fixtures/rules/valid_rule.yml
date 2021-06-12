@@ -2,4 +2,7 @@ title: "foo"
 description: "foo"
 queries:
   - analyzer: "shodan"
-    query: "foo"
+    query: "ip:1.1.1.1"
+
+  - analyzer: "crtsh"
+    query: "example.com"

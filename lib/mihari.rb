@@ -128,6 +128,7 @@ require "mihari/retriable"
 # Mixins
 require "mihari/mixins/hash"
 require "mihari/mixins/refang"
+require "mihari/mixins/rule"
 
 # Models
 require "mihari/models/alert"

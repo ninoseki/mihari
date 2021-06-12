@@ -1,17 +1,5 @@
 # frozen_string_literal: true
 
-require "yaml"
-require "active_support/core_ext/hash"
-
-def symbolize_data(data)
-  data.symbolize_keys!
-
-  queries = data[:queries]
-  queries.each(&:symbolize_keys!)
-
-  data
-end
-
 RSpec.describe Mihari::Schemas::Rule do
   let(:contract) { Mihari::Schemas::RuleContract.new }
 
@@ -47,7 +35,7 @@ RSpec.describe Mihari::Schemas::Rule do
     end
   end
 
-  context "with invalid service name" do
+  context "with invalid analyzer name" do
     it do
       expect { contract.call(description: "foo", title: "foo", queries: [{ analyzer: "foo", query: "foo" }]) }.to raise_error(NoMethodError)
     end

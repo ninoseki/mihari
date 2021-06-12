@@ -22,9 +22,6 @@ require "mihari/commands/json"
 module Mihari
   module CLI
     class Analyzer < Base
-      include Mihari::Mixins::Hash
-      include Mixins::Utils
-
       include Mihari::Commands::BinaryEdge
       include Mihari::Commands::Censys
       include Mihari::Commands::CIRCL
