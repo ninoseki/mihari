@@ -1,11 +1,11 @@
 ---
 http_interactions:
 - request:
-    method: post
-    uri: https://www.censys.io/api/v1/search/ipv4
+    method: get
+    uri: https://search.censys.io/api/v2/hosts/search?q=ip:1.1.1.1
     body:
-      encoding: UTF-8
-      string: '{"query":"sagawa.apk"}'
+      encoding: US-ASCII
+      string: ''
     headers:
       Accept-Encoding:
       - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
@@ -14,39 +14,55 @@ http_interactions:
       User-Agent:
       - Ruby
       Host:
-      - www.censys.io
+      - search.censys.io
       Authorization:
       - "<CENSYS_AUTH>"
-      Content-Type:
-      - application/json
   response:
     status:
       code: 200
       message: OK
     headers:
+      Date:
+      - Sat, 12 Jun 2021 04:54:13 GMT
       Content-Type:
       - application/json
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+      X-Content-Type-Options:
+      - nosniff
       Access-Control-Allow-Origin:
       - "*"
       Strict-Transport-Security:
       - max-age=31536000; includeSubDomains; preload
-      X-Cloud-Trace-Context:
-      - 363ee6653c4a9e2f957d01cde2287f34
-      Date:
-      - Sun, 21 Apr 2019 22:29:36 GMT
+      Access-Control-Allow-Credentials:
+      - 'true'
+      Cf-Cache-Status:
+      - DYNAMIC
+      Cf-Request-Id:
+      - 0aa02b1e210000efb221004000000001
+      Expect-Ct:
+      - max-age=604800, report-uri="https://report-uri.cloudflare.com/cdn-cgi/beacon/expect-ct"
+      Report-To:
+      - '{"endpoints":[{"url":"https:\/\/a.nel.cloudflare.com\/report\/v2?s=OIfD66yiM5ntT0QAqomE3nxVPZ1%2Fify3MS8D7R8l41iiu%2B7rmQ1YIwSoMXInmKrPoY2WhQcEyOG1RnR9D16OYLLXyCwO2HIKO7srYao9oUj%2FkTzkBQ1pGLGWqdkx"}],"group":"cf-nel","max_age":604800}'
+      Nel:
+      - '{"report_to":"cf-nel","max_age":604800}'
       Server:
-      - Google Frontend
-      Content-Length:
-      - '480'
+      - cloudflare
+      Cf-Ray:
+      - 65e07add0df9efb2-NRT
     body:
-      encoding: UTF-8
-      string: '{"status": "ok", "results": [{"location.country": "United States",
-        "location.registered_country": "United States", "location.longitude": -97.822,
-        "location.continent": "North America", "ip": "45.199.183.186", "location.registered_country_code":
-        "US", "location.country_code": "US", "location.latitude": 37.751, "protocols":
-        ["80/http", "22/ssh"], "location.timezone": "America/Chicago"}], "metadata":
-        {"count": 1, "query": "sagawa.apk", "backend_time": 36, "page": 1, "pages":
-        1}}'
-    http_version: 
-  recorded_at: Sun, 21 Apr 2019 22:29:23 GMT
-recorded_with: VCR 4.0.0
+      encoding: ASCII-8BIT
+      string: '{"code": 200, "status": "OK", "result": {"query": "ip:1.1.1.1", "total":
+        1, "hits": [{"ip": "1.1.1.1", "services": [{"port": 53, "service_name": "DNS",
+        "transport_protocol": "UDP"}, {"port": 80, "service_name": "HTTP", "transport_protocol":
+        "TCP"}, {"port": 443, "service_name": "HTTP", "transport_protocol": "TCP"}],
+        "location": {"continent": "Oceania", "country": "Australia", "country_code":
+        "AU", "timezone": "Australia/Sydney", "coordinates": {"latitude": -33.494,
+        "longitude": 143.2104}, "registered_country": "Australia", "registered_country_code":
+        "AU"}, "autonomous_system": {"asn": 13335, "description": "CLOUDFLARENET",
+        "bgp_prefix": "1.1.1.0/24", "name": "CLOUDFLARENET", "country_code": "US"}}],
+        "links": {"next": "", "prev": ""}}}'
+  recorded_at: Sat, 12 Jun 2021 04:54:09 GMT
+recorded_with: VCR 6.0.0
