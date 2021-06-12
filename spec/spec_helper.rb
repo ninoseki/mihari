@@ -82,12 +82,13 @@ VCR.configure do |config|
   ]
 
   api_keys.each do |key|
-    ENV[key] = Digest::MD5.hexdigest(key) unless ENV.key?(key)
+    ENV[key] = Digest::MD5.hexdigest(key) if ci_env? || !ENV.key?(key)
+
     config.filter_sensitive_data("<#{key}>") { ENV[key] }
   end
 
   api_endpoints.each do |key|
-    ENV[key] = "http://#{Digest::MD5.hexdigest(key)}"
+    ENV[key] = "http://#{Digest::MD5.hexdigest(key)}" if ci_env? || !ENV.key?(key)
     config.filter_sensitive_data("<#{key}>") { ENV[key] }
   end
 
