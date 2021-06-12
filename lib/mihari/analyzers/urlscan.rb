@@ -30,7 +30,7 @@ module Mihari
 
       private
 
-      def config_keys
+      def configuration_keys
         %w[urlscan_api_key]
       end
 

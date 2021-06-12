@@ -35,6 +35,7 @@ module Mihari
         raise NotImplementedError, "You must implement #{self.class}##{__method__}"
       end
 
+      # @return [String]
       def source
         self.class.to_s.split("::").last
       end
@@ -44,6 +45,11 @@ module Mihari
         []
       end
 
+      #
+      # Set artifacts & run emitters in parallel
+      #
+      # @return [nil]
+      #
       def run
         set_unique_artifacts
 
@@ -52,6 +58,13 @@ module Mihari
         end
       end
 
+      #
+      # Run emitter
+      #
+      # @param [Mihari::Emitters::Base] emitter
+      #
+      # @return [nil]
+      #
       def run_emitter(emitter)
         emitter.run(title: title, description: description, artifacts: unique_artifacts, source: source, tags: tags)
       rescue StandardError => e
@@ -64,7 +77,11 @@ module Mihari
 
       private
 
+      #
+      # Normalize artifacts (reject invalid artifacts)
+      #
       # @return [Array<Mihari::Artifact>]
+      #
       def normalized_artifacts
         @normalized_artifacts ||= artifacts.compact.uniq.sort.map do |artifact|
           artifact.is_a?(Artifact) ? artifact : Artifact.new(data: artifact)
@@ -72,12 +89,23 @@ module Mihari
       end
 
       # @return [Array<Mihari::Artifact>]
+
+      #
+      # Uniquefy artifacts
+      #
+      # @return [Array<Mihari::Artifact>]
+      #
       def unique_artifacts
         @unique_artifacts ||= normalized_artifacts.select do |artifact|
           artifact.unique?(ignore_old_artifacts: ignore_old_artifacts, ignore_threshold: ignore_threshold)
         end
       end
 
+      #
+      # Set unique artifacts
+      #
+      # @return [nil]
+      #
       def set_unique_artifacts
         retry_on_error { unique_artifacts }
       rescue ArgumentError => _e
@@ -85,6 +113,11 @@ module Mihari
         raise Error, "Please configure #{klass} API settings properly"
       end
 
+      #
+      # Select valid emitters
+      #
+      # @return [Array<Mihari::Emitters::Base>]
+      #
       def valid_emitters
         @valid_emitters ||= Mihari.emitters.filter_map do |klass|
           emitter = klass.new

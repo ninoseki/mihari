@@ -25,7 +25,7 @@ module Mihari
 
       PAGE_SIZE = 10
 
-      def config_keys
+      def configuration_keys
         %w[onyphe_api_key]
       end
 

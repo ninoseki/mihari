@@ -1,15 +1,14 @@
 # frozen_string_literal: true
 
-require "cymbal"
-
 module Mihari
   module CLI
     module Mixins
       module Utils
-        def symbolize_hash(hash)
-          Cymbal.symbolize hash
-        end
-
+        #
+        # Send an exception notification if there is any error in a block
+        #
+        # @return [Nil]
+        #
         def with_error_handling
           yield
         rescue StandardError => e
@@ -17,11 +16,22 @@ module Mihari
           notifier.notify e
         end
 
-        # @return [true, false]
-        def valid_json?(json)
+        #
+        # Check required keys in JSON
+        #
+        # @param [Hash] json
+        #
+        # @return [Boolean]
+        #
+        def required_alert_keys?(json)
           %w[title description artifacts].all? { |key| json.key? key }
         end
 
+        #
+        # Load configuration and establish DB connection
+        #
+        # @return [Hash]
+        #
         def load_configuration
           config = options["config"]
           return unless config
@@ -30,6 +40,15 @@ module Mihari
           Database.connect
         end
 
+        #
+        # Run analyzer
+        #
+        # @param [Class<Mihari::Analyzers::Base>] analyzer_class
+        # @param [String] query
+        # @param [Hash] options
+        #
+        # @return [nil]
+        #
         def run_analyzer(analyzer_class, query:, options:)
           load_configuration
 
@@ -49,6 +68,13 @@ module Mihari
           analyzer.run
         end
 
+        #
+        # Normalize options (reject keys not for analyzers)
+        #
+        # @param [Hash] options
+        #
+        # @return [Hash]
+        #
         def normalize_options(options)
           # Delete :config because it is not intended to use for running an analyzer
           [:config, :ignore_old_artifacts, :ignore_threshold].each do |ignore_key|

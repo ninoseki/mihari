@@ -33,7 +33,7 @@ module Mihari
 
       private
 
-      def config_keys
+      def configuration_keys
         %w[webhook_url]
       end
 

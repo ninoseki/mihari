@@ -75,7 +75,7 @@ module Mihari
         domains.flatten
       end
 
-      def config_keys
+      def configuration_keys
         %w[censys_id censys_secret]
       end
 

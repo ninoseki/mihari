@@ -1,5 +1,5 @@
 class TestAnalyzer
-  include Mihari::Analyzers::Mixins::Utils
+  include Mihari::Mixins::Refang
 end
 
 RSpec.describe TestAnalyzer do

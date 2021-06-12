@@ -12,6 +12,11 @@ module Mihari
 
     private
 
+    #
+    # Statuses of analyzers and emitters
+    #
+    # @return [Array<Hash>]
+    #
     def statuses
       (Mihari.analyzers + Mihari.emitters).map do |klass|
         name = klass.to_s.split("::").last.to_s
@@ -20,6 +25,13 @@ module Mihari
       end.to_h.compact
     end
 
+    #
+    # Build a status of a class
+    #
+    # @param [Class<Mihari::Analyzers::Base>, Class<Mihari::Emitters::Base>] klass
+    #
+    # @return [Hash, nil]
+    #
     def build_status(klass)
       return nil if klass == Mihari::Analyzers::Rule
 

@@ -1,10 +1,5 @@
 # frozen_string_literal: true
 
-require "cymbal"
-require "thor"
-
-require "mihari/commands/mixins/utils"
-
 require "mihari/commands/binaryedge"
 require "mihari/commands/censys"
 require "mihari/commands/circl"
@@ -24,17 +19,11 @@ require "mihari/commands/zoomeye"
 
 require "mihari/commands/json"
 
-require "mihari/cli/mixins/utils"
-
 module Mihari
   module CLI
-    class Service < Thor
+    class Service < Base
+      include Mihari::Mixins::Hash
       include Mixins::Utils
-
-      class_option :config, type: :string, desc: "Path to the config file"
-
-      class_option :ignore_old_artifacts, type: :boolean, default: false, desc: "Whether to ignore old artifacts from checking or not. Only affects with analyze commands."
-      class_option :ignore_threshold, type: :numeric, default: 0, desc: "Number of days to define whether an artifact is old or not. Only affects with analyze commands."
 
       include Mihari::Commands::BinaryEdge
       include Mihari::Commands::Censys
@@ -53,12 +42,6 @@ module Mihari
       include Mihari::Commands::Urlscan
       include Mihari::Commands::VirusTotal
       include Mihari::Commands::ZoomEye
-
-      class << self
-        def exit_on_failure?
-          true
-        end
-      end
     end
   end
 end

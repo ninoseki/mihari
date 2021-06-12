@@ -30,7 +30,7 @@ module Mihari
         %w[host web].include? type
       end
 
-      def config_keys
+      def configuration_keys
         %w[zoomeye_api_key]
       end
 
