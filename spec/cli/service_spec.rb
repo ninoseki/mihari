@@ -193,12 +193,12 @@ RSpec.describe Mihari::CLI::Service do
     }
 
     it do
-      expect(subject).to be_valid_json(json)
+      expect(subject).to be_required_alert_keys(json)
     end
 
     context "when given an invalid input" do
       it do
-        expect(subject).not_to be_valid_json({})
+        expect(subject).not_to be_required_alert_keys({})
       end
     end
   end

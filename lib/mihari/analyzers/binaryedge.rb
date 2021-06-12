@@ -46,7 +46,7 @@ module Mihari
         responses
       end
 
-      def config_keys
+      def configuration_keys
         %w[binaryedge_api_key]
       end
 

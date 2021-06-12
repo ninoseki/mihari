@@ -16,13 +16,23 @@ end
 module Mihari
   class Artifact < ActiveRecord::Base
     include ActiveModel::Validations
+
     validates_with ArtifactValidator
 
     def initialize(attributes)
       super
+
       self.data_type = TypeChecker.type(data)
     end
 
+    #
+    # Check uniqueness of artifact
+    #
+    # @param [Boolean] ignore_old_artifacts
+    # @param [Integer] ignore_threshold
+    #
+    # @return [Boolean] true if it is unique. Otherwise false.
+    #
     def unique?(ignore_old_artifacts: false, ignore_threshold: 0)
       artifact = self.class.where(data: data).order(created_at: :desc).first
       return true if artifact.nil?

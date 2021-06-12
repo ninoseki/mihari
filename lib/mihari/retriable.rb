@@ -2,6 +2,14 @@
 
 module Mihari
   module Retriable
+    #
+    # Retry on error
+    #
+    # @param [Integer] times
+    # @param [Integer] interval
+    #
+    # @return [nil]
+    #
     def retry_on_error(times: 3, interval: 10)
       try = 0
       begin

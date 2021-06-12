@@ -7,7 +7,7 @@ require "parallel"
 module Mihari
   module Analyzers
     class DNSTwister < Base
-      include Mixins::Utils
+      include Mixins::Refang
 
       param :query
       option :title, default: proc { "dnstwister domain lookup" }

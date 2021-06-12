@@ -10,6 +10,21 @@ module Mihari
     has_many :tags, through: :taggings
 
     class << self
+      #
+      # Search alerts
+      #
+      # @param [String, nil] artifact_data
+      # @param [String, nil] description
+      # @param [String, nil] source
+      # @param [String, nil] tag_name
+      # @param [String, nil] title
+      # @param [String, nil] from_at
+      # @param [String, nil] to_at
+      # @param [Integer, nil] limit
+      # @param [Integer, nil] page
+      #
+      # @return [Array<Hash>]
+      #
       def search(artifact_data: nil, description: nil, source: nil, tag_name: nil, title: nil, from_at: nil, to_at: nil, limit: 10, page: 1)
         limit = limit.to_i
         raise ArgumentError, "limit should be bigger than zero" unless limit.positive?
@@ -20,7 +35,6 @@ module Mihari
         offset = (page - 1) * limit
 
         relation = build_relation(artifact_data: artifact_data, title: title, description: description, source: source, tag_name: tag_name, from_at: from_at, to_at: to_at)
-        # relation = relation.group("alerts.id")
 
         alerts = relation.limit(limit).offset(offset).order(id: :desc)
 
@@ -32,6 +46,19 @@ module Mihari
         end
       end
 
+      #
+      # Count alerts
+      #
+      # @param [String, nil] artifact_data
+      # @param [String, nil] description
+      # @param [String, nil] source
+      # @param [String, nil] tag_name
+      # @param [String, nil] title
+      # @param [String, nil] from_at
+      # @param [String, nil] to_at
+      #
+      # @return [Integer]
+      #
       def count(artifact_data: nil, description: nil, source: nil, tag_name: nil, title: nil, from_at: nil, to_at: nil)
         relation = build_relation(artifact_data: artifact_data, title: title, description: description, source: source, tag_name: tag_name, from_at: from_at, to_at: to_at)
         relation.distinct("alerts.id").count

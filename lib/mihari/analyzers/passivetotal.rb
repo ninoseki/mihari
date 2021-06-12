@@ -5,7 +5,7 @@ require "passivetotal"
 module Mihari
   module Analyzers
     class PassiveTotal < Base
-      include Mixins::Utils
+      include Mixins::Refang
 
       param :query
       option :title, default: proc { "PassiveTotal lookup" }
@@ -27,7 +27,7 @@ module Mihari
 
       private
 
-      def config_keys
+      def configuration_keys
         %w[passivetotal_username passivetotal_api_key]
       end
 

@@ -7,7 +7,7 @@ require "pathname"
 module Mihari
   module Commands
     module Search
-      include Mixins::Utils
+      include Mihari::Mixins::Hash
 
       def self.included(thor)
         thor.class_eval do

@@ -12,7 +12,7 @@ module Mihari
               raise ArgumentError, "Input not found: please give an input in a JSON format" unless json
 
               json = parse_as_json(json)
-              raise ArgumentError, "Invalid input format: an input JSON data should have title, description and artifacts key" unless valid_json?(json)
+              raise ArgumentError, "Invalid input format: an input JSON data should have title, description and artifacts key" unless required_alert_keys?(json)
 
               title = json["title"]
               description = json["description"]

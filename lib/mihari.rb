@@ -6,8 +6,10 @@ require "dry/files"
 require "mem"
 require "yaml"
 
+# Constraints
 require "mihari/constraints"
 
+# Schemas
 require "mihari/schemas/configuration"
 require "mihari/schemas/rule"
 
@@ -69,6 +71,13 @@ module Mihari
     end
     memoize :analyzers
 
+    #
+    # Load configuration from YAML file
+    #
+    # @param [String] path Path to YAML file
+    #
+    # @return [nil]
+    #
     def load_config_from_yaml(path)
       raise ArgumentError, "#{path} does not exist." unless File.exist?(path)
 
@@ -89,6 +98,14 @@ module Mihari
       end
     end
 
+    #
+    # Create (blank) configuration file
+    #
+    # @param [String] filename
+    # @param [Dry::Files] files
+    #
+    # @return [nil]
+    #
     def initialize_config_yaml(filename, files = Dry::Files.new)
       config = Mihari.config.values.keys.map do |key|
         [key.to_s, nil]
@@ -105,22 +122,27 @@ require "mihari/errors"
 require "mihari/database"
 require "mihari/type_checker"
 
+require "mihari/configurable"
+require "mihari/retriable"
+
+# Mixins
+require "mihari/mixins/hash"
+require "mihari/mixins/refang"
+
+# Models
 require "mihari/models/alert"
 require "mihari/models/artifact"
 require "mihari/models/tag"
 require "mihari/models/tagging"
 
+# Serializers
 require "mihari/serializers/alert"
 require "mihari/serializers/artifact"
 require "mihari/serializers/tag"
 
-require "mihari/configurable"
-require "mihari/retriable"
-
+# Analyzers
 require "mihari/analyzers/base"
 require "mihari/analyzers/basic"
-
-require "mihari/analyzers/mixins/utils"
 
 require "mihari/analyzers/binaryedge"
 require "mihari/analyzers/censys"
@@ -141,10 +163,12 @@ require "mihari/analyzers/zoomeye"
 
 require "mihari/analyzers/rule"
 
+# Notifiers
 require "mihari/notifiers/base"
 require "mihari/notifiers/slack"
 require "mihari/notifiers/exception_notifier"
 
+# Emitters
 require "mihari/emitters/base"
 require "mihari/emitters/database"
 require "mihari/emitters/misp"
@@ -153,8 +177,15 @@ require "mihari/emitters/stdout"
 require "mihari/emitters/the_hive"
 require "mihari/emitters/webhook"
 
+# Status checker
 require "mihari/status"
 
+# Web app
 require "mihari/web/app"
+
+# CLIs
+require "mihari/cli/base"
+
+require "mihari/cli/service"
 
 require "mihari/cli/main"

@@ -22,7 +22,7 @@ module Mihari
         @search_params ||= JSON.parse(query)
       end
 
-      def config_keys
+      def configuration_keys
         %w[spyse_api_key]
       end
 
