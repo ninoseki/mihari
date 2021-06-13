@@ -31,7 +31,7 @@ module Mihari
       optional(:virustotal_api_key).value(:string)
       optional(:zoomeye_api_key).value(:string)
       optional(:webhook_url).value(:string)
-      optional(:webhook_use_json_body).value(:string)
+      optional(:webhook_use_json_body).value(:bool)
       optional(:database).value(:string)
     end
 
