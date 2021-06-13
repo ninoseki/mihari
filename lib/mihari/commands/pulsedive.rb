@@ -5,7 +5,7 @@ module Mihari
     module Pulsedive
       def self.included(thor)
         thor.class_eval do
-          desc "pulsedive [IP|DOMAIN]", "Pulsedive lookup by an ip or domain"
+          desc "pulsedive [IP|DOMAIN]", "Pulsedive search by an ip or domain"
           method_option :title, type: :string, desc: "title"
           method_option :description, type: :string, desc: "description"
           method_option :tags, type: :array, desc: "tags"

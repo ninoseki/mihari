@@ -10,7 +10,7 @@ RSpec.describe Mihari::Analyzers::Pulsedive, :vcr do
 
     describe "#title" do
       it do
-        expect(subject.title).to eq("Pulsedive lookup")
+        expect(subject.title).to eq("Pulsedive search")
       end
     end
 

@@ -12,7 +12,7 @@ RSpec.describe Mihari::Analyzers::Spyse, :vcr do
 
     describe "#title" do
       it do
-        expect(subject.title).to eq("Spyse lookup")
+        expect(subject.title).to eq("Spyse search")
       end
     end
 

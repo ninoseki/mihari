@@ -5,7 +5,7 @@ module Mihari
     module Onyphe
       def self.included(thor)
         thor.class_eval do
-          desc "onyphe [QUERY]", "Onyphe datascan search by a query"
+          desc "onyphe [QUERY]", "Onyphe datascan search"
           method_option :title, type: :string, desc: "title"
           method_option :description, type: :string, desc: "description"
           method_option :tags, type: :array, desc: "tags"

@@ -5,7 +5,7 @@ module Mihari
     module DNSTwister
       def self.included(thor)
         thor.class_eval do
-          desc "dnstwister [DOMAIN]", "dnstwister lookup by a domain"
+          desc "dnstwister [DOMAIN]", "dnstwister search"
           method_option :title, type: :string, desc: "title"
           method_option :description, type: :string, desc: "description"
           method_option :tags, type: :array, desc: "tags"

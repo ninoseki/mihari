@@ -6,7 +6,7 @@ module Mihari
   module Analyzers
     class Shodan < Base
       param :query
-      option :title, default: proc { "Shodan lookup" }
+      option :title, default: proc { "Shodan search" }
       option :description, default: proc { "query = #{query}" }
       option :tags, default: proc { [] }
 

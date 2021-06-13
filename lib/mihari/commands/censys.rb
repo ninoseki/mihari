@@ -5,7 +5,7 @@ module Mihari
     module Censys
       def self.included(thor)
         thor.class_eval do
-          desc "censys [QUERY]", "Censys IPv4 search by a query"
+          desc "censys [QUERY]", "Censys IPv4 search"
           method_option :title, type: :string, desc: "title"
           method_option :description, type: :string, desc: "description"
           method_option :tags, type: :array, desc: "tags"

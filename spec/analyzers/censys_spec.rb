@@ -8,7 +8,7 @@ RSpec.describe Mihari::Analyzers::Censys, :vcr do
 
   describe "#title" do
     it do
-      expect(subject.title).to eq("Censys lookup")
+      expect(subject.title).to eq("Censys search")
     end
   end
 

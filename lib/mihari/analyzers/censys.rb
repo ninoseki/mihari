@@ -6,17 +6,17 @@ module Mihari
   module Analyzers
     class Censys < Base
       param :query
-      option :title, default: proc { "Censys lookup" }
+      option :title, default: proc { "Censys search" }
       option :description, default: proc { "query = #{query}" }
       option :tags, default: proc { [] }
 
       def artifacts
-        lookup
+        search
       end
 
       private
 
-      def lookup
+      def search
         ipv4s = []
 
         cursor = nil

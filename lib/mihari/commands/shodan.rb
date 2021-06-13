@@ -5,7 +5,7 @@ module Mihari
     module Shodan
       def self.included(thor)
         thor.class_eval do
-          desc "shodan [QUERY]", "Shodan host search by a query"
+          desc "shodan [QUERY]", "Shodan host search"
           method_option :title, type: :string, desc: "title"
           method_option :description, type: :string, desc: "description"
           method_option :tags, type: :array, desc: "tags"

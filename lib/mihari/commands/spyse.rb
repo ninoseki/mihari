@@ -5,7 +5,7 @@ module Mihari
     module Spyse
       def self.included(thor)
         thor.class_eval do
-          desc "spyse [QUERY]", "Spyse search by a query"
+          desc "spyse [QUERY]", "Spyse search"
           method_option :title, type: :string, desc: "title"
           method_option :description, type: :string, desc: "description"
           method_option :tags, type: :array, desc: "tags"

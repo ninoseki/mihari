@@ -10,7 +10,7 @@ RSpec.describe Mihari::Analyzers::OTX, :vcr do
 
     describe "#title" do
       it do
-        expect(subject.title).to eq("OTX lookup")
+        expect(subject.title).to eq("OTX search")
       end
     end
 

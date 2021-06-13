@@ -10,7 +10,7 @@ RSpec.describe Mihari::Analyzers::PassiveTotal, :vcr do
 
     describe "#title" do
       it do
-        expect(subject.title).to eq("PassiveTotal lookup")
+        expect(subject.title).to eq("PassiveTotal search")
       end
     end
 
