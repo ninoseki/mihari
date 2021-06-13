@@ -36,14 +36,12 @@ module Mihari
       end
 
       def valid_type?
-        %w[ip domain mail].include? type
+        %w[ip domain mail hash].include? type
       end
 
       def search
         case type
-        when "domain"
-          passive_dns_search
-        when "ip"
+        when "domain", "ip"
           passive_dns_search
         when "mail"
           reverse_whois_search
