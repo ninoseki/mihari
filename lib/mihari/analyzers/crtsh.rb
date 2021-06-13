@@ -6,7 +6,7 @@ module Mihari
   module Analyzers
     class Crtsh < Base
       param :query
-      option :title, default: proc { "crt.sh lookup" }
+      option :title, default: proc { "crt.sh search" }
       option :description, default: proc { "query = #{query}" }
       option :tags, default: proc { [] }
       option :exclude_expired, default: proc { true }

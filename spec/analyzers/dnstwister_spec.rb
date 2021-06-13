@@ -18,7 +18,7 @@ RSpec.describe Mihari::Analyzers::DNSTwister, :vcr do
 
   describe "#title" do
     it do
-      expect(subject.title).to eq("dnstwister domain lookup")
+      expect(subject.title).to eq("dnstwister domain search")
     end
   end
 

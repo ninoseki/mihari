@@ -6,7 +6,7 @@ module Mihari
   module Analyzers
     class Onyphe < Base
       param :query
-      option :title, default: proc { "Onyphe lookup" }
+      option :title, default: proc { "Onyphe search" }
       option :description, default: proc { "query = #{query}" }
       option :tags, default: proc { [] }
 

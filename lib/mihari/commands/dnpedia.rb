@@ -5,7 +5,7 @@ module Mihari
     module DNPedia
       def self.included(thor)
         thor.class_eval do
-          desc "dnpedia [QUERY]", "DNPedia domain search by a query"
+          desc "dnpedia [QUERY]", "DNPedia domain search"
           method_option :title, type: :string, desc: "title"
           method_option :description, type: :string, desc: "description"
           method_option :tags, type: :array, desc: "tags"

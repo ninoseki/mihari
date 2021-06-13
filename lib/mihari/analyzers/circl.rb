@@ -8,7 +8,7 @@ module Mihari
       include Mixins::Refang
 
       param :query
-      option :title, default: proc { "CIRCL passive lookup" }
+      option :title, default: proc { "CIRCL passive DNS/SSL search" }
       option :description, default: proc { "query = #{query}" }
       option :tags, default: proc { [] }
 
@@ -22,7 +22,7 @@ module Mihari
       end
 
       def artifacts
-        lookup || []
+        search || []
       end
 
       private
@@ -35,18 +35,18 @@ module Mihari
         @api ||= ::PassiveCIRCL::API.new(username: Mihari.config.circl_passive_username, password: Mihari.config.circl_passive_password)
       end
 
-      def lookup
+      def search
         case @type
         when "domain"
-          passive_dns_lookup
+          passive_dns_search
         when "hash"
-          passive_ssl_lookup
+          passive_ssl_search
         else
           raise InvalidInputError, "#{@query}(type: #{@type || "unknown"}) is not supported."
         end
       end
 
-      def passive_dns_lookup
+      def passive_dns_search
         results = api.dns.query(@query)
         results.filter_map do |result|
           type = result["rrtype"]
@@ -54,7 +54,7 @@ module Mihari
         end.uniq
       end
 
-      def passive_ssl_lookup
+      def passive_ssl_search
         result = api.ssl.cquery(@query)
         seen = result["seen"] || []
         seen.uniq

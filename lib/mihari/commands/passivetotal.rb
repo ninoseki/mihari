@@ -5,7 +5,7 @@ module Mihari
     module PassiveTotal
       def self.included(thor)
         thor.class_eval do
-          desc "passivetotal [IP|DOMAIN|EMAIL|SHA1]", "PassiveTotal lookup by an ip, domain, email or SHA1 certificate fingerprint"
+          desc "passivetotal [IP|DOMAIN|EMAIL|SHA1]", "PassiveTotal search by an ip, domain, email or SHA1 certificate fingerprint"
           method_option :title, type: :string, desc: "title"
           method_option :description, type: :string, desc: "description"
           method_option :tags, type: :array, desc: "tags"

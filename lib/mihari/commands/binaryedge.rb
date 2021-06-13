@@ -5,7 +5,7 @@ module Mihari
     module BinaryEdge
       def self.included(thor)
         thor.class_eval do
-          desc "binaryedge [QUERY]", "BinaryEdge host search by a query"
+          desc "binaryedge [QUERY]", "BinaryEdge host search"
           method_option :title, type: :string, desc: "title"
           method_option :description, type: :string, desc: "description"
           method_option :tags, type: :array, desc: "tags"

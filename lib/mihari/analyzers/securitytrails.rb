@@ -8,7 +8,7 @@ module Mihari
       include Mixins::Refang
 
       param :query
-      option :title, default: proc { "SecurityTrails lookup" }
+      option :title, default: proc { "SecurityTrails search" }
       option :description, default: proc { "query = #{query}" }
       option :tags, default: proc { [] }
 
@@ -22,7 +22,7 @@ module Mihari
       end
 
       def artifacts
-        lookup || []
+        search || []
       end
 
       private
@@ -39,20 +39,20 @@ module Mihari
         %w[ip domain mail].include? type
       end
 
-      def lookup
+      def search
         case type
         when "domain"
-          domain_lookup
+          domain_search
         when "ip"
-          ip_lookup
+          ip_search
         when "mail"
-          mail_lookup
+          mail_search
         else
           raise InvalidInputError, "#{query}(type: #{type || "unknown"}) is not supported." unless valid_type?
         end
       end
 
-      def domain_lookup
+      def domain_search
         result = api.history.get_all_dns_history(query, type: "a")
         records = result["records"] || []
         records.map do |record|
@@ -60,13 +60,13 @@ module Mihari
         end.flatten.compact.uniq
       end
 
-      def ip_lookup
+      def ip_search
         result = api.domains.search(filter: { ipv4: query })
         records = result["records"] || []
         records.filter_map { |record| record["hostname"] }.uniq
       end
 
-      def mail_lookup
+      def mail_search
         result = api.domains.search(filter: { whois_email: query })
         records = result["records"] || []
         records.filter_map { |record| record["hostname"] }.uniq

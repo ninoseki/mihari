@@ -8,7 +8,7 @@ RSpec.describe Mihari::Analyzers::Crtsh, :vcr do
 
   describe "#title" do
     it do
-      expect(subject.title).to eq("crt.sh lookup")
+      expect(subject.title).to eq("crt.sh search")
     end
   end
 

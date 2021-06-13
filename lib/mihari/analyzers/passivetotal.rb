@@ -8,7 +8,7 @@ module Mihari
       include Mixins::Refang
 
       param :query
-      option :title, default: proc { "PassiveTotal lookup" }
+      option :title, default: proc { "PassiveTotal search" }
       option :description, default: proc { "query = #{query}" }
       option :tags, default: proc { [] }
 
@@ -22,7 +22,7 @@ module Mihari
       end
 
       def artifacts
-        lookup || []
+        search || []
       end
 
       private
@@ -39,27 +39,27 @@ module Mihari
         %w[ip domain mail].include? type
       end
 
-      def lookup
+      def search
         case type
         when "domain"
-          passive_dns_lookup
+          passive_dns_search
         when "ip"
-          passive_dns_lookup
+          passive_dns_search
         when "mail"
-          reverse_whois_lookup
+          reverse_whois_search
         when "hash"
-          ssl_lookup
+          ssl_search
         else
           raise InvalidInputError, "#{query}(type: #{type || "unknown"}) is not supported." unless valid_type?
         end
       end
 
-      def passive_dns_lookup
+      def passive_dns_search
         res = api.dns.passive_unique(query)
         res["results"] || []
       end
 
-      def reverse_whois_lookup
+      def reverse_whois_search
         res = api.whois.search(query: query, field: "email")
         results = res["results"] || []
         results.map do |result|
@@ -67,7 +67,7 @@ module Mihari
         end.flatten.compact.uniq
       end
 
-      def ssl_lookup
+      def ssl_search
         res = api.ssl.history(query)
         results = res["results"] || []
         results.map do |result|

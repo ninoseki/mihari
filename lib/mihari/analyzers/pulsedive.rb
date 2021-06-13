@@ -8,7 +8,7 @@ module Mihari
       include Mixins::Refang
 
       param :query
-      option :title, default: proc { "Pulsedive lookup" }
+      option :title, default: proc { "Pulsedive search" }
       option :description, default: proc { "query = #{query}" }
       option :tags, default: proc { [] }
 
@@ -22,7 +22,7 @@ module Mihari
       end
 
       def artifacts
-        lookup || []
+        search || []
       end
 
       private
@@ -39,7 +39,7 @@ module Mihari
         %w[ip domain].include? type
       end
 
-      def lookup
+      def search
         raise InvalidInputError, "#{query}(type: #{type || "unknown"}) is not supported." unless valid_type?
 
         indicator = api.indicator.get_by_value(query)

@@ -8,7 +8,7 @@ RSpec.describe Mihari::Analyzers::Urlscan, :vcr do
 
   describe "#title" do
     it do
-      expect(subject.title).to eq("urlscan lookup")
+      expect(subject.title).to eq("urlscan search")
     end
   end
 

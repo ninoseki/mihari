@@ -10,7 +10,7 @@ RSpec.describe Mihari::Analyzers::SecurityTrails, :vcr do
 
     describe "#title" do
       it do
-        expect(subject.title).to eq("SecurityTrails lookup")
+        expect(subject.title).to eq("SecurityTrails search")
       end
     end
 

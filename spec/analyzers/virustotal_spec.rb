@@ -10,7 +10,7 @@ RSpec.describe Mihari::Analyzers::VirusTotal, :vcr do
 
     describe "#title" do
       it do
-        expect(subject.title).to eq("VirusTotal lookup")
+        expect(subject.title).to eq("VirusTotal search")
       end
     end
 

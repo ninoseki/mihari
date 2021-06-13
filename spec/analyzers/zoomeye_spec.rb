@@ -8,7 +8,7 @@ RSpec.describe Mihari::Analyzers::ZoomEye, :vcr do
 
   describe "#title" do
     it do
-      expect(subject.title).to eq("ZoomEye lookup")
+      expect(subject.title).to eq("ZoomEye search")
     end
   end
 

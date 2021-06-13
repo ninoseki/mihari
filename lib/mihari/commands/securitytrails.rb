@@ -5,7 +5,7 @@ module Mihari
     module SecurityTrails
       def self.included(thor)
         thor.class_eval do
-          desc "securitytrails [IP|DOMAIN|EMAIL]", "SecurityTrails lookup by an ip, domain or email"
+          desc "securitytrails [IP|DOMAIN|EMAIL]", "SecurityTrails search by an ip, domain or email"
           method_option :title, type: :string, desc: "title"
           method_option :description, type: :string, desc: "description"
           method_option :tags, type: :array, desc: "tags"

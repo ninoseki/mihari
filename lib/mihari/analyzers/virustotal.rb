@@ -8,7 +8,7 @@ module Mihari
       include Mixins::Refang
 
       param :query
-      option :title, default: proc { "VirusTotal lookup" }
+      option :title, default: proc { "VirusTotal search" }
       option :description, default: proc { "query = #{query}" }
       option :tags, default: proc { [] }
 
@@ -22,7 +22,7 @@ module Mihari
       end
 
       def artifacts
-        lookup || []
+        search || []
       end
 
       private
@@ -39,18 +39,18 @@ module Mihari
         %w[ip domain].include? type
       end
 
-      def lookup
+      def search
         case type
         when "domain"
-          domain_lookup
+          domain_search
         when "ip"
-          ip_lookup
+          ip_search
         else
           raise InvalidInputError, "#{query}(type: #{type || "unknown"}) is not supported." unless valid_type?
         end
       end
 
-      def domain_lookup
+      def domain_search
         res = api.domain.resolutions(query)
 
         data = res["data"] || []
@@ -59,7 +59,7 @@ module Mihari
         end.uniq
       end
 
-      def ip_lookup
+      def ip_search
         res = api.ip_address.resolutions(query)
 
         data = res["data"] || []

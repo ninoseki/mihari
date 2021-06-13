@@ -5,7 +5,7 @@ module Mihari
     module OTX
       def self.included(thor)
         thor.class_eval do
-          desc "otx [IP|DOMAIN]", "OTX lookup by an IP or domain"
+          desc "otx [IP|DOMAIN]", "OTX search by an IP or domain"
           method_option :title, type: :string, desc: "title"
           method_option :description, type: :string, desc: "description"
           method_option :tags, type: :array, desc: "tags"

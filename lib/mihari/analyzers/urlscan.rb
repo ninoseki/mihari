@@ -8,7 +8,7 @@ module Mihari
   module Analyzers
     class Urlscan < Base
       param :query
-      option :title, default: proc { "urlscan lookup" }
+      option :title, default: proc { "urlscan search" }
       option :description, default: proc { "query = #{query}" }
       option :tags, default: proc { [] }
       option :allowed_data_types, default: proc { SUPPORTED_DATA_TYPES }
