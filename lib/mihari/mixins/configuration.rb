@@ -34,6 +34,16 @@ module Mihari
           show_validation_errors result.errors
           raise ArgumentError, "Invalid config schema"
         end
+
+        # check keys
+        # TODO: check keys with dry-schema
+        valid_keys = Mihari.config.values.keys
+        config.each_key do |key|
+          unless valid_keys.include?(key)
+            puts error_message.colorize(:red)
+            raise ArgumentError, "#{key} is not a valid key."
+          end
+        end
       end
 
       #
