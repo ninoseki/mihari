@@ -17,8 +17,8 @@ module Mihari
       include Mihari::Commands::Search
       include Mihari::Commands::Web
 
-      desc "analyzer", "Sub commands to run an analyzer"
-      subcommand "analyzer", Analyzer
+      desc "analyze", "Sub commands to run an analyzer"
+      subcommand "analyze", Analyzer
 
       desc "init", "Sub commands to initialize config & rule"
       subcommand "init", Initialization
