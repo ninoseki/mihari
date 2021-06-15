@@ -1,0 +1,16 @@
+title: ... # required
+description: ... # required
+
+id: ... # optional
+source: ... # optional
+tags: [] # optional
+allowed_data_types: # optional
+  - hash
+  - ip
+  - domain
+  - url
+  - mail
+
+queries: # required
+  - analyzer: shodan # required
+    query: ... # required
