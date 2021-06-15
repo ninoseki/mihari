@@ -60,3 +60,6 @@ Gemfile.lock
 
 # Config
 mihari.yml
+
+# Rule
+rule.yml

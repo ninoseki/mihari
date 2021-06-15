@@ -6,12 +6,11 @@ require "dry/files"
 require "mem"
 require "yaml"
 
-# Constraints
-require "mihari/constraints"
-
-# Schemas
-require "mihari/schemas/configuration"
-require "mihari/schemas/rule"
+# Mixins
+require "mihari/mixins/configuration"
+require "mihari/mixins/hash"
+require "mihari/mixins/refang"
+require "mihari/mixins/rule"
 
 def truthy?(value)
   return true if value == "true"
@@ -20,17 +19,9 @@ def truthy?(value)
   false
 end
 
-def show_errors(errors)
-  puts "There are errors in the configuration file!".colorize(:red)
-
-  errors.messages.each do |message|
-    path = message.path.map(&:to_s).join
-    puts "- #{path} #{message.text}".colorize(:red)
-  end
-end
-
 module Mihari
   extend Dry::Configurable
+  extend Mixins::Configuration
 
   setting :binaryedge_api_key, ENV["BINARYEDGE_API_KEY"]
   setting :censys_id, ENV["CENSYS_ID"]
@@ -79,39 +70,14 @@ module Mihari
     # @return [nil]
     #
     def load_config_from_yaml(path)
-      raise ArgumentError, "#{path} does not exist." unless File.exist?(path)
-
-      data = File.read(path)
-      begin
-        yaml = YAML.safe_load(data)
-      rescue TypeError => _e
-        return
-      end
+      config = load_config(path)
 
       # validate loaded yaml data
-      contract = Schemas::ConfigurationContract.new
-      result = contract.call(yaml)
-      show_errors(result.errors) unless result.errors.empty?
+      validate_config config
 
-      yaml.each do |key, value|
+      config.each do |key, value|
         Mihari.config.send("#{key.downcase}=".to_sym, value)
       end
-    end
-
-    #
-    # Create (blank) configuration file
-    #
-    # @param [String] filename
-    # @param [Dry::Files] files
-    #
-    # @return [nil]
-    #
-    def initialize_config_yaml(filename, files = Dry::Files.new)
-      config = Mihari.config.values.keys.map do |key|
-        [key.to_s, nil]
-      end.to_h
-
-      files.write(filename, YAML.dump(config))
     end
   end
 end
@@ -125,10 +91,12 @@ require "mihari/type_checker"
 require "mihari/configurable"
 require "mihari/retriable"
 
-# Mixins
-require "mihari/mixins/hash"
-require "mihari/mixins/refang"
-require "mihari/mixins/rule"
+# Constraints
+require "mihari/constraints"
+
+# Schemas
+require "mihari/schemas/configuration"
+require "mihari/schemas/rule"
 
 # Models
 require "mihari/models/alert"
@@ -188,5 +156,6 @@ require "mihari/web/app"
 require "mihari/cli/base"
 
 require "mihari/cli/analyzer"
+require "mihari/cli/init"
 
 require "mihari/cli/main"
