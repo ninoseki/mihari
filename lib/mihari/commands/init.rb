@@ -10,7 +10,7 @@ module Mihari
         include Mixins::Rule
 
         thor.class_eval do
-          desc "config", "Create a YAML configuration file"
+          desc "config", "Create a config file"
           method_option :filename, type: :string, default: "mihari.yml"
           def config
             filename = options["filename"]
@@ -25,7 +25,7 @@ module Mihari
             puts "The config file is initialized as #{filename}.".colorize(:blue)
           end
 
-          desc "rule", "Create a YAML rule file"
+          desc "rule", "Create a rule file"
           method_option :filename, type: :string, default: "rule.yml"
           def rule
             filename = options["filename"]
