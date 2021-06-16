@@ -7,9 +7,11 @@ require "mem"
 require "yaml"
 
 # Mixins
+require "mihari/mixins/configurable"
 require "mihari/mixins/configuration"
 require "mihari/mixins/hash"
 require "mihari/mixins/refang"
+require "mihari/mixins/retriable"
 require "mihari/mixins/rule"
 
 def truthy?(value)
@@ -87,9 +89,6 @@ require "mihari/errors"
 
 require "mihari/database"
 require "mihari/type_checker"
-
-require "mihari/configurable"
-require "mihari/retriable"
 
 # Constraints
 require "mihari/constraints"

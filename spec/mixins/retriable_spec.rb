@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class Test
-  include Mihari::Retriable
+  include Mihari::Mixins::Retriable
 
   attr_reader :count, :times, :interval
 
@@ -23,7 +23,7 @@ class Test
   end
 end
 
-RSpec.describe Mihari::Retriable do
+RSpec.describe Mihari::Mixins::Retriable do
   subject { Test.new }
 
   before do

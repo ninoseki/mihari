@@ -8,8 +8,8 @@ module Mihari
     class Base
       extend Dry::Initializer
 
-      include Configurable
-      include Retriable
+      include Mixins::Configurable
+      include Mixins::Retriable
 
       attr_accessor :ignore_old_artifacts, :ignore_threshold
 
