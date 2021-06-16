@@ -87,7 +87,7 @@ module Mihari
       memoize :_vt_link
 
       def _censys_link
-        data_type == "ip" ? "https://censys.io/ipv4/#{data}" : nil
+        data_type == "ip" ? "https://search.censys.io/hosts/#{data}" : nil
       end
       memoize :_censys_link
 
