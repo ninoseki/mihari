@@ -3,8 +3,8 @@
 module Mihari
   module Emitters
     class Base
-      include Configurable
-      include Retriable
+      include Mixins::Configurable
+      include Mixins::Retriable
 
       def self.inherited(child)
         Mihari.emitters << child
