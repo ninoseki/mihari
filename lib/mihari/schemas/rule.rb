@@ -57,8 +57,8 @@ module Mihari
       optional(:id).value(:string)
 
       optional(:author).value(:string)
-      optional(:created_at).value(:date)
-      optional(:updated_at).value(:date)
+      optional(:created_on).value(:date)
+      optional(:updated_on).value(:date)
 
       required(:queries).value(:array).each { Analyzer | Spyse | ZoomEye | Urlscan | Crtsh }
 

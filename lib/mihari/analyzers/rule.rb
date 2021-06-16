@@ -69,11 +69,14 @@ module Mihari
       # Normalize artifacts
       # - Uniquefy artifacts by #uniq(&:data)
       # - Reject an invalid artifact (for just in case)
+      # - Select artifacts with allowed data types
       #
       # @return [Array<Mihari::Artifact>]
       #
       def normalized_artifacts
-        @normalized_artifacts ||= artifacts.uniq(&:data).select(&:valid?)
+        @normalized_artifacts ||= artifacts.uniq(&:data).select(&:valid?).select do |artifact|
+          allowed_data_types.include? artifact.data_type
+        end
       end
 
       private
@@ -90,19 +93,6 @@ module Mihari
         return analyzer if analyzer
 
         raise ArgumentError, "#{analyzer_name} is not supported"
-      end
-
-      #
-      # Select allowed artifacts
-      #
-      # @param [Array<Mihari::Artifact>] artifacts
-      #
-      # @return [Array<Mihari::Artifact>]
-      #
-      def select_allowed_artifacts(artifacts)
-        artifacts.select do |artifact|
-          allowed_data_types.include? artifact.data_type
-        end
       end
     end
   end
