@@ -10,7 +10,7 @@ Gem::Specification.new do |spec|
   spec.authors = ["Manabu Niseki"]
   spec.email = ["manabu.niseki@gmail.com"]
 
-  spec.summary = "A framework for continuous malicious hosts monitoring"
+  spec.summary = "A framework for continuous OSINT based threat hunting"
   spec.homepage = "https://github.com/ninoseki/mihari"
   spec.license = "MIT"
 
@@ -27,12 +27,10 @@ Gem::Specification.new do |spec|
 
   spec.add_development_dependency "bundler", "~> 2.2"
   spec.add_development_dependency "coveralls_reborn", "~> 0.22"
-  spec.add_development_dependency "execjs", "~> 2.8"
   spec.add_development_dependency "fakefs", "~> 1.3"
   spec.add_development_dependency "mysql2", "~> 0.5"
   spec.add_development_dependency "overcommit", "~> 0.58"
   spec.add_development_dependency "pg", "~> 1.2"
-  spec.add_development_dependency "prmd", "~> 0.14"
   spec.add_development_dependency "rack-test", "~> 1.1"
   spec.add_development_dependency "rake", "~> 13.0"
   spec.add_development_dependency "rspec", "~> 3.10"
@@ -62,7 +60,6 @@ Gem::Specification.new do |spec|
   spec.add_dependency "launchy", "~> 2.5"
   spec.add_dependency "mem", "~> 0.1"
   spec.add_dependency "misp", "~> 0.1"
-  spec.add_dependency "murmurhash3", "~> 0.1"
   spec.add_dependency "net-ping", "~> 2.0"
   spec.add_dependency "onyphe", "~> 2.0"
   spec.add_dependency "otx_ruby", "~> 0.9"
