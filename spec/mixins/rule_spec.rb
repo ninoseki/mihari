@@ -15,7 +15,7 @@ RSpec.describe Test do
       filename = "/tmp/foo.yml"
       subject.initialize_rule_yaml(filename, files)
 
-      data = YAML.safe_load(files.read(filename), symbolize_names: true)
+      data = YAML.safe_load(files.read(filename), permitted_classes: [Date], symbolize_names: true)
 
       subject.validate_rule data
 
