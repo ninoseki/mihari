@@ -36,7 +36,7 @@ module Mihari
 
       private
 
-      def config_keys
+      def configuration_keys
         %w[misp_api_endpoint misp_api_key]
       end
 

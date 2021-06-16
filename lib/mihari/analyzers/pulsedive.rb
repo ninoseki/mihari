@@ -5,8 +5,10 @@ require "pulsedive"
 module Mihari
   module Analyzers
     class Pulsedive < Base
+      include Mixins::Refang
+
       param :query
-      option :title, default: proc { "Pulsedive lookup" }
+      option :title, default: proc { "Pulsedive search" }
       option :description, default: proc { "query = #{query}" }
       option :tags, default: proc { [] }
 
@@ -15,16 +17,17 @@ module Mihari
       def initialize(*args, **kwargs)
         super
 
+        @query = refang(query)
         @type = TypeChecker.type(query)
       end
 
       def artifacts
-        lookup || []
+        search || []
       end
 
       private
 
-      def config_keys
+      def configuration_keys
         %w[pulsedive_api_key]
       end
 
@@ -36,16 +39,16 @@ module Mihari
         %w[ip domain].include? type
       end
 
-      def lookup
+      def search
         raise InvalidInputError, "#{query}(type: #{type || "unknown"}) is not supported." unless valid_type?
 
         indicator = api.indicator.get_by_value(query)
         iid = indicator["iid"]
 
         properties = api.indicator.get_properties_by_id(iid)
-        (properties["dns"] || []).map do |property|
+        (properties["dns"] || []).filter_map do |property|
           property["value"] if ["A", "PTR"].include?(property["name"])
-        end.compact
+        end
       end
     end
   end

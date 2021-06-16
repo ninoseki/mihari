@@ -5,8 +5,10 @@ require "otx_ruby"
 module Mihari
   module Analyzers
     class OTX < Base
+      include Mixins::Refang
+
       param :query
-      option :title, default: proc { "OTX lookup" }
+      option :title, default: proc { "OTX search" }
       option :description, default: proc { "query = #{query}" }
       option :tags, default: proc { [] }
 
@@ -15,16 +17,17 @@ module Mihari
       def initialize(*args, **kwargs)
         super
 
+        @query = refang(query)
         @type = TypeChecker.type(query)
       end
 
       def artifacts
-        lookup || []
+        search || []
       end
 
       private
 
-      def config_keys
+      def configuration_keys
         %w[otx_api_key]
       end
 
@@ -40,29 +43,29 @@ module Mihari
         %w[ip domain].include? type
       end
 
-      def lookup
+      def search
         case type
         when "domain"
-          domain_lookup
+          domain_search
         when "ip"
-          ip_lookup
+          ip_search
         else
           raise InvalidInputError, "#{query}(type: #{type || "unknown"}) is not supported." unless valid_type?
         end
       end
 
-      def domain_lookup
+      def domain_search
         records = domain_client.get_passive_dns(query)
-        records.map do |record|
+        records.filter_map do |record|
           record.address if record.record_type == "A"
-        end.compact.uniq
+        end.uniq
       end
 
-      def ip_lookup
+      def ip_search
         records = ip_client.get_passive_dns(query)
-        records.map do |record|
+        records.filter_map do |record|
           record.hostname if record.record_type == "A"
-        end.compact.uniq
+        end.uniq
       end
     end
   end

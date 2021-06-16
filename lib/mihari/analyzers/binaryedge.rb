@@ -6,7 +6,7 @@ module Mihari
   module Analyzers
     class BinaryEdge < Base
       param :query
-      option :title, default: proc { "BinaryEdge lookup" }
+      option :title, default: proc { "BinaryEdge search" }
       option :description, default: proc { "query = #{query}" }
       option :tags, default: proc { [] }
 
@@ -16,9 +16,9 @@ module Mihari
 
         results.map do |result|
           events = result["events"] || []
-          events.map do |event|
+          events.filter_map do |event|
             event.dig "target", "ip"
-          end.compact
+          end
         end.flatten.compact.uniq
       end
 
@@ -46,7 +46,7 @@ module Mihari
         responses
       end
 
-      def config_keys
+      def configuration_keys
         %w[binaryedge_api_key]
       end
 

@@ -7,13 +7,13 @@ module Mihari
   module Analyzers
     class Spyse < Base
       param :query
-      option :title, default: proc { "Spyse lookup" }
-      option :description, default: proc {  "query = #{query}" }
+      option :title, default: proc { "Spyse search" }
+      option :description, default: proc { "query = #{query}" }
       option :type, default: proc { "domain" }
       option :tags, default: proc { [] }
 
       def artifacts
-        lookup || []
+        search || []
       end
 
       private
@@ -22,7 +22,7 @@ module Mihari
         @search_params ||= JSON.parse(query)
       end
 
-      def config_keys
+      def configuration_keys
         %w[spyse_api_key]
       end
 
@@ -34,7 +34,7 @@ module Mihari
         %w[ip domain cert].include? type
       end
 
-      def domain_lookup
+      def domain_search
         res = api.domain.search(search_params, limit: 100)
         items = res.dig("data", "items") || []
         items.map do |item|
@@ -42,7 +42,7 @@ module Mihari
         end.uniq.compact
       end
 
-      def ip_lookup
+      def ip_search
         res = api.ip.search(search_params, limit: 100)
         items = res.dig("data", "items") || []
         items.map do |item|
@@ -50,12 +50,12 @@ module Mihari
         end.uniq.compact
       end
 
-      def lookup
+      def search
         case type
         when "domain"
-          domain_lookup
+          domain_search
         when "ip"
-          ip_lookup
+          ip_search
         else
           raise InvalidInputError, "#{query}(type: #{type || "unknown"}) is not supported." unless valid_type?
         end

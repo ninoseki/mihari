@@ -6,7 +6,7 @@ module Mihari
   module Analyzers
     class Onyphe < Base
       param :query
-      option :title, default: proc { "Onyphe lookup" }
+      option :title, default: proc { "Onyphe search" }
       option :description, default: proc { "query = #{query}" }
       option :tags, default: proc { [] }
 
@@ -18,14 +18,14 @@ module Mihari
           result["results"]
         end.flatten.compact
 
-        flat_results.map { |result| result["ip"] }.compact.uniq
+        flat_results.filter_map { |result| result["ip"] }.uniq
       end
 
       private
 
       PAGE_SIZE = 10
 
-      def config_keys
+      def configuration_keys
         %w[onyphe_api_key]
       end
 

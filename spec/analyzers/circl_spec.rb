@@ -10,7 +10,7 @@ RSpec.describe Mihari::Analyzers::CIRCL, :vcr do
 
     describe "#title" do
       it do
-        expect(subject.title).to eq("CIRCL passive lookup")
+        expect(subject.title).to eq("CIRCL passive DNS/SSL search")
       end
     end
 

@@ -8,7 +8,7 @@ RSpec.describe Mihari::Analyzers::Shodan, :vcr do
 
   describe "#title" do
     it do
-      expect(subject.title).to eq("Shodan lookup")
+      expect(subject.title).to eq("Shodan search")
     end
   end
 

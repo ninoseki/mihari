@@ -8,7 +8,7 @@ RSpec.describe Mihari::Analyzers::Onyphe, :vcr do
 
   describe "#title" do
     it do
-      expect(subject.title).to eq("Onyphe lookup")
+      expect(subject.title).to eq("Onyphe search")
     end
   end
 

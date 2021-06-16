@@ -4,19 +4,19 @@ RSpec.describe Mihari::Analyzers::VirusTotal, :vcr do
   let(:tags) { %w[test] }
 
   context "ipv4" do
-    subject { described_class.new(indicator, tags: tags) }
+    subject { described_class.new(query, tags: tags) }
 
-    let(:indicator) { "45.83.140.140" }
+    let(:query) { "45.83.140.140" }
 
     describe "#title" do
       it do
-        expect(subject.title).to eq("VirusTotal lookup")
+        expect(subject.title).to eq("VirusTotal search")
       end
     end
 
     describe "#description" do
       it do
-        expect(subject.description).to eq("indicator = #{indicator}")
+        expect(subject.description).to eq("query = #{query}")
       end
     end
 
@@ -34,9 +34,9 @@ RSpec.describe Mihari::Analyzers::VirusTotal, :vcr do
   end
 
   context "domain" do
-    subject { described_class.new(indicator, tags: tags) }
+    subject { described_class.new(query, tags: tags) }
 
-    let(:indicator) { "jppost-ge.top" }
+    let(:query) { "jppost-ge.top" }
 
     describe "#artifacts" do
       it do
@@ -46,9 +46,9 @@ RSpec.describe Mihari::Analyzers::VirusTotal, :vcr do
   end
 
   context "when given an invalid input" do
-    subject { described_class.new(indicator, tags: tags) }
+    subject { described_class.new(query, tags: tags) }
 
-    let(:indicator) { "foo bar" }
+    let(:query) { "foo bar" }
 
     describe "#artifacts" do
       it do

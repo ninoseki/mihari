@@ -24,10 +24,25 @@ module Mihari
         notify_to_slack(text: clean_message, attachments: attachments) if @slack.valid?
       end
 
+      #
+      # Send notification to Slack
+      #
+      # @param [String] text
+      # @param [Array<Hash>] attachments
+      #
+      # @return [nil]
+      #
       def notify_to_slack(text:, attachments:)
         @slack.notify(text: text, attachments: attachments)
       end
 
+      #
+      # Send notification to STDOUT
+      #
+      # @param [Exception] exception
+      #
+      # @return [nil]
+      #
       def notify_to_stdout(exception)
         text = to_text(exception.class).chomp
         message = "#{text}: #{exception.message}"
@@ -35,6 +50,14 @@ module Mihari
         puts format_backtrace(exception.backtrace) if exception.backtrace
       end
 
+      #
+      # Convert exception to attachments (for Slack)
+      #
+      # @param [Exception] exception
+      # @param [String] clean_message
+      #
+      # @return [Array<Hash>]
+      #
       def to_attachments(exception, clean_message)
         text = to_text(exception.class)
         backtrace = exception.backtrace
@@ -43,12 +66,27 @@ module Mihari
         [color: @color, text: text, fields: fields, mrkdwn_in: %w[text fields]]
       end
 
+      #
+      # Convert exception class to text
+      #
+      # @param [Class<Exception>] exception_class
+      #
+      # @return [String]
+      #
       def to_text(exception_class)
         measure_word = /^[aeiou]/i.match?(exception_class.to_s) ? "An" : "A"
         exception_name = "*#{measure_word}* `#{exception_class}`"
         "#{exception_name} *occured in background*\n"
       end
 
+      #
+      # Convert clean_message and backtrace into fields (for Slack)
+      #
+      # @param [String] clean_message
+      # @param [Array] backtrace
+      #
+      # @return [Array<Hash>]
+      #
       def to_fields(clean_message, backtrace)
         fields = [
           { title: "Exception", value: clean_message },
@@ -62,12 +100,24 @@ module Mihari
         fields
       end
 
+      #
+      # Hostname of runnning instance
+      #
+      # @return [String]
+      #
       def hostname
         Socket.gethostname
       rescue StandardError => _e
         "N/A"
       end
 
+      #
+      # Format backtrace in string
+      #
+      # @param [Array] backtrace
+      #
+      # @return [String]
+      #
       def format_backtrace(backtrace)
         return nil unless backtrace
 

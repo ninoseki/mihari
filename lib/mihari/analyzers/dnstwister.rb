@@ -7,8 +7,10 @@ require "parallel"
 module Mihari
   module Analyzers
     class DNSTwister < Base
+      include Mixins::Refang
+
       param :query
-      option :title, default: proc { "dnstwister domain lookup" }
+      option :title, default: proc { "dnstwister domain search" }
       option :description, default: proc { "query = #{query}" }
       option :tags, default: proc { [] }
 
@@ -17,11 +19,12 @@ module Mihari
       def initialize(*args, **kwargs)
         super
 
+        @query = refang(query)
         @type = TypeChecker.type(query)
       end
 
       def artifacts
-        lookup || []
+        search || []
       end
 
       private
@@ -41,7 +44,7 @@ module Mihari
         false
       end
 
-      def lookup
+      def search
         raise InvalidInputError, "#{query}(type: #{type || "unknown"}) is not supported." unless valid_type?
 
         res = api.fuzz(query)

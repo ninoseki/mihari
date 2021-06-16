@@ -6,7 +6,7 @@ module Mihari
   module Analyzers
     class Shodan < Base
       param :query
-      option :title, default: proc { "Shodan lookup" }
+      option :title, default: proc { "Shodan search" }
       option :description, default: proc { "query = #{query}" }
       option :tags, default: proc { [] }
 
@@ -16,9 +16,9 @@ module Mihari
 
         results.map do |result|
           matches = result["matches"] || []
-          matches.map do |match|
+          matches.filter_map do |match|
             match["ip_str"]
-          end.compact
+          end
         end.flatten.compact.uniq
       end
 
@@ -26,7 +26,7 @@ module Mihari
 
       PAGE_SIZE = 100
 
-      def config_keys
+      def configuration_keys
         %w[shodan_api_key]
       end
 

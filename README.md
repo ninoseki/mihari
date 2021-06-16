@@ -48,17 +48,9 @@ Mihari supports the following services by default.
 - [VirusTotal](http://virustotal.com)
 - [ZoomEye](https://zoomeye.org)
 
-See [Usage](https://github.com/ninoseki/mihari/wiki/Usage) for more information.
-
 ## Docs
 
-- [Requirements & Installation](https://github.com/ninoseki/mihari/wiki/Requirements-&-Installation)
-- [Usage](https://github.com/ninoseki/mihari/wiki/Usage)
-- [Built-in Web App](https://github.com/ninoseki/mihari/wiki/Built-in-Web-App)
-- [Configuration](https://github.com/ninoseki/mihari/wiki/Configuration)
-- [Custom Script](https://github.com/ninoseki/mihari/wiki/Custom-Script)
-- [Docker](https://github.com/ninoseki/mihari/wiki/Docker)
-- [GitHub Actions](https://github.com/ninoseki/mihari/wiki/GitHub-Actions)
+- [Mihari Knowledge Base](https://www.notion.so/Mihari-Knowledge-Base-266994ff61204428ba6cfcebe40b0bd1)
 
 ## License
 

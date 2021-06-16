@@ -14,7 +14,7 @@ RSpec.describe Mihari::Analyzers::DNPedia, :vcr do
 
   describe "#title" do
     it do
-      expect(subject.title).to eq("DNPedia domain lookup")
+      expect(subject.title).to eq("DNPedia domain search")
     end
   end
 

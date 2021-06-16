@@ -1,9 +1,18 @@
 # frozen_string_literal: true
 
+require "colorize"
 require "dry/configurable"
 require "dry/files"
 require "mem"
 require "yaml"
+
+# Mixins
+require "mihari/mixins/configurable"
+require "mihari/mixins/configuration"
+require "mihari/mixins/hash"
+require "mihari/mixins/refang"
+require "mihari/mixins/retriable"
+require "mihari/mixins/rule"
 
 def truthy?(value)
   return true if value == "true"
@@ -14,6 +23,7 @@ end
 
 module Mihari
   extend Dry::Configurable
+  extend Mixins::Configuration
 
   setting :binaryedge_api_key, ENV["BINARYEDGE_API_KEY"]
   setting :censys_id, ENV["CENSYS_ID"]
@@ -24,7 +34,7 @@ module Mihari
   setting :misp_api_key, ENV["MISP_API_KEY"]
   setting :onyphe_api_key, ENV["ONYPHE_API_KEY"]
   setting :otx_api_key, ENV["OTX_API_KEY"]
-  setting :passivetotal_api_key,  ENV["PASSIVETOTAL_API_KEY"]
+  setting :passivetotal_api_key, ENV["PASSIVETOTAL_API_KEY"]
   setting :passivetotal_username, ENV["PASSIVETOTAL_USERNAME"]
   setting :pulsedive_api_key, ENV["PULSEDIVE_API_KEY"]
   setting :securitytrails_api_key, ENV["SECURITYTRAILS_API_KEY"]
@@ -54,27 +64,22 @@ module Mihari
     end
     memoize :analyzers
 
+    #
+    # Load configuration from YAML file
+    #
+    # @param [String] path Path to YAML file
+    #
+    # @return [nil]
+    #
     def load_config_from_yaml(path)
-      raise ArgumentError, "#{path} does not exist." unless File.exist?(path)
+      config = load_config(path)
 
-      data = File.read(path)
-      begin
-        yaml = YAML.safe_load(data)
-      rescue TypeError => _e
-        return
-      end
+      # validate loaded yaml data
+      validate_config config
 
-      yaml.each do |key, value|
+      config.each do |key, value|
         Mihari.config.send("#{key.downcase}=".to_sym, value)
       end
-    end
-
-    def initialize_config_yaml(filename, files = Dry::Files.new)
-      config = Mihari.config.values.keys.map do |key|
-        [key.to_s, nil]
-      end.to_h
-
-      files.write(filename, YAML.dump(config))
     end
   end
 end
@@ -85,20 +90,25 @@ require "mihari/errors"
 require "mihari/database"
 require "mihari/type_checker"
 
+# Constraints
+require "mihari/constraints"
+
+# Schemas
+require "mihari/schemas/configuration"
+require "mihari/schemas/rule"
+
+# Models
 require "mihari/models/alert"
 require "mihari/models/artifact"
 require "mihari/models/tag"
 require "mihari/models/tagging"
 
+# Serializers
 require "mihari/serializers/alert"
 require "mihari/serializers/artifact"
 require "mihari/serializers/tag"
 
-require "mihari/html"
-
-require "mihari/configurable"
-require "mihari/retriable"
-
+# Analyzers
 require "mihari/analyzers/base"
 require "mihari/analyzers/basic"
 
@@ -112,7 +122,6 @@ require "mihari/analyzers/onyphe"
 require "mihari/analyzers/otx"
 require "mihari/analyzers/passivetotal"
 require "mihari/analyzers/pulsedive"
-require "mihari/analyzers/securitytrails_domain_feed"
 require "mihari/analyzers/securitytrails"
 require "mihari/analyzers/shodan"
 require "mihari/analyzers/spyse"
@@ -120,17 +129,14 @@ require "mihari/analyzers/urlscan"
 require "mihari/analyzers/virustotal"
 require "mihari/analyzers/zoomeye"
 
-require "mihari/analyzers/free_text"
-require "mihari/analyzers/http_hash"
-require "mihari/analyzers/passive_dns"
-require "mihari/analyzers/passive_ssl"
-require "mihari/analyzers/reverse_whois"
-require "mihari/analyzers/ssh_fingerprint"
+require "mihari/analyzers/rule"
 
+# Notifiers
 require "mihari/notifiers/base"
 require "mihari/notifiers/slack"
 require "mihari/notifiers/exception_notifier"
 
+# Emitters
 require "mihari/emitters/base"
 require "mihari/emitters/database"
 require "mihari/emitters/misp"
@@ -139,8 +145,16 @@ require "mihari/emitters/stdout"
 require "mihari/emitters/the_hive"
 require "mihari/emitters/webhook"
 
+# Status checker
 require "mihari/status"
 
+# Web app
 require "mihari/web/app"
 
-require "mihari/cli"
+# CLIs
+require "mihari/cli/base"
+
+require "mihari/cli/analyzer"
+require "mihari/cli/init"
+
+require "mihari/cli/main"

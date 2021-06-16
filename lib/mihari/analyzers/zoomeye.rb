@@ -6,7 +6,7 @@ module Mihari
   module Analyzers
     class ZoomEye < Base
       param :query
-      option :title, default: proc { "ZoomEye lookup" }
+      option :title, default: proc { "ZoomEye search" }
       option :description, default: proc { "query = #{query}" }
       option :tags, default: proc { [] }
       option :type, default: proc { "host" }
@@ -14,9 +14,9 @@ module Mihari
       def artifacts
         case type
         when "host"
-          host_lookup
+          host_search
         when "web"
-          web_lookup
+          web_search
         else
           raise InvalidInputError, "#{type} type is not supported." unless valid_type?
         end
@@ -30,7 +30,7 @@ module Mihari
         %w[host web].include? type
       end
 
-      def config_keys
+      def configuration_keys
         %w[zoomeye_api_key]
       end
 
@@ -47,16 +47,16 @@ module Mihari
         end.flatten.compact.uniq
       end
 
-      def _host_lookup(query, page: 1)
+      def _host_search(query, page: 1)
         api.host.search(query, page: page)
       rescue ::ZoomEye::Error => _e
         nil
       end
 
-      def host_lookup
+      def host_search
         responses = []
         (1..Float::INFINITY).each do |page|
-          res = _host_lookup(query, page: page)
+          res = _host_search(query, page: page)
           break unless res
 
           total = res["total"].to_i
@@ -66,16 +66,16 @@ module Mihari
         convert_responses responses.compact
       end
 
-      def _web_lookup(query, page: 1)
+      def _web_search(query, page: 1)
         api.web.search(query, page: page)
       rescue ::ZoomEye::Error => _e
         nil
       end
 
-      def web_lookup
+      def web_search
         responses = []
         (1..Float::INFINITY).each do |page|
-          res = _web_lookup(query, page: page)
+          res = _web_search(query, page: page)
           break unless res
 
           total = res["total"].to_i

@@ -8,7 +8,7 @@ RSpec.describe Mihari::Analyzers::BinaryEdge, :vcr do
 
   describe "#title" do
     it do
-      expect(subject.title).to eq("BinaryEdge lookup")
+      expect(subject.title).to eq("BinaryEdge search")
     end
   end
 

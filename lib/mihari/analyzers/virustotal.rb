@@ -5,9 +5,11 @@ require "virustotal"
 module Mihari
   module Analyzers
     class VirusTotal < Base
-      param :indicator
-      option :title, default: proc { "VirusTotal lookup" }
-      option :description, default: proc { "indicator = #{indicator}" }
+      include Mixins::Refang
+
+      param :query
+      option :title, default: proc { "VirusTotal search" }
+      option :description, default: proc { "query = #{query}" }
       option :tags, default: proc { [] }
 
       attr_reader :type
@@ -15,16 +17,17 @@ module Mihari
       def initialize(*args, **kwargs)
         super
 
-        @type = TypeChecker.type(indicator)
+        @query = refang(query)
+        @type = TypeChecker.type(query)
       end
 
       def artifacts
-        lookup || []
+        search || []
       end
 
       private
 
-      def config_keys
+      def configuration_keys
         %w[virustotal_api_key]
       end
 
@@ -36,33 +39,33 @@ module Mihari
         %w[ip domain].include? type
       end
 
-      def lookup
+      def search
         case type
         when "domain"
-          domain_lookup
+          domain_search
         when "ip"
-          ip_lookup
+          ip_search
         else
-          raise InvalidInputError, "#{indicator}(type: #{type || "unknown"}) is not supported." unless valid_type?
+          raise InvalidInputError, "#{query}(type: #{type || "unknown"}) is not supported." unless valid_type?
         end
       end
 
-      def domain_lookup
-        res = api.domain.resolutions(indicator)
+      def domain_search
+        res = api.domain.resolutions(query)
 
         data = res["data"] || []
-        data.map do |item|
+        data.filter_map do |item|
           item.dig("attributes", "ip_address")
-        end.compact.uniq
+        end.uniq
       end
 
-      def ip_lookup
-        res = api.ip_address.resolutions(indicator)
+      def ip_search
+        res = api.ip_address.resolutions(query)
 
         data = res["data"] || []
-        data.map do |item|
+        data.filter_map do |item|
           item.dig("attributes", "host_name")
-        end.compact.uniq
+        end.uniq
       end
     end
   end

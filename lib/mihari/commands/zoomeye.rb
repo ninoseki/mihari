@@ -5,7 +5,7 @@ module Mihari
     module ZoomEye
       def self.included(thor)
         thor.class_eval do
-          desc "zoomeye [QUERY]", "ZoomEye search by a query"
+          desc "zoomeye [QUERY]", "ZoomEye search"
           method_option :title, type: :string, desc: "title"
           method_option :description, type: :string, desc: "description"
           method_option :tags, type: :array, desc: "tags"
