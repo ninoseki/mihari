@@ -75,20 +75,23 @@ module Mihari
         Mihari.analyzers << child
       end
 
-      private
-
       #
-      # Normalize artifacts (reject invalid artifacts)
+      # Normalize artifacts
+      # - Uniquefy artifacts by native #uniq
+      # - Convert data (string) into an artifact
+      # - Reject an invalid artifact
       #
       # @return [Array<Mihari::Artifact>]
       #
       def normalized_artifacts
         @normalized_artifacts ||= artifacts.compact.uniq.sort.map do |artifact|
-          artifact.is_a?(Artifact) ? artifact : Artifact.new(data: artifact)
+          # No need to set data_type manually
+          # It is set automatically in #initialize
+          artifact.is_a?(Artifact) ? artifact : Artifact.new(data: artifact, source: source)
         end.select(&:valid?)
       end
 
-      # @return [Array<Mihari::Artifact>]
+      private
 
       #
       # Uniquefy artifacts

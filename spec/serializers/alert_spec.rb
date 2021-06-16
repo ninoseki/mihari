@@ -21,7 +21,7 @@ RSpec.describe Mihari::AlertSerializer do
           source: "bar",
           created_at: nil,
           description: nil,
-          artifacts: [{ data: "1.1.1.1", data_type: "ip", id: nil }],
+          artifacts: [{ data: "1.1.1.1", data_type: "ip", id: nil, source: nil }],
           tags: []
         }
       )
