@@ -38,4 +38,21 @@ RSpec.describe Mihari::Analyzers::Rule, :vcr do
       expect(subject.tags).to eq(tags)
     end
   end
+
+  context "with duplicated artifacts" do
+    let(:queries) {
+      [
+        { analyzer: "shodan", query: "ip:1.1.1.1" },
+        { analyzer: "censys", query: "ip:1.1.1.1" }
+      ]
+    }
+
+    describe "#normalized_artifacts" do
+      it do
+        artifacts = subject.normalized_artifacts
+        expect(artifacts).to be_an(Array)
+        expect(artifacts.length).to eq(1) # 1.1.1.1
+      end
+    end
+  end
 end

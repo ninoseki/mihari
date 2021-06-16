@@ -2,7 +2,7 @@
 
 require "active_record"
 
-class InitialSchema < ActiveRecord::Migration[6.0]
+class InitialSchema < ActiveRecord::Migration[6.1]
   def change
     create_table :tags, if_not_exists: true do |t|
       t.string :name, null: false
@@ -32,6 +32,12 @@ class InitialSchema < ActiveRecord::Migration[6.0]
   end
 end
 
+class V3Schema < ActiveRecord::Migration[6.1]
+  def change
+    add_column :artifacts, :source, :string, if_not_exists: true
+  end
+end
+
 def adapter
   return "postgresql" if Mihari.config.database.start_with?("postgresql://", "postgres://")
   return "mysql2" if Mihari.config.database.start_with?("mysql2://")
@@ -54,7 +60,9 @@ module Mihari
         end
 
         ActiveRecord::Migration.verbose = false
+
         InitialSchema.migrate(:up)
+        V3Schema.migrate(:up)
       rescue StandardError
         # Do nothing
       end
@@ -65,7 +73,10 @@ module Mihari
       end
 
       def destroy!
-        InitialSchema.migrate(:down) if ActiveRecord::Base.connected?
+        return unless ActiveRecord::Base.connected?
+
+        InitialSchema.migrate(:down)
+        V3Schema.migrate(:down)
       end
     end
   end

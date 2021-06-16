@@ -56,10 +56,24 @@ module Mihari
 
           query = params[:query]
           analyzer = klass.new(query, **params)
-          artifacts << analyzer.artifacts
+
+          # Use #normalized_artifacts method to get atrifacts as Array<Mihari::Artifact>
+          # So Mihari::Artifact object has "source" attribute (e.g. "Shodan")
+          artifacts << analyzer.normalized_artifacts
         end
 
         artifacts.flatten
+      end
+
+      #
+      # Normalize artifacts
+      # - Uniquefy artifacts by #uniq(&:data)
+      # - Reject an invalid artifact (for just in case)
+      #
+      # @return [Array<Mihari::Artifact>]
+      #
+      def normalized_artifacts
+        @normalized_artifacts ||= artifacts.uniq(&:data).select(&:valid?)
       end
 
       private
