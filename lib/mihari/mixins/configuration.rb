@@ -14,9 +14,8 @@ module Mihari
       # @return [Hash]
       #
       def load_config(path)
-        return YAML.safe_load(File.read(path), symbolize_names: true) if Pathname(path).exist?
-
-        YAML.safe_load(path, symbolize_names: true)
+        data = _load_config(path)
+        data.transform_keys(&:downcase)
       end
 
       #
@@ -79,6 +78,12 @@ module Mihari
           path = message.path.map(&:to_s).join
           puts "- #{path} #{message.text}".colorize(:red)
         end
+      end
+
+      def _load_config(path)
+        return YAML.safe_load(File.read(path), symbolize_names: true) if Pathname(path).exist?
+
+        YAML.safe_load(path, symbolize_names: true)
       end
     end
   end
