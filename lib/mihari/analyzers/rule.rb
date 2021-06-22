@@ -2,8 +2,6 @@
 
 require "uuidtools"
 
-NIL = nil
-
 module Mihari
   module Analyzers
     class Rule < Base
