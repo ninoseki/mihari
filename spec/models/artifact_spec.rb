@@ -13,7 +13,7 @@ RSpec.describe Mihari::Artifact do
 
   describe "#unique?" do
     before do
-      described_class.delete_all
+      described_class.all.each(&:delete)
       described_class.create(data: "1.1.1.1")
     end
 
@@ -32,12 +32,11 @@ RSpec.describe Mihari::Artifact do
       let(:data) { "1.1.1.1" }
 
       before do
-        Timecop.freeze((-days).days.from_now)
+        described_class.all.each(&:delete)
 
-        described_class.delete_all
-        described_class.create(data: data)
-
-        Timecop.return
+        Timecop.freeze((-days).days.from_now) do
+          described_class.create(data: data)
+        end
       end
 
       it do

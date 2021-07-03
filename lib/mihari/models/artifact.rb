@@ -39,7 +39,7 @@ module Mihari
 
       return false unless ignore_old_artifacts
 
-      days_before = (-ignore_threshold).days.from_now
+      days_before = (-ignore_threshold).days.from_now.utc
       # if an artifact is created before {ignore_threshold} days, ignore it
       #                           within {ignore_threshold} days, do not ignore it
       artifact.created_at < days_before
