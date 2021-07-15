@@ -78,7 +78,7 @@ Gem::Specification.new do |spec|
   spec.add_dependency "sinatra-contrib", "~> 2.1"
   spec.add_dependency "sinatra-param", "~> 1.6"
   spec.add_dependency "slack-notifier", "~> 2.4"
-  spec.add_dependency "spysex", "~> 0.1"
+  spec.add_dependency "spysex", "~> 0.2"
   spec.add_dependency "sqlite3", "~> 1.4"
   spec.add_dependency "thor", "~> 1.1"
   spec.add_dependency "thread_safe", "~> 0.3"
