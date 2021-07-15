@@ -42,7 +42,7 @@ Gem::Specification.new do |spec|
   spec.add_dependency "active_model_serializers", "~> 0.10"
   spec.add_dependency "activerecord", "~> 6.1"
   spec.add_dependency "activerecord-filter", "~> 6.1"
-  spec.add_dependency "addressable", "~> 2.7"
+  spec.add_dependency "addressable", "~> 2.8"
   spec.add_dependency "awrence", "~> 1.2"
   spec.add_dependency "binaryedge", "~> 0.1"
   spec.add_dependency "censysx", "~> 0.1"
