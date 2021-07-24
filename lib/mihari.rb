@@ -94,6 +94,7 @@ require "mihari/type_checker"
 require "mihari/constraints"
 
 # Schemas
+require "mihari/schemas/analyzer"
 require "mihari/schemas/configuration"
 require "mihari/schemas/rule"
 

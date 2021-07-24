@@ -10,12 +10,12 @@ require "mihari/web/helpers/json"
 require "mihari/web/controllers/base_controller"
 
 require "mihari/web/controllers/alerts_controller"
+require "mihari/web/controllers/analyzers_controller"
 require "mihari/web/controllers/artifacts_controller"
 require "mihari/web/controllers/command_controller"
 require "mihari/web/controllers/config_controller"
 require "mihari/web/controllers/sources_controller"
 require "mihari/web/controllers/tags_controller"
-
 module Mihari
   class App < Sinatra::Base
     set :root, File.dirname(__FILE__)
@@ -26,6 +26,7 @@ module Mihari
     end
 
     use Mihari::Controllers::AlertsController
+    use Mihari::Controllers::AnalyzersController
     use Mihari::Controllers::ArtifactsController
     use Mihari::Controllers::CommandController
     use Mihari::Controllers::ConfigController
