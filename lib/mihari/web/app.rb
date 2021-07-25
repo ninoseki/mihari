@@ -16,6 +16,7 @@ require "mihari/web/controllers/command_controller"
 require "mihari/web/controllers/config_controller"
 require "mihari/web/controllers/sources_controller"
 require "mihari/web/controllers/tags_controller"
+
 module Mihari
   class App < Sinatra::Base
     set :root, File.dirname(__FILE__)

@@ -13,6 +13,10 @@ module Mihari
             host = options["host"] || "localhost"
 
             load_configuration
+
+            # set rack env as production
+            ENV["RACK_ENV"] ||= "production"
+
             Mihari::App.run!(port: port, host: host)
           end
         end
