@@ -63,10 +63,19 @@ module Mihari
       required(:queries).value(:array).each { Analyzer | Spyse | ZoomEye | Urlscan | Crtsh }
 
       optional(:allowed_data_types).value(array[DataTypes]).default(ALLOWED_DATA_TYPES)
+      optional(:disallowed_data_values).value(array[:string]).default([])
     end
 
     class RuleContract < Dry::Validation::Contract
       params(Rule)
+
+      rule(:disallowed_data_values) do
+        value.each do |v|
+          Regexp.compile v
+        rescue RegexpError
+          key.failure("#{value} is not a valid regexp.")
+        end
+      end
     end
   end
 end

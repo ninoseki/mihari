@@ -37,13 +37,15 @@ module Mihari
       # @param [Array<Hash>] queries
       # @param [Array<String>, nil] tags
       # @param [Array<String>, nil] allowed_data_types
+      # @param [Array<String>, nil] disallowed_data_values
       # @param [String, nil] source
       #
       # @return [Mihari::Analyzers::Rule]
       #
-      def build_rule_analyzer(title:, description:, queries:, tags: nil, allowed_data_types: nil, source: nil)
+      def build_rule_analyzer(title:, description:, queries:, tags: nil, allowed_data_types: nil, disallowed_data_values: nil, source: nil)
         tags = [] if tags.nil?
         allowed_data_types = ALLOWED_DATA_TYPES if allowed_data_types.nil?
+        disallowed_data_values = [] if disallowed_data_values.nil?
 
         Analyzers::Rule.new(
           title: title,
@@ -51,6 +53,7 @@ module Mihari
           tags: tags,
           queries: queries,
           allowed_data_types: allowed_data_types,
+          disallowed_data_values: disallowed_data_values,
           source: source
         )
       end

@@ -12,6 +12,7 @@ module Mihari
       option :id, default: proc {}
       option :tags, default: proc { [] }
       option :allowed_data_types, default: proc { ALLOWED_DATA_TYPES }
+      option :disallowed_data_values, default: proc { [] }
 
       attr_reader :source
 
@@ -68,13 +69,34 @@ module Mihari
       # - Uniquefy artifacts by #uniq(&:data)
       # - Reject an invalid artifact (for just in case)
       # - Select artifacts with allowed data types
+      # - Reject artifacts with disallowed data values
       #
       # @return [Array<Mihari::Artifact>]
       #
       def normalized_artifacts
         @normalized_artifacts ||= artifacts.uniq(&:data).select(&:valid?).select do |artifact|
           allowed_data_types.include? artifact.data_type
+        end.reject do |artifact|
+          disallowed_data_value? artifact.data
         end
+      end
+
+      #
+      # Disallowed data values in regexp
+      #
+      # @return [Array<Regexp>]
+      #
+      def disallowed_data_values_regexps
+        @disallowed_data_values_regexps ||= disallowed_data_values.map { |v| Regexp.compile v }
+      end
+
+      #
+      # Check whether a value is a disallowed data value or not
+      #
+      # @return [Boolean>]
+      #
+      def disallowed_data_value?(value)
+        disallowed_data_values_regexps.any? { |regexp| regexp.match? value }
       end
 
       private

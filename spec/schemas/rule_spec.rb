@@ -53,7 +53,9 @@ RSpec.describe Mihari::Schemas::Rule do
         )
       end.to raise_error(NoMethodError)
     end
+  end
 
+  context "with invalid allowed data types" do
     it do
       result = contract.call(
         description: "foo",
@@ -62,6 +64,32 @@ RSpec.describe Mihari::Schemas::Rule do
           { analyzer: "shodan", query: "foo" }
         ],
         allowed_data_types: ["foo"] # should be any of ip, domain, mail, url or hash
+      )
+      expect(result.errors.empty?).to eq(false)
+    end
+  end
+
+  context "with invalid disallowed data values" do
+    it do
+      result = contract.call(
+        description: "foo",
+        title: "foo",
+        queries: [
+          { analyzer: "shodan", query: "foo" }
+        ],
+        disallowed_data_values: [1] # should be string
+      )
+      expect(result.errors.empty?).to eq(false)
+    end
+
+    it do
+      result = contract.call(
+        description: "foo",
+        title: "foo",
+        queries: [
+          { analyzer: "shodan", query: "foo" }
+        ],
+        disallowed_data_values: ["*"]
       )
       expect(result.errors.empty?).to eq(false)
     end
