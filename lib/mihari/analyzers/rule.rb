@@ -5,6 +5,8 @@ require "uuidtools"
 module Mihari
   module Analyzers
     class Rule < Base
+      include Mihari::Mixins::DisallowedDataValue
+
       option :title
       option :description
       option :queries
@@ -82,21 +84,24 @@ module Mihari
       end
 
       #
-      # Disallowed data values in regexp
+      # Normalized disallowed data values
       #
-      # @return [Array<Regexp>]
+      # @return [Array<Regexp, String>]
       #
-      def disallowed_data_values_regexps
-        @disallowed_data_values_regexps ||= disallowed_data_values.map { |v| Regexp.compile v }
+      def normalized_disallowed_data_values
+        @normalized_disallowed_data_values ||= disallowed_data_values.map { |v| normalize_disallowed_data_value v }
       end
 
       #
       # Check whether a value is a disallowed data value or not
       #
-      # @return [Boolean>]
+      # @return [Boolean]
       #
       def disallowed_data_value?(value)
-        disallowed_data_values_regexps.any? { |regexp| regexp.match? value }
+        normalized_disallowed_data_values.any? do |disallowed_data_value|
+          return value == disallowed_data_value if disallowed_data_value.is_a?(String)
+          return disallowed_data_value.match?(value) if disallowed_data_value.is_a?(Regexp)
+        end
       end
 
       private

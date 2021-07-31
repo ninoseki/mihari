@@ -89,7 +89,7 @@ RSpec.describe Mihari::Schemas::Rule do
         queries: [
           { analyzer: "shodan", query: "foo" }
         ],
-        disallowed_data_values: ["*"]
+        disallowed_data_values: ["/*/"]
       )
       expect(result.errors.empty?).to eq(false)
     end

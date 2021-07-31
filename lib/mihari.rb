@@ -9,6 +9,7 @@ require "yaml"
 # Mixins
 require "mihari/mixins/configurable"
 require "mihari/mixins/configuration"
+require "mihari/mixins/disallowed_data_value"
 require "mihari/mixins/hash"
 require "mihari/mixins/refang"
 require "mihari/mixins/retriable"
