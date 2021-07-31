@@ -2,7 +2,7 @@ title: ... # String (required)
 description: ... # String (required)
 
 id: ... # String (optional)
-author: .. # String (optional)
+author: ... # String (optional)
 created_on: <%= Date.today %> # Date (optional)
 updated_on: <%= Date.today %> # Date (optional)
 
@@ -14,7 +14,6 @@ allowed_data_types: # Array<String> (Optional, defaults to ["hash", "ip", "domai
   - url
   - mail
 disallowed_data_values: [] # Array<String> (Optional, defaults to [])
-
 
 queries: # Array<Hash> (required)
   - analyzer: shodan # String (required)

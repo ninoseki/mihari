@@ -67,13 +67,15 @@ module Mihari
     end
 
     class RuleContract < Dry::Validation::Contract
+      include Mihari::Mixins::DisallowedDataValue
+
       params(Rule)
 
       rule(:disallowed_data_values) do
         value.each do |v|
-          Regexp.compile v
-        rescue RegexpError
-          key.failure("#{value} is not a valid regexp.")
+          unless valid_disallowed_data_value?(v)
+            key.failure("#{v} is not a valid format.")
+          end
         end
       end
     end

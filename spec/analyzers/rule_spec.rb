@@ -56,14 +56,40 @@ RSpec.describe Mihari::Analyzers::Rule, :vcr do
     end
   end
 
-  context "with disallowed data values", vcr: "Mihari_Analyzers_Rule/shodan_ip:1.1.1.1" do
+  context "with disallowed data values in string", vcr: "Mihari_Analyzers_Rule/shodan_ip:1.1.1.1" do
     subject do
       described_class.new(
         title: title,
         description: description,
         tags: tags,
         queries: queries,
-        disallowed_data_values: ["1.1.*"]
+        disallowed_data_values: ["1.1.1.1"]
+      )
+    end
+
+    let(:queries) {
+      [
+        { analyzer: "shodan", query: "ip:1.1.1.1" }
+      ]
+    }
+
+    describe "#normalized_artifacts" do
+      it do
+        artifacts = subject.normalized_artifacts
+        expect(artifacts).to be_an(Array)
+        expect(artifacts.length).to eq(0)
+      end
+    end
+  end
+
+  context "with disallowed data values in regexp", vcr: "Mihari_Analyzers_Rule/shodan_ip:1.1.1.1" do
+    subject do
+      described_class.new(
+        title: title,
+        description: description,
+        tags: tags,
+        queries: queries,
+        disallowed_data_values: ["/1.1.*/"]
       )
     end
 
