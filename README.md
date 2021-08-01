@@ -14,11 +14,12 @@ Mihari is a framework for continuous OSINT based threat hunting.
 
 ## How it works
 
-![img](https://github.com/ninoseki/mihari/raw/master/images/overview.png)
+![img](https://github.com/ninoseki/mihari/raw/master/images/overview.jpg)
 
 - Mihari makes a query against Shodan, Censys, VirusTotal, SecurityTrails, etc. and extracts artifacts (IP addresses, domains, URLs or hashes).
-- Mihari checks whether a DB (SQLite3, PostgreSQL or MySQL) contains the artifacts or not.
+- Mihari checks whether the database (SQLite3, PostgreSQL or MySQL) contains the artifacts or not.
   - If it doesn't contain the artifacts:
+    - Mihari saves artifacts in the database.
     - Mihari creates an alert on TheHive.
     - Mihari sends a notification to Slack.
     - Mihari creates an event on MISP.
