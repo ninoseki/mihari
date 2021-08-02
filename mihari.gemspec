@@ -68,7 +68,7 @@ Gem::Specification.new do |spec|
   spec.add_dependency "passivetotalx", "~> 0.1"
   spec.add_dependency "public_suffix", "~> 4.0"
   spec.add_dependency "pulsedive", "~> 0.1"
-  spec.add_dependency "puma", "~> 5.3"
+  spec.add_dependency "puma", "~> 5.4"
   spec.add_dependency "rack", "~> 2.2"
   spec.add_dependency "rack-contrib", "~> 2.3"
   spec.add_dependency "safe_shell", "~> 1.1"
