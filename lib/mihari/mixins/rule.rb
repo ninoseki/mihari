@@ -20,9 +20,11 @@ module Mihari
       end
 
       #
-      # Validate rule schema
+      # Validate rule schema and return a normalized rule
       #
       # @param [Hash] rule
+      #
+      # @return [Hash]
       #
       def validate_rule(rule)
         error_message = "Failed to parse the input as a rule!"
@@ -42,6 +44,8 @@ module Mihari
           puts error_message.colorize(:red)
           raise ArgumentError, "Invalid rule schema"
         end
+
+        result.to_h
       end
 
       #

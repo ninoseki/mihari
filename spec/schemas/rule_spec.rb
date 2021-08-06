@@ -94,4 +94,32 @@ RSpec.describe Mihari::Schemas::Rule do
       expect(result.errors.empty?).to eq(false)
     end
   end
+
+  context "with invalid ignore_old_artifacts" do
+    it do
+      result = contract.call(
+        description: "foo",
+        title: "foo",
+        queries: [
+          { analyzer: "shodan", query: "foo" }
+        ],
+        ignore_old_artifacts: "foo" # should be boolean (true or false)
+      )
+      expect(result.errors.empty?).to eq(false)
+    end
+  end
+
+  context "with invalid ignore_threshold" do
+    it do
+      result = contract.call(
+        description: "foo",
+        title: "foo",
+        queries: [
+          { analyzer: "shodan", query: "foo" }
+        ],
+        ignore_threshold: "foo" # should be integer
+      )
+      expect(result.errors.empty?).to eq(false)
+    end
+  end
 end

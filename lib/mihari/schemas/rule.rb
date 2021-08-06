@@ -64,6 +64,9 @@ module Mihari
 
       optional(:allowed_data_types).value(array[DataTypes]).default(ALLOWED_DATA_TYPES)
       optional(:disallowed_data_values).value(array[:string]).default([])
+
+      optional(:ignore_old_artifacts).value(:bool).default(false)
+      optional(:ignore_threshold).value(:integer).default(0)
     end
 
     class RuleContract < Dry::Validation::Contract

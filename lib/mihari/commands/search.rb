@@ -13,12 +13,21 @@ module Mihari
             rule = load_rule(rule)
 
             # validate rule schema
-            validate_rule rule
+            rule = validate_rule(rule)
 
-            analyzer = build_rule_analyzer(**rule)
+            analyzer = build_rule_analyzer(
+              title: rule[:title],
+              description: rule[:description],
+              queries: rule[:queries],
+              tags: rule[:tags],
+              allowed_data_types: rule[:allowed_data_types],
+              disallowed_data_values: rule[:disallowed_data_values],
+              source: rule[:source],
+              id: rule[:id]
+            )
 
-            ignore_old_artifacts = options["ignore_old_artifacts"] || false
-            ignore_threshold = options["ignore_threshold"] || 0
+            ignore_old_artifacts = rule[:ignore_old_artifacts]
+            ignore_threshold = rule[:ignore_threshold]
 
             with_error_handling do
               run_rule_analyzer analyzer, ignore_old_artifacts: ignore_old_artifacts, ignore_threshold: ignore_threshold
@@ -42,7 +51,7 @@ module Mihari
       #
       # @return [Mihari::Analyzers::Rule]
       #
-      def build_rule_analyzer(title:, description:, queries:, tags: nil, allowed_data_types: nil, disallowed_data_values: nil, source: nil)
+      def build_rule_analyzer(title:, description:, queries:, tags: nil, allowed_data_types: nil, disallowed_data_values: nil, source: nil, id: nil)
         tags = [] if tags.nil?
         allowed_data_types = ALLOWED_DATA_TYPES if allowed_data_types.nil?
         disallowed_data_values = [] if disallowed_data_values.nil?
@@ -54,7 +63,8 @@ module Mihari
           queries: queries,
           allowed_data_types: allowed_data_types,
           disallowed_data_values: disallowed_data_values,
-          source: source
+          source: source,
+          id: id
         )
       end
 
@@ -62,8 +72,6 @@ module Mihari
       # Run rule analyzer
       #
       # @param [Mihari::Analyzer::Rule] analyzer
-      # @param [Boolean] ignore_old_artifacts
-      # @param [Integer] ignore_threshold
       #
       # @return [nil]
       #
