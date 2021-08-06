@@ -15,6 +15,9 @@ allowed_data_types: # Array<String> (Optional, defaults to ["hash", "ip", "domai
   - mail
 disallowed_data_values: [] # Array<String> (Optional, defaults to [])
 
+ignore_old_artifacts: true # Whether to ignore old artifacts from checking or not (Optional, defaults to true)
+ignore_threshold: 0 # Number of days to define whether an artifact is old or not (Optional, defaults to 0)
+
 queries: # Array<Hash> (required)
   - analyzer: shodan # String (required)
     query: ... # String (required)

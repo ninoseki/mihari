@@ -22,6 +22,9 @@ require "mihari/commands/json"
 module Mihari
   module CLI
     class Analyzer < Base
+      class_option :ignore_old_artifacts, type: :boolean, default: false, desc: "Whether to ignore old artifacts from checking or not."
+      class_option :ignore_threshold, type: :numeric, default: 0, desc: "Number of days to define whether an artifact is old or not."
+
       include Mihari::Commands::BinaryEdge
       include Mihari::Commands::Censys
       include Mihari::Commands::CIRCL
