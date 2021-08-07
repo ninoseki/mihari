@@ -39,6 +39,13 @@ RSpec.describe Mihari::Analyzers::Rule, :vcr do
     end
   end
 
+  describe "#source" do
+    it do
+      # UUIDTools::UUID.md5_create(UUIDTools::UUID_URL_NAMESPACE, title + description).to_s
+      expect(subject.source).to eq("ce0da7c8-a87e-3782-8dc4-22dd52d9068a")
+    end
+  end
+
   context "with duplicated artifacts" do
     let(:queries) {
       [
@@ -130,6 +137,31 @@ RSpec.describe Mihari::Analyzers::Rule, :vcr do
         artifacts = subject.normalized_artifacts
         expect(artifacts).to be_an(Array)
         expect(artifacts.length).to eq(0)
+      end
+    end
+  end
+
+  context "with id", vcr: "Mihari_Analyzers_Rule/shodan_ip:1.1.1.1" do
+    subject do
+      described_class.new(
+        title: title,
+        description: description,
+        queries: queries,
+        id: id
+      )
+    end
+
+    let(:id) { "foo" }
+
+    let(:queries) {
+      [
+        { analyzer: "shodan", query: "ip:1.1.1.1" }
+      ]
+    }
+
+    describe "#source" do
+      it do
+        expect(subject.source).to eq(id)
       end
     end
   end
