@@ -53,6 +53,10 @@ Mihari supports the following services by default.
 
 - [Mihari Knowledge Base](https://www.notion.so/Mihari-Knowledge-Base-266994ff61204428ba6cfcebe40b0bd1)
 
+## Presentations
+
+- [Adversary Infrastructure Tracking with Mihari](https://ninoseki.github.io/presentations/Adversary%20Infrastructure%20Tracking%20with%20Mihari.pdf)
+
 ## License
 
 The gem is available as open source under the terms of the [MIT License](https://opensource.org/licenses/MIT).
