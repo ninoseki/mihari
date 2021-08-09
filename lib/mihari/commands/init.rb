@@ -5,10 +5,10 @@ require "colorize"
 module Mihari
   module Commands
     module Initialization
-      def self.included(thor)
-        include Mixins::Configuration
-        include Mixins::Rule
+      include Mixins::Configuration
+      include Mixins::Rule
 
+      def self.included(thor)
         thor.class_eval do
           desc "config", "Create a config file"
           method_option :filename, type: :string, default: "mihari.yml"
