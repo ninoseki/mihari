@@ -37,7 +37,7 @@ module Mihari
 
             initialize_rule_yaml filename
 
-            puts "The rule file is created as #{filename}.".colorize(:blue)
+            puts "The rule file is initialized as #{filename}.".colorize(:blue)
           end
         end
       end
