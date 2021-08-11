@@ -8,6 +8,7 @@ module Mihari
       def self.included(thor)
         thor.class_eval do
           desc "search [RULE]", "Search by a rule"
+          method_option :config, type: :string, desc: "Path to the config file"
           def search_by_rule(rule)
             # convert str(YAML) to hash or str(path/YAML file) to hash
             rule = load_rule(rule)

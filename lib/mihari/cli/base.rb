@@ -12,8 +12,6 @@ module Mihari
       include Mihari::Mixins::Hash
       include Mixins::Utils
 
-      class_option :config, type: :string, desc: "Path to the config file"
-
       class << self
         def exit_on_failure?
           true
