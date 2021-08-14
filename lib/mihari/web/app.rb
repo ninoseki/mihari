@@ -14,6 +14,7 @@ require "mihari/web/controllers/analyzers_controller"
 require "mihari/web/controllers/artifacts_controller"
 require "mihari/web/controllers/command_controller"
 require "mihari/web/controllers/config_controller"
+require "mihari/web/controllers/ip_address_controller"
 require "mihari/web/controllers/sources_controller"
 require "mihari/web/controllers/tags_controller"
 
@@ -31,6 +32,7 @@ module Mihari
     use Mihari::Controllers::ArtifactsController
     use Mihari::Controllers::CommandController
     use Mihari::Controllers::ConfigController
+    use Mihari::Controllers::IPAddressController
     use Mihari::Controllers::SourcesController
     use Mihari::Controllers::TagsController
 
