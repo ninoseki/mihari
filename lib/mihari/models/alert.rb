@@ -34,7 +34,15 @@ module Mihari
 
         offset = (page - 1) * limit
 
-        relation = build_relation(artifact_data: artifact_data, title: title, description: description, source: source, tag_name: tag_name, from_at: from_at, to_at: to_at)
+        relation = build_relation(
+          artifact_data: artifact_data,
+          title: title,
+          description: description,
+          source: source,
+          tag_name: tag_name,
+          from_at: from_at,
+          to_at: to_at
+        )
 
         alerts = relation.limit(limit).offset(offset).order(id: :desc)
 
@@ -60,7 +68,15 @@ module Mihari
       # @return [Integer]
       #
       def count(artifact_data: nil, description: nil, source: nil, tag_name: nil, title: nil, from_at: nil, to_at: nil)
-        relation = build_relation(artifact_data: artifact_data, title: title, description: description, source: source, tag_name: tag_name, from_at: from_at, to_at: to_at)
+        relation = build_relation(
+          artifact_data: artifact_data,
+          title: title,
+          description: description,
+          source: source,
+          tag_name: tag_name,
+          from_at: from_at,
+          to_at: to_at
+        )
         relation.distinct("alerts.id").count
       end
 

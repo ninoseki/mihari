@@ -13,6 +13,7 @@ module Mihari
       optional(:censys_secret).value(:string)
       optional(:circl_passive_password).value(:string)
       optional(:circl_passive_username).value(:string)
+      optional(:ipinfo_api_key).value(:string)
       optional(:misp_api_endpoint).value(:string)
       optional(:misp_api_key).value(:string)
       optional(:onyphe_api_key).value(:string)

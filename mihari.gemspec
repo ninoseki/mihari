@@ -57,6 +57,7 @@ Gem::Specification.new do |spec|
   spec.add_dependency "dry-validation", "~> 1.6"
   spec.add_dependency "email_address", "~> 0.2"
   spec.add_dependency "hachi", "~> 1.0"
+  spec.add_dependency "http", "~> 5.0"
   spec.add_dependency "launchy", "~> 2.5"
   spec.add_dependency "mem", "~> 0.1"
   spec.add_dependency "misp", "~> 0.1"
