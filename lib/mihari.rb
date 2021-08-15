@@ -92,8 +92,8 @@ require "mihari/errors"
 require "mihari/database"
 require "mihari/type_checker"
 
-# Constraints
-require "mihari/constraints"
+# Constants
+require "mihari/constants"
 
 # Schemas
 require "mihari/schemas/analyzer"
