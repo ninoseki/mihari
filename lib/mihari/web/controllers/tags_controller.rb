@@ -9,7 +9,9 @@ module Mihari
       end
 
       delete "/api/tags/:name" do
-        name = params["name"]
+        param :name, String, required: true
+
+        name = params["name"].to_s
 
         begin
           Mihari::Tag.where(name: name).destroy_all

@@ -4,8 +4,9 @@ module Mihari
   module Controllers
     class ArtifactsController < BaseController
       get "/api/artifacts/:id" do
-        id = params["id"]
-        id = id.to_s
+        param :id, Integer, required: true
+
+        id = params["id"].to_i
 
         begin
           artifact = Mihari::Artifact.find(id)
@@ -27,8 +28,9 @@ module Mihari
       end
 
       delete "/api/artifacts/:id" do
-        id = params["id"]
-        id = id.to_i
+        param :id, Integer, required: true
+
+        id = params["id"].to_i
 
         begin
           alert = Mihari::Artifact.find(id)

@@ -55,8 +55,9 @@ module Mihari
       end
 
       delete "/api/alerts/:id" do
-        id = params["id"]
-        id = id.to_i
+        param :id, Integer, required: true
+
+        id = params["id"].to_i
 
         begin
           alert = Mihari::Alert.find(id)

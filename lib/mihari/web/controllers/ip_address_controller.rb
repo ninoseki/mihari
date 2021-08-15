@@ -18,8 +18,9 @@ module Mihari
       end
 
       get "/api/ip_addresses/:ip" do
-        ip = params["ip"]
-        ip = ip.to_s
+        param :ip, String, required: true
+
+        ip = params["ip"].to_s
 
         begin
           data = query(ip)
