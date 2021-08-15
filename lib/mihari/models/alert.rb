@@ -18,8 +18,8 @@ module Mihari
       # @param [String, nil] source
       # @param [String, nil] tag_name
       # @param [String, nil] title
-      # @param [String, nil] from_at
-      # @param [String, nil] to_at
+      # @param [DateTime, nil] from_at
+      # @param [DateTime, nil] to_at
       # @param [Integer, nil] limit
       # @param [Integer, nil] page
       #
@@ -62,8 +62,8 @@ module Mihari
       # @param [String, nil] source
       # @param [String, nil] tag_name
       # @param [String, nil] title
-      # @param [String, nil] from_at
-      # @param [String, nil] to_at
+      # @param [DateTime, nil] from_at
+      # @param [DateTime, nil] to_at
       #
       # @return [Integer]
       #
