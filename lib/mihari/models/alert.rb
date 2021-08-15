@@ -84,11 +84,9 @@ module Mihari
 
       def build_relation(artifact_data: nil, title: nil, description: nil, source: nil, tag_name: nil, from_at: nil, to_at: nil)
         relation = self
-        relation = joins(:tags) if tag_name
-        relation = joins(:artifacts) if artifact_data
 
-        relation = relation.where(artifacts: { data: artifact_data }) if artifact_data
-        relation = relation.where(tags: { name: tag_name }) if tag_name
+        relation = relation.joins(:artifacts).where(artifacts: { data: artifact_data }) if artifact_data
+        relation = relation.joins(:tags).where(tags: { name: tag_name }) if tag_name
 
         relation = relation.where(source: source) if source
         relation = relation.where(title: title) if title
