@@ -14,9 +14,6 @@ RSpec.shared_context "with database fixtures" do
   end
 
   after do
-    Mihari::Alert.all.destroy_all
-    Mihari::Artifact.all.destroy_all
-    Mihari::Tagging.all.destroy_all
-    Mihari::Tag.all.destroy_all
+    reset_db
   end
 end
