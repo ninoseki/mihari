@@ -3,9 +3,10 @@
 require "bundler/setup"
 
 require "base64"
-require "fakefs/safe"
-require "vcr"
 require "digest"
+require "fakefs/safe"
+require "rack/test"
+require "vcr"
 
 require "simplecov"
 require "coveralls"
@@ -41,7 +42,6 @@ RSpec.configure do |config|
   end
 
   config.include Spec::Support::Helpers
-  config.include_context "with database"
 end
 
 def authorization_field(username, password)
@@ -105,6 +105,9 @@ VCR.configure do |config|
     authorization_field ENV["PASSIVETOTAL_USERNAME"] || "foo", ENV["PASSIVETOTAL_API_KEY"] || "bar"
   }
 end
+
+# for Rack app / Sinatra controllers
+ENV["APP_ENV"] = "test"
 
 # load Mihari after modifying ENV values
 require "mihari"
