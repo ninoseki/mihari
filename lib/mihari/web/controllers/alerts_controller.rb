@@ -26,9 +26,7 @@ module Mihari
         title = params["title"]
 
         from_at = params["from_at"] || params["fromAt"]
-        from_at = DateTime.parse(from_at) if from_at
         to_at = params["to_at"] || params["toAt"]
-        to_at = DateTime.parse(to_at) if to_at
 
         alerts = Mihari::Alert.search(
           artifact_data: artifact_data,
@@ -55,8 +53,9 @@ module Mihari
       end
 
       delete "/api/alerts/:id" do
-        id = params["id"]
-        id = id.to_i
+        param :id, Integer, required: true
+
+        id = params["id"].to_i
 
         begin
           alert = Mihari::Alert.find(id)
