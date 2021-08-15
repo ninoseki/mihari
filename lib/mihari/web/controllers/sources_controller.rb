@@ -4,8 +4,8 @@ module Mihari
   module Controllers
     class SourcesController < BaseController
       get "/api/sources" do
-        tags = Mihari::Alert.distinct.pluck(:source)
-        json tags
+        sources = Mihari::Alert.distinct.pluck(:source)
+        json sources
       end
     end
   end

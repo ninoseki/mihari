@@ -1,16 +1,7 @@
 # frozen_string_literal: true
 
 RSpec.describe Mihari::Alert do
-  before do
-    artifacts = [
-      Mihari::Artifact.new(data: "1.1.1.1"),
-      Mihari::Artifact.new(data: "example.com")
-    ]
-
-    database = Mihari::Emitters::Database.new
-    database.emit(title: "test", description: "test", artifacts: artifacts, source: "json", tags: %w[tag1])
-    database.emit(title: "test2", description: "tes2t", artifacts: artifacts, source: "json", tags: %w[tag2])
-  end
+  include_context "with database fixtures"
 
   describe ".search" do
     it do

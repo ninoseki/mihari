@@ -3,6 +3,10 @@
 RSpec.describe Mihari::Emitters::Database do
   subject { described_class.new }
 
+  after do
+    reset_db
+  end
+
   describe "#emit" do
     let(:title) { "test" }
     let(:description) { "test" }

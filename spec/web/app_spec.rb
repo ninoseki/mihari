@@ -1,7 +1,3 @@
-ENV["APP_ENV"] = "test"
-
-require "rack/test"
-
 RSpec.describe Mihari::App do
   include Rack::Test::Methods
 
