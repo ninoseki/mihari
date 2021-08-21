@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-RSpec.describe Mihari::TagSerializer do
+RSpec.describe Mihari::Serializers::TagSerializer do
   let(:tag) { Mihari::Tag.new(name: "foo") }
 
   describe "#as_json" do
