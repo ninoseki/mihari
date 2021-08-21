@@ -15,7 +15,7 @@ RSpec.describe Test do
 
       data = YAML.safe_load(files.read(filename))
 
-      expect(data.is_a?(Hash)).to eq(true)
+      expect(data).to be_a(Hash)
     end
   end
 

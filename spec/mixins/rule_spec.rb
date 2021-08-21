@@ -19,7 +19,7 @@ RSpec.describe Test do
 
       subject.validate_rule data
 
-      expect(data.is_a?(Hash)).to eq(true)
+      expect(data).to be_a(Hash)
     end
   end
 end

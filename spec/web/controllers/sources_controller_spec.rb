@@ -14,7 +14,7 @@ RSpec.describe Mihari::Controllers::SourcesController do
       expect(last_response.status).to eq(200)
 
       json = JSON.parse(last_response.body.to_s)
-      expect(json.is_a?(Array)).to eq(true)
+      expect(json).to be_an(Array)
     end
   end
 end
