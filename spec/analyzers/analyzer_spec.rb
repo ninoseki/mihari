@@ -41,12 +41,21 @@ RSpec.describe Mihari::Analyzers::Base, :vcr do
   end
 
   describe "#run" do
+    before do
+      # mock artifact enrichments
+      subject.normalized_artifacts.each do |artifact|
+        allow(artifact).to receive(:enrich_whois).and_return(nil)
+        allow(artifact).to receive(:enrich_dns).and_return(nil)
+      end
+    end
+
     it "doens't raise any error" do
       capture(:stdout) { subject.run }
     end
 
     context "when a notifer raises an error" do
       before do
+        # mock emitters
         emitter = double("emitter_instance")
         allow(emitter).to receive(:valid?).and_return(true)
         allow(emitter).to receive(:run).and_raise("error")

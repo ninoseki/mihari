@@ -51,7 +51,7 @@ module Mihari
       # @return [nil]
       #
       def run
-        set_unique_artifacts
+        set_enriched_artifacts
 
         Parallel.each(valid_emitters) do |emitter|
           run_emitter emitter
@@ -66,7 +66,7 @@ module Mihari
       # @return [nil]
       #
       def run_emitter(emitter)
-        emitter.run(title: title, description: description, artifacts: unique_artifacts, source: source, tags: tags)
+        emitter.run(title: title, description: description, artifacts: enriched_artifacts, source: source, tags: tags)
       rescue StandardError => e
         puts "Emission by #{emitter.class} is failed: #{e}"
       end
@@ -105,12 +105,25 @@ module Mihari
       end
 
       #
-      # Set unique artifacts
+      # Enriched artifacts
+      #
+      # @return [Array<Mihari::Artifact>]
+      #
+      def enriched_artifacts
+        @enriched_artifacts ||= unique_artifacts.map do |artifact|
+          artifact.enrich_whois
+          artifact.enrich_dns
+          artifact
+        end
+      end
+
+      #
+      # Set enriched artifacts
       #
       # @return [nil]
       #
-      def set_unique_artifacts
-        retry_on_error { unique_artifacts }
+      def set_enriched_artifacts
+        retry_on_error { enriched_artifacts }
       rescue ArgumentError => _e
         klass = self.class.to_s.split("::").last.to_s
         raise Error, "Please configure #{klass} API settings properly"

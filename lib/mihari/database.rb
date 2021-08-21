@@ -53,6 +53,23 @@ class IPEnrichmentSchema < ActiveRecord::Migration[6.1]
   end
 end
 
+class DomainEnrichmentSchema < ActiveRecord::Migration[6.1]
+  def change
+    create_table :whois_records, if_not_exists: true do |t|
+      t.text :text, null: false
+      t.string :registrar
+      t.date :created_on
+      t.belongs_to :artifact, foreign_key: true
+    end
+
+    create_table :dns_records, if_not_exists: true do |t|
+      t.string :resource, null: false
+      t.string :value, null: false
+      t.belongs_to :artifact, foreign_key: true
+    end
+  end
+end
+
 def adapter
   return "postgresql" if Mihari.config.database.start_with?("postgresql://", "postgres://")
   return "mysql2" if Mihari.config.database.start_with?("mysql2://")
@@ -80,6 +97,7 @@ module Mihari
         InitialSchema.migrate(:up)
         V3Schema.migrate(:up)
         IPEnrichmentSchema.migrate(:up)
+        DomainEnrichmentSchema.migrate(:up)
       rescue StandardError
         # Do nothing
       end
@@ -95,6 +113,7 @@ module Mihari
         InitialSchema.migrate(:down)
         V3Schema.migrate(:down)
         IPEnrichmentSchema.migrate(:down)
+        DomainEnrichmentSchema.migrate(:down)
       end
     end
   end

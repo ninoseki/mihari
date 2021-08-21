@@ -9,7 +9,12 @@ module Mihari
         id = params["id"].to_i
 
         begin
-          artifact = Mihari::Artifact.includes(:autonomous_system, :geolocation).find(id)
+          artifact = Mihari::Artifact.includes(
+            :autonomous_system,
+            :geolocation,
+            :whois_record,
+            :dns_records
+          ).find(id)
 
           # TODO: improve queries
           alert_ids = Mihari::Artifact.where(data: artifact.data).pluck(:alert_id)
