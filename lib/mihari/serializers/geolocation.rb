@@ -4,8 +4,8 @@ require "active_model_serializers"
 
 module Mihari
   module Serializers
-    class TagSerializer < ActiveModel::Serializer
-      attributes :id, :name
+    class GeolocationSerializer < ActiveModel::Serializer
+      attributes :country, :country_code
     end
   end
 end

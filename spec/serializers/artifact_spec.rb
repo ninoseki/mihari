@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-RSpec.describe Mihari::ArtifactSerializer do
+RSpec.describe Mihari::Serializers::ArtifactSerializer do
   let(:artifact) { Mihari::Artifact.new(data: "1.1.1.1") }
 
   describe "#as_json" do

@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-RSpec.describe Mihari::AlertSerializer do
+RSpec.describe Mihari::Serializers::AlertSerializer do
   let(:alert) {
     Mihari::Alert.new(
       title: "foo",

@@ -3,10 +3,12 @@
 require "active_model_serializers"
 
 module Mihari
-  class AlertSerializer < ActiveModel::Serializer
-    attributes :id, :title, :description, :source, :created_at
+  module Serializers
+    class AlertSerializer < ActiveModel::Serializer
+      attributes :id, :title, :description, :source, :created_at
 
-    has_many :artifacts
-    has_many :tags, through: :taggings
+      has_many :artifacts, serializer: ArtifactSerializer
+      has_many :tags, through: :taggings, serializer: TagSerializer
+    end
   end
 end

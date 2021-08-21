@@ -15,6 +15,9 @@ end
 
 module Mihari
   class Artifact < ActiveRecord::Base
+    has_one :autonomous_system, dependent: :destroy
+    has_one :geolocation, dependent: :destroy
+
     include ActiveModel::Validations
 
     validates_with ArtifactValidator

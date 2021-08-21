@@ -127,6 +127,20 @@ module Mihari
           emitter.valid? ? emitter : nil
         end
       end
+
+      #
+      # Normalize ASN value
+      #
+      # @param [String, Integer] asn
+      #
+      # @return [Integer]
+      #
+      def normalize_asn(asn)
+        return asn if asn.is_a?(Integer)
+        return asn.to_i unless asn.start_with?("AS")
+
+        asn.delete_prefix("AS").to_i
+      end
     end
   end
 end

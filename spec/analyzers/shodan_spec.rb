@@ -3,7 +3,7 @@
 RSpec.describe Mihari::Analyzers::Shodan, :vcr do
   subject { described_class.new(query, tags: tags) }
 
-  let(:query) { "dev.min.js" }
+  let(:query) { "ip:1.1.1.1" }
   let(:tags) { %w[test] }
 
   describe "#title" do
@@ -20,7 +20,16 @@ RSpec.describe Mihari::Analyzers::Shodan, :vcr do
 
   describe "#artifacts" do
     it do
-      expect(subject.artifacts).to be_an(Array)
+      artifacts = subject.artifacts
+
+      expect(artifacts).to be_an(Array)
+      expect(artifacts.length).to eq(1)
+
+      expect(artifacts.first.data).to eq("1.1.1.1")
+
+      expect(artifacts.first.autonomous_system.asn).to eq(13_335)
+
+      expect(artifacts.first.geolocation.country_code).to eq("US")
     end
   end
 

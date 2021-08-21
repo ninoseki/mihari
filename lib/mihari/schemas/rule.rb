@@ -2,26 +2,13 @@
 
 require "dry/schema"
 require "dry/validation"
-require "dry/types"
 
 require "mihari/schemas/macros"
 
 module Mihari
-  module Types
-    include Dry.Types()
-  end
-
-  DataTypes = Types::String.enum(*ALLOWED_DATA_TYPES)
-
-  AnalyzerTypes = Types::String.enum(
-    "binaryedge", "censys", "circl", "dnpedia", "dnstwister",
-    "onyphe", "otx", "passivetotal", "pulsedive", "securitytrails",
-    "shodan", "virustotal"
-  )
-
   module Schemas
     Analyzer = Dry::Schema.Params do
-      required(:analyzer).value(AnalyzerTypes)
+      required(:analyzer).value(Types::AnalyzerTypes)
       required(:query).value(:string)
     end
 
@@ -62,7 +49,7 @@ module Mihari
 
       required(:queries).value(:array).each { Analyzer | Spyse | ZoomEye | Urlscan | Crtsh }
 
-      optional(:allowed_data_types).value(array[DataTypes]).default(ALLOWED_DATA_TYPES)
+      optional(:allowed_data_types).value(array[Types::DataTypes]).default(ALLOWED_DATA_TYPES)
       optional(:disallowed_data_values).value(array[:string]).default([])
 
       optional(:ignore_old_artifacts).value(:bool).default(false)

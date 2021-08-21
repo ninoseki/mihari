@@ -21,10 +21,15 @@ RSpec.describe Mihari::Analyzers::Censys, :vcr do
   describe "#artifacts" do
     it do
       artifacts = subject.artifacts
+
       expect(artifacts).to be_an(Array)
       expect(artifacts.length).to eq(1)
 
-      expect(artifacts.first).to eq("1.1.1.1")
+      expect(artifacts.first.data).to eq("1.1.1.1")
+
+      expect(artifacts.first.autonomous_system.asn).to eq(13_335)
+
+      expect(artifacts.first.geolocation.country_code).to eq("AU")
     end
   end
 

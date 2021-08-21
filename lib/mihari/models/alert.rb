@@ -47,7 +47,7 @@ module Mihari
         alerts = relation.limit(limit).offset(offset).order(id: :desc)
 
         alerts.map do |alert|
-          json = AlertSerializer.new(alert).as_json
+          json = Serializers::AlertSerializer.new(alert).as_json
           json[:artifacts] = json[:artifacts] || []
           json[:tags] = json[:tags] || []
           json
@@ -85,8 +85,10 @@ module Mihari
       def build_relation(artifact_data: nil, title: nil, description: nil, source: nil, tag_name: nil, from_at: nil, to_at: nil)
         relation = self
 
-        relation = relation.joins(:artifacts).where(artifacts: { data: artifact_data }) if artifact_data
-        relation = relation.joins(:tags).where(tags: { name: tag_name }) if tag_name
+        relation = relation.includes(:artifacts, :tags)
+
+        relation = relation.where(artifacts: { data: artifact_data }) if artifact_data
+        relation = relation.where(tags: { name: tag_name }) if tag_name
 
         relation = relation.where(source: source) if source
         relation = relation.where(title: title) if title

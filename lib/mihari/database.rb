@@ -38,6 +38,21 @@ class V3Schema < ActiveRecord::Migration[6.1]
   end
 end
 
+class IPEnrichmentSchema < ActiveRecord::Migration[6.1]
+  def change
+    create_table :autonomous_systems, if_not_exists: true do |t|
+      t.integer :asn, null: false
+      t.belongs_to :artifact, foreign_key: true
+    end
+
+    create_table :geolocations, if_not_exists: true do |t|
+      t.string :country, null: false
+      t.string :country_code, null: false
+      t.belongs_to :artifact, foreign_key: true
+    end
+  end
+end
+
 def adapter
   return "postgresql" if Mihari.config.database.start_with?("postgresql://", "postgres://")
   return "mysql2" if Mihari.config.database.start_with?("mysql2://")
@@ -59,10 +74,12 @@ module Mihari
           )
         end
 
+        # ActiveRecord::Base.logger = Logger.new STDOUT
         ActiveRecord::Migration.verbose = false
 
         InitialSchema.migrate(:up)
         V3Schema.migrate(:up)
+        IPEnrichmentSchema.migrate(:up)
       rescue StandardError
         # Do nothing
       end
@@ -77,6 +94,7 @@ module Mihari
 
         InitialSchema.migrate(:down)
         V3Schema.migrate(:down)
+        IPEnrichmentSchema.migrate(:down)
       end
     end
   end
