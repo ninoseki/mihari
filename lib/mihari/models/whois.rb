@@ -26,6 +26,8 @@ module Mihari
           created_on: get_created_on(parser),
           registrar: get_registrar(parser)
         )
+      rescue Whois::Error, Whois::ParserError
+        nil
       end
 
       private

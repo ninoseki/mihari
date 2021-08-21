@@ -58,11 +58,7 @@ module Mihari
     def enrich_whois
       return if data_type != "domain"
 
-      begin
-        self.whois_record = WhoisRecord.build_by_domain(data)
-      rescue StandardError
-        nil
-      end
+      self.whois_record = WhoisRecord.build_by_domain(data)
     end
 
     #
@@ -71,11 +67,7 @@ module Mihari
     def enrich_dns
       return if data_type != "domain"
 
-      begin
-        self.dns_records = DnsRecord.build_by_domain(data)
-      rescue StandardError
-        nil
-      end
+      self.dns_records = DnsRecord.build_by_domain(data)
     end
 
     #
