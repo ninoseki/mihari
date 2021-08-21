@@ -33,7 +33,7 @@ RSpec.describe Mihari::Controllers::ArtifactsController do
       expect(last_response.status).to eq(200)
 
       json = JSON.parse(last_response.body.to_s)
-      expect(json.is_a?(Hash)).to eq(true)
+      expect(json).to be_a(Hash)
       expect(json["id"]).to eq(@artifact.id)
     end
   end

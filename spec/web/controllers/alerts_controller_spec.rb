@@ -46,7 +46,7 @@ RSpec.describe Mihari::Controllers::AlertsController do
         expect(last_response.status).to eq(200)
 
         json = JSON.parse(last_response.body.to_s)
-        expect(json.is_a?(Hash)).to eq(true)
+        expect(json).to be_a(Hash)
       end
     end
   end

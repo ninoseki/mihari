@@ -15,7 +15,7 @@ RSpec.describe Mihari::Controllers::IPAddressController, :vcr do
       expect(last_response.status).to eq(200)
 
       json = JSON.parse(last_response.body.to_s)
-      expect(json.is_a?(Hash)).to eq(true)
+      expect(json).to be_a(Hash)
       expect(json["ip"]).to eq(ip)
     end
   end
