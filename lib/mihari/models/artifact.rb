@@ -20,6 +20,7 @@ module Mihari
     has_one :whois_record, dependent: :destroy
 
     has_many :dns_records, dependent: :destroy
+    has_many :reverse_dns_names, dependent: :destroy
 
     include ActiveModel::Validations
 
@@ -57,11 +58,7 @@ module Mihari
     def enrich_whois
       return if data_type != "domain"
 
-      begin
-        self.whois_record = WhoisRecord.build_by_domain(data)
-      rescue StandardError
-        nil
-      end
+      self.whois_record = WhoisRecord.build_by_domain(data)
     end
 
     #
@@ -70,11 +67,16 @@ module Mihari
     def enrich_dns
       return if data_type != "domain"
 
-      begin
-        self.dns_records = DnsRecord.build_by_domain(data)
-      rescue StandardError
-        nil
-      end
+      self.dns_records = DnsRecord.build_by_domain(data)
+    end
+
+    #
+    # Enrich(add) reverse DNS names
+    #
+    def enrich_reverse_dns
+      return if data_type != "ip"
+
+      self.reverse_dns_names = ReverseDnsName.build_by_ip(data)
     end
   end
 end

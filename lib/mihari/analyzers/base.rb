@@ -113,6 +113,7 @@ module Mihari
         @enriched_artifacts ||= unique_artifacts.map do |artifact|
           artifact.enrich_whois
           artifact.enrich_dns
+          artifact.enrich_reverse_dns
           artifact
         end
       end

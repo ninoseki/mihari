@@ -24,7 +24,9 @@ module Mihari
 
         resource_types.map do |resource_type|
           get_values domain, resource_type
-        end.flatten
+        rescue Resolv::ResolvError
+          nil
+        end.flatten.compact
       end
 
       private
