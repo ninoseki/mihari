@@ -111,14 +111,18 @@ require "mihari/schemas/rule"
 require "mihari/models/alert"
 require "mihari/models/artifact"
 require "mihari/models/autonomous_system"
+require "mihari/models/dns"
 require "mihari/models/geolocation"
 require "mihari/models/tag"
 require "mihari/models/tagging"
+require "mihari/models/whois"
 
 # Serializers
 require "mihari/serializers/autonomous_system"
+require "mihari/serializers/dns"
 require "mihari/serializers/geolocation"
 require "mihari/serializers/tag"
+require "mihari/serializers/whois"
 
 require "mihari/serializers/artifact"
 

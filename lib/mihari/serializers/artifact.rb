@@ -9,6 +9,9 @@ module Mihari
 
       has_one :autonomous_system, serializer: AutonomousSystemSerializer
       has_one :geolocation, serializer: GeolocationSerializer
+      has_one :whois_record, serializer: WhoisRecordSerializer
+
+      has_many :dns_records, serializer: DnsRecordSerializer
     end
   end
 end

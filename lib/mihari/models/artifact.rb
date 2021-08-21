@@ -17,6 +17,9 @@ module Mihari
   class Artifact < ActiveRecord::Base
     has_one :autonomous_system, dependent: :destroy
     has_one :geolocation, dependent: :destroy
+    has_one :whois_record, dependent: :destroy
+
+    has_many :dns_records, dependent: :destroy
 
     include ActiveModel::Validations
 
@@ -46,6 +49,32 @@ module Mihari
       # if an artifact is created before {ignore_threshold} days, ignore it
       #                           within {ignore_threshold} days, do not ignore it
       artifact.created_at < days_before
+    end
+
+    #
+    # Enrich(add) whois record
+    #
+    def enrich_whois
+      return if data_type != "domain"
+
+      begin
+        self.whois_record = WhoisRecord.build_by_domain(data)
+      rescue StandardError
+        nil
+      end
+    end
+
+    #
+    # Enrich(add) DNS records
+    #
+    def enrich_dns
+      return if data_type != "domain"
+
+      begin
+        self.dns_records = DnsRecord.build_by_domain(data)
+      rescue StandardError
+        nil
+      end
     end
   end
 end
