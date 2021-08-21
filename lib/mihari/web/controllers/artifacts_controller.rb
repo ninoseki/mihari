@@ -9,7 +9,7 @@ module Mihari
         id = params["id"].to_i
 
         begin
-          artifact = Mihari::Artifact.find(id)
+          artifact = Mihari::Artifact.includes(:autonomous_system, :geolocation).find(id)
 
           # TODO: improve queries
           alert_ids = Mihari::Artifact.where(data: artifact.data).pluck(:alert_id)
@@ -21,7 +21,7 @@ module Mihari
           return json({ message: "ID:#{id} is not found" })
         end
 
-        artifact_json = ArtifactSerializer.new(artifact).as_json
+        artifact_json = Serializers::ArtifactSerializer.new(artifact).as_json
         artifact_json[:tags] = tag_names
 
         json artifact_json
