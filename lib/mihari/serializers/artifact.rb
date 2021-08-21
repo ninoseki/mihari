@@ -12,6 +12,7 @@ module Mihari
       has_one :whois_record, serializer: WhoisRecordSerializer
 
       has_many :dns_records, serializer: DnsRecordSerializer
+      has_many :reverse_dns_names, serializer: ReverseDnsNameSerializer
     end
   end
 end

@@ -13,7 +13,8 @@ module Mihari
             :autonomous_system,
             :geolocation,
             :whois_record,
-            :dns_records
+            :dns_records,
+            :reverse_dns_names
           ).find(id)
 
           # TODO: improve queries

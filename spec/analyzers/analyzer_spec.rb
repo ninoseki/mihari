@@ -46,6 +46,7 @@ RSpec.describe Mihari::Analyzers::Base, :vcr do
       subject.normalized_artifacts.each do |artifact|
         allow(artifact).to receive(:enrich_whois).and_return(nil)
         allow(artifact).to receive(:enrich_dns).and_return(nil)
+        allow(artifact).to receive(:enrich_reverse_dns).and_return(nil)
       end
     end
 

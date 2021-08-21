@@ -70,6 +70,15 @@ class DomainEnrichmentSchema < ActiveRecord::Migration[6.1]
   end
 end
 
+class ReverseDnsSchema < ActiveRecord::Migration[6.1]
+  def change
+    create_table :reverse_dns_names, if_not_exists: true do |t|
+      t.string :name, null: false
+      t.belongs_to :artifact, foreign_key: true
+    end
+  end
+end
+
 def adapter
   return "postgresql" if Mihari.config.database.start_with?("postgresql://", "postgres://")
   return "mysql2" if Mihari.config.database.start_with?("mysql2://")
@@ -98,6 +107,7 @@ module Mihari
         V3Schema.migrate(:up)
         IPEnrichmentSchema.migrate(:up)
         DomainEnrichmentSchema.migrate(:up)
+        ReverseDnsSchema.migrate(:up)
       rescue StandardError
         # Do nothing
       end
@@ -114,6 +124,7 @@ module Mihari
         V3Schema.migrate(:down)
         IPEnrichmentSchema.migrate(:down)
         DomainEnrichmentSchema.migrate(:down)
+        ReverseDnsSchema.migrate(:down)
       end
     end
   end

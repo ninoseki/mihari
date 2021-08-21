@@ -20,6 +20,7 @@ module Mihari
     has_one :whois_record, dependent: :destroy
 
     has_many :dns_records, dependent: :destroy
+    has_many :reverse_dns_names, dependent: :destroy
 
     include ActiveModel::Validations
 
@@ -75,6 +76,15 @@ module Mihari
       rescue StandardError
         nil
       end
+    end
+
+    #
+    # Enrich(add) reverse DNS names
+    #
+    def enrich_reverse_dns
+      return if data_type != "ip"
+
+      self.reverse_dns_names = ReverseDnsName.build_by_ip(data)
     end
   end
 end
