@@ -14,12 +14,11 @@ module Mihari
         results = search
         return [] unless results || results.empty?
 
+        results = results.map { |result| Structs::Shodan::Result.from_dynamic!(result) }
         results.map do |result|
-          matches = result["matches"] || []
-          matches.filter_map do |match|
-            match["ip_str"]
-          end
-        end.flatten.compact.uniq
+          matches = result.matches || []
+          matches.map { |match| build_artifact match }
+        end.flatten.compact.uniq(&:data)
       end
 
       private
@@ -56,6 +55,28 @@ module Mihari
           next
         end
         responses
+      end
+
+      #
+      # Build an artifact from a Shodan search API response
+      #
+      # @param [Structs::Shodan::Match] match
+      #
+      # @return [Artifact]
+      #
+      def build_artifact(match)
+        as = AutonomousSystem.new(asn: normalize_asn(match.asn))
+        geolocation = Geolocation.new(
+          country: match.location.country_name,
+          country_code: match.location.country_code
+        )
+
+        Artifact.new(
+          data: match.ip_str,
+          source: source,
+          autonomous_system: as,
+          geolocation: geolocation
+        )
       end
     end
   end

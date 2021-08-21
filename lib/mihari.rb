@@ -95,6 +95,13 @@ require "mihari/type_checker"
 # Constants
 require "mihari/constants"
 
+# Types
+require "mihari/types"
+
+# Structs
+require "mihari/structs/censys"
+require "mihari/structs/shodan"
+
 # Schemas
 require "mihari/schemas/analyzer"
 require "mihari/schemas/configuration"
@@ -103,13 +110,19 @@ require "mihari/schemas/rule"
 # Models
 require "mihari/models/alert"
 require "mihari/models/artifact"
+require "mihari/models/autonomous_system"
+require "mihari/models/geolocation"
 require "mihari/models/tag"
 require "mihari/models/tagging"
 
 # Serializers
-require "mihari/serializers/alert"
-require "mihari/serializers/artifact"
+require "mihari/serializers/autonomous_system"
+require "mihari/serializers/geolocation"
 require "mihari/serializers/tag"
+
+require "mihari/serializers/artifact"
+
+require "mihari/serializers/alert"
 
 # Analyzers
 require "mihari/analyzers/base"

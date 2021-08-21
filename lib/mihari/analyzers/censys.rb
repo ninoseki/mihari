@@ -17,31 +17,53 @@ module Mihari
       private
 
       def search
-        ipv4s = []
+        artifacts = []
 
         cursor = nil
         loop do
           response = api.search(query, cursor: cursor)
-          ipv4s << response_to_ipv4s(response)
+          response = Structs::Censys::Response.from_dynamic!(response)
 
-          links = response.dig("result", "links")
-          cursor = links["next"]
+          artifacts << response_to_artifacts(response)
+
+          cursor = response.result.links.next
           break if cursor == ""
         end
 
-        ipv4s.flatten
+        artifacts.flatten.uniq(&:data)
       end
 
       #
       # Extract IPv4s from Censys search API response
       #
-      # @param [Hash] response
+      # @param [Structs::Censys::Response] response
       #
       # @return [Array<String>]
       #
-      def response_to_ipv4s(response)
-        hits = response.dig("result", "hits") || []
-        hits.map { |hit| hit["ip"] }
+      def response_to_artifacts(response)
+        response.result.hits.map { |hit| build_artifact(hit) }
+      end
+
+      #
+      # Build an artifact from a Shodan search API response
+      #
+      # @param [Structs::Censys::Hit] hit
+      #
+      # @return [Artifact]
+      #
+      def build_artifact(hit)
+        as = AutonomousSystem.new(asn: normalize_asn(hit.autonomous_system.asn))
+        geolocation = Geolocation.new(
+          country: hit.location.country,
+          country_code: hit.location.country_code
+        )
+
+        Artifact.new(
+          data: hit.ip,
+          source: source,
+          autonomous_system: as,
+          geolocation: geolocation
+        )
       end
 
       def configuration_keys
