@@ -2,10 +2,13 @@
 
 require "active_record"
 require "whois-parser"
+require "public_suffix"
 
 module Mihari
   class WhoisRecord < ActiveRecord::Base
     has_one :artifact, dependent: :destroy
+
+    @memo = {}
 
     class << self
       #
@@ -16,16 +19,27 @@ module Mihari
       # @return [WhoisRecord, nil]
       #
       def build_by_domain(domain)
+        domain = PublicSuffix.domain(domain)
+
+        # check memo
+        return @memo[domain] if @memo.key?(domain)
+
         record = Whois.whois(domain)
         parser = record.parser
 
         return nil if parser.available?
 
-        new(
-          text: parser.record,
+        whois_record = new(
+          domain: domain,
           created_on: get_created_on(parser),
-          registrar: get_registrar(parser)
+          updated_on: get_updated_on(parser),
+          expires_on: get_expires_on(parser),
+          registrar: get_registrar(parser),
+          contacts: get_contacts(parser)
         )
+        # set memo
+        @memo[domain] = whois_record
+        whois_record
       rescue Whois::Error, Whois::ParserError
         nil
       end
@@ -46,14 +60,53 @@ module Mihari
       end
 
       #
+      # Get updated_on
+      #
+      # @param [::Whois::Parser:] parser
+      #
+      # @return [Date, nil]
+      #
+      def get_updated_on(parser)
+        parser.updated_on
+      rescue ::Whois::AttributeNotImplemented
+        nil
+      end
+
+      #
+      # Get expires_on
+      #
+      # @param [::Whois::Parser:] parser
+      #
+      # @return [Date, nil]
+      #
+      def get_expires_on(parser)
+        parser.expires_on
+      rescue ::Whois::AttributeNotImplemented
+        nil
+      end
+
+      #
       # Get registrar
       #
       # @param [::Whois::Parser:] parser
       #
-      # @return [String, nil]
+      # @return [Hash, nil]
       #
       def get_registrar(parser)
-        parser.registrar&.name
+        parser.registrar&.to_h
+      rescue ::Whois::AttributeNotImplemented
+        nil
+      end
+
+      #
+      # Get contacts
+      #
+      # @param [::Whois::Parser:] parser
+      #
+      # @return [Array[Hash], nil]
+      #
+      def get_contacts(parser)
+        parser.contacts.map(&:to_h)
       rescue ::Whois::AttributeNotImplemented
         nil
       end

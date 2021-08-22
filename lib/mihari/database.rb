@@ -56,9 +56,12 @@ end
 class DomainEnrichmentSchema < ActiveRecord::Migration[6.1]
   def change
     create_table :whois_records, if_not_exists: true do |t|
-      t.text :text, null: false
-      t.string :registrar
+      t.string :domain, null: false
       t.date :created_on
+      t.date :updated_on
+      t.date :expires_on
+      t.json :registrar
+      t.json :contacts
       t.belongs_to :artifact, foreign_key: true
     end
 
