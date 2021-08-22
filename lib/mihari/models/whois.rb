@@ -22,7 +22,11 @@ module Mihari
         domain = PublicSuffix.domain(domain)
 
         # check memo
-        return @memo[domain] if @memo.key?(domain)
+        if @memo.key?(domain)
+          whois_record = @memo[domain]
+          # return clone of the record
+          return whois_record.dup
+        end
 
         record = Whois.whois(domain)
         parser = record.parser
