@@ -44,7 +44,9 @@ module Mihari
           to_at: to_at
         )
 
-        alerts = relation.limit(limit).offset(offset).order(id: :desc)
+        # TODO: improve queires
+        alert_ids = relation.limit(limit).offset(offset).pluck(:id)
+        alerts = includes(:artifacts, :tags).where(id: [alert_ids])
 
         alerts.map do |alert|
           json = Serializers::AlertSerializer.new(alert).as_json
