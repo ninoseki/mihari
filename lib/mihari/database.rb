@@ -32,13 +32,13 @@ class InitialSchema < ActiveRecord::Migration[6.1]
   end
 end
 
-class V3Schema < ActiveRecord::Migration[6.1]
+class AddeSourceToArtifactSchema < ActiveRecord::Migration[6.1]
   def change
     add_column :artifacts, :source, :string, if_not_exists: true
   end
 end
 
-class IPEnrichmentSchema < ActiveRecord::Migration[6.1]
+class EnrichmentsSchema < ActiveRecord::Migration[6.1]
   def change
     create_table :autonomous_systems, if_not_exists: true do |t|
       t.integer :asn, null: false
@@ -50,11 +50,7 @@ class IPEnrichmentSchema < ActiveRecord::Migration[6.1]
       t.string :country_code, null: false
       t.belongs_to :artifact, foreign_key: true
     end
-  end
-end
 
-class DomainEnrichmentSchema < ActiveRecord::Migration[6.1]
-  def change
     create_table :whois_records, if_not_exists: true do |t|
       t.string :domain, null: false
       t.date :created_on
@@ -70,11 +66,7 @@ class DomainEnrichmentSchema < ActiveRecord::Migration[6.1]
       t.string :value, null: false
       t.belongs_to :artifact, foreign_key: true
     end
-  end
-end
 
-class ReverseDnsSchema < ActiveRecord::Migration[6.1]
-  def change
     create_table :reverse_dns_names, if_not_exists: true do |t|
       t.string :name, null: false
       t.belongs_to :artifact, foreign_key: true
@@ -107,10 +99,8 @@ module Mihari
         ActiveRecord::Migration.verbose = false
 
         InitialSchema.migrate(:up)
-        V3Schema.migrate(:up)
-        IPEnrichmentSchema.migrate(:up)
-        DomainEnrichmentSchema.migrate(:up)
-        ReverseDnsSchema.migrate(:up)
+        AddeSourceToArtifactSchema.migrate(:up)
+        EnrichmentsSchema.migrate(:up)
       rescue StandardError
         # Do nothing
       end
@@ -124,10 +114,8 @@ module Mihari
         return unless ActiveRecord::Base.connected?
 
         InitialSchema.migrate(:down)
-        V3Schema.migrate(:down)
-        IPEnrichmentSchema.migrate(:down)
-        DomainEnrichmentSchema.migrate(:down)
-        ReverseDnsSchema.migrate(:down)
+        AddeSourceToArtifactSchema.migrate(:down)
+        EnrichmentsSchema.migrate(:down)
       end
     end
   end
