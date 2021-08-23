@@ -53,10 +53,16 @@ module Mihari
       #
       def build_artifact(hit)
         as = AutonomousSystem.new(asn: normalize_asn(hit.autonomous_system.asn))
-        geolocation = Geolocation.new(
-          country: hit.location.country,
-          country_code: hit.location.country_code
-        )
+
+        # sometimes Censys overlooks country
+        # then set geolocation as nil
+        geolocation = nil
+        unless hit.location.country.nil?
+          geolocation = Geolocation.new(
+            country: hit.location.country,
+            country_code: hit.location.country_code
+          )
+        end
 
         Artifact.new(
           data: hit.ip,

@@ -6,26 +6,24 @@ module Mihari
     module Censys
       class AutonomousSystem < Dry::Struct
         attribute :asn, Types::Int
-        attribute :country_code, Types::String
 
         def self.from_dynamic!(d)
           d = Types::Hash[d]
           new(
-            asn: d.fetch("asn"),
-            country_code: d.fetch("country_code")
+            asn: d.fetch("asn")
           )
         end
       end
 
       class Location < Dry::Struct
-        attribute :country, Types::String
-        attribute :country_code, Types::String
+        attribute :country, Types::String.optional
+        attribute :country_code, Types::String.optional
 
         def self.from_dynamic!(d)
           d = Types::Hash[d]
           new(
-            country: d.fetch("country"),
-            country_code: d.fetch("country_code")
+            country: d["country"],
+            country_code: d["country_code"]
           )
         end
       end
