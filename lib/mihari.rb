@@ -100,6 +100,7 @@ require "mihari/types"
 
 # Structs
 require "mihari/structs/censys"
+require "mihari/structs/onyphe"
 require "mihari/structs/shodan"
 
 # Schemas

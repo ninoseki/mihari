@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require "onyphe"
+require "normalize_country"
 
 module Mihari
   module Analyzers
@@ -11,14 +12,13 @@ module Mihari
       option :tags, default: proc { [] }
 
       def artifacts
-        results = search
-        return [] unless results
+        responses = search
+        return [] unless responses
 
-        flat_results = results.map do |result|
-          result["results"]
-        end.flatten.compact
-
-        flat_results.filter_map { |result| result["ip"] }.uniq
+        results = responses.map(&:results).flatten
+        results.map do |result|
+          build_artifact result
+        end
       end
 
       private
@@ -34,7 +34,8 @@ module Mihari
       end
 
       def search_with_page(query, page: 1)
-        api.simple.datascan(query, page: page)
+        res = api.simple.datascan(query, page: page)
+        Structs::Onyphe::Response.from_dynamic!(res)
       end
 
       def search
@@ -42,10 +43,34 @@ module Mihari
         (1..Float::INFINITY).each do |page|
           res = search_with_page(query, page: page)
           responses << res
-          total = res["total"].to_i
+
+          total = res.total
           break if total <= page * PAGE_SIZE
         end
         responses
+      end
+
+      #
+      # Build an artifact from an Onyphe search API result
+      #
+      # @param [Structs::Onyphe::Result] result
+      #
+      # @return [Artifact]
+      #
+      def build_artifact(result)
+        as = AutonomousSystem.new(asn: normalize_asn(result.asn))
+
+        geolocation = Geolocation.new(
+          country: NormalizeCountry(result.country_code, to: :short),
+          country_code: result.country_code
+        )
+
+        Artifact.new(
+          data: result.ip,
+          source: source,
+          autonomous_system: as,
+          geolocation: geolocation
+        )
       end
     end
   end
