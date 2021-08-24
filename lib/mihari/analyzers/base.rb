@@ -88,7 +88,7 @@ module Mihari
           # No need to set data_type manually
           # It is set automatically in #initialize
           artifact.is_a?(Artifact) ? artifact : Artifact.new(data: artifact, source: source)
-        end.select(&:valid?)
+        end.select(&:valid?).uniq(&:data)
       end
 
       private
