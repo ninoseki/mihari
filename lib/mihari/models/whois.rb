@@ -44,7 +44,7 @@ module Mihari
         # set memo
         @memo[domain] = whois_record
         whois_record
-      rescue Whois::Error, Whois::ParserError
+      rescue Whois::Error, Whois::ParserError, Timeout::Error
         nil
       end
 
