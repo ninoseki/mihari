@@ -4,6 +4,7 @@ require "active_record"
 require "active_record/filter"
 require "active_support/core_ext/integer/time"
 require "active_support/core_ext/numeric/time"
+require "uri"
 
 class ArtifactValidator < ActiveModel::Validator
   def validate(record)
@@ -56,27 +57,47 @@ module Mihari
     # Enrich(add) whois record
     #
     def enrich_whois
-      return if data_type != "domain"
+      return unless can_enrich_whois?
 
-      self.whois_record = WhoisRecord.build_by_domain(data)
+      self.whois_record = WhoisRecord.build_by_domain(normalize_as_domain(data))
     end
 
     #
     # Enrich(add) DNS records
     #
     def enrich_dns
-      return if data_type != "domain"
+      return unless can_enrich_dns?
 
-      self.dns_records = DnsRecord.build_by_domain(data)
+      self.dns_records = DnsRecord.build_by_domain(normalize_as_domain(data))
     end
 
     #
     # Enrich(add) reverse DNS names
     #
     def enrich_reverse_dns
-      return if data_type != "ip"
+      return unless can_enrich_revese_dns?
 
       self.reverse_dns_names = ReverseDnsName.build_by_ip(data)
+    end
+
+    private
+
+    def normalize_as_domain(url_or_domain)
+      return url_or_domain if data_type == "domain"
+
+      URI.parse(url_or_domain).host
+    end
+
+    def can_enrich_whois?
+      %w[domain url].include? data_type
+    end
+
+    def can_enrich_dns?
+      %w[domain url].include? data_type
+    end
+
+    def can_enrich_revese_dns?
+      data_type == "ip"
     end
   end
 end

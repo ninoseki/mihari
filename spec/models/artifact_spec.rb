@@ -62,6 +62,18 @@ RSpec.describe Mihari::Artifact do
       artifact.enrich_whois
       expect(artifact.whois_record).not_to be_nil
     end
+
+    context "with URL" do
+      let(:data) { "https://example.com" }
+
+      it do
+        artifact = described_class.new(data: data)
+        expect(artifact.whois_record).to be_nil
+
+        artifact.enrich_whois
+        expect(artifact.whois_record).not_to be_nil
+      end
+    end
   end
 
   describe "#enrich_dns" do
@@ -73,6 +85,18 @@ RSpec.describe Mihari::Artifact do
 
       artifact.enrich_dns
       expect(artifact.dns_records.length).to be > 0
+    end
+
+    context "with URL" do
+      let(:data) { "https://example.com" }
+
+      it do
+        artifact = described_class.new(data: data)
+        expect(artifact.dns_records.length).to eq(0)
+
+        artifact.enrich_dns
+        expect(artifact.dns_records.length).to be > 0
+      end
     end
   end
 end
