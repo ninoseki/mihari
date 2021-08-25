@@ -6,7 +6,7 @@ module Mihari
     module Onyphe
       class Result < Dry::Struct
         attribute :asn, Types::String
-        attribute :country_code, Types::String
+        attribute :country_code, Types::String.optional
         attribute :ip, Types::String
 
         def self.from_dynamic!(d)
@@ -15,7 +15,7 @@ module Mihari
             asn: d.fetch("asn"),
             ip: d.fetch("ip"),
             # Onyphe's country = 2-letter country code
-            country_code: d.fetch("country")
+            country_code: d["country"]
           )
         end
       end
