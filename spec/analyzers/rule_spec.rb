@@ -165,4 +165,28 @@ RSpec.describe Mihari::Analyzers::Rule, :vcr do
       end
     end
   end
+
+  context "with invalid analyzer in queries" do
+    subject do
+      described_class.new(
+        title: title,
+        description: description,
+        queries: queries
+      )
+    end
+
+    let(:queries) {
+      [
+        { analyzer: "shodan", query: "ip:1.1.1.1" }
+      ]
+    }
+
+    before do
+      allow(Mihari.config).to receive(:shodan_api_key).and_return(nil)
+    end
+
+    it do
+      expect { subject.artifacts }.to raise_error(ArgumentError, "Shodan is not configured correctly")
+    end
+  end
 end

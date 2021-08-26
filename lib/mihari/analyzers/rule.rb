@@ -22,6 +22,8 @@ module Mihari
         super(**kwargs)
 
         @source = id || UUIDTools::UUID.md5_create(UUIDTools::UUID_URL_NAMESPACE, title + description).to_s
+
+        validate_analyzer_configurations
       end
 
       ANALYZER_TO_CLASS = {
@@ -118,6 +120,22 @@ module Mihari
         return analyzer if analyzer
 
         raise ArgumentError, "#{analyzer_name} is not supported"
+      end
+
+      #
+      # Validate configuration of analyzers
+      #
+      def validate_analyzer_configurations
+        queries.each do |params|
+          analyzer_name = params[:analyzer]
+          klass = get_analyzer_class(analyzer_name)
+
+          instance = klass.new("dummy")
+          unless instance.configured?
+            klass_name = klass.to_s.split("::").last
+            raise ArgumentError, "#{klass_name} is not configured correctly"
+          end
+        end
       end
     end
   end

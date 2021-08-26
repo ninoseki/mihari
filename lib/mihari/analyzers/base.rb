@@ -125,9 +125,9 @@ module Mihari
       #
       def set_enriched_artifacts
         retry_on_error { enriched_artifacts }
-      rescue ArgumentError => _e
+      rescue ArgumentError => e
         klass = self.class.to_s.split("::").last.to_s
-        raise Error, "Please configure #{klass} API settings properly"
+        raise Error, "Please configure #{klass} settings properly. (#{e})"
       end
 
       #
