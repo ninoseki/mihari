@@ -60,10 +60,13 @@ module Mihari
       def build_artifact(result)
         as = AutonomousSystem.new(asn: normalize_asn(result.asn))
 
-        geolocation = Geolocation.new(
-          country: NormalizeCountry(result.country_code, to: :short),
-          country_code: result.country_code
-        )
+        geolocation = nil
+        unless result.country_code.nil?
+          geolocation = Geolocation.new(
+            country: NormalizeCountry(result.country_code, to: :short),
+            country_code: result.country_code
+          )
+        end
 
         Artifact.new(
           data: result.ip,
