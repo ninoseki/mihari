@@ -1,0 +1,25 @@
+module Mihari
+  module Structs
+    module Onyphe
+      class Result
+        attr_reader asn: String
+        attr_reader country_code: String?
+        attr_reader ip: String
+
+        def self.from_dynamic!: (Hash[(String | Symbol), untyped] d) -> Mihari::Structs::Onyphe::Result
+      end
+
+      class Response
+        attr_reader count: Integer
+        attr_reader error: Integer
+        attr_reader max_page: Integer
+        attr_reader page: String
+        attr_reader results: Array[Mihari::Structs::Onyphe::Result]
+        attr_reader status: String
+        attr_reader total: Integer
+
+        def self.from_dynamic!: (Hash[(String | Symbol), untyped] d) -> Mihari::Structs::Onyphe::Response
+      end
+    end
+  end
+end

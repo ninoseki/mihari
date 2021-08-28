@@ -1,0 +1,24 @@
+module Mihari
+  module Emitters
+    class TheHive < Base
+      # @return [true, false]
+      def valid?: () -> bool
+
+      def emit: (title: untyped title, description: untyped description, artifacts: untyped artifacts, ?tags: untyped tags, **untyped _options) -> (nil | untyped)
+
+      private
+
+      def configuration_keys: () -> ::Array["thehive_api_endpoint" | "thehive_api_key"]
+
+      def api: () -> untyped
+
+      # @return [true, false]
+      def api_endpont?: () -> bool
+
+      # @return [true, false]
+      def api_key?: () -> bool
+
+      def ping?: () -> bool
+    end
+  end
+end

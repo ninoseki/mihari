@@ -1,0 +1,54 @@
+class ArtifactValidator < ActiveModel::Validator
+  def validate: (Mihari::Artifact record) -> (nil | Mihari::Artifact)
+end
+
+module Mihari
+  class Artifact < ActiveRecord::Base
+    attr_accessor data (): String
+    attr_accessor data_type (): String
+
+    attr_accessor geolocation (): Mihari::Geolocation
+    attr_accessor whois_record(): Mihari::WhoisRecord
+    attr_accessor dns_records(): Array[Mihari::DnsRecord]
+    attr_accessor reverse_dns_names(): Array[Mihari::ReverseDnsName]
+
+    include ActiveModel::Validations
+
+    def initialize: (Hash[(String | Symbol), untyped] attributes) -> void
+
+    #
+    # Check uniqueness of artifact
+    #
+    # @param [Boolean] ignore_old_artifacts
+    # @param [Integer] ignore_threshold
+    #
+    # @return [Boolean] true if it is unique. Otherwise false.
+    #
+    def unique?: (?ignore_old_artifacts: bool ignore_old_artifacts, ?ignore_threshold: ::Integer ignore_threshold) -> (bool)
+
+    #
+    # Enrich(add) whois record
+    #
+    def enrich_whois: () -> void
+
+    #
+    # Enrich(add) DNS records
+    #
+    def enrich_dns: () -> void
+
+    #
+    # Enrich(add) reverse DNS names
+    #
+    def enrich_reverse_dns: () -> void
+
+    private
+
+    def normalize_as_domain: (String url_or_domain) -> String
+
+    def can_enrich_whois?: () -> bool
+
+    def can_enrich_dns?: () -> bool
+
+    def can_enrich_revese_dns?: () -> bool
+  end
+end

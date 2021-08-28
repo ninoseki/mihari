@@ -1,0 +1,33 @@
+module Mihari
+  module Analyzers
+    class Onyphe < Base
+      attr_reader query: String
+      attr_reader title: String
+      attr_reader description: String
+      attr_reader tags: Array[String]
+
+      def artifacts: () -> (Array[String] | Array[Mihari::Artifact])
+
+      private
+
+      PAGE_SIZE: ::Integer
+
+      def configuration_keys: () -> ::Array["onyphe_api_key"]
+
+      def api: () -> untyped
+
+      def search_with_page: (String query, ?page: ::Integer page) -> Mihari::Structs::Onyphe::Response
+
+      def search: () -> Array[Mihari::Structs::Onyphe::Response]
+
+      #
+      # Build an artifact from an Onyphe search API result
+      #
+      # @param [Structs::Onyphe::Result] result
+      #
+      # @return [Artifact]
+      #
+      def build_artifact: (Mihari::Structs::Onyphe::Result result) -> Mihari::Artifact
+    end
+  end
+end

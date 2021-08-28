@@ -1,0 +1,26 @@
+module Mihari
+  module Mixins
+    module Configurable
+      #
+      # Check whether it is configured or not
+      #
+      # @return [Boolean]
+      #
+      def configured?: () -> bool
+
+      #
+      # Configuration values
+      #
+      # @return [Array<Hash>, nil] Configuration values as a list of hash. Returns nil if there is any keys.
+      #
+      def configuration_values: () -> untyped
+
+      #
+      # Configuration keys
+      #
+      # @return [Array<String>] A list of cofiguration keys
+      #
+      def configuration_keys: () -> Array[String]
+    end
+  end
+end

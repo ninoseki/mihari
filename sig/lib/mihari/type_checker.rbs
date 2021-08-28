@@ -1,0 +1,48 @@
+module Mihari
+  class TypeChecker
+    # extend Dry::Initializer
+
+    def initialize: (*untyped args, **untyped kwargs) -> void
+
+    # @return [true, false]
+    def hash?: () -> bool
+
+    # @return [true, false]
+    def ip?: () -> bool
+
+    # @return [true, false]
+    def domain?: () -> bool
+
+    # @return [true, false]
+    def url?: () -> bool
+
+    # @return [true, false]
+    def mail?: () -> bool
+
+    # @return [String, nil]
+    def type: () -> ("hash" | "ip" | "domain" | "url" | nil)
+
+    # @return [String, nil]
+    def detailed_type: () -> ("md5" | "sha1" | "sha256" | "sha512" | nil)
+
+    # @return [String, nil]
+    def self.type: (untyped data) -> String?
+
+    # @return [String, nil]
+    def self.detailed_type: (untyped data) -> String?
+
+    private
+
+    # @return [true, false]
+    def md5?: () -> bool
+
+    # @return [true, false]
+    def sha1?: () -> bool
+
+    # @return [true, false]
+    def sha256?: () -> bool
+
+    # @return [true, false]
+    def sha512?: () -> bool
+  end
+end

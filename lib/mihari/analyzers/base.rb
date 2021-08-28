@@ -27,7 +27,7 @@ module Mihari
 
       # @return [String]
       def title
-        self.class.to_s.split("::").last
+        self.class.to_s.split("::").last.to_s
       end
 
       # @return [String]
@@ -37,7 +37,7 @@ module Mihari
 
       # @return [String]
       def source
-        self.class.to_s.split("::").last
+        self.class.to_s.split("::").last.to_s
       end
 
       # @return [Array<String>]
@@ -139,7 +139,7 @@ module Mihari
         @valid_emitters ||= Mihari.emitters.filter_map do |klass|
           emitter = klass.new
           emitter.valid? ? emitter : nil
-        end
+        end.compact
       end
 
       #

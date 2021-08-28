@@ -43,12 +43,22 @@ module Mihari
         @api ||= ::UrlScan::API.new(Mihari.config.urlscan_api_key)
       end
 
+      #
+      # Search
+      #
+      # @return [Array<Hash>]
+      #
       def search
         return api.pro.similar(query) if use_similarity
 
         api.search(query, size: 10_000)
       end
 
+      #
+      # Check whether a data type is valid or not
+      #
+      # @return [Boolean]
+      #
       def valid_alllowed_data_types?
         allowed_data_types.all? { |type| SUPPORTED_DATA_TYPES.include? type }
       end

@@ -30,10 +30,20 @@ module Mihari
         @api ||= ::Spyse::API.new(Mihari.config.spyse_api_key)
       end
 
+      #
+      # Check whether a type is valid or not
+      #
+      # @return [Boolean]
+      #
       def valid_type?
         %w[ip domain cert].include? type
       end
 
+      #
+      # Domain search
+      #
+      # @return [Array<String>]
+      #
       def domain_search
         res = api.domain.search(search_params, limit: 100)
         items = res.dig("data", "items") || []
@@ -42,6 +52,11 @@ module Mihari
         end.uniq.compact
       end
 
+      #
+      # IP search
+      #
+      # @return [Array<String>]
+      #
       def ip_search
         res = api.ip.search(search_params, limit: 100)
         items = res.dig("data", "items") || []
@@ -50,6 +65,11 @@ module Mihari
         end.uniq.compact
       end
 
+      #
+      # IP/domain search
+      #
+      # @return [Array<String>]
+      #
       def search
         case type
         when "domain"

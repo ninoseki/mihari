@@ -39,10 +39,20 @@ module Mihari
         @ip_client ||= ::OTX::IP.new(Mihari.config.otx_api_key)
       end
 
+      #
+      # Check whether a type is valid or not
+      #
+      # @return [Boolean]
+      #
       def valid_type?
         %w[ip domain].include? type
       end
 
+      #
+      # IP/domain search
+      #
+      # @return [Array<String>]
+      #
       def search
         case type
         when "domain"
@@ -54,6 +64,11 @@ module Mihari
         end
       end
 
+      #
+      # Domain search
+      #
+      # @return [Array<String>]
+      #
       def domain_search
         records = domain_client.get_passive_dns(query)
         records.filter_map do |record|
@@ -61,7 +76,12 @@ module Mihari
         end.uniq
       end
 
-      def ip_search
+      #
+      # IP search
+      #
+      # @return [Array<String>]
+      #
+      def ip_earch
         records = ip_client.get_passive_dns(query)
         records.filter_map do |record|
           record.hostname if record.record_type == "A"

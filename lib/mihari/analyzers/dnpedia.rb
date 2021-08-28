@@ -20,6 +20,11 @@ module Mihari
         @api ||= ::DNPedia::API.new
       end
 
+      #
+      # Search
+      #
+      # @return [Array<String>]
+      #
       def search
         res = api.search(query)
         rows = res["rows"] || []

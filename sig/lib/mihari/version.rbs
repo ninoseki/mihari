@@ -1,0 +1,3 @@
+module Mihari
+  VERSION: ::String
+end

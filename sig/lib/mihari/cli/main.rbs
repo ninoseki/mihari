@@ -1,0 +1,9 @@
+module Mihari
+  module CLI
+    class Main < Base
+      include Mihari::Commands::Search
+
+      include Mihari::Commands::Web
+    end
+  end
+end

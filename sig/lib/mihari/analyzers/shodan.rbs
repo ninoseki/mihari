@@ -1,0 +1,33 @@
+module Mihari
+  module Analyzers
+    class Shodan < Base
+      attr_reader query: String
+      attr_reader title: String
+      attr_reader description: String
+      attr_reader tags: Array[String]
+
+      def artifacts: () -> (Array[String] | Array[Mihari::Artifact])
+
+      private
+
+      PAGE_SIZE: ::Integer
+
+      def configuration_keys: () -> ::Array["shodan_api_key"]
+
+      def api: () -> untyped
+
+      def search_with_page: (String query, ?page: ::Integer page) -> Hash[(String | Symbol), untyped]
+
+      def search: () -> Array[Hash[(String | Symbol), untyped]]
+
+      #
+      # Build an artifact from a Shodan search API response
+      #
+      # @param [Structs::Shodan::Match] match
+      #
+      # @return [Artifact]
+      #
+      def build_artifact: (Mihari::Structs::Shodan::Match match) -> Mihari::Artifact
+    end
+  end
+end

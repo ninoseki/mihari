@@ -33,11 +33,24 @@ module Mihari
         @api ||= ::Onyphe::API.new(Mihari.config.onyphe_api_key)
       end
 
+      #
+      # Search with pagination
+      #
+      # @param [String] query
+      # @param [Integer] page
+      #
+      # @return [Structs::Onyphe::Response]
+      #
       def search_with_page(query, page: 1)
         res = api.simple.datascan(query, page: page)
         Structs::Onyphe::Response.from_dynamic!(res)
       end
 
+      #
+      # Search
+      #
+      # @return [Array<Structs::Onyphe::Response>]
+      #
       def search
         responses = []
         (1..Float::INFINITY).each do |page|

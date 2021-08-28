@@ -1,0 +1,14 @@
+module Mihari
+  module Mixins
+    module Refang
+      #
+      # Refang defanged indicator
+      #
+      # @param [String] indicator
+      #
+      # @return [String]
+      #
+      def refang: (String indicator) -> String
+    end
+  end
+end

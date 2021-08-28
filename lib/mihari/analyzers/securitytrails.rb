@@ -35,10 +35,20 @@ module Mihari
         @api ||= ::SecurityTrails::API.new(Mihari.config.securitytrails_api_key)
       end
 
+      #
+      # Check whether a type is valid or not
+      #
+      # @return [Boolean]
+      #
       def valid_type?
         %w[ip domain mail].include? type
       end
 
+      #
+      # IP/domain/mail search
+      #
+      # @return [Array<String>]
+      #
       def search
         case type
         when "domain"
@@ -52,6 +62,11 @@ module Mihari
         end
       end
 
+      #
+      # Domain search
+      #
+      # @return [Array<String>]
+      #
       def domain_search
         result = api.history.get_all_dns_history(query, type: "a")
         records = result["records"] || []
@@ -60,12 +75,22 @@ module Mihari
         end.flatten.compact.uniq
       end
 
+      #
+      # IP search
+      #
+      # @return [Array<String>]
+      #
       def ip_search
         result = api.domains.search(filter: { ipv4: query })
         records = result["records"] || []
         records.filter_map { |record| record["hostname"] }.uniq
       end
 
+      #
+      # Mail search
+      #
+      # @return [Array<String>]
+      #
       def mail_search
         result = api.domains.search(filter: { whois_email: query })
         records = result["records"] || []

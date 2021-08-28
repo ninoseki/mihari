@@ -1,0 +1,9 @@
+module Mihari
+  module Emitters
+    class StandardOutput < Base
+      def valid?: () -> ::TrueClass
+
+      def emit: (title: String title, description: String description, artifacts: Array[Mihari::Artifact] artifacts, source: String source, tags: Array[String] tags) -> void
+    end
+  end
+end

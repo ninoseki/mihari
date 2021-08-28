@@ -26,6 +26,11 @@ module Mihari
 
       PAGE_SIZE = 10
 
+      #
+      # Check whether a type is valid or not
+      #
+      # @return [Boolean]
+      #
       def valid_type?
         %w[host web].include? type
       end
@@ -38,6 +43,13 @@ module Mihari
         @api ||= ::ZoomEye::API.new(api_key: Mihari.config.zoomeye_api_key)
       end
 
+      #
+      # Convert responses into an array of String
+      #
+      # @param [Array<Hash>] responses
+      #
+      # @return [Array<String>]
+      #
       def convert_responses(responses)
         responses.map do |res|
           matches = res["matches"] || []
@@ -47,12 +59,25 @@ module Mihari
         end.flatten.compact.uniq
       end
 
+      #
+      # Host search
+      #
+      # @param [String] query
+      # @param [Integer] page
+      #
+      # @return [Hash, nil]
+      #
       def _host_search(query, page: 1)
         api.host.search(query, page: page)
       rescue ::ZoomEye::Error => _e
         nil
       end
 
+      #
+      # Host search
+      #
+      # @return [Array<String>]
+      #
       def host_search
         responses = []
         (1..Float::INFINITY).each do |page|
@@ -66,12 +91,25 @@ module Mihari
         convert_responses responses.compact
       end
 
+      #
+      # Web search
+      #
+      # @param [String] query
+      # @param [Integer] page
+      #
+      # @return [Hash, nil]
+      #
       def _web_search(query, page: 1)
         api.web.search(query, page: page)
       rescue ::ZoomEye::Error => _e
         nil
       end
 
+      #
+      # Web search
+      #
+      # @return [Array<String>]
+      #
       def web_search
         responses = []
         (1..Float::INFINITY).each do |page|

@@ -16,6 +16,11 @@ module Mihari
 
       private
 
+      #
+      # Search
+      #
+      # @return [Array<String>]
+      #
       def search
         artifacts = []
 

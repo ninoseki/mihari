@@ -1,0 +1,25 @@
+module Mihari
+  class Status
+    def check: () -> Array[Hash[(String | Symbol), untyped]]
+
+    def self.check: () -> Array[Hash[(String | Symbol), untyped]]
+
+    private
+
+    #
+    # Statuses of analyzers and emitters
+    #
+    # @return [Array<Hash>]
+    #
+    def statuses: () -> Array[Hash[(String | Symbol), untyped]]
+
+    #
+    # Build a status of a class
+    #
+    # @param [Class<Mihari::Analyzers::Base>, Class<Mihari::Emitters::Base>] klass
+    #
+    # @return [Hash, nil]
+    #
+    def build_status: (singleton(Mihari::Analyzers::Base) | singleton(Mihari::Emitters::Base)) -> Hash[(String|Symbol), untyped]?
+  end
+end

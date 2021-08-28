@@ -1,0 +1,25 @@
+class InitialSchema
+  def change: () -> void
+end
+
+class AddeSourceToArtifactSchema
+  def change: () -> void
+end
+
+class EnrichmentsSchema
+  def change: () -> void
+end
+
+module Mihari
+  class Database
+    def self.connect: () -> void
+
+    def self.close: () -> void
+
+    def self.destroy!: () -> void
+  end
+end
+
+class Object
+  def adapter: () -> ("postgresql" | "mysql2" | "sqlite3")
+end

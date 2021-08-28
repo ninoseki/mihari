@@ -35,10 +35,20 @@ module Mihari
         @api = ::VirusTotal::API.new(key: Mihari.config.virustotal_api_key)
       end
 
+      #
+      # Check whether a type is valid or not
+      #
+      # @return [Boolean]
+      #
       def valid_type?
         %w[ip domain].include? type
       end
 
+      #
+      # Search
+      #
+      # @return [Array<String>]
+      #
       def search
         case type
         when "domain"
@@ -50,6 +60,11 @@ module Mihari
         end
       end
 
+      #
+      # Domain search
+      #
+      # @return [Array<String>]
+      #
       def domain_search
         res = api.domain.resolutions(query)
 
@@ -59,6 +74,11 @@ module Mihari
         end.uniq
       end
 
+      #
+      # IP search
+      #
+      # @return [Array<String>]
+      #
       def ip_search
         res = api.ip_address.resolutions(query)
 

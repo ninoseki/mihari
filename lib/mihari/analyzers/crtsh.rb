@@ -23,6 +23,11 @@ module Mihari
         @api ||= ::Crtsh::API.new
       end
 
+      #
+      # Search
+      #
+      # @return [Array<Hash>]
+      #
       def search
         exclude = exclude_expired ? "expired" : nil
         api.search(query, exclude: exclude)

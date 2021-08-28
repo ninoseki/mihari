@@ -55,7 +55,7 @@ module Mihari
 
       private
 
-      # @return [String]
+      # @return [String, nil]
       def _urlscan_link
         case data_type
         when "ip"
@@ -69,7 +69,7 @@ module Mihari
       end
       memoize :_urlscan_link
 
-      # @return [String]
+      # @return [String, nil]
       def _vt_link
         case data_type
         when "hash"
@@ -86,11 +86,13 @@ module Mihari
       end
       memoize :_vt_link
 
+      # @return [String, nil]
       def _censys_link
         data_type == "ip" ? "https://search.censys.io/hosts/#{data}" : nil
       end
       memoize :_censys_link
 
+      # @return [String, nil]
       def _shodan_link
         data_type == "ip" ? "https://www.shodan.io/host/#{data}" : nil
       end
@@ -116,12 +118,28 @@ module Mihari
         notifier.valid?
       end
 
+      #
+      # Build attachements
+      #
+      # @param [Array<Mihari::Artifact>] artifacts
+      #
+      # @return [Array<Mihari::Emitters::Attachment>]
+      #
       def to_attachments(artifacts)
         artifacts.map do |artifact|
           Attachment.new(data: artifact.data, data_type: artifact.data_type).to_a
         end.flatten
       end
 
+      #
+      # Build a text
+      #
+      # @param [String] title
+      # @param [String] description
+      # @param [Array<String>] tags
+      #
+      # @return [String]
+      #
       def to_text(title:, description:, tags: [])
         tags = ["N/A"] if tags.empty?
 

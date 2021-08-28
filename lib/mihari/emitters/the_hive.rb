@@ -6,7 +6,7 @@ require "net/ping"
 module Mihari
   module Emitters
     class TheHive < Base
-      # @return [true, false]
+      # @return [Boolean]
       def valid?
         api_endpont? && api_key? && ping?
       end
@@ -34,16 +34,29 @@ module Mihari
         @api ||= Hachi::API.new(api_endpoint: Mihari.config.thehive_api_endpoint, api_key: Mihari.config.thehive_api_key)
       end
 
-      # @return [true, false]
+      #
+      # Check whether an API endpoint is set or not
+      #
+      # @return [Boolean]
+      #
       def api_endpont?
         !Mihari.config.thehive_api_endpoint.nil?
       end
 
-      # @return [true, false]
+      #
+      # Check whether an API key is set or not
+      #
+      # @return [Boolean]
+      # ]
       def api_key?
         !Mihari.config.thehive_api_key.nil?
       end
 
+      #
+      # Check whether an API endpoint is reachable or not
+      #
+      # @return [Boolean]
+      #
       def ping?
         base_url = Mihari.config.thehive_api_endpoint
         base_url = base_url.end_with?("/") ? base_url[0..-2] : base_url

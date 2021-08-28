@@ -1,0 +1,31 @@
+module Mihari
+  module Analyzers
+    class VirusTotal < Base
+      attr_reader query: String
+      attr_reader title: String
+      attr_reader description: String
+      attr_reader tags: Array[String]
+      attr_reader type: String
+
+      include Mixins::Refang
+
+      def initialize: (*untyped args, **untyped kwargs) -> void
+
+      def artifacts: () -> (Array[String] | Array[Mihari::Artifact])
+
+      private
+
+      def configuration_keys: () -> ::Array["virustotal_api_key"]
+
+      def api: () -> untyped
+
+      def valid_type?: () -> bool
+
+      def search: () -> Array[String]
+
+      def domain_search: () -> Array[String]
+
+      def ip_search: () -> Array[String]
+    end
+  end
+end
