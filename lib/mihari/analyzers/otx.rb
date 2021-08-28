@@ -81,7 +81,7 @@ module Mihari
       #
       # @return [Array<String>]
       #
-      def ip_earch
+      def ip_search
         records = ip_client.get_passive_dns(query)
         records.filter_map do |record|
           record.hostname if record.record_type == "A"
