@@ -35,10 +35,20 @@ module Mihari
         @api ||= ::Pulsedive::API.new(Mihari.config.pulsedive_api_key)
       end
 
+      #
+      # Check whether a type is valid or not
+      #
+      # @return [Boolean]
+      #
       def valid_type?
         %w[ip domain].include? type
       end
 
+      #
+      # Search
+      #
+      # @return [Array<String>]
+      #
       def search
         raise InvalidInputError, "#{query}(type: #{type || "unknown"}) is not supported." unless valid_type?
 

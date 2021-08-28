@@ -1,0 +1,5 @@
+module Mihari
+  class AutonomousSystem < ActiveRecord::Base
+    attr_accessor asn (): Integer
+  end
+end

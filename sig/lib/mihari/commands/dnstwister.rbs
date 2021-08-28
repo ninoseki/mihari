@@ -1,0 +1,7 @@
+module Mihari
+  module Commands
+    module DNSTwister
+      def self.included: (untyped thor) -> untyped
+    end
+  end
+end

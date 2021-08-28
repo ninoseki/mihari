@@ -35,6 +35,11 @@ module Mihari
         @api ||= ::PassiveCIRCL::API.new(username: Mihari.config.circl_passive_username, password: Mihari.config.circl_passive_password)
       end
 
+      #
+      # Passive DNS/SSL search
+      #
+      # @return [Array<String>]
+      #
       def search
         case @type
         when "domain"
@@ -46,6 +51,11 @@ module Mihari
         end
       end
 
+      #
+      # Passive DNS search
+      #
+      # @return [Array<String>]
+      #
       def passive_dns_search
         results = api.dns.query(@query)
         results.filter_map do |result|
@@ -54,6 +64,11 @@ module Mihari
         end.uniq
       end
 
+      #
+      # Passive SSL search
+      #
+      # @return [Array<String>]
+      #
       def passive_ssl_search
         result = api.ssl.cquery(@query)
         seen = result["seen"] || []

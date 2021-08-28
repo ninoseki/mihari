@@ -18,12 +18,12 @@ module Mihari
       raise ArgumentError if data.is_a?(Hash)
     end
 
-    # @return [true, false]
+    # @return [Boolean]
     def hash?
       md5? || sha1? || sha256? || sha512?
     end
 
-    # @return [true, false]
+    # @return [Boolean]
     def ip?
       IPAddr.new data
       true
@@ -31,7 +31,7 @@ module Mihari
       false
     end
 
-    # @return [true, false]
+    # @return [Boolean]
     def domain?
       uri = Addressable::URI.parse("http://#{data}")
       uri.host == data && PublicSuffix.valid?(uri.host)
@@ -39,7 +39,7 @@ module Mihari
       false
     end
 
-    # @return [true, false]
+    # @return [Boolean]
     def url?
       uri = Addressable::URI.parse(data)
       uri.scheme && uri.host && uri.path && PublicSuffix.valid?(uri.host)
@@ -47,7 +47,7 @@ module Mihari
       false
     end
 
-    # @return [true, false]
+    # @return [Boolean]
     def mail?
       EmailAddress.valid? data, host_validation: :syntax
     end
@@ -83,22 +83,22 @@ module Mihari
 
     private
 
-    # @return [true, false]
+    # @return [Boolean]
     def md5?
       data.match?(/^[A-Fa-f0-9]{32}$/)
     end
 
-    # @return [true, false]
+    # @return [Boolean]
     def sha1?
       data.match?(/^[A-Fa-f0-9]{40}$/)
     end
 
-    # @return [true, false]
+    # @return [Boolean]
     def sha256?
       data.match?(/^[A-Fa-f0-9]{64}$/)
     end
 
-    # @return [true, false]
+    # @return [Boolean]
     def sha512?
       data.match?(/^[A-Fa-f0-9]{128}$/)
     end

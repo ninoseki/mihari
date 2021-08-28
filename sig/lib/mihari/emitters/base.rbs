@@ -1,0 +1,18 @@
+module Mihari
+  module Emitters
+    class Base
+      include Mixins::Configurable
+
+      include Mixins::Retriable
+
+      def self.inherited: (untyped child) -> untyped
+
+      # @return [true, false]
+      def valid?: () -> bool
+
+      def run: (**untyped params) -> void
+
+      def emit: () -> void
+    end
+  end
+end

@@ -1,0 +1,41 @@
+module Mihari
+  module Mixins
+    module Rule
+      #
+      # Load rule into hash
+      #
+      # @param [String] path Path to YAML file or YAML string
+      #
+      # @return [Hash]
+      #
+      def load_rule: (String path) -> Hash
+
+      #
+      # Validate rule schema and return a normalized rule
+      #
+      # @param [Hash] rule
+      #
+      # @return [Hash]
+      #
+      def validate_rule: (Hash rule) -> Hash
+
+      #
+      # Returns a template for rule
+      #
+      # @return [String] A template for rule
+      #
+      def rule_template: () -> String
+
+      #
+      # Create (blank) rule file
+      #
+      # @param [String] filename
+      # @param [Dry::Files] files
+      # @param [String] template
+      #
+      # @return [nil]
+      #
+      def initialize_rule_yaml: (String filename, ?untyped files, ?template: String template) -> nil
+    end
+  end
+end

@@ -1,0 +1,68 @@
+module Mihari
+  module Analyzers
+    class Rule < Base
+      include Mihari::Mixins::DisallowedDataValue
+
+      attr_reader title: String
+      attr_reader description: String
+      attr_reader queries: Hash[(String | Symbol), untyped]
+      attr_reader tags: Array[String]
+      attr_reader allowed_data_types: Array[String]
+      attr_reader disallowed_data_values: Array[String]
+      attr_reader source: String
+      attr_reader id: String?
+
+      def initialize: (**untyped kwargs) -> void
+
+      ANALYZER_TO_CLASS: Hash[String, singleton(Mihari::Analyzers::Base)]
+
+      #
+      # Returns a list of artifacts matched with queries
+      #
+      # @return [Array<Mihari::Artifact>]
+      #
+      def artifacts: () -> (Array[String] | Array[Mihari::Artifact])
+
+      #
+      # Normalize artifacts
+      # - Uniquefy artifacts by #uniq(&:data)
+      # - Reject an invalid artifact (for just in case)
+      # - Select artifacts with allowed data types
+      # - Reject artifacts with disallowed data values
+      #
+      # @return [Array<Mihari::Artifact>]
+      #
+      def normalized_artifacts: () -> untyped
+
+      #
+      # Normalized disallowed data values
+      #
+      # @return [Array<Regexp, String>]
+      #
+      def normalized_disallowed_data_values: () -> untyped
+
+      #
+      # Check whether a value is a disallowed data value or not
+      #
+      # @return [Boolean]
+      #
+      def disallowed_data_value?: (untyped value) -> untyped
+
+      private
+
+      #
+      # Get analyzer class
+      #
+      # @param [String] analyzer_name
+      #
+      # @return [Class<Mihari::Analyzers::Base>] analyzer class
+      #
+      def get_analyzer_class: (untyped analyzer_name) -> untyped
+
+      #
+      # Validate configuration of analyzers
+      #
+      def validate_analyzer_configurations: () -> untyped
+    end
+  end
+end

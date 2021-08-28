@@ -7,7 +7,7 @@ require "uri"
 module Mihari
   module Emitters
     class Webhook < Base
-      # @return [true, false]
+      # @return [Boolean]
       def valid?
         webhook_url?
       end
@@ -24,7 +24,7 @@ module Mihari
           tags: tags
         }
 
-        if use_json_body
+        if use_json_body?
           Net::HTTP.post(uri, data.to_json, "Content-Type" => "application/json")
         else
           Net::HTTP.post_form(uri, data)
@@ -37,15 +37,30 @@ module Mihari
         %w[webhook_url]
       end
 
+      #
+      # Webhook URL
+      #
+      # @return [String, nil]
+      #
       def webhook_url
         @webhook_url ||= Mihari.config.webhook_url
       end
 
+      #
+      # Check whether a webhook URL is set or not
+      #
+      # @return [<Type>] <description>
+      #
       def webhook_url?
         !webhook_url.nil?
       end
 
-      def use_json_body
+      #
+      # Check whether to use JSON body or NOT
+      #
+      # @return [<Type>] <description>
+      #
+      def use_json_body?
         @use_json_body ||= Mihari.config.webhook_use_json_body
       end
     end

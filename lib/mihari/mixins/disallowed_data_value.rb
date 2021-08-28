@@ -17,7 +17,7 @@ module Mihari
 
         # if a value is surrounded by slashes, take it as a regexp
         value_without_slashes = value[1..-2]
-        Regexp.compile value_without_slashes
+        Regexp.compile value_without_slashes.to_s
       end
 
       memoize :normalize_disallowed_data_value

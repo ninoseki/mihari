@@ -1,0 +1,17 @@
+module Mihari
+  module Analyzers
+    class Basic < Base
+      attr_reader title: String
+
+      attr_reader description: String
+
+      attr_reader artifacts: (Array[String] | Array[Mihari::Artifact])
+
+      attr_reader source: String
+
+      attr_reader tags: Array[String]?
+
+      def initialize: (title: String title, description: String description, artifacts: (Array[String] | Array[Mihari::Artifact]) artifacts, source: String source, ?tags: Array[String] tags) -> void
+    end
+  end
+end

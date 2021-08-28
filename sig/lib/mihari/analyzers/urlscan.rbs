@@ -1,0 +1,28 @@
+SUPPORTED_DATA_TYPES: untyped
+
+module Mihari
+  module Analyzers
+    class Urlscan < Base
+      attr_reader query: String
+      attr_reader title: String
+      attr_reader description: String
+      attr_reader tags: Array[String]
+      attr_reader allowed_data_types: Array[String]
+      attr_reader use_similarity: bool
+
+      def initialize: (*untyped args, **untyped kwargs) -> void
+
+      def artifacts: () -> (Array[String] | Array[Mihari::Artifact])
+
+      private
+
+      def configuration_keys: () -> ::Array["urlscan_api_key"]
+
+      def api: () -> untyped
+
+      def search: () -> Array[Hash[(String | Symbol), untyped]]
+
+      def valid_alllowed_data_types?: () -> bool
+    end
+  end
+end

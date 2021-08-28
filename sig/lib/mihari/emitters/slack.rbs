@@ -1,0 +1,58 @@
+module Mihari
+  module Emitters
+    class Attachment
+      attr_reader data: String
+      attr_reader data_type: String
+      # include Mem
+
+      # extend Dry::Initializer
+
+      def actions: () -> Array[Hash[(String | Symbol), untyped]]
+
+      def vt_link: () -> (nil | { :type => "button", text: "VirusTotal", url: String })
+
+      def urlscan_link: () -> (nil | { :type => "button", text: "urlscan.io", url: String })
+
+      def censys_link: () -> (nil | { :type => "button", text: "Censys", url: String })
+
+      def shodan_link: () -> (nil | { :type => "button", text: "Shodan", url: String })
+
+      # @return [Array]
+      def to_a: () -> ::Array[{ text: String, fallback: "VT & urlscan.io links", actions: Array[Hash[(String | Symbol), untyped]] }]
+
+      private
+
+      # @return [String]
+      def _urlscan_link: () -> String?
+
+      # @return [String]
+      def _vt_link: () -> String?
+
+      def _censys_link: () -> String?
+
+      def _shodan_link: () -> String?
+
+      # @return [String]
+      def sha256: () -> String
+
+      # @return [String]
+      def defanged_data: () -> String
+    end
+
+    class Slack < Base
+      def notifier: () -> Mihari::Notifiers::Slack
+
+      def valid?: () -> bool
+
+      def to_attachments: (Array[Mihari::Artifact] artifacts) -> Array[Mihari::Emitters::Attachment]
+
+      def to_text: (title: String title, description: String description, ?tags: Array[String] tags) -> String
+
+      def emit: (title: String title, description: String description, artifacts: Array[Mihari::Artifact] artifacts, ?tags: Array[String] tags, **untyped _options) -> void
+
+      private
+
+      def configuration_keys: () -> ::Array["slack_webhook_url"]
+    end
+  end
+end

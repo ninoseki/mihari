@@ -1,0 +1,3 @@
+module Mihari
+  ALLOWED_DATA_TYPES: Array[String]
+end

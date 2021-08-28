@@ -1,0 +1,4 @@
+module Mihari
+  class Tagging < ActiveRecord::Base
+  end
+end

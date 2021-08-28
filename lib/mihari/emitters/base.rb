@@ -10,7 +10,7 @@ module Mihari
         Mihari.emitters << child
       end
 
-      # @return [true, false]
+      # @return [Boolean]
       def valid?
         raise NotImplementedError, "You must implement #{self.class}##{__method__}"
       end

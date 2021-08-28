@@ -1,0 +1,18 @@
+module Mihari
+  module Analyzers
+    class DNPedia < Base
+      attr_reader query: String
+      attr_reader title: String
+      attr_reader description: String
+      attr_reader tags: Array[String]
+
+      def artifacts: () -> (Array[String] | Array[Mihari::Artifact])
+
+      private
+
+      def api: () -> untyped
+
+      def search: () -> Array[String]
+    end
+  end
+end

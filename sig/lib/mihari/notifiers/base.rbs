@@ -1,0 +1,18 @@
+module Mihari
+  module Notifiers
+    class Base
+      # Validate notifier availability
+      #
+      # @return [Boolean]
+      #
+      def valid?: () -> bool
+
+      #
+      # Send a notification
+      #
+      # @return [nil]
+      #
+      def notify: () -> void
+    end
+  end
+end

@@ -1,0 +1,6 @@
+module Mihari
+  class Geolocation < ActiveRecord::Base
+    attr_accessor country (): String
+    attr_accessor country_code (): String
+  end
+end

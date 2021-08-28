@@ -1,0 +1,57 @@
+class Configuration
+  attr_accessor binaryedge_api_key (): String?
+  attr_accessor censys_id (): String?
+  attr_accessor censys_secret (): String?
+  attr_accessor circl_passive_password (): String?
+  attr_accessor circl_passive_username (): String?
+  attr_accessor ipinfo_api_key (): String?
+  attr_accessor misp_api_endpoint (): String?
+  attr_accessor misp_api_key (): String?
+  attr_accessor onyphe_api_key (): String?
+  attr_accessor otx_api_key (): String?
+  attr_accessor passivetotal_api_key (): String?
+  attr_accessor passivetotal_username (): String?
+  attr_accessor pulsedive_api_key (): String?
+  attr_accessor securitytrails_api_key (): String?
+  attr_accessor shodan_api_key (): String?
+  attr_accessor slack_channel (): String?
+  attr_accessor slack_webhook_url (): String?
+  attr_accessor spyse_api_key (): String?
+  attr_accessor thehive_api_endpoint (): String?
+  attr_accessor thehive_api_key (): String?
+  attr_accessor urlscan_api_key (): String?
+  attr_accessor virustotal_api_key (): String?
+  attr_accessor zoomeye_api_key (): String?
+  attr_accessor webhook_url (): String?
+  attr_accessor webhook_use_json_body (): (bool | nil)
+  attr_accessor database (): String?
+
+  attr_reader values: Hash[(String | Symbol), String?]
+end
+
+module Mihari
+  def self.config: () -> Configuration
+
+  # extend Dry::Configurable
+
+  extend Mixins::Configuration
+
+  # include Mem
+
+  def self.emitters: () -> ::Array[singleton(Mihari::Emitters::Base)]
+
+  def self.analyzers: () -> ::Array[singleton(Mihari::Analyzers::Base)]
+
+  #
+  # Load configuration from YAML file
+  #
+  # @param [String] path Path to YAML file
+  #
+  # @return [nil]
+  #
+  def self.load_config_from_yaml: (String path) -> void
+end
+
+class Object
+  def truthy?: (untyped value) -> bool
+end

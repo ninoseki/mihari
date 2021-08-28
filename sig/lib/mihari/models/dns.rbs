@@ -1,0 +1,19 @@
+module Mihari
+  class DnsRecord < ActiveRecord::Base
+    attr_accessor resource (): String
+    attr_accessor value (): String
+
+    #
+    # Build DNS records
+    #
+    # @param [String] domain
+    #
+    # @return [Array<Mihari::DnsRecord>]
+    #
+    def self.build_by_domain: (String domain) -> Array[Mihari::DnsRecord]
+
+    private
+
+    def self.get_values: (String domain, singleton(Resolv::DNS::Query) resource_type) -> Array[Mihari::DnsRecord]
+  end
+end

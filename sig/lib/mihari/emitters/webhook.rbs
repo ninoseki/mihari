@@ -1,0 +1,20 @@
+module Mihari
+  module Emitters
+    class Webhook < Base
+      # @return [true, false]
+      def valid?: () -> bool
+
+      def emit: (title: String title, description: String description, artifacts: Array[Mihari::Artifact] artifacts, source: String source, tags: Array[String] tags) -> void
+
+      private
+
+      def configuration_keys: () -> ::Array["webhook_url"]
+
+      def webhook_url: () -> String?
+
+      def webhook_url?: () -> bool
+
+      def use_json_body?: () -> bool?
+    end
+  end
+end

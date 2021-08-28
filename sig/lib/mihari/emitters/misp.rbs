@@ -1,0 +1,28 @@
+module Mihari
+  module Emitters
+    class MISP < Base
+      def initialize: () -> void
+
+      # @return [true, false]
+      def valid?: () -> bool
+
+      def emit: (title: String title, artifacts: Array[Mihari::Artifact] artifacts, ?tags: Array[String] tags, **untyped _options) -> void
+
+      private
+
+      def configuration_keys: () -> ::Array["misp_api_endpoint" | "misp_api_key"]
+
+      def build_attribute: (Mihari::Artifact artifact) -> untyped
+
+      def hash_type: (String value) -> String?
+
+      def to_misp_type: (type: String `type`, value: String value) -> String?
+
+      def api_endpoint?: () -> bool
+
+      def api_key?: () -> bool
+
+      def ping?: () -> bool
+    end
+  end
+end

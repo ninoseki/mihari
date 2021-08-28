@@ -1,0 +1,38 @@
+module Mihari
+  module Analyzers
+    class Censys < Base
+      attr_reader query: String
+      attr_reader title: String
+      attr_reader description: String
+      attr_reader tags: Array[String]
+
+      def artifacts: () -> (Array[String] | Array[Mihari::Artifact])
+
+      private
+
+      def search: () -> Array[String]
+
+      #
+      # Extract IPv4s from Censys search API response
+      #
+      # @param [Structs::Censys::Response] response
+      #
+      # @return [Array<String>]
+      #
+      def response_to_artifacts: (Mihari::Structs::Censys::Response response) -> Array[String]
+
+      #
+      # Build an artifact from a Shodan search API response
+      #
+      # @param [Structs::Censys::Hit] hit
+      #
+      # @return [Artifact]
+      #
+      def build_artifact: (Mihari::Structs::Censys::Hit hit) -> Mihari::Artifact
+
+      def configuration_keys: () -> ::Array["censys_id" | "censys_secret"]
+
+      def api: () -> untyped
+    end
+  end
+end

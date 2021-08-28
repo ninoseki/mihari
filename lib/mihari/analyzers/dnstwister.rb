@@ -29,6 +29,11 @@ module Mihari
 
       private
 
+      #
+      # Check whether a type is valid or not
+      #
+      # @return [Boolean]
+      #
       def valid_type?
         type == "domain"
       end
@@ -37,6 +42,13 @@ module Mihari
         @api ||= ::DNSTwister::API.new
       end
 
+      #
+      # Check whether a domain is resolvable or not
+      #
+      # @param [String] domain
+      #
+      # @return [Boolean]
+      #
       def resolvable?(domain)
         Resolv.getaddress domain
         true
@@ -44,6 +56,11 @@ module Mihari
         false
       end
 
+      #
+      # Search
+      #
+      # @return [Array<String>]
+      #
       def search
         raise InvalidInputError, "#{query}(type: #{type || "unknown"}) is not supported." unless valid_type?
 

@@ -1,0 +1,29 @@
+module Mihari
+  module Analyzers
+    class Spyse < Base
+      attr_reader query: String
+      attr_reader title: String
+      attr_reader description: String
+      attr_reader tags: Array[String]
+      attr_reader type: String
+
+      def artifacts: () -> (Array[String] | Array[Mihari::Artifact])
+
+      private
+
+      def search_params: () -> Hash[(String | Symbol), untyped]
+
+      def configuration_keys: () -> ::Array["spyse_api_key"]
+
+      def api: () -> untyped
+
+      def valid_type?: () -> bool
+
+      def domain_search: () -> Array[String]
+
+      def ip_search: () -> Array[String]
+
+      def search: () -> Array[String]
+    end
+  end
+end

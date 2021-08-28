@@ -1,0 +1,46 @@
+module Mihari
+  class Alert < ActiveRecord::Base
+    attr_accessor title (): String
+    attr_accessor description (): String?
+    attr_accessor source (): String
+
+    attr_accessor artifacts(): Array[Mihari::Artifact]
+    attr_accessor Tags(): Array[Mihari::Tag]
+
+    #
+    # Search alerts
+    #
+    # @param [String, nil] artifact_data
+    # @param [String, nil] description
+    # @param [String, nil] source
+    # @param [String, nil] tag_name
+    # @param [String, nil] title
+    # @param [DateTime, nil] from_at
+    # @param [DateTime, nil] to_at
+    # @param [Integer, nil] limit
+    # @param [Integer, nil] page
+    #
+    # @return [Array<Hash>]
+    #
+    def self.search: (?artifact_data: String? artifact_data, ?description: String? description, ?source: String? source, ?tag_name: String? tag_name, ?title: String? title, ?from_at: DateTime? from_at, ?to_at: DateTime? to_at, ?limit: ::Integer limit, ?page: ::Integer page) -> Array[Hash[(String | Symbol), untyped]]
+
+    #
+    # Count alerts
+    #
+    # @param [String, nil] artifact_data
+    # @param [String, nil] description
+    # @param [String, nil] source
+    # @param [String, nil] tag_name
+    # @param [String, nil] title
+    # @param [DateTime, nil] from_at
+    # @param [DateTime, nil] to_at
+    #
+    # @return [Integer]
+    #
+    def self.count: (?artifact_data: String? artifact_data, ?description: String? description, ?source: String? source, ?tag_name: String? tag_name, ?title: String? title, ?from_at: DateTime? from_at, ?to_at: DateTime? to_at) -> Integer
+
+    private
+
+    def self.build_relation: (?artifact_data: String? artifact_data, ?title: String? title, ?description: String? description, ?source: String? source, ?tag_name: String? tag_name, ?from_at: DateTime? from_at, ?to_at: DateTime? to_at) -> Mihari::Alert
+  end
+end
