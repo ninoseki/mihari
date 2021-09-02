@@ -7,6 +7,7 @@ module Mihari
     attr_accessor data (): String
     attr_accessor data_type (): String
 
+    attr_accessor autonomous_system(): Mihari::AutonomousSystem
     attr_accessor geolocation (): Mihari::Geolocation
     attr_accessor whois_record(): Mihari::WhoisRecord
     attr_accessor dns_records(): Array[Mihari::DnsRecord]
@@ -41,6 +42,12 @@ module Mihari
     #
     def enrich_reverse_dns: () -> void
 
+    def enrich_geolocation: () -> void
+
+    def enrich_autonomous_system: () -> void
+
+    def enrich_all: () -> void
+
     private
 
     def normalize_as_domain: (String url_or_domain) -> String
@@ -50,5 +57,9 @@ module Mihari
     def can_enrich_dns?: () -> bool
 
     def can_enrich_revese_dns?: () -> bool
+
+    def can_enrich_geolocation?: () -> bool
+
+    def can_enrich_autonomous_system?: () -> bool
   end
 end

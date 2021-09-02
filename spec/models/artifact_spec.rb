@@ -99,4 +99,28 @@ RSpec.describe Mihari::Artifact do
       end
     end
   end
+
+  describe "#enrich_dns", vcr: "Mihari_Enrichers_IPInfo/ip:1.1.1.1" do
+    let(:data) { "1.1.1.1" }
+
+    it do
+      artifact = described_class.new(data: data)
+      expect(artifact.geolocation).to eq(nil)
+
+      artifact.enrich_geolocation
+      expect(artifact.geolocation.country_code).to eq("US")
+    end
+  end
+
+  describe "#enrich_autonomos_system", vcr: "Mihari_Enrichers_IPInfo/ip:1.1.1.1" do
+    let(:data) { "1.1.1.1" }
+
+    it do
+      artifact = described_class.new(data: data)
+      expect(artifact.autonomous_system).to eq(nil)
+
+      artifact.enrich_autonomous_system
+      expect(artifact.autonomous_system.asn).to eq(13_335)
+    end
+  end
 end

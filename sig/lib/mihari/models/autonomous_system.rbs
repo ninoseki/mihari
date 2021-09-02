@@ -1,5 +1,14 @@
 module Mihari
   class AutonomousSystem < ActiveRecord::Base
     attr_accessor asn (): Integer
+
+    #
+    # Build AS by IP
+    #
+    # @param [String] ip
+    #
+    # @return [Mihari::AutonomousSystem]
+    #
+    def self.build_by_ip: (String ip) -> Mihari::AutonomousSystem?
   end
 end
