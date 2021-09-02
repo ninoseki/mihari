@@ -79,7 +79,7 @@ module Mihari
 
         begin
           alert = Mihari::Artifact.find(id)
-          alert.delete
+          alert.destroy
 
           status 204
           body ""
