@@ -1,0 +1,14 @@
+module Mihari
+  module Enrichers
+    class IPInfo
+      #
+      # Query IPInfo
+      #
+      # @param [String] ip
+      #
+      # @return [Mihari::Structs::IPInfo::Response, nil]
+      #
+      def self.query: (String ip) -> Mihari::Structs::IPInfo::Response?
+    end
+  end
+end
