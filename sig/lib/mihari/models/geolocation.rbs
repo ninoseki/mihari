@@ -2,5 +2,14 @@ module Mihari
   class Geolocation < ActiveRecord::Base
     attr_accessor country (): String
     attr_accessor country_code (): String
+
+    #
+    # Build geolocation by IP
+    #
+    # @param [String] ip
+    #
+    # @return [Mihari::Geolocation]
+    #
+    def self.build_by_ip: (String ip) -> Mihari::Geolocation?
   end
 end

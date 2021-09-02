@@ -64,6 +64,7 @@ Gem::Specification.new do |spec|
   spec.add_dependency "http", "~> 5.0"
   spec.add_dependency "launchy", "~> 2.5"
   spec.add_dependency "mem", "~> 0.1"
+  spec.add_dependency "memist", "~> 2.0"
   spec.add_dependency "misp", "~> 0.1"
   spec.add_dependency "net-ping", "~> 2.0"
   spec.add_dependency "normalize_country", "0.3"

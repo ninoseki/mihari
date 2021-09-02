@@ -3,8 +3,8 @@ module Mihari
     class Base
       # extend Dry::Initializer
 
+      include Mixins::AutonomousSystem
       include Mixins::Configurable
-
       include Mixins::Retriable
 
       attr_accessor ignore_old_artifacts: bool
@@ -85,15 +85,6 @@ module Mihari
       # @return [Array<Mihari::Emitters::Base>]
       #
       def valid_emitters: () -> Array[Mihari::Emitters::Base]
-
-      #
-      # Normalize ASN value
-      #
-      # @param [String, Integer] asn
-      #
-      # @return [Integer]
-      #
-      def normalize_asn: (String asn) -> Integer
     end
   end
 end

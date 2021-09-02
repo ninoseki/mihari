@@ -5,6 +5,8 @@ require "resolv"
 
 module Mihari
   class DnsRecord < ActiveRecord::Base
+    belongs_to :artifact
+
     class << self
       #
       # Build DNS records

@@ -1,0 +1,14 @@
+module Mihari
+  module Mixins
+    module AutonomousSystem
+      #
+      # Normalize ASN value
+      #
+      # @param [String, Integer] asn
+      #
+      # @return [Integer]
+      #
+      def normalize_asn: (String | Integer asn) -> Integer
+    end
+  end
+end

@@ -5,6 +5,8 @@ require "resolv"
 
 module Mihari
   class ReverseDnsName < ActiveRecord::Base
+    belongs_to :artifact
+
     class << self
       #
       # Build reverse DNS names

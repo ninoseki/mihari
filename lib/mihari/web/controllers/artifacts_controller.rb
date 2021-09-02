@@ -46,6 +46,32 @@ module Mihari
         json artifact_json
       end
 
+      get "/api/artifacts/:id/enrich" do
+        param :id, Integer, required: true
+
+        id = params["id"].to_i
+
+        begin
+          artifact = Mihari::Artifact.includes(
+            :autonomous_system,
+            :geolocation,
+            :whois_record,
+            :dns_records,
+            :reverse_dns_names
+          ).find(id)
+        rescue ActiveRecord::RecordNotFound
+          status 404
+
+          return json({ message: "ID:#{id} is not found" })
+        end
+
+        artifact.enrich_all
+        artifact.save
+
+        status 201
+        body ""
+      end
+
       delete "/api/artifacts/:id" do
         param :id, Integer, required: true
 
