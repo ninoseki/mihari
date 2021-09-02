@@ -7,6 +7,7 @@ require "mem"
 require "yaml"
 
 # Mixins
+require "mihari/mixins/autonomous_system"
 require "mihari/mixins/configurable"
 require "mihari/mixins/configuration"
 require "mihari/mixins/disallowed_data_value"
@@ -100,6 +101,7 @@ require "mihari/types"
 
 # Structs
 require "mihari/structs/censys"
+require "mihari/structs/ipinfo"
 require "mihari/structs/onyphe"
 require "mihari/structs/shodan"
 
@@ -107,6 +109,9 @@ require "mihari/structs/shodan"
 require "mihari/schemas/analyzer"
 require "mihari/schemas/configuration"
 require "mihari/schemas/rule"
+
+# Enrichers
+require "mihari/enrichers/ipinfo"
 
 # Models
 require "mihari/models/alert"

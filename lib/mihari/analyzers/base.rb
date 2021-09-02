@@ -8,6 +8,7 @@ module Mihari
     class Base
       extend Dry::Initializer
 
+      include Mixins::AutonomousSystem
       include Mixins::Configurable
       include Mixins::Retriable
 
@@ -111,9 +112,7 @@ module Mihari
       #
       def enriched_artifacts
         @enriched_artifacts ||= unique_artifacts.map do |artifact|
-          artifact.enrich_whois
-          artifact.enrich_dns
-          artifact.enrich_reverse_dns
+          artifact.enrich_all
           artifact
         end
       end
@@ -140,20 +139,6 @@ module Mihari
           emitter = klass.new
           emitter.valid? ? emitter : nil
         end.compact
-      end
-
-      #
-      # Normalize ASN value
-      #
-      # @param [String, Integer] asn
-      #
-      # @return [Integer]
-      #
-      def normalize_asn(asn)
-        return asn if asn.is_a?(Integer)
-        return asn.to_i unless asn.start_with?("AS")
-
-        asn.delete_prefix("AS").to_i
       end
     end
   end
