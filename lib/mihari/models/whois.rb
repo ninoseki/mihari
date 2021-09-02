@@ -6,7 +6,7 @@ require "public_suffix"
 
 module Mihari
   class WhoisRecord < ActiveRecord::Base
-    has_one :artifact, dependent: :destroy
+    belongs_to :artifact
 
     @memo = {}
 
