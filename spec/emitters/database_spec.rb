@@ -7,7 +7,7 @@ RSpec.describe Mihari::Emitters::Database do
     reset_db
   end
 
-  describe "#emit" do
+  describe "#emit", vcr: "Mihari_Enrichers_IPInfo/ip:1.1.1.1" do
     let(:title) { "test" }
     let(:description) { "test" }
     let(:artifacts) { [Mihari::Artifact.new(data: "1.1.1.1")] }
