@@ -38,6 +38,13 @@ RSpec.describe Mihari::Controllers::ArtifactsController do
     end
   end
 
+  describe "get /api/artifacts/:id/enrich" do
+    it "returns 201" do
+      get "/api/artifacts/#{@artifact.id}/enrich"
+      expect(last_response.status).to eq(201)
+    end
+  end
+
   describe "delete /api/artifacts/:id" do
     it "returns 500" do
       delete "/api/artifacts/foo"
