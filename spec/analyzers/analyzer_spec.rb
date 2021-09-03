@@ -46,6 +46,11 @@ RSpec.describe Mihari::Analyzers::Base, :vcr do
       subject.normalized_artifacts.each do |artifact|
         allow(artifact).to receive(:enrich_all).and_return(nil)
       end
+
+      # set an empty array as emitters
+      allow(Mihari).to receive(:emitters).and_return([])
+
+      allow(Parallel).to receive(:processor_count).and_return(0)
     end
 
     it "doens't raise any error" do
@@ -54,6 +59,11 @@ RSpec.describe Mihari::Analyzers::Base, :vcr do
 
     context "when a notifer raises an error" do
       before do
+        # mock artifact enrichments
+        subject.normalized_artifacts.each do |artifact|
+          allow(artifact).to receive(:enrich_all).and_return(nil)
+        end
+
         # mock emitters
         emitter = double("emitter_instance")
         allow(emitter).to receive(:valid?).and_return(true)
@@ -62,11 +72,8 @@ RSpec.describe Mihari::Analyzers::Base, :vcr do
         klass = double("emitter_class")
         allow(klass).to receive(:new).and_return(emitter)
 
+        # set mocked classes as emitters
         allow(Mihari).to receive(:emitters).and_return([klass])
-
-        thehive = instance_double(Mihari::Emitters::TheHive)
-        allow(thehive).to receive(:valid?).and_return(false)
-        allow(Mihari::Emitters::TheHive).to receive(:new).and_return(thehive)
 
         allow(Parallel).to receive(:processor_count).and_return(0)
       end

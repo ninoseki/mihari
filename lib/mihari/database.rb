@@ -74,6 +74,17 @@ class EnrichmentsSchema < ActiveRecord::Migration[6.1]
   end
 end
 
+class EnrichmentCreatedAtSchema < ActiveRecord::Migration[6.1]
+  def change
+    # Add created_at column because now it is able to enrich an atrifact after the creation
+    add_column :autonomous_systems, :created_at, :datetime, if_not_exists: true
+    add_column :geolocations, :created_at, :datetime, if_not_exists: true
+    add_column :whois_records, :created_at, :datetime, if_not_exists: true
+    add_column :dns_records, :created_at, :datetime, if_not_exists: true
+    add_column :reverse_dns_names, :created_at, :datetime, if_not_exists: true
+  end
+end
+
 def adapter
   return "postgresql" if Mihari.config.database.start_with?("postgresql://", "postgres://")
   return "mysql2" if Mihari.config.database.start_with?("mysql2://")
@@ -101,6 +112,7 @@ module Mihari
         InitialSchema.migrate(:up)
         AddeSourceToArtifactSchema.migrate(:up)
         EnrichmentsSchema.migrate(:up)
+        EnrichmentCreatedAtSchema.migrate(:up)
       rescue StandardError
         # Do nothing
       end
@@ -116,6 +128,7 @@ module Mihari
         InitialSchema.migrate(:down)
         AddeSourceToArtifactSchema.migrate(:down)
         EnrichmentsSchema.migrate(:down)
+        EnrichmentCreatedAtSchema.migrate(:down)
       end
     end
   end
