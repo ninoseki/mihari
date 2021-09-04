@@ -4,7 +4,18 @@ require "memist"
 
 module Mihari
   module Enrichers
-    class IPInfo
+    class IPInfo < Base
+      # @return [Boolean]
+      def valid?
+        Mihari.config.ipinfo_api_key.nil?
+      end
+
+      private
+
+      def configuration_keys
+        %w[ipinfo_api_key]
+      end
+
       class << self
         include Memist::Memoizable
 

@@ -1,6 +1,8 @@
 module Mihari
   module Enrichers
     class IPInfo
+      def valid?: () -> bool
+
       #
       # Query IPInfo
       #

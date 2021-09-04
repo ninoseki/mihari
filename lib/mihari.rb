@@ -6,6 +6,9 @@ require "dry/files"
 require "mem"
 require "yaml"
 
+# Load .env
+require "dotenv/load"
+
 # Mixins
 require "mihari/mixins/autonomous_system"
 require "mihari/mixins/configurable"
@@ -67,6 +70,11 @@ module Mihari
     end
     memoize :analyzers
 
+    def enrichers
+      []
+    end
+    memoize :enrichers
+
     #
     # Load configuration from YAML file
     #
@@ -111,6 +119,7 @@ require "mihari/schemas/configuration"
 require "mihari/schemas/rule"
 
 # Enrichers
+require "mihari/enrichers/base"
 require "mihari/enrichers/ipinfo"
 
 # Models

@@ -42,6 +42,8 @@ module Mihari
 
   def self.analyzers: () -> ::Array[singleton(Mihari::Analyzers::Base)]
 
+  def self.enrichers: () -> ::Array[singleton(Mihari::Enrichers::Base)]
+
   #
   # Load configuration from YAML file
   #
