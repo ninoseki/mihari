@@ -9,7 +9,7 @@ module Mihari
         attribute :hostname, Types::String.optional
         attribute :loc, Types::String
         attribute :country_code, Types::String
-        attribute :asn, Types::Integer
+        attribute :asn, Types::Integer.optional
 
         class << self
           include Mixins::AutonomousSystem
@@ -17,9 +17,12 @@ module Mihari
           def from_dynamic!(d)
             d = Types::Hash[d]
 
-            org = d.fetch("org")
-            asn = org.split.first
-            asn = normalize_asn(asn)
+            asn = nil
+            org = d["org"]
+            unless org.nil?
+              asn = org.split.first
+              asn = normalize_asn(asn)
+            end
 
             new(
               ip: d.fetch("ip"),
@@ -29,7 +32,7 @@ module Mihari
               asn: asn
             )
           end
-      end
+        end
       end
     end
   end

@@ -32,7 +32,7 @@ module Mihari
   setting :censys_secret, ENV["CENSYS_SECRET"]
   setting :circl_passive_password, ENV["CIRCL_PASSIVE_PASSWORD"]
   setting :circl_passive_username, ENV["CIRCL_PASSIVE_USERNAME"]
-  setting :ipinfo_api_key, ENV["ipinfo_api_key"]
+  setting :ipinfo_api_key, ENV["IPINFO_API_KEY"]
   setting :misp_api_endpoint, ENV["MISP_API_ENDPOINT"]
   setting :misp_api_key, ENV["MISP_API_KEY"]
   setting :onyphe_api_key, ENV["ONYPHE_API_KEY"]

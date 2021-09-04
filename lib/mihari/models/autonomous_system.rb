@@ -17,11 +17,9 @@ module Mihari
       def build_by_ip(ip)
         res = Enrichers::IPInfo.query(ip)
 
-        unless res.nil?
-          return new(asn: res.asn)
-        end
+        return nil if res.nil? || res.asn.nil?
 
-        nil
+        new(asn: res.asn)
       end
     end
   end
