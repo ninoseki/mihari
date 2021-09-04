@@ -6,6 +6,9 @@ require "dry/files"
 require "mem"
 require "yaml"
 
+# Load .env
+require "dotenv/load"
+
 # Mixins
 require "mihari/mixins/autonomous_system"
 require "mihari/mixins/configurable"
