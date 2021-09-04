@@ -1,0 +1,12 @@
+module Mihari
+  module Enrichers
+    class Base
+      include Mixins::Configurable
+
+      def self.inherited: (untyped child) -> untyped
+
+      # @return [Boolean]
+      def valid?: () -> bool
+    end
+  end
+end

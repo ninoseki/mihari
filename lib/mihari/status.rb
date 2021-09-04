@@ -18,7 +18,7 @@ module Mihari
     # @return [Array<Hash>]
     #
     def statuses
-      (Mihari.analyzers + Mihari.emitters).map do |klass|
+      (Mihari.analyzers + Mihari.emitters + Mihari.enrichers).map do |klass|
         name = klass.to_s.split("::").last.to_s
 
         [name, build_status(klass)]
@@ -36,11 +36,16 @@ module Mihari
       return nil if klass == Mihari::Analyzers::Rule
 
       is_analyzer = klass.ancestors.include?(Mihari::Analyzers::Base)
+      is_emitter = klass.ancestors.include?(Mihari::Emitters::Base)
+      is_enricher = klass.ancestors.include?(Mihari::Enrichers::Base)
 
       instance = is_analyzer ? klass.new("dummy") : klass.new
       is_configured = instance.configured?
       values = instance.configuration_values
-      type = is_analyzer ? "Analyzer" : "Emitter"
+
+      type = "Analyzer"
+      type = "Emitter" if is_emitter
+      type = "Enricher" if is_enricher
 
       values ? { is_configured: is_configured, values: values, type: type } : nil
     rescue ArgumentError => _e
