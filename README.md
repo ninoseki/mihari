@@ -64,5 +64,3 @@ The gem is available as open source under the terms of the [MIT License](https:/
 ## Acknowledgement
 
 Mihari is proudly supported by [Tines.io](https://tines.io?utm_source=github&utm_medium=sponsorship&utm_campaign=ninoseki), The SOAR Platform for Enterprise Security Teams.
-
-$ bundle exec rbs -rpathname  --repo=gem_rbs/gems -ractivesupport -ractionpack -ractivejob -ractivemodel -ractionview -ractiverecord -rrailties -I sig validate
