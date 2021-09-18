@@ -14,6 +14,7 @@ module Mihari
               run_analyzer Analyzers::VirusTotal, query: indiactor, options: options
             end
           end
+          map "vt" => :virustotal
         end
       end
     end

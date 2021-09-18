@@ -14,6 +14,7 @@ module Mihari
               run_analyzer Analyzers::PassiveTotal, query: indicator, options: options
             end
           end
+          map "pt" => :passivetotal
         end
       end
     end

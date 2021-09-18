@@ -14,6 +14,7 @@ module Mihari
               run_analyzer Analyzers::VirusTotalIntelligence, query: query, options: options
             end
           end
+          map "vt_intel" => :virustotal_intelligence
         end
       end
     end

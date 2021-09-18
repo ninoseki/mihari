@@ -62,6 +62,11 @@ RSpec.describe Mihari::CLI::Analyzer do
       subject.start ["virustotal", query]
       expect(mock).to have_received(:run).once
     end
+
+    it do
+      subject.start ["vt", query]
+      expect(mock).to have_received(:run).once
+    end
   end
 
   describe "#virustotal_intelligence" do
@@ -71,6 +76,11 @@ RSpec.describe Mihari::CLI::Analyzer do
       subject.start ["virustotal_intelligence", query]
       expect(mock).to have_received(:run).once
     end
+
+    it do
+      subject.start ["vt_intel", query]
+      expect(mock).to have_received(:run).once
+    end
   end
 
   describe "#securitytrails" do
@@ -78,6 +88,11 @@ RSpec.describe Mihari::CLI::Analyzer do
 
     it do
       subject.start ["securitytrails", query]
+      expect(mock).to have_received(:run).once
+    end
+
+    it do
+      subject.start ["st", query]
       expect(mock).to have_received(:run).once
     end
   end
@@ -114,6 +129,11 @@ RSpec.describe Mihari::CLI::Analyzer do
 
     it do
       subject.start ["passivetotal", query]
+      expect(mock).to have_received(:run).once
+    end
+
+    it do
+      subject.start ["pt", query]
       expect(mock).to have_received(:run).once
     end
   end
