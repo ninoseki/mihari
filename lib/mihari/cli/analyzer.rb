@@ -14,6 +14,7 @@ require "mihari/commands/securitytrails"
 require "mihari/commands/shodan"
 require "mihari/commands/spyse"
 require "mihari/commands/urlscan"
+require "mihari/commands/virustotal_intelligence"
 require "mihari/commands/virustotal"
 require "mihari/commands/zoomeye"
 
@@ -42,6 +43,7 @@ module Mihari
       include Mihari::Commands::Spyse
       include Mihari::Commands::Urlscan
       include Mihari::Commands::VirusTotal
+      include Mihari::Commands::VirusTotalIntelligence
       include Mihari::Commands::ZoomEye
     end
   end

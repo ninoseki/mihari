@@ -42,6 +42,7 @@ module Mihari
         "spyse" => Spyse,
         "urlscan" => Urlscan,
         "virustotal" => VirusTotal,
+        "virustotal_intelligence" => VirusTotalIntelligence,
         "zoomeye" => ZoomEye
       }.freeze
 

@@ -13,9 +13,19 @@ module Mihari
     DataTypes = Types::String.enum(*ALLOWED_DATA_TYPES)
 
     AnalyzerTypes = Types::String.enum(
-      "binaryedge", "censys", "circl", "dnpedia", "dnstwister",
-      "onyphe", "otx", "passivetotal", "pulsedive", "securitytrails",
-      "shodan", "virustotal"
+      "binaryedge",
+      "censys",
+      "circl",
+      "dnpedia",
+      "dnstwister",
+      "onyphe",
+      "otx",
+      "passivetotal",
+      "pulsedive",
+      "securitytrails",
+      "shodan",
+      "virustotal_intelligence",
+      "virustotal"
     )
   end
 end

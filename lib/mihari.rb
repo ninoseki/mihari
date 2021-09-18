@@ -112,6 +112,7 @@ require "mihari/structs/censys"
 require "mihari/structs/ipinfo"
 require "mihari/structs/onyphe"
 require "mihari/structs/shodan"
+require "mihari/structs/virustotal_intelligence"
 
 # Schemas
 require "mihari/schemas/analyzer"
@@ -163,9 +164,9 @@ require "mihari/analyzers/securitytrails"
 require "mihari/analyzers/shodan"
 require "mihari/analyzers/spyse"
 require "mihari/analyzers/urlscan"
+require "mihari/analyzers/virustotal_intelligence"
 require "mihari/analyzers/virustotal"
 require "mihari/analyzers/zoomeye"
-
 require "mihari/analyzers/rule"
 
 # Notifiers
