@@ -4,34 +4,44 @@ RSpec.describe Mihari::Schemas::Rule do
   let(:contract) { Mihari::Schemas::RuleContract.new }
 
   context "with valid rule" do
-    it do
-      result = contract.call(description: "foo", title: "foo", queries: [{ analyzer: "shodan", query: "foo" }])
-      expect(result.errors.empty?).to eq(true)
+    context "analyzers does not need additional options" do
+      it do
+        analyzers = Mihari::Analyzers::ANALYZER_TO_CLASS.keys - ["spyse", "zoomeye", "crtsh"]
+
+        analyzers.each do |analyzer|
+          result = contract.call(description: "foo", title: "foo", queries: [{ analyzer: analyzer, query: "foo" }])
+          expect(result.errors.empty?).to eq(true)
+        end
+      end
     end
 
-    it do
-      result = contract.call(
-        description: "foo",
-        title: "foo",
-        queries: [
-          { analyzer: "shodan", query: "foo" },
-          { analyzer: "crtsh", query: "foo", exclude_expired: true },
-          { analyzer: "zoomeye", query: "foo", type: "host" }
-        ]
-      )
-      expect(result.errors.empty?).to eq(true)
+    context "analyzers needs additonal options" do
+      it do
+        result = contract.call(
+          description: "foo",
+          title: "foo",
+          queries: [
+            { analyzer: "crtsh", query: "foo", exclude_expired: true },
+            { analyzer: "spyse", query: "foo", type: "ip" },
+            { analyzer: "zoomeye", query: "foo", type: "host" }
+          ]
+        )
+        expect(result.errors.empty?).to eq(true)
+      end
     end
 
-    it do
-      result = contract.call(
-        description: "foo",
-        title: "foo",
-        queries: [
-          { analyzer: "shodan", query: "foo" }
-        ],
-        allowed_data_types: ["ip"]
-      )
-      expect(result.errors.empty?).to eq(true)
+    context "with allowed_data_types" do
+      it do
+        result = contract.call(
+          description: "foo",
+          title: "foo",
+          queries: [
+            { analyzer: "shodan", query: "foo" }
+          ],
+          allowed_data_types: ["ip"]
+        )
+        expect(result.errors.empty?).to eq(true)
+      end
     end
   end
 

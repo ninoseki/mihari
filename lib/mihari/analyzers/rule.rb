@@ -4,6 +4,30 @@ require "uuidtools"
 
 module Mihari
   module Analyzers
+    ANALYZER_TO_CLASS = {
+      "binaryedge" => BinaryEdge,
+      "censys" => Censys,
+      "circl" => CIRCL,
+      "crtsh" => Crtsh,
+      "dnpedia" => DNPedia,
+      "dnstwister" => DNSTwister,
+      "onyphe" => Onyphe,
+      "otx" => OTX,
+      "passivetotal" => PassiveTotal,
+      "pt" => PassiveTotal,
+      "pulsedive" => Pulsedive,
+      "securitytrails" => SecurityTrails,
+      "shodan" => Shodan,
+      "spyse" => Spyse,
+      "st" => SecurityTrails,
+      "urlscan" => Urlscan,
+      "virustotal_intelligence" => VirusTotalIntelligence,
+      "virustotal" => VirusTotal,
+      "vt_intel" => VirusTotalIntelligence,
+      "vt" => VirusTotal,
+      "zoomeye" => ZoomEye
+    }.freeze
+
     class Rule < Base
       include Mihari::Mixins::DisallowedDataValue
 
@@ -25,26 +49,6 @@ module Mihari
 
         validate_analyzer_configurations
       end
-
-      ANALYZER_TO_CLASS = {
-        "binaryedge" => BinaryEdge,
-        "censys" => Censys,
-        "circl" => CIRCL,
-        "crtsh" => Crtsh,
-        "dnpedia" => DNPedia,
-        "dnstwister" => DNSTwister,
-        "onyphe" => Onyphe,
-        "otx" => OTX,
-        "passivetotal" => PassiveTotal,
-        "pulsedive" => Pulsedive,
-        "securitytrails" => SecurityTrails,
-        "shodan" => Shodan,
-        "spyse" => Spyse,
-        "urlscan" => Urlscan,
-        "virustotal" => VirusTotal,
-        "virustotal_intelligence" => VirusTotalIntelligence,
-        "zoomeye" => ZoomEye
-      }.freeze
 
       #
       # Returns a list of artifacts matched with queries
