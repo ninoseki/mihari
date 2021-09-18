@@ -1,5 +1,7 @@
 module Mihari
   module Analyzers
+    ANALYZER_TO_CLASS: Hash[String, singleton(Mihari::Analyzers::Base)]
+
     class Rule < Base
       include Mihari::Mixins::DisallowedDataValue
 
@@ -13,8 +15,6 @@ module Mihari
       attr_reader id: String?
 
       def initialize: (**untyped kwargs) -> void
-
-      ANALYZER_TO_CLASS: Hash[String, singleton(Mihari::Analyzers::Base)]
 
       #
       # Returns a list of artifacts matched with queries

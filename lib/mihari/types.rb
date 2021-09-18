@@ -21,11 +21,15 @@ module Mihari
       "onyphe",
       "otx",
       "passivetotal",
+      "pt",
       "pulsedive",
       "securitytrails",
       "shodan",
+      "st",
       "virustotal_intelligence",
-      "virustotal"
+      "virustotal",
+      "vt_intel",
+      "vt"
     )
   end
 end
