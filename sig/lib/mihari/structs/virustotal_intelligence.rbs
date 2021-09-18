@@ -1,30 +1,30 @@
 module Mihari
   module Structs
     module VirusTotalIntelligence
-      class ContextAttributes < Dry::Struct
+      class ContextAttributes
         attr_reader url: Array[String]?
 
         def self.from_dynamic!: (Hash[(String | Symbol), untyped] d) -> Mihari::Structs::VirusTotalIntelligence::ContextAttributes
       end
 
-      class Datum < Dry::Struct
+      class Datum
         attr_reader type: String
         attr_reader context_attributes: Mihari::Structs::VirusTotalIntelligence::ContextAttributes?
 
         def value: () -> String?
 
-        def self.from_dynamic!: (Hash[(String | Symbol), untyped] d) -> Mihari::Structs::VirusTotalIntelligence::Datnum
+        def self.from_dynamic!: (Hash[(String | Symbol), untyped] d) -> Mihari::Structs::VirusTotalIntelligence::Datum
       end
 
-      class Meta < Dry::Struct
+      class Meta
         attr_reader cursor: String?
 
         def self.from_dynamic!: (Hash[(String | Symbol), untyped] d) -> Mihari::Structs::VirusTotalIntelligence::Meta
       end
 
-      class Response < Dry::Struct
+      class Response
         attr_reader meta: Mihari::Structs::VirusTotalIntelligence::Meta
-        attr_reader data: Array[Mihari::Structs::VirusTotalIntelligence::Datnum]
+        attr_reader data: Array[Mihari::Structs::VirusTotalIntelligence::Datum]
 
         def self.from_dynamic!: (Hash[(String | Symbol), untyped] d) -> Mihari::Structs::VirusTotalIntelligence::Response
       end

@@ -19,14 +19,14 @@ module Mihari
       #
       # @return [::VirusTotal::API]
       #
-      def api: () -> VirusTotal::API
+      def api: () -> untyped
 
       #
       # Search with cursor
       #
       # @return [Array<Mihari::Structs::VirusTotalIntelligence::Response>]
       #
-      def search_witgh_cursor: () -> Array<Mihari::Structs::VirusTotalIntelligence::Response>
+      def search_witgh_cursor: () -> Array[Mihari::Structs::VirusTotalIntelligence::Response]
     end
   end
 end
