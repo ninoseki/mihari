@@ -64,6 +64,15 @@ RSpec.describe Mihari::CLI::Analyzer do
     end
   end
 
+  describe "#virustotal_intelligence" do
+    before { allow(Mihari::Analyzers::VirusTotalIntelligence).to receive(:new).and_return(mock) }
+
+    it do
+      subject.start ["virustotal_intelligence", query]
+      expect(mock).to have_received(:run).once
+    end
+  end
+
   describe "#securitytrails" do
     before { allow(Mihari::Analyzers::SecurityTrails).to receive(:new).and_return(mock) }
 
