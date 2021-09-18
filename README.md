@@ -46,7 +46,7 @@ Mihari supports the following services by default.
 - [Shodan](https://shodan.io)
 - [Spyse](https://spyse.com)
 - [urlscan.io](https://urlscan.io)
-- [VirusTotal](http://virustotal.com)
+- [VirusTotal](http://virustotal.com) & [VirusTotal Intelligence](https://www.virustotal.com/gui/intelligence-overview)
 - [ZoomEye](https://zoomeye.org)
 
 ## Docs
