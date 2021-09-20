@@ -20,12 +20,28 @@ module Mihari
       # @param [String, nil] title
       # @param [DateTime, nil] from_at
       # @param [DateTime, nil] to_at
+      # @param [Integer, nil] asn
+      # @param [String, nil] dns_record
+      # @param [String, nil] reverse_dns_name
       # @param [Integer, nil] limit
       # @param [Integer, nil] page
       #
       # @return [Array<Hash>]
       #
-      def search(artifact_data: nil, description: nil, source: nil, tag_name: nil, title: nil, from_at: nil, to_at: nil, limit: 10, page: 1)
+      def search(
+        artifact_data: nil,
+        description: nil,
+        source: nil,
+        tag_name: nil,
+        title: nil,
+        from_at: nil,
+        to_at: nil,
+        asn: nil,
+        dns_record: nil,
+        reverse_dns_name: nil,
+        limit: 10,
+        page: 1
+      )
         limit = limit.to_i
         raise ArgumentError, "limit should be bigger than zero" unless limit.positive?
 
@@ -41,7 +57,10 @@ module Mihari
           source: source,
           tag_name: tag_name,
           from_at: from_at,
-          to_at: to_at
+          to_at: to_at,
+          asn: asn,
+          dns_record: dns_record,
+          reverse_dns_name: reverse_dns_name
         )
 
         # TODO: improve queires
@@ -66,10 +85,24 @@ module Mihari
       # @param [String, nil] title
       # @param [DateTime, nil] from_at
       # @param [DateTime, nil] to_at
+      # @param [Integer, nil] asn
+      # @param [String, nil] dns_record
+      # @param [String, nil] reverse_dns_name
       #
       # @return [Integer]
       #
-      def count(artifact_data: nil, description: nil, source: nil, tag_name: nil, title: nil, from_at: nil, to_at: nil)
+      def count(
+        artifact_data: nil,
+        description: nil,
+        source: nil,
+        tag_name: nil,
+        title: nil,
+        from_at: nil,
+        to_at: nil,
+        asn: nil,
+        dns_record: nil,
+        reverse_dns_name: nil
+      )
         relation = build_relation(
           artifact_data: artifact_data,
           title: title,
@@ -77,19 +110,45 @@ module Mihari
           source: source,
           tag_name: tag_name,
           from_at: from_at,
-          to_at: to_at
+          to_at: to_at,
+          asn: asn,
+          dns_record: dns_record,
+          reverse_dns_name: reverse_dns_name
         )
         relation.distinct("alerts.id").count
       end
 
       private
 
-      def build_relation(artifact_data: nil, title: nil, description: nil, source: nil, tag_name: nil, from_at: nil, to_at: nil)
-        relation = self
+      def build_relation(
+        artifact_data: nil,
+        title: nil,
+        description: nil,
+        source: nil,
+        tag_name: nil,
+        from_at: nil,
+        to_at: nil,
+        asn: nil,
+        dns_record: nil,
+        reverse_dns_name: nil
+      )
+        artifact_ids = []
+        artifact = Artifact.includes(:autonomous_system, :dns_records, :reverse_dns_names)
+        artifact = artifact.where(data: artifact_data) if artifact_data
+        artifact = artifact.where(autonomous_system: { asn: asn }) if asn
+        artifact = artifact.where(dns_records: { value: dns_record }) if dns_record
+        artifact = artifact.where(reverse_dns_names: { name: reverse_dns_name }) if reverse_dns_name
+        # get artifact ids if there is any valid filter for artifact
+        if artifact_data || asn || dns_record || reverse_dns_name
+          artifact_ids = artifact.pluck(:id)
+          # set invalid ID if nothing is matched with the filters
+          artifact_ids = [-1] if artifact_ids.empty?
+        end
 
+        relation = self
         relation = relation.includes(:artifacts, :tags)
 
-        relation = relation.where(artifacts: { data: artifact_data }) if artifact_data
+        relation = relation.where(artifacts: { id: artifact_ids }) unless artifact_ids.empty?
         relation = relation.where(tags: { name: tag_name }) if tag_name
 
         relation = relation.where(source: source) if source
