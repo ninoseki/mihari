@@ -106,7 +106,7 @@ module Mihari
           )
         end
 
-        # ActiveRecord::Base.logger = Logger.new STDOUT
+        ActiveRecord::Base.logger = Logger.new($stdout) if ENV["RACK_ENV"] == "development"
         ActiveRecord::Migration.verbose = false
 
         InitialSchema.migrate(:up)
