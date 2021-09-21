@@ -7,47 +7,12 @@ module Mihari
     attr_accessor artifacts(): Array[Mihari::Artifact]
     attr_accessor Tags(): Array[Mihari::Tag]
 
-    def self.search: (
-      ?artifact_data: String? artifact_data,
-      ?description: String? description,
-      ?source: String? source,
-      ?tag_name: String? tag_name,
-      ?title: String? title,
-      ?from_at: DateTime? from_at,
-      ?to_at: DateTime? to_at,
-      ?asn: ::Integer? asn,
-      ?dns_record: String? dns_record,
-      ?reverse_dns_name: String? reverse_dns_name,
-      ?limit: ::Integer limit,
-      ?page: ::Integer page
-    ) -> Array[Hash[(String | Symbol), untyped]]
+    def self.search: (Mihari::Structs::Alert::SearchFilterWithPagination filter) -> Array[Hash[(String | Symbol), untyped]]
 
-    def self.count: (
-      ?artifact_data: String? artifact_data,
-      ?description: String? description,
-      ?source: String? source,
-      ?tag_name: String? tag_name,
-      ?title: String? title,
-      ?from_at: DateTime? from_at,
-      ?to_at: DateTime? to_at,
-      ?asn: ::Integer? asn,
-      ?dns_record: String? dns_record,
-      ?reverse_dns_name: String? reverse_dns_name
-    ) -> Integer
+    def self.count: (Mihari::Structs::Alert::SearchFilter filter) -> Integer
 
     private
 
-    def self.build_relation: (
-      ?artifact_data: String? artifact_data,
-      ?title: String? title,
-      ?description: String? description,
-      ?source: String? source,
-      ?tag_name: String? tag_name,
-      ?from_at: DateTime? from_at,
-      ?to_at: DateTime? to_at,
-      ?asn: ::Integer? asn,
-      ?dns_record: String? dns_record,
-      ?reverse_dns_name: String? reverse_dns_name
-    ) -> Mihari::Alert
+    def self.build_relation: (Mihari::Structs::Alert::SearchFilter filter) -> Mihari::Alert
   end
 end
