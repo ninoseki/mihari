@@ -9,6 +9,7 @@ module Mihari
     Hash = Strict::Hash
     String = Strict::String
     Double = Strict::Float | Strict::Integer
+    DateTime = Strict::DateTime
 
     DataTypes = Types::String.enum(*ALLOWED_DATA_TYPES)
 

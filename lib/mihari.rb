@@ -108,6 +108,7 @@ require "mihari/constants"
 require "mihari/types"
 
 # Structs
+require "mihari/structs/alert"
 require "mihari/structs/censys"
 require "mihari/structs/ipinfo"
 require "mihari/structs/onyphe"
