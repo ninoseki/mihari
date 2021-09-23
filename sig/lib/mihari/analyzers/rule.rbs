@@ -21,7 +21,7 @@ module Mihari
       #
       # @return [Array<Mihari::Artifact>]
       #
-      def artifacts: () -> (Array[String] | Array[Mihari::Artifact])
+      def artifacts: () -> (Array[Mihari::Artifact])
 
       #
       # Normalize artifacts
