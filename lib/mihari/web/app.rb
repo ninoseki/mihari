@@ -37,10 +37,10 @@ module Mihari
     use Mihari::Controllers::TagsController
 
     class << self
-      def run!(port: 9292, host: "localhost")
+      def run!(port: 9292, host: "localhost", threads: "0:16", verbose: false)
         url = "http://#{host}:#{port}"
 
-        Rack::Handler::Puma.run self, Port: port, Host: host do |server|
+        Rack::Handler::Puma.run(self, Port: port, Host: host, Threads: threads, Verbose: verbose) do |server|
           Launchy.open url
 
           [:INT, :TERM].each do |sig|
