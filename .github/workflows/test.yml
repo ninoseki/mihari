@@ -43,17 +43,16 @@ jobs:
 
     steps:
       - uses: actions/checkout@v2
-      - name: Set up Ruby 2.7
-        uses: ruby/setup-ruby@v1
-        with:
-          ruby-version: ${{ matrix.ruby }}
-          bundler-cache: true
 
       - name: Install dependencies
         run: |
           sudo apt-get -yqq install libpq-dev libmysqlclient-dev
-          gem install bundler
-          bundle install
+
+      - name: Set up Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: ${{ matrix.ruby }}
+          bundler-cache: true
 
       - name: Test with PostgreSQL
         env:
