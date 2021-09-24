@@ -37,4 +37,21 @@ RSpec.describe Test do
       end
     end
   end
+
+  describe "#load_config" do
+    let(:path) { File.expand_path("../fixtures/configs/valid_config.yml", __dir__) }
+
+    it do
+      data = subject.load_config(path)
+      expect(data).to be_a(Hash)
+    end
+
+    context "with invalid path" do
+      it do
+        capture(:stdout) do
+          expect { subject.load_config("/tmp/foo/bar/404.yaml") }.to raise_error(Mihari::FileNotFoundError)
+        end
+      end
+    end
+  end
 end
