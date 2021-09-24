@@ -80,10 +80,20 @@ module Mihari
         end
       end
 
+      #
+      # Load configuration file
+      #
+      # @param [String] path
+      #
+      # @return [Hash]
+      #
       def _load_config(path)
-        return YAML.safe_load(File.read(path), symbolize_names: true) if Pathname(path).exist?
+        unless Pathname(path).exist?
+          puts "#{path} does not exist".colorize(:red)
+          raise FileNotFoundError
+        end
 
-        YAML.safe_load(path, symbolize_names: true)
+        YAML.safe_load(File.read(path), symbolize_names: true)
       end
     end
   end
