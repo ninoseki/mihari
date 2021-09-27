@@ -4,6 +4,7 @@ require "colorize"
 require "dry/configurable"
 require "dry/files"
 require "mem"
+require "plissken"
 require "yaml"
 
 # Load .env
@@ -134,18 +135,6 @@ require "mihari/models/reverse_dns"
 require "mihari/models/tag"
 require "mihari/models/tagging"
 require "mihari/models/whois"
-
-# Serializers
-require "mihari/serializers/autonomous_system"
-require "mihari/serializers/dns"
-require "mihari/serializers/geolocation"
-require "mihari/serializers/reverse_dns"
-require "mihari/serializers/tag"
-require "mihari/serializers/whois"
-
-require "mihari/serializers/artifact"
-
-require "mihari/serializers/alert"
 
 # Analyzers
 require "mihari/analyzers/base"

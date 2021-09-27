@@ -2,11 +2,11 @@ RSpec.describe Mihari::App do
   include Rack::Test::Methods
 
   def app
-    Mihari::App
+    Mihari::App.instance
   end
 
   it "returns 200" do
-    paths = %w[/ /api/alerts /api/tags /api/sources /api/config]
+    paths = %w[/ /api/alerts /api/tags /api/sources /api/configs]
     paths.each do |path|
       get path
       expect(last_response).to be_ok

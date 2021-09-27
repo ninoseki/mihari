@@ -30,14 +30,7 @@ module Mihari
 
         # TODO: improve queires
         alert_ids = relation.limit(limit).offset(offset).order(id: :desc).pluck(:id).uniq
-        alerts = includes(:artifacts, :tags).where(id: [alert_ids]).order(id: :desc)
-
-        alerts.map do |alert|
-          json = Serializers::AlertSerializer.new(alert).as_json
-          json[:artifacts] = json[:artifacts] || []
-          json[:tags] = json[:tags] || []
-          json
-        end
+        includes(:artifacts, :tags).where(id: [alert_ids]).order(id: :desc)
       end
 
       #

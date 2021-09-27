@@ -7,19 +7,24 @@ require "rack/handler/puma"
 require "rack/cors"
 
 require "grape"
-require "grape-entity"
 require "grape-swagger"
-require "grape-swagger-entity"
 
-require "mihari/web/api"
+require "mihari/web/apis/ping"
 
 module Mihari
-  class App
+  class API < Grape::API
+    prefix "api"
+    format :json
+    mount Apis::Ping
+    add_swagger_documentation api_version: "v1"
+  end
+
+  class GrapeApp
     def initialize
       @filenames = ["", ".html", "index.html", "/index.html"]
       @rack_static = ::Rack::Static.new(
-        -> { [404, {}, []] },
-        root: File.expand_path("./public", __dir__),
+        lambda { [404, {}, []] },
+        root: File.expand_path("public", __dir__),
         urls: ["/"]
       )
     end
@@ -27,14 +32,7 @@ module Mihari
     class << self
       def instance
         @instance ||= Rack::Builder.new do
-          use Rack::Cors do
-            allow do
-              origins "*"
-              resource "*", headers: :any, methods: [:get, :post, :put, :delete, :options]
-            end
-          end
-
-          run App.new
+          run GrapeApp.new
         end.to_app
       end
 
@@ -42,6 +40,9 @@ module Mihari
         url = "http://#{host}:#{port}"
 
         Rack::Handler::Puma.run(instance, Port: port, Host: host, Threads: threads, Verbose: verbose) do |server|
+          p ENV["RACK_ENV"]
+          p instance.class
+
           Launchy.open(url) if ENV["RACK_ENV"] != "development"
 
           [:INT, :TERM].each do |sig|
@@ -55,10 +56,11 @@ module Mihari
 
     def call(env)
       # api
-      api_response = API.call(env)
+      p GrapeApp.instance
+      response = API.call(env)
 
       # Check if the App wants us to pass the response along to others
-      if api_response[1]["X-Cascade"] == "pass"
+      if response[1]["X-Cascade"] == "pass"
         # static files
         request_path = env["PATH_INFO"]
         @filenames.each do |path|
@@ -66,8 +68,6 @@ module Mihari
           return response if response[0] != 404
         end
       end
-
-      api_response
     end
   end
 end

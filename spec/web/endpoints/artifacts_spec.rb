@@ -1,11 +1,11 @@
 require "json"
 
-RSpec.describe Mihari::Controllers::ArtifactsController do
+RSpec.describe Mihari::Endpoints::Artifacts do
   include Rack::Test::Methods
   include_context "with database fixtures"
 
   def app
-    Mihari::Controllers::ArtifactsController
+    Mihari::Endpoints::Artifacts
   end
 
   before do
@@ -18,9 +18,9 @@ RSpec.describe Mihari::Controllers::ArtifactsController do
   end
 
   describe "get /api/artifacts/:id" do
-    it "returns 500" do
+    it "returns 400" do
       get "/api/artifacts/foo"
-      expect(last_response.status).to eq(500)
+      expect(last_response.status).to eq(400)
     end
 
     it "returns 404" do
@@ -46,9 +46,9 @@ RSpec.describe Mihari::Controllers::ArtifactsController do
   end
 
   describe "delete /api/artifacts/:id" do
-    it "returns 500" do
+    it "returns 400" do
       delete "/api/artifacts/foo"
-      expect(last_response.status).to eq(500)
+      expect(last_response.status).to eq(400)
     end
 
     it "returns 404" do

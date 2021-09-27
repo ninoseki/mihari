@@ -1,5 +1,5 @@
 module Mihari
-  class App # < Sinatra::Base
+  class App
     def self.run!: (?port: ::Integer port, ?host: ::String host, ?threads: ::String threads, ?verbose: bool verbose) -> void
   end
 end

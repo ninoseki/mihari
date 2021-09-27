@@ -29,10 +29,13 @@ module Mihari
 
     validates_with ArtifactValidator
 
+    attr_accessor :tags
+
     def initialize(attributes)
       super
 
       self.data_type = TypeChecker.type(data)
+      self.tags = []
     end
 
     #

@@ -1,18 +1,18 @@
 require "json"
 require "time"
 
-RSpec.describe Mihari::Controllers::AlertsController do
+RSpec.describe Mihari::Endpoints::Alerts do
   include Rack::Test::Methods
   include_context "with database fixtures"
 
   def app
-    Mihari::Controllers::AlertsController
+    Mihari::Endpoints::Alerts
   end
 
   describe "delete /api/alerts/:id" do
-    it "returns 500" do
+    it "returns 400" do
       delete "/api/alerts/foo"
-      expect(last_response.status).to eq(500)
+      expect(last_response.status).to eq(400)
     end
 
     it "returns 404" do
@@ -20,7 +20,7 @@ RSpec.describe Mihari::Controllers::AlertsController do
       expect(last_response.status).to eq(404)
     end
 
-    it "returns 200" do
+    it "returns 204" do
       alert_id = @alerts.first.id
       delete "/api/alerts/#{alert_id}"
       expect(last_response.status).to eq(204)
@@ -29,14 +29,14 @@ RSpec.describe Mihari::Controllers::AlertsController do
 
   describe "get /api/alerts" do
     context "with invalid DateTime" do
-      it "returns 500" do
+      it "returns 400" do
         get "/api/alerts", { fromAt: "foo" }
-        expect(last_response.status).to eq(500)
+        expect(last_response.status).to eq(400)
       end
 
-      it "returns 500" do
+      it "returns 400" do
         get "/api/alerts", { fromAt: "2021-05" }
-        expect(last_response.status).to eq(500)
+        expect(last_response.status).to eq(400)
       end
     end
 
