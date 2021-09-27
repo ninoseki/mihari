@@ -18,10 +18,9 @@ module Mihari
             d = Types::Hash[d]
 
             asn = nil
-            org = d["org"]
-            unless org.nil?
-              asn = org.split.first
-              asn = normalize_asn(asn)
+            asn_ = d.dig("asn", "asn")
+            unless asn_.nil?
+              asn = normalize_asn(asn_)
             end
 
             new(
