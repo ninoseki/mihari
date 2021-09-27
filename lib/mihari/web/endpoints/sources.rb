@@ -5,6 +5,7 @@ module Mihari
     class Sources < Grape::API
       namespace :sources do
         desc "Get sources", {
+          is_array: true,
           success: Entities::Sources
         }
         get "/" do

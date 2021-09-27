@@ -5,6 +5,7 @@ module Mihari
     class Tags < Grape::API
       namespace :tags do
         desc "Get tags", {
+          is_array: true,
           success: Entities::Tags
         }
         get "/" do
