@@ -74,7 +74,7 @@ Gem::Specification.new do |spec|
   spec.add_dependency "normalize_country", "0.3"
   spec.add_dependency "onyphe", "~> 2.0"
   spec.add_dependency "otx_ruby", "~> 0.9"
-  spec.add_dependency "parallel", "~> 1.20"
+  spec.add_dependency "parallel", "~> 1.21"
   spec.add_dependency "passive_circl", "~> 0.1"
   spec.add_dependency "passivetotalx", "~> 0.1"
   spec.add_dependency "plissken", "~> 1.4"
