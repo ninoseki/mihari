@@ -16,15 +16,11 @@ module Mihari
           optional :source, type: String
           optional :tag, type: String
 
-          optional :from_at, type: DateTime
           optional :fromAt, type: DateTime
-          optional :to_at, type: DateTime
           optional :toAt, type: DateTime
 
           optional :asn, type: Integer
-          optional :dns_record, type: String
           optional :dnsRecord, type: String
-          optional :reverse_dns_name, type: String
           optional :reverseDnsName, type: String
         end
         get "/" do
