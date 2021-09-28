@@ -13,10 +13,10 @@ module Mihari
       expose :geolocation, using: Entities::Geolocation, documentation: { type: Entities::Geolocation, required: false }
       expose :whois_record, using: Entities::WhoisRecord, documentation: { type: Entities::WhoisRecord, required: false }, as: :whoisRecord
 
-      expose :reverse_dns_names, using: Entities::ReverseDnsName, documentation: { type: Entities::ReverseDnsName, is_array: true }, as: :reverseDnsNames do |status, _options|
+      expose :reverse_dns_names, using: Entities::ReverseDnsName, documentation: { type: Entities::ReverseDnsName, is_array: true, required: false }, as: :reverseDnsNames do |status, _options|
         status.reverse_dns_names.length > 0 ? status.reverse_dns_names : nil
       end
-      expose :dns_records, using: Entities::DnsRecord, documentation: { type: Entities::DnsRecord, is_array: true }, as: :dnsRecords do |status, _options|
+      expose :dns_records, using: Entities::DnsRecord, documentation: { type: Entities::DnsRecord, is_array: true, required: false }, as: :dnsRecords do |status, _options|
         status.dns_records.length > 0 ? status.dns_records : nil
       end
     end
