@@ -55,6 +55,7 @@ Gem::Specification.new do |spec|
   spec.add_dependency "dnstwister", "~> 0.1"
   spec.add_dependency "dotenv", "~> 2.7"
   spec.add_dependency "dry-configurable", "~> 0.13"
+  spec.add_dependency "dry-container", "~> 0.9"
   spec.add_dependency "dry-files", "~> 0.1"
   spec.add_dependency "dry-initializer", "~> 3.0"
   spec.add_dependency "dry-struct", "~> 1.4"
