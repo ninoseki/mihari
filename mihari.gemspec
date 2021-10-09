@@ -61,7 +61,7 @@ Gem::Specification.new do |spec|
   spec.add_dependency "dry-struct", "~> 1.4"
   spec.add_dependency "dry-validation", "~> 1.7"
   spec.add_dependency "email_address", "~> 0.2"
-  spec.add_dependency "grape", "~> 1.5"
+  spec.add_dependency "grape", "~> 1.6"
   spec.add_dependency "grape-entity", "~> 0.10"
   spec.add_dependency "grape-swagger", "~> 1.4"
   spec.add_dependency "grape-swagger-entity", "~> 0.5"
