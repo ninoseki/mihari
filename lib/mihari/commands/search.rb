@@ -10,6 +10,9 @@ module Mihari
           desc "search [RULE]", "Search by a rule"
           method_option :config, type: :string, desc: "Path to the config file"
           def search_by_rule(rule)
+            # load configuration
+            load_configuration
+
             # convert str(YAML) to hash or str(path/YAML file) to hash
             rule = load_rule(rule)
 
@@ -77,8 +80,6 @@ module Mihari
       # @return [nil]
       #
       def run_rule_analyzer(analyzer, ignore_old_artifacts: false, ignore_threshold: 0)
-        load_configuration
-
         analyzer.ignore_old_artifacts = ignore_old_artifacts
         analyzer.ignore_threshold = ignore_threshold
 

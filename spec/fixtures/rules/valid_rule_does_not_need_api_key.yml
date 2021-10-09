@@ -1,0 +1,5 @@
+title: "foo"
+description: "foo"
+queries:
+  - analyzer: "crtsh"
+    query: "example.com"
