@@ -78,7 +78,9 @@ module Mihari
       # @return [Artifact]
       #
       def build_artifact(match)
-        as = AutonomousSystem.new(asn: normalize_asn(match.asn))
+        as = nil
+        as = AutonomousSystem.new(asn: normalize_asn(match.asn)) unless match.asn.nil?
+
         geolocation = Geolocation.new(
           country: match.location.country_name,
           country_code: match.location.country_code

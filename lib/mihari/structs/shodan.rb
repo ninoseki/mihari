@@ -18,7 +18,7 @@ module Mihari
       end
 
       class Match < Dry::Struct
-        attribute :asn, Types::String
+        attribute :asn, Types::String.optional
         attribute :hostnames, Types.Array(Types::String)
         attribute :location, Location
         attribute :domains, Types.Array(Types::String)
@@ -27,7 +27,7 @@ module Mihari
         def self.from_dynamic!(d)
           d = Types::Hash[d]
           new(
-            asn: d.fetch("asn"),
+            asn: d["asn"],
             hostnames: d.fetch("hostnames"),
             location: Location.from_dynamic!(d.fetch("location")),
             domains: d.fetch("domains"),

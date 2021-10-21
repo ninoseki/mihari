@@ -9,7 +9,7 @@ module Mihari
       end
 
       class Match
-        attr_reader asn: String
+        attr_reader asn: String?
         attr_reader hostnames: Array[String]
         attr_reader location: Mihari::Structs::Shodan::Location
         attr_reader domains: Array[String]
