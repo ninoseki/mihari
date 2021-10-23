@@ -37,6 +37,8 @@ module Mihari
   setting :censys_secret, default: ENV["CENSYS_SECRET"]
   setting :circl_passive_password, default: ENV["CIRCL_PASSIVE_PASSWORD"]
   setting :circl_passive_username, default: ENV["CIRCL_PASSIVE_USERNAME"]
+  setting :database, default: ENV["DATABASE"] || "mihari.db"
+  setting :greynoise_api_key, default: ENV["GREYNOISE_API_KEY"]
   setting :ipinfo_api_key, default: ENV["IPINFO_API_KEY"]
   setting :misp_api_endpoint, default: ENV["MISP_API_ENDPOINT"]
   setting :misp_api_key, default: ENV["MISP_API_KEY"]
@@ -54,10 +56,9 @@ module Mihari
   setting :thehive_api_key, default: ENV["THEHIVE_API_KEY"]
   setting :urlscan_api_key, default: ENV["URLSCAN_API_KEY"]
   setting :virustotal_api_key, default: ENV["VIRUSTOTAL_API_KEY"]
-  setting :zoomeye_api_key, default: ENV["ZOOMEYE_API_KEY"]
   setting :webhook_url, default: ENV["WEBHOOK_URL"]
   setting :webhook_use_json_body, constructor: ->(value = ENV["WEBHOOK_USE_JSON_BODY"]) { truthy?(value) }
-  setting :database, default: ENV["DATABASE"] || "mihari.db"
+  setting :zoomeye_api_key, default: ENV["ZOOMEYE_API_KEY"]
 
   class << self
     include Mem
@@ -112,6 +113,7 @@ require "mihari/types"
 # Structs
 require "mihari/structs/alert"
 require "mihari/structs/censys"
+require "mihari/structs/greynoise"
 require "mihari/structs/ipinfo"
 require "mihari/structs/onyphe"
 require "mihari/structs/shodan"
@@ -147,6 +149,7 @@ require "mihari/analyzers/circl"
 require "mihari/analyzers/crtsh"
 require "mihari/analyzers/dnpedia"
 require "mihari/analyzers/dnstwister"
+require "mihari/analyzers/greynoise"
 require "mihari/analyzers/onyphe"
 require "mihari/analyzers/otx"
 require "mihari/analyzers/passivetotal"

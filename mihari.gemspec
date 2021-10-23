@@ -65,6 +65,7 @@ Gem::Specification.new do |spec|
   spec.add_dependency "grape-entity", "~> 0.10"
   spec.add_dependency "grape-swagger", "~> 1.4"
   spec.add_dependency "grape-swagger-entity", "~> 0.5"
+  spec.add_dependency "greynoise", "~> 0.1"
   spec.add_dependency "hachi", "~> 1.0"
   spec.add_dependency "http", "~> 5.0"
   spec.add_dependency "launchy", "~> 2.5"

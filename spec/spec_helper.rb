@@ -73,6 +73,7 @@ VCR.configure do |config|
     CIRCL_PASSIVE_PASSWORD
     PASSIVETOTAL_USERNAME
     PASSIVETOTAL_API_KEY
+    GREYNOISE_API_KEY
   ]
 
   api_endpoints = %w[

@@ -19,6 +19,7 @@ module Mihari
       "circl",
       "dnpedia",
       "dnstwister",
+      "greynoise",
       "onyphe",
       "otx",
       "passivetotal",
