@@ -8,13 +8,13 @@ http_interactions:
       string: ''
     headers:
       Authorization:
-      - Bearer 5dd124a89ed990
+      - Bearer <IPINFO_API_KEY>
       Connection:
       - close
       Host:
       - ipinfo.io
       User-Agent:
-      - http.rb/5.0.2
+      - http.rb/5.0.4
   response:
     status:
       code: 200
@@ -33,11 +33,11 @@ http_interactions:
       Content-Type:
       - application/json; charset=utf-8
       Content-Length:
-      - '500'
+      - '515'
       Date:
-      - Mon, 27 Sep 2021 00:44:10 GMT
+      - Sat, 23 Oct 2021 03:01:06 GMT
       X-Envoy-Upstream-Service-Time:
-      - '1'
+      - '3'
       Vary:
       - Accept-Encoding
       Via:
@@ -53,12 +53,12 @@ http_interactions:
           "ip": "1.1.1.1",
           "hostname": "one.one.one.one",
           "anycast": true,
-          "city": "Miami",
-          "region": "Florida",
+          "city": "San Francisco",
+          "region": "California",
           "country": "US",
-          "loc": "25.7867,-80.1800",
-          "postal": "33132",
-          "timezone": "America/New_York",
+          "loc": "37.7621,-122.3971",
+          "postal": "94107",
+          "timezone": "America/Los_Angeles",
           "asn": {
             "asn": "AS13335",
             "name": "Cloudflare, Inc.",
@@ -72,5 +72,5 @@ http_interactions:
             "type": "hosting"
           }
         }
-  recorded_at: Mon, 27 Sep 2021 00:44:08 GMT
+  recorded_at: Sat, 23 Oct 2021 03:01:06 GMT
 recorded_with: VCR 6.0.0

@@ -56,6 +56,7 @@ VCR.configure do |config|
   config.ignore_localhost = false
 
   api_keys = %w[
+    IPINFO_API_KEY
     THEHIVE_API_KEY
     MISP_API_KEY
     CENSYS_AUTH CENSYS_ID CENSYS_SECRET
