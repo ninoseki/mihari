@@ -13,6 +13,8 @@ module Mihari
       optional(:censys_secret).value(:string)
       optional(:circl_passive_password).value(:string)
       optional(:circl_passive_username).value(:string)
+      optional(:database).value(:string)
+      optional(:greynoise_api_key).value(:string)
       optional(:ipinfo_api_key).value(:string)
       optional(:misp_api_endpoint).value(:string)
       optional(:misp_api_key).value(:string)
@@ -30,10 +32,9 @@ module Mihari
       optional(:thehive_api_key).value(:string)
       optional(:urlscan_api_key).value(:string)
       optional(:virustotal_api_key).value(:string)
-      optional(:zoomeye_api_key).value(:string)
       optional(:webhook_url).value(:string)
       optional(:webhook_use_json_body).value(:bool)
-      optional(:database).value(:string)
+      optional(:zoomeye_api_key).value(:string)
     end
 
     class ConfigurationContract < Dry::Validation::Contract

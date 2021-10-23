@@ -1,0 +1,40 @@
+---
+http_interactions:
+  - request:
+      method: get
+      uri: https://api.greynoise.io/v2/experimental/gnql?query=cve:CVE-2020-9054&size=10000
+      body:
+        encoding: US-ASCII
+        string: ""
+      headers:
+        Accept-Encoding:
+          - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+        Accept:
+          - "*/*"
+        User-Agent:
+          - Ruby
+        Host:
+          - api.greynoise.io
+    response:
+      status:
+        code: 200
+        message: OK
+      headers:
+        Date:
+          - Sat, 23 Oct 2021 01:35:01 GMT
+        Content-Type:
+          - application/json; charset=utf-8
+        Content-Length:
+          - "1210"
+        Connection:
+          - keep-alive
+      body:
+        encoding: UTF-8
+        string:
+          '{"complete":true,"count":1,"data":[{"ip":"37.0.8.38","metadata":{"asn":"AS211252","city":"Soest","country":"Netherlands","country_code":"NL","organization":"Delis
+          LLC","category":"hosting","tor":false,"rdns":"jugg.water24s.xyz","os":"Windows
+          XP","region":"Utrecht"},"bot":false,"vpn":false,"vpn_service":"N/A","spoofable":false,"raw_data":{"scan":[{"port":22,"protocol":"TCP"},{"port":80,"protocol":"TCP"},{"port":81,"protocol":"TCP"},{"port":443,"protocol":"TCP"},{"port":1000,"protocol":"TCP"},{"port":8001,"protocol":"TCP"},{"port":8080,"protocol":"TCP"},{"port":8081,"protocol":"TCP"},{"port":8089,"protocol":"TCP"},{"port":9001,"protocol":"TCP"},{"port":9547,"protocol":"TCP"}],"web":{"paths":["/","/adv,/cgi-bin/weblogin.cgi"],"useragents":["Mozila/5.0"]},"ja3":[],"hassh":[{"fingerprint":"98ddc5604ef6a1006a2b49a58759fbe6","port":22},{"fingerprint":"92674389fa1e47a27ddd8d9b63ecd42b","port":22}]},"first_seen":"2021-09-24","last_seen":"2021-10-19","rdns":"jugg.water24s.xyz","seen":true,"tags":["CHINANET
+          SSH Bruteforcer","SSH Worm","Web Crawler","ZMap Client","Zyxel Firewall/NAS
+          RCE"],"actor":"unknown","classification":"malicious","cve":["CVE-2020-9054"]}],"message":"ok","query":"cve:CVE-2020-9054"}'
+    recorded_at: Sat, 23 Oct 2021 01:34:59 GMT
+recorded_with: VCR 6.0.0
