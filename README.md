@@ -38,6 +38,7 @@ Mihari supports the following services by default.
 - [crt.sh](https://crt.sh/)
 - [DN Pedia](https://dnpedia.com/)
 - [dnstwister](https://dnstwister.report/)
+- [GreyNoise](https://www.greynoise.io/)
 - [Onyphe](https://onyphe.io)
 - [OTX](https://otx.alienvault.com/)
 - [PassiveTotal](https://community.riskiq.com/)
