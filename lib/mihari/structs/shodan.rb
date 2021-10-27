@@ -5,14 +5,14 @@ module Mihari
   module Structs
     module Shodan
       class Location < Dry::Struct
-        attribute :country_code, Types::String
-        attribute :country_name, Types::String
+        attribute :country_code, Types::String.optional
+        attribute :country_name, Types::String.optional
 
         def self.from_dynamic!(d)
           d = Types::Hash[d]
           new(
-            country_code: d.fetch("country_code"),
-            country_name: d.fetch("country_name")
+            country_code: d["country_code"],
+            country_name: d["country_name"]
           )
         end
       end

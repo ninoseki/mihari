@@ -58,6 +58,7 @@ module Mihari
         responses = []
         (1..Float::INFINITY).each do |page|
           res = search_with_page(query, page: page)
+
           break unless res
 
           responses << res
@@ -81,10 +82,13 @@ module Mihari
         as = nil
         as = AutonomousSystem.new(asn: normalize_asn(match.asn)) unless match.asn.nil?
 
-        geolocation = Geolocation.new(
-          country: match.location.country_name,
-          country_code: match.location.country_code
-        )
+        geolocation = nil
+        if !match.location.country_name.nil? && !match.location.country_code.nil?
+          geolocation = Geolocation.new(
+            country: match.location.country_name,
+            country_code: match.location.country_code
+          )
+        end
 
         Artifact.new(
           data: match.ip_str,

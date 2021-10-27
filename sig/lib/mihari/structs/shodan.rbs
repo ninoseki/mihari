@@ -2,8 +2,8 @@ module Mihari
   module Structs
     module Shodan
       class Location
-        attr_reader country_code: String
-        attr_reader country_name: String
+        attr_reader country_code: String?
+        attr_reader country_name: String?
 
         def self.from_dynamic!: (Hash[(String | Symbol), untyped] d) -> Mihari::Structs::Shodan::Location
       end
