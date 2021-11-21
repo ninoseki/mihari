@@ -10,6 +10,8 @@ module Mihari
       option :description, default: proc { "query = #{query}" }
       option :tags, default: proc { [] }
 
+      option :interval, default: proc { 0 }
+
       def artifacts
         results = search
         return [] unless results || results.empty?
@@ -63,6 +65,9 @@ module Mihari
 
           responses << res
           break if res["total"].to_i <= page * PAGE_SIZE
+
+          # sleep #{interval} seconds to avoid the rate limitation (if it is set)
+          sleep interval
         rescue JSON::ParserError
           # ignore JSON::ParserError
           # ref. https://github.com/ninoseki/mihari/issues/197

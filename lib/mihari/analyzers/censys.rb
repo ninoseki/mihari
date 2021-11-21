@@ -10,6 +10,8 @@ module Mihari
       option :description, default: proc { "query = #{query}" }
       option :tags, default: proc { [] }
 
+      option :interval, default: proc { 0 }
+
       def artifacts
         search
       end
@@ -33,6 +35,9 @@ module Mihari
 
           cursor = response.result.links.next
           break if cursor == ""
+
+          # sleep #{interval} seconds to avoid the rate limitation (if it is set)
+          sleep interval
         end
 
         artifacts.flatten.uniq(&:data)

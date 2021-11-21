@@ -11,6 +11,8 @@ module Mihari
       option :tags, default: proc { [] }
       option :type, default: proc { "host" }
 
+      option :interval, default: proc { 0 }
+
       def artifacts
         case type
         when "host"
@@ -87,6 +89,9 @@ module Mihari
           total = res["total"].to_i
           responses << res
           break if total <= page * PAGE_SIZE
+
+          # sleep #{interval} seconds to avoid the rate limitation (if it is set)
+          sleep interval
         end
         convert_responses responses.compact
       end
@@ -119,6 +124,9 @@ module Mihari
           total = res["total"].to_i
           responses << res
           break if total <= page * PAGE_SIZE
+
+          # sleep #{interval} seconds to avoid the rate limitation (if it is set)
+          sleep interval
         end
         convert_responses responses.compact
       end

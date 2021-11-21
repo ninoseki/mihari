@@ -64,6 +64,12 @@ module Mihari
           klass = get_analyzer_class(analyzer_name)
 
           query = params[:query]
+
+          # set interval in the top level
+          options = params[:options] || {}
+          interval = options[:interval]
+          params[:interval] = interval
+
           analyzer = klass.new(query, **params)
 
           # Use #normalized_artifacts method to get atrifacts as Array<Mihari::Artifact>

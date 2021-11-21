@@ -26,6 +26,7 @@ module Mihari
     class Analyzer < Base
       class_option :ignore_old_artifacts, type: :boolean, default: false, desc: "Whether to ignore old artifacts from checking or not."
       class_option :ignore_threshold, type: :numeric, default: 0, desc: "Number of days to define whether an artifact is old or not."
+      class_option :interval, type: :numeric, default: 0, desc: "Seconds of the interval while calling API in a row."
       class_option :config, type: :string, desc: "Path to the config file"
 
       include Mihari::Commands::BinaryEdge

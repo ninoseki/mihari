@@ -7,6 +7,8 @@ module Mihari
       attr_reader description: String
       attr_reader tags: Array[String]
 
+      attr_reader interval: ::Integer
+
       def artifacts: () -> (Array[String] | Array[Mihari::Artifact])
 
       private
