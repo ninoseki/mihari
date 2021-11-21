@@ -7,33 +7,42 @@ require "mihari/schemas/macros"
 
 module Mihari
   module Schemas
+    AnalyzerOptions = Dry::Schema.Params do
+      optional(:interval).value(:integer)
+    end
+
     Analyzer = Dry::Schema.Params do
       required(:analyzer).value(Types::AnalyzerTypes)
       required(:query).value(:string)
+      optional(:options).hash(AnalyzerOptions)
     end
 
     Spyse = Dry::Schema.Params do
       required(:analyzer).value(Types::String.enum("spyse"))
       required(:query).value(:string)
       required(:type).value(Types::String.enum("ip", "domain"))
+      optional(:options).hash(AnalyzerOptions)
     end
 
     ZoomEye = Dry::Schema.Params do
       required(:analyzer).value(Types::String.enum("zoomeye"))
       required(:query).value(:string)
       required(:type).value(Types::String.enum("host", "web"))
+      optional(:options).hash(AnalyzerOptions)
     end
 
     Crtsh = Dry::Schema.Params do
       required(:analyzer).value(Types::String.enum("crtsh"))
       required(:query).value(:string)
       optional(:exclude_expired).value(:bool).default(true)
+      optional(:options).hash(AnalyzerOptions)
     end
 
     Urlscan = Dry::Schema.Params do
       required(:analyzer).value(Types::String.enum("urlscan"))
       required(:query).value(:string)
       optional(:use_similarity).value(:bool).default(true)
+      optional(:options).hash(AnalyzerOptions)
     end
 
     Rule = Dry::Schema.Params do

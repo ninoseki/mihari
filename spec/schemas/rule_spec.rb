@@ -23,7 +23,8 @@ RSpec.describe Mihari::Schemas::Rule do
           queries: [
             { analyzer: "crtsh", query: "foo", exclude_expired: true },
             { analyzer: "spyse", query: "foo", type: "ip" },
-            { analyzer: "zoomeye", query: "foo", type: "host" }
+            { analyzer: "zoomeye", query: "foo", type: "host" },
+            { analyzer: "zoomeye", query: "foo", type: "host", options: { interval: 10 } }
           ]
         )
         expect(result.errors.empty?).to eq(true)
@@ -130,6 +131,20 @@ RSpec.describe Mihari::Schemas::Rule do
         ignore_threshold: "foo" # should be integer
       )
       expect(result.errors.empty?).to eq(false)
+    end
+  end
+
+  context "with invalid options" do
+    it do
+      expect do
+        contract.call(
+          description: "foo",
+          title: "foo",
+          queries: [
+            { analyzer: "shodan", query: "foo", options: { interval: "foo" } }
+          ]
+        )
+      end.to raise_error(NoMethodError)
     end
   end
 end

@@ -11,6 +11,8 @@ module Mihari
       option :description, default: proc { "query = #{query}" }
       option :tags, default: proc { [] }
 
+      option :interval, default: proc { 0 }
+
       def artifacts
         responses = search
         return [] unless responses
@@ -59,6 +61,9 @@ module Mihari
 
           total = res.total
           break if total <= page * PAGE_SIZE
+
+          # sleep #{interval} seconds to avoid the rate limitation (if it is set)
+          sleep interval
         end
         responses
       end

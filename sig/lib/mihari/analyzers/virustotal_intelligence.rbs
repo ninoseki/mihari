@@ -6,6 +6,8 @@ module Mihari
       attr_reader description: String
       attr_reader tags: Array[String]
 
+      attr_reader interval: ::Integer
+
       def initialize: (*untyped args, **untyped kwargs) -> void
 
       def artifacts: () -> (Array[String] | Array[Mihari::Artifact])
