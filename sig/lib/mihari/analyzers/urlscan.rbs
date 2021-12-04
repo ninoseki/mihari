@@ -8,7 +8,8 @@ module Mihari
       attr_reader description: String
       attr_reader tags: Array[String]
       attr_reader allowed_data_types: Array[String]
-      attr_reader use_similarity: bool
+
+      attr_reader interval: ::Integer
 
       def initialize: (*untyped args, **untyped kwargs) -> void
 
@@ -20,7 +21,9 @@ module Mihari
 
       def api: () -> untyped
 
-      def search: () -> Array[Hash[(String | Symbol), untyped]]
+      def search_with_search_after: (search_after: String?) -> Array[Hash[(String | Symbol), untyped]]
+
+      def search: () -> Array[Mihari::Structs::Urlscan::Response]
 
       def valid_alllowed_data_types?: () -> bool
     end

@@ -41,7 +41,6 @@ module Mihari
     Urlscan = Dry::Schema.Params do
       required(:analyzer).value(Types::String.enum("urlscan"))
       required(:query).value(:string)
-      optional(:use_similarity).value(:bool).default(true)
       optional(:options).hash(AnalyzerOptions)
     end
 

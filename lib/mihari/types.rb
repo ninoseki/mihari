@@ -8,10 +8,13 @@ module Mihari
     Nil = Strict::Nil
     Hash = Strict::Hash
     String = Strict::String
+    Bool = Strict::Bool
     Double = Strict::Float | Strict::Integer
     DateTime = Strict::DateTime
 
     DataTypes = Types::String.enum(*ALLOWED_DATA_TYPES)
+
+    UrlscanDataTypes = Types::String.enum("ip", "domain", "url")
 
     AnalyzerTypes = Types::String.enum(
       "binaryedge",

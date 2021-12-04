@@ -2,8 +2,6 @@
 
 require "urlscan"
 
-SUPPORTED_DATA_TYPES = %w[url domain ip].freeze
-
 module Mihari
   module Analyzers
     class Urlscan < Base
@@ -12,7 +10,11 @@ module Mihari
       option :description, default: proc { "query = #{query}" }
       option :tags, default: proc { [] }
       option :allowed_data_types, default: proc { SUPPORTED_DATA_TYPES }
-      option :use_similarity, default: proc { false }
+
+      option :interval, default: proc { 0 }
+
+      SUPPORTED_DATA_TYPES = %w[url domain ip].freeze
+      SIZE = 1000
 
       def initialize(*args, **kwargs)
         super
@@ -21,16 +23,15 @@ module Mihari
       end
 
       def artifacts
-        result = search
-        return [] unless result
-
-        results = result["results"] || []
+        responses = search
+        results = responses.map(&:results).flatten
 
         allowed_data_types.map do |type|
-          results.filter_map do |match|
-            match.dig "page", type
+          results.filter_map do |result|
+            page = result.page
+            page.send(type.to_sym)
           end.uniq
-        end.flatten
+        end.flatten.compact
       end
 
       private
@@ -44,14 +45,37 @@ module Mihari
       end
 
       #
+      # Search with search_after option
+      #
+      # @return [Structs::Urlscan::Response]
+      #
+      def search_with_search_after(search_after: nil)
+        res = api.search(query, size: SIZE, search_after: search_after)
+        Structs::Urlscan::Response.from_dynamic! res
+      end
+
+      #
       # Search
       #
-      # @return [Array<Hash>]
+      # @return [Array<Structs::Urlscan::Response>]
       #
       def search
-        return api.pro.similar(query) if use_similarity
+        responses = []
 
-        api.search(query, size: 10_000)
+        search_after = nil
+        loop do
+          res = search_with_search_after(search_after: search_after)
+          responses << res
+
+          break if res.results.length < SIZE
+
+          search_after = res.results.last.sort.join(",")
+
+          # sleep #{interval} seconds to avoid the rate limitation (if it is set)
+          sleep interval
+        end
+
+        responses
       end
 
       #

@@ -94,7 +94,7 @@ Gem::Specification.new do |spec|
   spec.add_dependency "sqlite3", "~> 1.4"
   spec.add_dependency "thor", "~> 1.1"
   spec.add_dependency "thread_safe", "~> 0.3"
-  spec.add_dependency "urlscan", "~> 0.7"
+  spec.add_dependency "urlscan", "~> 0.8"
   spec.add_dependency "uuidtools", "~> 2.2"
   spec.add_dependency "virustotalx", "~> 1.2"
   spec.add_dependency "whois", "~> 5.0"
