@@ -6,14 +6,14 @@ module Mihari
         attr_reader country_code: String
         attr_reader asn: String
 
-        def self.from_dynamic!: (Hash[(String | Symbol), untyped] d) -> untyped
+        def self.from_dynamic!: (Hash[(String | Symbol), untyped] d) ->  Mihari::Structs::GreyNoise::Metadata
       end
 
       class Datum < Dry::Struct
         attr_reader ip: String
         attr_reader metadata: Mihari::Structs::GreyNoise::Metadata
 
-        def self.from_dynamic!: (Hash[(String | Symbol), untyped] d) -> untyped
+        def self.from_dynamic!: (Hash[(String | Symbol), untyped] d) -> Mihari::Structs::GreyNoise::Datum
       end
 
       class Response < Dry::Struct
@@ -23,7 +23,7 @@ module Mihari
         attr_reader message: String
         attr_reader query: String
 
-        def self.from_dynamic!: (Hash[(String | Symbol), untyped] d) -> untyped
+        def self.from_dynamic!: (Hash[(String | Symbol), untyped] d) -> Mihari::Structs::GreyNoise::Response
       end
     end
   end

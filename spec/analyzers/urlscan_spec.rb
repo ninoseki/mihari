@@ -3,7 +3,7 @@
 RSpec.describe Mihari::Analyzers::Urlscan, :vcr do
   subject { described_class.new(query, tags: tags) }
 
-  let(:query) { "e07f9491ce7429e8eee6d00df76b8cc1ffefc010050bba24fa994a74813276fb" }
+  let(:query) { "page.domain:example.com AND date:[2020-01-01 TO 2020-08-01]" }
   let(:tags) { %w[test] }
 
   describe "#title" do
@@ -29,15 +29,6 @@ RSpec.describe Mihari::Analyzers::Urlscan, :vcr do
       it do
         artifacts = subject.artifacts
         expect(artifacts.none? { |artifact| artifact.start_with?("http", "https") }).to eq(true)
-      end
-    end
-
-    context "when use similarity" do
-      let(:query) { "a731f865-6a2d-480f-ab06-d9415014015e" }
-      subject { described_class.new(query, tags: tags, use_similarity: true) }
-
-      it do
-        expect(subject.artifacts.length).to be > 0
       end
     end
   end

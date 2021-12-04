@@ -1,0 +1,28 @@
+module Mihari
+  module Structs
+    module Urlscan
+      class Page < Dry::Struct
+        attr_reader domain: String?
+        attr_reader ip: String?
+        attr_reader url: String
+
+        def self.from_dynamic!: (Hash[(String | Symbol), untyped] d) -> Mihari::Structs::Urlscan::Page
+      end
+
+      class Result < Dry::Struct
+        attr_reader page: Mihari::Structs::Urlscan::Page
+        attr_reader id: String
+        attr_reader sort: Array[Integer | String]
+
+        def self.from_dynamic!: (Hash[(String | Symbol), untyped] d) -> Mihari::Structs::Urlscan::Result
+      end
+
+      class Response < Dry::Struct
+        attr_reader results: Array[Mihari::Structs::Urlscan::Result]
+        attr_reader has_more: Boolean
+
+        def self.from_dynamic!: (Hash[(String | Symbol), untyped] d) -> Mihari::Structs::Urlscan::Response
+      end
+    end
+  end
+end

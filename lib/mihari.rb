@@ -117,6 +117,7 @@ require "mihari/structs/greynoise"
 require "mihari/structs/ipinfo"
 require "mihari/structs/onyphe"
 require "mihari/structs/shodan"
+require "mihari/structs/urlscan"
 require "mihari/structs/virustotal_intelligence"
 
 # Schemas

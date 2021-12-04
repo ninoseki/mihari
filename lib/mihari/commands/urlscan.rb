@@ -9,8 +9,7 @@ module Mihari
           method_option :title, type: :string, desc: "title"
           method_option :description, type: :string, desc: "description"
           method_option :tags, type: :array, desc: "tags"
-          method_option :target_type, type: :string, default: "url", desc: "target type to fetch from search results (target type should be 'url', 'domain' or 'ip')"
-          method_option :use_similarity, type: :boolean, default: false, desc: "use similarity API or not"
+          method_option :allowed_data_types, type: :array, default: ["url", "ip", "domain"], desc: "types to fetch from search results ('url', 'domain' or 'ip')"
           def urlscan(query)
             with_error_handling do
               run_analyzer Analyzers::Urlscan, query: query, options: options
