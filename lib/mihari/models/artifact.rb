@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 require "active_record"
-require "active_record/filter"
 require "active_support/core_ext/integer/time"
 require "active_support/core_ext/numeric/time"
 require "uri"

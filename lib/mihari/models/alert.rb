@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 require "active_record"
-require "active_record/filter"
 
 module Mihari
   class Alert < ActiveRecord::Base
@@ -70,10 +69,10 @@ module Mihari
         relation = relation.where(source: filter.source) if filter.source
         relation = relation.where(title: filter.title) if filter.title
 
-        relation = relation.filter(description: { like: "%#{filter.description}%" }) if filter.description
+        relation = relation.where("description LIKE ?", "%#{filter.description}%") if filter.description
 
-        relation = relation.filter(created_at: { gte: filter.from_at }) if filter.from_at
-        relation = relation.filter(created_at: { lte: filter.to_at }) if filter.to_at
+        relation = relation.where("alerts.created_at >= ?", filter.from_at) if filter.from_at
+        relation = relation.where("alerts.created_at <= ?", filter.to_at) if filter.to_at
 
         relation
       end
