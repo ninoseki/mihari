@@ -2,7 +2,7 @@
 
 require "active_record"
 
-class InitialSchema < ActiveRecord::Migration[6.1]
+class InitialSchema < ActiveRecord::Migration[7.0]
   def change
     create_table :tags, if_not_exists: true do |t|
       t.string :name, null: false
@@ -32,13 +32,13 @@ class InitialSchema < ActiveRecord::Migration[6.1]
   end
 end
 
-class AddeSourceToArtifactSchema < ActiveRecord::Migration[6.1]
+class AddeSourceToArtifactSchema < ActiveRecord::Migration[7.0]
   def change
     add_column :artifacts, :source, :string, if_not_exists: true
   end
 end
 
-class EnrichmentsSchema < ActiveRecord::Migration[6.1]
+class EnrichmentsSchema < ActiveRecord::Migration[7.0]
   def change
     create_table :autonomous_systems, if_not_exists: true do |t|
       t.integer :asn, null: false
@@ -74,7 +74,7 @@ class EnrichmentsSchema < ActiveRecord::Migration[6.1]
   end
 end
 
-class EnrichmentCreatedAtSchema < ActiveRecord::Migration[6.1]
+class EnrichmentCreatedAtSchema < ActiveRecord::Migration[7.0]
   def change
     # Add created_at column because now it is able to enrich an atrifact after the creation
     add_column :autonomous_systems, :created_at, :datetime, if_not_exists: true
