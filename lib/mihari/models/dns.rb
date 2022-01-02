@@ -37,7 +37,7 @@ module Mihari
         resources = Resolv::DNS.new.getresources(domain, resource_type)
         resource_name = resource_type.to_s.split("::").last
 
-        resources.map do |resource|
+        resources.filter_map do |resource|
           # A, AAAA
           if resource.respond_to?(:address)
             new(resource: resource_name, value: resource.address.to_s)
@@ -48,7 +48,7 @@ module Mihari
           elsif resource.respond_to?(:data)
             new(resource: resource_name, value: resource.data.to_s)
           end
-        end.compact
+        end
       end
     end
   end

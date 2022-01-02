@@ -51,9 +51,9 @@ module Mihari
       # @return [String] A template for config
       #
       def config_template
-        config = Mihari.config.values.keys.map do |key|
+        config = Mihari.config.values.keys.to_h do |key|
           [key.to_s, nil]
-        end.to_h
+        end
 
         YAML.dump(config)
       end

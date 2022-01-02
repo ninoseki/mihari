@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # Entities
 require "mihari/web/entities/message"
 

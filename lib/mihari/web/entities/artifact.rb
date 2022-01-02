@@ -14,10 +14,10 @@ module Mihari
       expose :whois_record, using: Entities::WhoisRecord, documentation: { type: Entities::WhoisRecord, required: false }, as: :whoisRecord
 
       expose :reverse_dns_names, using: Entities::ReverseDnsName, documentation: { type: Entities::ReverseDnsName, is_array: true, required: false }, as: :reverseDnsNames do |status, _options|
-        status.reverse_dns_names.length > 0 ? status.reverse_dns_names : nil
+        status.reverse_dns_names.empty? ? nil : status.reverse_dns_names
       end
       expose :dns_records, using: Entities::DnsRecord, documentation: { type: Entities::DnsRecord, is_array: true, required: false }, as: :dnsRecords do |status, _options|
-        status.dns_records.length > 0 ? status.dns_records : nil
+        status.dns_records.empty? ? nil : status.dns_records
       end
     end
   end
