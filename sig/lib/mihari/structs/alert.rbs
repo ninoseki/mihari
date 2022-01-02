@@ -13,7 +13,7 @@ module Mihari
         attr_reader dns_record: String?
         attr_reader reverse_dns_name: String?
 
-        def has_valid_artifact_filters: () -> bool
+        def valid_artifact_filters?: () -> bool
       end
 
       class SearchFilterWithPagination

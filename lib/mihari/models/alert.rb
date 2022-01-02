@@ -54,7 +54,7 @@ module Mihari
         artifact = artifact.where(dns_records: { value: filter.dns_record }) if filter.dns_record
         artifact = artifact.where(reverse_dns_names: { name: filter.reverse_dns_name }) if filter.reverse_dns_name
         # get artifact ids if there is any valid filter for artifact
-        if filter.has_valid_artifact_filters
+        if filter.valid_artifact_filters?
           artifact_ids = artifact.pluck(:id)
           # set invalid ID if nothing is matched with the filters
           artifact_ids = [-1] if artifact_ids.empty?

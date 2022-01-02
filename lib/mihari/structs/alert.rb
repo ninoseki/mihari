@@ -16,7 +16,7 @@ module Mihari
         attribute? :dns_record, Types::String.optional
         attribute? :reverse_dns_name, Types::String.optional
 
-        def has_valid_artifact_filters
+        def valid_artifact_filters?
           !(artifact_data || asn || dns_record || reverse_dns_name).nil?
         end
       end
