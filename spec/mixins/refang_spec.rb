@@ -1,8 +1,8 @@
-class TestAnalyzer
+class Test
   include Mihari::Mixins::Refang
 end
 
-RSpec.describe TestAnalyzer do
+RSpec.describe Test do
   describe "#refang" do
     subject { described_class.new }
 

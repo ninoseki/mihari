@@ -18,11 +18,11 @@ module Mihari
     # @return [Array<Hash>]
     #
     def statuses
-      (Mihari.analyzers + Mihari.emitters + Mihari.enrichers).map do |klass|
+      (Mihari.analyzers + Mihari.emitters + Mihari.enrichers).to_h do |klass|
         name = klass.to_s.split("::").last.to_s
 
         [name, build_status(klass)]
-      end.to_h.compact
+      end.compact
     end
 
     #

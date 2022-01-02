@@ -9,7 +9,7 @@ module Mihari
       expose :expires_on, documentation: { type: Date, required: false }, as: :expiresOn
       expose :registrar, documentation: { type: Hash, required: false }
       expose :contacts, documentation: { type: Hash, is_array: true, required: true } do |whois_record, _options|
-        whois_record.contacts.map { |h| h.to_camelback_keys }
+        whois_record.contacts.map(&:to_camelback_keys)
       end
     end
   end
