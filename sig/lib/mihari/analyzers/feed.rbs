@@ -1,0 +1,23 @@
+module Mihari
+  module Analyzers
+    class Feed < Base
+      attr_reader query: String
+      attr_reader title: String
+      attr_reader description: String
+      attr_reader tags: Array[String]
+
+      attr_reader http_request_headers: Hash[(String | Symbol), untyped]
+      attr_reader http_request_method: String
+      attr_reader http_request_payload_type: String?
+      attr_reader http_request_payload: Hash[(String | Symbol), untyped]
+
+      attr_reader selector: String
+
+      def artifacts: () ->  (Array[String] | Array[Mihari::Artifact])
+
+      private
+
+      def data: () -> Array[Hash]
+    end
+  end
+end

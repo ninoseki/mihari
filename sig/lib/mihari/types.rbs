@@ -13,5 +13,9 @@ module Mihari
     DataTypes: Array[String]
 
     AnalyzerTypes: Array[String]
+
+    FeedHttpRequestMethods: Array[String]
+
+    FeedHttpRequestPayloadTypes: Array[String]
   end
 end

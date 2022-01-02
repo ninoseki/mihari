@@ -13,6 +13,10 @@ module Mihari
 
       include Mihari::Commands::DNSTwister
 
+      include Mihari::Commands::Feed
+
+      include Mihari::Commands::GreyNoise
+
       include Mihari::Commands::JSON
 
       include Mihari::Commands::Onyphe

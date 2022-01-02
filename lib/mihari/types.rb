@@ -22,6 +22,7 @@ module Mihari
       "circl",
       "dnpedia",
       "dnstwister",
+      "feed",
       "greynoise",
       "onyphe",
       "otx",
@@ -36,5 +37,8 @@ module Mihari
       "vt_intel",
       "vt"
     )
+
+    FeedHttpRequestMethods = Types::String.enum("GET", "POST")
+    FeedHttpRequestPayloadTypes = Types::String.enum("application/json", "application/x-www-form-urlencoded")
   end
 end

@@ -8,4 +8,8 @@ module Mihari
   class RetryableError < Error; end
 
   class FileNotFoundError < Error; end
+
+  class HttpError < Error; end
+
+  class FeedParseError < Error; end
 end

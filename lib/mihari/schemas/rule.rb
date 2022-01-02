@@ -44,6 +44,17 @@ module Mihari
       optional(:options).hash(AnalyzerOptions)
     end
 
+    Feed = Dry::Schema.Params do
+      required(:analyzer).value(Types::String.enum("feed"))
+      required(:query).value(:string)
+      required(:http_request_method).value(Types::FeedHttpRequestMethods).default("GET")
+      required(:http_request_headers).value(:hash).default({})
+      required(:http_request_payload).value(:hash).default({})
+      required(:selector).value(:string)
+      optional(:http_request_payload_type).value(Types::FeedHttpRequestPayloadTypes)
+      optional(:options).hash(AnalyzerOptions)
+    end
+
     Rule = Dry::Schema.Params do
       required(:title).value(:string)
       required(:description).value(:string)
@@ -55,7 +66,7 @@ module Mihari
       optional(:created_on).value(:date)
       optional(:updated_on).value(:date)
 
-      required(:queries).value(:array).each { Analyzer | Spyse | ZoomEye | Urlscan | Crtsh }
+      required(:queries).value(:array).each { Analyzer | Spyse | ZoomEye | Urlscan | Crtsh | Feed }
 
       optional(:allowed_data_types).value(array[Types::DataTypes]).default(ALLOWED_DATA_TYPES)
       optional(:disallowed_data_values).value(array[:string]).default([])
