@@ -6,6 +6,7 @@ require "mihari/commands/circl"
 require "mihari/commands/crtsh"
 require "mihari/commands/dnpedia"
 require "mihari/commands/dnstwister"
+require "mihari/commands/feed"
 require "mihari/commands/greynoise"
 require "mihari/commands/onyphe"
 require "mihari/commands/otx"
@@ -35,6 +36,7 @@ module Mihari
       include Mihari::Commands::Crtsh
       include Mihari::Commands::DNPedia
       include Mihari::Commands::DNSTwister
+      include Mihari::Commands::Feed
       include Mihari::Commands::GreyNoise
       include Mihari::Commands::JSON
       include Mihari::Commands::Onyphe

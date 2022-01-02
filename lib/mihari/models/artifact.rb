@@ -3,7 +3,7 @@
 require "active_record"
 require "active_support/core_ext/integer/time"
 require "active_support/core_ext/numeric/time"
-require "uri"
+require "addressable/uri"
 
 class ArtifactValidator < ActiveModel::Validator
   def validate(record)
@@ -118,7 +118,7 @@ module Mihari
     def normalize_as_domain(url_or_domain)
       return url_or_domain if data_type == "domain"
 
-      URI.parse(url_or_domain).host
+      Addressable::URI.parse(url_or_domain).host
     end
 
     def can_enrich_whois?

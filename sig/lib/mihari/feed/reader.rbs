@@ -1,0 +1,56 @@
+module Mihari
+  class FeedReader
+    attr_reader uri: URI
+
+    attr_reader http_request_headers: Hash[(String | Symbol), untyped]
+
+    attr_reader http_request_method: String
+
+    attr_reader http_request_payload_type: String?
+
+    attr_reader http_request_payload: Hash[(String | Symbol), untyped]
+
+    def initialize: (
+      String url,
+      ?http_request_headers: Hash[(String | Symbol), untyped]] http_request_headers,
+      ?http_request_method: ::String http_request_method,
+      ?http_request_payload_type: String?  http_request_payload_type,
+      ?http_request_payload: Hash[(String | Symbol), untyped] http_request_payload
+    ) -> void
+
+    def read: () -> Array[Hash]
+
+    def get: () -> Array[Hash]
+
+    def post: () -> Array[Hash]
+
+    #
+    # Convert text as JSON
+    #
+    # @param [String] text
+    #
+    # @return [Array<Hash>]
+    #
+    def convert_as_json: (String text) -> Array[Hash]
+
+    #
+    # Convert text as CSV
+    #
+    # @param [String] text
+    #
+    # @return [Array<Hash>]
+    #
+    def convert_as_csv: (String text) -> Array[Hash]
+
+    def https_options: () -> ({ use_ssl: ::TrueClass } | ::Hash[untyped, untyped])
+
+    #
+    # Make a HTTP request
+    #
+    # @param [Net::HTTPRequest] req
+    #
+    # @return [Array<Hash>]
+    #
+    def request: (Net::HTTPRequest req) -> Array[Hash]
+  end
+end

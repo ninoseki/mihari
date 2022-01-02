@@ -11,6 +11,7 @@ module Mihari
       "crtsh" => Crtsh,
       "dnpedia" => DNPedia,
       "dnstwister" => DNSTwister,
+      "feed" => Feed,
       "greynoise" => GreyNoise,
       "onyphe" => Onyphe,
       "otx" => OTX,

@@ -75,6 +75,7 @@ VCR.configure do |config|
     PASSIVETOTAL_USERNAME
     PASSIVETOTAL_API_KEY
     GREYNOISE_API_KEY
+    THREATFOX_API_KEY
   ]
 
   api_endpoints = %w[
