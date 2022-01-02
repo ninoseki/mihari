@@ -111,7 +111,7 @@ module Mihari
       # @return [Array<Mihari::Artifact>]
       #
       def enriched_artifacts
-        @enriched_artifacts ||= unique_artifacts.map do |artifact|
+        @enriched_artifacts ||= Parallel.map(unique_artifacts) do |artifact|
           artifact.enrich_all
           artifact
         end
