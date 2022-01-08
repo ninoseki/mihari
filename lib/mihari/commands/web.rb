@@ -10,14 +10,11 @@ module Mihari
           method_option :host, type: :string, default: "localhost", desc: "Port to listen on"
           method_option :threads, type: :string, default: "0:16", desc: "min:max threads to use"
           method_option :verbose, type: :boolean, default: true, desc: "Report each request"
-          method_option :config, type: :string, desc: "Path to the config file"
           def web
             port = options["port"]
             host = options["host"]
             threads = options["threads"]
             verbose = options["verbose"]
-
-            load_configuration
 
             # set rack env as production
             ENV["RACK_ENV"] ||= "production"

@@ -14,7 +14,6 @@ require "dotenv/load"
 # Mixins
 require "mihari/mixins/autonomous_system"
 require "mihari/mixins/configurable"
-require "mihari/mixins/configuration"
 require "mihari/mixins/disallowed_data_value"
 require "mihari/mixins/hash"
 require "mihari/mixins/refang"
@@ -30,7 +29,6 @@ end
 
 module Mihari
   extend Dry::Configurable
-  extend Mixins::Configuration
 
   setting :binaryedge_api_key, default: ENV["BINARYEDGE_API_KEY"]
   setting :censys_id, default: ENV["CENSYS_ID"]
@@ -77,24 +75,6 @@ module Mihari
       []
     end
     memoize :enrichers
-
-    #
-    # Load configuration from YAML file
-    #
-    # @param [String] path Path to YAML file
-    #
-    # @return [nil]
-    #
-    def load_config_from_yaml(path)
-      config = load_config(path)
-
-      # validate loaded yaml data
-      validate_config config
-
-      config.each do |key, value|
-        Mihari.config.send("#{key.downcase}=".to_sym, value)
-      end
-    end
   end
 end
 
@@ -122,7 +102,6 @@ require "mihari/structs/virustotal_intelligence"
 
 # Schemas
 require "mihari/schemas/analyzer"
-require "mihari/schemas/configuration"
 require "mihari/schemas/rule"
 
 # Enrichers
