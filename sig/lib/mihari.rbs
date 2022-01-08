@@ -36,8 +36,6 @@ module Mihari
 
   extend Mixins::Configuration
 
-  # include Mem
-
   def self.emitters: () -> ::Array[singleton(Mihari::Emitters::Base)]
 
   def self.analyzers: () -> ::Array[singleton(Mihari::Analyzers::Base)]

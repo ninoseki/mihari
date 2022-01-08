@@ -1,13 +1,13 @@
 # frozen_string_literal: true
 
-require "slack-notifier"
 require "digest/sha2"
-require "dry-initializer"
+require "dry/initializer"
+require "slack-notifier"
 
 module Mihari
   module Emitters
     class Attachment
-      include Mem
+      include Memist::Memoizable
 
       extend Dry::Initializer
 
