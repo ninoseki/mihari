@@ -16,10 +16,10 @@ module Mihari
       include Mihari::Commands::Search
       include Mihari::Commands::Web
 
-      desc "init", "Sub commands to initialize config & rule"
+      desc "init", "Sub commands to initialize a rule"
       subcommand "init", Initialization
 
-      desc "validate", "Sub commands to validate format of config & rule"
+      desc "validate", "Sub commands to validate format of a rule"
       subcommand "validate", Validator
     end
   end
