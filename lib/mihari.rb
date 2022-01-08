@@ -186,9 +186,4 @@ require "mihari/status"
 require "mihari/web/app"
 
 # CLIs
-require "mihari/cli/base"
-
-require "mihari/cli/analyzer"
-require "mihari/cli/init"
-
 require "mihari/cli/main"

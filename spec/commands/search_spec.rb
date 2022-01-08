@@ -10,6 +10,8 @@ RSpec.describe Mihari::Commands::Search, :vcr do
   before do
     # set an empty array as emitters (disable emission)
     allow(Mihari).to receive(:emitters).and_return([])
+    # disable the parallel execution
+    allow(Parallel).to receive(:processor_count).and_return(0)
   end
 
   describe "#search_by_rule" do
