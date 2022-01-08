@@ -4,7 +4,7 @@ require "awrence"
 require "colorize"
 require "dry/configurable"
 require "dry/files"
-require "mem"
+require "memist"
 require "plissken"
 require "yaml"
 
@@ -61,7 +61,7 @@ module Mihari
   setting :zoomeye_api_key, default: ENV["ZOOMEYE_API_KEY"]
 
   class << self
-    include Mem
+    include Memist::Memoizable
 
     def emitters
       []

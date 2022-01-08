@@ -1,11 +1,9 @@
 # frozen_string_literal: true
 
-require "mem"
-
 module Mihari
   module Mixins
     module DisallowedDataValue
-      include Mem
+      include Memist::Memoizable
 
       #
       # Normalize a value as a disallowed data value
@@ -21,7 +19,6 @@ module Mihari
         value_without_slashes = value[1..-2]
         Regexp.compile value_without_slashes.to_s
       end
-
       memoize :normalize_disallowed_data_value
 
       #

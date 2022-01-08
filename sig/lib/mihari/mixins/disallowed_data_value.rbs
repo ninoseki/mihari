@@ -1,8 +1,6 @@
 module Mihari
   module Mixins
     module DisallowedDataValue
-      # include Mem
-
       #
       # Normalize a value as a disallowed data value
       #

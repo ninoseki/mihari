@@ -2,7 +2,6 @@
 
 require "http"
 require "json"
-require "memist"
 
 module Mihari
   module Enrichers
