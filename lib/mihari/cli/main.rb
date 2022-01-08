@@ -7,7 +7,6 @@ require "mihari/commands/web"
 # CLIs
 require "mihari/cli/base"
 
-require "mihari/cli/analyzer"
 require "mihari/cli/init"
 require "mihari/cli/validator"
 
@@ -16,9 +15,6 @@ module Mihari
     class Main < Base
       include Mihari::Commands::Search
       include Mihari::Commands::Web
-
-      desc "analyze", "Sub commands to run an analyzer"
-      subcommand "analyze", Analyzer
 
       desc "init", "Sub commands to initialize config & rule"
       subcommand "init", Initialization
