@@ -10,8 +10,8 @@ module Mihari
     class Reader
       attr_reader :uri, :http_request_headers, :http_request_method, :http_request_payload_type, :http_request_payload
 
-      def initialize(url, http_request_headers: {}, http_request_method: "GET", http_request_payload_type: nil, http_request_payload: {})
-        @uri = URI(url)
+      def initialize(uri, http_request_headers: {}, http_request_method: "GET", http_request_payload_type: nil, http_request_payload: {})
+        @uri = URI(uri)
         @http_request_headers = http_request_headers
         @http_request_method = http_request_method
         @http_request_payload_type = http_request_payload_type
@@ -19,6 +19,8 @@ module Mihari
       end
 
       def read
+        return read_file(uri.path) if uri.scheme == "file"
+
         return get if http_request_method == "GET"
 
         post
@@ -99,13 +101,28 @@ module Mihari
           body = response.body
 
           content_type = response["Content-Type"].to_s
-          data = if content_type.include?("application/json")
+          if content_type.include?("application/json")
             convert_as_json(body)
           else
             convert_as_csv(body)
           end
+        end
+      end
 
-          data
+      #
+      # Read & convert a file
+      #
+      # @param [String] path
+      #
+      # @return [Array<Hash>]
+      #
+      def read_file(path)
+        text = File.read(path)
+
+        if path.end_with?(".json")
+          convert_as_json text
+        else
+          convert_as_csv text
         end
       end
     end
