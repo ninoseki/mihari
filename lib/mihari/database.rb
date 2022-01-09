@@ -95,7 +95,24 @@ end
 module Mihari
   class Database
     class << self
+      #
+      # DB migraration
+      #
+      # @param [Symbol] direction
+      #
+      def migrate(direction)
+        InitialSchema.migrate(direction)
+        AddeSourceToArtifactSchema.migrate(direction)
+        EnrichmentsSchema.migrate(direction)
+        EnrichmentCreatedAtSchema.migrate(direction)
+      end
+
+      #
+      # Establish DB connection
+      #
       def connect
+        return if ActiveRecord::Base.connected?
+
         case adapter
         when "postgresql", "mysql2"
           ActiveRecord::Base.establish_connection(Mihari.config.database)
@@ -109,29 +126,28 @@ module Mihari
         ActiveRecord::Base.logger = Logger.new($stdout) if ENV["RACK_ENV"] == "development"
         ActiveRecord::Migration.verbose = false
 
-        InitialSchema.migrate(:up)
-        AddeSourceToArtifactSchema.migrate(:up)
-        EnrichmentsSchema.migrate(:up)
-        EnrichmentCreatedAtSchema.migrate(:up)
+        migrate :up
       rescue StandardError
         # Do nothing
       end
 
+      #
+      # Close DB connection(s)
+      #
       def close
-        ActiveRecord::Base.clear_active_connections!
-        ActiveRecord::Base.connection.close
+        return unless ActiveRecord::Base.connected?
+
+        ActiveRecord::Base.clear_all_connections!
       end
 
+      #
+      # Destory DB
+      #
       def destroy!
         return unless ActiveRecord::Base.connected?
 
-        InitialSchema.migrate(:down)
-        AddeSourceToArtifactSchema.migrate(:down)
-        EnrichmentsSchema.migrate(:down)
-        EnrichmentCreatedAtSchema.migrate(:down)
+        migrate :down
       end
     end
   end
 end
-
-Mihari::Database.connect

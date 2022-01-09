@@ -11,6 +11,8 @@ require "grape-entity"
 require "grape-swagger"
 require "grape-swagger-entity"
 
+require "mihari/web/middleware/connection_adapter"
+
 require "mihari/web/api"
 
 module Mihari
@@ -34,6 +36,8 @@ module Mihari
             end
           end
 
+          use Middleware::ConnectionAdapter
+
           run App.new
         end.to_app
       end
@@ -41,14 +45,8 @@ module Mihari
       def run!(port: 9292, host: "localhost", threads: "0:16", verbose: false)
         url = "http://#{host}:#{port}"
 
-        Rack::Handler::Puma.run(instance, Port: port, Host: host, Threads: threads, Verbose: verbose) do |server|
+        Rack::Handler::Puma.run(instance, Port: port, Host: host, Threads: threads, Verbose: verbose) do |_launcher|
           Launchy.open(url) if ENV["RACK_ENV"] != "development"
-
-          [:INT, :TERM].each do |sig|
-            trap(sig) do
-              server.shutdown
-            end
-          end
         end
       end
     end
