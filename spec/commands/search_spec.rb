@@ -1,7 +1,5 @@
 # frozen_string_literal: true
 
-require "thor"
-
 class CLI < Mihari::CLI::Base
   include Mihari::Commands::Search
 end

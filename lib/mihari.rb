@@ -1,22 +1,39 @@
 # frozen_string_literal: true
 
-require "awrence"
-require "colorize"
+require "active_support"
+require "active_support/core_ext/hash"
+
+require "active_record"
+
+# dry-rb
 require "dry/configurable"
 require "dry/files"
+require "dry/initializer"
+require "dry/schema"
+require "dry/types"
+require "dry/validation"
+
+# standard & utility libs
+require "awrence"
+require "colorize"
+require "json"
 require "memist"
 require "plissken"
+require "uuidtools"
 require "yaml"
 
 # Load .env
 require "dotenv/load"
+
+# Mihari
+require "mihari/version"
+require "mihari/errors"
 
 # Mixins
 require "mihari/mixins/autonomous_system"
 require "mihari/mixins/configurable"
 require "mihari/mixins/database"
 require "mihari/mixins/disallowed_data_value"
-require "mihari/mixins/hash"
 require "mihari/mixins/refang"
 require "mihari/mixins/retriable"
 require "mihari/mixins/rule"
@@ -79,9 +96,6 @@ module Mihari
   end
 end
 
-require "mihari/version"
-require "mihari/errors"
-
 require "mihari/database"
 require "mihari/type_checker"
 
@@ -97,6 +111,7 @@ require "mihari/structs/censys"
 require "mihari/structs/greynoise"
 require "mihari/structs/ipinfo"
 require "mihari/structs/onyphe"
+require "mihari/structs/rule"
 require "mihari/structs/shodan"
 require "mihari/structs/urlscan"
 require "mihari/structs/virustotal_intelligence"
@@ -116,6 +131,7 @@ require "mihari/models/autonomous_system"
 require "mihari/models/dns"
 require "mihari/models/geolocation"
 require "mihari/models/reverse_dns"
+require "mihari/models/rule"
 require "mihari/models/tag"
 require "mihari/models/tagging"
 require "mihari/models/whois"

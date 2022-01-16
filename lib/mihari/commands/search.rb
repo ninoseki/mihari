@@ -3,18 +3,24 @@
 module Mihari
   module Commands
     module Search
+      include Mixins::Database
       include Mixins::Rule
 
       def self.included(thor)
         thor.class_eval do
           desc "search [RULE]", "Search by a rule"
-          def search_by_rule(rule)
-            # convert str(YAML) to hash or str(path/YAML file) to hash
-            rule = load_rule(rule)
+          def search_by_rule(path_or_id)
+            rule = load_rule(path_or_id)
+            # validate
+            begin
+              rule.validate!
+            rescue RuleValidationError => e
+              error_message = "Failed to parse the input as a rule!"
+              puts error_message.colorize(:red)
+              raise e
+            end
 
-            # validate rule schema
-            rule = validate_rule(rule)
-
+            # build and run the analyzer
             analyzer = build_rule_analyzer(
               title: rule[:title],
               description: rule[:description],
@@ -22,8 +28,7 @@ module Mihari
               tags: rule[:tags],
               allowed_data_types: rule[:allowed_data_types],
               disallowed_data_values: rule[:disallowed_data_values],
-              source: rule[:source],
-              id: rule[:id]
+              id: rule.id
             )
 
             ignore_old_artifacts = rule[:ignore_old_artifacts]
@@ -31,6 +36,14 @@ module Mihari
 
             with_error_handling do
               run_rule_analyzer analyzer, ignore_old_artifacts: ignore_old_artifacts, ignore_threshold: ignore_threshold
+
+              # record a rule
+              with_db_connection do
+                model = rule.to_model
+                model.save
+              rescue ActiveRecord::RecordNotUnique
+                nil
+              end
             end
           end
         end
@@ -47,11 +60,10 @@ module Mihari
       # @param [Array<String>, nil] tags
       # @param [Array<String>, nil] allowed_data_types
       # @param [Array<String>, nil] disallowed_data_values
-      # @param [String, nil] source
       #
       # @return [Mihari::Analyzers::Rule]
       #
-      def build_rule_analyzer(title:, description:, queries:, tags: nil, allowed_data_types: nil, disallowed_data_values: nil, source: nil, id: nil)
+      def build_rule_analyzer(title:, description:, queries:, tags: nil, allowed_data_types: nil, disallowed_data_values: nil, id: nil)
         tags = [] if tags.nil?
         allowed_data_types = ALLOWED_DATA_TYPES if allowed_data_types.nil?
         disallowed_data_values = [] if disallowed_data_values.nil?
@@ -63,7 +75,6 @@ module Mihari
           queries: queries,
           allowed_data_types: allowed_data_types,
           disallowed_data_values: disallowed_data_values,
-          source: source,
           id: id
         )
       end

@@ -41,8 +41,7 @@ RSpec.describe Mihari::Analyzers::Rule, :vcr do
 
   describe "#source" do
     it do
-      # UUIDTools::UUID.md5_create(UUIDTools::UUID_URL_NAMESPACE, title + description).to_s
-      expect(subject.source).to eq("ce0da7c8-a87e-3782-8dc4-22dd52d9068a")
+      expect(subject.source).to be_a(String)
     end
   end
 

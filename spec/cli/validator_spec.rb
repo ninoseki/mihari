@@ -16,7 +16,7 @@ RSpec.describe Mihari::CLI::Validator do
 
       it do
         output = capture(:stdout) do
-          expect { subject.start ["rule", path] }.to raise_error(ArgumentError)
+          subject.start ["rule", path]
         end
         expect(output).to include("Failed to parse")
       end

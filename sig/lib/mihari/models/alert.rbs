@@ -7,7 +7,7 @@ module Mihari
     attr_accessor artifacts(): Array[Mihari::Artifact]
     attr_accessor Tags(): Array[Mihari::Tag]
 
-    def self.search: (Mihari::Structs::Alert::SearchFilterWithPagination filter) -> Array[Hash[(String | Symbol), untyped]]
+    def self.search: (Mihari::Structs::Alert::SearchFilterWithPagination filter) -> Array[Mihari::Alert]
 
     def self.count: (Mihari::Structs::Alert::SearchFilter filter) -> Integer
 

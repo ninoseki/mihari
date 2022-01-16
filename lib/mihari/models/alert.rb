@@ -8,13 +8,15 @@ module Mihari
     has_many :artifacts, dependent: :destroy
     has_many :tags, through: :taggings
 
+    belongs_to :rule
+
     class << self
       #
       # Search alerts
       #
       # @param [Structs::Alert::SearchFilterWithPagination] filter
       #
-      # @return [Array<Hash>]
+      # @return [Array<Alert>]
       #
       def search(filter)
         limit = filter.limit.to_i
