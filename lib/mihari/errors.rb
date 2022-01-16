@@ -12,4 +12,6 @@ module Mihari
   class HttpError < Error; end
 
   class FeedParseError < Error; end
+
+  class RuleValidationError < Error; end
 end

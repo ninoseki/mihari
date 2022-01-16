@@ -49,7 +49,6 @@ Gem::Specification.new do |spec|
   spec.add_dependency "censysx", "~> 0.1"
   spec.add_dependency "colorize", "~> 0.8"
   spec.add_dependency "crtsh-rb", "~> 0.3"
-  spec.add_dependency "cymbal", "~> 2.0"
   spec.add_dependency "dnpedia", "~> 0.1"
   spec.add_dependency "dnstwister", "~> 0.1"
   spec.add_dependency "dotenv", "~> 2.7"

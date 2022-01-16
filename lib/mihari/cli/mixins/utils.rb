@@ -42,7 +42,7 @@ module Mihari
           # so need to covert it to a plain hash
           hash_options = options.to_hash
 
-          hash_options = symbolize_hash(hash_options)
+          hash_options = hash_options.symbolize_keys
           hash_options = normalize_options(hash_options)
 
           analyzer = analyzer_class.new(query, **hash_options)

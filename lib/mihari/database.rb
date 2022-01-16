@@ -85,6 +85,17 @@ class EnrichmentCreatedAtSchema < ActiveRecord::Migration[7.0]
   end
 end
 
+class RuleSchema < ActiveRecord::Migration[7.0]
+  def change
+    create_table :rules, id: :string, if_not_exists: true do |t|
+      t.string :title, null: false
+      t.string :description, null: false
+      t.json :data, null: false
+      t.timestamps
+    end
+  end
+end
+
 def adapter
   return "postgresql" if Mihari.config.database.start_with?("postgresql://", "postgres://")
   return "mysql2" if Mihari.config.database.start_with?("mysql2://")
@@ -101,10 +112,12 @@ module Mihari
       # @param [Symbol] direction
       #
       def migrate(direction)
-        InitialSchema.migrate(direction)
-        AddeSourceToArtifactSchema.migrate(direction)
-        EnrichmentsSchema.migrate(direction)
-        EnrichmentCreatedAtSchema.migrate(direction)
+        InitialSchema.migrate direction
+        AddeSourceToArtifactSchema.migrate direction
+        EnrichmentsSchema.migrate direction
+        EnrichmentCreatedAtSchema.migrate direction
+        # v4
+        RuleSchema.migrate direction
       end
 
       #

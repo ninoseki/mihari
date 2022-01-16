@@ -17,7 +17,8 @@ RSpec.describe Test do
 
       data = YAML.safe_load(files.read(filename), permitted_classes: [Date], symbolize_names: true)
 
-      subject.validate_rule data
+      rule = Mihari::Structs::Rule::Rule.new(data)
+      expect(rule.errors?).to eq(false)
 
       expect(data).to be_a(Hash)
     end

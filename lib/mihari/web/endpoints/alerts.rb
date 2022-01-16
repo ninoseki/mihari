@@ -11,10 +11,12 @@ module Mihari
         }
         params do
           optional :page, type: Integer
+
           optional :artifact, type: String
           optional :description, type: String
           optional :source, type: String
           optional :tag, type: String
+          optional :title, type: String
 
           optional :fromAt, type: DateTime
           optional :toAt, type: DateTime
@@ -38,7 +40,7 @@ module Mihari
           filter["tag_name"] = filter["tag"]
 
           # symbolize hash keys
-          filter = filter.to_h.transform_keys(&:to_sym)
+          filter = filter.to_h.symbolize_keys
 
           search_filter_with_pagenation = Structs::Alert::SearchFilterWithPagination.new(**filter)
           alerts = Mihari::Alert.search(search_filter_with_pagenation)

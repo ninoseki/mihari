@@ -1,0 +1,14 @@
+module Mihari
+  class Rule < ActiveRecord::Base
+    attr_accessor id(): String
+    attr_accessor title(): String
+    attr_accessor description(): String
+    attr_accessor data(): Hash
+
+    def to_h: () -> Hash
+
+    def self.search: (Mihari::Structs::Rule::SearchFilterWithPagination filter) -> Array[Mihari::Rule]
+
+    def self.count: (Mihari::Structs::Rule::SearchFilter filter) -> Integer
+  end
+end

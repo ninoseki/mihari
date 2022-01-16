@@ -9,14 +9,18 @@ module Mihari
         thor.class_eval do
           desc "rule [PATH]", "Validate format of a rule file"
           def rule(path)
-            # convert str(YAML) to hash or str(path/YAML file) to hash
             rule = load_rule(path)
 
-            # validate rule schema
-            validate_rule rule
+            begin
+              rule.validate!
 
-            puts "Valid format. The input is parsed as the following:"
-            puts rule.to_yaml
+              puts "Valid format. The input is parsed as the following:"
+              puts rule.data.to_yaml
+            rescue RuleValidationError => e
+              error_message = "Failed to parse the input as a rule!"
+              puts error_message.colorize(:red)
+              puts e.message
+            end
           end
         end
       end
