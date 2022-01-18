@@ -1,7 +1,5 @@
 # frozen_string_literal: true
 
-require "colorize"
-
 module Mihari
   module Commands
     module Initialization

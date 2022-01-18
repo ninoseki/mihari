@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 require "misp"
-require "net/ping"
 
 module Mihari
   module Emitters

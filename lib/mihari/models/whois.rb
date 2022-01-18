@@ -1,8 +1,6 @@
 # frozen_string_literal: true
 
-require "active_record"
 require "whois-parser"
-require "public_suffix"
 
 module Mihari
   class WhoisRecord < ActiveRecord::Base

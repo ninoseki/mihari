@@ -1,7 +1,5 @@
 # frozen_string_literal: true
 
-require "json"
-
 module Mihari
   module Notifiers
     class ExceptionNotifier

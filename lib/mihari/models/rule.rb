@@ -1,7 +1,5 @@
 # frozen_string_literal: true
 
-require "active_record"
-
 module Mihari
   class Rule < ActiveRecord::Base
     has_many :alerts, foreign_key: :source

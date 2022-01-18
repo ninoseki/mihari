@@ -1,9 +1,6 @@
 # frozen_string_literal: true
 
 require "csv"
-require "json"
-require "net/https"
-require "uri"
 
 module Mihari
   module Feed
@@ -11,7 +8,7 @@ module Mihari
       attr_reader :uri, :http_request_headers, :http_request_method, :http_request_payload_type, :http_request_payload
 
       def initialize(uri, http_request_headers: {}, http_request_method: "GET", http_request_payload_type: nil, http_request_payload: {})
-        @uri = URI(uri)
+        @uri = Addressable::URI.parse(uri)
         @http_request_headers = http_request_headers
         @http_request_method = http_request_method
         @http_request_payload_type = http_request_payload_type
@@ -27,7 +24,7 @@ module Mihari
       end
 
       def get
-        uri.query = URI.encode_www_form(http_request_payload)
+        uri.query = Addressable::URI.form_encode(http_request_payload)
         get = Net::HTTP::Get.new(uri)
 
         request(get)

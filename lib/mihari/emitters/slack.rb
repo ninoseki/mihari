@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 require "digest/sha2"
-require "dry/initializer"
 require "slack-notifier"
 
 module Mihari
@@ -63,7 +62,7 @@ module Mihari
         when "domain"
           "https://urlscan.io/domain/#{data}"
         when "url"
-          uri = URI(data)
+          uri = Addressable::URI.parse(data)
           "https://urlscan.io/domain/#{uri.hostname}"
         end
       end

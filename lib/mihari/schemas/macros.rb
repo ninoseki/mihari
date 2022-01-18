@@ -1,7 +1,5 @@
 # frozen_string_literal: true
 
-require "dry/types"
-
 module Dry
   module Schema
     module Macros

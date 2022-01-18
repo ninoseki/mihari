@@ -1,11 +1,5 @@
 # frozen_string_literal: true
 
-require "addressable/uri"
-require "dry-initializer"
-require "email_address"
-require "ipaddr"
-require "public_suffix"
-
 module Mihari
   class TypeChecker
     extend Dry::Initializer

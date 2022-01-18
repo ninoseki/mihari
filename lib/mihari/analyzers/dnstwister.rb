@@ -1,8 +1,6 @@
 # frozen_string_literal: true
 
 require "dnstwister"
-require "resolv"
-require "parallel"
 
 module Mihari
   module Analyzers
