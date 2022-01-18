@@ -10,6 +10,8 @@ module Mihari
       super
 
       raise ArgumentError if data.is_a?(Hash)
+
+      @data = data.to_s
     end
 
     # @return [Boolean]

@@ -21,7 +21,7 @@ module Mihari
 
       def valid_type?: () -> bool
 
-      def search: () -> Array[String]
+      def search: () -> Array[Mihari::Artifact]
     end
   end
 end

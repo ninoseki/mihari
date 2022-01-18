@@ -18,6 +18,7 @@ module Mihari
         attribute :type, Types::String
         attribute :id, Types::String
         attribute :context_attributes, ContextAttributes.optional
+        attribute :metadata, Types::Hash
 
         def value
           case type
@@ -41,7 +42,8 @@ module Mihari
           new(
             type: d.fetch("type"),
             id: d.fetch("id"),
-            context_attributes: context_attributes
+            context_attributes: context_attributes,
+            metadata: d
           )
         end
       end

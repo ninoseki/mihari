@@ -20,7 +20,7 @@ module Mihari
         results.map do |result|
           matches = result.matches || []
           matches.map { |match| build_artifact match }
-        end.flatten.compact.uniq(&:data)
+        end.flatten.uniq(&:data)
       end
 
       private
@@ -98,6 +98,7 @@ module Mihari
         Artifact.new(
           data: match.ip_str,
           source: source,
+          metadata: match.metadata,
           autonomous_system: as,
           geolocation: geolocation
         )

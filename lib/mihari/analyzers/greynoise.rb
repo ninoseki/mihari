@@ -56,6 +56,7 @@ module Mihari
         Artifact.new(
           data: datum.ip,
           source: source,
+          metadata: datum.metadata_,
           autonomous_system: as,
           geolocation: geolocation
         )

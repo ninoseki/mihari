@@ -21,12 +21,14 @@ module Mihari
       class Datum < Dry::Struct
         attribute :ip, Types::String
         attribute :metadata, Metadata
+        attribute :metadata_, Types::Hash
 
         def self.from_dynamic!(d)
           d = Types::Hash[d]
           new(
             ip: d.fetch("ip"),
-            metadata: Metadata.from_dynamic!(d.fetch("metadata"))
+            metadata: Metadata.from_dynamic!(d.fetch("metadata")),
+            metadata_: d
           )
         end
       end
