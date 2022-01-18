@@ -7,6 +7,7 @@ module Mihari
         attribute :asn, Types::String
         attribute :country_code, Types::String.optional
         attribute :ip, Types::String
+        attribute :metadata, Types::Hash
 
         def self.from_dynamic!(d)
           d = Types::Hash[d]
@@ -14,7 +15,8 @@ module Mihari
             asn: d.fetch("asn"),
             ip: d.fetch("ip"),
             # Onyphe's country = 2-letter country code
-            country_code: d["country"]
+            country_code: d["country"],
+            metadata: d
           )
         end
       end

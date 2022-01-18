@@ -23,13 +23,14 @@ module Mihari
       #
       # Search
       #
-      # @return [Array<String>]
+      # @return [Array<Mihari::Artifact>]
       #
       def search
         res = api.search(query)
         rows = res["rows"] || []
         rows.map do |row|
-          [row["name"], row["zoneid"]].join(".")
+          data = [row["name"], row["zoneid"]].join(".")
+          Artifact.new(data: data, source: source, metadata: row)
         end
       end
     end

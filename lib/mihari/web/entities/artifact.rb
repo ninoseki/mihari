@@ -9,6 +9,8 @@ module Mihari
       expose :source, documentation: { type: String, required: true }
       expose :tags, documentation: { type: String, is_array: true }
 
+      expose :metadata, documentation: { type: Hash }
+
       expose :autonomous_system, using: Entities::AutonomousSystem, documentation: { type: Entities::AutonomousSystem, required: false }, as: :autonomousSystem
       expose :geolocation, using: Entities::Geolocation, documentation: { type: Entities::Geolocation, required: false }
       expose :whois_record, using: Entities::WhoisRecord, documentation: { type: Entities::WhoisRecord, required: false }, as: :whoisRecord

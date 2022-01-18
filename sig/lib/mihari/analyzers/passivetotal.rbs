@@ -25,9 +25,9 @@ module Mihari
 
       def passive_dns_search: () -> Array[String]
 
-      def reverse_whois_search: () -> Array[String]
+      def reverse_whois_search: () -> Array[Mihari::Artifact]
 
-      def ssl_search: () -> Array[String]
+      def ssl_search: () -> Array[Mihari::Artifact]
     end
   end
 end

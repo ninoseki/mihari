@@ -94,6 +94,12 @@ class RuleSchema < ActiveRecord::Migration[7.0]
   end
 end
 
+class AddeMetadataToArtifactSchema < ActiveRecord::Migration[7.0]
+  def change
+    add_column :artifacts, :metadata, :json, if_not_exists: true
+  end
+end
+
 def adapter
   return "postgresql" if Mihari.config.database.start_with?("postgresql://", "postgres://")
   return "mysql2" if Mihari.config.database.start_with?("mysql2://")
@@ -116,6 +122,7 @@ module Mihari
         EnrichmentCreatedAtSchema.migrate direction
         # v4
         RuleSchema.migrate direction
+        AddeMetadataToArtifactSchema.migrate direction
       end
 
       #

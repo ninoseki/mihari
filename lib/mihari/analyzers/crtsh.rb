@@ -13,8 +13,12 @@ module Mihari
 
       def artifacts
         results = search
-        name_values = results.filter_map { |result| result["name_value"] }
-        name_values.map(&:lines).flatten.uniq.map(&:chomp)
+        results.map do |result|
+          values = result["name_value"].to_s.lines.map(&:chomp)
+          values.map do |value|
+            Artifact.new(data: value, source: source, metadata: result)
+          end
+        end.flatten
       end
 
       private

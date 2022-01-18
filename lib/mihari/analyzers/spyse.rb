@@ -41,33 +41,35 @@ module Mihari
       #
       # Domain search
       #
-      # @return [Array<String>]
+      # @return [Array<Mihari::Artifact>]
       #
       def domain_search
         res = api.domain.search(search_params, limit: 100)
         items = res.dig("data", "items") || []
         items.map do |item|
-          item["name"]
-        end.uniq.compact
+          data = item["name"]
+          Artifact.new(data: data, source: source, metadata: item)
+        end
       end
 
       #
       # IP search
       #
-      # @return [Array<String>]
+      # @return [Array<Mihari::Artifact>]
       #
       def ip_search
         res = api.ip.search(search_params, limit: 100)
         items = res.dig("data", "items") || []
         items.map do |item|
-          item["ip"]
-        end.uniq.compact
+          data = item["ip"]
+          Artifact.new(data: data, source: source, metadata: item)
+        end
       end
 
       #
       # IP/domain search
       #
-      # @return [Array<String>]
+      # @return [Array<Mihari::Artifact>]
       #
       def search
         case type

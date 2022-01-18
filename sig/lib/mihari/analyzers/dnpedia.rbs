@@ -12,7 +12,7 @@ module Mihari
 
       def api: () -> untyped
 
-      def search: () -> Array[String]
+      def search: () -> Array[Mihari::Artifact]
     end
   end
 end

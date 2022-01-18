@@ -29,9 +29,10 @@ module Mihari
         allowed_data_types.map do |type|
           results.filter_map do |result|
             page = result.page
-            page.send(type.to_sym)
-          end.uniq
-        end.flatten.compact
+            data = page.send(type.to_sym)
+            data.nil? ? nil : Artifact.new(data: data, source: source, metadata: result)
+          end
+        end.flatten
       end
 
       private

@@ -50,13 +50,14 @@ module Mihari
       #
       # @param [Array<Hash>] responses
       #
-      # @return [Array<String>]
+      # @return [Array<Mihari::Artifact>]
       #
       def convert_responses(responses)
         responses.map do |res|
           matches = res["matches"] || []
           matches.map do |match|
-            match["ip"]
+            data = match["ip"]
+            Artifact.new(data: data, source: source, metadata: match)
           end
         end.flatten.compact.uniq
       end
