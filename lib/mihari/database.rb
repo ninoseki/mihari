@@ -1,7 +1,5 @@
 # frozen_string_literal: true
 
-require "active_record"
-
 class InitialSchema < ActiveRecord::Migration[7.0]
   def change
     create_table :tags, if_not_exists: true do |t|

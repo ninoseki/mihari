@@ -1,7 +1,10 @@
 # frozen_string_literal: true
 
 require "active_support"
+
 require "active_support/core_ext/hash"
+require "active_support/core_ext/integer/time"
+require "active_support/core_ext/numeric/time"
 
 require "active_record"
 
@@ -10,17 +13,27 @@ require "dry/configurable"
 require "dry/files"
 require "dry/initializer"
 require "dry/schema"
+require "dry/struct"
 require "dry/types"
 require "dry/validation"
 
 # standard & utility libs
+require "addressable/uri"
 require "awrence"
 require "colorize"
+require "email_address"
+require "ipaddr"
 require "json"
 require "memist"
+require "net/http"
+require "net/https"
+require "net/ping"
 require "plissken"
+require "public_suffix"
+require "resolv"
 require "uuidtools"
 require "yaml"
+require "parallel"
 
 # Load .env
 require "dotenv/load"
@@ -117,6 +130,8 @@ require "mihari/structs/urlscan"
 require "mihari/structs/virustotal_intelligence"
 
 # Schemas
+require "mihari/schemas/macros"
+
 require "mihari/schemas/analyzer"
 require "mihari/schemas/rule"
 

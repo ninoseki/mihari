@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require "thor"
+
 # Commands
 require "mihari/commands/search"
 require "mihari/commands/web"

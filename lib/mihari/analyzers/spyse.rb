@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 require "spyse"
-require "json"
 
 module Mihari
   module Analyzers

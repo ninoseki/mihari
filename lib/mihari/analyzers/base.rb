@@ -1,8 +1,5 @@
 # frozen_string_literal: true
 
-require "dry/initializer"
-require "parallel"
-
 module Mihari
   module Analyzers
     class Base
