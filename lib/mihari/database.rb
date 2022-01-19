@@ -1,5 +1,9 @@
 # frozen_string_literal: true
 
+def is_test?
+  ENV["APP_ENV"] == "test"
+end
+
 class InitialSchema < ActiveRecord::Migration[7.0]
   def change
     create_table :tags, if_not_exists: true do |t|
@@ -110,20 +114,25 @@ end
 module Mihari
   class Database
     class << self
+      include Memist::Memoizable
+
       #
       # DB migraration
       #
       # @param [Symbol] direction
       #
       def migrate(direction)
-        InitialSchema.migrate direction
-        AddeSourceToArtifactSchema.migrate direction
-        EnrichmentsSchema.migrate direction
-        EnrichmentCreatedAtSchema.migrate direction
-        # v4
-        RuleSchema.migrate direction
-        AddeMetadataToArtifactSchema.migrate direction
+        [
+          InitialSchema,
+          AddeSourceToArtifactSchema,
+          EnrichmentsSchema,
+          EnrichmentCreatedAtSchema,
+          # v4
+          RuleSchema,
+          AddeMetadataToArtifactSchema
+        ].each { |schema| schema.migrate direction }
       end
+      memoize :migrate
 
       #
       # Establish DB connection
