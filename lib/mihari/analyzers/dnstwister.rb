@@ -8,8 +8,7 @@ module Mihari
       include Mixins::Refang
 
       param :query
-      option :title, default: proc { "dnstwister domain search" }
-      option :description, default: proc { "query = #{query}" }
+
       option :tags, default: proc { [] }
 
       attr_reader :type

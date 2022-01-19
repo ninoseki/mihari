@@ -6,9 +6,7 @@ module Mihari
   module Analyzers
     class ZoomEye < Base
       param :query
-      option :title, default: proc { "ZoomEye search" }
-      option :description, default: proc { "query = #{query}" }
-      option :tags, default: proc { [] }
+
       option :type, default: proc { "host" }
 
       option :interval, default: proc { 0 }

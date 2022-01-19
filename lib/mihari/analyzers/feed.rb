@@ -7,9 +7,6 @@ module Mihari
   module Analyzers
     class Feed < Base
       param :query
-      option :title, default: proc { "Feed" }
-      option :description, default: proc { "query = #{query}" }
-      option :tags, default: proc { [] }
 
       option :http_request_method, default: proc { "GET" }
       option :http_request_headers, default: proc { {} }

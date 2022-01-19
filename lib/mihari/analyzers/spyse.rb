@@ -6,10 +6,8 @@ module Mihari
   module Analyzers
     class Spyse < Base
       param :query
-      option :title, default: proc { "Spyse search" }
-      option :description, default: proc { "query = #{query}" }
+
       option :type, default: proc { "domain" }
-      option :tags, default: proc { [] }
 
       def artifacts
         search || []

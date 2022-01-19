@@ -8,9 +8,6 @@ module Mihari
       include Mixins::Refang
 
       param :query
-      option :title, default: proc { "CIRCL passive DNS/SSL search" }
-      option :description, default: proc { "query = #{query}" }
-      option :tags, default: proc { [] }
 
       attr_reader :type
 
