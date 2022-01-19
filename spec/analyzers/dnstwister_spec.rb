@@ -1,9 +1,8 @@
 # frozen_string_literal: true
 
 RSpec.describe Mihari::Analyzers::DNSTwister, :vcr do
-  subject { described_class.new(query, tags: tags) }
+  subject { described_class.new(query) }
 
-  let(:tags) { %w[test] }
   let(:query) { "example.com" }
 
   describe "#artifacts" do
@@ -13,18 +12,6 @@ RSpec.describe Mihari::Analyzers::DNSTwister, :vcr do
 
     it do
       expect(subject.artifacts).to be_an(Array)
-    end
-  end
-
-  describe "#title" do
-    it do
-      expect(subject.title).to eq("dnstwister domain search")
-    end
-  end
-
-  describe "#description" do
-    it do
-      expect(subject.description).to eq("query = #{query}")
     end
   end
 end

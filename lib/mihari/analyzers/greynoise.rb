@@ -6,9 +6,6 @@ module Mihari
   module Analyzers
     class GreyNoise < Base
       param :query
-      option :title, default: proc { "GreyNoise search" }
-      option :description, default: proc { "query = #{query}" }
-      option :tags, default: proc { [] }
 
       def artifacts
         res = Structs::GreyNoise::Response.from_dynamic!(search)

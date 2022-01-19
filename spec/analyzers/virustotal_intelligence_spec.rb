@@ -6,18 +6,6 @@ RSpec.describe Mihari::Analyzers::VirusTotalIntelligence, :vcr do
 
     let(:query) { 'size:1KB- ls:"2021-09-18T00:00:00"' }
 
-    describe "#title" do
-      it do
-        expect(subject.title).to eq("VirusTotal Intelligence search")
-      end
-    end
-
-    describe "#description" do
-      it do
-        expect(subject.description).to eq("query = #{query}")
-      end
-    end
-
     describe "#artifacts" do
       it do
         artifacts = subject.artifacts

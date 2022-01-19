@@ -5,18 +5,6 @@ RSpec.describe Mihari::Analyzers::GreyNoise, :vcr do
 
   subject { described_class.new(query) }
 
-  describe "#title" do
-    it do
-      expect(subject.title).to eq("GreyNoise search")
-    end
-  end
-
-  describe "#description" do
-    it do
-      expect(subject.description).to eq("query = #{query}")
-    end
-  end
-
   describe "#artifacts" do
     it do
       artifacts = subject.artifacts

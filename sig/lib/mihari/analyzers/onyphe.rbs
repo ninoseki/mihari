@@ -2,9 +2,6 @@ module Mihari
   module Analyzers
     class Onyphe < Base
       attr_reader query: String
-      attr_reader title: String
-      attr_reader description: String
-      attr_reader tags: Array[String]
 
       attr_reader interval: ::Integer
 

@@ -1,22 +1,9 @@
 # frozen_string_literal: true
 
 RSpec.describe Mihari::Analyzers::Onyphe, :vcr do
-  subject { described_class.new(query, tags: tags) }
+  subject { described_class.new(query) }
 
   let(:query) { "4299114377898569169" }
-  let(:tags) { %w[test] }
-
-  describe "#title" do
-    it do
-      expect(subject.title).to eq("Onyphe search")
-    end
-  end
-
-  describe "#description" do
-    it do
-      expect(subject.description).to eq("query = #{query}")
-    end
-  end
 
   describe "#artifacts" do
     it do
@@ -25,12 +12,6 @@ RSpec.describe Mihari::Analyzers::Onyphe, :vcr do
 
       expect(artifacts.first.autonomous_system.asn).to eq(3462)
       expect(artifacts.first.geolocation.country).to eq("Taiwan")
-    end
-  end
-
-  describe "#tags" do
-    it do
-      expect(subject.tags).to eq(tags)
     end
   end
 

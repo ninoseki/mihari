@@ -6,9 +6,6 @@ module Mihari
   module Analyzers
     class VirusTotalIntelligence < Base
       param :query
-      option :title, default: proc { "VirusTotal Intelligence search" }
-      option :description, default: proc { "query = #{query}" }
-      option :tags, default: proc { [] }
 
       option :interval, default: proc { 0 }
 

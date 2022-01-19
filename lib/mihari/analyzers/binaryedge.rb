@@ -6,9 +6,6 @@ module Mihari
   module Analyzers
     class BinaryEdge < Base
       param :query
-      option :title, default: proc { "BinaryEdge search" }
-      option :description, default: proc { "query = #{query}" }
-      option :tags, default: proc { [] }
 
       option :interval, default: proc { 0 }
 

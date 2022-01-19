@@ -6,8 +6,7 @@ module Mihari
   module Analyzers
     class DNPedia < Base
       param :query
-      option :title, default: proc { "DNPedia domain search" }
-      option :description, default: proc { "query = #{query}" }
+
       option :tags, default: proc { [] }
 
       def artifacts
