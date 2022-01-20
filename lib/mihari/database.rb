@@ -1,7 +1,15 @@
 # frozen_string_literal: true
 
-def is_test?
-  ENV["APP_ENV"] == "test"
+def env
+  ENV["APP_ENV"] || ENV["RACK_ENV"]
+end
+
+def test_env?
+  env == "test"
+end
+
+def development_env?
+  env == "development"
 end
 
 class InitialSchema < ActiveRecord::Migration[7.0]
@@ -122,6 +130,8 @@ module Mihari
       # @param [Symbol] direction
       #
       def migrate(direction)
+        ActiveRecord::Migration.verbose = false
+
         [
           InitialSchema,
           AddeSourceToArtifactSchema,
@@ -132,7 +142,7 @@ module Mihari
           AddeMetadataToArtifactSchema
         ].each { |schema| schema.migrate direction }
       end
-      memoize :migrate
+      memoize :migrate unless test_env?
 
       #
       # Establish DB connection
@@ -150,8 +160,7 @@ module Mihari
           )
         end
 
-        ActiveRecord::Base.logger = Logger.new($stdout) if ENV["RACK_ENV"] == "development"
-        ActiveRecord::Migration.verbose = false
+        ActiveRecord::Base.logger = Logger.new($stdout) if development_env?
 
         migrate :up
       rescue StandardError
