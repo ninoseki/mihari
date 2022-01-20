@@ -114,6 +114,9 @@ RSpec.configure do |config|
 
   config.include Spec::Support::Helpers
 
-  config.before(:example) { Mihari::Database.connect }
+  config.before(:example) do
+    Mihari::Database.flush_memoization
+    Mihari::Database.connect
+  end
   config.after(:example) { Mihari::Database.close }
 end
