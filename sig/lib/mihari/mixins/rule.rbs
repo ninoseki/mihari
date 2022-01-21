@@ -17,6 +17,8 @@ module Mihari
       #
       def rule_template: () -> String
 
+      def validate_rule!: (Mihari::Structs::Rule::Rule rule) -> nil
+
       #
       # Create (blank) rule file
       #

@@ -12,14 +12,9 @@ module Mihari
             rule = load_rule(path)
 
             begin
-              rule.validate!
-
-              puts "Valid format. The input is parsed as the following:"
-              puts rule.data.to_yaml
-            rescue RuleValidationError => e
-              error_message = "Failed to parse the input as a rule!"
-              puts error_message.colorize(:red)
-              puts e.message
+              validate_rule! rule
+            rescue RuleValidationError
+              nil
             end
           end
         end

@@ -13,10 +13,8 @@ module Mihari
             rule = load_rule(path_or_id)
             # validate
             begin
-              rule.validate!
+              validate_rule! rule
             rescue RuleValidationError => e
-              error_message = "Failed to parse the input as a rule!"
-              puts error_message.colorize(:red)
               raise e
             end
 
