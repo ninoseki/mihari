@@ -41,6 +41,22 @@ module Mihari
       end
 
       #
+      # Validate a rule
+      #
+      # @param [Mihari::Structs::Rule::Rule] rule
+      #
+      def validate_rule!(rule)
+        rule.validate!
+
+        puts "Valid format. The input is parsed as the following:"
+        puts rule.data.to_yaml
+      rescue RuleValidationError => e
+        error_message = "Failed to parse the input as a rule:\n#{e.message}"
+        puts error_message.colorize(:red)
+        raise e
+      end
+
+      #
       # Returns a template for rule
       #
       # @return [String] A template for rule
