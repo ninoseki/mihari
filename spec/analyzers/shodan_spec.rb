@@ -17,6 +17,9 @@ RSpec.describe Mihari::Analyzers::Shodan, :vcr do
       expect(artifacts.first.autonomous_system.asn).to eq(13_335)
 
       expect(artifacts.first.geolocation.country_code).to eq("US")
+
+      expect(artifacts.first.metadata).to be_an(Array)
+      expect(artifacts.first.metadata.first).to be_a(Hash)
     end
   end
 
