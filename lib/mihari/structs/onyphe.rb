@@ -25,7 +25,7 @@ module Mihari
         attribute :count, Types::Int
         attribute :error, Types::Int
         attribute :max_page, Types::Int
-        attribute :page, Types::String
+        attribute :page, Types::Int
         attribute :results, Types.Array(Result)
         attribute :status, Types::String
         attribute :total, Types::Int
@@ -36,7 +36,7 @@ module Mihari
             count: d.fetch("count"),
             error: d.fetch("error"),
             max_page: d.fetch("max_page"),
-            page: d.fetch("page"),
+            page: d.fetch("page").to_i,
             results: d.fetch("results").map { |x| Result.from_dynamic!(x) },
             status: d.fetch("status"),
             total: d.fetch("total")
