@@ -68,7 +68,7 @@ module Mihari
           # set interval in the top level
           options = params[:options] || {}
           interval = options[:interval]
-          params[:interval] = interval
+          params[:interval] = interval if interval
 
           analyzer = klass.new(query, **params)
 
