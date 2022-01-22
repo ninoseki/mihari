@@ -19,6 +19,8 @@ module Mihari
 
       def search: () -> Array[Hash[(String | Symbol), untyped]]
 
+      def collect_metadata_by_ip: (Array[Mihari::Structs::Shodan::Match] matches, ip: String) -> Array[Hash[(String | Symbol), untyped]]
+
       #
       # Build an artifact from a Shodan search API response
       #

@@ -16,7 +16,7 @@ module Mihari
         results = results.map { |result| Structs::Shodan::Result.from_dynamic!(result) }
         results.map do |result|
           matches = result.matches || []
-          matches.map { |match| build_artifact match }
+          matches.map { |match| build_artifact(match, matches) }
         end.flatten.uniq(&:data)
       end
 
@@ -74,13 +74,26 @@ module Mihari
       end
 
       #
+      # Collect metadata from matches
+      #
+      # @param [Array<Structs::Shodan::Match>] matches
+      # @param [String] ip
+      #
+      # @return [Array<Hash>]
+      #
+      def collect_metadata_by_ip(matches, ip)
+        matches.select { |match| match.ip_str == ip }.map(&:metadata)
+      end
+
+      #
       # Build an artifact from a Shodan search API response
       #
       # @param [Structs::Shodan::Match] match
+      # @param [Array<Structs::Shodan::Match>] matches
       #
       # @return [Artifact]
       #
-      def build_artifact(match)
+      def build_artifact(match, matches)
         as = nil
         as = AutonomousSystem.new(asn: normalize_asn(match.asn)) unless match.asn.nil?
 
@@ -92,10 +105,12 @@ module Mihari
           )
         end
 
+        metadata = collect_metadata_by_ip(matches, match.ip_str)
+
         Artifact.new(
           data: match.ip_str,
           source: source,
-          metadata: match.metadata,
+          metadata: metadata,
           autonomous_system: as,
           geolocation: geolocation
         )
