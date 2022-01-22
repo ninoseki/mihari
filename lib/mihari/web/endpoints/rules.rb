@@ -7,7 +7,8 @@ module Mihari
         desc "Search rules", {
           is_array: true,
           success: Entities::Rule,
-          failure: [{ code: 404, message: "Not found", model: Entities::Message }]
+          failure: [{ code: 404, message: "Not found", model: Entities::Message }],
+          summary: "Search rules"
         }
         params do
           optional :page, type: Integer
@@ -44,7 +45,8 @@ module Mihari
 
         desc "Get a rule", {
           success: Entities::Rule,
-          failure: [{ code: 404, message: "Not found", model: Entities::Message }]
+          failure: [{ code: 404, message: "Not found", model: Entities::Message }],
+          summary: "Get a rule"
         }
         params do
           requires :id, type: String
@@ -62,7 +64,8 @@ module Mihari
         end
 
         desc "Run a rule", {
-          success: Entities::Message
+          success: Entities::Message,
+          summary: "Run a rule"
         }
         params do
           requires :id, type: String
@@ -83,7 +86,8 @@ module Mihari
         end
 
         desc "Create a rule", {
-          success: Entities::Rule
+          success: Entities::Rule,
+          summary: "Create a rule"
         }
         post "/" do
           rule = Structs::Rule::Rule.new(params)
@@ -110,7 +114,8 @@ module Mihari
 
         desc "Delete a rule", {
           success: Entities::Message,
-          failure: [{ code: 404, message: "Not found", model: Entities::Message }]
+          failure: [{ code: 404, message: "Not found", model: Entities::Message }],
+          summary: "Delete a rule"
         }
         params do
           requires :id, type: String

@@ -8,7 +8,8 @@ module Mihari
       namespace :command do
         desc "Run a command", {
           success: Entities::CommandResult,
-          failure: [{ code: 400, message: "Bad request", model: Entities::Message }]
+          failure: [{ code: 400, message: "Bad request", model: Entities::Message }],
+          summary: "Run a command"
         }
         params do
           requires :command, type: String, documentation: { param_type: "body" }

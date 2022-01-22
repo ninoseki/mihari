@@ -6,7 +6,8 @@ module Mihari
       namespace :sources do
         desc "Get sources", {
           is_array: true,
-          success: Entities::Sources
+          success: Entities::Sources,
+          summary: "Get sources"
         }
         get "/" do
           sources = Mihari::Alert.distinct.pluck(:source)

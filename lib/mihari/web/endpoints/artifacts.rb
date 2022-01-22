@@ -6,7 +6,8 @@ module Mihari
       namespace :artifacts do
         desc "Get an artifact", {
           success: Entities::Artifact,
-          failure: [{ code: 404, message: "Not found", model: Entities::Message }]
+          failure: [{ code: 404, message: "Not found", model: Entities::Message }],
+          summary: "Get an artifact"
         }
         params do
           requires :id, type: Integer
@@ -38,7 +39,8 @@ module Mihari
 
         desc "Enrich an artifact", {
           success: Entities::Message,
-          failure: [{ code: 404, message: "Not found", model: Entities::Message }]
+          failure: [{ code: 404, message: "Not found", model: Entities::Message }],
+          summary: "Enrich an artifact"
         }
         params do
           requires :id, type: Integer
@@ -67,7 +69,8 @@ module Mihari
 
         desc "Delete an artifact", {
           success: Entities::Message,
-          failure: [{ code: 404, message: "Not found", model: Entities::Message }]
+          failure: [{ code: 404, message: "Not found", model: Entities::Message }],
+          summary: "Delete an artifact"
         }
         params do
           requires :id, type: Integer
