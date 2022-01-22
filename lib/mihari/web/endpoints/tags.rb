@@ -6,7 +6,8 @@ module Mihari
       namespace :tags do
         desc "Get tags", {
           is_array: true,
-          success: Entities::Tags
+          success: Entities::Tags,
+          summary: "Get tags"
         }
         get "/" do
           tags = Mihari::Tag.distinct.pluck(:name)
@@ -15,7 +16,8 @@ module Mihari
 
         desc "Delete a tag", {
           success: Entities::Message,
-          failure: [{ code: 404, message: "Not found", model: Entities::Message }]
+          failure: [{ code: 404, message: "Not found", model: Entities::Message }],
+          summary: "Delete a tag"
         }
         params do
           requires :name, type: String

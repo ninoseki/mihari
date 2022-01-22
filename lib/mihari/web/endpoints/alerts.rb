@@ -7,7 +7,8 @@ module Mihari
         desc "Search alerts", {
           is_array: true,
           success: Entities::Alert,
-          failure: [{ code: 404, message: "Not found", model: Entities::Message }]
+          failure: [{ code: 404, message: "Not found", model: Entities::Message }],
+          summary: "Search alerts"
         }
         params do
           optional :page, type: Integer
@@ -51,7 +52,8 @@ module Mihari
 
         desc "Delete an alert", {
           success: Entities::Message,
-          failure: [{ code: 404, message: "Not found", model: Entities::Message }]
+          failure: [{ code: 404, message: "Not found", model: Entities::Message }],
+          summary: "Delete an alert"
         }
         params do
           requires :id, type: Integer
