@@ -153,7 +153,6 @@ require "mihari/models/whois"
 
 # Analyzers
 require "mihari/analyzers/base"
-require "mihari/analyzers/basic"
 
 require "mihari/analyzers/binaryedge"
 require "mihari/analyzers/censys"
