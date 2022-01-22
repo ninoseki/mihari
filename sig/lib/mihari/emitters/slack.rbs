@@ -3,7 +3,6 @@ module Mihari
     class Attachment
       attr_reader data: String
       attr_reader data_type: String
-      # include Mem
 
       # extend Dry::Initializer
 

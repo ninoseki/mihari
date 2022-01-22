@@ -1,8 +1,5 @@
 # frozen_string_literal: true
 
-require "active_record"
-require "resolv"
-
 module Mihari
   class DnsRecord < ActiveRecord::Base
     belongs_to :artifact

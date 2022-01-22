@@ -1,22 +1,52 @@
 # frozen_string_literal: true
 
-require "awrence"
-require "colorize"
+require "active_support"
+
+require "active_support/core_ext/hash"
+require "active_support/core_ext/integer/time"
+require "active_support/core_ext/numeric/time"
+
+require "active_record"
+
+# dry-rb
 require "dry/configurable"
 require "dry/files"
-require "mem"
+require "dry/initializer"
+require "dry/schema"
+require "dry/struct"
+require "dry/types"
+require "dry/validation"
+
+# standard & utility libs
+require "addressable/uri"
+require "awrence"
+require "colorize"
+require "email_address"
+require "ipaddr"
+require "json"
+require "memist"
+require "net/http"
+require "net/https"
+require "net/ping"
 require "plissken"
+require "public_suffix"
+require "resolv"
+require "uuidtools"
 require "yaml"
+require "parallel"
 
 # Load .env
 require "dotenv/load"
 
+# Mihari
+require "mihari/version"
+require "mihari/errors"
+
 # Mixins
 require "mihari/mixins/autonomous_system"
 require "mihari/mixins/configurable"
-require "mihari/mixins/configuration"
+require "mihari/mixins/database"
 require "mihari/mixins/disallowed_data_value"
-require "mihari/mixins/hash"
 require "mihari/mixins/refang"
 require "mihari/mixins/retriable"
 require "mihari/mixins/rule"
@@ -30,7 +60,6 @@ end
 
 module Mihari
   extend Dry::Configurable
-  extend Mixins::Configuration
 
   setting :binaryedge_api_key, default: ENV["BINARYEDGE_API_KEY"]
   setting :censys_id, default: ENV["CENSYS_ID"]
@@ -61,7 +90,7 @@ module Mihari
   setting :zoomeye_api_key, default: ENV["ZOOMEYE_API_KEY"]
 
   class << self
-    include Mem
+    include Memist::Memoizable
 
     def emitters
       []
@@ -77,29 +106,8 @@ module Mihari
       []
     end
     memoize :enrichers
-
-    #
-    # Load configuration from YAML file
-    #
-    # @param [String] path Path to YAML file
-    #
-    # @return [nil]
-    #
-    def load_config_from_yaml(path)
-      config = load_config(path)
-
-      # validate loaded yaml data
-      validate_config config
-
-      config.each do |key, value|
-        Mihari.config.send("#{key.downcase}=".to_sym, value)
-      end
-    end
   end
 end
-
-require "mihari/version"
-require "mihari/errors"
 
 require "mihari/database"
 require "mihari/type_checker"
@@ -116,13 +124,15 @@ require "mihari/structs/censys"
 require "mihari/structs/greynoise"
 require "mihari/structs/ipinfo"
 require "mihari/structs/onyphe"
+require "mihari/structs/rule"
 require "mihari/structs/shodan"
 require "mihari/structs/urlscan"
 require "mihari/structs/virustotal_intelligence"
 
 # Schemas
+require "mihari/schemas/macros"
+
 require "mihari/schemas/analyzer"
-require "mihari/schemas/configuration"
 require "mihari/schemas/rule"
 
 # Enrichers
@@ -136,6 +146,7 @@ require "mihari/models/autonomous_system"
 require "mihari/models/dns"
 require "mihari/models/geolocation"
 require "mihari/models/reverse_dns"
+require "mihari/models/rule"
 require "mihari/models/tag"
 require "mihari/models/tagging"
 require "mihari/models/whois"
@@ -186,9 +197,4 @@ require "mihari/status"
 require "mihari/web/app"
 
 # CLIs
-require "mihari/cli/base"
-
-require "mihari/cli/analyzer"
-require "mihari/cli/init"
-
 require "mihari/cli/main"

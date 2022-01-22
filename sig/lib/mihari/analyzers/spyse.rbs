@@ -2,9 +2,7 @@ module Mihari
   module Analyzers
     class Spyse < Base
       attr_reader query: String
-      attr_reader title: String
-      attr_reader description: String
-      attr_reader tags: Array[String]
+
       attr_reader type: String
 
       def artifacts: () -> (Array[String] | Array[Mihari::Artifact])
@@ -19,11 +17,11 @@ module Mihari
 
       def valid_type?: () -> bool
 
-      def domain_search: () -> Array[String]
+      def domain_search: () -> Array[Mihari::Artifact]
 
-      def ip_search: () -> Array[String]
+      def ip_search: () -> Array[Mihari::Artifact]
 
-      def search: () -> Array[String]
+      def search: () -> Array[Mihari::Artifact]
     end
   end
 end

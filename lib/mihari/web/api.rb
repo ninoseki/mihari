@@ -18,12 +18,15 @@ require "mihari/web/entities/artifact"
 
 require "mihari/web/entities/alert"
 
+require "mihari/web/entities/rule"
+
 # Endpoints
 require "mihari/web/endpoints/alerts"
 require "mihari/web/endpoints/artifacts"
 require "mihari/web/endpoints/command"
 require "mihari/web/endpoints/configs"
 require "mihari/web/endpoints/ip_addresses"
+require "mihari/web/endpoints/rules"
 require "mihari/web/endpoints/sources"
 require "mihari/web/endpoints/tags"
 
@@ -37,6 +40,7 @@ module Mihari
     mount Endpoints::Command
     mount Endpoints::Configs
     mount Endpoints::IPAddresses
+    mount Endpoints::Rules
     mount Endpoints::Sources
     mount Endpoints::Tags
 

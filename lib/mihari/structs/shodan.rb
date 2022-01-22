@@ -1,8 +1,5 @@
 # frozen_string_literal: true
 
-require "json"
-require "dry/struct"
-
 module Mihari
   module Structs
     module Shodan
@@ -25,6 +22,7 @@ module Mihari
         attribute :location, Location
         attribute :domains, Types.Array(Types::String)
         attribute :ip_str, Types::String
+        attribute :metadata, Types::Hash
 
         def self.from_dynamic!(d)
           d = Types::Hash[d]
@@ -33,7 +31,8 @@ module Mihari
             hostnames: d.fetch("hostnames"),
             location: Location.from_dynamic!(d.fetch("location")),
             domains: d.fetch("domains"),
-            ip_str: d.fetch("ip_str")
+            ip_str: d.fetch("ip_str"),
+            metadata: d
           )
         end
       end

@@ -6,9 +6,6 @@ module Mihari
   module Analyzers
     class VirusTotalIntelligence < Base
       param :query
-      option :title, default: proc { "VirusTotal Intelligence search" }
-      option :description, default: proc { "query = #{query}" }
-      option :tags, default: proc { [] }
 
       option :interval, default: proc { 0 }
 
@@ -21,8 +18,10 @@ module Mihari
       def artifacts
         responses = search_witgh_cursor
         responses.map do |response|
-          response.data.map(&:value)
-        end.flatten.compact.uniq
+          response.data.map do |datum|
+            Artifact.new(data: datum.value, source: source, metadata: datum.metadata)
+          end
+        end.flatten
       end
 
       private

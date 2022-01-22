@@ -2,9 +2,7 @@ module Mihari
   module Analyzers
     class ZoomEye < Base
       attr_reader query: String
-      attr_reader title: String
-      attr_reader description: String
-      attr_reader tags: Array[String]
+
       attr_reader type: String
 
       attr_reader interval: ::Integer
@@ -21,7 +19,7 @@ module Mihari
 
       def api: () -> untyped
 
-      def convert_responses: (Array[Hash[(String | Symbol), untyped]] responses) -> Array[String]
+      def convert_responses: (Array[Hash[(String | Symbol), untyped]] responses) -> Array[Mihari::Artifact]
 
       def _host_search: (String query, ?page: ::Integer page) -> (Hash[(String | Symbol), untyped] | nil)
 

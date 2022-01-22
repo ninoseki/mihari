@@ -21,6 +21,7 @@ module Spec
         Mihari::Artifact.destroy_all
         Mihari::Tagging.destroy_all
         Mihari::Tag.destroy_all
+        Mihari::Rule.destroy_all
       end
     end
   end

@@ -1,12 +1,12 @@
 # frozen_string_literal: true
 
-require "active_record"
-
 module Mihari
   class Alert < ActiveRecord::Base
     has_many :taggings, dependent: :destroy
     has_many :artifacts, dependent: :destroy
     has_many :tags, through: :taggings
+
+    belongs_to :rule
 
     class << self
       #
@@ -14,7 +14,7 @@ module Mihari
       #
       # @param [Structs::Alert::SearchFilterWithPagination] filter
       #
-      # @return [Array<Hash>]
+      # @return [Array<Alert>]
       #
       def search(filter)
         limit = filter.limit.to_i

@@ -1,7 +1,0 @@
-module Mihari
-  module Commands
-    module Censys
-      def self.included: (untyped thor) -> untyped
-    end
-  end
-end

@@ -1,10 +1,5 @@
 # frozen_string_literal: true
 
-require "dry/schema"
-require "dry/validation"
-
-require "mihari/schemas/macros"
-
 module Mihari
   module Schemas
     AnalyzerOptions = Dry::Schema.Params do

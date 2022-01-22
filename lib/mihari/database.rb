@@ -1,6 +1,16 @@
 # frozen_string_literal: true
 
-require "active_record"
+def env
+  ENV["APP_ENV"] || ENV["RACK_ENV"]
+end
+
+def test_env?
+  env == "test"
+end
+
+def development_env?
+  env == "development"
+end
 
 class InitialSchema < ActiveRecord::Migration[7.0]
   def change
@@ -85,6 +95,23 @@ class EnrichmentCreatedAtSchema < ActiveRecord::Migration[7.0]
   end
 end
 
+class RuleSchema < ActiveRecord::Migration[7.0]
+  def change
+    create_table :rules, id: :string, if_not_exists: true do |t|
+      t.string :title, null: false
+      t.string :description, null: false
+      t.json :data, null: false
+      t.timestamps
+    end
+  end
+end
+
+class AddeMetadataToArtifactSchema < ActiveRecord::Migration[7.0]
+  def change
+    add_column :artifacts, :metadata, :json, if_not_exists: true
+  end
+end
+
 def adapter
   return "postgresql" if Mihari.config.database.start_with?("postgresql://", "postgres://")
   return "mysql2" if Mihari.config.database.start_with?("mysql2://")
@@ -95,7 +122,34 @@ end
 module Mihari
   class Database
     class << self
+      include Memist::Memoizable
+
+      #
+      # DB migraration
+      #
+      # @param [Symbol] direction
+      #
+      def migrate(direction)
+        ActiveRecord::Migration.verbose = false
+
+        [
+          InitialSchema,
+          AddeSourceToArtifactSchema,
+          EnrichmentsSchema,
+          EnrichmentCreatedAtSchema,
+          # v4
+          RuleSchema,
+          AddeMetadataToArtifactSchema
+        ].each { |schema| schema.migrate direction }
+      end
+      memoize :migrate unless test_env?
+
+      #
+      # Establish DB connection
+      #
       def connect
+        return if ActiveRecord::Base.connected?
+
         case adapter
         when "postgresql", "mysql2"
           ActiveRecord::Base.establish_connection(Mihari.config.database)
@@ -106,32 +160,30 @@ module Mihari
           )
         end
 
-        ActiveRecord::Base.logger = Logger.new($stdout) if ENV["RACK_ENV"] == "development"
-        ActiveRecord::Migration.verbose = false
+        ActiveRecord::Base.logger = Logger.new($stdout) if development_env?
 
-        InitialSchema.migrate(:up)
-        AddeSourceToArtifactSchema.migrate(:up)
-        EnrichmentsSchema.migrate(:up)
-        EnrichmentCreatedAtSchema.migrate(:up)
+        migrate :up
       rescue StandardError
         # Do nothing
       end
 
+      #
+      # Close DB connection(s)
+      #
       def close
-        ActiveRecord::Base.clear_active_connections!
-        ActiveRecord::Base.connection.close
+        return unless ActiveRecord::Base.connected?
+
+        ActiveRecord::Base.clear_all_connections!
       end
 
+      #
+      # Destory DB
+      #
       def destroy!
         return unless ActiveRecord::Base.connected?
 
-        InitialSchema.migrate(:down)
-        AddeSourceToArtifactSchema.migrate(:down)
-        EnrichmentsSchema.migrate(:down)
-        EnrichmentCreatedAtSchema.migrate(:down)
+        migrate :down
       end
     end
   end
 end
-
-Mihari::Database.connect

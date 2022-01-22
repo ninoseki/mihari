@@ -1,9 +1,5 @@
 # frozen_string_literal: true
 
-require "json"
-require "net/http"
-require "uri"
-
 module Mihari
   module Emitters
     class Webhook < Base
@@ -15,7 +11,7 @@ module Mihari
       def emit(title:, description:, artifacts:, source:, tags:)
         return if artifacts.empty?
 
-        uri = URI(Mihari.config.webhook_url)
+        uri = Addressable::URI.parse(Mihari.config.webhook_url)
         data = {
           title: title,
           description: description,

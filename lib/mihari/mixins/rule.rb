@@ -1,53 +1,56 @@
 # frozen_string_literal: true
 
 require "date"
-require "pathname"
-require "yaml"
 require "erb"
+require "pathname"
 
 module Mihari
   module Mixins
     module Rule
+      include Mixins::Database
+
       #
       # Load rule into hash
       #
-      # @param [String] path Path to YAML file or YAML string
+      # @param [String] path_or_id Path to YAML file or YAML string or ID of a rule in the database
       #
-      # @return [Hash]
+      # @return [Mihari::Structs::Rule::Rule]
       #
-      def load_rule(path)
+      def load_rule(path_or_id)
+        data = nil
+
+        data = load_data_from_file(path_or_id) if File.exist?(path_or_id)
+        data = load_data_from_db(path_or_id) if data.nil?
+
+        Structs::Rule::Rule.new(data)
+      end
+
+      def load_data_from_file(path)
         return YAML.safe_load(File.read(path), permitted_classes: [Date], symbolize_names: true) if Pathname(path).exist?
 
         YAML.safe_load(path, symbolize_names: true)
       end
 
-      #
-      # Validate rule schema and return a normalized rule
-      #
-      # @param [Hash] rule
-      #
-      # @return [Hash]
-      #
-      def validate_rule(rule)
-        error_message = "Failed to parse the input as a rule!"
-
-        contract = Schemas::RuleContract.new
-        begin
-          result = contract.call(rule)
-          unless result.errors.empty?
-            messages = result.errors.messages.map do |message|
-              path = message.path.map(&:to_s).join
-              "#{path} #{message.text}"
-            end
-            puts error_message.colorize(:red)
-            raise ArgumentError, messages.join("\n")
-          end
-        rescue NoMethodError
-          puts error_message.colorize(:red)
-          raise ArgumentError, "Invalid rule schema"
+      def load_data_from_db(id)
+        with_db_connection do
+          rule = Mihari::Rule.find(id)
+          rule.data
+        rescue ActiveRecord::RecordNotFound
+          raise ArgumentError, "ID:#{id} is not found in the database"
         end
+      end
 
-        result.to_h
+      #
+      # Validate a rule
+      #
+      # @param [Mihari::Structs::Rule::Rule] rule
+      #
+      def validate_rule!(rule)
+        rule.validate!
+      rescue RuleValidationError => e
+        error_message = "Failed to parse the input as a rule:\n#{e.message}"
+        puts error_message.colorize(:red)
+        raise e
       end
 
       #
@@ -62,8 +65,8 @@ module Mihari
         data = template.result
 
         # validate the template of rule for just in case
-        rule = YAML.safe_load(data, permitted_classes: [Date], symbolize_names: true)
-        validate_rule rule
+        hashed_data = YAML.safe_load(data, permitted_classes: [Date], symbolize_names: true)
+        Structs::Rule::Rule.new(hashed_data)
 
         data
       end

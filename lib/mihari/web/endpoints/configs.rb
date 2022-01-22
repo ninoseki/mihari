@@ -6,7 +6,8 @@ module Mihari
       namespace :configs do
         desc "Get configs", {
           is_array: true,
-          success: Entities::Config
+          success: Entities::Config,
+          summary: "Get configs"
         }
         get "/" do
           statuses = Status.check

@@ -7,9 +7,6 @@ module Mihari
   module Analyzers
     class Onyphe < Base
       param :query
-      option :title, default: proc { "Onyphe search" }
-      option :description, default: proc { "query = #{query}" }
-      option :tags, default: proc { [] }
 
       option :interval, default: proc { 0 }
 
@@ -89,6 +86,7 @@ module Mihari
         Artifact.new(
           data: result.ip,
           source: source,
+          metadata: result.metadata,
           autonomous_system: as,
           geolocation: geolocation
         )

@@ -1,10 +1,5 @@
 # frozen_string_literal: true
 
-require "active_record"
-require "active_support/core_ext/integer/time"
-require "active_support/core_ext/numeric/time"
-require "addressable/uri"
-
 class ArtifactValidator < ActiveModel::Validator
   def validate(record)
     return if record.data_type

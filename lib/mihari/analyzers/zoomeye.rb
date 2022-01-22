@@ -6,9 +6,7 @@ module Mihari
   module Analyzers
     class ZoomEye < Base
       param :query
-      option :title, default: proc { "ZoomEye search" }
-      option :description, default: proc { "query = #{query}" }
-      option :tags, default: proc { [] }
+
       option :type, default: proc { "host" }
 
       option :interval, default: proc { 0 }
@@ -50,13 +48,14 @@ module Mihari
       #
       # @param [Array<Hash>] responses
       #
-      # @return [Array<String>]
+      # @return [Array<Mihari::Artifact>]
       #
       def convert_responses(responses)
         responses.map do |res|
           matches = res["matches"] || []
           matches.map do |match|
-            match["ip"]
+            data = match["ip"]
+            Artifact.new(data: data, source: source, metadata: match)
           end
         end.flatten.compact.uniq
       end

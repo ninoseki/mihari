@@ -28,19 +28,6 @@ module Mihari
         end
 
         #
-        # Load configuration and establish DB connection
-        #
-        # @return [Hash]
-        #
-        def load_configuration
-          config = options["config"]
-          return unless config
-
-          Mihari.load_config_from_yaml config
-          Database.connect
-        end
-
-        #
         # Run analyzer
         #
         # @param [Class<Mihari::Analyzers::Base>] analyzer_class
@@ -50,14 +37,12 @@ module Mihari
         # @return [nil]
         #
         def run_analyzer(analyzer_class, query:, options:)
-          load_configuration
-
           # options = Thor::CoreExt::HashWithIndifferentAccess
           # ref. https://www.rubydoc.info/github/wycats/thor/Thor/CoreExt/HashWithIndifferentAccess
           # so need to covert it to a plain hash
           hash_options = options.to_hash
 
-          hash_options = symbolize_hash(hash_options)
+          hash_options = hash_options.symbolize_keys
           hash_options = normalize_options(hash_options)
 
           analyzer = analyzer_class.new(query, **hash_options)
@@ -76,8 +61,7 @@ module Mihari
         # @return [Hash]
         #
         def normalize_options(options)
-          # Delete :config because it is not intended to use for running an analyzer
-          [:config, :ignore_old_artifacts, :ignore_threshold].each do |ignore_key|
+          [:ignore_old_artifacts, :ignore_threshold].each do |ignore_key|
             options.delete(ignore_key)
           end
           options

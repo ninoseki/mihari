@@ -6,9 +6,7 @@ module Mihari
   module Analyzers
     class Urlscan < Base
       param :query
-      option :title, default: proc { "urlscan search" }
-      option :description, default: proc { "query = #{query}" }
-      option :tags, default: proc { [] }
+
       option :allowed_data_types, default: proc { SUPPORTED_DATA_TYPES }
 
       option :interval, default: proc { 0 }
@@ -29,9 +27,10 @@ module Mihari
         allowed_data_types.map do |type|
           results.filter_map do |result|
             page = result.page
-            page.send(type.to_sym)
-          end.uniq
-        end.flatten.compact
+            data = page.send(type.to_sym)
+            data.nil? ? nil : Artifact.new(data: data, source: source, metadata: result)
+          end
+        end.flatten
       end
 
       private

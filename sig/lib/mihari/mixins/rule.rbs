@@ -4,20 +4,11 @@ module Mihari
       #
       # Load rule into hash
       #
-      # @param [String] path Path to YAML file or YAML string
+      # @param [String] path_or_id
       #
-      # @return [Hash]
+      # @return [Mihari::Structs::Rule::Rule]
       #
-      def load_rule: (String path) -> Hash
-
-      #
-      # Validate rule schema and return a normalized rule
-      #
-      # @param [Hash] rule
-      #
-      # @return [Hash]
-      #
-      def validate_rule: (Hash rule) -> Hash
+      def load_rule: (String path_or_id) -> Mihari::Structs::Rule::Rule
 
       #
       # Returns a template for rule
@@ -25,6 +16,8 @@ module Mihari
       # @return [String] A template for rule
       #
       def rule_template: () -> String
+
+      def validate_rule!: (Mihari::Structs::Rule::Rule rule) -> nil
 
       #
       # Create (blank) rule file

@@ -4,9 +4,7 @@ module Mihari
       include Mixins::Refang
 
       attr_reader query: String
-      attr_reader title: String
-      attr_reader description: String
-      attr_reader tags: Array[String]
+
       attr_reader type: String
 
       def initialize: (*untyped args, **untyped kwargs) -> void
@@ -25,9 +23,9 @@ module Mihari
 
       def passive_dns_search: () -> Array[String]
 
-      def reverse_whois_search: () -> Array[String]
+      def reverse_whois_search: () -> Array[Mihari::Artifact]
 
-      def ssl_search: () -> Array[String]
+      def ssl_search: () -> Array[Mihari::Artifact]
     end
   end
 end

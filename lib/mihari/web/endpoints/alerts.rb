@@ -7,14 +7,17 @@ module Mihari
         desc "Search alerts", {
           is_array: true,
           success: Entities::Alert,
-          failure: [{ code: 404, message: "Not found", model: Entities::Message }]
+          failure: [{ code: 404, message: "Not found", model: Entities::Message }],
+          summary: "Search alerts"
         }
         params do
           optional :page, type: Integer
+
           optional :artifact, type: String
           optional :description, type: String
           optional :source, type: String
           optional :tag, type: String
+          optional :title, type: String
 
           optional :fromAt, type: DateTime
           optional :toAt, type: DateTime
@@ -38,7 +41,7 @@ module Mihari
           filter["tag_name"] = filter["tag"]
 
           # symbolize hash keys
-          filter = filter.to_h.transform_keys(&:to_sym)
+          filter = filter.to_h.symbolize_keys
 
           search_filter_with_pagenation = Structs::Alert::SearchFilterWithPagination.new(**filter)
           alerts = Mihari::Alert.search(search_filter_with_pagenation)
@@ -49,7 +52,8 @@ module Mihari
 
         desc "Delete an alert", {
           success: Entities::Message,
-          failure: [{ code: 404, message: "Not found", model: Entities::Message }]
+          failure: [{ code: 404, message: "Not found", model: Entities::Message }],
+          summary: "Delete an alert"
         }
         params do
           requires :id, type: Integer

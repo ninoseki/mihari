@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require "thor"
+
 # Commands
 require "mihari/commands/search"
 require "mihari/commands/web"
@@ -7,7 +9,6 @@ require "mihari/commands/web"
 # CLIs
 require "mihari/cli/base"
 
-require "mihari/cli/analyzer"
 require "mihari/cli/init"
 require "mihari/cli/validator"
 
@@ -17,13 +18,10 @@ module Mihari
       include Mihari::Commands::Search
       include Mihari::Commands::Web
 
-      desc "analyze", "Sub commands to run an analyzer"
-      subcommand "analyze", Analyzer
-
-      desc "init", "Sub commands to initialize config & rule"
+      desc "init", "Sub commands to initialize a rule"
       subcommand "init", Initialization
 
-      desc "validate", "Sub commands to validate format of config & rule"
+      desc "validate", "Sub commands to validate format of a rule"
       subcommand "validate", Validator
     end
   end

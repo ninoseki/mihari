@@ -6,9 +6,6 @@ module Mihari
   module Analyzers
     class Censys < Base
       param :query
-      option :title, default: proc { "Censys search" }
-      option :description, default: proc { "query = #{query}" }
-      option :tags, default: proc { [] }
 
       option :interval, default: proc { 0 }
 
@@ -77,6 +74,7 @@ module Mihari
         Artifact.new(
           data: hit.ip,
           source: source,
+          metadata: hit.metadata,
           autonomous_system: as,
           geolocation: geolocation
         )

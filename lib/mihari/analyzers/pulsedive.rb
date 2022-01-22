@@ -8,9 +8,6 @@ module Mihari
       include Mixins::Refang
 
       param :query
-      option :title, default: proc { "Pulsedive search" }
-      option :description, default: proc { "query = #{query}" }
-      option :tags, default: proc { [] }
 
       attr_reader :type
 
@@ -47,7 +44,7 @@ module Mihari
       #
       # Search
       #
-      # @return [Array<String>]
+      # @return [Array<Mihari::Artifact>]
       #
       def search
         raise InvalidInputError, "#{query}(type: #{type || "unknown"}) is not supported." unless valid_type?
@@ -57,7 +54,12 @@ module Mihari
 
         properties = api.indicator.get_properties_by_id(iid)
         (properties["dns"] || []).filter_map do |property|
-          property["value"] if ["A", "PTR"].include?(property["name"])
+          if ["A", "PTR"].include?(property["name"])
+            nil
+          else
+            data = property["value"]
+            Artifact.new(data: data, source: source, metadata: property)
+          end
         end
       end
     end

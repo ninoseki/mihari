@@ -8,9 +8,6 @@ module Mihari
       include Mixins::Refang
 
       param :query
-      option :title, default: proc { "VirusTotal search" }
-      option :description, default: proc { "query = #{query}" }
-      option :tags, default: proc { [] }
 
       attr_reader :type
 
@@ -47,7 +44,7 @@ module Mihari
       #
       # Search
       #
-      # @return [Array<String>]
+      # @return [Array<Mihari::Artifact>]
       #
       def search
         case type
@@ -63,28 +60,30 @@ module Mihari
       #
       # Domain search
       #
-      # @return [Array<String>]
+      # @return [Array<Mihari::Artifact>]
       #
       def domain_search
         res = api.domain.resolutions(query)
 
         data = res["data"] || []
         data.filter_map do |item|
-          item.dig("attributes", "ip_address")
-        end.uniq
+          data = item.dig("attributes", "ip_address")
+          data.nil? ? nil : Artifact.new(data: data, source: source, metadata: item)
+        end
       end
 
       #
       # IP search
       #
-      # @return [Array<String>]
+      # @return [Array<Mihari::Artifact>]
       #
       def ip_search
         res = api.ip_address.resolutions(query)
 
         data = res["data"] || []
         data.filter_map do |item|
-          item.dig("attributes", "host_name")
+          data = item.dig("attributes", "host_name")
+          Artifact.new(data: data, source: source, metadata: item)
         end.uniq
       end
     end

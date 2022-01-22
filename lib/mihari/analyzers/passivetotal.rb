@@ -8,9 +8,6 @@ module Mihari
       include Mixins::Refang
 
       param :query
-      option :title, default: proc { "PassiveTotal search" }
-      option :description, default: proc { "query = #{query}" }
-      option :tags, default: proc { [] }
 
       attr_reader :type
 
@@ -75,27 +72,29 @@ module Mihari
       #
       # Reverse whois search
       #
-      # @return [Array<String>]
+      # @return [Array<Mihari::Artifact>]
       #
       def reverse_whois_search
         res = api.whois.search(query: query, field: "email")
         results = res["results"] || []
         results.map do |result|
-          result["domain"]
-        end.flatten.compact.uniq
+          data = result["domain"]
+          Artifact.new(data: data, source: source, metadata: result)
+        end.flatten
       end
 
       #
       # Passive SSL search
       #
-      # @return [Array<String>]
+      # @return [Array<Mihari::Artifact>]
       #
       def ssl_search
         res = api.ssl.history(query)
         results = res["results"] || []
         results.map do |result|
-          result["ipAddresses"]
-        end.flatten.compact.uniq
+          data = result["ipAddresses"]
+          Artifact.new(data: data, source: source, metadata: result)
+        end.flatten
       end
     end
   end

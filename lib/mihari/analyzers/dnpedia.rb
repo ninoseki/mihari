@@ -6,8 +6,7 @@ module Mihari
   module Analyzers
     class DNPedia < Base
       param :query
-      option :title, default: proc { "DNPedia domain search" }
-      option :description, default: proc { "query = #{query}" }
+
       option :tags, default: proc { [] }
 
       def artifacts
@@ -23,13 +22,14 @@ module Mihari
       #
       # Search
       #
-      # @return [Array<String>]
+      # @return [Array<Mihari::Artifact>]
       #
       def search
         res = api.search(query)
         rows = res["rows"] || []
         rows.map do |row|
-          [row["name"], row["zoneid"]].join(".")
+          data = [row["name"], row["zoneid"]].join(".")
+          Artifact.new(data: data, source: source, metadata: row)
         end
       end
     end

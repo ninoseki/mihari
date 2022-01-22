@@ -12,9 +12,15 @@ RSpec.shared_context "with database fixtures" do
     ]
 
     database = Mihari::Emitters::Database.new
-    alert1 = database.emit(title: "test", description: "test", artifacts: artifacts, source: "json", tags: %w[tag1])
-    alert2 = database.emit(title: "test2", description: "tes2t", artifacts: artifacts, source: "json", tags: %w[tag2])
+    alert1 = database.emit(title: "test", description: "test", artifacts: artifacts, source: "test", tags: %w[tag1])
+    alert2 = database.emit(title: "test2", description: "tes2t", artifacts: artifacts, source: "test2", tags: %w[tag2])
     @alerts = [alert1, alert2]
+
+    data = { id: "test", title: "test", description: "test", queries: [{ analyzer: "crtsh", query: "foo" }] }
+    rule1 = Mihari::Rule.new(id: "test", title: "test", description: "test", data: data)
+    rule1.save
+    rule2 = Mihari::Rule.new(id: "test2", title: "test2", description: "test2", data: data)
+    rule2.save
   end
 
   after do

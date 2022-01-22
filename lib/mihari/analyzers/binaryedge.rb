@@ -6,9 +6,6 @@ module Mihari
   module Analyzers
     class BinaryEdge < Base
       param :query
-      option :title, default: proc { "BinaryEdge search" }
-      option :description, default: proc { "query = #{query}" }
-      option :tags, default: proc { [] }
 
       option :interval, default: proc { 0 }
 
@@ -19,9 +16,10 @@ module Mihari
         results.map do |result|
           events = result["events"] || []
           events.filter_map do |event|
-            event.dig "target", "ip"
+            data = event.dig("target", "ip")
+            data.nil? ? nil : Artifact.new(data: data, source: source, metadata: event)
           end
-        end.flatten.compact.uniq
+        end.flatten
       end
 
       private

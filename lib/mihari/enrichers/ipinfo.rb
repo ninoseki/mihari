@@ -1,8 +1,6 @@
 # frozen_string_literal: true
 
 require "http"
-require "json"
-require "memist"
 
 module Mihari
   module Enrichers

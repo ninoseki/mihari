@@ -8,9 +8,6 @@ module Mihari
       include Mixins::Refang
 
       param :query
-      option :title, default: proc { "SecurityTrails search" }
-      option :description, default: proc { "query = #{query}" }
-      option :tags, default: proc { [] }
 
       attr_reader :type
 
@@ -47,7 +44,7 @@ module Mihari
       #
       # IP/domain/mail search
       #
-      # @return [Array<String>]
+      # @return [Array<String>, Array<Mihari::Artifact>]
       #
       def search
         case type
@@ -78,12 +75,15 @@ module Mihari
       #
       # IP search
       #
-      # @return [Array<String>]
+      # @return [Array<Mihari::Artifact>]
       #
       def ip_search
         result = api.domains.search(filter: { ipv4: query })
         records = result["records"] || []
-        records.filter_map { |record| record["hostname"] }.uniq
+        records.filter_map do |record|
+          data = record["hostname"]
+          Artifact.new(data: data, source: source, metadata: record)
+        end
       end
 
       #
@@ -94,7 +94,10 @@ module Mihari
       def mail_search
         result = api.domains.search(filter: { whois_email: query })
         records = result["records"] || []
-        records.filter_map { |record| record["hostname"] }.uniq
+        records.filter_map do |record|
+          data = record["hostname"]
+          Artifact.new(data: data, source: source, metadata: record)
+        end
       end
     end
   end

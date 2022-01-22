@@ -1,7 +1,0 @@
-module Mihari
-  module Commands
-    module OTX
-      def self.included: (untyped thor) -> untyped
-    end
-  end
-end

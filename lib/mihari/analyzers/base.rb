@@ -1,8 +1,5 @@
 # frozen_string_literal: true
 
-require "dry-initializer"
-require "parallel"
-
 module Mihari
   module Analyzers
     class Base
@@ -10,6 +7,7 @@ module Mihari
 
       include Mixins::AutonomousSystem
       include Mixins::Configurable
+      include Mixins::Database
       include Mixins::Retriable
 
       attr_accessor :ignore_old_artifacts, :ignore_threshold
@@ -52,10 +50,12 @@ module Mihari
       # @return [nil]
       #
       def run
-        set_enriched_artifacts
+        with_db_connection do
+          set_enriched_artifacts
 
-        Parallel.each(valid_emitters) do |emitter|
-          run_emitter emitter
+          Parallel.each(valid_emitters) do |emitter|
+            run_emitter emitter
+          end
         end
       end
 

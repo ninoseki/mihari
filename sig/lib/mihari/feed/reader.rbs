@@ -11,7 +11,7 @@ module Mihari
     attr_reader http_request_payload: Hash[(String | Symbol), untyped]
 
     def initialize: (
-      String url,
+      String uri,
       ?http_request_headers: Hash[(String | Symbol), untyped]] http_request_headers,
       ?http_request_method: ::String http_request_method,
       ?http_request_payload_type: String?  http_request_payload_type,

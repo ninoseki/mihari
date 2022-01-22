@@ -7,6 +7,8 @@ module Mihari
     attr_accessor data (): String
     attr_accessor data_type (): String
 
+    attr_accessor metadata(): Hash?
+
     attr_accessor autonomous_system(): Mihari::AutonomousSystem
     attr_accessor geolocation (): Mihari::Geolocation
     attr_accessor whois_record(): Mihari::WhoisRecord

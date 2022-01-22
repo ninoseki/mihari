@@ -1,7 +1,5 @@
 # frozen_string_literal: true
 
-require "thor"
-
 require "mihari/commands/init"
 
 module Mihari

@@ -1,7 +1,5 @@
 # frozen_string_literal: true
 
-require "uuidtools"
-
 module Mihari
   module Analyzers
     ANALYZER_TO_CLASS = {
@@ -31,13 +29,14 @@ module Mihari
     }.freeze
 
     class Rule < Base
-      include Mihari::Mixins::DisallowedDataValue
+      include Mixins::DisallowedDataValue
+      include Mixins::Rule
 
       option :title
       option :description
       option :queries
 
-      option :id, default: proc {}
+      option :id, default: proc { "" }
       option :tags, default: proc { [] }
       option :allowed_data_types, default: proc { ALLOWED_DATA_TYPES }
       option :disallowed_data_values, default: proc { [] }
@@ -47,7 +46,7 @@ module Mihari
       def initialize(**kwargs)
         super(**kwargs)
 
-        @source = id || UUIDTools::UUID.md5_create(UUIDTools::UUID_URL_NAMESPACE, title + description).to_s
+        @source = id
 
         validate_analyzer_configurations
       end
@@ -69,7 +68,7 @@ module Mihari
           # set interval in the top level
           options = params[:options] || {}
           interval = options[:interval]
-          params[:interval] = interval
+          params[:interval] = interval if interval
 
           analyzer = klass.new(query, **params)
 
