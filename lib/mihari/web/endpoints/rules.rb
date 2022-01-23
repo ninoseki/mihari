@@ -112,6 +112,41 @@ module Mihari
           present model.to_h, with: Entities::Rule
         end
 
+        desc "Update a rule", {
+          success: Entities::Rule,
+          summary: "Update a rule"
+        }
+        put "/" do
+          id = params["id"].to_s
+
+          begin
+            Mihari::Rule.find(id)
+          rescue ActiveRecord::RecordNotFound
+            error!({ message: "ID:#{id} is not found" }, 404)
+          end
+
+          rule = Structs::Rule::Rule.new(params)
+
+          begin
+            rule.validate!
+          rescue RuleValidationError
+            error!({ message: "Data format is invalid", details: rule.errors.to_h }, 400) if rule.errors?
+
+            # when NoMethodError occurs
+            error!({ message: "Data format is invalid" }, 400)
+          end
+
+          begin
+            model = rule.to_model
+            model.save
+          rescue ActiveRecord::RecordNotUnique
+            error!({ message: "ID:#{rule.id} is already registered" }, 400)
+          end
+
+          status 201
+          present model.to_h, with: Entities::Rule
+        end
+
         desc "Delete a rule", {
           success: Entities::Message,
           failure: [{ code: 404, message: "Not found", model: Entities::Message }],
