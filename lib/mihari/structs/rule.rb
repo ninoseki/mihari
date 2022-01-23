@@ -108,6 +108,12 @@ module Mihari
         # @return [Mihari::Rule]
         #
         def to_model
+          rule = Mihari::Rule.find(id)
+          rule.title = title
+          rule.description = description
+          rule.data = data
+          rule
+        rescue ActiveRecord::RecordNotFound
           Mihari::Rule.new(
             id: id,
             title: title,
