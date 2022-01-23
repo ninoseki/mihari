@@ -11,7 +11,7 @@ module Mihari
     #
     def to_h
       symbolized_data = data.deep_symbolize_keys
-      h = { id: id, created_at: created_at, yaml: symbolized_data.to_yaml }
+      h = { id: id, created_at: created_at, yaml: data.to_yaml }
       h.merge symbolized_data
     end
 
