@@ -7,3 +7,8 @@ require "standard/rake"
 RSpec::Core::RakeTask.new(:spec)
 
 task default: :spec
+
+desc "run rackup (via rerun)"
+task :rackup do
+  sh "rerun --pattern '{Gemfile.lock,lib/**/*.rb,lib/*.rb}' -- rackup config.ru"
+end
