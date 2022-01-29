@@ -173,7 +173,7 @@ module Mihari
       def close
         return unless ActiveRecord::Base.connected?
 
-        ActiveRecord::Base.clear_all_connections!
+        ActiveRecord::Base.clear_active_connections!
       end
 
       #
