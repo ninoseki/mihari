@@ -42,7 +42,7 @@ module Mihari
         end.to_app
       end
 
-      def run!(port: 9292, host: "localhost", threads: "0:16", verbose: false)
+      def run!(port: 9292, host: "localhost", threads: "0:5", verbose: false)
         url = "http://#{host}:#{port}"
 
         Rack::Handler::Puma.run(instance, Port: port, Host: host, Threads: threads, Verbose: verbose) do |_launcher|
