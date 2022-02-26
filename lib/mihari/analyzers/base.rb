@@ -72,8 +72,11 @@ module Mihari
         puts "Emission by #{emitter.class} is failed: #{e}"
       end
 
-      def self.inherited(child)
-        Mihari.analyzers << child
+      class << self
+        def inherited(child)
+          super
+          Mihari.analyzers << child
+        end
       end
 
       #

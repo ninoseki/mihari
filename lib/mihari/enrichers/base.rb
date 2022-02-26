@@ -5,8 +5,11 @@ module Mihari
     class Base
       include Mixins::Configurable
 
-      def self.inherited(child)
-        Mihari.enrichers << child
+      class << self
+        def inherited(child)
+          super
+          Mihari.enrichers << child
+        end
       end
 
       # @return [Boolean]

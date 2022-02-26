@@ -6,8 +6,11 @@ module Mihari
       include Mixins::Configurable
       include Mixins::Retriable
 
-      def self.inherited(child)
-        Mihari.emitters << child
+      class << self
+        def inherited(child)
+          super
+          Mihari.emitters << child
+        end
       end
 
       # @return [Boolean]
