@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require "stringio"
+
 class Test < Mihari::Analyzers::Base
   public :normalized_artifacts
 
@@ -54,10 +56,18 @@ RSpec.describe Mihari::Analyzers::Base, :vcr do
     end
 
     it "doens't raise any error" do
-      capture(:stdout) { subject.run }
+      capture(:stderr) { subject.run }
     end
 
     context "when a notifer raises an error" do
+      let(:sio) { StringIO.new }
+
+      let(:logger) do
+        SemanticLogger.default_level = :info
+        SemanticLogger.add_appender(io: sio, formatter: :color)
+        SemanticLogger["Mihari"]
+      end
+
       before do
         # mock artifact enrichments
         subject.normalized_artifacts.each do |artifact|
@@ -74,12 +84,19 @@ RSpec.describe Mihari::Analyzers::Base, :vcr do
 
         # set mocked classes as emitters
         allow(Mihari).to receive(:emitters).and_return([klass])
-
         allow(Parallel).to receive(:processor_count).and_return(0)
+
+        allow(Mihari).to receive(:logger).and_return(logger)
       end
 
       it do
-        output = capture(:stdout) { subject.run }
+        subject.run
+
+        # read logger output
+        SemanticLogger.flush
+        sio.rewind
+        output = sio.read
+
         expect(output).to include("Emission by")
       end
     end

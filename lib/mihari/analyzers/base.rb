@@ -47,15 +47,18 @@ module Mihari
       #
       # Set artifacts & run emitters in parallel
       #
-      # @return [nil]
+      # @return [Mihari::Alert, nil]
       #
       def run
         with_db_connection do
           set_enriched_artifacts
 
-          Parallel.each(valid_emitters) do |emitter|
+          responses = Parallel.map(valid_emitters) do |emitter|
             run_emitter emitter
           end
+
+          # returns Mihari::Alert created by the database emitter
+          responses.find { |res| res.is_a?(Mihari::Alert) }
         end
       end
 
@@ -69,7 +72,7 @@ module Mihari
       def run_emitter(emitter)
         emitter.run(title: title, description: description, artifacts: enriched_artifacts, source: source, tags: tags)
       rescue StandardError => e
-        puts "Emission by #{emitter.class} is failed: #{e}"
+        Mihari.logger.info "Emission by #{emitter.class} is failed: #{e}"
       end
 
       class << self
