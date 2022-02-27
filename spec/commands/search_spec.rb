@@ -17,8 +17,9 @@ RSpec.describe Mihari::Commands::Search, :vcr do
 
     it do
       # it should not raise ArgumentError
-      capture(:stdout) do
+      capture(:stderr) do
         CLI.start ["search", valid_rule]
+        SemanticLogger.flush
       end
     end
   end
