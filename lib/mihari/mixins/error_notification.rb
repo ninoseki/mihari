@@ -11,10 +11,8 @@ module Mihari
       def with_error_notification
         yield
       rescue StandardError => e
-        Mihari.logger.error e
-
         notifier = Notifiers::ExceptionNotifier.new
-        notifier.notify(e) if notifier.valid?
+        notifier.notify(e)
       end
     end
   end

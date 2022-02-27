@@ -15,7 +15,7 @@ module Mihari
       end
 
       def notify(exception)
-        notify_to_stdout exception
+        notify_to_stderr exception
 
         clean_message = exception.message.tr("`", "'")
         attachments = to_attachments(exception, clean_message)
@@ -35,17 +35,14 @@ module Mihari
       end
 
       #
-      # Send notification to STDOUT
+      # Send notification to STDERR
       #
       # @param [Exception] exception
       #
       # @return [nil]
       #
-      def notify_to_stdout(exception)
-        text = to_text(exception.class).chomp
-        message = "#{text}: #{exception.message}"
-        puts message
-        puts format_backtrace(exception.backtrace) if exception.backtrace
+      def notify_to_stderr(exception)
+        Mihari.logger.error exception
       end
 
       #

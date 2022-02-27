@@ -48,8 +48,7 @@ module Mihari
       def validate_rule!(rule)
         rule.validate!
       rescue RuleValidationError => e
-        error_message = "Failed to parse the input as a rule:\n#{e.message}"
-        puts error_message.colorize(:red)
+        Mihari.logger.error "Failed to parse the input as a rule"
         raise e
       end
 

@@ -18,13 +18,13 @@ module Mihari
       def notify_to_slack: (text: String text, attachments: Array[Hash[(String | Symbol), untyped]] attachments) -> void
 
       #
-      # Send notification to STDOUT
+      # Send notification to STDERR
       #
       # @param [Exception] exception
       #
       # @return [nil]
       #
-      def notify_to_stdout: (Exception exception) -> void
+      def notify_to_stderr: (Exception exception) -> void
 
       #
       # Convert exception to attachments (for Slack)

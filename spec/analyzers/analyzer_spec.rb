@@ -56,7 +56,10 @@ RSpec.describe Mihari::Analyzers::Base, :vcr do
     end
 
     it "doens't raise any error" do
-      capture(:stderr) { subject.run }
+      capture(:stderr) do
+        subject.run
+        SemanticLogger.flush
+      end
     end
 
     context "when a notifer raises an error" do

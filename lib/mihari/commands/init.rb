@@ -19,7 +19,7 @@ module Mihari
 
             initialize_rule_yaml filename
 
-            puts "The rule file is initialized as #{filename}.".colorize(:blue)
+            Mihari.logger.info "The rule file is initialized as #{filename}.".colorize(:blue)
           end
         end
       end
