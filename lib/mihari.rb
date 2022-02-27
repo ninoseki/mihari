@@ -128,6 +128,8 @@ end
 require "mihari/database"
 require "mihari/type_checker"
 
+require "mihari/http"
+
 # Constants
 require "mihari/constants"
 
