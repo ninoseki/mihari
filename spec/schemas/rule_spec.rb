@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-RSpec.describe Mihari::Schemas::Rule do
+RSpec.describe Mihari::Schemas::RuleContract do
   let(:contract) { Mihari::Schemas::RuleContract.new }
 
   context "with valid rule" do

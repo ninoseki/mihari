@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-RSpec.describe Mihari::Schemas::Rule do
+RSpec.describe Mihari::Schemas::AnalyzerRunContract do
   let(:contract) { Mihari::Schemas::AnalyzerRunContract.new }
 
   context "with valid params" do
