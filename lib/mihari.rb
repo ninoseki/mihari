@@ -1,5 +1,14 @@
 # frozen_string_literal: true
 
+# standard libs
+require "ipaddr"
+require "json"
+require "net/http"
+require "net/https"
+require "resolv"
+require "yaml"
+
+# Active Support & Active Record
 require "active_support"
 
 require "active_support/core_ext/hash"
@@ -17,23 +26,22 @@ require "dry/struct"
 require "dry/types"
 require "dry/validation"
 
-# standard & utility libs
+# Grape
+require "grape"
+require "grape-entity"
+
+# Other utility libs
 require "addressable/uri"
 require "awrence"
 require "colorize"
 require "email_address"
-require "ipaddr"
-require "json"
 require "memist"
-require "net/http"
-require "net/https"
 require "net/ping"
+require "parallel"
 require "plissken"
 require "public_suffix"
-require "resolv"
+require "semantic_logger"
 require "uuidtools"
-require "yaml"
-require "parallel"
 
 # Load .env
 require "dotenv/load"
@@ -47,6 +55,7 @@ require "mihari/mixins/autonomous_system"
 require "mihari/mixins/configurable"
 require "mihari/mixins/database"
 require "mihari/mixins/disallowed_data_value"
+require "mihari/mixins/error_notification"
 require "mihari/mixins/refang"
 require "mihari/mixins/retriable"
 require "mihari/mixins/rule"
@@ -106,6 +115,13 @@ module Mihari
       []
     end
     memoize :enrichers
+
+    def logger
+      SemanticLogger.default_level = :info
+      SemanticLogger.add_appender(io: $stderr, formatter: :color)
+      SemanticLogger["Mihari"]
+    end
+    memoize :logger
   end
 end
 
@@ -185,9 +201,29 @@ require "mihari/emitters/base"
 require "mihari/emitters/database"
 require "mihari/emitters/misp"
 require "mihari/emitters/slack"
-require "mihari/emitters/stdout"
 require "mihari/emitters/the_hive"
 require "mihari/emitters/webhook"
+
+# Entities
+
+require "mihari/entities/message"
+
+require "mihari/entities/autonomous_system"
+require "mihari/entities/command"
+require "mihari/entities/config"
+require "mihari/entities/dns"
+require "mihari/entities/geolocation"
+require "mihari/entities/ip_address"
+require "mihari/entities/reverse_dns"
+require "mihari/entities/source"
+require "mihari/entities/tag"
+require "mihari/entities/whois"
+
+require "mihari/entities/artifact"
+
+require "mihari/entities/alert"
+
+require "mihari/entities/rule"
 
 # Status checker
 require "mihari/status"

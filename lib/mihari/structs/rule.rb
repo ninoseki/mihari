@@ -121,6 +121,36 @@ module Mihari
             data: data
           )
         end
+
+        #
+        # @return [Mihari::Analyzers::Rule]
+        #
+        def to_analyzer
+          analyzer = Mihari::Analyzers::Rule.new(
+            title: self[:title],
+            description: self[:description],
+            tags: self[:tags],
+            queries: self[:queries],
+            allowed_data_types: self[:allowed_data_types],
+            disallowed_data_values: self[:disallowed_data_values],
+            id: id
+          )
+          analyzer.ignore_old_artifacts = self[:ignore_old_artifacts]
+          analyzer.ignore_threshold = self[:ignore_threshold]
+
+          analyzer
+        end
+
+        class << self
+          #
+          # @param [Mihari::Rule] model
+          #
+          # @return [Mihari::Structs::Rule::Rule]
+          #
+          def from_model(model)
+            Structs::Rule::Rule.new(model.data)
+          end
+        end
       end
     end
   end

@@ -42,6 +42,8 @@ module Mihari
 
   def self.enrichers: () -> ::Array[singleton(Mihari::Enrichers::Base)]
 
+  def self.logger: () -> SemanticLogger
+
   #
   # Load configuration from YAML file
   #
