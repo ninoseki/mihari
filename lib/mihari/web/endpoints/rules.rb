@@ -79,7 +79,9 @@ module Mihari
             error!({ message: "ID:#{id} is not found" }, 404)
           end
 
-          Mihari::CLI::Main.start ["search", rule.id]
+          struct = Mihari::Structs::Rule::Rule.from_model(rule)
+          analyzer = struct.to_analyzer
+          analyzer.run
 
           status 201
           present({ message: "ID:#{id} is ran successfully" }, with: Entities::Message)
