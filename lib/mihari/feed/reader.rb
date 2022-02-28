@@ -18,29 +18,21 @@ module Mihari
       def read
         return read_file(uri.path) if uri.scheme == "file"
 
-        return get if http_request_method == "GET"
+        res = nil
+        client = HTTP.new(uri, headers: http_request_headers, payload: http_request_payload, payload_type: http_request_payload_type)
 
-        post
-      end
+        res = client.get if http_request_method == "GET"
+        res = client.post if http_request_method == "POST"
 
-      def get
-        uri.query = Addressable::URI.form_encode(http_request_payload)
-        get = Net::HTTP::Get.new(uri)
+        return [] if res.nil?
 
-        request(get)
-      end
-
-      def post
-        post = Net::HTTP::Post.new(uri)
-
-        case http_request_payload_type
-        when "application/json"
-          post.body = JSON.generate(http_request_payload)
-        when "application/x-www-form-urlencoded"
-          post.set_form_data(http_request_payload)
+        body = res.body
+        content_type = res["Content-Type"].to_s
+        if content_type.include?("application/json")
+          convert_as_json(body)
+        else
+          convert_as_csv(body)
         end
-
-        request(post)
       end
 
       #
@@ -68,42 +60,6 @@ module Mihari
         text_without_comments = text.lines.reject { |line| line.start_with? "#" }.join("\n")
 
         CSV.new(text_without_comments).to_a.reject(&:empty?)
-      end
-
-      def https_options
-        return { use_ssl: true } if uri.scheme == "https"
-
-        {}
-      end
-
-      #
-      # Make a HTTP request
-      #
-      # @param [Net::HTTPRequest] req
-      #
-      # @return [Array<Hash>]
-      #
-      def request(req)
-        Net::HTTP.start(uri.host, uri.port, https_options) do |http|
-          # set headers
-          http_request_headers.each do |k, v|
-            req[k] = v
-          end
-
-          response = http.request(req)
-
-          code = response.code.to_i
-          raise HttpError, "Unsupported response code returned: #{code}" if code != 200
-
-          body = response.body
-
-          content_type = response["Content-Type"].to_s
-          if content_type.include?("application/json")
-            convert_as_json(body)
-          else
-            convert_as_csv(body)
-          end
-        end
       end
 
       #

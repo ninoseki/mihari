@@ -14,13 +14,12 @@ module Mihari
           include Mixins::AutonomousSystem
 
           def from_dynamic!(d)
+            d = d.deep_stringify_keys
             d = Types::Hash[d]
 
             asn = nil
             asn_ = d.dig("asn", "asn")
-            unless asn_.nil?
-              asn = normalize_asn(asn_)
-            end
+            asn = normalize_asn(asn_) unless asn_.nil?
 
             new(
               ip: d.fetch("ip"),

@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require "http"
+require "net/https"
 
 module Mihari
   module Enrichers
@@ -34,11 +34,12 @@ module Mihari
           end
 
           begin
-            res = HTTP.headers(headers).get("https://ipinfo.io/#{ip}/json")
+            url = "https://ipinfo.io/#{ip}/json"
+            res = HTTP.get(url, headers: headers)
             data = JSON.parse(res.body.to_s)
 
             Structs::IPInfo::Response.from_dynamic! data
-          rescue HTTP::Error
+          rescue HttpError
             nil
           end
         end
