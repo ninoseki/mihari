@@ -33,7 +33,6 @@ require "grape-entity"
 # Other utility libs
 require "addressable/uri"
 require "awrence"
-require "colorize"
 require "email_address"
 require "memist"
 require "net/ping"

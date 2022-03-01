@@ -9,7 +9,7 @@
 
 [![](images/tines.png)](https://tines.io?utm_source=github&utm_medium=sponsorship&utm_campaign=ninoseki)
 
-Mihari is a framework for continuous OSINT based threat hunting.
+Mihari is a tool for OSINT based threat hunting.
 
 ## How it works
 
