@@ -26,9 +26,17 @@ module Mihari
 
         def self.from_dynamic!(d)
           d = Types::Hash[d]
+
+          # hostnames should be an array of string but sometimes Shodan returns a string
+          # e.g. "hostnames": "set(['149.28.146.131.vultr.com', 'rebs.ga'])",
+          # https://github.com/ninoseki/mihari/issues/424
+          # so use an empty array if hostnames is a string
+          hostnames = d.fetch("hostnames")
+          hostnames = [] if hostnames.is_a?(String)
+
           new(
             asn: d["asn"],
-            hostnames: d.fetch("hostnames"),
+            hostnames: hostnames,
             location: Location.from_dynamic!(d.fetch("location")),
             domains: d.fetch("domains"),
             ip_str: d.fetch("ip_str"),
