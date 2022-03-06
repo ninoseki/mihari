@@ -40,6 +40,7 @@ require "parallel"
 require "plissken"
 require "public_suffix"
 require "semantic_logger"
+require "sentry-ruby"
 require "uuidtools"
 
 # Load .env
@@ -96,6 +97,7 @@ module Mihari
   setting :webhook_url, default: ENV["WEBHOOK_URL"]
   setting :webhook_use_json_body, constructor: ->(value = ENV["WEBHOOK_USE_JSON_BODY"]) { truthy?(value) }
   setting :zoomeye_api_key, default: ENV["ZOOMEYE_API_KEY"]
+  setting :sentry_dsn, default: ENV["SENTRY_DSN"]
 
   class << self
     include Memist::Memoizable
@@ -121,6 +123,17 @@ module Mihari
       SemanticLogger["Mihari"]
     end
     memoize :logger
+
+    def initialize_sentry
+      return if Mihari.config.sentry_dsn.nil?
+      return if Sentry.initialized?
+
+      Sentry.init do |config|
+        config.dsn = Mihari.config.sentry_dsn
+
+        config.traces_sample_rate = 0.5
+      end
+    end
   end
 end
 
@@ -192,11 +205,6 @@ require "mihari/analyzers/virustotal"
 require "mihari/analyzers/zoomeye"
 require "mihari/analyzers/rule"
 
-# Notifiers
-require "mihari/notifiers/base"
-require "mihari/notifiers/slack"
-require "mihari/notifiers/exception_notifier"
-
 # Emitters
 require "mihari/emitters/base"
 require "mihari/emitters/database"
@@ -234,3 +242,6 @@ require "mihari/web/app"
 
 # CLIs
 require "mihari/cli/main"
+
+# initialize Sentry
+Mihari.initialize_sentry
