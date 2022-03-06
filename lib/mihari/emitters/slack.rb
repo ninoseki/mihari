@@ -109,12 +109,48 @@ module Mihari
     end
 
     class Slack < Base
-      def notifier
-        @notifier ||= Notifiers::Slack.new
+      SLACK_WEBHOOK_URL_KEY = "SLACK_WEBHOOK_URL"
+      SLACK_CHANNEL_KEY = "SLACK_CHANNEL"
+      DEFAULT_USERNAME = "mihari"
+
+      #
+      # Slack channel to post
+      #
+      # @return [String]
+      #
+      def slack_channel
+        Mihari.config.slack_channel || "#general"
       end
 
+      #
+      # Slack webhook URL
+      #
+      # @return [String]
+      #
+      def slack_webhook_url
+        Mihari.config.slack_webhook_url
+      end
+
+      #
+      # Check Slack webhook URL is set
+      #
+      # @return [Boolean]
+      #
+      def slack_webhook_url?
+        !Mihari.config.slack_webhook_url.nil?
+      end
+
+      #
+      # Check Slack webhook URL is set. Alias of #slack_webhook_url?.
+      #
+      # @return [Boolean]
+      #
       def valid?
-        notifier.valid?
+        slack_webhook_url?
+      end
+
+      def notifier
+        @notifier ||= ::Slack::Notifier.new(slack_webhook_url, channel: slack_channel, username: DEFAULT_USERNAME)
       end
 
       #
@@ -155,7 +191,7 @@ module Mihari
         attachments = to_attachments(artifacts)
         text = to_text(title: title, description: description, tags: tags)
 
-        notifier.notify(text: text, attachments: attachments)
+        notifier.post(text: text, attachments: attachments, mrkdwn: true)
       end
 
       private

@@ -11,8 +11,9 @@ module Mihari
       def with_error_notification
         yield
       rescue StandardError => e
-        notifier = Notifiers::ExceptionNotifier.new
-        notifier.notify(e)
+        Mihari.logger.error e
+
+        Sentry.capture_exception(e) if Sentry.initialized?
       end
     end
   end

@@ -25,6 +25,7 @@ class Configuration
   attr_accessor webhook_url (): String?
   attr_accessor webhook_use_json_body (): (bool | nil)
   attr_accessor database (): String?
+  attr_accessor sentry_dsn(): String?
 
   attr_reader values: Hash[(String | Symbol), String?]
 end
@@ -44,14 +45,7 @@ module Mihari
 
   def self.logger: () -> SemanticLogger
 
-  #
-  # Load configuration from YAML file
-  #
-  # @param [String] path Path to YAML file
-  #
-  # @return [nil]
-  #
-  def self.load_config_from_yaml: (String path) -> void
+  def self.initialize_sentry: () -> void
 end
 
 class Object
