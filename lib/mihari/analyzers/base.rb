@@ -89,14 +89,14 @@ module Mihari
 
       #
       # Normalize artifacts
-      # - Uniquefy artifacts by native #uniq
       # - Convert data (string) into an artifact
       # - Reject an invalid artifact
+      # - Uniquefy artifacts by data
       #
       # @return [Array<Mihari::Artifact>]
       #
       def normalized_artifacts
-        @normalized_artifacts ||= artifacts.compact.uniq.sort.map do |artifact|
+        @normalized_artifacts ||= artifacts.compact.sort.map do |artifact|
           # No need to set data_type manually
           # It is set automatically in #initialize
           artifact.is_a?(Artifact) ? artifact : Artifact.new(data: artifact, source: source)
