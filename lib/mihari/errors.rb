@@ -14,4 +14,6 @@ module Mihari
   class FeedParseError < Error; end
 
   class RuleValidationError < Error; end
+
+  class ConfigurationError < Error; end
 end

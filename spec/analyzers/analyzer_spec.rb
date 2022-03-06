@@ -6,7 +6,9 @@ class Test < Mihari::Analyzers::Base
   public :normalized_artifacts
 
   def artifacts
-    %w[1.1.1.1 google.com 2.2.2.2 example.com nil]
+    values = %w[1.1.1.1 1.1.1.1 google.com 2.2.2.2 example.com foo]
+    values << nil
+    values
   end
 
   def description
@@ -31,7 +33,11 @@ RSpec.describe Mihari::Analyzers::Base, :vcr do
 
   describe "#artifacts" do
     it do
-      expect(subject.artifacts).to eq(%w[1.1.1.1 google.com 2.2.2.2 example.com nil])
+      expect(subject.artifacts).to eq(
+        [
+          "1.1.1.1", "1.1.1.1", "google.com", "2.2.2.2", "example.com", "foo", nil
+        ]
+      )
     end
   end
 

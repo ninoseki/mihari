@@ -50,6 +50,11 @@ module Mihari
       # @return [Mihari::Alert, nil]
       #
       def run
+        unless configured?
+          class_name = self.class.to_s.split("::").last
+          raise ConfigurationError, "#{class_name} is not configured correctly"
+        end
+
         with_db_connection do
           set_enriched_artifacts
 
@@ -84,14 +89,14 @@ module Mihari
 
       #
       # Normalize artifacts
-      # - Uniquefy artifacts by native #uniq
       # - Convert data (string) into an artifact
       # - Reject an invalid artifact
+      # - Uniquefy artifacts by data
       #
       # @return [Array<Mihari::Artifact>]
       #
       def normalized_artifacts
-        @normalized_artifacts ||= artifacts.compact.uniq.sort.map do |artifact|
+        @normalized_artifacts ||= artifacts.compact.sort.map do |artifact|
           # No need to set data_type manually
           # It is set automatically in #initialize
           artifact.is_a?(Artifact) ? artifact : Artifact.new(data: artifact, source: source)
@@ -130,9 +135,6 @@ module Mihari
       #
       def set_enriched_artifacts
         retry_on_error { enriched_artifacts }
-      rescue ArgumentError => e
-        klass = self.class.to_s.split("::").last.to_s
-        raise Error, "Please configure #{klass} settings properly. (#{e})"
       end
 
       #
