@@ -39,7 +39,35 @@ module Mihari
     end
 
     class Slack < Base
-      def notifier: () -> Mihari::Notifiers::Slack
+      SLACK_WEBHOOK_URL_KEY: ::String
+
+      SLACK_CHANNEL_KEY: ::String
+
+      DEFAULT_USERNAME: ::String
+
+      #
+      # Slack channel to post
+      #
+      # @return [String]
+      #
+      def slack_channel: () -> String
+
+      #
+      # Slack webhook URL
+      #
+      # @return [String]
+      #
+      def slack_webhook_url: () -> String
+
+      #
+      # Check Slack webhook URL is set
+      #
+      # @return [Boolean]
+      #
+      def slack_webhook_url?: () -> bool
+
+
+      def notifier: () -> ::Slack::Notifier
 
       def valid?: () -> bool
 
