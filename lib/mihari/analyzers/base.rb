@@ -50,6 +50,11 @@ module Mihari
       # @return [Mihari::Alert, nil]
       #
       def run
+        unless configured?
+          class_name = self.class.to_s.split("::").last
+          raise ConfigurationError, "#{class_name} is not configured correctly"
+        end
+
         with_db_connection do
           set_enriched_artifacts
 
@@ -130,9 +135,6 @@ module Mihari
       #
       def set_enriched_artifacts
         retry_on_error { enriched_artifacts }
-      rescue ArgumentError => e
-        klass = self.class.to_s.split("::").last.to_s
-        raise Error, "Please configure #{klass} settings properly. (#{e})"
       end
 
       #

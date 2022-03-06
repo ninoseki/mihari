@@ -145,7 +145,7 @@ module Mihari
           instance = klass.new("dummy")
           unless instance.configured?
             klass_name = klass.to_s.split("::").last
-            raise ArgumentError, "#{klass_name} is not configured correctly"
+            raise ConfigurationError, "#{klass_name} is not configured correctly"
           end
         end
       end
