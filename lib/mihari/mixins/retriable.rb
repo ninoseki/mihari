@@ -3,20 +3,30 @@
 module Mihari
   module Mixins
     module Retriable
+      DEFAULT_ON = [
+        Errno::ECONNRESET,
+        Errno::ECONNABORTED,
+        Errno::EPIPE,
+        OpenSSL::SSL::SSLError,
+        Timeout::Error,
+        RetryableError
+      ]
+
       #
       # Retry on error
       #
       # @param [Integer] times
       # @param [Integer] interval
+      # @param [Array<StandardError>] on
       #
       # @return [nil]
       #
-      def retry_on_error(times: 3, interval: 10)
+      def retry_on_error(times: 3, interval: 5, on: DEFAULT_ON)
         try = 0
         begin
           try += 1
           yield
-        rescue Errno::ECONNRESET, Errno::ECONNABORTED, Errno::EPIPE, OpenSSL::SSL::SSLError, Timeout::Error, RetryableError => e
+        rescue *on => e
           sleep interval
           retry if try < times
           raise e
