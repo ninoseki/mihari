@@ -10,6 +10,7 @@ require "grape-swagger"
 require "grape-swagger-entity"
 
 require "mihari/web/middleware/connection_adapter"
+require "mihari/web/middleware/error_notification_adapter"
 
 require "mihari/web/api"
 
@@ -35,6 +36,7 @@ module Mihari
           end
 
           use Middleware::ConnectionAdapter
+          use Middleware::ErrorNotificationAdapter
 
           run App.new
         end.to_app
