@@ -36,6 +36,7 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency "rb-fsevent", "~> 0.11"
   spec.add_development_dependency "rerun", "~> 0.13"
   spec.add_development_dependency "rspec", "~> 3.11"
+  spec.add_development_dependency "simplecov-lcov", "~> 0.8.0"
   spec.add_development_dependency "standard", "~> 1.7"
   spec.add_development_dependency "steep", "~> 0.47"
   spec.add_development_dependency "timecop", "~> 0.9"
