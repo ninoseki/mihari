@@ -3,7 +3,7 @@ name: Ruby CI
 on: [pull_request]
 
 jobs:
-  build:
+  test:
     runs-on: ubuntu-latest
 
     services:
@@ -39,7 +39,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        ruby: [2.7, "3.0"]
+        ruby: [2.7, "3.0", 3.1]
 
     steps:
       - uses: actions/checkout@v3
@@ -65,3 +65,21 @@ jobs:
           DATABASE: mysql2://mysql:mysql@127.0.0.1:3306/test
         run: |
           bundle exec rake
+
+      - name: Coveralls Parallel
+        uses: coverallsapp/github-action@master
+        with:
+          github-token: ${{ secrets.github_token }}
+          flag-name: run-${{ matrix.ruby-version }}
+          parallel: true
+
+  coverage:
+    name: Coverage
+    needs: test
+    runs-on: ubuntu-latest
+    steps:
+      - name: Coveralls Finished
+        uses: coverallsapp/github-action@master
+        with:
+          github-token: ${{ secrets.github_token }}
+          parallel-finished: true
