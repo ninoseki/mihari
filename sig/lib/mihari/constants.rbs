@@ -1,3 +1,5 @@
 module Mihari
   ALLOWED_DATA_TYPES: Array[String]
+
+  DEFAULT_EMITTERS: Array[Hash]
 end

@@ -147,4 +147,20 @@ RSpec.describe Mihari::Schemas::RuleContract do
       end.to raise_error(NoMethodError)
     end
   end
+
+  context "with invalid emitter name" do
+    it do
+      result = contract.call(
+        description: "foo",
+        title: "foo",
+        queries: [
+          { analyzer: "shodan", query: "foo" }
+        ],
+        emitters: [
+          { emitter: "foo" }
+        ]
+      )
+      expect(result.errors.empty?).to eq(false)
+    end
+  end
 end
