@@ -133,6 +133,7 @@ module Mihari
             queries: self[:queries],
             allowed_data_types: self[:allowed_data_types],
             disallowed_data_values: self[:disallowed_data_values],
+            emitters: self[:emitters],
             id: id
           )
           analyzer.ignore_old_artifacts = self[:ignore_old_artifacts]

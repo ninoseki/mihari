@@ -50,6 +50,10 @@ module Mihari
       optional(:options).hash(AnalyzerOptions)
     end
 
+    Emitter = Dry::Schema.Params do
+      required(:emitter).value(Types::EmitterTypes)
+    end
+
     Rule = Dry::Schema.Params do
       required(:title).value(:string)
       required(:description).value(:string)
@@ -62,6 +66,8 @@ module Mihari
       optional(:updated_on).value(:date)
 
       required(:queries).value(:array).each { Analyzer | Spyse | ZoomEye | Urlscan | Crtsh | Feed }
+
+      required(:emitters).value(:array).each(Emitter).default(DEFAULT_EMITTERS)
 
       optional(:allowed_data_types).value(array[Types::DataTypes]).default(ALLOWED_DATA_TYPES)
       optional(:disallowed_data_values).value(array[:string]).default([])

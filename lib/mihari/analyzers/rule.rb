@@ -28,6 +28,14 @@ module Mihari
       "zoomeye" => ZoomEye
     }.freeze
 
+    EMITTER_TO_CLASS = {
+      "database" => Emitters::Database,
+      "misp" => Emitters::MISP,
+      "slack" => Emitters::Slack,
+      "the_hive" => Emitters::TheHive,
+      "webhook" => Emitters::Webhook
+    }.freeze
+
     class Rule < Base
       include Mixins::DisallowedDataValue
       include Mixins::Rule
@@ -40,6 +48,8 @@ module Mihari
       option :tags, default: proc { [] }
       option :allowed_data_types, default: proc { ALLOWED_DATA_TYPES }
       option :disallowed_data_values, default: proc { [] }
+
+      option :emitters, default: proc { DEFAULT_EMITTERS }
 
       attr_reader :source
 
@@ -119,6 +129,29 @@ module Mihari
       end
 
       private
+
+      #
+      # Get emitter class
+      #
+      # @param [String] emitter_name
+      #
+      # @return [Class<Mihari::Emitters::Base>] emitter class
+      #
+      def get_emitter_class(emitter_name)
+        emitter = EMITTER_TO_CLASS[emitter_name]
+        return emitter if emitter
+
+        raise ArgumentError, "#{emitter_name} is not supported"
+      end
+
+      def valid_emitters
+        @valid_emitters ||= emitters.filter_map do |params|
+          name = params[:emitter]
+          klass = get_emitter_class(name)
+          emitter = klass.new
+          emitter.valid? ? emitter : nil
+        end
+      end
 
       #
       # Get analyzer class

@@ -17,5 +17,7 @@ module Mihari
     FeedHttpRequestMethods: Array[String]
 
     FeedHttpRequestPayloadTypes: Array[String]
+
+    EmitterTypes: Array[String]
   end
 end

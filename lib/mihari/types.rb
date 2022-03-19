@@ -40,5 +40,9 @@ module Mihari
 
     FeedHttpRequestMethods = Types::String.enum("GET", "POST")
     FeedHttpRequestPayloadTypes = Types::String.enum("application/json", "application/x-www-form-urlencoded")
+
+    EmitterTypes = Types::String.enum(
+      *DEFAULT_EMITTERS.map { |params| params[:emitter] }
+    )
   end
 end

@@ -181,6 +181,15 @@ require "mihari/models/tag"
 require "mihari/models/tagging"
 require "mihari/models/whois"
 
+# Emitters
+require "mihari/emitters/base"
+
+require "mihari/emitters/database"
+require "mihari/emitters/misp"
+require "mihari/emitters/slack"
+require "mihari/emitters/the_hive"
+require "mihari/emitters/webhook"
+
 # Analyzers
 require "mihari/analyzers/base"
 
@@ -205,16 +214,7 @@ require "mihari/analyzers/virustotal"
 require "mihari/analyzers/zoomeye"
 require "mihari/analyzers/rule"
 
-# Emitters
-require "mihari/emitters/base"
-require "mihari/emitters/database"
-require "mihari/emitters/misp"
-require "mihari/emitters/slack"
-require "mihari/emitters/the_hive"
-require "mihari/emitters/webhook"
-
 # Entities
-
 require "mihari/entities/message"
 
 require "mihari/entities/autonomous_system"
