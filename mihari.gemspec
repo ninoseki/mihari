@@ -16,6 +16,8 @@ Gem::Specification.new do |spec|
 
   spec.required_ruby_version = ">= 2.7"
 
+  spec.metadata["rubygems_mfa_required"] = "true"
+
   # Specify which files should be added to the gem when it is released.
   # The `git ls-files -z` loads the files in the RubyGem that have been added into git.
   spec.files = Dir.chdir(File.expand_path(__dir__)) do
@@ -26,7 +28,7 @@ Gem::Specification.new do |spec|
   spec.require_paths = ["lib"]
 
   spec.add_development_dependency "bundler", "~> 2.3"
-  spec.add_development_dependency "coveralls_reborn"
+  spec.add_development_dependency "coveralls_reborn", "~> 0.24"
   spec.add_development_dependency "fakefs", "~> 1.4"
   spec.add_development_dependency "mysql2", "~> 0.5"
   spec.add_development_dependency "overcommit", "~> 0.58"
@@ -37,13 +39,13 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency "rerun", "~> 0.13"
   spec.add_development_dependency "rspec", "~> 3.11"
   spec.add_development_dependency "simplecov-lcov", "~> 0.8.0"
-  spec.add_development_dependency "standard", "~> 1.7"
-  spec.add_development_dependency "steep", "~> 0.47"
+  spec.add_development_dependency "standard", "~> 1.8"
+  spec.add_development_dependency "steep", "~> 0.49"
   spec.add_development_dependency "timecop", "~> 0.9"
-  spec.add_development_dependency "vcr", "~> 6.0"
+  spec.add_development_dependency "vcr", "~> 6.1"
   spec.add_development_dependency "webmock", "~> 3.14"
 
-  spec.add_dependency "activerecord", "7.0.2.2"
+  spec.add_dependency "activerecord", "7.0.2.3"
   spec.add_dependency "addressable", "~> 2.8"
   spec.add_dependency "awrence", "~> 2.0"
   spec.add_dependency "binaryedge", "~> 0.1"
