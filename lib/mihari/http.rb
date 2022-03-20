@@ -1,13 +1,14 @@
 # frozen_string_literal: true
 
+require "insensitive_hash"
+
 module Mihari
   class HTTP
-    attr_reader :uri, :headers, :payload_type, :payload
+    attr_reader :uri, :headers, :payload
 
-    def initialize(uri, headers: {}, payload_type: nil, payload: {})
-      @uri = Addressable::URI.parse(uri)
-      @headers = headers
-      @payload_type = payload_type
+    def initialize(uri, headers: {}, payload: {})
+      @uri = uri.is_a?(Addressable::URI) ? uri : Addressable::URI.parse(uri)
+      @headers = headers.insensitive
       @payload = payload
     end
 
@@ -31,12 +32,10 @@ module Mihari
     def post
       post = Net::HTTP::Post.new(uri)
 
-      case payload_type
+      case content_type
       when "application/json"
-        headers["content-type"] = "application/json" unless headers.key?("content-type")
         post.body = JSON.generate(payload)
       when "application/x-www-form-urlencoded"
-        headers["content-type"] = "application/x-www-form-urlencoded" unless headers.key?("content-type")
         post.set_form_data(payload)
       end
 
@@ -44,18 +43,22 @@ module Mihari
     end
 
     class << self
-      def get(uri, headers: {}, payload_type: nil, payload: {})
-        client = new(uri, headers: headers, payload_type: payload_type, payload: payload)
+      def get(uri, headers: {}, payload: {})
+        client = new(uri, headers: headers, payload: payload)
         client.get
       end
 
-      def post(uri, headers: {}, payload_type: nil, payload: {})
-        client = new(uri, headers: headers, payload_type: payload_type, payload: payload)
+      def post(uri, headers: {}, payload: {})
+        client = new(uri, headers: headers, payload: payload)
         client.post
       end
     end
 
     private
+
+    def content_type
+      headers["content-type"] || "application/json"
+    end
 
     #
     # Get options for HTTP request
@@ -84,8 +87,10 @@ module Mihari
 
         res = http.request(req)
 
-        code = res.code.to_i
-        raise HttpError, "Unsupported response code returned: #{code}" if code != 200
+        unless res.is_a?(Net::HTTPSuccess)
+          code = res.code.to_i
+          raise HttpError, "Unsuccessful response code returned: #{code}"
+        end
 
         res
       end

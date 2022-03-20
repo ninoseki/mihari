@@ -1,0 +1,35 @@
+module Mihari
+  module Emitters
+    class PayloadTemplate < ERB
+      def self.template: () -> ::String
+
+      def initialize: (title: untyped title, description: untyped description, artifacts: untyped artifacts, source: untyped source, tags: untyped tags, ?options: ::Hash[untyped, untyped] options) -> void
+
+      def result: () -> untyped
+    end
+
+    class HTTP < Base
+      # @return [Addressable::URI, nil]
+      attr_reader uri: Addressable::URI?
+
+      # @return [Hash]
+      attr_reader http_request_headers: Hash
+
+      # @return [String]
+      attr_reader http_request_method: String
+
+      # @return [String, nil]
+      attr_reader template: String?
+
+      def initialize: (*untyped args, **untyped kwargs) -> void
+
+      def emit: (title: String title, artifacts: Array[Mihari::Artifact] artifacts, ?tags: Array[String] tags, **untyped _options) -> void
+
+      def valid?: () -> bool
+
+      private
+
+      def payload_as_string: (title: String title, description: String description, artifacts: Array[Mihari::Artifact] artifacts, source: String source, tags: Array[String] tags) -> String
+    end
+  end
+end

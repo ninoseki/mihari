@@ -30,6 +30,7 @@ module Mihari
 
     EMITTER_TO_CLASS = {
       "database" => Emitters::Database,
+      "http" => Emitters::HTTP,
       "misp" => Emitters::MISP,
       "slack" => Emitters::Slack,
       "the_hive" => Emitters::TheHive,
@@ -147,8 +148,12 @@ module Mihari
       def valid_emitters
         @valid_emitters ||= emitters.filter_map do |params|
           name = params[:emitter]
+
+          params.delete(:emitter)
+
           klass = get_emitter_class(name)
-          emitter = klass.new
+          emitter = klass.new(**params)
+
           emitter.valid? ? emitter : nil
         end
       end
