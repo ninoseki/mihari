@@ -6,7 +6,7 @@ RSpec.describe Mihari::Schemas::RuleContract do
   context "with valid rule" do
     context "analyzers does not need additional options" do
       it do
-        analyzers = Mihari::Analyzers::ANALYZER_TO_CLASS.keys - ["spyse", "zoomeye", "crtsh"]
+        analyzers = Mihari::Analyzers::ANALYZER_TO_CLASS.keys - ["spyse", "zoomeye", "crtsh", "feed"]
 
         analyzers.each do |analyzer|
           result = contract.call(description: "foo", title: "foo", queries: [{ analyzer: analyzer, query: "foo" }])

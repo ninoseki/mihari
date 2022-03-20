@@ -22,7 +22,6 @@ module Mihari
       "circl",
       "dnpedia",
       "dnstwister",
-      "feed",
       "greynoise",
       "onyphe",
       "otx",
