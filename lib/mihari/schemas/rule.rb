@@ -75,7 +75,7 @@ module Mihari
 
       required(:queries).value(:array).each { Analyzer | Spyse | ZoomEye | Urlscan | Crtsh | Feed }
 
-      optional(:emitters).value(:array).each { Emitter | HTTP }.default(DEFAULT_EMITTERS)
+      optional(:emitters).value(:array).each { Emitter | HTTP }
 
       optional(:allowed_data_types).value(array[Types::DataTypes]).default(ALLOWED_DATA_TYPES)
       optional(:disallowed_data_values).value(array[:string]).default([])
