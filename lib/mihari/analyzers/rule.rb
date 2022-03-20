@@ -72,18 +72,20 @@ module Mihari
       def artifacts
         artifacts = []
 
-        queries.each do |params|
-          analyzer_name = params[:analyzer]
+        queries.each do |original_params|
+          parmas = original_params.deep_dup
+
+          analyzer_name = parmas[:analyzer]
           klass = get_analyzer_class(analyzer_name)
 
-          query = params[:query]
+          query = parmas[:query]
 
           # set interval in the top level
-          options = params[:options] || {}
+          options = parmas[:options] || {}
           interval = options[:interval]
-          params[:interval] = interval if interval
+          parmas[:interval] = interval if interval
 
-          analyzer = klass.new(query, **params)
+          analyzer = klass.new(query, **parmas)
 
           # Use #normalized_artifacts method to get atrifacts as Array<Mihari::Artifact>
           # So Mihari::Artifact object has "source" attribute (e.g. "Shodan")
@@ -148,9 +150,10 @@ module Mihari
       end
 
       def valid_emitters
-        @valid_emitters ||= emitters.filter_map do |params|
-          name = params[:emitter]
+        @valid_emitters ||= emitters.filter_map do |original_params|
+          params = original_params.deep_dup
 
+          name = params[:emitter]
           params.delete(:emitter)
 
           klass = get_emitter_class(name)

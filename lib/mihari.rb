@@ -14,6 +14,7 @@ require "active_support"
 require "active_support/core_ext/hash"
 require "active_support/core_ext/integer/time"
 require "active_support/core_ext/numeric/time"
+require "active_support/core_ext/object/deep_dup"
 
 require "active_record"
 
