@@ -82,6 +82,18 @@ module Mihari
 
       optional(:ignore_old_artifacts).value(:bool).default(false)
       optional(:ignore_threshold).value(:integer).default(0)
+
+      before(:key_coercer) do |result|
+        # it looks like that dry-schema v1.9.1 has an issue with setting an array of schemas as a default value
+        # e.g. optional(:emitters).value(:array).each { Emitter | HTTP }.default(DEFAULT_EMITTERS) does not work well
+        # so let's do a dirty hack...
+        h = result.to_h
+
+        emitters = h[:emitters]
+        h[:emitters] = emitters || DEFAULT_EMITTERS
+
+        h
+      end
     end
 
     class RuleContract < Dry::Validation::Contract
