@@ -32,6 +32,7 @@ RSpec.describe Mihari::Emitters::Webhook, :vcr do
     let(:tags) { [] }
 
     before do
+      allow(Mihari.config).to receive(:webhook_url).and_return("https://httpbin.org/post")
       allow(Mihari.config).to receive(:webhook_use_json_body).and_return("true")
     end
 

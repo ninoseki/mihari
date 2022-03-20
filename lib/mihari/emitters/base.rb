@@ -6,6 +6,9 @@ module Mihari
       include Mixins::Configurable
       include Mixins::Retriable
 
+      def initialize(*)
+      end
+
       class << self
         def inherited(child)
           super

@@ -5,14 +5,11 @@ module Mihari
 
     attr_reader headers: Hash[(String | Symbol), untyped]
 
-    attr_reader payload_type: String?
-
     attr_reader payload: Hash[(String | Symbol), untyped]
 
     def initialize: (
       String uri,
       ?headers: Hash[(String | Symbol), untyped] headers,
-      ?payload_type: String? payload_type,
       ?payload: Hash[(String | Symbol), untyped] payload
     ) -> void
 
@@ -45,6 +42,8 @@ module Mihari
     ) -> Net::HTTPResponse
 
     private
+
+    def content_type: () -> String
 
     #
     # Get options for HTTP request

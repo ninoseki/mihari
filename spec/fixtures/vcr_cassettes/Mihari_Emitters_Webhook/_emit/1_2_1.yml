@@ -1,65 +1,46 @@
 ---
 http_interactions:
-  - request:
-      method: post
-      uri: "<WEBHOOK_URL>/"
-      body:
-        encoding: UTF-8
-        string: '{"title":"title","description":"description","artifacts":["1.1.1.1","github.com"],"source":"test","tags":[]}'
-      headers:
-        Content-Type:
-          - application/json
-        Accept-Encoding:
-          - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
-        Accept:
-          - "*/*"
-        User-Agent:
-          - Ruby
-    response:
-      status:
-        code: 201
-        message: Created
-      headers:
-        Date:
-          - Mon, 10 May 2021 08:10:28 GMT
-        Content-Type:
-          - application/json; charset=utf-8
-        Transfer-Encoding:
-          - chunked
-        Connection:
-          - keep-alive
-        Server:
-          - nginx/1.18.0
-        X-Frame-Options:
-          - SAMEORIGIN
-        X-Xss-Protection:
-          - 1; mode=block
-        X-Content-Type-Options:
-          - nosniff
-        X-Download-Options:
-          - noopen
-        X-Permitted-Cross-Domain-Policies:
-          - none
-        Referrer-Policy:
-          - strict-origin-when-cross-origin
-        X-Tines-Revision:
-          - 06f1340
-        Content-Security-Policy:
-          - default-src 'none'
-        Vary:
-          - Accept
-        Etag:
-          - W/"a29ee2b15c494311c52521766e44af56"
-        Cache-Control:
-          - max-age=0, private, must-revalidate
-        X-Request-Id:
-          - f8413c14-2f3a-4a15-8d49-bc7d17ff3005
-        X-Runtime:
-          - "0.105106"
-        Strict-Transport-Security:
-          - max-age=31536000; includeSubDomains; preload
-      body:
-        encoding: UTF-8
-        string: '{"status":"ok"}'
-    recorded_at: Mon, 10 May 2021 08:10:28 GMT
-recorded_with: VCR 6.0.0
+- request:
+    method: post
+    uri: https://httpbin.org/post
+    body:
+      encoding: UTF-8
+      string: '{"title":"title","description":"description","source":"test","artifacts":["1.1.1.1","github.com"],"tags":[]}'
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Sun, 20 Mar 2022 03:00:56 GMT
+      Content-Type:
+      - application/json
+      Content-Length:
+      - '611'
+      Connection:
+      - keep-alive
+      Server:
+      - gunicorn/19.9.0
+      Access-Control-Allow-Origin:
+      - "*"
+      Access-Control-Allow-Credentials:
+      - 'true'
+    body:
+      encoding: UTF-8
+      string: "{\n  \"args\": {}, \n  \"data\": \"\", \n  \"files\": {}, \n  \"form\":
+        {\n    \"{\\\"title\\\":\\\"title\\\",\\\"description\\\":\\\"description\\\",\\\"source\\\":\\\"test\\\",\\\"artifacts\\\":[\\\"1.1.1.1\\\",\\\"github.com\\\"],\\\"tags\\\":[]}\":
+        \"\"\n  }, \n  \"headers\": {\n    \"Accept\": \"*/*\", \n    \"Accept-Encoding\":
+        \"gzip;q=1.0,deflate;q=0.6,identity;q=0.3\", \n    \"Content-Length\": \"108\",
+        \n    \"Content-Type\": \"application/x-www-form-urlencoded\", \n    \"Host\":
+        \"httpbin.org\", \n    \"User-Agent\": \"Ruby\", \n    \"X-Amzn-Trace-Id\":
+        \"Root=1-623698e8-7881649b1eb34d19129c98ce\"\n  }, \n  \"json\": null, \n
+        \ \"origin\": \"133.218.173.245\", \n  \"url\": \"https://httpbin.org/post\"\n}\n"
+  recorded_at: Sun, 20 Mar 2022 03:00:56 GMT
+recorded_with: VCR 6.1.0

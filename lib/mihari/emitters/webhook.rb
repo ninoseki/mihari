@@ -11,20 +11,11 @@ module Mihari
       def emit(title:, description:, artifacts:, source:, tags:)
         return if artifacts.empty?
 
-        uri = Addressable::URI.parse(Mihari.config.webhook_url)
-        data = {
-          title: title,
-          description: description,
-          artifacts: artifacts.map(&:data),
-          source: source,
-          tags: tags
-        }
+        headers = { 'content-type': "application/x-www-form-urlencoded" }
+        headers["content-type"] = "application/json" if use_json_body?
 
-        if use_json_body?
-          Net::HTTP.post(uri, data.to_json, "Content-Type" => "application/json")
-        else
-          Net::HTTP.post_form(uri, data)
-        end
+        emitter = Emitters::HTTP.new(uri: Mihari.config.webhook_url)
+        emitter.emit(title: title, description: description, artifacts: artifacts, source: source, tags: tags)
       end
 
       private
@@ -45,16 +36,16 @@ module Mihari
       #
       # Check whether a webhook URL is set or not
       #
-      # @return [<Type>] <description>
+      # @return [Boolean]
       #
       def webhook_url?
         !webhook_url.nil?
       end
 
       #
-      # Check whether to use JSON body or NOT
+      # Check whether to use JSON body or not
       #
-      # @return [<Type>] <description>
+      # @return [Boolean]
       #
       def use_json_body?
         @use_json_body ||= Mihari.config.webhook_use_json_body

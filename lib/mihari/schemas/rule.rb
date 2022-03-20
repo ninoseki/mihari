@@ -42,16 +42,24 @@ module Mihari
     Feed = Dry::Schema.Params do
       required(:analyzer).value(Types::String.enum("feed"))
       required(:query).value(:string)
-      required(:http_request_method).value(Types::FeedHttpRequestMethods).default("GET")
+      required(:http_request_method).value(Types::HttpRequestMethods).default("GET")
       required(:http_request_headers).value(:hash).default({})
       required(:http_request_payload).value(:hash).default({})
       required(:selector).value(:string)
-      optional(:http_request_payload_type).value(Types::FeedHttpRequestPayloadTypes)
+      optional(:http_request_payload_type).value(Types::HttpRequestPayloadTypes)
       optional(:options).hash(AnalyzerOptions)
     end
 
     Emitter = Dry::Schema.Params do
       required(:emitter).value(Types::EmitterTypes)
+    end
+
+    HTTP = Dry::Schema.Params do
+      required(:emitter).value(Types::String.enum("http"))
+      required(:uri).value(:string)
+      required(:http_request_method).value(Types::HttpRequestMethods).default("POST")
+      required(:http_request_headers).value(:hash).default({})
+      optional(:template).value(:string)
     end
 
     Rule = Dry::Schema.Params do
@@ -67,7 +75,7 @@ module Mihari
 
       required(:queries).value(:array).each { Analyzer | Spyse | ZoomEye | Urlscan | Crtsh | Feed }
 
-      required(:emitters).value(:array).each(Emitter).default(DEFAULT_EMITTERS)
+      optional(:emitters).value(:array).each { Emitter | HTTP }
 
       optional(:allowed_data_types).value(array[Types::DataTypes]).default(ALLOWED_DATA_TYPES)
       optional(:disallowed_data_values).value(array[:string]).default([])

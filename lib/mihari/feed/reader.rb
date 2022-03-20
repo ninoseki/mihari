@@ -1,25 +1,27 @@
 # frozen_string_literal: true
 
 require "csv"
+require "insensitive_hash"
 
 module Mihari
   module Feed
     class Reader
-      attr_reader :uri, :http_request_headers, :http_request_method, :http_request_payload_type, :http_request_payload
+      attr_reader :uri, :http_request_headers, :http_request_method, :http_request_payload
 
       def initialize(uri, http_request_headers: {}, http_request_method: "GET", http_request_payload_type: nil, http_request_payload: {})
         @uri = Addressable::URI.parse(uri)
-        @http_request_headers = http_request_headers
+        @http_request_headers = http_request_headers.insensitive
         @http_request_method = http_request_method
-        @http_request_payload_type = http_request_payload_type
         @http_request_payload = http_request_payload
+
+        http_request_headers["content-type"] = http_request_payload_type if http_request_payload_type
       end
 
       def read
         return read_file(uri.path) if uri.scheme == "file"
 
         res = nil
-        client = HTTP.new(uri, headers: http_request_headers, payload: http_request_payload, payload_type: http_request_payload_type)
+        client = HTTP.new(uri, headers: http_request_headers, payload: http_request_payload)
 
         res = client.get if http_request_method == "GET"
         res = client.post if http_request_method == "POST"

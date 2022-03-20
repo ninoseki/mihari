@@ -38,11 +38,16 @@ module Mihari
       "vt"
     )
 
-    FeedHttpRequestMethods = Types::String.enum("GET", "POST")
-    FeedHttpRequestPayloadTypes = Types::String.enum("application/json", "application/x-www-form-urlencoded")
+    HttpRequestMethods = Types::String.enum("GET", "POST")
+    HttpRequestPayloadTypes = Types::String.enum("application/json", "application/x-www-form-urlencoded")
 
     EmitterTypes = Types::String.enum(
-      *DEFAULT_EMITTERS.map { |params| params[:emitter] }
+      "database",
+      "http",
+      "misp",
+      "slack",
+      "the_hive",
+      "webhook"
     )
   end
 end

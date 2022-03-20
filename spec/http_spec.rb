@@ -7,7 +7,8 @@ RSpec.describe Mihari::HTTP, :vcr do
 
     context "with application/x-www-form-urlencoded" do
       it do
-        res = described_class.post("https://httpbin.org/post", headers: headers, payload: payload, payload_type: "application/x-www-form-urlencoded")
+        headers["content-type"] = "application/x-www-form-urlencoded"
+        res = described_class.post("https://httpbin.org/post", headers: headers, payload: payload)
 
         data = JSON.parse(res.body.to_s)
 
@@ -18,7 +19,8 @@ RSpec.describe Mihari::HTTP, :vcr do
 
     context "with application/json" do
       it do
-        res = described_class.post("https://httpbin.org/post", headers: headers, payload: payload, payload_type: "application/json")
+        headers["content-type"] = "application/json"
+        res = described_class.post("https://httpbin.org/post", headers: headers, payload: payload)
 
         data = JSON.parse(res.body.to_s)
 
