@@ -8,6 +8,10 @@ module Mihari
       expose :interval, documentation: { type: Integer, required: false }
     end
 
+    class Emitter < Grape::Entity
+      expose :emitter, documentation: { type: String, required: true }
+    end
+
     class Rule < Grape::Entity
       expose :id, documentation: { type: String, required: true }
 
@@ -16,6 +20,7 @@ module Mihari
       expose :title, documentation: { type: String, required: true }
       expose :description, documentation: { type: String, required: true }
       expose :queries, using: Entities::Query, documentation: { type: Entities::Query, is_array: true, required: true }
+      expose :emitters, using: Entities::Emitter, documentation: { type: Entities::Emitter, is_array: true, required: false }
       expose :tags, documentation: { type: String, is_array: true }
       expose :allowed_data_types, documentation: { type: String, is_array: true }, as: :allowedDtaTypes
       expose :disallowed_data_values, documentation: { type: String, is_array: true }, as: :disallowedDataValues
