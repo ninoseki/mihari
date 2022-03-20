@@ -42,10 +42,10 @@ module Mihari
     Feed = Dry::Schema.Params do
       required(:analyzer).value(Types::String.enum("feed"))
       required(:query).value(:string)
-      required(:http_request_method).value(Types::HttpRequestMethods).default("GET")
-      required(:http_request_headers).value(:hash).default({})
-      required(:http_request_payload).value(:hash).default({})
       required(:selector).value(:string)
+      optional(:http_request_method).value(Types::HttpRequestMethods).default("GET")
+      optional(:http_request_headers).value(:hash).default({})
+      optional(:http_request_payload).value(:hash).default({})
       optional(:http_request_payload_type).value(Types::HttpRequestPayloadTypes)
       optional(:options).hash(AnalyzerOptions)
     end
@@ -57,8 +57,8 @@ module Mihari
     HTTP = Dry::Schema.Params do
       required(:emitter).value(Types::String.enum("http"))
       required(:uri).value(:string)
-      required(:http_request_method).value(Types::HttpRequestMethods).default("POST")
-      required(:http_request_headers).value(:hash).default({})
+      optional(:http_request_method).value(Types::HttpRequestMethods).default("POST")
+      optional(:http_request_headers).value(:hash).default({})
       optional(:template).value(:string)
     end
 
