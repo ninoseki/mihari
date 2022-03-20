@@ -58,6 +58,7 @@ Gem::Specification.new do |spec|
   spec.add_dependency "dry-container", "0.9.0"
   spec.add_dependency "dry-files", "0.1.0"
   spec.add_dependency "dry-initializer", "3.1.1"
+  spec.add_dependency "dry-schema", "1.9.1"
   spec.add_dependency "dry-struct", "1.4.0"
   spec.add_dependency "dry-validation", "1.8.0"
   spec.add_dependency "email_address", "~> 0.2"
