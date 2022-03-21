@@ -5,6 +5,19 @@ require "hachi"
 module Mihari
   module Emitters
     class TheHive < Base
+      # @return [String, nil]
+      attr_reader :api_endpoint
+
+      # @return [String, nil]
+      attr_reader :api_key
+
+      def initialize(*args, **kwargs)
+        super(*args, **kwargs)
+
+        @api_endpoint = kwargs[:api_endpoint] || Mihari.config.thehive_api_endpoint
+        @api_key = kwargs[:api_key] || Mihari.config.thehive_api_key
+      end
+
       # @return [Boolean]
       def valid?
         api_endpont? && api_key? && ping?
@@ -30,7 +43,7 @@ module Mihari
       end
 
       def api
-        @api ||= Hachi::API.new(api_endpoint: Mihari.config.thehive_api_endpoint, api_key: Mihari.config.thehive_api_key)
+        @api ||= Hachi::API.new(api_endpoint: api_endpoint, api_key: api_key)
       end
 
       #
@@ -39,16 +52,16 @@ module Mihari
       # @return [Boolean]
       #
       def api_endpont?
-        !Mihari.config.thehive_api_endpoint.nil?
+        !api_endpoint.nil?
       end
 
       #
       # Check whether an API key is set or not
       #
       # @return [Boolean]
-      # ]
+      #
       def api_key?
-        !Mihari.config.thehive_api_key.nil?
+        !api_key.nil?
       end
 
       #
@@ -57,8 +70,7 @@ module Mihari
       # @return [Boolean]
       #
       def ping?
-        base_url = Mihari.config.thehive_api_endpoint
-        base_url = base_url.end_with?("/") ? base_url[0..-2] : base_url
+        base_url = api_endpoint.end_with?("/") ? api_endpoint[0..-2] : api_endpoint
         url = "#{base_url}/index.html"
 
         http = Net::Ping::HTTP.new(url)
