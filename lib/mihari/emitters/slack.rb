@@ -109,48 +109,46 @@ module Mihari
     end
 
     class Slack < Base
-      SLACK_WEBHOOK_URL_KEY = "SLACK_WEBHOOK_URL"
-      SLACK_CHANNEL_KEY = "SLACK_CHANNEL"
-      DEFAULT_USERNAME = "mihari"
+      DEFAULT_CHANNEL = "#general"
+      DEFAULT_USERNAME = "Mihari"
 
-      #
-      # Slack channel to post
-      #
+      # @return [String, nil]
+      attr_reader :webhook_url
+
       # @return [String]
-      #
-      def slack_channel
-        Mihari.config.slack_channel || "#general"
+      attr_reader :channel
+
+      # @return [String]
+      attr_reader :username
+
+      def initialize(*args, **kwargs)
+        super(*args, **kwargs)
+
+        @webhook_url = kwargs[:webhook_url] || Mihari.config.slack_webhook_url
+        @channel = kwargs[:channel] || Mihari.config.slack_channel || DEFAULT_CHANNEL
+        @username = DEFAULT_USERNAME
       end
 
       #
-      # Slack webhook URL
-      #
-      # @return [String]
-      #
-      def slack_webhook_url
-        Mihari.config.slack_webhook_url
-      end
-
-      #
-      # Check Slack webhook URL is set
+      # Check webhook URL is set
       #
       # @return [Boolean]
       #
-      def slack_webhook_url?
-        !Mihari.config.slack_webhook_url.nil?
+      def webhook_url?
+        !webhook_url.nil?
       end
 
       #
-      # Check Slack webhook URL is set. Alias of #slack_webhook_url?.
+      # Check webhook URL is set. Alias of #webhook_url?
       #
       # @return [Boolean]
       #
       def valid?
-        slack_webhook_url?
+        webhook_url?
       end
 
       def notifier
-        @notifier ||= ::Slack::Notifier.new(slack_webhook_url, channel: slack_channel, username: DEFAULT_USERNAME)
+        @notifier ||= ::Slack::Notifier.new(webhook_url, channel: channel, username: username)
       end
 
       #
@@ -192,12 +190,6 @@ module Mihari
         text = to_text(title: title, description: description, tags: tags)
 
         notifier.post(text: text, attachments: attachments, mrkdwn: true)
-      end
-
-      private
-
-      def configuration_keys
-        %w[slack_webhook_url]
       end
     end
   end
