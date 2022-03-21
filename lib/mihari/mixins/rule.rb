@@ -26,9 +26,10 @@ module Mihari
       end
 
       def load_data_from_file(path)
-        return YAML.safe_load(File.read(path), permitted_classes: [Date], symbolize_names: true) if Pathname(path).exist?
+        return nil unless Pathname(path).exist?
 
-        YAML.safe_load(path, symbolize_names: true)
+        text = ERB.new(File.read(path)).result
+        YAML.safe_load(text, permitted_classes: [Date], symbolize_names: true)
       end
 
       def load_data_from_db(id)
