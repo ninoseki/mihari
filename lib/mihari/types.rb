@@ -42,10 +42,6 @@ module Mihari
 
     EmitterTypes = Types::String.enum(
       "database",
-      "http",
-      "misp",
-      "slack",
-      "the_hive",
       "webhook"
     )
   end

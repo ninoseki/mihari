@@ -54,6 +54,24 @@ module Mihari
       required(:emitter).value(Types::EmitterTypes)
     end
 
+    MISP = Dry::Schema.Params do
+      required(:emitter).value(Types::String.enum("misp"))
+      optional(:api_endpoint).value(:string)
+      optional(:api_key).value(:string)
+    end
+
+    TheHive = Dry::Schema.Params do
+      required(:emitter).value(Types::String.enum("the_hive"))
+      optional(:api_endpoint).value(:string)
+      optional(:api_key).value(:string)
+    end
+
+    Slack = Dry::Schema.Params do
+      required(:emitter).value(Types::String.enum("slack"))
+      optional(:webhook_url).value(:string)
+      optional(:channel).value(:string)
+    end
+
     HTTP = Dry::Schema.Params do
       required(:emitter).value(Types::String.enum("http"))
       required(:url).value(:string)
@@ -75,7 +93,7 @@ module Mihari
 
       required(:queries).value(:array).each { Analyzer | Spyse | ZoomEye | Urlscan | Crtsh | Feed }
 
-      optional(:emitters).value(:array).each { Emitter | HTTP }
+      optional(:emitters).value(:array).each { Emitter | MISP | TheHive | Slack | HTTP }
 
       optional(:allowed_data_types).value(array[Types::DataTypes]).default(ALLOWED_DATA_TYPES)
       optional(:disallowed_data_values).value(array[:string]).default([])

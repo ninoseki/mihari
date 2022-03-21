@@ -1,6 +1,12 @@
 module Mihari
   module Emitters
     class MISP < Base
+
+      attr_reader api_endpiont: String?
+
+      attr_reader api_key: String?
+
+
       def initialize: () -> void
 
       # @return [true, false]

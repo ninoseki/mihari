@@ -1,6 +1,10 @@
 module Mihari
   module Emitters
     class TheHive < Base
+      attr_reader api_endpiont: String?
+
+      attr_reader api_key: String?
+
       # @return [true, false]
       def valid?: () -> bool
 
