@@ -4,6 +4,7 @@ require "thor"
 
 # Commands
 require "mihari/commands/search"
+require "mihari/commands/version"
 require "mihari/commands/web"
 
 # CLIs
@@ -16,6 +17,7 @@ module Mihari
   module CLI
     class Main < Base
       include Mihari::Commands::Search
+      include Mihari::Commands::Version
       include Mihari::Commands::Web
 
       desc "init", "Sub commands to initialize a rule"
