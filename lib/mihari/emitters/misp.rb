@@ -5,12 +5,21 @@ require "misp"
 module Mihari
   module Emitters
     class MISP < Base
-      def initialize
-        super()
+      # @return [String, nil]
+      attr_reader :api_endpoint
+
+      # @return [String, nil]
+      attr_reader :api_key
+
+      def initialize(*args, **kwargs)
+        super(*args, **kwargs)
+
+        @api_endpoint = kwargs[:api_endpoint] || Mihari.config.misp_api_endpoint
+        @api_key = kwargs[:api_key] || Mihari.config.misp_api_key
 
         ::MISP.configure do |config|
-          config.api_endpoint = Mihari.config.misp_api_endpoint
-          config.api_key = Mihari.config.misp_api_key
+          config.api_endpoint = api_endpoint
+          config.api_key = api_key
         end
       end
 
@@ -21,6 +30,9 @@ module Mihari
 
       def emit(title:, artifacts:, tags: [], **_options)
         return if artifacts.empty?
+
+        p api_endpoint
+        p api_key
 
         event = ::MISP::Event.new(info: title)
 
@@ -99,7 +111,6 @@ module Mihari
       # @return [Boolean]
       #
       def api_endpoint?
-        api_endpoint = ::MISP.configuration.api_endpoint
         !api_endpoint.nil? && !api_endpoint.empty?
       end
 
@@ -109,7 +120,6 @@ module Mihari
       # @return [Boolean]
       #
       def api_key?
-        api_key = ::MISP.configuration.api_key
         !api_key.nil? && !api_key.empty?
       end
 
@@ -119,8 +129,7 @@ module Mihari
       # @return [Boolean]
       #
       def ping?
-        base_url = ::MISP.configuration.api_endpoint
-        base_url = base_url.end_with?("/") ? base_url[0..-2] : base_url
+        base_url = api_endpoint.end_with?("/") ? api_endpoint[0..-2] : api_endpoint
         url = "#{base_url}/users/login"
 
         http = Net::Ping::HTTP.new(url)
