@@ -39,33 +39,25 @@ module Mihari
     end
 
     class Slack < Base
-      SLACK_WEBHOOK_URL_KEY: ::String
+      DEFAULT_CHANNEL: String
 
-      SLACK_CHANNEL_KEY: ::String
+      DEFAULT_USERNAME: String
 
-      DEFAULT_USERNAME: ::String
+      # @return [String, nil]
+      attr_reader webhook_url: String?
 
-      #
-      # Slack channel to post
-      #
       # @return [String]
-      #
-      def slack_channel: () -> String
+      attr_reader channel: String
 
-      #
-      # Slack webhook URL
-      #
       # @return [String]
-      #
-      def slack_webhook_url: () -> String
+      attr_reader username: String
 
       #
-      # Check Slack webhook URL is set
+      # Check webhook URL is set
       #
       # @return [Boolean]
       #
-      def slack_webhook_url?: () -> bool
-
+      def webhook_url?: () -> bool
 
       def notifier: () -> ::Slack::Notifier
 
@@ -76,10 +68,6 @@ module Mihari
       def to_text: (title: String title, description: String description, ?tags: Array[String] tags) -> String
 
       def emit: (title: String title, description: String description, artifacts: Array[Mihari::Artifact] artifacts, ?tags: Array[String] tags, **untyped _options) -> void
-
-      private
-
-      def configuration_keys: () -> ::Array["slack_webhook_url"]
     end
   end
 end
