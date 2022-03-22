@@ -5,6 +5,8 @@ module Mihari
 
   class InvalidInputError < Error; end
 
+  class InvalidArtifactFormatError < Error; end
+
   class RetryableError < Error; end
 
   class FileNotFoundError < Error; end

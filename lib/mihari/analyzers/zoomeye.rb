@@ -55,7 +55,12 @@ module Mihari
           matches = res["matches"] || []
           matches.map do |match|
             data = match["ip"]
-            Artifact.new(data: data, source: source, metadata: match)
+
+            if data.is_a?(Array)
+              data.map { |d| Artifact.new(data: d, source: source, metadata: match) }
+            else
+              Artifact.new(data: data, source: source, metadata: match)
+            end
           end
         end.flatten.compact.uniq
       end
