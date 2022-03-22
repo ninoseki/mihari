@@ -25,8 +25,11 @@ module Mihari
 
     attr_accessor :tags
 
-    def initialize(attributes)
-      super
+    def initialize(*args, **kwargs)
+      data_ = args.first[:data]
+      raise InvalidArtifactFormatError if data_.is_a?(Array) || data_.is_a?(Hash)
+
+      super(*args, **kwargs)
 
       self.data_type = TypeChecker.type(data)
       self.tags = []
