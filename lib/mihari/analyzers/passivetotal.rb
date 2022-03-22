@@ -93,7 +93,7 @@ module Mihari
         results = res["results"] || []
         results.map do |result|
           data = result["ipAddresses"]
-          Artifact.new(data: data, source: source, metadata: result)
+          data.map { |d| Artifact.new(data: d, source: source, metadata: result) }
         end.flatten
       end
     end
