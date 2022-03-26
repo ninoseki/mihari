@@ -31,9 +31,6 @@ module Mihari
       def emit(title:, artifacts:, tags: [], **_options)
         return if artifacts.empty?
 
-        p api_endpoint
-        p api_key
-
         event = ::MISP::Event.new(info: title)
 
         artifacts.each do |artifact|
