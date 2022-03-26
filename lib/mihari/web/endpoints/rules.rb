@@ -98,6 +98,14 @@ module Mihari
           yaml = params[:yaml]
           rule = Structs::Rule::Rule.from_yaml(yaml)
 
+          # check ID duplication
+          begin
+            Mihari::Rule.find(rule.id)
+            error!({ message: "ID:#{rule.id} is already registered" }, 400)
+          rescue ActiveRecord::RecordNotFound
+            # do nothing
+          end
+
           begin
             rule.validate!
           rescue RuleValidationError
