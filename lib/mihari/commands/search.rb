@@ -10,6 +10,7 @@ module Mihari
       def self.included(thor)
         thor.class_eval do
           desc "search [RULE]", "Search by a rule"
+          method_option :yes, type: :boolean, aliases: "-y", desc: "yes to overwrite the rule in the database"
           def search_by_rule(path_or_id)
             rule = load_rule(path_or_id)
 
@@ -18,6 +19,19 @@ module Mihari
               validate_rule! rule
             rescue RuleValidationError => e
               raise e
+            end
+
+            # check update
+            id = rule.id
+            yes = options["yes"] || false
+            unless yes
+              with_db_connection do
+                rule_ = Mihari::Rule.find(id)
+                next if rule.yaml == rule_.yaml
+                return unless yes?("This operation will overwrite the rule in the database (Rule ID: #{id}). Are you sure you want to update the rule? (yes/no)")
+              rescue ActiveRecord::RecordNotFound
+                next
+              end
             end
 
             analyzer = rule.to_analyzer
