@@ -4,6 +4,9 @@ module Mihari
     attr_accessor title(): String
     attr_accessor description(): String
     attr_accessor data(): Hash
+    attr_accessor yaml(): String?
+
+    def symbolized_data: () -> Hash
 
     def to_h: () -> Hash
 

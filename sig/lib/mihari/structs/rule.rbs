@@ -11,7 +11,9 @@ module Mihari
       class Rule
         attr_reader data: Hash
 
-        attr_reader errors: Array[untypes]
+        attr_reader yaml: String
+
+        attr_reader errors: Array[untypes]?
 
         def initialize: (Hash data) -> void
 
@@ -54,6 +56,8 @@ module Mihari
         def to_analyzer: () -> Mihari::Analyzers::Rule
 
         def self.from_model: (Mihari::Rule model) -> Mihari::Structs::Rule::Rule
+
+        def self.from_yaml: (String yaml) -> Mihari::Structs::Rule::Rule
       end
     end
   end
