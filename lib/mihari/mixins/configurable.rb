@@ -9,7 +9,9 @@ module Mihari
       # @return [Boolean]
       #
       def configured?
-        configuration_keys.all? { |key| Mihari.config.send(key) }
+        return true if configuration_keys.empty?
+
+        configuration_keys.all? { |key| Mihari.config.send(key) } || api_key?
       end
 
       #
@@ -32,6 +34,15 @@ module Mihari
       #
       def configuration_keys
         []
+      end
+
+      private
+
+      def api_key?
+        value = method(:api_key).call
+        !value.nil?
+      rescue NameError
+        true
       end
     end
   end

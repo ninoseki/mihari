@@ -9,6 +9,8 @@ module Mihari
 
       attr_reader interval: ::Integer
 
+      attr_reader api_key: String?
+
       def initialize: (*untyped args, **untyped kwargs) -> void
 
       def artifacts: () -> (Array[String] | Array[Mihari::Artifact])

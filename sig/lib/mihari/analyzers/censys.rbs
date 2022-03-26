@@ -5,6 +5,10 @@ module Mihari
 
       attr_reader interval: ::Integer
 
+      attr_reader id: String?
+
+      attr_reader secret: String?
+
       def artifacts: () -> (Array[String] | Array[Mihari::Artifact])
 
       private

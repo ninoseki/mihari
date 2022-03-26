@@ -10,6 +10,15 @@ module Mihari
 
       option :interval, default: proc { 0 }
 
+      # @return [String, nil]
+      attr_reader :api_key
+
+      def initialize(*args, **kwargs)
+        super(*args, **kwargs)
+
+        @api_key = kwargs[:api_key] || Mihari.config.onyphe_api_key
+      end
+
       def artifacts
         responses = search
         return [] unless responses
@@ -29,7 +38,7 @@ module Mihari
       end
 
       def api
-        @api ||= ::Onyphe::API.new(Mihari.config.onyphe_api_key)
+        @api ||= ::Onyphe::API.new(api_key)
       end
 
       #

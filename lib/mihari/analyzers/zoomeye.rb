@@ -11,6 +11,15 @@ module Mihari
 
       option :interval, default: proc { 0 }
 
+      # @return [String, nil]
+      attr_reader :api_key
+
+      def initialize(*args, **kwargs)
+        super(*args, **kwargs)
+
+        @api_key = kwargs[:api_key] || Mihari.config.zoomeye_api_key
+      end
+
       def artifacts
         case type
         when "host"
@@ -40,7 +49,7 @@ module Mihari
       end
 
       def api
-        @api ||= ::ZoomEye::API.new(api_key: Mihari.config.zoomeye_api_key)
+        @api ||= ::ZoomEye::API.new(api_key: api_key)
       end
 
       #

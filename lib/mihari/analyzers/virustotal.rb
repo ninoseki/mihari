@@ -11,11 +11,16 @@ module Mihari
 
       attr_reader :type
 
+      # @return [String, nil]
+      attr_reader :api_key
+
       def initialize(*args, **kwargs)
-        super
+        super(*args, **kwargs)
 
         @query = refang(query)
         @type = TypeChecker.type(query)
+
+        @api_key = kwargs[:api_key] || Mihari.config.virustotal_api_key
       end
 
       def artifacts
@@ -29,7 +34,7 @@ module Mihari
       end
 
       def api
-        @api = ::VirusTotal::API.new(key: Mihari.config.virustotal_api_key)
+        @api = ::VirusTotal::API.new(key: api_key)
       end
 
       #

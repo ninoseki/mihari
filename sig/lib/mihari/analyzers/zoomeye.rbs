@@ -3,9 +3,11 @@ module Mihari
     class ZoomEye < Base
       attr_reader query: String
 
-      attr_reader type: String
+      attr_reader type: String?
 
       attr_reader interval: ::Integer
+
+      attr_reader api_key: String?
 
       def artifacts: () -> (Array[String] | Array[Mihari::Artifact])
 

@@ -9,13 +9,19 @@ module Mihari
 
       param :query
 
+      # @return [String, nil]
       attr_reader :type
+
+      # @return [String, nil]
+      attr_reader :api_key
 
       def initialize(*args, **kwargs)
         super
 
         @query = refang(query)
         @type = TypeChecker.type(query)
+
+        @api_key = kwargs[:api_key] || Mihari.config.securitytrails_api_key
       end
 
       def artifacts
@@ -29,7 +35,7 @@ module Mihari
       end
 
       def api
-        @api ||= ::SecurityTrails::API.new(Mihari.config.securitytrails_api_key)
+        @api ||= ::SecurityTrails::API.new(api_key)
       end
 
       #
