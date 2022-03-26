@@ -1,6 +1,8 @@
 module Mihari
   module Mixins
     module Rule
+      def load_erb_yaml: (String yaml) -> Hash
+
       #
       # Load rule into hash
       #

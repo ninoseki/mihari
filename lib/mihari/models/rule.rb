@@ -1,8 +1,14 @@
 # frozen_string_literal: true
 
+require "yaml"
+
 module Mihari
   class Rule < ActiveRecord::Base
     has_many :alerts, foreign_key: :source
+
+    def symbolized_data
+      @symbolized_data ||= data.deep_symbolize_keys
+    end
 
     #
     # Returns a hash representative
@@ -10,9 +16,12 @@ module Mihari
     # @return [Hash]
     #
     def to_h
-      symbolized_data = data.deep_symbolize_keys
-      h = { id: id, created_at: created_at, yaml: data.to_yaml }
-      h.merge symbolized_data
+      {
+        id: id,
+        yaml: yaml || data.to_yaml,
+        created_at: created_at,
+        updated_at: updated_at
+      }
     end
 
     class << self

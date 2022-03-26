@@ -91,8 +91,12 @@ module Mihari
           success: Entities::Rule,
           summary: "Create a rule"
         }
+        params do
+          requires :yaml, type: String, documentation: { param_type: "body" }
+        end
         post "/" do
-          rule = Structs::Rule::Rule.new(params)
+          yaml = params[:yaml]
+          rule = Structs::Rule::Rule.from_yaml(yaml)
 
           begin
             rule.validate!
@@ -118,8 +122,13 @@ module Mihari
           success: Entities::Rule,
           summary: "Update a rule"
         }
+        params do
+          requires :id, type: String, documentation: { param_type: "body" }
+          requires :yaml, type: String, documentation: { param_type: "body" }
+        end
         put "/" do
-          id = params["id"].to_s
+          id = params[:id]
+          yaml = params[:yaml]
 
           begin
             Mihari::Rule.find(id)
@@ -127,7 +136,7 @@ module Mihari
             error!({ message: "ID:#{id} is not found" }, 404)
           end
 
-          rule = Structs::Rule::Rule.new(params)
+          rule = Structs::Rule::Rule.from_yaml(yaml)
 
           begin
             rule.validate!

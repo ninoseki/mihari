@@ -14,20 +14,9 @@ module Mihari
 
     class Rule < Grape::Entity
       expose :id, documentation: { type: String, required: true }
-
       expose :yaml, documentation: { type: String, required: true }
-
-      expose :title, documentation: { type: String, required: true }
-      expose :description, documentation: { type: String, required: true }
-      expose :queries, using: Entities::Query, documentation: { type: Entities::Query, is_array: true, required: true }
-      expose :emitters, using: Entities::Emitter, documentation: { type: Entities::Emitter, is_array: true, required: false }
-      expose :tags, documentation: { type: String, is_array: true }
-      expose :allowed_data_types, documentation: { type: String, is_array: true }, as: :allowedDtaTypes
-      expose :disallowed_data_values, documentation: { type: String, is_array: true }, as: :disallowedDataValues
-      expose :ignore_old_artifacts, documentation: { type: "boolean", required: true }, as: :ignoreOldArtifacts
-      expose :ignore_threshold, documentation: { type: Integer, required: true }, as: :ignoreThreshold
-
       expose :created_at, documentation: { type: DateTime, required: true }, as: :createdAt
+      expose :updated_at, documentation: { type: DateTime, required: true }, as: :updatedAt
     end
 
     class RulesWithPagination < Grape::Entity

@@ -9,6 +9,10 @@ module Mihari
     module Rule
       include Mixins::Database
 
+      def load_erb_yaml(yaml)
+        YAML.safe_load(ERB.new(yaml).result, permitted_classes: [Date], symbolize_names: true)
+      end
+
       #
       # Load rule into hash
       #
@@ -17,25 +21,24 @@ module Mihari
       # @return [Mihari::Structs::Rule::Rule]
       #
       def load_rule(path_or_id)
-        data = nil
+        yaml = nil
 
-        data = load_data_from_file(path_or_id) if File.exist?(path_or_id)
-        data = load_data_from_db(path_or_id) if data.nil?
+        yaml = load_yaml_from_file(path_or_id) if File.exist?(path_or_id)
+        yaml = load_yaml_from_db(path_or_id) if yaml.nil?
 
-        Structs::Rule::Rule.new(data)
+        Structs::Rule::Rule.from_yaml yaml
       end
 
-      def load_data_from_file(path)
+      def load_yaml_from_file(path)
         return nil unless Pathname(path).exist?
 
-        text = ERB.new(File.read(path)).result
-        YAML.safe_load(text, permitted_classes: [Date], symbolize_names: true)
+        File.read path
       end
 
-      def load_data_from_db(id)
+      def load_yaml_from_db(id)
         with_db_connection do
           rule = Mihari::Rule.find(id)
-          rule.data
+          rule.yaml || rule.symbolized_data.to_yaml
         rescue ActiveRecord::RecordNotFound
           raise ArgumentError, "ID:#{id} is not found in the database"
         end
@@ -59,16 +62,9 @@ module Mihari
       # @return [String] A template for rule
       #
       def rule_template
-        # Use ERB to fill created_on and updated_on with Date.today
-        data = File.read(File.expand_path("../templates/rule.yml.erb", __dir__))
-        template = ERB.new(data)
-        data = template.result
-
-        # validate the template of rule for just in case
-        hashed_data = YAML.safe_load(data, permitted_classes: [Date], symbolize_names: true)
-        Structs::Rule::Rule.new(hashed_data)
-
-        data
+        yaml = File.read(File.expand_path("../templates/rule.yml.erb", __dir__))
+        Structs::Rule::Rule.from_yaml yaml
+        yaml
       end
 
       #

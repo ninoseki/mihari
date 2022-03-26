@@ -27,10 +27,19 @@ module Mihari
       end
 
       class Rule
-        attr_reader :data, :errors
+        # @return [Hash]
+        attr_reader :data
 
-        def initialize(data)
+        # @return [String]
+        attr_reader :yaml
+
+        # @return [Array, nil]
+        attr_reader :errors
+
+        def initialize(data, yaml)
           @data = data.deep_symbolize_keys
+          @yaml = yaml
+
           @errors = nil
           @no_method_error = nil
 
@@ -109,16 +118,20 @@ module Mihari
         #
         def to_model
           rule = Mihari::Rule.find(id)
+
           rule.title = title
           rule.description = description
           rule.data = data
+          rule.yaml = yaml
+
           rule
         rescue ActiveRecord::RecordNotFound
           Mihari::Rule.new(
             id: id,
             title: title,
             description: description,
-            data: data
+            data: data,
+            yaml: yaml
           )
         end
 
@@ -143,13 +156,28 @@ module Mihari
         end
 
         class << self
+          include Mixins::Rule
+
           #
           # @param [Mihari::Rule] model
           #
           # @return [Mihari::Structs::Rule::Rule]
           #
           def from_model(model)
-            Structs::Rule::Rule.new(model.data)
+            data = model.data.deep_symbolize_keys
+            data[:id] = model.id unless data.key?(:id)
+
+            Structs::Rule::Rule.new(data, model.yaml)
+          end
+
+          #
+          # @param [String] yaml
+          #
+          # @return [Mihari::Structs::Rule::Rule]
+          #
+          def from_yaml(yaml)
+            data = load_erb_yaml(yaml)
+            Structs::Rule::Rule.new(data, yaml)
           end
         end
       end
