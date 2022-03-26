@@ -9,13 +9,19 @@ module Mihari
 
       param :query
 
+      # @return [String, nil]
       attr_reader :type
+
+      # @return [String, nil]
+      attr_reader :api_key
 
       def initialize(*args, **kwargs)
         super
 
         @query = refang(query)
         @type = TypeChecker.type(query)
+
+        @api_key = kwargs[:api_key] || Mihari.config.otx_api_key
       end
 
       def artifacts
@@ -29,11 +35,11 @@ module Mihari
       end
 
       def domain_client
-        @domain_client ||= ::OTX::Domain.new(Mihari.config.otx_api_key)
+        @domain_client ||= ::OTX::Domain.new(api_key)
       end
 
       def ip_client
-        @ip_client ||= ::OTX::IP.new(Mihari.config.otx_api_key)
+        @ip_client ||= ::OTX::IP.new(api_key)
       end
 
       #

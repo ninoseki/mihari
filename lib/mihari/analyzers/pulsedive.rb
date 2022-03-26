@@ -9,13 +9,19 @@ module Mihari
 
       param :query
 
+      # @return [String, nil]
       attr_reader :type
+
+      # @return [String, nil]
+      attr_reader :api_key
 
       def initialize(*args, **kwargs)
         super
 
         @query = refang(query)
         @type = TypeChecker.type(query)
+
+        @api_key = kwargs[:api_key] || Mihari.config.pulsedive_api_key
       end
 
       def artifacts
@@ -29,7 +35,7 @@ module Mihari
       end
 
       def api
-        @api ||= ::Pulsedive::API.new(Mihari.config.pulsedive_api_key)
+        @api ||= ::Pulsedive::API.new(api_key)
       end
 
       #

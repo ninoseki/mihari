@@ -6,9 +6,55 @@ module Mihari
       optional(:interval).value(:integer)
     end
 
-    Analyzer = Dry::Schema.Params do
-      required(:analyzer).value(Types::AnalyzerTypes)
+    AnalyzerWithoutAPIKey = Dry::Schema.Params do
+      required(:analyzer).value(Types::String.enum("crtsh", "dnpedia", "dnstwister"))
       required(:query).value(:string)
+      optional(:options).hash(AnalyzerOptions)
+    end
+
+    AnalyzerWithAPIKey = Dry::Schema.Params do
+      required(:analyzer).value(
+        Types::String.enum(
+          "binaryedge",
+          "greynoise",
+          "onyphe",
+          "otx",
+          "pulsedive",
+          "securitytrails",
+          "shodan",
+          "st",
+          "virustotal_intelligence",
+          "virustotal",
+          "vt_intel",
+          "vt"
+        )
+      )
+      required(:query).value(:string)
+      optional(:api_key).value(:string)
+      optional(:options).hash(AnalyzerOptions)
+    end
+
+    Censys = Dry::Schema.Params do
+      required(:analyzer).value(Types::String.enum("censys"))
+      required(:query).value(:string)
+      optional(:id).value(:string)
+      optional(:secret).value(:string)
+      optional(:options).hash(AnalyzerOptions)
+    end
+
+    CIRCL = Dry::Schema.Params do
+      required(:analyzer).value(Types::String.enum("circl"))
+      required(:query).value(:string)
+      optional(:username).value(:string)
+      optional(:password).value(:string)
+      optional(:options).hash(AnalyzerOptions)
+    end
+
+    PassiveTotal = Dry::Schema.Params do
+      required(:analyzer).value(Types::String.enum("passivetotal", "pt"))
+      required(:query).value(:string)
+      optional(:username).value(:string)
+      optional(:api_key).value(:string)
       optional(:options).hash(AnalyzerOptions)
     end
 
@@ -91,7 +137,7 @@ module Mihari
       optional(:created_on).value(:date)
       optional(:updated_on).value(:date)
 
-      required(:queries).value(:array).each { Analyzer | Spyse | ZoomEye | Urlscan | Crtsh | Feed }
+      required(:queries).value(:array).each { AnalyzerWithoutAPIKey | AnalyzerWithAPIKey | Censys | CIRCL | PassiveTotal | Spyse | ZoomEye | Urlscan | Crtsh | Feed }
 
       optional(:emitters).value(:array).each { Emitter | MISP | TheHive | Slack | HTTP }
 

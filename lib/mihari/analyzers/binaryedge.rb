@@ -9,6 +9,15 @@ module Mihari
 
       option :interval, default: proc { 0 }
 
+      # @return [String, nil]
+      attr_reader :api_key
+
+      def initialize(*args, **kwargs)
+        super(*args, **kwargs)
+
+        @api_key = kwargs[:api_key] || Mihari.config.binaryedge_api_key
+      end
+
       def artifacts
         results = search
         return [] unless results || results.empty?
@@ -67,7 +76,7 @@ module Mihari
       end
 
       def api
-        @api ||= ::BinaryEdge::API.new(Mihari.config.binaryedge_api_key)
+        @api ||= ::BinaryEdge::API.new(api_key)
       end
     end
   end

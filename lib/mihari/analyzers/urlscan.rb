@@ -14,10 +14,15 @@ module Mihari
       SUPPORTED_DATA_TYPES = %w[url domain ip].freeze
       SIZE = 1000
 
+      # @return [String, nil]
+      attr_reader :api_key
+
       def initialize(*args, **kwargs)
         super
 
         raise InvalidInputError, "allowed_data_types should be any of url, domain and ip." unless valid_alllowed_data_types?
+
+        @api_key = kwargs[:api_key] || Mihari.config.urlscan_api_key
       end
 
       def artifacts
@@ -40,7 +45,7 @@ module Mihari
       end
 
       def api
-        @api ||= ::UrlScan::API.new(Mihari.config.urlscan_api_key)
+        @api ||= ::UrlScan::API.new(api_key)
       end
 
       #

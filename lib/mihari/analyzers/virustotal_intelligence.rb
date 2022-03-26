@@ -9,10 +9,15 @@ module Mihari
 
       option :interval, default: proc { 0 }
 
+      # @return [String, nil]
+      attr_reader :api_key
+
       def initialize(*args, **kwargs)
         super
 
         @query = query
+
+        @api_key = kwargs[:api_key] || Mihari.config.virustotal_api_key
       end
 
       def artifacts
@@ -36,7 +41,7 @@ module Mihari
       # @return [::VirusTotal::API]
       #
       def api
-        @api = ::VirusTotal::API.new(key: Mihari.config.virustotal_api_key)
+        @api = ::VirusTotal::API.new(key: api_key)
       end
 
       #

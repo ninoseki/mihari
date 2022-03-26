@@ -9,8 +9,25 @@ module Mihari
 
       option :interval, default: proc { 0 }
 
+      # @return [String, nil]
+      attr_reader :id
+
+      # @return [String, nil]
+      attr_reader :secret
+
+      def initialize(*args, **kwargs)
+        super(*args, **kwargs)
+
+        @id = kwargs[:id] || Mihari.config.censys_id
+        @secret = kwargs[:secret] || Mihari.config.censys_secret
+      end
+
       def artifacts
         search
+      end
+
+      def configured?
+        configuration_keys.all? { |key| Mihari.config.send(key) } || (id? && secret?)
       end
 
       private
@@ -85,7 +102,15 @@ module Mihari
       end
 
       def api
-        @api ||= ::Censys::API.new(Mihari.config.censys_id, Mihari.config.censys_secret)
+        @api ||= ::Censys::API.new(id, secret)
+      end
+
+      def id?
+        !id.nil?
+      end
+
+      def secret?
+        !secret.nil?
       end
     end
   end

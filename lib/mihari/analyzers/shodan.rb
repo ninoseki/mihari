@@ -9,6 +9,15 @@ module Mihari
 
       option :interval, default: proc { 0 }
 
+      # @return [String, nil]
+      attr_reader :api_key
+
+      def initialize(*args, **kwargs)
+        super(*args, **kwargs)
+
+        @api_key = kwargs[:api_key] || Mihari.config.shodan_api_key
+      end
+
       def artifacts
         results = search
         return [] unless results || results.empty?
@@ -29,7 +38,7 @@ module Mihari
       end
 
       def api
-        @api ||= ::Shodan::API.new(key: Mihari.config.shodan_api_key)
+        @api ||= ::Shodan::API.new(key: api_key)
       end
 
       #

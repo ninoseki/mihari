@@ -9,6 +9,15 @@ module Mihari
 
       option :type, default: proc { "domain" }
 
+      # @return [String, nil]
+      attr_reader :api_key
+
+      def initialize(*args, **kwargs)
+        super(*args, **kwargs)
+
+        @api_key = kwargs[:api_key] || Mihari.config.spyse_api_key
+      end
+
       def artifacts
         search || []
       end
@@ -24,7 +33,7 @@ module Mihari
       end
 
       def api
-        @api ||= ::Spyse::API.new(Mihari.config.spyse_api_key)
+        @api ||= ::Spyse::API.new(api_key)
       end
 
       #

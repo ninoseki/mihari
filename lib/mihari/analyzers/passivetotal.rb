@@ -9,17 +9,31 @@ module Mihari
 
       param :query
 
+      # @return [String, nil]
       attr_reader :type
 
+      # @return [String, nil]
+      attr_reader :username
+
+      # @return [String, nil]
+      attr_reader :api_key
+
       def initialize(*args, **kwargs)
-        super
+        super(*args, **kwargs)
 
         @query = refang(query)
         @type = TypeChecker.type(query)
+
+        @username = kwargs[:username] || Mihari.config.passivetotal_username
+        @api_key = kwargs[:api_key] || Mihari.config.passivetotal_api_key
       end
 
       def artifacts
         search || []
+      end
+
+      def configured?
+        configuration_keys.all? { |key| Mihari.config.send(key) } || (username? && api_key?)
       end
 
       private
@@ -29,7 +43,7 @@ module Mihari
       end
 
       def api
-        @api ||= ::PassiveTotal::API.new(username: Mihari.config.passivetotal_username, api_key: Mihari.config.passivetotal_api_key)
+        @api ||= ::PassiveTotal::API.new(username: username, api_key: api_key)
       end
 
       #
@@ -95,6 +109,14 @@ module Mihari
           data = result["ipAddresses"]
           data.map { |d| Artifact.new(data: d, source: source, metadata: result) }
         end.flatten
+      end
+
+      def username?
+        !username.nil?
+      end
+
+      def api_key?
+        !api_key.nil?
       end
     end
   end

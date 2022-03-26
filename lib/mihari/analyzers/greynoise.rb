@@ -7,6 +7,15 @@ module Mihari
     class GreyNoise < Base
       param :query
 
+      # @return [String, nil]
+      attr_reader :api_key
+
+      def initialize(*args, **kwargs)
+        super(*args, **kwargs)
+
+        @api_key = kwargs[:api_key] || Mihari.config.greynoise_api_key
+      end
+
       def artifacts
         res = Structs::GreyNoise::Response.from_dynamic!(search)
         res.data.map do |datum|
@@ -23,7 +32,7 @@ module Mihari
       end
 
       def api
-        @api ||= ::GreyNoise::API.new(key: Mihari.config.greynoise_api_key)
+        @api ||= ::GreyNoise::API.new(key: api_key)
       end
 
       #

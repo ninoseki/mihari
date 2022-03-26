@@ -8,6 +8,8 @@ module Mihari
       #
       def configured?: () -> bool
 
+      private
+
       #
       # Configuration values
       #
@@ -21,6 +23,8 @@ module Mihari
       # @return [Array<String>] A list of cofiguration keys
       #
       def configuration_keys: () -> Array[String]
+
+      def api_key?: () -> bool
     end
   end
 end

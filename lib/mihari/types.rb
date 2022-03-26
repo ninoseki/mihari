@@ -16,27 +16,6 @@ module Mihari
 
     UrlscanDataTypes = Types::String.enum("ip", "domain", "url")
 
-    AnalyzerTypes = Types::String.enum(
-      "binaryedge",
-      "censys",
-      "circl",
-      "dnpedia",
-      "dnstwister",
-      "greynoise",
-      "onyphe",
-      "otx",
-      "passivetotal",
-      "pt",
-      "pulsedive",
-      "securitytrails",
-      "shodan",
-      "st",
-      "virustotal_intelligence",
-      "virustotal",
-      "vt_intel",
-      "vt"
-    )
-
     HttpRequestMethods = Types::String.enum("GET", "POST")
     HttpRequestPayloadTypes = Types::String.enum("application/json", "application/x-www-form-urlencoded")
 
