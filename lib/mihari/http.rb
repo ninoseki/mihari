@@ -7,7 +7,7 @@ module Mihari
     attr_reader :uri, :headers, :payload
 
     def initialize(uri, headers: {}, payload: {})
-      @uri = uri.is_a?(Addressable::URI) ? uri : Addressable::URI.parse(uri)
+      @uri = uri.is_a?(URI) ? uri : URI(uri.to_s)
       @headers = headers.insensitive
       @payload = payload
     end
@@ -18,10 +18,11 @@ module Mihari
     # @return [Net::HTTPResponse]
     #
     def get
-      uri.query = Addressable::URI.form_encode(payload)
-      get = Net::HTTP::Get.new(uri)
+      new_uri = uri.deep_dup
+      new_uri.query = Addressable::URI.form_encode(payload) unless payload.empty?
 
-      request(get)
+      get = Net::HTTP::Get.new(new_uri)
+      request get
     end
 
     #
@@ -39,7 +40,7 @@ module Mihari
         post.set_form_data(payload)
       end
 
-      request(post)
+      request post
     end
 
     class << self

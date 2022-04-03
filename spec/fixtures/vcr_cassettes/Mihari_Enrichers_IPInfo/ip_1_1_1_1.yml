@@ -4,17 +4,19 @@ http_interactions:
     method: get
     uri: https://ipinfo.io/1.1.1.1/json
     body:
-      encoding: UTF-8
+      encoding: US-ASCII
       string: ''
     headers:
-      Authorization:
-      - Bearer <IPINFO_API_KEY>
-      Connection:
-      - close
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
       Host:
       - ipinfo.io
-      User-Agent:
-      - http.rb/5.0.4
+      Authorization:
+      - Bearer <IPINFO_API_KEY>
   response:
     status:
       code: 200
@@ -23,7 +25,7 @@ http_interactions:
       Access-Control-Allow-Origin:
       - "*"
       X-Frame-Options:
-      - DENY
+      - SAMEORIGIN
       X-Xss-Protection:
       - 1; mode=block
       X-Content-Type-Options:
@@ -32,10 +34,8 @@ http_interactions:
       - strict-origin-when-cross-origin
       Content-Type:
       - application/json; charset=utf-8
-      Content-Length:
-      - '515'
       Date:
-      - Sat, 23 Oct 2021 03:01:06 GMT
+      - Sun, 03 Apr 2022 08:21:37 GMT
       X-Envoy-Upstream-Service-Time:
       - '3'
       Vary:
@@ -44,20 +44,20 @@ http_interactions:
       - 1.1 google
       Alt-Svc:
       - clear
-      Connection:
-      - close
+      Transfer-Encoding:
+      - chunked
     body:
-      encoding: UTF-8
+      encoding: ASCII-8BIT
       string: |-
         {
           "ip": "1.1.1.1",
           "hostname": "one.one.one.one",
           "anycast": true,
-          "city": "San Francisco",
+          "city": "Los Angeles",
           "region": "California",
           "country": "US",
-          "loc": "37.7621,-122.3971",
-          "postal": "94107",
+          "loc": "34.0522,-118.2437",
+          "postal": "90076",
           "timezone": "America/Los_Angeles",
           "asn": {
             "asn": "AS13335",
@@ -70,7 +70,18 @@ http_interactions:
             "name": "APNIC and Cloudflare DNS Resolver project",
             "domain": "cloudflare.com",
             "type": "hosting"
+          },
+          "domains": {
+            "ip": "1.1.1.1",
+            "total": 26095,
+            "domains": [
+              "xmoon.club",
+              "sysceo.cn",
+              "authrock.com",
+              "gtl.us",
+              "realtorspk.com"
+            ]
           }
         }
-  recorded_at: Sat, 23 Oct 2021 03:01:06 GMT
-recorded_with: VCR 6.0.0
+  recorded_at: Sun, 03 Apr 2022 08:21:35 GMT
+recorded_with: VCR 6.1.0
