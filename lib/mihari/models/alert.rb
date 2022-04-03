@@ -27,9 +27,19 @@ module Mihari
 
         relation = build_relation(filter.without_pagination)
 
-        # TODO: improve queires
         alert_ids = relation.limit(limit).offset(offset).order(id: :desc).pluck(:id).uniq
-        includes(:artifacts, :tags).where(id: [alert_ids]).order(id: :desc)
+        eager_load(
+          {
+            artifacts: [
+              :autonomous_system,
+              :geolocation,
+              :whois_record,
+              :dns_records,
+              :reverse_dns_names
+            ]
+          },
+          :tags
+        ).where(id: [alert_ids]).order(id: :desc)
       end
 
       #
