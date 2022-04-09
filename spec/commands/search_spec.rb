@@ -17,10 +17,16 @@ RSpec.describe Mihari::Commands::Search, :vcr do
 
     it do
       # it should not raise ArgumentError
-      capture(:stderr) do
-        CLI.start ["search", valid_rule]
-        SemanticLogger.flush
+      out = capture(:stdout) do
+        capture(:stderr) do
+          CLI.start ["search", valid_rule]
+          SemanticLogger.flush
+        end
       end
+
+      # it should output the result in JSON format
+      data = JSON.parse(out)
+      expect(data).is_a?(Hash)
     end
   end
 end
