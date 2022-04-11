@@ -3,7 +3,6 @@
 # Endpoints
 require "mihari/web/endpoints/alerts"
 require "mihari/web/endpoints/artifacts"
-require "mihari/web/endpoints/command"
 require "mihari/web/endpoints/configs"
 require "mihari/web/endpoints/ip_addresses"
 require "mihari/web/endpoints/rules"
@@ -17,7 +16,6 @@ module Mihari
 
     mount Endpoints::Alerts
     mount Endpoints::Artifacts
-    mount Endpoints::Command
     mount Endpoints::Configs
     mount Endpoints::IPAddresses
     mount Endpoints::Rules
