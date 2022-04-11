@@ -87,7 +87,6 @@ Gem::Specification.new do |spec|
   spec.add_dependency "rack", "2.2.3"
   spec.add_dependency "rack-contrib", "2.3.0"
   spec.add_dependency "rack-cors", "1.1.1"
-  spec.add_dependency "safe_shell", "1.1.0"
   spec.add_dependency "securitytrails", "1.0.0"
   spec.add_dependency "semantic_logger", "4.10.0"
   spec.add_dependency "sentry-ruby", "5.2.1"
