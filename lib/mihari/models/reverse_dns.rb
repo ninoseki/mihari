@@ -13,10 +13,10 @@ module Mihari
       # @return [Array<Mihari::ReverseDnsName>]
       #
       def build_by_ip(ip)
-        names = Resolv.getnames(ip)
-        names.map { |name| new(name: name) }
-      rescue Resolv::ResolvError
-        []
+        res = Enrichers::Shodan.query(ip)
+        return if res.nil?
+
+        res.hostnames.map { |name| new(name: name) }
       end
     end
   end
