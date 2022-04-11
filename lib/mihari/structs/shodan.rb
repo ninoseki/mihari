@@ -57,6 +57,31 @@ module Mihari
           )
         end
       end
+
+      class InternetDBResponse < Dry::Struct
+        attribute :ip, Types::String
+        attribute :ports, Types.Array(Types::Int)
+        attribute :cpes, Types.Array(Types::String)
+        attribute :hostnames, Types.Array(Types::String)
+        attribute :tags, Types.Array(Types::String)
+        attribute :vulns, Types.Array(Types::String)
+
+        def self.from_dynamic!(d)
+          d = Types::Hash[d]
+          new(
+            ip: d.fetch("ip"),
+            ports: d.fetch("ports"),
+            cpes: d.fetch("cpes"),
+            hostnames: d.fetch("hostnames"),
+            tags: d.fetch("tags"),
+            vulns: d.fetch("vulns")
+          )
+        end
+
+        def self.from_json!(json)
+          from_dynamic!(JSON.parse(json))
+        end
+      end
     end
   end
 end

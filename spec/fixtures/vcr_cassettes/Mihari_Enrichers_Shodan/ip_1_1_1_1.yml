@@ -1,0 +1,55 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: https://internetdb.shodan.io/1.1.1.1
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+      Host:
+      - internetdb.shodan.io
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Mon, 11 Apr 2022 23:42:11 GMT
+      Content-Type:
+      - application/json
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+      Cache-Control:
+      - public, max-age=432000
+      Last-Modified:
+      - Mon, 11 Apr 2022 23:42:11 GMT
+      Cf-Cache-Status:
+      - MISS
+      Expires:
+      - Sat, 16 Apr 2022 23:42:11 GMT
+      Expect-Ct:
+      - max-age=604800, report-uri="https://report-uri.cloudflare.com/cdn-cgi/beacon/expect-ct"
+      Vary:
+      - Accept-Encoding
+      Permissions-Policy:
+      - interest-cohort=()
+      Server:
+      - cloudflare
+      Cf-Ray:
+      - 6fa793cbb8a93420-NRT
+      Alt-Svc:
+      - h3=":443"; ma=86400, h3-29=":443"; ma=86400
+    body:
+      encoding: ASCII-8BIT
+      string: '{"cpes":[],"hostnames":["one.one.one.one"],"ip":"1.1.1.1","ports":[53,80,443],"tags":[],"vulns":[]}'
+  recorded_at: Mon, 11 Apr 2022 23:42:11 GMT
+recorded_with: VCR 6.1.0

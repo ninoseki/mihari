@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-RSpec.describe Mihari::ReverseDnsName do
+RSpec.describe Mihari::ReverseDnsName, vcr: "Mihari_Enrichers_Shodan/ip:1.1.1.1" do
   describe ".build_by_ip" do
     let(:ip) { "1.1.1.1" }
 

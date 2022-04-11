@@ -1,6 +1,6 @@
 require "json"
 
-RSpec.describe Mihari::Endpoints::Artifacts do
+RSpec.describe Mihari::Endpoints::Artifacts, :vcr do
   include Rack::Test::Methods
   include_context "with database fixtures"
 

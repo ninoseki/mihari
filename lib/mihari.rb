@@ -169,6 +169,7 @@ require "mihari/schemas/rule"
 # Enrichers
 require "mihari/enrichers/base"
 require "mihari/enrichers/ipinfo"
+require "mihari/enrichers/shodan"
 
 # Models
 require "mihari/models/alert"
