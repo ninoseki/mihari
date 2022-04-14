@@ -1,5 +1,10 @@
 # frozen_string_literal: true
 
+# Make possible to use upper case acronyms in class names
+ActiveSupport::Inflector.inflections(:en) do |inflect|
+  inflect.acronym "CPE"
+end
+
 def env
   ENV["APP_ENV"] || ENV["RACK_ENV"]
 end
@@ -118,6 +123,20 @@ class AddYAMLToRulesSchema < ActiveRecord::Migration[7.0]
   end
 end
 
+class EnrichmentsV45Schema < ActiveRecord::Migration[7.0]
+  def change
+    create_table :cpes, if_not_exists: true do |t|
+      t.string :cpe, null: false
+      t.belongs_to :artifact, foreign_key: true
+    end
+
+    create_table :ports, if_not_exists: true do |t|
+      t.integer :port, null: false
+      t.belongs_to :artifact, foreign_key: true
+    end
+  end
+end
+
 def adapter
   return "postgresql" if Mihari.config.database.start_with?("postgresql://", "postgres://")
   return "mysql2" if Mihari.config.database.start_with?("mysql2://")
@@ -147,7 +166,9 @@ module Mihari
           RuleSchema,
           AddeMetadataToArtifactSchema,
           # v4.4
-          AddYAMLToRulesSchema
+          AddYAMLToRulesSchema,
+          # v4.5
+          EnrichmentsV45Schema
         ].each { |schema| schema.migrate direction }
       end
       memoize :migrate unless test_env?

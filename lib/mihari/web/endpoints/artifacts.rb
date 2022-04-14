@@ -54,7 +54,9 @@ module Mihari
               :geolocation,
               :whois_record,
               :dns_records,
-              :reverse_dns_names
+              :reverse_dns_names,
+              :cpes,
+              :ports
             ).find(id)
           rescue ActiveRecord::RecordNotFound
             error!({ message: "ID:#{id} is not found" }, 404)
