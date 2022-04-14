@@ -16,7 +16,9 @@ module Mihari
     has_one :geolocation, dependent: :destroy
     has_one :whois_record, dependent: :destroy
 
+    has_many :cpes, dependent: :destroy
     has_many :dns_records, dependent: :destroy
+    has_many :ports, dependent: :destroy
     has_many :reverse_dns_names, dependent: :destroy
 
     include ActiveModel::Validations
@@ -94,12 +96,30 @@ module Mihari
     end
 
     #
-    # Enrich(add) geolocation
+    # Enrich AS
     #
     def enrich_autonomous_system
       return unless can_enrich_autonomous_system?
 
       self.autonomous_system = AutonomousSystem.build_by_ip(data)
+    end
+
+    #
+    # Enrich ports
+    #
+    def enrich_ports
+      return unless can_enrich_ports?
+
+      self.ports = Port.build_by_ip(data)
+    end
+
+    #
+    # Enrich CPEs
+    #
+    def enrich_cpes
+      return unless can_enrich_cpes?
+
+      self.cpes = CPE.build_by_ip(data)
     end
 
     #
@@ -111,6 +131,8 @@ module Mihari
       enrich_geolocation
       enrich_reverse_dns
       enrich_whois
+      enrich_ports
+      enrich_cpes
     end
 
     private
@@ -139,6 +161,14 @@ module Mihari
 
     def can_enrich_autonomous_system?
       data_type == "ip" && autonomous_system.nil?
+    end
+
+    def can_enrich_ports?
+      data_type == "ip" && ports.empty?
+    end
+
+    def can_enrich_cpes?
+      data_type == "ip" && cpes.empty?
     end
   end
 end

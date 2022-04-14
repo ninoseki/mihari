@@ -14,6 +14,8 @@ module Mihari
     attr_accessor whois_record(): Mihari::WhoisRecord
     attr_accessor dns_records(): Array[Mihari::DnsRecord]
     attr_accessor reverse_dns_names(): Array[Mihari::ReverseDnsName]
+    attr_accessor cpes(): Array[Mihari::CPE]
+    attr_accessor ports(): Array[Mihari::Port]
 
     include ActiveModel::Validations
 

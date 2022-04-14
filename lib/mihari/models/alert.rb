@@ -35,7 +35,9 @@ module Mihari
               :geolocation,
               :whois_record,
               :dns_records,
-              :reverse_dns_names
+              :reverse_dns_names,
+              :cpes,
+              :ports
             ]
           },
           :tags

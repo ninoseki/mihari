@@ -21,6 +21,12 @@ module Mihari
       expose :dns_records, using: Entities::DnsRecord, documentation: { type: Entities::DnsRecord, is_array: true, required: false }, as: :dnsRecords do |status, _options|
         status.dns_records.empty? ? nil : status.dns_records
       end
+      expose :ceps, using: Entities::CPE, documentation: { type: Entities::CPE, is_array: true, required: false }, as: :cpes do |status, _options|
+        status.cpes.empty? ? nil : status.cpes
+      end
+      expose :ports, using: Entities::Port, documentation: { type: Entities::Port, is_array: true, required: false }, as: :ports do |status, _options|
+        status.ports.empty? ? nil : status.ports
+      end
     end
   end
 end
