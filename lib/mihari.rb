@@ -223,7 +223,6 @@ require "mihari/analyzers/rule"
 require "mihari/entities/message"
 
 require "mihari/entities/autonomous_system"
-require "mihari/entities/command"
 require "mihari/entities/config"
 require "mihari/entities/cpe"
 require "mihari/entities/dns"
