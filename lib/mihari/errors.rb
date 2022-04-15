@@ -11,11 +11,19 @@ module Mihari
 
   class FileNotFoundError < Error; end
 
-  class HttpError < Error; end
-
   class FeedParseError < Error; end
 
   class RuleValidationError < Error; end
 
   class ConfigurationError < Error; end
+
+  class HTTPError < Error; end
+
+  class UnsuccessfulStatusCodeError < HTTPError; end
+
+  class NetworkError < HTTPError; end
+
+  class TimeoutError < HTTPError; end
+
+  class SSLError < HTTPError; end
 end

@@ -26,7 +26,7 @@ module Mihari
           data = JSON.parse(res.body.to_s)
 
           Structs::Shodan::InternetDBResponse.from_dynamic! data
-        rescue HttpError
+        rescue HTTPError
           nil
         end
         memoize :query
