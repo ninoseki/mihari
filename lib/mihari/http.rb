@@ -90,11 +90,17 @@ module Mihari
 
         unless res.is_a?(Net::HTTPSuccess)
           code = res.code.to_i
-          raise HttpError, "Unsuccessful response code returned: #{code}"
+          raise UnsuccessfulStatusCodeError, "Unsuccessful response code returned: #{code}"
         end
 
         res
       end
+    rescue Errno::ECONNRESET, Errno::ECONNREFUSED, Errno::EHOSTUNREACH, EOFError, SocketError, Net::ProtocolError => e
+      raise NetworkError, e
+    rescue Timeout::Error => e
+      raise TimeoutError, e
+    rescue OpenSSL::SSL::SSLError => e
+      raise SSLError, e
     end
   end
 end

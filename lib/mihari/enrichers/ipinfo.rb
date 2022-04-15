@@ -39,7 +39,7 @@ module Mihari
             data = JSON.parse(res.body.to_s)
 
             Structs::IPInfo::Response.from_dynamic! data
-          rescue HttpError
+          rescue HTTPError
             nil
           end
         end
