@@ -27,7 +27,7 @@ module Mihari
     HTTP = Dry::Schema.Params do
       required(:emitter).value(Types::String.enum("http"))
       required(:url).value(:string)
-      optional(:http_request_method).value(Types::HttpRequestMethods).default("POST")
+      optional(:http_request_method).value(Types::HTTPRequestMethods).default("POST")
       optional(:http_request_headers).value(:hash).default({})
       optional(:template).value(:string)
     end

@@ -14,10 +14,8 @@ module Mihari
 
     DataTypes = Types::String.enum(*ALLOWED_DATA_TYPES)
 
-    UrlscanDataTypes = Types::String.enum("ip", "domain", "url")
-
-    HttpRequestMethods = Types::String.enum("GET", "POST")
-    HttpRequestPayloadTypes = Types::String.enum("application/json", "application/x-www-form-urlencoded")
+    HTTPRequestMethods = Types::String.enum("GET", "POST")
+    HTTPRequestPayloadTypes = Types::String.enum("application/json", "application/x-www-form-urlencoded")
 
     EmitterTypes = Types::String.enum(
       "database",
