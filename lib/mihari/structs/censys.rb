@@ -27,11 +27,23 @@ module Mihari
         end
       end
 
+      class Service < Dry::Struct
+        attribute :port, Types::Integer
+
+        def self.from_dynamic!(d)
+          d = Types::Hash[d]
+          new(
+            port: d.fetch("port")
+          )
+        end
+      end
+
       class Hit < Dry::Struct
         attribute :ip, Types::String
         attribute :location, Location
         attribute :autonomous_system, AutonomousSystem
         attribute :metadata, Types::Hash
+        attribute :services, Types.Array(Service)
 
         def self.from_dynamic!(d)
           d = Types::Hash[d]
@@ -39,7 +51,8 @@ module Mihari
             ip: d.fetch("ip"),
             location: Location.from_dynamic!(d.fetch("location")),
             autonomous_system: AutonomousSystem.from_dynamic!(d.fetch("autonomous_system")),
-            metadata: d
+            metadata: d,
+            services: d.fetch("services", []).map { |x| Service.from_dynamic!(x) }
           )
         end
       end

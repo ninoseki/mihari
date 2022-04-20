@@ -12,11 +12,14 @@ RSpec.describe Mihari::Analyzers::Censys, :vcr do
       expect(artifacts).to be_an(Array)
       expect(artifacts.length).to eq(1)
 
-      expect(artifacts.first.data).to eq("1.1.1.1")
+      first = artifacts.first
+      expect(first.data).to eq("1.1.1.1")
 
-      expect(artifacts.first.autonomous_system.asn).to eq(13_335)
+      expect(first.autonomous_system.asn).to eq(13_335)
 
-      expect(artifacts.first.geolocation.country_code).to eq("AU")
+      expect(first.geolocation.country_code).to eq("AU")
+
+      expect(first.ports.length).to be > 0
     end
   end
 
