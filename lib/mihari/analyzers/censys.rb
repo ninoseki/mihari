@@ -88,12 +88,17 @@ module Mihari
           )
         end
 
+        ports = hit.services.map(&:port).map do |port|
+          Port.new(port: port)
+        end
+
         Artifact.new(
           data: hit.ip,
           source: source,
           metadata: hit.metadata,
           autonomous_system: as,
-          geolocation: geolocation
+          geolocation: geolocation,
+          ports: ports
         )
       end
 

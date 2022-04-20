@@ -14,10 +14,18 @@ module Mihari
         def self.from_dynamic!: (Hash[(String | Symbol), untyped] d) -> Mihari::Structs::Censys::Location
       end
 
+      class Service
+        attr_reader port: Integer
+
+        def self.from_dynamic!: (Hash[(String | Symbol), untyped] d) -> Mihari::Structs::Censys::Service
+      end
+
       class Hit
         attr_reader ip: String
         attr_reader location: Mihari::Structs::Censys::Location
         attr_reader autonomous_system: Mihari::Structs::Censys::AutonomousSystem
+        attr_reader metadata: Hash[(String | Symbol), untyped]
+        attr_reader services: Array[Mihari::Structs::Censys::Service]
 
         def self.from_dynamic!: (Hash[(String | Symbol), untyped] d) -> Mihari::Structs::Censys::Hit
       end
