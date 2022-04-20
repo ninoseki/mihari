@@ -22,6 +22,7 @@ module Mihari
         attribute :location, Location
         attribute :domains, Types.Array(Types::String)
         attribute :ip_str, Types::String
+        attribute :port, Types::Integer
         attribute :metadata, Types::Hash
 
         def self.from_dynamic!(d)
@@ -40,6 +41,7 @@ module Mihari
             location: Location.from_dynamic!(d.fetch("location")),
             domains: d.fetch("domains"),
             ip_str: d.fetch("ip_str"),
+            port: d.fetch("port"),
             metadata: d
           )
         end
