@@ -14,6 +14,8 @@ module Mihari
         attr_reader location: Mihari::Structs::Shodan::Location
         attr_reader domains: Array[String]
         attr_reader ip_str: String
+        attr_reader port: Integer
+
         def self.from_dynamic!: (Hash[(String | Symbol), untyped] d) -> Mihari::Structs::Shodan::Match
       end
 

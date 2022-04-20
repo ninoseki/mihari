@@ -23,10 +23,10 @@ module Mihari
         return [] unless results || results.empty?
 
         results = results.map { |result| Structs::Shodan::Result.from_dynamic!(result) }
-        results.map do |result|
-          matches = result.matches || []
-          matches.map { |match| build_artifact(match, matches) }
-        end.flatten.uniq(&:data)
+        matches = results.map { |result| result.matches || [] }.flatten
+
+        uniq_matches = matches.uniq(&:ip_str)
+        uniq_matches.map { |match| build_artifact(match, matches) }
       end
 
       private
@@ -95,6 +95,30 @@ module Mihari
       end
 
       #
+      # Collect ports from matches
+      #
+      # @param [Array<Structs::Shodan::Match>] matches
+      # @param [String] ip
+      #
+      # @return [Array<String>]
+      #
+      def collect_ports_by_ip(matches, ip)
+        matches.select { |match| match.ip_str == ip }.map(&:port)
+      end
+
+      #
+      # Collect hostnames from matches
+      #
+      # @param [Array<Structs::Shodan::Match>] matches
+      # @param [String] ip
+      #
+      # @return [Array<String>]
+      #
+      def collect_hostnames_by_ip(matches, ip)
+        matches.select { |match| match.ip_str == ip }.map(&:hostnames).flatten.uniq
+      end
+
+      #
       # Build an artifact from a Shodan search API response
       #
       # @param [Structs::Shodan::Match] match
@@ -116,12 +140,22 @@ module Mihari
 
         metadata = collect_metadata_by_ip(matches, match.ip_str)
 
+        ports = collect_ports_by_ip(matches, match.ip_str).map do |port|
+          Port.new(port: port)
+        end
+
+        reverse_dns_names = collect_hostnames_by_ip(matches, match.ip_str).map do |name|
+          ReverseDnsName.new(name: name)
+        end
+
         Artifact.new(
           data: match.ip_str,
           source: source,
           metadata: metadata,
           autonomous_system: as,
-          geolocation: geolocation
+          geolocation: geolocation,
+          ports: ports,
+          reverse_dns_names: reverse_dns_names
         )
       end
     end
