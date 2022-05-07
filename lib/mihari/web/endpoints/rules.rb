@@ -145,6 +145,7 @@ module Mihari
           end
 
           rule = Structs::Rule::Rule.from_yaml(yaml)
+          rule.id = id
 
           begin
             rule.validate!
@@ -159,7 +160,7 @@ module Mihari
             model = rule.to_model
             model.save
           rescue ActiveRecord::RecordNotUnique
-            error!({ message: "ID:#{rule.id} is already registered" }, 400)
+            error!({ message: "ID:#{model.id} is already registered" }, 400)
           end
 
           status 201

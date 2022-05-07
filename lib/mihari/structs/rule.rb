@@ -36,6 +36,9 @@ module Mihari
         # @return [Array, nil]
         attr_reader :errors
 
+        # @return [String]
+        attr_writer :id
+
         def initialize(data, yaml)
           @data = data.deep_symbolize_keys
           @yaml = yaml
