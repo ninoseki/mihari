@@ -69,7 +69,7 @@ RSpec.describe Mihari::Analyzers::Rule, :vcr do
         description: description,
         tags: tags,
         queries: queries,
-        disallowed_data_values: ["1.1.1.1"]
+        disallowed_data_values: ["8.8.8.8", "9.9.9.9", "1.1.1.1"]
       )
     end
 
@@ -95,7 +95,7 @@ RSpec.describe Mihari::Analyzers::Rule, :vcr do
         description: description,
         tags: tags,
         queries: queries,
-        disallowed_data_values: ["/1.1.*/"]
+        disallowed_data_values: ["/[a-z]+/", "/^1.1.*$/"]
       )
     end
 
