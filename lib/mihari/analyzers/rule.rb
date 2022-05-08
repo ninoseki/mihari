@@ -127,9 +127,12 @@ module Mihari
       # @return [Boolean]
       #
       def disallowed_data_value?(value)
-        normalized_disallowed_data_values.any? do |disallowed_data_value|
-          return value == disallowed_data_value if disallowed_data_value.is_a?(String)
-          return disallowed_data_value.match?(value) if disallowed_data_value.is_a?(Regexp)
+        return true if normalized_disallowed_data_values.include?(value)
+
+        normalized_disallowed_data_values.select do |disallowed_data_value|
+          disallowed_data_value.is_a?(Regexp)
+        end.any? do |disallowed_data_value|
+          disallowed_data_value.match?(value)
         end
       end
 
