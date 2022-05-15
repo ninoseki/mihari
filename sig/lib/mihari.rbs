@@ -19,6 +19,7 @@ class Configuration
   attr_accessor spyse_api_key (): String?
   attr_accessor thehive_api_endpoint (): String?
   attr_accessor thehive_api_key (): String?
+  attr_accessor thehive_api_version (): String?
   attr_accessor urlscan_api_key (): String?
   attr_accessor virustotal_api_key (): String?
   attr_accessor zoomeye_api_key (): String?

@@ -4,8 +4,16 @@ RSpec.describe Mihari::Emitters::TheHive, :vcr do
   subject { described_class.new }
 
   describe "#valid?" do
+    before do
+      allow(Mihari.config).to receive(:thehive_api_version).and_return("v4")
+    end
+
     it do
       expect(subject.valid?).to be(true)
+    end
+
+    it do
+      expect(subject.normalized_api_version).to be(nil)
     end
 
     context "when THEHIVE_API_ENDPOINT is not given" do
@@ -15,6 +23,16 @@ RSpec.describe Mihari::Emitters::TheHive, :vcr do
 
       it do
         expect(subject.valid?).to be(false)
+      end
+    end
+
+    context "when THEHIVE_API_VERSION is given" do
+      before do
+        allow(Mihari.config).to receive(:thehive_api_version).and_return("v5")
+      end
+
+      it do
+        expect(subject.normalized_api_version).to eq("v1")
       end
     end
   end

@@ -71,34 +71,55 @@ end
 module Mihari
   extend Dry::Configurable
 
-  setting :binaryedge_api_key, default: ENV["BINARYEDGE_API_KEY"]
-  setting :censys_id, default: ENV["CENSYS_ID"]
-  setting :censys_secret, default: ENV["CENSYS_SECRET"]
-  setting :circl_passive_password, default: ENV["CIRCL_PASSIVE_PASSWORD"]
-  setting :circl_passive_username, default: ENV["CIRCL_PASSIVE_USERNAME"]
-  setting :database, default: ENV["DATABASE"] || "mihari.db"
-  setting :greynoise_api_key, default: ENV["GREYNOISE_API_KEY"]
-  setting :ipinfo_api_key, default: ENV["IPINFO_API_KEY"]
-  setting :misp_api_endpoint, default: ENV["MISP_API_ENDPOINT"]
-  setting :misp_api_key, default: ENV["MISP_API_KEY"]
-  setting :onyphe_api_key, default: ENV["ONYPHE_API_KEY"]
-  setting :otx_api_key, default: ENV["OTX_API_KEY"]
-  setting :passivetotal_api_key, default: ENV["PASSIVETOTAL_API_KEY"]
-  setting :passivetotal_username, default: ENV["PASSIVETOTAL_USERNAME"]
-  setting :pulsedive_api_key, default: ENV["PULSEDIVE_API_KEY"]
-  setting :securitytrails_api_key, default: ENV["SECURITYTRAILS_API_KEY"]
-  setting :shodan_api_key, default: ENV["SHODAN_API_KEY"]
-  setting :slack_channel, default: ENV["SLACK_CHANNEL"]
-  setting :slack_webhook_url, default: ENV["SLACK_WEBHOOK_URL"]
-  setting :spyse_api_key, default: ENV["SPYSE_API_KEY"]
-  setting :thehive_api_endpoint, default: ENV["THEHIVE_API_ENDPOINT"]
-  setting :thehive_api_key, default: ENV["THEHIVE_API_KEY"]
-  setting :urlscan_api_key, default: ENV["URLSCAN_API_KEY"]
-  setting :virustotal_api_key, default: ENV["VIRUSTOTAL_API_KEY"]
-  setting :webhook_url, default: ENV["WEBHOOK_URL"]
-  setting :webhook_use_json_body, constructor: ->(value = ENV["WEBHOOK_USE_JSON_BODY"]) { truthy?(value) }
-  setting :zoomeye_api_key, default: ENV["ZOOMEYE_API_KEY"]
-  setting :sentry_dsn, default: ENV["SENTRY_DSN"]
+  setting :binaryedge_api_key, default: ENV.fetch("BINARYEDGE_API_KEY", nil)
+
+  setting :censys_id, default: ENV.fetch("CENSYS_ID", nil)
+  setting :censys_secret, default: ENV.fetch("CENSYS_SECRET", nil)
+
+  setting :circl_passive_password, default: ENV.fetch("CIRCL_PASSIVE_PASSWORD", nil)
+  setting :circl_passive_username, default: ENV.fetch("CIRCL_PASSIVE_USERNAME", nil)
+
+  setting :database, default: ENV.fetch("DATABASE", "mihari.db")
+
+  setting :greynoise_api_key, default: ENV.fetch("GREYNOISE_API_KEY", nil)
+
+  setting :ipinfo_api_key, default: ENV.fetch("IPINFO_API_KEY", nil)
+
+  setting :misp_api_endpoint, default: ENV.fetch("MISP_API_ENDPOINT", nil)
+  setting :misp_api_key, default: ENV.fetch("MISP_API_KEY", nil)
+
+  setting :onyphe_api_key, default: ENV.fetch("ONYPHE_API_KEY", nil)
+
+  setting :otx_api_key, default: ENV.fetch("OTX_API_KEY", nil)
+
+  setting :passivetotal_api_key, default: ENV.fetch("PASSIVETOTAL_API_KEY", nil)
+  setting :passivetotal_username, default: ENV.fetch("PASSIVETOTAL_USERNAME", nil)
+
+  setting :pulsedive_api_key, default: ENV.fetch("PULSEDIVE_API_KEY", nil)
+
+  setting :securitytrails_api_key, default: ENV.fetch("SECURITYTRAILS_API_KEY", nil)
+
+  setting :shodan_api_key, default: ENV.fetch("SHODAN_API_KEY", nil)
+
+  setting :slack_channel, default: ENV.fetch("SLACK_CHANNEL", nil)
+  setting :slack_webhook_url, default: ENV.fetch("SLACK_WEBHOOK_URL", nil)
+
+  setting :spyse_api_key, default: ENV.fetch("SPYSE_API_KEY", nil)
+
+  setting :thehive_api_endpoint, default: ENV.fetch("THEHIVE_API_ENDPOINT", nil)
+  setting :thehive_api_key, default: ENV.fetch("THEHIVE_API_KEY", nil)
+  setting :thehive_api_version, default: ENV.fetch("THEHIVE_API_VERSION", nil)
+
+  setting :urlscan_api_key, default: ENV.fetch("URLSCAN_API_KEY", nil)
+
+  setting :virustotal_api_key, default: ENV.fetch("VIRUSTOTAL_API_KEY", nil)
+
+  setting :webhook_url, default: ENV.fetch("WEBHOOK_URL", nil)
+  setting :webhook_use_json_body, constructor: ->(value = ENV.fetch("WEBHOOK_USE_JSON_BODY", nil)) { truthy?(value) }
+
+  setting :zoomeye_api_key, default: ENV.fetch("ZOOMEYE_API_KEY", nil)
+
+  setting :sentry_dsn, default: ENV.fetch("SENTRY_DSN", nil)
 
   class << self
     include Memist::Memoizable

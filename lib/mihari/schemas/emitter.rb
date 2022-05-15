@@ -16,6 +16,7 @@ module Mihari
       required(:emitter).value(Types::String.enum("the_hive"))
       optional(:api_endpoint).value(:string)
       optional(:api_key).value(:string)
+      optional(:api_version).value(Types::String.enum("v4", "v5")).default("v4")
     end
 
     Slack = Dry::Schema.Params do
