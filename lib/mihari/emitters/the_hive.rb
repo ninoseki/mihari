@@ -50,7 +50,7 @@ module Mihari
             "v4" => nil,
             "v5" => "v1"
           }
-          out << table[api_version.downcase]
+          out << table[api_version.to_s.downcase]
         end.first
       end
 
