@@ -108,6 +108,7 @@ module Mihari
 
   setting :thehive_api_endpoint, default: ENV.fetch("THEHIVE_API_ENDPOINT", nil)
   setting :thehive_api_key, default: ENV.fetch("THEHIVE_API_KEY", nil)
+  setting :thehive_api_version, default: ENV.fetch("THEHIVE_API_VERSION", nil)
 
   setting :urlscan_api_key, default: ENV.fetch("URLSCAN_API_KEY", nil)
 

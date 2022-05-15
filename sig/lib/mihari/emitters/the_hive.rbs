@@ -5,10 +5,14 @@ module Mihari
 
       attr_reader api_key: String?
 
+      attr_reader api_version: String?
+
       # @return [true, false]
       def valid?: () -> bool
 
       def emit: (title: untyped title, description: untyped description, artifacts: untyped artifacts, ?tags: untyped tags, **untyped _options) -> (nil | untyped)
+
+      def normalized_api_version: () -> String?
 
       private
 
