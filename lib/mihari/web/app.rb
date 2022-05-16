@@ -53,6 +53,9 @@ module Mihari
 
         Rack::Handler::Puma.run(instance, Port: port, Host: host, Threads: threads, Verbose: verbose) do |_launcher|
           Launchy.open(url) if ENV["RACK_ENV"] != "development"
+        rescue Launchy::CommandNotFoundError
+          # ref. https://github.com/ninoseki/mihari/issues/477
+          # do nothing
         end
       end
     end
