@@ -17,7 +17,7 @@ RSpec.describe Mihari::Analyzers::VirusTotalIntelligence, :vcr do
   context "url" do
     subject { described_class.new(query) }
 
-    let(:query) { 'entity:url ls:"2021-09-18T01:00:00+" url:example' }
+    let(:query) { 'entity:url ls:"2022-05-18T11:00:00+" url:example' }
 
     describe "#artifacts" do
       it do

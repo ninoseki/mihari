@@ -27,13 +27,13 @@ http_interactions:
       Content-Type:
       - application/json; charset=utf-8
       X-Cloud-Trace-Context:
-      - 9f2d92d33a97bbea946ff862afb58b66
+      - 8f439ced146e536a6861952be52566c2
       Date:
-      - Sat, 18 Sep 2021 03:51:40 GMT
+      - Wed, 18 May 2022 12:47:48 GMT
       Server:
       - Google Frontend
       Content-Length:
-      - '28510'
+      - '28541'
     body:
       encoding: UTF-8
       string: |-
@@ -45,9 +45,10 @@ http_interactions:
                     "last_submission_date",
                     "positives",
                     "times_submitted",
-                    "size"
+                    "size",
+                    "unique_sources"
                 ],
-                "days_back": 90
+                "days_back": 365
             },
             "data": [
                 {
@@ -695,5 +696,5 @@ http_interactions:
                 "self": "https://www.virustotal.com/api/v3/intelligence/search?query=size%3A1KB-+ls%3A%222021-09-18T00%3A00%3A00%22"
             }
         }
-  recorded_at: Sat, 18 Sep 2021 03:51:38 GMT
-recorded_with: VCR 6.0.0
+  recorded_at: Wed, 18 May 2022 12:47:48 GMT
+recorded_with: VCR 6.1.0
