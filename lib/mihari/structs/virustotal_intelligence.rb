@@ -4,7 +4,7 @@ module Mihari
   module Structs
     module VirusTotalIntelligence
       class ContextAttributes < Dry::Struct
-        attribute :url, Types.Array(Types::String).optional
+        attribute :url, Types::String.optional
 
         def self.from_dynamic!(d)
           d = Types::Hash[d]
@@ -25,7 +25,7 @@ module Mihari
           when "file"
             id
           when "url"
-            (context_attributes.url || []).first
+            context_attributes&.url
           when "domain"
             id
           when "ip_address"
