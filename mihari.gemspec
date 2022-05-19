@@ -89,7 +89,7 @@ Gem::Specification.new do |spec|
   spec.add_dependency "rack-cors", "1.1.1"
   spec.add_dependency "securitytrails", "1.0.0"
   spec.add_dependency "semantic_logger", "4.11.0"
-  spec.add_dependency "sentry-ruby", "5.3.0"
+  spec.add_dependency "sentry-ruby", "5.3.1"
   spec.add_dependency "shodanx", "0.2.1"
   spec.add_dependency "slack-notifier", "2.4.0"
   spec.add_dependency "spysex", "0.2.0"
