@@ -14,7 +14,7 @@ module Mihari
       #
       def build_by_ip(ip)
         res = Enrichers::Shodan.query(ip)
-        return if res.nil?
+        return [] if res.nil?
 
         res.hostnames.map { |name| new(name: name) }
       end
