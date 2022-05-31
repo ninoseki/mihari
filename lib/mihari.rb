@@ -173,6 +173,7 @@ require "mihari/types"
 # Structs
 require "mihari/structs/alert"
 require "mihari/structs/censys"
+require "mihari/structs/google_public_dns"
 require "mihari/structs/greynoise"
 require "mihari/structs/ipinfo"
 require "mihari/structs/onyphe"
@@ -189,6 +190,7 @@ require "mihari/schemas/rule"
 
 # Enrichers
 require "mihari/enrichers/base"
+require "mihari/enrichers/google_public_dns"
 require "mihari/enrichers/ipinfo"
 require "mihari/enrichers/shodan"
 
