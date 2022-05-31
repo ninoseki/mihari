@@ -44,8 +44,8 @@ module Mihari
     end
 
     class << self
-      def get(uri, headers: {}, payload: {})
-        client = new(uri, headers: headers, payload: payload)
+      def get(uri, headers: {}, params: {})
+        client = new(uri, headers: headers, payload: params)
         client.get
       end
 

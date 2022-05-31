@@ -2,7 +2,7 @@
 
 require "timecop"
 
-RSpec.describe Mihari::Artifact do
+RSpec.describe Mihari::Artifact, :vcr do
   describe "#validate" do
     it do
       artifact = described_class.new(data: "1.1.1.1")

@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-RSpec.describe Mihari::DnsRecord do
+RSpec.describe Mihari::DnsRecord, :vcr do
   describe ".build_by_domain" do
     let(:domain) { "example.com" }
 
