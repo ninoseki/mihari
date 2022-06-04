@@ -193,6 +193,7 @@ require "mihari/enrichers/base"
 require "mihari/enrichers/google_public_dns"
 require "mihari/enrichers/ipinfo"
 require "mihari/enrichers/shodan"
+require "mihari/enrichers/whois"
 
 # Models
 require "mihari/models/alert"
