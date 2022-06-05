@@ -51,6 +51,7 @@ module Mihari
       option :disallowed_data_values, default: proc { [] }
 
       option :emitters, optional: true
+      option :enrichers, optional: true
 
       attr_reader :source
 
@@ -60,6 +61,7 @@ module Mihari
         @source = id
 
         @emitters = emitters || DEFAULT_EMITTERS
+        @enrichers = enrichers || DEFAULT_ENRICHERS
 
         validate_analyzer_configurations
       end
@@ -109,6 +111,21 @@ module Mihari
           allowed_data_types.include? artifact.data_type
         end.reject do |artifact|
           disallowed_data_value? artifact.data
+        end
+      end
+
+      #
+      # Enriched artifacts
+      #
+      # @return [Array<Mihari::Artifact>]
+      #
+      def enriched_artifacts
+        @enriched_artifacts ||= Parallel.map(unique_artifacts) do |artifact|
+          enrichers.each do |enricher|
+            artifact.enrich_by_enricher(enricher[:enricher])
+          end
+
+          artifact
         end
       end
 

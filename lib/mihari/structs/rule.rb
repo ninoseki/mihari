@@ -88,7 +88,7 @@ module Mihari
 
           raise RuleValidationError, error_messages.join("\n") if errors?
 
-          raise RuleValidationError, "Something wrong with queries or emitters." unless @no_method_error.nil?
+          raise RuleValidationError, "Something wrong with queries, emitters or enrichers." unless @no_method_error.nil?
         end
 
         def [](key)
@@ -150,6 +150,7 @@ module Mihari
             allowed_data_types: self[:allowed_data_types],
             disallowed_data_values: self[:disallowed_data_values],
             emitters: self[:emitters],
+            enrichers: self[:enrichers],
             id: id
           )
           analyzer.ignore_old_artifacts = self[:ignore_old_artifacts]

@@ -2,6 +2,7 @@
 
 require "mihari/schemas/analyzer"
 require "mihari/schemas/emitter"
+require "mihari/schemas/enricher"
 
 module Mihari
   module Schemas
@@ -20,6 +21,8 @@ module Mihari
 
       optional(:emitters).value(:array).each { Emitter | MISP | TheHive | Slack | HTTP }
 
+      optional(:enrichers).value(:array).each(Enricher)
+
       optional(:allowed_data_types).value(array[Types::DataTypes]).default(ALLOWED_DATA_TYPES)
       optional(:disallowed_data_values).value(array[:string]).default([])
 
@@ -34,6 +37,9 @@ module Mihari
 
         emitters = h[:emitters]
         h[:emitters] = emitters || DEFAULT_EMITTERS
+
+        enrichers = h[:enrichers]
+        h[:enrichers] = enrichers || DEFAULT_ENRICHERS
 
         h
       end

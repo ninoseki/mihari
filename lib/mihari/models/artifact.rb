@@ -135,6 +135,36 @@ module Mihari
       enrich_cpes
     end
 
+    ENRICH_METHODS_BY_ENRICHER = {
+      whois: [
+        :enrich_whois
+      ],
+      ipinfo: [
+        :enrich_autonomous_system,
+        :enrich_geolocation
+      ],
+      shodan: [
+        :enrich_ports,
+        :enrich_cpes,
+        :enrich_reverse_dns
+      ],
+      google_public_dns: [
+        :enrich_dns
+      ]
+    }.freeze
+
+    #
+    # Enrich by name of enricher
+    #
+    # @param [String] enricher
+    #
+    def enrich_by_enricher(enricher)
+      methods = ENRICH_METHODS_BY_ENRICHER[enricher.downcase.to_sym] || []
+      methods.each do |method|
+        send(method) if respond_to?(method)
+      end
+    end
+
     private
 
     def normalize_as_domain(url_or_domain)
