@@ -5,5 +5,5 @@ module Mihari
 
   DEFAULT_EMITTERS = ["database", "misp", "slack", "the_hive", "webhook"].map { |name| { emitter: name } }.freeze
 
-  DEFAULT_ENRICHERS = ["whois", "ipinfo", "shodan_internet_db", "google_public_dns"].map { |name| { enricher: name } }.freeze
+  DEFAULT_ENRICHERS = ["whois", "ipinfo", "shodan", "google_public_dns"].map { |name| { enricher: name } }.freeze
 end

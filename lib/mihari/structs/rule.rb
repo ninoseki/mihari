@@ -88,7 +88,7 @@ module Mihari
 
           raise RuleValidationError, error_messages.join("\n") if errors?
 
-          raise RuleValidationError, "Something wrong with queries or emitters." unless @no_method_error.nil?
+          raise RuleValidationError, "Something wrong with queries, emitters or enrichers." unless @no_method_error.nil?
         end
 
         def [](key)
