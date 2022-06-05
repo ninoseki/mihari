@@ -123,4 +123,58 @@ RSpec.describe Mihari::Artifact, :vcr do
       expect(artifact.autonomous_system.asn).to eq(13_335)
     end
   end
+
+  describe "#enrich_by_enricher" do
+    context "with IPInfo", vcr: "Mihari_Enrichers_IPInfo/ip:1.1.1.1" do
+      let(:data) { "1.1.1.1" }
+
+      it do
+        artifact = described_class.new(data: data)
+        expect(artifact.autonomous_system).to eq(nil)
+        expect(artifact.geolocation).to eq(nil)
+
+        artifact.enrich_by_enricher("ipinfo")
+        expect(artifact.autonomous_system).not_to eq(nil)
+        expect(artifact.geolocation).not_to eq(nil)
+      end
+    end
+
+    context "with Shodan", vcr: "Mihari_Enrichers_Shodan/ip:1.1.1.1" do
+      let(:data) { "1.1.1.1" }
+
+      it do
+        artifact = described_class.new(data: data)
+        expect(artifact.reverse_dns_names.empty?).to be true
+        expect(artifact.ports.empty?).to be true
+
+        artifact.enrich_by_enricher("shodan")
+        expect(artifact.reverse_dns_names.empty?).to be false
+        expect(artifact.ports.empty?).to be false
+      end
+    end
+
+    context "with Google Public DNS", :vcr do
+      let(:data) { "example.com" }
+
+      it do
+        artifact = described_class.new(data: data)
+        expect(artifact.dns_records.empty?).to be true
+
+        artifact.enrich_by_enricher("google_public_dns")
+        expect(artifact.dns_records.empty?).to be false
+      end
+    end
+
+    context "with Whois" do
+      let(:data) { "example.com" }
+
+      it do
+        artifact = described_class.new(data: data)
+        expect(artifact.whois_record).to be_nil
+
+        artifact.enrich_by_enricher("whois")
+        expect(artifact.whois_record).not_to be_nil
+      end
+    end
+  end
 end

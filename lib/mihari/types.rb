@@ -21,5 +21,12 @@ module Mihari
       "database",
       "webhook"
     )
+
+    EnricherTypes = Types::String.enum(
+      "whois",
+      "ipinfo",
+      "shodan",
+      "google_public_dns"
+    )
   end
 end
