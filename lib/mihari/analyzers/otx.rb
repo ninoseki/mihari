@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require "otx_ruby"
+require "mihari/analyzers/clients/otx"
 
 module Mihari
   module Analyzers
@@ -34,12 +34,8 @@ module Mihari
         %w[otx_api_key]
       end
 
-      def domain_client
-        @domain_client ||= ::OTX::Domain.new(api_key)
-      end
-
-      def ip_client
-        @ip_client ||= ::OTX::IP.new(api_key)
+      def client
+        @client ||= Mihari::Analyzers::Clients::OTX.new(api_key)
       end
 
       #
@@ -73,9 +69,15 @@ module Mihari
       # @return [Array<String>]
       #
       def domain_search
-        records = domain_client.get_passive_dns(query)
+        res = client.query_by_domain(query)
+        return [] if res.nil?
+
+        records = res["passive_dns"] || []
         records.filter_map do |record|
-          record.address if record.record_type == "A"
+          record_type = record["record_type"]
+          address = record["address"]
+
+          address if record_type == "A"
         end.uniq
       end
 
@@ -85,9 +87,15 @@ module Mihari
       # @return [Array<String>]
       #
       def ip_search
-        records = ip_client.get_passive_dns(query)
+        res = client.query_by_ip(query)
+        return [] if res.nil?
+
+        records = res["passive_dns"] || []
         records.filter_map do |record|
-          record.hostname if record.record_type == "A"
+          record_type = record["record_type"]
+          hostname = record["hostname"]
+
+          hostname if record_type == "A"
         end.uniq
       end
     end
