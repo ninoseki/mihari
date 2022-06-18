@@ -92,7 +92,7 @@ Gem::Specification.new do |spec|
   spec.add_dependency "shodanx", "0.2.1"
   spec.add_dependency "slack-notifier", "2.4.0"
   spec.add_dependency "spysex", "0.2.0"
-  spec.add_dependency "sqlite3", "1.4.2"
+  spec.add_dependency "sqlite3", "1.4.4"
   spec.add_dependency "thor", "1.2.1"
   spec.add_dependency "urlscan", "0.8.0"
   spec.add_dependency "uuidtools", "2.2.0"
