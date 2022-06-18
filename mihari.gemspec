@@ -76,7 +76,6 @@ Gem::Specification.new do |spec|
   spec.add_dependency "net-ping", "2.0.8"
   spec.add_dependency "normalize_country", "0.3.2"
   spec.add_dependency "onyphe", "2.0.0"
-  spec.add_dependency "otx_ruby", "0.9.9"
   spec.add_dependency "parallel", "1.22.1"
   spec.add_dependency "passive_circl", "0.1.0"
   spec.add_dependency "passivetotalx", "0.1.1"

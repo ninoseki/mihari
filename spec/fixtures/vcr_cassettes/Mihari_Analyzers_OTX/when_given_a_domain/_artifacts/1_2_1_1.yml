@@ -7,14 +7,16 @@ http_interactions:
       encoding: US-ASCII
       string: ''
     headers:
-      User-Agent:
-      - Faraday v0.17.3
-      X-Otx-Api-Key:
-      - "<OTX_API_KEY>"
       Accept-Encoding:
       - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
       Accept:
       - "*/*"
+      User-Agent:
+      - Ruby
+      Host:
+      - otx.alienvault.com
+      X-Otx-Api-Key:
+      - "<OTX_API_KEY>"
   response:
     status:
       code: 200
@@ -23,47 +25,50 @@ http_interactions:
       Content-Type:
       - application/json
       Content-Length:
-      - '316'
+      - '367'
       Connection:
       - keep-alive
+      Date:
+      - Sat, 18 Jun 2022 01:05:17 GMT
+      Server:
+      - gunicorn
       Cache-Control:
       - max-age=600
-      Date:
-      - Sat, 01 Aug 2020 00:14:53 GMT
-      Server:
-      - nginx
-      Set-Cookie:
-      - authkeys="api_key:<OTX_API_KEY>:1k1fAr:12EHotfFpg1jtuF5QfRAcUVGLyY"; expires=Sat,
-        01-Aug-2020 03:14:53 GMT; Max-Age=10800; Path=/
       X-Frame-Options:
       - SAMEORIGIN
+      X-Remote-User-Name:
+      - niseki
       X-Otx-Active:
       - '1'
+      Access-Control-Allow-Origin:
+      - "*"
       Vary:
       - Accept-Encoding
       X-Cache:
       - Miss from cloudfront
       Via:
-      - 1.1 efb99d3a822380f07a607f1aad7468f7.cloudfront.net (CloudFront)
+      - 1.1 eb653d436fde5f3e890eb3528ceda15e.cloudfront.net (CloudFront)
       X-Amz-Cf-Pop:
-      - NRT57-C4
+      - NRT20-C4
       X-Amz-Cf-Id:
-      - nWxlml669JSjyTON5lzIvIaT3CCT0W9jpDE2DXG5XERFlsdlbcriTw==
+      - Ggx-knEOzwbAyc94Gz_7ToyQj-KZ3_YujGZD0siosidyE1vu2n5Plg==
     body:
       encoding: ASCII-8BIT
-      string: '{"passive_dns": [{"flag_url": "assets/images/ro.png", "record_type":
-        "A", "last": "2019-09-04T18:16:07+00:00", "flag_title": "Romania", "address":
-        "193.148.69.37", "indicator_link": "/indicator/domain/jppost-tu.top", "hostname":
-        "jppost-tu.top", "asset_type": "domain", "first": "2019-09-04T05:32:29+00:00"},
-        {"flag_url": "assets/images/ro.png", "record_type": "A", "last": "2019-09-02T01:30:07+00:00",
-        "flag_title": "Romania", "address": "89.35.39.84", "indicator_link": "/indicator/domain/jppost-tu.top",
-        "hostname": "jppost-tu.top", "asset_type": "domain", "first": "2019-09-02T01:30:07+00:00"},
-        {"flag_url": "assets/images/ro.png", "record_type": "A", "last": "2019-08-31T07:14:45+00:00",
-        "flag_title": "Romania", "address": "193.148.69.230", "indicator_link": "/indicator/domain/jppost-tu.top",
-        "hostname": "jppost-tu.top", "asset_type": "domain", "first": "2019-08-31T07:14:45+00:00"},
-        {"flag_url": "assets/images/fr.png", "record_type": "A", "last": "2019-07-02T14:17:10+00:00",
-        "flag_title": "France", "address": "51.68.251.30", "indicator_link": "/indicator/domain/jppost-tu.top",
-        "hostname": "jppost-tu.top", "asset_type": "domain", "first": "2019-07-02T14:17:10+00:00"}],
+      string: '{"passive_dns": [{"address": "193.148.69.37", "first": "2019-09-04T05:32:29",
+        "last": "2019-09-04T18:16:07", "hostname": "jppost-tu.top", "record_type":
+        "A", "indicator_link": "/indicator/domain/jppost-tu.top", "flag_url": "assets/images/flags/de.png",
+        "flag_title": "Germany", "asset_type": "domain", "asn": "ASNone "}, {"address":
+        "89.35.39.84", "first": "2019-09-02T01:30:07", "last": "2019-09-02T01:30:07",
+        "hostname": "jppost-tu.top", "record_type": "A", "indicator_link": "/indicator/domain/jppost-tu.top",
+        "flag_url": "assets/images/flags/ro.png", "flag_title": "Romania", "asset_type":
+        "domain", "asn": "AS20473 the constant company  llc"}, {"address": "193.148.69.230",
+        "first": "2019-08-31T07:14:45", "last": "2019-08-31T07:14:45", "hostname":
+        "jppost-tu.top", "record_type": "A", "indicator_link": "/indicator/domain/jppost-tu.top",
+        "flag_url": "assets/images/flags/de.png", "flag_title": "Germany", "asset_type":
+        "domain", "asn": "ASNone "}, {"address": "51.68.251.30", "first": "2019-07-02T14:17:10",
+        "last": "2019-07-02T14:17:10", "hostname": "jppost-tu.top", "record_type":
+        "A", "indicator_link": "/indicator/domain/jppost-tu.top", "flag_url": "assets/images/flags/fr.png",
+        "flag_title": "France", "asset_type": "domain", "asn": "AS16276 ovh sas"}],
         "count": 4}'
-  recorded_at: Sat, 01 Aug 2020 00:14:53 GMT
-recorded_with: VCR 6.0.0
+  recorded_at: Sat, 18 Jun 2022 01:05:15 GMT
+recorded_with: VCR 6.1.0
