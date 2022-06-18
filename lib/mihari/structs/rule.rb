@@ -169,6 +169,7 @@ module Mihari
           #
           def from_model(model)
             data = model.data.deep_symbolize_keys
+            # set ID if YAML data do not have ID
             data[:id] = model.id unless data.key?(:id)
 
             Structs::Rule::Rule.new(data, model.yaml)
@@ -178,9 +179,13 @@ module Mihari
           # @param [String] yaml
           #
           # @return [Mihari::Structs::Rule::Rule]
+          # @param [String, nil] id
           #
-          def from_yaml(yaml)
+          def from_yaml(yaml, id: nil)
             data = load_erb_yaml(yaml)
+            # set ID if id is given & YAML data do not have ID
+            data[:id] = id if !id.nil? && !data.key?(:id)
+
             Structs::Rule::Rule.new(data, yaml)
           end
         end
