@@ -144,8 +144,7 @@ module Mihari
             error!({ message: "ID:#{id} is not found" }, 404)
           end
 
-          rule = Structs::Rule::Rule.from_yaml(yaml)
-          rule.id = id
+          rule = Structs::Rule::Rule.from_yaml(yaml, id: id)
 
           begin
             rule.validate!
