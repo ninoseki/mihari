@@ -4,8 +4,8 @@ module Mihari
       class Response
         attr_reader ip: String
         attr_reader hostname: String?
-        attr_reader loc: String
-        attr_reader country_code: String
+        attr_reader loc: String?
+        attr_reader country_code: String?
         attr_reader asn: Integer?
 
         def self.from_dynamic!: (Hash[(String | Symbol), untyped] d) -> Mihari::Structs::IPInfo::Response

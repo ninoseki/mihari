@@ -17,11 +17,9 @@ module Mihari
       def build_by_ip(ip)
         res = Enrichers::IPInfo.query(ip)
 
-        unless res.nil?
-          return new(country: NormalizeCountry(res.country_code, to: :short), country_code: res.country_code)
-        end
+        return nil if res&.country_code.nil?
 
-        nil
+        new(country: NormalizeCountry(res.country_code, to: :short), country_code: res.country_code)
       end
     end
   end
