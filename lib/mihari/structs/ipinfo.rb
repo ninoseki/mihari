@@ -6,8 +6,8 @@ module Mihari
       class Response < Dry::Struct
         attribute :ip, Types::String
         attribute :hostname, Types::String.optional
-        attribute :loc, Types::String
-        attribute :country_code, Types::String
+        attribute :loc, Types::String.optional
+        attribute :country_code, Types::String.optional
         attribute :asn, Types::Integer.optional
 
         class << self
@@ -23,9 +23,9 @@ module Mihari
 
             new(
               ip: d.fetch("ip"),
-              loc: d.fetch("loc"),
+              loc: d["loc"],
               hostname: d["hostname"],
-              country_code: d.fetch("country"),
+              country_code: d["country"],
               asn: asn
             )
           end
