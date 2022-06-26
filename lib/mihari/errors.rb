@@ -15,6 +15,8 @@ module Mihari
 
   class RuleValidationError < Error; end
 
+  class YAMLSyntaxError < Error; end
+
   class ConfigurationError < Error; end
 
   class HTTPError < Error; end
