@@ -134,20 +134,6 @@ RSpec.describe Mihari::Schemas::RuleContract do
     end
   end
 
-  context "with invalid options" do
-    it do
-      expect do
-        contract.call(
-          description: "foo",
-          title: "foo",
-          queries: [
-            { analyzer: "shodan", query: "foo", options: { interval: "foo" } }
-          ]
-        )
-      end.to raise_error(NoMethodError)
-    end
-  end
-
   context "with invalid emitter name" do
     it do
       expect do

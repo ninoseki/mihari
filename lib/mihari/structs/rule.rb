@@ -64,9 +64,11 @@ module Mihari
         def error_messages
           return [] if @errors.nil?
 
-          @errors.messages.map do |message|
+          @errors.messages.filter_map do |message|
             path = message.path.map(&:to_s).join
             "#{path} #{message.text}"
+          rescue NoMethodError
+            nil
           end
         end
 
