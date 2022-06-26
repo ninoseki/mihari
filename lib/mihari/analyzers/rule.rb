@@ -39,7 +39,6 @@ module Mihari
 
     class Rule < Base
       include Mixins::DisallowedDataValue
-      include Mixins::Rule
 
       option :title
       option :description

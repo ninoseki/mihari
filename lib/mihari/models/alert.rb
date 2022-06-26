@@ -12,7 +12,7 @@ module Mihari
       #
       # Search alerts
       #
-      # @param [Structs::Alert::SearchFilterWithPagination] filter
+      # @param [Structs::Filters::Alert::SearchFilterWithPagination] filter
       #
       # @return [Array<Alert>]
       #
@@ -58,6 +58,11 @@ module Mihari
 
       private
 
+      #
+      # @param [Structs::Filters::Alert::SearchFilter] filter
+      #
+      # @return [Mihari::Alert]
+      #
       def build_relation(filter)
         artifact_ids = []
         artifact = Artifact.includes(:autonomous_system, :dns_records, :reverse_dns_names)

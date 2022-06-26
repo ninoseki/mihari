@@ -28,7 +28,7 @@ module Mihari
       #
       # Search rules
       #
-      # @param [Structs::Rule::SearchFilterWithPagination] filter
+      # @param [Structs::Filters::Rule::SearchFilterWithPagination] filter
       #
       # @return [Array<Rule>]
       #
@@ -51,7 +51,7 @@ module Mihari
       #
       # Count alerts
       #
-      # @param [Structs::Rule::SearchFilterWithPagination] filter
+      # @param [Structs::Filters::Rule::SearchFilterWithPagination] filter
       #
       # @return [Integer]
       #
@@ -62,6 +62,11 @@ module Mihari
 
       private
 
+      #
+      # @param [Structs::Filters::Rule::SearchFilter] filter
+      #
+      # @return [Mihari::Rule]
+      #
       def build_relation(filter)
         relation = self
         relation = relation.includes(alerts: :tags)
