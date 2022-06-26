@@ -36,7 +36,7 @@ module Mihari
           # symbolize hash keys
           filter = filter.to_h.symbolize_keys
 
-          search_filter_with_pagenation = Structs::Rule::SearchFilterWithPagination.new(**filter)
+          search_filter_with_pagenation = Structs::Filters::Rule::SearchFilterWithPagination.new(**filter)
           rules = Mihari::Rule.search(search_filter_with_pagenation)
           total = Mihari::Rule.count(search_filter_with_pagenation.without_pagination)
 
@@ -79,7 +79,7 @@ module Mihari
             error!({ message: "ID:#{id} is not found" }, 404)
           end
 
-          struct = Mihari::Structs::Rule::Rule.from_model(rule)
+          struct = Mihari::Structs::Rule.from_model(rule)
           analyzer = struct.to_analyzer
           analyzer.run
 
@@ -96,7 +96,7 @@ module Mihari
         end
         post "/" do
           yaml = params[:yaml]
-          rule = Structs::Rule::Rule.from_yaml(yaml)
+          rule = Structs::Rule.from_yaml(yaml)
 
           # check ID duplication
           begin
@@ -144,7 +144,7 @@ module Mihari
             error!({ message: "ID:#{id} is not found" }, 404)
           end
 
-          rule = Structs::Rule::Rule.from_yaml(yaml, id: id)
+          rule = Structs::Rule.from_yaml(yaml, id: id)
 
           begin
             rule.validate!

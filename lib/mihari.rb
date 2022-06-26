@@ -59,7 +59,6 @@ require "mihari/mixins/disallowed_data_value"
 require "mihari/mixins/error_notification"
 require "mihari/mixins/refang"
 require "mihari/mixins/retriable"
-require "mihari/mixins/rule"
 
 def truthy?(value)
   return true if value == "true"
@@ -171,8 +170,8 @@ require "mihari/constants"
 require "mihari/types"
 
 # Structs
-require "mihari/structs/alert"
 require "mihari/structs/censys"
+require "mihari/structs/filters"
 require "mihari/structs/google_public_dns"
 require "mihari/structs/greynoise"
 require "mihari/structs/ipinfo"

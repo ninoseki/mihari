@@ -1,194 +1,234 @@
 # frozen_string_literal: true
 
+require "date"
+require "erb"
+require "pathname"
+require "yaml"
+
 module Mihari
   module Structs
-    module Rule
-      class SearchFilter < Dry::Struct
-        attribute? :description, Types::String.optional
-        attribute? :tag_name, Types::String.optional
-        attribute? :title, Types::String.optional
-        attribute? :from_at, Types::DateTime.optional
-        attribute? :to_at, Types::DateTime.optional
+    class Rule
+      # @return [Hash]
+      attr_reader :data
+
+      # @return [String]
+      attr_reader :yaml
+
+      # @return [Array, nil]
+      attr_reader :errors
+
+      # @return [String]
+      attr_writer :id
+
+      def initialize(data, yaml)
+        @data = data.deep_symbolize_keys
+        @yaml = yaml
+
+        @errors = nil
+        @no_method_error = nil
+
+        validate
       end
 
-      class SearchFilterWithPagination < SearchFilter
-        attribute? :page, Types::Int.default(1)
-        attribute? :limit, Types::Int.default(10)
+      #
+      # @return [Boolean]
+      #
+      def errors?
+        return false if @errors.nil?
 
-        def without_pagination
-          SearchFilter.new(
-            description: description,
-            from_at: from_at,
-            tag_name: tag_name,
-            title: title,
-            to_at: to_at
-          )
+        !@errors.empty?
+      end
+
+      #
+      # @return [Array<String>]
+      #
+      def error_messages
+        return [] if @errors.nil?
+
+        @errors.messages.filter_map do |message|
+          path = message.path.map(&:to_s).join
+          "#{path} #{message.text}"
+        rescue NoMethodError
+          nil
         end
       end
 
-      class Rule
+      def validate
+        begin
+          contract = Schemas::RuleContract.new
+          result = contract.call(data)
+        rescue NoMethodError => e
+          @no_method_error = e
+          return
+        end
+
+        @data = result.to_h
+        @errors = result.errors
+      end
+
+      def validate!
+        raise RuleValidationError, "Data should be a hash" unless data.is_a?(Hash)
+        raise RuleValidationError, error_messages.join("\n") if errors?
+        raise RuleValidationError, "Something wrong with queries, emitters or enrichers." unless @no_method_error.nil?
+      rescue RuleValidationError => e
+        message = "Failed to parse the input as a rule"
+        message += ": #{e.message}" unless e.message.empty?
+        Mihari.logger.error message
+
+        raise e
+      end
+
+      def [](key)
+        data[key.to_sym]
+      end
+
+      #
+      # @return [String]
+      #
+      def id
+        @id ||= data[:id] || UUIDTools::UUID.md5_create(UUIDTools::UUID_URL_NAMESPACE, data.to_yaml).to_s
+      end
+
+      #
+      # @return [String]
+      #
+      def title
+        @title ||= data[:title]
+      end
+
+      #
+      # @return [String]
+      #
+      def description
+        @description ||= data[:description]
+      end
+
+      #
+      # @return [Mihari::Rule]
+      #
+      def to_model
+        rule = Mihari::Rule.find(id)
+
+        rule.title = title
+        rule.description = description
+        rule.data = data
+        rule.yaml = yaml
+
+        rule
+      rescue ActiveRecord::RecordNotFound
+        Mihari::Rule.new(
+          id: id,
+          title: title,
+          description: description,
+          data: data,
+          yaml: yaml
+        )
+      end
+
+      #
+      # @return [Mihari::Analyzers::Rule]
+      #
+      def to_analyzer
+        analyzer = Mihari::Analyzers::Rule.new(
+          title: self[:title],
+          description: self[:description],
+          tags: self[:tags],
+          queries: self[:queries],
+          allowed_data_types: self[:allowed_data_types],
+          disallowed_data_values: self[:disallowed_data_values],
+          emitters: self[:emitters],
+          enrichers: self[:enrichers],
+          id: id
+        )
+        analyzer.ignore_old_artifacts = self[:ignore_old_artifacts]
+        analyzer.ignore_threshold = self[:ignore_threshold]
+
+        analyzer
+      end
+
+      class << self
+        include Mixins::Database
+
+        #
+        # @param [Mihari::Rule] model
+        #
+        # @return [Mihari::Structs::Rule]
+        #
+        def from_model(model)
+          data = model.data.deep_symbolize_keys
+          # set ID if YAML data do not have ID
+          data[:id] = model.id unless data.key?(:id)
+
+          Structs::Rule.new(data, model.yaml)
+        end
+
+        #
+        # @param [String] yaml
+        #
+        # @return [Mihari::Structs::Rule]
+        # @param [String, nil] id
+        #
+        def from_yaml(yaml, id: nil)
+          data = load_erb_yaml(yaml)
+          # set ID if id is given & YAML data do not have ID
+          data[:id] = id if !id.nil? && !data.key?(:id)
+
+          Structs::Rule.new(data, yaml)
+        end
+
+        #
+        # @param [String] path_or_id Path to YAML file or YAML string or ID of a rule in the database
+        #
+        # @return [Mihari::Structs::Rule]
+        #
+        def from_path_or_id(path_or_id)
+          yaml = nil
+
+          yaml = load_yaml_from_file(path_or_id) if File.exist?(path_or_id)
+          yaml = load_yaml_from_db(path_or_id) if yaml.nil?
+
+          Structs::Rule.from_yaml yaml
+        end
+
+        private
+
+        #
+        # Load ERR templated YAML
+        #
+        # @param [String] yaml
+        #
         # @return [Hash]
-        attr_reader :data
-
-        # @return [String]
-        attr_reader :yaml
-
-        # @return [Array, nil]
-        attr_reader :errors
-
-        # @return [String]
-        attr_writer :id
-
-        def initialize(data, yaml)
-          @data = data.deep_symbolize_keys
-          @yaml = yaml
-
-          @errors = nil
-          @no_method_error = nil
-
-          validate
+        #
+        def load_erb_yaml(yaml)
+          YAML.safe_load(ERB.new(yaml).result, permitted_classes: [Date, Symbol], symbolize_names: true)
         end
 
         #
-        # @return [Boolean]
+        # Load YAML string from path
         #
-        def errors?
-          return false if @errors.nil?
+        # @param [String] path
+        #
+        # @return [String, nil]
+        #
+        def load_yaml_from_file(path)
+          return nil unless Pathname(path).exist?
 
-          !@errors.empty?
+          File.read path
         end
 
         #
-        # @return [Array<String>]
+        # Load YAML string from the database
         #
-        def error_messages
-          return [] if @errors.nil?
-
-          @errors.messages.filter_map do |message|
-            path = message.path.map(&:to_s).join
-            "#{path} #{message.text}"
-          rescue NoMethodError
-            nil
-          end
-        end
-
-        def validate
-          begin
-            contract = Schemas::RuleContract.new
-            result = contract.call(data)
-          rescue NoMethodError => e
-            @no_method_error = e
-            return
-          end
-
-          @data = result.to_h
-          @errors = result.errors
-        end
-
-        def validate!
-          raise RuleValidationError, "Data should be a hash" unless data.is_a?(Hash)
-
-          raise RuleValidationError, error_messages.join("\n") if errors?
-
-          raise RuleValidationError, "Something wrong with queries, emitters or enrichers." unless @no_method_error.nil?
-        end
-
-        def [](key)
-          data[key.to_sym]
-        end
-
+        # @param [String] id <description>
         #
-        # @return [String]
+        # @return [Hash]
         #
-        def id
-          @id ||= data[:id] || UUIDTools::UUID.md5_create(UUIDTools::UUID_URL_NAMESPACE, data.to_yaml).to_s
-        end
-
-        #
-        # @return [String]
-        #
-        def title
-          @title ||= data[:title]
-        end
-
-        #
-        # @return [String]
-        #
-        def description
-          @description ||= data[:description]
-        end
-
-        #
-        # @return [Mihari::Rule]
-        #
-        def to_model
-          rule = Mihari::Rule.find(id)
-
-          rule.title = title
-          rule.description = description
-          rule.data = data
-          rule.yaml = yaml
-
-          rule
-        rescue ActiveRecord::RecordNotFound
-          Mihari::Rule.new(
-            id: id,
-            title: title,
-            description: description,
-            data: data,
-            yaml: yaml
-          )
-        end
-
-        #
-        # @return [Mihari::Analyzers::Rule]
-        #
-        def to_analyzer
-          analyzer = Mihari::Analyzers::Rule.new(
-            title: self[:title],
-            description: self[:description],
-            tags: self[:tags],
-            queries: self[:queries],
-            allowed_data_types: self[:allowed_data_types],
-            disallowed_data_values: self[:disallowed_data_values],
-            emitters: self[:emitters],
-            enrichers: self[:enrichers],
-            id: id
-          )
-          analyzer.ignore_old_artifacts = self[:ignore_old_artifacts]
-          analyzer.ignore_threshold = self[:ignore_threshold]
-
-          analyzer
-        end
-
-        class << self
-          include Mixins::Rule
-
-          #
-          # @param [Mihari::Rule] model
-          #
-          # @return [Mihari::Structs::Rule::Rule]
-          #
-          def from_model(model)
-            data = model.data.deep_symbolize_keys
-            # set ID if YAML data do not have ID
-            data[:id] = model.id unless data.key?(:id)
-
-            Structs::Rule::Rule.new(data, model.yaml)
-          end
-
-          #
-          # @param [String] yaml
-          #
-          # @return [Mihari::Structs::Rule::Rule]
-          # @param [String, nil] id
-          #
-          def from_yaml(yaml, id: nil)
-            data = load_erb_yaml(yaml)
-            # set ID if id is given & YAML data do not have ID
-            data[:id] = id if !id.nil? && !data.key?(:id)
-
-            Structs::Rule::Rule.new(data, yaml)
+        def load_yaml_from_db(id)
+          with_db_connection do
+            rule = Mihari::Rule.find(id)
+            rule.yaml || rule.symbolized_data.to_yaml
+          rescue ActiveRecord::RecordNotFound
+            raise ArgumentError, "ID:#{id} is not found in the database"
           end
         end
       end

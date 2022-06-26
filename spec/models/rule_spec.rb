@@ -5,74 +5,74 @@ RSpec.describe Mihari::Rule do
 
   describe ".search" do
     it do
-      alerts = described_class.search(Mihari::Structs::Rule::SearchFilterWithPagination.new)
+      alerts = described_class.search(Mihari::Structs::Filters::Rule::SearchFilterWithPagination.new)
       expect(alerts.length).to eq(2)
     end
 
     it do
-      alerts = described_class.search(Mihari::Structs::Rule::SearchFilterWithPagination.new(tag_name: "tag1"))
+      alerts = described_class.search(Mihari::Structs::Filters::Rule::SearchFilterWithPagination.new(tag_name: "tag1"))
       expect(alerts.length).to eq(1)
     end
 
     it do
-      alerts = described_class.search(Mihari::Structs::Rule::SearchFilterWithPagination.new(tag_name: "404_not_found"))
+      alerts = described_class.search(Mihari::Structs::Filters::Rule::SearchFilterWithPagination.new(tag_name: "404_not_found"))
       expect(alerts.length).to eq(0)
     end
 
     it do
-      alerts = described_class.search(Mihari::Structs::Rule::SearchFilterWithPagination.new(title: "404_not_found"))
+      alerts = described_class.search(Mihari::Structs::Filters::Rule::SearchFilterWithPagination.new(title: "404_not_found"))
       expect(alerts.length).to eq(0)
     end
 
     it do
-      alerts = described_class.search(Mihari::Structs::Rule::SearchFilterWithPagination.new(title: "test"))
+      alerts = described_class.search(Mihari::Structs::Filters::Rule::SearchFilterWithPagination.new(title: "test"))
       expect(alerts.length).to eq(1)
     end
 
     it do
-      alerts = described_class.search(Mihari::Structs::Rule::SearchFilterWithPagination.new(description: "404_not_found"))
+      alerts = described_class.search(Mihari::Structs::Filters::Rule::SearchFilterWithPagination.new(description: "404_not_found"))
       expect(alerts.length).to eq(0)
     end
 
     it do
-      alerts = described_class.search(Mihari::Structs::Rule::SearchFilterWithPagination.new(description: "test"))
+      alerts = described_class.search(Mihari::Structs::Filters::Rule::SearchFilterWithPagination.new(description: "test"))
       expect(alerts.length).to eq(2)
     end
   end
 
   describe ".count" do
     it do
-      count = described_class.count(Mihari::Structs::Rule::SearchFilter.new)
+      count = described_class.count(Mihari::Structs::Filters::Rule::SearchFilter.new)
       expect(count).to eq(2)
     end
 
     it do
-      count = described_class.count(Mihari::Structs::Rule::SearchFilter.new(tag_name: "tag1"))
+      count = described_class.count(Mihari::Structs::Filters::Rule::SearchFilter.new(tag_name: "tag1"))
       expect(count).to eq(1)
     end
 
     it do
-      count = described_class.count(Mihari::Structs::Rule::SearchFilter.new(tag_name: "404_not_found"))
+      count = described_class.count(Mihari::Structs::Filters::Rule::SearchFilter.new(tag_name: "404_not_found"))
       expect(count).to eq(0)
     end
 
     it do
-      count = described_class.count(Mihari::Structs::Rule::SearchFilter.new(title: "404_not_found"))
+      count = described_class.count(Mihari::Structs::Filters::Rule::SearchFilter.new(title: "404_not_found"))
       expect(count).to eq(0)
     end
 
     it do
-      count = described_class.count(Mihari::Structs::Rule::SearchFilter.new(title: "test"))
+      count = described_class.count(Mihari::Structs::Filters::Rule::SearchFilter.new(title: "test"))
       expect(count).to eq(1)
     end
 
     it do
-      count = described_class.count(Mihari::Structs::Rule::SearchFilter.new(description: "404_not_found"))
+      count = described_class.count(Mihari::Structs::Filters::Rule::SearchFilter.new(description: "404_not_found"))
       expect(count).to eq(0)
     end
 
     it do
-      count = described_class.count(Mihari::Structs::Rule::SearchFilter.new(description: "test"))
+      count = described_class.count(Mihari::Structs::Filters::Rule::SearchFilter.new(description: "test"))
       expect(count).to eq(2)
     end
   end

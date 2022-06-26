@@ -3,16 +3,21 @@
 module Mihari
   module Commands
     module Validator
-      include Mixins::Rule
-
       def self.included(thor)
         thor.class_eval do
-          desc "rule [PATH]", "Validate format of a rule file"
+          desc "rule [PATH]", "Validate rule file format"
+          #
+          # Validate format of a rule
+          #
+          # @param [String] path
+          #
+          # @return [nil]
+          #
           def rule(path)
-            rule = load_rule(path)
+            rule = Structs::Rule.from_path_or_id(path)
 
             begin
-              validate_rule! rule
+              rule.validate!
               Mihari.logger.info "Valid format. The input is parsed as the following:\n#{rule.data.to_yaml}"
             rescue RuleValidationError
               nil

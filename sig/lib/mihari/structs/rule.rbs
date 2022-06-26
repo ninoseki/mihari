@@ -1,64 +1,57 @@
 module Mihari
   module Structs
-    module Rule
-      class SearchFilter < Dry::Struct
-      end
+    class Rule
+      attr_reader data: Hash
 
-      class SearchFilterWithPagination < SearchFilter
-        def without_pagination: () -> SearchFilter
-      end
+      attr_reader yaml: String
 
-      class Rule
-        attr_reader data: Hash
+      attr_reader errors: Array[untypes]?
 
-        attr_reader yaml: String
+      def initialize: (Hash data) -> void
 
-        attr_reader errors: Array[untypes]?
+      #
+      # @return [Boolean]
+      #
+      def errors?: () -> (bool)
 
-        def initialize: (Hash data) -> void
+      #
+      # @return [Array[String]]
+      #
+      def error_messages: () -> (Array[String])
 
-        #
-        # @return [Boolean]
-        #
-        def errors?: () -> (bool)
+      def validate: () -> void
 
-        #
-        # @return [Array[String]]
-        #
-        def error_messages: () -> (Array[String])
+      def validate!: () -> void
 
-        def validate: () -> void
+      def []: (untyped key) -> untyped
 
-        def validate!: () -> void
+      #
+      # @return [String]
+      #
+      def id: () -> String
 
-        def []: (untyped key) -> untyped
+      #
+      # @return [String]
+      #
+      def title: () -> String
 
-        #
-        # @return [String]
-        #
-        def id: () -> String
+      #
+      # @return [String]
+      #
+      def description: () -> String
 
-        #
-        # @return [String]
-        #
-        def title: () -> String
+      #
+      # @return [Mihari::Rule]
+      #
+      def to_model: () -> Mihari::Rule
 
-        #
-        # @return [String]
-        #
-        def description: () -> String
+      def to_analyzer: () -> Mihari::Analyzers::Rule
 
-        #
-        # @return [Mihari::Rule]
-        #
-        def to_model: () -> Mihari::Rule
+      def self.from_model: (Mihari::Rule model) -> Mihari::Structs::Rule
 
-        def to_analyzer: () -> Mihari::Analyzers::Rule
+      def self.from_yaml: (String yaml) -> Mihari::Structs::Rule
 
-        def self.from_model: (Mihari::Rule model) -> Mihari::Structs::Rule::Rule
-
-        def self.from_yaml: (String yaml) -> Mihari::Structs::Rule::Rule
-      end
+      def self.from_path_or_id: (String path_or_id) -> Mihari::Structs::Rule
     end
   end
 end

@@ -4,7 +4,6 @@ module Mihari
   module Commands
     module Search
       include Mixins::Database
-      include Mixins::Rule
       include Mixins::ErrorNotification
 
       def self.included(thor)
@@ -12,14 +11,10 @@ module Mihari
           desc "search [RULE]", "Search by a rule"
           method_option :yes, type: :boolean, aliases: "-y", desc: "yes to overwrite the rule in the database"
           def search_by_rule(path_or_id)
-            rule = load_rule(path_or_id)
+            rule = Structs::Rule.from_path_or_id path_or_id
 
             # validate
-            begin
-              validate_rule! rule
-            rescue RuleValidationError => e
-              raise e
-            end
+            rule.validate!
 
             # check update
             id = rule.id

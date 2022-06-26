@@ -1,0 +1,40 @@
+module Mihari
+  module Structs
+    module Filters
+      module Alert
+        class SearchFilter < Dry::Struct
+          attr_reader artifact_data: String?
+          attr_reader description: String?
+          attr_reader source: String?
+          attr_reader tag_name: String?
+          attr_reader title: String?
+          attr_reader from_at: DateTime?
+          attr_reader to_at: DateTime?
+          attr_reader asn: Integer?
+          attr_reader dns_record: String?
+          attr_reader reverse_dns_name: String?
+
+          def valid_artifact_filters?: () -> bool
+        end
+
+        class SearchFilterWithPagination < SearchFilter
+          def without_pagination: () ->  Mihari::Structs::Filters::Alert::SearchFilter
+        end
+      end
+
+      module Rule
+        class SearchFilter < Dry::Struct
+          attr_reader page: Integer?
+          attr_reader tag: String?
+          attr_reader source: String?
+          attr_reader from_at: DateTime?
+          attr_reader to_at: DateTime?
+        end
+
+        class SearchFilterWithPagination < SearchFilter
+          def without_pagination: () ->  Mihari::Structs::Filters::Rule::SearchFilter
+        end
+      end
+    end
+  end
+end

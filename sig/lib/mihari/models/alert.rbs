@@ -7,12 +7,12 @@ module Mihari
     attr_accessor artifacts(): Array[Mihari::Artifact]
     attr_accessor Tags(): Array[Mihari::Tag]
 
-    def self.search: (Mihari::Structs::Alert::SearchFilterWithPagination filter) -> Array[Mihari::Alert]
+    def self.search: (Mihari::Structs::Filters::Alert::SearchFilterWithPagination filter) -> Array[Mihari::Alert]
 
-    def self.count: (Mihari::Structs::Alert::SearchFilter filter) -> Integer
+    def self.count: (Mihari::Structs::Filters::Alert::SearchFilter filter) -> Integer
 
     private
 
-    def self.build_relation: (Mihari::Structs::Alert::SearchFilter filter) -> Mihari::Alert
+    def self.build_relation: (Mihari::Structs::Filters::Alert::SearchFilter filter) -> Mihari::Alert
   end
 end
