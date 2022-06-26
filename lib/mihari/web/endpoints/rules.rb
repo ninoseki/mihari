@@ -96,7 +96,12 @@ module Mihari
         end
         post "/" do
           yaml = params[:yaml]
-          rule = Structs::Rule.from_yaml(yaml)
+
+          begin
+            rule = Structs::Rule.from_yaml(yaml)
+          rescue YAMLSyntaxError => e
+            error!({ message: e.message }, 400)
+          end
 
           # check ID duplication
           begin
@@ -144,7 +149,11 @@ module Mihari
             error!({ message: "ID:#{id} is not found" }, 404)
           end
 
-          rule = Structs::Rule.from_yaml(yaml, id: id)
+          begin
+            rule = Structs::Rule.from_yaml(yaml, id: id)
+          rescue YAMLSyntaxError => e
+            error!({ message: e.message }, 400)
+          end
 
           begin
             rule.validate!

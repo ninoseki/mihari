@@ -201,6 +201,8 @@ module Mihari
         #
         def load_erb_yaml(yaml)
           YAML.safe_load(ERB.new(yaml).result, permitted_classes: [Date, Symbol], symbolize_names: true)
+        rescue Psych::SyntaxError => e
+          raise YAMLSyntaxError, e.message
         end
 
         #
