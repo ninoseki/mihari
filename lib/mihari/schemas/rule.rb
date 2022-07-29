@@ -13,6 +13,11 @@ module Mihari
       optional(:tags).value(array[:string]).default([])
       optional(:id).value(:string)
 
+      optional(:status).value(:string)
+
+      optional(:related).value(array[:string])
+      optional(:references).value(array[:string])
+
       optional(:author).value(:string)
       optional(:created_on).value(:date)
       optional(:updated_on).value(:date)
