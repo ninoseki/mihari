@@ -48,21 +48,21 @@ RSpec.describe Mihari::Schemas::RuleContract do
 
   context "with invalid analyzer name" do
     it do
-      expect { contract.call(description: "foo", title: "foo", queries: [{ analyzer: "foo", query: "foo" }]) }.to raise_error(NoMethodError)
+      result = contract.call(description: "foo", title: "foo", queries: [{ analyzer: "foo", query: "foo" }])
+      expect(result.errors.empty?).to eq(false)
     end
 
     it do
-      expect do
-        contract.call(
-          description: "foo",
-          title: "foo",
-          queries: [
-            { analyzer: "shodan", query: "foo" },
-            { analyzer: "crtsh", query: "foo", exclude_expired: 1 }, # should be bool
-            { analyzer: "zoomeye", query: "foo", type: "bar" } # should be any of host or web
-          ]
-        )
-      end.to raise_error(NoMethodError)
+      result = contract.call(
+        description: "foo",
+        title: "foo",
+        queries: [
+          { analyzer: "shodan", query: "foo" },
+          { analyzer: "crtsh", query: "foo", exclude_expired: 1 }, # should be bool
+          { analyzer: "zoomeye", query: "foo", type: "bar" } # should be any of host or web
+        ]
+      )
+      expect(result.errors.empty?).to eq(false)
     end
   end
 
@@ -136,18 +136,17 @@ RSpec.describe Mihari::Schemas::RuleContract do
 
   context "with invalid emitter name" do
     it do
-      expect do
-        contract.call(
-          description: "foo",
-          title: "foo",
-          queries: [
-            { analyzer: "shodan", query: "foo" }
-          ],
-          emitters: [
-            { emitter: "foo" }
-          ]
-        )
-      end.to raise_error(NoMethodError)
+      result = contract.call(
+        description: "foo",
+        title: "foo",
+        queries: [
+          { analyzer: "shodan", query: "foo" }
+        ],
+        emitters: [
+          { emitter: "foo" }
+        ]
+      )
+      expect(result.errors.empty?).to eq(false)
     end
   end
 end
