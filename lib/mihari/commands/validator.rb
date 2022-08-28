@@ -18,7 +18,8 @@ module Mihari
 
             begin
               rule.validate!
-              Mihari.logger.info "Valid format. The input is parsed as the following:\n#{rule.data.to_yaml}"
+              Mihari.logger.info "Valid format. The input is parsed as the following:"
+              Mihari.logger.info rule.data.to_yaml
             rescue RuleValidationError
               nil
             end
