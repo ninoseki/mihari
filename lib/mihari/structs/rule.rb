@@ -2,6 +2,7 @@
 
 require "date"
 require "erb"
+require "json"
 require "pathname"
 require "yaml"
 
@@ -20,12 +21,17 @@ module Mihari
       # @return [String]
       attr_writer :id
 
+      #
+      # Initialize
+      #
+      # @param [Hash] data
+      # @param [String] yaml
+      #
       def initialize(data, yaml)
         @data = data.deep_symbolize_keys
         @yaml = yaml
 
         @errors = nil
-        @no_method_error = nil
 
         validate
       end
@@ -39,41 +45,19 @@ module Mihari
         !@errors.empty?
       end
 
-      #
-      # @return [Array<String>]
-      #
-      def error_messages
-        return [] if @errors.nil?
-
-        @errors.messages.filter_map do |message|
-          path = message.path.map(&:to_s).join
-          "#{path} #{message.text}"
-        rescue NoMethodError
-          nil
-        end
-      end
-
       def validate
-        begin
-          contract = Schemas::RuleContract.new
-          result = contract.call(data)
-        rescue NoMethodError => e
-          @no_method_error = e
-          return
-        end
+        contract = Schemas::RuleContract.new
+        result = contract.call(data)
 
         @data = result.to_h
         @errors = result.errors
       end
 
       def validate!
-        raise RuleValidationError, "Data should be a hash" unless data.is_a?(Hash)
-        raise RuleValidationError, error_messages.join("\n") if errors?
-        raise RuleValidationError, "Something wrong with queries, emitters or enrichers." unless @no_method_error.nil?
+        raise RuleValidationError if errors?
       rescue RuleValidationError => e
-        message = "Failed to parse the input as a rule"
-        message += ": #{e.message}" unless e.message.empty?
-        Mihari.logger.error message
+        Mihari.logger.error "Failed to parse the input as a rule:"
+        Mihari.logger.error JSON.pretty_generate(errors.to_h)
 
         raise e
       end
