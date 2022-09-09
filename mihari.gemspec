@@ -45,7 +45,7 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency "vcr", "~> 6.1"
   spec.add_development_dependency "webmock", "~> 3.18"
 
-  spec.add_dependency "activerecord", "7.0.3.1"
+  spec.add_dependency "activerecord", "7.0.4"
   spec.add_dependency "addressable", "2.8.1"
   spec.add_dependency "awrence", "2.0.1"
   spec.add_dependency "binaryedge", "0.1.0"
@@ -92,12 +92,12 @@ Gem::Specification.new do |spec|
   spec.add_dependency "shodanx", "0.2.1"
   spec.add_dependency "slack-notifier", "2.4.0"
   spec.add_dependency "spysex", "0.2.0"
-  spec.add_dependency "sqlite3", "1.4.4"
+  spec.add_dependency "sqlite3", "1.5.0"
   spec.add_dependency "thor", "1.2.1"
   spec.add_dependency "urlscan", "0.8.0"
   spec.add_dependency "uuidtools", "2.2.0"
   spec.add_dependency "virustotalx", "1.2.0"
   spec.add_dependency "whois", "5.1.0"
-  spec.add_dependency "whois-parser", "1.2.0"
+  spec.add_dependency "whois-parser", "2.0.0"
   spec.add_dependency "zoomeye-rb", "0.2.0"
 end
