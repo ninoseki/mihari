@@ -14,7 +14,11 @@ module Mihari
             rule = Structs::Rule.from_path_or_id path_or_id
 
             # validate
-            rule.validate!
+            begin
+              rule.validate!
+            rescue RuleValidationError
+              return
+            end
 
             # check update
             id = rule.id
@@ -23,7 +27,9 @@ module Mihari
               with_db_connection do
                 rule_ = Mihari::Rule.find(id)
                 next if rule.yaml == rule_.yaml
-                return unless yes?("This operation will overwrite the rule in the database (Rule ID: #{id}). Are you sure you want to update the rule? (yes/no)")
+                unless yes?("This operation will overwrite the rule in the database (Rule ID: #{id}). Are you sure you want to update the rule? (yes/no)")
+                  return
+                end
               rescue ActiveRecord::RecordNotFound
                 next
               end
