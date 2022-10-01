@@ -18,7 +18,6 @@ module Mihari
       "pulsedive" => Pulsedive,
       "securitytrails" => SecurityTrails,
       "shodan" => Shodan,
-      "spyse" => Spyse,
       "st" => SecurityTrails,
       "urlscan" => Urlscan,
       "virustotal_intelligence" => VirusTotalIntelligence,
