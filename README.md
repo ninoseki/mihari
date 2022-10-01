@@ -44,7 +44,6 @@ Mihari supports the following services by default.
 - [Pulsedive](https://pulsedive.com/)
 - [SecurityTrails](https://securitytrails.com/)
 - [Shodan](https://shodan.io)
-- [Spyse](https://spyse.com)
 - [urlscan.io](https://urlscan.io)
 - [VirusTotal](http://virustotal.com) & [VirusTotal Intelligence](https://www.virustotal.com/gui/intelligence-overview)
 - [ZoomEye](https://zoomeye.org)

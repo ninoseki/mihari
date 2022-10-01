@@ -22,7 +22,9 @@ module Mihari
       optional(:created_on).value(:date)
       optional(:updated_on).value(:date)
 
-      required(:queries).value(:array).each { AnalyzerWithoutAPIKey | AnalyzerWithAPIKey | Censys | CIRCL | PassiveTotal | Spyse | ZoomEye | Urlscan | Crtsh | Feed }
+      required(:queries).value(:array).each do
+        AnalyzerWithoutAPIKey | AnalyzerWithAPIKey | Censys | CIRCL | PassiveTotal | ZoomEye | Urlscan | Crtsh | Feed
+      end
 
       optional(:emitters).value(:array).each { Emitter | MISP | TheHive | Slack | HTTP }
 
@@ -57,9 +59,7 @@ module Mihari
 
       rule(:disallowed_data_values) do
         value.each do |v|
-          unless valid_disallowed_data_value?(v)
-            key.failure("#{v} is not a valid format.")
-          end
+          key.failure("#{v} is not a valid format.") unless valid_disallowed_data_value?(v)
         end
       end
     end

@@ -58,13 +58,6 @@ module Mihari
       optional(:options).hash(AnalyzerOptions)
     end
 
-    Spyse = Dry::Schema.Params do
-      required(:analyzer).value(Types::String.enum("spyse"))
-      required(:query).value(:string)
-      required(:type).value(Types::String.enum("ip", "domain"))
-      optional(:options).hash(AnalyzerOptions)
-    end
-
     ZoomEye = Dry::Schema.Params do
       required(:analyzer).value(Types::String.enum("zoomeye"))
       required(:query).value(:string)
