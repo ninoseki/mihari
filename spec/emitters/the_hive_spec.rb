@@ -16,9 +16,9 @@ RSpec.describe Mihari::Emitters::TheHive, :vcr do
       expect(subject.normalized_api_version).to be(nil)
     end
 
-    context "when THEHIVE_API_ENDPOINT is not given" do
+    context "when THEHIVE_URL is not given" do
       before do
-        allow(Mihari.config).to receive(:thehive_api_endpoint).and_return(nil)
+        allow(Mihari.config).to receive(:thehive_url).and_return(nil)
       end
 
       it do

@@ -2,7 +2,7 @@
 http_interactions:
   - request:
       method: head
-      uri: <THEHIVE_API_ENDPOINT>/index.html
+      uri: <THEHIVE_URL>/index.html
       body:
         encoding: US-ASCII
         string: ""

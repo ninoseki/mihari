@@ -1,7 +1,7 @@
 module Mihari
   module Emitters
     class TheHive < Base
-      attr_reader api_endpiont: String?
+      attr_reader url: String?
 
       attr_reader api_key: String?
 
@@ -16,12 +16,12 @@ module Mihari
 
       private
 
-      def configuration_keys: () -> ::Array["thehive_api_endpoint" | "thehive_api_key"]
+      def configuration_keys: () -> ::Array["thehive_url" | "thehive_api_key"]
 
       def api: () -> untyped
 
       # @return [true, false]
-      def api_endpont?: () -> bool
+      def url?: () -> bool
 
       # @return [true, false]
       def api_key?: () -> bool

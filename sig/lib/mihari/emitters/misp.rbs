@@ -2,7 +2,7 @@ module Mihari
   module Emitters
     class MISP < Base
 
-      attr_reader api_endpiont: String?
+      attr_reader url: String?
 
       attr_reader api_key: String?
 
@@ -16,7 +16,7 @@ module Mihari
 
       private
 
-      def configuration_keys: () -> ::Array["misp_api_endpoint" | "misp_api_key"]
+      def configuration_keys: () -> ::Array["misp_url" | "misp_api_key"]
 
       def build_attribute: (Mihari::Artifact artifact) -> untyped
 
@@ -24,7 +24,7 @@ module Mihari
 
       def to_misp_type: (type: String `type`, value: String value) -> String?
 
-      def api_endpoint?: () -> bool
+      def url?: () -> bool
 
       def api_key?: () -> bool
 

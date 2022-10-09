@@ -9,12 +9,14 @@ module Mihari
     MISP = Dry::Schema.Params do
       required(:emitter).value(Types::String.enum("misp"))
       optional(:api_endpoint).value(:string)
+      optional(:url).value(:string)
       optional(:api_key).value(:string)
     end
 
     TheHive = Dry::Schema.Params do
       required(:emitter).value(Types::String.enum("the_hive"))
       optional(:api_endpoint).value(:string)
+      optional(:url).value(:string)
       optional(:api_key).value(:string)
       optional(:api_version).value(Types::String.enum("v4", "v5")).default("v4")
     end

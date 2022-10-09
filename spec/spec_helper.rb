@@ -55,9 +55,7 @@ def ci_env?
 end
 
 # Use in-memory SQLite in local test
-unless ci_env?
-  ENV["DATABASE"] = ":memory:"
-end
+ENV["DATABASE"] = ":memory:" unless ci_env?
 
 def authorization_field(username, password)
   token = "#{username}:#{password}"
@@ -95,7 +93,9 @@ VCR.configure do |config|
 
   api_endpoints = %w[
     THEHIVE_API_ENDPOINT
+    THEHIVE_URL
     MISP_API_ENDPOINT
+    MISP_URL
     WEBHOOK_URL
   ]
 
@@ -111,17 +111,17 @@ VCR.configure do |config|
   end
 
   # Censys
-  config.filter_sensitive_data("<CENSYS_AUTH>") {
+  config.filter_sensitive_data("<CENSYS_AUTH>") do
     authorization_field ENV["CENSYS_ID"] || "foo", ENV["CENSYS_SECRET"] || "bar"
-  }
+  end
   # CIRCL
-  config.filter_sensitive_data("<CIRCL_AUTH>") {
+  config.filter_sensitive_data("<CIRCL_AUTH>") do
     authorization_field ENV["CIRCL_PASSIVE_USERNAME"] || "foo", ENV["CIRCL_PASSIVE_PASSWORD"] || "bar"
-  }
+  end
   # PassiveTotal
-  config.filter_sensitive_data("<PASSIVETOTAL_AUTH>") {
+  config.filter_sensitive_data("<PASSIVETOTAL_AUTH>") do
     authorization_field ENV["PASSIVETOTAL_USERNAME"] || "foo", ENV["PASSIVETOTAL_API_KEY"] || "bar"
-  }
+  end
 end
 
 # for Rack app / Sinatra controllers

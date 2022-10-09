@@ -6,7 +6,7 @@ module Mihari
   module Emitters
     class TheHive < Base
       # @return [String, nil]
-      attr_reader :api_endpoint
+      attr_reader :url
 
       # @return [String, nil]
       attr_reader :api_key
@@ -17,14 +17,25 @@ module Mihari
       def initialize(*args, **kwargs)
         super(*args, **kwargs)
 
-        @api_endpoint = kwargs[:api_endpoint] || Mihari.config.thehive_api_endpoint
+        @url = kwargs[:url] || kwargs[:api_endpoint] || Mihari.config.thehive_url
         @api_key = kwargs[:api_key] || Mihari.config.thehive_api_key
         @api_version = kwargs[:api_version] || Mihari.config.thehive_api_version
       end
 
       # @return [Boolean]
       def valid?
-        api_endpont? && api_key? && ping?
+        unless url? && api_key?
+          Mihari.logger.info("TheHive URL is not set") unless url?
+          Mihari.logger.info("TheHive API key is not set") unless api_key?
+          return false
+        end
+
+        unless ping?
+          Mihari.logger.info("TheHive URL (#{url}) is not reachable")
+          return false
+        end
+
+        true
       end
 
       def emit(title:, description:, artifacts:, tags: [], **_options)
@@ -57,20 +68,20 @@ module Mihari
       private
 
       def configuration_keys
-        %w[thehive_api_endpoint thehive_api_key]
+        %w[thehive_url thehive_api_key]
       end
 
       def api
-        @api ||= Hachi::API.new(api_endpoint: api_endpoint, api_key: api_key, api_version: normalized_api_version)
+        @api ||= Hachi::API.new(api_endpoint: url, api_key: api_key, api_version: normalized_api_version)
       end
 
       #
-      # Check whether an API endpoint is set or not
+      # Check whether a URL is set or not
       #
       # @return [Boolean]
       #
-      def api_endpont?
-        !api_endpoint.nil?
+      def url?
+        !url.nil?
       end
 
       #
@@ -83,7 +94,10 @@ module Mihari
       end
 
       def payload(title:, description:, artifacts:, tags: [])
-        return v4_payload(title: title, description: description, artifacts: artifacts, tags: tags) if normalized_api_version.nil?
+        if normalized_api_version.nil?
+          return v4_payload(title: title, description: description, artifacts: artifacts,
+            tags: tags)
+        end
 
         v5_payload(title: title, description: description, artifacts: artifacts, tags: tags)
       end
@@ -92,7 +106,9 @@ module Mihari
         {
           title: title,
           description: description,
-          artifacts: artifacts.map { |artifact| { data: artifact.data, data_type: artifact.data_type, message: description } },
+          artifacts: artifacts.map do |artifact|
+                       { data: artifact.data, data_type: artifact.data_type, message: description }
+                     end,
           tags: tags,
           type: "external",
           source: "mihari"
@@ -103,7 +119,9 @@ module Mihari
         {
           title: title,
           description: description,
-          observables: artifacts.map { |artifact| { data: artifact.data, data_type: artifact.data_type, message: description } },
+          observables: artifacts.map do |artifact|
+                         { data: artifact.data, data_type: artifact.data_type, message: description }
+                       end,
           tags: tags,
           type: "external",
           source: "mihari",
@@ -112,23 +130,23 @@ module Mihari
       end
 
       #
-      # Check whether an API endpoint is reachable or not
+      # Check whether a URL is reachable or not
       #
       # @return [Boolean]
       #
       def ping?
-        base_url = api_endpoint.end_with?("/") ? api_endpoint[0..-2] : api_endpoint
+        base_url = url.end_with?("/") ? url[0..-2] : url
 
         if normalized_api_version.nil?
           # for v4
-          base_url = api_endpoint.end_with?("/") ? api_endpoint[0..-2] : api_endpoint
-          url = "#{base_url}/index.html"
+          base_url = url.end_with?("/") ? url[0..-2] : url
+          public_url = "#{base_url}/index.html"
         else
           # for v5
-          url = "#{base_url}/api/v1/status/public"
+          public_url = "#{base_url}/api/v1/status/public"
         end
 
-        http = Net::Ping::HTTP.new(url)
+        http = Net::Ping::HTTP.new(public_url)
 
         # use GET for v5
         http.get_request = true if normalized_api_version

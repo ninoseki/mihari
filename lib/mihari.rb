@@ -84,7 +84,8 @@ module Mihari
 
   setting :ipinfo_api_key, default: ENV.fetch("IPINFO_API_KEY", nil)
 
-  setting :misp_api_endpoint, default: ENV.fetch("MISP_API_ENDPOINT", nil)
+  # TODO: deprecate MISP_API_ENDPOINT
+  setting :misp_url, default: ENV.fetch("MISP_URL", nil) || ENV.fetch("MISP_API_ENDPOINT", nil)
   setting :misp_api_key, default: ENV.fetch("MISP_API_KEY", nil)
 
   setting :onyphe_api_key, default: ENV.fetch("ONYPHE_API_KEY", nil)
@@ -105,7 +106,8 @@ module Mihari
 
   setting :spyse_api_key, default: ENV.fetch("SPYSE_API_KEY", nil)
 
-  setting :thehive_api_endpoint, default: ENV.fetch("THEHIVE_API_ENDPOINT", nil)
+  # TODO: deprecate THEHIVE_API_ENDPOINT
+  setting :thehive_url, default: ENV.fetch("THEHIVE_URL", nil) || ENV.fetch("THEHIVE_API_ENDPOINT", nil)
   setting :thehive_api_key, default: ENV.fetch("THEHIVE_API_KEY", nil)
   setting :thehive_api_version, default: ENV.fetch("THEHIVE_API_VERSION", nil)
 
