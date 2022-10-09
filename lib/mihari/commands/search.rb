@@ -44,7 +44,7 @@ module Mihari
                 data = Mihari::Entities::Alert.represent(alert)
                 puts JSON.pretty_generate(data.as_json)
               else
-                Mihari.logger.info "There is no new artifact"
+                Mihari.logger.info "No new alert created in the database"
               end
 
               # record a rule

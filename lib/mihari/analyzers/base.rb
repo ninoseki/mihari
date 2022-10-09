@@ -72,10 +72,22 @@ module Mihari
       #
       # @param [Mihari::Emitters::Base] emitter
       #
-      # @return [nil]
+      # @return [Mihari::Alert, nil]
       #
       def run_emitter(emitter)
-        emitter.run(title: title, description: description, artifacts: enriched_artifacts, source: source, tags: tags)
+        return if enriched_artifacts.empty?
+
+        alert_or_something = emitter.run(
+          title: title,
+          description: description,
+          artifacts: enriched_artifacts,
+          source: source,
+          tags: tags
+        )
+
+        Mihari.logger.info "Emission by #{emitter.class} is succedded"
+
+        alert_or_something
       rescue StandardError => e
         Mihari.logger.info "Emission by #{emitter.class} is failed: #{e}"
       end
