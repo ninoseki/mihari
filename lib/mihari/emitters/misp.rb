@@ -6,7 +6,7 @@ module Mihari
   module Emitters
     class MISP < Base
       # @return [String, nil]
-      attr_reader :api_endpoint
+      attr_reader :url
 
       # @return [String, nil]
       attr_reader :api_key
@@ -14,18 +14,29 @@ module Mihari
       def initialize(*args, **kwargs)
         super(*args, **kwargs)
 
-        @api_endpoint = kwargs[:api_endpoint] || Mihari.config.misp_api_endpoint
+        @url = kwargs[:url] || kwargs[:api_endpoint] || Mihari.config.misp_url
         @api_key = kwargs[:api_key] || Mihari.config.misp_api_key
 
         ::MISP.configure do |config|
-          config.api_endpoint = api_endpoint
+          config.api_endpoint = url
           config.api_key = api_key
         end
       end
 
       # @return [Boolean]
       def valid?
-        api_endpoint? && api_key? && ping?
+        unless url? && api_key?
+          Mihari.logger.info("MISP URL is not set") unless url?
+          Mihari.logger.info("MISP API key is not set") unless api_key?
+          return false
+        end
+
+        unless ping?
+          Mihari.logger.info("MISP URL (#{url}) is not reachable")
+          return false
+        end
+
+        true
       end
 
       def emit(title:, artifacts:, tags: [], **_options)
@@ -47,7 +58,7 @@ module Mihari
       private
 
       def configuration_keys
-        %w[misp_api_endpoint misp_api_key]
+        %w[misp_url misp_api_key]
       end
 
       #
@@ -103,12 +114,12 @@ module Mihari
       end
 
       #
-      # Check whether an API endpoint is set or not
+      # Check whether a URL is set or not
       #
       # @return [Boolean]
       #
-      def api_endpoint?
-        !api_endpoint.nil? && !api_endpoint.empty?
+      def url?
+        !url.nil? && !url.empty?
       end
 
       #
@@ -121,15 +132,15 @@ module Mihari
       end
 
       #
-      # Check whether an API endpoint is reachable or not
+      # Check whether a URL is reachable or not
       #
       # @return [Boolean]
       #
       def ping?
-        base_url = api_endpoint.end_with?("/") ? api_endpoint[0..-2] : api_endpoint
-        url = "#{base_url}/users/login"
+        base_url = url.end_with?("/") ? url[0..-2] : url
+        login_url = "#{base_url}/users/login"
 
-        http = Net::Ping::HTTP.new(url)
+        http = Net::Ping::HTTP.new(login_url)
         http.ping?
       end
     end

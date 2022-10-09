@@ -5,7 +5,7 @@ class Configuration
   attr_accessor circl_passive_password (): String?
   attr_accessor circl_passive_username (): String?
   attr_accessor ipinfo_api_key (): String?
-  attr_accessor misp_api_endpoint (): String?
+  attr_accessor misp_url (): String?
   attr_accessor misp_api_key (): String?
   attr_accessor onyphe_api_key (): String?
   attr_accessor otx_api_key (): String?
@@ -17,7 +17,7 @@ class Configuration
   attr_accessor slack_channel (): String?
   attr_accessor slack_webhook_url (): String?
   attr_accessor spyse_api_key (): String?
-  attr_accessor thehive_api_endpoint (): String?
+  attr_accessor thehive_url (): String?
   attr_accessor thehive_api_key (): String?
   attr_accessor thehive_api_version (): String?
   attr_accessor urlscan_api_key (): String?

@@ -2,7 +2,7 @@
 http_interactions:
   - request:
       method: post
-      uri: <THEHIVE_API_ENDPOINT>/api/case/artifact/_search?range=0-1
+      uri: <THEHIVE_URL>/api/case/artifact/_search?range=0-1
       body:
         encoding: UTF-8
         string: '{"query":{"_and":[{"_string":"data:1.1.1.1"},{"_string":"dataType:ip"},{"_and":[{"_not":{"status":"Deleted"}},{"_not":{"_in":{"_field":"_type","_values":["dashboard","data","user","analyzer","caseTemplate","reportTemplate","action"]}}}]}]}}'
@@ -14,7 +14,7 @@ http_interactions:
         User-Agent:
           - Ruby
         Host:
-          - "<THEHIVE_API_ENDPOINT>"
+          - "<THEHIVE_URL>"
         Content-Type:
           - application/json
         Authorization:
