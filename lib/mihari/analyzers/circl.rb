@@ -71,7 +71,7 @@ module Mihari
         results = api.dns.query(@query)
         results.filter_map do |result|
           type = result["rrtype"]
-          type == "A" ? result["rdata"] : nil
+          (type == "A") ? result["rdata"] : nil
         end.uniq
       end
 

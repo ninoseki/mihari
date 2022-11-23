@@ -87,13 +87,13 @@ module Mihari
 
       # @return [String, nil]
       def _censys_link
-        data_type == "ip" ? "https://search.censys.io/hosts/#{data}" : nil
+        (data_type == "ip") ? "https://search.censys.io/hosts/#{data}" : nil
       end
       memoize :_censys_link
 
       # @return [String, nil]
       def _shodan_link
-        data_type == "ip" ? "https://www.shodan.io/host/#{data}" : nil
+        (data_type == "ip") ? "https://www.shodan.io/host/#{data}" : nil
       end
       memoize :_shodan_link
 
