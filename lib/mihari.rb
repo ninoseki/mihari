@@ -104,8 +104,6 @@ module Mihari
   setting :slack_channel, default: ENV.fetch("SLACK_CHANNEL", nil)
   setting :slack_webhook_url, default: ENV.fetch("SLACK_WEBHOOK_URL", nil)
 
-  setting :spyse_api_key, default: ENV.fetch("SPYSE_API_KEY", nil)
-
   # TODO: deprecate THEHIVE_API_ENDPOINT
   setting :thehive_url, default: ENV.fetch("THEHIVE_URL", nil) || ENV.fetch("THEHIVE_API_ENDPOINT", nil)
   setting :thehive_api_key, default: ENV.fetch("THEHIVE_API_KEY", nil)
