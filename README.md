@@ -5,9 +5,15 @@
 [![Coverage Status](https://coveralls.io/repos/github/ninoseki/mihari/badge.svg?branch=master)](https://coveralls.io/github/ninoseki/mihari?branch=master)
 [![CodeFactor](https://www.codefactor.io/repository/github/ninoseki/mihari/badge)](https://www.codefactor.io/repository/github/ninoseki/mihari)
 
-![img](https://github.com/ninoseki/mihari/raw/master/images/logo.png)
-
-[![](images/tines.png)](https://tines.io?utm_source=github&utm_medium=sponsorship&utm_campaign=ninoseki)
+<p align="center">
+  <img src="https://github.com/ninoseki/mihari/raw/master/images/logo.png"/>
+  <a href="https://tines.io?utm_source=github&utm_medium=sponsorship&utm_campaign=ninoseki">
+  <br/>
+  <img src="https://github.com/ninoseki/mihari/raw/master/images/Tines-Full_Logo-Tines_Black.png"/>
+  </a>
+  <br/>
+  Mihari is proudly supported by <a href="https://tines.io?utm_source=github&utm_medium=sponsorship&utm_campaign=ninoseki">Tines</a>
+</p>
 
 Mihari is a tool for OSINT based threat hunting.
 
