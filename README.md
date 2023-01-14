@@ -7,9 +7,9 @@
 
 <p align="center">
   <img src="https://github.com/ninoseki/mihari/raw/master/images/logo.png"/>
-  <a href="https://tines.io?utm_source=github&utm_medium=sponsorship&utm_campaign=ninoseki">
   <br/>
-  <img src="https://github.com/ninoseki/mihari/raw/master/images/Tines-Full_Logo-Tines_Black.png"/>
+  <a href="https://tines.io?utm_source=github&utm_medium=sponsorship&utm_campaign=ninoseki">
+    <img src="https://github.com/ninoseki/mihari/raw/master/images/Tines-Full_Logo-Tines_Black.png"/>
   </a>
   <br/>
   Mihari is proudly supported by <a href="https://tines.io?utm_source=github&utm_medium=sponsorship&utm_campaign=ninoseki">Tines</a>
