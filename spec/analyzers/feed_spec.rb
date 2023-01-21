@@ -10,7 +10,7 @@ RSpec.describe Mihari::Analyzers::Feed, :vcr do
           http_request_payload: { query: "get_iocs", days: 1 },
           http_request_type: "application/json",
           http_request_headers: {
-            'api-key': ENV["THREATFOX_API_KEY"]
+            "api-key": ENV["THREATFOX_API_KEY"]
           },
           selector: "map(&:data).unwrap.map(&:ioc)"
         )
