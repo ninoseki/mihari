@@ -34,7 +34,7 @@ RSpec.describe Mihari::Emitters::HTTP, :vcr do
     let(:uri) { "https://httpbin.org/post" }
 
     it do
-      emitter = described_class.new(uri: uri, http_request_headers: { 'Content-Type': "application/json" })
+      emitter = described_class.new(uri: uri, http_request_headers: { "Content-Type": "application/json" })
       res = emitter.emit(title: title, description: description, artifacts: artifacts, source: source, tags: tags)
 
       json_data = JSON.parse(res.body.to_s)["json"]
