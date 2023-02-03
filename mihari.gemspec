@@ -45,7 +45,7 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency "vcr", "~> 6.1"
   spec.add_development_dependency "webmock", "~> 3.18"
 
-  spec.add_dependency "activerecord", "7.0.4.1"
+  spec.add_dependency "activerecord", "7.0.4.2"
   spec.add_dependency "addressable", "2.8.1"
   spec.add_dependency "awrence", "2.0.1"
   spec.add_dependency "binaryedge", "0.1.0"
