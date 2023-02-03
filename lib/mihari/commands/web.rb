@@ -8,7 +8,7 @@ module Mihari
           desc "web", "Launch the web app"
           method_option :port, type: :numeric, default: 9292, desc: "Hostname to listen on"
           method_option :host, type: :string, default: "localhost", desc: "Port to listen on"
-          method_option :threads, type: :string, default: "1:1", desc: "min:max threads to use"
+          method_option :threads, type: :string, default: "0:5", desc: "min:max threads to use"
           method_option :verbose, type: :boolean, default: true, desc: "Report each request"
           method_option :worker_timeout, type: :numeric, default: 60, desc: "Worker timeout value (in seconds)"
           def web

@@ -31,7 +31,7 @@ module Mihari
           use Rack::Cors do
             allow do
               origins "*"
-              resource "*", headers: :any, methods: [:get, :post, :put, :delete, :options]
+              resource "*", headers: :any, methods: %i[get post put delete options]
             end
           end
 
@@ -42,7 +42,7 @@ module Mihari
         end.to_app
       end
 
-      def run!(port: 9292, host: "localhost", threads: "1:1", verbose: false)
+      def run!(port: 9292, host: "localhost", threads: "0:5", verbose: false, worker_timeout: 60)
         url = "http://#{host}:#{port}"
 
         # set maximum number of threads to use as PARALLEL_PROCESSOR_COUNT (if it is not set)
@@ -50,8 +50,14 @@ module Mihari
         # TODO: is this the best way?
         _min_thread, max_thread = threads.split(":")
         ENV["PARALLEL_PROCESSOR_COUNT"] = max_thread if ENV["PARALLEL_PROCESSOR_COUNT"].nil?
-
-        Rack::Handler::Puma.run(instance, Port: port, Host: host, Threads: threads, Verbose: verbose) do |_launcher|
+        Rack::Handler::Puma.run(
+          instance,
+          Port: port,
+          Host: host,
+          Threads: threads,
+          Verbose: verbose,
+          worker_timeout: worker_timeout
+        ) do |_launcher|
           Launchy.open(url) if ENV["RACK_ENV"] != "development"
         rescue Launchy::CommandNotFoundError
           # ref. https://github.com/ninoseki/mihari/issues/477
