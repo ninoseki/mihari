@@ -38,7 +38,7 @@ RSpec.describe Mihari::Schemas::RuleContract do
           queries: [
             { analyzer: "shodan", query: "foo" }
           ],
-          allowed_data_types: ["ip"]
+          data_types: ["ip"]
         )
         expect(result.errors.empty?).to eq(true)
       end
@@ -73,7 +73,7 @@ RSpec.describe Mihari::Schemas::RuleContract do
         queries: [
           { analyzer: "shodan", query: "foo" }
         ],
-        allowed_data_types: ["foo"] # should be any of ip, domain, mail, url or hash
+        data_types: ["foo"] # should be any of ip, domain, mail, url or hash
       )
       expect(result.errors.empty?).to eq(false)
     end
@@ -105,7 +105,7 @@ RSpec.describe Mihari::Schemas::RuleContract do
     end
   end
 
-  context "with invalid ignore_old_artifacts" do
+  context "with invalid artifact_lifetime" do
     it do
       result = contract.call(
         description: "foo",
@@ -113,21 +113,7 @@ RSpec.describe Mihari::Schemas::RuleContract do
         queries: [
           { analyzer: "shodan", query: "foo" }
         ],
-        ignore_old_artifacts: "foo" # should be boolean (true or false)
-      )
-      expect(result.errors.empty?).to eq(false)
-    end
-  end
-
-  context "with invalid ignore_threshold" do
-    it do
-      result = contract.call(
-        description: "foo",
-        title: "foo",
-        queries: [
-          { analyzer: "shodan", query: "foo" }
-        ],
-        ignore_threshold: "foo" # should be integer
+        artifact_lifetime: "foo" # should be an integer
       )
       expect(result.errors.empty?).to eq(false)
     end

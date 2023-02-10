@@ -118,14 +118,13 @@ module Mihari
           description: self[:description],
           tags: self[:tags],
           queries: self[:queries],
-          allowed_data_types: self[:allowed_data_types],
+          data_types: self[:data_types],
           disallowed_data_values: self[:disallowed_data_values],
           emitters: self[:emitters],
           enrichers: self[:enrichers],
           id: id
         )
-        analyzer.ignore_old_artifacts = self[:ignore_old_artifacts]
-        analyzer.ignore_threshold = self[:ignore_threshold]
+        analyzer.artifact_lifetime = self[:artifact_lifetime]
 
         analyzer
       end

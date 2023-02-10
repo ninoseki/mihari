@@ -10,13 +10,14 @@ module Mihari
       include Mixins::Database
       include Mixins::Retriable
 
-      attr_accessor :ignore_old_artifacts, :ignore_threshold
+      # @return [Integer, nil] Artifact lifetime (TTL) in seconds
+      attr_accessor :artifact_lifetime
 
       def initialize(*args, **kwargs)
         super
 
-        @ignore_old_artifacts = false
-        @ignore_threshold = 0
+        @artifact_lifetime = artifact_lifetime
+        @base_time = Time.now.utc
       end
 
       # @return [Array<String>, Array<Mihari::Artifact>]
@@ -124,7 +125,7 @@ module Mihari
       #
       def unique_artifacts
         @unique_artifacts ||= normalized_artifacts.select do |artifact|
-          artifact.unique?(ignore_old_artifacts: ignore_old_artifacts, ignore_threshold: ignore_threshold)
+          artifact.unique?(base_time: @base_time, artifact_lifetime: artifact_lifetime)
         end
       end
 

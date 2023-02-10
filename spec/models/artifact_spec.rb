@@ -27,27 +27,31 @@ RSpec.describe Mihari::Artifact, :vcr do
       expect(artifact).to be_unique
     end
 
-    context "with --ignore-old-artifacts" do
-      let(:days) { 2 }
+    context "with artifact_lifetime" do
       let(:data) { "1.1.1.1" }
+      let(:artifact_lifetime) { 60 }
+      let(:base_time) { Time.now.utc }
 
       before do
         described_class.all.each(&:delete)
-
-        Timecop.freeze((-days).days.from_now) do
-          described_class.create(data: data)
-        end
       end
 
       it do
-        artifact = described_class.new(data: data)
-
-        (0..days).each do |day|
-          expect(artifact.unique?(ignore_old_artifacts: true, ignore_threshold: day)).to eq(true)
+        Timecop.freeze(base_time) do
+          described_class.create(data: data)
         end
 
-        expect(artifact.unique?(ignore_old_artifacts: true, ignore_threshold: days + 1)).to eq(false)
-        expect(artifact.unique?(ignore_old_artifacts: true, ignore_threshold: days + 2)).to eq(false)
+        artifact = described_class.new(data: data)
+        expect(artifact.unique?(base_time: base_time, artifact_lifetime: artifact_lifetime)).to eq(false)
+      end
+
+      it do
+        Timecop.freeze(base_time - (artifact_lifetime + 1).seconds) do
+          described_class.create(data: data)
+        end
+
+        artifact = described_class.new(data: data)
+        expect(artifact.unique?(base_time: base_time, artifact_lifetime: artifact_lifetime)).to eq(true)
       end
     end
   end
