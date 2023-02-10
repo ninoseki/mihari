@@ -52,7 +52,7 @@ module Mihari
       return true if artifact.nil?
 
       # check whetehr the artifact is decayed or not
-      return true if artifact_lifetime.nil?
+      return false if artifact_lifetime.nil?
 
       decayed_at = base_time - (artifact_lifetime || -1).seconds
       artifact.created_at < decayed_at

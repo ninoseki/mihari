@@ -16,7 +16,7 @@ module Mihari
       def initialize(*args, **kwargs)
         super
 
-        @artifact_lifetime = artifact_lifetime
+        @artifact_lifetime = nil
         @base_time = Time.now.utc
       end
 
