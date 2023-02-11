@@ -24,8 +24,8 @@ module Mihari
             yes = options["yes"] || false
             unless yes
               with_db_connection do
-                next if Mihari::Rule.find(rule.id).data == rule.data
-                unless yes?("This operation will overwrite the rule in the database (Rule ID: #{rule.id}). Are you sure you want to update the rule? (yes/no)")
+                next if Mihari::Rule.find(rule.id).data == rule.data.deep_stringify_keys
+                unless yes?("This operation will overwrite the rule in the database (Rule ID: #{rule.id}). Are you sure you want to update the rule? (y/n)")
                   return
                 end
               rescue ActiveRecord::RecordNotFound
