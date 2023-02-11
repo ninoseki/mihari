@@ -47,7 +47,7 @@ class V5Schema < ActiveRecord::Migration[7.0]
 
     create_table :autonomous_systems, if_not_exists: true do |t|
       t.integer :asn, null: false
-      t.timestamps
+      t.datetime :created_at
 
       t.belongs_to :artifact, foreign_key: true
     end
@@ -55,7 +55,7 @@ class V5Schema < ActiveRecord::Migration[7.0]
     create_table :geolocations, if_not_exists: true do |t|
       t.string :country, null: false
       t.string :country_code, null: false
-      t.timestamps
+      t.datetime :created_at
 
       t.belongs_to :artifact, foreign_key: true
     end
@@ -67,7 +67,7 @@ class V5Schema < ActiveRecord::Migration[7.0]
       t.date :expires_on
       t.json :registrar
       t.json :contacts
-      t.timestamps
+      t.datetime :created_at
 
       t.belongs_to :artifact, foreign_key: true
     end
@@ -75,41 +75,41 @@ class V5Schema < ActiveRecord::Migration[7.0]
     create_table :dns_records, if_not_exists: true do |t|
       t.string :resource, null: false
       t.string :value, null: false
-      t.timestamps
+      t.datetime :created_at
 
       t.belongs_to :artifact, foreign_key: true
     end
 
     create_table :reverse_dns_names, if_not_exists: true do |t|
       t.string :name, null: false
-      t.timestamps
+      t.datetime :created_at
 
       t.belongs_to :artifact, foreign_key: true
     end
 
     create_table :cpes, if_not_exists: true do |t|
       t.string :cpe, null: false
-      t.timestamps
+      t.datetime :created_at
 
       t.belongs_to :artifact, foreign_key: true
     end
 
     create_table :ports, if_not_exists: true do |t|
       t.integer :port, null: false
-      t.timestamps
+      t.datetime :created_at
 
       t.belongs_to :artifact, foreign_key: true
     end
 
     create_table :tags, if_not_exists: true do |t|
       t.string :name, null: false
-      t.timestamps
+      t.datetime :created_at
     end
 
     create_table :taggings, if_not_exists: true do |t|
       t.integer :tag_id
       t.integer :alert_id
-      t.timestamps
+      t.datetime :created_at
     end
 
     add_index :taggings, :tag_id, if_not_exists: true
