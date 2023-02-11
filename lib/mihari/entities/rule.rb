@@ -25,5 +25,9 @@ module Mihari
       expose :current_page, documentation: { type: Integer, required: true }, as: :currentPage
       expose :page_size, documentation: { type: Integer, required: true }, as: :pageSize
     end
+
+    class RuleIDs < Grape::Entity
+      expose :rule_ids, documentation: { type: Array[String], required: true }
+    end
   end
 end

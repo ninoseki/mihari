@@ -22,20 +22,20 @@ RSpec.describe Mihari::Emitters::HTTP, :vcr do
   describe "#emit" do
     let(:title) { "title" }
     let(:description) { "description" }
-    let(:artifacts) {
+    let(:artifacts) do
       [
         Mihari::Artifact.new(data: "1.1.1.1"),
         Mihari::Artifact.new(data: "github.com")
       ]
-    }
-    let(:source) { "test" }
+    end
+    let(:rule_id) { "test" }
     let(:tags) { [] }
 
     let(:uri) { "https://httpbin.org/post" }
 
     it do
       emitter = described_class.new(uri: uri, http_request_headers: { "Content-Type": "application/json" })
-      res = emitter.emit(title: title, description: description, artifacts: artifacts, source: source, tags: tags)
+      res = emitter.emit(title: title, description: description, artifacts: artifacts, rule_id: rule_id, tags: tags)
 
       json_data = JSON.parse(res.body.to_s)["json"]
       expect(json_data).to be_a(Hash)

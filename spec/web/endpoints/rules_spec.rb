@@ -14,12 +14,13 @@ RSpec.describe Mihari::Endpoints::Rules do
   let(:description) { "dummy" }
   let(:queries) { [{ analyzer: "crtsh", query: "foo" }] }
 
-  let(:data) {
+  let(:data) do
     { title: title, description: description, queries: queries }
-  }
+  end
+  let(:yaml) { data.to_yaml }
 
   before do
-    @rule = Mihari::Rule.new(id: id, title: title, description: description, data: data)
+    @rule = Mihari::Rule.new(id: id, title: title, description: description, data: data, yaml: yaml)
     @rule.save
   end
 

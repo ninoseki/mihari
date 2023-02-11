@@ -5,6 +5,8 @@ module Mihari
     class Base
       extend Dry::Initializer
 
+      option :rule_id, default: proc { "" }
+
       include Mixins::AutonomousSystem
       include Mixins::Configurable
       include Mixins::Database
@@ -14,7 +16,7 @@ module Mihari
       attr_accessor :artifact_lifetime
 
       def initialize(*args, **kwargs)
-        super
+        super(*args, **kwargs)
 
         @artifact_lifetime = nil
         @base_time = Time.now.utc
@@ -82,8 +84,8 @@ module Mihari
           title: title,
           description: description,
           artifacts: enriched_artifacts,
-          source: source,
-          tags: tags
+          tags: tags,
+          rule_id: @rule_id
         )
 
         Mihari.logger.info "Emission by #{emitter.class} is succedded"
@@ -113,7 +115,10 @@ module Mihari
           # No need to set data_type manually
           # It is set automatically in #initialize
           artifact.is_a?(Artifact) ? artifact : Artifact.new(data: artifact, source: source)
-        end.select(&:valid?).uniq(&:data)
+        end.select(&:valid?).uniq(&:data).map do |artifact|
+          artifact.rule_id = @rule_id
+          artifact
+        end
       end
 
       private

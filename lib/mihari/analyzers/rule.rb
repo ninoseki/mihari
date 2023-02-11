@@ -39,11 +39,11 @@ module Mihari
     class Rule < Base
       include Mixins::DisallowedDataValue
 
+      option :id
       option :title
       option :description
       option :queries
 
-      option :id, default: proc { "" }
       option :tags, default: proc { [] }
       option :data_types, default: proc { DEFAULT_DATA_TYPES }
       option :disallowed_data_values, default: proc { [] }
@@ -54,9 +54,9 @@ module Mihari
       attr_reader :source
 
       def initialize(**kwargs)
-        super(**kwargs)
+        kwargs[:rule_id] = kwargs[:id]
 
-        @source = id
+        super(**kwargs)
 
         @emitters = emitters || DEFAULT_EMITTERS
         @enrichers = enrichers || DEFAULT_ENRICHERS
@@ -83,7 +83,11 @@ module Mihari
           # set interval in the top level
           options = parmas[:options] || {}
           interval = options[:interval]
+
           parmas[:interval] = interval if interval
+
+          # set rule ID
+          parmas[:rule_id] = id
 
           analyzer = klass.new(query, **parmas)
 

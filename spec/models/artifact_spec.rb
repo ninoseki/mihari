@@ -3,54 +3,56 @@
 require "timecop"
 
 RSpec.describe Mihari::Artifact, :vcr do
+  include_context "with database fixtures"
+
+  let(:alert) { Mihari::Alert.first }
+  let(:alert_id) { alert.id }
+  let(:rule_id) { alert.rule_id }
+  let(:aritfact_data) { Mihari::Artifact.where(alert_id: alert_id).first.data }
+
   describe "#validate" do
     it do
-      artifact = described_class.new(data: "1.1.1.1")
+      artifact = described_class.new(data: "9.9.9.9", alert_id: alert_id)
       expect(artifact).to be_valid
       expect(artifact.data_type).to eq("ip")
     end
   end
 
   describe "#unique?" do
-    before do
-      described_class.all.each(&:delete)
-      described_class.create(data: "1.1.1.1")
-    end
-
     it do
-      artifact = described_class.new(data: "1.1.1.1")
+      artifact = described_class.new(data: aritfact_data, alert_id: alert_id)
+      artifact.rule_id = rule_id
+
       expect(artifact).not_to be_unique
     end
 
     it do
-      artifact = described_class.new(data: "2.2.2.2")
+      artifact = described_class.new(data: "2.2.2.2", alert_id: alert_id)
       expect(artifact).to be_unique
     end
 
     context "with artifact_lifetime" do
-      let(:data) { "1.1.1.1" }
+      let(:data) { "9.9.9.9" }
       let(:artifact_lifetime) { 60 }
       let(:base_time) { Time.now.utc }
 
-      before do
-        described_class.all.each(&:delete)
-      end
-
       it do
         Timecop.freeze(base_time) do
-          described_class.create(data: data)
+          described_class.create(data: data, alert_id: alert_id)
         end
 
-        artifact = described_class.new(data: data)
+        artifact = described_class.new(data: data, alert_id: alert_id)
+        artifact.rule_id = rule_id
+
         expect(artifact.unique?(base_time: base_time, artifact_lifetime: artifact_lifetime)).to eq(false)
       end
 
       it do
         Timecop.freeze(base_time - (artifact_lifetime + 1).seconds) do
-          described_class.create(data: data)
+          described_class.create(data: data, alert_id: alert_id)
         end
 
-        artifact = described_class.new(data: data)
+        artifact = described_class.new(data: data, alert_id: alert_id)
         expect(artifact.unique?(base_time: base_time, artifact_lifetime: artifact_lifetime)).to eq(true)
       end
     end
@@ -60,7 +62,7 @@ RSpec.describe Mihari::Artifact, :vcr do
     let(:data) { "example.com" }
 
     it do
-      artifact = described_class.new(data: data)
+      artifact = described_class.new(data: data, alert_id: alert_id)
       expect(artifact.whois_record).to be_nil
 
       artifact.enrich_whois
@@ -71,7 +73,7 @@ RSpec.describe Mihari::Artifact, :vcr do
       let(:data) { "https://example.com" }
 
       it do
-        artifact = described_class.new(data: data)
+        artifact = described_class.new(data: data, alert_id: alert_id)
         expect(artifact.whois_record).to be_nil
 
         artifact.enrich_whois
@@ -84,7 +86,7 @@ RSpec.describe Mihari::Artifact, :vcr do
     let(:data) { "example.com" }
 
     it do
-      artifact = described_class.new(data: data)
+      artifact = described_class.new(data: data, alert_id: alert_id)
       expect(artifact.dns_records.length).to eq(0)
 
       artifact.enrich_dns
@@ -95,7 +97,7 @@ RSpec.describe Mihari::Artifact, :vcr do
       let(:data) { "https://example.com" }
 
       it do
-        artifact = described_class.new(data: data)
+        artifact = described_class.new(data: data, alert_id: alert_id)
         expect(artifact.dns_records.length).to eq(0)
 
         artifact.enrich_dns
@@ -108,7 +110,7 @@ RSpec.describe Mihari::Artifact, :vcr do
     let(:data) { "1.1.1.1" }
 
     it do
-      artifact = described_class.new(data: data)
+      artifact = described_class.new(data: data, alert_id: alert_id)
       expect(artifact.geolocation).to eq(nil)
 
       artifact.enrich_geolocation
@@ -120,7 +122,7 @@ RSpec.describe Mihari::Artifact, :vcr do
     let(:data) { "1.1.1.1" }
 
     it do
-      artifact = described_class.new(data: data)
+      artifact = described_class.new(data: data, alert_id: alert_id)
       expect(artifact.autonomous_system).to eq(nil)
 
       artifact.enrich_autonomous_system
@@ -133,7 +135,7 @@ RSpec.describe Mihari::Artifact, :vcr do
       let(:data) { "1.1.1.1" }
 
       it do
-        artifact = described_class.new(data: data)
+        artifact = described_class.new(data: data, alert_id: alert_id)
         expect(artifact.autonomous_system).to eq(nil)
         expect(artifact.geolocation).to eq(nil)
 
@@ -147,7 +149,7 @@ RSpec.describe Mihari::Artifact, :vcr do
       let(:data) { "1.1.1.1" }
 
       it do
-        artifact = described_class.new(data: data)
+        artifact = described_class.new(data: data, alert_id: alert_id)
         expect(artifact.reverse_dns_names.empty?).to be true
         expect(artifact.ports.empty?).to be true
 
@@ -161,7 +163,7 @@ RSpec.describe Mihari::Artifact, :vcr do
       let(:data) { "example.com" }
 
       it do
-        artifact = described_class.new(data: data)
+        artifact = described_class.new(data: data, alert_id: alert_id)
         expect(artifact.dns_records.empty?).to be true
 
         artifact.enrich_by_enricher("google_public_dns")
@@ -173,7 +175,7 @@ RSpec.describe Mihari::Artifact, :vcr do
       let(:data) { "example.com" }
 
       it do
-        artifact = described_class.new(data: data)
+        artifact = described_class.new(data: data, alert_id: alert_id)
         expect(artifact.whois_record).to be_nil
 
         artifact.enrich_by_enricher("whois")

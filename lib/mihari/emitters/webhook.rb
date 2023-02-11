@@ -8,14 +8,14 @@ module Mihari
         webhook_url?
       end
 
-      def emit(title:, description:, artifacts:, source:, tags:)
+      def emit(title:, description:, artifacts:, rule_id:, tags:)
         return if artifacts.empty?
 
         headers = { "content-type": "application/x-www-form-urlencoded" }
         headers["content-type"] = "application/json" if use_json_body?
 
         emitter = Emitters::HTTP.new(uri: Mihari.config.webhook_url)
-        emitter.emit(title: title, description: description, artifacts: artifacts, source: source, tags: tags)
+        emitter.emit(title: title, description: description, artifacts: artifacts, rule_id: rule_id, tags: tags)
       end
 
       private

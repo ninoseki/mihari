@@ -4,7 +4,7 @@ require "yaml"
 
 module Mihari
   class Rule < ActiveRecord::Base
-    has_many :alerts, foreign_key: :source
+    has_many :alerts, dependent: :destroy
 
     def symbolized_data
       @symbolized_data ||= data.deep_symbolize_keys

@@ -5,6 +5,7 @@ require "yaml"
 RSpec.describe Mihari::Structs::Rule do
   let(:data) do
     {
+      id: "foo",
       description: "foo",
       title: "foo",
       queries: [

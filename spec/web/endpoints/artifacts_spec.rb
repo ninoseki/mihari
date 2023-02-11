@@ -8,14 +8,8 @@ RSpec.describe Mihari::Endpoints::Artifacts, :vcr do
     Mihari::Endpoints::Artifacts
   end
 
-  before do
-    @artifact = Mihari::Artifact.new(data: "dummy.artifact.example.com")
-    @artifact.save
-  end
-
-  after do
-    @artifact.destroy
-  end
+  let(:artifact) { Mihari::Artifact.first }
+  let(:alert) { Mihari::Alert.first }
 
   describe "get /api/artifacts/:id" do
     it "returns 400" do
@@ -29,25 +23,21 @@ RSpec.describe Mihari::Endpoints::Artifacts, :vcr do
     end
 
     it "returns 200" do
-      get "/api/artifacts/#{@artifact.id}"
+      get "/api/artifacts/#{artifact.id}"
       expect(last_response.status).to eq(200)
 
       json = JSON.parse(last_response.body.to_s)
       expect(json).to be_a(Hash)
-      expect(json["id"]).to eq(@artifact.id)
-
-      # the artifact is not enriched so those attrs should be nil
-      expect(json["reverseDnsNames"]).to eq(nil)
-      expect(json["dnsRecords"]).to eq(nil)
+      expect(json["id"]).to eq(artifact.id)
     end
 
     context "with enriched artifact" do
       before do
-        @enriched_domain_artifact = Mihari::Artifact.new(data: "example.com")
+        @enriched_domain_artifact = Mihari::Artifact.new(data: "example.com", alert_id: alert.id)
         @enriched_domain_artifact.save
         @enriched_domain_artifact.enrich_dns
 
-        @enriched_ip_artifact = Mihari::Artifact.new(data: "1.1.1.1")
+        @enriched_ip_artifact = Mihari::Artifact.new(data: "1.1.1.1", alert_id: alert.id)
         @enriched_ip_artifact.save
         @enriched_ip_artifact.enrich_reverse_dns
       end
@@ -76,7 +66,7 @@ RSpec.describe Mihari::Endpoints::Artifacts, :vcr do
 
   describe "get /api/artifacts/:id/enrich" do
     it "returns 201" do
-      get "/api/artifacts/#{@artifact.id}/enrich"
+      get "/api/artifacts/#{artifact.id}/enrich"
       expect(last_response.status).to eq(201)
     end
   end
@@ -93,7 +83,7 @@ RSpec.describe Mihari::Endpoints::Artifacts, :vcr do
     end
 
     it "returns 201" do
-      delete "/api/artifacts/#{@artifact.id}"
+      delete "/api/artifacts/#{artifact.id}"
       expect(last_response.status).to eq(204)
     end
   end

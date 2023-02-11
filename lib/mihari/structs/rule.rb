@@ -70,7 +70,7 @@ module Mihari
       # @return [String]
       #
       def id
-        @id ||= data[:id] || UUIDTools::UUID.md5_create(UUIDTools::UUID_URL_NAMESPACE, data.to_yaml).to_s
+        @id ||= data[:id]
       end
 
       #

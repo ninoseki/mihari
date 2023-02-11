@@ -1,8 +1,8 @@
-title: "foo"
-description: "foo"
+id: test
+title: foo
+description: foo
 queries:
-  - analyzer: "shodan"
+  - analyzer: shodan
     query: "ip:1.1.1.1"
-
-  - analyzer: "crtsh"
-    query: "example.com"
+  - analyzer: crtsh
+    query: example.com

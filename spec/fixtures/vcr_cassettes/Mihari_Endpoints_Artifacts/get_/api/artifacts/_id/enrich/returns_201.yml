@@ -2,7 +2,7 @@
 http_interactions:
 - request:
     method: get
-    uri: https://dns.google/resolve?name=dummy.artifact.example.com&type=A
+    uri: https://ipinfo.io/1.1.1.1/json
     body:
       encoding: US-ASCII
       string: ''
@@ -14,240 +14,49 @@ http_interactions:
       User-Agent:
       - Ruby
       Host:
-      - dns.google
+      - ipinfo.io
+      Authorization:
+      - Bearer <IPINFO_API_KEY>
   response:
     status:
-      code: 200
-      message: OK
+      code: 403
+      message: Forbidden
     headers:
-      X-Content-Type-Options:
-      - nosniff
-      Strict-Transport-Security:
-      - max-age=31536000; includeSubDomains; preload
       Access-Control-Allow-Origin:
       - "*"
-      Date:
-      - Tue, 31 May 2022 08:48:43 GMT
-      Expires:
-      - Tue, 31 May 2022 08:48:43 GMT
-      Cache-Control:
-      - private, max-age=746
-      Content-Type:
-      - application/json; charset=UTF-8
-      Server:
-      - HTTP server (unknown)
-      X-Xss-Protection:
-      - '0'
       X-Frame-Options:
       - SAMEORIGIN
+      X-Xss-Protection:
+      - 1; mode=block
+      X-Content-Type-Options:
+      - nosniff
+      Referrer-Policy:
+      - strict-origin-when-cross-origin
+      Content-Type:
+      - application/json; charset=utf-8
+      Date:
+      - Sat, 11 Feb 2023 07:09:45 GMT
+      X-Envoy-Upstream-Service-Time:
+      - '3'
+      Strict-Transport-Security:
+      - max-age=2592000; includeSubDomains
+      Vary:
+      - Accept-Encoding
+      Via:
+      - 1.1 google
       Alt-Svc:
-      - h3=":443"; ma=2592000,h3-29=":443"; ma=2592000,h3-Q050=":443"; ma=2592000,h3-Q046=":443";
-        ma=2592000,h3-Q043=":443"; ma=2592000,quic=":443"; ma=2592000; v="46,43"
+      - h3=":443"; ma=2592000,h3-29=":443"; ma=2592000
       Transfer-Encoding:
       - chunked
     body:
       encoding: ASCII-8BIT
-      string: '{"Status":3,"TC":false,"RD":true,"RA":true,"AD":true,"CD":false,"Question":[{"name":"dummy.artifact.example.com.","type":1}],"Authority":[{"name":"example.com.","type":6,"TTL":746,"data":"ns.icann.org.
-        noc.dns.icann.org. 2022040434 7200 3600 1209600 3600"}]}'
-  recorded_at: Tue, 31 May 2022 08:48:43 GMT
-- request:
-    method: get
-    uri: https://dns.google/resolve?name=dummy.artifact.example.com&type=AAAA
-    body:
-      encoding: US-ASCII
-      string: ''
-    headers:
-      Accept-Encoding:
-      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
-      Accept:
-      - "*/*"
-      User-Agent:
-      - Ruby
-      Host:
-      - dns.google
-  response:
-    status:
-      code: 200
-      message: OK
-    headers:
-      X-Content-Type-Options:
-      - nosniff
-      Strict-Transport-Security:
-      - max-age=31536000; includeSubDomains; preload
-      Access-Control-Allow-Origin:
-      - "*"
-      Date:
-      - Tue, 31 May 2022 08:48:43 GMT
-      Expires:
-      - Tue, 31 May 2022 08:48:43 GMT
-      Cache-Control:
-      - private, max-age=746
-      Content-Type:
-      - application/json; charset=UTF-8
-      Server:
-      - HTTP server (unknown)
-      X-Xss-Protection:
-      - '0'
-      X-Frame-Options:
-      - SAMEORIGIN
-      Alt-Svc:
-      - h3=":443"; ma=2592000,h3-29=":443"; ma=2592000,h3-Q050=":443"; ma=2592000,h3-Q046=":443";
-        ma=2592000,h3-Q043=":443"; ma=2592000,quic=":443"; ma=2592000; v="46,43"
-      Transfer-Encoding:
-      - chunked
-    body:
-      encoding: ASCII-8BIT
-      string: '{"Status":3,"TC":false,"RD":true,"RA":true,"AD":true,"CD":false,"Question":[{"name":"dummy.artifact.example.com.","type":28}],"Authority":[{"name":"example.com.","type":6,"TTL":746,"data":"ns.icann.org.
-        noc.dns.icann.org. 2022040434 7200 3600 1209600 3600"}]}'
-  recorded_at: Tue, 31 May 2022 08:48:43 GMT
-- request:
-    method: get
-    uri: https://dns.google/resolve?name=dummy.artifact.example.com&type=CNAME
-    body:
-      encoding: US-ASCII
-      string: ''
-    headers:
-      Accept-Encoding:
-      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
-      Accept:
-      - "*/*"
-      User-Agent:
-      - Ruby
-      Host:
-      - dns.google
-  response:
-    status:
-      code: 200
-      message: OK
-    headers:
-      X-Content-Type-Options:
-      - nosniff
-      Strict-Transport-Security:
-      - max-age=31536000; includeSubDomains; preload
-      Access-Control-Allow-Origin:
-      - "*"
-      Date:
-      - Tue, 31 May 2022 08:48:43 GMT
-      Expires:
-      - Tue, 31 May 2022 08:48:43 GMT
-      Cache-Control:
-      - private, max-age=746
-      Content-Type:
-      - application/json; charset=UTF-8
-      Server:
-      - HTTP server (unknown)
-      X-Xss-Protection:
-      - '0'
-      X-Frame-Options:
-      - SAMEORIGIN
-      Alt-Svc:
-      - h3=":443"; ma=2592000,h3-29=":443"; ma=2592000,h3-Q050=":443"; ma=2592000,h3-Q046=":443";
-        ma=2592000,h3-Q043=":443"; ma=2592000,quic=":443"; ma=2592000; v="46,43"
-      Transfer-Encoding:
-      - chunked
-    body:
-      encoding: ASCII-8BIT
-      string: '{"Status":3,"TC":false,"RD":true,"RA":true,"AD":true,"CD":false,"Question":[{"name":"dummy.artifact.example.com.","type":5}],"Authority":[{"name":"example.com.","type":6,"TTL":746,"data":"ns.icann.org.
-        noc.dns.icann.org. 2022040434 7200 3600 1209600 3600"}]}'
-  recorded_at: Tue, 31 May 2022 08:48:43 GMT
-- request:
-    method: get
-    uri: https://dns.google/resolve?name=dummy.artifact.example.com&type=TXT
-    body:
-      encoding: US-ASCII
-      string: ''
-    headers:
-      Accept-Encoding:
-      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
-      Accept:
-      - "*/*"
-      User-Agent:
-      - Ruby
-      Host:
-      - dns.google
-  response:
-    status:
-      code: 200
-      message: OK
-    headers:
-      X-Content-Type-Options:
-      - nosniff
-      Strict-Transport-Security:
-      - max-age=31536000; includeSubDomains; preload
-      Access-Control-Allow-Origin:
-      - "*"
-      Date:
-      - Tue, 31 May 2022 08:48:43 GMT
-      Expires:
-      - Tue, 31 May 2022 08:48:43 GMT
-      Cache-Control:
-      - private, max-age=372
-      Content-Type:
-      - application/json; charset=UTF-8
-      Server:
-      - HTTP server (unknown)
-      X-Xss-Protection:
-      - '0'
-      X-Frame-Options:
-      - SAMEORIGIN
-      Alt-Svc:
-      - h3=":443"; ma=2592000,h3-29=":443"; ma=2592000,h3-Q050=":443"; ma=2592000,h3-Q046=":443";
-        ma=2592000,h3-Q043=":443"; ma=2592000,quic=":443"; ma=2592000; v="46,43"
-      Transfer-Encoding:
-      - chunked
-    body:
-      encoding: ASCII-8BIT
-      string: '{"Status":3,"TC":false,"RD":true,"RA":true,"AD":true,"CD":false,"Question":[{"name":"dummy.artifact.example.com.","type":16}],"Authority":[{"name":"example.com.","type":6,"TTL":372,"data":"ns.icann.org.
-        noc.dns.icann.org. 2022040434 7200 3600 1209600 3600"}]}'
-  recorded_at: Tue, 31 May 2022 08:48:43 GMT
-- request:
-    method: get
-    uri: https://dns.google/resolve?name=dummy.artifact.example.com&type=NS
-    body:
-      encoding: US-ASCII
-      string: ''
-    headers:
-      Accept-Encoding:
-      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
-      Accept:
-      - "*/*"
-      User-Agent:
-      - Ruby
-      Host:
-      - dns.google
-  response:
-    status:
-      code: 200
-      message: OK
-    headers:
-      X-Content-Type-Options:
-      - nosniff
-      Strict-Transport-Security:
-      - max-age=31536000; includeSubDomains; preload
-      Access-Control-Allow-Origin:
-      - "*"
-      Date:
-      - Tue, 31 May 2022 08:48:43 GMT
-      Expires:
-      - Tue, 31 May 2022 08:48:43 GMT
-      Cache-Control:
-      - private, max-age=997
-      Content-Type:
-      - application/json; charset=UTF-8
-      Server:
-      - HTTP server (unknown)
-      X-Xss-Protection:
-      - '0'
-      X-Frame-Options:
-      - SAMEORIGIN
-      Alt-Svc:
-      - h3=":443"; ma=2592000,h3-29=":443"; ma=2592000,h3-Q050=":443"; ma=2592000,h3-Q046=":443";
-        ma=2592000,h3-Q043=":443"; ma=2592000,quic=":443"; ma=2592000; v="46,43"
-      Transfer-Encoding:
-      - chunked
-    body:
-      encoding: ASCII-8BIT
-      string: '{"Status":3,"TC":false,"RD":true,"RA":true,"AD":true,"CD":false,"Question":[{"name":"dummy.artifact.example.com.","type":2}],"Authority":[{"name":"example.com.","type":6,"TTL":997,"data":"ns.icann.org.
-        noc.dns.icann.org. 2022040434 7200 3600 1209600 3600"}]}'
-  recorded_at: Tue, 31 May 2022 08:48:43 GMT
+      string: |-
+        {
+          "status": 403,
+          "error": {
+            "title": "Unknown token",
+            "message": "Please ensure you've entered your token correctly. Refer to https://ipinfo.io/developers for details, or contact us at support@ipinfo.io for help"
+          }
+        }
+  recorded_at: Sat, 11 Feb 2023 07:09:45 GMT
 recorded_with: VCR 6.1.0

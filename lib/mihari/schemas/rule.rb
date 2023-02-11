@@ -7,18 +7,17 @@ require "mihari/schemas/enricher"
 module Mihari
   module Schemas
     Rule = Dry::Schema.Params do
+      required(:id).value(:string)
       required(:title).value(:string)
       required(:description).value(:string)
 
       optional(:tags).value(array[:string]).default([])
-      optional(:id).value(:string)
-
-      optional(:status).value(:string)
-
-      optional(:related).value(array[:string])
-      optional(:references).value(array[:string])
 
       optional(:author).value(:string)
+      optional(:references).value(array[:string])
+      optional(:related).value(array[:string])
+      optional(:status).value(:string)
+
       optional(:created_on).value(:date)
       optional(:updated_on).value(:date)
 

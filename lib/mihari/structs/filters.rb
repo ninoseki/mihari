@@ -7,7 +7,7 @@ module Mihari
         class SearchFilter < Dry::Struct
           attribute? :artifact_data, Types::String.optional
           attribute? :description, Types::String.optional
-          attribute? :source, Types::String.optional
+          attribute? :rule_id, Types::String.optional
           attribute? :tag_name, Types::String.optional
           attribute? :title, Types::String.optional
           attribute? :from_at, Types::DateTime.optional
@@ -30,7 +30,7 @@ module Mihari
               artifact_data: artifact_data,
               description: description,
               from_at: from_at,
-              source: source,
+              rule_id: rule_id,
               tag_name: tag_name,
               title: title,
               to_at: to_at,

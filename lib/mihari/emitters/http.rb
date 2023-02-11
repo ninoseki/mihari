@@ -10,7 +10,7 @@ module Mihari
 					{
 						"title": "<%= @title %>",
 						"description": "<%= @description %>",
-						"source": "<%= @source %>",
+						"rule": "<%= @rule_id %>",
 						"artifacts": [
 							<% @artifacts.each_with_index do |artifact, idx| %>
 								"<%= artifact.data %>"
@@ -27,11 +27,11 @@ module Mihari
 				}
       end
 
-      def initialize(title:, description:, artifacts:, source:, tags:, options: {})
+      def initialize(title:, description:, artifacts:, rule_id:, tags:, options: {})
         @title = title
         @description = description
         @artifacts = artifacts
-        @source = source
+        @rule_id = rule_id
         @tags = tags
 
         @template = options.fetch(:template, self.class.template)
@@ -70,7 +70,7 @@ module Mihari
         @template = template
       end
 
-      def emit(title:, description:, artifacts:, source:, tags:)
+      def emit(title:, description:, artifacts:, rule_id:, tags:)
         return if artifacts.empty?
 
         res = nil
@@ -79,7 +79,7 @@ module Mihari
           title: title,
           description: description,
           artifacts: artifacts,
-          source: source,
+          rule_id: rule_id,
           tags: tags
         )
         payload = JSON.parse(payload_)
@@ -99,23 +99,21 @@ module Mihari
       def valid?
         return false if uri.nil?
 
-        ["http", "https"].include? uri.scheme.downcase
+        %w[http https].include? uri.scheme.downcase
       end
 
       private
 
-      def payload_as_string(title:, description:, artifacts:, source:, tags:)
+      def payload_as_string(title:, description:, artifacts:, rule_id:, tags:)
         @payload_as_string ||= [].tap do |out|
           options = {}
-          unless template.nil?
-            options[:template] = File.read(template)
-          end
+          options[:template] = File.read(template) unless template.nil?
 
           payload_template = PayloadTemplate.new(
             title: title,
             description: description,
             artifacts: artifacts,
-            source: source,
+            rule_id: rule_id,
             tags: tags,
             options: options
           )

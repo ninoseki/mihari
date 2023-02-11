@@ -7,7 +7,7 @@ module Mihari
         true
       end
 
-      def emit(title:, description:, artifacts:, source:, tags: [])
+      def emit(title:, description:, artifacts:, rule_id:, tags: [])
         return if artifacts.empty?
 
         tags = tags.filter_map { |name| Tag.find_or_create_by(name: name) }.uniq
@@ -17,10 +17,9 @@ module Mihari
           title: title,
           description: description,
           artifacts: artifacts,
-          source: source,
-          taggings: taggings
+          taggings: taggings,
+          rule_id: rule_id
         )
-
         alert.save
         alert
       end

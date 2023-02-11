@@ -25,7 +25,7 @@ RSpec.describe Mihari::Rule do
     end
 
     it do
-      alerts = described_class.search(Mihari::Structs::Filters::Rule::SearchFilterWithPagination.new(title: "test"))
+      alerts = described_class.search(Mihari::Structs::Filters::Rule::SearchFilterWithPagination.new(title: "test1"))
       expect(alerts.length).to eq(1)
     end
 
@@ -62,7 +62,7 @@ RSpec.describe Mihari::Rule do
     end
 
     it do
-      count = described_class.count(Mihari::Structs::Filters::Rule::SearchFilter.new(title: "test"))
+      count = described_class.count(Mihari::Structs::Filters::Rule::SearchFilter.new(title: "test1"))
       expect(count).to eq(1)
     end
 

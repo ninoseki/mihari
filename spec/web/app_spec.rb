@@ -6,7 +6,7 @@ RSpec.describe Mihari::App do
   end
 
   it "returns 200" do
-    paths = %w[/ /api/alerts /api/tags /api/sources /api/configs]
+    paths = %w[/ /api/alerts /api/tags /api/configs]
     paths.each do |path|
       get path
       expect(last_response).to be_ok

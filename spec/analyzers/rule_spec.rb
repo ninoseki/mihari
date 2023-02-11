@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 RSpec.describe Mihari::Analyzers::Rule, :vcr do
+  let(:id) { "test" }
   let(:title) { "test" }
   let(:description) { "test" }
   let(:queries) do
@@ -11,7 +12,7 @@ RSpec.describe Mihari::Analyzers::Rule, :vcr do
   end
   let(:tags) { %w[test] }
 
-  subject { described_class.new(title: title, description: description, tags: tags, queries: queries) }
+  subject { described_class.new(title: title, description: description, tags: tags, queries: queries, id: id) }
 
   describe "#title" do
     it do
@@ -39,9 +40,9 @@ RSpec.describe Mihari::Analyzers::Rule, :vcr do
     end
   end
 
-  describe "#source" do
+  describe "#id" do
     it do
-      expect(subject.source).to be_a(String)
+      expect(subject.id).to eq(id)
     end
   end
 
@@ -65,6 +66,7 @@ RSpec.describe Mihari::Analyzers::Rule, :vcr do
   context "with disallowed data values in string", vcr: "Mihari_Analyzers_Rule/shodan_ip:1.1.1.1" do
     subject do
       described_class.new(
+        id: id,
         title: title,
         description: description,
         tags: tags,
@@ -91,6 +93,7 @@ RSpec.describe Mihari::Analyzers::Rule, :vcr do
   context "with disallowed data values in regexp", vcr: "Mihari_Analyzers_Rule/shodan_ip:1.1.1.1" do
     subject do
       described_class.new(
+        id: id,
         title: title,
         description: description,
         tags: tags,
@@ -117,6 +120,7 @@ RSpec.describe Mihari::Analyzers::Rule, :vcr do
   context "with disallowed data types", vcr: "Mihari_Analyzers_Rule/shodan_ip:1.1.1.1" do
     subject do
       described_class.new(
+        id: id,
         title: title,
         description: description,
         tags: tags,
@@ -140,34 +144,10 @@ RSpec.describe Mihari::Analyzers::Rule, :vcr do
     end
   end
 
-  context "with id", vcr: "Mihari_Analyzers_Rule/shodan_ip:1.1.1.1" do
-    subject do
-      described_class.new(
-        title: title,
-        description: description,
-        queries: queries,
-        id: id
-      )
-    end
-
-    let(:id) { "foo" }
-
-    let(:queries) do
-      [
-        { analyzer: "shodan", query: "ip:1.1.1.1" }
-      ]
-    end
-
-    describe "#source" do
-      it do
-        expect(subject.source).to eq(id)
-      end
-    end
-  end
-
   context "with invalid analyzer in queries" do
     subject do
       described_class.new(
+        id: id,
         title: title,
         description: description,
         queries: queries

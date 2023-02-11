@@ -4,6 +4,16 @@ module Mihari
   module Endpoints
     class Rules < Grape::API
       namespace :rules do
+        desc "Get Rule IDs", {
+          is_array: true,
+          success: Entities::RuleIDs,
+          summary: "Get rule IDs"
+        }
+        get "/ids" do
+          rule_ids = Mihari::Rule.distinct.pluck(:id)
+          present({ rule_ids: rule_ids }, with: Entities::RuleIDs)
+        end
+
         desc "Search rules", {
           is_array: true,
           success: Entities::Rule,
@@ -40,7 +50,13 @@ module Mihari
           rules = Mihari::Rule.search(search_filter_with_pagenation)
           total = Mihari::Rule.count(search_filter_with_pagenation.without_pagination)
 
-          present({ rules: rules.map(&:to_h), total: total, current_page: page, page_size: limit }, with: Entities::RulesWithPagination)
+          present(
+            { rules: rules.map(&:to_h),
+              total: total,
+              current_page: page,
+              page_size: limit },
+            with: Entities::RulesWithPagination
+          )
         end
 
         desc "Get a rule", {
