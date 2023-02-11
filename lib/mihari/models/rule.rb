@@ -18,7 +18,8 @@ module Mihari
     def to_h
       {
         id: id,
-        yaml: yaml || data.to_yaml,
+        yaml: data.to_yaml,
+        data: data,
         created_at: created_at,
         updated_at: updated_at
       }

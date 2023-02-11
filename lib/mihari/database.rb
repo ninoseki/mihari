@@ -22,7 +22,6 @@ class V5Schema < ActiveRecord::Migration[7.0]
     create_table :rules, id: :string, if_not_exists: true do |t|
       t.string :title, null: false
       t.string :description, null: false
-      t.text :yaml, null: false
       t.json :data, null: false
       t.timestamps
     end

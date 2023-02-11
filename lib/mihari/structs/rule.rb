@@ -12,9 +12,6 @@ module Mihari
       # @return [Hash]
       attr_reader :data
 
-      # @return [String]
-      attr_reader :yaml
-
       # @return [Array, nil]
       attr_reader :errors
 
@@ -25,11 +22,9 @@ module Mihari
       # Initialize
       #
       # @param [Hash] data
-      # @param [String] yaml
       #
-      def initialize(data, yaml)
+      def initialize(data)
         @data = data.deep_symbolize_keys
-        @yaml = yaml
 
         @errors = nil
 
@@ -88,6 +83,13 @@ module Mihari
       end
 
       #
+      # @return [String]
+      #
+      def yaml
+        @yaml ||= data.deep_stringify_keys.to_yaml
+      end
+
+      #
       # @return [Mihari::Rule]
       #
       def to_model
@@ -96,7 +98,6 @@ module Mihari
         rule.title = title
         rule.description = description
         rule.data = data
-        rule.yaml = yaml
 
         rule
       rescue ActiveRecord::RecordNotFound
@@ -104,8 +105,7 @@ module Mihari
           id: id,
           title: title,
           description: description,
-          data: data,
-          yaml: yaml
+          data: data
         )
       end
 
@@ -142,7 +142,7 @@ module Mihari
           # set ID if YAML data do not have ID
           data[:id] = model.id unless data.key?(:id)
 
-          Structs::Rule.new(data, model.yaml)
+          Structs::Rule.new(data)
         end
 
         #
@@ -153,10 +153,8 @@ module Mihari
         #
         def from_yaml(yaml, id: nil)
           data = load_erb_yaml(yaml)
-          # set ID if id is given & YAML data do not have ID
-          data[:id] = id if !id.nil? && !data.key?(:id)
 
-          Structs::Rule.new(data, yaml)
+          Structs::Rule.new(data)
         end
 
         #
@@ -210,8 +208,7 @@ module Mihari
         #
         def load_yaml_from_db(id)
           with_db_connection do
-            rule = Mihari::Rule.find(id)
-            rule.yaml || rule.symbolized_data.to_yaml
+            Mihari::Rule.find(id)
           rescue ActiveRecord::RecordNotFound
             raise ArgumentError, "ID:#{id} is not found in the database"
           end

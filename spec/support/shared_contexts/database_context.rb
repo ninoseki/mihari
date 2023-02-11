@@ -5,10 +5,10 @@ RSpec.shared_context "with database fixtures" do
     # create rules
     data = { id: "test", title: "test", description: "test", queries: [{ analyzer: "crtsh", query: "foo" }] }
 
-    rule1 = Mihari::Rule.new(id: "test1", title: "test1", description: "test1", data: data, yaml: data.to_yaml)
+    rule1 = Mihari::Rule.new(id: "test1", title: "test1", description: "test1", data: data)
     rule1.save
 
-    rule2 = Mihari::Rule.new(id: "test2", title: "test2", description: "test2", data: data, yaml: data.to_yaml)
+    rule2 = Mihari::Rule.new(id: "test2", title: "test2", description: "test2", data: data)
     rule2.save
 
     # create alerts & aritfaicts

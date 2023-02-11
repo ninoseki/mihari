@@ -15,6 +15,7 @@ module Mihari
     class Rule < Grape::Entity
       expose :id, documentation: { type: String, required: true }
       expose :yaml, documentation: { type: String, required: true }
+      expose :data, documentation: { type: Hash, required: true }
       expose :created_at, documentation: { type: DateTime, required: true }, as: :createdAt
       expose :updated_at, documentation: { type: DateTime, required: true }, as: :updatedAt
     end

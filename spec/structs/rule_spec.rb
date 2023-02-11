@@ -14,8 +14,7 @@ RSpec.describe Mihari::Structs::Rule do
       allowed_data_types: ["ip"]
     }
   end
-  let(:yaml) { data.to_yaml }
-  let(:rule) { described_class.new(data, yaml) }
+  let(:rule) { described_class.new(data) }
 
   describe "#errors?" do
     it "should not have any errors" do
