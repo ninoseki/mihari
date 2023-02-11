@@ -31,7 +31,7 @@ class V5Schema < ActiveRecord::Migration[7.0]
       t.string :description
       t.timestamps
 
-      t.references :rule, foreign_key: true, type: :string, index: true
+      t.belongs_to :rule, foreign_key: true, type: :string
     end
 
     create_table :artifacts, if_not_exists: true do |t|
@@ -41,7 +41,6 @@ class V5Schema < ActiveRecord::Migration[7.0]
       t.json :metadata
       t.timestamps
 
-      # t.references :rule, foreign_key: true, type: :string, index: true
       t.belongs_to :alert, foreign_key: true, null: false
     end
 
