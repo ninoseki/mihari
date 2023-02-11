@@ -42,17 +42,20 @@ module Mihari
     #
     # Check uniqueness of artifact
     #
-    # @param [Time] base_time Base time to check decaying
+    # @param [Time, nil] base_time Base time to check decaying
     # @param [Integer, nil] artifact_lifetime Artifact lifetime (TTL) in seconds
     #
     # @return [Boolean] true if it is unique. Otherwise false.
     #
-    def unique?(base_time:, artifact_lifetime: nil)
+    def unique?(base_time: nil, artifact_lifetime: nil)
       artifact = self.class.where(data: data).order(created_at: :desc).first
       return true if artifact.nil?
 
       # check whetehr the artifact is decayed or not
       return false if artifact_lifetime.nil?
+
+      # use the current UTC time if base_time is not given (for testing)
+      base_time ||= Time.now.utc
 
       decayed_at = base_time - (artifact_lifetime || -1).seconds
       artifact.created_at < decayed_at
