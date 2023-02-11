@@ -6,7 +6,7 @@ module Mihari
       expose :id, documentation: { type: Integer, required: true }
       expose :title, documentation: { type: String, required: true }
       expose :description, documentation: { type: String, required: true }
-      expose :rule_id, documentation: { type: String, required: true }
+      expose :rule_id, documentation: { type: String, required: true }, as: :ruleId
       expose :created_at, documentation: { type: DateTime, required: true }, as: :createdAt
 
       expose :artifacts, using: Entities::Artifact, documentation: { type: Entities::Artifact, is_array: true }
