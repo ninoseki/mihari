@@ -45,7 +45,7 @@ module Mihari
 
       option :id, default: proc { "" }
       option :tags, default: proc { [] }
-      option :allowed_data_types, default: proc { ALLOWED_DATA_TYPES }
+      option :data_types, default: proc { DEFAULT_DATA_TYPES }
       option :disallowed_data_values, default: proc { [] }
 
       option :emitters, optional: true
@@ -106,7 +106,7 @@ module Mihari
       #
       def normalized_artifacts
         @normalized_artifacts ||= artifacts.uniq(&:data).select(&:valid?).select do |artifact|
-          allowed_data_types.include? artifact.data_type
+          data_types.include? artifact.data_type
         end.reject do |artifact|
           disallowed_data_value? artifact.data
         end

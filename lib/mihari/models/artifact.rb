@@ -42,21 +42,23 @@ module Mihari
     #
     # Check uniqueness of artifact
     #
-    # @param [Boolean] ignore_old_artifacts
-    # @param [Integer] ignore_threshold
+    # @param [Time, nil] base_time Base time to check decaying
+    # @param [Integer, nil] artifact_lifetime Artifact lifetime (TTL) in seconds
     #
     # @return [Boolean] true if it is unique. Otherwise false.
     #
-    def unique?(ignore_old_artifacts: false, ignore_threshold: 0)
+    def unique?(base_time: nil, artifact_lifetime: nil)
       artifact = self.class.where(data: data).order(created_at: :desc).first
       return true if artifact.nil?
 
-      return false unless ignore_old_artifacts
+      # check whetehr the artifact is decayed or not
+      return false if artifact_lifetime.nil?
 
-      days_before = (-ignore_threshold).days.from_now.utc
-      # if an artifact is created before {ignore_threshold} days, ignore it
-      #                           within {ignore_threshold} days, do not ignore it
-      artifact.created_at < days_before
+      # use the current UTC time if base_time is not given (for testing)
+      base_time ||= Time.now.utc
+
+      decayed_at = base_time - (artifact_lifetime || -1).seconds
+      artifact.created_at < decayed_at
     end
 
     #
@@ -139,14 +141,14 @@ module Mihari
       whois: [
         :enrich_whois
       ],
-      ipinfo: [
-        :enrich_autonomous_system,
-        :enrich_geolocation
+      ipinfo: %i[
+        enrich_autonomous_system
+        enrich_geolocation
       ],
-      shodan: [
-        :enrich_ports,
-        :enrich_cpes,
-        :enrich_reverse_dns
+      shodan: %i[
+        enrich_ports
+        enrich_cpes
+        enrich_reverse_dns
       ],
       google_public_dns: [
         :enrich_dns

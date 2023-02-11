@@ -12,7 +12,7 @@ module Mihari
     Double = Strict::Float | Strict::Integer
     DateTime = Strict::DateTime
 
-    DataTypes = Types::String.enum(*ALLOWED_DATA_TYPES)
+    DataTypes = Types::String.enum(*DEFAULT_DATA_TYPES)
 
     HTTPRequestMethods = Types::String.enum("GET", "POST")
     HTTPRequestPayloadTypes = Types::String.enum("application/json", "application/x-www-form-urlencoded")

@@ -3,12 +3,12 @@
 RSpec.describe Mihari::Analyzers::Rule, :vcr do
   let(:title) { "test" }
   let(:description) { "test" }
-  let(:queries) {
+  let(:queries) do
     [
       { analyzer: "shodan", query: "ip:1.1.1.1" },
       { analyzer: "crtsh", query: "www.example.org", exclude_expired: true }
     ]
-  }
+  end
   let(:tags) { %w[test] }
 
   subject { described_class.new(title: title, description: description, tags: tags, queries: queries) }
@@ -46,12 +46,12 @@ RSpec.describe Mihari::Analyzers::Rule, :vcr do
   end
 
   context "with duplicated artifacts" do
-    let(:queries) {
+    let(:queries) do
       [
         { analyzer: "shodan", query: "ip:1.1.1.1" },
         { analyzer: "censys", query: "ip:1.1.1.1" }
       ]
-    }
+    end
 
     describe "#normalized_artifacts" do
       it do
@@ -73,11 +73,11 @@ RSpec.describe Mihari::Analyzers::Rule, :vcr do
       )
     end
 
-    let(:queries) {
+    let(:queries) do
       [
         { analyzer: "shodan", query: "ip:1.1.1.1" }
       ]
-    }
+    end
 
     describe "#normalized_artifacts" do
       it do
@@ -99,11 +99,11 @@ RSpec.describe Mihari::Analyzers::Rule, :vcr do
       )
     end
 
-    let(:queries) {
+    let(:queries) do
       [
         { analyzer: "shodan", query: "ip:1.1.1.1" }
       ]
-    }
+    end
 
     describe "#normalized_artifacts" do
       it do
@@ -121,15 +121,15 @@ RSpec.describe Mihari::Analyzers::Rule, :vcr do
         description: description,
         tags: tags,
         queries: queries,
-        allowed_data_types: ["domain"]
+        data_types: ["domain"]
       )
     end
 
-    let(:queries) {
+    let(:queries) do
       [
         { analyzer: "shodan", query: "ip:1.1.1.1" }
       ]
-    }
+    end
 
     describe "#normalized_artifacts" do
       it do
@@ -152,11 +152,11 @@ RSpec.describe Mihari::Analyzers::Rule, :vcr do
 
     let(:id) { "foo" }
 
-    let(:queries) {
+    let(:queries) do
       [
         { analyzer: "shodan", query: "ip:1.1.1.1" }
       ]
-    }
+    end
 
     describe "#source" do
       it do
@@ -174,11 +174,11 @@ RSpec.describe Mihari::Analyzers::Rule, :vcr do
       )
     end
 
-    let(:queries) {
+    let(:queries) do
       [
         { analyzer: "shodan", query: "ip:1.1.1.1" }
       ]
-    }
+    end
 
     before do
       allow(Mihari.config).to receive(:shodan_api_key).and_return(nil)

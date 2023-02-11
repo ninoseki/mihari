@@ -30,11 +30,10 @@ module Mihari
 
       optional(:enrichers).value(:array).each(Enricher)
 
-      optional(:allowed_data_types).value(array[Types::DataTypes]).default(ALLOWED_DATA_TYPES)
+      optional(:data_types).value(array[Types::DataTypes]).default(DEFAULT_DATA_TYPES)
       optional(:disallowed_data_values).value(array[:string]).default([])
 
-      optional(:ignore_old_artifacts).value(:bool).default(false)
-      optional(:ignore_threshold).value(:integer).default(0)
+      optional(:artifact_lifetime).value(:integer)
 
       before(:key_coercer) do |result|
         # it looks like that dry-schema v1.9.1 has an issue with setting an array of schemas as a default value
