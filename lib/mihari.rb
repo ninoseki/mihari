@@ -252,7 +252,6 @@ require "mihari/entities/geolocation"
 require "mihari/entities/ip_address"
 require "mihari/entities/port"
 require "mihari/entities/reverse_dns"
-require "mihari/entities/source"
 require "mihari/entities/tag"
 require "mihari/entities/whois"
 

@@ -27,11 +27,11 @@ http_interactions:
       Access-Control-Allow-Origin:
       - "*"
       Date:
-      - Tue, 31 May 2022 08:48:45 GMT
+      - Sat, 11 Feb 2023 07:09:44 GMT
       Expires:
-      - Tue, 31 May 2022 08:48:45 GMT
+      - Sat, 11 Feb 2023 07:09:44 GMT
       Cache-Control:
-      - private, max-age=20215
+      - private, max-age=445
       Content-Type:
       - application/json; charset=UTF-8
       Server:
@@ -41,14 +41,13 @@ http_interactions:
       X-Frame-Options:
       - SAMEORIGIN
       Alt-Svc:
-      - h3=":443"; ma=2592000,h3-29=":443"; ma=2592000,h3-Q050=":443"; ma=2592000,h3-Q046=":443";
-        ma=2592000,h3-Q043=":443"; ma=2592000,quic=":443"; ma=2592000; v="46,43"
+      - h3=":443"; ma=2592000,h3-29=":443"; ma=2592000
       Transfer-Encoding:
       - chunked
     body:
       encoding: ASCII-8BIT
-      string: '{"Status":0,"TC":false,"RD":true,"RA":true,"AD":true,"CD":false,"Question":[{"name":"example.com.","type":1}],"Answer":[{"name":"example.com.","type":1,"TTL":20215,"data":"93.184.216.34"}]}'
-  recorded_at: Tue, 31 May 2022 08:48:45 GMT
+      string: '{"Status":0,"TC":false,"RD":true,"RA":true,"AD":true,"CD":false,"Question":[{"name":"example.com.","type":1}],"Answer":[{"name":"example.com.","type":1,"TTL":445,"data":"93.184.216.34"}]}'
+  recorded_at: Sat, 11 Feb 2023 07:09:44 GMT
 - request:
     method: get
     uri: https://dns.google/resolve?name=example.com&type=AAAA
@@ -76,11 +75,11 @@ http_interactions:
       Access-Control-Allow-Origin:
       - "*"
       Date:
-      - Tue, 31 May 2022 08:48:45 GMT
+      - Sat, 11 Feb 2023 07:09:44 GMT
       Expires:
-      - Tue, 31 May 2022 08:48:45 GMT
+      - Sat, 11 Feb 2023 07:09:44 GMT
       Cache-Control:
-      - private, max-age=21043
+      - private, max-age=20650
       Content-Type:
       - application/json; charset=UTF-8
       Server:
@@ -90,14 +89,13 @@ http_interactions:
       X-Frame-Options:
       - SAMEORIGIN
       Alt-Svc:
-      - h3=":443"; ma=2592000,h3-29=":443"; ma=2592000,h3-Q050=":443"; ma=2592000,h3-Q046=":443";
-        ma=2592000,h3-Q043=":443"; ma=2592000,quic=":443"; ma=2592000; v="46,43"
+      - h3=":443"; ma=2592000,h3-29=":443"; ma=2592000
       Transfer-Encoding:
       - chunked
     body:
       encoding: ASCII-8BIT
-      string: '{"Status":0,"TC":false,"RD":true,"RA":true,"AD":true,"CD":false,"Question":[{"name":"example.com.","type":28}],"Answer":[{"name":"example.com.","type":28,"TTL":21043,"data":"2606:2800:220:1:248:1893:25c8:1946"}]}'
-  recorded_at: Tue, 31 May 2022 08:48:45 GMT
+      string: '{"Status":0,"TC":false,"RD":true,"RA":true,"AD":true,"CD":false,"Question":[{"name":"example.com.","type":28}],"Answer":[{"name":"example.com.","type":28,"TTL":20650,"data":"2606:2800:220:1:248:1893:25c8:1946"}]}'
+  recorded_at: Sat, 11 Feb 2023 07:09:44 GMT
 - request:
     method: get
     uri: https://dns.google/resolve?name=example.com&type=CNAME
@@ -125,11 +123,11 @@ http_interactions:
       Access-Control-Allow-Origin:
       - "*"
       Date:
-      - Tue, 31 May 2022 08:48:45 GMT
+      - Sat, 11 Feb 2023 07:09:44 GMT
       Expires:
-      - Tue, 31 May 2022 08:48:45 GMT
+      - Sat, 11 Feb 2023 07:09:44 GMT
       Cache-Control:
-      - private, max-age=296
+      - private, max-age=1063
       Content-Type:
       - application/json; charset=UTF-8
       Server:
@@ -139,15 +137,14 @@ http_interactions:
       X-Frame-Options:
       - SAMEORIGIN
       Alt-Svc:
-      - h3=":443"; ma=2592000,h3-29=":443"; ma=2592000,h3-Q050=":443"; ma=2592000,h3-Q046=":443";
-        ma=2592000,h3-Q043=":443"; ma=2592000,quic=":443"; ma=2592000; v="46,43"
+      - h3=":443"; ma=2592000,h3-29=":443"; ma=2592000
       Transfer-Encoding:
       - chunked
     body:
       encoding: ASCII-8BIT
-      string: '{"Status":0,"TC":false,"RD":true,"RA":true,"AD":true,"CD":false,"Question":[{"name":"example.com.","type":5}],"Authority":[{"name":"example.com.","type":6,"TTL":296,"data":"ns.icann.org.
-        noc.dns.icann.org. 2022040434 7200 3600 1209600 3600"}]}'
-  recorded_at: Tue, 31 May 2022 08:48:45 GMT
+      string: '{"Status":0,"TC":false,"RD":true,"RA":true,"AD":true,"CD":false,"Question":[{"name":"example.com.","type":5}],"Authority":[{"name":"example.com.","type":6,"TTL":1063,"data":"ns.icann.org.
+        noc.dns.icann.org. 2022091205 7200 3600 1209600 3600"}]}'
+  recorded_at: Sat, 11 Feb 2023 07:09:44 GMT
 - request:
     method: get
     uri: https://dns.google/resolve?name=example.com&type=TXT
@@ -175,9 +172,9 @@ http_interactions:
       Access-Control-Allow-Origin:
       - "*"
       Date:
-      - Tue, 31 May 2022 08:48:45 GMT
+      - Sat, 11 Feb 2023 07:09:44 GMT
       Expires:
-      - Tue, 31 May 2022 08:48:45 GMT
+      - Sat, 11 Feb 2023 07:09:44 GMT
       Cache-Control:
       - private, max-age=21600
       Content-Type:
@@ -189,16 +186,15 @@ http_interactions:
       X-Frame-Options:
       - SAMEORIGIN
       Alt-Svc:
-      - h3=":443"; ma=2592000,h3-29=":443"; ma=2592000,h3-Q050=":443"; ma=2592000,h3-Q046=":443";
-        ma=2592000,h3-Q043=":443"; ma=2592000,quic=":443"; ma=2592000; v="46,43"
+      - h3=":443"; ma=2592000,h3-29=":443"; ma=2592000
       Transfer-Encoding:
       - chunked
     body:
       encoding: ASCII-8BIT
       string: '{"Status":0,"TC":false,"RD":true,"RA":true,"AD":true,"CD":false,"Question":[{"name":"example.com.","type":16}],"Answer":[{"name":"example.com.","type":16,"TTL":21600,"data":"v=spf1
         -all"},{"name":"example.com.","type":16,"TTL":21600,"data":"wgyf8z8cgvm2qmxpnbnldrcltvk4xqfn"}],"Comment":"Response
-        from 199.43.135.53."}'
-  recorded_at: Tue, 31 May 2022 08:48:45 GMT
+        from 2001:500:8f::53."}'
+  recorded_at: Sat, 11 Feb 2023 07:09:44 GMT
 - request:
     method: get
     uri: https://dns.google/resolve?name=example.com&type=NS
@@ -226,11 +222,11 @@ http_interactions:
       Access-Control-Allow-Origin:
       - "*"
       Date:
-      - Tue, 31 May 2022 08:48:45 GMT
+      - Sat, 11 Feb 2023 07:09:44 GMT
       Expires:
-      - Tue, 31 May 2022 08:48:45 GMT
+      - Sat, 11 Feb 2023 07:09:44 GMT
       Cache-Control:
-      - private, max-age=7558
+      - private, max-age=5219
       Content-Type:
       - application/json; charset=UTF-8
       Server:
@@ -240,66 +236,11 @@ http_interactions:
       X-Frame-Options:
       - SAMEORIGIN
       Alt-Svc:
-      - h3=":443"; ma=2592000,h3-29=":443"; ma=2592000,h3-Q050=":443"; ma=2592000,h3-Q046=":443";
-        ma=2592000,h3-Q043=":443"; ma=2592000,quic=":443"; ma=2592000; v="46,43"
+      - h3=":443"; ma=2592000,h3-29=":443"; ma=2592000
       Transfer-Encoding:
       - chunked
     body:
       encoding: ASCII-8BIT
-      string: '{"Status":0,"TC":false,"RD":true,"RA":true,"AD":true,"CD":false,"Question":[{"name":"example.com.","type":2}],"Answer":[{"name":"example.com.","type":2,"TTL":7558,"data":"a.iana-servers.net."},{"name":"example.com.","type":2,"TTL":7558,"data":"b.iana-servers.net."}]}'
-  recorded_at: Tue, 31 May 2022 08:48:45 GMT
-- request:
-    method: get
-    uri: https://internetdb.shodan.io/1.1.1.1
-    body:
-      encoding: US-ASCII
-      string: ''
-    headers:
-      Accept-Encoding:
-      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
-      Accept:
-      - "*/*"
-      User-Agent:
-      - Ruby
-      Host:
-      - internetdb.shodan.io
-  response:
-    status:
-      code: 200
-      message: OK
-    headers:
-      Date:
-      - Tue, 31 May 2022 08:48:45 GMT
-      Content-Type:
-      - application/json
-      Transfer-Encoding:
-      - chunked
-      Connection:
-      - keep-alive
-      Cache-Control:
-      - public, max-age=432000
-      Last-Modified:
-      - Mon, 30 May 2022 10:45:38 GMT
-      Cf-Cache-Status:
-      - HIT
-      Age:
-      - '78448'
-      Expires:
-      - Sun, 05 Jun 2022 08:48:45 GMT
-      Expect-Ct:
-      - max-age=604800, report-uri="https://report-uri.cloudflare.com/cdn-cgi/beacon/expect-ct"
-      Vary:
-      - Accept-Encoding
-      Permissions-Policy:
-      - interest-cohort=()
-      Server:
-      - cloudflare
-      Cf-Ray:
-      - 713e73ceab99af82-NRT
-      Alt-Svc:
-      - h3=":443"; ma=86400, h3-29=":443"; ma=86400
-    body:
-      encoding: ASCII-8BIT
-      string: '{"cpes":[],"hostnames":["one.one.one.one"],"ip":"1.1.1.1","ports":[53,80,443],"tags":["scanner"],"vulns":[]}'
-  recorded_at: Tue, 31 May 2022 08:48:45 GMT
+      string: '{"Status":0,"TC":false,"RD":true,"RA":true,"AD":true,"CD":false,"Question":[{"name":"example.com.","type":2}],"Answer":[{"name":"example.com.","type":2,"TTL":5219,"data":"a.iana-servers.net."},{"name":"example.com.","type":2,"TTL":5219,"data":"b.iana-servers.net."}]}'
+  recorded_at: Sat, 11 Feb 2023 07:09:44 GMT
 recorded_with: VCR 6.1.0

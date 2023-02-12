@@ -1,5 +1,6 @@
-title: "foo"
-description: "foo"
+id: test
+title: foo
+description: foo
 queries:
-  - analyzer: "crtsh"
-    query: "example.com"
+  - analyzer: crtsh
+    query: example.com

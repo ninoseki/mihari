@@ -2,6 +2,9 @@
 
 RSpec.describe Mihari::Schemas::RuleContract do
   let(:contract) { Mihari::Schemas::RuleContract.new }
+  let(:id) { "test" }
+  let(:description) { "test" }
+  let(:title) { "test" }
 
   context "with valid rule" do
     context "analyzers does not need additional options" do
@@ -9,7 +12,12 @@ RSpec.describe Mihari::Schemas::RuleContract do
         analyzers = Mihari::Analyzers::ANALYZER_TO_CLASS.keys - %w[zoomeye crtsh feed]
 
         analyzers.each do |analyzer|
-          result = contract.call(description: "foo", title: "foo", queries: [{ analyzer: analyzer, query: "foo" }])
+          result = contract.call(
+            id: id,
+            description: description,
+            title: title,
+            queries: [{ analyzer: analyzer, query: "foo" }]
+          )
           expect(result.errors.empty?).to eq(true)
         end
       end
@@ -18,8 +26,9 @@ RSpec.describe Mihari::Schemas::RuleContract do
     context "analyzers needs additonal options" do
       it do
         result = contract.call(
-          description: "foo",
-          title: "foo",
+          id: id,
+          description: description,
+          title: title,
           queries: [
             { analyzer: "crtsh", query: "foo", exclude_expired: true },
             { analyzer: "zoomeye", query: "foo", type: "host" },
@@ -33,8 +42,9 @@ RSpec.describe Mihari::Schemas::RuleContract do
     context "with allowed_data_types" do
       it do
         result = contract.call(
-          description: "foo",
-          title: "foo",
+          id: id,
+          description: description,
+          title: title,
           queries: [
             { analyzer: "shodan", query: "foo" }
           ],
@@ -47,14 +57,20 @@ RSpec.describe Mihari::Schemas::RuleContract do
 
   context "with invalid analyzer name" do
     it do
-      result = contract.call(description: "foo", title: "foo", queries: [{ analyzer: "foo", query: "foo" }])
+      result = contract.call(
+        id: id,
+        description: description,
+        title: title,
+        queries: [{ analyzer: "foo", query: "foo" }]
+      )
       expect(result.errors.empty?).to eq(false)
     end
 
     it do
       result = contract.call(
-        description: "foo",
-        title: "foo",
+        id: id,
+        description: description,
+        title: title,
         queries: [
           { analyzer: "shodan", query: "foo" },
           { analyzer: "crtsh", query: "foo", exclude_expired: 1 }, # should be bool
@@ -65,11 +81,12 @@ RSpec.describe Mihari::Schemas::RuleContract do
     end
   end
 
-  context "with invalid allowed data types" do
+  context "with invalid data types" do
     it do
       result = contract.call(
-        description: "foo",
-        title: "foo",
+        id: id,
+        description: description,
+        title: title,
         queries: [
           { analyzer: "shodan", query: "foo" }
         ],
@@ -82,8 +99,9 @@ RSpec.describe Mihari::Schemas::RuleContract do
   context "with invalid disallowed data values" do
     it do
       result = contract.call(
-        description: "foo",
-        title: "foo",
+        id: id,
+        description: description,
+        title: title,
         queries: [
           { analyzer: "shodan", query: "foo" }
         ],
@@ -94,8 +112,9 @@ RSpec.describe Mihari::Schemas::RuleContract do
 
     it do
       result = contract.call(
-        description: "foo",
-        title: "foo",
+        id: id,
+        description: description,
+        title: title,
         queries: [
           { analyzer: "shodan", query: "foo" }
         ],
@@ -108,8 +127,9 @@ RSpec.describe Mihari::Schemas::RuleContract do
   context "with invalid artifact_lifetime" do
     it do
       result = contract.call(
-        description: "foo",
-        title: "foo",
+        id: id,
+        description: description,
+        title: title,
         queries: [
           { analyzer: "shodan", query: "foo" }
         ],
@@ -122,8 +142,9 @@ RSpec.describe Mihari::Schemas::RuleContract do
   context "with invalid emitter name" do
     it do
       result = contract.call(
-        description: "foo",
-        title: "foo",
+        id: id,
+        description: description,
+        title: title,
         queries: [
           { analyzer: "shodan", query: "foo" }
         ],

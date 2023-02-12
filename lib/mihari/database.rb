@@ -17,52 +17,43 @@ def development_env?
   env == "development"
 end
 
-class InitialSchema < ActiveRecord::Migration[7.0]
+class V5Schema < ActiveRecord::Migration[7.0]
   def change
-    create_table :tags, if_not_exists: true do |t|
-      t.string :name, null: false
+    create_table :rules, id: :string, if_not_exists: true do |t|
+      t.string :title, null: false
+      t.string :description, null: false
+      t.json :data, null: false
+      t.timestamps
     end
 
     create_table :alerts, if_not_exists: true do |t|
-      t.string :title, null: false
-      t.string :description, null: true
-      t.string :source, null: false
       t.timestamps
+
+      t.belongs_to :rule, foreign_key: true, type: :string
     end
 
     create_table :artifacts, if_not_exists: true do |t|
       t.string :data, null: false
       t.string :data_type, null: false
-      t.belongs_to :alert, foreign_key: true
+      t.string :source
+      t.json :metadata
       t.timestamps
+
+      t.belongs_to :alert, foreign_key: true, null: false
     end
 
-    create_table :taggings, if_not_exists: true do |t|
-      t.integer :tag_id
-      t.integer :alert_id
-    end
-
-    add_index :taggings, :tag_id, if_not_exists: true
-    add_index :taggings, [:tag_id, :alert_id], unique: true, if_not_exists: true
-  end
-end
-
-class AddeSourceToArtifactSchema < ActiveRecord::Migration[7.0]
-  def change
-    add_column :artifacts, :source, :string, if_not_exists: true
-  end
-end
-
-class EnrichmentsSchema < ActiveRecord::Migration[7.0]
-  def change
     create_table :autonomous_systems, if_not_exists: true do |t|
       t.integer :asn, null: false
+      t.datetime :created_at
+
       t.belongs_to :artifact, foreign_key: true
     end
 
     create_table :geolocations, if_not_exists: true do |t|
       t.string :country, null: false
       t.string :country_code, null: false
+      t.datetime :created_at
+
       t.belongs_to :artifact, foreign_key: true
     end
 
@@ -73,67 +64,53 @@ class EnrichmentsSchema < ActiveRecord::Migration[7.0]
       t.date :expires_on
       t.json :registrar
       t.json :contacts
+      t.datetime :created_at
+
       t.belongs_to :artifact, foreign_key: true
     end
 
     create_table :dns_records, if_not_exists: true do |t|
       t.string :resource, null: false
       t.string :value, null: false
+      t.datetime :created_at
+
       t.belongs_to :artifact, foreign_key: true
     end
 
     create_table :reverse_dns_names, if_not_exists: true do |t|
       t.string :name, null: false
+      t.datetime :created_at
+
       t.belongs_to :artifact, foreign_key: true
     end
-  end
-end
 
-class EnrichmentCreatedAtSchema < ActiveRecord::Migration[7.0]
-  def change
-    # Add created_at column because now it is able to enrich an atrifact after the creation
-    add_column :autonomous_systems, :created_at, :datetime, if_not_exists: true
-    add_column :geolocations, :created_at, :datetime, if_not_exists: true
-    add_column :whois_records, :created_at, :datetime, if_not_exists: true
-    add_column :dns_records, :created_at, :datetime, if_not_exists: true
-    add_column :reverse_dns_names, :created_at, :datetime, if_not_exists: true
-  end
-end
-
-class RuleSchema < ActiveRecord::Migration[7.0]
-  def change
-    create_table :rules, id: :string, if_not_exists: true do |t|
-      t.string :title, null: false
-      t.string :description, null: false
-      t.json :data, null: false
-      t.timestamps
-    end
-  end
-end
-
-class AddeMetadataToArtifactSchema < ActiveRecord::Migration[7.0]
-  def change
-    add_column :artifacts, :metadata, :json, if_not_exists: true
-  end
-end
-
-class AddYAMLToRulesSchema < ActiveRecord::Migration[7.0]
-  def change
-    add_column :rules, :yaml, :text, if_not_exists: true
-  end
-end
-
-class EnrichmentsV45Schema < ActiveRecord::Migration[7.0]
-  def change
     create_table :cpes, if_not_exists: true do |t|
       t.string :cpe, null: false
+      t.datetime :created_at
+
       t.belongs_to :artifact, foreign_key: true
     end
 
     create_table :ports, if_not_exists: true do |t|
       t.integer :port, null: false
+      t.datetime :created_at
+
       t.belongs_to :artifact, foreign_key: true
     end
+
+    create_table :tags, if_not_exists: true do |t|
+      t.string :name, null: false
+      t.datetime :created_at
+    end
+
+    create_table :taggings, if_not_exists: true do |t|
+      t.integer :tag_id
+      t.integer :alert_id
+      t.datetime :created_at
+    end
+
+    add_index :taggings, :tag_id, if_not_exists: true
+    add_index :taggings, %i[tag_id alert_id], unique: true, if_not_exists: true
   end
 end
 
@@ -157,19 +134,7 @@ module Mihari
       def migrate(direction)
         ActiveRecord::Migration.verbose = false
 
-        [
-          InitialSchema,
-          AddeSourceToArtifactSchema,
-          EnrichmentsSchema,
-          EnrichmentCreatedAtSchema,
-          # v4.0
-          RuleSchema,
-          AddeMetadataToArtifactSchema,
-          # v4.4
-          AddYAMLToRulesSchema,
-          # v4.5
-          EnrichmentsV45Schema
-        ].each { |schema| schema.migrate direction }
+        [V5Schema].each { |schema| schema.migrate direction }
       end
       memoize :migrate unless test_env?
 

@@ -36,30 +36,14 @@ module Mihari
       "webhook" => Emitters::Webhook
     }.freeze
 
+    # @return [Mihari::Structs::Rule]
+    attr_reader :rule
+
     class Rule < Base
       include Mixins::DisallowedDataValue
 
-      option :title
-      option :description
-      option :queries
-
-      option :id, default: proc { "" }
-      option :tags, default: proc { [] }
-      option :data_types, default: proc { DEFAULT_DATA_TYPES }
-      option :disallowed_data_values, default: proc { [] }
-
-      option :emitters, optional: true
-      option :enrichers, optional: true
-
-      attr_reader :source
-
       def initialize(**kwargs)
         super(**kwargs)
-
-        @source = id
-
-        @emitters = emitters || DEFAULT_EMITTERS
-        @enrichers = enrichers || DEFAULT_ENRICHERS
 
         validate_analyzer_configurations
       end
@@ -72,7 +56,7 @@ module Mihari
       def artifacts
         artifacts = []
 
-        queries.each do |original_params|
+        rule.queries.each do |original_params|
           parmas = original_params.deep_dup
 
           analyzer_name = parmas[:analyzer]
@@ -83,7 +67,11 @@ module Mihari
           # set interval in the top level
           options = parmas[:options] || {}
           interval = options[:interval]
+
           parmas[:interval] = interval if interval
+
+          # set rule
+          parmas[:rule] = rule
 
           analyzer = klass.new(query, **parmas)
 
@@ -106,7 +94,7 @@ module Mihari
       #
       def normalized_artifacts
         @normalized_artifacts ||= artifacts.uniq(&:data).select(&:valid?).select do |artifact|
-          data_types.include? artifact.data_type
+          rule.data_types.include? artifact.data_type
         end.reject do |artifact|
           disallowed_data_value? artifact.data
         end
@@ -119,7 +107,7 @@ module Mihari
       #
       def enriched_artifacts
         @enriched_artifacts ||= Parallel.map(unique_artifacts) do |artifact|
-          enrichers.each do |enricher|
+          rule.enrichers.each do |enricher|
             artifact.enrich_by_enricher(enricher[:enricher])
           end
 
@@ -133,7 +121,7 @@ module Mihari
       # @return [Array<Regexp, String>]
       #
       def normalized_disallowed_data_values
-        @normalized_disallowed_data_values ||= disallowed_data_values.map { |v| normalize_disallowed_data_value v }
+        @normalized_disallowed_data_values ||= rule.disallowed_data_values.map { |v| normalize_disallowed_data_value v }
       end
 
       #
@@ -168,7 +156,7 @@ module Mihari
       end
 
       def valid_emitters
-        @valid_emitters ||= emitters.filter_map do |original_params|
+        @valid_emitters ||= rule.emitters.filter_map do |original_params|
           params = original_params.deep_dup
 
           name = params[:emitter]
@@ -199,7 +187,7 @@ module Mihari
       # Validate configuration of analyzers
       #
       def validate_analyzer_configurations
-        queries.each do |params|
+        rule.queries.each do |params|
           analyzer_name = params[:analyzer]
           klass = get_analyzer_class(analyzer_name)
 

@@ -25,7 +25,11 @@ module Mihari
 
     validates_with ArtifactValidator
 
+    # @return [Array<Mihari::Tag>] Tags
     attr_accessor :tags
+
+    # @return [String, nil] Rule ID
+    attr_accessor :rule_id
 
     def initialize(*args, **kwargs)
       attrs = args.first || kwargs
@@ -36,7 +40,9 @@ module Mihari
       super(*args, **kwargs)
 
       self.data_type = TypeChecker.type(data)
-      self.tags = []
+
+      @tags = []
+      @rule_id = ""
     end
 
     #
@@ -48,7 +54,10 @@ module Mihari
     # @return [Boolean] true if it is unique. Otherwise false.
     #
     def unique?(base_time: nil, artifact_lifetime: nil)
-      artifact = self.class.where(data: data).order(created_at: :desc).first
+      artifact = self.class.joins(:alert).where(
+        data: data,
+        alert: { rule_id: rule_id }
+      ).order(created_at: :desc).first
       return true if artifact.nil?
 
       # check whetehr the artifact is decayed or not

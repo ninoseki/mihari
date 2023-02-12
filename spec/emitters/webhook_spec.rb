@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 RSpec.describe Mihari::Emitters::Webhook, :vcr do
+  include_context "with database fixtures"
+
   subject { described_class.new }
 
   describe "#valid?" do
@@ -20,15 +22,13 @@ RSpec.describe Mihari::Emitters::Webhook, :vcr do
   end
 
   describe "#emit" do
-    let(:title) { "title" }
-    let(:description) { "description" }
-    let(:artifacts) {
+    let(:artifacts) do
       [
         Mihari::Artifact.new(data: "1.1.1.1"),
         Mihari::Artifact.new(data: "github.com")
       ]
-    }
-    let(:source) { "test" }
+    end
+    let(:rule) { Mihari::Rule.first }
     let(:tags) { [] }
 
     before do
@@ -37,7 +37,7 @@ RSpec.describe Mihari::Emitters::Webhook, :vcr do
     end
 
     it do
-      subject.emit(title: title, description: description, artifacts: artifacts, source: source, tags: tags)
+      subject.emit(artifacts: artifacts, rule: rule, tags: tags)
     end
   end
 end

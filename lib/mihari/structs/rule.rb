@@ -12,24 +12,16 @@ module Mihari
       # @return [Hash]
       attr_reader :data
 
-      # @return [String]
-      attr_reader :yaml
-
       # @return [Array, nil]
       attr_reader :errors
-
-      # @return [String]
-      attr_writer :id
 
       #
       # Initialize
       #
       # @param [Hash] data
-      # @param [String] yaml
       #
-      def initialize(data, yaml)
+      def initialize(data)
         @data = data.deep_symbolize_keys
-        @yaml = yaml
 
         @errors = nil
 
@@ -70,7 +62,7 @@ module Mihari
       # @return [String]
       #
       def id
-        @id ||= data[:id] || UUIDTools::UUID.md5_create(UUIDTools::UUID_URL_NAMESPACE, data.to_yaml).to_s
+        @id ||= data[:id]
       end
 
       #
@@ -88,6 +80,55 @@ module Mihari
       end
 
       #
+      # @return [String]
+      #
+      def yaml
+        @yaml ||= data.deep_stringify_keys.to_yaml
+      end
+
+      #
+      # @return [Array<Hash>]
+      #
+      def queries
+        @queries ||= data[:queries]
+      end
+
+      #
+      # @return [Array<String>]
+      #
+      def data_types
+        @data_types ||= data[:data_types]
+      end
+
+      #
+      # @return [Array<String>, nil]
+      #
+      def tags
+        @tags ||= data[:tags]
+      end
+
+      #
+      # @return [Array<String>]
+      #
+      def disallowed_data_values
+        @disallowed_data_values ||= data[:disallowed_data_values]
+      end
+
+      #
+      # @return [Array<Hash>]
+      #
+      def emitters
+        @emitters ||= data[:emitters]
+      end
+
+      #
+      # @return [Array<Hash>]
+      #
+      def enrichers
+        @enrichers ||= data[:enrichers]
+      end
+
+      #
       # @return [Mihari::Rule]
       #
       def to_model
@@ -96,7 +137,6 @@ module Mihari
         rule.title = title
         rule.description = description
         rule.data = data
-        rule.yaml = yaml
 
         rule
       rescue ActiveRecord::RecordNotFound
@@ -104,8 +144,7 @@ module Mihari
           id: id,
           title: title,
           description: description,
-          data: data,
-          yaml: yaml
+          data: data
         )
       end
 
@@ -114,15 +153,16 @@ module Mihari
       #
       def to_analyzer
         analyzer = Mihari::Analyzers::Rule.new(
-          title: self[:title],
-          description: self[:description],
-          tags: self[:tags],
-          queries: self[:queries],
-          data_types: self[:data_types],
-          disallowed_data_values: self[:disallowed_data_values],
-          emitters: self[:emitters],
-          enrichers: self[:enrichers],
-          id: id
+          title: title,
+          description: description,
+          tags: tags,
+          queries: queries,
+          data_types: data_types,
+          disallowed_data_values: disallowed_data_values,
+          emitters: emitters,
+          enrichers: enrichers,
+          id: id,
+          rule: self
         )
         analyzer.artifact_lifetime = self[:artifact_lifetime]
 
@@ -142,7 +182,7 @@ module Mihari
           # set ID if YAML data do not have ID
           data[:id] = model.id unless data.key?(:id)
 
-          Structs::Rule.new(data, model.yaml)
+          Structs::Rule.new(data)
         end
 
         #
@@ -153,10 +193,8 @@ module Mihari
         #
         def from_yaml(yaml, id: nil)
           data = load_erb_yaml(yaml)
-          # set ID if id is given & YAML data do not have ID
-          data[:id] = id if !id.nil? && !data.key?(:id)
 
-          Structs::Rule.new(data, yaml)
+          Structs::Rule.new(data)
         end
 
         #
@@ -210,8 +248,7 @@ module Mihari
         #
         def load_yaml_from_db(id)
           with_db_connection do
-            rule = Mihari::Rule.find(id)
-            rule.yaml || rule.symbolized_data.to_yaml
+            Mihari::Rule.find(id)
           rescue ActiveRecord::RecordNotFound
             raise ArgumentError, "ID:#{id} is not found in the database"
           end

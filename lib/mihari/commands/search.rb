@@ -21,13 +21,11 @@ module Mihari
             end
 
             # check update
-            id = rule.id
             yes = options["yes"] || false
             unless yes
               with_db_connection do
-                rule_ = Mihari::Rule.find(id)
-                next if rule.yaml == rule_.yaml
-                unless yes?("This operation will overwrite the rule in the database (Rule ID: #{id}). Are you sure you want to update the rule? (yes/no)")
+                next if Mihari::Rule.find(rule.id).data == rule.data.deep_stringify_keys
+                unless yes?("This operation will overwrite the rule in the database (Rule ID: #{rule.id}). Are you sure you want to update the rule? (y/n)")
                   return
                 end
               rescue ActiveRecord::RecordNotFound
@@ -35,24 +33,17 @@ module Mihari
               end
             end
 
+            rule.to_model.save
+
             analyzer = rule.to_analyzer
 
             with_error_notification do
               alert = analyzer.run
-
               if alert
                 data = Mihari::Entities::Alert.represent(alert)
                 puts JSON.pretty_generate(data.as_json)
               else
                 Mihari.logger.info "No new alert created in the database"
-              end
-
-              # record a rule
-              with_db_connection do
-                model = rule.to_model
-                model.save
-              rescue ActiveRecord::RecordNotUnique
-                nil
               end
             end
           end

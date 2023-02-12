@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 RSpec.describe Mihari::Emitters::TheHive, :vcr do
+  include_context "with database fixtures"
+
   subject { described_class.new }
 
   describe "#valid?" do
@@ -38,9 +40,8 @@ RSpec.describe Mihari::Emitters::TheHive, :vcr do
   end
 
   describe "#emit" do
-    let(:title) { "test" }
-    let(:description) { "test" }
     let(:artifacts) { [Mihari::Artifact.new(data: "1.1.1.1")] }
+    let(:rule) { Mihari::Rule.first }
 
     let(:mock_thehive) { double("thehive") }
     let(:mock_alert) { double("alert") }
@@ -52,7 +53,7 @@ RSpec.describe Mihari::Emitters::TheHive, :vcr do
     end
 
     it do
-      subject.emit(title: title, description: description, artifacts: artifacts)
+      subject.emit(artifacts: artifacts, rule: rule)
       expect(mock_alert).to have_received(:create)
     end
   end

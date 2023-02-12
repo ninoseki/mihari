@@ -17,11 +17,11 @@ module Spec
       end
 
       def reset_db
+        Mihari::Rule.destroy_all
         Mihari::Alert.destroy_all
         Mihari::Artifact.destroy_all
         Mihari::Tagging.destroy_all
         Mihari::Tag.destroy_all
-        Mihari::Rule.destroy_all
       end
     end
   end

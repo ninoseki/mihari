@@ -15,7 +15,7 @@ module Mihari
 
           optional :artifact, type: String
           optional :description, type: String
-          optional :source, type: String
+          optional :rule_id, type: String
           optional :tag, type: String
           optional :title, type: String
 
@@ -47,7 +47,15 @@ module Mihari
           alerts = Mihari::Alert.search(search_filter_with_pagenation)
           total = Mihari::Alert.count(search_filter_with_pagenation.without_pagination)
 
-          present({ alerts: alerts, total: total, current_page: page, page_size: limit }, with: Entities::AlertsWithPagination)
+          present(
+            {
+              alerts: alerts,
+              total: total,
+              current_page: page,
+              page_size: limit
+            },
+            with: Entities::AlertsWithPagination
+          )
         end
 
         desc "Delete an alert", {

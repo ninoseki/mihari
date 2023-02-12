@@ -3,7 +3,10 @@ require "time"
 
 RSpec.describe Mihari::Endpoints::Alerts do
   include Rack::Test::Methods
+
   include_context "with database fixtures"
+
+  let(:alert) { Mihari::Alert.first }
 
   def app
     Mihari::Endpoints::Alerts
@@ -21,7 +24,7 @@ RSpec.describe Mihari::Endpoints::Alerts do
     end
 
     it "returns 204" do
-      alert_id = @alerts.first.id
+      alert_id = alert.id
       delete "/api/alerts/#{alert_id}"
       expect(last_response.status).to eq(204)
     end

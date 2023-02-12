@@ -167,27 +167,26 @@ module Mihari
       #
       # Build a text
       #
-      # @param [String] title
-      # @param [String] description
+      # @param [Mihari::Rule] rule
       # @param [Array<String>] tags
       #
       # @return [String]
       #
-      def to_text(title:, description:, tags: [])
+      def to_text(rule:, tags: [])
         tags = ["N/A"] if tags.empty?
 
         [
-          "*#{title}*",
-          "*Desc.*: #{description}",
+          "*#{rule.title}*",
+          "*Desc.*: #{rule.description}",
           "*Tags*: #{tags.join(", ")}"
         ].join("\n")
       end
 
-      def emit(title:, description:, artifacts:, tags: [], **_options)
+      def emit(rule:, artifacts:, tags: [], **_options)
         return if artifacts.empty?
 
         attachments = to_attachments(artifacts)
-        text = to_text(title: title, description: description, tags: tags)
+        text = to_text(rule: rule, tags: tags)
 
         notifier.post(text: text, attachments: attachments, mrkdwn: true)
       end

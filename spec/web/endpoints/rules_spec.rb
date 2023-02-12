@@ -9,23 +9,7 @@ RSpec.describe Mihari::Endpoints::Rules do
     Mihari::Endpoints::Rules
   end
 
-  let(:id) { "dummy" }
-  let(:title) { "dummy" }
-  let(:description) { "dummy" }
-  let(:queries) { [{ analyzer: "crtsh", query: "foo" }] }
-
-  let(:data) {
-    { title: title, description: description, queries: queries }
-  }
-
-  before do
-    @rule = Mihari::Rule.new(id: id, title: title, description: description, data: data)
-    @rule.save
-  end
-
-  after do
-    @rule.destroy
-  end
+  let(:rule) { Mihari::Rule.first }
 
   describe "get /api/rules" do
     it "returns 200" do
@@ -34,7 +18,9 @@ RSpec.describe Mihari::Endpoints::Rules do
 
       json = JSON.parse(last_response.body.to_s)
       expect(json).to be_a(Hash)
-      expect(json["rules"].first["id"]).to eq(@rule.id)
+
+      rule_ids = json["rules"].map { |rule| rule["id"] }
+      expect(rule_ids).to include rule.id
     end
   end
 
@@ -45,12 +31,12 @@ RSpec.describe Mihari::Endpoints::Rules do
     end
 
     it "returns 200" do
-      get "/api/rules/#{@rule.id}"
+      get "/api/rules/#{rule.id}"
       expect(last_response.status).to eq(200)
 
       json = JSON.parse(last_response.body.to_s)
       expect(json).to be_a(Hash)
-      expect(json["id"]).to eq(@rule.id)
+      expect(json["id"]).to eq(rule.id)
     end
   end
 
@@ -61,7 +47,7 @@ RSpec.describe Mihari::Endpoints::Rules do
     end
 
     it "returns 204" do
-      delete "/api/rules/#{@rule.id}"
+      delete "/api/rules/#{rule.id}"
       expect(last_response.status).to eq(204)
     end
   end
@@ -70,11 +56,11 @@ RSpec.describe Mihari::Endpoints::Rules do
     let(:title) { "updated" }
 
     it "returns 204" do
-      data = @rule.data.deep_dup
+      data = rule.data.deep_dup
       data["title"] = title
 
       payload = {
-        id: @rule.id,
+        id: rule.id,
         yaml: data.to_yaml
       }
       put("/api/rules/", payload.to_json, "CONTENT_TYPE" => "application/json")
@@ -89,7 +75,7 @@ RSpec.describe Mihari::Endpoints::Rules do
 
   describe "post /api/rules/" do
     it "returns 201" do
-      data = @rule.data.deep_dup
+      data = rule.data.deep_dup
       data["id"] = SecureRandom.uuid
       payload = { yaml: data.to_yaml }
 

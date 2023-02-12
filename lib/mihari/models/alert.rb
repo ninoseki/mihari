@@ -30,14 +30,14 @@ module Mihari
         alert_ids = relation.limit(limit).offset(offset).order(id: :desc).pluck(:id).uniq
         eager_load(
           {
-            artifacts: [
-              :autonomous_system,
-              :geolocation,
-              :whois_record,
-              :dns_records,
-              :reverse_dns_names,
-              :cpes,
-              :ports
+            artifacts: %i[
+              autonomous_system
+              geolocation
+              whois_record
+              dns_records
+              reverse_dns_names
+              cpes
+              ports
             ]
           },
           :tags
@@ -83,7 +83,7 @@ module Mihari
         relation = relation.where(artifacts: { id: artifact_ids }) unless artifact_ids.empty?
         relation = relation.where(tags: { name: filter.tag_name }) if filter.tag_name
 
-        relation = relation.where(source: filter.source) if filter.source
+        relation = relation.where(rule_id: filter.rule_id) if filter.rule_id
         relation = relation.where(title: filter.title) if filter.title
 
         relation = relation.where("description LIKE ?", "%#{filter.description}%") if filter.description

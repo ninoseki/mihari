@@ -1,9 +1,12 @@
 # frozen_string_literal: true
 
 RSpec.describe Mihari::Emitters::Slack do
+  include_context "with database fixtures"
+
   subject { described_class.new }
 
-  let(:artifacts) {
+  let(:rule) { Mihari::Rule.first }
+  let(:artifacts) do
     [
       Mihari::Artifact.new(data: "1.1.1.1"),
       Mihari::Artifact.new(data: "github.com"),
@@ -11,7 +14,7 @@ RSpec.describe Mihari::Emitters::Slack do
       Mihari::Artifact.new(data: "44d88612fea8a8f36de82e1278abb02f"),
       Mihari::Artifact.new(data: "example@gmail.com")
     ]
-  }
+  end
 
   describe "#to_attachments" do
     it do
@@ -26,13 +29,10 @@ RSpec.describe Mihari::Emitters::Slack do
   end
 
   describe "#to_text" do
-    let(:title) { "test" }
-    let(:description) { "test" }
-
     context "when not given tags" do
       it do
-        text = subject.to_text(title: title, description: description)
-        expect(text).to eq("*test*\n*Desc.*: test\n*Tags*: N/A")
+        text = subject.to_text(rule: rule)
+        expect(text).to eq("*test1*\n*Desc.*: test1\n*Tags*: N/A")
       end
     end
 
@@ -40,8 +40,8 @@ RSpec.describe Mihari::Emitters::Slack do
       let(:tags) { %w[foo bar] }
 
       it do
-        text = subject.to_text(title: title, description: description, tags: tags)
-        expect(text).to eq("*test*\n*Desc.*: test\n*Tags*: foo, bar")
+        text = subject.to_text(rule: rule, tags: tags)
+        expect(text).to eq("*test1*\n*Desc.*: test1\n*Tags*: foo, bar")
       end
     end
   end
@@ -79,7 +79,7 @@ RSpec.describe Mihari::Emitters::Slack do
     end
 
     it do
-      subject.emit(title: title, description: description, artifacts: artifacts)
+      subject.emit(rule: rule, artifacts: artifacts)
       expect(mock).to have_received(:post).once
     end
   end

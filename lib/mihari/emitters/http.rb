@@ -8,9 +8,11 @@ module Mihari
       def self.template
         %{
 					{
-						"title": "<%= @title %>",
-						"description": "<%= @description %>",
-						"source": "<%= @source %>",
+						"rule": {
+              "id": "<%= @rule.id %>",
+              "title": "<%= @rule.title %>",
+              "description": "<%= @rule.description %>"
+            },
 						"artifacts": [
 							<% @artifacts.each_with_index do |artifact, idx| %>
 								"<%= artifact.data %>"
@@ -27,11 +29,9 @@ module Mihari
 				}
       end
 
-      def initialize(title:, description:, artifacts:, source:, tags:, options: {})
-        @title = title
-        @description = description
+      def initialize(artifacts:, rule:, tags:, options: {})
         @artifacts = artifacts
-        @source = source
+        @rule = rule
         @tags = tags
 
         @template = options.fetch(:template, self.class.template)
@@ -70,16 +70,14 @@ module Mihari
         @template = template
       end
 
-      def emit(title:, description:, artifacts:, source:, tags:)
+      def emit(artifacts:, rule:, tags:)
         return if artifacts.empty?
 
         res = nil
 
         payload_ = payload_as_string(
-          title: title,
-          description: description,
           artifacts: artifacts,
-          source: source,
+          rule: rule,
           tags: tags
         )
         payload = JSON.parse(payload_)
@@ -99,23 +97,28 @@ module Mihari
       def valid?
         return false if uri.nil?
 
-        ["http", "https"].include? uri.scheme.downcase
+        %w[http https].include? uri.scheme.downcase
       end
 
       private
 
-      def payload_as_string(title:, description:, artifacts:, source:, tags:)
+      #
+      # Convert payload into string
+      #
+      # @param [Array<Mihari::Artifact>] artifacts
+      # @param [Mihari::Rule] rule
+      # @param [Array<String>] tags
+      #
+      # @return [String]
+      #
+      def payload_as_string(artifacts:, rule:, tags:)
         @payload_as_string ||= [].tap do |out|
           options = {}
-          unless template.nil?
-            options[:template] = File.read(template)
-          end
+          options[:template] = File.read(template) unless template.nil?
 
           payload_template = PayloadTemplate.new(
-            title: title,
-            description: description,
             artifacts: artifacts,
-            source: source,
+            rule: rule,
             tags: tags,
             options: options
           )
