@@ -29,7 +29,7 @@ class V5Schema < ActiveRecord::Migration[7.0]
     create_table :alerts, if_not_exists: true do |t|
       t.timestamps
 
-      t.belongs_to :rule, foreign_key: true, type: :string
+      t.belongs_to :rule, foreign_key: true, type: :string, null: false
     end
 
     create_table :artifacts, if_not_exists: true do |t|
@@ -46,7 +46,7 @@ class V5Schema < ActiveRecord::Migration[7.0]
       t.integer :asn, null: false
       t.datetime :created_at
 
-      t.belongs_to :artifact, foreign_key: true
+      t.belongs_to :artifact, foreign_key: true, null: false
     end
 
     create_table :geolocations, if_not_exists: true do |t|
@@ -54,7 +54,7 @@ class V5Schema < ActiveRecord::Migration[7.0]
       t.string :country_code, null: false
       t.datetime :created_at
 
-      t.belongs_to :artifact, foreign_key: true
+      t.belongs_to :artifact, foreign_key: true, null: false
     end
 
     create_table :whois_records, if_not_exists: true do |t|
@@ -66,7 +66,7 @@ class V5Schema < ActiveRecord::Migration[7.0]
       t.json :contacts
       t.datetime :created_at
 
-      t.belongs_to :artifact, foreign_key: true
+      t.belongs_to :artifact, foreign_key: true, null: false
     end
 
     create_table :dns_records, if_not_exists: true do |t|
@@ -74,28 +74,28 @@ class V5Schema < ActiveRecord::Migration[7.0]
       t.string :value, null: false
       t.datetime :created_at
 
-      t.belongs_to :artifact, foreign_key: true
+      t.belongs_to :artifact, foreign_key: true, null: false
     end
 
     create_table :reverse_dns_names, if_not_exists: true do |t|
       t.string :name, null: false
       t.datetime :created_at
 
-      t.belongs_to :artifact, foreign_key: true
+      t.belongs_to :artifact, foreign_key: true, null: false
     end
 
     create_table :cpes, if_not_exists: true do |t|
       t.string :cpe, null: false
       t.datetime :created_at
 
-      t.belongs_to :artifact, foreign_key: true
+      t.belongs_to :artifact, foreign_key: true, null: false
     end
 
     create_table :ports, if_not_exists: true do |t|
       t.integer :port, null: false
       t.datetime :created_at
 
-      t.belongs_to :artifact, foreign_key: true
+      t.belongs_to :artifact, foreign_key: true, null: false
     end
 
     create_table :tags, if_not_exists: true do |t|
