@@ -11,15 +11,14 @@ module Mihari
       # Create an alert
       #
       # @param [Arra<Mihari::Artifact>] artifacts
-      # @param [Mihari::Rule] rule
-      # @param [Array<Mihari::Tag>] tags
+      # @param [Mihari::Structs::Rule] rule
       #
       # @return [Mihari::Alert]
       #
-      def emit(artifacts:, rule:, tags: [])
+      def emit(artifacts:, rule:)
         return if artifacts.empty?
 
-        tags = tags.filter_map { |name| Tag.find_or_create_by(name: name) }.uniq
+        tags = rule.tags.filter_map { |name| Tag.find_or_create_by(name: name) }.uniq
         taggings = tags.map { |tag| Tagging.new(tag_id: tag.id) }
 
         alert = Alert.new(

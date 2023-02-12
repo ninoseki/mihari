@@ -12,16 +12,12 @@ module Mihari
       include Mixins::Database
       include Mixins::Retriable
 
-      # @return [Integer, nil] Artifact lifetime (TTL) in seconds
-      attr_accessor :artifact_lifetime
-
-      # @return [Mihari::Structs::Rule]
+      # @return [Mihari::Structs::Rule, nil]
       attr_reader :rule
 
       def initialize(*args, **kwargs)
         super(*args, **kwargs)
 
-        @artifact_lifetime = nil
         @base_time = Time.now.utc
       end
 
@@ -33,11 +29,6 @@ module Mihari
       # @return [String]
       def source
         self.class.to_s.split("::").last.to_s
-      end
-
-      # @return [Array<String>]
-      def tags
-        rule&.tags || []
       end
 
       #
@@ -73,11 +64,7 @@ module Mihari
       def run_emitter(emitter)
         return if enriched_artifacts.empty?
 
-        alert_or_something = emitter.run(
-          artifacts: enriched_artifacts,
-          tags: tags,
-          rule: rule
-        )
+        alert_or_something = emitter.run(artifacts: enriched_artifacts, rule: rule)
 
         Mihari.logger.info "Emission by #{emitter.class} is succedded"
 
@@ -121,7 +108,7 @@ module Mihari
       #
       def unique_artifacts
         @unique_artifacts ||= normalized_artifacts.select do |artifact|
-          artifact.unique?(base_time: @base_time, artifact_lifetime: artifact_lifetime)
+          artifact.unique?(base_time: @base_time, artifact_lifetime: rule&.artifact_lifetime)
         end
       end
 

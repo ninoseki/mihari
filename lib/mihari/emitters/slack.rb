@@ -167,12 +167,12 @@ module Mihari
       #
       # Build a text
       #
-      # @param [Mihari::Rule] rule
-      # @param [Array<String>] tags
+      # @param [Mihari::Structs::Rule] rule
       #
       # @return [String]
       #
-      def to_text(rule:, tags: [])
+      def to_text(rule)
+        tags = rule.tags
         tags = ["N/A"] if tags.empty?
 
         [
@@ -182,11 +182,11 @@ module Mihari
         ].join("\n")
       end
 
-      def emit(rule:, artifacts:, tags: [], **_options)
+      def emit(rule:, artifacts:, **_options)
         return if artifacts.empty?
 
         attachments = to_attachments(artifacts)
-        text = to_text(rule: rule, tags: tags)
+        text = to_text(rule)
 
         notifier.post(text: text, attachments: attachments, mrkdwn: true)
       end

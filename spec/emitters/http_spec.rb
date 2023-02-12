@@ -28,13 +28,12 @@ RSpec.describe Mihari::Emitters::HTTP, :vcr do
         Mihari::Artifact.new(data: "github.com")
       ]
     end
-    let(:rule) { Mihari::Rule.first }
-    let(:tags) { [] }
+    let(:rule) { Mihari::Structs::Rule.from_model(Mihari::Rule.first) }
     let(:uri) { "https://httpbin.org/post" }
 
     it do
       emitter = described_class.new(uri: uri, http_request_headers: { "Content-Type": "application/json" })
-      res = emitter.emit(artifacts: artifacts, rule: rule, tags: tags)
+      res = emitter.emit(artifacts: artifacts, rule: rule)
 
       json_data = JSON.parse(res.body.to_s)["json"]
       expect(json_data).to be_a(Hash)
