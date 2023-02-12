@@ -172,7 +172,8 @@ module Mihari
       # @return [String]
       #
       def to_text(rule)
-        tags = ["N/A"] if rule.tags.empty?
+        tags = rule.tags
+        tags = ["N/A"] if tags.empty?
 
         [
           "*#{rule.title}*",
