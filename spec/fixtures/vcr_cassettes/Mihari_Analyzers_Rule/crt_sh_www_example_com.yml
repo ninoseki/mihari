@@ -1,0 +1,44 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: https://crt.sh/?exclude=expired&identity=www.example.com&output=json
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+      Host:
+      - crt.sh
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - nginx
+      Date:
+      - Sun, 12 Feb 2023 00:43:08 GMT
+      Content-Type:
+      - application/json
+      Content-Length:
+      - '1023'
+      Connection:
+      - keep-alive
+      Strict-Transport-Security:
+      - max-age=15768000; includeSubDomains; preload
+      Expect-Ct:
+      - preload
+    body:
+      encoding: UTF-8
+      string: '[{"issuer_ca_id":185756,"issuer_name":"C=US, O=DigiCert Inc, CN=DigiCert
+        TLS RSA SHA256 2020 CA1","common_name":"www.example.org","name_value":"www.example.com","id":8396709327,"entry_timestamp":"2023-01-13T13:18:21.987","not_before":"2023-01-13T00:00:00","not_after":"2024-02-13T23:59:59","serial_number":"0c1fcb184518c7e3866741236d6b73f1"},{"issuer_ca_id":185756,"issuer_name":"C=US,
+        O=DigiCert Inc, CN=DigiCert TLS RSA SHA256 2020 CA1","common_name":"www.example.org","name_value":"www.example.com","id":6359075900,"entry_timestamp":"2022-03-17T10:02:40.41","not_before":"2022-03-14T00:00:00","not_after":"2023-03-14T23:59:59","serial_number":"0faa63109307bc3d414892640ccd4d9a"},{"issuer_ca_id":185756,"issuer_name":"C=US,
+        O=DigiCert Inc, CN=DigiCert TLS RSA SHA256 2020 CA1","common_name":"www.example.org","name_value":"www.example.com","id":6342480680,"entry_timestamp":"2022-03-14T22:48:46.166","not_before":"2022-03-14T00:00:00","not_after":"2023-03-14T23:59:59","serial_number":"0faa63109307bc3d414892640ccd4d9a"}]'
+  recorded_at: Sun, 12 Feb 2023 00:43:09 GMT
+recorded_with: VCR 6.1.0
