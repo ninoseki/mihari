@@ -1,19 +1,19 @@
 # frozen_string_literal: true
 
 RSpec.describe Mihari::Analyzers::ZoomEye, :vcr do
-  subject { described_class.new(query) }
+  let(:type) { "host" }
 
-  let(:query) { "sagawa.apk" }
+  subject { described_class.new(query, type: type) }
 
   describe "#artifacts" do
+    let(:query) { "sagawa.apk" }
+
     it do
       expect(subject.artifacts).to be_an(Array)
     end
   end
 
   context "when given web type" do
-    subject { described_class.new(query, type: type) }
-
     let(:query) { "wordpress +wooo +en-US" }
     let(:type) { "web" }
 
@@ -25,6 +25,8 @@ RSpec.describe Mihari::Analyzers::ZoomEye, :vcr do
   end
 
   context "when api config is not given" do
+    let(:query) { "dummy" }
+
     before do
       allow(Mihari.config).to receive(:zoomeye_api_key).and_return(nil)
     end

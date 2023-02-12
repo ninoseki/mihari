@@ -69,8 +69,6 @@ RSpec.describe Mihari::Emitters::Slack do
   end
 
   describe "#emit" do
-    let(:title) { "test" }
-    let(:description) { "test" }
     let(:mock) { double("notifier") }
 
     before do
