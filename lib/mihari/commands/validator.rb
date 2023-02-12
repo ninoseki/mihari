@@ -5,7 +5,7 @@ module Mihari
     module Validator
       def self.included(thor)
         thor.class_eval do
-          desc "rule [PATH]", "Validate rule file format"
+          desc "validate [PATH]", "Validate a rule file"
           #
           # Validate format of a rule
           #
@@ -13,7 +13,7 @@ module Mihari
           #
           # @return [nil]
           #
-          def rule(path)
+          def validate(path)
             rule = Structs::Rule.from_path_or_id(path)
 
             begin

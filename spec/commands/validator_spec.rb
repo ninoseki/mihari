@@ -2,9 +2,11 @@
 
 require "stringio"
 
-RSpec.describe Mihari::CLI::Validator do
-  subject { described_class }
+class CLI < Mihari::CLI::Base
+  include Mihari::Commands::Validator
+end
 
+RSpec.describe Mihari::Commands::Validator do
   let(:sio) { StringIO.new }
   let(:logger) do
     SemanticLogger.default_level = :info
@@ -12,18 +14,20 @@ RSpec.describe Mihari::CLI::Validator do
     SemanticLogger["Mihari"]
   end
 
-  describe "#rule" do
-    before { allow(Mihari).to receive(:logger).and_return(logger) }
+  before { allow(Mihari).to receive(:logger).and_return(logger) }
 
+  describe "#validate" do
     let(:path) { File.expand_path("../fixtures/rules/valid_rule.yml", __dir__) }
 
     it do
-      capture(:stderr) { subject.start ["rule", path] }
+      capture(:stderr) { CLI.start ["validate", path] }
 
       # read logger output
       SemanticLogger.flush
       sio.rewind
       output = sio.read
+
+      p output
 
       expect(output).to include("Valid format.")
     end
@@ -32,7 +36,7 @@ RSpec.describe Mihari::CLI::Validator do
       let(:path) { File.expand_path("../fixtures/rules/invalid_rule.yml", __dir__) }
 
       it do
-        subject.start ["rule", path]
+        CLI.start ["validate", path]
 
         # read logger output
         SemanticLogger.flush

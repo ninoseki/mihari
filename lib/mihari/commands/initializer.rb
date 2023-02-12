@@ -2,18 +2,16 @@
 
 module Mihari
   module Commands
-    module Initialization
+    module Initializer
       def self.included(thor)
         thor.class_eval do
-          desc "rule", "Create a rule file"
+          desc "init", "Initialize a new rule"
           method_option :filename, type: :string, default: "rule.yml"
-          def rule
+          def init
             filename = options["filename"]
 
             warning = "#{filename} exists. Do you want to overwrite it? (y/n)"
-            if File.exist?(filename) && !(yes? warning)
-              return
-            end
+            return if File.exist?(filename) && !(yes? warning)
 
             initialize_rule_yaml filename
 
@@ -32,7 +30,7 @@ module Mihari
             end
 
             #
-            # Create (blank) rule file
+            # Create a (blank) rule file
             #
             # @param [String] filename
             # @param [Dry::Files] files

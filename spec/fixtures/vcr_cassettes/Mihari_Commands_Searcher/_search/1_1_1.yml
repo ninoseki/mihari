@@ -23,11 +23,11 @@ http_interactions:
       Server:
       - nginx
       Date:
-      - Tue, 31 May 2022 08:49:45 GMT
+      - Sun, 12 Feb 2023 03:33:03 GMT
       Content-Type:
       - application/json
       Content-Length:
-      - '1416'
+      - '1355'
       Connection:
       - keep-alive
       Strict-Transport-Security:
@@ -37,11 +37,11 @@ http_interactions:
     body:
       encoding: UTF-8
       string: '[{"issuer_ca_id":185756,"issuer_name":"C=US, O=DigiCert Inc, CN=DigiCert
-        TLS RSA SHA256 2020 CA1","common_name":"www.example.org","name_value":"example.com\nwww.example.com","id":6359075900,"entry_timestamp":"2022-03-17T10:02:40.41","not_before":"2022-03-14T00:00:00","not_after":"2023-03-14T23:59:59","serial_number":"0faa63109307bc3d414892640ccd4d9a"},{"issuer_ca_id":185756,"issuer_name":"C=US,
-        O=DigiCert Inc, CN=DigiCert TLS RSA SHA256 2020 CA1","common_name":"www.example.org","name_value":"example.com\nwww.example.com","id":6342480680,"entry_timestamp":"2022-03-14T22:48:46.166","not_before":"2022-03-14T00:00:00","not_after":"2023-03-14T23:59:59","serial_number":"0faa63109307bc3d414892640ccd4d9a"},{"issuer_ca_id":185756,"issuer_name":"C=US,
-        O=DigiCert Inc, CN=DigiCert TLS RSA SHA256 2020 CA1","common_name":"www.example.org","name_value":"example.com\nwww.example.com","id":5813209289,"entry_timestamp":"2021-12-17T11:32:05.977","not_before":"2021-12-10T00:00:00","not_after":"2022-12-09T23:59:59","serial_number":"025216e1c4998e2632aa5d1da985b43c"},{"issuer_ca_id":185756,"issuer_name":"C=US,
-        O=DigiCert Inc, CN=DigiCert TLS RSA SHA256 2020 CA1","common_name":"www.example.org","name_value":"example.com\nwww.example.com","id":5771467708,"entry_timestamp":"2021-12-10T05:18:05.116","not_before":"2021-12-10T00:00:00","not_after":"2022-12-09T23:59:59","serial_number":"025216e1c4998e2632aa5d1da985b43c"}]'
-  recorded_at: Tue, 31 May 2022 08:49:45 GMT
+        TLS RSA SHA256 2020 CA1","common_name":"www.example.org","name_value":"example.com\nwww.example.com","id":8396709327,"entry_timestamp":"2023-01-13T13:18:21.987","not_before":"2023-01-13T00:00:00","not_after":"2024-02-13T23:59:59","serial_number":"0c1fcb184518c7e3866741236d6b73f1"},{"issuer_ca_id":185756,"issuer_name":"C=US,
+        O=DigiCert Inc, CN=DigiCert TLS RSA SHA256 2020 CA1","common_name":"www.example.org","name_value":"example.com\nwww.example.com","id":6359075900,"entry_timestamp":"2022-03-17T10:02:40.41","not_before":"2022-03-14T00:00:00","not_after":"2023-03-14T23:59:59","serial_number":"0faa63109307bc3d414892640ccd4d9a"},{"issuer_ca_id":185756,"issuer_name":"C=US,
+        O=DigiCert Inc, CN=DigiCert TLS RSA SHA256 2020 CA1","common_name":"www.example.org","name_value":"example.com\nwww.example.com","id":6342480680,"entry_timestamp":"2022-03-14T22:48:46.166","not_before":"2022-03-14T00:00:00","not_after":"2023-03-14T23:59:59","serial_number":"0faa63109307bc3d414892640ccd4d9a"},{"issuer_ca_id":-1,"issuer_name":"Issuer
+        Not Found","common_name":"example.com","name_value":"example.com\nuser@example.com","id":8506962125,"entry_timestamp":null,"not_before":"2023-01-27T01:21:18","not_after":"2033-01-24T01:21:18","serial_number":"1ac1e693c87d36563a92ca145c87bbc26fd49f4c"}]'
+  recorded_at: Sun, 12 Feb 2023 03:33:03 GMT
 - request:
     method: get
     uri: https://dns.google/resolve?name=www.example.com&type=A
@@ -69,11 +69,11 @@ http_interactions:
       Access-Control-Allow-Origin:
       - "*"
       Date:
-      - Tue, 31 May 2022 08:49:45 GMT
+      - Sun, 12 Feb 2023 03:33:04 GMT
       Expires:
-      - Tue, 31 May 2022 08:49:45 GMT
+      - Sun, 12 Feb 2023 03:33:04 GMT
       Cache-Control:
-      - private, max-age=20015
+      - private, max-age=20278
       Content-Type:
       - application/json; charset=UTF-8
       Server:
@@ -83,14 +83,13 @@ http_interactions:
       X-Frame-Options:
       - SAMEORIGIN
       Alt-Svc:
-      - h3=":443"; ma=2592000,h3-29=":443"; ma=2592000,h3-Q050=":443"; ma=2592000,h3-Q046=":443";
-        ma=2592000,h3-Q043=":443"; ma=2592000,quic=":443"; ma=2592000; v="46,43"
+      - h3=":443"; ma=2592000,h3-29=":443"; ma=2592000
       Transfer-Encoding:
       - chunked
     body:
       encoding: ASCII-8BIT
-      string: '{"Status":0,"TC":false,"RD":true,"RA":true,"AD":true,"CD":false,"Question":[{"name":"www.example.com.","type":1}],"Answer":[{"name":"www.example.com.","type":1,"TTL":20015,"data":"93.184.216.34"}]}'
-  recorded_at: Tue, 31 May 2022 08:49:45 GMT
+      string: '{"Status":0,"TC":false,"RD":true,"RA":true,"AD":true,"CD":false,"Question":[{"name":"www.example.com.","type":1}],"Answer":[{"name":"www.example.com.","type":1,"TTL":20278,"data":"93.184.216.34"}]}'
+  recorded_at: Sun, 12 Feb 2023 03:33:04 GMT
 - request:
     method: get
     uri: https://dns.google/resolve?name=www.example.com&type=AAAA
@@ -118,11 +117,11 @@ http_interactions:
       Access-Control-Allow-Origin:
       - "*"
       Date:
-      - Tue, 31 May 2022 08:49:45 GMT
+      - Sun, 12 Feb 2023 03:33:04 GMT
       Expires:
-      - Tue, 31 May 2022 08:49:45 GMT
+      - Sun, 12 Feb 2023 03:33:04 GMT
       Cache-Control:
-      - private, max-age=15617
+      - private, max-age=20910
       Content-Type:
       - application/json; charset=UTF-8
       Server:
@@ -132,14 +131,13 @@ http_interactions:
       X-Frame-Options:
       - SAMEORIGIN
       Alt-Svc:
-      - h3=":443"; ma=2592000,h3-29=":443"; ma=2592000,h3-Q050=":443"; ma=2592000,h3-Q046=":443";
-        ma=2592000,h3-Q043=":443"; ma=2592000,quic=":443"; ma=2592000; v="46,43"
+      - h3=":443"; ma=2592000,h3-29=":443"; ma=2592000
       Transfer-Encoding:
       - chunked
     body:
       encoding: ASCII-8BIT
-      string: '{"Status":0,"TC":false,"RD":true,"RA":true,"AD":true,"CD":false,"Question":[{"name":"www.example.com.","type":28}],"Answer":[{"name":"www.example.com.","type":28,"TTL":15617,"data":"2606:2800:220:1:248:1893:25c8:1946"}]}'
-  recorded_at: Tue, 31 May 2022 08:49:45 GMT
+      string: '{"Status":0,"TC":false,"RD":true,"RA":true,"AD":true,"CD":false,"Question":[{"name":"www.example.com.","type":28}],"Answer":[{"name":"www.example.com.","type":28,"TTL":20910,"data":"2606:2800:220:1:248:1893:25c8:1946"}]}'
+  recorded_at: Sun, 12 Feb 2023 03:33:04 GMT
 - request:
     method: get
     uri: https://dns.google/resolve?name=www.example.com&type=CNAME
@@ -167,11 +165,11 @@ http_interactions:
       Access-Control-Allow-Origin:
       - "*"
       Date:
-      - Tue, 31 May 2022 08:49:45 GMT
+      - Sun, 12 Feb 2023 03:33:04 GMT
       Expires:
-      - Tue, 31 May 2022 08:49:45 GMT
+      - Sun, 12 Feb 2023 03:33:04 GMT
       Cache-Control:
-      - private, max-age=937
+      - private, max-age=308
       Content-Type:
       - application/json; charset=UTF-8
       Server:
@@ -181,15 +179,14 @@ http_interactions:
       X-Frame-Options:
       - SAMEORIGIN
       Alt-Svc:
-      - h3=":443"; ma=2592000,h3-29=":443"; ma=2592000,h3-Q050=":443"; ma=2592000,h3-Q046=":443";
-        ma=2592000,h3-Q043=":443"; ma=2592000,quic=":443"; ma=2592000; v="46,43"
+      - h3=":443"; ma=2592000,h3-29=":443"; ma=2592000
       Transfer-Encoding:
       - chunked
     body:
       encoding: ASCII-8BIT
-      string: '{"Status":0,"TC":false,"RD":true,"RA":true,"AD":true,"CD":false,"Question":[{"name":"www.example.com.","type":5}],"Authority":[{"name":"example.com.","type":6,"TTL":937,"data":"ns.icann.org.
-        noc.dns.icann.org. 2022040434 7200 3600 1209600 3600"}]}'
-  recorded_at: Tue, 31 May 2022 08:49:45 GMT
+      string: '{"Status":0,"TC":false,"RD":true,"RA":true,"AD":true,"CD":false,"Question":[{"name":"www.example.com.","type":5}],"Authority":[{"name":"example.com.","type":6,"TTL":308,"data":"ns.icann.org.
+        noc.dns.icann.org. 2022091208 7200 3600 1209600 3600"}]}'
+  recorded_at: Sun, 12 Feb 2023 03:33:04 GMT
 - request:
     method: get
     uri: https://dns.google/resolve?name=www.example.com&type=TXT
@@ -217,9 +214,9 @@ http_interactions:
       Access-Control-Allow-Origin:
       - "*"
       Date:
-      - Tue, 31 May 2022 08:49:45 GMT
+      - Sun, 12 Feb 2023 03:33:05 GMT
       Expires:
-      - Tue, 31 May 2022 08:49:45 GMT
+      - Sun, 12 Feb 2023 03:33:05 GMT
       Cache-Control:
       - private, max-age=21600
       Content-Type:
@@ -231,16 +228,15 @@ http_interactions:
       X-Frame-Options:
       - SAMEORIGIN
       Alt-Svc:
-      - h3=":443"; ma=2592000,h3-29=":443"; ma=2592000,h3-Q050=":443"; ma=2592000,h3-Q046=":443";
-        ma=2592000,h3-Q043=":443"; ma=2592000,quic=":443"; ma=2592000; v="46,43"
+      - h3=":443"; ma=2592000,h3-29=":443"; ma=2592000
       Transfer-Encoding:
       - chunked
     body:
       encoding: ASCII-8BIT
       string: '{"Status":0,"TC":false,"RD":true,"RA":true,"AD":true,"CD":false,"Question":[{"name":"www.example.com.","type":16}],"Answer":[{"name":"www.example.com.","type":16,"TTL":21600,"data":"v=spf1
         -all"},{"name":"www.example.com.","type":16,"TTL":21600,"data":"wgyf8z8cgvm2qmxpnbnldrcltvk4xqfn"}],"Comment":"Response
-        from 2001:500:8f::53."}'
-  recorded_at: Tue, 31 May 2022 08:49:45 GMT
+        from 2001:500:8d::53."}'
+  recorded_at: Sun, 12 Feb 2023 03:33:05 GMT
 - request:
     method: get
     uri: https://dns.google/resolve?name=www.example.com&type=NS
@@ -268,11 +264,11 @@ http_interactions:
       Access-Control-Allow-Origin:
       - "*"
       Date:
-      - Tue, 31 May 2022 08:49:46 GMT
+      - Sun, 12 Feb 2023 03:33:05 GMT
       Expires:
-      - Tue, 31 May 2022 08:49:46 GMT
+      - Sun, 12 Feb 2023 03:33:05 GMT
       Cache-Control:
-      - private, max-age=1021
+      - private, max-age=307
       Content-Type:
       - application/json; charset=UTF-8
       Server:
@@ -282,15 +278,14 @@ http_interactions:
       X-Frame-Options:
       - SAMEORIGIN
       Alt-Svc:
-      - h3=":443"; ma=2592000,h3-29=":443"; ma=2592000,h3-Q050=":443"; ma=2592000,h3-Q046=":443";
-        ma=2592000,h3-Q043=":443"; ma=2592000,quic=":443"; ma=2592000; v="46,43"
+      - h3=":443"; ma=2592000,h3-29=":443"; ma=2592000
       Transfer-Encoding:
       - chunked
     body:
       encoding: ASCII-8BIT
-      string: '{"Status":0,"TC":false,"RD":true,"RA":true,"AD":true,"CD":false,"Question":[{"name":"www.example.com.","type":2}],"Authority":[{"name":"example.com.","type":6,"TTL":1021,"data":"ns.icann.org.
-        noc.dns.icann.org. 2022040434 7200 3600 1209600 3600"}]}'
-  recorded_at: Tue, 31 May 2022 08:49:46 GMT
+      string: '{"Status":0,"TC":false,"RD":true,"RA":true,"AD":true,"CD":false,"Question":[{"name":"www.example.com.","type":2}],"Authority":[{"name":"example.com.","type":6,"TTL":307,"data":"ns.icann.org.
+        noc.dns.icann.org. 2022091208 7200 3600 1209600 3600"}]}'
+  recorded_at: Sun, 12 Feb 2023 03:33:05 GMT
 - request:
     method: get
     uri: https://dns.google/resolve?name=example.com&type=A
@@ -318,11 +313,11 @@ http_interactions:
       Access-Control-Allow-Origin:
       - "*"
       Date:
-      - Tue, 31 May 2022 08:49:47 GMT
+      - Sun, 12 Feb 2023 03:33:05 GMT
       Expires:
-      - Tue, 31 May 2022 08:49:47 GMT
+      - Sun, 12 Feb 2023 03:33:05 GMT
       Cache-Control:
-      - private, max-age=17520
+      - private, max-age=20328
       Content-Type:
       - application/json; charset=UTF-8
       Server:
@@ -332,14 +327,13 @@ http_interactions:
       X-Frame-Options:
       - SAMEORIGIN
       Alt-Svc:
-      - h3=":443"; ma=2592000,h3-29=":443"; ma=2592000,h3-Q050=":443"; ma=2592000,h3-Q046=":443";
-        ma=2592000,h3-Q043=":443"; ma=2592000,quic=":443"; ma=2592000; v="46,43"
+      - h3=":443"; ma=2592000,h3-29=":443"; ma=2592000
       Transfer-Encoding:
       - chunked
     body:
       encoding: ASCII-8BIT
-      string: '{"Status":0,"TC":false,"RD":true,"RA":true,"AD":true,"CD":false,"Question":[{"name":"example.com.","type":1}],"Answer":[{"name":"example.com.","type":1,"TTL":17520,"data":"93.184.216.34"}]}'
-  recorded_at: Tue, 31 May 2022 08:49:47 GMT
+      string: '{"Status":0,"TC":false,"RD":true,"RA":true,"AD":true,"CD":false,"Question":[{"name":"example.com.","type":1}],"Answer":[{"name":"example.com.","type":1,"TTL":20328,"data":"93.184.216.34"}]}'
+  recorded_at: Sun, 12 Feb 2023 03:33:05 GMT
 - request:
     method: get
     uri: https://dns.google/resolve?name=example.com&type=AAAA
@@ -367,11 +361,11 @@ http_interactions:
       Access-Control-Allow-Origin:
       - "*"
       Date:
-      - Tue, 31 May 2022 08:49:47 GMT
+      - Sun, 12 Feb 2023 03:33:05 GMT
       Expires:
-      - Tue, 31 May 2022 08:49:47 GMT
+      - Sun, 12 Feb 2023 03:33:05 GMT
       Cache-Control:
-      - private, max-age=18804
+      - private, max-age=20113
       Content-Type:
       - application/json; charset=UTF-8
       Server:
@@ -381,14 +375,13 @@ http_interactions:
       X-Frame-Options:
       - SAMEORIGIN
       Alt-Svc:
-      - h3=":443"; ma=2592000,h3-29=":443"; ma=2592000,h3-Q050=":443"; ma=2592000,h3-Q046=":443";
-        ma=2592000,h3-Q043=":443"; ma=2592000,quic=":443"; ma=2592000; v="46,43"
+      - h3=":443"; ma=2592000,h3-29=":443"; ma=2592000
       Transfer-Encoding:
       - chunked
     body:
       encoding: ASCII-8BIT
-      string: '{"Status":0,"TC":false,"RD":true,"RA":true,"AD":true,"CD":false,"Question":[{"name":"example.com.","type":28}],"Answer":[{"name":"example.com.","type":28,"TTL":18804,"data":"2606:2800:220:1:248:1893:25c8:1946"}]}'
-  recorded_at: Tue, 31 May 2022 08:49:47 GMT
+      string: '{"Status":0,"TC":false,"RD":true,"RA":true,"AD":true,"CD":false,"Question":[{"name":"example.com.","type":28}],"Answer":[{"name":"example.com.","type":28,"TTL":20113,"data":"2606:2800:220:1:248:1893:25c8:1946"}]}'
+  recorded_at: Sun, 12 Feb 2023 03:33:05 GMT
 - request:
     method: get
     uri: https://dns.google/resolve?name=example.com&type=CNAME
@@ -416,11 +409,11 @@ http_interactions:
       Access-Control-Allow-Origin:
       - "*"
       Date:
-      - Tue, 31 May 2022 08:49:47 GMT
+      - Sun, 12 Feb 2023 03:33:05 GMT
       Expires:
-      - Tue, 31 May 2022 08:49:47 GMT
+      - Sun, 12 Feb 2023 03:33:05 GMT
       Cache-Control:
-      - private, max-age=944
+      - private, max-age=1210
       Content-Type:
       - application/json; charset=UTF-8
       Server:
@@ -430,15 +423,14 @@ http_interactions:
       X-Frame-Options:
       - SAMEORIGIN
       Alt-Svc:
-      - h3=":443"; ma=2592000,h3-29=":443"; ma=2592000,h3-Q050=":443"; ma=2592000,h3-Q046=":443";
-        ma=2592000,h3-Q043=":443"; ma=2592000,quic=":443"; ma=2592000; v="46,43"
+      - h3=":443"; ma=2592000,h3-29=":443"; ma=2592000
       Transfer-Encoding:
       - chunked
     body:
       encoding: ASCII-8BIT
-      string: '{"Status":0,"TC":false,"RD":true,"RA":true,"AD":true,"CD":false,"Question":[{"name":"example.com.","type":5}],"Authority":[{"name":"example.com.","type":6,"TTL":944,"data":"ns.icann.org.
-        noc.dns.icann.org. 2022040434 7200 3600 1209600 3600"}]}'
-  recorded_at: Tue, 31 May 2022 08:49:47 GMT
+      string: '{"Status":0,"TC":false,"RD":true,"RA":true,"AD":true,"CD":false,"Question":[{"name":"example.com.","type":5}],"Authority":[{"name":"example.com.","type":6,"TTL":1210,"data":"ns.icann.org.
+        noc.dns.icann.org. 2022091208 7200 3600 1209600 3600"}]}'
+  recorded_at: Sun, 12 Feb 2023 03:33:05 GMT
 - request:
     method: get
     uri: https://dns.google/resolve?name=example.com&type=TXT
@@ -466,11 +458,11 @@ http_interactions:
       Access-Control-Allow-Origin:
       - "*"
       Date:
-      - Tue, 31 May 2022 08:49:47 GMT
+      - Sun, 12 Feb 2023 03:33:06 GMT
       Expires:
-      - Tue, 31 May 2022 08:49:47 GMT
+      - Sun, 12 Feb 2023 03:33:06 GMT
       Cache-Control:
-      - private, max-age=20590
+      - private, max-age=21600
       Content-Type:
       - application/json; charset=UTF-8
       Server:
@@ -480,15 +472,15 @@ http_interactions:
       X-Frame-Options:
       - SAMEORIGIN
       Alt-Svc:
-      - h3=":443"; ma=2592000,h3-29=":443"; ma=2592000,h3-Q050=":443"; ma=2592000,h3-Q046=":443";
-        ma=2592000,h3-Q043=":443"; ma=2592000,quic=":443"; ma=2592000; v="46,43"
+      - h3=":443"; ma=2592000,h3-29=":443"; ma=2592000
       Transfer-Encoding:
       - chunked
     body:
       encoding: ASCII-8BIT
-      string: '{"Status":0,"TC":false,"RD":true,"RA":true,"AD":true,"CD":false,"Question":[{"name":"example.com.","type":16}],"Answer":[{"name":"example.com.","type":16,"TTL":20590,"data":"v=spf1
-        -all"},{"name":"example.com.","type":16,"TTL":20590,"data":"wgyf8z8cgvm2qmxpnbnldrcltvk4xqfn"}]}'
-  recorded_at: Tue, 31 May 2022 08:49:47 GMT
+      string: '{"Status":0,"TC":false,"RD":true,"RA":true,"AD":true,"CD":false,"Question":[{"name":"example.com.","type":16}],"Answer":[{"name":"example.com.","type":16,"TTL":21600,"data":"v=spf1
+        -all"},{"name":"example.com.","type":16,"TTL":21600,"data":"wgyf8z8cgvm2qmxpnbnldrcltvk4xqfn"}],"Comment":"Response
+        from 199.43.133.53."}'
+  recorded_at: Sun, 12 Feb 2023 03:33:06 GMT
 - request:
     method: get
     uri: https://dns.google/resolve?name=example.com&type=NS
@@ -516,11 +508,11 @@ http_interactions:
       Access-Control-Allow-Origin:
       - "*"
       Date:
-      - Tue, 31 May 2022 08:49:47 GMT
+      - Sun, 12 Feb 2023 03:33:06 GMT
       Expires:
-      - Tue, 31 May 2022 08:49:47 GMT
+      - Sun, 12 Feb 2023 03:33:06 GMT
       Cache-Control:
-      - private, max-age=7496
+      - private, max-age=21600
       Content-Type:
       - application/json; charset=UTF-8
       Server:
@@ -530,12 +522,12 @@ http_interactions:
       X-Frame-Options:
       - SAMEORIGIN
       Alt-Svc:
-      - h3=":443"; ma=2592000,h3-29=":443"; ma=2592000,h3-Q050=":443"; ma=2592000,h3-Q046=":443";
-        ma=2592000,h3-Q043=":443"; ma=2592000,quic=":443"; ma=2592000; v="46,43"
+      - h3=":443"; ma=2592000,h3-29=":443"; ma=2592000
       Transfer-Encoding:
       - chunked
     body:
       encoding: ASCII-8BIT
-      string: '{"Status":0,"TC":false,"RD":true,"RA":true,"AD":true,"CD":false,"Question":[{"name":"example.com.","type":2}],"Answer":[{"name":"example.com.","type":2,"TTL":7496,"data":"a.iana-servers.net."},{"name":"example.com.","type":2,"TTL":7496,"data":"b.iana-servers.net."}]}'
-  recorded_at: Tue, 31 May 2022 08:49:47 GMT
+      string: '{"Status":0,"TC":false,"RD":true,"RA":true,"AD":true,"CD":false,"Question":[{"name":"example.com.","type":2}],"Answer":[{"name":"example.com.","type":2,"TTL":21600,"data":"a.iana-servers.net."},{"name":"example.com.","type":2,"TTL":21600,"data":"b.iana-servers.net."}],"Comment":"Response
+        from 199.43.135.53."}'
+  recorded_at: Sun, 12 Feb 2023 03:33:06 GMT
 recorded_with: VCR 6.1.0

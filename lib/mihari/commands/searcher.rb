@@ -2,15 +2,15 @@
 
 module Mihari
   module Commands
-    module Search
+    module Searcher
       include Mixins::Database
       include Mixins::ErrorNotification
 
       def self.included(thor)
         thor.class_eval do
-          desc "search [RULE]", "Search by a rule"
+          desc "search [PATH]", "Search by a rule"
           method_option :yes, type: :boolean, aliases: "-y", desc: "yes to overwrite the rule in the database"
-          def search_by_rule(path_or_id)
+          def search(path_or_id)
             rule = Structs::Rule.from_path_or_id path_or_id
 
             # validate
@@ -43,7 +43,7 @@ module Mihari
                 data = Mihari::Entities::Alert.represent(alert)
                 puts JSON.pretty_generate(data.as_json)
               else
-                Mihari.logger.info "No new alert created in the database"
+                Mihari.logger.info "There is no new alert created in the database"
               end
             end
           end

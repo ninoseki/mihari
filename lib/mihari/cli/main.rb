@@ -3,28 +3,23 @@
 require "thor"
 
 # Commands
-require "mihari/commands/search"
+require "mihari/commands/initializer"
+require "mihari/commands/searcher"
+require "mihari/commands/validator"
 require "mihari/commands/version"
 require "mihari/commands/web"
 
 # CLIs
 require "mihari/cli/base"
 
-require "mihari/cli/init"
-require "mihari/cli/validator"
-
 module Mihari
   module CLI
     class Main < Base
-      include Mihari::Commands::Search
+      include Mihari::Commands::Searcher
       include Mihari::Commands::Version
       include Mihari::Commands::Web
-
-      desc "init", "Sub commands to initialize a rule"
-      subcommand "init", Initialization
-
-      desc "validate", "Sub commands to validate format of a rule"
-      subcommand "validate", Validator
+      include Mihari::Commands::Validator
+      include Mihari::Commands::Initializer
     end
   end
 end
