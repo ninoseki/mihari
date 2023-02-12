@@ -5,7 +5,7 @@ RSpec.describe Mihari::Emitters::Slack do
 
   subject { described_class.new }
 
-  let(:rule) { Mihari::Rule.first }
+  let(:rule) { Mihari::Structs::Rule.from_model(Mihari::Rule.first) }
   let(:artifacts) do
     [
       Mihari::Artifact.new(data: "1.1.1.1"),
@@ -31,17 +31,8 @@ RSpec.describe Mihari::Emitters::Slack do
   describe "#to_text" do
     context "when not given tags" do
       it do
-        text = subject.to_text(rule: rule)
-        expect(text).to eq("*test1*\n*Desc.*: test1\n*Tags*: N/A")
-      end
-    end
-
-    context "when given tags" do
-      let(:tags) { %w[foo bar] }
-
-      it do
-        text = subject.to_text(rule: rule, tags: tags)
-        expect(text).to eq("*test1*\n*Desc.*: test1\n*Tags*: foo, bar")
+        text = subject.to_text(rule)
+        expect(text).to eq("*test1*\n*Desc.*: test1\n*Tags*: tag1")
       end
     end
   end

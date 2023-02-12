@@ -20,11 +20,10 @@ RSpec.describe Mihari::Emitters::MISP, :vcr do
 
   describe "#emit" do
     let(:artifacts) { [Mihari::Artifact.new(data: "1.1.1.1")] }
-    let(:tags) { %w[test] }
-    let(:rule) { Mihari::Rule.first }
+    let(:rule) { Mihari::Structs::Rule.from_model(Mihari::Rule.first) }
 
     it do
-      event = subject.emit(artifacts: artifacts, rule: rule, tags: tags)
+      event = subject.emit(artifacts: artifacts, rule: rule)
       expect(event).to be_a(MISP::Event)
     end
   end

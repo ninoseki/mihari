@@ -43,12 +43,11 @@ module Mihari
       # Create a MISP event
       #
       # @param [Arra<Mihari::Artifact>] artifacts
-      # @param [Mihari::Rule] rule
-      # @param [Array<Mihari::Tag>] tags
+      # @param [Mihari::Structs::Rule] rule
       #
       # @return [::MISP::Event]
       #
-      def emit(rule:, artifacts:, tags: [], **_options)
+      def emit(rule:, artifacts:, **_options)
         return if artifacts.empty?
 
         event = ::MISP::Event.new(info: rule.title)
@@ -57,7 +56,7 @@ module Mihari
           event.attributes << build_attribute(artifact)
         end
 
-        tags.each do |tag|
+        rule.tags.each do |tag|
           event.add_tag name: tag
         end
 

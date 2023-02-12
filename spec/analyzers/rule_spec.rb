@@ -34,12 +34,6 @@ RSpec.describe Mihari::Analyzers::Rule, :vcr do
     end
   end
 
-  describe "#tags" do
-    it do
-      expect(subject.tags).to eq(tags)
-    end
-  end
-
   context "with duplicated artifacts" do
     let(:queries) do
       [

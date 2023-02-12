@@ -42,15 +42,14 @@ module Mihari
       # Create a Hive alert
       #
       # @param [Arra<Mihari::Artifact>] artifacts
-      # @param [Mihari::Rule] rule
-      # @param [Array<Mihari::Tag>] tags
+      # @param [Mihari::Structs::Rule] rule
       #
       # @return [::MISP::Event]
       #
-      def emit(rule:, artifacts:, tags: [], **_options)
+      def emit(rule:, artifacts:, **_options)
         return if artifacts.empty?
 
-        payload = payload(rule: rule, artifacts: artifacts, tags: tags)
+        payload = payload(rule: rule, artifacts: artifacts)
         api.alert.create(**payload)
       end
 
@@ -106,18 +105,17 @@ module Mihari
       # Build payload for alert
       #
       # @param [Arra<Mihari::Artifact>] artifacts
-      # @param [Mihari::Rule] rule
-      # @param [Array<Mihari::Tag>] tags
+      # @param [Mihari::Structs::Rule] rule
       #
       # @return [<Type>] <description>
       #
-      def payload(rule:, artifacts:, tags: [])
-        return v4_payload(rule: rule, artifacts: artifacts, tags: tags) if normalized_api_version.nil?
+      def payload(rule:, artifacts:)
+        return v4_payload(rule: rule, artifacts: artifacts) if normalized_api_version.nil?
 
-        v5_payload(rule: rule, artifacts: artifacts, tags: tags)
+        v5_payload(rule: rule, artifacts: artifacts)
       end
 
-      def v4_payload(rule:, artifacts:, tags: [])
+      def v4_payload(rule:, artifacts:)
         {
           title: rule.title,
           description: rule.description,
@@ -128,13 +126,13 @@ module Mihari
               message: rule.description
             }
           end,
-          tags: tags,
+          tags: rule.tags,
           type: "external",
           source: "mihari"
         }
       end
 
-      def v5_payload(rule:, artifacts:, tags: [])
+      def v5_payload(rule:, artifacts:)
         {
           title: rule.title,
           description: rule.description,
@@ -145,7 +143,7 @@ module Mihari
               message: rule.description
             }
           end,
-          tags: tags,
+          tags: rule.tags,
           type: "external",
           source: "mihari",
           source_ref: "1"

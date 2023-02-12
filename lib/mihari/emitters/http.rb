@@ -20,19 +20,18 @@ module Mihari
 							<% end %>
 						],
 						"tags": [
-							<% @tags.each_with_index do |tag, idx| %>
+							<% @rule.tags.each_with_index do |tag, idx| %>
 								"<%= tag %>"
-								<%= ',' if idx < (@tags.length - 1) %>
+								<%= ',' if idx < (@rule.tags.length - 1) %>
 							<% end %>
 						]
 					}
 				}
       end
 
-      def initialize(artifacts:, rule:, tags:, options: {})
+      def initialize(artifacts:, rule:, options: {})
         @artifacts = artifacts
         @rule = rule
-        @tags = tags
 
         @template = options.fetch(:template, self.class.template)
         super(@template)
@@ -70,16 +69,12 @@ module Mihari
         @template = template
       end
 
-      def emit(artifacts:, rule:, tags:)
+      def emit(artifacts:, rule:)
         return if artifacts.empty?
 
         res = nil
 
-        payload_ = payload_as_string(
-          artifacts: artifacts,
-          rule: rule,
-          tags: tags
-        )
+        payload_ = payload_as_string(artifacts: artifacts, rule: rule)
         payload = JSON.parse(payload_)
 
         client = Mihari::HTTP.new(uri, headers: http_request_headers, payload: payload)
@@ -106,12 +101,11 @@ module Mihari
       # Convert payload into string
       #
       # @param [Array<Mihari::Artifact>] artifacts
-      # @param [Mihari::Rule] rule
-      # @param [Array<String>] tags
+      # @param [Mihari::Structs::Rule] rule
       #
       # @return [String]
       #
-      def payload_as_string(artifacts:, rule:, tags:)
+      def payload_as_string(artifacts:, rule:)
         @payload_as_string ||= [].tap do |out|
           options = {}
           options[:template] = File.read(template) unless template.nil?
@@ -119,7 +113,6 @@ module Mihari
           payload_template = PayloadTemplate.new(
             artifacts: artifacts,
             rule: rule,
-            tags: tags,
             options: options
           )
           out << payload_template.result

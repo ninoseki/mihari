@@ -101,7 +101,7 @@ module Mihari
       end
 
       #
-      # @return [Array<String>, nil]
+      # @return [Array<String>]
       #
       def tags
         @tags ||= data[:tags]
@@ -129,6 +129,13 @@ module Mihari
       end
 
       #
+      # @return [Integer, nil]
+      #
+      def artifact_lifetime
+        @artifact_lifetime ||= data[:artifact_lifetime]
+      end
+
+      #
       # @return [Mihari::Rule]
       #
       def to_model
@@ -152,21 +159,7 @@ module Mihari
       # @return [Mihari::Analyzers::Rule]
       #
       def to_analyzer
-        analyzer = Mihari::Analyzers::Rule.new(
-          title: title,
-          description: description,
-          tags: tags,
-          queries: queries,
-          data_types: data_types,
-          falsepositives: falsepositives,
-          emitters: emitters,
-          enrichers: enrichers,
-          id: id,
-          rule: self
-        )
-        analyzer.artifact_lifetime = self[:artifact_lifetime]
-
-        analyzer
+        Mihari::Analyzers::Rule.new(rule: self)
       end
 
       class << self

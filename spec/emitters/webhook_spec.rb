@@ -28,8 +28,7 @@ RSpec.describe Mihari::Emitters::Webhook, :vcr do
         Mihari::Artifact.new(data: "github.com")
       ]
     end
-    let(:rule) { Mihari::Rule.first }
-    let(:tags) { [] }
+    let(:rule) { Mihari::Structs::Rule.from_model(Mihari::Rule.first) }
 
     before do
       allow(Mihari.config).to receive(:webhook_url).and_return("https://httpbin.org/post")
@@ -37,7 +36,7 @@ RSpec.describe Mihari::Emitters::Webhook, :vcr do
     end
 
     it do
-      subject.emit(artifacts: artifacts, rule: rule, tags: tags)
+      subject.emit(artifacts: artifacts, rule: rule)
     end
   end
 end

@@ -41,7 +41,7 @@ RSpec.describe Mihari::Emitters::TheHive, :vcr do
 
   describe "#emit" do
     let(:artifacts) { [Mihari::Artifact.new(data: "1.1.1.1")] }
-    let(:rule) { Mihari::Rule.first }
+    let(:rule) { Mihari::Structs::Rule.from_model(Mihari::Rule.first) }
 
     let(:mock_thehive) { double("thehive") }
     let(:mock_alert) { double("alert") }
