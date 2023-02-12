@@ -1,9 +1,9 @@
 # frozen_string_literal: true
 
 RSpec.describe Mihari::Analyzers::VirusTotal, :vcr do
-  context "ipv4" do
-    subject { described_class.new(query) }
+  subject { described_class.new(query) }
 
+  context "ipv4" do
     let(:query) { "45.83.140.140" }
 
     describe "#artifacts" do
@@ -14,8 +14,6 @@ RSpec.describe Mihari::Analyzers::VirusTotal, :vcr do
   end
 
   context "domain" do
-    subject { described_class.new(query) }
-
     let(:query) { "jppost-ge.top" }
 
     describe "#artifacts" do
@@ -26,8 +24,6 @@ RSpec.describe Mihari::Analyzers::VirusTotal, :vcr do
   end
 
   context "when given an invalid input" do
-    subject { described_class.new(query) }
-
     let(:query) { "foo bar" }
 
     describe "#artifacts" do
@@ -38,6 +34,8 @@ RSpec.describe Mihari::Analyzers::VirusTotal, :vcr do
   end
 
   context "when api config is not given" do
+    let(:query) { "1.1.1.1" }
+
     before do
       allow(Mihari.config).to receive(:virustotal_api_key).and_return(nil)
     end

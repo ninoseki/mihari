@@ -1,9 +1,9 @@
 # frozen_string_literal: true
 
 RSpec.describe Mihari::Analyzers::Pulsedive, :vcr do
-  context "when given an ipv4" do
-    subject { described_class.new(query) }
+  subject { described_class.new(query) }
 
+  context "when given an ipv4" do
     let(:query) { "1.1.1.1" }
 
     describe "#artifacts" do
@@ -14,8 +14,6 @@ RSpec.describe Mihari::Analyzers::Pulsedive, :vcr do
   end
 
   context "when given a domain" do
-    subject { described_class.new(query) }
-
     let(:query) { "one.one.one.one" }
 
     describe "#artifacts" do
@@ -26,8 +24,6 @@ RSpec.describe Mihari::Analyzers::Pulsedive, :vcr do
   end
 
   context "when given an invalid input" do
-    subject { described_class.new(query) }
-
     let(:query) { "foo bar" }
 
     describe "#artifacts" do
@@ -38,6 +34,8 @@ RSpec.describe Mihari::Analyzers::Pulsedive, :vcr do
   end
 
   context "when api config is not given" do
+    let(:query) { "1.1.1.1" }
+
     before do
       allow(Mihari.config).to receive(:pulsedive_api_key).and_return(nil)
     end
