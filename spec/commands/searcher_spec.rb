@@ -1,18 +1,19 @@
 # frozen_string_literal: true
 
 class CLI < Mihari::CLI::Base
-  include Mihari::Commands::Search
+  include Mihari::Commands::Searcher
 end
 
-RSpec.describe Mihari::Commands::Search, :vcr do
+RSpec.describe Mihari::Commands::Searcher, :vcr do
   before do
     # set an empty array as emitters (disable emission)
     allow(Mihari).to receive(:emitters).and_return([])
+    allow(Mihari).to receive(:enrichers).and_return([])
     # disable the parallel execution
     allow(Parallel).to receive(:processor_count).and_return(0)
   end
 
-  describe "#search_by_rule" do
+  describe "#search" do
     let(:valid_rule) { File.expand_path("../fixtures/rules/valid_rule_does_not_need_api_key.yml", __dir__) }
 
     it do
