@@ -10,7 +10,7 @@ RSpec.describe Mihari::Analyzers::Rule, :vcr do
     ]
   end
   let(:tags) { %w[test] }
-  let(:disallowed_data_values) { [] }
+  let(:falsepositives) { [] }
   let(:data_types) { Mihari::DEFAULT_DATA_TYPES }
   let(:rule) do
     Mihari::Structs::Rule.new(
@@ -20,7 +20,7 @@ RSpec.describe Mihari::Analyzers::Rule, :vcr do
       queries: queries,
       id: id,
       data_types: data_types,
-      disallowed_data_values: disallowed_data_values
+      falsepositives: falsepositives
     )
   end
 
@@ -58,7 +58,7 @@ RSpec.describe Mihari::Analyzers::Rule, :vcr do
   end
 
   context "with disallowed data values in string", vcr: "Mihari_Analyzers_Rule/crt_sh:www.example.com" do
-    let(:disallowed_data_values) { ["www.example.com"] }
+    let(:falsepositives) { ["www.example.com"] }
 
     describe "#normalized_artifacts" do
       it do
@@ -70,7 +70,7 @@ RSpec.describe Mihari::Analyzers::Rule, :vcr do
   end
 
   context "with disallowed data values in regexp", vcr: "Mihari_Analyzers_Rule/crt_sh:www.example.com" do
-    let(:disallowed_data_values) { ["/[a-z.]+/"] }
+    let(:falsepositives) { ["/[a-z.]+/"] }
 
     describe "#normalized_artifacts" do
       it do

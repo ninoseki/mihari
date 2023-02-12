@@ -30,7 +30,7 @@ module Mihari
       optional(:enrichers).value(:array).each(Enricher)
 
       optional(:data_types).value(array[Types::DataTypes]).default(DEFAULT_DATA_TYPES)
-      optional(:disallowed_data_values).value(array[:string]).default([])
+      optional(:falsepositives).value(array[:string]).default([])
 
       optional(:artifact_lifetime).value(:integer)
 
@@ -51,13 +51,13 @@ module Mihari
     end
 
     class RuleContract < Dry::Validation::Contract
-      include Mihari::Mixins::DisallowedDataValue
+      include Mihari::Mixins::FalsePositive
 
       params(Rule)
 
-      rule(:disallowed_data_values) do
+      rule(:falsepositives) do
         value.each do |v|
-          key.failure("#{v} is not a valid format.") unless valid_disallowed_data_value?(v)
+          key.failure("#{v} is not a valid format.") unless valid_falsepositive?(v)
         end
       end
     end
