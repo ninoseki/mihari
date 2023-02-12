@@ -40,7 +40,7 @@ module Mihari
     attr_reader :rule
 
     class Rule < Base
-      include Mixins::DisallowedDataValue
+      include Mixins::FalsePositive
 
       def initialize(**kwargs)
         super(**kwargs)
@@ -96,7 +96,7 @@ module Mihari
         @normalized_artifacts ||= artifacts.uniq(&:data).select(&:valid?).select do |artifact|
           rule.data_types.include? artifact.data_type
         end.reject do |artifact|
-          disallowed_data_value? artifact.data
+          falsepositive? artifact.data
         end
       end
 
@@ -120,22 +120,22 @@ module Mihari
       #
       # @return [Array<Regexp, String>]
       #
-      def normalized_disallowed_data_values
-        @normalized_disallowed_data_values ||= rule.disallowed_data_values.map { |v| normalize_disallowed_data_value v }
+      def normalized_falsepositives
+        @normalized_falsepositives ||= rule.falsepositives.map { |v| normalize_falsepositive v }
       end
 
       #
-      # Check whether a value is a disallowed data value or not
+      # Check whether a value is a falsepositive value or not
       #
       # @return [Boolean]
       #
-      def disallowed_data_value?(value)
-        return true if normalized_disallowed_data_values.include?(value)
+      def falsepositive?(value)
+        return true if normalized_falsepositives.include?(value)
 
-        normalized_disallowed_data_values.select do |disallowed_data_value|
-          disallowed_data_value.is_a?(Regexp)
-        end.any? do |disallowed_data_value|
-          disallowed_data_value.match?(value)
+        normalized_falsepositives.select do |falsepositive|
+          falsepositive.is_a?(Regexp)
+        end.any? do |falseposistive|
+          falseposistive.match?(value)
         end
       end
 

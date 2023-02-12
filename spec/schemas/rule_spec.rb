@@ -105,7 +105,7 @@ RSpec.describe Mihari::Schemas::RuleContract do
         queries: [
           { analyzer: "shodan", query: "foo" }
         ],
-        disallowed_data_values: [1] # should be string
+        falsepositives: [1] # should be string
       )
       expect(result.errors.empty?).to eq(false)
     end
@@ -118,7 +118,7 @@ RSpec.describe Mihari::Schemas::RuleContract do
         queries: [
           { analyzer: "shodan", query: "foo" }
         ],
-        disallowed_data_values: ["/*/"]
+        falsepositives: ["/*/"]
       )
       expect(result.errors.empty?).to eq(false)
     end

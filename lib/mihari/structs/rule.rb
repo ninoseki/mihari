@@ -110,8 +110,8 @@ module Mihari
       #
       # @return [Array<String>]
       #
-      def disallowed_data_values
-        @disallowed_data_values ||= data[:disallowed_data_values]
+      def falsepositives
+        @falsepositives ||= data[:falsepositives]
       end
 
       #
@@ -158,7 +158,7 @@ module Mihari
           tags: tags,
           queries: queries,
           data_types: data_types,
-          disallowed_data_values: disallowed_data_values,
+          falsepositives: falsepositives,
           emitters: emitters,
           enrichers: enrichers,
           id: id,
