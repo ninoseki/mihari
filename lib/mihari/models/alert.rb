@@ -28,20 +28,7 @@ module Mihari
         relation = build_relation(filter.without_pagination)
 
         alert_ids = relation.limit(limit).offset(offset).order(id: :desc).pluck(:id).uniq
-        eager_load(
-          {
-            artifacts: %i[
-              autonomous_system
-              geolocation
-              whois_record
-              dns_records
-              reverse_dns_names
-              cpes
-              ports
-            ]
-          },
-          :tags
-        ).where(id: [alert_ids]).order(id: :desc)
+        eager_load(:artifacts, :tags).where(id: [alert_ids]).order(id: :desc)
       end
 
       #

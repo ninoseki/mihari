@@ -7,7 +7,7 @@ module Mihari
       expose :rule_id, documentation: { type: String, required: true }, as: :ruleId
       expose :created_at, documentation: { type: DateTime, required: true }, as: :createdAt
 
-      expose :artifacts, using: Entities::Artifact, documentation: { type: Entities::Artifact, is_array: true }
+      expose :artifacts, using: Entities::BaseArtifact, documentation: { type: Entities::BaseArtifact, is_array: true }
       expose :tags, using: Entities::Tag, documentation: { type: Entities::Tag, is_array: true, required: true }
     end
 
