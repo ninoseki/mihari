@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 RSpec.describe Mihari::Emitters::MISP, :vcr do
+  include_context "with database fixtures"
+
   subject { described_class.new }
 
   describe "#valid?" do
@@ -17,13 +19,12 @@ RSpec.describe Mihari::Emitters::MISP, :vcr do
   end
 
   describe "#emit" do
-    let(:title) { "test" }
-    let(:description) { "test" }
     let(:artifacts) { [Mihari::Artifact.new(data: "1.1.1.1")] }
     let(:tags) { %w[test] }
+    let(:rule) { Mihari::Rule.first }
 
     it do
-      event = subject.emit(title: title, description: description, artifacts: artifacts, tags: tags)
+      event = subject.emit(artifacts: artifacts, rule: rule, tags: tags)
       expect(event).to be_a(MISP::Event)
     end
   end

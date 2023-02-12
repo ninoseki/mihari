@@ -5,19 +5,13 @@ RSpec.describe Mihari::Emitters::Database do
 
   include_context "with database fixtures"
 
-  after do
-    reset_db
-  end
-
   describe "#emit", vcr: "Mihari_Enrichers_IPInfo/ip:1.1.1.1" do
-    let(:title) { "test" }
-    let(:description) { "test" }
+    let(:rule) { Mihari::Rule.first }
     let(:artifacts) { [Mihari::Artifact.new(data: "1.1.1.1")] }
-    let(:rule_id) { Mihari::Rule.first.id }
     let(:tags) { %w[test] }
 
     it do
-      alert = subject.emit(title: title, description: description, artifacts: artifacts, rule_id: rule_id, tags: tags)
+      alert = subject.emit(artifacts: artifacts, rule: rule, tags: tags)
       expect(alert).to be_a(Mihari::Alert)
 
       created_artifacts = Mihari::Artifact.where(alert_id: alert.id)
@@ -25,8 +19,8 @@ RSpec.describe Mihari::Emitters::Database do
     end
 
     it "does not create multi tags" do
-      subject.emit(title: title, description: description, artifacts: artifacts, rule_id: rule_id, tags: tags)
-      subject.emit(title: title, description: description, artifacts: artifacts, rule_id: rule_id, tags: tags)
+      subject.emit(artifacts: artifacts, rule: rule, tags: tags)
+      subject.emit(artifacts: artifacts, rule: rule, tags: tags)
 
       expect(Mihari::Tag.where(name: "test").count).to eq(1)
     end

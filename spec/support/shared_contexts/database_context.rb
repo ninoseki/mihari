@@ -18,22 +18,18 @@ RSpec.shared_context "with database fixtures" do
 
     database = Mihari::Emitters::Database.new
     database.emit(
-      title: "test1",
-      description: "test1",
       artifacts: [
         Mihari::Artifact.new(data: "1.1.1.1", autonomous_system: as, reverse_dns_names: [reverse_dns_name])
       ],
-      rule_id: rule1.id,
+      rule: rule1,
       tags: %w[tag1]
     )
 
     database.emit(
-      title: "test2",
-      description: "tes2t",
       artifacts: [
         Mihari::Artifact.new(data: "example.com", dns_records: [dns_record])
       ],
-      rule_id: rule2.id,
+      rule: rule2,
       tags: %w[tag2]
     )
   end

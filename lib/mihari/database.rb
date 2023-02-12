@@ -27,8 +27,6 @@ class V5Schema < ActiveRecord::Migration[7.0]
     end
 
     create_table :alerts, if_not_exists: true do |t|
-      t.string :title, null: false
-      t.string :description
       t.timestamps
 
       t.belongs_to :rule, foreign_key: true, type: :string

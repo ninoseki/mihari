@@ -10,26 +10,10 @@ class Test < Mihari::Analyzers::Base
     values << nil
     values
   end
-
-  def description
-    "test"
-  end
 end
 
 RSpec.describe Mihari::Analyzers::Base, :vcr do
   subject { Test.new }
-
-  describe "#title" do
-    it do
-      expect(subject.title).to eq("Test")
-    end
-  end
-
-  describe "#description" do
-    it do
-      expect(subject.description).to eq("test")
-    end
-  end
 
   describe "#artifacts" do
     it do

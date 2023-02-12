@@ -8,9 +8,11 @@ module Mihari
       def self.template
         %{
 					{
-						"title": "<%= @title %>",
-						"description": "<%= @description %>",
-						"rule": "<%= @rule_id %>",
+						"rule": {
+              "id": "<%= @rule.id %>",
+              "title": "<%= @rule.title %>",
+              "description": "<%= @rule.description %>"
+            },
 						"artifacts": [
 							<% @artifacts.each_with_index do |artifact, idx| %>
 								"<%= artifact.data %>"
@@ -27,11 +29,9 @@ module Mihari
 				}
       end
 
-      def initialize(title:, description:, artifacts:, rule_id:, tags:, options: {})
-        @title = title
-        @description = description
+      def initialize(artifacts:, rule:, tags:, options: {})
         @artifacts = artifacts
-        @rule_id = rule_id
+        @rule = rule
         @tags = tags
 
         @template = options.fetch(:template, self.class.template)
@@ -70,16 +70,14 @@ module Mihari
         @template = template
       end
 
-      def emit(title:, description:, artifacts:, rule_id:, tags:)
+      def emit(artifacts:, rule:, tags:)
         return if artifacts.empty?
 
         res = nil
 
         payload_ = payload_as_string(
-          title: title,
-          description: description,
           artifacts: artifacts,
-          rule_id: rule_id,
+          rule: rule,
           tags: tags
         )
         payload = JSON.parse(payload_)
@@ -104,16 +102,23 @@ module Mihari
 
       private
 
-      def payload_as_string(title:, description:, artifacts:, rule_id:, tags:)
+      #
+      # Convert payload into string
+      #
+      # @param [Array<Mihari::Artifact>] artifacts
+      # @param [Mihari::Rule] rule
+      # @param [Array<String>] tags
+      #
+      # @return [String]
+      #
+      def payload_as_string(artifacts:, rule:, tags:)
         @payload_as_string ||= [].tap do |out|
           options = {}
           options[:template] = File.read(template) unless template.nil?
 
           payload_template = PayloadTemplate.new(
-            title: title,
-            description: description,
             artifacts: artifacts,
-            rule_id: rule_id,
+            rule: rule,
             tags: tags,
             options: options
           )

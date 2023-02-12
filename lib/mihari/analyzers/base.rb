@@ -5,7 +5,7 @@ module Mihari
     class Base
       extend Dry::Initializer
 
-      option :rule_id, default: proc { "" }
+      option :rule, default: proc {}
 
       include Mixins::AutonomousSystem
       include Mixins::Configurable
@@ -14,6 +14,9 @@ module Mihari
 
       # @return [Integer, nil] Artifact lifetime (TTL) in seconds
       attr_accessor :artifact_lifetime
+
+      # @return [Mihari::Structs::Rule]
+      attr_reader :rule
 
       def initialize(*args, **kwargs)
         super(*args, **kwargs)
@@ -28,23 +31,13 @@ module Mihari
       end
 
       # @return [String]
-      def title
-        self.class.to_s.split("::").last.to_s
-      end
-
-      # @return [String]
-      def description
-        raise NotImplementedError, "You must implement #{self.class}##{__method__}"
-      end
-
-      # @return [String]
       def source
         self.class.to_s.split("::").last.to_s
       end
 
       # @return [Array<String>]
       def tags
-        []
+        rule&.tags || []
       end
 
       #
@@ -81,11 +74,9 @@ module Mihari
         return if enriched_artifacts.empty?
 
         alert_or_something = emitter.run(
-          title: title,
-          description: description,
           artifacts: enriched_artifacts,
           tags: tags,
-          rule_id: @rule_id
+          rule: rule
         )
 
         Mihari.logger.info "Emission by #{emitter.class} is succedded"
@@ -116,7 +107,7 @@ module Mihari
           # It is set automatically in #initialize
           artifact.is_a?(Artifact) ? artifact : Artifact.new(data: artifact, source: source)
         end.select(&:valid?).uniq(&:data).map do |artifact|
-          artifact.rule_id = @rule_id
+          artifact.rule_id = rule&.id
           artifact
         end
       end

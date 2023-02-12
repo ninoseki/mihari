@@ -15,9 +15,6 @@ module Mihari
       # @return [Array, nil]
       attr_reader :errors
 
-      # @return [String]
-      attr_writer :id
-
       #
       # Initialize
       #
@@ -90,6 +87,48 @@ module Mihari
       end
 
       #
+      # @return [Array<Hash>]
+      #
+      def queries
+        @queries ||= data[:queries]
+      end
+
+      #
+      # @return [Array<String>]
+      #
+      def data_types
+        @data_types ||= data[:data_types]
+      end
+
+      #
+      # @return [Array<String>, nil]
+      #
+      def tags
+        @tags ||= data[:tags]
+      end
+
+      #
+      # @return [Array<String>]
+      #
+      def disallowed_data_values
+        @disallowed_data_values ||= data[:disallowed_data_values]
+      end
+
+      #
+      # @return [Array<Hash>]
+      #
+      def emitters
+        @emitters ||= data[:emitters]
+      end
+
+      #
+      # @return [Array<Hash>]
+      #
+      def enrichers
+        @enrichers ||= data[:enrichers]
+      end
+
+      #
       # @return [Mihari::Rule]
       #
       def to_model
@@ -114,15 +153,16 @@ module Mihari
       #
       def to_analyzer
         analyzer = Mihari::Analyzers::Rule.new(
-          title: self[:title],
-          description: self[:description],
-          tags: self[:tags],
-          queries: self[:queries],
-          data_types: self[:data_types],
-          disallowed_data_values: self[:disallowed_data_values],
-          emitters: self[:emitters],
-          enrichers: self[:enrichers],
-          id: id
+          title: title,
+          description: description,
+          tags: tags,
+          queries: queries,
+          data_types: data_types,
+          disallowed_data_values: disallowed_data_values,
+          emitters: emitters,
+          enrichers: enrichers,
+          id: id,
+          rule: self
         )
         analyzer.artifact_lifetime = self[:artifact_lifetime]
 

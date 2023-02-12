@@ -51,11 +51,7 @@ module Mihari
       option :emitters, optional: true
       option :enrichers, optional: true
 
-      attr_reader :source
-
       def initialize(**kwargs)
-        kwargs[:rule_id] = kwargs[:id]
-
         super(**kwargs)
 
         @emitters = emitters || DEFAULT_EMITTERS
@@ -86,8 +82,8 @@ module Mihari
 
           parmas[:interval] = interval if interval
 
-          # set rule ID
-          parmas[:rule_id] = id
+          # set rule
+          parmas[:rule] = rule
 
           analyzer = klass.new(query, **parmas)
 

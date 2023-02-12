@@ -38,10 +38,19 @@ module Mihari
         true
       end
 
-      def emit(title:, description:, artifacts:, tags: [], **_options)
+      #
+      # Create a Hive alert
+      #
+      # @param [Arra<Mihari::Artifact>] artifacts
+      # @param [Mihari::Rule] rule
+      # @param [Array<Mihari::Tag>] tags
+      #
+      # @return [::MISP::Event]
+      #
+      def emit(rule:, artifacts:, tags: [], **_options)
         return if artifacts.empty?
 
-        payload = payload(title: title, description: description, artifacts: artifacts, tags: tags)
+        payload = payload(rule: rule, artifacts: artifacts, tags: tags)
         api.alert.create(**payload)
       end
 
@@ -93,35 +102,49 @@ module Mihari
         !api_key.nil?
       end
 
-      def payload(title:, description:, artifacts:, tags: [])
-        if normalized_api_version.nil?
-          return v4_payload(title: title, description: description, artifacts: artifacts,
-            tags: tags)
-        end
+      #
+      # Build payload for alert
+      #
+      # @param [Arra<Mihari::Artifact>] artifacts
+      # @param [Mihari::Rule] rule
+      # @param [Array<Mihari::Tag>] tags
+      #
+      # @return [<Type>] <description>
+      #
+      def payload(rule:, artifacts:, tags: [])
+        return v4_payload(rule: rule, artifacts: artifacts, tags: tags) if normalized_api_version.nil?
 
-        v5_payload(title: title, description: description, artifacts: artifacts, tags: tags)
+        v5_payload(rule: rule, artifacts: artifacts, tags: tags)
       end
 
-      def v4_payload(title:, description:, artifacts:, tags: [])
+      def v4_payload(rule:, artifacts:, tags: [])
         {
-          title: title,
-          description: description,
+          title: rule.title,
+          description: rule.description,
           artifacts: artifacts.map do |artifact|
-                       { data: artifact.data, data_type: artifact.data_type, message: description }
-                     end,
+            {
+              data: artifact.data,
+              data_type: artifact.data_type,
+              message: rule.description
+            }
+          end,
           tags: tags,
           type: "external",
           source: "mihari"
         }
       end
 
-      def v5_payload(title:, description:, artifacts:, tags: [])
+      def v5_payload(rule:, artifacts:, tags: [])
         {
-          title: title,
-          description: description,
+          title: rule.title,
+          description: rule.description,
           observables: artifacts.map do |artifact|
-                         { data: artifact.data, data_type: artifact.data_type, message: description }
-                       end,
+            {
+              data: artifact.data,
+              data_type: artifact.data_type,
+              message: rule.description
+            }
+          end,
           tags: tags,
           type: "external",
           source: "mihari",
