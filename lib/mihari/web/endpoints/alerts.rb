@@ -6,7 +6,7 @@ module Mihari
       namespace :alerts do
         desc "Search alerts", {
           is_array: true,
-          success: Entities::Alert,
+          success: Entities::AlertsWithPagination,
           failure: [{ code: 404, message: "Not found", model: Entities::Message }],
           summary: "Search alerts"
         }

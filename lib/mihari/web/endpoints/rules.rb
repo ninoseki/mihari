@@ -16,7 +16,7 @@ module Mihari
 
         desc "Search rules", {
           is_array: true,
-          success: Entities::Rule,
+          success: Entities::RulesWithPagination,
           failure: [{ code: 404, message: "Not found", model: Entities::Message }],
           summary: "Search rules"
         }
