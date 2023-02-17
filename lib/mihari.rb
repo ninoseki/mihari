@@ -60,13 +60,6 @@ require "mihari/mixins/error_notification"
 require "mihari/mixins/refang"
 require "mihari/mixins/retriable"
 
-def truthy?(value)
-  return true if value == "true"
-  return true if value == true
-
-  false
-end
-
 module Mihari
   extend Dry::Configurable
 
@@ -84,8 +77,7 @@ module Mihari
 
   setting :ipinfo_api_key, default: ENV.fetch("IPINFO_API_KEY", nil)
 
-  # TODO: deprecate MISP_API_ENDPOINT
-  setting :misp_url, default: ENV.fetch("MISP_URL", nil) || ENV.fetch("MISP_API_ENDPOINT", nil)
+  setting :misp_url, default: ENV.fetch("MISP_URL", nil)
   setting :misp_api_key, default: ENV.fetch("MISP_API_KEY", nil)
 
   setting :onyphe_api_key, default: ENV.fetch("ONYPHE_API_KEY", nil)
@@ -104,17 +96,13 @@ module Mihari
   setting :slack_channel, default: ENV.fetch("SLACK_CHANNEL", nil)
   setting :slack_webhook_url, default: ENV.fetch("SLACK_WEBHOOK_URL", nil)
 
-  # TODO: deprecate THEHIVE_API_ENDPOINT
-  setting :thehive_url, default: ENV.fetch("THEHIVE_URL", nil) || ENV.fetch("THEHIVE_API_ENDPOINT", nil)
+  setting :thehive_url, default: ENV.fetch("THEHIVE_URL", nil)
   setting :thehive_api_key, default: ENV.fetch("THEHIVE_API_KEY", nil)
   setting :thehive_api_version, default: ENV.fetch("THEHIVE_API_VERSION", nil)
 
   setting :urlscan_api_key, default: ENV.fetch("URLSCAN_API_KEY", nil)
 
   setting :virustotal_api_key, default: ENV.fetch("VIRUSTOTAL_API_KEY", nil)
-
-  setting :webhook_url, default: ENV.fetch("WEBHOOK_URL", nil)
-  setting :webhook_use_json_body, constructor: ->(value = ENV.fetch("WEBHOOK_USE_JSON_BODY", nil)) { truthy?(value) }
 
   setting :zoomeye_api_key, default: ENV.fetch("ZOOMEYE_API_KEY", nil)
 
@@ -212,7 +200,6 @@ require "mihari/models/whois"
 require "mihari/emitters/base"
 
 require "mihari/emitters/database"
-require "mihari/emitters/http"
 require "mihari/emitters/misp"
 require "mihari/emitters/slack"
 require "mihari/emitters/the_hive"

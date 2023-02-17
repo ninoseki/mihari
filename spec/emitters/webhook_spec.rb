@@ -1,22 +1,22 @@
 # frozen_string_literal: true
 
+require "json"
+
 RSpec.describe Mihari::Emitters::Webhook, :vcr do
   include_context "with database fixtures"
 
-  subject { described_class.new }
-
   describe "#valid?" do
-    it do
-      expect(subject.valid?).to be(true)
+    context "without url" do
+      it do
+        emitter = described_class.new
+        expect(emitter.valid?).to eq(false)
+      end
     end
 
-    context "when WEBHOOK_URL is not given" do
-      before do
-        allow(Mihari.config).to receive(:webhook_url).and_return(nil)
-      end
-
+    context "with uri" do
       it do
-        expect(subject.valid?).to be(false)
+        emitter = described_class.new(url: "http://example.com")
+        expect(emitter.valid?).to eq(true)
       end
     end
   end
@@ -29,14 +29,14 @@ RSpec.describe Mihari::Emitters::Webhook, :vcr do
       ]
     end
     let(:rule) { Mihari::Structs::Rule.from_model(Mihari::Rule.first) }
-
-    before do
-      allow(Mihari.config).to receive(:webhook_url).and_return("https://httpbin.org/post")
-      allow(Mihari.config).to receive(:webhook_use_json_body).and_return("true")
-    end
+    let(:url) { "https://httpbin.org/post" }
 
     it do
-      subject.emit(artifacts: artifacts, rule: rule)
+      emitter = described_class.new(url: url, headers: { "Content-Type": "application/json" })
+      res = emitter.emit(artifacts: artifacts, rule: rule)
+
+      json_data = JSON.parse(res.body.to_s)["json"]
+      expect(json_data).to be_a(Hash)
     end
   end
 end

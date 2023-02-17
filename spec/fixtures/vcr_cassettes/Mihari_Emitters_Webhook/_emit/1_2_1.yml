@@ -5,7 +5,7 @@ http_interactions:
     uri: https://httpbin.org/post
     body:
       encoding: UTF-8
-      string: '{"title":"title","description":"description","source":"test","artifacts":["1.1.1.1","github.com"],"tags":[]}'
+      string: '{"rule":{"id":"test1","title":"test1","description":"test1"},"artifacts":["1.1.1.1","github.com"],"tags":["tag1"]}'
     headers:
       Accept-Encoding:
       - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
@@ -13,17 +13,21 @@ http_interactions:
       - "*/*"
       User-Agent:
       - Ruby
+      Host:
+      - httpbin.org
+      Content-Type:
+      - application/json
   response:
     status:
       code: 200
       message: OK
     headers:
       Date:
-      - Sun, 20 Mar 2022 03:00:56 GMT
+      - Fri, 17 Feb 2023 22:28:45 GMT
       Content-Type:
       - application/json
       Content-Length:
-      - '611'
+      - '785'
       Connection:
       - keep-alive
       Server:
@@ -34,13 +38,15 @@ http_interactions:
       - 'true'
     body:
       encoding: UTF-8
-      string: "{\n  \"args\": {}, \n  \"data\": \"\", \n  \"files\": {}, \n  \"form\":
-        {\n    \"{\\\"title\\\":\\\"title\\\",\\\"description\\\":\\\"description\\\",\\\"source\\\":\\\"test\\\",\\\"artifacts\\\":[\\\"1.1.1.1\\\",\\\"github.com\\\"],\\\"tags\\\":[]}\":
-        \"\"\n  }, \n  \"headers\": {\n    \"Accept\": \"*/*\", \n    \"Accept-Encoding\":
-        \"gzip;q=1.0,deflate;q=0.6,identity;q=0.3\", \n    \"Content-Length\": \"108\",
-        \n    \"Content-Type\": \"application/x-www-form-urlencoded\", \n    \"Host\":
-        \"httpbin.org\", \n    \"User-Agent\": \"Ruby\", \n    \"X-Amzn-Trace-Id\":
-        \"Root=1-623698e8-7881649b1eb34d19129c98ce\"\n  }, \n  \"json\": null, \n
-        \ \"origin\": \"133.218.173.245\", \n  \"url\": \"https://httpbin.org/post\"\n}\n"
-  recorded_at: Sun, 20 Mar 2022 03:00:56 GMT
+      string: "{\n  \"args\": {}, \n  \"data\": \"{\\\"rule\\\":{\\\"id\\\":\\\"test1\\\",\\\"title\\\":\\\"test1\\\",\\\"description\\\":\\\"test1\\\"},\\\"artifacts\\\":[\\\"1.1.1.1\\\",\\\"github.com\\\"],\\\"tags\\\":[\\\"tag1\\\"]}\",
+        \n  \"files\": {}, \n  \"form\": {}, \n  \"headers\": {\n    \"Accept\": \"*/*\",
+        \n    \"Accept-Encoding\": \"gzip;q=1.0,deflate;q=0.6,identity;q=0.3\", \n
+        \   \"Content-Length\": \"114\", \n    \"Content-Type\": \"application/json\",
+        \n    \"Host\": \"httpbin.org\", \n    \"User-Agent\": \"Ruby\", \n    \"X-Amzn-Trace-Id\":
+        \"Root=1-63efff9d-42a36f532ffbb1d32ce66884\"\n  }, \n  \"json\": {\n    \"artifacts\":
+        [\n      \"1.1.1.1\", \n      \"github.com\"\n    ], \n    \"rule\": {\n      \"description\":
+        \"test1\", \n      \"id\": \"test1\", \n      \"title\": \"test1\"\n    },
+        \n    \"tags\": [\n      \"tag1\"\n    ]\n  }, \n  \"origin\": \"113.197.192.51\",
+        \n  \"url\": \"https://httpbin.org/post\"\n}\n"
+  recorded_at: Fri, 17 Feb 2023 22:28:45 GMT
 recorded_with: VCR 6.1.0

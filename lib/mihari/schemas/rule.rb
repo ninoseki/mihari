@@ -25,7 +25,7 @@ module Mihari
         AnalyzerWithoutAPIKey | AnalyzerWithAPIKey | Censys | CIRCL | PassiveTotal | ZoomEye | Urlscan | Crtsh | Feed
       end
 
-      optional(:emitters).value(:array).each { Emitter | MISP | TheHive | Slack | HTTP }
+      optional(:emitters).value(:array).each { Database | MISP | TheHive | Slack | Webhook }
 
       optional(:enrichers).value(:array).each(Enricher)
 
