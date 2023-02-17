@@ -1,7 +1,0 @@
-module Mihari
-  class CPE < ActiveRecord::Base
-    attr_accessor cpe (): String
-
-    def self.build_by_ip: (String ip) ->  Array[Mihari::CPE]
-  end
-end

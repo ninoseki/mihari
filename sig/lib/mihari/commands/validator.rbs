@@ -1,9 +1,0 @@
-module Mihari
-  module Commands
-    module Validator
-      include Mixins::Rule
-
-      def self.included: (untyped thor) -> untyped
-    end
-  end
-end

@@ -1,7 +1,0 @@
-module Mihari
-  class Port < ActiveRecord::Base
-    attr_accessor port (): Integer
-
-    def self.build_by_ip: (String ip) ->  Array[Mihari::Port]
-  end
-end

@@ -1,5 +1,0 @@
-module Mihari
-  class Tag < ActiveRecord::Base
-    attr_accessor name (): String
-  end
-end

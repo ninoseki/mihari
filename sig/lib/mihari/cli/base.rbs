@@ -1,9 +1,0 @@
-module Mihari
-  module CLI
-    class Base
-      include Mihari::Mixins::Hash
-
-      def self.exit_on_failure?: () -> ::TrueClass
-    end
-  end
-end

@@ -1,5 +1,4 @@
 target :lib do
-  signature "sig"
   check "lib"
 
   repo_path "vendor/rbs/gem_rbs_collection/gems"
