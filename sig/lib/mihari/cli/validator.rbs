@@ -1,7 +1,0 @@
-module Mihari
-  module CLI
-    class Validator < Base
-      include Mihari::Commands::Validator
-    end
-  end
-end
