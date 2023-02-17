@@ -6,7 +6,7 @@ RSpec.describe Mihari::Emitters::Webhook, :vcr do
   include_context "with database fixtures"
 
   describe "#valid?" do
-    context "without uri" do
+    context "without url" do
       it do
         emitter = described_class.new
         expect(emitter.valid?).to eq(false)
