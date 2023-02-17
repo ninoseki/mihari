@@ -10,19 +10,8 @@ module Mihari
       @symbolized_data ||= data.deep_symbolize_keys
     end
 
-    #
-    # Returns a hash representative
-    #
-    # @return [Hash]
-    #
-    def to_h
-      {
-        id: id,
-        yaml: data.to_yaml,
-        data: data,
-        created_at: created_at,
-        updated_at: updated_at
-      }
+    def yaml
+      @yaml ||= data.to_yaml
     end
 
     class << self

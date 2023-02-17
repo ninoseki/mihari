@@ -51,7 +51,7 @@ module Mihari
           total = Mihari::Rule.count(search_filter_with_pagenation.without_pagination)
 
           present(
-            { rules: rules.map(&:to_h),
+            { rules: rules,
               total: total,
               current_page: page,
               page_size: limit },
@@ -76,7 +76,7 @@ module Mihari
             error!({ message: "ID:#{id} is not found" }, 404)
           end
 
-          present rule.to_h, with: Entities::Rule
+          present rule, with: Entities::Rule
         end
 
         desc "Run a rule", {
@@ -144,7 +144,7 @@ module Mihari
           end
 
           status 201
-          present model.to_h, with: Entities::Rule
+          present model, with: Entities::Rule
         end
 
         desc "Update a rule", {
@@ -188,7 +188,7 @@ module Mihari
           end
 
           status 201
-          present model.to_h, with: Entities::Rule
+          present model, with: Entities::Rule
         end
 
         desc "Delete a rule", {
