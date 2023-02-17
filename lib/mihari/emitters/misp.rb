@@ -14,7 +14,7 @@ module Mihari
       def initialize(*args, **kwargs)
         super(*args, **kwargs)
 
-        @url = kwargs[:url] || kwargs[:api_endpoint] || Mihari.config.misp_url
+        @url = kwargs[:url] || Mihari.config.misp_url
         @api_key = kwargs[:api_key] || Mihari.config.misp_api_key
 
         ::MISP.configure do |config|

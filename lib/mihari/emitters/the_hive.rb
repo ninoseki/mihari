@@ -17,7 +17,7 @@ module Mihari
       def initialize(*args, **kwargs)
         super(*args, **kwargs)
 
-        @url = kwargs[:url] || kwargs[:api_endpoint] || Mihari.config.thehive_url
+        @url = kwargs[:url] || Mihari.config.thehive_url
         @api_key = kwargs[:api_key] || Mihari.config.thehive_api_key
         @api_version = kwargs[:api_version] || Mihari.config.thehive_api_version
       end

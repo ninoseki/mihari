@@ -1,54 +1,122 @@
 # frozen_string_literal: true
 
+require "erb"
+
 module Mihari
   module Emitters
-    class Webhook < Base
-      # @return [Boolean]
-      def valid?
-        webhook_url?
+    class PayloadTemplate < ERB
+      def self.template
+        %{
+					{
+						"rule": {
+              "id": "<%= @rule.id %>",
+              "title": "<%= @rule.title %>",
+              "description": "<%= @rule.description %>"
+            },
+						"artifacts": [
+							<% @artifacts.each_with_index do |artifact, idx| %>
+								"<%= artifact.data %>"
+								<%= ',' if idx < (@artifacts.length - 1) %>
+							<% end %>
+						],
+						"tags": [
+							<% @rule.tags.each_with_index do |tag, idx| %>
+								"<%= tag %>"
+								<%= ',' if idx < (@rule.tags.length - 1) %>
+							<% end %>
+						]
+					}
+				}
       end
 
-      def emit(rule:, artifacts:)
+      def initialize(artifacts:, rule:, options: {})
+        @artifacts = artifacts
+        @rule = rule
+
+        @template = options.fetch(:template, self.class.template)
+        super(@template)
+      end
+
+      def result
+        super(binding)
+      end
+    end
+
+    class Webhook < Base
+      # @return [Addressable::URI, nil]
+      attr_reader :url
+
+      # @return [Hash]
+      attr_reader :headers
+
+      # @return [String]
+      attr_reader :method
+
+      # @return [String, nil]
+      attr_reader :template
+
+      def initialize(*args, **kwargs)
+        super(*args, **kwargs)
+
+        url = kwargs[:url]
+        headers = kwargs[:headers] || {}
+        method = kwargs[:method] || "POST"
+        template = kwargs[:template]
+
+        @url = Addressable::URI.parse(url)
+        @headers = headers
+        @method = method
+        @template = template
+      end
+
+      def emit(artifacts:, rule:)
         return if artifacts.empty?
 
-        headers = { "content-type": "application/x-www-form-urlencoded" }
-        headers["content-type"] = "application/json" if use_json_body?
+        res = nil
 
-        emitter = Emitters::HTTP.new(uri: Mihari.config.webhook_url)
-        emitter.emit(rule: rule, artifacts: artifacts)
+        payload_ = payload_as_string(artifacts: artifacts, rule: rule)
+        payload = JSON.parse(payload_)
+
+        client = Mihari::HTTP.new(url, headers: headers, payload: payload)
+
+        case method
+        when "GET"
+          res = client.get
+        when "POST"
+          res = client.post
+        end
+
+        res
+      end
+
+      def valid?
+        return false if url.nil?
+
+        %w[http https].include? url.scheme.downcase
       end
 
       private
 
-      def configuration_keys
-        %w[webhook_url]
-      end
+      #
+      # Convert payload into string
+      #
+      # @param [Array<Mihari::Artifact>] artifacts
+      # @param [Mihari::Structs::Rule] rule
+      #
+      # @return [String]
+      #
+      def payload_as_string(artifacts:, rule:)
+        @payload_as_string ||= [].tap do |out|
+          options = {}
+          options[:template] = File.read(template) unless template.nil?
 
-      #
-      # Webhook URL
-      #
-      # @return [String, nil]
-      #
-      def webhook_url
-        @webhook_url ||= Mihari.config.webhook_url
-      end
-
-      #
-      # Check whether a webhook URL is set or not
-      #
-      # @return [Boolean]
-      #
-      def webhook_url?
-        !webhook_url.nil?
-      end
-
-      #
-      # Check whether to use JSON body or not
-      #
-      # @return [Boolean]
-      #
-      def use_json_body?
-        @use_json_body ||= Mihari.config.webhook_use_json_body
+          payload_template = PayloadTemplate.new(
+            artifacts: artifacts,
+            rule: rule,
+            options: options
+          )
+          out << payload_template.result
+        end.first
       end
     end
   end

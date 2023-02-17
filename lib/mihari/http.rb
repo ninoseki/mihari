@@ -4,10 +4,10 @@ require "insensitive_hash"
 
 module Mihari
   class HTTP
-    attr_reader :uri, :headers, :payload
+    attr_reader :url, :headers, :payload
 
-    def initialize(uri, headers: {}, payload: {})
-      @uri = uri.is_a?(URI) ? uri : URI(uri.to_s)
+    def initialize(url, headers: {}, payload: {})
+      @url = url.is_a?(URI) ? url : URI(url.to_s)
       @headers = headers.insensitive
       @payload = payload
     end
@@ -18,10 +18,10 @@ module Mihari
     # @return [Net::HTTPResponse]
     #
     def get
-      new_uri = uri.deep_dup
-      new_uri.query = Addressable::URI.form_encode(payload) unless payload.empty?
+      new_url = url.deep_dup
+      new_url.query = Addressable::URI.form_encode(payload) unless payload.empty?
 
-      get = Net::HTTP::Get.new(new_uri)
+      get = Net::HTTP::Get.new(new_url)
       request get
     end
 
@@ -31,7 +31,7 @@ module Mihari
     # @return [Net::HTTPResponse]
     #
     def post
-      post = Net::HTTP::Post.new(uri)
+      post = Net::HTTP::Post.new(url)
 
       case content_type
       when "application/json"
@@ -44,13 +44,13 @@ module Mihari
     end
 
     class << self
-      def get(uri, headers: {}, params: {})
-        client = new(uri, headers: headers, payload: params)
+      def get(url, headers: {}, params: {})
+        client = new(url, headers: headers, payload: params)
         client.get
       end
 
-      def post(uri, headers: {}, payload: {})
-        client = new(uri, headers: headers, payload: payload)
+      def post(url, headers: {}, payload: {})
+        client = new(url, headers: headers, payload: payload)
         client.post
       end
     end
@@ -67,7 +67,7 @@ module Mihari
     # @return [Hahs]
     #
     def https_options
-      return { use_ssl: true } if uri.scheme == "https"
+      return { use_ssl: true } if url.scheme == "https"
 
       {}
     end
@@ -80,7 +80,7 @@ module Mihari
     # @return [Net::HTTPResponse]
     #
     def request(req)
-      Net::HTTP.start(uri.host, uri.port, https_options) do |http|
+      Net::HTTP.start(url.host, url.port, https_options) do |http|
         # set headers
         headers.each do |k, v|
           req[k] = v

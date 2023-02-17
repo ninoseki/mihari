@@ -29,7 +29,6 @@ module Mihari
 
     EMITTER_TO_CLASS = {
       "database" => Emitters::Database,
-      "http" => Emitters::HTTP,
       "misp" => Emitters::MISP,
       "slack" => Emitters::Slack,
       "the_hive" => Emitters::TheHive,
