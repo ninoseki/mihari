@@ -10,12 +10,7 @@ module Mihari
           summary: "Get configs"
         }
         get "/" do
-          statuses = Status.check
-
-          configs = statuses.map do |key, value|
-            { name: key, status: value }
-          end
-          present(configs, with: Entities::Config)
+          present(Mihari.configs, with: Entities::Config)
         end
       end
     end
