@@ -4,6 +4,7 @@ require "date"
 require "erb"
 require "json"
 require "pathname"
+require "securerandom"
 require "yaml"
 
 module Mihari
@@ -166,28 +167,53 @@ module Mihari
         include Mixins::Database
 
         #
+        # Load rule from YAML string
+        #
+        # @param [String] yaml
+        #
+        # @return [Mihari::Structs::Rule]
+        #
+        def from_yaml(yaml)
+          Structs::Rule.new YAML.safe_load(ERB.new(yaml).result, permitted_classes: [Date, Symbol])
+        rescue Psych::SyntaxError => e
+          raise YAMLSyntaxError, e.message
+        end
+
+        #
         # @param [Mihari::Rule] model
         #
         # @return [Mihari::Structs::Rule]
         #
         def from_model(model)
-          data = model.data.deep_symbolize_keys
-          # set ID if YAML data do not have ID
-          data[:id] = model.id unless data.key?(:id)
-
-          Structs::Rule.new(data)
+          Structs::Rule.new(model.data)
         end
 
         #
-        # @param [String] yaml
+        # Load a rule from path
         #
-        # @return [Mihari::Structs::Rule]
-        # @param [String, nil] id
+        # @param [String] path
         #
-        def from_yaml(yaml, id: nil)
-          data = load_erb_yaml(yaml)
+        # @return [Mihari::Structs::Rule, nil]
+        #
+        def from_path(path)
+          return nil unless Pathname(path).exist?
 
-          Structs::Rule.new(data)
+          from_yaml File.read(path)
+        end
+
+        #
+        # Load a rule from DB
+        #
+        # @param [String] id
+        #
+        # @return [Mihari::Structs::Rule, nil]
+        #
+        def from_id(id)
+          with_db_connection do
+            return nil unless Mihari::Rule.exists?(id)
+
+            Structs::Rule.from_model Mihari::Rule.find(id)
+          end
         end
 
         #
@@ -196,55 +222,13 @@ module Mihari
         # @return [Mihari::Structs::Rule]
         #
         def from_path_or_id(path_or_id)
-          yaml = nil
+          rule = from_path(path_or_id)
+          return rule unless rule.nil?
 
-          yaml = load_yaml_from_file(path_or_id) if File.exist?(path_or_id)
-          yaml = load_yaml_from_db(path_or_id) if yaml.nil?
+          rule = from_id(path_or_id)
+          return rule unless rule.nil?
 
-          Structs::Rule.from_yaml yaml
-        end
-
-        private
-
-        #
-        # Load ERR templated YAML
-        #
-        # @param [String] yaml
-        #
-        # @return [Hash]
-        #
-        def load_erb_yaml(yaml)
-          YAML.safe_load(ERB.new(yaml).result, permitted_classes: [Date, Symbol], symbolize_names: true)
-        rescue Psych::SyntaxError => e
-          raise YAMLSyntaxError, e.message
-        end
-
-        #
-        # Load YAML string from path
-        #
-        # @param [String] path
-        #
-        # @return [String, nil]
-        #
-        def load_yaml_from_file(path)
-          return nil unless Pathname(path).exist?
-
-          File.read path
-        end
-
-        #
-        # Load YAML string from the database
-        #
-        # @param [String] id <description>
-        #
-        # @return [Hash]
-        #
-        def load_yaml_from_db(id)
-          with_db_connection do
-            Mihari::Rule.find(id)
-          rescue ActiveRecord::RecordNotFound
-            raise ArgumentError, "ID:#{id} is not found in the database"
-          end
+          raise ArgumentError, "#{path_or_id} does not exist"
         end
       end
     end

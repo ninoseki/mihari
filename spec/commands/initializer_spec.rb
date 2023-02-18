@@ -15,7 +15,7 @@ RSpec.describe Mihari::Commands::Initializer do
 
       yaml = files.read(filename)
       rule = Mihari::Structs::Rule.from_yaml(yaml)
-      expect(rule.errors?).to eq(false)
+      expect(rule.errors?).to be false
       expect(rule.data).to be_a(Hash)
     end
   end
@@ -42,7 +42,7 @@ RSpec.describe Mihari::Commands::Initializer do
       sio.rewind
       output = sio.read
 
-      expect(output).to include("The rule file is initialized")
+      expect(output).to include("A new rule file is initialized")
     end
   end
 end
