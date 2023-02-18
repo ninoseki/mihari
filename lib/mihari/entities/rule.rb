@@ -19,6 +19,8 @@ module Mihari
       expose :yaml, documentation: { type: String, required: true }
       expose :created_at, documentation: { type: DateTime, required: true }, as: :createdAt
       expose :updated_at, documentation: { type: DateTime, required: true }, as: :updatedAt
+
+      expose :tags, using: Entities::Tag, documentation: { type: Entities::Tag, is_array: true, required: true }
     end
 
     class RulesWithPagination < Grape::Entity
