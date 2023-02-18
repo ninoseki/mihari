@@ -32,13 +32,11 @@ module Mihari
                 next
               end
             end
-
-            rule.to_model.save
-
-            analyzer = rule.to_analyzer
+            # update rule model
+            rule.model.save
 
             with_error_notification do
-              alert = analyzer.run
+              alert = rule.analyzer.run
               if alert
                 data = Mihari::Entities::Alert.represent(alert)
                 puts JSON.pretty_generate(data.as_json)

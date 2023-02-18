@@ -90,14 +90,12 @@ module Mihari
           id = params["id"].to_s
 
           begin
-            rule = Mihari::Rule.find(id)
+            rule = Mihari::Structs::Rule.from_model(Mihari::Rule.find(id))
           rescue ActiveRecord::RecordNotFound
             error!({ message: "ID:#{id} is not found" }, 404)
           end
 
-          struct = Mihari::Structs::Rule.from_model(rule)
-          analyzer = struct.to_analyzer
-          analyzer.run
+          rule.analyzer.run
 
           status 201
           present({ message: "ID:#{id} is ran successfully" }, with: Entities::Message)
@@ -137,14 +135,13 @@ module Mihari
           end
 
           begin
-            model = rule.to_model
-            model.save
+            rule.model.save
           rescue ActiveRecord::RecordNotUnique
             error!({ message: "ID:#{rule.id} is already registered" }, 400)
           end
 
           status 201
-          present model, with: Entities::Rule
+          present rule.model, with: Entities::Rule
         end
 
         desc "Update a rule", {
@@ -181,14 +178,13 @@ module Mihari
           end
 
           begin
-            model = rule.to_model
-            model.save
+            rule.model.save
           rescue ActiveRecord::RecordNotUnique
-            error!({ message: "ID:#{model.id} is already registered" }, 400)
+            error!({ message: "ID:#{id} is already registered" }, 400)
           end
 
           status 201
-          present model, with: Entities::Rule
+          present rule.model, with: Entities::Rule
         end
 
         desc "Delete a rule", {

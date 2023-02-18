@@ -22,9 +22,9 @@ RSpec.describe Mihari::Structs::Rule do
     end
   end
 
-  describe "#to_analyzer" do
+  describe "#analyzer" do
     it "should return an analyzer" do
-      expect(rule.to_analyzer).to be_a Mihari::Analyzers::Rule
+      expect(rule.analyzer).to be_a Mihari::Analyzers::Rule
     end
   end
 end

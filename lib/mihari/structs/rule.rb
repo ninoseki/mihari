@@ -138,7 +138,7 @@ module Mihari
       #
       # @return [Mihari::Rule]
       #
-      def to_model
+      def model
         rule = Mihari::Rule.find(id)
 
         rule.title = title
@@ -158,7 +158,7 @@ module Mihari
       #
       # @return [Mihari::Analyzers::Rule]
       #
-      def to_analyzer
+      def analyzer
         Mihari::Analyzers::Rule.new(rule: self)
       end
 
