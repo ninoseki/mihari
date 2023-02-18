@@ -55,7 +55,7 @@ def ci_env?
 end
 
 # Use in-memory SQLite in local test
-ENV["DATABASE"] = ":memory:" unless ci_env?
+ENV["DATABASE_URL"] = "sqlite3:///:memory:" unless ci_env?
 
 def authorization_field(username, password)
   token = "#{username}:#{password}"

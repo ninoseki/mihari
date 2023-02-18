@@ -71,7 +71,7 @@ module Mihari
   setting :circl_passive_password, default: ENV.fetch("CIRCL_PASSIVE_PASSWORD", nil)
   setting :circl_passive_username, default: ENV.fetch("CIRCL_PASSIVE_USERNAME", nil)
 
-  setting :database, default: ENV.fetch("DATABASE", "mihari.db")
+  setting :database_url, default: URI(ENV.fetch("DATABASE_URL", "sqlite3:///mihari.db"))
 
   setting :greynoise_api_key, default: ENV.fetch("GREYNOISE_API_KEY", nil)
 
