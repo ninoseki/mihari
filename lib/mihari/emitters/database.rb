@@ -29,6 +29,10 @@ module Mihari
         alert.save
         alert
       end
+
+      def configuration_keys
+        %w[database_url]
+      end
     end
   end
 end
