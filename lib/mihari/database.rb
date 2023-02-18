@@ -157,8 +157,8 @@ module Mihari
         ActiveRecord::Base.logger = Logger.new($stdout) if development_env?
 
         migrate :up
-      rescue StandardError
-        # Do nothing
+      rescue StandardError => e
+        Mihari.logger.error e
       end
 
       #
