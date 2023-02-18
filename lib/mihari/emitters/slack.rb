@@ -190,6 +190,14 @@ module Mihari
 
         notifier.post(text: text, attachments: attachments, mrkdwn: true)
       end
+
+      def configuration_keys
+        %w[slack_webhook_url slack_channel]
+      end
+
+      def configured?
+        valid?
+      end
     end
   end
 end

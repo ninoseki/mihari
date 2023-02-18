@@ -126,6 +126,12 @@ module Mihari
     end
     memoize :enrichers
 
+    def configs
+      (Mihari.analyzers + Mihari.emitters + Mihari.enrichers).map do |klass|
+        Mihari::Structs::Config.from_class(klass)
+      end.compact
+    end
+
     def logger
       SemanticLogger.default_level = :info
       SemanticLogger.add_appender(io: $stderr, formatter: :color)
@@ -159,6 +165,7 @@ require "mihari/types"
 
 # Structs
 require "mihari/structs/censys"
+require "mihari/structs/config"
 require "mihari/structs/filters"
 require "mihari/structs/google_public_dns"
 require "mihari/structs/greynoise"
@@ -247,9 +254,6 @@ require "mihari/entities/artifact"
 require "mihari/entities/alert"
 
 require "mihari/entities/rule"
-
-# Status checker
-require "mihari/status"
 
 # Web app
 require "mihari/web/app"
