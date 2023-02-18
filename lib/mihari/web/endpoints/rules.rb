@@ -163,7 +163,7 @@ module Mihari
           end
 
           begin
-            rule = Structs::Rule.from_yaml(yaml, id: id)
+            rule = Structs::Rule.from_yaml(yaml)
           rescue YAMLSyntaxError => e
             error!({ message: e.message }, 400)
           end

@@ -1,20 +1,5 @@
-title: ... # String (required)
-description: ... # String (required)
-
-id: ... # String (optional)
-author: ... # String (optional)
-created_on: <%= Date.today %> # Date (optional)
-updated_on: <%= Date.today %> # Date (optional)
-
-tags: [] # Array<String> (Optional, defaults to [])
-data_types: # Array<String> (Optional, defaults to ["hash", "ip", "domain", "url", "mail"])
-  - hash
-  - ip
-  - domain
-  - url
-  - mail
-falsepositives: [] # Array<String> (Optional, defaults to [])
-
-queries: # Array<Hash> (required)
-  - analyzer: shodan # String (required)
-    query: ... # String (required)
+id: <%= SecureRandom.uuid %>
+title: Title goes here
+description: Description goes here
+created_on: <%= Date.today %>
+queries: []

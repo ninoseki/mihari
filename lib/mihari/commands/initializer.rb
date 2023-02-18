@@ -1,45 +1,43 @@
 # frozen_string_literal: true
 
+require "pathname"
+
 module Mihari
   module Commands
     module Initializer
       def self.included(thor)
         thor.class_eval do
           desc "init", "Initialize a new rule"
-          method_option :filename, type: :string, default: "rule.yml"
+          method_option :path, type: :string, default: "./rule.yml"
           def init
-            filename = options["filename"]
+            path = options["path"]
 
-            warning = "#{filename} exists. Do you want to overwrite it? (y/n)"
-            return if File.exist?(filename) && !(yes? warning)
+            warning = "#{path} exists. Do you want to overwrite it? (y/n)"
+            return if Pathname(path).exist? && !(yes? warning)
 
-            initialize_rule_yaml filename
+            initialize_rule_yaml path
 
-            Mihari.logger.info "The rule file is initialized as #{filename}."
+            Mihari.logger.info "A new rule is initialized as #{path}."
           end
 
           no_commands do
             #
-            # Returns a template for rule
-            #
-            # @return [String] A template for rule
+            # @return [Mihari::Structs::Rule]
             #
             def rule_template
-              rule = Structs::Rule.from_path_or_id File.expand_path("../templates/rule.yml.erb", __dir__)
-              rule.yaml
+              Structs::Rule.from_path File.expand_path("../templates/rule.yml.erb", __dir__)
             end
 
             #
-            # Create a (blank) rule file
+            # Create a new rule
             #
-            # @param [String] filename
+            # @param [String] path
             # @param [Dry::Files] files
-            # @param [String] template
             #
             # @return [nil]
             #
-            def initialize_rule_yaml(filename, files = Dry::Files.new, template: rule_template)
-              files.write(filename, template)
+            def initialize_rule_yaml(path, files = Dry::Files.new)
+              files.write(path, rule_template.yaml)
             end
           end
         end
