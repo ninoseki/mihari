@@ -11,7 +11,11 @@ module Mihari
     end
 
     def yaml
-      @yaml ||= data.to_yaml
+      data.to_yaml
+    end
+
+    def tags
+      (data["tags"] || []).map { |tag| { name: tag } }
     end
 
     class << self
