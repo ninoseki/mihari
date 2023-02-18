@@ -10,7 +10,7 @@ RSpec.shared_context "with database fixtures" do
       queries: [{ analyzer: "crtsh", query: "foo" }],
       tags: ["tag1"]
     )
-    rule1.to_model.save
+    rule1.model.save
 
     rule2 = Mihari::Structs::Rule.new(
       id: "test2",
@@ -19,7 +19,7 @@ RSpec.shared_context "with database fixtures" do
       queries: [{ analyzer: "crtsh", query: "foo" }],
       tags: ["tag2"]
     )
-    rule2.to_model.save
+    rule2.model.save
 
     # create alerts & aritfaicts
     as = Mihari::AutonomousSystem.new(asn: 13_335)
