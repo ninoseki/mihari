@@ -11,7 +11,7 @@ RSpec.describe Mihari::Commands::Initializer do
     it do
       files = Dry::Files.new(memory: true)
       filename = "/tmp/foo.yml"
-      CLI.new.initialize_rule_yaml(filename, files)
+      CLI.new.initialize_rule(filename, files)
 
       yaml = files.read(filename)
       rule = Mihari::Structs::Rule.from_yaml(yaml)
@@ -35,14 +35,14 @@ RSpec.describe Mihari::Commands::Initializer do
     after { FileUtils.rm path }
 
     it do
-      capture(:stderr) { CLI.start ["init", "--filename", path] }
+      capture(:stderr) { CLI.start ["init", "--path", path] }
 
       # read logger output
       SemanticLogger.flush
       sio.rewind
       output = sio.read
 
-      expect(output).to include("A new rule file is initialized")
+      expect(output).to include("A new rule is initialized")
     end
   end
 end
