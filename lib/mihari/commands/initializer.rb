@@ -15,7 +15,7 @@ module Mihari
             warning = "#{path} exists. Do you want to overwrite it? (y/n)"
             return if Pathname(path).exist? && !(yes? warning)
 
-            initialize_rule_yaml path
+            initialize_rule path
 
             Mihari.logger.info "A new rule is initialized as #{path}."
           end
@@ -36,7 +36,7 @@ module Mihari
             #
             # @return [nil]
             #
-            def initialize_rule_yaml(path, files = Dry::Files.new)
+            def initialize_rule(path, files = Dry::Files.new)
               files.write(path, rule_template.yaml)
             end
           end
