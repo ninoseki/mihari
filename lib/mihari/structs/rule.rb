@@ -164,8 +164,6 @@ module Mihari
       end
 
       class << self
-        include Mixins::Database
-
         #
         # Load rule from YAML string
         #
@@ -209,11 +207,9 @@ module Mihari
         # @return [Mihari::Structs::Rule, nil]
         #
         def from_id(id)
-          with_db_connection do
-            return nil unless Mihari::Rule.exists?(id)
+          return nil unless Mihari::Rule.exists?(id)
 
-            Structs::Rule.from_model Mihari::Rule.find(id)
-          end
+          Structs::Rule.from_model Mihari::Rule.find(id)
         end
 
         #

@@ -9,7 +9,6 @@ module Mihari
 
       include Mixins::AutonomousSystem
       include Mixins::Configurable
-      include Mixins::Database
       include Mixins::Retriable
 
       # @return [Mihari::Structs::Rule, nil]
@@ -42,16 +41,14 @@ module Mihari
           raise ConfigurationError, "#{class_name} is not configured correctly"
         end
 
-        with_db_connection do
-          set_enriched_artifacts
+        set_enriched_artifacts
 
-          responses = Parallel.map(valid_emitters) do |emitter|
-            run_emitter emitter
-          end
-
-          # returns Mihari::Alert created by the database emitter
-          responses.find { |res| res.is_a?(Mihari::Alert) }
+        responses = Parallel.map(valid_emitters) do |emitter|
+          run_emitter emitter
         end
+
+        # returns Mihari::Alert created by the database emitter
+        responses.find { |res| res.is_a?(Mihari::Alert) }
       end
 
       #
