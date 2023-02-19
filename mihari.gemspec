@@ -28,8 +28,8 @@ Gem::Specification.new do |spec|
   spec.require_paths = ["lib"]
 
   spec.add_development_dependency "bundler", "~> 2.4"
-  spec.add_development_dependency "coveralls_reborn", "~> 0.26"
-  spec.add_development_dependency "fakefs", "~> 2.0"
+  spec.add_development_dependency "coveralls_reborn", "~> 0.27"
+  spec.add_development_dependency "fakefs", "~> 2.4"
   spec.add_development_dependency "mysql2", "~> 0.5"
   spec.add_development_dependency "overcommit", "~> 0.60"
   spec.add_development_dependency "pg", "~> 1.4"
@@ -39,7 +39,7 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency "rerun", "~> 0.14"
   spec.add_development_dependency "rspec", "~> 3.12"
   spec.add_development_dependency "simplecov-lcov", "~> 0.8.0"
-  spec.add_development_dependency "standard", "~> 1.22"
+  spec.add_development_dependency "standard", "~> 1.24"
   spec.add_development_dependency "steep", "~> 1.3"
   spec.add_development_dependency "timecop", "~> 0.9"
   spec.add_development_dependency "vcr", "~> 6.1"
@@ -63,7 +63,7 @@ Gem::Specification.new do |spec|
   spec.add_dependency "dry-validation", "1.10.0"
   spec.add_dependency "email_address", "0.2.4"
   spec.add_dependency "grape", "1.7.0"
-  spec.add_dependency "grape-entity", "0.10.2"
+  spec.add_dependency "grape-entity", "1.0.0"
   spec.add_dependency "grape-swagger", "1.5.0"
   spec.add_dependency "grape-swagger-entity", "0.5.1"
   spec.add_dependency "greynoise", "0.1.1"
