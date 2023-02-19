@@ -146,7 +146,7 @@ module Mihari
 
         case adapter
         when "postgresql", "mysql2"
-          ActiveRecord::Base.establish_connection(Mihari.config.database_url)
+          ActiveRecord::Base.establish_connection(Mihari.config.database_url.to_s)
         else
           ActiveRecord::Base.establish_connection(
             adapter: adapter,
