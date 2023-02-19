@@ -3,7 +3,11 @@
 module Mihari
   module Entities
     class BaseArtifact < Grape::Entity
-      expose :id, documentation: { type: Integer, required: true }
+      expose :id,
+        documentation: { type: String, required: true,
+                         desc: "String representation of the ID" } do |artifact, _options|
+        artifact.id.to_s
+      end
       expose :data, documentation: { type: String, required: true }
       expose :data_type, documentation: { type: String, required: true }, as: :dataType
       expose :source, documentation: { type: String, required: true }
