@@ -9,14 +9,14 @@ RSpec.describe Mihari::Emitters::Webhook, :vcr do
     context "without url" do
       it do
         emitter = described_class.new
-        expect(emitter.valid?).to eq(false)
+        expect(emitter.valid?).to be false
       end
     end
 
     context "with uri" do
       it do
         emitter = described_class.new(url: "http://example.com")
-        expect(emitter.valid?).to eq(true)
+        expect(emitter.valid?).to be true
       end
     end
   end

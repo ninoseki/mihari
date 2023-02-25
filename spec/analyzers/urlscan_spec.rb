@@ -15,7 +15,7 @@ RSpec.describe Mihari::Analyzers::Urlscan, :vcr do
 
       it do
         artifacts = subject.artifacts
-        expect(artifacts.none? { |artifact| artifact.data.start_with?("http", "https") }).to eq(true)
+        expect(artifacts.none? { |artifact| artifact.data.start_with?("http", "https") }).to be true
       end
     end
   end
