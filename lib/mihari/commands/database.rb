@@ -9,6 +9,10 @@ module Mihari
         thor.class_eval do
           desc "migrate", "Migrate DB schemas"
           method_option :verbose, type: :boolean, default: true
+          #
+          # @param [String] direction
+          #
+          #
           def migrate(direction = "up")
             verbose = options["verbose"]
             ActiveRecord::Migration.verbose = verbose

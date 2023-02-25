@@ -21,7 +21,7 @@ module Mihari
       include Mihari::Commands::Version
       include Mihari::Commands::Web
 
-      desc "database", "Sub commands for database"
+      desc "db", "Sub commands for DB"
       subcommand "db", Database
 
       desc "rule", "Sub commands for rule"

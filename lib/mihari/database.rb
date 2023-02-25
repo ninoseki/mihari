@@ -117,18 +117,23 @@ def adapter
   "sqlite3"
 end
 
+#
+# @return [Array<ActiveRecord::Migration>] schemas
+#
+def schemas
+  [V5Schema]
+end
+
 module Mihari
   class Database
     class << self
-      include Memist::Memoizable
-
       #
       # DB migraration
       #
       # @param [Symbol] direction
       #
       def migrate(direction)
-        [V5Schema].each { |schema| schema.migrate direction }
+        schemas.each { |schema| schema.migrate direction }
       end
 
       #
