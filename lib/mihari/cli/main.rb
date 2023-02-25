@@ -3,14 +3,16 @@
 require "thor"
 
 # Commands
-require "mihari/commands/initializer"
 require "mihari/commands/searcher"
-require "mihari/commands/validator"
 require "mihari/commands/version"
 require "mihari/commands/web"
+require "mihari/commands/database"
 
 # CLIs
 require "mihari/cli/base"
+
+require "mihari/cli/database"
+require "mihari/cli/rule"
 
 module Mihari
   module CLI
@@ -18,8 +20,12 @@ module Mihari
       include Mihari::Commands::Searcher
       include Mihari::Commands::Version
       include Mihari::Commands::Web
-      include Mihari::Commands::Validator
-      include Mihari::Commands::Initializer
+
+      desc "database", "Sub commands for database"
+      subcommand "db", Database
+
+      desc "rule", "Sub commands for rule"
+      subcommand "rule", Rule
     end
   end
 end
