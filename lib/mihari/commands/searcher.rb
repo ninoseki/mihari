@@ -10,6 +10,11 @@ module Mihari
         thor.class_eval do
           desc "search [PATH]", "Search by a rule"
           method_option :force_overwrite, type: :boolean, aliases: "-f", desc: "Force an overwrite the rule"
+          #
+          # Search by a rule
+          #
+          # @param [String] path_or_id
+          #
           def search(path_or_id)
             with_db_connection do
               rule = Structs::Rule.from_path_or_id path_or_id
