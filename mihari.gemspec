@@ -30,6 +30,7 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency "bundler", "~> 2.4"
   spec.add_development_dependency "coveralls_reborn", "~> 0.27"
   spec.add_development_dependency "fakefs", "~> 2.4"
+  spec.add_development_dependency "fuubar", "~> 2.5"
   spec.add_development_dependency "mysql2", "~> 0.5"
   spec.add_development_dependency "overcommit", "~> 0.60"
   spec.add_development_dependency "pg", "~> 1.4"
