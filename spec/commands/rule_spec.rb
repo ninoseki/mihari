@@ -35,7 +35,7 @@ RSpec.describe Mihari::Commands::Rule do
     after { FileUtils.rm path }
 
     it do
-      capture(:stderr) { CLI.start ["init", "--path", path] }
+      capture(:stderr) { CLI.start ["init", path] }
 
       # read logger output
       SemanticLogger.flush
