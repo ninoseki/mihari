@@ -18,7 +18,7 @@ RSpec.describe Mihari::Schemas::RuleContract do
             title: title,
             queries: [{ analyzer: analyzer, query: "foo" }]
           )
-          expect(result.errors.empty?).to eq(true)
+          expect(result.errors.empty?).to be true
         end
       end
     end
@@ -35,7 +35,7 @@ RSpec.describe Mihari::Schemas::RuleContract do
             { analyzer: "zoomeye", query: "foo", type: "host", options: { interval: 10 } }
           ]
         )
-        expect(result.errors.empty?).to eq(true)
+        expect(result.errors.empty?).to be true
       end
     end
 
@@ -50,7 +50,7 @@ RSpec.describe Mihari::Schemas::RuleContract do
           ],
           data_types: ["ip"]
         )
-        expect(result.errors.empty?).to eq(true)
+        expect(result.errors.empty?).to be true
       end
     end
   end
@@ -63,7 +63,7 @@ RSpec.describe Mihari::Schemas::RuleContract do
         title: title,
         queries: [{ analyzer: "foo", query: "foo" }]
       )
-      expect(result.errors.empty?).to eq(false)
+      expect(result.errors.empty?).to be false
     end
 
     it do
@@ -77,7 +77,7 @@ RSpec.describe Mihari::Schemas::RuleContract do
           { analyzer: "zoomeye", query: "foo", type: "bar" } # should be any of host or web
         ]
       )
-      expect(result.errors.empty?).to eq(false)
+      expect(result.errors.empty?).to be false
     end
   end
 
@@ -92,7 +92,7 @@ RSpec.describe Mihari::Schemas::RuleContract do
         ],
         data_types: ["foo"] # should be any of ip, domain, mail, url or hash
       )
-      expect(result.errors.empty?).to eq(false)
+      expect(result.errors.empty?).to be false
     end
   end
 
@@ -107,7 +107,7 @@ RSpec.describe Mihari::Schemas::RuleContract do
         ],
         falsepositives: [1] # should be string
       )
-      expect(result.errors.empty?).to eq(false)
+      expect(result.errors.empty?).to be false
     end
 
     it do
@@ -120,7 +120,7 @@ RSpec.describe Mihari::Schemas::RuleContract do
         ],
         falsepositives: ["/*/"]
       )
-      expect(result.errors.empty?).to eq(false)
+      expect(result.errors.empty?).to be false
     end
   end
 
@@ -135,7 +135,7 @@ RSpec.describe Mihari::Schemas::RuleContract do
         ],
         artifact_lifetime: "foo" # should be an integer
       )
-      expect(result.errors.empty?).to eq(false)
+      expect(result.errors.empty?).to be false
     end
   end
 
@@ -152,7 +152,7 @@ RSpec.describe Mihari::Schemas::RuleContract do
           { emitter: "foo" }
         ]
       )
-      expect(result.errors.empty?).to eq(false)
+      expect(result.errors.empty?).to be false
     end
   end
 end

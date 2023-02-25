@@ -18,7 +18,7 @@ RSpec.describe Mihari::Structs::Rule do
 
   describe "#errors?" do
     it "should not have any errors" do
-      expect(rule.errors?).to eq(false)
+      expect(rule.errors?).to be false
     end
   end
 

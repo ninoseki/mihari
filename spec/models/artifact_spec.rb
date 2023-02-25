@@ -44,7 +44,7 @@ RSpec.describe Mihari::Artifact, :vcr do
         artifact = described_class.new(data: data, alert_id: alert_id)
         artifact.rule_id = rule_id
 
-        expect(artifact.unique?(base_time: base_time, artifact_lifetime: artifact_lifetime)).to eq(false)
+        expect(artifact.unique?(base_time: base_time, artifact_lifetime: artifact_lifetime)).to be false
       end
 
       it do
@@ -53,7 +53,7 @@ RSpec.describe Mihari::Artifact, :vcr do
         end
 
         artifact = described_class.new(data: data, alert_id: alert_id)
-        expect(artifact.unique?(base_time: base_time, artifact_lifetime: artifact_lifetime)).to eq(true)
+        expect(artifact.unique?(base_time: base_time, artifact_lifetime: artifact_lifetime)).to be true
       end
     end
   end

@@ -9,7 +9,7 @@ RSpec.describe Mihari::Analyzers::VirusTotalIntelligence, :vcr do
     describe "#artifacts" do
       it do
         artifacts = subject.artifacts
-        expect(artifacts.all? { |artifact| artifact.data_type == "hash" }).to eq(true)
+        expect(artifacts.all? { |artifact| artifact.data_type == "hash" }).to be true
       end
     end
   end
@@ -21,7 +21,7 @@ RSpec.describe Mihari::Analyzers::VirusTotalIntelligence, :vcr do
       it do
         artifacts = subject.artifacts
         expect(artifacts.length).to be > 0
-        expect(artifacts.all? { |artifact| artifact.data_type == "url" }).to eq(true)
+        expect(artifacts.all? { |artifact| artifact.data_type == "url" }).to be true
       end
     end
   end
@@ -33,7 +33,7 @@ RSpec.describe Mihari::Analyzers::VirusTotalIntelligence, :vcr do
       it do
         artifacts = subject.artifacts
         expect(artifacts.length).to be > 0
-        expect(artifacts.all? { |artifact| artifact.data_type == "domain" }).to eq(true)
+        expect(artifacts.all? { |artifact| artifact.data_type == "domain" }).to be true
       end
     end
   end
@@ -45,7 +45,7 @@ RSpec.describe Mihari::Analyzers::VirusTotalIntelligence, :vcr do
       it do
         artifacts = subject.artifacts
         expect(artifacts.length).to be > 0
-        expect(artifacts.all? { |artifact| artifact.data_type == "ip" }).to eq(true)
+        expect(artifacts.all? { |artifact| artifact.data_type == "ip" }).to be true
       end
     end
   end

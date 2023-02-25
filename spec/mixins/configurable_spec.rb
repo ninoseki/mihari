@@ -22,12 +22,12 @@ RSpec.describe ConfigurableTest do
 
     it do
       instance = described_class.new(nil)
-      expect(instance.configured?).to eq(false)
+      expect(instance.configured?).to be false
     end
 
     it do
       instance = described_class.new("foo")
-      expect(instance.configured?).to eq(true)
+      expect(instance.configured?).to be true
     end
   end
 end
