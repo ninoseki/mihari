@@ -41,8 +41,4 @@ RSpec.shared_context "with database fixtures" do
       rule: rule2
     )
   end
-
-  after do
-    reset_db
-  end
 end
