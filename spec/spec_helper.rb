@@ -147,8 +147,11 @@ RSpec.configure do |config|
   config.include Spec::Support::Helpers
 
   config.before(:example) do
-    Mihari::Database.flush_memoization
+    ActiveRecord::Migration.verbose = false
+
     Mihari::Database.connect
+    Mihari::Database.migrate :up
   end
+
   config.after(:example) { Mihari::Database.close }
 end

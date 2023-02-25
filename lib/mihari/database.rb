@@ -9,10 +9,6 @@ def env
   ENV["APP_ENV"] || ENV["RACK_ENV"]
 end
 
-def test_env?
-  env == "test"
-end
-
 def development_env?
   env == "development"
 end
@@ -132,11 +128,8 @@ module Mihari
       # @param [Symbol] direction
       #
       def migrate(direction)
-        ActiveRecord::Migration.verbose = false
-
         [V5Schema].each { |schema| schema.migrate direction }
       end
-      memoize :migrate unless test_env?
 
       #
       # Establish DB connection
@@ -153,10 +146,7 @@ module Mihari
             database: Mihari.config.database_url.path[1..]
           )
         end
-
         ActiveRecord::Base.logger = Logger.new($stdout) if development_env?
-
-        migrate :up
       rescue StandardError => e
         Mihari.logger.error e
       end
@@ -168,15 +158,6 @@ module Mihari
         return unless ActiveRecord::Base.connected?
 
         ActiveRecord::Base.clear_active_connections!
-      end
-
-      #
-      # Destory DB
-      #
-      def destroy!
-        return unless ActiveRecord::Base.connected?
-
-        migrate :down
       end
     end
   end
