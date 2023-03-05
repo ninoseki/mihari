@@ -8,26 +8,28 @@ module Mihari
     class Feed < Base
       param :query
 
-      option :http_request_method, default: proc { "GET" }
-      option :http_request_headers, default: proc { {} }
-      option :http_request_payload, default: proc { {} }
-      option :http_request_payload_type, default: proc {}
+      option :method, default: proc { "GET" }
+      option :headers, default: proc { {} }
+      option :params, default: proc {}
+      option :json, default: proc {}
+      option :data, default: proc {}
 
       option :selector, default: proc { "" }
 
       def artifacts
-        Mihari::Feed::Parser.new(data).parse selector
+        Mihari::Feed::Parser.new(results).parse selector
       end
 
       private
 
-      def data
+      def results
         reader = Mihari::Feed::Reader.new(
           query,
-          http_request_method: http_request_method,
-          http_request_headers: http_request_headers,
-          http_request_payload: http_request_payload,
-          http_request_payload_type: http_request_payload_type
+          method: method,
+          headers: headers,
+          params: params,
+          json: json,
+          data: data
         )
         reader.read
       end

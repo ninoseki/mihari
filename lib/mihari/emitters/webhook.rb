@@ -77,13 +77,13 @@ module Mihari
         payload_ = payload_as_string(artifacts: artifacts, rule: rule)
         payload = JSON.parse(payload_)
 
-        client = Mihari::HTTP.new(url, headers: headers, payload: payload)
+        client = Mihari::HTTP.new(url, headers: headers)
 
         case method
         when "GET"
           res = client.get
         when "POST"
-          res = client.post
+          res = client.post(json: payload)
         end
 
         res
