@@ -212,6 +212,11 @@ require "mihari/emitters/slack"
 require "mihari/emitters/the_hive"
 require "mihari/emitters/webhook"
 
+# Clients
+require "mihari/clients/base"
+
+require "mihari/clients/crtsh"
+
 # Analyzers
 require "mihari/analyzers/base"
 
