@@ -36,8 +36,7 @@ module Mihari
       # @return [String] <description>
       #
       def get(path, params: nil)
-        res = HTTP.get(url_for(path), headers: headers, params: params)
-        res.body.to_s
+        HTTP.get(url_for(path), headers: headers, params: params)
       rescue HTTPError
         nil
       end
