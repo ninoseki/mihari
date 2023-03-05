@@ -1,7 +1,5 @@
 # frozen_string_literal: true
 
-require "dnstwister"
-
 module Mihari
   module Analyzers
     class DNSTwister < Base
@@ -35,8 +33,8 @@ module Mihari
         type == "domain"
       end
 
-      def api
-        @api ||= ::DNSTwister::API.new
+      def client
+        @client ||= Clients::DNSTwister.new
       end
 
       #
@@ -61,7 +59,7 @@ module Mihari
       def search
         raise InvalidInputError, "#{query}(type: #{type || "unknown"}) is not supported." unless valid_type?
 
-        res = api.fuzz(query)
+        res = client.fuzz(query)
         fuzzy_domains = res["fuzzy_domains"] || []
         domains = fuzzy_domains.map { |domain| domain["domain"] }
         Parallel.map(domains) do |domain|
