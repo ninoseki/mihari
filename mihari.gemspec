@@ -81,7 +81,6 @@ Gem::Specification.new do |spec|
   spec.add_dependency "passivetotalx", "0.1.1"
   spec.add_dependency "plissken", "2.0.1"
   spec.add_dependency "public_suffix", "5.0.1"
-  spec.add_dependency "pulsedive", "0.1.5"
   spec.add_dependency "puma", "6.0.2"
   spec.add_dependency "rack", "2.2.4"
   spec.add_dependency "rack-contrib", "2.3.0"

@@ -1,7 +1,5 @@
 # frozen_string_literal: true
 
-require "pulsedive"
-
 module Mihari
   module Analyzers
     class Pulsedive < Base
@@ -34,8 +32,8 @@ module Mihari
         %w[pulsedive_api_key]
       end
 
-      def api
-        @api ||= ::Pulsedive::API.new(api_key)
+      def client
+        @client ||= Clients::PulseDive.new(api_key: api_key)
       end
 
       #
@@ -55,12 +53,12 @@ module Mihari
       def search
         raise InvalidInputError, "#{query}(type: #{type || "unknown"}) is not supported." unless valid_type?
 
-        indicator = api.indicator.get_by_value(query)
+        indicator = client.get_indicator(query)
         iid = indicator["iid"]
 
-        properties = api.indicator.get_properties_by_id(iid)
+        properties = client.get_properties(iid)
         (properties["dns"] || []).filter_map do |property|
-          if ["A", "PTR"].include?(property["name"])
+          if %w[A PTR].include?(property["name"])
             nil
           else
             data = property["value"]

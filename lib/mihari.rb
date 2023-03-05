@@ -218,6 +218,7 @@ require "mihari/clients/base"
 require "mihari/clients/crtsh"
 require "mihari/clients/dnstwister"
 require "mihari/clients/otx"
+require "mihari/clients/publsedive"
 
 # Analyzers
 require "mihari/analyzers/base"
