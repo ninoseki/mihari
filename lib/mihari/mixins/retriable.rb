@@ -9,7 +9,9 @@ module Mihari
         Errno::EPIPE,
         OpenSSL::SSL::SSLError,
         Timeout::Error,
-        RetryableError
+        RetryableError,
+        NetworkError,
+        TimeoutError
       ]
 
       #

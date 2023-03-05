@@ -1,7 +1,5 @@
 # frozen_string_literal: true
 
-require "crtsh"
-
 module Mihari
   module Analyzers
     class Crtsh < Base
@@ -21,8 +19,11 @@ module Mihari
 
       private
 
-      def api
-        @api ||= ::Crtsh::API.new
+      #
+      # @return [Mihari::Clients::Crtsh]
+      #
+      def client
+        @client ||= Mihari::Clients::Crtsh.new
       end
 
       #
@@ -32,9 +33,7 @@ module Mihari
       #
       def search
         exclude = exclude_expired ? "expired" : nil
-        api.search(query, exclude: exclude)
-      rescue ::Crtsh::Error => _e
-        []
+        client.search(query, exclude: exclude)
       end
     end
   end
