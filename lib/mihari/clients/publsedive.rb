@@ -14,11 +14,11 @@ module Mihari
       end
 
       def get_indicator(ip_or_domain)
-        get "/api/info.php", params: { indicator: ip_or_domain }
+        _get "/api/info.php", params: { indicator: ip_or_domain }
       end
 
       def get_properties(indicator_id)
-        get "/api/info.php", params: { iid: indicator_id, get: "properties" }
+        _get "/api/info.php", params: { iid: indicator_id, get: "properties" }
       end
 
       private
@@ -30,10 +30,10 @@ module Mihari
       #
       # @return [<Type>] <description>
       #
-      def get(path, params: {})
+      def _get(path, params: {})
         params["key"] = api_key
 
-        res = HTTP.get(url_for(path), headers: headers, params: params)
+        res = get(path, params: params)
         JSON.parse(res.body.to_s)
       rescue HTTPError
         nil
