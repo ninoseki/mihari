@@ -6,25 +6,28 @@ require "insensitive_hash"
 module Mihari
   module Feed
     class Reader
-      attr_reader :uri, :http_request_headers, :http_request_method, :http_request_payload
+      attr_reader :url, :headers, :params, :json, :data, :method
 
-      def initialize(uri, http_request_headers: {}, http_request_method: "GET", http_request_payload_type: nil, http_request_payload: {})
-        @uri = Addressable::URI.parse(uri)
-        @http_request_headers = http_request_headers.insensitive
-        @http_request_method = http_request_method
-        @http_request_payload = http_request_payload
+      def initialize(url, headers: {}, method: "GET", params: nil, json: nil, data: nil)
+        @url = Addressable::URI.parse(url)
+        @headers = headers.insensitive
+        @method = method
 
-        http_request_headers["content-type"] = http_request_payload_type if http_request_payload_type
+        @params = params
+        @json = json
+        @data = data
+
+        headers["content-type"] = "application/json" unless json.nil?
       end
 
       def read
-        return read_file(uri.path) if uri.scheme == "file"
+        return read_file(url.path) if url.scheme == "file"
 
         res = nil
-        client = HTTP.new(uri, headers: http_request_headers, payload: http_request_payload)
+        client = HTTP.new(url, headers: headers)
 
-        res = client.get if http_request_method == "GET"
-        res = client.post if http_request_method == "POST"
+        res = client.get(params: params) if method == "GET"
+        res = client.post(params: params, json: json, data: data) if method == "POST"
 
         return [] if res.nil?
 

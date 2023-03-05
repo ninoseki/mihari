@@ -82,10 +82,11 @@ module Mihari
       required(:analyzer).value(Types::String.enum("feed"))
       required(:query).value(:string)
       required(:selector).value(:string)
-      optional(:http_request_method).value(Types::HTTPRequestMethods).default("GET")
-      optional(:http_request_headers).value(:hash).default({})
-      optional(:http_request_payload).value(:hash).default({})
-      optional(:http_request_payload_type).value(Types::HTTPRequestPayloadTypes)
+      optional(:method).value(Types::HTTPRequestMethods).default("GET")
+      optional(:headers).value(:hash).default({})
+      optional(:params).value(:hash)
+      optional(:data).value(:hash)
+      optional(:json).value(:hash)
       optional(:options).hash(AnalyzerOptions)
     end
   end
