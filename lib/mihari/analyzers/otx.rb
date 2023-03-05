@@ -1,7 +1,5 @@
 # frozen_string_literal: true
 
-require "mihari/analyzers/clients/otx"
-
 module Mihari
   module Analyzers
     class OTX < Base
@@ -35,7 +33,7 @@ module Mihari
       end
 
       def client
-        @client ||= Mihari::Analyzers::Clients::OTX.new(api_key)
+        @client ||= Mihari::Clients::OTX.new(headers: { "x-otx-api-key": api_key })
       end
 
       #
