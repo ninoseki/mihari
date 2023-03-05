@@ -15,8 +15,8 @@ RSpec.describe Mihari::Analyzers::BinaryEdge, :vcr do
     describe "#artifacts" do
       before do
         mock = double("API")
-        allow(mock).to receive_message_chain(:host, :search).and_raise(BinaryEdge::Error.new("Request time limit exceeded. Please refine your query or specify a smaller time range."))
-        allow(BinaryEdge::API).to receive(:new).and_return(mock)
+        allow(mock).to receive_message_chain(:search).and_raise(Mihari::UnsuccessfulStatusCodeError.new("Request time limit exceeded. Please refine your query or specify a smaller time range."))
+        allow(Mihari::Clients::BinaryEdge).to receive(:new).and_return(mock)
       end
 
       it do

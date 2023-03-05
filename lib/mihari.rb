@@ -215,6 +215,7 @@ require "mihari/emitters/webhook"
 # Clients
 require "mihari/clients/base"
 
+require "mihari/clients/binaryedge"
 require "mihari/clients/crtsh"
 require "mihari/clients/dnstwister"
 require "mihari/clients/otx"

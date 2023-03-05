@@ -1,7 +1,5 @@
 # frozen_string_literal: true
 
-require "binaryedge"
-
 module Mihari
   module Analyzers
     class BinaryEdge < Base
@@ -44,8 +42,8 @@ module Mihari
       # @return [Hash]
       #
       def search_with_page(query, page: 1)
-        api.host.search(query, page: page)
-      rescue ::BinaryEdge::Error => e
+        client.search(query, page: page)
+      rescue UnsuccessfulStatusCodeError => e
         raise RetryableError, e if e.message.include?("Request time limit exceeded")
 
         raise e
@@ -58,7 +56,7 @@ module Mihari
       #
       def search
         responses = []
-        (1..Float::INFINITY).each do |page|
+        (1..500).each do |page|
           res = search_with_page(query, page: page)
           total = res["total"].to_i
 
@@ -75,8 +73,12 @@ module Mihari
         %w[binaryedge_api_key]
       end
 
-      def api
-        @api ||= ::BinaryEdge::API.new(api_key)
+      #
+      #
+      # @return [Mihari::Clients::BinaryEdge]
+      #
+      def client
+        @client ||= Clients::BinaryEdge.new(api_key: api_key)
       end
     end
   end
