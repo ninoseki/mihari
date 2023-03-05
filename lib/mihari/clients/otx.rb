@@ -11,17 +11,17 @@ module Mihari
       end
 
       def query_by_ip(ip)
-        get "/api/v1/indicators/IPv4/#{ip}/passive_dns"
+        _get "/api/v1/indicators/IPv4/#{ip}/passive_dns"
       end
 
       def query_by_domain(domain)
-        get "/api/v1/indicators/domain/#{domain}/passive_dns"
+        _get "/api/v1/indicators/domain/#{domain}/passive_dns"
       end
 
       private
 
-      def get(path)
-        res = HTTP.get(url_for(path), headers: headers)
+      def _get(path)
+        res = get(path)
         JSON.parse(res.body.to_s)
       rescue HTTPError
         nil

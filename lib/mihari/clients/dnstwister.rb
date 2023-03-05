@@ -19,7 +19,7 @@ module Mihari
       # @return [Hash]
       #
       def fuzz(domain)
-        res = HTTP.get(url_for("/api/fuzz/#{to_hex(domain)}"))
+        res = get("/api/fuzz/#{to_hex(domain)}")
         JSON.parse(res.body.to_s)
       end
 

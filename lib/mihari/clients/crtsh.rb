@@ -24,7 +24,7 @@ module Mihari
         params = { identity: identity, match: match, exclude: exclude, output: "json" }.compact
 
         begin
-          res = HTTP.get(url_for("/"), headers: headers, params: params)
+          res = get("/", params: params)
           JSON.parse(res.body.to_s)
         rescue HTTPError
           []
