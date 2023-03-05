@@ -3,7 +3,10 @@
 module Mihari
   module Clients
     class OTX < Base
-      def initialize(base_url = "https://otx.alienvault.com", headers: {})
+      def initialize(base_url = "https://otx.alienvault.com", api_key:, headers: {})
+        raise(ArgumentError, "'api_key' argument is required") unless api_key
+
+        headers["x-otx-api-key"] = api_key
         super(base_url, headers: headers)
       end
 

@@ -33,7 +33,7 @@ module Mihari
       end
 
       def client
-        @client ||= Mihari::Clients::OTX.new(headers: { "x-otx-api-key": api_key })
+        @client ||= Mihari::Clients::OTX.new(api_key: api_key)
       end
 
       #
