@@ -216,6 +216,7 @@ require "mihari/emitters/webhook"
 require "mihari/clients/base"
 
 require "mihari/clients/crtsh"
+require "mihari/clients/dnstwister"
 require "mihari/clients/otx"
 
 # Analyzers

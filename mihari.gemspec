@@ -53,7 +53,6 @@ Gem::Specification.new do |spec|
   spec.add_dependency "binaryedge", "0.1.0"
   spec.add_dependency "censysx", "0.1.1"
   spec.add_dependency "dnpedia", "0.1.0"
-  spec.add_dependency "dnstwister", "0.1.0"
   spec.add_dependency "dotenv", "2.8.1"
   spec.add_dependency "dry-configurable", "1.0.1"
   spec.add_dependency "dry-container", "0.11.0"
