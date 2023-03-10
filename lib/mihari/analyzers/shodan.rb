@@ -1,7 +1,5 @@
 # frozen_string_literal: true
 
-require "shodan"
-
 module Mihari
   module Analyzers
     class Shodan < Base
@@ -37,8 +35,8 @@ module Mihari
         %w[shodan_api_key]
       end
 
-      def api
-        @api ||= ::Shodan::API.new(key: api_key)
+      def client
+        @client ||= Clients::Shodan.new(api_key: api_key)
       end
 
       #
@@ -50,11 +48,7 @@ module Mihari
       # @return [Hash]
       #
       def search_with_page(query, page: 1)
-        api.host.search(query, page: page)
-      rescue ::Shodan::Error => e
-        raise RetryableError, e if e.message.include?("request timed out")
-
-        raise e
+        client.search(query, page: page)
       end
 
       #

@@ -220,6 +220,7 @@ require "mihari/clients/crtsh"
 require "mihari/clients/dnstwister"
 require "mihari/clients/otx"
 require "mihari/clients/publsedive"
+require "mihari/clients/shodan"
 require "mihari/clients/zoomeye"
 
 # Analyzers
