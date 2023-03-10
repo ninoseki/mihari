@@ -96,5 +96,4 @@ Gem::Specification.new do |spec|
   spec.add_dependency "virustotalx", "1.2.0"
   spec.add_dependency "whois", "5.1.0"
   spec.add_dependency "whois-parser", "2.0.0"
-  spec.add_dependency "zoomeye-rb", "0.2.0"
 end

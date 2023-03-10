@@ -28,8 +28,6 @@ module Mihari
       # @param [String] path
       # @param [Hash] params
       #
-      # @return [<Type>] <description>
-      #
       def _get(path, params: {})
         params["key"] = api_key
 

@@ -1,7 +1,5 @@
 # frozen_string_literal: true
 
-require "zoomeye"
-
 module Mihari
   module Analyzers
     class ZoomEye < Base
@@ -48,8 +46,8 @@ module Mihari
         %w[zoomeye_api_key]
       end
 
-      def api
-        @api ||= ::ZoomEye::API.new(api_key: api_key)
+      def client
+        @client ||= Clients::ZoomEye.new(api_key: api_key)
       end
 
       #
@@ -83,9 +81,7 @@ module Mihari
       # @return [Hash, nil]
       #
       def _host_search(query, page: 1)
-        api.host.search(query, page: page)
-      rescue ::ZoomEye::Error => _e
-        nil
+        client.host_search(query, page: page)
       end
 
       #
@@ -118,9 +114,7 @@ module Mihari
       # @return [Hash, nil]
       #
       def _web_search(query, page: 1)
-        api.web.search(query, page: page)
-      rescue ::ZoomEye::Error => _e
-        nil
+        client.web_search(query, page: page)
       end
 
       #
