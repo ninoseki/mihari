@@ -8,6 +8,8 @@ require "fakefs/safe"
 require "rack/test"
 require "vcr"
 
+require "dotenv/load"
+
 require "simplecov"
 
 class InceptionFormatter
