@@ -37,8 +37,6 @@ module Mihari
       #
       def get(path, params: nil)
         HTTP.get(url_for(path), headers: headers, params: params)
-      rescue HTTPError
-        nil
       end
     end
   end
