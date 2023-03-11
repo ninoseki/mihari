@@ -1,7 +1,5 @@
 # frozen_string_literal: true
 
-require "passivetotal"
-
 module Mihari
   module Analyzers
     class PassiveTotal < Base
