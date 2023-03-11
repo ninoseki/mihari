@@ -220,11 +220,12 @@ require "mihari/clients/censys"
 require "mihari/clients/circl"
 require "mihari/clients/crtsh"
 require "mihari/clients/dnstwister"
+require "mihari/clients/greynoise"
+require "mihari/clients/onyphe"
 require "mihari/clients/otx"
 require "mihari/clients/publsedive"
 require "mihari/clients/shodan"
 require "mihari/clients/zoomeye"
-require "mihari/clients/onyphe"
 
 # Analyzers
 require "mihari/analyzers/base"
