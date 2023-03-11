@@ -20,7 +20,10 @@ module Mihari
       def initialize(*args, **kwargs)
         super
 
-        raise InvalidInputError, "allowed_data_types should be any of url, domain and ip." unless valid_alllowed_data_types?
+        unless valid_alllowed_data_types?
+          raise InvalidInputError,
+            "allowed_data_types should be any of url, domain and ip."
+        end
 
         @api_key = kwargs[:api_key] || Mihari.config.urlscan_api_key
       end
@@ -44,8 +47,8 @@ module Mihari
         %w[urlscan_api_key]
       end
 
-      def api
-        @api ||= ::UrlScan::API.new(api_key)
+      def client
+        @client ||= Clients::UrlScan.new(api_key: api_key)
       end
 
       #
@@ -54,7 +57,7 @@ module Mihari
       # @return [Structs::Urlscan::Response]
       #
       def search_with_search_after(search_after: nil)
-        res = api.search(query, size: SIZE, search_after: search_after)
+        res = client.search(query, size: SIZE, search_after: search_after)
         Structs::Urlscan::Response.from_dynamic! res
       end
 
