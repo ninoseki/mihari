@@ -94,7 +94,6 @@ Gem::Specification.new do |spec|
   spec.add_dependency "thor", "1.2.1"
   spec.add_dependency "urlscan", "0.8.0"
   spec.add_dependency "uuidtools", "2.2.0"
-  spec.add_dependency "virustotalx", "1.2.0"
   spec.add_dependency "whois", "5.1.0"
   spec.add_dependency "whois-parser", "2.0.0"
 end

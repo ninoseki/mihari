@@ -1,7 +1,5 @@
 # frozen_string_literal: true
 
-require "virustotal"
-
 module Mihari
   module Analyzers
     class VirusTotalIntelligence < Base
@@ -40,8 +38,8 @@ module Mihari
       #
       # @return [::VirusTotal::API]
       #
-      def api
-        @api = ::VirusTotal::API.new(key: api_key)
+      def client
+        @client = Clients::VirusTotal.new(api_key: api_key)
       end
 
       #
@@ -54,7 +52,8 @@ module Mihari
         responses = []
 
         loop do
-          response = Structs::VirusTotalIntelligence::Response.from_dynamic!(api.intelligence.search(query, cursor: cursor))
+          response = Structs::VirusTotalIntelligence::Response.from_dynamic!(client.intel_search(query,
+            cursor: cursor))
           responses << response
 
           break if response.meta.cursor.nil?
