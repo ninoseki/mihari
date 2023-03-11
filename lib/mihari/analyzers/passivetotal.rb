@@ -42,8 +42,8 @@ module Mihari
         %w[passivetotal_username passivetotal_api_key]
       end
 
-      def api
-        @api ||= ::PassiveTotal::API.new(username: username, api_key: api_key)
+      def client
+        @client ||= Clients::PassiveTotal.new(username: username, api_key: api_key)
       end
 
       #
@@ -79,7 +79,7 @@ module Mihari
       # @return [Array<String>]
       #
       def passive_dns_search
-        res = api.dns.passive_unique(query)
+        res = client.passive_dns_search(query)
         res["results"] || []
       end
 
@@ -89,7 +89,7 @@ module Mihari
       # @return [Array<Mihari::Artifact>]
       #
       def reverse_whois_search
-        res = api.whois.search(query: query, field: "email")
+        res = client.reverse_whois_search(query: query, field: "email")
         results = res["results"] || []
         results.map do |result|
           data = result["domain"]
@@ -103,7 +103,7 @@ module Mihari
       # @return [Array<Mihari::Artifact>]
       #
       def ssl_search
-        res = api.ssl.history(query)
+        res = client.ssl_search(query)
         results = res["results"] || []
         results.map do |result|
           data = result["ipAddresses"]
