@@ -227,6 +227,7 @@ require "mihari/clients/otx"
 require "mihari/clients/passivetotal"
 require "mihari/clients/publsedive"
 require "mihari/clients/shodan"
+require "mihari/clients/virustotal"
 require "mihari/clients/zoomeye"
 
 # Analyzers

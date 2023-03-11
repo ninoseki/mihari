@@ -1,7 +1,5 @@
 # frozen_string_literal: true
 
-require "virustotal"
-
 module Mihari
   module Analyzers
     class VirusTotal < Base
@@ -33,8 +31,8 @@ module Mihari
         %w[virustotal_api_key]
       end
 
-      def api
-        @api = ::VirusTotal::API.new(key: api_key)
+      def client
+        @client = Clients::VirusTotal.new(api_key: api_key)
       end
 
       #
@@ -68,7 +66,7 @@ module Mihari
       # @return [Array<Mihari::Artifact>]
       #
       def domain_search
-        res = api.domain.resolutions(query)
+        res = client.domain_search(query)
 
         data = res["data"] || []
         data.filter_map do |item|
@@ -83,7 +81,7 @@ module Mihari
       # @return [Array<Mihari::Artifact>]
       #
       def ip_search
-        res = api.ip_address.resolutions(query)
+        res = client.ip_search(query)
 
         data = res["data"] || []
         data.filter_map do |item|
