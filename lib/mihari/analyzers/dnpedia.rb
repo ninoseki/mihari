@@ -1,13 +1,9 @@
 # frozen_string_literal: true
 
-require "dnpedia"
-
 module Mihari
   module Analyzers
     class DNPedia < Base
       param :query
-
-      option :tags, default: proc { [] }
 
       def artifacts
         search || []
@@ -15,8 +11,8 @@ module Mihari
 
       private
 
-      def api
-        @api ||= ::DNPedia::API.new
+      def client
+        @client ||= Clients::DNPedia.new
       end
 
       #
@@ -25,7 +21,7 @@ module Mihari
       # @return [Array<Mihari::Artifact>]
       #
       def search
-        res = api.search(query)
+        res = client.search(query)
         rows = res["rows"] || []
         rows.map do |row|
           data = [row["name"], row["zoneid"]].join(".")
