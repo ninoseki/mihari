@@ -1,7 +1,5 @@
 # frozen_string_literal: true
 
-require "urlscan"
-
 module Mihari
   module Analyzers
     class Urlscan < Base
