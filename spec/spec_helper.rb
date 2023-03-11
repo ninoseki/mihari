@@ -52,8 +52,8 @@ end
 require "coveralls"
 
 def ci_env?
-  # CI=true and TRAVIS=true in Travis CI
-  ENV["CI"] || ENV["TRAVIS"]
+  # CI=true in GitHub Actions
+  ENV["CI"]
 end
 
 # Use in-memory SQLite in local test
