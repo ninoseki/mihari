@@ -14,21 +14,8 @@ module Mihari
       end
 
       def datascan(query, page: 1)
-        params = { page: page }
-        _get("/api/v2/simple/datascan/#{query}", params: params)
-      end
-
-      private
-
-      #
-      #
-      # @param [String] path
-      # @param [Hash] params
-      #
-      def _get(path, params: {})
-        params["apikey"] = api_key
-
-        res = get(path, params: params)
+        params = { page: page, apikey: api_key }
+        res = get("/api/v2/simple/datascan/#{query}", params: params)
         JSON.parse(res.body.to_s)
       end
     end

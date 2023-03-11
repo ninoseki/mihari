@@ -18,20 +18,9 @@ module Mihari
         super(base_url, headers: headers)
       end
 
-      def alert(payload)
-        _post("/alert", json: payload)
-      end
-
-      private
-
-      #
-      #
-      # @param [String] path
-      # @param [Hash] params
-      #
-      def _post(path, json: {})
+      def alert(json)
         json = json.to_camelback_keys.compact
-        res = post(path, json: json)
+        res = post("/alert", json: json)
         JSON.parse(res.body.to_s)
       end
     end

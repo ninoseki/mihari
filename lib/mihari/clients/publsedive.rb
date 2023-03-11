@@ -33,8 +33,6 @@ module Mihari
 
         res = get(path, params: params)
         JSON.parse(res.body.to_s)
-      rescue HTTPError
-        nil
       end
     end
   end

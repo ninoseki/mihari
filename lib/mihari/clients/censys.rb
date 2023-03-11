@@ -34,18 +34,7 @@ module Mihari
       #
       def search(query, per_page: nil, cursor: nil)
         params = { q: query, per_page: per_page, cursor: cursor }.compact
-        _get("/api/v2/hosts/search", params: params)
-      end
-
-      private
-
-      #
-      #
-      # @param [String] path
-      # @param [Hash] params
-      #
-      def _get(path, params: {})
-        res = get(path, params: params)
+        res = get("/api/v2/hosts/search", params: params)
         JSON.parse(res.body.to_s)
       end
     end
