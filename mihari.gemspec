@@ -75,7 +75,6 @@ Gem::Specification.new do |spec|
   spec.add_dependency "jr-cli", "0.6.0"
   spec.add_dependency "launchy", "2.5.2"
   spec.add_dependency "memist", "2.0.2"
-  spec.add_dependency "misp", "0.1.4"
   spec.add_dependency "net-ping", "2.0.8"
   spec.add_dependency "normalize_country", "0.3.2"
   spec.add_dependency "parallel", "1.22.1"
