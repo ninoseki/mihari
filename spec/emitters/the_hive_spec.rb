@@ -43,18 +43,16 @@ RSpec.describe Mihari::Emitters::TheHive, :vcr do
     let(:artifacts) { [Mihari::Artifact.new(data: "1.1.1.1")] }
     let(:rule) { Mihari::Structs::Rule.from_model(Mihari::Rule.first) }
 
-    let(:mock_thehive) { double("thehive") }
-    let(:mock_alert) { double("alert") }
+    let(:mock_client) { double("client") }
 
     before do
-      allow(subject).to receive(:api).and_return(mock_thehive)
-      allow(mock_thehive).to receive(:alert).and_return(mock_alert)
-      allow(mock_alert).to receive(:create)
+      allow(subject).to receive(:client).and_return(mock_client)
+      allow(mock_client).to receive(:alert)
     end
 
     it do
       subject.emit(artifacts: artifacts, rule: rule)
-      expect(mock_alert).to have_received(:create)
+      expect(mock_client).to have_received(:alert)
     end
   end
 end
