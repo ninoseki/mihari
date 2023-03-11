@@ -1,7 +1,5 @@
 # frozen_string_literal: true
 
-require "misp"
-
 module Mihari
   module Emitters
     class MISP < Base
@@ -16,11 +14,6 @@ module Mihari
 
         @url = kwargs[:url] || Mihari.config.misp_url
         @api_key = kwargs[:api_key] || Mihari.config.misp_api_key
-
-        ::MISP.configure do |config|
-          config.api_endpoint = url
-          config.api_key = api_key
-        end
       end
 
       # @return [Boolean]
@@ -50,17 +43,13 @@ module Mihari
       def emit(rule:, artifacts:, **_options)
         return if artifacts.empty?
 
-        event = ::MISP::Event.new(info: rule.title)
-
-        artifacts.each do |artifact|
-          event.attributes << build_attribute(artifact)
-        end
-
-        rule.tags.each do |tag|
-          event.add_tag name: tag
-        end
-
-        event.create
+        client.create_event({
+          Event: {
+            info: rule.title
+          },
+          Attribute: artifacts.map { |artifact| build_attribute(artifact) },
+          Tag: rule.tags.map { |tag| { name: tag } }
+        })
       end
 
       private
@@ -69,15 +58,19 @@ module Mihari
         %w[misp_url misp_api_key]
       end
 
+      def client
+        @client ||= Clients::MISP.new(url, api_key: api_key)
+      end
+
       #
       # Build a MISP attribute
       #
       # @param [Mihari::Artifact] artifact
       #
-      # @return [::MISP::Attribute]
+      # @return [Hash]
       #
       def build_attribute(artifact)
-        ::MISP::Attribute.new(value: artifact.data, type: to_misp_type(type: artifact.data_type, value: artifact.data))
+        { value: artifact.data, type: to_misp_type(type: artifact.data_type, value: artifact.data) }
       end
 
       #
