@@ -22,18 +22,7 @@ module Mihari
           minify: minify,
           key: api_key
         }
-        _get("/shodan/host/search", params: params)
-      end
-
-      private
-
-      #
-      #
-      # @param [String] path
-      # @param [Hash] params
-      #
-      def _get(path, params: {})
-        res = get(path, params: params)
+        res = get("/shodan/host/search", params: params)
         JSON.parse(res.body.to_s)
       end
     end

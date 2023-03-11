@@ -23,12 +23,8 @@ module Mihari
       def search(identity, match: nil, exclude: nil)
         params = { identity: identity, match: match, exclude: exclude, output: "json" }.compact
 
-        begin
-          res = get("/", params: params)
-          JSON.parse(res.body.to_s)
-        rescue HTTPError
-          []
-        end
+        res = get("/", params: params)
+        JSON.parse(res.body.to_s)
       end
     end
   end

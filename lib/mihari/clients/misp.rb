@@ -16,18 +16,7 @@ module Mihari
       end
 
       def create_event(payload)
-        _post("/events/add", json: payload)
-      end
-
-      private
-
-      #
-      #
-      # @param [String] path
-      # @param [Hash] params
-      #
-      def _post(path, json: {})
-        res = post(path, json: json)
+        res = post("/events/add", json: payload)
         JSON.parse(res.body.to_s)
       end
     end
