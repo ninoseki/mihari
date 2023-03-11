@@ -1,7 +1,5 @@
 # frozen_string_literal: true
 
-require "greynoise"
-
 module Mihari
   module Analyzers
     class GreyNoise < Base
@@ -31,8 +29,8 @@ module Mihari
         %w[greynoise_api_key]
       end
 
-      def api
-        @api ||= ::GreyNoise::API.new(key: api_key)
+      def client
+        @client ||= Clients::GreyNoise.new(api_key: api_key)
       end
 
       #
@@ -41,7 +39,7 @@ module Mihari
       # @return [Hash]
       #
       def search
-        api.experimental.gnql(query, size: PAGE_SIZE)
+        client.gnql_search(query, size: PAGE_SIZE)
       end
 
       #
