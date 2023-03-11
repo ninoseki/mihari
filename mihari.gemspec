@@ -41,17 +41,17 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency "rack-test", "~> 2.0"
   spec.add_development_dependency "rake", "~> 13.0"
   spec.add_development_dependency "rb-fsevent", "~> 0.11"
+  spec.add_development_dependency "rerun", "~> 0.14"
   spec.add_development_dependency "rspec", "~> 3.12"
   spec.add_development_dependency "simplecov-lcov", "~> 0.8.0"
+  spec.add_development_dependency "standard", "~> 1.24"
   spec.add_development_dependency "timecop", "~> 0.9"
   spec.add_development_dependency "vcr", "~> 6.1"
   spec.add_development_dependency "webmock", "~> 3.18"
 
   unless ci_env?
     spec.add_development_dependency "overcommit", "~> 0.60"
-    spec.add_development_dependency "rerun", "~> 0.14"
     spec.add_development_dependency "ruby-lsp", "~> 0.4"
-    spec.add_development_dependency "standard", "~> 1.24"
     spec.add_development_dependency "steep", "~> 1.3"
   end
 
