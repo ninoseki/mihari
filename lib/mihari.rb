@@ -224,6 +224,7 @@ require "mihari/clients/otx"
 require "mihari/clients/publsedive"
 require "mihari/clients/shodan"
 require "mihari/clients/zoomeye"
+require "mihari/clients/onyphe"
 
 # Analyzers
 require "mihari/analyzers/base"

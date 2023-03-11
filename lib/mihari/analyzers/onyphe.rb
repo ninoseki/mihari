@@ -1,6 +1,5 @@
 # frozen_string_literal: true
 
-require "onyphe"
 require "normalize_country"
 
 module Mihari
@@ -37,8 +36,8 @@ module Mihari
         %w[onyphe_api_key]
       end
 
-      def api
-        @api ||= ::Onyphe::API.new(api_key)
+      def client
+        @client ||= Clients::Onyphe.new(api_key: api_key)
       end
 
       #
@@ -50,7 +49,7 @@ module Mihari
       # @return [Structs::Onyphe::Response]
       #
       def search_with_page(query, page: 1)
-        res = api.simple.datascan(query, page: page)
+        res = client.datascan(query, page: page)
         Structs::Onyphe::Response.from_dynamic!(res)
       end
 
