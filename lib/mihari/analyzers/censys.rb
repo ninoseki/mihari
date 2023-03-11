@@ -1,7 +1,5 @@
 # frozen_string_literal: true
 
-require "censysx"
-
 module Mihari
   module Analyzers
     class Censys < Base
@@ -42,7 +40,7 @@ module Mihari
 
         cursor = nil
         loop do
-          response = api.search(query, cursor: cursor)
+          response = client.search(query, cursor: cursor)
           response = Structs::Censys::Response.from_dynamic!(response)
 
           artifacts << response_to_artifacts(response)
@@ -106,8 +104,8 @@ module Mihari
         %w[censys_id censys_secret]
       end
 
-      def api
-        @api ||= ::Censys::API.new(id, secret)
+      def client
+        @client ||= Clients::Censys.new(id: id, secret: secret)
       end
 
       def id?

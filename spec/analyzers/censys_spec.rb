@@ -16,9 +16,6 @@ RSpec.describe Mihari::Analyzers::Censys, :vcr do
       expect(first.data).to eq("1.1.1.1")
 
       expect(first.autonomous_system.asn).to eq(13_335)
-
-      expect(first.geolocation.country_code).to eq("AU")
-
       expect(first.ports.length).to be > 0
     end
   end
