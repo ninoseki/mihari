@@ -83,7 +83,6 @@ Gem::Specification.new do |spec|
   spec.add_dependency "normalize_country", "0.3.2"
   spec.add_dependency "onyphe", "2.0.0"
   spec.add_dependency "parallel", "1.22.1"
-  spec.add_dependency "passive_circl", "0.1.0"
   spec.add_dependency "passivetotalx", "0.1.1"
   spec.add_dependency "plissken", "2.0.1"
   spec.add_dependency "public_suffix", "5.0.1"
