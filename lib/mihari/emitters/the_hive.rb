@@ -1,7 +1,5 @@
 # frozen_string_literal: true
 
-require "hachi"
-
 module Mihari
   module Emitters
     class TheHive < Base
@@ -50,7 +48,7 @@ module Mihari
         return if artifacts.empty?
 
         payload = payload(rule: rule, artifacts: artifacts)
-        api.alert.create(**payload)
+        client.alert(payload)
       end
 
       #
@@ -79,8 +77,8 @@ module Mihari
         %w[thehive_url thehive_api_key]
       end
 
-      def api
-        @api ||= Hachi::API.new(api_endpoint: url, api_key: api_key, api_version: normalized_api_version)
+      def client
+        @client ||= Clients::TheHive.new(url, api_key: api_key, api_version: normalized_api_version)
       end
 
       #

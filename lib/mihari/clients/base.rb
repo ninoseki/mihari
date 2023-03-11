@@ -38,6 +38,16 @@ module Mihari
       def get(path, params: nil)
         HTTP.get(url_for(path), headers: headers, params: params)
       end
+
+      #
+      # @param [String] path
+      # @param [Hash, nil] json
+      #
+      # @return [String] <description>
+      #
+      def post(path, json: {})
+        HTTP.post(url_for(path), headers: headers, json: json)
+      end
     end
   end
 end
