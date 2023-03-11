@@ -229,6 +229,7 @@ require "mihari/clients/passivetotal"
 require "mihari/clients/publsedive"
 require "mihari/clients/shodan"
 require "mihari/clients/the_hive"
+require "mihari/clients/urlscan"
 require "mihari/clients/virustotal"
 require "mihari/clients/zoomeye"
 
