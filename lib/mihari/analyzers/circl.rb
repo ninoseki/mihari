@@ -1,7 +1,5 @@
 # frozen_string_literal: true
 
-require "passive_circl"
-
 module Mihari
   module Analyzers
     class CIRCL < Base
@@ -42,8 +40,8 @@ module Mihari
         %w[circl_passive_password circl_passive_username]
       end
 
-      def api
-        @api ||= ::PassiveCIRCL::API.new(username: username, password: password)
+      def client
+        @client ||= Clients::CIRCL.new(username: username, password: password)
       end
 
       #
@@ -68,7 +66,7 @@ module Mihari
       # @return [Array<String>]
       #
       def passive_dns_search
-        results = api.dns.query(@query)
+        results = client.dns_query(@query)
         results.filter_map do |result|
           type = result["rrtype"]
           (type == "A") ? result["rdata"] : nil
@@ -81,7 +79,7 @@ module Mihari
       # @return [Array<String>]
       #
       def passive_ssl_search
-        result = api.ssl.cquery(@query)
+        result = client.ssl_cquery(@query)
         seen = result["seen"] || []
         seen.uniq
       end

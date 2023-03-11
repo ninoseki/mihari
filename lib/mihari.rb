@@ -217,6 +217,7 @@ require "mihari/clients/base"
 
 require "mihari/clients/binaryedge"
 require "mihari/clients/censys"
+require "mihari/clients/circl"
 require "mihari/clients/crtsh"
 require "mihari/clients/dnstwister"
 require "mihari/clients/otx"
