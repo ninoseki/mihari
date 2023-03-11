@@ -42,10 +42,14 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency "ruby-lsp", "~> 0.4"
   spec.add_development_dependency "simplecov-lcov", "~> 0.8.0"
   spec.add_development_dependency "standard", "~> 1.24"
-  spec.add_development_dependency "steep", "~> 1.3"
   spec.add_development_dependency "timecop", "~> 0.9"
   spec.add_development_dependency "vcr", "~> 6.1"
   spec.add_development_dependency "webmock", "~> 3.18"
+
+  # tests in Ruby 3.0 & 3.1 fail because of steep's pathname issue
+  # so skip installing it as a workaround
+  skip_versions_that_fail_in_ci = RUBY_VERSION.start_with?("3.0.", "3.1.")
+  spec.add_development_dependency "steep", "~> 1.3" unless skip_versions_that_fail_in_ci
 
   spec.add_dependency "activerecord", "7.0.4.2"
   spec.add_dependency "addressable", "2.8.1"
