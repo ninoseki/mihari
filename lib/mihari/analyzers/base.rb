@@ -20,6 +20,15 @@ module Mihari
         @base_time = Time.now.utc
       end
 
+      #
+      # Load/overwrite rule
+      #
+      # @param [String] path_or_id
+      #
+      def load_rule(path_or_id)
+        @rule = Structs::Rule.from_path_or_id path_or_id
+      end
+
       # @return [Array<String>, Array<Mihari::Artifact>]
       def artifacts
         raise NotImplementedError, "You must implement #{self.class}##{__method__}"
@@ -30,35 +39,40 @@ module Mihari
         self.class.to_s.split("::").last.to_s
       end
 
+      def class_name
+        self.class.to_s.split("::").last
+      end
+
       #
       # Set artifacts & run emitters in parallel
       #
       # @return [Mihari::Alert, nil]
       #
       def run
-        unless configured?
-          class_name = self.class.to_s.split("::").last
-          raise ConfigurationError, "#{class_name} is not configured correctly"
-        end
+        raise ConfigurationError, "#{class_name} is not configured correctly" unless configured?
 
-        set_enriched_artifacts
-
-        responses = Parallel.map(valid_emitters) do |emitter|
-          run_emitter emitter
-        end
-
+        alert_or_something = bulk_emit
         # returns Mihari::Alert created by the database emitter
-        responses.find { |res| res.is_a?(Mihari::Alert) }
+        alert_or_something.find { |res| res.is_a?(Mihari::Alert) }
       end
 
       #
-      # Run emitter
+      # Bulk emitt
+      #
+      # @return [Array<Mihari::Alert>]
+      #
+      def bulk_emit
+        Parallel.map(valid_emitters) { |emitter| emit emitter }.compact
+      end
+
+      #
+      # Emit an alert
       #
       # @param [Mihari::Emitters::Base] emitter
       #
       # @return [Mihari::Alert, nil]
       #
-      def run_emitter(emitter)
+      def emit(emitter)
         return if enriched_artifacts.empty?
 
         alert_or_something = emitter.run(artifacts: enriched_artifacts, rule: rule)
@@ -80,6 +94,7 @@ module Mihari
       #
       # Normalize artifacts
       # - Convert data (string) into an artifact
+      # - Set rule ID
       # - Reject an invalid artifact
       # - Uniquefy artifacts by data
       #
@@ -89,17 +104,16 @@ module Mihari
         @normalized_artifacts ||= artifacts.compact.sort.map do |artifact|
           # No need to set data_type manually
           # It is set automatically in #initialize
-          artifact.is_a?(Artifact) ? artifact : Artifact.new(data: artifact, source: source)
-        end.select(&:valid?).uniq(&:data).map do |artifact|
+          artifact = artifact.is_a?(Artifact) ? artifact : Artifact.new(data: artifact, source: source)
           artifact.rule_id = rule&.id
           artifact
-        end
+        end.select(&:valid?).uniq(&:data)
       end
 
       private
 
       #
-      # Uniquefy artifacts
+      # Uniquefy artifacts (assure rule level uniqueness)
       #
       # @return [Array<Mihari::Artifact>]
       #
@@ -119,15 +133,6 @@ module Mihari
           artifact.enrich_all
           artifact
         end
-      end
-
-      #
-      # Set enriched artifacts
-      #
-      # @return [nil]
-      #
-      def set_enriched_artifacts
-        retry_on_error { enriched_artifacts }
       end
 
       #

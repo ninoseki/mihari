@@ -3,7 +3,6 @@
 module Mihari
   module Commands
     module Searcher
-      include Mixins::Database
       include Mixins::ErrorNotification
 
       def self.included(thor)
@@ -16,7 +15,7 @@ module Mihari
           # @param [String] path_or_id
           #
           def search(path_or_id)
-            with_db_connection do
+            Mihari::Database.with_db_connection do
               rule = Structs::Rule.from_path_or_id path_or_id
 
               # validate
