@@ -7,7 +7,6 @@ module Mihari
       "censys" => Censys,
       "circl" => CIRCL,
       "crtsh" => Crtsh,
-      "dnpedia" => DNPedia,
       "dnstwister" => DNSTwister,
       "feed" => Feed,
       "greynoise" => GreyNoise,
