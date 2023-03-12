@@ -3,8 +3,14 @@
 module Mihari
   module Clients
     class Shodan < Base
+      # @return [String]
       attr_reader :api_key
 
+      #
+      # @param [String] base_url
+      # @param [String, nil] api_key
+      # @param [Hash] headers
+      #
       def initialize(base_url = "https://api.shodan.io", api_key:, headers: {})
         raise(ArgumentError, "'api_key' argument is required") unless api_key
 
@@ -13,8 +19,13 @@ module Mihari
         @api_key = api_key
       end
 
-      # Search Shodan using the same query syntax as the website and use facets
-      # to get summary information for different properties.
+      #
+      # @param [String] query
+      # @param [Integer] page
+      # @param [Boolean] minify
+      #
+      # @return [Structs::Shodan::Result]
+      #
       def search(query, page: 1, minify: true)
         params = {
           query: query,
@@ -23,7 +34,7 @@ module Mihari
           key: api_key
         }
         res = get("/shodan/host/search", params: params)
-        JSON.parse(res.body.to_s)
+        Structs::Shodan::Result.from_dynamic! JSON.parse(res.body.to_s)
       end
     end
   end

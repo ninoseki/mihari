@@ -5,6 +5,11 @@ module Mihari
     class ZoomEye < Base
       attr_reader :api_key
 
+      #
+      # @param [String] base_url
+      # @param [String, nil] api_key
+      # @param [Hash] headers
+      #
       def initialize(base_url = "https://api.zoomeye.org", api_key:, headers: {})
         raise(ArgumentError, "'api_key' argument is required") unless api_key
 
@@ -53,9 +58,10 @@ module Mihari
       private
 
       #
-      #
       # @param [String] path
       # @param [Hash] params
+      #
+      # @return [Hash, nil]
       #
       def _get(path, params: {})
         res = get(path, params: params)

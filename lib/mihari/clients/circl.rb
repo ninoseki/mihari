@@ -7,8 +7,8 @@ module Mihari
     class CIRCL < Base
       #
       # @param [String] base_url
-      # @param [String] username
-      # @param [String] password
+      # @param [String, nil] username
+      # @param [String, nil] password
       # @param [Hash] headers
       #
       def initialize(base_url = "https://www.circl.lu", username:, password:, headers: {})
@@ -43,7 +43,7 @@ module Mihari
       #
       #
       # @param [String] path
-      # @param [Array<Hash>] params
+      # @param [Hash] params
       #
       def _get(path, params: {})
         res = get(path, params: params)

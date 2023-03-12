@@ -5,7 +5,7 @@ module Mihari
     class UrlScan < Base
       #
       # @param [String] base_url
-      # @param [String] api_key
+      # @param [String, nil] api_key
       # @param [Hash] headers
       #
       def initialize(base_url = "https://urlscan.io", api_key:, headers: {})
@@ -20,6 +20,8 @@ module Mihari
       # @param [String] q
       # @param [Integer] size
       # @param [String, nil] search_after
+      #
+      # @return [Hash]
       #
       def search(q, size: 100, search_after: nil)
         params = { q: q, size: size, search_after: search_after }.compact

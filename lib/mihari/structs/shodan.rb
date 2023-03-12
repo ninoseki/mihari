@@ -7,6 +7,18 @@ module Mihari
         attribute :country_code, Types::String.optional
         attribute :country_name, Types::String.optional
 
+        #
+        # @return [Mihari::Geolocation, nil]
+        #
+        def to_geolocation
+          return nil if country_name.nil? && country_code.nil?
+
+          Mihari::Geolocation.new(
+            country: country_name,
+            country_code: country_code
+          )
+        end
+
         def self.from_dynamic!(d)
           d = Types::Hash[d]
           new(
@@ -17,6 +29,8 @@ module Mihari
       end
 
       class Match < Dry::Struct
+        include Mixins::AutonomousSystem
+
         attribute :asn, Types::String.optional
         attribute :hostnames, Types.Array(Types::String)
         attribute :location, Location
@@ -24,6 +38,15 @@ module Mihari
         attribute :ip_str, Types::String
         attribute :port, Types::Integer
         attribute :metadata, Types::Hash
+
+        #
+        # @return [Mihari::AutonomousSystem, nil]
+        #
+        def to_asn
+          return nil if asn.nil?
+
+          Mihari::AutonomousSystem.new(asn: normalize_asn(asn))
+        end
 
         def self.from_dynamic!(d)
           d = Types::Hash[d]
@@ -50,6 +73,66 @@ module Mihari
       class Result < Dry::Struct
         attribute :matches, Types.Array(Match)
         attribute :total, Types::Int
+
+        #
+        # Collect metadata from matches
+        #
+        # @param [String] ip
+        #
+        # @return [Array<Hash>]
+        #
+        def collect_metadata_by_ip(ip)
+          matches.select { |match| match.ip_str == ip }.map(&:metadata)
+        end
+
+        #
+        # Collect ports from matches
+        #
+        # @param [String] ip
+        #
+        # @return [Array<String>]
+        #
+        def collect_ports_by_ip(ip)
+          matches.select { |match| match.ip_str == ip }.map(&:port)
+        end
+
+        #
+        # Collect hostnames from matches
+        #
+        # @param [String] ip
+        #
+        # @return [Array<String>]
+        #
+        def collect_hostnames_by_ip(ip)
+          matches.select { |match| match.ip_str == ip }.map(&:hostnames).flatten.uniq
+        end
+
+        #
+        # @param [Source] source
+        #
+        # @return [Array<Mihari::Artifact>]
+        #
+        def to_artifacts(source = "Shodan")
+          matches.map do |match|
+            metadata = collect_metadata_by_ip(match.ip_str)
+            ports = collect_ports_by_ip(match.ip_str).map do |port|
+              Mihari::Port.new(port: port)
+            end
+            reverse_dns_names = collect_hostnames_by_ip(match.ip_str).map do |name|
+              Mihari::ReverseDnsName.new(name: name)
+            end
+
+            Mihari::Artifact.new(
+              data: match.ip_str,
+              source: source,
+              metadata: metadata,
+              autonomous_system: match.to_asn,
+              geolocation: match.location.to_geolocation,
+              ports: ports,
+              reverse_dns_names: reverse_dns_names
+            )
+          end
+        end
 
         def self.from_dynamic!(d)
           d = Types::Hash[d]

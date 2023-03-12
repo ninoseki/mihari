@@ -7,7 +7,6 @@ module Mihari
 
       option :rule, default: proc {}
 
-      include Mixins::AutonomousSystem
       include Mixins::Configurable
       include Mixins::Retriable
 
@@ -39,6 +38,7 @@ module Mihari
         self.class.to_s.split("::").last.to_s
       end
 
+      # @return [String]
       def class_name
         self.class.to_s.split("::").last
       end
@@ -57,7 +57,7 @@ module Mihari
       end
 
       #
-      # Bulk emitt
+      # Bulk emit
       #
       # @return [Array<Mihari::Alert>]
       #

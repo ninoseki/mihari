@@ -7,6 +7,12 @@ module Mihari
 
       option :exclude_expired, default: proc { true }
 
+      # @return [Boolean]
+      attr_reader :exclude_expired
+
+      # @return [String]
+      attr_reader :query
+
       def artifacts
         results = search
         results.map do |result|

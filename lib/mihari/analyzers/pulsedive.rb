@@ -13,6 +13,9 @@ module Mihari
       # @return [String, nil]
       attr_reader :api_key
 
+      # @return [Integer]
+      attr_reader :query
+
       def initialize(*args, **kwargs)
         super
 

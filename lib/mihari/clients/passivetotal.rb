@@ -7,8 +7,8 @@ module Mihari
     class PassiveTotal < Base
       #
       # @param [String] base_url
-      # @param [String] username
-      # @param [String] api_key
+      # @param [String, nil] username
+      # @param [String, nil] api_key
       # @param [Hash] headers
       #
       def initialize(base_url = "https://api.passivetotal.org", username:, api_key:, headers: {})
@@ -30,6 +30,8 @@ module Mihari
 
       #
       # @param [String] query
+      #
+      # @return [Hash]
       #
       def passive_dns_search(query)
         params = { query: query }
@@ -55,6 +57,8 @@ module Mihari
       #
       # @param [String] path
       # @param [Hash] params
+      #
+      # @return [Hash]
       #
       def _get(path, params: {})
         res = get(path, params: params)
