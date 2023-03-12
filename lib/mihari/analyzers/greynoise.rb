@@ -8,6 +8,9 @@ module Mihari
       # @return [String, nil]
       attr_reader :api_key
 
+      # @return [String]
+      attr_reader :query
+
       def initialize(*args, **kwargs)
         super(*args, **kwargs)
 
@@ -15,10 +18,8 @@ module Mihari
       end
 
       def artifacts
-        res = Structs::GreyNoise::Response.from_dynamic!(search)
-        res.data.map do |datum|
-          build_artifact datum
-        end
+        res = search
+        res.to_artifacts
       end
 
       private
@@ -40,30 +41,6 @@ module Mihari
       #
       def search
         client.gnql_search(query, size: PAGE_SIZE)
-      end
-
-      #
-      # Build an artifact from a GreyNoise search API response
-      #
-      # @param [Structs::GreyNoise::Datum] datum
-      #
-      # @return [Artifact]
-      #
-      def build_artifact(datum)
-        as = AutonomousSystem.new(asn: normalize_asn(datum.metadata.asn))
-
-        geolocation = Geolocation.new(
-          country: datum.metadata.country,
-          country_code: datum.metadata.country_code
-        )
-
-        Artifact.new(
-          data: datum.ip,
-          source: source,
-          metadata: datum.metadata_,
-          autonomous_system: as,
-          geolocation: geolocation
-        )
       end
     end
   end

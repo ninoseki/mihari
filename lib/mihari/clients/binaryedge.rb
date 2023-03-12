@@ -3,6 +3,11 @@
 module Mihari
   module Clients
     class BinaryEdge < Base
+      #
+      # @param [String] base_url
+      # @param [String, nil] api_key
+      # @param [Hash] headers
+      #
       def initialize(base_url = "https://api.binaryedge.io/v2", api_key:, headers: {})
         raise(ArgumentError, "'api_key' argument is required") unless api_key
 

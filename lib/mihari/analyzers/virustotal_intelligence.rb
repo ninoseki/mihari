@@ -10,6 +10,12 @@ module Mihari
       # @return [String, nil]
       attr_reader :api_key
 
+      # @return [String]
+      attr_reader :query
+
+      # @return [Integer]
+      attr_reader :interval
+
       def initialize(*args, **kwargs)
         super
 
@@ -19,7 +25,7 @@ module Mihari
       end
 
       def artifacts
-        responses = search_witgh_cursor
+        responses = search_with_cursor
         responses.map do |response|
           response.data.map do |datum|
             Artifact.new(data: datum.value, source: source, metadata: datum.metadata)
@@ -47,7 +53,7 @@ module Mihari
       #
       # @return [Array<Structs::VirusTotalIntelligence::Response>]
       #
-      def search_witgh_cursor
+      def search_with_cursor
         cursor = nil
         responses = []
 

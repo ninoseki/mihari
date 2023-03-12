@@ -15,6 +15,15 @@ module Mihari
       # @return [String, nil]
       attr_reader :api_key
 
+      # @return [String]
+      attr_reader :query
+
+      # @return [Integer]
+      attr_reader :interval
+
+      # @return [String]
+      attr_reader :allowed_data_types
+
       def initialize(*args, **kwargs)
         super
 

@@ -7,8 +7,8 @@ module Mihari
     class Censys < Base
       #
       # @param [String] base_url
-      # @param [String] id
-      # @param [String] secret
+      # @param [String, nil] id
+      # @param [String, nil] secret
       # @param [Hash] headers
       #
       def initialize(base_url = "https://search.censys.io", id:, secret:, headers: {})
@@ -30,12 +30,12 @@ module Mihari
       # @params [Integer, nil] per_page the number of results to be returned for each page.
       # @params [Integer, nil] cursor the cursor of the desired result set.
       #
-      # @return [Hash]
+      # @return [Structs::Censys::Response]
       #
       def search(query, per_page: nil, cursor: nil)
         params = { q: query, per_page: per_page, cursor: cursor }.compact
         res = get("/api/v2/hosts/search", params: params)
-        JSON.parse(res.body.to_s)
+        Structs::Censys::Response.from_dynamic! JSON.parse(res.body.to_s)
       end
     end
   end

@@ -7,9 +7,11 @@ module Mihari
 
       param :query
 
-      option :tags, default: proc { [] }
-
+      # @return [String]
       attr_reader :type
+
+      # @return [String]
+      attr_reader :query
 
       def initialize(*args, **kwargs)
         super

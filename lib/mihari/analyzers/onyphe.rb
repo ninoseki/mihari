@@ -12,6 +12,12 @@ module Mihari
       # @return [String, nil]
       attr_reader :api_key
 
+      # @return [String]
+      attr_reader :query
+
+      # @return [Integer]
+      attr_reader :interval
+
       def initialize(*args, **kwargs)
         super(*args, **kwargs)
 
@@ -22,10 +28,7 @@ module Mihari
         responses = search
         return [] unless responses
 
-        results = responses.map(&:results).flatten
-        results.map do |result|
-          build_artifact result
-        end
+        responses.map { |response| response.to_artifacts(source) }.flatten
       end
 
       private
@@ -49,8 +52,7 @@ module Mihari
       # @return [Structs::Onyphe::Response]
       #
       def search_with_page(query, page: 1)
-        res = client.datascan(query, page: page)
-        Structs::Onyphe::Response.from_dynamic!(res)
+        client.datascan(query, page: page)
       end
 
       #
@@ -71,33 +73,6 @@ module Mihari
           sleep interval
         end
         responses
-      end
-
-      #
-      # Build an artifact from an Onyphe search API result
-      #
-      # @param [Structs::Onyphe::Result] result
-      #
-      # @return [Artifact]
-      #
-      def build_artifact(result)
-        as = AutonomousSystem.new(asn: normalize_asn(result.asn))
-
-        geolocation = nil
-        unless result.country_code.nil?
-          geolocation = Geolocation.new(
-            country: NormalizeCountry(result.country_code, to: :short),
-            country_code: result.country_code
-          )
-        end
-
-        Artifact.new(
-          data: result.ip,
-          source: source,
-          metadata: result.metadata,
-          autonomous_system: as,
-          geolocation: geolocation
-        )
       end
     end
   end

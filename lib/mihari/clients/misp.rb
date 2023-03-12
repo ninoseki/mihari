@@ -5,7 +5,7 @@ module Mihari
     class MISP < Base
       #
       # @param [String] base_url
-      # @param [String] api_key
+      # @param [String, nil] api_key
       # @param [Hash] headers
       #
       def initialize(base_url, api_key:, headers: {})
@@ -15,6 +15,11 @@ module Mihari
         super(base_url, headers: headers)
       end
 
+      #
+      # @param [Hash] payload
+      #
+      # @return [Hash]
+      #
       def create_event(payload)
         res = post("/events/add", json: payload)
         JSON.parse(res.body.to_s)

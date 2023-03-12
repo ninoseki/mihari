@@ -10,6 +10,12 @@ module Mihari
       # @return [String, nil]
       attr_reader :api_key
 
+      # @return [String]
+      attr_reader :query
+
+      # @return [Integer]
+      attr_reader :interval
+
       def initialize(*args, **kwargs)
         super(*args, **kwargs)
 
@@ -41,7 +47,7 @@ module Mihari
       #
       # @return [Hash]
       #
-      def search_with_page(query, page: 1)
+      def search_with_page(page: 1)
         client.search(query, page: page)
       rescue UnsuccessfulStatusCodeError => e
         raise RetryableError, e if e.message.include?("Request time limit exceeded")
@@ -57,7 +63,7 @@ module Mihari
       def search
         responses = []
         (1..500).each do |page|
-          res = search_with_page(query, page: page)
+          res = search_with_page(page: page)
           total = res["total"].to_i
 
           responses << res

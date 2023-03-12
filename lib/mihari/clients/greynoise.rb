@@ -3,6 +3,11 @@
 module Mihari
   module Clients
     class GreyNoise < Base
+      #
+      # @param [String] base_url
+      # @param [String, nil] api_key
+      # @param [Hash] headers
+      #
       def initialize(base_url = "https://api.greynoise.io", api_key:, headers: {})
         raise(ArgumentError, "'api_key' argument is required") unless api_key
 
@@ -22,7 +27,7 @@ module Mihari
       def gnql_search(query, size: nil, scroll: nil)
         params = { query: query, size: size, scroll: scroll }.compact
         res = get("/v2/experimental/gnql", params: params)
-        JSON.parse res.body.to_s
+        Structs::GreyNoise::Response.from_dynamic! JSON.parse(res.body.to_s)
       end
     end
   end

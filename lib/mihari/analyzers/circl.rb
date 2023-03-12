@@ -16,6 +16,9 @@ module Mihari
       # @return [String, nil]
       attr_reader :password
 
+      # @return [String]
+      attr_reader :query
+
       def initialize(*args, **kwargs)
         super
 
@@ -66,7 +69,7 @@ module Mihari
       # @return [Array<String>]
       #
       def passive_dns_search
-        results = client.dns_query(@query)
+        results = client.dns_query(query)
         results.filter_map do |result|
           type = result["rrtype"]
           (type == "A") ? result["rdata"] : nil
@@ -79,7 +82,7 @@ module Mihari
       # @return [Array<String>]
       #
       def passive_ssl_search
-        result = client.ssl_cquery(@query)
+        result = client.ssl_cquery(query)
         seen = result["seen"] || []
         seen.uniq
       end

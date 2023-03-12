@@ -5,7 +5,7 @@ module Mihari
     class TheHive < Base
       #
       # @param [String] base_url
-      # @param [String] api_key
+      # @param [String, nil] api_key
       # @param [String, nil] api_version
       # @param [Hash] headers
       #
@@ -18,6 +18,11 @@ module Mihari
         super(base_url, headers: headers)
       end
 
+      #
+      # @param [Hash] json
+      #
+      # @return [Hash]
+      #
       def alert(json)
         json = json.to_camelback_keys.compact
         res = post("/alert", json: json)

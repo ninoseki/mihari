@@ -5,8 +5,7 @@ module Mihari
     class VirusTotal < Base
       #
       # @param [String] base_url
-      # @param [String] id
-      # @param [String] secret
+      # @param [String, nil] api_key
       # @param [Hash] headers
       #
       def initialize(base_url = "https://www.virustotal.com", api_key:, headers: {})
@@ -20,12 +19,16 @@ module Mihari
       #
       # @param [String] query
       #
+      # @return [Hash]
+      #
       def domain_search(query)
         _get("/api/v3/domains/#{query}/resolutions")
       end
 
       #
       # @param [String] query
+      #
+      # @return [Hash]
       #
       def ip_search(query)
         _get("/api/v3/ip_addresses/#{query}/resolutions")
@@ -35,6 +38,8 @@ module Mihari
       # @param [String] query
       # @param [String, nil] cursor
       #
+      # @return [Hash]
+      #
       def intel_search(query, cursor: nil)
         params = { query: query, cursor: cursor }.compact
         _get("/api/v3/intelligence/search", params: params)
@@ -43,9 +48,10 @@ module Mihari
       private
 
       #
-      #
       # @param [String] path
       # @param [Hash] params
+      #
+      # @return [Hash]
       #
       def _get(path, params: {})
         res = get(path, params: params)

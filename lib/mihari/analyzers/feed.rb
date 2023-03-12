@@ -16,6 +16,27 @@ module Mihari
 
       option :selector, default: proc { "" }
 
+      # @return [Hash, nil]
+      attr_reader :data
+
+      # @return [Hash, nil]
+      attr_reader :json
+
+      # @return [Hash, nil]
+      attr_reader :params
+
+      # @return [Hash, nil]
+      attr_reader :headers
+
+      # @return [String]
+      attr_reader :method
+
+      # @return [String]
+      attr_reader :selector
+
+      # @return [String]
+      attr_reader :query
+
       def artifacts
         Mihari::Feed::Parser.new(results).parse selector
       end

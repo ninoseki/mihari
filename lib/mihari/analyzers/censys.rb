@@ -13,6 +13,12 @@ module Mihari
       # @return [String, nil]
       attr_reader :secret
 
+      # @return [Integer]
+      attr_reader :interval
+
+      # @return [String]
+      attr_reader :query
+
       def initialize(*args, **kwargs)
         super(*args, **kwargs)
 
@@ -41,10 +47,7 @@ module Mihari
         cursor = nil
         loop do
           response = client.search(query, cursor: cursor)
-          response = Structs::Censys::Response.from_dynamic!(response)
-
-          artifacts << response_to_artifacts(response)
-
+          artifacts << response.result.to_artifacts(source)
           cursor = response.result.links.next
           break if cursor == ""
 
@@ -53,51 +56,6 @@ module Mihari
         end
 
         artifacts.flatten.uniq(&:data)
-      end
-
-      #
-      # Extract IPv4s from Censys search API response
-      #
-      # @param [Structs::Censys::Response] response
-      #
-      # @return [Array<String>]
-      #
-      def response_to_artifacts(response)
-        response.result.hits.map { |hit| build_artifact(hit) }
-      end
-
-      #
-      # Build an artifact from a Shodan search API response
-      #
-      # @param [Structs::Censys::Hit] hit
-      #
-      # @return [Artifact]
-      #
-      def build_artifact(hit)
-        as = AutonomousSystem.new(asn: normalize_asn(hit.autonomous_system.asn))
-
-        # sometimes Censys overlooks country
-        # then set geolocation as nil
-        geolocation = nil
-        unless hit.location.country.nil?
-          geolocation = Geolocation.new(
-            country: hit.location.country,
-            country_code: hit.location.country_code
-          )
-        end
-
-        ports = hit.services.map(&:port).map do |port|
-          Port.new(port: port)
-        end
-
-        Artifact.new(
-          data: hit.ip,
-          source: source,
-          metadata: hit.metadata,
-          autonomous_system: as,
-          geolocation: geolocation,
-          ports: ports
-        )
       end
 
       def configuration_keys
