@@ -129,11 +129,9 @@ module Mihari
       # @return [Array<Mihari::Artifact>]
       #
       def enriched_artifacts
-        retry_on_error do
-          @enriched_artifacts ||= Parallel.map(unique_artifacts) do |artifact|
-            artifact.enrich_all
-            artifact
-          end
+        @enriched_artifacts ||= Parallel.map(unique_artifacts) do |artifact|
+          artifact.enrich_all
+          artifact
         end
       end
 
