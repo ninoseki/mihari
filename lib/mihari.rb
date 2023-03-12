@@ -54,7 +54,6 @@ require "mihari/errors"
 # Mixins
 require "mihari/mixins/autonomous_system"
 require "mihari/mixins/configurable"
-require "mihari/mixins/database"
 require "mihari/mixins/falsepositive"
 require "mihari/mixins/error_notification"
 require "mihari/mixins/refang"
