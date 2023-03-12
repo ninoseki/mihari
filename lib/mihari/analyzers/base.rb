@@ -20,6 +20,15 @@ module Mihari
         @base_time = Time.now.utc
       end
 
+      #
+      # Load/overwrite rule
+      #
+      # @param [String] path_or_id
+      #
+      def load_rule(path_or_id)
+        @rule = Structs::Rule.from_path_or_id path_or_id
+      end
+
       # @return [Array<String>, Array<Mihari::Artifact>]
       def artifacts
         raise NotImplementedError, "You must implement #{self.class}##{__method__}"
