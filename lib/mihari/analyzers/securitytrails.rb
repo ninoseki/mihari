@@ -1,7 +1,5 @@
 # frozen_string_literal: true
 
-require "securitytrails"
-
 module Mihari
   module Analyzers
     class SecurityTrails < Base
@@ -37,8 +35,8 @@ module Mihari
         %w[securitytrails_api_key]
       end
 
-      def api
-        @api ||= ::SecurityTrails::API.new(api_key)
+      def client
+        @client ||= Clients::SecurityTrails.new(api_key: api_key)
       end
 
       #
@@ -74,8 +72,7 @@ module Mihari
       # @return [Array<String>]
       #
       def domain_search
-        result = api.history.get_all_dns_history(query, type: "a")
-        records = result["records"] || []
+        records = client.get_all_dns_history(query, type: "a")
         records.map do |record|
           (record["values"] || []).map { |value| value["ip"] }
         end.flatten.compact.uniq
@@ -87,8 +84,7 @@ module Mihari
       # @return [Array<Mihari::Artifact>]
       #
       def ip_search
-        result = api.domains.search(filter: { ipv4: query })
-        records = result["records"] || []
+        records = client.search_by_ip(query)
         records.filter_map do |record|
           data = record["hostname"]
           Artifact.new(data: data, source: source, metadata: record)
@@ -101,8 +97,7 @@ module Mihari
       # @return [Array<String>]
       #
       def mail_search
-        result = api.domains.search(filter: { whois_email: query })
-        records = result["records"] || []
+        records = client.search_by_mail(query)
         records.filter_map do |record|
           data = record["hostname"]
           Artifact.new(data: data, source: source, metadata: record)
