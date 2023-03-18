@@ -27,21 +27,6 @@ module Mihari
       end
 
       def artifacts
-        search
-      end
-
-      def configured?
-        configuration_keys.all? { |key| Mihari.config.send(key) } || (id? && secret?)
-      end
-
-      private
-
-      #
-      # Search
-      #
-      # @return [Array<String>]
-      #
-      def search
         artifacts = []
 
         cursor = nil
@@ -57,6 +42,12 @@ module Mihari
 
         artifacts.flatten.uniq(&:data)
       end
+
+      def configured?
+        configuration_keys.all? { |key| Mihari.config.send(key) } || (id? && secret?)
+      end
+
+      private
 
       def configuration_keys
         %w[censys_id censys_secret]

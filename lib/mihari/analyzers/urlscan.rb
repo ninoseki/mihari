@@ -27,9 +27,8 @@ module Mihari
       def initialize(*args, **kwargs)
         super
 
-        unless valid_alllowed_data_types?
-          raise InvalidInputError,
-            "allowed_data_types should be any of url, domain and ip."
+        unless valid_allowed_data_types?
+          raise InvalidInputError, "allowed_data_types should be any of url, domain and ip."
         end
 
         @api_key = kwargs[:api_key] || Mihari.config.urlscan_api_key
@@ -97,7 +96,7 @@ module Mihari
       #
       # @return [Boolean]
       #
-      def valid_alllowed_data_types?
+      def valid_allowed_data_types?
         allowed_data_types.all? { |type| SUPPORTED_DATA_TYPES.include? type }
       end
     end

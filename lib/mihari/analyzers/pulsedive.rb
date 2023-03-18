@@ -58,7 +58,6 @@ module Mihari
 
         indicator = client.get_indicator(query)
         iid = indicator["iid"]
-
         properties = client.get_properties(iid)
         (properties["dns"] || []).filter_map do |property|
           if %w[A PTR].include?(property["name"])

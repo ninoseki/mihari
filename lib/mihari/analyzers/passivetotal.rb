@@ -30,7 +30,16 @@ module Mihari
       end
 
       def artifacts
-        search || []
+        case type
+        when "domain", "ip"
+          passive_dns_search
+        when "mail"
+          reverse_whois_search
+        when "hash"
+          ssl_search
+        else
+          raise InvalidInputError, "#{query}(type: #{type || "unknown"}) is not supported." unless valid_type?
+        end
       end
 
       def configured?
@@ -54,24 +63,6 @@ module Mihari
       #
       def valid_type?
         %w[ip domain mail hash].include? type
-      end
-
-      #
-      # Passive DNS/SSL, reverse whois search
-      #
-      # @return [Array<String>]
-      #
-      def search
-        case type
-        when "domain", "ip"
-          passive_dns_search
-        when "mail"
-          reverse_whois_search
-        when "hash"
-          ssl_search
-        else
-          raise InvalidInputError, "#{query}(type: #{type || "unknown"}) is not supported." unless valid_type?
-        end
       end
 
       #

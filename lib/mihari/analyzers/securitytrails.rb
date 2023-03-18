@@ -26,7 +26,16 @@ module Mihari
       end
 
       def artifacts
-        search || []
+        case type
+        when "domain"
+          domain_search
+        when "ip"
+          ip_search
+        when "mail"
+          mail_search
+        else
+          raise InvalidInputError, "#{query}(type: #{type || "unknown"}) is not supported." unless valid_type?
+        end
       end
 
       private
@@ -46,24 +55,6 @@ module Mihari
       #
       def valid_type?
         %w[ip domain mail].include? type
-      end
-
-      #
-      # IP/domain/mail search
-      #
-      # @return [Array<String>, Array<Mihari::Artifact>]
-      #
-      def search
-        case type
-        when "domain"
-          domain_search
-        when "ip"
-          ip_search
-        when "mail"
-          mail_search
-        else
-          raise InvalidInputError, "#{query}(type: #{type || "unknown"}) is not supported." unless valid_type?
-        end
       end
 
       #

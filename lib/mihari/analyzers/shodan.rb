@@ -73,17 +73,6 @@ module Mihari
         end
         responses
       end
-
-      #
-      # Build an artifact from a Shodan search API response
-      #
-      # @param [Structs::Shodan::Match] match
-      # @param [Array<Structs::Shodan::Match>] matches
-      #
-      # @return [Artifact]
-      #
-      def build_artifact(match, matches)
-      end
     end
   end
 end
