@@ -30,7 +30,14 @@ module Mihari
       end
 
       def artifacts
-        search || []
+        case type
+        when "domain"
+          passive_dns_search
+        when "hash"
+          passive_ssl_search
+        else
+          raise InvalidInputError, "#{@query}(type: #{@type || "unknown"}) is not supported."
+        end
       end
 
       def configured?
@@ -45,22 +52,6 @@ module Mihari
 
       def client
         @client ||= Clients::CIRCL.new(username: username, password: password)
-      end
-
-      #
-      # Passive DNS/SSL search
-      #
-      # @return [Array<String>]
-      #
-      def search
-        case @type
-        when "domain"
-          passive_dns_search
-        when "hash"
-          passive_ssl_search
-        else
-          raise InvalidInputError, "#{@query}(type: #{@type || "unknown"}) is not supported."
-        end
       end
 
       #

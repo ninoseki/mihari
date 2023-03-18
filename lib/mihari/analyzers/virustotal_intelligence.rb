@@ -58,14 +58,11 @@ module Mihari
         responses = []
 
         loop do
-          response = Structs::VirusTotalIntelligence::Response.from_dynamic!(client.intel_search(query,
-            cursor: cursor))
+          response = Structs::VirusTotalIntelligence::Response.from_dynamic!(client.intel_search(query, cursor: cursor))
           responses << response
-
           break if response.meta.cursor.nil?
 
           cursor = response.meta.cursor
-
           # sleep #{interval} seconds to avoid the rate limitation (if it is set)
           sleep interval
         end
