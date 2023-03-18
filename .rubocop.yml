@@ -5,5 +5,6 @@ Style/StringLiterals:
 Metrics/BlockLength:
   Exclude:
     - "spec/**/*"
+    - "*.gemspec"
 Metrics/ClassLength:
   Enabled: false
