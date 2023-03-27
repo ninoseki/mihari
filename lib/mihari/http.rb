@@ -4,7 +4,7 @@ require "insensitive_hash"
 
 module Mihari
   class HTTP
-    # @return [String]
+    # @return [URI]
     attr_reader :url
 
     # @return [Hash]
@@ -26,12 +26,12 @@ module Mihari
       new_url = url.deep_dup
       new_url.query = Addressable::URI.form_encode(params) unless (params || {}).empty?
 
-      get = Net::HTTP::Get.new(new_url)
+      get = Net::HTTP::Get.new(new_url, headers)
       request get
     end
 
     #
-    # Make a POST requesti
+    # Make a POST request
     #
     # @param [Hash, nil] params
     # @param [Hash, nil] json
@@ -43,10 +43,17 @@ module Mihari
       new_url = url.deep_dup
       new_url.query = Addressable::URI.form_encode(params) unless (params || {}).empty?
 
-      post = Net::HTTP::Post.new(new_url)
+      post = Net::HTTP::Post.new(new_url, headers)
 
-      post.body = JSON.generate(json) if json
-      post.set_form_data(data) if data
+      if json
+        post.body = JSON.generate(json) if json
+        post.content_type = "application/json"
+      end
+
+      if data
+        post.set_form_data(data) if data
+        post.content_type = "application/x-www-form-urlencoded"
+      end
 
       request post
     end
@@ -64,10 +71,6 @@ module Mihari
     end
 
     private
-
-    def content_type
-      headers["content-type"] || "application/json"
-    end
 
     #
     # Get options for HTTP request
@@ -89,16 +92,9 @@ module Mihari
     #
     def request(req)
       Net::HTTP.start(url.host, url.port, https_options) do |http|
-        # set headers
-        headers.each do |k, v|
-          req[k] = v
-        end
-
         res = http.request(req)
-
         unless res.is_a?(Net::HTTPSuccess)
-          code = res.code.to_i
-          raise UnsuccessfulStatusCodeError, "Unsuccessful response code returned: #{code}"
+          raise UnsuccessfulStatusCodeError, "Unsuccessful response code returned: #{res.code}"
         end
 
         res

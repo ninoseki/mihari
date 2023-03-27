@@ -12,6 +12,8 @@ module Mihari
         raise(ArgumentError, "'api_key' argument is required") unless api_key
 
         headers["authorization"] = api_key
+        headers["accept"] = "application/json"
+
         super(base_url, headers: headers)
       end
 
