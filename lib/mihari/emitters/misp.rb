@@ -45,10 +45,10 @@ module Mihari
 
         client.create_event({
           Event: {
-            info: rule.title
-          },
-          Attribute: artifacts.map { |artifact| build_attribute(artifact) },
-          Tag: rule.tags.map { |tag| { name: tag } }
+            info: rule.title,
+            Attribute: artifacts.map { |artifact| build_attribute(artifact) },
+            Tag: rule.tags.map { |tag| { name: tag } }
+          }
         })
       end
 
