@@ -23,7 +23,9 @@ module Mihari
         return nil if configuration_keys.empty?
 
         configuration_keys.map do |key|
-          { key: key.upcase, value: Mihari.config.send(key) }
+          value = Mihari.config.send(key)
+          value = "REDACTED" if value && Mihari.config.hide_config_values
+          { key: key.upcase, value: value }
         end
       end
 

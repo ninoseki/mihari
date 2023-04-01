@@ -107,6 +107,8 @@ module Mihari
 
   setting :sentry_dsn, default: ENV.fetch("SENTRY_DSN", nil)
 
+  setting :hide_config_values, default: ENV.fetch("HIDE_CONFIG_VALUES", false)
+
   class << self
     include Memist::Memoizable
 
