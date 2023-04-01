@@ -11,7 +11,8 @@ module Mihari
           summary: "Search alerts"
         }
         params do
-          optional :page, type: Integer
+          optional :page, type: Integer, default: 1
+          optional :limit, type: Integer, default: 10
 
           optional :artifact, type: String
           optional :description, type: String
@@ -29,17 +30,9 @@ module Mihari
         get "/" do
           filter = params.to_h.to_snake_keys
 
-          # set page & limit
-          page = filter["page"] || 1
-          filter["page"] = page.to_i
-
-          limit = 10
-          filter["limit"] = 10
-
           # normalize keys
           filter["artifact_data"] = filter["artifact"]
           filter["tag_name"] = filter["tag"]
-
           # symbolize hash keys
           filter = filter.to_h.symbolize_keys
 
@@ -51,8 +44,8 @@ module Mihari
             {
               alerts: alerts,
               total: total,
-              current_page: page,
-              page_size: limit
+              current_page: filter[:page].to_i,
+              page_size: filter[:limit].to_i
             },
             with: Entities::AlertsWithPagination
           )
