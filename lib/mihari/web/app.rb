@@ -1,10 +1,12 @@
 # frozen_string_literal: true
 
 require "launchy"
+
 require "rack"
-require "rack/contrib"
-require "rack/handler/puma"
+require "rackup"
 require "rack/cors"
+
+require "rack/handler/puma"
 
 require "grape-swagger"
 require "grape-swagger-entity"
@@ -18,7 +20,7 @@ module Mihari
   class App
     def initialize
       @filenames = ["", ".html", "index.html", "/index.html"]
-      @rack_static = ::Rack::Static.new(
+      @rack_static = Rack::Static.new(
         -> { [404, {}, []] },
         root: File.expand_path("./public", __dir__),
         urls: ["/"]
@@ -50,14 +52,14 @@ module Mihari
         # TODO: is this the best way?
         _min_thread, max_thread = threads.split(":")
         ENV["PARALLEL_PROCESSOR_COUNT"] = max_thread if ENV["PARALLEL_PROCESSOR_COUNT"].nil?
-        Rack::Handler::Puma.run(
+        Rackup::Handler::Puma.run(
           instance,
           Port: port,
           Host: host,
           Threads: threads,
           Verbose: verbose,
           worker_timeout: worker_timeout
-        ) do |_launcher|
+        ) do |_|
           Launchy.open(url) if ENV["RACK_ENV"] != "development"
         rescue Launchy::CommandNotFoundError
           # ref. https://github.com/ninoseki/mihari/issues/477
