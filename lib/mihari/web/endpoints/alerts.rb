@@ -36,9 +36,9 @@ module Mihari
           # symbolize hash keys
           filter = filter.to_h.symbolize_keys
 
-          search_filter_with_pagenation = Structs::Filters::Alert::SearchFilterWithPagination.new(**filter)
-          alerts = Mihari::Alert.search(search_filter_with_pagenation)
-          total = Mihari::Alert.count(search_filter_with_pagenation.without_pagination)
+          search_filter_with_pagination = Structs::Filters::Alert::SearchFilterWithPagination.new(**filter)
+          alerts = Mihari::Alert.search(search_filter_with_pagination)
+          total = Mihari::Alert.count(search_filter_with_pagination.without_pagination)
 
           present(
             {
