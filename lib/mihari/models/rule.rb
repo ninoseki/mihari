@@ -67,8 +67,7 @@ module Mihari
 
         relation = relation.where(alerts: { tags: { name: filter.tag_name } }) if filter.tag_name
 
-        relation = relation.where(title: filter.title) if filter.title
-
+        relation = relation.where("rules.title LIKE ?", "%#{filter.title}%") if filter.title
         relation = relation.where("rules.description LIKE ?", "%#{filter.description}%") if filter.description
 
         relation = relation.where("rules.created_at >= ?", filter.from_at) if filter.from_at
