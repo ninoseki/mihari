@@ -30,21 +30,6 @@ RSpec.describe Mihari::Alert do
       alerts = described_class.search(Mihari::Structs::Filters::Alert::SearchFilterWithPagination.new(rule_id: "404"))
       expect(alerts.length).to eq(0)
     end
-
-    it do
-      alerts = described_class.search(Mihari::Structs::Filters::Alert::SearchFilterWithPagination.new(asn: asn))
-      expect(alerts.length).to eq(1)
-    end
-
-    it do
-      alerts = described_class.search(Mihari::Structs::Filters::Alert::SearchFilterWithPagination.new(reverse_dns_name: reverse_dns_name))
-      expect(alerts.length).to eq(1)
-    end
-
-    it do
-      alerts = described_class.search(Mihari::Structs::Filters::Alert::SearchFilterWithPagination.new(dns_record: dns_record))
-      expect(alerts.length).to eq(1)
-    end
   end
 
   describe ".count" do
@@ -66,21 +51,6 @@ RSpec.describe Mihari::Alert do
     it do
       count = described_class.count(Mihari::Structs::Filters::Alert::SearchFilter.new(rule_id: "404"))
       expect(count).to eq(0)
-    end
-
-    it do
-      count = described_class.count(Mihari::Structs::Filters::Alert::SearchFilter.new(asn: asn))
-      expect(count).to eq(1)
-    end
-
-    it do
-      count = described_class.count(Mihari::Structs::Filters::Alert::SearchFilter.new(reverse_dns_name: reverse_dns_name))
-      expect(count).to eq(1)
-    end
-
-    it do
-      count = described_class.count(Mihari::Structs::Filters::Alert::SearchFilter.new(dns_record: dns_record))
-      expect(count).to eq(1)
     end
   end
 end

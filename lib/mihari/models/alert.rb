@@ -48,21 +48,28 @@ module Mihari
       #
       # @param [Structs::Filters::Alert::SearchFilter] filter
       #
-      # @return [Mihari::Alert]
+      # @return [Array<Integer>]
       #
-      def build_relation(filter)
+      def get_artifact_ids_by_filter(filter)
         artifact_ids = []
-        artifact = Artifact.includes(:autonomous_system, :dns_records, :reverse_dns_names)
-        artifact = artifact.where(data: filter.artifact_data) if filter.artifact_data
-        artifact = artifact.where(autonomous_system: { asn: filter.asn }) if filter.asn
-        artifact = artifact.where(dns_records: { value: filter.dns_record }) if filter.dns_record
-        artifact = artifact.where(reverse_dns_names: { name: filter.reverse_dns_name }) if filter.reverse_dns_name
-        # get artifact ids if there is any valid filter for artifact
-        if filter.valid_artifact_filters?
+
+        if filter.artifact_data
+          artifact = Artifact.where(data: filter.artifact_data)
           artifact_ids = artifact.pluck(:id)
           # set invalid ID if nothing is matched with the filters
           artifact_ids = [-1] if artifact_ids.empty?
         end
+
+        artifact_ids
+      end
+
+      #
+      # @param [Structs::Filters::Alert::SearchFilter] filter
+      #
+      # @return [Mihari::Alert]
+      #
+      def build_relation(filter)
+        artifact_ids = get_artifact_ids_by_filter(filter)
 
         relation = self
         relation = relation.includes(:artifacts, :tags)
@@ -71,9 +78,6 @@ module Mihari
         relation = relation.where(tags: { name: filter.tag_name }) if filter.tag_name
 
         relation = relation.where(rule_id: filter.rule_id) if filter.rule_id
-        relation = relation.where(title: filter.title) if filter.title
-
-        relation = relation.where("description LIKE ?", "%#{filter.description}%") if filter.description
 
         relation = relation.where("alerts.created_at >= ?", filter.from_at) if filter.from_at
         relation = relation.where("alerts.created_at <= ?", filter.to_at) if filter.to_at
