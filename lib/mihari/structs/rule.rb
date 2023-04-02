@@ -133,7 +133,7 @@ module Mihari
       # @return [Integer, nil]
       #
       def artifact_lifetime
-        @artifact_lifetime ||= data[:artifact_lifetime]
+        @artifact_lifetime ||= data[:artifact_lifetime] || data[:artifact_ttl]
       end
 
       #
