@@ -14,18 +14,11 @@ module Mihari
           method_option :hide_config_values, type: :boolean, default: false,
             desc: "Whether to hide config values or not"
           def web
-            port = options["port"]
-            host = options["host"]
-            threads = options["threads"]
-            verbose = options["verbose"]
-            worker_timeout = options["worker_timeout"]
-
             Mihari.config.hide_config_values = options["hide_config_values"]
-
             # set rack env as production
             ENV["RACK_ENV"] ||= "production"
-
-            Mihari::App.run!(port: port, host: host, threads: threads, verbose: verbose, worker_timeout: worker_timeout)
+            Mihari::App.run!(port: options["port"], host: options["host"], threads: options["threads"],
+              verbose: options["verbose"], worker_timeout: options["worker_timeout"])
           end
         end
       end
