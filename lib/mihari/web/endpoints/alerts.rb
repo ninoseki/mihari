@@ -15,17 +15,11 @@ module Mihari
           optional :limit, type: Integer, default: 10
 
           optional :artifact, type: String
-          optional :description, type: String
           optional :rule_id, type: String
           optional :tag, type: String
-          optional :title, type: String
 
           optional :fromAt, type: DateTime
           optional :toAt, type: DateTime
-
-          optional :asn, type: Integer
-          optional :dnsRecord, type: String
-          optional :reverseDnsName, type: String
         end
         get "/" do
           filter = params.to_h.to_snake_keys

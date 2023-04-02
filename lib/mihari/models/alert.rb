@@ -53,13 +53,8 @@ module Mihari
       def get_artifact_ids_by_filter(filter)
         artifact_ids = []
 
-        artifact = Artifact.includes(:autonomous_system, :dns_records, :reverse_dns_names)
-        artifact = artifact.where(data: filter.artifact_data) if filter.artifact_data
-        artifact = artifact.where(autonomous_system: { asn: filter.asn }) if filter.asn
-        artifact = artifact.where(dns_records: { value: filter.dns_record }) if filter.dns_record
-        artifact = artifact.where(reverse_dns_names: { name: filter.reverse_dns_name }) if filter.reverse_dns_name
-        # get artifact ids if there is any valid filter for artifact
-        if filter.valid_artifact_filters?
+        if filter.artifact_data
+          artifact = Artifact.where(data: filter.artifact_data)
           artifact_ids = artifact.pluck(:id)
           # set invalid ID if nothing is matched with the filters
           artifact_ids = [-1] if artifact_ids.empty?
