@@ -33,6 +33,7 @@ module Mihari
       optional(:falsepositives).value(array[:string]).default([])
 
       optional(:artifact_lifetime).value(:integer)
+      optional(:artifact_ttl).value(:integer)
 
       before(:key_coercer) do |result|
         # it looks like that dry-schema v1.9.1 has an issue with setting an array of schemas as a default value
