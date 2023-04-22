@@ -44,7 +44,7 @@ module Mihari
         end.to_app
       end
 
-      def run!(port: 9292, host: "localhost", threads: "0:5", verbose: false, worker_timeout: 60)
+      def run!(port: 9292, host: "localhost", threads: "0:5", verbose: false, worker_timeout: 60, open: true)
         url = "http://#{host}:#{port}"
 
         # set maximum number of threads to use as PARALLEL_PROCESSOR_COUNT (if it is not set)
@@ -60,7 +60,7 @@ module Mihari
           Verbose: verbose,
           worker_timeout: worker_timeout
         ) do |_|
-          Launchy.open(url) if ENV["RACK_ENV"] != "development"
+          Launchy.open(url) if ENV["RACK_ENV"] != "development" && open
         rescue Launchy::CommandNotFoundError
           # ref. https://github.com/ninoseki/mihari/issues/477
           # do nothing
