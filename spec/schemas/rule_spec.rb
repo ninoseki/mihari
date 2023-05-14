@@ -7,6 +7,23 @@ RSpec.describe Mihari::Schemas::RuleContract do
   let(:title) { "test" }
 
   context "with valid rule" do
+    context "rule should have default values" do
+      it do
+        result = contract.call(
+          id: id,
+          description: description,
+          title: title,
+          queries: [{ analyzer: "shodan", query: "foo" }]
+        )
+
+        expect(result[:enrichers].length).to eq Mihari::DEFAULT_ENRICHERS.length
+        expect(result[:emitters].length).to eq Mihari::DEFAULT_EMITTERS.length
+        expect(result[:data_types].length).to eq Mihari::DEFAULT_DATA_TYPES.length
+
+        expect(result[:tags].length).to eq 0
+      end
+    end
+
     context "analyzers does not need additional options" do
       it do
         analyzers = Mihari::Analyzers::ANALYZER_TO_CLASS.keys - %w[zoomeye crtsh feed]
