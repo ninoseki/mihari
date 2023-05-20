@@ -6,6 +6,18 @@ module Mihari
       class ContextAttributes < Dry::Struct
         attribute :url, Types::String.optional
 
+        #
+        # @return [String, nil]
+        #
+        def url
+          attributes[:url]
+        end
+
+        #
+        # @param [Hash] d
+        #
+        # @return [ContextAttributes]
+        #
         def self.from_dynamic!(d)
           d = Types::Hash[d]
           new(
@@ -20,6 +32,37 @@ module Mihari
         attribute :context_attributes, ContextAttributes.optional
         attribute :metadata, Types::Hash
 
+        #
+        # @return [String]
+        #
+        def type
+          attributes[:type]
+        end
+
+        #
+        # @return [String]
+        #
+        def id
+          attributes[:id]
+        end
+
+        #
+        # @return [ContextAttributes, nil]
+        #
+        def context_attributes
+          attributes[:context_attributes]
+        end
+
+        #
+        # @return [Hash, nil]
+        #
+        def metadata
+          attributes[:metadata]
+        end
+
+        #
+        # @return [String, nil]
+        #
         def value
           case type
           when "file"
@@ -33,11 +76,25 @@ module Mihari
           end
         end
 
+        #
+        # @return [Mihari::Artifact]
+        #
+        def to_artifact
+          Artifact.new(data: value, metadata: metadata)
+        end
+
+        #
+        # @param [Hash] d
+        #
+        # @return [Datum]
+        #
         def self.from_dynamic!(d)
           d = Types::Hash[d]
 
           context_attributes = nil
-          context_attributes = ContextAttributes.from_dynamic!(d.fetch("context_attributes")) if d.key?("context_attributes")
+          if d.key?("context_attributes")
+            context_attributes = ContextAttributes.from_dynamic!(d.fetch("context_attributes"))
+          end
 
           new(
             type: d.fetch("type"),
@@ -51,6 +108,18 @@ module Mihari
       class Meta < Dry::Struct
         attribute :cursor, Types::String.optional
 
+        #
+        # @return [String, nil]
+        #
+        def cursor
+          attributes[:cursor]
+        end
+
+        #
+        # @param [Hash] d
+        #
+        # @return [Meta]
+        #
         def self.from_dynamic!(d)
           d = Types::Hash[d]
           new(
@@ -63,6 +132,32 @@ module Mihari
         attribute :meta, Meta
         attribute :data, Types.Array(Datum)
 
+        #
+        # @return [Meta]
+        #
+        def meta
+          attributes[:meta]
+        end
+
+        #
+        # @return [Array<Datum>]
+        #
+        def data
+          attributes[:data]
+        end
+
+        #
+        # @return [Array<Mihari::Artifact>]
+        #
+        def to_artifacts
+          data.map(&:to_artifact)
+        end
+
+        #
+        # @param [Hash] d
+        #
+        # @return [Response]
+        #
         def self.from_dynamic!(d)
           d = Types::Hash[d]
           new(

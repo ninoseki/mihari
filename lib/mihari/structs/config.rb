@@ -9,6 +9,34 @@ module Mihari
       attribute :values, Types.Array(Types::Hash).optional
 
       #
+      # @return [String]
+      #
+      def name
+        attributes[:name]
+      end
+
+      #
+      # @return [String]
+      #
+      def type
+        attributes[:type]
+      end
+
+      #
+      # @return [Boolean]
+      #
+      def is_configured
+        attributes[:is_configured]
+      end
+
+      #
+      # @return [Array<Hash>]
+      #
+      def values
+        attributes[:values]
+      end
+
+      #
       # @param [Class<Mihari::Analyzers::Base>, Class<Mihari::Emitters::Base>] klass
       #
       # @return [Mihari::Structs::Config, nil] config

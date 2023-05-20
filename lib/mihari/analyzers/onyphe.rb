@@ -28,7 +28,7 @@ module Mihari
         responses = search
         return [] unless responses
 
-        responses.map { |response| response.to_artifacts(source) }.flatten
+        responses.map(&:to_artifacts).flatten
       end
 
       private

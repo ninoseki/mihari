@@ -26,11 +26,7 @@ module Mihari
 
       def artifacts
         responses = search_with_cursor
-        responses.map do |response|
-          response.data.map do |datum|
-            Artifact.new(data: datum.value, source: source, metadata: datum.metadata)
-          end
-        end.flatten
+        responses.map(&:to_artifacts).flatten
       end
 
       private

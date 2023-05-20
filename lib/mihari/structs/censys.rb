@@ -9,12 +9,24 @@ module Mihari
         attribute :asn, Types::Int
 
         #
+        # @return [Integer]
+        #
+        def asn
+          attributes[:asn]
+        end
+
+        #
         # @return [Mihari::AutonomousSystem]
         #
         def to_as
           Mihari::AutonomousSystem.new(asn: normalize_asn(asn))
         end
 
+        #
+        # @param [Hash] d
+        #
+        # @return [AutonomousSystem]
+        #
         def self.from_dynamic!(d)
           d = Types::Hash[d]
           new(
@@ -26,6 +38,20 @@ module Mihari
       class Location < Dry::Struct
         attribute :country, Types::String.optional
         attribute :country_code, Types::String.optional
+
+        #
+        # @return [String, nil]
+        #
+        def country
+          attributes[:country]
+        end
+
+        #
+        # @return [String, nil]
+        #
+        def country_code
+          attributes[:country_code]
+        end
 
         #
         # @return [Mihari::Geolocation] <description>
@@ -41,6 +67,11 @@ module Mihari
           )
         end
 
+        #
+        # @param [Hash] d
+        #
+        # @return [Location]
+        #
         def self.from_dynamic!(d)
           d = Types::Hash[d]
           new(
@@ -54,12 +85,24 @@ module Mihari
         attribute :port, Types::Integer
 
         #
+        # @return [Integer]
+        #
+        def port
+          attributes[:port]
+        end
+
+        #
         # @return [Mihari::Port]
         #
         def to_port
           Port.new(port: port)
         end
 
+        #
+        # @param [Hash] d
+        #
+        # @return [Service]
+        #
         def self.from_dynamic!(d)
           d = Types::Hash[d]
           new(
@@ -76,6 +119,41 @@ module Mihari
         attribute :services, Types.Array(Service)
 
         #
+        # @return [String]
+        #
+        def ip
+          attributes[:ip]
+        end
+
+        #
+        # @return [Location]
+        #
+        def location
+          attributes[:location]
+        end
+
+        #
+        # @return [AutonomousSystem]
+        #
+        def autonomous_system
+          attributes[:autonomous_system]
+        end
+
+        #
+        # @return [Hash]
+        #
+        def metadata
+          attributes[:metadata]
+        end
+
+        #
+        # @return [Array<Service>]
+        #
+        def services
+          attributes[:services]
+        end
+
+        #
         # @return [Array<Mihari::Port>]
         #
         def to_ports
@@ -83,14 +161,11 @@ module Mihari
         end
 
         #
-        # @param [String] source
-        #
         # @return [Mihari::Artifact]
         #
-        def to_artifact(source = "Censys")
+        def to_artifact
           Artifact.new(
             data: ip,
-            source: source,
             metadata: metadata,
             autonomous_system: autonomous_system.to_as,
             geolocation: location.to_geolocation,
@@ -98,6 +173,11 @@ module Mihari
           )
         end
 
+        #
+        # @param [Hash] d
+        #
+        # @return [Hit]
+        #
         def self.from_dynamic!(d)
           d = Types::Hash[d]
           new(
@@ -114,6 +194,25 @@ module Mihari
         attribute :next, Types::String.optional
         attribute :prev, Types::String.optional
 
+        #
+        # @return [String, nil]
+        #
+        def next
+          attributes[:next]
+        end
+
+        #
+        # @return [String, nil]
+        #
+        def prev
+          attributes[:prev]
+        end
+
+        #
+        # @param [Hash] d
+        #
+        # @return [Links]
+        #
         def self.from_dynamic!(d)
           d = Types::Hash[d]
           new(
@@ -130,14 +229,45 @@ module Mihari
         attribute :links, Links
 
         #
-        # @param [String] source
+        # @return [String]
+        #
+        def query
+          attributes[:query]
+        end
+
+        #
+        # @return [Integer]
+        #
+        def total
+          attributes[:total]
+        end
+
+        #
+        # @return [Array<Hit>]
+        #
+        def hits
+          attributes[:hits]
+        end
+
+        #
+        # @return [Links]
+        #
+        def links
+          attributes[:links]
+        end
+
         #
         # @return [Array<Mihari::Artifact>]
         #
-        def to_artifacts(source = "Censys")
-          hits.map { |hit| hit.to_artifact(source) }
+        def to_artifacts
+          hits.map { |hit| hit.to_artifact }
         end
 
+        #
+        # @param [Hash] d
+        #
+        # @return [Result]
+        #
         def self.from_dynamic!(d)
           d = Types::Hash[d]
           new(
@@ -154,6 +284,32 @@ module Mihari
         attribute :status, Types::String
         attribute :result, Result
 
+        #
+        # @return [Integer]
+        #
+        def code
+          attributes[:code]
+        end
+
+        #
+        # @return [String]
+        #
+        def status
+          attributes[:status]
+        end
+
+        #
+        # @return [Result]
+        #
+        def result
+          attributes[:result]
+        end
+
+        #
+        # @param [Hash] d
+        #
+        # @return [Response]
+        #
         def self.from_dynamic!(d)
           d = Types::Hash[d]
           new(

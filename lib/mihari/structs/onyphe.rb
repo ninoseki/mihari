@@ -12,14 +12,39 @@ module Mihari
         attribute :metadata, Types::Hash
 
         #
-        # @param [String] source
+        # @return [String]
+        #
+        def asn
+          attributes[:asn]
+        end
+
+        #
+        # @return [String, nil]
+        #
+        def country_code
+          attributes[:country_code]
+        end
+
+        #
+        # @return [String]
+        #
+        def ip
+          attributes[:ip]
+        end
+
+        #
+        # @return [Hash]
+        #
+        def metadata
+          attributes[:metadata]
+        end
+
         #
         # @return [Mihari::Artifact]
         #
-        def to_artifact(source = "Onyphe")
+        def to_artifact
           Mihari::Artifact.new(
             data: ip,
-            source: source,
             metadata: metadata,
             autonomous_system: to_as,
             geolocation: to_geolocation
@@ -45,6 +70,11 @@ module Mihari
           Mihari::AutonomousSystem.new(asn: normalize_asn(asn))
         end
 
+        #
+        # @param [Hash] d
+        #
+        # @return [Result]
+        #
         def self.from_dynamic!(d)
           d = Types::Hash[d]
           new(
@@ -67,14 +97,66 @@ module Mihari
         attribute :total, Types::Int
 
         #
-        # @param [String] source
+        # @return [Integer]
+        #
+        def count
+          attributes[:count]
+        end
+
+        #
+        # @return [Integer]
+        #
+        def error
+          attributes[:error]
+        end
+
+        #
+        # @return [Integer]
+        #
+        def max_page
+          attributes[:max_page]
+        end
+
+        #
+        # @return [Integer]
+        #
+        def page
+          attributes[:page]
+        end
+
+        #
+        # @return [Array<Result>]
+        #
+        def results
+          attributes[:results]
+        end
+
+        #
+        # @return [String]
+        #
+        def status
+          attributes[:status]
+        end
+
+        #
+        # @return [Integer]
+        #
+        def total
+          attributes[:total]
+        end
+
         #
         # @return [Array<Mihari::Artifact>]
         #
-        def to_artifacts(source = "Onyphe")
-          results.map { |result| result.to_artifact(source) }
+        def to_artifacts
+          results.map(&:to_artifact)
         end
 
+        #
+        # @param [Hash] d
+        #
+        # @return [Response]
+        #
         def self.from_dynamic!(d)
           d = Types::Hash[d]
           new(

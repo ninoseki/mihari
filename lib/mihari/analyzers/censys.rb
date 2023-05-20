@@ -35,7 +35,7 @@ module Mihari
         cursor = nil
         loop do
           response = client.search(query, cursor: cursor)
-          artifacts << response.result.to_artifacts(source)
+          artifacts << response.result.to_artifacts
           cursor = response.result.links.next
           break if cursor.nil?
 
