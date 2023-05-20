@@ -26,7 +26,7 @@ Gem::Specification.new do |spec|
   # Specify which files should be added to the gem when it is released.
   # The `git ls-files -z` loads the files in the RubyGem that have been added into git.
   spec.files = Dir.chdir(File.expand_path(__dir__)) do
-    `git ls-files -z`.split("\x0").reject { |f| f.match(%r{^(test|spec|features)/}) }
+    `git ls-files -z`.split("\x0").reject { |f| f.match(%r{^(test|spec|features|images|docker|.github)/}) }
   end
   spec.bindir = "exe"
   spec.executables = spec.files.grep(%r{^exe/}) { |f| File.basename(f) }
@@ -37,22 +37,23 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency "fakefs", "~> 2.4"
   spec.add_development_dependency "fuubar", "~> 2.5"
   spec.add_development_dependency "mysql2", "~> 0.5"
-  spec.add_development_dependency "pg", "~> 1.4"
+  spec.add_development_dependency "pg", "~> 1.5"
   spec.add_development_dependency "rack-test", "~> 2.1"
   spec.add_development_dependency "rake", "~> 13.0"
   spec.add_development_dependency "rb-fsevent", "~> 0.11"
   spec.add_development_dependency "rerun", "~> 0.14"
   spec.add_development_dependency "rspec", "~> 3.12"
   spec.add_development_dependency "simplecov-lcov", "~> 0.8.0"
-  spec.add_development_dependency "standard", "~> 1.27"
+  spec.add_development_dependency "standard", "~> 1.28"
   spec.add_development_dependency "timecop", "~> 0.9"
   spec.add_development_dependency "vcr", "~> 6.1"
   spec.add_development_dependency "webmock", "~> 3.18"
 
   unless ci_env?
     spec.add_development_dependency "overcommit", "~> 0.60"
-    spec.add_development_dependency "ruby-lsp", "~> 0.4"
-    spec.add_development_dependency "steep", "~> 1.3"
+    spec.add_development_dependency "ruby-lsp", "~> 0.5"
+    spec.add_development_dependency "solargraph", "~> 0.49"
+    spec.add_development_dependency "steep", "~> 1.4"
   end
 
   spec.add_dependency "activerecord", "7.0.4.3"
@@ -87,8 +88,8 @@ Gem::Specification.new do |spec|
   spec.add_dependency "semantic_logger", "4.13.0"
   spec.add_dependency "sentry-ruby", "5.9.0"
   spec.add_dependency "slack-notifier", "2.4.0"
-  spec.add_dependency "sqlite3", "1.6.2"
-  spec.add_dependency "thor", "1.2.1"
+  spec.add_dependency "sqlite3", "1.6.3"
+  spec.add_dependency "thor", "1.2.2"
   spec.add_dependency "uuidtools", "2.2.0"
   spec.add_dependency "whois", "5.1.0"
   spec.add_dependency "whois-parser", "2.0.0"
