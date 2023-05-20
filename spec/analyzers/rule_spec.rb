@@ -112,4 +112,62 @@ RSpec.describe Mihari::Analyzers::Rule, :vcr do
       expect { subject.artifacts }.to raise_error(Mihari::ConfigurationError, "Shodan is not configured correctly")
     end
   end
+
+  describe "#run" do
+    before do
+      # set an empty array in emitters & enrichers
+      allow(Mihari).to receive(:emitters).and_return([])
+      allow(Mihari).to receive(:enrichers).and_return([])
+
+      allow(Parallel).to receive(:processor_count).and_return(0)
+
+      allow(subject).to receive(:enriched_artifacts).and_return([
+        Mihari::Artifact.new(data: "1.1.1.1")
+      ])
+    end
+
+    it "should not raise any error" do
+      capture(:stderr) do
+        subject.run
+        SemanticLogger.flush
+      end
+    end
+
+    context "when a notifier raises an error" do
+      let(:sio) { StringIO.new }
+
+      let(:logger) do
+        SemanticLogger.default_level = :info
+        SemanticLogger.add_appender(io: sio, formatter: :color)
+        SemanticLogger["Mihari"]
+      end
+
+      before do
+        # mock emitters
+        emitter = double("emitter_instance")
+        allow(emitter).to receive(:valid?).and_return(true)
+        allow(emitter).to receive(:run).and_raise("error")
+
+        klass = double("emitter_class")
+        allow(klass).to receive(:new).and_return(emitter)
+
+        # set mocked classes as emitters
+        allow(Mihari).to receive(:emitters).and_return([klass])
+        allow(Parallel).to receive(:processor_count).and_return(0)
+
+        allow(Mihari).to receive(:logger).and_return(logger)
+      end
+
+      it do
+        subject.run
+
+        # read logger output
+        SemanticLogger.flush
+        sio.rewind
+        output = sio.read
+
+        expect(output).to include("Emission by")
+      end
+    end
+  end
 end

@@ -34,14 +34,21 @@ module Mihari
       "webhook" => Emitters::Webhook
     }.freeze
 
-    # @return [Mihari::Structs::Rule]
-    attr_reader :rule
-
-    class Rule < Base
+    class Rule
       include Mixins::FalsePositive
 
-      def initialize(**kwargs)
-        super(**kwargs)
+      # @return [Mihari::Structs::Rule]
+      attr_reader :rule
+
+      # @return [Time]
+      attr_reader :base_time
+
+      #
+      # @param [Mihari::Structs::Rule] rule
+      #
+      def initialize(rule:)
+        @rule = rule
+        @base_time = Time.now.utc
 
         validate_analyzer_configurations
       end
@@ -52,41 +59,15 @@ module Mihari
       # @return [Array<Mihari::Artifact>]
       #
       def artifacts
-        artifacts = []
-
-        rule.queries.each do |original_params|
-          parmas = original_params.deep_dup
-
-          analyzer_name = parmas[:analyzer]
-          klass = get_analyzer_class(analyzer_name)
-
-          query = parmas[:query]
-
-          # set interval in the top level
-          options = parmas[:options] || {}
-          interval = options[:interval]
-
-          parmas[:interval] = interval if interval
-
-          # set rule
-          parmas[:rule] = rule
-
-          analyzer = klass.new(query, **parmas)
-
-          # Use #normalized_artifacts method to get atrifacts as Array<Mihari::Artifact>
-          # So Mihari::Artifact object has "source" attribute (e.g. "Shodan")
-          artifacts << analyzer.normalized_artifacts
-        end
-
-        artifacts.flatten
+        rule.queries.map { |params| run_query(params.deep_dup) }.flatten
       end
 
       #
       # Normalize artifacts
-      # - Uniquefy artifacts by #uniq(&:data)
-      # - Reject an invalid artifact (for just in case)
+      # - Reject invalid artifacts (for just in case)
       # - Select artifacts with allowed data types
-      # - Reject artifacts with disallowed data values
+      # - Reject artifacts with false positive values
+      # - Set rule ID
       #
       # @return [Array<Mihari::Artifact>]
       #
@@ -95,6 +76,20 @@ module Mihari
           rule.data_types.include? artifact.data_type
         end.reject do |artifact|
           falsepositive? artifact.data
+        end.map do |artifact|
+          artifact.rule_id = rule.id
+          artifact
+        end
+      end
+
+      #
+      # Uniquify artifacts (assure rule level uniqueness)
+      #
+      # @return [Array<Mihari::Artifact>]
+      #
+      def unique_artifacts
+        @unique_artifacts ||= normalized_artifacts.select do |artifact|
+          artifact.unique?(base_time: base_time, artifact_lifetime: rule.artifact_lifetime)
         end
       end
 
@@ -108,10 +103,53 @@ module Mihari
           rule.enrichers.each do |enricher|
             artifact.enrich_by_enricher(enricher[:enricher])
           end
-
           artifact
         end
       end
+
+      #
+      # Bulk emit
+      #
+      # @return [Array<Mihari::Alert>]
+      #
+      def bulk_emit
+        Parallel.map(valid_emitters) { |emitter| emit emitter }.compact
+      end
+
+      #
+      # Emit an alert
+      #
+      # @param [Mihari::Emitters::Base] emitter
+      #
+      # @return [Mihari::Alert, nil]
+      #
+      def emit(emitter)
+        return if enriched_artifacts.empty?
+
+        alert_or_something = emitter.run(artifacts: enriched_artifacts, rule: rule)
+
+        Mihari.logger.info "Emission by #{emitter.class} is succeeded"
+
+        alert_or_something
+      rescue StandardError => e
+        Mihari.logger.info "Emission by #{emitter.class} is failed: #{e}"
+      end
+
+      #
+      # Set artifacts & run emitters in parallel
+      #
+      # @return [Mihari::Alert, nil]
+      #
+      def run
+        # memoize enriched artifacts
+        enriched_artifacts
+
+        alert_or_something = bulk_emit
+        # returns Mihari::Alert created by the database emitter
+        alert_or_something.find { |res| res.is_a?(Mihari::Alert) }
+      end
+
+      private
 
       #
       # Normalized disallowed data values
@@ -137,7 +175,24 @@ module Mihari
         end
       end
 
-      private
+      def run_query(params)
+        analyzer_name = params[:analyzer]
+        klass = get_analyzer_class(analyzer_name)
+
+        # set interval in the top level
+        options = params[:options] || {}
+        interval = options[:interval]
+        params[:interval] = interval if interval
+
+        # set rule
+        params[:rule] = rule
+        query = params[:query]
+        analyzer = klass.new(query, **params)
+
+        # Use #normalized_artifacts method to get artifacts as Array<Mihari::Artifact>
+        # So Mihari::Artifact object has "source" attribute (e.g. "Shodan")
+        analyzer.normalized_artifacts
+      end
 
       #
       # Get emitter class
@@ -153,18 +208,18 @@ module Mihari
         raise ArgumentError, "#{emitter_name} is not supported"
       end
 
+      def validate_emitter(params)
+        name = params[:emitter]
+        params.delete(:emitter)
+
+        klass = get_emitter_class(name)
+        emitter = klass.new(**params)
+
+        emitter.valid? ? emitter : nil
+      end
+
       def valid_emitters
-        @valid_emitters ||= rule.emitters.filter_map do |original_params|
-          params = original_params.deep_dup
-
-          name = params[:emitter]
-          params.delete(:emitter)
-
-          klass = get_emitter_class(name)
-          emitter = klass.new(**params)
-
-          emitter.valid? ? emitter : nil
-        end
+        @valid_emitters ||= rule.emitters.filter_map { |params| validate_emitter(params.deep_dup) }
       end
 
       #
@@ -187,13 +242,12 @@ module Mihari
       def validate_analyzer_configurations
         rule.queries.each do |params|
           analyzer_name = params[:analyzer]
+
           klass = get_analyzer_class(analyzer_name)
+          klass_name = klass.to_s.split("::").last
 
           instance = klass.new("dummy")
-          unless instance.configured?
-            klass_name = klass.to_s.split("::").last
-            raise ConfigurationError, "#{klass_name} is not configured correctly"
-          end
+          raise ConfigurationError, "#{klass_name} is not configured correctly" unless instance.configured?
         end
       end
     end
