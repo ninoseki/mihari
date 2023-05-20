@@ -26,6 +26,9 @@ module Mihari
         @secret = kwargs[:secret] || Mihari.config.censys_secret
       end
 
+      #
+      # @return [Array<Mihari::Artifact>]
+      #
       def artifacts
         artifacts = []
 
@@ -34,7 +37,7 @@ module Mihari
           response = client.search(query, cursor: cursor)
           artifacts << response.result.to_artifacts(source)
           cursor = response.result.links.next
-          break if cursor == ""
+          break if cursor.nil?
 
           # sleep #{interval} seconds to avoid the rate limitation (if it is set)
           sleep interval
@@ -43,24 +46,39 @@ module Mihari
         artifacts.flatten.uniq(&:data)
       end
 
+      #
+      # @return [Boolean]
+      #
       def configured?
         configuration_keys.all? { |key| Mihari.config.send(key) } || (id? && secret?)
       end
 
       private
 
+      #
+      # @return [Array<String>]
+      #
       def configuration_keys
         %w[censys_id censys_secret]
       end
 
+      #
+      # @return [Mihari::Clients::Censys]
+      #
       def client
         @client ||= Clients::Censys.new(id: id, secret: secret)
       end
 
+      #
+      # @return [Boolean]
+      #
       def id?
         !id.nil?
       end
 
+      #
+      # @return [Boolean]
+      #
       def secret?
         !secret.nil?
       end

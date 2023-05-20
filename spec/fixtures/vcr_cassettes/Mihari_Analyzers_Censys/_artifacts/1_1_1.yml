@@ -1,93 +1,83 @@
 ---
 http_interactions:
-- request:
-    method: get
-    uri: https://search.censys.io/api/v2/hosts/search?q=ip:1.1.1.1
-    body:
-      encoding: US-ASCII
-      string: ''
-    headers:
-      Accept-Encoding:
-      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
-      Accept:
-      - "*/*"
-      User-Agent:
-      - Ruby
-      Host:
-      - search.censys.io
-      Authorization:
-      - "<CENSYS_AUTH>"
-  response:
-    status:
-      code: 200
-      message: OK
-    headers:
-      Date:
-      - Fri, 10 Mar 2023 23:52:16 GMT
-      Content-Type:
-      - application/json
-      Transfer-Encoding:
-      - chunked
-      Connection:
-      - keep-alive
-      Access-Control-Allow-Origin:
-      - "*"
-      X-Content-Type-Options:
-      - nosniff
-      Strict-Transport-Security:
-      - max-age=31536000; includeSubDomains; preload
-      Access-Control-Allow-Credentials:
-      - 'true'
-      Access-Control-Allow-Methods:
-      - PUT, GET, POST, OPTIONS
-      Access-Control-Allow-Headers:
-      - DNT,X-CustomHeader,Keep-Alive,User-Agent,X-Requested-With,If-Modified-Since,Cache-Control,Content-Type,Authorization
-      Access-Control-Max-Age:
-      - '1728000'
-      Cf-Cache-Status:
-      - DYNAMIC
-      Report-To:
-      - '{"endpoints":[{"url":"https:\/\/a.nel.cloudflare.com\/report\/v3?s=%2BD%2FdAsscUdWJrW%2FvdDQdWq7yaV%2FxH7hJmZ7dS9hYCsedC195UhrWgoCrEW09WT4kotEuuyJ0iTE%2B1Hydg1MbImB5mqSYKozUE2pjg%2FMV35iBBzEcG7LX8BFjBSdIGfQKpEM%3D"}],"group":"cf-nel","max_age":604800}'
-      Nel:
-      - '{"success_fraction":0,"report_to":"cf-nel","max_age":604800}'
-      Server:
-      - cloudflare
-      Cf-Ray:
-      - 7a5f786bcc4df6dd-NRT
-    body:
-      encoding: ASCII-8BIT
-      string: '{"code": 200, "status": "OK", "result": {"query": "ip:1.1.1.1", "total":
-        1, "duration": 44, "hits": [{"ip": "1.1.1.1", "services": [{"port": 53, "service_name":
-        "DNS", "transport_protocol": "UDP", "extended_service_name": "DNS"}, {"port":
-        80, "service_name": "HTTP", "extended_service_name": "HTTP", "transport_protocol":
-        "TCP"}, {"port": 443, "service_name": "UNKNOWN", "transport_protocol": "QUIC",
-        "extended_service_name": "UNKNOWN"}, {"port": 443, "service_name": "HTTP",
-        "certificate": "98ce6111a81057e7d8d4fdf470278b2fb77781c4bb79bfb31fd31047c388d5a3",
-        "extended_service_name": "HTTPS", "transport_protocol": "TCP"}, {"port": 853,
-        "service_name": "UNKNOWN", "certificate": "98ce6111a81057e7d8d4fdf470278b2fb77781c4bb79bfb31fd31047c388d5a3",
-        "extended_service_name": "UNKNOWN", "transport_protocol": "TCP"}, {"port":
-        2052, "service_name": "HTTP", "extended_service_name": "HTTP", "transport_protocol":
-        "TCP"}, {"port": 2053, "service_name": "UNKNOWN", "certificate": "98ce6111a81057e7d8d4fdf470278b2fb77781c4bb79bfb31fd31047c388d5a3",
-        "extended_service_name": "UNKNOWN", "transport_protocol": "TCP"}, {"port":
-        2082, "service_name": "HTTP", "extended_service_name": "HTTP", "transport_protocol":
-        "TCP"}, {"port": 2083, "service_name": "UNKNOWN", "certificate": "98ce6111a81057e7d8d4fdf470278b2fb77781c4bb79bfb31fd31047c388d5a3",
-        "extended_service_name": "UNKNOWN", "transport_protocol": "TCP"}, {"port":
-        2086, "service_name": "HTTP", "extended_service_name": "HTTP", "transport_protocol":
-        "TCP"}, {"port": 2087, "service_name": "UNKNOWN", "certificate": "98ce6111a81057e7d8d4fdf470278b2fb77781c4bb79bfb31fd31047c388d5a3",
-        "extended_service_name": "UNKNOWN", "transport_protocol": "TCP"}, {"port":
-        2095, "service_name": "HTTP", "extended_service_name": "HTTP", "transport_protocol":
-        "TCP"}, {"port": 2096, "service_name": "UNKNOWN", "certificate": "98ce6111a81057e7d8d4fdf470278b2fb77781c4bb79bfb31fd31047c388d5a3",
-        "extended_service_name": "UNKNOWN", "transport_protocol": "TCP"}, {"port":
-        8080, "service_name": "HTTP", "extended_service_name": "HTTP", "transport_protocol":
-        "TCP"}, {"port": 8443, "service_name": "UNKNOWN", "certificate": "98ce6111a81057e7d8d4fdf470278b2fb77781c4bb79bfb31fd31047c388d5a3",
-        "extended_service_name": "UNKNOWN", "transport_protocol": "TCP"}, {"port":
-        8880, "service_name": "HTTP", "extended_service_name": "HTTP", "transport_protocol":
-        "TCP"}], "location": {"country_code": "", "postal_code": "", "timezone": "",
-        "coordinates": {"latitude": 0.0, "longitude": 0.0}, "registered_country":
-        "Australia", "registered_country_code": "AU"}, "autonomous_system": {"asn":
-        13335, "description": "CLOUDFLARENET", "bgp_prefix": "1.1.1.0/24", "name":
-        "CLOUDFLARENET", "country_code": "US"}, "last_updated_at": "2023-03-10T08:20:24.315Z",
-        "dns": {"reverse_dns": {"names": ["one.one.one.one"]}}}], "links": {"next":
-        "", "prev": ""}}}'
-  recorded_at: Fri, 10 Mar 2023 23:52:16 GMT
+  - request:
+      method: get
+      uri: https://search.censys.io/api/v2/hosts/search?q=ip:1.1.1.1
+      body:
+        encoding: US-ASCII
+        string: ""
+      headers:
+        Authorization:
+          - "<CENSYS_AUTH>"
+        Accept-Encoding:
+          - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+        Accept:
+          - "*/*"
+        User-Agent:
+          - Ruby
+        Host:
+          - search.censys.io
+    response:
+      status:
+        code: 200
+        message: OK
+      headers:
+        Date:
+          - Sat, 20 May 2023 04:01:59 GMT
+        Content-Type:
+          - application/json
+        Transfer-Encoding:
+          - chunked
+        Connection:
+          - keep-alive
+        Access-Control-Allow-Origin:
+          - "*"
+        X-Content-Type-Options:
+          - nosniff
+        Strict-Transport-Security:
+          - max-age=31536000; includeSubDomains; preload
+        Access-Control-Allow-Credentials:
+          - "true"
+        Access-Control-Allow-Methods:
+          - PUT, GET, POST, OPTIONS
+      body:
+        encoding: ASCII-8BIT
+        string:
+          '{"code": 200, "status": "OK", "result": {"query": "ip:1.1.1.1", "total":
+          1, "duration": 53, "hits": [{"operating_system": {"product": "linux", "source":
+          "OSI_TRANSPORT_LAYER", "uniform_resource_identifier": "cpe:2.3:o:*:linux:*:*:*:*:*:*:*:*",
+          "part": "o", "component_uniform_resource_identifiers": [], "other": []}, "ip":
+          "1.1.1.1", "services": [{"port": 53, "extended_service_name": "DNS", "transport_protocol":
+          "UDP", "service_name": "DNS"}, {"service_name": "HTTP", "transport_protocol":
+          "TCP", "extended_service_name": "HTTP", "port": 80}, {"service_name": "UNKNOWN",
+          "extended_service_name": "UNKNOWN", "port": 443, "transport_protocol": "QUIC"},
+          {"service_name": "HTTP", "transport_protocol": "TCP", "extended_service_name":
+          "HTTPS", "port": 443, "certificate": "98ce6111a81057e7d8d4fdf470278b2fb77781c4bb79bfb31fd31047c388d5a3"},
+          {"service_name": "UNKNOWN", "certificate": "98ce6111a81057e7d8d4fdf470278b2fb77781c4bb79bfb31fd31047c388d5a3",
+          "port": 853, "extended_service_name": "UNKNOWN", "transport_protocol": "TCP"},
+          {"extended_service_name": "HTTP", "port": 2052, "transport_protocol": "TCP",
+          "service_name": "HTTP"}, {"extended_service_name": "UNKNOWN", "service_name":
+          "UNKNOWN", "transport_protocol": "TCP", "port": 2053, "certificate": "98ce6111a81057e7d8d4fdf470278b2fb77781c4bb79bfb31fd31047c388d5a3"},
+          {"port": 2082, "extended_service_name": "HTTP", "service_name": "HTTP", "transport_protocol":
+          "TCP"}, {"service_name": "UNKNOWN", "port": 2083, "certificate": "98ce6111a81057e7d8d4fdf470278b2fb77781c4bb79bfb31fd31047c388d5a3",
+          "extended_service_name": "UNKNOWN", "transport_protocol": "TCP"}, {"transport_protocol":
+          "TCP", "port": 2086, "service_name": "HTTP", "extended_service_name": "HTTP"},
+          {"service_name": "UNKNOWN", "transport_protocol": "TCP", "extended_service_name":
+          "UNKNOWN", "certificate": "98ce6111a81057e7d8d4fdf470278b2fb77781c4bb79bfb31fd31047c388d5a3",
+          "port": 2087}, {"extended_service_name": "HTTP", "transport_protocol": "TCP",
+          "service_name": "HTTP", "port": 2095}, {"service_name": "UNKNOWN", "transport_protocol":
+          "TCP", "extended_service_name": "UNKNOWN", "certificate": "98ce6111a81057e7d8d4fdf470278b2fb77781c4bb79bfb31fd31047c388d5a3",
+          "port": 2096}, {"extended_service_name": "HTTP", "transport_protocol": "TCP",
+          "service_name": "HTTP", "port": 8080}, {"port": 8443, "extended_service_name":
+          "UNKNOWN", "transport_protocol": "TCP", "certificate": "98ce6111a81057e7d8d4fdf470278b2fb77781c4bb79bfb31fd31047c388d5a3",
+          "service_name": "UNKNOWN"}, {"transport_protocol": "TCP", "service_name":
+          "HTTP", "extended_service_name": "HTTP", "port": 8880}], "location": {"postal_code":
+          "90076", "country_code": "US", "coordinates": {"latitude": 34.0522, "longitude":
+          -118.2437}, "country": "United States", "timezone": "America/Los_Angeles",
+          "province": "California", "city": "Los Angeles", "continent": "North America"},
+          "dns": {"reverse_dns": {"names": ["one.one.one.one"]}}, "autonomous_system":
+          {"name": "CLOUDFLARENET", "country_code": "US", "asn": 13335, "bgp_prefix":
+          "1.1.1.0/24", "description": "CLOUDFLARENET"}, "last_updated_at": "2023-05-19T09:18:15.942Z"}],
+          "links": {}}}'
+    recorded_at: Sat, 20 May 2023 04:01:59 GMT
 recorded_with: VCR 6.1.0
