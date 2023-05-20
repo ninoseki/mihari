@@ -74,7 +74,7 @@ jobs:
       - name: Coveralls Parallel
         uses: coverallsapp/github-action@v2
         with:
-          flag-name: run-${{ matrix.ruby-version }}
+          flag-name: run-${{ matrix.ruby }}
           parallel: true
 
   coverage:
