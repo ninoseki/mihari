@@ -111,14 +111,14 @@ module Mihari
       end
 
       class Links < Dry::Struct
-        attribute :next, Types::String
-        attribute :prev, Types::String
+        attribute :next, Types::String.optional
+        attribute :prev, Types::String.optional
 
         def self.from_dynamic!(d)
           d = Types::Hash[d]
           new(
-            next: d.fetch("next"),
-            prev: d.fetch("prev")
+            next: d["next"],
+            prev: d["prev"]
           )
         end
       end
