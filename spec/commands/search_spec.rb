@@ -1,10 +1,10 @@
 # frozen_string_literal: true
 
 class CLI < Mihari::CLI::Base
-  include Mihari::Commands::Searcher
+  include Mihari::Commands::Search
 end
 
-RSpec.describe Mihari::Commands::Searcher, :vcr do
+RSpec.describe Mihari::Commands::Search, :vcr do
   before do
     # set an empty array as emitters (disable emission)
     allow(Mihari).to receive(:emitters).and_return([])
