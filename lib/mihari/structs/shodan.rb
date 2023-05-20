@@ -8,6 +8,20 @@ module Mihari
         attribute :country_name, Types::String.optional
 
         #
+        # @return [String, nil]
+        #
+        def country_code
+          attributes[:country_code]
+        end
+
+        #
+        # @return [String, nil]
+        #
+        def country_name
+          attributes[:country_name]
+        end
+
+        #
         # @return [Mihari::Geolocation, nil]
         #
         def to_geolocation
@@ -19,6 +33,11 @@ module Mihari
           )
         end
 
+        #
+        # @param [Hash] d
+        #
+        # @return [Location]
+        #
         def self.from_dynamic!(d)
           d = Types::Hash[d]
           new(
@@ -40,6 +59,48 @@ module Mihari
         attribute :metadata, Types::Hash
 
         #
+        # @return [String, nil]
+        #
+        def asn
+          attributes[:asn]
+        end
+
+        #
+        # @return [Array<String>]
+        #
+        def hostnames
+          attributes[:hostnames]
+        end
+
+        #
+        # @return [Location]
+        #
+        def location
+          attributes[:location]
+        end
+
+        #
+        # @return [String]
+        #
+        def ip_str
+          attributes[:ip_str]
+        end
+
+        #
+        # @return [Integer]
+        #
+        def port
+          attributes[:port]
+        end
+
+        #
+        # @return [Hash]
+        #
+        def metadata
+          attributes[:metadata]
+        end
+
+        #
         # @return [Mihari::AutonomousSystem, nil]
         #
         def to_asn
@@ -48,6 +109,11 @@ module Mihari
           Mihari::AutonomousSystem.new(asn: normalize_asn(asn))
         end
 
+        #
+        # @param [Hash] d
+        #
+        # @return [Match]
+        #
         def self.from_dynamic!(d)
           d = Types::Hash[d]
 
@@ -73,6 +139,20 @@ module Mihari
       class Result < Dry::Struct
         attribute :matches, Types.Array(Match)
         attribute :total, Types::Int
+
+        #
+        # @return [Array<Match>]
+        #
+        def matches
+          attributes[:matches]
+        end
+
+        #
+        # @return [Integer]
+        #
+        def total
+          attributes[:total]
+        end
 
         #
         # Collect metadata from matches
@@ -108,11 +188,9 @@ module Mihari
         end
 
         #
-        # @param [Source] source
-        #
         # @return [Array<Mihari::Artifact>]
         #
-        def to_artifacts(source = "Shodan")
+        def to_artifacts
           matches.map do |match|
             metadata = collect_metadata_by_ip(match.ip_str)
             ports = collect_ports_by_ip(match.ip_str).map do |port|
@@ -124,7 +202,6 @@ module Mihari
 
             Mihari::Artifact.new(
               data: match.ip_str,
-              source: source,
               metadata: metadata,
               autonomous_system: match.to_asn,
               geolocation: match.location.to_geolocation,
@@ -134,6 +211,11 @@ module Mihari
           end
         end
 
+        #
+        # @param [Hash] d
+        #
+        # @return [Result]
+        #
         def self.from_dynamic!(d)
           d = Types::Hash[d]
           new(
@@ -151,6 +233,53 @@ module Mihari
         attribute :tags, Types.Array(Types::String)
         attribute :vulns, Types.Array(Types::String)
 
+        #
+        # @return [String]
+        #
+        def ip
+          attributes[:ip]
+        end
+
+        #
+        # @return [Array<Integer>]
+        #
+        def ports
+          attributes[:ports]
+        end
+
+        #
+        # @return [Array<String>]
+        #
+        def cpes
+          attributes[:cpes]
+        end
+
+        #
+        # @return [Array<String>]
+        #
+        def hostnames
+          attributes[:hostnames]
+        end
+
+        #
+        # @return [Array<String>]
+        #
+        def tags
+          attributes[:tags]
+        end
+
+        #
+        # @return [Array<String>]
+        #
+        def vulns
+          attributes[:vulns]
+        end
+
+        #
+        # @param [Hash] d
+        #
+        # @return [InternetDBResponse]
+        #
         def self.from_dynamic!(d)
           d = Types::Hash[d]
           new(
@@ -163,6 +292,11 @@ module Mihari
           )
         end
 
+        #
+        # @param [String] json
+        #
+        # @return [InternetDBResponse]
+        #
         def self.from_json!(json)
           from_dynamic!(JSON.parse(json))
         end

@@ -26,7 +26,7 @@ module Mihari
         results = search
         return [] if results.empty?
 
-        results.map { |result| result.to_artifacts(source) }.flatten.uniq(&:data)
+        results.map(&:to_artifacts).flatten.uniq(&:data)
       end
 
       private

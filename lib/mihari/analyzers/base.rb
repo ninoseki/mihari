@@ -25,9 +25,13 @@ module Mihari
           @normalized_artifacts ||= artifacts.compact.sort.map do |artifact|
             # No need to set data_type manually
             # It is set automatically in #initialize
-            artifact = artifact.is_a?(Artifact) ? artifact : Artifact.new(data: artifact, source: source)
+            artifact = artifact.is_a?(Artifact) ? artifact : Artifact.new(data: artifact)
             artifact
-          end.select(&:valid?).uniq(&:data)
+          end.select(&:valid?).uniq(&:data).map do |artifact|
+            # set source
+            artifact.source = source
+            artifact
+          end
         end
       end
 

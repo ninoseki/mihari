@@ -11,6 +11,27 @@ module Mihari
         attribute :asn, Types::String
 
         #
+        # @return [String]
+        #
+        def country
+          attributes[:country]
+        end
+
+        #
+        # @return [String]
+        #
+        def country_code
+          attributes[:country_code]
+        end
+
+        #
+        # @return [String]
+        #
+        def asn
+          attributes[:asn]
+        end
+
+        #
         # @return [Mihari::AutonomousSystem]
         #
         def to_as
@@ -27,6 +48,11 @@ module Mihari
           )
         end
 
+        #
+        # @param [Hash] d
+        #
+        # @return [Metadata]
+        #
         def self.from_dynamic!(d)
           d = Types::Hash[d]
           new(
@@ -43,20 +69,43 @@ module Mihari
         attribute :metadata_, Types::Hash
 
         #
-        # @param [String] source
+        # @return [String]
+        #
+        def ip
+          attributes[:ip]
+        end
+
+        #
+        # @return [Metadata]
+        #
+        def metadata
+          attributes[:metadata]
+        end
+
+        #
+        # @return [Hash]
+        #
+        def metadata_
+          attributes[:metadata_]
+        end
+
         #
         # @return [Mihari::Artifact]
         #
-        def to_artifact(source = "GreyNoise")
+        def to_artifact
           Mihari::Artifact.new(
             data: ip,
-            source: source,
             metadata: metadata_,
             autonomous_system: metadata.to_as,
             geolocation: metadata.to_geolocation
           )
         end
 
+        #
+        # @param [Hash] d
+        #
+        # @return [Datum]
+        #
         def self.from_dynamic!(d)
           d = Types::Hash[d]
           new(
@@ -75,14 +124,52 @@ module Mihari
         attribute :query, Types::String
 
         #
-        # @param [String] source
+        # @return [Boolean]
+        #
+        def complete
+          attributes[:complete]
+        end
+
+        #
+        # @return [Integer]
+        #
+        def count
+          attributes[:count]
+        end
+
+        #
+        # @return [Array<Datum>]
+        #
+        def data
+          attributes[:data]
+        end
+
+        #
+        # @return [String]
+        #
+        def message
+          attributes[:message]
+        end
+
+        #
+        # @return [String]
+        #
+        def query
+          attributes[:query]
+        end
+
         #
         # @return [Array<Mihari::Artifact>]
         #
-        def to_artifacts(source = "GreyNoise")
-          data.map { |datum| datum.to_artifact(source) }
+        def to_artifacts
+          data.map { |datum| datum.to_artifact }
         end
 
+        #
+        # @param [Hash] d
+        #
+        # @return [Response]
+        #
         def self.from_dynamic!(d)
           d = Types::Hash[d]
           new(

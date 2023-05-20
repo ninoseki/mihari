@@ -36,15 +36,12 @@ module Mihari
 
       def artifacts
         responses = search
-        results = responses.map(&:results).flatten
+        # @type [Array<Mihari::Artifact>]
+        artifacts = responses.map { |res| res.to_artifacts }.flatten
 
-        allowed_data_types.map do |type|
-          results.filter_map do |result|
-            page = result.page
-            data = page.send(type.to_sym)
-            data.nil? ? nil : Artifact.new(data: data, source: source, metadata: result)
-          end
-        end.flatten
+        artifacts.select do |artifact|
+          allowed_data_types.include? artifact.data_type
+        end
       end
 
       private

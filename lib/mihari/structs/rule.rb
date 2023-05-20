@@ -10,6 +10,8 @@ require "yaml"
 module Mihari
   module Structs
     class Rule
+      include Mixins::FalsePositive
+
       # @return [Hash]
       attr_reader :data
 
@@ -109,10 +111,10 @@ module Mihari
       end
 
       #
-      # @return [Array<String>]
+      # @return [Array<String, RegExp>]
       #
       def falsepositives
-        @falsepositives ||= data[:falsepositives]
+        @falsepositives ||= data[:falsepositives].map { |fp| normalize_falsepositive fp }
       end
 
       #
