@@ -60,7 +60,7 @@ module Mihari
       ).order(created_at: :desc).first
       return true if artifact.nil?
 
-      # check whetehr the artifact is decayed or not
+      # check whether the artifact is decayed or not
       return false if artifact_lifetime.nil?
 
       # use the current UTC time if base_time is not given (for testing)

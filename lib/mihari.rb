@@ -254,6 +254,7 @@ require "mihari/analyzers/urlscan"
 require "mihari/analyzers/virustotal_intelligence"
 require "mihari/analyzers/virustotal"
 require "mihari/analyzers/zoomeye"
+
 require "mihari/analyzers/rule"
 
 # Entities
