@@ -8,3 +8,5 @@ Metrics/BlockLength:
     - "*.gemspec"
 Metrics/ClassLength:
   Enabled: false
+Metrics/MethodLength:
+  Max: 20

@@ -3,7 +3,7 @@
 require "thor"
 
 # Commands
-require "mihari/commands/searcher"
+require "mihari/commands/search"
 require "mihari/commands/version"
 require "mihari/commands/web"
 require "mihari/commands/database"
@@ -17,7 +17,7 @@ require "mihari/cli/rule"
 module Mihari
   module CLI
     class Main < Base
-      include Mihari::Commands::Searcher
+      include Mihari::Commands::Search
       include Mihari::Commands::Version
       include Mihari::Commands::Web
 
