@@ -100,9 +100,7 @@ module Mihari
       #
       def enriched_artifacts
         @enriched_artifacts ||= Parallel.map(unique_artifacts) do |artifact|
-          rule.enrichers.each do |enricher|
-            artifact.enrich_by_enricher(enricher[:enricher])
-          end
+          rule.enrichers.each { |enricher| artifact.enrich_by_enricher enricher[:enricher] }
           artifact
         end
       end
@@ -152,29 +150,25 @@ module Mihari
       private
 
       #
-      # Normalized disallowed data values
-      #
-      # @return [Array<Regexp, String>]
-      #
-      def normalized_falsepositives
-        @normalized_falsepositives ||= rule.falsepositives.map { |v| normalize_falsepositive v }
-      end
-
-      #
       # Check whether a value is a falsepositive value or not
       #
       # @return [Boolean]
       #
       def falsepositive?(value)
-        return true if normalized_falsepositives.include?(value)
+        return true if rule.falsepositives.include?(value)
 
-        normalized_falsepositives.select do |falsepositive|
+        rule.falsepositives.select do |falsepositive|
           falsepositive.is_a?(Regexp)
         end.any? do |falseposistive|
           falseposistive.match?(value)
         end
       end
 
+      #
+      # @param [Hash] params
+      #
+      # @return [Array<Mihari::Artifact>]
+      #
       def run_query(params)
         analyzer_name = params[:analyzer]
         klass = get_analyzer_class(analyzer_name)
@@ -208,6 +202,11 @@ module Mihari
         raise ArgumentError, "#{emitter_name} is not supported"
       end
 
+      #
+      # @param [Hash] params
+      #
+      # @return [Mihari::Emitter:Base]
+      #
       def validate_emitter(params)
         name = params[:emitter]
         params.delete(:emitter)
@@ -218,6 +217,9 @@ module Mihari
         emitter.valid? ? emitter : nil
       end
 
+      #
+      # @return [Array<Mihari::Emitter::Base>]
+      #
       def valid_emitters
         @valid_emitters ||= rule.emitters.filter_map { |params| validate_emitter(params.deep_dup) }
       end
