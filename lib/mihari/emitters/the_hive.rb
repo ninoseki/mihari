@@ -12,12 +12,12 @@ module Mihari
       # @return [String, nil]
       attr_reader :api_version
 
-      def initialize(*args, **kwargs)
-        super(*args, **kwargs)
+      def initialize(artifacts:, rule:, **options)
+        super(artifacts: artifacts, rule: rule, **options)
 
-        @url = kwargs[:url] || Mihari.config.thehive_url
-        @api_key = kwargs[:api_key] || Mihari.config.thehive_api_key
-        @api_version = kwargs[:api_version] || Mihari.config.thehive_api_version
+        @url = options[:url] || Mihari.config.thehive_url
+        @api_key = options[:api_key] || Mihari.config.thehive_api_key
+        @api_version = options[:api_version] || Mihari.config.thehive_api_version
       end
 
       # @return [Boolean]
@@ -39,15 +39,11 @@ module Mihari
       #
       # Create a Hive alert
       #
-      # @param [Arra<Mihari::Artifact>] artifacts
-      # @param [Mihari::Structs::Rule] rule
-      #
       # @return [::MISP::Event]
       #
-      def emit(rule:, artifacts:, **_options)
+      def emit
         return if artifacts.empty?
 
-        payload = payload(rule: rule, artifacts: artifacts)
         client.alert(payload)
       end
 
@@ -102,18 +98,15 @@ module Mihari
       #
       # Build payload for alert
       #
-      # @param [Arra<Mihari::Artifact>] artifacts
-      # @param [Mihari::Structs::Rule] rule
+      # @return [Hash]
       #
-      # @return [<Type>] <description>
-      #
-      def payload(rule:, artifacts:)
-        return v4_payload(rule: rule, artifacts: artifacts) if normalized_api_version.nil?
+      def payload
+        return v4_payload if normalized_api_version.nil?
 
-        v5_payload(rule: rule, artifacts: artifacts)
+        v5_payload
       end
 
-      def v4_payload(rule:, artifacts:)
+      def v4_payload
         {
           title: rule.title,
           description: rule.description,
@@ -130,7 +123,7 @@ module Mihari
         }
       end
 
-      def v5_payload(rule:, artifacts:)
+      def v5_payload
         {
           title: rule.title,
           description: rule.description,

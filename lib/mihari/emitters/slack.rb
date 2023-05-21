@@ -121,11 +121,11 @@ module Mihari
       # @return [String]
       attr_reader :username
 
-      def initialize(*args, **kwargs)
-        super(*args, **kwargs)
+      def initialize(artifacts:, rule:, **options)
+        super(artifacts: artifacts, rule: rule, **options)
 
-        @webhook_url = kwargs[:webhook_url] || Mihari.config.slack_webhook_url
-        @channel = kwargs[:channel] || Mihari.config.slack_channel || DEFAULT_CHANNEL
+        @webhook_url = options[:webhook_url] || Mihari.config.slack_webhook_url
+        @channel = options[:channel] || Mihari.config.slack_channel || DEFAULT_CHANNEL
         @username = DEFAULT_USERNAME
       end
 
@@ -152,13 +152,11 @@ module Mihari
       end
 
       #
-      # Build attachements
-      #
-      # @param [Array<Mihari::Artifact>] artifacts
+      # Build attachments
       #
       # @return [Array<Mihari::Emitters::Attachment>]
       #
-      def to_attachments(artifacts)
+      def attachments
         artifacts.map do |artifact|
           Attachment.new(data: artifact.data, data_type: artifact.data_type).to_a
         end.flatten
@@ -167,11 +165,9 @@ module Mihari
       #
       # Build a text
       #
-      # @param [Mihari::Structs::Rule] rule
-      #
       # @return [String]
       #
-      def to_text(rule)
+      def text
         tags = rule.tags
         tags = ["N/A"] if tags.empty?
 
@@ -182,11 +178,8 @@ module Mihari
         ].join("\n")
       end
 
-      def emit(rule:, artifacts:, **_options)
+      def emit
         return if artifacts.empty?
-
-        attachments = to_attachments(artifacts)
-        text = to_text(rule)
 
         notifier.post(text: text, attachments: attachments, mrkdwn: true)
       end

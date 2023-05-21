@@ -3,8 +3,6 @@
 RSpec.describe Mihari::Emitters::Slack do
   include_context "with database fixtures"
 
-  subject { described_class.new }
-
   let(:rule) { Mihari::Structs::Rule.from_model(Mihari::Rule.first) }
   let(:artifacts) do
     [
@@ -16,10 +14,11 @@ RSpec.describe Mihari::Emitters::Slack do
     ]
   end
 
-  describe "#to_attachments" do
+  subject { described_class.new(artifacts: artifacts, rule: rule) }
+
+  describe "#attachments" do
     it do
-      attachments = subject.to_attachments(artifacts)
-      attachments.each do |a|
+      subject.attachments.each do |a|
         actions = a[:actions] || []
         actions.each do |action|
           expect(action[:url]).to match(/virustotal|urlscan|censys|shodan/)
@@ -28,11 +27,10 @@ RSpec.describe Mihari::Emitters::Slack do
     end
   end
 
-  describe "#to_text" do
+  describe "#text" do
     context "when not given tags" do
       it do
-        text = subject.to_text(rule)
-        expect(text).to eq("*test1*\n*Desc.*: test1\n*Tags*: tag1")
+        expect(subject.text).to eq("*test1*\n*Desc.*: test1\n*Tags*: tag1")
       end
     end
   end
@@ -68,7 +66,7 @@ RSpec.describe Mihari::Emitters::Slack do
     end
 
     it do
-      subject.emit(rule: rule, artifacts: artifacts)
+      subject.emit
       expect(mock).to have_received(:post).once
     end
   end

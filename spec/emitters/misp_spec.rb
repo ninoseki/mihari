@@ -3,7 +3,10 @@
 RSpec.describe Mihari::Emitters::MISP, :vcr do
   include_context "with database fixtures"
 
-  subject { described_class.new }
+  let(:artifacts) { [Mihari::Artifact.new(data: "1.1.1.1")] }
+  let(:rule) { Mihari::Structs::Rule.from_model(Mihari::Rule.first) }
+
+  subject { described_class.new(artifacts: artifacts, rule: rule) }
 
   describe "#valid?" do
     context "when MISP_URL & MISP_API_KEY are not given" do
@@ -19,11 +22,8 @@ RSpec.describe Mihari::Emitters::MISP, :vcr do
   end
 
   describe "#emit" do
-    let(:artifacts) { [Mihari::Artifact.new(data: "1.1.1.1")] }
-    let(:rule) { Mihari::Structs::Rule.from_model(Mihari::Rule.first) }
-
     it do
-      subject.emit(artifacts: artifacts, rule: rule)
+      subject.emit
     end
   end
 end

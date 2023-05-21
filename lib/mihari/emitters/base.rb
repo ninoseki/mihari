@@ -6,7 +6,15 @@ module Mihari
       include Mixins::Configurable
       include Mixins::Retriable
 
-      def initialize(*)
+      # @return [Array<Mihari::Artifact>]
+      attr_reader :artifacts
+
+      # @return [Mihari::Structs::Rule]
+      attr_reader :rule
+
+      def initialize(artifacts:, rule:, **_options)
+        @artifacts = artifacts
+        @rule = rule
       end
 
       class << self

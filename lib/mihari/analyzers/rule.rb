@@ -54,12 +54,12 @@ module Mihari
       end
 
       #
-      # Returns a list of artifacts matched with queries
+      # Returns a list of artifacts matched with queries/analyzers
       #
       # @return [Array<Mihari::Artifact>]
       #
       def artifacts
-        rule.queries.map { |params| run_query(params.deep_dup) }.flatten
+        analyzers.flat_map(&:normalized_artifacts)
       end
 
       #
@@ -111,26 +111,15 @@ module Mihari
       # @return [Array<Mihari::Alert>]
       #
       def bulk_emit
-        Parallel.map(valid_emitters) { |emitter| emit emitter }.compact
-      end
+        return [] if enriched_artifacts.empty?
 
-      #
-      # Emit an alert
-      #
-      # @param [Mihari::Emitters::Base] emitter
-      #
-      # @return [Mihari::Alert, nil]
-      #
-      def emit(emitter)
-        return if enriched_artifacts.empty?
-
-        alert_or_something = emitter.run(artifacts: enriched_artifacts, rule: rule)
-
-        Mihari.logger.info "Emission by #{emitter.class} is succeeded"
-
-        alert_or_something
-      rescue StandardError => e
-        Mihari.logger.info "Emission by #{emitter.class} is failed: #{e}"
+        Parallel.map(valid_emitters) do |emitter|
+          emission = emitter.emit
+          Mihari.logger.info "Emission by #{emitter.class} is succeeded"
+          emission
+        rescue StandardError => e
+          Mihari.logger.info "Emission by #{emitter.class} is failed: #{e}"
+        end.compact
       end
 
       #
@@ -165,63 +154,12 @@ module Mihari
       end
 
       #
-      # @param [Hash] params
+      # Deep copied queries
       #
-      # @return [Array<Mihari::Artifact>]
+      # @return [Array<Hash>]
       #
-      def run_query(params)
-        analyzer_name = params[:analyzer]
-        klass = get_analyzer_class(analyzer_name)
-
-        # set interval in the top level
-        options = params[:options] || {}
-        interval = options[:interval]
-        params[:interval] = interval if interval
-
-        # set rule
-        params[:rule] = rule
-        query = params[:query]
-        analyzer = klass.new(query, **params)
-
-        # Use #normalized_artifacts method to get artifacts as Array<Mihari::Artifact>
-        # So Mihari::Artifact object has "source" attribute (e.g. "Shodan")
-        analyzer.normalized_artifacts
-      end
-
-      #
-      # Get emitter class
-      #
-      # @param [String] emitter_name
-      #
-      # @return [Class<Mihari::Emitters::Base>] emitter class
-      #
-      def get_emitter_class(emitter_name)
-        emitter = EMITTER_TO_CLASS[emitter_name]
-        return emitter if emitter
-
-        raise ArgumentError, "#{emitter_name} is not supported"
-      end
-
-      #
-      # @param [Hash] params
-      #
-      # @return [Mihari::Emitter:Base]
-      #
-      def validate_emitter(params)
-        name = params[:emitter]
-        params.delete(:emitter)
-
-        klass = get_emitter_class(name)
-        emitter = klass.new(**params)
-
-        emitter.valid? ? emitter : nil
-      end
-
-      #
-      # @return [Array<Mihari::Emitter::Base>]
-      #
-      def valid_emitters
-        @valid_emitters ||= rule.emitters.filter_map { |params| validate_emitter(params.deep_dup) }
+      def queries
+        rule.queries.map(&:deep_dup)
       end
 
       #
@@ -239,18 +177,71 @@ module Mihari
       end
 
       #
+      # @return [Array<Mihari::Analyzers::Base>] <description>
+      #
+      def analyzers
+        @analyzers ||= queries.map do |params|
+          analyzer_name = params[:analyzer]
+          klass = get_analyzer_class(analyzer_name)
+
+          # set interval in the top level
+          options = params[:options] || {}
+          interval = options[:interval]
+          params[:interval] = interval if interval
+
+          # set rule
+          params[:rule] = rule
+          query = params[:query]
+
+          analyzer = klass.new(query, **params)
+          raise ConfigurationError, "#{analyzer.source} is not configured correctly" unless analyzer.configured?
+
+          analyzer
+        end
+      end
+
+      #
+      # Get emitter class
+      #
+      # @param [String] emitter_name
+      #
+      # @return [Class<Mihari::Emitters::Base>] emitter class
+      #
+      def get_emitter_class(emitter_name)
+        emitter = EMITTER_TO_CLASS[emitter_name]
+        return emitter if emitter
+
+        raise ArgumentError, "#{emitter_name} is not supported"
+      end
+
+      #
+      # Deep copied emitters
+      #
+      # @return [Array<Mihari::Emitters::Base>]
+      #
+      def emitters
+        rule.emitters.map(&:deep_dup).map do |params|
+          name = params[:emitter]
+          params.delete(:emitter)
+
+          klass = get_emitter_class(name)
+          klass.new(artifacts: enriched_artifacts, rule: rule, **params)
+        end
+      end
+
+      #
+      # @return [Array<Mihari::Emitters::Base>]
+      #
+      def valid_emitters
+        @valid_emitters ||= emitters.select(&:valid?)
+      end
+
+      #
       # Validate configuration of analyzers
       #
       def validate_analyzer_configurations
-        rule.queries.each do |params|
-          analyzer_name = params[:analyzer]
-
-          klass = get_analyzer_class(analyzer_name)
-          klass_name = klass.to_s.split("::").last
-
-          instance = klass.new("dummy")
-          raise ConfigurationError, "#{klass_name} is not configured correctly" unless instance.configured?
-        end
+        # memoize analyzers & raise ConfigurationError if there is an analyzer which is not configured
+        analyzers
       end
     end
   end

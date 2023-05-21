@@ -3,7 +3,10 @@
 RSpec.describe Mihari::Emitters::TheHive, :vcr do
   include_context "with database fixtures"
 
-  subject { described_class.new }
+  let(:artifacts) { [Mihari::Artifact.new(data: "1.1.1.1")] }
+  let(:rule) { Mihari::Structs::Rule.from_model(Mihari::Rule.first) }
+
+  subject { described_class.new(artifacts: artifacts, rule: rule) }
 
   describe "#valid?" do
     before do
@@ -40,9 +43,6 @@ RSpec.describe Mihari::Emitters::TheHive, :vcr do
   end
 
   describe "#emit" do
-    let(:artifacts) { [Mihari::Artifact.new(data: "1.1.1.1")] }
-    let(:rule) { Mihari::Structs::Rule.from_model(Mihari::Rule.first) }
-
     let(:mock_client) { double("client") }
 
     before do
@@ -51,7 +51,7 @@ RSpec.describe Mihari::Emitters::TheHive, :vcr do
     end
 
     it do
-      subject.emit(artifacts: artifacts, rule: rule)
+      subject.emit
       expect(mock_client).to have_received(:alert)
     end
   end
