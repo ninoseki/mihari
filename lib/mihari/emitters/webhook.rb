@@ -55,30 +55,22 @@ module Mihari
       # @return [String, nil]
       attr_reader :template
 
-      def initialize(*args, **kwargs)
-        super(*args, **kwargs)
+      def initialize(artifacts:, rule:, **options)
+        @artifacts = artifacts
+        @rule = rule
 
-        url = kwargs[:url]
-        headers = kwargs[:headers] || {}
-        method = kwargs[:method] || "POST"
-        template = kwargs[:template]
-
-        @url = Addressable::URI.parse(url)
-        @headers = headers
-        @method = method
-        @template = template
+        @url = Addressable::URI.parse(options[:url])
+        @headers = options[:headers] || {}
+        @method = options[:method] || "POST"
+        @template = options[:template]
       end
 
-      def emit(artifacts:, rule:)
+      def emit
         return if artifacts.empty?
-
-        res = nil
-
-        payload_ = payload_as_string(artifacts: artifacts, rule: rule)
-        payload = JSON.parse(payload_)
 
         client = Mihari::HTTP.new(url, headers: headers)
 
+        res = nil
         case method
         when "GET"
           res = client.get
@@ -100,13 +92,10 @@ module Mihari
       #
       # Convert payload into string
       #
-      # @param [Array<Mihari::Artifact>] artifacts
-      # @param [Mihari::Structs::Rule] rule
-      #
       # @return [String]
       #
-      def payload_as_string(artifacts:, rule:)
-        @payload_as_string ||= [].tap do |out|
+      def payload_as_string
+        [].tap do |out|
           options = {}
           options[:template] = File.read(template) unless template.nil?
 
@@ -117,6 +106,13 @@ module Mihari
           )
           out << payload_template.result
         end.first
+      end
+
+      #
+      # @return [Hash]
+      #
+      def payload
+        JSON.parse payload_as_string
       end
     end
   end

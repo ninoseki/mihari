@@ -9,11 +9,18 @@ module Mihari
       # @return [String, nil]
       attr_reader :api_key
 
-      def initialize(*args, **kwargs)
-        super(*args, **kwargs)
+      # @return [Array<Mihari::Artifact>]
+      attr_reader :artifacts
 
-        @url = kwargs[:url] || Mihari.config.misp_url
-        @api_key = kwargs[:api_key] || Mihari.config.misp_api_key
+      # @return [Mihari::Structs::Rule]
+      attr_reader :rule
+
+      def initialize(artifacts:, rule:, **options)
+        @artifacts = artifacts
+        @rule = rule
+
+        @url = options[:url] || Mihari.config.misp_url
+        @api_key = options[:api_key] || Mihari.config.misp_api_key
       end
 
       # @return [Boolean]
@@ -40,7 +47,7 @@ module Mihari
       #
       # @return [::MISP::Event]
       #
-      def emit(rule:, artifacts:, **_options)
+      def emit
         return if artifacts.empty?
 
         client.create_event({

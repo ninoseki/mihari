@@ -55,7 +55,7 @@ module Mihari
         type = "Enricher" if is_enricher
 
         begin
-          instance = is_analyzer ? klass.new("dummy") : klass.new
+          instance = is_analyzer ? klass.new("dummy") : klass.new(artifacts: [], rule: nil)
           is_configured = instance.configured?
           values = instance.configuration_values
 
