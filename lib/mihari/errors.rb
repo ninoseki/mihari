@@ -19,8 +19,6 @@ module Mihari
 
   class ConfigurationError < Error; end
 
-  class CancelError < Error; end
-
   class HTTPError < Error; end
 
   class UnsuccessfulStatusCodeError < HTTPError; end
