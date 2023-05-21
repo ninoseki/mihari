@@ -16,8 +16,7 @@ module Mihari
       attr_reader :rule
 
       def initialize(artifacts:, rule:, **options)
-        @artifacts = artifacts
-        @rule = rule
+        super(artifacts: artifacts, rule: rule, **options)
 
         @url = options[:url] || Mihari.config.misp_url
         @api_key = options[:api_key] || Mihari.config.misp_api_key

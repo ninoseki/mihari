@@ -13,8 +13,7 @@ module Mihari
       attr_reader :api_version
 
       def initialize(artifacts:, rule:, **options)
-        @artifacts = artifacts
-        @rule = rule
+        super(artifacts: artifacts, rule: rule, **options)
 
         @url = options[:url] || Mihari.config.thehive_url
         @api_key = options[:api_key] || Mihari.config.thehive_api_key

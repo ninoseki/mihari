@@ -56,8 +56,7 @@ module Mihari
       attr_reader :template
 
       def initialize(artifacts:, rule:, **options)
-        @artifacts = artifacts
-        @rule = rule
+        super(artifacts: artifacts, rule: rule, **options)
 
         @url = Addressable::URI.parse(options[:url])
         @headers = options[:headers] || {}

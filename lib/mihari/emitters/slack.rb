@@ -122,8 +122,7 @@ module Mihari
       attr_reader :username
 
       def initialize(artifacts:, rule:, **options)
-        @artifacts = artifacts
-        @rule = rule
+        super(artifacts: artifacts, rule: rule, **options)
 
         @webhook_url = options[:webhook_url] || Mihari.config.slack_webhook_url
         @channel = options[:channel] || Mihari.config.slack_channel || DEFAULT_CHANNEL
