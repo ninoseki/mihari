@@ -6,7 +6,23 @@ require "insensitive_hash"
 module Mihari
   module Feed
     class Reader
-      attr_reader :url, :headers, :params, :json, :data, :method
+      # @return [String]
+      attr_reader :url
+
+      # @return [Hash]
+      attr_reader :headers
+
+      # @return [Hash, nil]
+      attr_reader :params
+
+      # @return [Hash, nil]
+      attr_reader :json
+
+      # @return [Hash, nil]
+      attr_reader :data
+
+      # @return [String]
+      attr_reader :method
 
       def initialize(url, headers: {}, method: "GET", params: nil, json: nil, data: nil)
         @url = Addressable::URI.parse(url)
@@ -20,6 +36,9 @@ module Mihari
         headers["content-type"] = "application/json" unless json.nil?
       end
 
+      #
+      # @return [Array<Hash>]
+      #
       def read
         return read_file(url.path) if url.scheme == "file"
 
@@ -33,11 +52,9 @@ module Mihari
 
         body = res.body
         content_type = res["Content-Type"].to_s
-        if content_type.include?("application/json")
-          convert_as_json(body)
-        else
-          convert_as_csv(body)
-        end
+        return convert_as_json(body) if content_type.include?("application/json")
+
+        convert_as_csv(body)
       end
 
       #
@@ -48,10 +65,10 @@ module Mihari
       # @return [Array<Hash>]
       #
       def convert_as_json(text)
-        data = JSON.parse(text, symbolize_names: true)
-        return data if data.is_a?(Array)
+        parsed = JSON.parse(text, symbolize_names: true)
+        return parsed if parsed.is_a?(Array)
 
-        [data]
+        [parsed]
       end
 
       #
@@ -77,11 +94,9 @@ module Mihari
       def read_file(path)
         text = File.read(path)
 
-        if path.end_with?(".json")
-          convert_as_json text
-        else
-          convert_as_csv text
-        end
+        return convert_as_json(text) if path.end_with?(".json")
+
+        convert_as_csv text
       end
     end
   end

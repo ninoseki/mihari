@@ -31,7 +31,7 @@ module Mihari
 
       #
       # @param [String] path
-      # @param [Hashk, nil] params
+      # @param [Hash, nil] params
       #
       # @return [String] <description>
       #

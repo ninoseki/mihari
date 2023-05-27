@@ -25,8 +25,7 @@ module Mihari
       end
 
       def artifacts
-        responses = search_with_cursor
-        responses.map(&:to_artifacts).flatten
+        search_with_cursor.map(&:to_artifacts).flatten
       end
 
       private

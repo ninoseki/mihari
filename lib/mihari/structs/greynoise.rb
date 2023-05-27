@@ -48,18 +48,20 @@ module Mihari
           )
         end
 
-        #
-        # @param [Hash] d
-        #
-        # @return [Metadata]
-        #
-        def self.from_dynamic!(d)
-          d = Types::Hash[d]
-          new(
-            country: d.fetch("country"),
-            country_code: d.fetch("country_code"),
-            asn: d.fetch("asn")
-          )
+        class << self
+          #
+          # @param [Hash] d
+          #
+          # @return [Metadata]
+          #
+          def from_dynamic!(d)
+            d = Types::Hash[d]
+            new(
+              country: d.fetch("country"),
+              country_code: d.fetch("country_code"),
+              asn: d.fetch("asn")
+            )
+          end
         end
       end
 
@@ -101,18 +103,20 @@ module Mihari
           )
         end
 
-        #
-        # @param [Hash] d
-        #
-        # @return [Datum]
-        #
-        def self.from_dynamic!(d)
-          d = Types::Hash[d]
-          new(
-            ip: d.fetch("ip"),
-            metadata: Metadata.from_dynamic!(d.fetch("metadata")),
-            metadata_: d
-          )
+        class << self
+          #
+          # @param [Hash] d
+          #
+          # @return [Datum]
+          #
+          def from_dynamic!(d)
+            d = Types::Hash[d]
+            new(
+              ip: d.fetch("ip"),
+              metadata: Metadata.from_dynamic!(d.fetch("metadata")),
+              metadata_: d
+            )
+          end
         end
       end
 
@@ -165,20 +169,22 @@ module Mihari
           data.map { |datum| datum.to_artifact }
         end
 
-        #
-        # @param [Hash] d
-        #
-        # @return [Response]
-        #
-        def self.from_dynamic!(d)
-          d = Types::Hash[d]
-          new(
-            complete: d.fetch("complete"),
-            count: d.fetch("count"),
-            data: d.fetch("data").map { |x| Datum.from_dynamic!(x) },
-            message: d.fetch("message"),
-            query: d.fetch("query")
-          )
+        class << self
+          #
+          # @param [Hash] d
+          #
+          # @return [Response]
+          #
+          def from_dynamic!(d)
+            d = Types::Hash[d]
+            new(
+              complete: d.fetch("complete"),
+              count: d.fetch("count"),
+              data: d.fetch("data").map { |x| Datum.from_dynamic!(x) },
+              message: d.fetch("message"),
+              query: d.fetch("query")
+            )
+          end
         end
       end
     end

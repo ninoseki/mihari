@@ -22,16 +22,18 @@ module Mihari
           Mihari::AutonomousSystem.new(asn: normalize_asn(asn))
         end
 
-        #
-        # @param [Hash] d
-        #
-        # @return [AutonomousSystem]
-        #
-        def self.from_dynamic!(d)
-          d = Types::Hash[d]
-          new(
-            asn: d.fetch("asn")
-          )
+        class << self
+          #
+          # @param [Hash] d
+          #
+          # @return [AutonomousSystem]
+          #
+          def from_dynamic!(d)
+            d = Types::Hash[d]
+            new(
+              asn: d.fetch("asn")
+            )
+          end
         end
       end
 
@@ -67,17 +69,19 @@ module Mihari
           )
         end
 
-        #
-        # @param [Hash] d
-        #
-        # @return [Location]
-        #
-        def self.from_dynamic!(d)
-          d = Types::Hash[d]
-          new(
-            country: d["country"],
-            country_code: d["country_code"]
-          )
+        class << self
+          #
+          # @param [Hash] d
+          #
+          # @return [Location]
+          #
+          def from_dynamic!(d)
+            d = Types::Hash[d]
+            new(
+              country: d["country"],
+              country_code: d["country_code"]
+            )
+          end
         end
       end
 
@@ -98,16 +102,18 @@ module Mihari
           Port.new(port: port)
         end
 
-        #
-        # @param [Hash] d
-        #
-        # @return [Service]
-        #
-        def self.from_dynamic!(d)
-          d = Types::Hash[d]
-          new(
-            port: d.fetch("port")
-          )
+        class << self
+          #
+          # @param [Hash] d
+          #
+          # @return [Service]
+          #
+          def from_dynamic!(d)
+            d = Types::Hash[d]
+            new(
+              port: d.fetch("port")
+            )
+          end
         end
       end
 
@@ -173,20 +179,22 @@ module Mihari
           )
         end
 
-        #
-        # @param [Hash] d
-        #
-        # @return [Hit]
-        #
-        def self.from_dynamic!(d)
-          d = Types::Hash[d]
-          new(
-            ip: d.fetch("ip"),
-            location: Location.from_dynamic!(d.fetch("location")),
-            autonomous_system: AutonomousSystem.from_dynamic!(d.fetch("autonomous_system")),
-            metadata: d,
-            services: d.fetch("services", []).map { |x| Service.from_dynamic!(x) }
-          )
+        class << self
+          #
+          # @param [Hash] d
+          #
+          # @return [Hit]
+          #
+          def from_dynamic!(d)
+            d = Types::Hash[d]
+            new(
+              ip: d.fetch("ip"),
+              location: Location.from_dynamic!(d.fetch("location")),
+              autonomous_system: AutonomousSystem.from_dynamic!(d.fetch("autonomous_system")),
+              metadata: d,
+              services: d.fetch("services", []).map { |x| Service.from_dynamic!(x) }
+            )
+          end
         end
       end
 
@@ -208,17 +216,19 @@ module Mihari
           attributes[:prev]
         end
 
-        #
-        # @param [Hash] d
-        #
-        # @return [Links]
-        #
-        def self.from_dynamic!(d)
-          d = Types::Hash[d]
-          new(
-            next: d["next"],
-            prev: d["prev"]
-          )
+        class << self
+          #
+          # @param [Hash] d
+          #
+          # @return [Links]
+          #
+          def from_dynamic!(d)
+            d = Types::Hash[d]
+            new(
+              next: d["next"],
+              prev: d["prev"]
+            )
+          end
         end
       end
 
@@ -260,22 +270,24 @@ module Mihari
         # @return [Array<Mihari::Artifact>]
         #
         def to_artifacts
-          hits.map { |hit| hit.to_artifact }
+          hits.map(&:to_artifact)
         end
 
-        #
-        # @param [Hash] d
-        #
-        # @return [Result]
-        #
-        def self.from_dynamic!(d)
-          d = Types::Hash[d]
-          new(
-            query: d.fetch("query"),
-            total: d.fetch("total"),
-            hits: d.fetch("hits", []).map { |x| Hit.from_dynamic!(x) },
-            links: Links.from_dynamic!(d.fetch("links"))
-          )
+        class << self
+          #
+          # @param [Hash] d
+          #
+          # @return [Result]
+          #
+          def from_dynamic!(d)
+            d = Types::Hash[d]
+            new(
+              query: d.fetch("query"),
+              total: d.fetch("total"),
+              hits: d.fetch("hits", []).map { |x| Hit.from_dynamic!(x) },
+              links: Links.from_dynamic!(d.fetch("links"))
+            )
+          end
         end
       end
 
@@ -305,18 +317,20 @@ module Mihari
           attributes[:result]
         end
 
-        #
-        # @param [Hash] d
-        #
-        # @return [Response]
-        #
-        def self.from_dynamic!(d)
-          d = Types::Hash[d]
-          new(
-            code: d.fetch("code"),
-            status: d.fetch("status"),
-            result: Result.from_dynamic!(d.fetch("result"))
-          )
+        class << self
+          #
+          # @param [Hash] d
+          #
+          # @return [Response]
+          #
+          def from_dynamic!(d)
+            d = Types::Hash[d]
+            new(
+              code: d.fetch("code"),
+              status: d.fetch("status"),
+              result: Result.from_dynamic!(d.fetch("result"))
+            )
+          end
         end
       end
     end

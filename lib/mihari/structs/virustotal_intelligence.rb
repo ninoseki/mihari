@@ -13,16 +13,18 @@ module Mihari
           attributes[:url]
         end
 
-        #
-        # @param [Hash] d
-        #
-        # @return [ContextAttributes]
-        #
-        def self.from_dynamic!(d)
-          d = Types::Hash[d]
-          new(
-            url: d["url"]
-          )
+        class << self
+          #
+          # @param [Hash] d
+          #
+          # @return [ContextAttributes]
+          #
+          def from_dynamic!(d)
+            d = Types::Hash[d]
+            new(
+              url: d["url"]
+            )
+          end
         end
       end
 
@@ -83,25 +85,27 @@ module Mihari
           Artifact.new(data: value, metadata: metadata)
         end
 
-        #
-        # @param [Hash] d
-        #
-        # @return [Datum]
-        #
-        def self.from_dynamic!(d)
-          d = Types::Hash[d]
+        class << self
+          #
+          # @param [Hash] d
+          #
+          # @return [Datum]
+          #
+          def from_dynamic!(d)
+            d = Types::Hash[d]
 
-          context_attributes = nil
-          if d.key?("context_attributes")
-            context_attributes = ContextAttributes.from_dynamic!(d.fetch("context_attributes"))
+            context_attributes = nil
+            if d.key?("context_attributes")
+              context_attributes = ContextAttributes.from_dynamic!(d.fetch("context_attributes"))
+            end
+
+            new(
+              type: d.fetch("type"),
+              id: d.fetch("id"),
+              context_attributes: context_attributes,
+              metadata: d
+            )
           end
-
-          new(
-            type: d.fetch("type"),
-            id: d.fetch("id"),
-            context_attributes: context_attributes,
-            metadata: d
-          )
         end
       end
 
@@ -115,16 +119,18 @@ module Mihari
           attributes[:cursor]
         end
 
-        #
-        # @param [Hash] d
-        #
-        # @return [Meta]
-        #
-        def self.from_dynamic!(d)
-          d = Types::Hash[d]
-          new(
-            cursor: d["cursor"]
-          )
+        class << self
+          #
+          # @param [Hash] d
+          #
+          # @return [Meta]
+          #
+          def from_dynamic!(d)
+            d = Types::Hash[d]
+            new(
+              cursor: d["cursor"]
+            )
+          end
         end
       end
 
@@ -153,17 +159,19 @@ module Mihari
           data.map(&:to_artifact)
         end
 
-        #
-        # @param [Hash] d
-        #
-        # @return [Response]
-        #
-        def self.from_dynamic!(d)
-          d = Types::Hash[d]
-          new(
-            meta: Meta.from_dynamic!(d.fetch("meta")),
-            data: d.fetch("data").map { |x| Datum.from_dynamic!(x) }
-          )
+        class << self
+          #
+          # @param [Hash] d
+          #
+          # @return [Response]
+          #
+          def from_dynamic!(d)
+            d = Types::Hash[d]
+            new(
+              meta: Meta.from_dynamic!(d.fetch("meta")),
+              data: d.fetch("data").map { |x| Datum.from_dynamic!(x) }
+            )
+          end
         end
       end
     end

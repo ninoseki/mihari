@@ -5,6 +5,7 @@ require "whois-parser"
 module Mihari
   module Enrichers
     class Whois < Base
+      # @type [Hash]
       @memo = {}
 
       # @return [Boolean]

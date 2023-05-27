@@ -55,7 +55,7 @@ module Mihari
       # @return [Boolean]
       #
       def configured?
-        configuration_keys.all? { |key| Mihari.config.send(key) } || (id? && secret?)
+        configuration_keys? || (id? && secret?)
       end
 
       private

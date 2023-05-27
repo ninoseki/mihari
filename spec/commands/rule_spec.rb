@@ -42,7 +42,7 @@ RSpec.describe Mihari::Commands::Rule do
       sio.rewind
       output = sio.read
 
-      expect(output).to include("A new rule is initialized")
+      expect(output).to include("A new rule file has been initialized")
     end
   end
 

@@ -67,14 +67,16 @@ module Mihari
       type
     end
 
-    # @return [String, nil]
-    def self.type(data)
-      new(data).type
-    end
+    class << self
+      # @return [String, nil]
+      def type(data)
+        new(data).type
+      end
 
-    # @return [String, nil]
-    def self.detailed_type(data)
-      new(data).detailed_type
+      # @return [String, nil]
+      def detailed_type(data)
+        new(data).detailed_type
+      end
     end
 
     private

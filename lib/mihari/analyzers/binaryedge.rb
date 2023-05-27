@@ -42,7 +42,6 @@ module Mihari
       #
       # Search with pagination
       #
-      # @param [String] query
       # @param [Integer] page
       #
       # @return [Hash]
