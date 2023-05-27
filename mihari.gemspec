@@ -34,7 +34,7 @@ Gem::Specification.new do |spec|
 
   spec.add_development_dependency "bundler", "~> 2.4"
   spec.add_development_dependency "coveralls_reborn", "~> 0.27"
-  spec.add_development_dependency "fakefs", "~> 2.4"
+  spec.add_development_dependency "fakefs", "~> 2.5"
   spec.add_development_dependency "fuubar", "~> 2.5"
   spec.add_development_dependency "mysql2", "~> 0.5"
   spec.add_development_dependency "pg", "~> 1.5"
@@ -56,7 +56,7 @@ Gem::Specification.new do |spec|
     spec.add_development_dependency "steep", "~> 1.4"
   end
 
-  spec.add_dependency "activerecord", "7.0.4.3"
+  spec.add_dependency "activerecord", "7.0.5"
   spec.add_dependency "addressable", "2.8.4"
   spec.add_dependency "awrence", "2.0.1"
   spec.add_dependency "dotenv", "2.8.1"
@@ -70,7 +70,7 @@ Gem::Specification.new do |spec|
   spec.add_dependency "email_address", "0.2.4"
   spec.add_dependency "grape", "1.7.0"
   spec.add_dependency "grape-entity", "1.0.0"
-  spec.add_dependency "grape-swagger", "1.6.0"
+  spec.add_dependency "grape-swagger", "1.6.1"
   spec.add_dependency "grape-swagger-entity", "0.5.1"
   spec.add_dependency "insensitive_hash", "0.3.3"
   spec.add_dependency "jr-cli", "0.6.0"
