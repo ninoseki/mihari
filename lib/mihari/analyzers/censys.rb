@@ -37,7 +37,12 @@ module Mihari
           response = client.search(query, cursor: cursor)
           artifacts << response.result.to_artifacts
           cursor = response.result.links.next
-          break if cursor.nil?
+          # NOTE: Censys's search API is unstable recently
+          # it may returns empty links or empty string cursors
+          # - Empty links: "links": {}
+          # - Empty cursors: "links": { "next": "", "prev": "" }
+          # So it needs to check both cases
+          break if cursor.nil? || cursor.empty?
 
           # sleep #{interval} seconds to avoid the rate limitation (if it is set)
           sleep interval
