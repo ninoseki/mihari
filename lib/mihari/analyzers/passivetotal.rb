@@ -43,7 +43,7 @@ module Mihari
       end
 
       def configured?
-        configuration_keys.all? { |key| Mihari.config.send(key) } || (username? && api_key?)
+        configuration_keys? || (username? && api_key?)
       end
 
       private

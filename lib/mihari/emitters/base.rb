@@ -12,6 +12,11 @@ module Mihari
       # @return [Mihari::Structs::Rule]
       attr_reader :rule
 
+      #
+      # @param [Array<Mihari::Artifact>] artifacts
+      # @param [Mihari::Structs::Rule] rule
+      # @param [Hash] **_options
+      #
       def initialize(artifacts:, rule:, **_options)
         @artifacts = artifacts
         @rule = rule

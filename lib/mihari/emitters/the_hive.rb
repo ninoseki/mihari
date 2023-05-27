@@ -12,6 +12,11 @@ module Mihari
       # @return [String, nil]
       attr_reader :api_version
 
+      #
+      # @param [Array<Mihari::Artifact>] artifacts
+      # @param [Mihari::Structs::Rule] rule
+      # @param [Hash] **options
+      #
       def initialize(artifacts:, rule:, **options)
         super(artifacts: artifacts, rule: rule, **options)
 

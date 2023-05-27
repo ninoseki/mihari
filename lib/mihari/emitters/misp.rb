@@ -15,6 +15,11 @@ module Mihari
       # @return [Mihari::Structs::Rule]
       attr_reader :rule
 
+      #
+      # @param [Array<Mihari::Artifact>] artifacts
+      # @param [Mihari::Structs::Rule] rule
+      # @param [Hash] **options
+      #
       def initialize(artifacts:, rule:, **options)
         super(artifacts: artifacts, rule: rule, **options)
 

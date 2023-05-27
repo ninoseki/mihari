@@ -4,14 +4,23 @@ module Mihari
   module Mixins
     module Configurable
       #
+      # Check whether there are configuration key-values or not
+      #
+      # @return [Boolean]
+      #
+      def configuration_keys?
+        return true if configuration_keys.empty?
+
+        configuration_keys.all? { |key| Mihari.config.send(key) }
+      end
+
+      #
       # Check whether it is configured or not
       #
       # @return [Boolean]
       #
       def configured?
-        return true if configuration_keys.empty?
-
-        configuration_keys.all? { |key| Mihari.config.send(key) } || api_key?
+        configuration_keys? || api_key?
       end
 
       #
@@ -32,7 +41,7 @@ module Mihari
       #
       # Configuration keys
       #
-      # @return [Array<String>] A list of cofiguration keys
+      # @return [Array<String>] A list of configuration keys
       #
       def configuration_keys
         []

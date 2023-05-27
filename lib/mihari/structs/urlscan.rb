@@ -29,18 +29,20 @@ module Mihari
           attributes[:url]
         end
 
-        #
-        # @param [Hash] d
-        #
-        # @return [Page]
-        #
-        def self.from_dynamic!(d)
-          d = Types::Hash[d]
-          new(
-            domain: d["domain"],
-            ip: d["ip"],
-            url: d.fetch("url")
-          )
+        class << self
+          #
+          # @param [Hash] d
+          #
+          # @return [Page]
+          #
+          def from_dynamic!(d)
+            d = Types::Hash[d]
+            new(
+              domain: d["domain"],
+              ip: d["ip"],
+              url: d.fetch("url")
+            )
+          end
         end
       end
 
@@ -88,19 +90,21 @@ module Mihari
           end
         end
 
-        #
-        # @param [Hash] d
-        #
-        # @return [Result]
-        #
-        def self.from_dynamic!(d)
-          d = Types::Hash[d]
-          new(
-            page: Page.from_dynamic!(d.fetch("page")),
-            id: d.fetch("_id"),
-            sort: d.fetch("sort"),
-            metadata: d
-          )
+        class << self
+          #
+          # @param [Hash] d
+          #
+          # @return [Result]
+          #
+          def from_dynamic!(d)
+            d = Types::Hash[d]
+            new(
+              page: Page.from_dynamic!(d.fetch("page")),
+              id: d.fetch("_id"),
+              sort: d.fetch("sort"),
+              metadata: d
+            )
+          end
         end
       end
 
@@ -129,17 +133,19 @@ module Mihari
           results.map(&:to_artifacts).flatten
         end
 
-        #
-        # @param [Hash] d
-        #
-        # @return [Response]
-        #
-        def self.from_dynamic!(d)
-          d = Types::Hash[d]
-          new(
-            results: d.fetch("results").map { |x| Result.from_dynamic!(x) },
-            has_more: d.fetch("has_more")
-          )
+        class << self
+          #
+          # @param [Hash] d
+          #
+          # @return [Response]
+          #
+          def from_dynamic!(d)
+            d = Types::Hash[d]
+            new(
+              results: d.fetch("results").map { |x| Result.from_dynamic!(x) },
+              has_more: d.fetch("has_more")
+            )
+          end
         end
       end
     end

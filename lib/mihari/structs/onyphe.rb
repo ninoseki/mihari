@@ -70,20 +70,22 @@ module Mihari
           Mihari::AutonomousSystem.new(asn: normalize_asn(asn))
         end
 
-        #
-        # @param [Hash] d
-        #
-        # @return [Result]
-        #
-        def self.from_dynamic!(d)
-          d = Types::Hash[d]
-          new(
-            asn: d.fetch("asn"),
-            ip: d.fetch("ip"),
-            # Onyphe's country = 2-letter country code
-            country_code: d["country"],
-            metadata: d
-          )
+        class << self
+          #
+          # @param [Hash] d
+          #
+          # @return [Result]
+          #
+          def from_dynamic!(d)
+            d = Types::Hash[d]
+            new(
+              asn: d.fetch("asn"),
+              ip: d.fetch("ip"),
+              # Onyphe's country = 2-letter country code
+              country_code: d["country"],
+              metadata: d
+            )
+          end
         end
       end
 
@@ -152,22 +154,24 @@ module Mihari
           results.map(&:to_artifact)
         end
 
-        #
-        # @param [Hash] d
-        #
-        # @return [Response]
-        #
-        def self.from_dynamic!(d)
-          d = Types::Hash[d]
-          new(
-            count: d.fetch("count"),
-            error: d.fetch("error"),
-            max_page: d.fetch("max_page"),
-            page: d.fetch("page").to_i,
-            results: d.fetch("results").map { |x| Result.from_dynamic!(x) },
-            status: d.fetch("status"),
-            total: d.fetch("total")
-          )
+        class << self
+          #
+          # @param [Hash] d
+          #
+          # @return [Response]
+          #
+          def from_dynamic!(d)
+            d = Types::Hash[d]
+            new(
+              count: d.fetch("count"),
+              error: d.fetch("error"),
+              max_page: d.fetch("max_page"),
+              page: d.fetch("page").to_i,
+              results: d.fetch("results").map { |x| Result.from_dynamic!(x) },
+              status: d.fetch("status"),
+              total: d.fetch("total")
+            )
+          end
         end
       end
     end

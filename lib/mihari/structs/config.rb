@@ -36,32 +36,34 @@ module Mihari
         attributes[:values]
       end
 
-      #
-      # @param [Class<Mihari::Analyzers::Base>, Class<Mihari::Emitters::Base>] klass
-      #
-      # @return [Mihari::Structs::Config, nil] config
-      #
-      def self.from_class(klass)
-        return nil if klass == Mihari::Analyzers::Rule
+      class << self
+        #
+        # @param [Class<Mihari::Analyzers::Base>, Class<Mihari::Emitters::Base>] klass
+        #
+        # @return [Mihari::Structs::Config, nil] config
+        #
+        def from_class(klass)
+          return nil if klass == Mihari::Analyzers::Rule
 
-        name = klass.to_s.split("::").last.to_s
+          name = klass.to_s.split("::").last.to_s
 
-        is_analyzer = klass.ancestors.include?(Mihari::Analyzers::Base)
-        is_emitter = klass.ancestors.include?(Mihari::Emitters::Base)
-        is_enricher = klass.ancestors.include?(Mihari::Enrichers::Base)
+          is_analyzer = klass.ancestors.include?(Mihari::Analyzers::Base)
+          is_emitter = klass.ancestors.include?(Mihari::Emitters::Base)
+          is_enricher = klass.ancestors.include?(Mihari::Enrichers::Base)
 
-        type = "Analyzer"
-        type = "Emitter" if is_emitter
-        type = "Enricher" if is_enricher
+          type = "Analyzer"
+          type = "Emitter" if is_emitter
+          type = "Enricher" if is_enricher
 
-        begin
-          instance = is_analyzer ? klass.new("dummy") : klass.new(artifacts: [], rule: nil)
-          is_configured = instance.configured?
-          values = instance.configuration_values
+          begin
+            instance = is_analyzer ? klass.new("dummy") : klass.new(artifacts: [], rule: nil)
+            is_configured = instance.configured?
+            values = instance.configuration_values
 
-          new(name: name, values: values, is_configured: is_configured, type: type)
-        rescue ArgumentError => _e
-          nil
+            new(name: name, values: values, is_configured: is_configured, type: type)
+          rescue ArgumentError => _e
+            nil
+          end
         end
       end
     end
