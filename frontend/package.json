@@ -6,8 +6,7 @@
     "serve": "vite",
     "build": "npx redoc-cli build src/swagger.yaml -o public/redoc-static.html && vite build",
     "test:unit": "jest",
-    "lint": "eslint --ext .js,.vue,.ts --ignore-path .gitignore --fix src --fix tests",
-    "prepare": "cd .. && husky install"
+    "lint": "eslint --ext .js,.vue,.ts --ignore-path .gitignore --fix src --fix tests"
   },
   "dependencies": {
     "@fortawesome/fontawesome-free": "^6.4.0",
