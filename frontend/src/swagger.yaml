@@ -1,0 +1,737 @@
+---
+info:
+  title: Mihari API
+  version: 0.0.1
+swagger: "2.0"
+produces:
+  - application/json
+tags:
+  - name: alerts
+    description: Operations about alerts
+  - name: artifacts
+    description: Operations about artifacts
+  - name: configs
+    description: Operations about configs
+  - name: ip_addresses
+    description: Operations about ip_addresses
+  - name: rules
+    description: Operations about rules
+  - name: tags
+    description: Operations about tags
+paths:
+  "/api/alerts/{id}":
+    delete:
+      summary: Delete an alert
+      description: Delete an alert
+      produces:
+        - application/json
+      parameters:
+        - in: path
+          name: id
+          type: integer
+          format: int32
+          required: true
+      responses:
+        "200":
+          description: Delete an alert
+          schema:
+            "$ref": "#/definitions/Mihari_Entities_Message"
+        "404":
+          description: Not found
+          schema:
+            "$ref": "#/definitions/Mihari_Entities_Message"
+      tags:
+        - alerts
+  "/api/alerts":
+    get:
+      summary: Search alerts
+      description: Search alerts
+      produces:
+        - application/json
+      parameters:
+        - in: query
+          name: page
+          type: integer
+          format: int32
+          default: 1
+          required: false
+        - in: query
+          name: limit
+          type: integer
+          format: int32
+          default: 10
+          required: false
+        - in: query
+          name: artifact
+          type: string
+          required: false
+        - in: query
+          name: rule_id
+          type: string
+          required: false
+        - in: query
+          name: tag
+          type: string
+          required: false
+        - in: query
+          name: fromAt
+          type: string
+          format: date-time
+          required: false
+        - in: query
+          name: toAt
+          type: string
+          format: date-time
+          required: false
+      responses:
+        "200":
+          description: Search alerts
+          schema:
+            type: array
+            items:
+              "$ref": "#/definitions/Mihari_Entities_AlertsWithPagination"
+        "404":
+          description: Not found
+          schema:
+            "$ref": "#/definitions/Mihari_Entities_Message"
+      tags:
+        - alerts
+  "/api/artifacts/{id}":
+    delete:
+      summary: Delete an artifact
+      description: Delete an artifact
+      produces:
+        - application/json
+      parameters:
+        - in: path
+          name: id
+          type: integer
+          format: int32
+          required: true
+      responses:
+        "200":
+          description: Delete an artifact
+          schema:
+            "$ref": "#/definitions/Mihari_Entities_Message"
+        "404":
+          description: Not found
+          schema:
+            "$ref": "#/definitions/Mihari_Entities_Message"
+      tags:
+        - artifacts
+    get:
+      summary: Get an artifact
+      description: Get an artifact
+      produces:
+        - application/json
+      parameters:
+        - in: path
+          name: id
+          type: integer
+          format: int32
+          required: true
+      responses:
+        "200":
+          description: Get an artifact
+          schema:
+            "$ref": "#/definitions/Mihari_Entities_Artifact"
+        "404":
+          description: Not found
+          schema:
+            "$ref": "#/definitions/Mihari_Entities_Message"
+      tags:
+        - artifacts
+  "/api/artifacts/{id}/enrich":
+    get:
+      summary: Enrich an artifact
+      description: Enrich an artifact
+      produces:
+        - application/json
+      parameters:
+        - in: path
+          name: id
+          type: integer
+          format: int32
+          required: true
+      responses:
+        "200":
+          description: Enrich an artifact
+          schema:
+            "$ref": "#/definitions/Mihari_Entities_Message"
+        "404":
+          description: Not found
+          schema:
+            "$ref": "#/definitions/Mihari_Entities_Message"
+      tags:
+        - artifacts
+  "/api/configs":
+    get:
+      summary: Get configs
+      description: Get configs
+      produces:
+        - application/json
+      responses:
+        "200":
+          description: Get configs
+          schema:
+            type: array
+            items:
+              "$ref": "#/definitions/Mihari_Entities_Config"
+      tags:
+        - configs
+  "/api/ip_addresses/{ip}":
+    get:
+      summary: Get an IP address
+      description: Get an IP address
+      produces:
+        - application/json
+      parameters:
+        - in: path
+          name: ip
+          type: string
+          required: true
+      responses:
+        "200":
+          description: Get an IP address
+          schema:
+            "$ref": "#/definitions/Mihari_Entities_IPAddress"
+        "404":
+          description: Not found
+          schema:
+            "$ref": "#/definitions/Mihari_Entities_Message"
+      tags:
+        - ip_addresses
+  "/api/rules/{id}":
+    delete:
+      summary: Delete a rule
+      description: Delete a rule
+      produces:
+        - application/json
+      parameters:
+        - in: path
+          name: id
+          type: string
+          required: true
+      responses:
+        "200":
+          description: Delete a rule
+          schema:
+            "$ref": "#/definitions/Mihari_Entities_Message"
+        "404":
+          description: Not found
+          schema:
+            "$ref": "#/definitions/Mihari_Entities_Message"
+      tags:
+        - rules
+    get:
+      summary: Get a rule
+      description: Get a rule
+      produces:
+        - application/json
+      parameters:
+        - in: path
+          name: id
+          type: string
+          required: true
+      responses:
+        "200":
+          description: Get a rule
+          schema:
+            "$ref": "#/definitions/Mihari_Entities_Rule"
+        "404":
+          description: Not found
+          schema:
+            "$ref": "#/definitions/Mihari_Entities_Message"
+      tags:
+        - rules
+  "/api/rules":
+    put:
+      summary: Update a rule
+      description: Update a rule
+      produces:
+        - application/json
+      consumes:
+        - application/json
+      parameters:
+        - name: putApiRules
+          in: body
+          required: true
+          schema:
+            "$ref": "#/definitions/putApiRules"
+      responses:
+        "200":
+          description: Update a rule
+          schema:
+            "$ref": "#/definitions/Mihari_Entities_Rule"
+      tags:
+        - rules
+    post:
+      summary: Create a rule
+      description: Create a rule
+      produces:
+        - application/json
+      consumes:
+        - application/json
+      parameters:
+        - name: postApiRules
+          in: body
+          required: true
+          schema:
+            "$ref": "#/definitions/postApiRules"
+      responses:
+        "201":
+          description: Create a rule
+          schema:
+            "$ref": "#/definitions/Mihari_Entities_Rule"
+      tags:
+        - rules
+    get:
+      summary: Search rules
+      description: Search rules
+      produces:
+        - application/json
+      parameters:
+        - in: query
+          name: page
+          type: integer
+          format: int32
+          default: 1
+          required: false
+        - in: query
+          name: limit
+          type: integer
+          format: int32
+          default: 10
+          required: false
+        - in: query
+          name: title
+          type: string
+          required: false
+        - in: query
+          name: description
+          type: string
+          required: false
+        - in: query
+          name: tag
+          type: string
+          required: false
+        - in: query
+          name: fromAt
+          type: string
+          format: date-time
+          required: false
+        - in: query
+          name: toAt
+          type: string
+          format: date-time
+          required: false
+      responses:
+        "200":
+          description: Search rules
+          schema:
+            type: array
+            items:
+              "$ref": "#/definitions/Mihari_Entities_RulesWithPagination"
+        "404":
+          description: Not found
+          schema:
+            "$ref": "#/definitions/Mihari_Entities_Message"
+      tags:
+        - rules
+  "/api/rules/{id}/run":
+    get:
+      summary: Run a rule
+      description: Run a rule
+      produces:
+        - application/json
+      parameters:
+        - in: path
+          name: id
+          type: string
+          required: true
+      responses:
+        "200":
+          description: Run a rule
+          schema:
+            "$ref": "#/definitions/Mihari_Entities_Message"
+      tags:
+        - rules
+  "/api/rules/ids":
+    get:
+      summary: Get rule IDs
+      description: Get Rule IDs
+      produces:
+        - application/json
+      responses:
+        "200":
+          description: Get Rule IDs
+          schema:
+            type: array
+            items:
+              "$ref": "#/definitions/Mihari_Entities_RuleIDs"
+      tags:
+        - rules
+  "/api/tags/{name}":
+    delete:
+      summary: Delete a tag
+      description: Delete a tag
+      produces:
+        - application/json
+      parameters:
+        - in: path
+          name: name
+          type: string
+          required: true
+      responses:
+        "200":
+          description: Delete a tag
+          schema:
+            "$ref": "#/definitions/Mihari_Entities_Message"
+        "404":
+          description: Not found
+          schema:
+            "$ref": "#/definitions/Mihari_Entities_Message"
+      tags:
+        - tags
+  "/api/tags":
+    get:
+      summary: Get tags
+      description: Get tags
+      produces:
+        - application/json
+      responses:
+        "200":
+          description: Get tags
+          schema:
+            type: array
+            items:
+              "$ref": "#/definitions/Mihari_Entities_Tags"
+      tags:
+        - tags
+definitions:
+  Mihari_Entities_Message:
+    type: object
+    properties:
+      message:
+        type: string
+    required:
+      - message
+    description: Mihari_Entities_Message model
+  Mihari_Entities_AlertsWithPagination:
+    type: object
+    properties:
+      alerts:
+        type: array
+        items:
+          "$ref": "#/definitions/Mihari_Entities_Alert"
+      total:
+        type: integer
+        format: int32
+      currentPage:
+        type: integer
+        format: int32
+      pageSize:
+        type: integer
+        format: int32
+    required:
+      - alerts
+      - total
+      - currentPage
+      - pageSize
+    description: Mihari_Entities_AlertsWithPagination model
+  Mihari_Entities_Alert:
+    type: object
+    properties:
+      id:
+        type: string
+        description: String representation of the ID
+      ruleId:
+        type: string
+      createdAt:
+        type: string
+        format: date-time
+      artifacts:
+        type: array
+        items:
+          "$ref": "#/definitions/Mihari_Entities_BaseArtifact"
+      tags:
+        type: array
+        items:
+          "$ref": "#/definitions/Mihari_Entities_Tag"
+    required:
+      - id
+      - ruleId
+      - createdAt
+      - tags
+  Mihari_Entities_BaseArtifact:
+    type: object
+    properties:
+      id:
+        type: string
+        description: String representation of the ID
+      data:
+        type: string
+      dataType:
+        type: string
+      source:
+        type: string
+      tags:
+        type: array
+        items:
+          type: string
+    required:
+      - id
+      - data
+      - dataType
+      - source
+  Mihari_Entities_Tag:
+    type: object
+    properties:
+      name:
+        type: string
+    required:
+      - name
+  Mihari_Entities_Artifact:
+    type: object
+    properties:
+      id:
+        type: string
+        description: String representation of the ID
+      data:
+        type: string
+      dataType:
+        type: string
+      source:
+        type: string
+      tags:
+        type: array
+        items:
+          type: string
+      metadata:
+        type: object
+      autonomousSystem:
+        "$ref": "#/definitions/Mihari_Entities_AutonomousSystem"
+      geolocation:
+        "$ref": "#/definitions/Mihari_Entities_Geolocation"
+      whoisRecord:
+        "$ref": "#/definitions/Mihari_Entities_WhoisRecord"
+      reverseDnsNames:
+        type: array
+        items:
+          "$ref": "#/definitions/Mihari_Entities_ReverseDnsName"
+      dnsRecords:
+        type: array
+        items:
+          "$ref": "#/definitions/Mihari_Entities_DnsRecord"
+      cpes:
+        type: array
+        items:
+          "$ref": "#/definitions/Mihari_Entities_CPE"
+      ports:
+        type: array
+        items:
+          "$ref": "#/definitions/Mihari_Entities_Port"
+    required:
+      - id
+      - data
+      - dataType
+      - source
+    description: Mihari_Entities_Artifact model
+  Mihari_Entities_AutonomousSystem:
+    type: object
+    properties:
+      asn:
+        type: integer
+        format: int32
+    required:
+      - asn
+  Mihari_Entities_Geolocation:
+    type: object
+    properties:
+      country:
+        type: string
+      countryCode:
+        type: string
+    required:
+      - country
+      - countryCode
+  Mihari_Entities_WhoisRecord:
+    type: object
+    properties:
+      domain:
+        type: string
+      createdOn:
+        type: string
+        format: date
+      updatedOn:
+        type: string
+        format: date
+      expiresOn:
+        type: string
+        format: date
+      registrar:
+        type: object
+      contacts:
+        type: array
+        items:
+          type: object
+    required:
+      - domain
+      - contacts
+  Mihari_Entities_ReverseDnsName:
+    type: object
+    properties:
+      name:
+        type: string
+    required:
+      - name
+  Mihari_Entities_DnsRecord:
+    type: object
+    properties:
+      resource:
+        type: string
+      value:
+        type: string
+    required:
+      - resource
+      - value
+  Mihari_Entities_CPE:
+    type: object
+    properties:
+      cpe:
+        type: string
+    required:
+      - cpe
+  Mihari_Entities_Port:
+    type: object
+    properties:
+      port:
+        type: integer
+        format: int32
+    required:
+      - port
+  Mihari_Entities_Config:
+    type: object
+    properties:
+      name:
+        type: string
+      type:
+        type: string
+      values:
+        type: array
+        items:
+          type: string
+      isConfigured:
+        type: boolean
+    required:
+      - name
+      - type
+      - values
+      - isConfigured
+    description: Mihari_Entities_Config model
+  Mihari_Entities_IPAddress:
+    type: object
+    properties:
+      ip:
+        type: string
+      countryCode:
+        type: string
+      hostname:
+        type: string
+      loc:
+        type: string
+      asn:
+        type: integer
+        format: int32
+    required:
+      - ip
+      - countryCode
+      - loc
+    description: Mihari_Entities_IPAddress model
+  putApiRules:
+    type: object
+    properties:
+      id:
+        type: string
+      yaml:
+        type: string
+    required:
+      - id
+      - yaml
+    description: Update a rule
+  Mihari_Entities_Rule:
+    type: object
+    properties:
+      id:
+        type: string
+      title:
+        type: string
+      description:
+        type: string
+      yaml:
+        type: string
+      createdAt:
+        type: string
+        format: date-time
+      updatedAt:
+        type: string
+        format: date-time
+      tags:
+        type: array
+        items:
+          "$ref": "#/definitions/Mihari_Entities_Tag"
+    required:
+      - id
+      - title
+      - description
+      - yaml
+      - createdAt
+      - updatedAt
+      - tags
+    description: Mihari_Entities_Rule model
+  postApiRules:
+    type: object
+    properties:
+      yaml:
+        type: string
+    required:
+      - yaml
+    description: Create a rule
+  Mihari_Entities_RulesWithPagination:
+    type: object
+    properties:
+      rules:
+        type: array
+        items:
+          "$ref": "#/definitions/Mihari_Entities_Rule"
+      total:
+        type: integer
+        format: int32
+      currentPage:
+        type: integer
+        format: int32
+      pageSize:
+        type: integer
+        format: int32
+    required:
+      - rules
+      - total
+      - currentPage
+      - pageSize
+    description: Mihari_Entities_RulesWithPagination model
+  Mihari_Entities_RuleIDs:
+    type: object
+    properties:
+      ruleIds:
+        type: string
+    required:
+      - ruleIds
+    description: Mihari_Entities_RuleIDs model
+  Mihari_Entities_Tags:
+    type: object
+    properties:
+      tags:
+        type: string
+    required:
+      - tags
+    description: Mihari_Entities_Tags model
