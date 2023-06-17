@@ -22,7 +22,7 @@ module Mihari
       optional(:updated_on).value(:date)
 
       required(:queries).value(:array).each do
-        AnalyzerWithoutAPIKey | AnalyzerWithAPIKey | Censys | CIRCL | PassiveTotal | ZoomEye | Urlscan | Crtsh | Feed
+        AnalyzerWithoutAPIKey | AnalyzerWithAPIKey | Censys | CIRCL | PassiveTotal | ZoomEye | Crtsh | Feed
       end
 
       optional(:emitters).value(:array).each { Database | MISP | TheHive | Slack | Webhook }.default(DEFAULT_EMITTERS)

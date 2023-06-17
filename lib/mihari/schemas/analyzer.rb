@@ -7,7 +7,7 @@ module Mihari
     end
 
     AnalyzerWithoutAPIKey = Dry::Schema.Params do
-      required(:analyzer).value(Types::String.enum("crtsh", "dnpedia", "dnstwister"))
+      required(:analyzer).value(Types::String.enum("dnstwister"))
       required(:query).value(:string)
       optional(:options).hash(AnalyzerOptions)
     end
@@ -23,6 +23,7 @@ module Mihari
           "securitytrails",
           "shodan",
           "st",
+          "urlscan",
           "virustotal_intelligence",
           "virustotal",
           "vt_intel",
@@ -69,12 +70,6 @@ module Mihari
       required(:analyzer).value(Types::String.enum("crtsh"))
       required(:query).value(:string)
       optional(:exclude_expired).value(:bool).default(true)
-      optional(:options).hash(AnalyzerOptions)
-    end
-
-    Urlscan = Dry::Schema.Params do
-      required(:analyzer).value(Types::String.enum("urlscan"))
-      required(:query).value(:string)
       optional(:options).hash(AnalyzerOptions)
     end
 
