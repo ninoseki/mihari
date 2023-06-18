@@ -36,16 +36,33 @@ module Mihari
       end
 
       # @return [String]
-      def source
-        self.class.to_s.split("::").last.to_s
-      end
-
-      # @return [String]
       def class_name
         self.class.to_s.split("::").last
       end
 
+      alias_method :source, :class_name
+
       class << self
+        #
+        # Initialize an analyzer by query params
+        #
+        # @param [Hash] params
+        #
+        # @return [Mihari::Analyzers::Base]
+        #
+        def from_query(params)
+          # get options and set default value as an empty hash
+          options = params[:options] || {}
+
+          # set interval in the top level
+          interval = options[:interval]
+          params[:interval] = interval if interval
+
+          query = params[:query]
+
+          new(query, **params)
+        end
+
         def inherited(child)
           super
           Mihari.analyzers << child

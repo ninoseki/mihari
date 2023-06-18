@@ -46,7 +46,7 @@ module Mihari
       #
       # @param [Mihari::Structs::Rule] rule
       #
-      def initialize(rule:)
+      def initialize(rule)
         @rule = rule
         @base_time = Time.now.utc
 
@@ -154,15 +154,6 @@ module Mihari
       end
 
       #
-      # Deep copied queries
-      #
-      # @return [Array<Hash>]
-      #
-      def queries
-        rule.queries.map(&:deep_dup)
-      end
-
-      #
       # Get analyzer class
       #
       # @param [String] analyzer_name
@@ -177,26 +168,13 @@ module Mihari
       end
 
       #
-      # @return [Array<Mihari::Analyzers::Base>] <description>
+      # @return [Array<Mihari::Analyzers::Base>]
       #
       def analyzers
-        @analyzers ||= queries.map do |params|
-          analyzer_name = params[:analyzer]
+        @analyzers ||= rule.queries.map do |query_params|
+          analyzer_name = query_params[:analyzer]
           klass = get_analyzer_class(analyzer_name)
-
-          # set interval in the top level
-          options = params[:options] || {}
-          interval = options[:interval]
-          params[:interval] = interval if interval
-
-          # set rule
-          params[:rule] = rule
-          query = params[:query]
-
-          analyzer = klass.new(query, **params)
-          raise ConfigurationError, "#{analyzer.source} is not configured correctly" unless analyzer.configured?
-
-          analyzer
+          klass.from_query(query_params)
         end
       end
 
@@ -240,8 +218,9 @@ module Mihari
       # Validate configuration of analyzers
       #
       def validate_analyzer_configurations
-        # memoize analyzers & raise ConfigurationError if there is an analyzer which is not configured
-        analyzers
+        analyzers.map do |analyzer|
+          raise ConfigurationError, "#{analyzer.source} is not configured correctly" unless analyzer.configured?
+        end
       end
     end
   end

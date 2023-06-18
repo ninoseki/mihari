@@ -24,7 +24,7 @@ RSpec.describe Mihari::Analyzers::Rule, :vcr do
     )
   end
 
-  subject { described_class.new(rule: rule) }
+  subject { described_class.new(rule) }
 
   describe "#artifacts", vcr: "Mihari_Analyzers_Rule/crt_sh:www.example.com" do
     it do

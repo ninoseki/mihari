@@ -13,7 +13,7 @@ module Mihari
           # @return [Boolean]
           attr_reader :force_overwrite
 
-          def initialize(rule:, force_overwrite:)
+          def initialize(rule, force_overwrite:)
             @rule = rule
             @force_overwrite = force_overwrite
           end
@@ -37,14 +37,23 @@ module Mihari
           end
 
           def run
+            begin
+              analyzer = rule.analyzer
+            rescue ConfigurationError => e
+              # if there is a configuration error, output that error without the stack trace
+              Mihari.logger.error e.to_s
+              return
+            end
+
             with_error_notification do
-              alert = rule.analyzer.run
-              if alert
-                data = Mihari::Entities::Alert.represent(alert)
-                puts JSON.pretty_generate(data.as_json)
-              else
+              alert = analyzer.run
+              if alert.nil?
                 Mihari.logger.info "There is no new artifact found"
+                return
               end
+
+              data = Mihari::Entities::Alert.represent(alert)
+              puts JSON.pretty_generate(data.as_json)
             end
           end
         end
@@ -69,7 +78,7 @@ module Mihari
                 end
 
                 force_overwrite = options["force_overwrite"] || false
-                wrapper = RuleWrapper.new(rule: rule, force_overwrite: force_overwrite)
+                wrapper = RuleWrapper.new(rule, force_overwrite: force_overwrite)
 
                 if wrapper.diff? && !force_overwrite
                   message = "There is diff in the rule (#{rule.id}). Are you sure you want to overwrite the rule? (y/n)"
