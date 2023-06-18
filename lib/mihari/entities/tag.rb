@@ -7,7 +7,7 @@ module Mihari
     end
 
     class Tags < Grape::Entity
-      expose :tags, documentation: { type: Array[String], required: true }
+      expose :tags, documentation: { type: [String], required: true }
     end
   end
 end

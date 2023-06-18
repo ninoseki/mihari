@@ -31,7 +31,7 @@ module Mihari
     end
 
     class RuleIDs < Grape::Entity
-      expose :rule_ids, documentation: { type: Array[String], required: true }, as: :ruleIds
+      expose :rule_ids, documentation: { type: [String], required: true }, as: :ruleIds
     end
   end
 end
