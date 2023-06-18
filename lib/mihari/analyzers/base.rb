@@ -36,14 +36,11 @@ module Mihari
       end
 
       # @return [String]
-      def source
-        self.class.to_s.split("::").last.to_s
-      end
-
-      # @return [String]
       def class_name
         self.class.to_s.split("::").last
       end
+
+      alias_method :source, :class_name
 
       class << self
         #
