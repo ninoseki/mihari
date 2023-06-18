@@ -13,7 +13,7 @@ module Mihari
           # @return [Boolean]
           attr_reader :force_overwrite
 
-          def initialize(rule:, force_overwrite:)
+          def initialize(rule, force_overwrite:)
             @rule = rule
             @force_overwrite = force_overwrite
           end
@@ -69,7 +69,7 @@ module Mihari
                 end
 
                 force_overwrite = options["force_overwrite"] || false
-                wrapper = RuleWrapper.new(rule: rule, force_overwrite: force_overwrite)
+                wrapper = RuleWrapper.new(rule, force_overwrite: force_overwrite)
 
                 if wrapper.diff? && !force_overwrite
                   message = "There is diff in the rule (#{rule.id}). Are you sure you want to overwrite the rule? (y/n)"

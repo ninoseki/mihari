@@ -162,7 +162,7 @@ module Mihari
       # @return [Mihari::Analyzers::Rule]
       #
       def analyzer
-        Mihari::Analyzers::Rule.new(rule: self)
+        Mihari::Analyzers::Rule.new(self)
       end
 
       class << self
