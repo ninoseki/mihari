@@ -37,14 +37,23 @@ module Mihari
           end
 
           def run
+            begin
+              analyzer = rule.analyzer
+            rescue ConfigurationError => e
+              # if there is a configuration error, output that error without the stack trace
+              Mihari.logger.error e.to_s
+              return
+            end
+
             with_error_notification do
-              alert = rule.analyzer.run
-              if alert
-                data = Mihari::Entities::Alert.represent(alert)
-                puts JSON.pretty_generate(data.as_json)
-              else
+              alert = analyzer.run
+              if alert.nil?
                 Mihari.logger.info "There is no new artifact found"
+                return
               end
+
+              data = Mihari::Entities::Alert.represent(alert)
+              puts JSON.pretty_generate(data.as_json)
             end
           end
         end
