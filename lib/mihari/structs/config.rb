@@ -38,30 +38,53 @@ module Mihari
 
       class << self
         #
-        # @param [Class<Mihari::Analyzers::Base>, Class<Mihari::Emitters::Base>] klass
+        # Get a type of a class
+        #
+        # @param [Class<Mihari::Analyzers::Base>, Class<Mihari::Emitters::Base>, Class<Mihari::Enrichers::Base>] klass
+        #
+        # @return [String, nil]
+        #
+        def get_type(klass)
+          return "Analyzer" if klass.ancestors.include?(Mihari::Analyzers::Base)
+          return "Emitter" if klass.ancestors.include?(Mihari::Emitters::Base)
+          return "Enricher" if klass.ancestors.include?(Mihari::Enrichers::Base)
+
+          nil
+        end
+
+        #
+        # Get a dummy instance
+        #
+        # @param [Class<Mihari::Analyzers::Base>, Class<Mihari::Emitters::Base>, Class<Mihari::Enrichers::Base>] klass
+        #
+        # @return [Mihari::Analyzers::Base, Mihari::Emitter::Base, Mihari::Enricher::Base] dummy
+        #
+        def get_dummy(klass)
+          type = get_type(klass)
+          is_analyzer = type == "Analyzer"
+          is_analyzer ? klass.new("dummy") : klass.new(artifacts: [], rule: nil)
+        end
+
+        #
+        # @param [Class<Mihari::Analyzers::Base>, Class<Mihari::Emitters::Base>, Class<Mihari::Enrichers::Base>] klass
         #
         # @return [Mihari::Structs::Config, nil] config
         #
         def from_class(klass)
           return nil if klass == Mihari::Analyzers::Rule
 
-          name = klass.to_s.split("::").last.to_s
-
-          is_analyzer = klass.ancestors.include?(Mihari::Analyzers::Base)
-          is_emitter = klass.ancestors.include?(Mihari::Emitters::Base)
-          is_enricher = klass.ancestors.include?(Mihari::Enrichers::Base)
-
-          type = "Analyzer"
-          type = "Emitter" if is_emitter
-          type = "Enricher" if is_enricher
+          type = get_type(klass)
+          return nil if type.nil?
 
           begin
-            instance = is_analyzer ? klass.new("dummy") : klass.new(artifacts: [], rule: nil)
-            is_configured = instance.configured?
-            values = instance.configuration_values
-
-            new(name: name, values: values, is_configured: is_configured, type: type)
-          rescue ArgumentError => _e
+            instance = get_dummy(klass)
+            new(
+              name: klass.to_s.split("::").last.to_s,
+              values: instance.configuration_values,
+              is_configured: instance.configured?,
+              type: type
+            )
+          rescue ArgumentError
             nil
           end
         end
