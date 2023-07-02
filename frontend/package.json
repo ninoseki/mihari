@@ -20,7 +20,7 @@
     "axios": "^1.4.0",
     "bulma": "^0.9.4",
     "bulma-helpers": "^0.4.3",
-    "dayjs": "^1.11.8",
+    "dayjs": "^1.11.9",
     "js-sha256": "^0.9.0",
     "truncate": "^3.0.0",
     "ts-dedent": "^2.2.0",
@@ -33,10 +33,10 @@
     "vue-router": "^4.2.2"
   },
   "devDependencies": {
-    "@rushstack/eslint-patch": "^1.2.0",
-    "@tsconfig/node18": "^18.2.0",
+    "@rushstack/eslint-patch": "^1.3.2",
+    "@tsconfig/node20": "^1.0.2",
     "@types/jsdom": "^21.1.1",
-    "@types/node": "^18.16.17",
+    "@types/node": "^20.3.3",
     "@types/prismjs": "^1.26.0",
     "@types/url-parse": "^1.4.8",
     "@typescript-eslint/eslint-plugin": "^5.60.1",
