@@ -3,8 +3,10 @@ pre-commit:
   commands:
     standard:
       glob: "*.rb"
-      run: bundle exec standardrb --fix {staged_files} && git add {staged_files}
+      run: bundle exec standardrb --fix {staged_files}
+      stage_fixed: true
     eslint:
       root: "frontend/"
       glob: "*.{js,ts,vue}"
-      run: npx eslint --fix {staged_files} && git add {staged_files}
+      run: npx eslint --fix {staged_files}
+      stage_fixed: true
