@@ -23,52 +23,52 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, PropType, ref } from "vue";
-import { useRouter } from "vue-router";
+import { defineComponent, type PropType, ref } from "vue"
+import { useRouter } from "vue-router"
 
-import { generateUpdateRuleTask } from "@/api-helper";
-import ErrorMessage from "@/components/ErrorMessage.vue";
-import InputForm from "@/components/rule/InputForm.vue";
-import { Rule } from "@/types";
+import { generateUpdateRuleTask } from "@/api-helper"
+import ErrorMessage from "@/components/ErrorMessage.vue"
+import InputForm from "@/components/rule/InputForm.vue"
+import type { Rule } from "@/types"
 
 export default defineComponent({
   name: "EditRule",
   components: {
     InputForm,
-    ErrorMessage,
+    ErrorMessage
   },
   props: {
     rule: {
       type: Object as PropType<Rule>,
-      required: true,
-    },
+      required: true
+    }
   },
   setup(props) {
-    const router = useRouter();
+    const router = useRouter()
 
-    const yaml = ref(props.rule.yaml);
+    const yaml = ref(props.rule.yaml)
 
-    const updateRuleTask = generateUpdateRuleTask();
+    const updateRuleTask = generateUpdateRuleTask()
 
     const updateYAML = (value: string) => {
-      yaml.value = value;
-    };
+      yaml.value = value
+    }
 
     const edit = async () => {
       const rule = await updateRuleTask.perform({
         id: props.rule.id,
-        yaml: yaml.value,
-      });
+        yaml: yaml.value
+      })
 
-      router.push({ name: "Rule", params: { id: rule.id } });
-    };
+      router.push({ name: "Rule", params: { id: rule.id } })
+    }
 
     return {
       edit,
       yaml,
       updateYAML,
-      updateRuleTask,
-    };
-  },
-});
+      updateRuleTask
+    }
+  }
+})
 </script>

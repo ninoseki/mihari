@@ -28,10 +28,7 @@
 
     <Loading v-if="getRulesTask.isRunning"></Loading>
 
-    <ErrorMessage
-      v-if="getRulesTask.isError"
-      :error="getRulesTask.last?.error"
-    ></ErrorMessage>
+    <ErrorMessage v-if="getRulesTask.isError" :error="getRulesTask.last?.error"></ErrorMessage>
 
     <Rules
       :rules="getRulesTask.last.value"
@@ -44,14 +41,14 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, nextTick, onMounted, ref, watch } from "vue";
+import { defineComponent, nextTick, onMounted, ref, watch } from "vue"
 
-import { generateGetRulesTask, generateGetTagsTask } from "@/api-helper";
-import ErrorMessage from "@/components/ErrorMessage.vue";
-import Loading from "@/components/Loading.vue";
-import FormComponent from "@/components/rule/Form.vue";
-import Rules from "@/components/rule/Rules.vue";
-import { RuleSearchParams } from "@/types";
+import { generateGetRulesTask, generateGetTagsTask } from "@/api-helper"
+import ErrorMessage from "@/components/ErrorMessage.vue"
+import Loading from "@/components/Loading.vue"
+import FormComponent from "@/components/rule/Form.vue"
+import Rules from "@/components/rule/Rules.vue"
+import type { RuleSearchParams } from "@/types"
 
 export default defineComponent({
   name: "RulesWrapper",
@@ -59,60 +56,60 @@ export default defineComponent({
     Rules,
     Loading,
     FormComponent,
-    ErrorMessage,
+    ErrorMessage
   },
   setup() {
-    const page = ref(1);
-    const tag = ref<string | undefined>(undefined);
-    const form = ref<InstanceType<typeof FormComponent>>();
+    const page = ref(1)
+    const tag = ref<string | undefined>(undefined)
+    const form = ref<InstanceType<typeof FormComponent>>()
 
-    const getRulesTask = generateGetRulesTask();
-    const getTagsTask = generateGetTagsTask();
+    const getRulesTask = generateGetRulesTask()
+    const getTagsTask = generateGetTagsTask()
 
     const getRules = async () => {
-      const params = form.value?.getSearchParams() as RuleSearchParams;
-      return await getRulesTask.perform(params);
-    };
+      const params = form.value?.getSearchParams() as RuleSearchParams
+      return await getRulesTask.perform(params)
+    }
 
     const updatePage = (newPage: number) => {
-      page.value = newPage;
-    };
+      page.value = newPage
+    }
 
     const resetPage = () => {
-      page.value = 1;
-    };
+      page.value = 1
+    }
 
     const search = async () => {
       // reset page
-      resetPage();
+      resetPage()
 
-      await getRules();
-    };
+      await getRules()
+    }
 
     const updateTag = (newTag: string | undefined) => {
       if (tag.value === newTag) {
-        tag.value = undefined;
+        tag.value = undefined
       } else {
-        tag.value = newTag;
+        tag.value = newTag
       }
 
-      nextTick(async () => await search());
-    };
+      nextTick(async () => await search())
+    }
 
     const refreshPage = async () => {
       // it is just an alias of search
       // this function will be invoked when a rule is deleted
-      await search();
-    };
+      await search()
+    }
 
     onMounted(async () => {
-      getTagsTask.perform();
-      await getRules();
-    });
+      getTagsTask.perform()
+      await getRules()
+    })
 
     watch([page, tag], async () => {
-      nextTick(async () => await getRules());
-    });
+      nextTick(async () => await getRules())
+    })
 
     return {
       form,
@@ -123,8 +120,8 @@ export default defineComponent({
       refreshPage,
       search,
       updatePage,
-      updateTag,
-    };
-  },
-});
+      updateTag
+    }
+  }
+})
 </script>

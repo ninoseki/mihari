@@ -7,7 +7,7 @@
           class="tag"
           :to="{
             name: 'Alerts',
-            query: { dnsRecord: dnsRecord.value },
+            query: { dnsRecord: dnsRecord.value }
           }"
         >
           {{ truncate(dnsRecord.value, 50) }}
@@ -18,21 +18,21 @@
 </template>
 
 <script lang="ts">
-import truncate from "truncate";
-import { defineComponent, PropType } from "vue";
+import truncate from "truncate"
+import { defineComponent, type PropType } from "vue"
 
-import { DnsRecord } from "@/types";
+import type { DnsRecord } from "@/types"
 
 export default defineComponent({
   name: "DnsRecords",
   props: {
     dnsRecords: {
       type: Array as PropType<DnsRecord[]>,
-      required: true,
-    },
+      required: true
+    }
   },
   setup() {
-    return { truncate };
-  },
-});
+    return { truncate }
+  }
+})
 </script>

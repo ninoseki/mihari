@@ -88,46 +88,46 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, PropType, ref, watch } from "vue";
-import { useRoute } from "vue-router";
+import { defineComponent, type PropType, ref, watch } from "vue"
+import { useRoute } from "vue-router"
 
-import { RuleSearchParams } from "@/types";
-import { normalizeQueryParam } from "@/utils";
+import type { RuleSearchParams } from "@/types"
+import { normalizeQueryParam } from "@/utils"
 
 export default defineComponent({
   name: "RulesForm",
   props: {
     tags: {
       type: Array as PropType<string[]>,
-      required: true,
+      required: true
     },
     page: {
       type: Number,
-      required: true,
+      required: true
     },
     tag: {
       type: String,
-      required: false,
-    },
+      required: false
+    }
   },
   setup(props) {
-    const route = useRoute();
+    const route = useRoute()
 
-    const description = ref<string | undefined>(undefined);
-    const fromAt = ref<string | undefined>(undefined);
-    const tagInput = ref<string | undefined>(props.tag);
-    const title = ref<string | undefined>(undefined);
-    const toAt = ref<string | undefined>(undefined);
+    const description = ref<string | undefined>(undefined)
+    const fromAt = ref<string | undefined>(undefined)
+    const tagInput = ref<string | undefined>(props.tag)
+    const title = ref<string | undefined>(undefined)
+    const toAt = ref<string | undefined>(undefined)
 
     const updateByQueryParams = () => {
-      const tag_ = route.query["tag"];
+      const tag_ = route.query["tag"]
       if (tagInput.value === undefined) {
-        tagInput.value = normalizeQueryParam(tag_);
+        tagInput.value = normalizeQueryParam(tag_)
       }
-    };
+    }
 
     const getSearchParams = (): RuleSearchParams => {
-      updateByQueryParams();
+      updateByQueryParams()
 
       const params: RuleSearchParams = {
         description: description.value === "" ? undefined : description.value,
@@ -135,17 +135,17 @@ export default defineComponent({
         tag: tagInput.value === "" ? undefined : tagInput.value,
         title: title.value === "" ? undefined : title.value,
         toAt: toAt.value === "" ? undefined : toAt.value,
-        fromAt: fromAt.value === "" ? undefined : fromAt.value,
-      };
-      return params;
-    };
+        fromAt: fromAt.value === "" ? undefined : fromAt.value
+      }
+      return params
+    }
 
     watch(
       () => props.tag,
       () => {
-        tagInput.value = props.tag;
+        tagInput.value = props.tag
       }
-    );
+    )
 
     return {
       description,
@@ -153,8 +153,8 @@ export default defineComponent({
       getSearchParams,
       title,
       toAt,
-      tagInput,
-    };
-  },
-});
+      tagInput
+    }
+  }
+})
 </script>

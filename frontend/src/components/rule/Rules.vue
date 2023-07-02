@@ -9,9 +9,7 @@
       </tr>
       <tr v-for="rule in rules.rules" :key="rule.id">
         <td>
-          <router-link :to="{ name: 'Rule', params: { id: rule.id } }">{{
-            rule.id
-          }}</router-link>
+          <router-link :to="{ name: 'Rule', params: { id: rule.id } }">{{ rule.id }}</router-link>
         </td>
         <td>
           {{ rule.title }}
@@ -31,58 +29,56 @@
     :pageSize="rules.pageSize"
     @update-page="updatePage"
   ></Pagination>
-  <p class="help">
-    ({{ rules.total }} results in total, {{ rules.rules.length }} shown)
-  </p>
+  <p class="help">({{ rules.total }} results in total, {{ rules.rules.length }} shown)</p>
 </template>
 
 <script lang="ts">
-import { computed, defineComponent, PropType } from "vue";
+import { computed, defineComponent, type PropType } from "vue"
 
-import Pagination from "@/components/Pagination.vue";
-import Tags from "@/components/tag/Tags.vue";
-import { Rules } from "@/types";
+import Pagination from "@/components/Pagination.vue"
+import Tags from "@/components/tag/Tags.vue"
+import type { Rules } from "@/types"
 
 export default defineComponent({
   name: "RulesItem",
   props: {
     rules: {
       type: Object as PropType<Rules>,
-      required: true,
-    },
+      required: true
+    }
   },
   components: {
     Pagination,
-    Tags,
+    Tags
   },
   emits: ["update-page", "refresh-page", "update-tag"],
   setup(props, context) {
     const scrollToTop = () => {
       window.scrollTo({
-        top: 0,
-      });
-    };
+        top: 0
+      })
+    }
 
     const updatePage = (page: number) => {
-      scrollToTop();
-      context.emit("update-page", page);
-    };
+      scrollToTop()
+      context.emit("update-page", page)
+    }
 
     const refreshPage = () => {
-      scrollToTop();
-      context.emit("refresh-page");
-    };
+      scrollToTop()
+      context.emit("refresh-page")
+    }
 
     const updateTag = (tag: string) => {
-      scrollToTop();
-      context.emit("update-tag", tag);
-    };
+      scrollToTop()
+      context.emit("update-tag", tag)
+    }
 
     const hasRules = computed(() => {
-      return props.rules.rules.length > 0;
-    });
+      return props.rules.rules.length > 0
+    })
 
-    return { updatePage, refreshPage, updateTag, hasRules };
-  },
-});
+    return { updatePage, refreshPage, updateTag, hasRules }
+  }
+})
 </script>

@@ -13,54 +13,52 @@
     :pageSize="alerts.pageSize"
     @update-page="updatePage"
   ></Pagination>
-  <p class="help">
-    ({{ alerts.total }} results in total, {{ alerts.alerts.length }} shown)
-  </p>
+  <p class="help">({{ alerts.total }} results in total, {{ alerts.alerts.length }} shown)</p>
 </template>
 
 <script lang="ts">
-import { defineComponent, PropType } from "vue";
+import { defineComponent, type PropType } from "vue"
 
-import Alert from "@/components/alert/Alert.vue";
-import Pagination from "@/components/Pagination.vue";
-import { Alerts } from "@/types";
+import Alert from "@/components/alert/Alert.vue"
+import Pagination from "@/components/Pagination.vue"
+import type { Alerts } from "@/types"
 
 export default defineComponent({
   name: "AlertsItem",
   components: {
     Alert,
-    Pagination,
+    Pagination
   },
   props: {
     alerts: {
       type: Object as PropType<Alerts>,
-      required: true,
-    },
+      required: true
+    }
   },
   emits: ["update-page", "refresh-page", "update-tag"],
   setup(_, context) {
     const scrollToTop = () => {
       window.scrollTo({
-        top: 0,
-      });
-    };
+        top: 0
+      })
+    }
 
     const updatePage = (page: number) => {
-      scrollToTop();
-      context.emit("update-page", page);
-    };
+      scrollToTop()
+      context.emit("update-page", page)
+    }
 
     const refreshPage = () => {
-      scrollToTop();
-      context.emit("refresh-page");
-    };
+      scrollToTop()
+      context.emit("refresh-page")
+    }
 
     const updateTag = (tag: string) => {
-      scrollToTop();
-      context.emit("update-tag", tag);
-    };
+      scrollToTop()
+      context.emit("update-tag", tag)
+    }
 
-    return { updatePage, updateTag, refreshPage };
-  },
-});
+    return { updatePage, updateTag, refreshPage }
+  }
+})
 </script>

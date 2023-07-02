@@ -10,61 +10,55 @@
         :to="{ name: 'Artifact', params: { id: artifact.id } }"
         >{{ artifact.data }}</router-link
       >
-      <span
-        class="tag is-delete"
-        v-if="isDeleteButtonEnabled"
-        @click="deleteArtifact"
-      ></span>
+      <span class="tag is-delete" v-if="isDeleteButtonEnabled" @click="deleteArtifact"></span>
     </div>
   </div>
 </template>
 
 <script lang="ts">
-import { defineComponent, PropType, ref } from "vue";
+import { defineComponent, type PropType, ref } from "vue"
 
-import { generateDeleteArtifactTask } from "@/api-helper";
-import { Artifact } from "@/types";
+import { generateDeleteArtifactTask } from "@/api-helper"
+import type { Artifact } from "@/types"
 
 export default defineComponent({
   name: "ArtifactTag",
   props: {
     artifact: {
       type: Object as PropType<Artifact>,
-      required: true,
-    },
+      required: true
+    }
   },
   setup(props) {
-    const isDeleted = ref(false);
-    const isDeleteButtonEnabled = ref(false);
+    const isDeleted = ref(false)
+    const isDeleteButtonEnabled = ref(false)
 
-    const deleteArtifactTask = generateDeleteArtifactTask();
+    const deleteArtifactTask = generateDeleteArtifactTask()
 
     const deleteArtifact = async () => {
-      const result = window.confirm(
-        `Are you sure you want to delete ${props.artifact.data}?`
-      );
+      const result = window.confirm(`Are you sure you want to delete ${props.artifact.data}?`)
 
       if (result) {
-        await deleteArtifactTask.perform(props.artifact.id);
-        isDeleted.value = true;
+        await deleteArtifactTask.perform(props.artifact.id)
+        isDeleted.value = true
       }
-    };
+    }
 
     const showDeleteButton = () => {
-      isDeleteButtonEnabled.value = true;
-    };
+      isDeleteButtonEnabled.value = true
+    }
 
     const hideDeleteButton = () => {
-      isDeleteButtonEnabled.value = false;
-    };
+      isDeleteButtonEnabled.value = false
+    }
 
     return {
       isDeleted,
       deleteArtifact,
       showDeleteButton,
       hideDeleteButton,
-      isDeleteButtonEnabled,
-    };
-  },
-});
+      isDeleteButtonEnabled
+    }
+  }
+})
 </script>

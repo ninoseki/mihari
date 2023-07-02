@@ -3,24 +3,24 @@
 </template>
 
 <script lang="ts">
-import { useTitle } from "@vueuse/core";
-import { defineComponent, onMounted } from "vue";
+import { useTitle } from "@vueuse/core"
+import { defineComponent, onMounted } from "vue"
 
-import NewRule from "@/components/rule/NewRule.vue";
+import NewRule from "@/components/rule/NewRule.vue"
 
 export default defineComponent({
   name: "NewRuleView",
   components: {
-    NewRule,
+    NewRule
   },
   setup() {
     const updateTitle = () => {
-      useTitle(`New rule - Mihari`);
-    };
+      useTitle(`New rule - Mihari`)
+    }
 
     onMounted(() => {
-      updateTitle();
-    });
-  },
-});
+      updateTitle()
+    })
+  }
+})
 </script>

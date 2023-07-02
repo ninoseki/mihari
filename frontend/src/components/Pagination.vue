@@ -21,10 +21,7 @@
         >
       </li>
       <li>
-        <a
-          class="pagination-link mt-2 is-current"
-          @click="updatePage(currentPage)"
-        >
+        <a class="pagination-link mt-2 is-current" @click="updatePage(currentPage)">
           {{ currentPage }}</a
         >
       </li>
@@ -37,80 +34,76 @@
         <span class="pagination-ellipsis">&hellip;</span>
       </li>
       <li v-if="hasNextPage && isNextPageNotLast">
-        <a class="pagination-link mt-2" @click="updatePage(totalPageCount)">{{
-          totalPageCount
-        }}</a>
+        <a class="pagination-link mt-2" @click="updatePage(totalPageCount)">{{ totalPageCount }}</a>
       </li>
     </ul>
   </nav>
 </template>
 
 <script lang="ts">
-import { useRouteQuery } from "@vueuse/router";
-import { computed, defineComponent, onMounted, Ref } from "vue";
-import { useRoute, useRouter } from "vue-router";
+import { useRouteQuery } from "@vueuse/router"
+import { computed, defineComponent, onMounted, type Ref } from "vue"
+import { useRoute, useRouter } from "vue-router"
 
 export default defineComponent({
   name: "AlertsPagination",
   props: {
     currentPage: {
       type: Number,
-      required: true,
+      required: true
     },
     pageSize: {
       type: Number,
-      required: true,
+      required: true
     },
     total: {
       type: Number,
-      required: true,
-    },
+      required: true
+    }
   },
   emits: ["update-page"],
   setup(props, context) {
-    const route = useRoute();
-    const router = useRouter();
-    const options = { route, router };
+    const route = useRoute()
+    const router = useRouter()
+    const options = { route, router }
 
     const totalPageCount = computed(() => {
-      return Math.ceil(props.total / props.pageSize);
-    });
+      return Math.ceil(props.total / props.pageSize)
+    })
 
     const hasOnlyOnePage = computed(() => {
-      return totalPageCount.value === 1;
-    });
+      return totalPageCount.value === 1
+    })
 
     const hasPreviousPage = computed(() => {
-      return props.currentPage > 1;
-    });
+      return props.currentPage > 1
+    })
 
     const isPreviousPageNotFirst = computed(() => {
-      return props.currentPage - 1 !== 1;
-    });
+      return props.currentPage - 1 !== 1
+    })
 
     const hasNextPage = computed(() => {
-      return props.currentPage < totalPageCount.value;
-    });
+      return props.currentPage < totalPageCount.value
+    })
 
     const isNextPageNotLast = computed(() => {
-      return props.currentPage + 1 !== totalPageCount.value;
-    });
+      return props.currentPage + 1 !== totalPageCount.value
+    })
 
     const updatePage = (page: number) => {
-      const pageQuery = useRouteQuery("page", page.toString(), options);
-      pageQuery.value = page.toString();
+      const pageQuery = useRouteQuery("page", page.toString(), options)
+      pageQuery.value = page.toString()
 
-      context.emit("update-page", page);
-    };
+      context.emit("update-page", page)
+    }
 
     onMounted(() => {
-      const pageQuery = useRouteQuery("page", null, options) as Ref<
-        string | null
-      >;
+      const pageQuery = useRouteQuery("page", null, options) as Ref<string | null>
       if (pageQuery.value && parseInt(pageQuery.value) !== props.currentPage) {
-        updatePage(parseInt(pageQuery.value));
+        updatePage(parseInt(pageQuery.value))
       }
-    });
+    })
 
     return {
       updatePage,
@@ -119,8 +112,8 @@ export default defineComponent({
       hasPreviousPage,
       isNextPageNotLast,
       isPreviousPageNotFirst,
-      totalPageCount,
-    };
-  },
-});
+      totalPageCount
+    }
+  }
+})
 </script>

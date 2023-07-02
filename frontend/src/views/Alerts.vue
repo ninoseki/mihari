@@ -3,18 +3,18 @@
 </template>
 
 <script lang="ts">
-import { useTitle } from "@vueuse/core";
-import { defineComponent } from "vue";
+import { useTitle } from "@vueuse/core"
+import { defineComponent } from "vue"
 
-import Alerts from "@/components/alert/AlertsWrapper.vue";
+import Alerts from "@/components/alert/AlertsWrapper.vue"
 
 export default defineComponent({
   name: "AlertsView",
   components: {
-    Alerts,
+    Alerts
   },
   setup() {
-    useTitle("Alerts - Mihari");
-  },
-});
+    useTitle("Alerts - Mihari")
+  }
+})
 </script>

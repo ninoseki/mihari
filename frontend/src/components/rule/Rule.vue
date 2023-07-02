@@ -51,58 +51,56 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, PropType } from "vue";
-import { useRouter } from "vue-router";
+import { defineComponent, type PropType } from "vue"
+import { useRouter } from "vue-router"
 
-import { generateDeleteRuleTask, generateRunRuleTask } from "@/api-helper";
-import Alerts from "@/components/alert/AlertsWithPagination.vue";
-import ErrorMessage from "@/components/ErrorMessage.vue";
-import Loading from "@/components/Loading.vue";
-import YAML from "@/components/rule/YAML.vue";
-import { Rule } from "@/types";
+import { generateDeleteRuleTask, generateRunRuleTask } from "@/api-helper"
+import Alerts from "@/components/alert/AlertsWithPagination.vue"
+import ErrorMessage from "@/components/ErrorMessage.vue"
+import Loading from "@/components/Loading.vue"
+import YAML from "@/components/rule/YAML.vue"
+import type { Rule } from "@/types"
 
 export default defineComponent({
   name: "RuleItem",
   props: {
     rule: {
       type: Object as PropType<Rule>,
-      required: true,
-    },
+      required: true
+    }
   },
   components: {
     YAML,
     Alerts,
     Loading,
-    ErrorMessage,
+    ErrorMessage
   },
   emits: ["refresh"],
   setup(props, context) {
-    const router = useRouter();
+    const router = useRouter()
 
-    const deleteRuleTask = generateDeleteRuleTask();
-    const runRuleTask = generateRunRuleTask();
+    const deleteRuleTask = generateDeleteRuleTask()
+    const runRuleTask = generateRunRuleTask()
 
     const deleteRule = async () => {
-      const result = window.confirm(
-        `Are you sure you want to delete ${props.rule.id}?`
-      );
+      const result = window.confirm(`Are you sure you want to delete ${props.rule.id}?`)
 
       if (result) {
-        await deleteRuleTask.perform(props.rule.id);
-        router.push("/");
+        await deleteRuleTask.perform(props.rule.id)
+        router.push("/")
       }
-    };
+    }
 
     const runRule = async () => {
-      await runRuleTask.perform(props.rule.id);
-      context.emit("refresh");
-    };
+      await runRuleTask.perform(props.rule.id)
+      context.emit("refresh")
+    }
 
     return {
       deleteRule,
       runRule,
-      runRuleTask,
-    };
-  },
-});
+      runRuleTask
+    }
+  }
+})
 </script>

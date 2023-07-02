@@ -4,7 +4,7 @@
       class="tag"
       :to="{
         name: 'Alerts',
-        query: { asn: autonomousSystem.asn },
+        query: { asn: autonomousSystem.asn }
       }"
     >
       {{ autonomousSystem.asn }}
@@ -13,17 +13,17 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, PropType } from "vue";
+import { defineComponent, type PropType } from "vue"
 
-import { AutonomousSystem } from "@/types";
+import type { AutonomousSystem } from "@/types"
 
 export default defineComponent({
   name: "AS",
   props: {
     autonomousSystem: {
       type: Object as PropType<AutonomousSystem>,
-      required: true,
-    },
-  },
-});
+      required: true
+    }
+  }
+})
 </script>
