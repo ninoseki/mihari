@@ -3,42 +3,42 @@
 </template>
 
 <script lang="ts">
-import { useTitle } from "@vueuse/core";
-import { defineComponent, onMounted, ref, watch } from "vue";
+import { useTitle } from "@vueuse/core"
+import { defineComponent, onMounted, ref, watch } from "vue"
 
-import Artifact from "@/components/artifact/ArtifactWrapper.vue";
+import Artifact from "@/components/artifact/ArtifactWrapper.vue"
 
 export default defineComponent({
   name: "ArtifactView",
   components: {
-    Artifact,
+    Artifact
   },
   props: {
     id: {
       type: String,
-      required: true,
-    },
+      required: true
+    }
   },
   setup(props) {
-    const artifactId = ref<string>(props.id);
+    const artifactId = ref<string>(props.id)
 
     const updateTitle = () => {
-      useTitle(`Artifact:${artifactId.value} - Mihari`);
-    };
+      useTitle(`Artifact:${artifactId.value} - Mihari`)
+    }
 
     onMounted(() => {
-      updateTitle();
-    });
+      updateTitle()
+    })
 
     watch(
       () => props.id,
       () => {
-        artifactId.value = props.id;
-        updateTitle();
+        artifactId.value = props.id
+        updateTitle()
       }
-    );
+    )
 
-    return { artifactId };
-  },
-});
+    return { artifactId }
+  }
+})
 </script>

@@ -7,17 +7,17 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, PropType } from "vue";
+import { defineComponent, type PropType } from "vue"
 
-import { CPE } from "@/types";
+import type { CPE } from "@/types"
 
 export default defineComponent({
   name: "CPEsItem",
   props: {
     cpes: {
       type: Array as PropType<CPE[]>,
-      required: true,
-    },
-  },
-});
+      required: true
+    }
+  }
+})
 </script>

@@ -10,28 +10,28 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, PropType } from "vue";
+import { defineComponent, type PropType } from "vue"
 
-import TagComponent from "@/components/tag/Tag.vue";
-import { Tag } from "@/types";
+import TagComponent from "@/components/tag/Tag.vue"
+import type { Tag } from "@/types"
 
 export default defineComponent({
   name: "TagsItem",
   components: {
-    TagComponent,
+    TagComponent
   },
   props: {
     tags: {
       type: Array as PropType<Tag[]>,
-      required: true,
-    },
+      required: true
+    }
   },
   setup(_, context) {
     const updateTag = (tag: string) => {
-      context.emit("update-tag", tag);
-    };
+      context.emit("update-tag", tag)
+    }
 
-    return { updateTag };
-  },
-});
+    return { updateTag }
+  }
+})
 </script>

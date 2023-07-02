@@ -9,21 +9,21 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, PropType } from "vue";
+import { defineComponent, type PropType } from "vue"
 
-import ArtifactComponent from "@/components/artifact/ArtifactTag.vue";
-import { Artifact } from "@/types";
+import ArtifactComponent from "@/components/artifact/ArtifactTag.vue"
+import type { Artifact } from "@/types"
 
 export default defineComponent({
   name: "ArtifactTags",
   components: {
-    ArtifactComponent,
+    ArtifactComponent
   },
   props: {
     artifacts: {
       type: Array as PropType<Artifact[]>,
-      required: true,
-    },
-  },
-});
+      required: true
+    }
+  }
+})
 </script>

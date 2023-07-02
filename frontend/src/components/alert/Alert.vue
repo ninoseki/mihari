@@ -5,10 +5,7 @@
         <th>ID</th>
         <td>
           {{ alert.id }}
-          <button
-            class="button is-light is-small is-pulled-right"
-            @click="deleteAlert"
-          >
+          <button class="button is-light is-small is-pulled-right" @click="deleteAlert">
             <span>Delete</span>
             <span class="icon is-small">
               <i class="fas fa-times"></i>
@@ -42,51 +39,49 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, PropType } from "vue";
+import { defineComponent, type PropType } from "vue"
 
-import { generateDeleteAlertTask } from "@/api-helper";
-import Artifacts from "@/components/artifact/ArtifactTags.vue";
-import Tags from "@/components/tag/Tags.vue";
-import { Alert } from "@/types";
-import { getHumanizedRelativeTime, getLocalDatetime } from "@/utils";
+import { generateDeleteAlertTask } from "@/api-helper"
+import Artifacts from "@/components/artifact/ArtifactTags.vue"
+import Tags from "@/components/tag/Tags.vue"
+import type { Alert } from "@/types"
+import { getHumanizedRelativeTime, getLocalDatetime } from "@/utils"
 
 export default defineComponent({
   name: "AlertItem",
   components: {
     Artifacts,
-    Tags,
+    Tags
   },
   props: {
     alert: {
       type: Object as PropType<Alert>,
-      required: true,
-    },
+      required: true
+    }
   },
   setup(props, context) {
     const updateTag = (tag: string) => {
-      context.emit("update-tag", tag);
-    };
+      context.emit("update-tag", tag)
+    }
 
-    const deleteAlertTask = generateDeleteAlertTask();
+    const deleteAlertTask = generateDeleteAlertTask()
 
     const deleteAlert = async () => {
-      const result = window.confirm(
-        `Are you sure you want to delete ${props.alert.id}?`
-      );
+      const result = window.confirm(`Are you sure you want to delete ${props.alert.id}?`)
 
       if (result) {
-        await deleteAlertTask.perform(props.alert.id);
+        await deleteAlertTask.perform(props.alert.id)
         // refresh the page
-        context.emit("refresh-page");
+        context.emit("refresh-page")
       }
-    };
+    }
 
     return {
       updateTag,
       deleteAlert,
       getLocalDatetime,
-      getHumanizedRelativeTime,
-    };
-  },
-});
+      getHumanizedRelativeTime
+    }
+  }
+})
 </script>

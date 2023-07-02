@@ -1,21 +1,21 @@
-import { Link } from "@/types";
+import type { Link } from "@/types"
 
-import { AnyRun } from "./anyrun";
-import { Censys } from "./censys";
-import { Crtsh } from "./crtsh";
-import { DNSlyticsForDomain, DNSlyticsForIP } from "./dnslytics";
-import { GreyNoise } from "./greynoise";
-import { Intezer } from "./intezer";
-import { OtxForDomain, OtxForIP } from "./otx";
-import { SecurityTrailsForDomain, SecurityTrailsForIP } from "./securitytrails";
-import { Shodan } from "./shodan";
-import { UrlscanForDomain, UrlscanForIP, UrlscanForURL } from "./urlscan";
+import { AnyRun } from "./anyrun"
+import { Censys } from "./censys"
+import { Crtsh } from "./crtsh"
+import { DNSlyticsForDomain, DNSlyticsForIP } from "./dnslytics"
+import { GreyNoise } from "./greynoise"
+import { Intezer } from "./intezer"
+import { OtxForDomain, OtxForIP } from "./otx"
+import { SecurityTrailsForDomain, SecurityTrailsForIP } from "./securitytrails"
+import { Shodan } from "./shodan"
+import { UrlscanForDomain, UrlscanForIP, UrlscanForURL } from "./urlscan"
 import {
   VirusTotalForDomain,
   VirusTotalForHash,
   VirusTotalForIP,
-  VirusTotalForURL,
-} from "./virustotal";
+  VirusTotalForURL
+} from "./virustotal"
 
 export const Links: Link[] = [
   new AnyRun(),
@@ -36,5 +36,5 @@ export const Links: Link[] = [
   new VirusTotalForDomain(),
   new VirusTotalForHash(),
   new VirusTotalForIP(),
-  new VirusTotalForURL(),
-];
+  new VirusTotalForURL()
+]

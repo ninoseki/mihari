@@ -6,7 +6,7 @@
       :key="reverseDnsName.name"
       :to="{
         name: 'Alerts',
-        query: { reverseDnsName: reverseDnsName.name },
+        query: { reverseDnsName: reverseDnsName.name }
       }"
     >
       {{ reverseDnsName.name }}
@@ -15,17 +15,17 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, PropType } from "vue";
+import { defineComponent, type PropType } from "vue"
 
-import { ReverseDnsName } from "@/types";
+import type { ReverseDnsName } from "@/types"
 
 export default defineComponent({
   name: "ReverseDnsNames",
   props: {
     reverseDnsNames: {
       type: Array as PropType<ReverseDnsName[]>,
-      required: true,
-    },
-  },
-});
+      required: true
+    }
+  }
+})
 </script>

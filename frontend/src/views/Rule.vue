@@ -3,42 +3,42 @@
 </template>
 
 <script lang="ts">
-import { useTitle } from "@vueuse/core";
-import { defineComponent, onMounted, ref, watch } from "vue";
+import { useTitle } from "@vueuse/core"
+import { defineComponent, onMounted, ref, watch } from "vue"
 
-import Rule from "@/components/rule/RuleWrapper.vue";
+import Rule from "@/components/rule/RuleWrapper.vue"
 
 export default defineComponent({
   name: "RuleView",
   components: {
-    Rule,
+    Rule
   },
   props: {
     id: {
       type: String,
-      required: true,
-    },
+      required: true
+    }
   },
   setup(props) {
-    const ruleId = ref<string>(props.id);
+    const ruleId = ref<string>(props.id)
 
     const updateTitle = () => {
-      useTitle(`Rule:${ruleId.value} - Mihari`);
-    };
+      useTitle(`Rule:${ruleId.value} - Mihari`)
+    }
 
     onMounted(() => {
-      updateTitle();
-    });
+      updateTitle()
+    })
 
     watch(
       () => props.id,
       () => {
-        ruleId.value = props.id;
-        updateTitle();
+        ruleId.value = props.id
+        updateTitle()
       }
-    );
+    )
 
-    return { ruleId };
-  },
-});
+    return { ruleId }
+  }
+})
 </script>

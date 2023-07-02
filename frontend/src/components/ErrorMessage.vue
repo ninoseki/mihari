@@ -12,21 +12,21 @@
 </template>
 
 <script lang="ts">
-import "vue-json-pretty/lib/styles.css";
+import "vue-json-pretty/lib/styles.css"
 
-import { defineComponent } from "vue";
-import VueJsonPretty from "vue-json-pretty";
+import { defineComponent } from "vue"
+import VueJsonPretty from "vue-json-pretty"
 
 export default defineComponent({
   name: "ErrorItem",
   props: {
     error: {
       type: Object,
-      required: true,
-    },
+      required: true
+    }
   },
   components: {
-    VueJsonPretty,
-  },
-});
+    VueJsonPretty
+  }
+})
 </script>

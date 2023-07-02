@@ -6,23 +6,23 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, PropType } from "vue";
+import { defineComponent, type PropType } from "vue"
 
-import { Link } from "@/types";
+import type { Link } from "@/types"
 
 export default defineComponent({
   name: "LinkItem",
   props: {
     data: {
       type: String,
-      required: true,
+      required: true
     },
     link: {
       type: Object as PropType<Link>,
-      required: true,
-    },
-  },
-});
+      required: true
+    }
+  }
+})
 </script>
 
 <style scoped>

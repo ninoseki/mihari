@@ -23,38 +23,38 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, ref } from "vue";
-import { useRouter } from "vue-router";
+import { defineComponent, ref } from "vue"
+import { useRouter } from "vue-router"
 
-import { generateCreateRuleTask } from "@/api-helper";
-import ErrorMessage from "@/components/ErrorMessage.vue";
-import InputForm from "@/components/rule/InputForm.vue";
-import { getRuleTemplate } from "@/rule";
+import { generateCreateRuleTask } from "@/api-helper"
+import ErrorMessage from "@/components/ErrorMessage.vue"
+import InputForm from "@/components/rule/InputForm.vue"
+import { getRuleTemplate } from "@/rule"
 
 export default defineComponent({
   name: "NewRule",
   components: {
     InputForm,
-    ErrorMessage,
+    ErrorMessage
   },
   setup() {
-    const router = useRouter();
+    const router = useRouter()
 
-    const yaml = ref(getRuleTemplate());
+    const yaml = ref(getRuleTemplate())
 
-    const createRuleTask = generateCreateRuleTask();
+    const createRuleTask = generateCreateRuleTask()
 
     const updateYAML = (value: string) => {
-      yaml.value = value;
-    };
+      yaml.value = value
+    }
 
     const create = async () => {
-      const rule = await createRuleTask.perform({ yaml: yaml.value });
+      const rule = await createRuleTask.perform({ yaml: yaml.value })
 
-      router.push({ name: "Rule", params: { id: rule.id } });
-    };
+      router.push({ name: "Rule", params: { id: rule.id } })
+    }
 
-    return { yaml, create, updateYAML, createRuleTask };
-  },
-});
+    return { yaml, create, updateYAML, createRuleTask }
+  }
+})
 </script>

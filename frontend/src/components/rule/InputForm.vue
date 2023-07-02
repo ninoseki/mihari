@@ -11,57 +11,57 @@
 
 <script lang="ts">
 // eslint-disable-next-line simple-import-sort/imports
-import "vue-prism-editor/dist/prismeditor.min.css";
+import "vue-prism-editor/dist/prismeditor.min.css"
 
-import { defineComponent, ref, watchEffect } from "vue";
-import { PrismEditor } from "vue-prism-editor";
+import { defineComponent, ref, watchEffect } from "vue"
+import { PrismEditor } from "vue-prism-editor"
 
-import Prism from "prismjs";
+import Prism from "prismjs"
 
-import "prismjs/components/prism-yaml";
-import "prismjs/plugins/custom-class/prism-custom-class";
-import "prismjs/themes/prism-twilight.css";
+import "prismjs/components/prism-yaml"
+import "prismjs/plugins/custom-class/prism-custom-class"
+import "prismjs/themes/prism-twilight.css"
 
 export default defineComponent({
   name: "RuleInputForm",
   components: {
-    PrismEditor,
+    PrismEditor
   },
   props: {
     yaml: {
       type: String,
-      required: true,
-    },
+      required: true
+    }
   },
   emits: ["update-yaml"],
   setup(props, context) {
-    const yamlInput = ref(props.yaml);
-    const wrapper = ref<HTMLElement | undefined>(undefined);
+    const yamlInput = ref(props.yaml)
+    const wrapper = ref<HTMLElement | undefined>(undefined)
 
     Prism.plugins.customClass.map({
       number: "prism-number",
-      tag: "prism-tag",
-    });
+      tag: "prism-tag"
+    })
 
     const highlighter = (code: string) => {
-      return Prism.highlight(code, Prism.languages.yaml, "yaml");
-    };
+      return Prism.highlight(code, Prism.languages.yaml, "yaml")
+    }
 
     watchEffect(() => {
-      context.emit("update-yaml", yamlInput.value);
+      context.emit("update-yaml", yamlInput.value)
 
       // TODO: a dirty hack to change the default text color
       if (wrapper.value) {
-        const strings = wrapper.value.querySelectorAll(":not(span.token)");
+        const strings = wrapper.value.querySelectorAll(":not(span.token)")
         strings.forEach((string) => {
-          (string as HTMLElement).style.color = "white";
-        });
+          ;(string as HTMLElement).style.color = "white"
+        })
       }
-    });
+    })
 
-    return { yamlInput, highlighter, wrapper };
-  },
-});
+    return { yamlInput, highlighter, wrapper }
+  }
+})
 </script>
 
 <style scoped>

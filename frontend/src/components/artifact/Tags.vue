@@ -6,7 +6,7 @@
       :key="tag"
       :to="{
         name: 'Alerts',
-        query: { tag: tag },
+        query: { tag: tag }
       }"
     >
       {{ tag }}
@@ -15,15 +15,15 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, PropType } from "vue";
+import { defineComponent, type PropType } from "vue"
 
 export default defineComponent({
   name: "TagsItem",
   props: {
     tags: {
       type: Array as PropType<string[]>,
-      required: true,
-    },
-  },
-});
+      required: true
+    }
+  }
+})
 </script>

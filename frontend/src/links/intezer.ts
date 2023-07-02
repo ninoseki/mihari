@@ -1,20 +1,20 @@
-import { BaseLink } from "@/links/base";
-import { Link, LinkType } from "@/types";
+import { BaseLink } from "@/links/base"
+import type { Link, LinkType } from "@/types"
 
 export class Intezer extends BaseLink implements Link {
-  public baseURL: string;
-  public name: string;
-  public type: LinkType;
+  public baseURL: string
+  public name: string
+  public type: LinkType
 
   public constructor() {
-    super();
+    super()
 
-    this.baseURL = "https://analyze.intezer.com";
-    this.name = "Intezer";
-    this.type = "hash";
+    this.baseURL = "https://analyze.intezer.com"
+    this.name = "Intezer"
+    this.type = "hash"
   }
 
   public href(data: string): string {
-    return this.baseURL + `/#/files/${data}`;
+    return this.baseURL + `/#/files/${data}`
   }
 }

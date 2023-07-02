@@ -95,64 +95,63 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, PropType, ref, watch } from "vue";
-import { useRoute } from "vue-router";
+import { defineComponent, type PropType, ref, watch } from "vue"
+import { useRoute } from "vue-router"
 
-import { AlertSearchParams } from "@/types";
-import { normalizeQueryParam } from "@/utils";
+import type { AlertSearchParams } from "@/types"
+import { normalizeQueryParam } from "@/utils"
 
 export default defineComponent({
   name: "AlertsForm",
   props: {
     tags: {
       type: Array as PropType<string[]>,
-      required: true,
+      required: true
     },
     ruleSet: {
       type: Array as PropType<string[]>,
-      required: true,
+      required: true
     },
     page: {
       type: Number,
-      required: true,
+      required: true
     },
     tag: {
       type: String,
-      required: false,
-    },
+      required: false
+    }
   },
   setup(props) {
-    const route = useRoute();
+    const route = useRoute()
 
-    const artifact = ref<string | undefined>(undefined);
-    const fromAt = ref<string | undefined>(undefined);
-    const tagInput = ref<string | undefined>(props.tag);
-    const ruleId = ref<string | undefined>(undefined);
-    const toAt = ref<string | undefined>(undefined);
-    const asn = ref<number | undefined>(undefined);
-    const dnsRecord = ref<string | undefined>(undefined);
-    const reverseDnsName = ref<string | undefined>(undefined);
+    const artifact = ref<string | undefined>(undefined)
+    const fromAt = ref<string | undefined>(undefined)
+    const tagInput = ref<string | undefined>(props.tag)
+    const ruleId = ref<string | undefined>(undefined)
+    const toAt = ref<string | undefined>(undefined)
+    const asn = ref<number | undefined>(undefined)
+    const dnsRecord = ref<string | undefined>(undefined)
+    const reverseDnsName = ref<string | undefined>(undefined)
 
     const updateByQueryParams = () => {
-      const asn_ = route.query["asn"];
-      const normalizedAsn = normalizeQueryParam(asn_);
-      asn.value =
-        normalizedAsn === undefined ? undefined : parseInt(normalizedAsn);
+      const asn_ = route.query["asn"]
+      const normalizedAsn = normalizeQueryParam(asn_)
+      asn.value = normalizedAsn === undefined ? undefined : parseInt(normalizedAsn)
 
-      const dnsRecord_ = route.query["dnsRecord"];
-      dnsRecord.value = normalizeQueryParam(dnsRecord_);
+      const dnsRecord_ = route.query["dnsRecord"]
+      dnsRecord.value = normalizeQueryParam(dnsRecord_)
 
-      const reverseDnsName_ = route.query["reverseDnsName"];
-      reverseDnsName.value = normalizeQueryParam(reverseDnsName_);
+      const reverseDnsName_ = route.query["reverseDnsName"]
+      reverseDnsName.value = normalizeQueryParam(reverseDnsName_)
 
-      const tag_ = route.query["tag"];
+      const tag_ = route.query["tag"]
       if (tagInput.value === undefined) {
-        tagInput.value = normalizeQueryParam(tag_);
+        tagInput.value = normalizeQueryParam(tag_)
       }
-    };
+    }
 
     const getSearchParams = (): AlertSearchParams => {
-      updateByQueryParams();
+      updateByQueryParams()
 
       const params: AlertSearchParams = {
         artifact: artifact.value === "" ? undefined : artifact.value,
@@ -160,17 +159,17 @@ export default defineComponent({
         ruleId: ruleId.value === "" ? undefined : ruleId.value,
         tag: tagInput.value === "" ? undefined : tagInput.value,
         toAt: toAt.value === "" ? undefined : toAt.value,
-        fromAt: fromAt.value === "" ? undefined : fromAt.value,
-      };
-      return params;
-    };
+        fromAt: fromAt.value === "" ? undefined : fromAt.value
+      }
+      return params
+    }
 
     watch(
       () => props.tag,
       () => {
-        tagInput.value = props.tag;
+        tagInput.value = props.tag
       }
-    );
+    )
 
     return {
       artifact,
@@ -178,8 +177,8 @@ export default defineComponent({
       getSearchParams,
       ruleId,
       toAt,
-      tagInput,
-    };
-  },
-});
+      tagInput
+    }
+  }
+})
 </script>

@@ -12,32 +12,32 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, nextTick, onMounted, ref, watch } from "vue";
+import { defineComponent, nextTick, onMounted, ref, watch } from "vue"
 
-import { generateGetAlertsTask } from "@/api-helper";
-import Alerts from "@/components/alert/Alerts.vue";
-import Loading from "@/components/Loading.vue";
-import { AlertSearchParams } from "@/types";
+import { generateGetAlertsTask } from "@/api-helper"
+import Alerts from "@/components/alert/Alerts.vue"
+import Loading from "@/components/Loading.vue"
+import type { AlertSearchParams } from "@/types"
 
 export default defineComponent({
   name: "AlertsWithPagination",
   props: {
     ruleId: {
-      type: String,
+      type: String
     },
     artifact: {
-      type: String,
-    },
+      type: String
+    }
   },
   components: {
     Alerts,
-    Loading,
+    Loading
   },
   setup(props) {
-    const page = ref(1);
-    const tag = ref<string | undefined>(undefined);
+    const page = ref(1)
+    const tag = ref<string | undefined>(undefined)
 
-    const getAlertsTask = generateGetAlertsTask();
+    const getAlertsTask = generateGetAlertsTask()
 
     const getAlerts = async () => {
       const params: AlertSearchParams = {
@@ -46,46 +46,46 @@ export default defineComponent({
         ruleId: props.ruleId,
         tag: tag.value,
         toAt: undefined,
-        fromAt: undefined,
-      };
-      return await getAlertsTask.perform(params);
-    };
+        fromAt: undefined
+      }
+      return await getAlertsTask.perform(params)
+    }
 
     const updatePage = (newPage: number) => {
-      page.value = newPage;
-    };
+      page.value = newPage
+    }
 
     const resetPage = () => {
-      page.value = 1;
-    };
+      page.value = 1
+    }
 
     const refreshPage = async () => {
-      resetPage();
-      await getAlerts();
-    };
+      resetPage()
+      await getAlerts()
+    }
 
     const updateTag = (newTag: string | undefined) => {
       if (tag.value === newTag) {
-        tag.value = undefined;
+        tag.value = undefined
       } else {
-        tag.value = newTag;
+        tag.value = newTag
       }
-    };
+    }
 
     onMounted(async () => {
-      await getAlerts();
-    });
+      await getAlerts()
+    })
 
     watch([props, page, tag], async () => {
-      nextTick(async () => await getAlerts());
-    });
+      nextTick(async () => await getAlerts())
+    })
 
     return {
       getAlertsTask,
       refreshPage,
       updatePage,
-      updateTag,
-    };
-  },
-});
+      updateTag
+    }
+  }
+})
 </script>

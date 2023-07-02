@@ -1,4 +1,4 @@
-import { Country } from "@/types";
+import type { Country } from "@/types"
 
 const COUNTRIES: Country[] = [
   { name: "Afghanistan", lat: 33.93911, long: 67.709953, code: "AF" },
@@ -35,7 +35,7 @@ const COUNTRIES: Country[] = [
     name: "British Indian Ocean Territory",
     lat: -6.343194,
     long: 71.876519,
-    code: "IO",
+    code: "IO"
   },
   { name: "Brunei", lat: 4.535277, long: 114.727669, code: "BN" },
   { name: "Bulgaria", lat: 42.733883, long: 25.48583, code: "BG" },
@@ -50,7 +50,7 @@ const COUNTRIES: Country[] = [
     name: "Central African Republic",
     lat: 6.611111,
     long: 20.939444,
-    code: "CF",
+    code: "CF"
   },
   { name: "Caribbean Netherlands", lat: 12.2, long: -68.26, code: "BQ" },
   { name: "Chad", lat: 15.454166, long: 18.732207, code: "TD" },
@@ -61,7 +61,7 @@ const COUNTRIES: Country[] = [
     name: "Cocos (Keeling) Islands",
     lat: -12.164165,
     long: 96.870956,
-    code: "CC",
+    code: "CC"
   },
   { name: "Colombia", lat: 4.570868, long: -74.297333, code: "CO" },
   { name: "Comoros", lat: -11.875001, long: 43.872219, code: "KM" },
@@ -90,7 +90,7 @@ const COUNTRIES: Country[] = [
     name: "Falkland Islands (Malvinas)",
     lat: -51.796253,
     long: -59.523613,
-    code: "FK",
+    code: "FK"
   },
   { name: "Faroe Islands", lat: 61.892635, long: -6.911806, code: "FO" },
   { name: "Fiji", lat: -16.578193, long: 179.414413, code: "FJ" },
@@ -102,7 +102,7 @@ const COUNTRIES: Country[] = [
     name: "French Southern Territories",
     lat: -49.280366,
     long: 69.348557,
-    code: "TF",
+    code: "TF"
   },
   { name: "Gabon", lat: -0.803689, long: 11.609444, code: "GA" },
   { name: "Gambia", lat: 13.443182, long: -15.310139, code: "GM" },
@@ -125,13 +125,13 @@ const COUNTRIES: Country[] = [
     name: "Heard Island and McDonald Islands",
     lat: -53.08181,
     long: 73.504158,
-    code: "HM",
+    code: "HM"
   },
   {
     name: "Holy See (Vatican City State)",
     lat: 41.902916,
     long: 12.453389,
-    code: "VA",
+    code: "VA"
   },
   { name: "Honduras", lat: 15.199999, long: -86.241905, code: "HN" },
   { name: "Hong Kong", lat: 22.396428, long: 114.109497, code: "HK" },
@@ -161,7 +161,7 @@ const COUNTRIES: Country[] = [
     name: 'Lao People"s Democratic Republic',
     lat: 19.85627,
     long: 102.495496,
-    code: "LA",
+    code: "LA"
   },
   { name: "Latvia", lat: 56.879635, long: 24.603189, code: "LV" },
   { name: "Lebanon", lat: 33.854721, long: 35.862285, code: "LB" },
@@ -203,7 +203,7 @@ const COUNTRIES: Country[] = [
     name: "Netherlands Antilles",
     lat: 12.226079,
     long: -69.060087,
-    code: "AN",
+    code: "AN"
   },
   { name: "New Caledonia", lat: -20.904305, long: 165.618042, code: "NC" },
   { name: "New Zealand", lat: -40.900557, long: 174.885971, code: "NZ" },
@@ -216,7 +216,7 @@ const COUNTRIES: Country[] = [
     name: "Northern Mariana Islands",
     lat: 17.33083,
     long: 145.38469,
-    code: "MP",
+    code: "MP"
   },
   { name: "Norway", lat: 60.472024, long: 8.468946, code: "NO" },
   { name: "Oman", lat: 21.512583, long: 55.923255, code: "OM" },
@@ -243,14 +243,14 @@ const COUNTRIES: Country[] = [
     name: "Saint Kitts and Nevis",
     lat: 17.357822,
     long: -62.782998,
-    code: "KN",
+    code: "KN"
   },
   { name: "Saint Lucia", lat: 13.909444, long: -60.978893, code: "LC" },
   {
     name: "Saint Pierre Miquelon",
     lat: 46.941936,
     long: -56.27111,
-    code: "PM",
+    code: "PM"
   },
   { name: "Saint Martin", lat: 18.11, long: -63.03, code: "MF" },
   { name: "Sint Maarten", lat: 18.02, long: -63.06, code: "SX" },
@@ -258,7 +258,7 @@ const COUNTRIES: Country[] = [
     name: "Saint Vincent and the Grenadines",
     lat: 12.984305,
     long: -61.287228,
-    code: "VC",
+    code: "VC"
   },
   { name: "Samoa", lat: -13.759029, long: -172.104629, code: "WS" },
   { name: "San Marino", lat: 43.94236, long: 12.457777, code: "SM" },
@@ -278,7 +278,7 @@ const COUNTRIES: Country[] = [
     name: "South Georgia and the South Sandwich Islands",
     lat: -54.429579,
     long: -36.587909,
-    code: "GS",
+    code: "GS"
   },
   { name: "South Sudan", lat: 6.8769, long: 31.3069, code: "SS" },
   { name: "Spain", lat: 40.463667, long: -3.74922, code: "ES" },
@@ -289,7 +289,7 @@ const COUNTRIES: Country[] = [
     name: "Svalbard and Jan Mayen",
     lat: 77.553604,
     long: 23.670272,
-    code: "SJ",
+    code: "SJ"
   },
   { name: "Swaziland", lat: -26.522503, long: 31.465866, code: "SZ" },
   { name: "Sweden", lat: 60.128161, long: 18.643501, code: "SE" },
@@ -311,7 +311,7 @@ const COUNTRIES: Country[] = [
     name: "Turks and Caicos Islands",
     lat: 21.694025,
     long: -71.797928,
-    code: "TC",
+    code: "TC"
   },
   { name: "Tuvalu", lat: -7.109535, long: 177.64933, code: "TV" },
   { name: "Uganda", lat: 1.373333, long: 32.290275, code: "UG" },
@@ -323,7 +323,7 @@ const COUNTRIES: Country[] = [
     name: "United States Minor Outlying Islands",
     lat: 0.0,
     long: 0.0,
-    code: "UM",
+    code: "UM"
   },
   { name: "Uruguay", lat: -32.522779, long: -55.765835, code: "UY" },
   { name: "Uzbekistan", lat: 41.377491, long: 64.585262, code: "UZ" },
@@ -334,17 +334,17 @@ const COUNTRIES: Country[] = [
     name: "British Virgin Islands",
     lat: 18.420695,
     long: -64.639968,
-    code: "VG",
+    code: "VG"
   },
   { name: "U.S. Virgin Islands", lat: 18.335765, long: -64.896335, code: "VI" },
   { name: "Wallis and Futuna", lat: -13.768752, long: -177.156097, code: "WF" },
   { name: "Western Sahara", lat: 24.215527, long: -12.885834, code: "EH" },
   { name: "Yemen", lat: 15.552727, long: 48.516388, code: "YE" },
   { name: "Zambia", lat: -13.133897, long: 27.849332, code: "ZM" },
-  { name: "Zimbabwe", lat: -19.015438, long: 29.154857, code: "ZW" },
-];
+  { name: "Zimbabwe", lat: -19.015438, long: 29.154857, code: "ZW" }
+]
 
 export function getCountryByCode(code: string): Country | undefined {
-  const country = COUNTRIES.find((country) => country.code === code);
-  return country;
+  const country = COUNTRIES.find((country) => country.code === code)
+  return country
 }

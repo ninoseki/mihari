@@ -31,10 +31,7 @@
 
     <Loading v-if="getAlertsTask.isRunning"></Loading>
 
-    <ErrorMessage
-      v-if="getAlertsTask.isError"
-      :error="getAlertsTask.last?.error"
-    ></ErrorMessage>
+    <ErrorMessage v-if="getAlertsTask.isError" :error="getAlertsTask.last?.error"></ErrorMessage>
 
     <AlertsComponent
       :alerts="getAlertsTask.last.value"
@@ -47,18 +44,14 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, nextTick, onMounted, ref, watch } from "vue";
+import { defineComponent, nextTick, onMounted, ref, watch } from "vue"
 
-import {
-  generateGetAlertsTask,
-  generateGetRuleSetTask,
-  generateGetTagsTask,
-} from "@/api-helper";
-import AlertsComponent from "@/components/alert/Alerts.vue";
-import FormComponent from "@/components/alert/Form.vue";
-import ErrorMessage from "@/components/ErrorMessage.vue";
-import Loading from "@/components/Loading.vue";
-import { AlertSearchParams } from "@/types";
+import { generateGetAlertsTask, generateGetRuleSetTask, generateGetTagsTask } from "@/api-helper"
+import AlertsComponent from "@/components/alert/Alerts.vue"
+import FormComponent from "@/components/alert/Form.vue"
+import ErrorMessage from "@/components/ErrorMessage.vue"
+import Loading from "@/components/Loading.vue"
+import type { AlertSearchParams } from "@/types"
 
 export default defineComponent({
   name: "AlertsWrapper",
@@ -66,63 +59,63 @@ export default defineComponent({
     AlertsComponent,
     FormComponent,
     Loading,
-    ErrorMessage,
+    ErrorMessage
   },
   setup() {
-    const page = ref(1);
-    const tag = ref<string | undefined>(undefined);
-    const form = ref<InstanceType<typeof FormComponent>>();
+    const page = ref(1)
+    const tag = ref<string | undefined>(undefined)
+    const form = ref<InstanceType<typeof FormComponent>>()
 
-    const getAlertsTask = generateGetAlertsTask();
-    const getTagsTask = generateGetTagsTask();
-    const getRuleSetTask = generateGetRuleSetTask();
+    const getAlertsTask = generateGetAlertsTask()
+    const getTagsTask = generateGetTagsTask()
+    const getRuleSetTask = generateGetRuleSetTask()
 
     const getAlerts = async () => {
-      const params = form.value?.getSearchParams() as AlertSearchParams;
-      return await getAlertsTask.perform(params);
-    };
+      const params = form.value?.getSearchParams() as AlertSearchParams
+      return await getAlertsTask.perform(params)
+    }
 
     const updatePage = (newPage: number) => {
-      page.value = newPage;
-    };
+      page.value = newPage
+    }
 
     const resetPage = () => {
-      page.value = 1;
-    };
+      page.value = 1
+    }
 
     const search = async () => {
       // reset page
-      resetPage();
+      resetPage()
 
-      await getAlerts();
-    };
+      await getAlerts()
+    }
 
     const updateTag = (newTag: string | undefined) => {
       if (tag.value === newTag) {
-        tag.value = undefined;
+        tag.value = undefined
       } else {
-        tag.value = newTag;
+        tag.value = newTag
       }
 
-      nextTick(async () => await search());
-    };
+      nextTick(async () => await search())
+    }
 
     const refreshPage = async () => {
       // it is just an alias of search
       // this function will be invoked when an alert is deleted
-      await search();
-    };
+      await search()
+    }
 
     onMounted(async () => {
-      getTagsTask.perform();
-      getRuleSetTask.perform();
+      getTagsTask.perform()
+      getRuleSetTask.perform()
 
-      await getAlerts();
-    });
+      await getAlerts()
+    })
 
     watch([page, tag], async () => {
-      nextTick(async () => await getAlerts());
-    });
+      nextTick(async () => await getAlerts())
+    })
 
     return {
       getAlertsTask,
@@ -134,8 +127,8 @@ export default defineComponent({
       updatePage,
       updateTag,
       form,
-      page,
-    };
-  },
-});
+      page
+    }
+  }
+})
 </script>

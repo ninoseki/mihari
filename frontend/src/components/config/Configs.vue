@@ -19,10 +19,7 @@
               {{ config.type }}
             </td>
             <td>
-              <button
-                class="button is-success is-small ml-1"
-                v-if="config.isConfigured"
-              >
+              <button class="button is-success is-small ml-1" v-if="config.isConfigured">
                 <span class="icon is-small">
                   <i class="fas fa-check"></i>
                 </span>
@@ -52,17 +49,17 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, PropType } from "vue";
+import { defineComponent, type PropType } from "vue"
 
-import { Config } from "@/types";
+import type { Config } from "@/types"
 
 export default defineComponent({
   name: "ConfigsItem",
   props: {
     configs: {
       type: Array as PropType<Config[]>,
-      required: true,
-    },
-  },
-});
+      required: true
+    }
+  }
+})
 </script>
