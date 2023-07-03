@@ -9,12 +9,6 @@
 
 <p align="center">
   <img src="https://github.com/ninoseki/mihari/raw/master/images/logo.png"/>
-  <br/>
-  <a href="https://tines.io?utm_source=github&utm_medium=sponsorship&utm_campaign=ninoseki">
-    <img src="https://github.com/ninoseki/mihari/raw/master/images/Tines-Full_Logo-Tines_Black.png"/>
-  </a>
-  <br/>
-  Mihari is proudly supported by <a href="https://tines.io?utm_source=github&utm_medium=sponsorship&utm_campaign=ninoseki">Tines</a>
 </p>
 
 ---
@@ -68,7 +62,3 @@ Mihari supports the following services by default.
 ## License
 
 The gem is available as open source under the terms of the [MIT License](https://opensource.org/licenses/MIT).
-
-## Acknowledgement
-
-Mihari is proudly supported by [Tines.io](https://tines.io?utm_source=github&utm_medium=sponsorship&utm_campaign=ninoseki), The SOAR Platform for Enterprise Security Teams.
