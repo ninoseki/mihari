@@ -5,18 +5,16 @@ module Mihari
     class DNSTwister < Base
       include Mixins::Refang
 
-      param :query
-
       # @return [String]
       attr_reader :type
 
-      # @return [String]
-      attr_reader :query
+      #
+      # @param [String] query
+      # @param [Hash, nil] options
+      #
+      def initialize(query, options: nil)
+        super(refang(query), options: options)
 
-      def initialize(*args, **kwargs)
-        super
-
-        @query = refang(query)
         @type = TypeChecker.type(query)
       end
 

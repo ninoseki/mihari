@@ -5,8 +5,6 @@ module Mihari
     class SecurityTrails < Base
       include Mixins::Refang
 
-      param :query
-
       # @return [String, nil]
       attr_reader :type
 
@@ -16,13 +14,17 @@ module Mihari
       # @return [String]
       attr_reader :query
 
-      def initialize(*args, **kwargs)
-        super
+      #
+      # @param [String] query
+      # @param [Hash, nil] options
+      # @param [String, nil] api_key
+      #
+      def initialize(query, options: nil, api_key: nil)
+        super(refang(query), options: options)
 
-        @query = refang(query)
         @type = TypeChecker.type(query)
 
-        @api_key = kwargs[:api_key] || Mihari.config.securitytrails_api_key
+        @api_key = api_key || Mihari.config.securitytrails_api_key
       end
 
       def artifacts

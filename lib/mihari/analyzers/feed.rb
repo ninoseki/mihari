@@ -6,16 +6,6 @@ require "mihari/feed/parser"
 module Mihari
   module Analyzers
     class Feed < Base
-      param :query
-
-      option :method, default: proc { "GET" }
-      option :headers, default: proc { {} }
-      option :params, default: proc {}
-      option :json, default: proc {}
-      option :data, default: proc {}
-
-      option :selector, default: proc { "" }
-
       # @return [Hash, nil]
       attr_reader :data
 
@@ -36,6 +26,27 @@ module Mihari
 
       # @return [String]
       attr_reader :query
+
+      #
+      # @param [String] query
+      # @param [Hash, nil] options
+      # @param [String] method
+      # @param [Hash] headers
+      # @param [Hash] params
+      # @param [Hash] json
+      # @param [Hash] data
+      # @param [String] selector
+      #
+      def initialize(query, options: nil, method: "GET", headers: {}, params: {}, json: {}, data: {}, selector: "")
+        super(query, options: options)
+
+        @method = method
+        @headers = headers
+        @params = params
+        @json = json
+        @data = data
+        @selector = selector
+      end
 
       def artifacts
         Mihari::Feed::Parser.new(results).parse selector

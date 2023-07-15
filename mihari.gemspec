@@ -46,12 +46,11 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency "simplecov-lcov", "~> 0.8.0"
   spec.add_development_dependency "standard", "~> 1.29"
   spec.add_development_dependency "timecop", "~> 0.9"
-  spec.add_development_dependency "vcr", "~> 6.1"
+  spec.add_development_dependency "vcr", "~> 6.2"
   spec.add_development_dependency "webmock", "~> 3.18"
 
   unless ci_env?
     spec.add_development_dependency "lefthook", "~> 1.4"
-    spec.add_development_dependency "ruby-lsp", "~> 0.5"
     spec.add_development_dependency "solargraph", "~> 0.49"
     spec.add_development_dependency "steep", "~> 1.4"
   end
@@ -63,7 +62,6 @@ Gem::Specification.new do |spec|
   spec.add_dependency "dry-configurable", "1.0.1"
   spec.add_dependency "dry-container", "0.11.0"
   spec.add_dependency "dry-files", "1.0.1"
-  spec.add_dependency "dry-initializer", "3.1.1"
   spec.add_dependency "dry-schema", "1.13.2"
   spec.add_dependency "dry-struct", "1.6.0"
   spec.add_dependency "dry-validation", "1.10.0"

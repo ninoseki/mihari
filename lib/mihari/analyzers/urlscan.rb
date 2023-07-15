@@ -3,35 +3,30 @@
 module Mihari
   module Analyzers
     class Urlscan < Base
-      param :query
-
-      option :allowed_data_types, default: proc { SUPPORTED_DATA_TYPES }
-
-      option :interval, default: proc { 0 }
-
       SUPPORTED_DATA_TYPES = %w[url domain ip].freeze
       SIZE = 1000
 
       # @return [String, nil]
       attr_reader :api_key
 
-      # @return [String]
-      attr_reader :query
-
-      # @return [Integer]
-      attr_reader :interval
-
-      # @return [String]
+      # @return [Array<String>]
       attr_reader :allowed_data_types
 
-      def initialize(*args, **kwargs)
-        super
+      #
+      # @param [String] query
+      # @param [Hash, nil] options
+      # @param [String, nil] api_key
+      # @param [Array<String>] allowed_data_types
+      #
+      def initialize(query, options: nil, api_key: nil, allowed_data_types: SUPPORTED_DATA_TYPES)
+        super(query, options: options)
 
-        unless valid_allowed_data_types?
-          raise InvalidInputError, "allowed_data_types should be any of url, domain and ip."
-        end
+        @api_key = api_key || Mihari.config.urlscan_api_key
+        @allowed_data_types = allowed_data_types
 
-        @api_key = kwargs[:api_key] || Mihari.config.urlscan_api_key
+        return if valid_allowed_data_types?
+
+        raise InvalidInputError, "allowed_data_types should be any of url, domain and ip."
       end
 
       def artifacts
@@ -82,7 +77,7 @@ module Mihari
           search_after = res.results.last.sort.join(",")
 
           # sleep #{interval} seconds to avoid the rate limitation (if it is set)
-          sleep interval
+          sleep(interval) if interval
         end
 
         responses

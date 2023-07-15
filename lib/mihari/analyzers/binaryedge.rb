@@ -3,23 +3,18 @@
 module Mihari
   module Analyzers
     class BinaryEdge < Base
-      param :query
-
-      option :interval, default: proc { 0 }
-
       # @return [String, nil]
       attr_reader :api_key
 
-      # @return [String]
-      attr_reader :query
+      #
+      # @param [String] query
+      # @param [Hash, nil] options
+      # @param [String, nil] api_key
+      #
+      def initialize(query, options: nil, api_key: nil)
+        super(query, options: options)
 
-      # @return [Integer]
-      attr_reader :interval
-
-      def initialize(*args, **kwargs)
-        super(*args, **kwargs)
-
-        @api_key = kwargs[:api_key] || Mihari.config.binaryedge_api_key
+        @api_key = api_key || Mihari.config.binaryedge_api_key
       end
 
       def artifacts
@@ -69,7 +64,7 @@ module Mihari
           break if total <= page * PAGE_SIZE
 
           # sleep #{interval} seconds to avoid the rate limitation (if it is set)
-          sleep interval
+          sleep(interval) if interval
         end
         responses
       end

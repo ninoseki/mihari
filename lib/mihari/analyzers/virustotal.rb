@@ -5,28 +5,34 @@ module Mihari
     class VirusTotal < Base
       include Mixins::Refang
 
-      param :query
-
       # @return [String]
       attr_reader :type
 
       # @return [String, nil]
       attr_reader :api_key
 
-      # @return [String]
-      attr_reader :query
+      #
+      # @param [String] query
+      # @param [Hash, nil] options
+      # @param [String, nil] api_key
+      #
+      def initialize(query, options: nil, api_key: nil)
+        super(refang(query), options: options)
 
-      def initialize(*args, **kwargs)
-        super(*args, **kwargs)
-
-        @query = refang(query)
         @type = TypeChecker.type(query)
 
-        @api_key = kwargs[:api_key] || Mihari.config.virustotal_api_key
+        @api_key = api_key || Mihari.config.virustotal_api_key
       end
 
       def artifacts
-        search || []
+        case type
+        when "domain"
+          domain_search
+        when "ip"
+          ip_search
+        else
+          raise InvalidInputError, "#{query}(type: #{type || "unknown"}) is not supported." unless valid_type?
+        end
       end
 
       private
@@ -46,22 +52,6 @@ module Mihari
       #
       def valid_type?
         %w[ip domain].include? type
-      end
-
-      #
-      # Search
-      #
-      # @return [Array<Mihari::Artifact>]
-      #
-      def search
-        case type
-        when "domain"
-          domain_search
-        when "ip"
-          ip_search
-        else
-          raise InvalidInputError, "#{query}(type: #{type || "unknown"}) is not supported." unless valid_type?
-        end
       end
 
       #

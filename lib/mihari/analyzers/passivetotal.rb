@@ -5,8 +5,6 @@ module Mihari
     class PassiveTotal < Base
       include Mixins::Refang
 
-      param :query
-
       # @return [String, nil]
       attr_reader :type
 
@@ -16,17 +14,19 @@ module Mihari
       # @return [String, nil]
       attr_reader :api_key
 
-      # @return [String]
-      attr_reader :query
+      #
+      # @param [String] query
+      # @param [Hash, nil] options
+      # @param [String, nil] api_key
+      # @param [String, nil] username
+      #
+      def initialize(query, options: nil, api_key: nil, username: nil)
+        super(refang(query), options: options)
 
-      def initialize(*args, **kwargs)
-        super(*args, **kwargs)
-
-        @query = refang(query)
         @type = TypeChecker.type(query)
 
-        @username = kwargs[:username] || Mihari.config.passivetotal_username
-        @api_key = kwargs[:api_key] || Mihari.config.passivetotal_api_key
+        @username = username || Mihari.config.passivetotal_username
+        @api_key = api_key || Mihari.config.passivetotal_api_key
       end
 
       def artifacts

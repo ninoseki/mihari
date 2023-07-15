@@ -5,6 +5,10 @@ require "stringio"
 class Test < Mihari::Analyzers::Base
   public :normalized_artifacts
 
+  def initialize
+    super("dummy")
+  end
+
   def artifacts
     values = %w[1.1.1.1 1.1.1.1 google.com 2.2.2.2 example.com foo]
     values << nil

@@ -3,15 +3,19 @@
 module Mihari
   module Analyzers
     class Crtsh < Base
-      param :query
-
-      option :exclude_expired, default: proc { true }
-
       # @return [Boolean]
       attr_reader :exclude_expired
 
-      # @return [String]
-      attr_reader :query
+      #
+      # @param [String] query
+      # @param [Hash, nil] options
+      # @param [Bool] exclude_expired
+      #
+      def initialize(query, options: nil, exclude_expired: true)
+        super(query, options: options)
+
+        @exclude_expired = exclude_expired
+      end
 
       def artifacts
         results = search

@@ -3,28 +3,27 @@
 module Mihari
   module Analyzers
     class GreyNoise < Base
-      param :query
+      PAGE_SIZE = 10_000
 
       # @return [String, nil]
       attr_reader :api_key
 
-      # @return [String]
-      attr_reader :query
+      #
+      # @param [String] query
+      # @param [Hash, nil] options
+      # @param [String, nil] api_key
+      #
+      def initialize(query, options: nil, api_key: nil)
+        super(query, options: options)
 
-      def initialize(*args, **kwargs)
-        super(*args, **kwargs)
-
-        @api_key = kwargs[:api_key] || Mihari.config.greynoise_api_key
+        @api_key = api_key || Mihari.config.greynoise_api_key
       end
 
       def artifacts
-        res = search
-        res.to_artifacts
+        client.gnql_search(query, size: PAGE_SIZE).to_artifacts
       end
 
       private
-
-      PAGE_SIZE = 10_000
 
       def configuration_keys
         %w[greynoise_api_key]
@@ -32,15 +31,6 @@ module Mihari
 
       def client
         @client ||= Clients::GreyNoise.new(api_key: api_key)
-      end
-
-      #
-      # Search
-      #
-      # @return [Hash]
-      #
-      def search
-        client.gnql_search(query, size: PAGE_SIZE)
       end
     end
   end
