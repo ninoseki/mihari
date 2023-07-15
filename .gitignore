@@ -64,3 +64,6 @@ mihari.yml
 # Rule
 rule.yml
 !lib/mihari/templates/rule.yml
+
+# Frontend assets
+lib/mihari/web/public/

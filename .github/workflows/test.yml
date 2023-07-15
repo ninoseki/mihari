@@ -49,8 +49,7 @@ jobs:
       - uses: actions/checkout@v3
 
       - name: Install dependencies
-        run: |
-          sudo apt-get -yqq install libpq-dev libmysqlclient-dev
+        run: sudo apt-get -yqq install libpq-dev libmysqlclient-dev
 
       - name: Set up Ruby
         uses: ruby/setup-ruby@v1
@@ -59,17 +58,20 @@ jobs:
           bundler: latest
           bundler-cache: true
 
+      - name: Create dummy frontend assets
+        run: |
+          mkdir -p lib/mihari/web/public/
+          touch lib/mihari/web/public/index.html
+
       - name: Test with PostgreSQL
         env:
           DATABASE: postgresql://postgres:postgres@localhost:5432/test
-        run: |
-          bundle exec rake
+        run: bundle exec rake
 
       - name: Test with MySQL
         env:
           DATABASE: mysql2://mysql:mysql@127.0.0.1:3306/test
-        run: |
-          bundle exec rake
+        run: bundle exec rake
 
       - name: Coveralls Parallel
         uses: coverallsapp/github-action@v2
