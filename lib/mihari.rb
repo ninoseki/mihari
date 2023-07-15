@@ -19,7 +19,6 @@ require "active_support/core_ext/object/deep_dup"
 require "active_record"
 
 # dry-rb
-require "dry/configurable"
 require "dry/files"
 require "dry/initializer"
 require "dry/schema"
@@ -60,54 +59,137 @@ require "mihari/mixins/refang"
 require "mihari/mixins/retriable"
 
 module Mihari
-  extend Dry::Configurable
+  class Config
+    # @return [String, nil]
+    attr_reader :binaryedge_api_key
 
-  setting :binaryedge_api_key, default: ENV.fetch("BINARYEDGE_API_KEY", nil)
+    # @return [String, nil]
+    attr_reader :censys_id
 
-  setting :censys_id, default: ENV.fetch("CENSYS_ID", nil)
-  setting :censys_secret, default: ENV.fetch("CENSYS_SECRET", nil)
+    # @return [String, nil]
+    attr_reader :censys_secret
 
-  setting :circl_passive_password, default: ENV.fetch("CIRCL_PASSIVE_PASSWORD", nil)
-  setting :circl_passive_username, default: ENV.fetch("CIRCL_PASSIVE_USERNAME", nil)
+    # @return [String, nil]
+    attr_reader :circl_passive_password
 
-  setting :database_url, default: URI(ENV.fetch("DATABASE_URL", "sqlite3:///mihari.db"))
+    # @return [String, nil]
+    attr_reader :circl_passive_username
 
-  setting :greynoise_api_key, default: ENV.fetch("GREYNOISE_API_KEY", nil)
+    # @return [URI]
+    attr_reader :database_url
 
-  setting :ipinfo_api_key, default: ENV.fetch("IPINFO_API_KEY", nil)
+    # @return [String, nil]
+    attr_reader :greynoise_api_key
 
-  setting :misp_url, default: ENV.fetch("MISP_URL", nil)
-  setting :misp_api_key, default: ENV.fetch("MISP_API_KEY", nil)
+    # @return [String, nil]
+    attr_reader :ipinfo_api_key
 
-  setting :onyphe_api_key, default: ENV.fetch("ONYPHE_API_KEY", nil)
+    # @return [String, nil]
+    attr_reader :misp_url
 
-  setting :otx_api_key, default: ENV.fetch("OTX_API_KEY", nil)
+    # @return [String, nil]
+    attr_reader :misp_api_key
 
-  setting :passivetotal_api_key, default: ENV.fetch("PASSIVETOTAL_API_KEY", nil)
-  setting :passivetotal_username, default: ENV.fetch("PASSIVETOTAL_USERNAME", nil)
+    # @return [String, nil]
+    attr_reader :onyphe_api_key
 
-  setting :pulsedive_api_key, default: ENV.fetch("PULSEDIVE_API_KEY", nil)
+    # @return [String, nil]
+    attr_reader :otx_api_key
 
-  setting :securitytrails_api_key, default: ENV.fetch("SECURITYTRAILS_API_KEY", nil)
+    # @return [String, nil]
+    attr_reader :passivetotal_api_key
 
-  setting :shodan_api_key, default: ENV.fetch("SHODAN_API_KEY", nil)
+    # @return [String, nil]
+    attr_reader :passivetotal_username
 
-  setting :slack_channel, default: ENV.fetch("SLACK_CHANNEL", nil)
-  setting :slack_webhook_url, default: ENV.fetch("SLACK_WEBHOOK_URL", nil)
+    # @return [String, nil]
+    attr_reader :pulsedive_api_key
 
-  setting :thehive_url, default: ENV.fetch("THEHIVE_URL", nil)
-  setting :thehive_api_key, default: ENV.fetch("THEHIVE_API_KEY", nil)
-  setting :thehive_api_version, default: ENV.fetch("THEHIVE_API_VERSION", nil)
+    # @return [String, nil]
+    attr_reader :securitytrails_api_key
 
-  setting :urlscan_api_key, default: ENV.fetch("URLSCAN_API_KEY", nil)
+    # @return [String, nil]
+    attr_reader :shodan_api_key
 
-  setting :virustotal_api_key, default: ENV.fetch("VIRUSTOTAL_API_KEY", nil)
+    # @return [String, nil]
+    attr_reader :slack_channel
 
-  setting :zoomeye_api_key, default: ENV.fetch("ZOOMEYE_API_KEY", nil)
+    # @return [String, nil]
+    attr_reader :slack_webhook_url
 
-  setting :sentry_dsn, default: ENV.fetch("SENTRY_DSN", nil)
+    # @return [String, nil]
+    attr_reader :thehive_url
 
-  setting :hide_config_values, default: ENV.fetch("HIDE_CONFIG_VALUES", false)
+    # @return [String, nil]
+    attr_reader :thehive_api_key
+
+    # @return [String, nil]
+    attr_reader :thehive_api_version
+
+    # @return [String, nil]
+    attr_reader :urlscan_api_key
+
+    # @return [String, nil]
+    attr_reader :virustotal_api_key
+
+    # @return [String, nil]
+    attr_reader :zoomeye_api_key
+
+    # @return [String, nil]
+    attr_reader :sentry_dsn
+
+    # @return [String, nil]
+    attr_reader :hide_config_values
+
+    def initialize
+      @binaryedge_api_key = ENV.fetch("BINARYEDGE_API_KEY", nil)
+
+      @censys_id = ENV.fetch("CENSYS_ID", nil)
+      @censys_secret = ENV.fetch("CENSYS_SECRET", nil)
+
+      @circl_passive_password = ENV.fetch("CIRCL_PASSIVE_PASSWORD", nil)
+      @circl_passive_username = ENV.fetch("CIRCL_PASSIVE_USERNAME", nil)
+
+      @database_url = URI(ENV.fetch("DATABASE_URL", "sqlite3:///mihari.db"))
+
+      @greynoise_api_key = ENV.fetch("GREYNOISE_API_KEY", nil)
+
+      @ipinfo_api_key = ENV.fetch("IPINFO_API_KEY", nil)
+
+      @misp_url = ENV.fetch("MISP_URL", nil)
+      @misp_api_key = ENV.fetch("MISP_API_KEY", nil)
+
+      @onyphe_api_key = ENV.fetch("ONYPHE_API_KEY", nil)
+
+      @otx_api_key = ENV.fetch("OTX_API_KEY", nil)
+
+      @passivetotal_api_key = ENV.fetch("PASSIVETOTAL_API_KEY", nil)
+      @passivetotal_username = ENV.fetch("PASSIVETOTAL_USERNAME", nil)
+
+      @pulsedive_api_key = ENV.fetch("PULSEDIVE_API_KEY", nil)
+
+      @securitytrails_api_key = ENV.fetch("SECURITYTRAILS_API_KEY", nil)
+
+      @shodan_api_key = ENV.fetch("SHODAN_API_KEY", nil)
+
+      @slack_channel = ENV.fetch("SLACK_CHANNEL", nil)
+      @slack_webhook_url = ENV.fetch("SLACK_WEBHOOK_URL", nil)
+
+      @thehive_url = ENV.fetch("THEHIVE_URL", nil)
+      @thehive_api_key = ENV.fetch("THEHIVE_API_KEY", nil)
+      @thehive_api_version = ENV.fetch("THEHIVE_API_VERSION", nil)
+
+      @urlscan_api_key = ENV.fetch("URLSCAN_API_KEY", nil)
+
+      @virustotal_api_key = ENV.fetch("VIRUSTOTAL_API_KEY", nil)
+
+      @zoomeye_api_key = ENV.fetch("ZOOMEYE_API_KEY", nil)
+
+      @sentry_dsn = ENV.fetch("SENTRY_DSN", nil)
+
+      @hide_config_values = ENV.fetch("HIDE_CONFIG_VALUES", false)
+    end
+  end
 
   class << self
     include Memist::Memoizable
@@ -126,6 +208,10 @@ module Mihari
       []
     end
     memoize :enrichers
+
+    def config
+      @config ||= Config.new
+    end
 
     def configs
       (Mihari.analyzers + Mihari.emitters + Mihari.enrichers).map do |klass|
