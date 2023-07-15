@@ -21,7 +21,7 @@ module Mihari
 
   class HTTPError < Error; end
 
-  class UnsuccessfulStatusCodeError < HTTPError; end
+  class StatusCodeError < HTTPError; end
 
   class NetworkError < HTTPError; end
 
