@@ -62,7 +62,6 @@ Gem::Specification.new do |spec|
   spec.add_dependency "addressable", "2.8.4"
   spec.add_dependency "awrence", "2.0.1"
   spec.add_dependency "dotenv", "2.8.1"
-  spec.add_dependency "dry-configurable", "1.0.1"
   spec.add_dependency "dry-container", "0.11.0"
   spec.add_dependency "dry-files", "1.0.1"
   spec.add_dependency "dry-schema", "1.13.2"
