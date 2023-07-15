@@ -3,27 +3,24 @@
 module Mihari
   module Analyzers
     class Censys < Base
-      param :query
-
-      option :interval, default: proc { 0 }
-
       # @return [String, nil]
       attr_reader :id
 
       # @return [String, nil]
       attr_reader :secret
 
-      # @return [Integer]
-      attr_reader :interval
+      #
+      # @param [String] query
+      # @param [hash, nil] options
+      # @param [String, nil] api_key
+      # @param [String, nil] id
+      # @param [String, nil] secret
+      #
+      def initialize(query, options: nil, id: nil, secret: nil)
+        super(query, options: options)
 
-      # @return [String]
-      attr_reader :query
-
-      def initialize(*args, **kwargs)
-        super(*args, **kwargs)
-
-        @id = kwargs[:id] || Mihari.config.censys_id
-        @secret = kwargs[:secret] || Mihari.config.censys_secret
+        @id = id || Mihari.config.censys_id
+        @secret = secret || Mihari.config.censys_secret
       end
 
       #
@@ -45,7 +42,7 @@ module Mihari
           break if cursor.nil? || cursor.empty?
 
           # sleep #{interval} seconds to avoid the rate limitation (if it is set)
-          sleep interval
+          sleep(interval) if interval
         end
 
         artifacts.flatten.uniq(&:data)

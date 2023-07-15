@@ -5,8 +5,6 @@ module Mihari
     class CIRCL < Base
       include Mixins::Refang
 
-      param :query
-
       # @return [String, nil]
       attr_reader :type
 
@@ -16,17 +14,19 @@ module Mihari
       # @return [String, nil]
       attr_reader :password
 
-      # @return [String]
-      attr_reader :query
+      #
+      # @param [String] query
+      # @param [Hash, nil] options
+      # @param [String, nil] username
+      # @param [String, nil] password
+      #
+      def initialize(query, options: nil, username: nil, password: nil)
+        super(refang(query), options: options)
 
-      def initialize(*args, **kwargs)
-        super
-
-        @query = refang(query)
         @type = TypeChecker.type(query)
 
-        @username = kwargs[:username] || Mihari.config.circl_passive_username
-        @password = kwargs[:password] || Mihari.config.circl_passive_password
+        @username = username || Mihari.config.circl_passive_username
+        @password = password || Mihari.config.circl_passive_password
       end
 
       def artifacts

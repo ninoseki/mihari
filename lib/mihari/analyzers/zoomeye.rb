@@ -3,28 +3,23 @@
 module Mihari
   module Analyzers
     class ZoomEye < Base
-      param :query
-
-      option :type, default: proc { "host" }
-
-      option :interval, default: proc { 0 }
-
       # @return [String, nil]
       attr_reader :api_key
 
       # @return [String]
-      attr_reader :query
-
-      # @return [String]
       attr_reader :type
 
-      # @return [Integer]
-      attr_reader :interval
+      #
+      # @param [String] query
+      # @param [Hash, nil] options
+      # @param [String, nil] api_key
+      # @param [String] type
+      #
+      def initialize(query, options: nil, api_key: nil, type: "host")
+        super(query, options: options)
 
-      def initialize(*args, **kwargs)
-        super(*args, **kwargs)
-
-        @api_key = kwargs[:api_key] || Mihari.config.zoomeye_api_key
+        @type = type
+        @api_key = api_key || Mihari.config.zoomeye_api_key
       end
 
       def artifacts
@@ -109,7 +104,7 @@ module Mihari
           break if total <= page * PAGE_SIZE
 
           # sleep #{interval} seconds to avoid the rate limitation (if it is set)
-          sleep interval
+          sleep(interval) if interval
         end
         convert_responses responses.compact
       end
@@ -142,7 +137,7 @@ module Mihari
           break if total <= page * PAGE_SIZE
 
           # sleep #{interval} seconds to avoid the rate limitation (if it is set)
-          sleep interval
+          sleep(interval) if interval
         end
         convert_responses responses.compact
       end

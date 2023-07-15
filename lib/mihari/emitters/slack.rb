@@ -8,10 +8,20 @@ module Mihari
     class Attachment
       include Memist::Memoizable
 
-      extend Dry::Initializer
+      # @return [String]
+      attr_reader :data
 
-      option :data
-      option :data_type
+      # @return [String]
+      attr_reader :data_type
+
+      #
+      # @param [String] data
+      # @param [String] data_type
+      #
+      def initialize(data:, data_type:)
+        @data = data
+        @data_type = data_type
+      end
 
       def actions
         [vt_link, urlscan_link, censys_link, shodan_link].compact

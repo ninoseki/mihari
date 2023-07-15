@@ -2,13 +2,13 @@
 
 module Mihari
   class TypeChecker
-    extend Dry::Initializer
+    # @return [String]
+    attr_reader :data
 
-    param :data
-
-    def initialize(*args, **kwargs)
-      super
-
+    #
+    # @param [String] data
+    #
+    def initialize(data)
       raise ArgumentError if data.is_a?(Hash)
 
       @data = data.to_s

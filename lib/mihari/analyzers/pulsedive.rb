@@ -5,28 +5,39 @@ module Mihari
     class Pulsedive < Base
       include Mixins::Refang
 
-      param :query
-
       # @return [String, nil]
       attr_reader :type
 
       # @return [String, nil]
       attr_reader :api_key
 
-      # @return [Integer]
-      attr_reader :query
+      #
+      # @param [String] query
+      # @param [Hash, nil] options
+      # @param [String, nil] api_key
+      #
+      def initialize(query, options: nil, api_key: nil)
+        super(refang(query), options: options)
 
-      def initialize(*args, **kwargs)
-        super
-
-        @query = refang(query)
         @type = TypeChecker.type(query)
 
-        @api_key = kwargs[:api_key] || Mihari.config.pulsedive_api_key
+        @api_key = api_key || Mihari.config.pulsedive_api_key
       end
 
       def artifacts
-        search || []
+        raise InvalidInputError, "#{query}(type: #{type || "unknown"}) is not supported." unless valid_type?
+
+        indicator = client.get_indicator(query)
+        iid = indicator["iid"]
+        properties = client.get_properties(iid)
+        (properties["dns"] || []).filter_map do |property|
+          if %w[A PTR].include?(property["name"])
+            nil
+          else
+            data = property["value"]
+            Artifact.new(data: data, source: source, metadata: property)
+          end
+        end
       end
 
       private
@@ -46,27 +57,6 @@ module Mihari
       #
       def valid_type?
         %w[ip domain].include? type
-      end
-
-      #
-      # Search
-      #
-      # @return [Array<Mihari::Artifact>]
-      #
-      def search
-        raise InvalidInputError, "#{query}(type: #{type || "unknown"}) is not supported." unless valid_type?
-
-        indicator = client.get_indicator(query)
-        iid = indicator["iid"]
-        properties = client.get_properties(iid)
-        (properties["dns"] || []).filter_map do |property|
-          if %w[A PTR].include?(property["name"])
-            nil
-          else
-            data = property["value"]
-            Artifact.new(data: data, source: source, metadata: property)
-          end
-        end
       end
     end
   end

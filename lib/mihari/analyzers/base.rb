@@ -3,10 +3,30 @@
 module Mihari
   module Analyzers
     class Base
-      extend Dry::Initializer
-
       include Mixins::Configurable
       include Mixins::Retriable
+
+      # @return [String]
+      attr_reader :query
+
+      # @return [Hash]
+      attr_reader :options
+
+      #
+      # @param [String] query
+      # @param [Hash, nil] options
+      #
+      def initialize(query, options: nil)
+        @query = query
+        @options = options || {}
+      end
+
+      #
+      # @return [Integer, nil]
+      #
+      def interval
+        @interval = options[:interval]
+      end
 
       # @return [Array<String>, Array<Mihari::Artifact>]
       def artifacts
@@ -51,16 +71,19 @@ module Mihari
         # @return [Mihari::Analyzers::Base]
         #
         def from_query(params)
-          # get options and set default value as an empty hash
-          options = params[:options] || {}
+          copied = params.deep_dup
 
-          # set interval in the top level
-          interval = options[:interval]
-          params[:interval] = interval if interval
+          # convert params into arguments for initialization
+          query = copied[:query]
 
-          query = params[:query]
+          # delete analyzer and query
+          %i[analyzer query].each do |key|
+            copied.delete key
+          end
 
-          new(query, **params)
+          copied[:options] = copied[:options] || nil
+
+          new(query, **copied)
         end
 
         def inherited(child)
