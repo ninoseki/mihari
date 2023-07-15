@@ -48,7 +48,7 @@ module Mihari
       #
       def search_with_page(page: 1)
         client.search(query, page: page)
-      rescue UnsuccessfulStatusCodeError => e
+      rescue StatusCodeError => e
         raise RetryableError, e if e.message.include?("Request time limit exceeded")
 
         raise e
