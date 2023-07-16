@@ -4,6 +4,8 @@ module Mihari
   module Schemas
     AnalyzerOptions = Dry::Schema.Params do
       optional(:interval).value(:integer)
+      optional(:retry_times).value(:integer).default(DEFAULT_RETRY_TIMES)
+      optional(:retry_interval).value(:integer).default(DEFAULT_RETRY_INTERVAL)
     end
 
     AnalyzerWithoutAPIKey = Dry::Schema.Params do

@@ -28,6 +28,20 @@ module Mihari
         @interval = options[:interval]
       end
 
+      #
+      # @return [Integer]
+      #
+      def retry_interval
+        @retry_interval ||= options[:retry_interval] || DEFAULT_RETRY_INTERVAL
+      end
+
+      #
+      # @return [Integer]
+      #
+      def retry_times
+        @retry_times ||= options[:retry_times] || DEFAULT_RETRY_TIMES
+      end
+
       # @return [Array<String>, Array<Mihari::Artifact>]
       def artifacts
         raise NotImplementedError, "You must implement #{self.class}##{__method__}"
@@ -41,17 +55,14 @@ module Mihari
       # @return [Array<Mihari::Artifact>]
       #
       def normalized_artifacts
-        retry_on_error do
+        retry_on_error(times: retry_times, interval: retry_interval) do
           @normalized_artifacts ||= artifacts.compact.sort.map do |artifact|
             # No need to set data_type manually
             # It is set automatically in #initialize
             artifact = artifact.is_a?(Artifact) ? artifact : Artifact.new(data: artifact)
-            artifact
-          end.select(&:valid?).uniq(&:data).map do |artifact|
-            # set source
             artifact.source = source
             artifact
-          end
+          end.select(&:valid?).uniq(&:data)
         end
       end
 

@@ -239,16 +239,16 @@ module Mihari
   end
 end
 
-require "mihari/database"
-require "mihari/type_checker"
-
-require "mihari/http"
-
 # Constants
 require "mihari/constants"
 
 # Types
 require "mihari/types"
+
+# Core classes
+require "mihari/database"
+require "mihari/type_checker"
+require "mihari/http"
 
 # Structs
 require "mihari/structs/censys"
