@@ -12,8 +12,14 @@ task :rackup do
   sh "rerun --pattern '{Gemfile.lock,lib/**/*.rb,lib/*.rb}' -- rackup config.ru"
 end
 
-task :build do
-  sh "./build_frontend.sh"
+def ci?
+  ENV.fetch("CI", false)
+end
+
+unless ci?
+  task :build do
+    sh "./build_frontend.sh"
+  end
 end
 
 # require it later enables doing pre-build step (= build the frontend app)
