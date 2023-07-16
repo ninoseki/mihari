@@ -83,12 +83,6 @@ module Mihari
       @config ||= Config.new
     end
 
-    def configs
-      (Mihari.analyzers + Mihari.emitters + Mihari.enrichers).map do |klass|
-        Mihari::Structs::Config.from_class(klass)
-      end.compact
-    end
-
     def logger
       SemanticLogger.default_level = :info
       SemanticLogger.add_appender(io: $stderr, formatter: :color)
