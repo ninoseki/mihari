@@ -96,7 +96,7 @@
                 <button class="delete" aria-label="close" @click="flipShowMetadata"></button>
               </header>
               <section class="modal-card-body">
-                <VueJsonPretty :data="(artifact.metadata as any)"></VueJsonPretty>
+                <VueJsonPretty :data="artifact.metadata as any"></VueJsonPretty>
               </section>
             </div>
           </div>
@@ -289,7 +289,9 @@ img.liveshot {
   object-position: top;
   display: block;
   overflow: hidden;
-  transition: max-height 1s, height 1s;
+  transition:
+    max-height 1s,
+    height 1s;
 }
 
 img.liveshot:hover {

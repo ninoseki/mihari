@@ -67,7 +67,13 @@ export default defineComponent({
 <style scoped>
 .my-editor {
   background: hsl(0, 0%, 8%);
-  font-family: Fira code, Fira Mono, Consolas, Menlo, Courier, monospace;
+  font-family:
+    Fira code,
+    Fira Mono,
+    Consolas,
+    Menlo,
+    Courier,
+    monospace;
   font-size: 1em;
   line-height: 1.5;
   padding: 5px;
