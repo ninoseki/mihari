@@ -8,7 +8,7 @@
       <p class="control">
         <a class="button is-primary" @click="edit">
           <span class="icon is-small">
-            <i class="fas fa-edit"></i>
+            <font-awesome-icon icon="edit"></font-awesome-icon>
           </span>
           <span>Edit</span>
         </a>

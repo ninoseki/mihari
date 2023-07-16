@@ -21,13 +21,13 @@
             <td>
               <button class="button is-success is-small ml-1" v-if="config.isConfigured">
                 <span class="icon is-small">
-                  <i class="fas fa-check"></i>
+                  <font-awesome-icon icon="check"></font-awesome-icon>
                 </span>
                 <span>Yes</span>
               </button>
               <button class="button is-warning is-small ml-1" v-else>
                 <span class="icon is-small">
-                  <i class="fas fa-exclamation"></i>
+                  <font-awesome-icon icon="exclamation"></font-awesome-icon>
                 </span>
                 <span>No</span>
               </button>

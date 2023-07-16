@@ -8,7 +8,7 @@
       <p class="control">
         <a class="button is-primary" @click="create">
           <span class="icon is-small">
-            <i class="fas fa-plus"></i>
+            <font-awesome-icon icon="plus"></font-awesome-icon>
           </span>
           <span>Create</span>
         </a>
