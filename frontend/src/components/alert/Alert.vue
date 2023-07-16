@@ -8,7 +8,7 @@
           <button class="button is-light is-small is-pulled-right" @click="deleteAlert">
             <span>Delete</span>
             <span class="icon is-small">
-              <i class="fas fa-times"></i>
+              <font-awesome-icon icon="times"></font-awesome-icon>
             </span>
           </button>
         </td>

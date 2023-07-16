@@ -44,7 +44,7 @@
                   <button class="button is-primary is-light is-small" @click="enrichArtifact">
                     <span>Enrich</span>
                     <span class="icon is-small">
-                      <i class="fas fa-lightbulb"></i>
+                      <font-awesome-icon icon="lightbulb"></font-awesome-icon>
                     </span>
                   </button>
 
@@ -55,14 +55,14 @@
                   >
                     <span>Metadata</span>
                     <span class="icon is-small">
-                      <i class="fas fa-info-circle"></i>
+                      <font-awesome-icon icon="info-circle"></font-awesome-icon>
                     </span>
                   </button>
 
                   <button class="button is-light is-small" @click="deleteArtifact">
                     <span>Delete</span>
                     <span class="icon is-small">
-                      <i class="fas fa-times"></i>
+                      <font-awesome-icon icon="times"></font-awesome-icon>
                     </span>
                   </button>
                 </span>

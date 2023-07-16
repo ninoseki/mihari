@@ -17,7 +17,7 @@
         <button class="button is-primary is-light is-small" @click="runRule">
           <span>Run</span>
           <span class="icon is-small">
-            <i class="fas fa-arrow-right"></i>
+            <font-awesome-icon icon="arrow-right"></font-awesome-icon>
           </span>
         </button>
         <router-link
@@ -26,13 +26,13 @@
         >
           <span>Edit</span>
           <span class="icon is-small">
-            <i class="fas fa-edit"></i>
+            <font-awesome-icon icon="edit"></font-awesome-icon>
           </span>
         </router-link>
         <button class="button is-light is-small" @click="deleteRule">
           <span>Delete</span>
           <span class="icon is-small">
-            <i class="fas fa-times"></i>
+            <font-awesome-icon icon="times"></font-awesome-icon>
           </span>
         </button>
       </span>

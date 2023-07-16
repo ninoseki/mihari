@@ -14,7 +14,7 @@
         <p class="control">
           <a class="button is-primary" @click="search">
             <span class="icon is-small">
-              <i class="fas fa-search"></i>
+              <font-awesome-icon icon="search"></font-awesome-icon>
             </span>
             <span>Search</span>
           </a>
