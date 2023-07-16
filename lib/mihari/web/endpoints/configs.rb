@@ -10,7 +10,11 @@ module Mihari
           summary: "Get configs"
         }
         get "/" do
-          present(Mihari.configs, with: Entities::Config)
+          configs = (Mihari.analyzers + Mihari.emitters + Mihari.enrichers).map do |klass|
+            Mihari::Structs::Config.from_class(klass)
+          end.compact
+
+          present(configs, with: Entities::Config)
         end
       end
     end
