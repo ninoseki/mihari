@@ -2,7 +2,7 @@
 
 require "yaml"
 
-RSpec.describe Mihari::Structs::Rule do
+RSpec.describe Mihari::Services::Rule do
   let(:data) do
     {
       id: "foo",
@@ -22,9 +22,9 @@ RSpec.describe Mihari::Structs::Rule do
     end
   end
 
-  describe "#analyzer" do
+  describe "#to_analyzer" do
     it "should return an analyzer" do
-      expect(rule.analyzer).to be_a Mihari::Analyzers::Rule
+      expect(rule.to_analyzer).to be_a Mihari::Analyzers::Rule
     end
   end
 end

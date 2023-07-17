@@ -3,23 +3,23 @@
 RSpec.shared_context "with database fixtures" do
   before do
     # create rules
-    rule1 = Mihari::Structs::Rule.new(
+    rule1 = Mihari::Services::Rule.new(
       id: "test1",
       title: "test1",
       description: "test1",
       queries: [{ analyzer: "crtsh", query: "foo" }],
       tags: ["tag1"]
     )
-    rule1.model.save
+    rule1.to_model.save
 
-    rule2 = Mihari::Structs::Rule.new(
+    rule2 = Mihari::Services::Rule.new(
       id: "test2",
       title: "test2",
       description: "test2",
       queries: [{ analyzer: "crtsh", query: "foo" }],
       tags: ["tag2"]
     )
-    rule2.model.save
+    rule2.to_model.save
 
     # create alerts & aritfaicts
     as = Mihari::AutonomousSystem.new(asn: 13_335)

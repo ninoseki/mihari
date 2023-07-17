@@ -114,6 +114,9 @@ require "mihari/database"
 require "mihari/type_checker"
 require "mihari/http"
 
+# Services
+require "mihari/services/rule"
+
 # Structs
 require "mihari/structs/censys"
 require "mihari/structs/config"
@@ -122,7 +125,6 @@ require "mihari/structs/google_public_dns"
 require "mihari/structs/greynoise"
 require "mihari/structs/ipinfo"
 require "mihari/structs/onyphe"
-require "mihari/structs/rule"
 require "mihari/structs/shodan"
 require "mihari/structs/urlscan"
 require "mihari/structs/virustotal_intelligence"
