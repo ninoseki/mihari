@@ -8,7 +8,7 @@ require "securerandom"
 require "yaml"
 
 module Mihari
-  module Structs
+  module Services
     class Rule
       include Mixins::FalsePositive
 
@@ -49,16 +49,16 @@ module Mihari
       end
 
       def validate!
-        raise RuleValidationError if errors?
-      rescue RuleValidationError => e
+        return unless errors?
+
         Mihari.logger.error "Failed to parse the input as a rule:"
         Mihari.logger.error JSON.pretty_generate(errors.to_h)
 
-        raise e
+        raise RuleValidationError, errors
       end
 
       def [](key)
-        data[key.to_sym]
+        data key.to_sym
       end
 
       #
@@ -141,7 +141,7 @@ module Mihari
       #
       # @return [Mihari::Rule]
       #
-      def model
+      def to_model
         rule = Mihari::Rule.find(id)
 
         rule.title = title
@@ -161,8 +161,8 @@ module Mihari
       #
       # @return [Mihari::Analyzers::Rule]
       #
-      def analyzer
-        Mihari::Analyzers::Rule.new(self)
+      def to_analyzer
+        Mihari::Analyzers::Rule.new self
       end
 
       class << self
@@ -171,10 +171,10 @@ module Mihari
         #
         # @param [String] yaml
         #
-        # @return [Mihari::Structs::Rule]
+        # @return [Mihari::Services::Rule]
         #
         def from_yaml(yaml)
-          Structs::Rule.new YAML.safe_load(ERB.new(yaml).result, permitted_classes: [Date, Symbol])
+          Services::Rule.new YAML.safe_load(ERB.new(yaml).result, permitted_classes: [Date, Symbol])
         rescue Psych::SyntaxError => e
           raise YAMLSyntaxError, e.message
         end
@@ -182,10 +182,10 @@ module Mihari
         #
         # @param [Mihari::Rule] model
         #
-        # @return [Mihari::Structs::Rule]
+        # @return [Mihari::Services::Rule]
         #
         def from_model(model)
-          Structs::Rule.new(model.data)
+          Services::Rule.new model.data
         end
 
         #
@@ -193,7 +193,7 @@ module Mihari
         #
         # @param [String] path
         #
-        # @return [Mihari::Structs::Rule, nil]
+        # @return [Mihari::Services::Rule, nil]
         #
         def from_path(path)
           return nil unless Pathname(path).exist?
@@ -206,18 +206,18 @@ module Mihari
         #
         # @param [String] id
         #
-        # @return [Mihari::Structs::Rule, nil]
+        # @return [Mihari::Services::Rule, nil]
         #
         def from_id(id)
           return nil unless Mihari::Rule.exists?(id)
 
-          Structs::Rule.from_model Mihari::Rule.find(id)
+          Services::Rule.from_model Mihari::Rule.find(id)
         end
 
         #
         # @param [String] path_or_id Path to YAML file or YAML string or ID of a rule in the database
         #
-        # @return [Mihari::Structs::Rule]
+        # @return [Mihari::Services::Rule]
         #
         def from_path_or_id(path_or_id)
           rule = from_path(path_or_id)

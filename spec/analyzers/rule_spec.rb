@@ -13,7 +13,7 @@ RSpec.describe Mihari::Analyzers::Rule, :vcr do
   let(:falsepositives) { [] }
   let(:data_types) { Mihari::DEFAULT_DATA_TYPES }
   let(:rule) do
-    Mihari::Structs::Rule.new(
+    Mihari::Services::Rule.new(
       title: title,
       description: description,
       tags: tags,
@@ -95,7 +95,7 @@ RSpec.describe Mihari::Analyzers::Rule, :vcr do
     end
 
     let(:rule) do
-      Mihari::Structs::Rule.new(
+      Mihari::Services::Rule.new(
         id: id,
         title: title,
         description: description,

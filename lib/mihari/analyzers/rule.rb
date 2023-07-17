@@ -37,14 +37,14 @@ module Mihari
     class Rule
       include Mixins::FalsePositive
 
-      # @return [Mihari::Structs::Rule]
+      # @return [Mihari::Services::Rule]
       attr_reader :rule
 
       # @return [Time]
       attr_reader :base_time
 
       #
-      # @param [Mihari::Structs::Rule] rule
+      # @param [Mihari::Services::Rule] rule
       #
       def initialize(rule)
         @rule = rule
@@ -146,11 +146,8 @@ module Mihari
       def falsepositive?(value)
         return true if rule.falsepositives.include?(value)
 
-        rule.falsepositives.select do |falsepositive|
-          falsepositive.is_a?(Regexp)
-        end.any? do |falseposistive|
-          falseposistive.match?(value)
-        end
+        regexps = rule.falsepositives.select { |fp| fp.is_a?(Regexp) }
+        regexps.any? { |fp| fp.match?(value) }
       end
 
       #

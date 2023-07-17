@@ -33,12 +33,12 @@ module Mihari
           end
 
           def update_or_create
-            rule.model.save
+            rule.to_model.save
           end
 
           def run
             begin
-              analyzer = rule.analyzer
+              analyzer = rule.to_analyzer
             rescue ConfigurationError => e
               # if there is a configuration error, output that error without the stack trace
               Mihari.logger.error e.to_s
@@ -69,7 +69,7 @@ module Mihari
             #
             def search(path_or_id)
               Mihari::Database.with_db_connection do
-                rule = Structs::Rule.from_path_or_id path_or_id
+                rule = Services::Rule.from_path_or_id path_or_id
 
                 begin
                   rule.validate!

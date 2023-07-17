@@ -4,7 +4,7 @@ RSpec.describe Mihari::Emitters::TheHive, :vcr do
   include_context "with database fixtures"
 
   let(:artifacts) { [Mihari::Artifact.new(data: "1.1.1.1")] }
-  let(:rule) { Mihari::Structs::Rule.from_model(Mihari::Rule.first) }
+  let(:rule) { Mihari::Services::Rule.from_model(Mihari::Rule.first) }
 
   subject { described_class.new(artifacts: artifacts, rule: rule) }
 

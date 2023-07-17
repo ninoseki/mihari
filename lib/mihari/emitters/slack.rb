@@ -133,7 +133,7 @@ module Mihari
 
       #
       # @param [Array<Mihari::Artifact>] artifacts
-      # @param [Mihari::Structs::Rule] rule
+      # @param [Mihari::Services::Rule] rule
       # @param [Hash] **_options
       #
       def initialize(artifacts:, rule:, **options)

@@ -83,12 +83,13 @@ module Mihari
           id = params["id"].to_s
 
           begin
-            rule = Mihari::Structs::Rule.from_model(Mihari::Rule.find(id))
+            rule = Mihari::Services::Rule.from_model(Mihari::Rule.find(id))
           rescue ActiveRecord::RecordNotFound
             error!({ message: "ID:#{id} is not found" }, 404)
           end
 
-          rule.analyzer.run
+          analyzer = rule.to_analyzer
+          analyzer.run
 
           status 201
           present({ message: "ID:#{id} is ran successfully" }, with: Entities::Message)
@@ -105,7 +106,7 @@ module Mihari
           yaml = params[:yaml]
 
           begin
-            rule = Structs::Rule.from_yaml(yaml)
+            rule = Services::Rule.from_yaml(yaml)
           rescue YAMLSyntaxError => e
             error!({ message: e.message }, 400)
           end
@@ -128,13 +129,13 @@ module Mihari
           end
 
           begin
-            rule.model.save
+            rule.to_model.save
           rescue ActiveRecord::RecordNotUnique
             error!({ message: "ID:#{rule.id} is already registered" }, 400)
           end
 
           status 201
-          present rule.model, with: Entities::Rule
+          present rule.to_model, with: Entities::Rule
         end
 
         desc "Update a rule", {
@@ -156,7 +157,7 @@ module Mihari
           end
 
           begin
-            rule = Structs::Rule.from_yaml(yaml)
+            rule = Services::Rule.from_yaml(yaml)
           rescue YAMLSyntaxError => e
             error!({ message: e.message }, 400)
           end
@@ -171,13 +172,13 @@ module Mihari
           end
 
           begin
-            rule.model.save
+            rule.to_model.save
           rescue ActiveRecord::RecordNotUnique
             error!({ message: "ID:#{id} is already registered" }, 400)
           end
 
           status 201
-          present rule.model, with: Entities::Rule
+          present rule.to_model, with: Entities::Rule
         end
 
         desc "Delete a rule", {
