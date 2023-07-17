@@ -49,6 +49,11 @@ module Mihari
 
       private
 
+      #
+      # Check whether API key is set or not
+      #
+      # @return [Boolean]
+      #
       def api_key?
         value = method(:api_key).call
         !value.nil?

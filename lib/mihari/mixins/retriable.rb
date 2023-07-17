@@ -21,8 +21,6 @@ module Mihari
       # @param [Integer] interval
       # @param [Array<StandardError>] on
       #
-      # @return [nil]
-      #
       def retry_on_error(times: 3, interval: 5, on: DEFAULT_ON)
         try = 0
         begin

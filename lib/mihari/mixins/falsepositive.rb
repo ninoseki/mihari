@@ -22,7 +22,7 @@ module Mihari
       memoize :normalize_falsepositive
 
       #
-      # Check whetehr a value is valid format as a disallowed data value
+      # Check whether a value is valid format as a disallowed data value
       #
       # @param [String] value Data value
       #
