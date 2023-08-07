@@ -53,7 +53,7 @@ module Mihari
 
           cursor = response.meta.cursor
           # sleep #{interval} seconds to avoid the rate limitation (if it is set)
-          sleep(interval) if interval
+          sleep_interval
         end
 
         responses

@@ -42,7 +42,7 @@ module Mihari
           break if cursor.nil? || cursor.empty?
 
           # sleep #{interval} seconds to avoid the rate limitation (if it is set)
-          sleep(interval) if interval
+          sleep_interval
         end
 
         artifacts.flatten.uniq(&:data)

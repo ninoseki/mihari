@@ -60,7 +60,7 @@ module Mihari
           break if res.total <= page * PAGE_SIZE
 
           # sleep #{interval} seconds to avoid the rate limitation (if it is set)
-          sleep interval
+          sleep_interval
         rescue JSON::ParserError
           # ignore JSON::ParserError
           # ref. https://github.com/ninoseki/mihari/issues/197
