@@ -104,7 +104,7 @@ module Mihari
           break if total <= page * PAGE_SIZE
 
           # sleep #{interval} seconds to avoid the rate limitation (if it is set)
-          sleep(interval) if interval
+          sleep_interval
         end
         convert_responses responses.compact
       end
@@ -137,7 +137,7 @@ module Mihari
           break if total <= page * PAGE_SIZE
 
           # sleep #{interval} seconds to avoid the rate limitation (if it is set)
-          sleep(interval) if interval
+          sleep_interval
         end
         convert_responses responses.compact
       end
