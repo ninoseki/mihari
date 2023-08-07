@@ -2,6 +2,7 @@
 
 lib = File.expand_path("lib", __dir__)
 $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
+
 require "mihari/version"
 
 def ci_env?
@@ -36,7 +37,7 @@ Gem::Specification.new do |spec|
   spec.require_paths = ["lib"]
 
   spec.add_development_dependency "bundler", "~> 2.4"
-  spec.add_development_dependency "coveralls_reborn", "~> 0.27"
+  spec.add_development_dependency "coveralls_reborn", "~> 0.28"
   spec.add_development_dependency "fakefs", "~> 2.5"
   spec.add_development_dependency "fuubar", "~> 2.5"
   spec.add_development_dependency "mysql2", "~> 0.5"
@@ -47,7 +48,7 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency "rerun", "~> 0.14"
   spec.add_development_dependency "rspec", "~> 3.12"
   spec.add_development_dependency "simplecov-lcov", "~> 0.8.0"
-  spec.add_development_dependency "standard", "~> 1.29"
+  spec.add_development_dependency "standard", "~> 1.30"
   spec.add_development_dependency "timecop", "~> 0.9"
   spec.add_development_dependency "vcr", "~> 6.2"
   spec.add_development_dependency "webmock", "~> 3.18"
@@ -59,7 +60,7 @@ Gem::Specification.new do |spec|
   end
 
   spec.add_dependency "activerecord", "7.0.6"
-  spec.add_dependency "addressable", "2.8.4"
+  spec.add_dependency "addressable", "2.8.5"
   spec.add_dependency "awrence", "2.0.1"
   spec.add_dependency "dotenv", "2.8.1"
   spec.add_dependency "dry-container", "0.11.0"
@@ -85,7 +86,7 @@ Gem::Specification.new do |spec|
   spec.add_dependency "rack", "3.0.8"
   spec.add_dependency "rack-cors", "2.0.1"
   spec.add_dependency "rackup", "2.1.0"
-  spec.add_dependency "semantic_logger", "4.13.0"
+  spec.add_dependency "semantic_logger", "4.14.0"
   spec.add_dependency "sentry-ruby", "5.10.0"
   spec.add_dependency "slack-notifier", "2.4.0"
   spec.add_dependency "sqlite3", "1.6.3"

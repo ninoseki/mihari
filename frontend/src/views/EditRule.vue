@@ -4,7 +4,7 @@
 
 <script lang="ts">
 import { useTitle } from "@vueuse/core"
-import { defineComponent, onMounted, ref, watch } from "vue"
+import { defineComponent, onMounted, watch } from "vue"
 
 import EditRule from "@/components/rule/EditRuleWrapper.vue"
 
@@ -20,10 +20,8 @@ export default defineComponent({
     }
   },
   setup(props) {
-    const ruleId = ref<string>(props.id)
-
     const updateTitle = () => {
-      useTitle(`Edit rule:${ruleId.value} - Mihari`)
+      useTitle(`Edit rule:${props.id} - Mihari`)
     }
 
     onMounted(() => {
@@ -33,12 +31,9 @@ export default defineComponent({
     watch(
       () => props.id,
       () => {
-        ruleId.value = props.id
         updateTitle()
       }
     )
-
-    return { ruleId }
   }
 })
 </script>

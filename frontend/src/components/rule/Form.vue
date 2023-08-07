@@ -88,7 +88,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, type PropType, ref, watch } from "vue"
+import { defineComponent, type PropType, ref, toRef,watch } from "vue"
 import { useRoute } from "vue-router"
 
 import type { RuleSearchParams } from "@/types"
@@ -115,7 +115,7 @@ export default defineComponent({
 
     const description = ref<string | undefined>(undefined)
     const fromAt = ref<string | undefined>(undefined)
-    const tagInput = ref<string | undefined>(props.tag)
+    const tagInput = toRef(props, "tag")
     const title = ref<string | undefined>(undefined)
     const toAt = ref<string | undefined>(undefined)
 

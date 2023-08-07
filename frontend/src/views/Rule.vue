@@ -1,10 +1,10 @@
 <template>
-  <Rule :id="ruleId"></Rule>
+  <Rule :id="id"></Rule>
 </template>
 
 <script lang="ts">
 import { useTitle } from "@vueuse/core"
-import { defineComponent, onMounted, ref, watch } from "vue"
+import { defineComponent, onMounted, watch } from "vue"
 
 import Rule from "@/components/rule/RuleWrapper.vue"
 
@@ -20,10 +20,8 @@ export default defineComponent({
     }
   },
   setup(props) {
-    const ruleId = ref<string>(props.id)
-
     const updateTitle = () => {
-      useTitle(`Rule:${ruleId.value} - Mihari`)
+      useTitle(`Rule:${props.id} - Mihari`)
     }
 
     onMounted(() => {
@@ -33,12 +31,9 @@ export default defineComponent({
     watch(
       () => props.id,
       () => {
-        ruleId.value = props.id
         updateTitle()
       }
     )
-
-    return { ruleId }
   }
 })
 </script>

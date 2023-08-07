@@ -17,7 +17,7 @@
 <script lang="ts">
 import "@/ace-config"
 
-import { defineComponent, ref, watchEffect } from "vue"
+import { defineComponent, toRef, watchEffect } from "vue"
 import { VAceEditor } from "vue3-ace-editor"
 
 export default defineComponent({
@@ -33,7 +33,7 @@ export default defineComponent({
   },
   emits: ["update-yaml"],
   setup(props, context) {
-    const yamlInput = ref(props.yaml)
+    const yamlInput = toRef(props, "yaml")
 
     watchEffect(() => {
       context.emit("update-yaml", yamlInput.value)
