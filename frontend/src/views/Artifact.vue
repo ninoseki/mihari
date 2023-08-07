@@ -1,10 +1,10 @@
 <template>
-  <Artifact :id="artifactId"></Artifact>
+  <Artifact :id="id"></Artifact>
 </template>
 
 <script lang="ts">
 import { useTitle } from "@vueuse/core"
-import { defineComponent, onMounted, ref, watch } from "vue"
+import { defineComponent, onMounted, watch } from "vue"
 
 import Artifact from "@/components/artifact/ArtifactWrapper.vue"
 
@@ -20,10 +20,8 @@ export default defineComponent({
     }
   },
   setup(props) {
-    const artifactId = ref<string>(props.id)
-
     const updateTitle = () => {
-      useTitle(`Artifact:${artifactId.value} - Mihari`)
+      useTitle(`Artifact:${props.id} - Mihari`)
     }
 
     onMounted(() => {
@@ -33,12 +31,9 @@ export default defineComponent({
     watch(
       () => props.id,
       () => {
-        artifactId.value = props.id
         updateTitle()
       }
     )
-
-    return { artifactId }
   }
 })
 </script>

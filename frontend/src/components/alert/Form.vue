@@ -95,7 +95,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, type PropType, ref, watch } from "vue"
+import { defineComponent, type PropType, ref, toRef,watch } from "vue"
 import { useRoute } from "vue-router"
 
 import type { AlertSearchParams } from "@/types"
@@ -126,7 +126,7 @@ export default defineComponent({
 
     const artifact = ref<string | undefined>(undefined)
     const fromAt = ref<string | undefined>(undefined)
-    const tagInput = ref<string | undefined>(props.tag)
+    const tagInput = toRef(props, "tag")
     const ruleId = ref<string | undefined>(undefined)
     const toAt = ref<string | undefined>(undefined)
     const asn = ref<number | undefined>(undefined)

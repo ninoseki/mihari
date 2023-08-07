@@ -23,7 +23,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, type PropType, ref } from "vue"
+import { defineComponent, type PropType, toRef } from "vue"
 import { useRouter } from "vue-router"
 
 import { generateUpdateRuleTask } from "@/api-helper"
@@ -46,7 +46,8 @@ export default defineComponent({
   setup(props) {
     const router = useRouter()
 
-    const yaml = ref(props.rule.yaml)
+    const rule = toRef(props, "rule")
+    const yaml = toRef(rule.value, "yaml")
 
     const updateRuleTask = generateUpdateRuleTask()
 
