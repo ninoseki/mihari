@@ -59,7 +59,7 @@ Gem::Specification.new do |spec|
     spec.add_development_dependency "steep", "~> 1.4"
   end
 
-  spec.add_dependency "activerecord", "7.0.6"
+  spec.add_dependency "activerecord", "7.0.7"
   spec.add_dependency "addressable", "2.8.5"
   spec.add_dependency "awrence", "2.0.1"
   spec.add_dependency "dotenv", "2.8.1"
