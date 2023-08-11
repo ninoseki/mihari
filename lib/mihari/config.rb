@@ -22,6 +22,9 @@ module Mihari
     attr_accessor :greynoise_api_key
 
     # @return [String, nil]
+    attr_accessor :hunterhow_api_key
+
+    # @return [String, nil]
     attr_accessor :ipinfo_api_key
 
     # @return [String, nil]
@@ -95,6 +98,8 @@ module Mihari
       @greynoise_api_key = ENV.fetch("GREYNOISE_API_KEY", nil)
 
       @ipinfo_api_key = ENV.fetch("IPINFO_API_KEY", nil)
+
+      @hunterhow_api_key = ENV.fetch("HUNTERHOW_API_KEY", nil)
 
       @misp_url = ENV.fetch("MISP_URL", nil)
       @misp_api_key = ENV.fetch("MISP_API_KEY", nil)

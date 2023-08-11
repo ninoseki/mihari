@@ -75,6 +75,15 @@ module Mihari
       optional(:options).hash(AnalyzerOptions)
     end
 
+    HunterHow = Dry::Schema.Params do
+      required(:analyzer).value(Types::String.enum("hunterhow"))
+      required(:query).value(:string)
+      required(:start_time).value(:date)
+      required(:end_time).value(:date)
+      optional(:api_key).value(:string)
+      optional(:options).hash(AnalyzerOptions)
+    end
+
     Feed = Dry::Schema.Params do
       required(:analyzer).value(Types::String.enum("feed"))
       required(:query).value(:string)
