@@ -35,9 +35,10 @@ module Mihari
       def artifacts
         artifacts = []
 
-        loop do
+        (1..pagination_limit).each do |page|
           res = client.search(
             query,
+            page: page,
             page_size: PAGE_SIZE,
             start_time: start_time.strftime("%Y-%m-%d"),
             end_time: end_time.strftime("%Y-%m-%d")

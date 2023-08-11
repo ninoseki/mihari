@@ -25,21 +25,28 @@ module Mihari
       # @return [Integer, nil]
       #
       def interval
-        @interval = options[:interval]
+        @interval ||= options[:interval]
       end
 
       #
       # @return [Integer]
       #
       def retry_interval
-        @retry_interval ||= options[:retry_interval] || DEFAULT_RETRY_INTERVAL
+        @retry_interval ||= options[:retry_interval] || Mihari.config.retry_interval
       end
 
       #
       # @return [Integer]
       #
       def retry_times
-        @retry_times ||= options[:retry_times] || DEFAULT_RETRY_TIMES
+        @retry_times ||= options[:retry_times] || Mihari.config.retry_times
+      end
+
+      #
+      # @return [Integer]
+      #
+      def pagination_limit
+        @pagination_limit ||= options[:pagination_limit] || Mihari.config.pagination_limit
       end
 
       # @return [Array<String>, Array<Mihari::Artifact>]

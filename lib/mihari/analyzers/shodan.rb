@@ -54,7 +54,7 @@ module Mihari
       #
       def search
         responses = []
-        (1..Float::INFINITY).each do |page|
+        (1..pagination_limit).each do |page|
           res = search_with_page(page: page)
           responses << res
           break if res.total <= page * PAGE_SIZE

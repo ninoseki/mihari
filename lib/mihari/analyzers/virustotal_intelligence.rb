@@ -45,7 +45,7 @@ module Mihari
         cursor = nil
         responses = []
 
-        loop do
+        pagination_limit.times do
           response = Structs::VirusTotalIntelligence::Response.from_dynamic!(client.intel_search(query,
             cursor: cursor))
           responses << response
