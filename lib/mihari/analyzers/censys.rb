@@ -30,7 +30,7 @@ module Mihari
         artifacts = []
 
         cursor = nil
-        loop do
+        pagination_limit.times do
           response = client.search(query, cursor: cursor)
           artifacts << response.result.to_artifacts
           cursor = response.result.links.next

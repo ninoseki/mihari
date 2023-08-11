@@ -68,7 +68,7 @@ module Mihari
         responses = []
 
         search_after = nil
-        loop do
+        pagination_limit.times do
           res = search_with_search_after(search_after: search_after)
           responses << res
 

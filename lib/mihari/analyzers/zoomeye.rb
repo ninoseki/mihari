@@ -95,7 +95,7 @@ module Mihari
       #
       def host_search
         responses = []
-        (1..Float::INFINITY).each do |page|
+        (1..pagination_limit).each do |page|
           res = _host_search(query, page: page)
           break unless res
 
@@ -128,7 +128,7 @@ module Mihari
       #
       def web_search
         responses = []
-        (1..Float::INFINITY).each do |page|
+        (1..pagination_limit).each do |page|
           res = _web_search(query, page: page)
           break unless res
 

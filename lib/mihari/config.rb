@@ -1,88 +1,97 @@
 module Mihari
   class Config
     # @return [String, nil]
-    attr_accessor :binaryedge_api_key
+    attr_reader :binaryedge_api_key
 
     # @return [String, nil]
-    attr_accessor :censys_id
+    attr_reader :censys_id
 
     # @return [String, nil]
-    attr_accessor :censys_secret
+    attr_reader :censys_secret
 
     # @return [String, nil]
-    attr_accessor :circl_passive_password
+    attr_reader :circl_passive_password
 
     # @return [String, nil]
-    attr_accessor :circl_passive_username
+    attr_reader :circl_passive_username
 
     # @return [URI]
-    attr_accessor :database_url
+    attr_reader :database_url
 
     # @return [String, nil]
-    attr_accessor :greynoise_api_key
+    attr_reader :greynoise_api_key
 
     # @return [String, nil]
-    attr_accessor :hunterhow_api_key
+    attr_reader :hunterhow_api_key
 
     # @return [String, nil]
-    attr_accessor :ipinfo_api_key
+    attr_reader :ipinfo_api_key
 
     # @return [String, nil]
-    attr_accessor :misp_url
+    attr_reader :misp_url
 
     # @return [String, nil]
-    attr_accessor :misp_api_key
+    attr_reader :misp_api_key
 
     # @return [String, nil]
-    attr_accessor :onyphe_api_key
+    attr_reader :onyphe_api_key
 
     # @return [String, nil]
-    attr_accessor :otx_api_key
+    attr_reader :otx_api_key
 
     # @return [String, nil]
-    attr_accessor :passivetotal_api_key
+    attr_reader :passivetotal_api_key
 
     # @return [String, nil]
-    attr_accessor :passivetotal_username
+    attr_reader :passivetotal_username
 
     # @return [String, nil]
-    attr_accessor :pulsedive_api_key
+    attr_reader :pulsedive_api_key
 
     # @return [String, nil]
-    attr_accessor :securitytrails_api_key
+    attr_reader :securitytrails_api_key
 
     # @return [String, nil]
-    attr_accessor :shodan_api_key
+    attr_reader :shodan_api_key
 
     # @return [String, nil]
-    attr_accessor :slack_channel
+    attr_reader :slack_channel
 
     # @return [String, nil]
-    attr_accessor :slack_webhook_url
+    attr_reader :slack_webhook_url
 
     # @return [String, nil]
-    attr_accessor :thehive_url
+    attr_reader :thehive_url
 
     # @return [String, nil]
-    attr_accessor :thehive_api_key
+    attr_reader :thehive_api_key
 
     # @return [String, nil]
-    attr_accessor :thehive_api_version
+    attr_reader :thehive_api_version
 
     # @return [String, nil]
-    attr_accessor :urlscan_api_key
+    attr_reader :urlscan_api_key
 
     # @return [String, nil]
-    attr_accessor :virustotal_api_key
+    attr_reader :virustotal_api_key
 
     # @return [String, nil]
-    attr_accessor :zoomeye_api_key
+    attr_reader :zoomeye_api_key
 
     # @return [String, nil]
-    attr_accessor :sentry_dsn
+    attr_reader :sentry_dsn
 
-    # @return [String, nil]
-    attr_accessor :hide_config_values
+    # @return [Boolean]
+    attr_reader :hide_config_values
+
+    # @return [Integer]
+    attr_reader :retry_interval
+
+    # @return [Integer]
+    attr_reader :retry_times
+
+    # @return [Integer]
+    attr_reader :pagination_limit
 
     def initialize
       @binaryedge_api_key = ENV.fetch("BINARYEDGE_API_KEY", nil)
@@ -133,6 +142,11 @@ module Mihari
       @sentry_dsn = ENV.fetch("SENTRY_DSN", nil)
 
       @hide_config_values = ENV.fetch("HIDE_CONFIG_VALUES", false)
+
+      @retry_times = ENV.fetch("RETRY_TIMES", 3).to_i
+      @retry_interval = ENV.fetch("RETRY_INTERVAL", 5).to_i
+
+      @pagination_limit = ENV.fetch("PAGINATION_LIMIT", 1000).to_i
     end
   end
 end

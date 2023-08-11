@@ -56,7 +56,7 @@ module Mihari
       #
       def search
         responses = []
-        (1..500).each do |page|
+        (1..pagination_limit).each do |page|
           res = search_with_page(page: page)
           total = res["total"].to_i
 

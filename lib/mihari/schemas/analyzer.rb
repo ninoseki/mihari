@@ -4,8 +4,9 @@ module Mihari
   module Schemas
     AnalyzerOptions = Dry::Schema.Params do
       optional(:interval).value(:integer)
-      optional(:retry_times).value(:integer).default(DEFAULT_RETRY_TIMES)
-      optional(:retry_interval).value(:integer).default(DEFAULT_RETRY_INTERVAL)
+      optional(:pagination_limit).value(:integer).default(Mihari.config.pagination_limit)
+      optional(:retry_times).value(:integer).default(Mihari.config.retry_times)
+      optional(:retry_interval).value(:integer).default(Mihari.config.retry_interval)
     end
 
     AnalyzerWithoutAPIKey = Dry::Schema.Params do
