@@ -1,0 +1,49 @@
+---
+http_interactions:
+  - request:
+      method: get
+      uri: https://api.hunter.how//search?api-key=<HUNTERHOW_API_KEY>&end_time=2023-08-31&page=1&page_size=100&query=aXA6IjEuMS4xLjEi&start_time=2023-08-01
+      body:
+        encoding: US-ASCII
+        string: ""
+      headers:
+        Accept-Encoding:
+          - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+        Accept:
+          - "*/*"
+        User-Agent:
+          - Ruby
+        Host:
+          - api.hunter.how
+    response:
+      status:
+        code: 200
+        message: OK
+      headers:
+        Date:
+          - Fri, 11 Aug 2023 09:09:24 GMT
+        Content-Type:
+          - application/json; charset=utf-8
+        Transfer-Encoding:
+          - chunked
+        Connection:
+          - keep-alive
+        Vary:
+          - Accept-Encoding
+        Access-Control-Allow-Origin:
+          - "*"
+        Cf-Cache-Status:
+          - DYNAMIC
+        Nel:
+          - '{"success_fraction":0,"report_to":"cf-nel","max_age":604800}'
+        Server:
+          - cloudflare
+        Cf-Ray:
+          - 7f4f56e62a70e035-NRT
+        Alt-Svc:
+          - h3=":443"; ma=86400
+      body:
+        encoding: ASCII-8BIT
+        string: '{"code":200,"data":{"list":[{"domain":"","ip":"1.1.1.1","port":80},{"domain":"","ip":"1.1.1.1","port":443},{"domain":"rgdkagqaaltpqelfom3c26bygywtmna.h.nessus.org","ip":"1.1.1.1","port":80},{"domain":"","ip":"1.1.1.1","port":2096},{"domain":"","ip":"1.1.1.1","port":2095},{"domain":"rfz27laaalcd4e3xnfxc26bygywtmna.h.nessus.org","ip":"1.1.1.1","port":2095},{"domain":"","ip":"1.1.1.1","port":2087},{"domain":"","ip":"1.1.1.1","port":2083},{"domain":"","ip":"1.1.1.1","port":8443},{"domain":"rfk4vdiaalcqkilxnfxc26bygywtmna.h.nessus.org","ip":"1.1.1.1","port":2095},{"domain":"","ip":"1.1.1.1","port":2082},{"domain":"","ip":"1.1.1.1","port":2086},{"domain":"rfz27laaalcd4e3xnfxc26bygywtmna.h.nessus.org","ip":"1.1.1.1","port":2086},{"domain":"","ip":"1.1.1.1","port":8880},{"domain":"","ip":"1.1.1.1","port":2053},{"domain":"","ip":"1.1.1.1","port":853},{"domain":"","ip":"1.1.1.1","port":8080},{"domain":"www.qiui.net","ip":"1.1.1.1","port":8080},{"domain":"souquan.wang","ip":"1.1.1.1","port":80},{"domain":"www.qiui.net","ip":"1.1.1.1","port":80},{"domain":"www.mseav.com","ip":"1.1.1.1","port":443},{"domain":"cloudflare-dns.com","ip":"1.1.1.1","port":443},{"domain":"cloudflare-dns.com","ip":"1.1.1.1","port":8443},{"domain":"cloudflare-dns.com","ip":"1.1.1.1","port":2096},{"domain":"cloudflare-dns.com","ip":"1.1.1.1","port":2087},{"domain":"www.qiui.net","ip":"1.1.1.1","port":2052},{"domain":"","ip":"1.1.1.1","port":2052},{"domain":"nizhe.net","ip":"1.1.1.1","port":443},{"domain":"www.qiui.net","ip":"1.1.1.1","port":443},{"domain":"souquan.wang","ip":"1.1.1.1","port":443},{"domain":"heyan.caiwenhao.cn","ip":"1.1.1.1","port":443},{"domain":"cloudflare-dns.com","ip":"1.1.1.1","port":2083},{"domain":"zhe365.net","ip":"1.1.1.1","port":443},{"domain":"www.qiui.net","ip":"1.1.1.1","port":2086},{"domain":"www.qiui.net","ip":"1.1.1.1","port":2082},{"domain":"zhe365.net","ip":"1.1.1.1","port":80},{"domain":"heyan.caiwenhao.cn","ip":"1.1.1.1","port":80},{"domain":"www.mseav.com","ip":"1.1.1.1","port":80},{"domain":"nizhe.net","ip":"1.1.1.1","port":80},{"domain":"www.qiui.net","ip":"1.1.1.1","port":8880},{"domain":"cloudflare-dns.com","ip":"1.1.1.1","port":2053}],"total":41},"message":"success"}'
+    recorded_at: Fri, 11 Aug 2023 09:09:24 GMT
+recorded_with: VCR 6.2.0

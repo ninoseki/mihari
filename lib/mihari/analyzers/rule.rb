@@ -10,6 +10,7 @@ module Mihari
       "dnstwister" => DNSTwister,
       "feed" => Feed,
       "greynoise" => GreyNoise,
+      "hunterhow" => HunterHow,
       "onyphe" => Onyphe,
       "otx" => OTX,
       "passivetotal" => PassiveTotal,

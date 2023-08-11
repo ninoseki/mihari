@@ -26,7 +26,7 @@ RSpec.describe Mihari::Schemas::RuleContract do
 
     context "analyzers does not need additional options" do
       it do
-        analyzers = Mihari::Analyzers::ANALYZER_TO_CLASS.keys - %w[zoomeye crtsh feed]
+        analyzers = Mihari::Analyzers::ANALYZER_TO_CLASS.keys - %w[zoomeye crtsh feed hunterhow]
 
         analyzers.each do |analyzer|
           result = contract.call(
@@ -40,7 +40,7 @@ RSpec.describe Mihari::Schemas::RuleContract do
       end
     end
 
-    context "analyzers needs additonal options" do
+    context "analyzers needs additional options" do
       it do
         result = contract.call(
           id: id,
