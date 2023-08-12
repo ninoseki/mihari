@@ -82,7 +82,7 @@ module Mihari
     attr_reader :sentry_dsn
 
     # @return [Boolean]
-    attr_reader :hide_config_values
+    attr_accessor :hide_config_values
 
     # @return [Integer]
     attr_reader :retry_interval
