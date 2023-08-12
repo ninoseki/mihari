@@ -109,7 +109,7 @@ RSpec.describe Mihari::Analyzers::Rule, :vcr do
     end
 
     it do
-      expect { subject.artifacts }.to raise_error(Mihari::ConfigurationError, "Shodan is not configured correctly")
+      expect { subject.artifacts }.to raise_error(Mihari::ConfigurationError, /Shodan is not configured correctly/)
     end
   end
 
