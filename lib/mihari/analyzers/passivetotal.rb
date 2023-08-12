@@ -46,11 +46,11 @@ module Mihari
         configuration_keys? || (username? && api_key?)
       end
 
-      private
-
       def configuration_keys
         %w[passivetotal_username passivetotal_api_key]
       end
+
+      private
 
       def client
         @client ||= Clients::PassiveTotal.new(username: username, api_key: api_key)

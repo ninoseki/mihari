@@ -33,6 +33,10 @@ module Mihari
         end
       end
 
+      def configuration_keys
+        %w[zoomeye_api_key]
+      end
+
       private
 
       PAGE_SIZE = 10
@@ -44,10 +48,6 @@ module Mihari
       #
       def valid_type?
         %w[host web].include? type
-      end
-
-      def configuration_keys
-        %w[zoomeye_api_key]
       end
 
       def client

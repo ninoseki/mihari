@@ -30,6 +30,10 @@ module Mihari
         end.flatten
       end
 
+      def configuration_keys
+        %w[binaryedge_api_key]
+      end
+
       private
 
       PAGE_SIZE = 20
@@ -67,10 +71,6 @@ module Mihari
           sleep_interval
         end
         responses
-      end
-
-      def configuration_keys
-        %w[binaryedge_api_key]
       end
 
       #

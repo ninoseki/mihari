@@ -40,11 +40,11 @@ module Mihari
         end
       end
 
-      private
-
       def configuration_keys
         %w[securitytrails_api_key]
       end
+
+      private
 
       def client
         @client ||= Clients::SecurityTrails.new(api_key: api_key)

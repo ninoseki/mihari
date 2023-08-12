@@ -21,11 +21,11 @@ module Mihari
         search_with_cursor.map(&:to_artifacts).flatten
       end
 
-      private
-
       def configuration_keys
         %w[virustotal_api_key]
       end
+
+      private
 
       #
       # VT API

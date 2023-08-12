@@ -3,9 +3,6 @@
 module Mihari
   module Analyzers
     class HunterHow < Base
-      # @return [Integer]
-      PAGE_SIZE = 100
-
       # @return [String, nil]
       attr_reader :api_key
 
@@ -54,11 +51,14 @@ module Mihari
         artifacts.flatten
       end
 
-      private
-
       def configuration_keys
         %w[hunterhow_api_key]
       end
+
+      private
+
+      # @return [Integer]
+      PAGE_SIZE = 100
 
       def client
         @client ||= Clients::HunterHow.new(api_key: api_key)

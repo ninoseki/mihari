@@ -24,13 +24,13 @@ module Mihari
         results.map(&:to_artifacts).flatten.uniq(&:data)
       end
 
-      private
-
-      PAGE_SIZE = 100
-
       def configuration_keys
         %w[shodan_api_key]
       end
+
+      private
+
+      PAGE_SIZE = 100
 
       def client
         @client ||= Clients::Shodan.new(api_key: api_key)

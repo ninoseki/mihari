@@ -35,11 +35,11 @@ module Mihari
         end
       end
 
-      private
-
       def configuration_keys
         %w[virustotal_api_key]
       end
+
+      private
 
       def client
         @client = Clients::VirusTotal.new(api_key: api_key)

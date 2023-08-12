@@ -215,7 +215,10 @@ module Mihari
       #
       def validate_analyzer_configurations
         analyzers.map do |analyzer|
-          raise ConfigurationError, "#{analyzer.source} is not configured correctly" unless analyzer.configured?
+          next if analyzer.configured?
+
+          message = "#{analyzer.source} is not configured correctly. #{analyzer.configuration_keys.join(", ")} is/are missing."
+          raise ConfigurationError, message
         end
       end
     end
