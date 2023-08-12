@@ -55,12 +55,15 @@ module Mihari
       end
 
       #
-      # Returns a list of artifacts matched with queries/analyzers
+      # Returns a list of artifacts matched with queries/analyzers (with the rule ID)
       #
       # @return [Array<Mihari::Artifact>]
       #
       def artifacts
-        analyzers.flat_map(&:normalized_artifacts)
+        analyzers.flat_map(&:normalized_artifacts).map do |artifact|
+          artifact.rule_id = rule.id
+          artifact
+        end
       end
 
       #
@@ -73,14 +76,9 @@ module Mihari
       # @return [Array<Mihari::Artifact>]
       #
       def normalized_artifacts
-        @normalized_artifacts ||= artifacts.uniq(&:data).select(&:valid?).select do |artifact|
-          rule.data_types.include? artifact.data_type
-        end.reject do |artifact|
-          falsepositive? artifact.data
-        end.map do |artifact|
-          artifact.rule_id = rule.id
-          artifact
-        end
+        valid_artifacts = artifacts.uniq(&:data).select(&:valid?)
+        date_type_allowed_artifacts = valid_artifacts.select { |artifact| rule.data_types.include? artifact.data_type }
+        date_type_allowed_artifacts.reject { |artifact| falsepositive? artifact.data }
       end
 
       #
@@ -89,7 +87,7 @@ module Mihari
       # @return [Array<Mihari::Artifact>]
       #
       def unique_artifacts
-        @unique_artifacts ||= normalized_artifacts.select do |artifact|
+        normalized_artifacts.select do |artifact|
           artifact.unique?(base_time: base_time, artifact_lifetime: rule.artifact_lifetime)
         end
       end
