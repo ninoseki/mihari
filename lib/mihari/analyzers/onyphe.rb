@@ -26,13 +26,13 @@ module Mihari
         responses.map(&:to_artifacts).flatten
       end
 
-      private
-
-      PAGE_SIZE = 10
-
       def configuration_keys
         %w[onyphe_api_key]
       end
+
+      private
+
+      PAGE_SIZE = 10
 
       def client
         @client ||= Clients::Onyphe.new(api_key: api_key)

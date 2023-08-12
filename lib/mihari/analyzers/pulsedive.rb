@@ -40,11 +40,11 @@ module Mihari
         end
       end
 
-      private
-
       def configuration_keys
         %w[pulsedive_api_key]
       end
+
+      private
 
       def client
         @client ||= Clients::PulseDive.new(api_key: api_key)

@@ -55,14 +55,14 @@ module Mihari
         configuration_keys? || (id? && secret?)
       end
 
-      private
-
       #
       # @return [Array<String>]
       #
       def configuration_keys
         %w[censys_id censys_secret]
       end
+
+      private
 
       #
       # @return [Mihari::Clients::Censys]

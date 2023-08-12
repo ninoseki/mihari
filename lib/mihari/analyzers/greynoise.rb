@@ -23,11 +23,11 @@ module Mihari
         client.gnql_search(query, size: PAGE_SIZE).to_artifacts
       end
 
-      private
-
       def configuration_keys
         %w[greynoise_api_key]
       end
+
+      private
 
       def client
         @client ||= Clients::GreyNoise.new(api_key: api_key)

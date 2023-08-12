@@ -44,11 +44,11 @@ module Mihari
         configuration_keys? || (username? && password?)
       end
 
-      private
-
       def configuration_keys
         %w[circl_passive_password circl_passive_username]
       end
+
+      private
 
       def client
         @client ||= Clients::CIRCL.new(username: username, password: password)
