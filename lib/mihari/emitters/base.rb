@@ -14,7 +14,7 @@ module Mihari
 
       #
       # @param [Array<Mihari::Artifact>] artifacts
-      # @param [Mihari::Services::Rule] rule
+      # @param [Mihari::Services::RuleProxy] rule
       # @param [Hash] **_options
       #
       def initialize(artifacts:, rule:, **_options)

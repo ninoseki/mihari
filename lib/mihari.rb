@@ -117,6 +117,9 @@ require "mihari/http"
 require "mihari/services/rule_proxy"
 require "mihari/services/rule_runner"
 
+require "mihari/services/alert_proxy"
+require "mihari/services/alert_runner"
+
 # Structs
 require "mihari/structs/censys"
 require "mihari/structs/config"
@@ -133,6 +136,7 @@ require "mihari/structs/virustotal_intelligence"
 # Schemas
 require "mihari/schemas/macros"
 
+require "mihari/schemas/alert"
 require "mihari/schemas/analyzer"
 require "mihari/schemas/rule"
 

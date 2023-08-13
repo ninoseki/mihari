@@ -10,10 +10,10 @@ module Mihari
       #
       # Create an alert
       #
-      # @return [Mihari::Alert]
+      # @return [Mihari::Alert, nil]
       #
       def emit
-        return if artifacts.empty?
+        return nil if artifacts.empty?
 
         tags = rule.tags.filter_map { |name| Tag.find_or_create_by(name: name) }.uniq
         taggings = tags.map { |tag| Tagging.new(tag_id: tag.id) }
