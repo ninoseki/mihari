@@ -2,7 +2,7 @@
 
 require "yaml"
 
-RSpec.describe Mihari::Services::Rule do
+RSpec.describe Mihari::Services::RuleProxy do
   let(:data) do
     {
       id: "foo",

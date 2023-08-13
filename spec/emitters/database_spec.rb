@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 RSpec.describe Mihari::Emitters::Database do
-  let(:rule) { Mihari::Services::Rule.from_model(Mihari::Rule.first) }
+  let(:rule) { Mihari::Services::RuleProxy.from_model(Mihari::Rule.first) }
   let(:artifacts) { [Mihari::Artifact.new(data: "1.1.1.1")] }
 
   subject { described_class.new(artifacts: artifacts, rule: rule) }

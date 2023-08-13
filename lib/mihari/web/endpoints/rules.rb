@@ -83,7 +83,7 @@ module Mihari
           id = params["id"].to_s
 
           begin
-            rule = Mihari::Services::Rule.from_model(Mihari::Rule.find(id))
+            rule = Mihari::Services::RuleProxy.from_model(Mihari::Rule.find(id))
           rescue ActiveRecord::RecordNotFound
             error!({ message: "ID:#{id} is not found" }, 404)
           end
@@ -106,7 +106,7 @@ module Mihari
           yaml = params[:yaml]
 
           begin
-            rule = Services::Rule.from_yaml(yaml)
+            rule = Services::RuleProxy.from_yaml(yaml)
           rescue YAMLSyntaxError => e
             error!({ message: e.message }, 400)
           end
@@ -157,7 +157,7 @@ module Mihari
           end
 
           begin
-            rule = Services::Rule.from_yaml(yaml)
+            rule = Services::RuleProxy.from_yaml(yaml)
           rescue YAMLSyntaxError => e
             error!({ message: e.message }, 400)
           end

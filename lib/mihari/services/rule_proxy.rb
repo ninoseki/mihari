@@ -9,7 +9,11 @@ require "yaml"
 
 module Mihari
   module Services
-    class Rule
+    #
+    # proxy (or converter) class for rule
+    # proxying rule schema data into analyzer & model
+    #
+    class RuleProxy
       include Mixins::FalsePositive
 
       # @return [Hash]
@@ -174,7 +178,7 @@ module Mihari
         # @return [Mihari::Services::Rule]
         #
         def from_yaml(yaml)
-          Services::Rule.new YAML.safe_load(ERB.new(yaml).result, permitted_classes: [Date, Symbol])
+          Services::RuleProxy.new YAML.safe_load(ERB.new(yaml).result, permitted_classes: [Date, Symbol])
         rescue Psych::SyntaxError => e
           raise YAMLSyntaxError, e.message
         end
@@ -185,7 +189,7 @@ module Mihari
         # @return [Mihari::Services::Rule]
         #
         def from_model(model)
-          Services::Rule.new model.data
+          Services::RuleProxy.new model.data
         end
 
         #
@@ -211,7 +215,7 @@ module Mihari
         def from_id(id)
           return nil unless Mihari::Rule.exists?(id)
 
-          Services::Rule.from_model Mihari::Rule.find(id)
+          Services::RuleProxy.from_model Mihari::Rule.find(id)
         end
 
         #
