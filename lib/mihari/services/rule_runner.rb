@@ -31,14 +31,14 @@ module Mihari
       end
 
       def update_or_create
-        rule.to_model.save
+        rule.model.save
       end
 
       #
       # @return [Mihari::Alert, nil]
       #
       def run
-        analyzer = rule.to_analyzer
+        analyzer = rule.analyzer
 
         with_error_notification do
           analyzer.run

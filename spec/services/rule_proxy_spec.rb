@@ -24,13 +24,13 @@ RSpec.describe Mihari::Services::RuleProxy do
 
   describe "#to_analyzer" do
     it "should return an analyzer" do
-      expect(rule.to_analyzer).to be_a Mihari::Analyzers::Rule
+      expect(rule.analyzer).to be_a Mihari::Analyzers::Rule
     end
   end
 
   describe "#to_model" do
     it "should return a model" do
-      expect(rule.to_model).to be_a Mihari::Rule
+      expect(rule.model).to be_a Mihari::Rule
     end
   end
 end
