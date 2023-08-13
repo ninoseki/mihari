@@ -88,7 +88,7 @@ module Mihari
             error!({ message: "ID:#{id} is not found" }, 404)
           end
 
-          analyzer = rule.to_analyzer
+          analyzer = rule.analyzer
           analyzer.run
 
           status 201
@@ -129,13 +129,13 @@ module Mihari
           end
 
           begin
-            rule.to_model.save
+            rule.model.save
           rescue ActiveRecord::RecordNotUnique
             error!({ message: "ID:#{rule.id} is already registered" }, 400)
           end
 
           status 201
-          present rule.to_model, with: Entities::Rule
+          present rule.model, with: Entities::Rule
         end
 
         desc "Update a rule", {
@@ -172,13 +172,13 @@ module Mihari
           end
 
           begin
-            rule.to_model.save
+            rule.model.save
           rescue ActiveRecord::RecordNotUnique
             error!({ message: "ID:#{id} is already registered" }, 400)
           end
 
           status 201
-          present rule.to_model, with: Entities::Rule
+          present rule.model, with: Entities::Rule
         end
 
         desc "Delete a rule", {
