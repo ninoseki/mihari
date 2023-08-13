@@ -32,7 +32,22 @@ module Mihari
                 end
 
                 runner.update_or_create
-                runner.run
+
+                begin
+                  alert = runner.run
+                rescue ConfigurationError => e
+                  # if there is a configuration error, output that error without the stack trace
+                  Mihari.logger.error e.to_s
+                  return
+                end
+
+                if alert.nil?
+                  Mihari.logger.info "There is no new artifact found"
+                  return
+                end
+
+                data = Mihari::Entities::Alert.represent(alert)
+                puts JSON.pretty_generate(data.as_json)
               end
             end
           end

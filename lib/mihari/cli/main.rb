@@ -3,14 +3,16 @@
 require "thor"
 
 # Commands
+require "mihari/commands/alert"
+require "mihari/commands/database"
 require "mihari/commands/search"
 require "mihari/commands/version"
 require "mihari/commands/web"
-require "mihari/commands/database"
 
 # CLIs
 require "mihari/cli/base"
 
+require "mihari/cli/alert"
 require "mihari/cli/database"
 require "mihari/cli/rule"
 
@@ -26,6 +28,9 @@ module Mihari
 
       desc "rule", "Sub commands for rule"
       subcommand "rule", Rule
+
+      desc "alert", "Sub commands for alert"
+      subcommand "alert", Alert
     end
   end
 end

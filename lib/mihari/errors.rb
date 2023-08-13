@@ -15,10 +15,13 @@ module Mihari
 
   class RuleValidationError < Error; end
 
+  class AlertValidationError < Error; end
+
   class YAMLSyntaxError < Error; end
 
   class ConfigurationError < Error; end
 
+  # errors for HTTP interactions
   class HTTPError < Error; end
 
   class StatusCodeError < HTTPError; end

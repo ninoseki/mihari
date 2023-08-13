@@ -5,7 +5,7 @@ module Mihari
     class RuleRunner
       include Mixins::ErrorNotification
 
-      # @return [Nihari::Services::RuleProxy]
+      # @return [Mihari::Services::RuleProxy]
       attr_reader :rule
 
       # @return [Boolean]
@@ -34,24 +34,14 @@ module Mihari
         rule.to_model.save
       end
 
+      #
+      # @return [Mihari::Alert, nil]
+      #
       def run
-        begin
-          analyzer = rule.to_analyzer
-        rescue ConfigurationError => e
-          # if there is a configuration error, output that error without the stack trace
-          Mihari.logger.error e.to_s
-          return
-        end
+        analyzer = rule.to_analyzer
 
         with_error_notification do
-          alert = analyzer.run
-          if alert.nil?
-            Mihari.logger.info "There is no new artifact found"
-            return
-          end
-
-          data = Mihari::Entities::Alert.represent(alert)
-          puts JSON.pretty_generate(data.as_json)
+          analyzer.run
         end
       end
     end
