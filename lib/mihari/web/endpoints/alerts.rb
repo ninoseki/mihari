@@ -67,6 +67,28 @@ module Mihari
           status 204
           present({ message: "" }, with: Entities::Message)
         end
+
+        desc "Create an alert", {
+          success: Entities::Alert,
+          summary: "Create an alert"
+        }
+        params do
+          requires :ruleId, type: String, documentation: { param_type: "body" }
+          requires :artifacts, type: Array, documentation: { type: String, is_array: true, param_type: "body" }
+        end
+        post "/" do
+          proxy = Services::AlertProxy.new(params.to_snake_keys)
+          runner = Services::AlertRunner.new(proxy)
+
+          begin
+            alert = runner.run
+          rescue ActiveRecord::RecordNotFound
+            error!({ message: "Rule:#{params["ruleId"]} is not found" }, 404)
+          end
+
+          status 201
+          present alert, with: Entities::Alert
+        end
       end
     end
   end
