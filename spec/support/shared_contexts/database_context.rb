@@ -3,7 +3,7 @@
 RSpec.shared_context "with database fixtures" do
   before do
     # create rules
-    rule1 = Mihari::Services::Rule.new(
+    rule1 = Mihari::Services::RuleProxy.new(
       id: "test1",
       title: "test1",
       description: "test1",
@@ -12,7 +12,7 @@ RSpec.shared_context "with database fixtures" do
     )
     rule1.to_model.save
 
-    rule2 = Mihari::Services::Rule.new(
+    rule2 = Mihari::Services::RuleProxy.new(
       id: "test2",
       title: "test2",
       description: "test2",

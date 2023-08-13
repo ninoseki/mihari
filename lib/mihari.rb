@@ -114,7 +114,8 @@ require "mihari/type_checker"
 require "mihari/http"
 
 # Services
-require "mihari/services/rule"
+require "mihari/services/rule_proxy"
+require "mihari/services/rule_runner"
 
 # Structs
 require "mihari/structs/censys"

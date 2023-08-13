@@ -15,7 +15,7 @@ module Mihari
             # @param [String] path
             #
             def validate(path)
-              rule = Services::Rule.from_path_or_id(path)
+              rule = Services::RuleProxy.from_path_or_id(path)
 
               begin
                 rule.validate!
@@ -47,7 +47,7 @@ module Mihari
               # @return [Mihari::Services::Rule]
               #
               def rule_template
-                Services::Rule.from_path File.expand_path("../templates/rule.yml.erb", __dir__)
+                Services::RuleProxy.from_path File.expand_path("../templates/rule.yml.erb", __dir__)
               end
 
               #
