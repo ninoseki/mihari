@@ -94,7 +94,13 @@ module Mihari
       Net::HTTP.start(url.host, url.port, https_options) do |http|
         res = http.request(req)
 
-        raise StatusCodeError, "Unsuccessful response code returned: #{res.code}" unless res.is_a?(Net::HTTPSuccess)
+        unless res.is_a?(Net::HTTPSuccess)
+          raise StatusCodeError.new(
+            "Unsuccessful response code returned: #{res.code}",
+            res.code.to_i,
+            res.body
+          )
+        end
 
         res
       end

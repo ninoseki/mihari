@@ -24,11 +24,29 @@ module Mihari
   # errors for HTTP interactions
   class HTTPError < Error; end
 
-  class StatusCodeError < HTTPError; end
-
   class NetworkError < HTTPError; end
 
   class TimeoutError < HTTPError; end
 
   class SSLError < HTTPError; end
+
+  class StatusCodeError < HTTPError
+    # @return [Integer]
+    attr_reader :status_code
+
+    # @return [String, nil]
+    attr_reader :body
+
+    #
+    # @param [String] msg
+    # @param [Integer] status_code
+    # @param [String, nil] body
+    #
+    def initialize(msg, status_code, body)
+      super(msg)
+
+      @status_code = status_code
+      @body = body
+    end
+  end
 end
