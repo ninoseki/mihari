@@ -48,7 +48,7 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency "rerun", "~> 0.14"
   spec.add_development_dependency "rspec", "~> 3.12"
   spec.add_development_dependency "simplecov-lcov", "~> 0.8.0"
-  spec.add_development_dependency "standard", "~> 1.30"
+  spec.add_development_dependency "standard", "~> 1.31"
   spec.add_development_dependency "timecop", "~> 0.9"
   spec.add_development_dependency "vcr", "~> 6.2"
   spec.add_development_dependency "webmock", "~> 3.18"
@@ -56,7 +56,6 @@ Gem::Specification.new do |spec|
   unless ci_env?
     spec.add_development_dependency "lefthook", "~> 1.4"
     spec.add_development_dependency "solargraph", "~> 0.49"
-    spec.add_development_dependency "steep", "~> 1.4"
   end
 
   spec.add_dependency "activerecord", "7.0.7"
@@ -82,7 +81,7 @@ Gem::Specification.new do |spec|
   spec.add_dependency "parallel", "1.23.0"
   spec.add_dependency "plissken", "2.0.1"
   spec.add_dependency "public_suffix", "5.0.3"
-  spec.add_dependency "puma", "6.3.0"
+  spec.add_dependency "puma", "6.3.1"
   spec.add_dependency "rack", "3.0.8"
   spec.add_dependency "rack-cors", "2.0.1"
   spec.add_dependency "rackup", "2.1.0"
