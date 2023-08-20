@@ -146,7 +146,7 @@ module Mihari
       @retry_times = ENV.fetch("RETRY_TIMES", 3).to_i
       @retry_interval = ENV.fetch("RETRY_INTERVAL", 5).to_i
 
-      @pagination_limit = ENV.fetch("PAGINATION_LIMIT", 1000).to_i
+      @pagination_limit = ENV.fetch("PAGINATION_LIMIT", 100).to_i
     end
   end
 end
