@@ -141,7 +141,7 @@ module Mihari
 
       @sentry_dsn = ENV.fetch("SENTRY_DSN", nil)
 
-      @hide_config_values = ENV.fetch("HIDE_CONFIG_VALUES", false)
+      @hide_config_values = ENV.fetch("HIDE_CONFIG_VALUES", true)
 
       @retry_times = ENV.fetch("RETRY_TIMES", 3).to_i
       @retry_interval = ENV.fetch("RETRY_INTERVAL", 5).to_i
