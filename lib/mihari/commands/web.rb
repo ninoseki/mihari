@@ -12,7 +12,7 @@ module Mihari
             method_option :threads, type: :string, default: "0:5", desc: "min:max threads to use"
             method_option :verbose, type: :boolean, default: true, desc: "Report each request"
             method_option :worker_timeout, type: :numeric, default: 60, desc: "Worker timeout value (in seconds)"
-            method_option :hide_config_values, type: :boolean, default: false,
+            method_option :hide_config_values, type: :boolean, default: true,
               desc: "Whether to hide config values or not"
             method_option :open, type: :boolean, default: true, desc: "Whether to open the app in browser or not"
             method_option :rack_env, type: :string, default: "production", desc: "Rack environment"
