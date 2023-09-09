@@ -27,9 +27,9 @@ module Mihari
       def artifacts
         case type
         when "domain"
-          domain_search
+          client.domain_search(query)
         when "ip"
-          ip_search
+          client.ip_search(query)
         else
           raise InvalidInputError, "#{query}(type: #{type || "unknown"}) is not supported." unless valid_type?
         end
@@ -52,42 +52,6 @@ module Mihari
       #
       def valid_type?
         %w[ip domain].include? type
-      end
-
-      #
-      # Domain search
-      #
-      # @return [Array<String>]
-      #
-      def domain_search
-        res = client.query_by_domain(query)
-        return [] if res.nil?
-
-        records = res["passive_dns"] || []
-        records.filter_map do |record|
-          record_type = record["record_type"]
-          address = record["address"]
-
-          address if record_type == "A"
-        end.uniq
-      end
-
-      #
-      # IP search
-      #
-      # @return [Array<String>]
-      #
-      def ip_search
-        res = client.query_by_ip(query)
-        return [] if res.nil?
-
-        records = res["passive_dns"] || []
-        records.filter_map do |record|
-          record_type = record["record_type"]
-          hostname = record["hostname"]
-
-          hostname if record_type == "A"
-        end.uniq
       end
     end
   end

@@ -30,25 +30,13 @@ module Mihari
       # @return [Array<Mihari::Artifact>]
       #
       def artifacts
-        artifacts = []
-
-        (1..pagination_limit).each do |page|
-          res = client.search(
-            query,
-            page: page,
-            page_size: PAGE_SIZE,
-            start_time: start_time.strftime("%Y-%m-%d"),
-            end_time: end_time.strftime("%Y-%m-%d")
-          )
-
-          artifacts << res.data.artifacts
-
-          break if res.data.list.length < PAGE_SIZE
-
-          sleep_interval
-        end
-
-        artifacts.flatten
+        client.search_with_pagination(
+          query,
+          start_time: start_time.strftime("%Y-%m-%d"),
+          end_time: end_time.strftime("%Y-%m-%d")
+        ).map do |res|
+          res.data.artifacts
+        end.flatten
       end
 
       def configuration_keys
@@ -57,11 +45,8 @@ module Mihari
 
       private
 
-      # @return [Integer]
-      PAGE_SIZE = 100
-
       def client
-        @client ||= Clients::HunterHow.new(api_key: api_key)
+        @client ||= Clients::HunterHow.new(api_key: api_key, interval: interval)
       end
     end
   end

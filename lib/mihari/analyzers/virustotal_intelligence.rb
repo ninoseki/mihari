@@ -18,7 +18,7 @@ module Mihari
       end
 
       def artifacts
-        search_with_cursor.map(&:to_artifacts).flatten
+        client.intel_search_with_pagination(query, pagination_limit: pagination_limit).map(&:artifacts).flatten
       end
 
       def configuration_keys
@@ -33,30 +33,7 @@ module Mihari
       # @return [::VirusTotal::API]
       #
       def client
-        @client = Clients::VirusTotal.new(api_key: api_key)
-      end
-
-      #
-      # Search with cursor
-      #
-      # @return [Array<Structs::VirusTotalIntelligence::Response>]
-      #
-      def search_with_cursor
-        cursor = nil
-        responses = []
-
-        pagination_limit.times do
-          response = Structs::VirusTotalIntelligence::Response.from_dynamic!(client.intel_search(query,
-            cursor: cursor))
-          responses << response
-          break if response.meta.cursor.nil?
-
-          cursor = response.meta.cursor
-          # sleep #{interval} seconds to avoid the rate limitation (if it is set)
-          sleep_interval
-        end
-
-        responses
+        @client = Clients::VirusTotal.new(api_key: api_key, interval: interval)
       end
     end
   end

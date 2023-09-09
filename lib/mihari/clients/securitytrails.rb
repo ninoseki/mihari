@@ -16,6 +16,50 @@ module Mihari
       end
 
       #
+      # Domain search
+      #
+      # @param [String] query
+      #
+      # @return [Array<String>]
+      #
+      def domain_search(query)
+        records = get_all_dns_history(query, type: "a")
+        records.map do |record|
+          (record["values"] || []).map { |value| value["ip"] }
+        end.flatten.compact.uniq
+      end
+
+      #
+      # IP search
+      #
+      # @param [String] query
+      #
+      # @return [Array<Mihari::Artifact>]
+      #
+      def ip_search(query)
+        records = search_by_ip(query)
+        records.filter_map do |record|
+          data = record["hostname"]
+          Artifact.new(data: data, metadata: record)
+        end
+      end
+
+      #
+      # Mail search
+      #
+      # @param [String] query
+      #
+      # @return [Array<String>]
+      #
+      def mail_search(query)
+        records = search_by_mail(query)
+        records.filter_map do |record|
+          data = record["hostname"]
+          Artifact.new(data: data, metadata: record)
+        end
+      end
+
+      #
       # @param [String] mail
       #
       # @return [Array<Hash>]

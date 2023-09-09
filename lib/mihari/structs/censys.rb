@@ -18,7 +18,7 @@ module Mihari
         #
         # @return [Mihari::AutonomousSystem]
         #
-        def to_as
+        def as
           Mihari::AutonomousSystem.new(asn: normalize_asn(asn))
         end
 
@@ -58,7 +58,7 @@ module Mihari
         #
         # @return [Mihari::Geolocation] <description>
         #
-        def to_geolocation
+        def geolocation
           # sometimes Censys overlooks country
           # then set geolocation as nil
           return nil if country.nil?
@@ -98,7 +98,7 @@ module Mihari
         #
         # @return [Mihari::Port]
         #
-        def to_port
+        def _port
           Port.new(port: port)
         end
 
@@ -162,20 +162,20 @@ module Mihari
         #
         # @return [Array<Mihari::Port>]
         #
-        def to_ports
-          services.map(&:to_port)
+        def ports
+          services.map(&:_port)
         end
 
         #
         # @return [Mihari::Artifact]
         #
-        def to_artifact
+        def artifact
           Artifact.new(
             data: ip,
             metadata: metadata,
-            autonomous_system: autonomous_system.to_as,
-            geolocation: location.to_geolocation,
-            ports: to_ports
+            autonomous_system: autonomous_system.as,
+            geolocation: location.geolocation,
+            ports: ports
           )
         end
 
@@ -269,8 +269,8 @@ module Mihari
         #
         # @return [Array<Mihari::Artifact>]
         #
-        def to_artifacts
-          hits.map(&:to_artifact)
+        def artifacts
+          hits.map(&:artifact)
         end
 
         class << self

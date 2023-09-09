@@ -16,11 +16,13 @@ module Mihari
       #
       # @param [String] domain
       #
-      # @return [Hash]
+      # @return [Array<String>]
       #
       def fuzz(domain)
         res = get("/api/fuzz/#{to_hex(domain)}")
-        JSON.parse(res.body.to_s)
+        res = JSON.parse(res.body.to_s)
+        fuzzy_domains = res["fuzzy_domains"] || []
+        fuzzy_domains.map { |d| d["domain"] }
       end
 
       private

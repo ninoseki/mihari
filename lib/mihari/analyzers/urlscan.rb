@@ -4,7 +4,6 @@ module Mihari
   module Analyzers
     class Urlscan < Base
       SUPPORTED_DATA_TYPES = %w[url domain ip].freeze
-      SIZE = 1000
 
       # @return [String, nil]
       attr_reader :api_key
@@ -30,9 +29,8 @@ module Mihari
       end
 
       def artifacts
-        responses = search
         # @type [Array<Mihari::Artifact>]
-        artifacts = responses.map { |res| res.to_artifacts }.flatten
+        artifacts = client.search_with_pagination(query, pagination_limit: pagination_limit).map(&:artifacts).flatten
 
         artifacts.select do |artifact|
           allowed_data_types.include? artifact.data_type
@@ -46,41 +44,7 @@ module Mihari
       private
 
       def client
-        @client ||= Clients::UrlScan.new(api_key: api_key)
-      end
-
-      #
-      # Search with search_after option
-      #
-      # @return [Structs::Urlscan::Response]
-      #
-      def search_with_search_after(search_after: nil)
-        res = client.search(query, size: SIZE, search_after: search_after)
-        Structs::Urlscan::Response.from_dynamic! res
-      end
-
-      #
-      # Search
-      #
-      # @return [Array<Structs::Urlscan::Response>]
-      #
-      def search
-        responses = []
-
-        search_after = nil
-        pagination_limit.times do
-          res = search_with_search_after(search_after: search_after)
-          responses << res
-
-          break if res.results.length < SIZE
-
-          search_after = res.results.last.sort.join(",")
-
-          # sleep #{interval} seconds to avoid the rate limitation (if it is set)
-          sleep_interval
-        end
-
-        responses
+        @client ||= Clients::UrlScan.new(api_key: api_key, interval: interval)
       end
 
       #

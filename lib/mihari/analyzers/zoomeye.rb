@@ -25,9 +25,13 @@ module Mihari
       def artifacts
         case type
         when "host"
-          host_search
+          client.host_search_with_pagination(query).map do |res|
+            convert(res)
+          end.flatten
         when "web"
-          web_search
+          client.web_search_with_pagination(query).map do |res|
+            convert(res)
+          end.flatten
         else
           raise InvalidInputError, "#{type} type is not supported." unless valid_type?
         end
@@ -39,8 +43,6 @@ module Mihari
 
       private
 
-      PAGE_SIZE = 10
-
       #
       # Check whether a type is valid or not
       #
@@ -51,95 +53,27 @@ module Mihari
       end
 
       def client
-        @client ||= Clients::ZoomEye.new(api_key: api_key)
+        @client ||= Clients::ZoomEye.new(api_key: api_key, interval: interval)
       end
 
       #
       # Convert responses into an array of String
       #
-      # @param [Array<Hash>] responses
+      # @param [Hash] response
       #
       # @return [Array<Mihari::Artifact>]
       #
-      def convert_responses(responses)
-        responses.map do |res|
-          matches = res["matches"] || []
-          matches.map do |match|
-            data = match["ip"]
+      def convert(res)
+        matches = res["matches"] || []
+        matches.map do |match|
+          data = match["ip"]
 
-            if data.is_a?(Array)
-              data.map { |d| Artifact.new(data: d, source: source, metadata: match) }
-            else
-              Artifact.new(data: data, source: source, metadata: match)
-            end
+          if data.is_a?(Array)
+            data.map { |d| Artifact.new(data: d, source: source, metadata: match) }
+          else
+            Artifact.new(data: data, source: source, metadata: match)
           end
-        end.flatten.compact.uniq
-      end
-
-      #
-      # Host search
-      #
-      # @param [String] query
-      # @param [Integer] page
-      #
-      # @return [Hash, nil]
-      #
-      def _host_search(query, page: 1)
-        client.host_search(query, page: page)
-      end
-
-      #
-      # Host search
-      #
-      # @return [Array<String>]
-      #
-      def host_search
-        responses = []
-        (1..pagination_limit).each do |page|
-          res = _host_search(query, page: page)
-          break unless res
-
-          total = res["total"].to_i
-          responses << res
-          break if total <= page * PAGE_SIZE
-
-          # sleep #{interval} seconds to avoid the rate limitation (if it is set)
-          sleep_interval
-        end
-        convert_responses responses.compact
-      end
-
-      #
-      # Web search
-      #
-      # @param [String] query
-      # @param [Integer] page
-      #
-      # @return [Hash, nil]
-      #
-      def _web_search(query, page: 1)
-        client.web_search(query, page: page)
-      end
-
-      #
-      # Web search
-      #
-      # @return [Array<String>]
-      #
-      def web_search
-        responses = []
-        (1..pagination_limit).each do |page|
-          res = _web_search(query, page: page)
-          break unless res
-
-          total = res["total"].to_i
-          responses << res
-          break if total <= page * PAGE_SIZE
-
-          # sleep #{interval} seconds to avoid the rate limitation (if it is set)
-          sleep_interval
-        end
-        convert_responses responses.compact
+        end.flatten
       end
     end
   end

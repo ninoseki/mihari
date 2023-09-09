@@ -32,11 +32,11 @@ module Mihari
       def artifacts
         case type
         when "domain", "ip"
-          passive_dns_search
+          client.passive_dns_search query
         when "mail"
-          reverse_whois_search
+          client.reverse_whois_search query
         when "hash"
-          ssl_search
+          client.ssl_search query
         else
           raise InvalidInputError, "#{query}(type: #{type || "unknown"}) is not supported." unless valid_type?
         end
@@ -63,44 +63,6 @@ module Mihari
       #
       def valid_type?
         %w[ip domain mail hash].include? type
-      end
-
-      #
-      # Passive DNS search
-      #
-      # @return [Array<String>]
-      #
-      def passive_dns_search
-        res = client.passive_dns_search(query)
-        res["results"] || []
-      end
-
-      #
-      # Reverse whois search
-      #
-      # @return [Array<Mihari::Artifact>]
-      #
-      def reverse_whois_search
-        res = client.reverse_whois_search(query: query, field: "email")
-        results = res["results"] || []
-        results.map do |result|
-          data = result["domain"]
-          Artifact.new(data: data, source: source, metadata: result)
-        end.flatten
-      end
-
-      #
-      # Passive SSL search
-      #
-      # @return [Array<Mihari::Artifact>]
-      #
-      def ssl_search
-        res = client.ssl_search(query)
-        results = res["results"] || []
-        results.map do |result|
-          data = result["ipAddresses"]
-          data.map { |d| Artifact.new(data: d, source: source, metadata: result) }
-        end.flatten
       end
 
       def username?

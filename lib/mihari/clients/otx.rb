@@ -16,6 +16,46 @@ module Mihari
       end
 
       #
+      # Domain search
+      #
+      # @param [String] query
+      #
+      # @return [Array<String>]
+      #
+      def domain_search(query)
+        res = query_by_domain(query)
+        return [] if res.nil?
+
+        records = res["passive_dns"] || []
+        records.filter_map do |record|
+          record_type = record["record_type"]
+          address = record["address"]
+
+          address if record_type == "A"
+        end.uniq
+      end
+
+      #
+      # IP search
+      #
+      # @param [String] query
+      #
+      # @return [Array<String>]
+      #
+      def ip_search(query)
+        res = query_by_ip(query)
+        return [] if res.nil?
+
+        records = res["passive_dns"] || []
+        records.filter_map do |record|
+          record_type = record["record_type"]
+          hostname = record["hostname"]
+
+          hostname if record_type == "A"
+        end.uniq
+      end
+
+      #
       # @param [String] ip
       #
       # @return [Hash]

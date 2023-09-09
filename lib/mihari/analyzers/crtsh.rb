@@ -18,13 +18,8 @@ module Mihari
       end
 
       def artifacts
-        results = search
-        results.map do |result|
-          values = result["name_value"].to_s.lines.map(&:chomp)
-          values.map do |value|
-            Artifact.new(data: value, source: source, metadata: result)
-          end
-        end.flatten
+        exclude = exclude_expired ? "expired" : nil
+        client.search(query, exclude: exclude)
       end
 
       private
@@ -34,16 +29,6 @@ module Mihari
       #
       def client
         @client ||= Mihari::Clients::Crtsh.new
-      end
-
-      #
-      # Search
-      #
-      # @return [Array<Hash>]
-      #
-      def search
-        exclude = exclude_expired ? "expired" : nil
-        client.search(query, exclude: exclude)
       end
     end
   end

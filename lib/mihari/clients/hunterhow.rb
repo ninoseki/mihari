@@ -5,6 +5,8 @@ require "base64"
 module Mihari
   module Clients
     class HunterHow < Base
+      PAGE_SIZE = 100
+
       # @return [String]
       attr_reader :api_key
 
@@ -12,11 +14,12 @@ module Mihari
       # @param [String] base_url
       # @param [String, nil] api_key
       # @param [Hash] headers
+      # @param [Integer, nil] interval
       #
-      def initialize(base_url = "https://api.hunter.how/", api_key:, headers: {})
+      def initialize(base_url = "https://api.hunter.how/", api_key:, headers: {}, interval: nil)
         raise(ArgumentError, "'api_key' argument is required") unless api_key
 
-        super(base_url, headers: headers)
+        super(base_url, headers: headers, interval: interval)
 
         @api_key = api_key
       end
@@ -30,7 +33,7 @@ module Mihari
       #
       # @return [Structs::HunterHow::Response]
       #
-      def search(query, start_time:, end_time:, page: 1, page_size: 10)
+      def search(query, start_time:, end_time:, page: 1, page_size: PAGE_SIZE)
         params = {
           query: Base64.urlsafe_encode64(query),
           page: page,
@@ -41,6 +44,41 @@ module Mihari
         }.compact
         res = get("/search", params: params)
         Structs::HunterHow::Response.from_dynamic! JSON.parse(res.body.to_s)
+      end
+
+      #
+      # @param [String] query String used to query our data
+      # @param [Integer] page_size Default 100, Maximum: 100
+      # @param [Integer] pagination_limit
+      # @param [String] start_time
+      # @param [String] end_time
+      #
+      # @return [Enumerable<Structs::HunterHow::Response>]
+      #
+      def search_with_pagination(
+        query,
+        start_time:,
+        end_time:,
+        page_size: PAGE_SIZE,
+        pagination_limit: Mihari.config.pagination_limit
+      )
+        Enumerator.new do |y|
+          (1..pagination_limit).each do |page|
+            res = search(
+              query,
+              start_time: start_time,
+              end_time: end_time,
+              page: page,
+              page_size: page_size
+            )
+
+            y.yield res
+
+            break if res.data.list.length < page_size
+
+            sleep_interval
+          end
+        end
       end
     end
   end
