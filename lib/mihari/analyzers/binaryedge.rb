@@ -18,13 +18,7 @@ module Mihari
       end
 
       def artifacts
-        client.search_with_pagination(query, pagination_limit: pagination_limit).map do |res|
-          events = res["events"] || []
-          events.filter_map do |event|
-            data = event.dig("target", "ip")
-            data.nil? ? nil : Artifact.new(data: data, source: source, metadata: event)
-          end
-        end
+        client.search_with_pagination(query, pagination_limit: pagination_limit).map(&:artifacts).flatten
       end
 
       def configuration_keys

@@ -121,6 +121,7 @@ require "mihari/services/alert_proxy"
 require "mihari/services/alert_runner"
 
 # Structs
+require "mihari/structs/binaryedge"
 require "mihari/structs/censys"
 require "mihari/structs/config"
 require "mihari/structs/filters"
