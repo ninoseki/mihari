@@ -86,7 +86,7 @@ Gem::Specification.new do |spec|
   spec.add_dependency "rack-cors", "2.0.1"
   spec.add_dependency "rackup", "2.1.0"
   spec.add_dependency "semantic_logger", "4.14.0"
-  spec.add_dependency "sentry-ruby", "5.10.0"
+  spec.add_dependency "sentry-ruby", "5.11.0"
   spec.add_dependency "slack-notifier", "2.4.0"
   spec.add_dependency "sqlite3", "1.6.4"
   spec.add_dependency "thor", "1.2.2"
