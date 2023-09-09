@@ -34,14 +34,14 @@ module Mihari
         #
         # @return [Mihari::AutonomousSystem]
         #
-        def to_as
+        def as
           Mihari::AutonomousSystem.new(asn: normalize_asn(asn))
         end
 
         #
         # @return [Mihari::Geolocation]
         #
-        def to_geolocation
+        def geolocation
           Mihari::Geolocation.new(
             country: country,
             country_code: country_code
@@ -94,12 +94,12 @@ module Mihari
         #
         # @return [Mihari::Artifact]
         #
-        def to_artifact
+        def artifact
           Mihari::Artifact.new(
             data: ip,
             metadata: metadata_,
-            autonomous_system: metadata.to_as,
-            geolocation: metadata.to_geolocation
+            autonomous_system: metadata.as,
+            geolocation: metadata.geolocation
           )
         end
 
@@ -126,6 +126,7 @@ module Mihari
         attribute :data, Types.Array(Datum)
         attribute :message, Types::String
         attribute :query, Types::String
+        attribute :scroll, Types::String.optional
 
         #
         # @return [Boolean]
@@ -163,10 +164,17 @@ module Mihari
         end
 
         #
+        # @return [String, nil]
+        #
+        def scroll
+          attributes[:scroll]
+        end
+
+        #
         # @return [Array<Mihari::Artifact>]
         #
-        def to_artifacts
-          data.map { |datum| datum.to_artifact }
+        def artifacts
+          data.map(&:artifact)
         end
 
         class << self
@@ -182,7 +190,8 @@ module Mihari
               count: d.fetch("count"),
               data: d.fetch("data").map { |x| Datum.from_dynamic!(x) },
               message: d.fetch("message"),
-              query: d.fetch("query")
+              query: d.fetch("query"),
+              scroll: d["scroll"]
             )
           end
         end

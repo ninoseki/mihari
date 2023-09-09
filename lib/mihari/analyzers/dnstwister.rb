@@ -21,9 +21,7 @@ module Mihari
       def artifacts
         raise InvalidInputError, "#{query}(type: #{type || "unknown"}) is not supported." unless valid_type?
 
-        res = client.fuzz(query)
-        fuzzy_domains = res["fuzzy_domains"] || []
-        domains = fuzzy_domains.map { |domain| domain["domain"] }
+        domains = client.fuzz(query)
         Parallel.map(domains) do |domain|
           resolvable?(domain) ? domain : nil
         end.compact

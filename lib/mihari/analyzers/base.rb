@@ -82,10 +82,6 @@ module Mihari
 
       private
 
-      def sleep_interval
-        sleep(interval) if interval
-      end
-
       class << self
         #
         # Initialize an analyzer by query params

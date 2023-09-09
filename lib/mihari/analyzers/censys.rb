@@ -27,25 +27,9 @@ module Mihari
       # @return [Array<Mihari::Artifact>]
       #
       def artifacts
-        artifacts = []
-
-        cursor = nil
-        pagination_limit.times do
-          response = client.search(query, cursor: cursor)
-          artifacts << response.result.to_artifacts
-          cursor = response.result.links.next
-          # NOTE: Censys's search API is unstable recently
-          # it may returns empty links or empty string cursors
-          # - Empty links: "links": {}
-          # - Empty cursors: "links": { "next": "", "prev": "" }
-          # So it needs to check both cases
-          break if cursor.nil? || cursor.empty?
-
-          # sleep #{interval} seconds to avoid the rate limitation (if it is set)
-          sleep_interval
-        end
-
-        artifacts.flatten.uniq(&:data)
+        client.search_with_pagination(query, pagination_limit: pagination_limit).map do |res|
+          res.result.artifacts
+        end.flatten.uniq(&:data)
       end
 
       #
@@ -68,7 +52,7 @@ module Mihari
       # @return [Mihari::Clients::Censys]
       #
       def client
-        @client ||= Clients::Censys.new(id: id, secret: secret)
+        @client ||= Clients::Censys.new(id: id, secret: secret, interval: interval)
       end
 
       #

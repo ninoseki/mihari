@@ -3,7 +3,7 @@
 RSpec.describe Mihari::Analyzers::Urlscan, :vcr do
   subject { described_class.new(query) }
 
-  let(:query) { "page.domain:example.com AND date:[2020-01-01 TO 2020-08-01]" }
+  let(:query) { "page.domain:example.com AND date:[2023-01-01 TO 2023-02-01]" }
 
   describe "#artifacts" do
     it do

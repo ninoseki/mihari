@@ -7,26 +7,52 @@ module Mihari
       # @param [String] base_url
       # @param [String, nil] api_key
       # @param [Hash] headers
+      # @param [Interval, nil] interval
       #
-      def initialize(base_url = "https://urlscan.io", api_key:, headers: {})
+      def initialize(base_url = "https://urlscan.io", api_key:, headers: {}, interval: nil)
         raise(ArgumentError, "'api_key' argument is required") if api_key.nil?
 
         headers["api-key"] = api_key
 
-        super(base_url, headers: headers)
+        super(base_url, headers: headers, interval: interval)
       end
 
       #
       # @param [String] q
-      # @param [Integer] size
+      # @param [Integer, nil] size
       # @param [String, nil] search_after
       #
-      # @return [Hash]
+      # @return [Structs::Urlscan::Response]
       #
-      def search(q, size: 100, search_after: nil)
+      def search(q, size: nil, search_after: nil)
         params = { q: q, size: size, search_after: search_after }.compact
         res = get("/api/v1/search/", params: params)
-        JSON.parse res.body.to_s
+        Structs::Urlscan::Response.from_dynamic! JSON.parse(res.body.to_s)
+      end
+
+      #
+      # @param [String] q
+      # @param [Integer, nil] size
+      # @param [Integer] pagination_limit
+      #
+      # @return [Enumerable<Structs::Urlscan::Response>]
+      #
+      def search_with_pagination(q, size: nil, pagination_limit: Mihari.config.pagination_limit)
+        search_after = nil
+
+        Enumerator.new do |y|
+          pagination_limit.times do
+            res = search(q, size: size, search_after: search_after)
+
+            y.yield res
+
+            break unless res.has_more
+
+            search_after = res.results.last.sort.join(",")
+
+            sleep_interval
+          end
+        end
       end
     end
   end

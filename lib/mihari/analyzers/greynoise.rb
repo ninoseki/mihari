@@ -3,8 +3,6 @@
 module Mihari
   module Analyzers
     class GreyNoise < Base
-      PAGE_SIZE = 10_000
-
       # @return [String, nil]
       attr_reader :api_key
 
@@ -20,7 +18,10 @@ module Mihari
       end
 
       def artifacts
-        client.gnql_search(query, size: PAGE_SIZE).to_artifacts
+        client.gnql_search_with_pagination(
+          query,
+          pagination_limit: pagination_limit
+        ).map(&:artifacts).flatten
       end
 
       def configuration_keys
@@ -30,7 +31,7 @@ module Mihari
       private
 
       def client
-        @client ||= Clients::GreyNoise.new(api_key: api_key)
+        @client ||= Clients::GreyNoise.new(api_key: api_key, interval: interval)
       end
     end
   end

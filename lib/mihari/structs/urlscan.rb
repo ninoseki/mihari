@@ -83,7 +83,7 @@ module Mihari
         #
         # @return [Array<Mihari::Artifact>]
         #
-        def to_artifacts
+        def artifacts
           values = [page.url, page.domain, page.ip].compact
           values.map do |value|
             Mihari::Artifact.new(data: value, metadata: metadata)
@@ -129,8 +129,8 @@ module Mihari
         #
         # @return [Array<Mihari::Artifact>]
         #
-        def to_artifacts
-          results.map(&:to_artifacts).flatten
+        def artifacts
+          results.map(&:artifacts).flatten
         end
 
         class << self

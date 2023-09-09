@@ -18,10 +18,10 @@ module Mihari
       end
 
       def artifacts
-        results = search
-        return [] if results.empty?
-
-        results.map(&:to_artifacts).flatten.uniq(&:data)
+        client.search_with_pagination(
+          query,
+          pagination_limit: pagination_limit
+        ).map(&:artifacts).flatten.uniq(&:data)
       end
 
       def configuration_keys
@@ -30,43 +30,11 @@ module Mihari
 
       private
 
-      PAGE_SIZE = 100
-
+      #
+      # @return [Clients::Shodan]
+      #
       def client
-        @client ||= Clients::Shodan.new(api_key: api_key)
-      end
-
-      #
-      # Search with pagination
-      #
-      # @param [Integer] page
-      #
-      # @return [Structs::Shodan::Result]
-      #
-      def search_with_page(page: 1)
-        client.search(query, page: page)
-      end
-
-      #
-      # Search
-      #
-      # @return [Array<Structs::Shodan::Result>]
-      #
-      def search
-        responses = []
-        (1..pagination_limit).each do |page|
-          res = search_with_page(page: page)
-          responses << res
-          break if res.total <= page * PAGE_SIZE
-
-          # sleep #{interval} seconds to avoid the rate limitation (if it is set)
-          sleep_interval
-        rescue JSON::ParserError
-          # ignore JSON::ParserError
-          # ref. https://github.com/ninoseki/mihari/issues/197
-          next
-        end
-        responses
+        @client ||= Clients::Shodan.new(api_key: api_key, interval: interval)
       end
     end
   end

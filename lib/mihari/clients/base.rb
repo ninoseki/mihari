@@ -9,16 +9,24 @@ module Mihari
       # @return [Hash]
       attr_reader :headers
 
+      # @return [Integer, nil]
+      attr_reader :interval
+
       #
       # @param [String] base_url
       # @param [Hash] headers
       #
-      def initialize(base_url, headers: {})
+      def initialize(base_url, headers: {}, interval: nil)
         @base_url = base_url
         @headers = headers || {}
+        @interval = interval
       end
 
       private
+
+      def sleep_interval
+        sleep(interval) if interval
+      end
 
       #
       # @param [String] path

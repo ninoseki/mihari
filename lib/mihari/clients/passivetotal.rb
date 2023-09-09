@@ -21,35 +21,53 @@ module Mihari
       end
 
       #
-      # @param [String] query
-      #
-      def ssl_search(query)
-        params = { query: query }
-        _get("/v2/ssl-certificate/history", params: params)
-      end
-
+      # Passive DNS search
       #
       # @param [String] query
       #
-      # @return [Hash]
+      # @return [Array<String>]
       #
       def passive_dns_search(query)
         params = { query: query }
-        _get("/v2/dns/passive/unique", params: params)
+        res = _get("/v2/dns/passive/unique", params: params)
+        res["results"] || []
       end
 
       #
-      # @param [String] query the domain being queried
-      # @param [String] field whether to return historical results
+      # Reverse whois search
       #
-      # @return [Hash]
+      # @param [String] query
       #
-      def reverse_whois_search(query:, field:)
+      # @return [Array<Mihari::Artifact>]
+      #
+      def reverse_whois_search(query)
         params = {
           query: query,
-          field: field
+          field: "email"
         }.compact
-        _get("/v2/whois/search", params: params)
+        res = _get("/v2/whois/search", params: params)
+        results = res["results"] || []
+        results.map do |result|
+          data = result["domain"]
+          Artifact.new(data: data, metadata: result)
+        end.flatten
+      end
+
+      #
+      # Passive SSL search
+      #
+      # @param [String] query
+      #
+      # @return [Array<Mihari::Artifact>]
+      #
+      def ssl_search(query)
+        params = { query: query }
+        res = _get("/v2/ssl-certificate/history", params: params)
+        results = res["results"] || []
+        results.map do |result|
+          data = result["ipAddresses"]
+          data.map { |d| Artifact.new(data: d, metadata: result) }
+        end.flatten
       end
 
       private
