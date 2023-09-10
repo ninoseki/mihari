@@ -28,9 +28,7 @@ module Mihari
 
         parsed.map do |result|
           values = result["name_value"].to_s.lines.map(&:chomp)
-          values.map do |value|
-            Artifact.new(data: value, metadata: result)
-          end
+          values.map { |value| Artifact.new(data: value, metadata: result) }
         end.flatten
       end
     end

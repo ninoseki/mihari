@@ -21,9 +21,7 @@ module Mihari
           #
           def from_dynamic!(d)
             d = Types::Hash[d]
-            new(
-              url: d["url"]
-            )
+            new(url: d["url"])
           end
         end
       end

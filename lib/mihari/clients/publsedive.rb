@@ -49,7 +49,7 @@ module Mihari
         params["key"] = api_key
 
         res = get(path, params: params)
-        JSON.parse(res.body.to_s)
+        JSON.parse res.body.to_s
       end
     end
   end

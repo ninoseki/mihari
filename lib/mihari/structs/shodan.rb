@@ -140,7 +140,7 @@ module Mihari
         end
       end
 
-      class Result < Dry::Struct
+      class Response < Dry::Struct
         attribute :matches, Types.Array(Match)
         attribute :total, Types::Int
 
@@ -197,6 +197,7 @@ module Mihari
         def artifacts
           matches.map do |match|
             metadata = collect_metadata_by_ip(match.ip_str)
+
             ports = collect_ports_by_ip(match.ip_str).map do |port|
               Mihari::Port.new(port: port)
             end
