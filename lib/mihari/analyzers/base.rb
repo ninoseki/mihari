@@ -80,8 +80,6 @@ module Mihari
 
       alias_method :source, :class_name
 
-      private
-
       class << self
         #
         # Initialize an analyzer by query params
@@ -97,9 +95,7 @@ module Mihari
           query = copied[:query]
 
           # delete analyzer and query
-          %i[analyzer query].each do |key|
-            copied.delete key
-          end
+          %i[analyzer query].each { |key| copied.delete key }
 
           copied[:options] = copied[:options] || nil
 

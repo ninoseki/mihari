@@ -37,7 +37,7 @@ module Mihari
           key: api_key
         }
         res = get("/shodan/host/search", params: params)
-        Structs::Shodan::Result.from_dynamic! JSON.parse(res.body.to_s)
+        Structs::Shodan::Response.from_dynamic! JSON.parse(res.body.to_s)
       end
 
       #
@@ -45,7 +45,7 @@ module Mihari
       # @param [Boolean] minify
       # @param [Integer] pagination_limit
       #
-      # @return [Enumerable<Structs::Shodan::Result>]
+      # @return [Enumerable<Structs::Shodan::Response>]
       #
       def search_with_pagination(query, minify: true, pagination_limit: Mihari.config.pagination_limit)
         Enumerator.new do |y|

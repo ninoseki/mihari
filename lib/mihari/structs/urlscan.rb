@@ -85,9 +85,7 @@ module Mihari
         #
         def artifacts
           values = [page.url, page.domain, page.ip].compact
-          values.map do |value|
-            Mihari::Artifact.new(data: value, metadata: metadata)
-          end
+          values.map { |value| Mihari::Artifact.new(data: value, metadata: metadata) }
         end
 
         class << self
