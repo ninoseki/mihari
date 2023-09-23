@@ -1,8 +1,12 @@
 # frozen_string_literal: true
 
+require "dry/monads"
+
 module Mihari
   module Analyzers
     class Base
+      include Dry::Monads[:result]
+
       include Mixins::Configurable
       include Mixins::Retriable
 
@@ -25,28 +29,37 @@ module Mihari
       # @return [Integer, nil]
       #
       def interval
-        @interval ||= options[:interval]
+        options[:interval]
       end
 
       #
       # @return [Integer]
       #
       def retry_interval
-        @retry_interval ||= options[:retry_interval] || Mihari.config.retry_interval
+        options[:retry_interval] || Mihari.config.retry_interval
       end
 
       #
       # @return [Integer]
       #
       def retry_times
-        @retry_times ||= options[:retry_times] || Mihari.config.retry_times
+        options[:retry_times] || Mihari.config.retry_times
       end
 
       #
       # @return [Integer]
       #
       def pagination_limit
-        @pagination_limit ||= options[:pagination_limit] || Mihari.config.pagination_limit
+        options[:pagination_limit] || Mihari.config.pagination_limit
+      end
+
+      #
+      # @return [Boolean]
+      #
+      def ignore_error?
+        return options[:ignore_error] if :ignore_error in options
+
+        Mihari.config.ignore_error
       end
 
       # @return [Array<String>, Array<Mihari::Artifact>]
@@ -63,7 +76,7 @@ module Mihari
       #
       def normalized_artifacts
         retry_on_error(times: retry_times, interval: retry_interval) do
-          @normalized_artifacts ||= artifacts.compact.sort.map do |artifact|
+          artifacts.compact.sort.map do |artifact|
             # No need to set data_type manually
             # It is set automatically in #initialize
             artifact = artifact.is_a?(Artifact) ? artifact : Artifact.new(data: artifact)
@@ -71,6 +84,15 @@ module Mihari
             artifact
           end.select(&:valid?).uniq(&:data)
         end
+      end
+
+      #
+      # @return [Dry::Monads::Result::Success<Array<Mihari::Artifact>>, Dry::Monads::Result::Failure]
+      #
+      def result
+        Success normalized_artifacts
+      rescue StandardError => e
+        Failure e
       end
 
       # @return [String]

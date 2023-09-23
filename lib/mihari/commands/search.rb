@@ -15,13 +15,19 @@ module Mihari
             #
             def search(path_or_id)
               Mihari::Database.with_db_connection do
-                rule = Services::RuleProxy.from_path_or_id path_or_id
+                builder = Services::RuleBuilder.new(path_or_id)
 
-                begin
-                  rule.validate!
-                rescue RuleValidationError
+                build_result = builder.result
+                if build_result.failure?
+                  failure = build_result.failure
+
+                  raise failure unless failure.is_a?(ValidationError)
+
+                  Mihari.logger.error "Failed to parse the input as a rule:"
+                  Mihari.logger.error JSON.pretty_generate(failure.errors.to_h)
                   return
                 end
+                rule = build_result.value!
 
                 force_overwrite = options["force_overwrite"] || false
                 runner = Services::RuleRunner.new(rule, force_overwrite: force_overwrite)
@@ -33,14 +39,15 @@ module Mihari
 
                 runner.update_or_create
 
-                begin
-                  alert = runner.run
-                rescue ConfigurationError => e
-                  # if there is a configuration error, output that error without the stack trace
-                  Mihari.logger.error e.to_s
+                run_result = runner.result
+                if run_result.failure?
+                  failure = run_result.failure
+                  Mihari.logger.error failure
+                  Sentry.capture_exception(failure) if Sentry.initialized?
                   return
                 end
 
+                alert = run_result.value!
                 if alert.nil?
                   Mihari.logger.info "There is no new artifact found"
                   return

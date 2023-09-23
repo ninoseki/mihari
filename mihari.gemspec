@@ -64,6 +64,7 @@ Gem::Specification.new do |spec|
   spec.add_dependency "dotenv", "2.8.1"
   spec.add_dependency "dry-container", "0.11.0"
   spec.add_dependency "dry-files", "1.0.1"
+  spec.add_dependency "dry-monads", "1.6.0"
   spec.add_dependency "dry-schema", "1.13.3"
   spec.add_dependency "dry-struct", "1.6.0"
   spec.add_dependency "dry-validation", "1.10.0"

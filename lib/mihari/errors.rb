@@ -49,4 +49,18 @@ module Mihari
       @body = body
     end
   end
+
+  class ValidationError < Error
+    attr_reader :errors
+
+    #
+    # @param [String] msg
+    # @param [Dry::Schema::MessageSet] errors
+    #
+    def initialize(msg, errors)
+      super(msg)
+
+      @errors = errors
+    end
+  end
 end

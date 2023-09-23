@@ -1,8 +1,12 @@
 # frozen_string_literal: true
 
+require "dry/monads"
+
 module Mihari
   module Services
     class RuleRunner
+      include Dry::Monads[:result]
+
       include Mixins::ErrorNotification
 
       # @return [Mihari::Services::RuleProxy]
@@ -38,11 +42,16 @@ module Mihari
       # @return [Mihari::Alert, nil]
       #
       def run
-        analyzer = rule.analyzer
+        rule.analyzer.run
+      end
 
-        with_error_notification do
-          analyzer.run
-        end
+      #
+      # @return [Dry::Monads::Result::Success<Mihari::Alert, nil>, Dry::Monads::Result::Failure]
+      #
+      def result
+        Success run
+      rescue StandardError => e
+        Failure e
       end
     end
   end

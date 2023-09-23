@@ -114,9 +114,11 @@ require "mihari/type_checker"
 require "mihari/http"
 
 # Services
+require "mihari/services/rule_builder"
 require "mihari/services/rule_proxy"
 require "mihari/services/rule_runner"
 
+require "mihari/services/alert_builder"
 require "mihari/services/alert_proxy"
 require "mihari/services/alert_runner"
 
