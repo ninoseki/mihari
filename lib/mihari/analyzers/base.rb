@@ -57,7 +57,8 @@ module Mihari
       # @return [Boolean]
       #
       def ignore_error?
-        return options[:ignore_error] if :ignore_error in options
+        ignore_error = options[:ignore_error]
+        return ignore_error unless ignore_error.nil?
 
         Mihari.config.ignore_error
       end
