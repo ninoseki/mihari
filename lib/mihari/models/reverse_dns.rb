@@ -5,6 +5,8 @@ module Mihari
     belongs_to :artifact
 
     class << self
+      include Dry::Monads[:result]
+
       #
       # Build reverse DNS names
       #
@@ -13,10 +15,14 @@ module Mihari
       # @return [Array<Mihari::ReverseDnsName>]
       #
       def build_by_ip(ip)
-        res = Enrichers::Shodan.query(ip)
-        return [] if res.nil?
-
-        res.hostnames.map { |name| new(name: name) }
+        result = Enrichers::Shodan.query_result(ip).bind do |res|
+          if res.nil?
+            Success []
+          else
+            Success(res.hostnames.map { |name| new(name: name) })
+          end
+        end
+        result.value_or []
       end
     end
   end

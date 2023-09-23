@@ -8,7 +8,7 @@ RSpec.describe Mihari::Enrichers::GooglePublicDNS, :vcr do
     let(:type) { "A" }
 
     it do
-      res = subject.query(name, type)
+      res = subject.query_by_type(name, type)
       expect(res.answers.first.data).to eq("93.184.216.34")
     end
   end

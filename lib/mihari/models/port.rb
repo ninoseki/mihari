@@ -5,6 +5,8 @@ module Mihari
     belongs_to :artifact
 
     class << self
+      include Dry::Monads[:result]
+
       #
       # Build ports
       #
@@ -13,10 +15,14 @@ module Mihari
       # @return [Array<Mihari::Port>]
       #
       def build_by_ip(ip)
-        res = Enrichers::Shodan.query(ip)
-        return [] if res.nil?
-
-        res.ports.map { |port| new(port: port) }
+        result = Enrichers::Shodan.query_result(ip).bind do |res|
+          if res.nil?
+            Success []
+          else
+            Success(res.ports.map { |port| new(port: port) })
+          end
+        end
+        result.value_or []
       end
     end
   end

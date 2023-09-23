@@ -11,6 +11,7 @@ module Mihari
       end
 
       class << self
+        include Dry::Monads[:result]
         include Memist::Memoizable
 
         #
@@ -26,8 +27,6 @@ module Mihari
           data = JSON.parse(res.body.to_s)
 
           Structs::Shodan::InternetDBResponse.from_dynamic! data
-        rescue HTTPError
-          nil
         end
         memoize :query
       end

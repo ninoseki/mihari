@@ -14,6 +14,8 @@ module Mihari
       end
 
       class << self
+        include Dry::Monads[:result]
+
         #
         # Query IAIA Whois API
         #
@@ -47,8 +49,6 @@ module Mihari
           # set memo
           @memo[domain] = whois_record
           whois_record
-        rescue ::Whois::Error, ::Whois::ParserError, Timeout::Error
-          nil
         end
 
         def reset_cache
