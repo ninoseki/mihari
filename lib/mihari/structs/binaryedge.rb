@@ -44,7 +44,7 @@ module Mihari
       class Response < Dry::Struct
         # @!attribute [r] page
         # @return [Integer]
-        attribute :page,     Types::Integer
+        attribute :page, Types::Integer
 
         # @!attribute [r] pagesize
         # @return [Integer]
@@ -52,11 +52,11 @@ module Mihari
 
         # @!attribute [r] total
         # @return [Integer]
-        attribute :total,    Types::Integer
+        attribute :total, Types::Integer
 
         # @!attribute [r] events
         # @return [Array<Event>]
-        attribute :events,   Types.Array(Event)
+        attribute :events, Types.Array(Event)
 
         #
         # @return [Array<Event>]

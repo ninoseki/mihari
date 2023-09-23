@@ -143,7 +143,7 @@ RSpec.describe Mihari::Analyzers::Rule, :vcr do
         # mock emitters
         emitter = double("emitter_instance")
         allow(emitter).to receive(:valid?).and_return(true)
-        allow(emitter).to receive(:emit).and_raise("error")
+        allow(emitter).to receive(:result).and_return(Dry::Monads::Result::Failure.new("error"))
 
         # set mocked classes as emitters
         allow(subject).to receive(:valid_emitters).and_return([emitter])

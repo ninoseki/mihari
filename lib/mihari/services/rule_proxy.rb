@@ -1,11 +1,6 @@
 # frozen_string_literal: true
 
-require "date"
-require "erb"
 require "json"
-require "pathname"
-require "securerandom"
-require "yaml"
 
 module Mihari
   module Services
@@ -29,10 +24,9 @@ module Mihari
       #
       def initialize(data)
         @data = data.deep_symbolize_keys
-
         @errors = nil
 
-        validate
+        validate!
       end
 
       #
@@ -44,21 +38,14 @@ module Mihari
         !@errors.empty?
       end
 
-      def validate
+      def validate!
         contract = Schemas::RuleContract.new
         result = contract.call(data)
 
         @data = result.to_h
         @errors = result.errors
-      end
 
-      def validate!
-        return unless errors?
-
-        Mihari.logger.error "Failed to parse the input as a rule:"
-        Mihari.logger.error JSON.pretty_generate(errors.to_h)
-
-        raise RuleValidationError, errors
+        raise ValidationError.new("Validation failed", errors) if errors?
       end
 
       def [](key)
@@ -178,9 +165,7 @@ module Mihari
         # @return [Mihari::Services::Rule]
         #
         def from_yaml(yaml)
-          Services::RuleProxy.new YAML.safe_load(ERB.new(yaml).result, permitted_classes: [Date, Symbol])
-        rescue Psych::SyntaxError => e
-          raise YAMLSyntaxError, e.message
+          new YAML.safe_load(ERB.new(yaml).result, permitted_classes: [Date, Symbol])
         end
 
         #
@@ -189,48 +174,7 @@ module Mihari
         # @return [Mihari::Services::Rule]
         #
         def from_model(model)
-          Services::RuleProxy.new model.data
-        end
-
-        #
-        # Load a rule from path
-        #
-        # @param [String] path
-        #
-        # @return [Mihari::Services::Rule, nil]
-        #
-        def from_path(path)
-          return nil unless Pathname(path).exist?
-
-          from_yaml File.read(path)
-        end
-
-        #
-        # Load a rule from DB
-        #
-        # @param [String] id
-        #
-        # @return [Mihari::Services::Rule, nil]
-        #
-        def from_id(id)
-          return nil unless Mihari::Rule.exists?(id)
-
-          Services::RuleProxy.from_model Mihari::Rule.find(id)
-        end
-
-        #
-        # @param [String] path_or_id Path to YAML file or YAML string or ID of a rule in the database
-        #
-        # @return [Mihari::Services::Rule]
-        #
-        def from_path_or_id(path_or_id)
-          rule = from_path(path_or_id)
-          return rule unless rule.nil?
-
-          rule = from_id(path_or_id)
-          return rule unless rule.nil?
-
-          raise ArgumentError, "#{path_or_id} does not exist"
+          new model.data
         end
       end
     end

@@ -114,7 +114,7 @@ module Mihari
 
       # @return [String]
       def defanged_data
-        @defanged_data ||= data.to_s.gsub(/\./, "[.]")
+        @defanged_data ||= data.to_s.gsub(".", "[.]")
       end
     end
 

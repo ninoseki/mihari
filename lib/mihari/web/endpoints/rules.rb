@@ -107,8 +107,10 @@ module Mihari
 
           begin
             rule = Services::RuleProxy.from_yaml(yaml)
-          rescue YAMLSyntaxError => e
+          rescue Psych::SyntaxError => e
             error!({ message: e.message }, 400)
+          rescue ValidationError => e
+            error!({ message: "Data format is invalid", details: e.errors.to_h }, 400)
           end
 
           # check ID duplication
@@ -117,15 +119,6 @@ module Mihari
             error!({ message: "ID:#{rule.id} is already registered" }, 400)
           rescue ActiveRecord::RecordNotFound
             # do nothing
-          end
-
-          begin
-            rule.validate!
-          rescue RuleValidationError
-            error!({ message: "Data format is invalid", details: rule.errors.to_h }, 400) if rule.errors?
-
-            # when NoMethodError occurs
-            error!({ message: "Data format is invalid" }, 400)
           end
 
           begin
@@ -158,17 +151,10 @@ module Mihari
 
           begin
             rule = Services::RuleProxy.from_yaml(yaml)
-          rescue YAMLSyntaxError => e
+          rescue Psych::SyntaxError => e
             error!({ message: e.message }, 400)
-          end
-
-          begin
-            rule.validate!
-          rescue RuleValidationError
-            error!({ message: "Data format is invalid", details: rule.errors.to_h }, 400) if rule.errors?
-
-            # when NoMethodError occurs
-            error!({ message: "Data format is invalid" }, 400)
+          rescue ValidationError => e
+            error!({ message: "Data format is invalid", details: e.errors.to_h }, 400)
           end
 
           begin

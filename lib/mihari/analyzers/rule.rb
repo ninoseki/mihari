@@ -60,9 +60,16 @@ module Mihari
       # @return [Array<Mihari::Artifact>]
       #
       def artifacts
-        analyzers.flat_map(&:normalized_artifacts).map do |artifact|
-          artifact.rule_id = rule.id
-          artifact
+        analyzers.flat_map do |analyzer|
+          result = analyzer.result
+
+          raise result.failure if result.failure? && !analyzer.ignore_error?
+
+          artifacts = result.value!
+          artifacts.map do |artifact|
+            artifact.rule_id = rule.id
+            artifact
+          end
         end
       end
 
@@ -113,11 +120,12 @@ module Mihari
         return [] if enriched_artifacts.empty?
 
         Parallel.map(valid_emitters) do |emitter|
-          emission = emitter.emit
-          Mihari.logger.info "Emission by #{emitter.class} is succeeded"
-          emission
-        rescue StandardError => e
-          Mihari.logger.info "Emission by #{emitter.class} is failed: #{e}"
+          result = emitter.result
+
+          Mihari.logger.info "Emission by #{emitter.class} is failed: #{result.failure}" if result.failure?
+          Mihari.logger.info "Emission by #{emitter.class} is succeeded" if result.success?
+
+          result.value_or nil
         end.compact
       end
 
@@ -127,9 +135,6 @@ module Mihari
       # @return [Mihari::Alert, nil]
       #
       def run
-        # memoize enriched artifacts
-        enriched_artifacts
-
         alert_or_something = bulk_emit
         # returns Mihari::Alert created by the database emitter
         alert_or_something.find { |res| res.is_a?(Mihari::Alert) }
@@ -167,7 +172,7 @@ module Mihari
       # @return [Array<Mihari::Analyzers::Base>]
       #
       def analyzers
-        @analyzers ||= rule.queries.map do |query_params|
+        rule.queries.map do |query_params|
           analyzer_name = query_params[:analyzer]
           klass = get_analyzer_class(analyzer_name)
           klass.from_query(query_params)
@@ -207,7 +212,7 @@ module Mihari
       # @return [Array<Mihari::Emitters::Base>]
       #
       def valid_emitters
-        @valid_emitters ||= emitters.select(&:valid?)
+        emitters.select(&:valid?)
       end
 
       #

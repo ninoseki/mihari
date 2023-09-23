@@ -54,7 +54,7 @@ module Mihari
       return "ip" if ip?
       return "domain" if domain?
       return "url" if url?
-      return "mail" if mail?
+      "mail" if mail?
     end
 
     # @return [String, nil]

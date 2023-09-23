@@ -1,8 +1,12 @@
 # frozen_string_literal: true
 
+require "dry/monads"
+
 module Mihari
   module Emitters
     class Base
+      include Dry::Monads[:result]
+
       include Mixins::Configurable
       include Mixins::Retriable
 
@@ -34,11 +38,17 @@ module Mihari
         raise NotImplementedError, "You must implement #{self.class}##{__method__}"
       end
 
-      def run(**params)
-        retry_on_error { emit(**params) }
+      def run
+        retry_on_error { emit }
       end
 
-      def emit(*)
+      def result
+        Success run
+      rescue StandardError => e
+        Failure e
+      end
+
+      def emit
         raise NotImplementedError, "You must implement #{self.class}##{__method__}"
       end
     end

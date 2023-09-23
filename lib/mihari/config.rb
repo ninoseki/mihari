@@ -93,6 +93,9 @@ module Mihari
     # @return [Integer]
     attr_reader :pagination_limit
 
+    # @return [Boolean]
+    attr_reader :ignore_error
+
     def initialize
       @binaryedge_api_key = ENV.fetch("BINARYEDGE_API_KEY", nil)
 
@@ -147,6 +150,8 @@ module Mihari
       @retry_interval = ENV.fetch("RETRY_INTERVAL", 5).to_i
 
       @pagination_limit = ENV.fetch("PAGINATION_LIMIT", 100).to_i
+
+      @ignore_error = ENV.fetch("IGNORE_ERROR", false)
     end
   end
 end

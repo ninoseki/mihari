@@ -15,15 +15,12 @@ module Mihari
             # @param [String] path
             #
             def validate(path)
-              rule = Services::RuleProxy.from_path_or_id(path)
-
-              begin
-                rule.validate!
-                Mihari.logger.info "Valid format. The input is parsed as the following:"
-                Mihari.logger.info rule.data.to_yaml
-              rescue RuleValidationError
-                nil
-              end
+              rule = Services::RuleProxy.from_yaml(File.read(path))
+              Mihari.logger.info "Valid format. The input is parsed as the following:"
+              Mihari.logger.info rule.data.to_yaml
+            rescue ValidationError => e
+              Mihari.logger.error "Failed to parse the input as a rule:"
+              Mihari.logger.error JSON.pretty_generate(e.errors.to_h)
             end
 
             desc "init [PATH]", "Initialize a new rule file"
@@ -47,7 +44,7 @@ module Mihari
               # @return [Mihari::Services::Rule]
               #
               def rule_template
-                Services::RuleProxy.from_path File.expand_path("../templates/rule.yml.erb", __dir__)
+                Services::RuleProxy.from_yaml File.read(File.expand_path("../templates/rule.yml.erb", __dir__))
               end
 
               #
