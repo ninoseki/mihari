@@ -20,6 +20,7 @@ require "active_record"
 
 # dry-rb
 require "dry/files"
+require "dry/monads"
 require "dry/schema"
 require "dry/struct"
 require "dry/types"

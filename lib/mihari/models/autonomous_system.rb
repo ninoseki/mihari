@@ -1,7 +1,5 @@
 # frozen_string_literal: true
 
-require "dry/monads"
-
 module Mihari
   class AutonomousSystem < ActiveRecord::Base
     belongs_to :artifact
