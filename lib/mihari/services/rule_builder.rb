@@ -4,7 +4,6 @@ require "date"
 require "erb"
 require "pathname"
 require "yaml"
-require "dry/monads"
 
 module Mihari
   module Services

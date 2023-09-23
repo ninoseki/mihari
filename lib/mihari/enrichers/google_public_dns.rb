@@ -11,15 +11,30 @@ module Mihari
       end
 
       class << self
+        include Dry::Monads[:result]
+
         #
         # Query Google Public DNS
+        #
+        # @param [String] name
+        #
+        # @return [Array<Mihari::Structs::Shodan::GooglePublicDNS::Response>]
+        #
+        def query(name)
+          %w[A AAAA CNAME TXT NS].filter_map do |resource_type|
+            query_by_type(name, resource_type)
+          end
+        end
+
+        #
+        # Query Google Public DNS by resource type
         #
         # @param [String] name
         # @param [String] resource_type
         #
         # @return [Mihari::Structs::Shodan::GooglePublicDNS::Response, nil]
         #
-        def query(name, resource_type)
+        def query_by_type(name, resource_type)
           url = "https://dns.google/resolve"
           params = { name: name, type: resource_type }
           res = HTTP.get(url, params: params)

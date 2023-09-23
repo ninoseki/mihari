@@ -7,6 +7,8 @@ module Mihari
     @memo = {}
 
     class << self
+      include Dry::Monads[:result]
+
       #
       # Build whois record
       #
@@ -15,7 +17,8 @@ module Mihari
       # @return [WhoisRecord, nil]
       #
       def build_by_domain(domain)
-        Enrichers::Whois.query domain
+        result = Enrichers::Whois.query_result(domain)
+        result.value_or nil
       end
     end
   end

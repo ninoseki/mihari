@@ -5,6 +5,8 @@ module Mihari
     belongs_to :artifact
 
     class << self
+      include Dry::Monads[:result]
+
       #
       # Build DNS records
       #
@@ -13,23 +15,16 @@ module Mihari
       # @return [Array<Mihari::DnsRecord>]
       #
       def build_by_domain(domain)
-        resource_types = %w[A AAAA CNAME TXT NS]
-        resource_types.map do |resource_type|
-          get_values domain, resource_type
-        rescue Resolv::ResolvError
-          nil
-        end.flatten.compact
-      end
-
-      private
-
-      def get_values(domain, resource_type)
-        response = Enrichers::GooglePublicDNS.query(domain, resource_type)
-        answers = response.answers || []
-
-        answers.filter_map do |answer|
-          new(resource: answer.resource_type, value: answer.data)
+        result = Enrichers::GooglePublicDNS.query_result(domain).bind do |responses|
+          Success(
+            responses.map do |res|
+              res.answers.map do |answer|
+                new(resource: answer.resource_type, value: answer.data)
+              end
+            end.flatten
+          )
         end
+        result.value_or []
       end
     end
   end

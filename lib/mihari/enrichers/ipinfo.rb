@@ -17,6 +17,7 @@ module Mihari
       end
 
       class << self
+        include Dry::Monads[:result]
         include Memist::Memoizable
 
         #
@@ -28,20 +29,15 @@ module Mihari
         #
         def query(ip)
           headers = {}
+
           token = Mihari.config.ipinfo_api_key
-          unless token.nil?
-            headers[:authorization] = "Bearer #{token}"
-          end
+          headers[:authorization] = "Bearer #{token}" unless token.nil?
 
-          begin
-            url = "https://ipinfo.io/#{ip}/json"
-            res = HTTP.get(url, headers: headers)
-            data = JSON.parse(res.body.to_s)
+          url = "https://ipinfo.io/#{ip}/json"
+          res = HTTP.get(url, headers: headers)
+          data = JSON.parse(res.body.to_s)
 
-            Structs::IPInfo::Response.from_dynamic! data
-          rescue HTTPError
-            nil
-          end
+          Structs::IPInfo::Response.from_dynamic! data
         end
         memoize :query
       end
