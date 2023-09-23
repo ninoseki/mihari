@@ -25,8 +25,8 @@ module Mihari
       def parse(selector)
         parsed = data.instance_eval(selector)
 
-        raise FeedParseError unless parsed.is_a?(Array) || parsed.is_a?(Enumerator)
-        raise FeedParseError unless parsed.all?(String)
+        raise TypeError unless parsed.is_a?(Array) || parsed.is_a?(Enumerator)
+        raise TypeError unless parsed.all?(String)
 
         parsed.to_a
       end

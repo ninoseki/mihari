@@ -38,7 +38,7 @@ RSpec.describe Mihari::Analyzers::SecurityTrails, :vcr do
 
     describe "#artifacts" do
       it do
-        expect { subject.artifacts }.to raise_error(Mihari::InvalidInputError)
+        expect { subject.artifacts }.to raise_error(Mihari::ValueError)
       end
     end
   end

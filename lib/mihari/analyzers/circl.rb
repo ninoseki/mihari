@@ -36,7 +36,7 @@ module Mihari
         when "hash"
           client.passive_ssl_search query
         else
-          raise InvalidInputError, "#{@query}(type: #{@type || "unknown"}) is not supported."
+          raise ValueError, "#{@query}(type: #{@type || "unknown"}) is not supported."
         end
       end
 

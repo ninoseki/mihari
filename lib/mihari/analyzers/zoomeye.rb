@@ -33,7 +33,7 @@ module Mihari
             convert(res)
           end.flatten
         else
-          raise InvalidInputError, "#{type} type is not supported." unless valid_type?
+          raise ValueError, "#{type} type is not supported." unless valid_type?
         end
       end
 

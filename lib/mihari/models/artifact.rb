@@ -35,7 +35,7 @@ module Mihari
       attrs = args.first || kwargs
       data_ = attrs[:data]
 
-      raise InvalidArtifactFormatError if data_.is_a?(Array) || data_.is_a?(Hash)
+      raise TypeError if data_.is_a?(Array) || data_.is_a?(Hash)
 
       super(*args, **kwargs)
 

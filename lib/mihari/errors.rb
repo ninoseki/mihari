@@ -3,21 +3,13 @@
 module Mihari
   class Error < StandardError; end
 
-  class InvalidInputError < Error; end
+  class ValueError < Error; end
 
-  class InvalidArtifactFormatError < Error; end
+  class TypeError < Error; end
 
   class RetryableError < Error; end
 
   class FileNotFoundError < Error; end
-
-  class FeedParseError < Error; end
-
-  class RuleValidationError < Error; end
-
-  class AlertValidationError < Error; end
-
-  class YAMLSyntaxError < Error; end
 
   class ConfigurationError < Error; end
 

@@ -36,7 +36,7 @@ module Mihari
         when "mail"
           client.mail_search query
         else
-          raise InvalidInputError, "#{query}(type: #{type || "unknown"}) is not supported." unless valid_type?
+          raise ValueError, "#{query}(type: #{type || "unknown"}) is not supported." unless valid_type?
         end
       end
 
