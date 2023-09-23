@@ -19,7 +19,7 @@ module Mihari
       end
 
       def artifacts
-        raise InvalidInputError, "#{query}(type: #{type || "unknown"}) is not supported." unless valid_type?
+        raise ValueError, "#{query}(type: #{type || "unknown"}) is not supported." unless valid_type?
 
         domains = client.fuzz(query)
         Parallel.map(domains) do |domain|

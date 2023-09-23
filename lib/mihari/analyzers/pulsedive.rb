@@ -25,7 +25,7 @@ module Mihari
       end
 
       def artifacts
-        raise InvalidInputError, "#{query}(type: #{type || "unknown"}) is not supported." unless valid_type?
+        raise ValueError, "#{query}(type: #{type || "unknown"}) is not supported." unless valid_type?
 
         indicator = client.get_indicator(query)
         iid = indicator["iid"]

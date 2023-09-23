@@ -25,7 +25,7 @@ module Mihari
 
         return if valid_allowed_data_types?
 
-        raise InvalidInputError, "allowed_data_types should be any of url, domain and ip."
+        raise ValueError, "allowed_data_types should be any of url, domain and ip."
       end
 
       def artifacts
