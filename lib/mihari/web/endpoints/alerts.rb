@@ -54,18 +54,27 @@ module Mihari
           requires :id, type: Integer
         end
         delete "/:id" do
+          extend Dry::Monads[:result, :try]
+
           id = params["id"].to_i
 
-          begin
+          result = Try do
             alert = Mihari::Alert.find(id)
-          rescue ActiveRecord::RecordNotFound
-            error!({ message: "ID:#{id} is not found" }, 404)
+            alert.destroy
+          end.to_result
+
+          if result.success?
+            status 204
+            return present({ message: "" }, with: Entities::Message)
           end
 
-          alert.destroy
-
-          status 204
-          present({ message: "" }, with: Entities::Message)
+          failure = result.failure
+          case failure
+          when ActiveRecord::RecordNotFound
+            error!({ message: "ID:#{id} is not found" }, 404)
+          else
+            raise failure
+          end
         end
 
         desc "Create an alert", {
@@ -77,17 +86,26 @@ module Mihari
           requires :artifacts, type: Array, documentation: { type: String, is_array: true, param_type: "body" }
         end
         post "/" do
-          proxy = Services::AlertProxy.new(params.to_snake_keys)
-          runner = Services::AlertRunner.new(proxy)
+          extend Dry::Monads[:result, :try]
 
-          begin
-            alert = runner.run
-          rescue ActiveRecord::RecordNotFound
-            error!({ message: "Rule:#{params["ruleId"]} is not found" }, 404)
+          result = Try do
+            proxy = Services::AlertProxy.new(params.to_snake_keys)
+            runner = Services::AlertRunner.new(proxy)
+            runner.run
+          end.to_result
+
+          if result.success?
+            status 201
+            return present(result.value!, with: Entities::Alert)
           end
 
-          status 201
-          present alert, with: Entities::Alert
+          failure = result.failure
+          case failure
+          when ActiveRecord::RecordNotFound
+            error!({ message: "Rule:#{params["ruleId"]} is not found" }, 404)
+          else
+            raise failure
+          end
         end
       end
     end

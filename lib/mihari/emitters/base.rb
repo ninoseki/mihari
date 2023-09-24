@@ -3,7 +3,7 @@
 module Mihari
   module Emitters
     class Base
-      include Dry::Monads[:result]
+      include Dry::Monads[:result, :try]
 
       include Mixins::Configurable
       include Mixins::Retriable
@@ -41,9 +41,7 @@ module Mihari
       end
 
       def result
-        Success run
-      rescue StandardError => e
-        Failure e
+        Try[StandardError] { run }.to_result
       end
 
       def emit

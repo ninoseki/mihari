@@ -8,6 +8,8 @@ module Mihari
       class << self
         def included(thor)
           thor.class_eval do
+            include Dry::Monads[:result, :try]
+
             desc "validate [PATH]", "Validate a rule file"
             #
             # Validate format of a rule
@@ -15,12 +17,17 @@ module Mihari
             # @param [String] path
             #
             def validate(path)
-              rule = Services::RuleProxy.from_yaml(File.read(path))
-              Mihari.logger.info "Valid format. The input is parsed as the following:"
-              Mihari.logger.info rule.data.to_yaml
-            rescue ValidationError => e
+              res = Dry::Monads::Try[ValidationError] do
+                Services::RuleProxy.from_yaml(File.read(path))
+              end.fmap do |rule|
+                Mihari.logger.info "Valid format. The input is parsed as the following:"
+                Mihari.logger.info rule.data.to_yaml
+              end
+
+              return unless res.error?
+
               Mihari.logger.error "Failed to parse the input as a rule:"
-              Mihari.logger.error JSON.pretty_generate(e.errors.to_h)
+              Mihari.logger.error JSON.pretty_generate(res.exception.errors.to_h)
             end
 
             desc "init [PATH]", "Initialize a new rule file"

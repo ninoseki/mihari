@@ -9,7 +9,7 @@ require "yaml"
 module Mihari
   module Services
     class AlertBuilder
-      include Dry::Monads[:result]
+      include Dry::Monads[:result, :try]
 
       # @return [String]
       attr_reader :path
@@ -36,9 +36,7 @@ module Mihari
       end
 
       def result
-        Success AlertProxy.new(data)
-      rescue StandardError => e
-        Failure e
+        Try[StandardError] { AlertProxy.new(data) }.to_result
       end
     end
   end

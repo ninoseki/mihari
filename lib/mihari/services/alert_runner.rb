@@ -3,7 +3,7 @@
 module Mihari
   module Services
     class AlertRunner
-      include Dry::Monads[:result]
+      include Dry::Monads[:result, :try]
 
       # @return [Mihari::Services::AlertProxy]
       attr_reader :alert
@@ -24,9 +24,7 @@ module Mihari
       # @return [Dry::Monads::Result::Success<Mihari::Alert, nil>, Dry::Monads::Result::Failure]
       #
       def result
-        Success run
-      rescue StandardError => e
-        Failure e
+        Try[StandardError] { run }.to_result
       end
     end
   end

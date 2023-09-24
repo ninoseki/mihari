@@ -13,9 +13,11 @@ module Mihari
           requires :id, type: Integer
         end
         get "/:id" do
+          extend Dry::Monads[:result, :try]
+
           id = params[:id].to_i
 
-          begin
+          result = Try do
             artifact = Mihari::Artifact.includes(
               :autonomous_system,
               :geolocation,
@@ -23,18 +25,25 @@ module Mihari
               :dns_records,
               :reverse_dns_names
             ).find(id)
-          rescue ActiveRecord::RecordNotFound
+            # TODO: improve queries
+            alert_ids = Mihari::Artifact.where(data: artifact.data).pluck(:alert_id)
+            tag_ids = Mihari::Tagging.where(alert_id: alert_ids).pluck(:tag_id)
+            tag_names = Mihari::Tag.where(id: tag_ids).distinct.pluck(:name)
+
+            artifact.tags = tag_names
+
+            artifact
+          end.to_result
+
+          return present(result.value!, with: Entities::Artifact) if result.success?
+
+          failure = result.failure
+          case failure
+          when ActiveRecord::RecordNotFound
             error!({ message: "ID:#{id} is not found" }, 404)
+          else
+            raise failure
           end
-
-          # TODO: improve queries
-          alert_ids = Mihari::Artifact.where(data: artifact.data).pluck(:alert_id)
-          tag_ids = Mihari::Tagging.where(alert_id: alert_ids).pluck(:tag_id)
-          tag_names = Mihari::Tag.where(id: tag_ids).distinct.pluck(:name)
-
-          artifact.tags = tag_names
-
-          present artifact, with: Entities::Artifact
         end
 
         desc "Enrich an artifact", {
@@ -46,9 +55,11 @@ module Mihari
           requires :id, type: Integer
         end
         get "/:id/enrich" do
+          extend Dry::Monads[:result, :try]
+
           id = params["id"].to_i
 
-          begin
+          result = Try do
             artifact = Mihari::Artifact.includes(
               :autonomous_system,
               :geolocation,
@@ -58,15 +69,23 @@ module Mihari
               :cpes,
               :ports
             ).find(id)
-          rescue ActiveRecord::RecordNotFound
-            error!({ message: "ID:#{id} is not found" }, 404)
+
+            artifact.enrich_all
+            artifact.save
+          end.to_result
+
+          if result.success?
+            status 201
+            return present({ message: "" }, with: Entities::Message)
           end
 
-          artifact.enrich_all
-          artifact.save
-
-          status 201
-          present({ message: "" }, with: Entities::Message)
+          failure = result.failure
+          case failure
+          when ActiveRecord::RecordNotFound
+            error!({ message: "ID:#{id} is not found" }, 404)
+          else
+            raise failure
+          end
         end
 
         desc "Delete an artifact", {
@@ -78,18 +97,27 @@ module Mihari
           requires :id, type: Integer
         end
         delete "/:id" do
+          extend Dry::Monads[:result, :try]
+
           id = params["id"].to_i
 
-          begin
+          result = Try do
             alert = Mihari::Artifact.find(id)
-          rescue ActiveRecord::RecordNotFound
-            error!({ message: "ID:#{id} is not found" }, 404)
+            alert.destroy
+          end.to_result
+
+          if result.success?
+            status 204
+            return present({ message: "" }, with: Entities::Message)
           end
 
-          alert.destroy
-
-          status 204
-          present({ message: "" }, with: Entities::Message)
+          failure = result.failure
+          case failure
+          when ActiveRecord::RecordNotFound
+            error!({ message: "ID:#{id} is not found" }, 404)
+          else
+            raise failure
+          end
         end
       end
     end

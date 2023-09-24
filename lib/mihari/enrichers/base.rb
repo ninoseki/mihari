@@ -6,7 +6,7 @@ module Mihari
       include Mixins::Configurable
 
       class << self
-        include Dry::Monads[:result]
+        include Dry::Monads[:result, :try]
 
         def inherited(child)
           super
@@ -14,9 +14,7 @@ module Mihari
         end
 
         def query_result(value)
-          Success query(value)
-        rescue StandardError => e
-          Failure e
+          Try[StandardError] { query(value) }.to_result
         end
 
         #

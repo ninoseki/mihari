@@ -8,7 +8,7 @@ require "yaml"
 module Mihari
   module Services
     class RuleBuilder
-      include Dry::Monads[:result]
+      include Dry::Monads[:result, :try]
 
       # @return [String]
       attr_reader :path_or_id
@@ -40,9 +40,7 @@ module Mihari
       end
 
       def result
-        Success RuleProxy.new(data)
-      rescue StandardError => e
-        Failure e
+        Try[StandardError] { RuleProxy.new(data) }.to_result
       end
     end
   end
