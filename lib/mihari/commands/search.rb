@@ -6,7 +6,7 @@ module Mihari
       class << self
         def included(thor)
           thor.class_eval do
-            include Dry::Monads[:result]
+            include Dry::Monads[:result, :try]
 
             desc "search [PATH]", "Search by a rule"
             method_option :force_overwrite, type: :boolean, aliases: "-f", desc: "Force an overwrite the rule"
@@ -76,10 +76,10 @@ module Mihari
               # @param [Mihari::Services::RuleRunner] runner
               #
               def update_and_run(runner)
-                runner.update_or_create
-                Success runner.run
-              rescue StandardError => e
-                Failure e
+                Dry::Monads::Try[StandardError] do
+                  runner.update_or_create
+                  runner.run
+                end.to_result
               end
             end
           end

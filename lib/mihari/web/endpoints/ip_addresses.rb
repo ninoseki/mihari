@@ -16,11 +16,9 @@ module Mihari
           ip = params[:ip].to_s
 
           data = Enrichers::IPInfo.query(ip)
-          if data.nil?
-            error!({ message: "IP:#{ip} is not found" }, 404)
-          else
-            present data, with: Entities::IPAddress
-          end
+          error!({ message: "IP:#{ip} is not found" }, 404) if data.nil?
+
+          present data, with: Entities::IPAddress
         end
       end
     end

@@ -61,15 +61,23 @@ module Mihari
           requires :id, type: String
         end
         get "/:id" do
+          extend Dry::Monads[:result, :try]
+
           id = params["id"].to_s
 
-          begin
-            rule = Mihari::Rule.find(id)
-          rescue ActiveRecord::RecordNotFound
-            error!({ message: "ID:#{id} is not found" }, 404)
-          end
+          result = Try do
+            Mihari::Rule.find(id)
+          end.to_result
 
-          present rule, with: Entities::Rule
+          return present(result.value!, with: Entities::Rule) if result.success?
+
+          failure = result.failure
+          case failure
+          when ActiveRecord::RecordNotFound
+            error!({ message: "ID:#{id} is not found" }, 404)
+          else
+            raise failure
+          end
         end
 
         desc "Run a rule", {
@@ -80,19 +88,27 @@ module Mihari
           requires :id, type: String
         end
         get "/:id/run" do
+          extend Dry::Monads[:result, :try]
+
           id = params["id"].to_s
 
-          begin
-            rule = Mihari::Services::RuleProxy.from_model(Mihari::Rule.find(id))
-          rescue ActiveRecord::RecordNotFound
-            error!({ message: "ID:#{id} is not found" }, 404)
+          result = Try do
+            Mihari::Services::RuleProxy.from_model(Mihari::Rule.find(id))
+          end.to_result
+
+          if result.success?
+            result.value!.analyzer.run
+            status 201
+            return present({ message: "ID:#{id} is ran successfully" }, with: Entities::Message)
           end
 
-          analyzer = rule.analyzer
-          analyzer.run
-
-          status 201
-          present({ message: "ID:#{id} is ran successfully" }, with: Entities::Message)
+          failure = result.failure
+          case failure
+          when ActiveRecord::RecordNotFound
+            error!({ message: "ID:#{id} is not found" }, 404)
+          else
+            raise failure
+          end
         end
 
         desc "Create a rule", {
@@ -103,32 +119,38 @@ module Mihari
           requires :yaml, type: String, documentation: { param_type: "body" }
         end
         post "/" do
+          extend Dry::Monads[:result, :try]
+
           yaml = params[:yaml]
-
-          begin
-            rule = Services::RuleProxy.from_yaml(yaml)
-          rescue Psych::SyntaxError => e
-            error!({ message: e.message }, 400)
-          rescue ValidationError => e
-            error!({ message: "Data format is invalid", details: e.errors.to_h }, 400)
+          result = Try do
+            Services::RuleProxy.from_yaml(yaml)
+          end.to_result.bind do |rule|
+            Try do
+              found = Mihari::Rule.find_by_id(rule.id)
+              error!({ message: "ID:#{rule.id} is already registered" }, 400) unless found.nil?
+              rule
+            end.to_result
+          end.bind do |rule|
+            Try do
+              rule.model.save
+              rule
+            end.to_result
           end
 
-          # check ID duplication
-          begin
-            Mihari::Rule.find(rule.id)
-            error!({ message: "ID:#{rule.id} is already registered" }, 400)
-          rescue ActiveRecord::RecordNotFound
-            # do nothing
+          if result.success?
+            status 201
+            return present(result.value!.model, with: Entities::Rule)
           end
 
-          begin
-            rule.model.save
-          rescue ActiveRecord::RecordNotUnique
-            error!({ message: "ID:#{rule.id} is already registered" }, 400)
+          failure = result.failure
+          case failure
+          when Psych::SyntaxError
+            error!({ message: failure.message }, 400)
+          when ValidationError
+            error!({ message: "Data format is invalid", details: failure.errors.to_h }, 400)
+          else
+            raise failure
           end
-
-          status 201
-          present rule.model, with: Entities::Rule
         end
 
         desc "Update a rule", {
@@ -140,31 +162,40 @@ module Mihari
           requires :yaml, type: String, documentation: { param_type: "body" }
         end
         put "/" do
+          extend Dry::Monads[:result, :try]
+
           id = params[:id]
           yaml = params[:yaml]
 
-          begin
+          result = Try do
             Mihari::Rule.find(id)
-          rescue ActiveRecord::RecordNotFound
+          end.to_result.bind do |_|
+            Try do
+              Services::RuleProxy.from_yaml(yaml)
+            end.to_result
+          end.bind do |rule|
+            Try do
+              rule.model.save
+              rule
+            end.to_result
+          end
+
+          if result.success?
+            status 201
+            return present(result.value!.model, with: Entities::Rule)
+          end
+
+          failure = result.failure
+          case failure
+          when ActiveRecord::RecordNotFound
             error!({ message: "ID:#{id} is not found" }, 404)
+          when Psych::SyntaxError
+            error!({ message: failure.message }, 400)
+          when ValidationError
+            error!({ message: "Data format is invalid", details: failure.errors.to_h }, 400)
+          else
+            raise failure
           end
-
-          begin
-            rule = Services::RuleProxy.from_yaml(yaml)
-          rescue Psych::SyntaxError => e
-            error!({ message: e.message }, 400)
-          rescue ValidationError => e
-            error!({ message: "Data format is invalid", details: e.errors.to_h }, 400)
-          end
-
-          begin
-            rule.model.save
-          rescue ActiveRecord::RecordNotUnique
-            error!({ message: "ID:#{id} is already registered" }, 400)
-          end
-
-          status 201
-          present rule.model, with: Entities::Rule
         end
 
         desc "Delete a rule", {
@@ -176,18 +207,27 @@ module Mihari
           requires :id, type: String
         end
         delete "/:id" do
+          extend Dry::Monads[:result, :try]
+
           id = params["id"].to_s
 
-          begin
+          result = Try do
             rule = Mihari::Rule.find(id)
-          rescue ActiveRecord::RecordNotFound
-            error!({ message: "ID:#{id} is not found" }, 404)
+            rule.destroy
+          end.to_result
+
+          if result.success?
+            status 204
+            return present({ message: "ID:#{id} is deleted" }, with: Entities::Message)
           end
 
-          rule.destroy
-
-          status 204
-          present({ message: "ID:#{id} is deleted" }, with: Entities::Message)
+          failure = result.failure
+          case failure
+          when ActiveRecord::RecordNotFound
+            error!({ message: "ID:#{id} is not found" }, 404)
+          else
+            raise failure
+          end
         end
       end
     end

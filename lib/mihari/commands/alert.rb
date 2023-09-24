@@ -6,7 +6,7 @@ module Mihari
       class << self
         def included(thor)
           thor.class_eval do
-            include Dry::Monads[:result]
+            include Dry::Monads[:result, :try]
 
             desc "add [PATH]", "Add an alert"
             #
@@ -46,10 +46,10 @@ module Mihari
               # @param [Mihari::Services::AlertProxy] proxy
               #
               def run_proxy(proxy)
-                runner = Mihari::Services::AlertRunner.new(proxy)
-                Success runner.run
-              rescue StandardError => e
-                Failure e
+                Dry::Monads::Try[StandardError] do
+                  runner = Mihari::Services::AlertRunner.new(proxy)
+                  runner.run
+                end.to_result
               end
 
               #

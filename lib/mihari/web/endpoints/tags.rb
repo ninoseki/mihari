@@ -23,16 +23,26 @@ module Mihari
           requires :name, type: String
         end
         delete "/:name" do
+          extend Dry::Monads[:result, :try]
+
           name = params[:name].to_s
 
-          begin
+          result = Try do
             Mihari::Tag.where(name: name).destroy_all
-          rescue ActiveRecord::RecordNotFound
-            error!({ message: "Name:#{name} is not found" }, 404)
+          end.to_result
+
+          if result.success?
+            status 204
+            return present({ message: "" }, with: Entities::Message)
           end
 
-          status 204
-          present({ message: "" }, with: Entities::Message)
+          failure = result.failure
+          case failure
+          when ActiveRecord::RecordNotFound
+            error!({ message: "Name:#{name} is not found" }, 404)
+          else
+            raise failure
+          end
         end
       end
     end

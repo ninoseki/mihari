@@ -3,7 +3,7 @@
 module Mihari
   module Analyzers
     class Base
-      include Dry::Monads[:result]
+      include Dry::Monads[:result, :try]
 
       include Mixins::Configurable
       include Mixins::Retriable
@@ -89,9 +89,7 @@ module Mihari
       # @return [Dry::Monads::Result::Success<Array<Mihari::Artifact>>, Dry::Monads::Result::Failure]
       #
       def result
-        Success normalized_artifacts
-      rescue StandardError => e
-        Failure e
+        Try[StandardError] { normalized_artifacts }.to_result
       end
 
       # @return [String]
