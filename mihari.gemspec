@@ -54,7 +54,7 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency "webmock", "~> 3.19"
 
   unless ci_env?
-    spec.add_development_dependency "lefthook", "~> 1.4"
+    spec.add_development_dependency "lefthook", "~> 1.5"
     spec.add_development_dependency "solargraph", "~> 0.49"
   end
 
@@ -82,7 +82,7 @@ Gem::Specification.new do |spec|
   spec.add_dependency "parallel", "1.23.0"
   spec.add_dependency "plissken", "2.0.1"
   spec.add_dependency "public_suffix", "5.0.3"
-  spec.add_dependency "puma", "6.3.1"
+  spec.add_dependency "puma", "6.4.0"
   spec.add_dependency "rack", "3.0.8"
   spec.add_dependency "rack-cors", "2.0.1"
   spec.add_dependency "rackup", "2.1.0"

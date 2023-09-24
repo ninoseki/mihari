@@ -8,7 +8,7 @@ module Mihari
           thor.class_eval do
             include Dry::Monads[:result, :try]
 
-            desc "search [PATH]", "Search by a rule"
+            desc "search [PATH_OR_ID]", "Search by a rule"
             method_option :force_overwrite, type: :boolean, aliases: "-f", desc: "Force an overwrite the rule"
             #
             # Search by a rule
