@@ -68,7 +68,6 @@ jobs:
         env:
           DATABASE: postgresql://postgres:postgres@localhost:5432/test
         run: bundle exec rake
-
   test-mysql:
     runs-on: ubuntu-latest
     services:
@@ -107,7 +106,6 @@ jobs:
         env:
           DATABASE: mysql2://mysql:mysql@127.0.0.1:3306/test
         run: bundle exec rake
-
   coverage:
     name: Coverage
     needs: test

@@ -1,0 +1,35 @@
+site_name: Mihari
+
+theme:
+  name: material
+
+plugins:
+  search:
+  tags:
+    enabled: true
+    tags_file: tags.md
+    tags_slugify: !!python/object/apply:pymdownx.slugs.slugify
+      kwds:
+        case: lower
+
+nav:
+  - Mihari: index.md
+  - Requirements: requirements.md
+  - Installation: installation.md
+  - How to Write a Rule: rule.md
+  - Usage: usage.md
+  - Configuration: configuration.md
+  - GitHub Actions: github_actions.md
+  - Analyzers: "analyzers/index.md"
+  - Enrichers: "enrichers/index.md"
+  - Emitters: "emitters/index.md"
+  - Tags: "./tags.md"
+
+markdown_extensions:
+  - toc:
+      permalink: true
+  - admonition
+  - pymdownx.details
+  - pymdownx.superfences
+  - pymdownx.highlight
+  - pymdownx.extra

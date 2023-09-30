@@ -13,25 +13,7 @@
 
 ---
 
-Mihari is a tool for OSINT based threat hunting.
-
-## How it works
-
-![img](https://github.com/ninoseki/mihari/raw/master/images/overview.jpg)
-
-- Mihari makes a query against Shodan, Censys, VirusTotal, SecurityTrails, etc. and extracts artifacts (IP addresses, domains, URLs or hashes).
-- Mihari checks whether the database (SQLite3, PostgreSQL or MySQL) contains the artifacts or not.
-  - If it doesn't contain the artifacts:
-    - Mihari saves artifacts in the database.
-    - Mihari creates an alert on TheHive.
-    - Mihari sends a notification to Slack.
-    - Mihari creates an event on MISP.
-
-Also, you can check the alerts on a built-in web app.
-
-![img](https://github.com/ninoseki/mihari/raw/master/images/web_alerts.png)
-
-## Supported services
+A query aggregator for OSINT based threat hunting.
 
 Mihari supports the following services by default.
 
@@ -52,13 +34,7 @@ Mihari supports the following services by default.
 - [VirusTotal](http://virustotal.com) & [VirusTotal Intelligence](https://www.virustotal.com/gui/intelligence-overview)
 - [ZoomEye](https://zoomeye.org)
 
-## Docs
-
-- [Mihari Knowledge Base](https://www.notion.so/Mihari-Knowledge-Base-266994ff61204428ba6cfcebe40b0bd1)
-
-## Presentations
-
-- [Adversary Infrastructure Tracking with Mihari](https://ninoseki.github.io/presentations/Adversary%20Infrastructure%20Tracking%20with%20Mihari.pdf)
+See [documentation](https://ninoseki.github.io/mihari/) for more details.
 
 ## License
 
