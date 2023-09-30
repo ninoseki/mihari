@@ -15,6 +15,8 @@
 
 A query aggregator for OSINT based threat hunting.
 
+Mihari can aggregate multiple searches across multiple services in a single rule & persist findings in a database.
+
 Mihari supports the following services by default.
 
 - [BinaryEdge](https://www.binaryedge.io/)
