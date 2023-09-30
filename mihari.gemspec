@@ -16,7 +16,7 @@ Gem::Specification.new do |spec|
   spec.authors = ["Manabu Niseki"]
   spec.email = ["manabu.niseki@gmail.com"]
 
-  spec.summary = "A framework for continuous OSINT based threat hunting"
+  spec.summary = "A query aggregator for OSINT based threat hunting"
   spec.homepage = "https://github.com/ninoseki/mihari"
   spec.license = "MIT"
 
