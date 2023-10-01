@@ -2,7 +2,7 @@
 
 - [https://zoomeye.org/](https://zoomeye.org/)
 
-The analyzer uses ZoomEye API v3.
+This analyzer uses ZoomEye API v3. Pagination is supported.
 
 An API endpoint to use is changed based on a `type` option.
 
@@ -18,8 +18,16 @@ type: ...
 api_key: ...
 ```
 
-| Name    | Type                     | Required? | Default                | Desc.        |
-| ------- | ------------------------ | --------- | ---------------------- | ------------ |
-| query   | String                   | Yes       |                        | Search query |
-| type    | String (`web` or `host`) | Yes       |                        | Query type   |
-| api_key | String                   | No        | ENV[”ZOOMEYE_API_KEY"] | API key      |
+## Components
+
+### Query
+
+`query` is a search query.
+
+### Type
+
+`type` determines a search type. `web` or `host`.
+
+### API Key
+
+`api_key` is an API key. Optional. Defaults to `ENV[”ZOOMEYE_API_KEY"]`.

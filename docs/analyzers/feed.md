@@ -7,40 +7,64 @@ Note that you should write a selector to get proper IoCs from a feed. A selector
 ```yaml
 analyzer: feed
 query: ...
-http_request_method: ...
-http_request_payload: ...
-http_request_payload_type: ...
-http_request_headers: ...
 selector: ...
+method: ...
+headers: ...
+params: ...
+data: ...
+json: ...
 ```
 
-| Name                      | Type   | Required? | Default | Desc.                                |
-| ------------------------- | ------ | --------- | ------- | ------------------------------------ |
-| query                     | String | Yes       |         | URL                                  |
-| http_request_method       | String | No        | GET     | HTTP request method (GET or POST)    |
-| http_request_headers      | Hash   | No        |         | HTTP request headers                 |
-| http_request_payload      | Hash   | No        |         | HTTP request payload                 |
-| http_request_payload_type | String | No        |         | Content-type of HTTP request payload |
-| selector                  | String | Yes       |         | `jr` selector                        |
+## Components
+
+### Query
+
+`query` is a URL of a feed.
+
+!!! note
+
+    I know this is a strange naming. It's just for keeping the convention with other analyzers.
+
+### Method
+
+`method` is an HTTP method. Defaults to `GET`.
+
+### Selector
+
+`selector` is a `jr` selector.
+
+### Headers
+
+`headers` (hash) is an HTTP headers. Optional.
+
+### Params
+
+`params` (hash) is an HTTP query params. Optional.
+
+### Data
+
+`data` (hash) is an HTTP form data. Optional.
+
+### JSON
+
+`json` (hash) is an JSON body. Optional.
 
 ## Examples
 
-**ThreatFox**
+### ThreatFox
 
 ```yaml
 analyzer: feed
 query: "https://threatfox-api.abuse.ch/api/v1/"
-http_request_method: "POST"
-http_request_payload:
-  query: "get_iocs"
+method: POST
+json:
+  query: get_iocs
   days: 1
-http_request_payload_type: "application/json"
-http_request_headers:
-  "api-key": "YOUR_API_KEY"
+headers:
 selector: "map(&:data).unwrap.map(&:ioc).map { |v| v.start_with?('http://', 'https://') ? v :  v.split(':').first }"
 ```
 
-**URLhaus**
+### URLhaus
 
 ```yaml
 analyzer: feed

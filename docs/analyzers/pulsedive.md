@@ -17,7 +17,12 @@ query: ...
 api_key: ...
 ```
 
-| Name    | Type   | Required? | Default                  | Desc.                |
-| ------- | ------ | --------- | ------------------------ | -------------------- |
-| query   | String | Yes       |                          | Domain or IP address |
-| api_key | String | No        | ENV[”PULSEDIVE_API_KEY"] | API key              |
+## Components
+
+### Query
+
+`query` is a passive DNS search query. Domain or IP address.
+
+### API Key
+
+`api_key` is an API key. Optional. Defaults to `ENV[”PULSEDIVE_API_KEY"]`.

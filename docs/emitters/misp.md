@@ -10,7 +10,12 @@ url: ...
 api_key: ...
 ```
 
-| Name    | Type   | Required? | Default             | Desc.        |
-| ------- | ------ | --------- | ------------------- | ------------ |
-| url     | String | No        | ENV[”MISP_URL”]     | MISP API URL |
-| api_key | String | No        | ENV[”MISP_API_KEY”] | MISP API key |
+## Components
+
+### URL
+
+`url` is a MISP URL. Optional. Defaults to `ENV[MISP_URL]`.
+
+### API Key
+
+`api_key` is an API key. Optional. Defaults to `ENV[”MISP_API_KEY”]`.

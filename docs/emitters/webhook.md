@@ -10,32 +10,32 @@ headers: ...
 template: ...
 ```
 
-| Name     | Type   | Required? | Default | Desc.                                                |
-| -------- | ------ | --------- | ------- | ---------------------------------------------------- |
-| url      | String | Yes       |         | URL                                                  |
-| method   | String | No        | POST    | HTTP request method (GET or POST)                    |
-| headers  | Hash   | No        |         | HTTP request headers                                 |
-| template | String | No        |         | ERB template to customize the payload in JSON format |
+## Components
 
-You can customize the payload by using **template**.
+### URL
 
-A template is an ERB template. It should generate a valid JSON.
+`url` is a webhook URL.
 
-- [https://github.com/ruby/erb](https://github.com/ruby/erb)
+### Method
 
-You can use the following variables to build the JSON.
+`method` is an HTTP method. Optional. Defaults to `POST`.
 
-| Name        | Type                    | Default | Desc.        |
-| ----------- | ----------------------- | ------- | ------------ |
-| title       | String                  |         |              |
-| description | String                  |         |              |
-| source      | String                  |         | ID of a rule |
-| tags        | Array<String>           | []      |              |
-| artifacts   | Array<Mihari::Artifact> |         |              |
+### Headers
 
-## Example
+`headers` (hash) is HTTP headers. Optional.
 
-**ThreatFox**
+### Template
+
+`template` is an [ERB](https://github.com/ruby/erb) template to customize the payload to sent. A template should generate a valid JSON.
+
+You can use the following parameters inside an ERB template.
+
+- `rule`: a rule
+- `artifacts`: a list of artifacts
+
+## Examples
+
+### ThreatFox
 
 ```yaml
 - emitter: webhook

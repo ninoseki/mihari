@@ -9,7 +9,7 @@ tags:
 
 - [https://www.virustotal.com](https://www.virustotal.com/gui/home/search)
 
-The analyzer uses VirusTotal API v3.
+This analyzer uses VirusTotal API v3.
 
 An API endpoint to use is changed based on a type of a query.
 
@@ -28,7 +28,12 @@ query: ...
 api_key: ...
 ```
 
-| Name    | Type   | Required? | Default                   | Desc.                |
-| ------- | ------ | --------- | ------------------------- | -------------------- |
-| query   | String | Yes       |                           | Domain or IP address |
-| api_key | String | No        | ENV[”VIRUSTOTAL_API_KEY"] | API key              |
+## Components
+
+### Query
+
+`query` is a passive DNS search query. Domain or IP address.
+
+### API Key
+
+`api_key` is an API key. Optional. Defaults to `ENV[”VIRUSTOTAL_API_KEY"]`.
