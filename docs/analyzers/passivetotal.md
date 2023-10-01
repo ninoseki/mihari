@@ -29,8 +29,20 @@ username: ...
 api_key: ...
 ```
 
-| Name     | Type   | Required? | Default                      | Desc.                                                            |
-| -------- | ------ | --------- | ---------------------------- | ---------------------------------------------------------------- |
-| query    | String | Yes       |                              | Domain, IP address, mail address or SHA1 certificate fingerprint |
-| username | String | No        | ENV[”PASSIVETOTAL_USERNAME"] | Username                                                         |
-| api_key  | String | No        | ENV[”PASSIVETOTAL_API_KEY"]  | API key                                                          |
+## Components
+
+### Query
+
+`query` is a passive DNS/SSL or reverse whois search query. Domain, IP address, mail or SHA1 certificate fingerprint.
+
+- Passive DNS: Domain, IP Address
+- Passive SSL: SHA1 certificate fingerprint
+- Reverse whois: mail
+
+### Username
+
+`username` is a username. Optional. Defaults to `ENV[”PASSIVETOTAL_USERNAME"]`.
+
+### API Key
+
+`api_key` is an API key. Optional. Defaults to `ENV[”PASSIVETOTAL_API_KEY"]`.

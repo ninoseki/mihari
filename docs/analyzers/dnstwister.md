@@ -14,9 +14,11 @@ analyzer: dnstwister
 query: ...
 ```
 
-| Name  | Type   | Required? | Default | Desc.  |
-| ----- | ------ | --------- | ------- | ------ |
-| query | String | Yes       |         | Domain |
+## Components
+
+### Query
+
+`query` is a search query.
 
 !!! tip
 

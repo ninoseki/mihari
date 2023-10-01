@@ -7,7 +7,7 @@ tags:
 
 - [https://censys.io/](https://censys.io/)
 
-The analyzer uses [Censys Search 2.0 REST API](https://search.censys.io/api) to search.
+This analyzer uses [Censys Search 2.0 REST API](https://search.censys.io/api) to search. Pagination is supported.
 
 ```yaml
 analyzer: censys
@@ -16,8 +16,16 @@ id: ...
 secret: ...
 ```
 
-| Name   | Type   | Required? | Default              | Desc.         |
-| ------ | ------ | --------- | -------------------- | ------------- |
-| query  | String | Yes       |                      | Search query  |
-| id     | String | No        | ENV[”CENSYS_ID”]     | Censys ID     |
-| secret | String | No        | ENV[”CENSYS_SECRET”] | Censys secret |
+## Components
+
+### Query
+
+`query` is a search query.
+
+### ID
+
+`id` is a Cencys ID. Optional. Defaults to `ENV[”CENSYS_ID”]`.
+
+### Secret
+
+`secret` is a Cencys secret. Optional. Defaults to `ENV[”CENSYS_SECRET”]`.

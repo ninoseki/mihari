@@ -11,8 +11,16 @@ api_key: ...
 api_version: ...
 ```
 
-| Name        | Type   | Required? | Default                    | Desc.               |
-| ----------- | ------ | --------- | -------------------------- | ------------------- |
-| url         | String | No        | ENV[”THEHIVE_URL”]         | TheHive API URL     |
-| api_key     | String | No        | ENV[”THEHIVE_API_KEY”]     | TheHive API key     |
-| api_version | String | No        | ENV[”THEHIVE_API_VERSION”] | TheHive API version |
+## Components
+
+### URL
+
+`url` is a TheHive URL. Optional. Defaults to `ENV[”THEHIVE_URL”]`.
+
+### API Key
+
+`api_key` is an API key. Optional. Defaults to `ENV[”THEHIVE_API_KEY”]`.
+
+### API Version
+
+`api_version` is a version of The Hive API. Optional. Defaults to `ENV[”THEHIVE_API_VERSION”]`.

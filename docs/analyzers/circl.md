@@ -22,8 +22,16 @@ password: ...
 username: ...
 ```
 
-| Name     | Type   | Required? | Default                       | Desc.                                  |
-| -------- | ------ | --------- | ----------------------------- | -------------------------------------- |
-| query    | String | Yes       |                               | Domain or SHA1 certificate fingerprint |
-| username | String | No        | ENV[”CIRCL_PASSIVE_USERNAME”] | Username                               |
-| password | String | Noe       | ENV[”CIRCL_PASSIVE_PASSWORD”] | Password                               |
+## Components
+
+### Query
+
+`query` is a domain or SHA1 certificate fingerprint.
+
+### Username
+
+`username` is a username. Optional. Defaults to `ENV[”CIRCL_PASSIVE_USERNAME”]`.
+
+### Password
+
+`password` is a password. Optional. Defaults to `ENV[”CIRCL_PASSIVE_PASSWORD”]`.

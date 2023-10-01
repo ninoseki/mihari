@@ -7,7 +7,7 @@ tags:
 
 - [https://hunter.how/](https://hunter.how/)
 
-This analyzer uses `https://api.hunter.how/search` API endpoint to search.
+This analyzer uses Hunter How API (`https://api.hunter.how/search`) to search. Pagination is supported.
 
 ```yaml
 analyzer: hunterhow
@@ -17,9 +17,17 @@ start_time: ...
 end_time: ...
 ```
 
-| Name       | Type   | Required? | Default                  | Desc.        |
-| ---------- | ------ | --------- | ------------------------ | ------------ |
-| query      | String | Yes       |                          | Search query |
-| start_time | Date   | Yes       |                          |              |
-| end_time   | Date   | Yes       |                          |              |
-| api_key    | String | No        | ENV[”HUNTERHOW_API_KEY"] | API key      |
+## Components
+
+### Query
+
+`query` is a search query.
+
+### Start/End Time
+
+- `start_time` (date): Only show results after the given date.
+- `end_time` (date): Only show results after the given date.
+
+### API key
+
+`api_key` is an API key. Optional. Defaults to `ENV[”HUNTERHOW_API_KEY"]`.

@@ -15,11 +15,12 @@ query: ...
 exclude_expired: ...
 ```
 
-| Name            | Type               | Default | Desc.                                     |
-| --------------- | ------------------ | ------- | ----------------------------------------- |
-| query           | String             |         | Search query                              |
-| exclude_expired | Boolean (optional) | True    | Whether to exclude expired domains or not |
+## Components
 
-!!! tip
+### Query
 
-    if `exclude_expired` is set as `true`, expired domains are excluded from search results.
+`query` is a search query.
+
+### Exclude Expired
+
+`exclude_expired` (boolean) determines whether to exclude expired domains or not. Optional. Defaults to `true`.

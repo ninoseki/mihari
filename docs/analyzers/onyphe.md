@@ -15,7 +15,12 @@ query: ...
 api_key: ...
 ```
 
-| Name    | Type   | Required? | Default               | Desc.        |
-| ------- | ------ | --------- | --------------------- | ------------ |
-| query   | String | Yes       |                       | Search query |
-| api_key | String | No        | ENV[”ONYPHE_API_KEY”] | API key      |
+## Components
+
+### Query
+
+`query` is a search query.
+
+### API Key
+
+`api_key` is an API key. Optional. Defaults to `ENV[”ONYPHE_API_KEY”"]`.
