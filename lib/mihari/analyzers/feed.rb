@@ -15,7 +15,7 @@ module Mihari
       # @return [Hash, nil]
       attr_reader :params
 
-      # @return [Hash, nil]
+      # @return [Hash]
       attr_reader :headers
 
       # @return [String]
@@ -31,17 +31,17 @@ module Mihari
       # @param [String] query
       # @param [Hash, nil] options
       # @param [String] method
-      # @param [Hash] headers
-      # @param [Hash] params
-      # @param [Hash] json
-      # @param [Hash] data
+      # @param [Hash, nil] headers
+      # @param [Hash, nil] params
+      # @param [Hash, nil] json
+      # @param [Hash, nil] data
       # @param [String] selector
       #
-      def initialize(query, options: nil, method: "GET", headers: {}, params: {}, json: {}, data: {}, selector: "")
+      def initialize(query, options: nil, method: "GET", headers: nil, params: nil, json: nil, data: nil, selector: "")
         super(query, options: options)
 
         @method = method
-        @headers = headers
+        @headers = headers || {}
         @params = params
         @json = json
         @data = data
