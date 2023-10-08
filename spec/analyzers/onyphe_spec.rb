@@ -15,7 +15,7 @@ RSpec.describe Mihari::Analyzers::Onyphe, :vcr do
     end
   end
 
-  context "when api config is not given" do
+  context "without API credentials" do
     before do
       allow(Mihari.config).to receive(:onyphe_api_key).and_return(nil)
     end

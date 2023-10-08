@@ -27,7 +27,7 @@ RSpec.describe Mihari::Analyzers::Shodan, :vcr do
     end
   end
 
-  context "when api config is not given" do
+  context "without API credentials" do
     before do
       allow(Mihari.config).to receive(:shodan_api_key).and_return(nil)
     end

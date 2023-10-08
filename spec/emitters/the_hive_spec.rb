@@ -21,7 +21,7 @@ RSpec.describe Mihari::Emitters::TheHive, :vcr do
       expect(subject.normalized_api_version).to be(nil)
     end
 
-    context "when THEHIVE_URL is not given" do
+    context "with THEHIVE_URL" do
       before do
         allow(Mihari.config).to receive(:thehive_url).and_return(nil)
       end
@@ -31,7 +31,7 @@ RSpec.describe Mihari::Emitters::TheHive, :vcr do
       end
     end
 
-    context "when THEHIVE_API_VERSION is given" do
+    context "with THEHIVE_API_VERSION" do
       before do
         allow(Mihari.config).to receive(:thehive_api_version).and_return("v5")
       end

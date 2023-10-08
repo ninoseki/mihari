@@ -1,0 +1,46 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: https://api.zoomeye.org/web/search?page=1&query=wordpress%20%2Bwooo%20%2Ben-US
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Api-Key:
+      - "<ZOOMEYE_API_KEY>"
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+      Host:
+      - api.zoomeye.org
+  response:
+    status:
+      code: 401
+      message: Unauthorized
+    headers:
+      Date:
+      - Sat, 07 Oct 2023 01:16:37 GMT
+      Content-Type:
+      - application/json
+      Content-Length:
+      - '181'
+      Connection:
+      - keep-alive
+      X-Cdn-Edge:
+      - 6ea28b7,-
+      Set-Cookie:
+      - __cdnuid_s=38eba58709d9890729bda997c3429e9b; max-age=31536000; path=/; HttpOnly;
+        SameSite=None; secure
+      X-Cache:
+      - bypass
+    body:
+      encoding: UTF-8
+      string: '{"code": "login_required", "error": "login required, missing Authorization
+        header", "message": "request invalid, validate usage and try again", "url":
+        "https://www.zoomeye.org/api"}'
+  recorded_at: Sat, 07 Oct 2023 01:16:37 GMT
+recorded_with: VCR 6.2.0

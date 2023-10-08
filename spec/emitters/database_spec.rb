@@ -17,7 +17,7 @@ RSpec.describe Mihari::Emitters::Database do
       expect(created_artifacts.length).to eq(artifacts.length)
     end
 
-    it "does not create multi tags" do
+    it "should not create duplications" do
       subject.emit
       subject.emit
 

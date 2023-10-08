@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 RSpec.describe Mihari::Emitters::Base do
-  describe "self.inherited" do
+  describe ".inherited" do
     it do
       expect(Mihari.emitters).to be_an(Array)
     end

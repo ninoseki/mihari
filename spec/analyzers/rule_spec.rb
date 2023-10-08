@@ -51,7 +51,7 @@ RSpec.describe Mihari::Analyzers::Rule, :vcr do
     end
   end
 
-  context "with disallowed data values in string", vcr: "Mihari_Analyzers_Rule/crt_sh:www.example.com" do
+  context "with string false positive", vcr: "Mihari_Analyzers_Rule/crt_sh:www.example.com" do
     let(:falsepositives) { ["www.example.com"] }
 
     describe "#normalized_artifacts" do
@@ -63,7 +63,7 @@ RSpec.describe Mihari::Analyzers::Rule, :vcr do
     end
   end
 
-  context "with disallowed data values in regexp", vcr: "Mihari_Analyzers_Rule/crt_sh:www.example.com" do
+  context "with regexp false positive", vcr: "Mihari_Analyzers_Rule/crt_sh:www.example.com" do
     let(:falsepositives) { ["/[a-z.]+/"] }
 
     describe "#normalized_artifacts" do
@@ -75,7 +75,7 @@ RSpec.describe Mihari::Analyzers::Rule, :vcr do
     end
   end
 
-  context "with disallowed data types", vcr: "Mihari_Analyzers_Rule/crt_sh:www.example.com" do
+  context "with data types", vcr: "Mihari_Analyzers_Rule/crt_sh:www.example.com" do
     let(:data_types) { ["ip"] }
 
     describe "#normalized_artifacts" do
@@ -87,7 +87,7 @@ RSpec.describe Mihari::Analyzers::Rule, :vcr do
     end
   end
 
-  context "with invalid analyzer in queries" do
+  context "with an invalid analyzer" do
     let(:queries) do
       [
         { analyzer: "shodan", query: "ip:1.1.1.1" }

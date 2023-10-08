@@ -13,7 +13,7 @@ RSpec.describe Mihari::Analyzers::ZoomEye, :vcr do
     end
   end
 
-  context "when given web type" do
+  context "with web type" do
     let(:query) { "wordpress +wooo +en-US" }
     let(:type) { "web" }
 
@@ -24,7 +24,7 @@ RSpec.describe Mihari::Analyzers::ZoomEye, :vcr do
     end
   end
 
-  context "when api config is not given" do
+  context "without API credentials" do
     let(:query) { "dummy" }
 
     before do

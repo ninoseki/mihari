@@ -23,7 +23,7 @@ RSpec.describe Mihari::Analyzers::VirusTotal, :vcr do
     end
   end
 
-  context "when given an invalid input" do
+  context "with invalid input" do
     let(:query) { "foo bar" }
 
     describe "#artifacts" do
@@ -33,7 +33,7 @@ RSpec.describe Mihari::Analyzers::VirusTotal, :vcr do
     end
   end
 
-  context "when api config is not given" do
+  context "without API credentials" do
     let(:query) { "1.1.1.1" }
 
     before do

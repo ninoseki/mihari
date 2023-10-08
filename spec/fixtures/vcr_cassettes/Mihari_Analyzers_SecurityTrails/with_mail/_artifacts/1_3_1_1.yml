@@ -1,0 +1,43 @@
+---
+http_interactions:
+- request:
+    method: post
+    uri: https://api.securitytrails.com/v1/domains/list
+    body:
+      encoding: UTF-8
+      string: '{"filter":{"whois_email":"test@test.com"}}'
+    headers:
+      Apikey:
+      - "<SECURITYTRAILS_API_KEY>"
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+      Host:
+      - api.securitytrails.com
+      Content-Type:
+      - application/json
+  response:
+    status:
+      code: 401
+      message: Unauthorized
+    headers:
+      Date:
+      - Sat, 07 Oct 2023 01:16:35 GMT
+      Content-Length:
+      - '29'
+      Connection:
+      - keep-alive
+      Cache-Control:
+      - max-age=0, private, must-revalidate
+      Server:
+      - Cowboy
+      X-Request-Id:
+      - F4uuXBk5MDWWXZcAkBUx
+    body:
+      encoding: UTF-8
+      string: Please check user credentials
+  recorded_at: Sat, 07 Oct 2023 01:16:35 GMT
+recorded_with: VCR 6.2.0
