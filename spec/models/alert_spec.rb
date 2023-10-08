@@ -3,12 +3,12 @@
 RSpec.describe Mihari::Alert do
   include_context "with database fixtures"
 
-  let(:alert) { Mihari::Alert.first }
-  let(:artifact_data) { Mihari::Artifact.where(alert_id: alert.id).first.data }
-  let(:tag_name) { alert.tags.first.name }
-  let(:asn) { Mihari::AutonomousSystem.first.asn }
-  let(:reverse_dns_name) { Mihari::ReverseDnsName.first.name }
-  let(:dns_record) { Mihari::DnsRecord.first.value }
+  let!(:alert) { Mihari::Alert.first }
+  let!(:artifact_data) { Mihari::Artifact.where(alert_id: alert.id).first.data }
+  let!(:tag_name) { alert.tags.first.name }
+  let!(:asn) { Mihari::AutonomousSystem.first.asn }
+  let!(:reverse_dns_name) { Mihari::ReverseDnsName.first.name }
+  let!(:dns_record) { Mihari::DnsRecord.first.value }
 
   describe ".search" do
     it do

@@ -3,7 +3,7 @@
 RSpec.describe Mihari::Analyzers::Shodan, :vcr do
   subject { described_class.new(query) }
 
-  let(:query) { "ip:1.1.1.1" }
+  let!(:query) { "ip:1.1.1.1" }
 
   describe "#artifacts" do
     it do

@@ -9,7 +9,6 @@ RSpec.describe Mihari::Services::AlertProxy do
       artifacts: ["example.com", "1.1.1.1"]
     }
   end
-
   let(:alert) { described_class.new(data) }
 
   describe "#errors?" do
@@ -28,14 +27,12 @@ RSpec.describe Mihari::Services::AlertProxy do
     include_context "with database fixtures"
 
     let(:rule) { Mihari::Rule.first }
-
     let(:data) do
       {
         rule_id: rule.id,
         artifacts: ["example.com", "1.1.1.1"]
       }
     end
-
     let(:alert) { described_class.new(data) }
 
     describe "#rule" do

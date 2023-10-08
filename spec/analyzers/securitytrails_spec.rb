@@ -4,7 +4,7 @@ RSpec.describe Mihari::Analyzers::SecurityTrails, :vcr do
   subject { described_class.new(query) }
 
   context "with ip" do
-    let(:query) { "89.35.39.84" }
+    let!(:query) { "89.35.39.84" }
 
     describe "#artifacts" do
       it do
@@ -14,7 +14,7 @@ RSpec.describe Mihari::Analyzers::SecurityTrails, :vcr do
   end
 
   context "with domain" do
-    let(:query) { "jppost-tu.top" }
+    let!(:query) { "jppost-tu.top" }
 
     describe "#artifacts" do
       it do
@@ -24,7 +24,7 @@ RSpec.describe Mihari::Analyzers::SecurityTrails, :vcr do
   end
 
   context "with email" do
-    let(:query) { "test@test.com" }
+    let!(:query) { "test@test.com" }
 
     describe "#artifacts" do
       it do
@@ -34,7 +34,7 @@ RSpec.describe Mihari::Analyzers::SecurityTrails, :vcr do
   end
 
   context "with invalid input" do
-    let(:query) { "foo bar" }
+    let!(:query) { "foo bar" }
 
     describe "#artifacts" do
       it do
@@ -44,7 +44,7 @@ RSpec.describe Mihari::Analyzers::SecurityTrails, :vcr do
   end
 
   context "without API credentials" do
-    let(:query) { "1.1.1.1" }
+    let!(:query) { "1.1.1.1" }
 
     before do
       allow(Mihari.config).to receive(:securitytrails_api_key).and_return(nil)

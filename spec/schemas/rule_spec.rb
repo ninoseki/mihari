@@ -1,10 +1,10 @@
 # frozen_string_literal: true
 
 RSpec.describe Mihari::Schemas::RuleContract do
-  let(:contract) { Mihari::Schemas::RuleContract.new }
-  let(:id) { "test" }
-  let(:description) { "test" }
-  let(:title) { "test" }
+  let!(:contract) { Mihari::Schemas::RuleContract.new }
+  let!(:id) { "test" }
+  let!(:description) { "test" }
+  let!(:title) { "test" }
 
   context "with valid rule" do
     describe "rule should have default values" do

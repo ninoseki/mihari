@@ -3,7 +3,7 @@
 RSpec.describe Mihari::Analyzers::Onyphe, :vcr do
   subject { described_class.new(query) }
 
-  let(:query) { "4299114377898569169" }
+  let!(:query) { "4299114377898569169" }
 
   describe "#artifacts" do
     it do

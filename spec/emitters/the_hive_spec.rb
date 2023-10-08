@@ -3,8 +3,8 @@
 RSpec.describe Mihari::Emitters::TheHive, :vcr do
   include_context "with database fixtures"
 
-  let(:artifacts) { [Mihari::Artifact.new(data: "1.1.1.1")] }
-  let(:rule) { Mihari::Services::RuleProxy.from_model(Mihari::Rule.first) }
+  let!(:artifacts) { [Mihari::Artifact.new(data: "1.1.1.1")] }
+  let!(:rule) { Mihari::Services::RuleProxy.from_model(Mihari::Rule.first) }
 
   subject { described_class.new(artifacts: artifacts, rule: rule) }
 
@@ -43,7 +43,7 @@ RSpec.describe Mihari::Emitters::TheHive, :vcr do
   end
 
   describe "#emit" do
-    let(:mock_client) { double("client") }
+    let!(:mock_client) { double("client") }
 
     before do
       allow(subject).to receive(:client).and_return(mock_client)

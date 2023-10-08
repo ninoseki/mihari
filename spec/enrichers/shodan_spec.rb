@@ -4,7 +4,7 @@ RSpec.describe Mihari::Enrichers::Shodan, vcr: "Mihari_Enrichers_Shodan/ip:1.1.1
   subject { described_class }
 
   describe ".query" do
-    let(:ip) { "1.1.1.1" }
+    let!(:ip) { "1.1.1.1" }
 
     it do
       res = subject.query(ip)

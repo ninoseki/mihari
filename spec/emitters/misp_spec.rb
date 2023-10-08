@@ -3,8 +3,8 @@
 RSpec.describe Mihari::Emitters::MISP, :vcr do
   include_context "with database fixtures"
 
-  let(:artifacts) { [Mihari::Artifact.new(data: "1.1.1.1")] }
-  let(:rule) { Mihari::Services::RuleProxy.from_model(Mihari::Rule.first) }
+  let!(:artifacts) { [Mihari::Artifact.new(data: "1.1.1.1")] }
+  let!(:rule) { Mihari::Services::RuleProxy.from_model(Mihari::Rule.first) }
 
   subject { described_class.new(artifacts: artifacts, rule: rule) }
 

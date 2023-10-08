@@ -3,7 +3,7 @@
 RSpec.describe Mihari::Analyzers::Crtsh, :vcr do
   subject { described_class.new(query) }
 
-  let(:query) { "crt.sh" }
+  let!(:query) { "crt.sh" }
 
   describe "#artifacts" do
     it do

@@ -9,7 +9,7 @@ RSpec.describe Mihari::Endpoints::Rules do
     Mihari::Endpoints::Rules
   end
 
-  let(:rule) { Mihari::Rule.first }
+  let!(:rule) { Mihari::Rule.first }
 
   describe "get /api/rules" do
     it "returns 200" do
@@ -53,7 +53,7 @@ RSpec.describe Mihari::Endpoints::Rules do
   end
 
   describe "put /api/rules/" do
-    let(:title) { "updated" }
+    let!(:title) { "updated" }
 
     it "returns 204" do
       data = rule.data.deep_dup

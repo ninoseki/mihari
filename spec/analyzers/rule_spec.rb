@@ -1,18 +1,18 @@
 # frozen_string_literal: true
 
 RSpec.describe Mihari::Analyzers::Rule, :vcr do
-  let(:id) { "test" }
-  let(:title) { "test" }
-  let(:description) { "test" }
-  let(:queries) do
+  let!(:id) { "test" }
+  let!(:title) { "test" }
+  let!(:description) { "test" }
+  let!(:queries) do
     [
       { analyzer: "crtsh", query: "www.example.com", exclude_expired: true }
     ]
   end
-  let(:tags) { %w[test] }
-  let(:falsepositives) { [] }
-  let(:data_types) { Mihari::DEFAULT_DATA_TYPES }
-  let(:rule) do
+  let!(:tags) { %w[test] }
+  let!(:falsepositives) { [] }
+  let!(:data_types) { Mihari::DEFAULT_DATA_TYPES }
+  let!(:rule) do
     Mihari::Services::RuleProxy.new(
       title: title,
       description: description,
@@ -35,7 +35,7 @@ RSpec.describe Mihari::Analyzers::Rule, :vcr do
   end
 
   context "with duplicated artifacts" do
-    let(:queries) do
+    let!(:queries) do
       [
         { analyzer: "crtsh", query: "www.example.com", exclude_expired: true },
         { analyzer: "crtsh", query: "www.example.com", exclude_expired: true }
@@ -52,7 +52,7 @@ RSpec.describe Mihari::Analyzers::Rule, :vcr do
   end
 
   context "with string false positive", vcr: "Mihari_Analyzers_Rule/crt_sh:www.example.com" do
-    let(:falsepositives) { ["www.example.com"] }
+    let!(:falsepositives) { ["www.example.com"] }
 
     describe "#normalized_artifacts" do
       it do
@@ -64,7 +64,7 @@ RSpec.describe Mihari::Analyzers::Rule, :vcr do
   end
 
   context "with regexp false positive", vcr: "Mihari_Analyzers_Rule/crt_sh:www.example.com" do
-    let(:falsepositives) { ["/[a-z.]+/"] }
+    let!(:falsepositives) { ["/[a-z.]+/"] }
 
     describe "#normalized_artifacts" do
       it do
@@ -76,7 +76,7 @@ RSpec.describe Mihari::Analyzers::Rule, :vcr do
   end
 
   context "with data types", vcr: "Mihari_Analyzers_Rule/crt_sh:www.example.com" do
-    let(:data_types) { ["ip"] }
+    let!(:data_types) { ["ip"] }
 
     describe "#normalized_artifacts" do
       it do
@@ -88,13 +88,13 @@ RSpec.describe Mihari::Analyzers::Rule, :vcr do
   end
 
   context "with an invalid analyzer" do
-    let(:queries) do
+    let!(:queries) do
       [
         { analyzer: "shodan", query: "ip:1.1.1.1" }
       ]
     end
 
-    let(:rule) do
+    let!(:rule) do
       Mihari::Services::RuleProxy.new(
         id: id,
         title: title,
@@ -131,9 +131,9 @@ RSpec.describe Mihari::Analyzers::Rule, :vcr do
     end
 
     context "when a notifier raises an error" do
-      let(:sio) { StringIO.new }
+      let!(:sio) { StringIO.new }
 
-      let(:logger) do
+      let!(:logger) do
         SemanticLogger.default_level = :info
         SemanticLogger.add_appender(io: sio, formatter: :color)
         SemanticLogger["Mihari"]

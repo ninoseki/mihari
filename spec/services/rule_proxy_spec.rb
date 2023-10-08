@@ -3,7 +3,7 @@
 require "yaml"
 
 RSpec.describe Mihari::Services::RuleProxy do
-  let(:data) do
+  let!(:data) do
     {
       id: "foo",
       description: "foo",
@@ -14,7 +14,7 @@ RSpec.describe Mihari::Services::RuleProxy do
       allowed_data_types: ["ip"]
     }
   end
-  let(:rule) { described_class.new(data) }
+  let!(:rule) { described_class.new(data) }
 
   describe "#errors?" do
     it "should not have any errors" do

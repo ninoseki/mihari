@@ -3,7 +3,7 @@
 require "yaml"
 
 RSpec.describe Mihari::Services::RuleRunner do
-  let(:data) do
+  let!(:data) do
     {
       id: "foo",
       description: "foo",
@@ -15,11 +15,11 @@ RSpec.describe Mihari::Services::RuleRunner do
     }
   end
 
-  let(:proxy) { Mihari::Services::RuleProxy.new(data) }
+  let!(:proxy) { Mihari::Services::RuleProxy.new(data) }
 
-  let(:force_overwrite) { true }
+  let!(:force_overwrite) { true }
 
-  let(:rule) { Mihari::Services::RuleRunner.new(proxy, force_overwrite: force_overwrite) }
+  let!(:rule) { Mihari::Services::RuleRunner.new(proxy, force_overwrite: force_overwrite) }
 
   describe "#force_overwrite?" do
     it "should return the same value" do

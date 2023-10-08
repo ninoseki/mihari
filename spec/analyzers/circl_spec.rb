@@ -4,7 +4,7 @@ RSpec.describe Mihari::Analyzers::CIRCL, :vcr do
   context "with domain" do
     subject { described_class.new(query) }
 
-    let(:query) { "www.circl.lu" }
+    let!(:query) { "www.circl.lu" }
 
     describe "#artifacts" do
       it do
@@ -16,7 +16,7 @@ RSpec.describe Mihari::Analyzers::CIRCL, :vcr do
   context "with hash" do
     subject { described_class.new(query) }
 
-    let(:query) { "7c552ab044c76d1df4f5ddf358807bfdcd07fa57" }
+    let!(:query) { "7c552ab044c76d1df4f5ddf358807bfdcd07fa57" }
 
     describe "#artifacts" do
       it do
@@ -28,7 +28,7 @@ RSpec.describe Mihari::Analyzers::CIRCL, :vcr do
   context "with invalid input" do
     subject { described_class.new(query) }
 
-    let(:query) { "foo bar" }
+    let!(:query) { "foo bar" }
 
     describe "#artifacts" do
       it do

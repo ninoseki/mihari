@@ -4,7 +4,7 @@ RSpec.describe Mihari::Enrichers::Whois, :vcr do
   subject { described_class }
 
   describe ".query" do
-    let(:domain) { "example.com" }
+    let!(:domain) { "example.com" }
 
     before { subject.reset_cache }
 

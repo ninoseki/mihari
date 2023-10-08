@@ -14,7 +14,7 @@ RSpec.describe Mihari::Commands::Search, :vcr do
   end
 
   describe "#search" do
-    let(:rule) { File.expand_path("../fixtures/rules/valid_rule_does_not_need_api_key.yml", __dir__) }
+    let!(:rule) { File.expand_path("../fixtures/rules/valid_rule_does_not_need_api_key.yml", __dir__) }
 
     it do
       expect do

@@ -8,8 +8,8 @@ RSpec.describe Mihari::Endpoints::Artifacts, :vcr do
     Mihari::Endpoints::Artifacts
   end
 
-  let(:artifact) { Mihari::Artifact.first }
-  let(:alert) { Mihari::Alert.first }
+  let!(:artifact) { Mihari::Artifact.first }
+  let!(:alert) { Mihari::Alert.first }
 
   describe "get /api/artifacts/:id" do
     it "returns 400" do

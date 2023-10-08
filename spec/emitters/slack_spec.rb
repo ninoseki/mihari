@@ -3,8 +3,8 @@
 RSpec.describe Mihari::Emitters::Slack do
   include_context "with database fixtures"
 
-  let(:rule) { Mihari::Services::RuleProxy.from_model(Mihari::Rule.first) }
-  let(:artifacts) do
+  let!(:rule) { Mihari::Services::RuleProxy.from_model(Mihari::Rule.first) }
+  let!(:artifacts) do
     [
       Mihari::Artifact.new(data: "1.1.1.1"),
       Mihari::Artifact.new(data: "github.com"),
@@ -56,7 +56,7 @@ RSpec.describe Mihari::Emitters::Slack do
   end
 
   describe "#emit" do
-    let(:mock) { double("notifier") }
+    let!(:mock) { double("notifier") }
 
     before do
       allow(::Slack::Notifier).to receive(:new).and_return(mock)
