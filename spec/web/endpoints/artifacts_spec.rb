@@ -34,12 +34,12 @@ RSpec.describe Mihari::Endpoints::Artifacts, :vcr do
     context "with enriched artifact" do
       before do
         @enriched_domain_artifact = Mihari::Artifact.new(data: "example.com", alert_id: alert.id)
-        @enriched_domain_artifact.save
         @enriched_domain_artifact.enrich_dns
+        @enriched_domain_artifact.save
 
         @enriched_ip_artifact = Mihari::Artifact.new(data: "1.1.1.1", alert_id: alert.id)
-        @enriched_ip_artifact.save
         @enriched_ip_artifact.enrich_reverse_dns
+        @enriched_ip_artifact.save
       end
 
       it "has dnsRecords" do
