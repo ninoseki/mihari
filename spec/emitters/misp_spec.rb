@@ -2,6 +2,7 @@
 
 RSpec.describe Mihari::Emitters::MISP, :vcr do
   include_context "with database fixtures"
+  include_context "with mocked logger"
 
   let!(:artifacts) { [Mihari::Artifact.new(data: "1.1.1.1")] }
   let!(:rule) { Mihari::Services::RuleProxy.from_model(Mihari::Rule.first) }

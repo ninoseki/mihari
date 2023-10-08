@@ -1,8 +1,11 @@
-id: test
+id: ad001daa-c7cd-4809-a5bd-0c3c64d765fa
 title: foo
 description: foo
 queries:
-  - analyzer: shodan
-    query: "ip:1.1.1.1"
   - analyzer: crtsh
     query: example.com
+enrichers: []
+emitters:
+  - emitter: database
+tags:
+  - foo

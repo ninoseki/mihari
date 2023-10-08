@@ -12,6 +12,7 @@ RSpec.describe Mihari::Analyzers::Rule, :vcr do
   let!(:tags) { %w[test] }
   let!(:falsepositives) { [] }
   let!(:data_types) { Mihari::DEFAULT_DATA_TYPES }
+  let!(:emitters) { [{ emitter: "database" }] }
   let!(:rule) do
     Mihari::Services::RuleProxy.new(
       title: title,
@@ -20,7 +21,8 @@ RSpec.describe Mihari::Analyzers::Rule, :vcr do
       queries: queries,
       id: id,
       data_types: data_types,
-      falsepositives: falsepositives
+      falsepositives: falsepositives,
+      emitters: emitters
     )
   end
 

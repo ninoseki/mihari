@@ -5,6 +5,7 @@ require "bundler/setup"
 require "base64"
 require "digest"
 require "fakefs/safe"
+require "faker"
 require "rack/test"
 require "vcr"
 
@@ -133,7 +134,10 @@ ENV["APP_ENV"] = "test"
 # load Mihari after modifying ENV values
 require "mihari"
 
+require "test_prof/recipes/rspec/before_all"
+
 require_relative "./support/shared_contexts/database_context"
+require_relative "./support/shared_contexts/logger_context"
 
 RSpec.configure do |config|
   # Enable flags like --only-failures and --next-failure
@@ -146,16 +150,16 @@ RSpec.configure do |config|
     c.syntax = :expect
   end
 
-  config.before(:example) do
+  config.order = "random"
+
+  config.before(:suite) do
     Mihari::Database.connect
 
     ActiveRecord::Migration.verbose = false
     Mihari::Database.migrate :up
   end
 
-  config.after(:example) do
-    Mihari::Database.migrate :down
-
+  config.before(:suite) do
     Mihari::Database.close
   end
 end

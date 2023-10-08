@@ -13,7 +13,7 @@ RSpec.describe Mihari::Alert do
   describe ".search" do
     it do
       alerts = described_class.search(Mihari::Structs::Filters::Alert::SearchFilterWithPagination.new)
-      expect(alerts.length).to eq(2)
+      expect(alerts.length).to be >= 2
     end
 
     it do
@@ -35,7 +35,7 @@ RSpec.describe Mihari::Alert do
   describe ".count" do
     it do
       count = described_class.count(Mihari::Structs::Filters::Alert::SearchFilter.new)
-      expect(count).to eq(2)
+      expect(count).to be >= 2
     end
 
     it do

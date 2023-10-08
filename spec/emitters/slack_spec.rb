@@ -3,7 +3,8 @@
 RSpec.describe Mihari::Emitters::Slack do
   include_context "with database fixtures"
 
-  let!(:rule) { Mihari::Services::RuleProxy.from_model(Mihari::Rule.first) }
+  let!(:rule) { Mihari::Rule.first }
+  let!(:proxy) { Mihari::Services::RuleProxy.from_model rule }
   let!(:artifacts) do
     [
       Mihari::Artifact.new(data: "1.1.1.1"),
@@ -14,7 +15,7 @@ RSpec.describe Mihari::Emitters::Slack do
     ]
   end
 
-  subject { described_class.new(artifacts: artifacts, rule: rule) }
+  subject { described_class.new(artifacts: artifacts, rule: proxy) }
 
   describe "#attachments" do
     it do
@@ -28,8 +29,10 @@ RSpec.describe Mihari::Emitters::Slack do
   end
 
   describe "#text" do
+    let!(:tags) { proxy.tags.join(", ") }
+
     it do
-      expect(subject.text).to eq("*test1*\n*Desc.*: test1\n*Tags*: tag1")
+      expect(subject.text).to include("*Desc.*: #{rule.description}\n*Tags*: #{tags}")
     end
   end
 
