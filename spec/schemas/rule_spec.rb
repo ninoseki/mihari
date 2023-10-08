@@ -1,13 +1,13 @@
 # frozen_string_literal: true
 
 RSpec.describe Mihari::Schemas::RuleContract do
-  let(:contract) { Mihari::Schemas::RuleContract.new }
-  let(:id) { "test" }
-  let(:description) { "test" }
-  let(:title) { "test" }
+  let!(:contract) { Mihari::Schemas::RuleContract.new }
+  let!(:id) { "test" }
+  let!(:description) { "test" }
+  let!(:title) { "test" }
 
   context "with valid rule" do
-    context "rule should have default values" do
+    describe "rule should have default values" do
       it do
         result = contract.call(
           id: id,
@@ -24,7 +24,7 @@ RSpec.describe Mihari::Schemas::RuleContract do
       end
     end
 
-    context "analyzers does not need additional options" do
+    context "analyzers that do not need additional options" do
       it do
         analyzers = Mihari::Analyzers::ANALYZER_TO_CLASS.keys - %w[zoomeye crtsh feed hunterhow]
 
@@ -40,7 +40,7 @@ RSpec.describe Mihari::Schemas::RuleContract do
       end
     end
 
-    context "analyzers needs additional options" do
+    context "analyzers that need additional options" do
       it do
         result = contract.call(
           id: id,

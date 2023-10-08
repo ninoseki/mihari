@@ -1,10 +1,10 @@
 # frozen_string_literal: true
 
 RSpec.describe Mihari::Analyzers::OTX, :vcr do
-  context "when given an ipv4" do
+  context "with ip" do
     subject { described_class.new(query) }
 
-    let(:query) { "89.35.39.84" }
+    let!(:query) { "89.35.39.84" }
 
     describe "#artifacts" do
       it do
@@ -13,10 +13,10 @@ RSpec.describe Mihari::Analyzers::OTX, :vcr do
     end
   end
 
-  context "when given a domain" do
+  context "with domain" do
     subject { described_class.new(query) }
 
-    let(:query) { "jppost-tu.top" }
+    let!(:query) { "jppost-tu.top" }
 
     describe "#artifacts" do
       it do
@@ -25,10 +25,10 @@ RSpec.describe Mihari::Analyzers::OTX, :vcr do
     end
   end
 
-  context "when given an invalid input" do
+  context "with invalid input" do
     subject { described_class.new(query) }
 
-    let(:query) { "foo bar" }
+    let!(:query) { "foo bar" }
 
     describe "#artifacts" do
       it do
@@ -37,7 +37,7 @@ RSpec.describe Mihari::Analyzers::OTX, :vcr do
     end
   end
 
-  context "when api config is not given" do
+  context "without API credentials" do
     before do
       allow(Mihari.config).to receive(:otx_api_key).and_return(nil)
     end

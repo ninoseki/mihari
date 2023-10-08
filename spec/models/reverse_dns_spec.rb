@@ -2,7 +2,7 @@
 
 RSpec.describe Mihari::ReverseDnsName, vcr: "Mihari_Enrichers_Shodan/ip:1.1.1.1" do
   describe ".build_by_ip" do
-    let(:ip) { "1.1.1.1" }
+    let!(:ip) { "1.1.1.1" }
 
     it do
       names = described_class.build_by_ip(ip)

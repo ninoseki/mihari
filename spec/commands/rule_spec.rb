@@ -7,14 +7,7 @@ class CLI < Mihari::CLI::Base
 end
 
 RSpec.describe Mihari::Commands::Rule do
-  let(:sio) { StringIO.new }
-  let(:logger) do
-    SemanticLogger.default_level = :info
-    SemanticLogger.add_appender(io: sio, formatter: :color)
-    SemanticLogger["Mihari"]
-  end
-
-  before { allow(Mihari).to receive(:logger).and_return(logger) }
+  include_context "with mocked logger"
 
   describe "#initialize_rule" do
     it do
@@ -30,12 +23,12 @@ RSpec.describe Mihari::Commands::Rule do
   end
 
   describe "#rule" do
-    let(:path) { "/tmp/#{SecureRandom.uuid}.yml" }
+    let!(:path) { "/tmp/#{SecureRandom.uuid}.yml" }
 
     after { FileUtils.rm path }
 
     it do
-      capture(:stderr) { CLI.start ["init", path] }
+      CLI.start ["init", path]
 
       # read logger output
       SemanticLogger.flush
@@ -47,10 +40,10 @@ RSpec.describe Mihari::Commands::Rule do
   end
 
   describe "#validate" do
-    let(:path) { File.expand_path("../fixtures/rules/valid_rule.yml", __dir__) }
+    let!(:path) { File.expand_path("../fixtures/rules/valid_rule.yml", __dir__) }
 
     it do
-      capture(:stderr) { CLI.start ["validate", path] }
+      CLI.start ["validate", path]
 
       # read logger output
       SemanticLogger.flush
@@ -61,7 +54,7 @@ RSpec.describe Mihari::Commands::Rule do
     end
 
     context "with invalid rule" do
-      let(:path) { File.expand_path("../fixtures/rules/invalid_rule.yml", __dir__) }
+      let!(:path) { File.expand_path("../fixtures/rules/invalid_rule.yml", __dir__) }
 
       it do
         CLI.start ["validate", path]

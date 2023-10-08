@@ -3,14 +3,14 @@
 RSpec.describe Mihari::Analyzers::Urlscan, :vcr do
   subject { described_class.new(query) }
 
-  let(:query) { "page.domain:example.com AND date:[2023-01-01 TO 2023-02-01]" }
+  let!(:query) { "page.domain:example.com AND date:[2023-01-01 TO 2023-02-01]" }
 
   describe "#artifacts" do
     it do
       expect(subject.artifacts).to be_an(Array)
     end
 
-    context "when given a type option" do
+    context "with allowed data types" do
       subject { described_class.new(query, allowed_data_types: %w[domain]) }
 
       it do
@@ -21,7 +21,7 @@ RSpec.describe Mihari::Analyzers::Urlscan, :vcr do
   end
 
   describe "#initialize" do
-    context "when given an invalid target_type" do
+    context "with invalid allowed data types" do
       it do
         expect { described_class.new(query, allowed_data_types: %w[foo bar]) }.to raise_error(Mihari::ValueError)
       end

@@ -3,8 +3,9 @@
 RSpec.describe Mihari::Emitters::Slack do
   include_context "with database fixtures"
 
-  let(:rule) { Mihari::Services::RuleProxy.from_model(Mihari::Rule.first) }
-  let(:artifacts) do
+  let!(:rule) { Mihari::Rule.first }
+  let!(:proxy) { Mihari::Services::RuleProxy.from_model rule }
+  let!(:artifacts) do
     [
       Mihari::Artifact.new(data: "1.1.1.1"),
       Mihari::Artifact.new(data: "github.com"),
@@ -14,7 +15,7 @@ RSpec.describe Mihari::Emitters::Slack do
     ]
   end
 
-  subject { described_class.new(artifacts: artifacts, rule: rule) }
+  subject { described_class.new(artifacts: artifacts, rule: proxy) }
 
   describe "#attachments" do
     it do
@@ -28,15 +29,15 @@ RSpec.describe Mihari::Emitters::Slack do
   end
 
   describe "#text" do
-    context "when not given tags" do
-      it do
-        expect(subject.text).to eq("*test1*\n*Desc.*: test1\n*Tags*: tag1")
-      end
+    let!(:tags) { proxy.tags.join(", ") }
+
+    it do
+      expect(subject.text).to include("*Desc.*: #{rule.description}\n*Tags*: #{tags}")
     end
   end
 
   describe "#valid?" do
-    context "when SLAC_WEBHOOK_URL is given" do
+    context "with SLAC_WEBHOOK_URL" do
       before do
         allow(Mihari.config).to receive(:slack_webhook_url).and_return("http://example.com")
       end
@@ -46,7 +47,7 @@ RSpec.describe Mihari::Emitters::Slack do
       end
     end
 
-    context "when SLAC_WEBHOOK_URL is not given" do
+    context "without SLAC_WEBHOOK_URL" do
       before do
         allow(Mihari.config).to receive(:slack_webhook_url).and_return(nil)
       end
@@ -58,7 +59,7 @@ RSpec.describe Mihari::Emitters::Slack do
   end
 
   describe "#emit" do
-    let(:mock) { double("notifier") }
+    let!(:mock) { double("notifier") }
 
     before do
       allow(::Slack::Notifier).to receive(:new).and_return(mock)

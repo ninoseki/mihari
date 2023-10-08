@@ -4,7 +4,7 @@ RSpec.describe Mihari::AutonomousSystem, vcr: "Mihari_Enrichers_IPInfo/ip:1.1.1.
   subject { described_class }
 
   describe ".build_by_ip" do
-    let(:ip) { "1.1.1.1" }
+    let!(:ip) { "1.1.1.1" }
 
     it do
       as = subject.build_by_ip(ip)

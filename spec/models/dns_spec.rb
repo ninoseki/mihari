@@ -2,7 +2,7 @@
 
 RSpec.describe Mihari::DnsRecord, :vcr do
   describe ".build_by_domain" do
-    let(:domain) { "example.com" }
+    let!(:domain) { "example.com" }
 
     it do
       dns_records = described_class.build_by_domain(domain)

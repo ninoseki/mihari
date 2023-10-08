@@ -2,7 +2,7 @@
 
 RSpec.describe Mihari::WhoisRecord do
   describe ".build_by_domain" do
-    let(:domain) { "example.com" }
+    let!(:domain) { "example.com" }
 
     it do
       whois_record = described_class.build_by_domain(domain)

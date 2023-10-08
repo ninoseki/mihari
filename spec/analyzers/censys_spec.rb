@@ -3,7 +3,7 @@
 RSpec.describe Mihari::Analyzers::Censys, :vcr do
   subject { described_class.new(query) }
 
-  let(:query) { "ip:1.1.1.1" }
+  let!(:query) { "ip:1.1.1.1" }
 
   describe "#artifacts" do
     it do
@@ -20,7 +20,7 @@ RSpec.describe Mihari::Analyzers::Censys, :vcr do
     end
   end
 
-  context "when api config is not given" do
+  context "without API credentials" do
     before do
       allow(Mihari.config).to receive(:censys_id).and_return(nil)
       allow(Mihari.config).to receive(:censys_secret).and_return(nil)

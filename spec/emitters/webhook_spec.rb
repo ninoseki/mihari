@@ -5,16 +5,16 @@ require "json"
 RSpec.describe Mihari::Emitters::Webhook, :vcr do
   include_context "with database fixtures"
 
-  let(:artifacts) do
+  let!(:artifacts) do
     [
       Mihari::Artifact.new(data: "1.1.1.1"),
       Mihari::Artifact.new(data: "github.com")
     ]
   end
-  let(:rule) { Mihari::Services::RuleProxy.from_model(Mihari::Rule.first) }
+  let!(:rule) { Mihari::Services::RuleProxy.from_model(Mihari::Rule.first) }
 
   describe "#valid?" do
-    context "without url" do
+    context "without URL" do
       subject do
         described_class.new(
           artifacts: artifacts, rule: rule
@@ -26,7 +26,7 @@ RSpec.describe Mihari::Emitters::Webhook, :vcr do
       end
     end
 
-    context "with uri" do
+    context "with URL" do
       subject do
         described_class.new(
           artifacts: artifacts, rule: rule, url: "http://example.com"
@@ -40,7 +40,7 @@ RSpec.describe Mihari::Emitters::Webhook, :vcr do
   end
 
   describe "#emit" do
-    let(:url) { "https://httpbin.org/post" }
+    let!(:url) { "https://httpbin.org/post" }
 
     subject do
       described_class.new(

@@ -29,7 +29,7 @@ RSpec.describe Mihari::Analyzers::Base, :vcr do
     end
   end
 
-  describe "#artifacts" do
+  describe "#normalized_artifacts" do
     it do
       artifacts = %w[1.1.1.1 2.2.2.2 example.com google.com]
       expect(subject.normalized_artifacts.map(&:data)).to eq(artifacts)

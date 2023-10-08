@@ -2,8 +2,8 @@
 
 RSpec.describe Mihari::Feed::Reader do
   describe "#read" do
-    context "with csv file" do
-      let(:uri) { "file://#{File.expand_path("../fixtures/feed/test.csv", __dir__)}" }
+    context "with CSV file" do
+      let!(:uri) { "file://#{File.expand_path('../fixtures/feed/test.csv', __dir__)}" }
 
       it do
         reader = described_class.new(uri)
@@ -12,7 +12,7 @@ RSpec.describe Mihari::Feed::Reader do
     end
 
     context "with JSON file" do
-      let(:uri) { "file://#{File.expand_path("../fixtures/feed/test.json", __dir__)}" }
+      let!(:uri) { "file://#{File.expand_path('../fixtures/feed/test.json', __dir__)}" }
 
       it do
         reader = described_class.new(uri)

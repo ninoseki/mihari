@@ -7,7 +7,7 @@ RSpec.describe Mihari::Endpoints::IPAddresses, :vcr do
     Mihari::Endpoints::IPAddresses
   end
 
-  let(:ip) { "1.1.1.1" }
+  let!(:ip) { "1.1.1.1" }
 
   describe "get /api/ip_addresses/:ip" do
     it "returns 200" do

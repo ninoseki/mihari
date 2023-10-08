@@ -3,8 +3,8 @@
 RSpec.describe Mihari::Analyzers::PassiveTotal, :vcr do
   subject { described_class.new(query) }
 
-  context "when given an ipv4" do
-    let(:query) { "89.35.39.84" }
+  context "with ip" do
+    let!(:query) { "89.35.39.84" }
 
     describe "#artifacts" do
       it do
@@ -13,8 +13,8 @@ RSpec.describe Mihari::Analyzers::PassiveTotal, :vcr do
     end
   end
 
-  context "when given a domain" do
-    let(:query) { "jppost-tu.top" }
+  context "with domain" do
+    let!(:query) { "jppost-tu.top" }
 
     describe "#artifacts" do
       it do
@@ -23,8 +23,8 @@ RSpec.describe Mihari::Analyzers::PassiveTotal, :vcr do
     end
   end
 
-  context "when given a hash" do
-    let(:query) { "7c552ab044c76d1df4f5ddf358807bfdcd07fa57" }
+  context "with hash" do
+    let!(:query) { "7c552ab044c76d1df4f5ddf358807bfdcd07fa57" }
 
     describe "#artifacts" do
       it do
@@ -33,8 +33,8 @@ RSpec.describe Mihari::Analyzers::PassiveTotal, :vcr do
     end
   end
 
-  context "when given an email" do
-    let(:query) { "test@test.com" }
+  context "with email" do
+    let!(:query) { "test@test.com" }
 
     describe "#artifacts" do
       it do
@@ -43,8 +43,8 @@ RSpec.describe Mihari::Analyzers::PassiveTotal, :vcr do
     end
   end
 
-  context "when given an invalid input" do
-    let(:query) { "foo bar" }
+  context "with invalid input" do
+    let!(:query) { "foo bar" }
 
     describe "#artifacts" do
       it do
@@ -53,8 +53,8 @@ RSpec.describe Mihari::Analyzers::PassiveTotal, :vcr do
     end
   end
 
-  context "when api config is not given" do
-    let(:query) { "89.35.39.84" }
+  context "without API credentials" do
+    let!(:query) { "89.35.39.84" }
 
     before do
       allow(Mihari.config).to receive(:passivetotal_api_key).and_return(nil)

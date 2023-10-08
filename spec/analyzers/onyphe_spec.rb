@@ -3,7 +3,7 @@
 RSpec.describe Mihari::Analyzers::Onyphe, :vcr do
   subject { described_class.new(query) }
 
-  let(:query) { "4299114377898569169" }
+  let!(:query) { "4299114377898569169" }
 
   describe "#artifacts" do
     it do
@@ -15,7 +15,7 @@ RSpec.describe Mihari::Analyzers::Onyphe, :vcr do
     end
   end
 
-  context "when api config is not given" do
+  context "without API credentials" do
     before do
       allow(Mihari.config).to receive(:onyphe_api_key).and_return(nil)
     end

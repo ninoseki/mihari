@@ -2,8 +2,8 @@
 
 RSpec.describe Mihari::HTTP, :vcr do
   describe ".post" do
-    let(:headers) { { foo: "bar" } }
-    let(:payload) { { foo: "bar" } }
+    let!(:headers) { { foo: "bar" } }
+    let!(:payload) { { foo: "bar" } }
 
     context "with application/x-www-form-urlencoded" do
       it do

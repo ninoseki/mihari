@@ -1,12 +1,12 @@
 # frozen_string_literal: true
 
 RSpec.describe Mihari::Emitters::Database do
+  include_context "with database fixtures"
+
   let(:rule) { Mihari::Services::RuleProxy.from_model(Mihari::Rule.first) }
   let(:artifacts) { [Mihari::Artifact.new(data: "1.1.1.1")] }
 
   subject { described_class.new(artifacts: artifacts, rule: rule) }
-
-  include_context "with database fixtures"
 
   describe "#emit", vcr: "Mihari_Enrichers_IPInfo/ip:1.1.1.1" do
     it do
@@ -17,7 +17,7 @@ RSpec.describe Mihari::Emitters::Database do
       expect(created_artifacts.length).to eq(artifacts.length)
     end
 
-    it "does not create multi tags" do
+    it "should not create duplications" do
       subject.emit
       subject.emit
 

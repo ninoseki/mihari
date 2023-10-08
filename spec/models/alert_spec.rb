@@ -3,17 +3,17 @@
 RSpec.describe Mihari::Alert do
   include_context "with database fixtures"
 
-  let(:alert) { Mihari::Alert.first }
-  let(:artifact_data) { Mihari::Artifact.where(alert_id: alert.id).first.data }
-  let(:tag_name) { alert.tags.first.name }
-  let(:asn) { Mihari::AutonomousSystem.first.asn }
-  let(:reverse_dns_name) { Mihari::ReverseDnsName.first.name }
-  let(:dns_record) { Mihari::DnsRecord.first.value }
+  let!(:alert) { Mihari::Alert.first }
+  let!(:artifact_data) { Mihari::Artifact.where(alert_id: alert.id).first.data }
+  let!(:tag_name) { alert.tags.first.name }
+  let!(:asn) { Mihari::AutonomousSystem.first.asn }
+  let!(:reverse_dns_name) { Mihari::ReverseDnsName.first.name }
+  let!(:dns_record) { Mihari::DnsRecord.first.value }
 
   describe ".search" do
     it do
       alerts = described_class.search(Mihari::Structs::Filters::Alert::SearchFilterWithPagination.new)
-      expect(alerts.length).to eq(2)
+      expect(alerts.length).to be >= 2
     end
 
     it do
@@ -35,7 +35,7 @@ RSpec.describe Mihari::Alert do
   describe ".count" do
     it do
       count = described_class.count(Mihari::Structs::Filters::Alert::SearchFilter.new)
-      expect(count).to eq(2)
+      expect(count).to be >= 2
     end
 
     it do

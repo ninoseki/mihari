@@ -3,7 +3,7 @@
 RSpec.describe Mihari::Analyzers::BinaryEdge, :vcr do
   subject { described_class.new(query) }
 
-  let(:query) { "sagawa.apk" }
+  let!(:query) { "sagawa.apk" }
 
   describe "#artifacts" do
     it do

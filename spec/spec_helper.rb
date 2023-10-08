@@ -5,6 +5,7 @@ require "bundler/setup"
 require "base64"
 require "digest"
 require "fakefs/safe"
+require "faker"
 require "rack/test"
 require "vcr"
 
@@ -71,34 +72,34 @@ VCR.configure do |config|
   config.ignore_localhost = false
 
   api_keys = %w[
-    IPINFO_API_KEY
-    THEHIVE_API_KEY
-    MISP_API_KEY
-    CENSYS_AUTH CENSYS_ID CENSYS_SECRET
-    SHODAN_API_KEY
-    HUNTERHOW_API_KEY
-    ONYPHE_API_KEY
-    VIRUSTOTAL_API_KEY
-    SECURITYTRAILS_API_KEY
-    ZOOMEYE_API_KEY
     BINARYEDGE_API_KEY
-    PULSEDIVE_API_KEY
-    OTX_API_KEY
-    SPYSE_API_KEY
-    URLSCAN_API_KEY
-    CIRCL_PASSIVE_USERNAME
+    CENSYS_AUTH CENSYS_ID CENSYS_SECRET
     CIRCL_PASSIVE_PASSWORD
-    PASSIVETOTAL_USERNAME
-    PASSIVETOTAL_API_KEY
+    CIRCL_PASSIVE_USERNAME
     GREYNOISE_API_KEY
+    HUNTERHOW_API_KEY
+    IPINFO_API_KEY
+    MISP_API_KEY
+    ONYPHE_API_KEY
+    OTX_API_KEY
+    PASSIVETOTAL_API_KEY
+    PASSIVETOTAL_USERNAME
+    PULSEDIVE_API_KEY
+    SECURITYTRAILS_API_KEY
+    SHODAN_API_KEY
+    SPYSE_API_KEY
+    THEHIVE_API_KEY
     THREATFOX_API_KEY
+    URLSCAN_API_KEY
+    VIRUSTOTAL_API_KEY
+    ZOOMEYE_API_KEY
   ]
 
   api_endpoints = %w[
-    THEHIVE_API_ENDPOINT
-    THEHIVE_URL
     MISP_API_ENDPOINT
     MISP_URL
+    THEHIVE_API_ENDPOINT
+    THEHIVE_URL
     WEBHOOK_URL
   ]
 
@@ -133,8 +134,10 @@ ENV["APP_ENV"] = "test"
 # load Mihari after modifying ENV values
 require "mihari"
 
-require_relative "./support/helpers/helpers"
+require "test_prof/recipes/rspec/before_all"
+
 require_relative "./support/shared_contexts/database_context"
+require_relative "./support/shared_contexts/logger_context"
 
 RSpec.configure do |config|
   # Enable flags like --only-failures and --next-failure
@@ -147,18 +150,16 @@ RSpec.configure do |config|
     c.syntax = :expect
   end
 
-  config.include Spec::Support::Helpers
+  config.order = "random"
 
-  config.before(:example) do
+  config.before(:suite) do
     Mihari::Database.connect
 
     ActiveRecord::Migration.verbose = false
     Mihari::Database.migrate :up
   end
 
-  config.after(:example) do
-    Mihari::Database.migrate :down
-
+  config.before(:suite) do
     Mihari::Database.close
   end
 end

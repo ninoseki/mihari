@@ -3,7 +3,7 @@
 RSpec.describe Mihari::Analyzers::DNSTwister, :vcr do
   subject { described_class.new(query) }
 
-  let(:query) { "example.com" }
+  let!(:query) { "example.com" }
 
   describe "#artifacts" do
     before do

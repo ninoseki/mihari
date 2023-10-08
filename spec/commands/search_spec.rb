@@ -5,29 +5,24 @@ class CLI < Mihari::CLI::Base
 end
 
 RSpec.describe Mihari::Commands::Search, :vcr do
+  include_context "with mocked logger"
+
   before do
-    # set an empty array as emitters (disable emission)
-    allow(Mihari).to receive(:emitters).and_return([])
-    allow(Mihari).to receive(:enrichers).and_return([])
-    # disable the parallel execution
     allow(Parallel).to receive(:processor_count).and_return(0)
   end
 
   describe "#search" do
-    let(:valid_rule) { File.expand_path("../fixtures/rules/valid_rule_does_not_need_api_key.yml", __dir__) }
+    let!(:path) { File.expand_path("../fixtures/rules/valid_rule.yml", __dir__) }
+    let!(:rule_id) do
+      rule = YAML.safe_load(File.read(path))
+      rule["id"]
+    end
 
     it do
-      # it should not raise ArgumentError
-      out = capture(:stdout) do
-        capture(:stderr) do
-          CLI.start ["search", valid_rule]
-          SemanticLogger.flush
-        end
-      end
-
-      # it should output the result in JSON format
-      data = JSON.parse(out)
-      expect(data).is_a?(Hash)
+      expect do
+        CLI.start ["search", "-f", path]
+        SemanticLogger.flush
+      end.to output(/#{rule_id}/).to_stdout
     end
   end
 end

@@ -1,10 +1,10 @@
 # frozen_string_literal: true
 
 RSpec.describe Mihari::Analyzers::CIRCL, :vcr do
-  context "when given a domain" do
+  context "with domain" do
     subject { described_class.new(query) }
 
-    let(:query) { "www.circl.lu" }
+    let!(:query) { "www.circl.lu" }
 
     describe "#artifacts" do
       it do
@@ -13,10 +13,10 @@ RSpec.describe Mihari::Analyzers::CIRCL, :vcr do
     end
   end
 
-  context "when given a hash" do
+  context "with hash" do
     subject { described_class.new(query) }
 
-    let(:query) { "7c552ab044c76d1df4f5ddf358807bfdcd07fa57" }
+    let!(:query) { "7c552ab044c76d1df4f5ddf358807bfdcd07fa57" }
 
     describe "#artifacts" do
       it do
@@ -25,10 +25,10 @@ RSpec.describe Mihari::Analyzers::CIRCL, :vcr do
     end
   end
 
-  context "when given an invalid input" do
+  context "with invalid input" do
     subject { described_class.new(query) }
 
-    let(:query) { "foo bar" }
+    let!(:query) { "foo bar" }
 
     describe "#artifacts" do
       it do
@@ -37,7 +37,7 @@ RSpec.describe Mihari::Analyzers::CIRCL, :vcr do
     end
   end
 
-  context "when api config is not given" do
+  context "without API credentials" do
     before do
       allow(Mihari.config).to receive(:circl_passive_password).and_return(nil)
       allow(Mihari.config).to receive(:circl_passive_username).and_return(nil)
