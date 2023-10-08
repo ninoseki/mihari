@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 RSpec.describe Mihari::Analyzers::OTX, :vcr do
-  context "with IP" do
+  context "with ip" do
     subject { described_class.new(query) }
 
     let(:query) { "89.35.39.84" }

@@ -3,7 +3,7 @@
 RSpec.describe Mihari::Analyzers::Pulsedive, :vcr do
   subject { described_class.new(query) }
 
-  context "with IP" do
+  context "with ip" do
     let(:query) { "1.1.1.1" }
 
     describe "#artifacts" do

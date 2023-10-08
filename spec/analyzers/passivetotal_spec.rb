@@ -3,7 +3,7 @@
 RSpec.describe Mihari::Analyzers::PassiveTotal, :vcr do
   subject { described_class.new(query) }
 
-  context "with IP" do
+  context "with ip" do
     let(:query) { "89.35.39.84" }
 
     describe "#artifacts" do
