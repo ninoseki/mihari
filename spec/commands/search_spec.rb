@@ -14,7 +14,7 @@ RSpec.describe Mihari::Commands::Search, :vcr do
   describe "#search" do
     let!(:path) { File.expand_path("../fixtures/rules/valid_rule.yml", __dir__) }
     let!(:rule_id) do
-      rule = YAML.safe_load_file(path)
+      rule = YAML.safe_load(File.read(path))
       rule["id"]
     end
 
@@ -23,8 +23,6 @@ RSpec.describe Mihari::Commands::Search, :vcr do
         CLI.start ["search", "-f", path]
         SemanticLogger.flush
       end.to output(/#{rule_id}/).to_stdout
-      # "ad001daa-c7cd-4809-a5bd-0c3c64d765fa" is a rule ID
-      # it should be included in the output
     end
   end
 end
