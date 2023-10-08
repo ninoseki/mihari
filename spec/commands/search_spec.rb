@@ -14,20 +14,17 @@ RSpec.describe Mihari::Commands::Search, :vcr do
   end
 
   describe "#search" do
-    let(:valid_rule) { File.expand_path("../fixtures/rules/valid_rule_does_not_need_api_key.yml", __dir__) }
+    let(:rule) { File.expand_path("../fixtures/rules/valid_rule_does_not_need_api_key.yml", __dir__) }
 
     it do
-      # it should not raise ArgumentError
-      out = capture(:stdout) do
-        capture(:stderr) do
-          CLI.start ["search", valid_rule]
+      expect do
+        expect do
+          CLI.start ["search", rule]
           SemanticLogger.flush
-        end
-      end
-
-      # it should output the result in JSON format
-      data = JSON.parse(out)
-      expect(data).is_a?(Hash)
+        end.to output(/test/).to_stdout
+        # "test" is a rule ID
+        # it should be included in the output
+      end.to output.to_stderr
     end
   end
 end

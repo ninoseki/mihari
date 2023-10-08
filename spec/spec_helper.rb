@@ -133,7 +133,6 @@ ENV["APP_ENV"] = "test"
 # load Mihari after modifying ENV values
 require "mihari"
 
-require_relative "./support/helpers/helpers"
 require_relative "./support/shared_contexts/database_context"
 
 RSpec.configure do |config|
@@ -146,8 +145,6 @@ RSpec.configure do |config|
   config.expect_with :rspec do |c|
     c.syntax = :expect
   end
-
-  config.include Spec::Support::Helpers
 
   config.before(:example) do
     Mihari::Database.connect

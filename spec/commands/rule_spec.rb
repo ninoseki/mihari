@@ -35,7 +35,7 @@ RSpec.describe Mihari::Commands::Rule do
     after { FileUtils.rm path }
 
     it do
-      capture(:stderr) { CLI.start ["init", path] }
+      expect { CLI.start ["init", path] }.not_to output.to_stderr
 
       # read logger output
       SemanticLogger.flush
@@ -50,7 +50,7 @@ RSpec.describe Mihari::Commands::Rule do
     let(:path) { File.expand_path("../fixtures/rules/valid_rule.yml", __dir__) }
 
     it do
-      capture(:stderr) { CLI.start ["validate", path] }
+      expect { CLI.start ["validate", path] }.not_to output.to_stderr
 
       # read logger output
       SemanticLogger.flush
