@@ -13,7 +13,7 @@ def development_env?
   env == "development"
 end
 
-class V5Schema < ActiveRecord::Migration[7.0]
+class V5Schema < ActiveRecord::Migration[7.1]
   def change
     create_table :rules, id: :string, if_not_exists: true do |t|
       t.string :title, null: false
@@ -162,7 +162,7 @@ module Mihari
       def close
         return unless ActiveRecord::Base.connected?
 
-        ActiveRecord::Base.clear_active_connections!
+        ActiveRecord::Base.connection_handler.clear_active_connections!
       end
 
       def with_db_connection

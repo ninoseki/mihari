@@ -60,12 +60,12 @@ Gem::Specification.new do |spec|
     spec.add_development_dependency "solargraph", "~> 0.49"
   end
 
-  spec.add_dependency "activerecord", "7.0.8"
+  spec.add_dependency "activerecord", "7.1.0"
   spec.add_dependency "addressable", "2.8.5"
   spec.add_dependency "awrence", "2.0.1"
   spec.add_dependency "dotenv", "2.8.1"
   spec.add_dependency "dry-container", "0.11.0"
-  spec.add_dependency "dry-files", "1.0.1"
+  spec.add_dependency "dry-files", "1.0.2"
   spec.add_dependency "dry-monads", "1.6.0"
   spec.add_dependency "dry-schema", "1.13.3"
   spec.add_dependency "dry-struct", "1.6.0"
