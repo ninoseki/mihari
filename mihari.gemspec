@@ -76,7 +76,7 @@ Gem::Specification.new do |spec|
   spec.add_dependency "grape-entity", "1.0.0"
   spec.add_dependency "grape-swagger", "1.6.1"
   spec.add_dependency "grape-swagger-entity", "0.5.2"
-  spec.add_dependency "insensitive_hash", "0.3.3"
+  spec.add_dependency "http", "5.1.1"
   spec.add_dependency "jr-cli", "0.6.0"
   spec.add_dependency "launchy", "2.5.2"
   spec.add_dependency "memist", "2.0.2"

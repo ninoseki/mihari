@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 require "csv"
-require "insensitive_hash"
 
 module Mihari
   module Feed
@@ -26,14 +25,12 @@ module Mihari
 
       def initialize(url, headers: {}, method: "GET", params: nil, json: nil, data: nil)
         @url = Addressable::URI.parse(url)
-        @headers = headers.insensitive
+        @headers = headers
         @method = method
 
         @params = params
         @json = json
         @data = data
-
-        headers["content-type"] = "application/json" unless json.nil?
       end
 
       #
@@ -43,14 +40,13 @@ module Mihari
         return read_file(url.path) if url.scheme == "file"
 
         res = nil
-        client = HTTP.new(url, headers: headers)
 
-        res = client.get(params: params) if method == "GET"
-        res = client.post(params: params, json: json, data: data) if method == "POST"
+        res = HTTP.get(url, params: params) if method == "GET"
+        res = HTTP.post(url, params: params, json: json, data: data) if method == "POST"
 
         return [] if res.nil?
 
-        body = res.body
+        body = res.body.to_s
         content_type = res["Content-Type"].to_s
         return convert_as_json(body) if content_type.include?("application/json")
 
