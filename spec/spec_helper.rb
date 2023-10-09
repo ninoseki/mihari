@@ -12,6 +12,12 @@ require "vcr"
 
 require "dotenv/load"
 
+def ci_env?
+  # CI=true in GitHub Actions
+  ENV["CI"]
+end
+
+# setup simplecov formatter for coveralls
 class InceptionFormatter
   def format(result)
     Coveralls::SimpleCov::Formatter.new.format(result)
@@ -53,18 +59,11 @@ end
 
 require "coveralls"
 
-def ci_env?
-  # CI=true in GitHub Actions
-  ENV["CI"]
-end
-
 # for Rack app / Sinatra controllers
 ENV["APP_ENV"] = "test"
-
 # Use in-memory SQLite in local test
 ENV["DATABASE_URL"] = "sqlite3:///:memory:" unless ci_env?
 
-# load Mihari after modifying ENV values
 require "mihari"
 
 def authorization_field(username, password)
@@ -83,7 +82,7 @@ VCR.configure do |config|
   secrets = Mihari.config.keys.select { |key| key.end_with?("_SECRET") }
   usernames = Mihari.config.keys.select { |key| key.end_with?("_USERNAME") }
   ids = Mihari.config.keys.select { |key| key.end_with?("_ID") }
-  api_urls = Mihari.config.keys.select { |key| key.end_with?("_URL") }
+  api_urls = Mihari.config.keys.select { |key| key != "DATABASE_URL" && key.end_with?("_URL") }
 
   (api_keys + passwords + secrets + usernames + ids).each do |key|
     ENV[key] = Digest::MD5.hexdigest(key) if ci_env? || !ENV.key?(key)
