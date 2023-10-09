@@ -10,3 +10,5 @@ Metrics/ClassLength:
   Enabled: false
 Metrics/MethodLength:
   Max: 20
+require:
+  - rubocop-rspec

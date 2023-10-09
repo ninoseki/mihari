@@ -4,47 +4,59 @@ RSpec.describe Mihari::TypeChecker do
   subject { described_class }
 
   describe ".type" do
-    context "when given an ip address" do
+    context "when ip" do
+      let!(:ip) { "1.1.1.1" }
       it do
-        expect(subject.type("1.1.1.1")).to eq("ip")
+        expect(subject.type(ip)).to eq("ip")
       end
     end
 
-    context "when given a domain" do
+    context "with domain" do
+      let!(:domain) { "example.com" }
       it do
-        expect(subject.type("example.com")).to eq("domain")
+        expect(subject.type(domain)).to eq("domain")
       end
     end
 
     context "when given a url" do
+      let!(:url) { "http://example.com" }
+
       it do
-        expect(subject.type("http://example.com")).to eq("url")
+        expect(subject.type(url)).to eq("url")
       end
     end
 
-    context "when given a hash" do
+    context "with hash" do
+      let!(:hash) { "275a021bbfb6489e54d471899f7db9d1663fc695ec2fe2a2c4538aabf651fd0f" }
+
       it do
-        expect(subject.type("275a021bbfb6489e54d471899f7db9d1663fc695ec2fe2a2c4538aabf651fd0f")).to eq("hash")
+        expect(subject.type(hash)).to eq("hash")
       end
     end
 
-    context "when given an email" do
+    context "with mail" do
+      let!(:mail) { "example@example.com" }
+
       it do
-        expect(subject.type("example@gmail.com")).to eq("mail")
+        expect(subject.type(mail)).to eq("mail")
       end
     end
   end
 
   describe ".detailed_type" do
-    context "when given a sha256" do
+    context "with sha256" do
+      let!(:sha256) { "275a021bbfb6489e54d471899f7db9d1663fc695ec2fe2a2c4538aabf651fd0f" }
+
       it do
-        expect(subject.detailed_type("275a021bbfb6489e54d471899f7db9d1663fc695ec2fe2a2c4538aabf651fd0f")).to eq("sha256")
+        expect(subject.detailed_type(sha256)).to eq("sha256")
       end
     end
 
-    context "when given a md5" do
+    context "with md5" do
+      let!(:md5) { "44d88612fea8a8f36de82e1278abb02f" }
+
       it do
-        expect(subject.detailed_type("44d88612fea8a8f36de82e1278abb02f")).to eq("md5")
+        expect(subject.detailed_type(md5)).to eq("md5")
       end
     end
   end
