@@ -61,6 +61,13 @@ module Mihari
         Mihari.config.ignore_error
       end
 
+      #
+      # @return [Integer, nil]
+      #
+      def timeout
+        options[:timeout]
+      end
+
       # @return [Array<String>, Array<Mihari::Artifact>]
       def artifacts
         raise NotImplementedError, "You must implement #{self.class}##{__method__}"
@@ -97,7 +104,7 @@ module Mihari
         self.class.to_s.split("::").last
       end
 
-      alias_method :source, :class_name
+      alias source class_name
 
       class << self
         #

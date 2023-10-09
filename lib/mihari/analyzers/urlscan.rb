@@ -44,7 +44,7 @@ module Mihari
       private
 
       def client
-        @client ||= Clients::UrlScan.new(api_key: api_key, interval: interval)
+        @client ||= Clients::UrlScan.new(api_key: api_key, interval: interval, timeout: timeout)
       end
 
       #

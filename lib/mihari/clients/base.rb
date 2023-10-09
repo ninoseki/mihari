@@ -12,14 +12,20 @@ module Mihari
       # @return [Integer, nil]
       attr_reader :interval
 
+      # @return [Integer, nil]
+      attr_reader :timeout
+
       #
       # @param [String] base_url
       # @param [Hash] headers
+      # @param [Integer, nil] interval
+      # @param [Integer, nil] timeout
       #
-      def initialize(base_url, headers: {}, interval: nil)
+      def initialize(base_url, headers: {}, interval: nil, timeout: nil)
         @base_url = base_url
         @headers = headers || {}
         @interval = interval
+        @timeout = timeout
       end
 
       private
@@ -41,20 +47,20 @@ module Mihari
       # @param [String] path
       # @param [Hash, nil] params
       #
-      # @return [String] <description>
+      # @return [::HTTP::Response]
       #
       def get(path, params: nil)
-        HTTP.get(url_for(path), headers: headers, params: params)
+        HTTP.get(url_for(path), headers: headers, timeout: timeout, params: params)
       end
 
       #
       # @param [String] path
       # @param [Hash, nil] json
       #
-      # @return [String] <description>
+      # @return [::HTTP::Response]
       #
       def post(path, json: {})
-        HTTP.post(url_for(path), headers: headers, json: json)
+        HTTP.post(url_for(path), headers: headers, timeout: timeout, json: json)
       end
     end
   end

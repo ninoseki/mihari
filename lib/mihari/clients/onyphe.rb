@@ -12,11 +12,13 @@ module Mihari
       # @param [String] base_url
       # @param [String, nil] api_key
       # @param [Hash] headers
+      # @param [Integer, nil] interval
+      # @param [Integer, nil] timeout
       #
-      def initialize(base_url = "https://www.onyphe.io", api_key:, headers: {}, interval: nil)
+      def initialize(base_url = "https://www.onyphe.io", api_key:, headers: {}, interval: nil, timeout: nil)
         raise(ArgumentError, "'api_key' argument is required") if api_key.nil?
 
-        super(base_url, headers: headers, interval: interval)
+        super(base_url, headers: headers, interval: interval, timeout: timeout)
 
         @api_key = api_key
       end

@@ -11,14 +11,15 @@ module Mihari
       # @param [String, nil] secret
       # @param [Hash] headers
       # @param [Integer, nil] interval
+      # @param [Integer, nil] timeout
       #
-      def initialize(base_url = "https://search.censys.io", id:, secret:, headers: {}, interval: nil)
+      def initialize(base_url = "https://search.censys.io", id:, secret:, headers: {}, interval: nil, timeout: nil)
         raise(ArgumentError, "'id' argument is required") if id.nil?
         raise(ArgumentError, "'secret' argument is required") if secret.nil?
 
         headers["authorization"] = "Basic #{Base64.strict_encode64("#{id}:#{secret}")}"
 
-        super(base_url, headers: headers, interval: interval)
+        super(base_url, headers: headers, interval: interval, timeout: timeout)
       end
 
       #
