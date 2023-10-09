@@ -97,6 +97,10 @@ module Mihari
     attr_reader :ignore_error
 
     def initialize
+      load
+    end
+
+    def load
       @binaryedge_api_key = ENV.fetch("BINARYEDGE_API_KEY", nil)
 
       @censys_id = ENV.fetch("CENSYS_ID", nil)
@@ -152,6 +156,15 @@ module Mihari
       @pagination_limit = ENV.fetch("PAGINATION_LIMIT", 100).to_i
 
       @ignore_error = ENV.fetch("IGNORE_ERROR", false)
+    end
+
+    #
+    # @return [Array<String>]
+    #
+    def keys
+      instance_variables.map do |key|
+        key[1..].to_s.upcase
+      end
     end
   end
 end
