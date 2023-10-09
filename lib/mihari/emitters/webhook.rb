@@ -72,7 +72,7 @@ module Mihari
       def emit
         return if artifacts.empty?
 
-        # returns status code to prevent Parallel issue (it cannot handle HTTP:Response object)
+        # returns body to prevent Parallel issue (Parallel fails to handle HTTP:Response object)
         case method
         when "GET"
           Mihari::HTTP.get(url, headers: headers).body.to_s
