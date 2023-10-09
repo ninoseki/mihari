@@ -19,6 +19,18 @@ class InceptionFormatter
   end
 end
 
+def formatter
+  if ENV["CI"] || ENV["COVERALLS_REPO_TOKEN"]
+    if ENV["GITHUB_ACTIONS"]
+      SimpleCov::Formatter::MultiFormatter.new([InceptionFormatter, SimpleCov::Formatter::LcovFormatter])
+    else
+      InceptionFormatter
+    end
+  else
+    SimpleCov::Formatter::HTMLFormatter
+  end
+end
+
 def setup_formatter
   if ENV["GITHUB_ACTIONS"]
     require "simplecov-lcov"
@@ -28,17 +40,7 @@ def setup_formatter
       c.single_report_path = "coverage/lcov.info"
     end
   end
-
-  SimpleCov.formatter =
-    if ENV["CI"] || ENV["COVERALLS_REPO_TOKEN"]
-      if ENV["GITHUB_ACTIONS"]
-        SimpleCov::Formatter::MultiFormatter.new([InceptionFormatter, SimpleCov::Formatter::LcovFormatter])
-      else
-        InceptionFormatter
-      end
-    else
-      SimpleCov::Formatter::HTMLFormatter
-    end
+  SimpleCov.formatter = formatter
 end
 
 setup_formatter
@@ -136,8 +138,8 @@ require "mihari"
 
 require "test_prof/recipes/rspec/before_all"
 
-require_relative "./support/shared_contexts/database_context"
-require_relative "./support/shared_contexts/logger_context"
+require_relative "support/shared_contexts/database_context"
+require_relative "support/shared_contexts/logger_context"
 
 RSpec.configure do |config|
   # Enable flags like --only-failures and --next-failure

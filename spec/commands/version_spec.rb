@@ -7,11 +7,11 @@ end
 RSpec.describe Mihari::Commands::Version do
   describe "#__print_version" do
     it do
-      expect { CLI.start ["--version"] }.to output(/#{Mihari::VERSION}/).to_stdout
+      expect { CLI.start ["--version"] }.to output(/#{Mihari::VERSION}/o).to_stdout
     end
 
     it do
-      expect { CLI.start ["-v"] }.to output(/#{Mihari::VERSION}/).to_stdout
+      expect { CLI.start ["-v"] }.to output(/#{Mihari::VERSION}/o).to_stdout
     end
   end
 end
