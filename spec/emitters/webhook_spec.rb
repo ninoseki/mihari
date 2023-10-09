@@ -55,6 +55,7 @@ RSpec.describe Mihari::Emitters::Webhook, :vcr do
       res = subject.emit
 
       json_data = JSON.parse(res.body.to_s)["json"]
+      json_data = JSON.parse(res)["json"]
       expect(json_data).to be_a(Hash)
     end
   end

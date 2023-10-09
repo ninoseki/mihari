@@ -72,17 +72,13 @@ module Mihari
       def emit
         return if artifacts.empty?
 
-        client = Mihari::HTTP.new(url, headers: headers)
-
-        res = nil
+        # returns status code to prevent Parallel issue (it cannot handle HTTP:Response object)
         case method
         when "GET"
-          res = client.get
+          Mihari::HTTP.get(url, headers: headers).body.to_s
         when "POST"
-          res = client.post(json: payload)
+          Mihari::HTTP.post(url, headers: headers, json: json).body.to_s
         end
-
-        res
       end
 
       def valid?
@@ -94,11 +90,11 @@ module Mihari
       private
 
       #
-      # Convert payload into string
+      # Render template
       #
       # @return [String]
       #
-      def payload_as_string
+      def rendered_template
         [].tap do |out|
           options = {}
           options[:template] = File.read(template) unless template.nil?
@@ -115,8 +111,8 @@ module Mihari
       #
       # @return [Hash]
       #
-      def payload
-        JSON.parse payload_as_string
+      def json
+        JSON.parse rendered_template
       end
     end
   end
