@@ -33,7 +33,7 @@ module Mihari
       private
 
       def client
-        @client ||= Clients::Onyphe.new(api_key: api_key, interval: interval)
+        @client ||= Clients::Onyphe.new(api_key: api_key, interval: interval, timeout: timeout)
       end
     end
   end

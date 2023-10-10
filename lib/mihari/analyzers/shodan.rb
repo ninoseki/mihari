@@ -34,7 +34,7 @@ module Mihari
       # @return [Clients::Shodan]
       #
       def client
-        @client ||= Clients::Shodan.new(api_key: api_key, interval: interval)
+        @client ||= Clients::Shodan.new(api_key: api_key, interval: interval, timeout: timeout)
       end
     end
   end

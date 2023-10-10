@@ -8,13 +8,14 @@ module Mihari
       # @param [String, nil] api_key
       # @param [Hash] headers
       # @param [Interval, nil] interval
+      # @param [Interval, nil] timeout
       #
-      def initialize(base_url = "https://urlscan.io", api_key:, headers: {}, interval: nil)
+      def initialize(base_url = "https://urlscan.io", api_key:, headers: {}, interval: nil, timeout: nil)
         raise(ArgumentError, "'api_key' argument is required") if api_key.nil?
 
         headers["api-key"] = api_key
 
-        super(base_url, headers: headers, interval: interval)
+        super(base_url, headers: headers, interval: interval, timeout: timeout)
       end
 
       #

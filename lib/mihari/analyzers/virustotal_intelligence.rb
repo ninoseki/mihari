@@ -33,7 +33,7 @@ module Mihari
       # @return [::VirusTotal::API]
       #
       def client
-        @client = Clients::VirusTotal.new(api_key: api_key, interval: interval)
+        @client = Clients::VirusTotal.new(api_key: api_key, interval: interval, timeout: timeout)
       end
     end
   end

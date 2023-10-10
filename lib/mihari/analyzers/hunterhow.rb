@@ -46,7 +46,7 @@ module Mihari
       private
 
       def client
-        @client ||= Clients::HunterHow.new(api_key: api_key, interval: interval)
+        @client ||= Clients::HunterHow.new(api_key: api_key, interval: interval, timeout: timeout)
       end
     end
   end
