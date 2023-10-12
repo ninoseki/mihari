@@ -3,6 +3,26 @@
 require "http"
 
 module Mihari
+  class BetterError < ::HTTP::Feature
+    def wrap_response(response)
+      unless response.status.success?
+        raise StatusCodeError.new(
+          "Unsuccessful response code returned: #{response.code}",
+          response.code,
+          response.body.to_s
+        )
+      end
+      response
+    end
+
+    def on_error(_request, error)
+      raise TimeoutError, error if error.is_a?(::HTTP::TimeoutError)
+      raise NetworkError, error if error.is_a?(::HTTP::Error)
+    end
+
+    ::HTTP::Options.register_feature(:better_error, self)
+  end
+
   class HTTP
     class << self
       #
@@ -16,10 +36,9 @@ module Mihari
       # @return [Net::HTTPResponse]
       #
       def get(uri, headers: {}, timeout: nil, params: nil)
-        client = ::HTTP::Client.new.headers(headers)
+        client = ::HTTP.use(:better_error).headers(headers)
         client = client.timeout(timeout) unless timeout.nil?
-
-        handle_request client, :get, uri, params: params
+        client.get uri, params: params
       end
 
       #
@@ -35,37 +54,9 @@ module Mihari
       # @return [Net::HTTPResponse]
       #
       def post(uri, headers: {}, timeout: nil, params: nil, json: nil, data: nil)
-        client = ::HTTP::Client.new.headers(headers)
+        client = ::HTTP.use(:better_error).headers(headers)
         client = client.timeout(timeout) unless timeout.nil?
-
-        handle_request client, :post, uri, params: params, json: json, form: data
-      end
-
-      private
-
-      #
-      # Make a HTTP request
-      #
-      # @param [Net::HTTPRequest] req
-      #
-      # @return [::HTTP::Response]
-      #
-      def handle_request(client, method, uri, options = {})
-        res = client.request(method, uri, options)
-        unless res.status.success?
-          raise StatusCodeError.new(
-            "Unsuccessful response code returned: #{res.code}",
-            res.code,
-            res.body.to_s
-          )
-        end
-        res
-      rescue ::HTTP::TimeoutError => e
-        raise TimeoutError, e
-      rescue ::HTTP::Error => e
-        raise NetworkError, e
-      rescue OpenSSL::SSL::SSLError => e
-        raise SSLError, e
+        client.post uri, params: params, json: json, form: data
       end
     end
   end

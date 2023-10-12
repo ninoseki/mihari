@@ -20,8 +20,6 @@ module Mihari
 
   class TimeoutError < HTTPError; end
 
-  class SSLError < HTTPError; end
-
   class StatusCodeError < HTTPError
     # @return [Integer]
     attr_reader :status_code
