@@ -34,7 +34,7 @@ module Mihari
           headers[:authorization] = "Bearer #{token}" unless token.nil?
 
           url = "https://ipinfo.io/#{ip}/json"
-          res = HTTP.get(url, headers: headers)
+          res = HTTP::Factory.build(headers: headers).get(url)
           data = JSON.parse(res.body.to_s)
 
           Structs::IPInfo::Response.from_dynamic! data

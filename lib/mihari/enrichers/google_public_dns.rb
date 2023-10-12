@@ -37,7 +37,7 @@ module Mihari
         def query_by_type(name, resource_type)
           url = "https://dns.google/resolve"
           params = { name: name, type: resource_type }
-          res = HTTP.get(url, params: params)
+          res = HTTP::Factory.build.get(url, params: params)
 
           data = JSON.parse(res.body.to_s)
 

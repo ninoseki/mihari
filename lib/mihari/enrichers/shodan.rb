@@ -23,7 +23,7 @@ module Mihari
         #
         def query(ip)
           url = "https://internetdb.shodan.io/#{ip}"
-          res = HTTP.get(url)
+          res = HTTP::Factory.build.get(url)
           data = JSON.parse(res.body.to_s)
 
           Structs::Shodan::InternetDBResponse.from_dynamic! data

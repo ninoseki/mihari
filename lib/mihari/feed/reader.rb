@@ -39,10 +39,11 @@ module Mihari
       def read
         return read_file(url.path) if url.scheme == "file"
 
-        res = nil
+        http = HTTP::Factory.build(headers: headers)
 
-        res = HTTP.get(url, params: params) if method == "GET"
-        res = HTTP.post(url, params: params, json: json, data: data) if method == "POST"
+        res = nil
+        res = http.get(url, params: params) if method == "GET"
+        res = http.post(url, params: params, json: json, form: data) if method == "POST"
 
         return [] if res.nil?
 

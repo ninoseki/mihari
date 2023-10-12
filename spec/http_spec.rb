@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-RSpec.describe Mihari::HTTP, :vcr do
+RSpec.describe Mihari::HTTP::Factory, :vcr do
   describe ".post" do
     let!(:headers) { { foo: "bar" } }
     let!(:payload) { { foo: "bar" } }
@@ -8,7 +8,7 @@ RSpec.describe Mihari::HTTP, :vcr do
     context "with application/x-www-form-urlencoded" do
       it do
         headers["content-type"] = "application/x-www-form-urlencoded"
-        res = described_class.post("https://httpbin.org/post", headers: headers, data: payload)
+        res = described_class.build(headers: headers).post("https://httpbin.org/post", form: payload)
 
         data = JSON.parse(res.body.to_s)
 
@@ -20,7 +20,7 @@ RSpec.describe Mihari::HTTP, :vcr do
     context "with application/json" do
       it do
         headers["content-type"] = "application/json"
-        res = described_class.post("https://httpbin.org/post", headers: headers, json: payload)
+        res = described_class.build(headers: headers).post("https://httpbin.org/post", json: payload)
 
         data = JSON.parse(res.body.to_s)
 
