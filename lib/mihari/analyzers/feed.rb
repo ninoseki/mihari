@@ -59,6 +59,7 @@ module Mihari
           query,
           method: method,
           headers: headers,
+          timeout: timeout,
           params: params,
           json: json,
           data: data
