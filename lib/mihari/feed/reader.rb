@@ -23,10 +23,14 @@ module Mihari
       # @return [String]
       attr_reader :method
 
-      def initialize(url, headers: {}, method: "GET", params: nil, json: nil, data: nil)
+      # @return [Integer, nil]
+      attr_reader :timeout
+
+      def initialize(url, headers: {}, method: "GET", params: nil, json: nil, data: nil, timeout: nil)
         @url = Addressable::URI.parse(url)
         @headers = headers
         @method = method
+        @timeout = timeout
 
         @params = params
         @json = json
@@ -97,7 +101,7 @@ module Mihari
       private
 
       def http
-        HTTP::Factory.build(headers: headers)
+        HTTP::Factory.build headers: headers, timeout: timeout
       end
     end
   end
