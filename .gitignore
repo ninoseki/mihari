@@ -57,6 +57,8 @@ Gemfile.lock
 
 # SQLite
 *.db
+*.db-shm
+*.db-wal
 
 # Config
 mihari.yml
