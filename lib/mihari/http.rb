@@ -33,7 +33,9 @@ module Mihari
         # @return [::HTTP::Client]
         #
         def build(headers: {}, timeout: nil)
-          ::HTTP.use(:better_error).headers(headers).timeout(timeout || {})
+          client = ::HTTP.use(:better_error).headers(headers)
+          client.timeout(timeout) unless timeout.nil?
+          client
         end
       end
     end
