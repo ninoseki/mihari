@@ -37,13 +37,19 @@ module Mihari
         def query_by_type(name, resource_type)
           url = "https://dns.google/resolve"
           params = { name: name, type: resource_type }
-          res = HTTP.get(url, params: params)
+          res = http.get(url, params: params)
 
           data = JSON.parse(res.body.to_s)
 
           Structs::GooglePublicDNS::Response.from_dynamic! data
         rescue HTTPError
           nil
+        end
+
+        private
+
+        def http
+          HTTP::Factory.build
         end
       end
     end

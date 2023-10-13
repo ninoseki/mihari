@@ -40,9 +40,8 @@ module Mihari
         return read_file(url.path) if url.scheme == "file"
 
         res = nil
-
-        res = HTTP.get(url, params: params) if method == "GET"
-        res = HTTP.post(url, params: params, json: json, data: data) if method == "POST"
+        res = http.get(url, params: params) if method == "GET"
+        res = http.post(url, params: params, json: json, form: data) if method == "POST"
 
         return [] if res.nil?
 
@@ -93,6 +92,12 @@ module Mihari
         return convert_as_json(text) if path.end_with?(".json")
 
         convert_as_csv text
+      end
+
+      private
+
+      def http
+        HTTP::Factory.build(headers: headers)
       end
     end
   end

@@ -28,18 +28,25 @@ module Mihari
         # @return [Mihari::Structs::IPInfo::Response, nil]
         #
         def query(ip)
-          headers = {}
-
-          token = Mihari.config.ipinfo_api_key
-          headers[:authorization] = "Bearer #{token}" unless token.nil?
-
           url = "https://ipinfo.io/#{ip}/json"
-          res = HTTP.get(url, headers: headers)
+          res = http.get(url)
           data = JSON.parse(res.body.to_s)
 
           Structs::IPInfo::Response.from_dynamic! data
         end
         memoize :query
+
+        private
+
+        def headers
+          token = Mihari.config.ipinfo_api_key
+          authorization = token.nil? ? nil : "Bearer #{token}"
+          { authorization: authorization }.compact
+        end
+
+        def http
+          HTTP::Factory.build headers: headers
+        end
       end
     end
   end

@@ -75,9 +75,9 @@ module Mihari
         # returns body to prevent Parallel issue (Parallel fails to handle HTTP:Response object)
         case method
         when "GET"
-          Mihari::HTTP.get(url, headers: headers).body.to_s
+          http.get(url).body.to_s
         when "POST"
-          Mihari::HTTP.post(url, headers: headers, json: json).body.to_s
+          http.post(url, json: json).body.to_s
         end
       end
 
@@ -88,6 +88,10 @@ module Mihari
       end
 
       private
+
+      def http
+        HTTP::Factory.build headers: headers
+      end
 
       #
       # Render template
