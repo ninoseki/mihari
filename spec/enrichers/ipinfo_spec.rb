@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 RSpec.describe Mihari::Enrichers::IPInfo, vcr: "Mihari_Enrichers_IPInfo/ip:1.1.1.1" do
-  subject { described_class }
+  subject { described_class.new }
 
   describe ".query" do
     let!(:ip) { "1.1.1.1" }

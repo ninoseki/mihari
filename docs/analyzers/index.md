@@ -27,7 +27,7 @@ analyzer: ...
 query: ...
 options:
   timeout: ...
-  interval: ...
+  pagination_interval: ...
   pagination_limit: ...
   retry_times: ...
   retry_interval: ...
@@ -37,34 +37,34 @@ options:
 
 ### Timeout
 
-`timeout` is an HTTP timeout in seconds. Optional.
+`timeout` (`integer`) is an HTTP timeout in seconds. Optional.
 
 ### Pagination Interval
 
-`pagination_interval` (`int`) is an interval in seconds between pagination. Defaults to 0.
+`pagination_interval` (`integer`) is an interval in seconds between pagination. Optional. Defaults to 0.
 
 ### Pagination Limit
 
-`pagination_limit` is an limit for pagination. Defaults to 100.
+`pagination_limit` (`integer`) is an limit for pagination. Optional. Defaults to 100.
 
 In the worst case, if something wrong with Mihari or a service, Mihari can drain API quota by doing pagination forever.
 `pagination_limit` is a safety valve for that. A number of pagination is limited as `pagination_limit` times.
 
 ### Retry Times
 
-`retry_times` is a number of times of retry when something goes wrong. Defaults to 3.
+`retry_times` (`integer`) is a number of times of retry when something goes wrong. Optional. Defaults to 3.
 
 ### Retry Interval
 
-`retry_interval` is an interval in seconds between retries. Defaults to 5.
+`retry_interval` (`integer`) is an interval in seconds between retries. Optional. Defaults to 5.
 
 ### Retry Exponential Backoff
 
-`retry_exponential_backoff` (`bool`) controls whether to do exponential backoff. Defaults to `true`.
+`retry_exponential_backoff` (`bool`) controls whether to do exponential backoff. Optional. Defaults to `true`.
 
 ### Ignore Error
 
-`ignore_error` controls whether to ignore an error or not. Defaults to `false`.
+`ignore_error` (`bool`) controls whether to ignore an error or not. Optional. Defaults to `false`.
 
 Mihari uses fail-fast approach. For example, if Shodan returns an error, the Censys query next is not triggered because Mihari raises an error before it.
 

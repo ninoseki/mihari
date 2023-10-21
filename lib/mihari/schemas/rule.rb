@@ -25,9 +25,13 @@ module Mihari
         AnalyzerWithoutAPIKey | AnalyzerWithAPIKey | Censys | CIRCL | PassiveTotal | ZoomEye | Crtsh | Feed | HunterHow
       end
 
-      optional(:emitters).value(:array).each { Database | MISP | TheHive | Slack | Webhook }.default(DEFAULT_EMITTERS)
+      optional(:emitters).value(:array).each do
+        Emitters::Database | Emitters::MISP | Emitters::TheHive | Emitters::Slack | Emitters::Webhook
+      end.default(DEFAULT_EMITTERS)
 
-      optional(:enrichers).value(:array).each(Enricher).default(DEFAULT_ENRICHERS)
+      optional(:enrichers).value(:array).each do
+        Enrichers::Whois | Enrichers::IPInfo | Enrichers::Shodan | Enrichers::GooglePublicDNS
+      end.default(DEFAULT_ENRICHERS)
 
       optional(:data_types).value(array[Types::DataTypes]).default(DEFAULT_DATA_TYPES)
       optional(:falsepositives).value(array[:string]).default([])
