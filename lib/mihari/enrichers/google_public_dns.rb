@@ -41,7 +41,7 @@ module Mihari
       private
 
       def http
-        HTTP::Factory.build
+        HTTP::Factory.build timeout: timeout
       end
     end
   end

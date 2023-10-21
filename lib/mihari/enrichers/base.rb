@@ -36,6 +36,13 @@ module Mihari
         options[:retry_times] || Mihari.config.retry_times
       end
 
+      #
+      # @return [Integer, nil]
+      #
+      def timeout
+        options[:timeout]
+      end
+
       def query_result(value)
         Try[StandardError] do
           retry_on_error(

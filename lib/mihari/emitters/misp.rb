@@ -71,7 +71,7 @@ module Mihari
       end
 
       def client
-        @client ||= Clients::MISP.new(url, api_key: api_key)
+        @client ||= Clients::MISP.new(url, api_key: api_key, timeout: timeout)
       end
 
       #

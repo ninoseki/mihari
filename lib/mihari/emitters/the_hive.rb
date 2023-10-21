@@ -80,7 +80,7 @@ module Mihari
       end
 
       def client
-        @client ||= Clients::TheHive.new(url, api_key: api_key, api_version: normalized_api_version)
+        @client ||= Clients::TheHive.new(url, api_key: api_key, api_version: normalized_api_version, timeout: timeout)
       end
 
       #
