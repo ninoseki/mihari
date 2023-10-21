@@ -13,17 +13,19 @@ plugins:
         case: lower
 
 nav:
-  - Mihari: index.md
   - Requirements: requirements.md
   - Installation: installation.md
   - How to Write a Rule: rule.md
   - Usage: usage.md
   - Configuration: configuration.md
-  - GitHub Actions: github_actions.md
-  - Analyzers: "analyzers/index.md"
-  - Enrichers: "enrichers/index.md"
-  - Emitters: "emitters/index.md"
-  - Tags: "./tags.md"
+  - Tips:
+      - GitHub Actions: github_actions.md
+      - Alternatives: alternatives.md
+  - References:
+      - Analyzers: "analyzers/index.md"
+      - Enrichers: "enrichers/index.md"
+      - Emitters: "emitters/index.md"
+      - Tags: "./tags.md"
 
 markdown_extensions:
   - toc:

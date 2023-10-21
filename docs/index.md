@@ -9,5 +9,3 @@ Mihari can aggregate multiple searches across multiple services in a single rule
 - [How to Write a Rule](./rule.md)
 - [Usage](./usage.md)
 - [Configuration](./configuration.md)
-- [GitHub Actions](./github_actions.md)
-- [Alternatives](./alternatives.md)

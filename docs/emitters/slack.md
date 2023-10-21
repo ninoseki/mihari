@@ -19,8 +19,8 @@ channel: ...
 
 ### Webhook URL
 
-`url` is a Slack's incoming webhook URL. Optional. Defaults to `ENV[SLACK_WEBHOOK_URL]`.
+`url` (`string`) is a Slack's incoming webhook URL. Optional. Defaults to `ENV[SLACK_WEBHOOK_URL]`.
 
 ### API Key
 
-`channel` is a Slack channel to sent a message. Optional. Defaults to `ENV[SLACK_CHANNEL]` or `#general`.
+`channel` (`string`) is a Slack channel to sent a message. Optional. Defaults to `ENV[SLACK_CHANNEL]` or `#general`.

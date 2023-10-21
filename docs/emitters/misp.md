@@ -14,8 +14,8 @@ api_key: ...
 
 ### URL
 
-`url` is a MISP URL. Optional. Defaults to `ENV[MISP_URL]`.
+`url` (`string`) is a MISP URL. Optional. Defaults to `ENV[MISP_URL]`.
 
 ### API Key
 
-`api_key` is an API key. Optional. Defaults to `ENV[”MISP_API_KEY”]`.
+`api_key` (`string`) is an API key. Optional. Defaults to `ENV[”MISP_API_KEY”]`.

@@ -30,8 +30,8 @@ api_key: ...
 
 ### Query
 
-`query` is a passive DNS search/reverse whois query. Domain, IP address or mail.
+`query` (`string`) is a passive DNS search/reverse whois query. Domain, IP address or mail.
 
 ### API Key
 
-`api_key` is an API key. Optional. Defaults to `ENV[”SECURITYTRAILS_API_KEY"]`.
+`api_key` (`string`) is an API key. Optional. Defaults to `ENV[”SECURITYTRAILS_API_KEY"]`.

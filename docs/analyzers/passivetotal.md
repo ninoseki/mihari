@@ -33,7 +33,7 @@ api_key: ...
 
 ### Query
 
-`query` is a passive DNS/SSL or reverse whois search query. Domain, IP address, mail or SHA1 certificate fingerprint.
+`query` (`string`) is a passive DNS/SSL or reverse whois search query. Domain, IP address, mail or SHA1 certificate fingerprint.
 
 - Passive DNS: Domain, IP Address
 - Passive SSL: SHA1 certificate fingerprint
@@ -41,8 +41,8 @@ api_key: ...
 
 ### Username
 
-`username` is a username. Optional. Defaults to `ENV[”PASSIVETOTAL_USERNAME"]`.
+`username` (`string`) is a username. Optional. Defaults to `ENV[”PASSIVETOTAL_USERNAME"]`.
 
 ### API Key
 
-`api_key` is an API key. Optional. Defaults to `ENV[”PASSIVETOTAL_API_KEY"]`.
+`api_key` (`string`) is an API key. Optional. Defaults to `ENV[”PASSIVETOTAL_API_KEY"]`.
