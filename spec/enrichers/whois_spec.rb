@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 RSpec.describe Mihari::Enrichers::Whois, :vcr do
-  subject { described_class }
+  subject { described_class.new }
 
   describe ".query" do
     let!(:domain) { "example.com" }

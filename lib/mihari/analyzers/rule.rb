@@ -35,17 +35,24 @@ module Mihari
       "webhook" => Emitters::Webhook
     }.freeze
 
+    ENRICHER_TO_CLASS = {
+      "whois" => Enrichers::Whois,
+      "ipinfo" => Enrichers::IPInfo,
+      "shodan" => Enrichers::Shodan,
+      "google_public_dns" => Enrichers::GooglePublicDNS
+    }.freeze
+
     class Rule
       include Mixins::FalsePositive
 
-      # @return [Mihari::Services::Rule]
+      # @return [Mihari::Services::RuleProxy]
       attr_reader :rule
 
       # @return [Time]
       attr_reader :base_time
 
       #
-      # @param [Mihari::Services::Rule] rule
+      # @param [Mihari::Services::RuleProxy] rule
       #
       def initialize(rule)
         @rule = rule
@@ -106,7 +113,7 @@ module Mihari
       #
       def enriched_artifacts
         @enriched_artifacts ||= Parallel.map(unique_artifacts) do |artifact|
-          rule.enrichers.each { |enricher| artifact.enrich_by_enricher enricher[:enricher] }
+          enrichers.each { |enricher| artifact.enrich_by_enricher enricher }
           artifact
         end
       end
@@ -194,21 +201,17 @@ module Mihari
       end
 
       #
-      # Deep copied emitters
-      #
       # @return [Array<Mihari::Emitters::Base>]
       #
       def emitters
         rule.emitters.map(&:deep_dup).map do |params|
-          copied = params.deep_dup
-
           name = params[:emitter]
           options = params[:options]
 
-          %i[emitter options].each { |key| copied.delete key }
+          %i[emitter options].each { |key| params.delete key }
 
           klass = get_emitter_class(name)
-          klass.new(artifacts: enriched_artifacts, rule: rule, options: options, **copied)
+          klass.new(artifacts: enriched_artifacts, rule: rule, options: options, **params)
         end
       end
 
@@ -217,6 +220,35 @@ module Mihari
       #
       def valid_emitters
         emitters.select(&:valid?)
+      end
+
+      #
+      # Get enricher class
+      #
+      # @param [String] enricher_name
+      #
+      # @return [Class<Mihari::Enrichers::Base>] enricher class
+      #
+      def get_enricher_class(enricher_name)
+        enricher = ENRICHER_TO_CLASS[enricher_name]
+        return enricher if enricher
+
+        raise ArgumentError, "#{enricher_name} is not supported"
+      end
+
+      #
+      # @return [Array<Mihari::Enrichers::Base>] enrichers
+      #
+      def enrichers
+        @enrichers ||= rule.enrichers.map(&:deep_dup).map do |params|
+          name = params[:enricher]
+          options = params[:options]
+
+          %i[enricher options].each { |key| params.delete key }
+
+          klass = get_enricher_class(name)
+          klass.new(options: options, **params)
+        end
       end
 
       #

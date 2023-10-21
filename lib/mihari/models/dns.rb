@@ -11,11 +11,12 @@ module Mihari
       # Build DNS records
       #
       # @param [String] domain
+      # @param [Mihari::Enrichers::Shodan] enricher
       #
       # @return [Array<Mihari::DnsRecord>]
       #
-      def build_by_domain(domain)
-        result = Enrichers::GooglePublicDNS.query_result(domain).bind do |responses|
+      def build_by_domain(domain, enricher: Enrichers::GooglePublicDNS.new)
+        result = enricher.query_result(domain).bind do |responses|
           Success(
             responses.map do |res|
               res.answers.map do |answer|

@@ -5,36 +5,28 @@ require "net/https"
 module Mihari
   module Enrichers
     class Shodan < Base
-      # @return [Boolean]
-      def valid?
-        true
+      include Memist::Memoizable
+
+      #
+      # Query Shodan Internet DB
+      #
+      # @param [String] ip
+      #
+      # @return [Mihari::Structs::Shodan::InternetDBResponse, nil]
+      #
+      def query(ip)
+        url = "https://internetdb.shodan.io/#{ip}"
+        res = http.get(url)
+        data = JSON.parse(res.body.to_s)
+
+        Structs::Shodan::InternetDBResponse.from_dynamic! data
       end
+      memoize :query
 
-      class << self
-        include Dry::Monads[:result]
-        include Memist::Memoizable
+      private
 
-        #
-        # Query Shodan Internet DB
-        #
-        # @param [String] ip
-        #
-        # @return [Mihari::Structs::Shodan::InternetDBResponse, nil]
-        #
-        def query(ip)
-          url = "https://internetdb.shodan.io/#{ip}"
-          res = http.get(url)
-          data = JSON.parse(res.body.to_s)
-
-          Structs::Shodan::InternetDBResponse.from_dynamic! data
-        end
-        memoize :query
-
-        private
-
-        def http
-          HTTP::Factory.build
-        end
+      def http
+        HTTP::Factory.build
       end
     end
   end

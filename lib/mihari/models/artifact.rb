@@ -73,64 +73,78 @@ module Mihari
     #
     # Enrich(add) whois record
     #
-    def enrich_whois
+    # @param [Mihari::Enrichers::Whois] enricher
+    #
+    def enrich_whois(enricher = Enrichers::Whois.new)
       return unless can_enrich_whois?
 
-      self.whois_record = WhoisRecord.build_by_domain(normalize_as_domain(data))
+      self.whois_record = WhoisRecord.build_by_domain(normalize_as_domain(data), enricher: enricher)
     end
 
     #
     # Enrich(add) DNS records
     #
-    def enrich_dns
+    # @param [Mihari::Enrichers::GooglePublicDNS] enricher
+    #
+    def enrich_dns(enricher = Enrichers::GooglePublicDNS.new)
       return unless can_enrich_dns?
 
-      self.dns_records = DnsRecord.build_by_domain(normalize_as_domain(data))
+      self.dns_records = DnsRecord.build_by_domain(normalize_as_domain(data), enricher: enricher)
     end
 
     #
     # Enrich(add) reverse DNS names
     #
-    def enrich_reverse_dns
+    # @param [Mihari::Enrichers::Shodan] enricher
+    #
+    def enrich_reverse_dns(enricher = Enrichers::Shodan.new)
       return unless can_enrich_revese_dns?
 
-      self.reverse_dns_names = ReverseDnsName.build_by_ip(data)
+      self.reverse_dns_names = ReverseDnsName.build_by_ip(data, enricher: enricher)
     end
 
     #
     # Enrich(add) geolocation
     #
-    def enrich_geolocation
+    # @param [Mihari::Enrichers::IPInfo] enricher
+    #
+    def enrich_geolocation(enricher = Enrichers::IPInfo.new)
       return unless can_enrich_geolocation?
 
-      self.geolocation = Geolocation.build_by_ip(data)
+      self.geolocation = Geolocation.build_by_ip(data, enricher: enricher)
     end
 
     #
     # Enrich AS
     #
-    def enrich_autonomous_system
+    # @param [Mihari::Enrichers::IPInfo] enricher
+    #
+    def enrich_autonomous_system(enricher = Enrichers::IPInfo.new)
       return unless can_enrich_autonomous_system?
 
-      self.autonomous_system = AutonomousSystem.build_by_ip(data)
+      self.autonomous_system = AutonomousSystem.build_by_ip(data, enricher: enricher)
     end
 
     #
     # Enrich ports
     #
-    def enrich_ports
+    # @param [Mihari::Enrichers::Shodan] enricher
+    #
+    def enrich_ports(enricher = Enrichers::Shodan.new)
       return unless can_enrich_ports?
 
-      self.ports = Port.build_by_ip(data)
+      self.ports = Port.build_by_ip(data, enricher: enricher)
     end
 
     #
     # Enrich CPEs
     #
-    def enrich_cpes
+    # @param [Mihari::Enrichers::Shodan] enricher
+    #
+    def enrich_cpes(enricher = Enrichers::Shodan.new)
       return unless can_enrich_cpes?
 
-      self.cpes = CPE.build_by_ip(data)
+      self.cpes = CPE.build_by_ip(data, enricher: enricher)
     end
 
     #
@@ -147,32 +161,32 @@ module Mihari
     end
 
     ENRICH_METHODS_BY_ENRICHER = {
-      whois: [
-        :enrich_whois
+      Enrichers::Whois => %i[
+        enrich_whois
       ],
-      ipinfo: %i[
+      Enrichers::IPInfo => %i[
         enrich_autonomous_system
         enrich_geolocation
       ],
-      shodan: %i[
+      Enrichers::Shodan => %i[
         enrich_ports
         enrich_cpes
         enrich_reverse_dns
       ],
-      google_public_dns: [
-        :enrich_dns
+      Enrichers::GooglePublicDNS => %i[
+        enrich_dns
       ]
     }.freeze
 
     #
     # Enrich by name of enricher
     #
-    # @param [String] enricher
+    # @param [Mihari::Enrichers::Base] enricher
     #
     def enrich_by_enricher(enricher)
-      methods = ENRICH_METHODS_BY_ENRICHER[enricher.downcase.to_sym] || []
+      methods = ENRICH_METHODS_BY_ENRICHER[enricher.class] || []
       methods.each do |method|
-        send(method) if respond_to?(method)
+        send(method, enricher) if respond_to?(method)
       end
     end
 

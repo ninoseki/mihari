@@ -15,7 +15,7 @@ module Mihari
         get "/:ip", requirements: { ip: %r{[^/]+} } do
           ip = params[:ip].to_s
 
-          data = Enrichers::IPInfo.query(ip)
+          data = Enrichers::IPInfo.new.query(ip)
           error!({ message: "IP:#{ip} is not found" }, 404) if data.nil?
 
           present data, with: Entities::IPAddress

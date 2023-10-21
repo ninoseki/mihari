@@ -139,7 +139,7 @@ RSpec.describe Mihari::Artifact, :vcr do
         expect(artifact.autonomous_system).to eq(nil)
         expect(artifact.geolocation).to eq(nil)
 
-        artifact.enrich_by_enricher("ipinfo")
+        artifact.enrich_by_enricher(Mihari::Enrichers::IPInfo.new)
         expect(artifact.autonomous_system).not_to eq(nil)
         expect(artifact.geolocation).not_to eq(nil)
       end
@@ -153,7 +153,7 @@ RSpec.describe Mihari::Artifact, :vcr do
         expect(artifact.reverse_dns_names.empty?).to be true
         expect(artifact.ports.empty?).to be true
 
-        artifact.enrich_by_enricher("shodan")
+        artifact.enrich_by_enricher(Mihari::Enrichers::Shodan.new)
         expect(artifact.reverse_dns_names.empty?).to be false
         expect(artifact.ports.empty?).to be false
       end
@@ -166,7 +166,7 @@ RSpec.describe Mihari::Artifact, :vcr do
         artifact = described_class.new(data: data, alert_id: alert_id)
         expect(artifact.dns_records.empty?).to be true
 
-        artifact.enrich_by_enricher("google_public_dns")
+        artifact.enrich_by_enricher(Mihari::Enrichers::GooglePublicDNS.new)
         expect(artifact.dns_records.empty?).to be false
       end
     end
@@ -178,7 +178,7 @@ RSpec.describe Mihari::Artifact, :vcr do
         artifact = described_class.new(data: data, alert_id: alert_id)
         expect(artifact.whois_record).to be_nil
 
-        artifact.enrich_by_enricher("whois")
+        artifact.enrich_by_enricher(Mihari::Enrichers::Whois.new)
         expect(artifact.whois_record).not_to be_nil
       end
     end

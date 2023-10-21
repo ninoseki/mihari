@@ -11,11 +11,12 @@ module Mihari
       # Build AS
       #
       # @param [String] ip
+      # @param [Mihari::Enrichers::IPInfo] enricher
       #
       # @return [Mihari::AutonomousSystem, nil]
       #
-      def build_by_ip(ip)
-        result = Enrichers::IPInfo.query_result(ip).bind do |res|
+      def build_by_ip(ip, enricher: Enrichers::IPInfo.new)
+        result = enricher.query_result(ip).bind do |res|
           value = res&.asn
           if value.nil?
             Success nil

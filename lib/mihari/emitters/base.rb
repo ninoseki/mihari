@@ -20,6 +20,7 @@ module Mihari
       #
       # @param [Array<Mihari::Artifact>] artifacts
       # @param [Mihari::Services::RuleProxy] rule
+      # @param [Hash, nil] options
       # @param [Hash] **_params
       #
       def initialize(artifacts:, rule:, options: nil, **_params)
@@ -54,18 +55,16 @@ module Mihari
         raise NotImplementedError, "You must implement #{self.class}##{__method__}"
       end
 
-      def run
-        retry_on_error(
-          times: retry_times,
-          interval: retry_interval,
-          exponential_backoff: retry_exponential_backoff
-        ) do
-          emit
-        end
-      end
-
       def result
-        Try[StandardError] { run }.to_result
+        Try[StandardError] do
+          retry_on_error(
+            times: retry_times,
+            interval: retry_interval,
+            exponential_backoff: retry_exponential_backoff
+          ) do
+            emit
+          end
+        end.to_result
       end
 
       def emit

@@ -12,12 +12,13 @@ module Mihari
       #
       # Build whois record
       #
-      # @param [Stinrg] domain
+      # @param [String] domain
+      # @param [Mihari::Enrichers::Whois] enricher
       #
       # @return [WhoisRecord, nil]
       #
-      def build_by_domain(domain)
-        result = Enrichers::Whois.query_result(domain)
+      def build_by_domain(domain, enricher: Enrichers::Whois.new)
+        result = enricher.query_result(domain)
         result.value_or nil
       end
     end

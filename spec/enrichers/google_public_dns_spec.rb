@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 RSpec.describe Mihari::Enrichers::GooglePublicDNS, :vcr do
-  subject { described_class }
+  subject { described_class.new }
 
   describe ".query" do
     let!(:name) { "example.com" }

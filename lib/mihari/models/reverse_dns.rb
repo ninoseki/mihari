@@ -11,11 +11,12 @@ module Mihari
       # Build reverse DNS names
       #
       # @param [String] ip
+      # @param [Mihari::Enrichers::Shodan] enricher
       #
       # @return [Array<Mihari::ReverseDnsName>]
       #
-      def build_by_ip(ip)
-        result = Enrichers::Shodan.query_result(ip).bind do |res|
+      def build_by_ip(ip, enricher: Enrichers::Shodan.new)
+        result = enricher.query_result(ip).bind do |res|
           if res.nil?
             Success []
           else

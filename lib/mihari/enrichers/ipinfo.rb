@@ -5,9 +5,15 @@ require "net/https"
 module Mihari
   module Enrichers
     class IPInfo < Base
-      # @return [Boolean]
-      def valid?
-        Mihari.config.ipinfo_api_key.nil?
+      include Memist::Memoizable
+
+      # @return [String, nil]
+      attr_reader :api_key
+
+      def initialize(options: nil, api_key: nil)
+        @api_key = api_key || Mihari.config.ipinfo_api_key
+
+        super(options: options)
       end
 
       private
@@ -16,37 +22,29 @@ module Mihari
         %w[ipinfo_api_key]
       end
 
-      class << self
-        include Dry::Monads[:result]
-        include Memist::Memoizable
+      #
+      # Query IPInfo
+      #
+      # @param [String] ip
+      #
+      # @return [Mihari::Structs::IPInfo::Response, nil]
+      #
+      def query(ip)
+        url = "https://ipinfo.io/#{ip}/json"
+        res = http.get(url)
+        data = JSON.parse(res.body.to_s)
 
-        #
-        # Query IPInfo
-        #
-        # @param [String] ip
-        #
-        # @return [Mihari::Structs::IPInfo::Response, nil]
-        #
-        def query(ip)
-          url = "https://ipinfo.io/#{ip}/json"
-          res = http.get(url)
-          data = JSON.parse(res.body.to_s)
+        Structs::IPInfo::Response.from_dynamic! data
+      end
+      memoize :query
 
-          Structs::IPInfo::Response.from_dynamic! data
-        end
-        memoize :query
+      def headers
+        authorization = api_key.nil? ? nil : "Bearer #{api_key}"
+        { authorization: authorization }.compact
+      end
 
-        private
-
-        def headers
-          token = Mihari.config.ipinfo_api_key
-          authorization = token.nil? ? nil : "Bearer #{token}"
-          { authorization: authorization }.compact
-        end
-
-        def http
-          HTTP::Factory.build headers: headers
-        end
+      def http
+        HTTP::Factory.build headers: headers
       end
     end
   end
