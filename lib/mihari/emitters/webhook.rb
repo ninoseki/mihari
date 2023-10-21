@@ -5,28 +5,30 @@ require "erb"
 module Mihari
   module Emitters
     class PayloadTemplate < ERB
-      def self.template
-        %{
-					{
-						"rule": {
-              "id": "<%= @rule.id %>",
-              "title": "<%= @rule.title %>",
-              "description": "<%= @rule.description %>"
-            },
-						"artifacts": [
-							<% @artifacts.each_with_index do |artifact, idx| %>
-								"<%= artifact.data %>"
-								<%= ',' if idx < (@artifacts.length - 1) %>
-							<% end %>
-						],
-						"tags": [
-							<% @rule.tags.each_with_index do |tag, idx| %>
-								"<%= tag %>"
-								<%= ',' if idx < (@rule.tags.length - 1) %>
-							<% end %>
-						]
-					}
-				}
+      class << self
+        def template
+          %{
+            {
+              "rule": {
+                "id": "<%= @rule.id %>",
+                "title": "<%= @rule.title %>",
+                "description": "<%= @rule.description %>"
+              },
+              "artifacts": [
+                <% @artifacts.each_with_index do |artifact, idx| %>
+                  "<%= artifact.data %>"
+                  <%= ',' if idx < (@artifacts.length - 1) %>
+                <% end %>
+              ],
+              "tags": [
+                <% @rule.tags.each_with_index do |tag, idx| %>
+                  "<%= tag %>"
+                  <%= ',' if idx < (@rule.tags.length - 1) %>
+                <% end %>
+              ]
+            }
+          }
+        end
       end
 
       def initialize(artifacts:, rule:, options: {})
@@ -60,13 +62,13 @@ module Mihari
       # @param [Mihari::Services::Rule] rule
       # @param [Hash] **options
       #
-      def initialize(artifacts:, rule:, **options)
-        super(artifacts: artifacts, rule: rule, **options)
+      def initialize(artifacts:, rule:, options: nil, **params)
+        super(artifacts: artifacts, rule: rule, options: options)
 
-        @url = Addressable::URI.parse(options[:url])
-        @headers = options[:headers] || {}
-        @method = options[:method] || "POST"
-        @template = options[:template]
+        @url = Addressable::URI.parse(params[:url])
+        @headers = params[:headers] || {}
+        @method = params[:method] || "POST"
+        @template = params[:template]
       end
 
       def emit

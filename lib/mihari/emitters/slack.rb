@@ -134,13 +134,14 @@ module Mihari
       #
       # @param [Array<Mihari::Artifact>] artifacts
       # @param [Mihari::Services::Rule] rule
-      # @param [Hash] **_options
+      # @param [Hash, nil] options
+      # @param [Hash] **params
       #
-      def initialize(artifacts:, rule:, **options)
-        super(artifacts: artifacts, rule: rule, **options)
+      def initialize(artifacts:, rule:, options: nil, **params)
+        super(artifacts: artifacts, rule: rule, options: options)
 
-        @webhook_url = options[:webhook_url] || Mihari.config.slack_webhook_url
-        @channel = options[:channel] || Mihari.config.slack_channel || DEFAULT_CHANNEL
+        @webhook_url = params[:webhook_url] || Mihari.config.slack_webhook_url
+        @channel = params[:channel] || Mihari.config.slack_channel || DEFAULT_CHANNEL
         @username = DEFAULT_USERNAME
       end
 

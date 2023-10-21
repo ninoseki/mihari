@@ -18,13 +18,14 @@ module Mihari
       #
       # @param [Array<Mihari::Artifact>] artifacts
       # @param [Mihari::Services::Rule] rule
-      # @param [Hash] **options
+      # @param [Hash, nil] options
+      # @param [Hash] **params
       #
-      def initialize(artifacts:, rule:, **options)
-        super(artifacts: artifacts, rule: rule, **options)
+      def initialize(artifacts:, rule:, options: nil, **params)
+        super(artifacts: artifacts, rule: rule, options: options)
 
-        @url = options[:url] || Mihari.config.misp_url
-        @api_key = options[:api_key] || Mihari.config.misp_api_key
+        @url = params[:url] || Mihari.config.misp_url
+        @api_key = params[:api_key] || Mihari.config.misp_api_key
       end
 
       # @return [Boolean]

@@ -15,14 +15,15 @@ module Mihari
       #
       # @param [Array<Mihari::Artifact>] artifacts
       # @param [Mihari::Services::Rule] rule
-      # @param [Hash] **options
+      # @param [Hash, nil] options
+      # @param [Hash] **params
       #
-      def initialize(artifacts:, rule:, **options)
-        super(artifacts: artifacts, rule: rule, **options)
+      def initialize(artifacts:, rule:, options: nil, **params)
+        super(artifacts: artifacts, rule: rule, options: options)
 
-        @url = options[:url] || Mihari.config.thehive_url
-        @api_key = options[:api_key] || Mihari.config.thehive_api_key
-        @api_version = options[:api_version] || Mihari.config.thehive_api_version
+        @url = params[:url] || Mihari.config.thehive_url
+        @api_key = params[:api_key] || Mihari.config.thehive_api_key
+        @api_version = params[:api_version] || Mihari.config.thehive_api_version
       end
 
       # @return [Boolean]

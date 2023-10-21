@@ -14,21 +14,39 @@ module Mihari
       # @return [Mihari::Services::Rule]
       attr_reader :rule
 
+      # @return [Hash]
+      attr_reader :options
+
       #
       # @param [Array<Mihari::Artifact>] artifacts
       # @param [Mihari::Services::RuleProxy] rule
-      # @param [Hash] **_options
+      # @param [Hash] **_params
       #
-      def initialize(artifacts:, rule:, **_options)
+      def initialize(artifacts:, rule:, options: nil, **_params)
         @artifacts = artifacts
         @rule = rule
+        @options = options || {}
       end
 
-      class << self
-        def inherited(child)
-          super
-          Mihari.emitters << child
-        end
+      #
+      # @return [Integer]
+      #
+      def retry_interval
+        options[:retry_interval] || Mihari.config.retry_interval
+      end
+
+      #
+      # @return [Boolean]
+      #
+      def retry_exponential_backoff
+        options[:retry_exponential_backoff] || Mihari.config.retry_exponential_backoff
+      end
+
+      #
+      # @return [Integer]
+      #
+      def retry_times
+        options[:retry_times] || Mihari.config.retry_times
       end
 
       # @return [Boolean]
@@ -37,7 +55,13 @@ module Mihari
       end
 
       def run
-        retry_on_error { emit }
+        retry_on_error(
+          times: retry_times,
+          interval: retry_interval,
+          exponential_backoff: retry_exponential_backoff
+        ) do
+          emit
+        end
       end
 
       def result
@@ -46,6 +70,13 @@ module Mihari
 
       def emit
         raise NotImplementedError, "You must implement #{self.class}##{__method__}"
+      end
+
+      class << self
+        def inherited(child)
+          super
+          Mihari.emitters << child
+        end
       end
     end
   end

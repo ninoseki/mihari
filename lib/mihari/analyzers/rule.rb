@@ -200,11 +200,15 @@ module Mihari
       #
       def emitters
         rule.emitters.map(&:deep_dup).map do |params|
+          copied = params.deep_dup
+
           name = params[:emitter]
-          params.delete(:emitter)
+          options = params[:options]
+
+          %i[emitter options].each { |key| copied.delete key }
 
           klass = get_emitter_class(name)
-          klass.new(artifacts: enriched_artifacts, rule: rule, **params)
+          klass.new(artifacts: enriched_artifacts, rule: rule, options: options, **copied)
         end
       end
 
