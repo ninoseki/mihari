@@ -50,6 +50,13 @@ module Mihari
         options[:retry_times] || Mihari.config.retry_times
       end
 
+      #
+      # @return [Integer, nil]
+      #
+      def timeout
+        options[:timeout]
+      end
+
       # @return [Boolean]
       def valid?
         raise NotImplementedError, "You must implement #{self.class}##{__method__}"

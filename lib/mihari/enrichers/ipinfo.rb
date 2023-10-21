@@ -44,7 +44,7 @@ module Mihari
       end
 
       def http
-        HTTP::Factory.build headers: headers
+        HTTP::Factory.build headers: headers, timeout: timeout
       end
     end
   end

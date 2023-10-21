@@ -7,14 +7,15 @@ module Mihari
       # @param [String] base_url
       # @param [String, nil] api_key
       # @param [Hash] headers
+      # @param [Integer, nil] timeout
       #
-      def initialize(base_url, api_key:, headers: {})
+      def initialize(base_url, api_key:, headers: {}, timeout: nil)
         raise(ArgumentError, "'api_key' argument is required") unless api_key
 
         headers["authorization"] = api_key
         headers["accept"] = "application/json"
 
-        super(base_url, headers: headers)
+        super(base_url, headers: headers, timeout: timeout)
       end
 
       #

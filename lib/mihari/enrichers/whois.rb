@@ -30,7 +30,7 @@ module Mihari
         # check memo
         return memo[domain].dup if memo.key?(domain)
 
-        record = ::Whois.whois(domain)
+        record = whois.lookup(domain)
         parser = record.parser
         return nil if parser.available?
 
@@ -54,6 +54,19 @@ module Mihari
       end
 
       private
+
+      #
+      # @return [::Whois::Client]
+      #
+      def whois
+        @whois ||= [].tap do |out|
+          out << if timeout.nil?
+            ::Whois::Client.new
+          else
+            ::Whois::Client.new(timeout: timeout)
+          end
+        end.last
+      end
 
       #
       # Get created_on

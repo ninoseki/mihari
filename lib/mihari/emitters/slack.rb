@@ -163,8 +163,25 @@ module Mihari
         webhook_url?
       end
 
+      #
+      # @return [::Slack::Notifier]
+      #
       def notifier
-        @notifier ||= ::Slack::Notifier.new(webhook_url, channel: channel, username: username)
+        @notifier ||= [].tap do |out|
+          out << if timeout.nil?
+            ::Slack::Notifier.new(
+              webhook_url,
+              channel: channel, username: username
+            )
+          else
+            ::Slack::Notifier.new(
+              webhook_url,
+              channel: channel,
+              username: username,
+              http_options: { timeout: timeout }
+            )
+          end
+        end.first
       end
 
       #
