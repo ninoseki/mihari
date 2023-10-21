@@ -11,14 +11,20 @@ module Mihari
       # @param [String] base_url
       # @param [String, nil] api_key
       # @param [Hash] headers
-      # @param [Integer, nil] interval
+      # @param [Integer] pagination_interval
       # @param [Integer, nil] timeout
       #
-      def initialize(base_url = "https://api.zoomeye.org", api_key:, headers: {}, interval: nil, timeout: nil)
+      def initialize(
+        base_url = "https://api.zoomeye.org",
+        api_key:,
+        headers: {},
+        pagination_interval: 0,
+        timeout: nil
+      )
         raise(ArgumentError, "'api_key' argument is required") unless api_key
 
         headers["api-key"] = api_key
-        super(base_url, headers: headers, interval: interval, timeout: timeout)
+        super(base_url, headers: headers, pagination_interval: pagination_interval, timeout: timeout)
       end
 
       #
@@ -59,7 +65,7 @@ module Mihari
             total = res["total"].to_i
             break if total <= page * PAGE_SIZE
 
-            sleep_interval
+            sleep_pagination_interval
           end
         end
       end
@@ -102,7 +108,7 @@ module Mihari
             total = res["total"].to_i
             break if total <= page * PAGE_SIZE
 
-            sleep_interval
+            sleep_pagination_interval
           end
         end
       end

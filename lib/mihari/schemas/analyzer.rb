@@ -3,7 +3,7 @@
 module Mihari
   module Schemas
     AnalyzerOptions = Dry::Schema.Params do
-      optional(:interval).value(:integer)
+      optional(:pagination_interval).value(:integer).default(Mihari.config.pagination_interval)
       optional(:pagination_limit).value(:integer).default(Mihari.config.pagination_limit)
       optional(:retry_times).value(:integer).default(Mihari.config.retry_times)
       optional(:retry_interval).value(:integer).default(Mihari.config.retry_interval)

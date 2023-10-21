@@ -53,7 +53,11 @@ module Mihari
       end
 
       def client
-        @client ||= Clients::ZoomEye.new(api_key: api_key, interval: interval, timeout: timeout)
+        @client ||= Clients::ZoomEye.new(
+          api_key: api_key,
+          pagination_interval: pagination_interval,
+          timeout: timeout
+        )
       end
 
       #

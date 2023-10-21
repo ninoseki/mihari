@@ -9,8 +9,8 @@ module Mihari
       # @return [Hash]
       attr_reader :headers
 
-      # @return [Integer, nil]
-      attr_reader :interval
+      # @return [Integer]
+      attr_reader :pagination_interval
 
       # @return [Integer, nil]
       attr_reader :timeout
@@ -18,20 +18,20 @@ module Mihari
       #
       # @param [String] base_url
       # @param [Hash] headers
-      # @param [Integer, nil] interval
+      # @param [Integer] interval
       # @param [Integer, nil] timeout
       #
-      def initialize(base_url, headers: {}, interval: nil, timeout: nil)
+      def initialize(base_url, headers: {}, pagination_interval: 0, timeout: nil)
         @base_url = base_url
         @headers = headers || {}
-        @interval = interval
+        @pagination_interval = pagination_interval
         @timeout = timeout
       end
 
       private
 
-      def sleep_interval
-        sleep(interval) if interval
+      def sleep_pagination_interval
+        sleep pagination_interval
       end
 
       #

@@ -9,14 +9,20 @@ module Mihari
       # @param [String] base_url
       # @param [String, nil] api_key
       # @param [Hash] headers
-      # @param [Integer, nil] interval
+      # @param [Integer] pagination_interval
       # @param [Integer, nil] timeout
       #
-      def initialize(base_url = "https://api.greynoise.io", api_key:, headers: {}, interval: nil, timeout: nil)
+      def initialize(
+        base_url = "https://api.greynoise.io",
+        api_key:,
+        headers: {},
+        pagination_interval: 0,
+        timeout: nil
+      )
         raise(ArgumentError, "'api_key' argument is required") unless api_key
 
         headers["key"] = api_key
-        super(base_url, headers: headers, interval: interval, timeout: timeout)
+        super(base_url, headers: headers, pagination_interval: pagination_interval, timeout: timeout)
       end
 
       #
@@ -53,7 +59,7 @@ module Mihari
             scroll = res.scroll
             break if scroll.nil?
 
-            sleep_interval
+            sleep_pagination_interval
           end
         end
       end
