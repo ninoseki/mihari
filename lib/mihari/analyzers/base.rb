@@ -24,13 +24,6 @@ module Mihari
       end
 
       #
-      # @return [Integer, nil]
-      #
-      def interval
-        options[:interval]
-      end
-
-      #
       # @return [Integer]
       #
       def retry_interval
@@ -49,6 +42,13 @@ module Mihari
       #
       def retry_times
         options[:retry_times] || Mihari.config.retry_times
+      end
+
+      #
+      # @return [Integer]
+      #
+      def pagination_interval
+        options[:pagination_interval] || Mihari.config.pagination_interval
       end
 
       #

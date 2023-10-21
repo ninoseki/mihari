@@ -10,16 +10,23 @@ module Mihari
       # @param [String, nil] id
       # @param [String, nil] secret
       # @param [Hash] headers
-      # @param [Integer, nil] interval
+      # @param [Integer] pagination_interval
       # @param [Integer, nil] timeout
       #
-      def initialize(base_url = "https://search.censys.io", id:, secret:, headers: {}, interval: nil, timeout: nil)
+      def initialize(
+        base_url = "https://search.censys.io",
+        id:,
+        secret:,
+        headers: {},
+        pagination_interval: 0,
+        timeout: nil
+      )
         raise(ArgumentError, "'id' argument is required") if id.nil?
         raise(ArgumentError, "'secret' argument is required") if secret.nil?
 
         headers["authorization"] = "Basic #{Base64.strict_encode64("#{id}:#{secret}")}"
 
-        super(base_url, headers: headers, interval: interval, timeout: timeout)
+        super(base_url, headers: headers, pagination_interval: pagination_interval, timeout: timeout)
       end
 
       #
@@ -64,7 +71,7 @@ module Mihari
             # So it needs to check both cases
             break if cursor.nil? || cursor.empty?
 
-            sleep_interval
+            sleep_pagination_interval
           end
         end
       end

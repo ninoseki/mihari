@@ -10,12 +10,18 @@ module Mihari
       # @param [Interval, nil] interval
       # @param [Interval, nil] timeout
       #
-      def initialize(base_url = "https://urlscan.io", api_key:, headers: {}, interval: nil, timeout: nil)
+      def initialize(
+        base_url = "https://urlscan.io",
+        api_key:,
+        headers: {},
+        pagination_interval: 0,
+        timeout: nil
+      )
         raise(ArgumentError, "'api_key' argument is required") if api_key.nil?
 
         headers["api-key"] = api_key
 
-        super(base_url, headers: headers, interval: interval, timeout: timeout)
+        super(base_url, headers: headers, pagination_interval: pagination_interval, timeout: timeout)
       end
 
       #
@@ -51,7 +57,7 @@ module Mihari
 
             search_after = res.results.last.sort.join(",")
 
-            sleep_interval
+            sleep_pagination_interval
           end
         end
       end

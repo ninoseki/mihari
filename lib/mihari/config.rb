@@ -94,6 +94,9 @@ module Mihari
     attr_reader :retry_exponential_backoff
 
     # @return [Integer]
+    attr_reader :pagination_interval
+
+    # @return [Integer]
     attr_reader :pagination_limit
 
     # @return [Boolean]
@@ -157,6 +160,7 @@ module Mihari
       @retry_interval = ENV.fetch("RETRY_INTERVAL", 5).to_i
       @retry_exponential_backoff = ENV.fetch("RETRY_EXPONENTIAL_BACKOFF", true).to_s.downcase == "true"
 
+      @pagination_interval = ENV.fetch("PAGINATION_INTERVAL", 0).to_i
       @pagination_limit = ENV.fetch("PAGINATION_LIMIT", 100).to_i
 
       @ignore_error = ENV.fetch("IGNORE_ERROR", false)

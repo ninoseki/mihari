@@ -39,9 +39,9 @@ options:
 
 `timeout` is an HTTP timeout in seconds. Optional.
 
-### Interval
+### Pagination Interval
 
-`interval` is an interval in seconds between pagination. (If an analyzer does pagination). Optional.
+`pagination_interval` (`int`) is an interval in seconds between pagination. Defaults to 0.
 
 ### Pagination Limit
 

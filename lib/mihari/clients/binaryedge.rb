@@ -7,15 +7,21 @@ module Mihari
       # @param [String] base_url
       # @param [String, nil] api_key
       # @param [Hash] headers
-      # @param [Integer, nil] interval
+      # @param [Integer] pagnation_interval
       # @param [Integer, nil] timeout
       #
-      def initialize(base_url = "https://api.binaryedge.io/v2", api_key:, headers: {}, interval: nil, timeout: nil)
+      def initialize(
+        base_url = "https://api.binaryedge.io/v2",
+        api_key:,
+        headers: {},
+        pagination_interval: 0,
+        timeout: nil
+      )
         raise(ArgumentError, "'api_key' argument is required") unless api_key
 
         headers["x-key"] = api_key
 
-        super(base_url, headers: headers, interval: interval, timeout: timeout)
+        super(base_url, headers: headers, pagination_interval: pagination_interval, timeout: timeout)
       end
 
       #
@@ -52,7 +58,7 @@ module Mihari
 
             break if res.events.length < res.pagesize
 
-            sleep_interval
+            sleep_pagination_interval
           end
         end
       end
