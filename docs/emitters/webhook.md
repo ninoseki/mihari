@@ -14,19 +14,19 @@ template: ...
 
 ### URL
 
-`url` is a webhook URL.
+`url` (`string`) is a webhook URL.
 
 ### Method
 
-`method` is an HTTP method. Optional. Defaults to `POST`.
+`method` (`string`)is an HTTP method. Optional. Defaults to `POST`.
 
 ### Headers
 
-`headers` (hash) is HTTP headers. Optional.
+`headers` (`hash`) are HTTP headers. Optional.
 
 ### Template
 
-`template` is an [ERB](https://github.com/ruby/erb) template to customize the payload to sent. A template should generate a valid JSON.
+`template` (`string`) is an [ERB](https://github.com/ruby/erb) template to customize the payload to sent. A template should generate a valid JSON.
 
 You can use the following parameters inside an ERB template.
 

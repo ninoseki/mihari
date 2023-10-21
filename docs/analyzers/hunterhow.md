@@ -21,13 +21,13 @@ end_time: ...
 
 ### Query
 
-`query` is a search query.
+`query` (`string`) is a search query.
 
 ### Start/End Time
 
-- `start_time` (date): Only show results after the given date.
-- `end_time` (date): Only show results after the given date.
+- `start_time` (`date`): Only show results after the given date.
+- `end_time` (`date`): Only show results after the given date.
 
 ### API key
 
-`api_key` is an API key. Optional. Defaults to `ENV[”HUNTERHOW_API_KEY"]`.
+`api_key` (`string`) is an API key. Optional. Defaults to `ENV[”HUNTERHOW_API_KEY"]`.

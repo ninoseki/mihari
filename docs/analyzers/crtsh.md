@@ -19,8 +19,8 @@ exclude_expired: ...
 
 ### Query
 
-`query` is a search query.
+`query` (`string`) is a search query.
 
 ### Exclude Expired
 
-`exclude_expired` (boolean) determines whether to exclude expired domains or not. Optional. Defaults to `true`.
+`exclude_expired` (`boolean`) determines whether to exclude expired domains or not. Optional. Defaults to `true`.

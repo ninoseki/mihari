@@ -19,7 +19,7 @@ json: ...
 
 ### Query
 
-`query` is a URL of a feed.
+`query` (`string`) is a URL of a feed.
 
 !!! note
 
@@ -27,27 +27,27 @@ json: ...
 
 ### Method
 
-`method` is an HTTP method. Defaults to `GET`.
+`method` (`string`) is an HTTP method. Defaults to `GET`.
 
 ### Selector
 
-`selector` is a `jr` selector.
+`selector` (`string`) is a `jr` selector.
 
 ### Headers
 
-`headers` (hash) is an HTTP headers. Optional.
+`headers` (`hash`) is an HTTP headers. Optional.
 
 ### Params
 
-`params` (hash) is an HTTP query params. Optional.
+`params` (`hash`) is an HTTP query params. Optional.
 
 ### Data
 
-`data` (hash) is an HTTP form data. Optional.
+`data` (`hash`) is an HTTP form data. Optional.
 
 ### JSON
 
-`json` (hash) is an JSON body. Optional.
+`json` (`hash`) is an JSON body. Optional.
 
 ## Examples
 

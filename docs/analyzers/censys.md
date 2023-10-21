@@ -20,12 +20,12 @@ secret: ...
 
 ### Query
 
-`query` is a search query.
+`query` (`string`) is a search query.
 
 ### ID
 
-`id` is a Cencys ID. Optional. Defaults to `ENV[”CENSYS_ID”]`.
+`id` (`string`) is a Cencys ID. Optional. Defaults to `ENV[”CENSYS_ID”]`.
 
 ### Secret
 
-`secret` is a Cencys secret. Optional. Defaults to `ENV[”CENSYS_SECRET”]`.
+`secret` (`string`) is a Cencys secret. Optional. Defaults to `ENV[”CENSYS_SECRET”]`.

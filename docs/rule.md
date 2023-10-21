@@ -68,36 +68,36 @@ falsepositives: []
 
 ### ID
 
-`id` is an unique ID of a rule. UUID v4 is recommended.
+`id` (`string`) is an unique ID of a rule. UUID v4 is recommended.
 
 ### Title
 
-`title` is a title of a rule.
+`title` (`string`) is a title of a rule.
 
 ### Description
 
-`description` is a short description of a rule.
+`description` (`string`) is a short description of a rule.
 
 ### Created/Updated On
 
-`created_on` is a date of a rule creation. Optional.
+`created_on` (`date`) is a date of a rule creation. Optional.
 Also a rule can have `updated_on` that is a date of a rule modification. Optional.
 
 ### Tags
 
-`tags` is a list of tags of a rule.
+`tags` (`array[:string]`) is a list of tags of a rule.
 
 ### Author
 
-`author` is an author of a rule. Optional.
+`author` (`string`) is an author of a rule. Optional.
 
 ### References
 
-`references` is a list of a references of a rule. Optional.
+`references` (`array[:string]`) is a list of a references of a rule. Optional.
 
 ### Related
 
-`related` is a list of related rule IDs. Optional.
+`related` (`array[:string]`) is a list of related rule IDs. Optional.
 
 ### Queries
 
@@ -130,7 +130,7 @@ Defaults to:
 
 ### Data Types
 
-`data_types` is a list of data (artifact) types to allow by a rule. Types not defined in here will be automatically rejected.
+`data_types` (`array[:string]`) is a list of data (artifact) types to allow by a rule. Types not defined in here will be automatically rejected.
 
 Defaults to:
 
@@ -142,11 +142,11 @@ Defaults to:
 
 ### False positives
 
-`falsepositives` is a list of false positive values. A string or regexp can be used in here.
+`falsepositives` (`array[:string]`) is a list of false positive values. A string or regexp can be used in here.
 
 ### Artifact TTL
 
-`artifact_ttl` (alias: `artifact_lifetime`) is an integer value of artifact TTL (Time-To-Live) in seconds.
+`artifact_ttl` (`integer` / alias: `artifact_lifetime`) is an integer value of artifact TTL (Time-To-Live) in seconds.
 
 Mihari rejects a same artifact in a same rule in general.
 

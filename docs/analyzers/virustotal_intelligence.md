@@ -22,8 +22,8 @@ api_key: ...
 
 ### Query
 
-`query` is a search query.
+`query` (`string`) is a search query.
 
 ### API Key
 
-`api_key` is an API key. Optional. Defaults to `ENV[”VIRUSTOTAL_API_KEY"]`.
+`api_key` (`string`) is an API key. Optional. Defaults to `ENV[”VIRUSTOTAL_API_KEY"]`.

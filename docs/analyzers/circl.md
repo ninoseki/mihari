@@ -26,12 +26,12 @@ username: ...
 
 ### Query
 
-`query` is a domain or SHA1 certificate fingerprint.
+`query` (`string`) is a domain or SHA1 certificate fingerprint.
 
 ### Username
 
-`username` is a username. Optional. Defaults to `ENV[”CIRCL_PASSIVE_USERNAME”]`.
+`username` (`string`) is a username. Optional. Defaults to `ENV[”CIRCL_PASSIVE_USERNAME”]`.
 
 ### Password
 
-`password` is a password. Optional. Defaults to `ENV[”CIRCL_PASSIVE_PASSWORD”]`.
+`password` (`string`) is a password. Optional. Defaults to `ENV[”CIRCL_PASSIVE_PASSWORD”]`.

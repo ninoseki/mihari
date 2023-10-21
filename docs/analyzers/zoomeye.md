@@ -22,12 +22,12 @@ api_key: ...
 
 ### Query
 
-`query` is a search query.
+`query` (`string`) is a search query.
 
 ### Type
 
-`type` determines a search type. `web` or `host`.
+`type` (`string`) determines a search type. `web` or `host`.
 
 ### API Key
 
-`api_key` is an API key. Optional. Defaults to `ENV[”ZOOMEYE_API_KEY"]`.
+`api_key` (`string`) is an API key. Optional. Defaults to `ENV[”ZOOMEYE_API_KEY"]`.

@@ -18,7 +18,7 @@ query: ...
 
 ### Query
 
-`query` is a search query.
+`query` (`string`) is a search query.
 
 !!! tip
 

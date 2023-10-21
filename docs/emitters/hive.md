@@ -15,12 +15,12 @@ api_version: ...
 
 ### URL
 
-`url` is a TheHive URL. Optional. Defaults to `ENV[”THEHIVE_URL”]`.
+`url` (`string`) is a TheHive URL. Optional. Defaults to `ENV[”THEHIVE_URL”]`.
 
 ### API Key
 
-`api_key` is an API key. Optional. Defaults to `ENV[”THEHIVE_API_KEY”]`.
+`api_key` (`string`) is an API key. Optional. Defaults to `ENV[”THEHIVE_API_KEY”]`.
 
 ### API Version
 
-`api_version` is a version of The Hive API. Optional. Defaults to `ENV[”THEHIVE_API_VERSION”]`.
+`api_version` (`string`) is a version of The Hive API. Optional. `v4` or `v5`. Defaults to `ENV[”THEHIVE_API_VERSION”]`.

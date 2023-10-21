@@ -32,8 +32,8 @@ api_key: ...
 
 ### Query
 
-`query` is a passive DNS search query. Domain or IP address.
+`query` (`string`) is a passive DNS search query. Domain or IP address.
 
 ### API Key
 
-`api_key` is an API key. Optional. Defaults to `ENV[”VIRUSTOTAL_API_KEY"]`.
+`api_key` (`string`) is an API key. Optional. Defaults to `ENV[”VIRUSTOTAL_API_KEY"]`.

@@ -19,8 +19,8 @@ api_key: ...
 
 ### Query
 
-`query` is a GNQL search query.
+`query` (`string`) is a GNQL search query.
 
 ### API Key
 
-`api_key` is an API key. Optional. Defaults to `ENV[”GREYNOISE_API_KEY"]`.
+`api_key` (`string`) is an API key. Optional. Defaults to `ENV[”GREYNOISE_API_KEY"]`.
