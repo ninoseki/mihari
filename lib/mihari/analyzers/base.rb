@@ -38,6 +38,13 @@ module Mihari
       end
 
       #
+      # @return [Boolean]
+      #
+      def retry_exponential_backoff
+        options[:retry_exponential_backoff] || Mihari.config.retry_exponential_backoff
+      end
+
+      #
       # @return [Integer]
       #
       def retry_times
@@ -81,7 +88,7 @@ module Mihari
       # @return [Array<Mihari::Artifact>]
       #
       def normalized_artifacts
-        retry_on_error(times: retry_times, interval: retry_interval) do
+        retry_on_error(times: retry_times, interval: retry_interval, exponential_backoff: retry_exponential_backoff) do
           artifacts.compact.sort.map do |artifact|
             # No need to set data_type manually
             # It is set automatically in #initialize
@@ -104,7 +111,7 @@ module Mihari
         self.class.to_s.split("::").last
       end
 
-      alias source class_name
+      alias_method :source, :class_name
 
       class << self
         #
