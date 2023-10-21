@@ -7,6 +7,7 @@ module Mihari
       optional(:pagination_limit).value(:integer).default(Mihari.config.pagination_limit)
       optional(:retry_times).value(:integer).default(Mihari.config.retry_times)
       optional(:retry_interval).value(:integer).default(Mihari.config.retry_interval)
+      optional(:retry_exponential_backoff).value(:bool).default(Mihari.config.retry_exponential_backoff)
       optional(:ignore_error).value(:bool).default(Mihari.config.ignore_error)
       optional(:timeout).value(:integer)
     end

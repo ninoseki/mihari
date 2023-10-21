@@ -30,8 +30,10 @@ RSpec.describe RetriableTest do
 
   describe "#retry_on_error" do
     subject { described_class.new }
+
     it do
       expect { subject.foo }.to raise_error(Net::OpenTimeout)
+
       expect(subject.count).to eq(subject.times)
     end
   end

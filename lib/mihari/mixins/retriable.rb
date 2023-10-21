@@ -19,15 +19,17 @@ module Mihari
       #
       # @param [Integer] times
       # @param [Integer] interval
+      # @param [Boolean] exponential_backoff
       # @param [Array<StandardError>] on
       #
-      def retry_on_error(times: 3, interval: 5, on: DEFAULT_ON)
+      def retry_on_error(times: 3, interval: 5, exponential_backoff: true, on: DEFAULT_ON)
         try = 0
         begin
           try += 1
           yield
         rescue *on => e
-          sleep interval
+          sleep_seconds = exponential_backoff ? interval * (2**(try - 1)) : interval
+          sleep sleep_seconds
           retry if try < times
           raise e
         end
