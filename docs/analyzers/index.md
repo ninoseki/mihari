@@ -31,6 +31,7 @@ options:
   pagination_limit: ...
   retry_times: ...
   retry_interval: ...
+  retry_exponential_backoff: ...
   ignore_error: ...
 ```
 
@@ -56,6 +57,10 @@ In the worst case, if something wrong with Mihari or a service, Mihari can drain
 ### Retry Interval
 
 `retry_interval` is an interval in seconds between retries. Defaults to 5.
+
+### Retry Exponential Backoff
+
+`retry_exponential_backoff` (`bool`) controls whether to do exponential backoff. Defaults to `true`.
 
 ### Ignore Error
 
