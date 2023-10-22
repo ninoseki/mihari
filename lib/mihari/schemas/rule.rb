@@ -22,7 +22,7 @@ module Mihari
       optional(:updated_on).value(:date)
 
       required(:queries).value(:array).each do
-        AnalyzerWithoutAPIKey | AnalyzerWithAPIKey | Censys | CIRCL | PassiveTotal | ZoomEye | Crtsh | Feed | HunterHow
+        AnalyzerAPIKey | AnalyzerAPIKeyPagination | Censys | CIRCL | PassiveTotal | ZoomEye | Crtsh | Feed | HunterHow | DNSTwister
       end
 
       optional(:emitters).value(:array).each do
