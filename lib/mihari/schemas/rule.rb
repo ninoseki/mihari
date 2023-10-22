@@ -33,7 +33,7 @@ module Mihari
         Enrichers::Whois | Enrichers::IPInfo | Enrichers::Shodan | Enrichers::GooglePublicDNS
       end.default(DEFAULT_ENRICHERS)
 
-      optional(:data_types).value(array[Types::DataTypes]).default(DEFAULT_DATA_TYPES)
+      optional(:data_types).value(array[Types::DataTypes]).default(Mihari::Types::DataTypes.values)
       optional(:falsepositives).value(array[:string]).default([])
 
       optional(:artifact_lifetime).value(:integer)

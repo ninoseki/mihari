@@ -23,7 +23,7 @@ module Mihari
       end
 
       TheHive = Dry::Schema.Params do
-        required(:emitter).value(Types::String.enum("the_hive"))
+        required(:emitter).value(Types::String.enum("thehive"))
         optional(:url).value(:string)
         optional(:api_key).value(:string)
         optional(:api_version).value(Types::String.enum("v4", "v5")).default("v4")

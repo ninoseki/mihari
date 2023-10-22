@@ -38,6 +38,15 @@ module Mihari
         nil
       end
 
+      class << self
+        #
+        # @return [String]
+        #
+        def class_key
+          "google_public_dns"
+        end
+      end
+
       private
 
       def http

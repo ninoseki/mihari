@@ -2,11 +2,12 @@
 
 module Mihari
   # @return [Array<String>]
-  DEFAULT_DATA_TYPES = %w[hash ip domain url mail].freeze
+  DEFAULT_DATA_TYPES = Types::DataTypes.values
+
+  # TODO: make "database" the only default emitter
+  # @return [Array<Hash>]
+  DEFAULT_EMITTERS = %w[database misp slack thehive].map { |name| { emitter: name } }.freeze
 
   # @return [Array<Hash>]
-  DEFAULT_EMITTERS = %w[database misp slack the_hive].map { |name| { emitter: name } }.freeze
-
-  # @return [Array<Hash>]
-  DEFAULT_ENRICHERS = %w[whois ipinfo shodan google_public_dns].map { |name| { enricher: name } }.freeze
+  DEFAULT_ENRICHERS = Mihari.enricher_to_class.keys.map { |name| { enricher: name.downcase } }.freeze
 end

@@ -12,21 +12,8 @@ module Mihari
     Double = Strict::Float | Strict::Integer
     DateTime = Strict::DateTime
 
-    DataTypes = Types::String.enum(*DEFAULT_DATA_TYPES)
+    DataTypes = Types::String.enum("hash", "ip", "domain", "url", "mail")
 
     HTTPRequestMethods = Types::String.enum("GET", "POST")
-    HTTPRequestPayloadTypes = Types::String.enum("application/json", "application/x-www-form-urlencoded")
-
-    EmitterTypes = Types::String.enum(
-      "database",
-      "webhook"
-    )
-
-    EnricherTypes = Types::String.enum(
-      "whois",
-      "ipinfo",
-      "shodan",
-      "google_public_dns"
-    )
   end
 end

@@ -2,45 +2,14 @@
 
 module Mihari
   module Enrichers
-    class Base
+    class Base < Mihari::Base
       include Mixins::Configurable
       include Mixins::Retriable
 
       include Dry::Monads[:result, :try]
 
-      # @return [Hash]
-      attr_reader :options
-
       def initialize(options: nil)
-        @options = options || {}
-      end
-
-      #
-      # @return [Integer]
-      #
-      def retry_interval
-        options[:retry_interval] || Mihari.config.retry_interval
-      end
-
-      #
-      # @return [Boolean]
-      #
-      def retry_exponential_backoff
-        options[:retry_exponential_backoff] || Mihari.config.retry_exponential_backoff
-      end
-
-      #
-      # @return [Integer]
-      #
-      def retry_times
-        options[:retry_times] || Mihari.config.retry_times
-      end
-
-      #
-      # @return [Integer, nil]
-      #
-      def timeout
-        options[:timeout]
+        super(options: options)
       end
 
       def query_result(value)
