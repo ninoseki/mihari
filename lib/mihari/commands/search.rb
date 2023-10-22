@@ -6,10 +6,10 @@ module Mihari
       class << self
         def included(thor)
           thor.class_eval do
-            include Dry::Monads[:result, :try]
+            include Dry::Monads[:try, :result]
 
-            desc "search [PATH_OR_ID]", "Search by a rule"
-            method_option :force_overwrite, type: :boolean, aliases: "-f", desc: "Force an overwrite the rule"
+            desc "search [PATH_OR_ID]", "Search by a rule (Outputs null if there is no new finding)"
+            method_option :force_overwrite, type: :boolean, aliases: "-f", desc: "Force overwriting a rule"
             #
             # Search by a rule
             #
@@ -21,27 +21,12 @@ module Mihari
 
                 check_diff_l = ->(rule) { check_diff rule }
                 update_and_run_l = ->(runner) { update_and_run runner }
-                check_nil_l = ->(alert_or_nil) { check_nil alert_or_nil }
 
-                result = builder.result.bind(check_diff_l).bind(update_and_run_l).bind(check_nil_l)
+                result = builder.result.bind(check_diff_l).bind(update_and_run_l)
 
-                if result.success?
-                  alert = result.value!
-                  data = Mihari::Entities::Alert.represent(alert)
-                  puts JSON.pretty_generate(data.as_json)
-                  return
-                end
-
-                failure = result.failure
-                case failure
-                when ValidationError
-                  Mihari.logger.error "Failed to parse the input as a rule:"
-                  Mihari.logger.error JSON.pretty_generate(failure.errors.to_h)
-                when StandardError
-                  raise failure
-                else
-                  Mihari.logger.info failure
-                end
+                alert = result.value!
+                data = Entities::Alert.represent(alert)
+                puts JSON.pretty_generate(data.as_json)
               end
             end
 
@@ -51,25 +36,12 @@ module Mihari
               #
               def check_diff(rule)
                 force_overwrite = options["force_overwrite"] || false
-                runner = Services::RuleRunner.new(rule, force_overwrite: force_overwrite)
-                message = "There is a diff in the rule (#{rule.id}). Are you sure you want to overwrite the rule? (y/n)"
+                message = "There is a diff in the rule. Are you sure you want to overwrite the rule? (y/n)"
+                runner = Services::RuleRunner.new(rule)
 
-                if runner.diff? && !force_overwrite && !yes?(message)
-                  return Failure("Stop overwriting the rule (#{rule.id})")
-                end
+                exit 0 if runner.diff? && !force_overwrite && !yes?(message)
 
                 Success runner
-              end
-
-              #
-              # @param [Mihari::Alert, nil] alert_or_nil
-              #
-              def check_nil(alert_or_nil)
-                if alert_or_nil.nil?
-                  Failure "There is no new artifact found"
-                else
-                  Success alert_or_nil
-                end
               end
 
               #

@@ -14,15 +14,12 @@ RSpec.describe Mihari::Commands::Search, :vcr do
   describe "#search" do
     let!(:path) { File.expand_path("../fixtures/rules/valid_rule.yml", __dir__) }
     let!(:rule_id) do
-      rule = YAML.safe_load(File.read(path))
+      rule = YAML.safe_load_file(path)
       rule["id"]
     end
 
     it do
-      expect do
-        CLI.start ["search", "-f", path]
-        SemanticLogger.flush
-      end.to output(/#{rule_id}/).to_stdout
+      expect { CLI.start ["search", "-f", path] }.to output(include(rule_id)).to_stdout
     end
   end
 end

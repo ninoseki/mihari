@@ -5,7 +5,7 @@ require "yaml"
 RSpec.describe Mihari::Services::RuleProxy do
   let!(:data) do
     {
-      id: "foo",
+      id: SecureRandom.uuid,
       description: "foo",
       title: "foo",
       queries: [
@@ -17,19 +17,19 @@ RSpec.describe Mihari::Services::RuleProxy do
   let!(:rule) { described_class.new(data) }
 
   describe "#errors?" do
-    it "should not have any errors" do
+    it "doesn't have any errors" do
       expect(rule.errors?).to be false
     end
   end
 
   describe "#to_analyzer" do
-    it "should return an analyzer" do
+    it "returns an analyzer" do
       expect(rule.analyzer).to be_a Mihari::Analyzers::Rule
     end
   end
 
   describe "#to_model" do
-    it "should return a model" do
+    it "returns a model" do
       expect(rule.model).to be_a Mihari::Rule
     end
   end

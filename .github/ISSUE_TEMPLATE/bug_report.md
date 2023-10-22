@@ -3,8 +3,7 @@ name: Bug report
 about: Create a bug report to help us improve
 title: "[BUG]"
 labels: bug
-assignees: ''
-
+assignees: ""
 ---
 
 <!--
@@ -27,6 +26,11 @@ A clear and concise description of what you expected to happen.
 ### **Actual behavior**
 
 A clear and concise description of what actually happened.
+
+<!--
+Please get & attach debug logs by adding the `--debug` option to the command if it's possible.
+For example, `mihari search /path/to/rule.yml --debug`.
+-->
 
 ### **Screenshots**
 

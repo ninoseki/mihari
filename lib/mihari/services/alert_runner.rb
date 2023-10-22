@@ -16,7 +16,7 @@ module Mihari
       # @return [Mihari::Alert]
       #
       def run
-        emitter = Mihari::Emitters::Database.new(artifacts: alert.artifacts, rule: alert.rule)
+        emitter = Emitters::Database.new(artifacts: alert.artifacts, rule: alert.rule)
         emitter.emit
       end
 

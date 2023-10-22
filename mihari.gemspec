@@ -94,6 +94,7 @@ Gem::Specification.new do |spec|
   spec.add_dependency "slack-notifier", "2.4.0"
   spec.add_dependency "sqlite3", "1.6.7"
   spec.add_dependency "thor", "1.3.0"
+  spec.add_dependency "thor-hollaback", "0.2.1"
   spec.add_dependency "uuidtools", "2.2.0"
   spec.add_dependency "whois", "5.1.0"
   spec.add_dependency "whois-parser", "2.0.0"
