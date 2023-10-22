@@ -2,7 +2,7 @@
 
 module Mihari
   module Emitters
-    class Base
+    class Base < Mihari::Base
       include Dry::Monads[:result, :try]
 
       include Mixins::Configurable
@@ -14,9 +14,6 @@ module Mihari
       # @return [Mihari::Services::Rule]
       attr_reader :rule
 
-      # @return [Hash]
-      attr_reader :options
-
       #
       # @param [Array<Mihari::Artifact>] artifacts
       # @param [Mihari::Services::RuleProxy] rule
@@ -24,37 +21,10 @@ module Mihari
       # @param [Hash] **_params
       #
       def initialize(artifacts:, rule:, options: nil, **_params)
+        super(options: options)
+
         @artifacts = artifacts
         @rule = rule
-        @options = options || {}
-      end
-
-      #
-      # @return [Integer]
-      #
-      def retry_interval
-        options[:retry_interval] || Mihari.config.retry_interval
-      end
-
-      #
-      # @return [Boolean]
-      #
-      def retry_exponential_backoff
-        options[:retry_exponential_backoff] || Mihari.config.retry_exponential_backoff
-      end
-
-      #
-      # @return [Integer]
-      #
-      def retry_times
-        options[:retry_times] || Mihari.config.retry_times
-      end
-
-      #
-      # @return [Integer, nil]
-      #
-      def timeout
-        options[:timeout]
       end
 
       # @return [Boolean]

@@ -54,7 +54,7 @@ emitters:
   - emitter: database
   - emitter: misp
   - emitter: slack
-  - emitter: the_hive
+  - emitter: thehive
 data_types:
   - hash
   - ip
@@ -126,7 +126,7 @@ Defaults to:
 - `database`
 - `misp`
 - `slack`
-- `the_hive`
+- `thehive`
 
 ### Data Types
 

@@ -44,6 +44,15 @@ module Mihari
         %w[securitytrails_api_key]
       end
 
+      class << self
+        #
+        # @return [Array<String>, nil]
+        #
+        def key_aliases
+          ["st"]
+        end
+      end
+
       private
 
       def client

@@ -7,26 +7,23 @@ RSpec.describe Mihari::Schemas::RuleContract do
   let!(:title) { "test" }
 
   context "with valid rule" do
-    describe "rule should have default values" do
-      it do
-        result = contract.call(
-          id: id,
-          description: description,
-          title: title,
-          queries: [{ analyzer: "shodan", query: "foo" }]
-        )
+    it "has default values" do
+      result = contract.call(
+        id: id,
+        description: description,
+        title: title,
+        queries: [{ analyzer: "shodan", query: "foo" }]
+      )
 
-        expect(result[:enrichers].length).to eq Mihari::DEFAULT_ENRICHERS.length
-        expect(result[:emitters].length).to eq Mihari::DEFAULT_EMITTERS.length
-        expect(result[:data_types].length).to eq Mihari::DEFAULT_DATA_TYPES.length
-
-        expect(result[:tags].length).to eq 0
-      end
+      expect(result[:enrichers].length).to eq Mihari::DEFAULT_ENRICHERS.length
+      expect(result[:emitters].length).to eq Mihari::DEFAULT_EMITTERS.length
+      expect(result[:data_types].length).to eq Mihari::DEFAULT_DATA_TYPES.length
+      expect(result[:tags].length).to eq 0
     end
 
-    context "analyzers that do not need additional options" do
+    context "with analyzers don't need additional options" do
       it do
-        analyzers = Mihari::Analyzers::ANALYZER_TO_CLASS.keys - %w[zoomeye crtsh feed hunterhow]
+        analyzers = Mihari.analyzer_to_class.keys - %w[zoomeye crtsh feed hunterhow]
 
         analyzers.each do |analyzer|
           result = contract.call(
@@ -40,7 +37,7 @@ RSpec.describe Mihari::Schemas::RuleContract do
       end
     end
 
-    context "analyzers that need additional options" do
+    context "with analyzers need additional options" do
       it do
         result = contract.call(
           id: id,

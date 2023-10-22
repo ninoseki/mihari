@@ -14,6 +14,13 @@ class Test < Mihari::Analyzers::Base
     values << nil
     values
   end
+
+  class << self
+    def class_keys
+      # NOTE: returns an empty array to prevent adding this class in Mihari#analyzer_to_class
+      []
+    end
+  end
 end
 
 RSpec.describe Mihari::Analyzers::Base, :vcr do

@@ -2,7 +2,7 @@
 
 module Mihari
   module Analyzers
-    class Base
+    class Base < Mihari::Base
       include Dry::Monads[:result, :try]
 
       include Mixins::Configurable
@@ -11,37 +11,14 @@ module Mihari
       # @return [String]
       attr_reader :query
 
-      # @return [Hash]
-      attr_reader :options
-
       #
       # @param [String] query
       # @param [Hash, nil] options
       #
       def initialize(query, options: nil)
+        super(options: options)
+
         @query = query
-        @options = options || {}
-      end
-
-      #
-      # @return [Integer]
-      #
-      def retry_interval
-        options[:retry_interval] || Mihari.config.retry_interval
-      end
-
-      #
-      # @return [Boolean]
-      #
-      def retry_exponential_backoff
-        options[:retry_exponential_backoff] || Mihari.config.retry_exponential_backoff
-      end
-
-      #
-      # @return [Integer]
-      #
-      def retry_times
-        options[:retry_times] || Mihari.config.retry_times
       end
 
       #
@@ -68,13 +45,6 @@ module Mihari
         Mihari.config.ignore_error
       end
 
-      #
-      # @return [Integer, nil]
-      #
-      def timeout
-        options[:timeout]
-      end
-
       # @return [Array<String>, Array<Mihari::Artifact>]
       def artifacts
         raise NotImplementedError, "You must implement #{self.class}##{__method__}"
@@ -93,7 +63,7 @@ module Mihari
             # No need to set data_type manually
             # It is set automatically in #initialize
             artifact = artifact.is_a?(Artifact) ? artifact : Artifact.new(data: artifact)
-            artifact.source = source
+            artifact.source = self.class.class_key
             artifact
           end.select(&:valid?).uniq(&:data)
         end
@@ -105,13 +75,6 @@ module Mihari
       def result
         Try[StandardError] { normalized_artifacts }.to_result
       end
-
-      # @return [String]
-      def class_name
-        self.class.to_s.split("::").last
-      end
-
-      alias_method :source, :class_name
 
       class << self
         #

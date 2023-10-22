@@ -25,6 +25,22 @@ module Mihari
         %w[virustotal_api_key]
       end
 
+      class << self
+        #
+        # @return [String]
+        #
+        def class_key
+          "virustotal_intelligence"
+        end
+
+        #
+        # @return [Array<String>, nil]
+        #
+        def class_key_aliases
+          ["vt_intel"]
+        end
+      end
+
       private
 
       #

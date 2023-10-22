@@ -73,9 +73,9 @@ module Mihari
           data = match["ip"]
 
           if data.is_a?(Array)
-            data.map { |d| Artifact.new(data: d, source: source, metadata: match) }
+            data.map { |d| Artifact.new(data: d, metadata: match) }
           else
-            Artifact.new(data: data, source: source, metadata: match)
+            Artifact.new(data: data, metadata: match)
           end
         end.flatten
       end

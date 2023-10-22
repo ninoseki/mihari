@@ -69,15 +69,42 @@ module Mihari
     end
     memoize :emitters
 
+    #
+    # @return [Hash<String, Mihari::Enrichers::Base>]
+    #
+    def emitter_to_class
+      @emitter_to_class ||= emitters.flat_map do |klass|
+        klass.class_keys.map { |key| [key.downcase, klass] }
+      end.to_h
+    end
+
     def analyzers
       []
     end
     memoize :analyzers
 
+    #
+    # @return [Hash<String, Mihari::Analyzers::Base>]
+    #
+    def analyzer_to_class
+      @analyzer_to_class ||= analyzers.flat_map do |klass|
+        klass.class_keys.map { |key| [key.downcase, klass] }
+      end.to_h
+    end
+
     def enrichers
       []
     end
     memoize :enrichers
+
+    #
+    # @return [Hash<String, Mihari::Enrichers::Base>]
+    #
+    def enricher_to_class
+      @enricher_to_class ||= enrichers.flat_map do |klass|
+        klass.class_keys.map { |key| [key.downcase, klass] }
+      end.to_h
+    end
 
     def config
       @config ||= Config.new
@@ -103,46 +130,11 @@ module Mihari
   end
 end
 
-# Constants
-require "mihari/constants"
-
-# Types
-require "mihari/types"
-
 # Core classes
+require "mihari/base"
 require "mihari/database"
-require "mihari/type_checker"
 require "mihari/http"
-
-# Services
-require "mihari/services/rule_builder"
-require "mihari/services/rule_proxy"
-require "mihari/services/rule_runner"
-
-require "mihari/services/alert_builder"
-require "mihari/services/alert_proxy"
-require "mihari/services/alert_runner"
-
-# Structs
-require "mihari/structs/binaryedge"
-require "mihari/structs/censys"
-require "mihari/structs/config"
-require "mihari/structs/filters"
-require "mihari/structs/google_public_dns"
-require "mihari/structs/greynoise"
-require "mihari/structs/ipinfo"
-require "mihari/structs/hunterhow"
-require "mihari/structs/onyphe"
-require "mihari/structs/shodan"
-require "mihari/structs/urlscan"
-require "mihari/structs/virustotal_intelligence"
-
-# Schemas
-require "mihari/schemas/macros"
-
-require "mihari/schemas/alert"
-require "mihari/schemas/analyzer"
-require "mihari/schemas/rule"
+require "mihari/type_checker"
 
 # Enrichers
 require "mihari/enrichers/base"
@@ -219,6 +211,42 @@ require "mihari/analyzers/virustotal"
 require "mihari/analyzers/zoomeye"
 
 require "mihari/analyzers/rule"
+
+# Types
+require "mihari/types"
+
+# Constants
+require "mihari/constants"
+
+# Structs
+require "mihari/structs/binaryedge"
+require "mihari/structs/censys"
+require "mihari/structs/config"
+require "mihari/structs/filters"
+require "mihari/structs/google_public_dns"
+require "mihari/structs/greynoise"
+require "mihari/structs/ipinfo"
+require "mihari/structs/hunterhow"
+require "mihari/structs/onyphe"
+require "mihari/structs/shodan"
+require "mihari/structs/urlscan"
+require "mihari/structs/virustotal_intelligence"
+
+# Schemas
+require "mihari/schemas/macros"
+
+require "mihari/schemas/alert"
+require "mihari/schemas/analyzer"
+require "mihari/schemas/rule"
+
+# Services
+require "mihari/services/rule_builder"
+require "mihari/services/rule_proxy"
+require "mihari/services/rule_runner"
+
+require "mihari/services/alert_builder"
+require "mihari/services/alert_proxy"
+require "mihari/services/alert_runner"
 
 # Entities
 require "mihari/entities/message"

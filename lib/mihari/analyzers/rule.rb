@@ -2,46 +2,6 @@
 
 module Mihari
   module Analyzers
-    ANALYZER_TO_CLASS = {
-      "binaryedge" => BinaryEdge,
-      "censys" => Censys,
-      "circl" => CIRCL,
-      "crtsh" => Crtsh,
-      "dnstwister" => DNSTwister,
-      "feed" => Feed,
-      "greynoise" => GreyNoise,
-      "hunterhow" => HunterHow,
-      "onyphe" => Onyphe,
-      "otx" => OTX,
-      "passivetotal" => PassiveTotal,
-      "pt" => PassiveTotal,
-      "pulsedive" => Pulsedive,
-      "securitytrails" => SecurityTrails,
-      "shodan" => Shodan,
-      "st" => SecurityTrails,
-      "urlscan" => Urlscan,
-      "virustotal_intelligence" => VirusTotalIntelligence,
-      "virustotal" => VirusTotal,
-      "vt_intel" => VirusTotalIntelligence,
-      "vt" => VirusTotal,
-      "zoomeye" => ZoomEye
-    }.freeze
-
-    EMITTER_TO_CLASS = {
-      "database" => Emitters::Database,
-      "misp" => Emitters::MISP,
-      "slack" => Emitters::Slack,
-      "the_hive" => Emitters::TheHive,
-      "webhook" => Emitters::Webhook
-    }.freeze
-
-    ENRICHER_TO_CLASS = {
-      "whois" => Enrichers::Whois,
-      "ipinfo" => Enrichers::IPInfo,
-      "shodan" => Enrichers::Shodan,
-      "google_public_dns" => Enrichers::GooglePublicDNS
-    }.freeze
-
     class Rule
       include Mixins::FalsePositive
 
@@ -170,15 +130,14 @@ module Mihari
       #
       # Get analyzer class
       #
-      # @param [String] analyzer_name
+      # @param [String] key
       #
       # @return [Class<Mihari::Analyzers::Base>] analyzer class
       #
-      def get_analyzer_class(analyzer_name)
-        analyzer = ANALYZER_TO_CLASS[analyzer_name]
-        return analyzer if analyzer
+      def get_analyzer_class(key)
+        raise ArgumentError, "#{key} is not supported" unless Mihari.analyzer_to_class.key?(key)
 
-        raise ArgumentError, "#{analyzer_name} is not supported"
+        Mihari.analyzer_to_class[key]
       end
 
       #
@@ -195,15 +154,14 @@ module Mihari
       #
       # Get emitter class
       #
-      # @param [String] emitter_name
+      # @param [String] key
       #
       # @return [Class<Mihari::Emitters::Base>] emitter class
       #
-      def get_emitter_class(emitter_name)
-        emitter = EMITTER_TO_CLASS[emitter_name]
-        return emitter if emitter
+      def get_emitter_class(key)
+        raise ArgumentError, "#{key} is not supported" unless Mihari.emitter_to_class.key?(key)
 
-        raise ArgumentError, "#{emitter_name} is not supported"
+        Mihari.emitter_to_class[key]
       end
 
       #
@@ -231,15 +189,14 @@ module Mihari
       #
       # Get enricher class
       #
-      # @param [String] enricher_name
+      # @param [String] key
       #
       # @return [Class<Mihari::Enrichers::Base>] enricher class
       #
-      def get_enricher_class(enricher_name)
-        enricher = ENRICHER_TO_CLASS[enricher_name]
-        return enricher if enricher
+      def get_enricher_class(key)
+        raise ArgumentError, "#{key} is not supported" unless Mihari.enricher_to_class.key?(key)
 
-        raise ArgumentError, "#{enricher_name} is not supported"
+        Mihari.enricher_to_class[key]
       end
 
       #
@@ -266,7 +223,7 @@ module Mihari
 
           joined = analyzer.configuration_keys.join(", ")
           be = (analyzer.configuration_keys.length > 1) ? "are" : "is"
-          message = "#{analyzer.source} is not configured correctly. #{joined} #{be} missing."
+          message = "#{analyzer.class.class_key} is not configured correctly. #{joined} #{be} missing."
           raise ConfigurationError, message
         end
       end

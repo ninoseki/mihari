@@ -39,6 +39,15 @@ module Mihari
         %w[virustotal_api_key]
       end
 
+      class << self
+        #
+        # @return [Array<String>, nil]
+        #
+        def key_aliases
+          ["vt"]
+        end
+      end
+
       private
 
       def client
@@ -65,7 +74,7 @@ module Mihari
         data = res["data"] || []
         data.filter_map do |item|
           data = item.dig("attributes", "ip_address")
-          data.nil? ? nil : Artifact.new(data: data, source: source, metadata: item)
+          data.nil? ? nil : Artifact.new(data: data, metadata: item)
         end
       end
 
@@ -80,7 +89,7 @@ module Mihari
         data = res["data"] || []
         data.filter_map do |item|
           data = item.dig("attributes", "host_name")
-          Artifact.new(data: data, source: source, metadata: item)
+          Artifact.new(data: data, metadata: item)
         end.uniq
       end
     end

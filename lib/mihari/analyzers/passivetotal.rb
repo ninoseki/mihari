@@ -50,6 +50,15 @@ module Mihari
         %w[passivetotal_username passivetotal_api_key]
       end
 
+      class << self
+        #
+        # @return [Array<String>, nil]
+        #
+        def key_aliases
+          ["pt"]
+        end
+      end
+
       private
 
       def client
