@@ -5,7 +5,7 @@ require "yaml"
 RSpec.describe Mihari::Services::RuleRunner do
   let!(:data) do
     {
-      id: "foo",
+      id: SecureRandom.uuid,
       description: "foo",
       title: "foo",
       queries: [
@@ -14,16 +14,12 @@ RSpec.describe Mihari::Services::RuleRunner do
       allowed_data_types: ["ip"]
     }
   end
-
   let!(:proxy) { Mihari::Services::RuleProxy.new(data) }
+  let!(:runner) { Mihari::Services::RuleRunner.new(proxy) }
 
-  let!(:force_overwrite) { true }
-
-  let!(:rule) { Mihari::Services::RuleRunner.new(proxy, force_overwrite: force_overwrite) }
-
-  describe "#force_overwrite?" do
-    it "should return the same value" do
-      expect(rule.force_overwrite?).to eq force_overwrite
+  describe "#diff?" do
+    it do
+      expect(runner.diff?).to be false
     end
   end
 end

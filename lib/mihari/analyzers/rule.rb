@@ -126,8 +126,14 @@ module Mihari
       def bulk_emit
         return [] if enriched_artifacts.empty?
 
-        Parallel.map(valid_emitters) do |emitter|
-          result = emitter.result
+        # NOTE: separate parallel execution and logging
+        #       because the logger does not work along with Parallel
+        results = Parallel.map(valid_emitters) do |emitter|
+          emitter.result
+        end
+
+        results.zip(valid_emitters).map do |result_and_emitter|
+          result, emitter = result_and_emitter
 
           Mihari.logger.info "Emission by #{emitter.class} is failed: #{result.failure}" if result.failure?
           Mihari.logger.info "Emission by #{emitter.class} is succeeded" if result.success?
@@ -219,7 +225,7 @@ module Mihari
       # @return [Array<Mihari::Emitters::Base>]
       #
       def valid_emitters
-        emitters.select(&:valid?)
+        @valid_emitters ||= emitters.select(&:valid?)
       end
 
       #
@@ -258,7 +264,9 @@ module Mihari
         analyzers.map do |analyzer|
           next if analyzer.configured?
 
-          message = "#{analyzer.source} is not configured correctly. #{analyzer.configuration_keys.join(", ")} is/are missing."
+          joined = analyzer.configuration_keys.join(", ")
+          be = (analyzer.configuration_keys.length > 1) ? "are" : "is"
+          message = "#{analyzer.source} is not configured correctly. #{joined} #{be} missing."
           raise ConfigurationError, message
         end
       end

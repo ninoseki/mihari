@@ -8,7 +8,7 @@ module Mihari
       class << self
         def included(thor)
           thor.class_eval do
-            include Dry::Monads[:result, :try]
+            include Dry::Monads[:try, :result]
 
             desc "validate [PATH]", "Validate a rule file"
             #
@@ -18,16 +18,11 @@ module Mihari
             #
             def validate(path)
               res = Dry::Monads::Try[ValidationError] do
-                Services::RuleProxy.from_yaml(File.read(path))
-              end.fmap do |rule|
-                Mihari.logger.info "Valid format. The input is parsed as the following:"
-                Mihari.logger.info rule.data.to_yaml
+                Services::RuleProxy.from_yaml File.read(path)
               end
 
-              return unless res.error?
-
-              Mihari.logger.error "Failed to parse the input as a rule:"
-              Mihari.logger.error JSON.pretty_generate(res.exception.errors.to_h)
+              rule = res.value!
+              puts rule.data.to_yaml
             end
 
             desc "init [PATH]", "Initialize a new rule file"
@@ -43,14 +38,14 @@ module Mihari
 
               initialize_rule path
 
-              Mihari.logger.info "A new rule file has been initialized: #{path}."
+              puts "A new rule file has been initialized: #{path}."
             end
 
             no_commands do
               #
               # @return [Mihari::Services::Rule]
               #
-              def rule_template
+              def rule
                 Services::RuleProxy.from_yaml File.read(File.expand_path("../templates/rule.yml.erb", __dir__))
               end
 
@@ -63,7 +58,7 @@ module Mihari
               # @return [nil]
               #
               def initialize_rule(path, files = Dry::Files.new)
-                files.write(path, rule_template.yaml)
+                files.write(path, rule.yaml)
               end
             end
           end

@@ -7,12 +7,11 @@ class CLI < Mihari::CLI::Base
 end
 
 RSpec.describe Mihari::Commands::Rule do
-  include_context "with mocked logger"
-
   describe "#initialize_rule" do
+    let!(:files) { Dry::Files.new(memory: true) }
+    let!(:filename) { "/tmp/foo.yml" }
+
     it do
-      files = Dry::Files.new(memory: true)
-      filename = "/tmp/foo.yml"
       CLI.new.initialize_rule(filename, files)
 
       yaml = files.read(filename)
@@ -25,46 +24,28 @@ RSpec.describe Mihari::Commands::Rule do
   describe "#rule" do
     let!(:path) { "/tmp/#{SecureRandom.uuid}.yml" }
 
-    after { FileUtils.rm path }
+    after { FileUtils.rm path, force: true }
 
     it do
-      CLI.start ["init", path]
-
-      # read logger output
-      SemanticLogger.flush
-      sio.rewind
-      output = sio.read
-
-      expect(output).to include("A new rule file has been initialized")
+      expect { CLI.start ["init", path] }.to output(include("A new rule file has been initialized")).to_stdout
     end
   end
 
   describe "#validate" do
     let!(:path) { File.expand_path("../fixtures/rules/valid_rule.yml", __dir__) }
+    let!(:data) { File.read path }
+    let!(:rule_id) { YAML.safe_load(data)["id"] }
 
     it do
-      CLI.start ["validate", path]
-
-      # read logger output
-      SemanticLogger.flush
-      sio.rewind
-      output = sio.read
-
-      expect(output).to include("Valid format.")
+      expect { CLI.start ["validate", path] }.to output(include(rule_id)).to_stdout
     end
 
     context "with invalid rule" do
       let!(:path) { File.expand_path("../fixtures/rules/invalid_rule.yml", __dir__) }
 
       it do
-        CLI.start ["validate", path]
-
-        # read logger output
-        SemanticLogger.flush
-        sio.rewind
-        output = sio.read
-
-        expect(output).to include("Failed to parse")
+        # TODO: assert UnwrapError
+        expect { CLI.start ["validate", path] }.to raise_error(Dry::Monads::UnwrapError)
       end
     end
   end

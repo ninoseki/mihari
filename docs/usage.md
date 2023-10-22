@@ -8,8 +8,11 @@ Commands:
   mihari db                   # Sub commands for DB
   mihari help [COMMAND]       # Describe available commands or one specific command
   mihari rule                 # Sub commands for rule
-  mihari search [PATH_OR_ID]  # Search by a rule
+  mihari search [PATH_OR_ID]  # Search by a rule (Outputs null if there is no new finding)
   mihari web                  # Launch the web app
+
+Options:
+  -d, [--debug], [--no-debug]  # Sets up debug mode
 ```
 
 ## `mihari db`
@@ -43,7 +46,7 @@ Mihari asks whether really you want to update a rule if there is a diff by defau
 
 ```bash
 $ mihari search /path/to/rule.yml
-There is a diff in the rule (6254bb74-5e5d-42ad-bc1e-231da0293b0f). Are you sure you want to overwrite the rule? (y/n)
+There is a diff in the rule. Are you sure you want to overwrite the rule? (y/n)
 ```
 
 It can be suppressed by providing `-f`.

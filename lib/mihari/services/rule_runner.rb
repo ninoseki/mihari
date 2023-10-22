@@ -5,21 +5,11 @@ module Mihari
     class RuleRunner
       include Dry::Monads[:result, :try]
 
-      include Mixins::ErrorNotification
-
       # @return [Mihari::Services::RuleProxy]
       attr_reader :rule
 
-      # @return [Boolean]
-      attr_reader :force_overwrite
-
-      def initialize(rule, force_overwrite:)
+      def initialize(rule)
         @rule = rule
-        @force_overwrite = force_overwrite
-      end
-
-      def force_overwrite?
-        force_overwrite
       end
 
       #
