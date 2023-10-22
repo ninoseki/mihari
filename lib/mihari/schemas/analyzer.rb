@@ -2,37 +2,31 @@
 
 module Mihari
   module Schemas
-    AnalyzerOptions = Dry::Schema.Params do
-      optional(:pagination_interval).value(:integer).default(Mihari.config.pagination_interval)
-      optional(:pagination_limit).value(:integer).default(Mihari.config.pagination_limit)
-      optional(:retry_times).value(:integer).default(Mihari.config.retry_times)
-      optional(:retry_interval).value(:integer).default(Mihari.config.retry_interval)
-      optional(:retry_exponential_backoff).value(:bool).default(Mihari.config.retry_exponential_backoff)
-      optional(:ignore_error).value(:bool).default(Mihari.config.ignore_error)
-      optional(:timeout).value(:integer)
-    end
-
-    AnalyzerWithoutAPIKey = Dry::Schema.Params do
-      required(:analyzer).value(Types::String.enum("dnstwister"))
-      required(:query).value(:string)
-      optional(:options).hash(AnalyzerOptions)
-    end
-
-    AnalyzerWithAPIKey = Dry::Schema.Params do
+    AnalyzerAPIKeyPagination = Dry::Schema.Params do
       required(:analyzer).value(
         Types::String.enum(
           "binaryedge",
           "greynoise",
           "onyphe",
+          "shodan",
+          "urlscan",
+          "virustotal_intelligence",
+          "vt_intel"
+        )
+      )
+      required(:query).value(:string)
+      optional(:api_key).value(:string)
+      optional(:options).hash(AnalyzerPaginationOptions)
+    end
+
+    AnalyzerAPIKey = Dry::Schema.Params do
+      required(:analyzer).value(
+        Types::String.enum(
           "otx",
           "pulsedive",
           "securitytrails",
-          "shodan",
           "st",
-          "urlscan",
-          "virustotal_intelligence",
           "virustotal",
-          "vt_intel",
           "vt"
         )
       )
@@ -41,12 +35,18 @@ module Mihari
       optional(:options).hash(AnalyzerOptions)
     end
 
+    DNSTwister = Dry::Schema.Params do
+      required(:analyzer).value(Types::String.enum("dnstwister"))
+      required(:query).value(:string)
+      optional(:options).hash(AnalyzerOptions)
+    end
+
     Censys = Dry::Schema.Params do
       required(:analyzer).value(Types::String.enum("censys"))
       required(:query).value(:string)
       optional(:id).value(:string)
       optional(:secret).value(:string)
-      optional(:options).hash(AnalyzerOptions)
+      optional(:options).hash(AnalyzerPaginationOptions)
     end
 
     CIRCL = Dry::Schema.Params do
@@ -69,7 +69,7 @@ module Mihari
       required(:analyzer).value(Types::String.enum("zoomeye"))
       required(:query).value(:string)
       required(:type).value(Types::String.enum("host", "web"))
-      optional(:options).hash(AnalyzerOptions)
+      optional(:options).hash(AnalyzerPaginationOptions)
     end
 
     Crtsh = Dry::Schema.Params do
@@ -85,7 +85,7 @@ module Mihari
       required(:start_time).value(:date)
       required(:end_time).value(:date)
       optional(:api_key).value(:string)
-      optional(:options).hash(AnalyzerOptions)
+      optional(:options).hash(AnalyzerPaginationOptions)
     end
 
     Feed = Dry::Schema.Params do

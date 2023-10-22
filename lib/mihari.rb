@@ -235,6 +235,8 @@ require "mihari/structs/virustotal_intelligence"
 # Schemas
 require "mihari/schemas/macros"
 
+require "mihari/schemas/options"
+
 require "mihari/schemas/alert"
 require "mihari/schemas/analyzer"
 require "mihari/schemas/rule"
