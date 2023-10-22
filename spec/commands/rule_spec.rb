@@ -33,10 +33,8 @@ RSpec.describe Mihari::Commands::Rule do
 
   describe "#validate" do
     let!(:path) { File.expand_path("../fixtures/rules/valid_rule.yml", __dir__) }
-    let!(:rule_id) do
-      rule = YAML.safe_load_file(path)
-      rule["id"]
-    end
+    let!(:data) { File.read path }
+    let!(:rule_id) { YAML.safe_load(data)["id"] }
 
     it do
       expect { CLI.start ["validate", path] }.to output(include(rule_id)).to_stdout
