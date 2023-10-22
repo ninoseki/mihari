@@ -124,9 +124,6 @@ See [Emitters](./emitters/index.md) to know details of each emitter.
 Defaults to:
 
 - `database`
-- `misp`
-- `slack`
-- `thehive`
 
 ### Data Types
 

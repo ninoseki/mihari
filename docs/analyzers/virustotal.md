@@ -30,6 +30,10 @@ api_key: ...
 
 ## Components
 
+### Analyzer
+
+`analyzer` (`string`) should be either of `virustoal` and `vt`.
+
 ### Query
 
 `query` (`string`) is a passive DNS search query. Domain or IP address.

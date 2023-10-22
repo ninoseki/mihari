@@ -1,6 +1,5 @@
 <template>
   <Loading v-if="getAlertsTask.isRunning"></Loading>
-
   <Alerts
     :alerts="getAlertsTask.last.value"
     v-if="getAlertsTask.last?.value"

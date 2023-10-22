@@ -7,9 +7,7 @@
       :page="page"
       :tag="tag"
     ></FormComponent>
-
     <hr />
-
     <div class="columns">
       <div class="column">
         <div class="field is-grouped is-grouped-centered">
@@ -25,14 +23,10 @@
       </div>
     </div>
   </div>
-
   <div v-if="getAlertsTask.performCount > 0">
     <hr />
-
     <Loading v-if="getAlertsTask.isRunning"></Loading>
-
     <ErrorMessage v-if="getAlertsTask.isError" :error="getAlertsTask.last?.error"></ErrorMessage>
-
     <AlertsComponent
       :alerts="getAlertsTask.last.value"
       v-if="getAlertsTask.last?.value"

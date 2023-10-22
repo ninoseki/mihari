@@ -29,7 +29,6 @@
       </div>
     </div>
   </div>
-
   <div class="columns">
     <div class="column">
       <div class="field is-horizontal">
@@ -54,7 +53,6 @@
     </div>
     <div class="column"></div>
   </div>
-
   <div class="columns">
     <div class="column">
       <div class="field is-horizontal">
@@ -88,7 +86,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, type PropType, ref, toRef,watch } from "vue"
+import { defineComponent, type PropType, ref, toRef, watch } from "vue"
 import { useRoute } from "vue-router"
 
 import type { RuleSearchParams } from "@/types"
