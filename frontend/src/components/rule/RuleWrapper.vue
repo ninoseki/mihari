@@ -1,8 +1,6 @@
 <template>
   <Loading v-if="getRuleTask.isRunning"></Loading>
-
   <ErrorMessage v-if="getRuleTask.isError" :error="getRuleTask.last?.error"></ErrorMessage>
-
   <Rule :rule="getRuleTask.last.value" @refresh="refresh" v-if="getRuleTask.last?.value"></Rule>
 </template>
 

@@ -4,15 +4,12 @@
       <Loading></Loading>
       <hr />
     </div>
-
     <div v-if="runRuleTask.last?.error">
       <ErrorMessage :error="runRuleTask.last.error"></ErrorMessage>
       <hr />
     </div>
-
     <h2 class="is-size-2 mb-4">Rule</h2>
-
-    <p class="is-clearfix">
+    <p class="block is-clearfix">
       <span class="buttons is-pulled-right">
         <button class="button is-primary is-light is-small" @click="runRule">
           <span>Run</span>
@@ -37,12 +34,9 @@
         </button>
       </span>
     </p>
-
     <YAML :yaml="rule.yaml"></YAML>
   </div>
-
   <hr />
-
   <div class="column">
     <h2 class="is-size-2 mb-4">Related alerts</h2>
 

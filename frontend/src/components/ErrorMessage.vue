@@ -3,7 +3,6 @@
     <p v-if="error.response.data?.message">{{ error.response.data.message }}</p>
     <p v-else>{{ error }}</p>
   </div>
-
   <article class="message" v-if="error.response.data?.details">
     <div class="message-body">
       <VueJsonPretty :data="error.response.data.details"></VueJsonPretty>

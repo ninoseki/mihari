@@ -4,9 +4,7 @@
       <Loading></Loading>
       <hr />
     </div>
-
     <h2 class="is-size-2 mb-4">Artifact</h2>
-
     <div class="columns">
       <div
         class="column is-half"
@@ -21,7 +19,6 @@
           </h4>
           <iframe class="mb-4" :src="googleMapSrc" width="100%" height="240px"></iframe>
         </div>
-
         <div v-if="urlscanLiveshotSrc">
           <h4 class="is-size-4 mb-2">
             Live screenshot
@@ -30,11 +27,9 @@
           <img :src="urlscanLiveshotSrc" class="liveshot" alt="liveshot" />
         </div>
       </div>
-
       <div class="column">
         <div class="block">
           <h4 class="is-size-4 mb-2">Information</h4>
-
           <table class="table is-fullwidth is-completely-borderless">
             <tr>
               <th>ID</th>
@@ -47,7 +42,6 @@
                       <font-awesome-icon icon="lightbulb"></font-awesome-icon>
                     </span>
                   </button>
-
                   <button
                     class="button is-info is-light is-small"
                     @click="flipShowMetadata"
@@ -58,7 +52,6 @@
                       <font-awesome-icon icon="info-circle"></font-awesome-icon>
                     </span>
                   </button>
-
                   <button class="button is-light is-small" @click="deleteArtifact">
                     <span>Delete</span>
                     <span class="icon is-small">
@@ -86,7 +79,6 @@
             </tr>
           </table>
         </div>
-
         <div v-if="artifact.metadata && showMetadata">
           <div class="modal is-active">
             <div class="modal-background" @click="flipShowMetadata"></div>
@@ -103,45 +95,36 @@
         </div>
       </div>
     </div>
-
     <div class="block" v-if="artifact.autonomousSystem">
       <h4 class="is-size-4 mb-2">AS</h4>
       <AS :autonomousSystem="artifact.autonomousSystem"></AS>
     </div>
-
     <div class="block" v-if="artifact.reverseDnsNames">
       <h4 class="is-size-4 mb-2">Reverse DNS</h4>
       <ReverseDnsNames :reverseDnsNames="artifact.reverseDnsNames"></ReverseDnsNames>
     </div>
-
     <div class="block" v-if="artifact.dnsRecords">
       <h4 class="is-size-4 mb-2">DNS records</h4>
       <DnsRecords :dnsRecords="artifact.dnsRecords"></DnsRecords>
     </div>
-
     <div class="block" v-if="artifact.cpes">
       <h4 class="is-size-4 mb-2">CPEs</h4>
       <CPEs :cpes="artifact.cpes"></CPEs>
     </div>
-
     <div class="block" v-if="artifact.ports">
       <h4 class="is-size-4 mb-2">Ports</h4>
       <Ports :ports="artifact.ports"></Ports>
     </div>
-
     <div class="block" v-if="artifact.whoisRecord">
       <h4 class="is-size-4 mb-2">Whois record</h4>
       <WhoisRecord :whoisRecord="artifact.whoisRecord"></WhoisRecord>
     </div>
-
     <div class="block">
       <h4 class="is-size-4 mb-2">Links</h4>
       <Links :data="artifact.data" :type="artifact.dataType"></Links>
     </div>
   </div>
-
   <hr />
-
   <div class="column">
     <h2 class="is-size-2 mb-4">Related alerts</h2>
     <Alerts :artifact="artifact.data"></Alerts>

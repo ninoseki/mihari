@@ -1,8 +1,6 @@
 <template>
   <Loading v-if="getArtifactTask.isRunning"></Loading>
-
   <ErrorMessage v-if="getArtifactTask.isError" :error="getArtifactTask.last?.error"></ErrorMessage>
-
   <ArtifactComponent
     :artifact="getArtifactTask.last.value"
     @refresh="refresh"

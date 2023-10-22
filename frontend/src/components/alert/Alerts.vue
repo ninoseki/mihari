@@ -6,7 +6,6 @@
     @refresh-page="refreshPage"
     @update-tag="updateTag"
   ></Alert>
-
   <Pagination
     :total="alerts.total"
     :currentPage="alerts.currentPage"

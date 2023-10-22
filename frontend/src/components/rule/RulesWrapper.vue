@@ -6,9 +6,7 @@
       :page="page"
       :tag="tag"
     ></FormComponent>
-
     <hr />
-
     <div class="column">
       <div class="field is-grouped is-grouped-centered">
         <p class="control">
@@ -22,14 +20,10 @@
       </div>
     </div>
   </div>
-
   <div v-if="getRulesTask.performCount > 0">
     <hr />
-
     <Loading v-if="getRulesTask.isRunning"></Loading>
-
     <ErrorMessage v-if="getRulesTask.isError" :error="getRulesTask.last?.error"></ErrorMessage>
-
     <Rules
       :rules="getRulesTask.last.value"
       v-if="getRulesTask.last?.value"
