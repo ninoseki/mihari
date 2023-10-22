@@ -31,6 +31,10 @@ api_key: ...
 
 ## Components
 
+### Analyzer
+
+`analyzer` (`string`) should be either of `passivetotal` and `pt`.
+
 ### Query
 
 `query` (`string`) is a passive DNS/SSL or reverse whois search query. Domain, IP address, mail or SHA1 certificate fingerprint.

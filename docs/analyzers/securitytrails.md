@@ -28,6 +28,10 @@ api_key: ...
 
 ## Components
 
+### Analyzer
+
+`analyzer` (`string`) should be either of `securitytrails` and `st`.
+
 ### Query
 
 `query` (`string`) is a passive DNS search/reverse whois query. Domain, IP address or mail.

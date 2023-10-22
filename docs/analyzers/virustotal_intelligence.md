@@ -20,6 +20,10 @@ api_key: ...
 
 ## Components
 
+### Analyzer
+
+`analyzer` (`string`) should be either of `virustotal_intelligence` and ``.
+
 ### Query
 
 `query` (`string`) is a search query.
