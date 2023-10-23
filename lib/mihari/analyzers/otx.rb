@@ -42,7 +42,7 @@ module Mihari
       private
 
       def client
-        @client ||= Mihari::Clients::OTX.new(api_key: api_key)
+        @client ||= Mihari::Clients::OTX.new(api_key: api_key, timeout: timeout)
       end
 
       #

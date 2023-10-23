@@ -6,9 +6,10 @@ module Mihari
       #
       # @param [String] base_url
       # @param [Hash] headers
+      # @param [Integer, nil] timeout
       #
-      def initialize(base_url = "https://crt.sh", headers: {})
-        super(base_url, headers: headers)
+      def initialize(base_url = "https://crt.sh", headers: {}, timeout: nil)
+        super(base_url, headers: headers, timeout: timeout)
       end
 
       #

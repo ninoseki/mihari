@@ -47,7 +47,7 @@ module Mihari
       private
 
       def client
-        @client ||= Clients::PulseDive.new(api_key: api_key)
+        @client ||= Clients::PulseDive.new(api_key: api_key, timeout: timeout)
       end
 
       #

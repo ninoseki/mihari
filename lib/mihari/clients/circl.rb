@@ -10,14 +10,15 @@ module Mihari
       # @param [String, nil] username
       # @param [String, nil] password
       # @param [Hash] headers
+      # @param [Integer, nil] timeout
       #
-      def initialize(base_url = "https://www.circl.lu", username:, password:, headers: {})
-        raise(ArgumentError, "'username' argument is required") if username.nil?
-        raise(ArgumentError, "'password' argument is required") if password.nil?
+      def initialize(base_url = "https://www.circl.lu", username:, password:, headers: {}, timeout: nil)
+        raise(ArgumentError, "username is required") if username.nil?
+        raise(ArgumentError, "password is required") if password.nil?
 
         headers["authorization"] = "Basic #{Base64.strict_encode64("#{username}:#{password}")}"
 
-        super(base_url, headers: headers)
+        super(base_url, headers: headers, timeout: timeout)
       end
 
       #

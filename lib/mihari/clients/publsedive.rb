@@ -10,13 +10,14 @@ module Mihari
       # @param [String] base_url
       # @param [String, nil] api_key
       # @param [Hash] headers
+      # @param [Integer, nil] timeout
       #
-      def initialize(base_url = "https://pulsedive.com", api_key:, headers: {})
-        super(base_url, headers: headers)
+      def initialize(base_url = "https://pulsedive.com", api_key:, headers: {}, timeout: nil)
+        raise(ArgumentError, "api_key is required") unless api_key
 
         @api_key = api_key
 
-        raise(ArgumentError, "'api_key' argument is required") unless api_key
+        super(base_url, headers: headers, timeout: timeout)
       end
 
       #

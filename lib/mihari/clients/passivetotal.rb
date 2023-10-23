@@ -10,14 +10,15 @@ module Mihari
       # @param [String, nil] username
       # @param [String, nil] api_key
       # @param [Hash] headers
+      # @param [Integer, nil] timeout
       #
-      def initialize(base_url = "https://api.passivetotal.org", username:, api_key:, headers: {})
-        raise(ArgumentError, "'username' argument is required") if username.nil?
-        raise(ArgumentError, "'api_key' argument is required") if api_key.nil?
+      def initialize(base_url = "https://api.passivetotal.org", username:, api_key:, headers: {}, timeout: nil)
+        raise(ArgumentError, "username is required") if username.nil?
+        raise(ArgumentError, "api_key is required") if api_key.nil?
 
         headers["authorization"] = "Basic #{Base64.strict_encode64("#{username}:#{api_key}")}"
 
-        super(base_url, headers: headers)
+        super(base_url, headers: headers, timeout: timeout)
       end
 
       #

@@ -18,10 +18,10 @@ module Mihari
       #
       # @param [String] base_url
       # @param [Hash] headers
-      # @param [Integer] interval
+      # @param [Integer] pagination_interval
       # @param [Integer, nil] timeout
       #
-      def initialize(base_url, headers: {}, pagination_interval: 0, timeout: nil)
+      def initialize(base_url, headers: {}, pagination_interval: Mihari.config.pagination_interval, timeout: nil)
         @base_url = base_url
         @headers = headers || {}
         @pagination_interval = pagination_interval
