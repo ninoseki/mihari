@@ -1,6 +1,6 @@
 ---
 tags:
-  - Whois
+  - Enrichment:Whois
 ---
 
 # Whois

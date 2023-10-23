@@ -1,3 +1,8 @@
+---
+tags:
+  - Artifact:IP
+---
+
 # ZoomEye
 
 - [https://zoomeye.org/](https://zoomeye.org/)

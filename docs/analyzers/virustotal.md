@@ -1,7 +1,7 @@
 ---
 tags:
-  - IP address
-  - Domain
+  - Artifact:IP
+  - Artifact:Domain
   - Passive DNS
 ---
 

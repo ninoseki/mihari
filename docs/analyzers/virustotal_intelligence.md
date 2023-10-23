@@ -1,9 +1,9 @@
 ---
 tags:
-  - IP address
-  - Domain
-  - URL
-  - Hash
+  - Artifact:IP
+  - Artifact:Domain
+  - Artifact:URL
+  - Artifact:Hash
 ---
 
 # VirusTotal Intelligence

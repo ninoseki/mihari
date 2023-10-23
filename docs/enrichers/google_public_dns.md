@@ -1,6 +1,6 @@
 ---
 tags:
-  - DNS record
+  - Enrichment:DNS_Record
 ---
 
 # Google Public DNS

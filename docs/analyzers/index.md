@@ -26,29 +26,28 @@ All the analyzers can have optional `options`.
 analyzer: ...
 query: ...
 options:
-  timeout: ...
-  pagination_interval: ...
-  pagination_limit: ...
   retry_times: ...
   retry_interval: ...
   retry_exponential_backoff: ...
+  timeout: ...
   ignore_error: ...
 ```
 
-### Timeout
+Also the following analyzers can have pagination options.
 
-`timeout` (`integer`) is an HTTP timeout in seconds. Optional.
+- [Shodan](./shodan.md)
+- [BinaryEdge](./binaryedge.md)
+- [Censys](./censys.md)
+- [ZoomEye](./zoomeye.md)
+- [urlscan.io](./urlscan.md)
+- [VirusTotal Intelligence](./virustotal_intelligence.md)
+- [HunterHow](./hunterhow.md)
 
-### Pagination Interval
-
-`pagination_interval` (`integer`) is an interval in seconds between pagination. Optional. Defaults to 0.
-
-### Pagination Limit
-
-`pagination_limit` (`integer`) is an limit for pagination. Optional. Defaults to 100.
-
-In the worst case, if something wrong with Mihari or a service, Mihari can drain API quota by doing pagination forever.
-`pagination_limit` is a safety valve for that. A number of pagination is limited as `pagination_limit` times.
+```yaml
+options:
+  pagination_interval: ...
+  pagination_limit: ...
+```
 
 ### Retry Times
 
@@ -61,6 +60,10 @@ In the worst case, if something wrong with Mihari or a service, Mihari can drain
 ### Retry Exponential Backoff
 
 `retry_exponential_backoff` (`bool`) controls whether to do exponential backoff. Optional. Defaults to `true`.
+
+### Timeout
+
+`timeout` (`integer`) is an HTTP timeout in seconds. Optional.
 
 ### Ignore Error
 
@@ -87,3 +90,14 @@ queries:
   - analyzer: censys
     query: ip:8.8.8.8
 ```
+
+### Pagination Interval
+
+`pagination_interval` (`integer`) is an interval in seconds between pagination. Optional. Defaults to 0.
+
+### Pagination Limit
+
+`pagination_limit` (`integer`) is an limit for pagination. Optional. Defaults to 100.
+
+In the worst case, if something wrong with Mihari or a service, Mihari can drain API quota by doing pagination forever.
+`pagination_limit` is a safety valve for that. A number of pagination is limited as `pagination_limit` times.
