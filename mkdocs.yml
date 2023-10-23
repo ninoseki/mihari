@@ -8,9 +8,6 @@ plugins:
   tags:
     enabled: true
     tags_file: tags.md
-    tags_slugify: !!python/object/apply:pymdownx.slugs.slugify
-      kwds:
-        case: lower
 
 nav:
   - Requirements: requirements.md

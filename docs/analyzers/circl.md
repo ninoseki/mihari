@@ -1,6 +1,6 @@
 ---
 tags:
-  - IP address
+  - Artifact:IP
   - Passive DNS
   - Passive SSL
 ---

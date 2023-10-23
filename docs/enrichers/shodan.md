@@ -1,11 +1,11 @@
 ---
 tags:
-  - Port
-  - CPE
-  - DNS record
+  - Enrichment:Port
+  - Enrichment:CPE
+  - Enrichment:DNS_Record
 ---
 
-# Shodan
+# Shodan (The InternetDB API)
 
 - [https://www.shodan.io/](https://www.shodan.io/dashboard)
 

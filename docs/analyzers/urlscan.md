@@ -1,8 +1,8 @@
 ---
 tags:
-  - IP address
-  - Domain
-  - URL
+  - Artifact:IP
+  - Artifact:Domain
+  - Artifact:URL
 ---
 
 # urlscan.io

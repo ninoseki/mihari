@@ -1,6 +1,6 @@
 ---
 tags:
-  - IP address
+  - Artifact:IP
 ---
 
 # Hunter How

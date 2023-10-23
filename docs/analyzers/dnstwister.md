@@ -1,6 +1,6 @@
 ---
 tags:
-  - Domain
+  - Artifact:Domain
 ---
 
 # dnstwister

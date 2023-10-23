@@ -1,7 +1,7 @@
 ---
 tags:
-  - Autonomous system
-  - Geolocation
+  - Enrichment:Autonomous_System
+  - Enrichment:Geolocation
 ---
 
 # ipinfo.io
