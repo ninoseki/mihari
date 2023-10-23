@@ -11,7 +11,7 @@ module Mihari
       # @param [Integer, nil] timeout
       #
       def initialize(base_url, api_key:, api_version:, headers: {}, timeout: nil)
-        raise(ArgumentError, "'api_key' argument is required") unless api_key
+        raise(ArgumentError, "api_key is required") unless api_key
 
         base_url += "/#{api_version}" unless api_version.nil?
         headers["authorization"] = "Bearer #{api_key}"

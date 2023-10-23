@@ -18,11 +18,11 @@ module Mihari
         id:,
         secret:,
         headers: {},
-        pagination_interval: 0,
+        pagination_interval: Mihari.config.pagination_interval,
         timeout: nil
       )
-        raise(ArgumentError, "'id' argument is required") if id.nil?
-        raise(ArgumentError, "'secret' argument is required") if secret.nil?
+        raise(ArgumentError, "id is required") if id.nil?
+        raise(ArgumentError, "secret is required") if secret.nil?
 
         headers["authorization"] = "Basic #{Base64.strict_encode64("#{id}:#{secret}")}"
 

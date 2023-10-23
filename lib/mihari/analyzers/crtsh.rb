@@ -28,7 +28,7 @@ module Mihari
       # @return [Mihari::Clients::Crtsh]
       #
       def client
-        @client ||= Mihari::Clients::Crtsh.new
+        @client ||= Mihari::Clients::Crtsh.new(timeout: timeout)
       end
     end
   end

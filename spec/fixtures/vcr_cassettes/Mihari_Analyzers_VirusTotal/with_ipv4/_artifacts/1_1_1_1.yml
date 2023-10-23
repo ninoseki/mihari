@@ -1,0 +1,183 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: https://www.virustotal.com/api/v3/ip_addresses/45.83.140.140/resolutions
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+      Host:
+      - www.virustotal.com
+      X-Apikey:
+      - "<VIRUSTOTAL_API_KEY>"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Cache-Control:
+      - no-cache
+      Content-Type:
+      - application/json; charset=utf-8
+      X-Cloud-Trace-Context:
+      - 553e1f245e75808ef1d41fee4bf88d7e
+      Date:
+      - Thu, 26 Sep 2019 22:54:27 GMT
+      Server:
+      - Google Frontend
+      Content-Length:
+      - '5076'
+    body:
+      encoding: UTF-8
+      string: |-
+        {
+            "data": [
+                {
+                    "attributes": {
+                        "date": 1566265526,
+                        "host_name": "jppost-ayu.top",
+                        "ip_address": "45.83.140.140",
+                        "resolver": "VirusTotal"
+                    },
+                    "id": "45.83.140.140jppost-ayu.top",
+                    "links": {
+                        "self": "https://www.virustotal.com/api/v3/resolutions/45.83.140.140jppost-ayu.top"
+                    },
+                    "type": "resolution"
+                },
+                {
+                    "attributes": {
+                        "date": 1565939215,
+                        "host_name": "jppost-ze.top",
+                        "ip_address": "45.83.140.140",
+                        "resolver": "VirusTotal"
+                    },
+                    "id": "45.83.140.140jppost-ze.top",
+                    "links": {
+                        "self": "https://www.virustotal.com/api/v3/resolutions/45.83.140.140jppost-ze.top"
+                    },
+                    "type": "resolution"
+                },
+                {
+                    "attributes": {
+                        "date": 1565939207,
+                        "host_name": "jppost-zu.top",
+                        "ip_address": "45.83.140.140",
+                        "resolver": "VirusTotal"
+                    },
+                    "id": "45.83.140.140jppost-zu.top",
+                    "links": {
+                        "self": "https://www.virustotal.com/api/v3/resolutions/45.83.140.140jppost-zu.top"
+                    },
+                    "type": "resolution"
+                },
+                {
+                    "attributes": {
+                        "date": 1565939177,
+                        "host_name": "jppost-ba.top",
+                        "ip_address": "45.83.140.140",
+                        "resolver": "VirusTotal"
+                    },
+                    "id": "45.83.140.140jppost-ba.top",
+                    "links": {
+                        "self": "https://www.virustotal.com/api/v3/resolutions/45.83.140.140jppost-ba.top"
+                    },
+                    "type": "resolution"
+                },
+                {
+                    "attributes": {
+                        "date": 1565924651,
+                        "host_name": "jppost-pa.top",
+                        "ip_address": "45.83.140.140",
+                        "resolver": "VirusTotal"
+                    },
+                    "id": "45.83.140.140jppost-pa.top",
+                    "links": {
+                        "self": "https://www.virustotal.com/api/v3/resolutions/45.83.140.140jppost-pa.top"
+                    },
+                    "type": "resolution"
+                },
+                {
+                    "attributes": {
+                        "date": 1565924288,
+                        "host_name": "jppost-do.top",
+                        "ip_address": "45.83.140.140",
+                        "resolver": "VirusTotal"
+                    },
+                    "id": "45.83.140.140jppost-do.top",
+                    "links": {
+                        "self": "https://www.virustotal.com/api/v3/resolutions/45.83.140.140jppost-do.top"
+                    },
+                    "type": "resolution"
+                },
+                {
+                    "attributes": {
+                        "date": 1565874268,
+                        "host_name": "jppost-pi.top",
+                        "ip_address": "45.83.140.140",
+                        "resolver": "VirusTotal"
+                    },
+                    "id": "45.83.140.140jppost-pi.top",
+                    "links": {
+                        "self": "https://www.virustotal.com/api/v3/resolutions/45.83.140.140jppost-pi.top"
+                    },
+                    "type": "resolution"
+                },
+                {
+                    "attributes": {
+                        "date": 1565874215,
+                        "host_name": "jppost-pe.top",
+                        "ip_address": "45.83.140.140",
+                        "resolver": "VirusTotal"
+                    },
+                    "id": "45.83.140.140jppost-pe.top",
+                    "links": {
+                        "self": "https://www.virustotal.com/api/v3/resolutions/45.83.140.140jppost-pe.top"
+                    },
+                    "type": "resolution"
+                },
+                {
+                    "attributes": {
+                        "date": 1565849466,
+                        "host_name": "jppost-ahe.top",
+                        "ip_address": "45.83.140.140",
+                        "resolver": "VirusTotal"
+                    },
+                    "id": "45.83.140.140jppost-ahe.top",
+                    "links": {
+                        "self": "https://www.virustotal.com/api/v3/resolutions/45.83.140.140jppost-ahe.top"
+                    },
+                    "type": "resolution"
+                },
+                {
+                    "attributes": {
+                        "date": 1565849465,
+                        "host_name": "jppost-ago.top",
+                        "ip_address": "45.83.140.140",
+                        "resolver": "VirusTotal"
+                    },
+                    "id": "45.83.140.140jppost-ago.top",
+                    "links": {
+                        "self": "https://www.virustotal.com/api/v3/resolutions/45.83.140.140jppost-ago.top"
+                    },
+                    "type": "resolution"
+                }
+            ],
+            "links": {
+                "next": "https://www.virustotal.com/api/v3/ip_addresses/45.83.140.140/resolutions?cursor=ClkKEQoEZGF0ZRIJCJ3spumbhOQCEkBqEXN-dmlydXN0b3RhbGNsb3VkcisLEgpSZXNvbHV0aW9uIhs0NS44My4xNDAuMTQwanBwb3N0LWFnby50b3AMGAAgAQ%3D%3D&limit=10",
+                "self": "https://www.virustotal.com/api/v3/ip_addresses/45.83.140.140/resolutions?limit=10"
+            },
+            "meta": {
+                "cursor": "ClkKEQoEZGF0ZRIJCJ3spumbhOQCEkBqEXN-dmlydXN0b3RhbGNsb3VkcisLEgpSZXNvbHV0aW9uIhs0NS44My4xNDAuMTQwanBwb3N0LWFnby50b3AMGAAgAQ=="
+            }
+        }
+    http_version: 
+  recorded_at: Thu, 26 Sep 2019 22:54:26 GMT
+recorded_with: VCR 5.0.0

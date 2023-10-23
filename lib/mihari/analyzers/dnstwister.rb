@@ -39,7 +39,7 @@ module Mihari
       end
 
       def client
-        @client ||= Clients::DNSTwister.new
+        @client ||= Clients::DNSTwister.new(timeout: timeout)
       end
 
       #

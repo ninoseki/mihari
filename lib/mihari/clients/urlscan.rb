@@ -7,17 +7,17 @@ module Mihari
       # @param [String] base_url
       # @param [String, nil] api_key
       # @param [Hash] headers
-      # @param [Interval, nil] interval
-      # @param [Interval, nil] timeout
+      # @param [Integer, nil] interval
+      # @param [Integer, nil] timeout
       #
       def initialize(
         base_url = "https://urlscan.io",
         api_key:,
         headers: {},
-        pagination_interval: 0,
+        pagination_interval: Mihari.config.pagination_interval,
         timeout: nil
       )
-        raise(ArgumentError, "'api_key' argument is required") if api_key.nil?
+        raise(ArgumentError, "api_key is required") if api_key.nil?
 
         headers["api-key"] = api_key
 

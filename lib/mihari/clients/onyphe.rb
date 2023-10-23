@@ -19,10 +19,10 @@ module Mihari
         base_url = "https://www.onyphe.io",
         api_key:,
         headers: {},
-        pagination_interval: 0,
+        pagination_interval: Mihari.config.pagination_interval,
         timeout: nil
       )
-        raise(ArgumentError, "'api_key' argument is required") if api_key.nil?
+        raise(ArgumentError, "api_key is required") if api_key.nil?
 
         super(base_url, headers: headers, pagination_interval: pagination_interval, timeout: timeout)
 

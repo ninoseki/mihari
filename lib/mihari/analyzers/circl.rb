@@ -51,7 +51,7 @@ module Mihari
       private
 
       def client
-        @client ||= Clients::CIRCL.new(username: username, password: password)
+        @client ||= Clients::CIRCL.new(username: username, password: password, timeout: timeout)
       end
 
       def username?

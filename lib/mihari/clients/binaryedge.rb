@@ -7,21 +7,19 @@ module Mihari
       # @param [String] base_url
       # @param [String, nil] api_key
       # @param [Hash] headers
-      # @param [Integer] pagnation_interval
       # @param [Integer, nil] timeout
+      # @param [Integer] pagination_interval
       #
       def initialize(
         base_url = "https://api.binaryedge.io/v2",
         api_key:,
         headers: {},
-        pagination_interval: 0,
+        pagination_interval: Mihari.config.pagination_interval,
         timeout: nil
       )
-        raise(ArgumentError, "'api_key' argument is required") unless api_key
-
         headers["x-key"] = api_key
 
-        super(base_url, headers: headers, pagination_interval: pagination_interval, timeout: timeout)
+        super(base_url, headers: headers, timeout: timeout, pagination_interval: pagination_interval)
       end
 
       #

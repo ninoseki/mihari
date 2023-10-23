@@ -14,10 +14,10 @@ module Mihari
         base_url = "https://www.virustotal.com",
         api_key:,
         headers: {},
-        pagination_interval: 0,
+        pagination_interval: Mihari.config.pagination_interval,
         timeout: nil
       )
-        raise(ArgumentError, "'api_key' argument is required") if api_key.nil?
+        raise(ArgumentError, "api_key is required") if api_key.nil?
 
         headers["x-apikey"] = api_key
 

@@ -7,12 +7,13 @@ module Mihari
       # @param [String] base_url
       # @param [String, nil] api_key
       # @param [Hash] headers
+      # @param [Integer, nil] timeout
       #
-      def initialize(base_url = "https://otx.alienvault.com", api_key:, headers: {})
-        raise(ArgumentError, "'api_key' argument is required") unless api_key
+      def initialize(base_url = "https://otx.alienvault.com", api_key:, headers: {}, timeout: nil)
+        raise(ArgumentError, "api_key is required") unless api_key
 
         headers["x-otx-api-key"] = api_key
-        super(base_url, headers: headers)
+        super(base_url, headers: headers, timeout: timeout)
       end
 
       #

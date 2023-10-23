@@ -19,10 +19,10 @@ module Mihari
         base_url = "https://api.shodan.io",
         api_key:,
         headers: {},
-        pagination_interval: 0,
+        pagination_interval: Mihari.config.pagination_interval,
         timeout: nil
       )
-        raise(ArgumentError, "'api_key' argument is required") unless api_key
+        raise(ArgumentError, "api_key is required") unless api_key
 
         super(base_url, headers: headers, pagination_interval: pagination_interval, timeout: timeout)
 
