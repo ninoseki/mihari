@@ -39,7 +39,7 @@ module Mihari
       #
       # @param [String] query
       #
-      # @return [Array<Mihari::Artifact>]
+      # @return [Array<Mihari::Models::Artifact>]
       #
       def reverse_whois_search(query)
         params = {
@@ -50,7 +50,7 @@ module Mihari
         results = res["results"] || []
         results.map do |result|
           data = result["domain"]
-          Artifact.new(data: data, metadata: result)
+          Models::Artifact.new(data: data, metadata: result)
         end.flatten
       end
 
@@ -59,7 +59,7 @@ module Mihari
       #
       # @param [String] query
       #
-      # @return [Array<Mihari::Artifact>]
+      # @return [Array<Mihari::Models::Artifact>]
       #
       def ssl_search(query)
         params = { query: query }
@@ -67,7 +67,7 @@ module Mihari
         results = res["results"] || []
         results.map do |result|
           data = result["ipAddresses"]
-          data.map { |d| Artifact.new(data: d, metadata: result) }
+          data.map { |d| Models::Artifact.new(data: d, metadata: result) }
         end.flatten
       end
 

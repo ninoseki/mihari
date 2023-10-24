@@ -40,10 +40,10 @@ module Mihari
         end
 
         #
-        # @return [Mihari::Artifact]
+        # @return [Mihari::Models::Artifact]
         #
         def artifact
-          Mihari::Artifact.new(
+          Mihari::Models::Artifact.new(
             data: ip,
             metadata: metadata,
             autonomous_system: as,
@@ -57,7 +57,7 @@ module Mihari
         def geolocation
           return nil if country_code.nil?
 
-          Mihari::Geolocation.new(
+          Mihari::Models::Geolocation.new(
             country: NormalizeCountry(country_code, to: :short),
             country_code: country_code
           )
@@ -67,7 +67,7 @@ module Mihari
         # @return [Mihari::AutonomousSystem]
         #
         def as
-          Mihari::AutonomousSystem.new(asn: normalize_asn(asn))
+          Mihari::Models::AutonomousSystem.new(asn: normalize_asn(asn))
         end
 
         class << self
@@ -148,7 +148,7 @@ module Mihari
         end
 
         #
-        # @return [Array<Mihari::Artifact>]
+        # @return [Array<Mihari::Models::Artifact>]
         #
         def artifacts
           results.map(&:artifact)

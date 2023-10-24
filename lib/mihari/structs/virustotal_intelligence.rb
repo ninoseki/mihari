@@ -77,10 +77,10 @@ module Mihari
         end
 
         #
-        # @return [Mihari::Artifact]
+        # @return [Mihari::Models::Artifact]
         #
         def artifact
-          Artifact.new(data: value, metadata: metadata)
+          Models::Artifact.new(data: value, metadata: metadata)
         end
 
         class << self
@@ -151,7 +151,7 @@ module Mihari
         end
 
         #
-        # @return [Array<Mihari::Artifact>]
+        # @return [Array<Mihari::Models::Artifact>]
         #
         def artifacts
           data.map(&:artifact)

@@ -29,7 +29,7 @@ module Mihari
       end
 
       def artifacts
-        # @type [Array<Mihari::Artifact>]
+        # @type [Array<Mihari::Models::Artifact>]
         artifacts = client.search_with_pagination(query, pagination_limit: pagination_limit).map(&:artifacts).flatten
 
         artifacts.select do |artifact|

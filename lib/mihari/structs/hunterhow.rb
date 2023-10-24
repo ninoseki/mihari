@@ -14,10 +14,10 @@ module Mihari
         end
 
         #
-        # @return [Mihari::Artifact]
+        # @return [Mihari::Models::Artifact]
         #
         def artifact
-          Artifact.new(data: ip)
+          Models::Artifact.new(data: ip)
         end
 
         class << self
@@ -49,7 +49,7 @@ module Mihari
         end
 
         #
-        # @return [Array<Mihari::Artifact>]
+        # @return [Array<Mihari::Models::Artifact>]
         #
         def artifacts
           list.map(&:artifact)

@@ -54,11 +54,11 @@ module Mihari
       end
 
       #
-      # @return [Array<Mihari::Artifact>]
+      # @return [Array<Mihari::Models::Artifact>]
       #
       def artifacts
         @artifacts ||= data[:artifacts].map do |data|
-          artifact = Artifact.new(data: data)
+          artifact = Models::Artifact.new(data: data)
           artifact.rule_id = rule_id
           artifact
         end.uniq(&:data).select(&:valid?)
@@ -68,7 +68,7 @@ module Mihari
       # @return [Mihari::Services::RuleProxy]
       #
       def rule
-        @rule ||= Services::RuleProxy.new(Mihari::Rule.find(rule_id).data)
+        @rule ||= Services::RuleProxy.new(Mihari::Models::Rule.find(rule_id).data)
       end
 
       class << self

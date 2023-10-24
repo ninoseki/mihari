@@ -2,13 +2,13 @@
 
 require "timecop"
 
-RSpec.describe Mihari::Artifact, :vcr do
+RSpec.describe Mihari::Models::Artifact, :vcr do
   include_context "with database fixtures"
 
-  let!(:alert) { Mihari::Alert.first }
+  let!(:alert) { Mihari::Models::Alert.first }
   let!(:alert_id) { alert.id }
   let!(:rule_id) { alert.rule_id }
-  let!(:aritfact_data) { Mihari::Artifact.where(alert_id: alert_id).first.data }
+  let!(:aritfact_data) { Mihari::Models::Artifact.where(alert_id: alert_id).first.data }
 
   describe "#validate" do
     it do

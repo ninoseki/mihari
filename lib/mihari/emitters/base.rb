@@ -8,14 +8,14 @@ module Mihari
       include Mixins::Configurable
       include Mixins::Retriable
 
-      # @return [Array<Mihari::Artifact>]
+      # @return [Array<Mihari::Models::Artifact>]
       attr_reader :artifacts
 
       # @return [Mihari::Services::Rule]
       attr_reader :rule
 
       #
-      # @param [Array<Mihari::Artifact>] artifacts
+      # @param [Array<Mihari::Models::Artifact>] artifacts
       # @param [Mihari::Services::RuleProxy] rule
       # @param [Hash, nil] options
       # @param [Hash] **_params

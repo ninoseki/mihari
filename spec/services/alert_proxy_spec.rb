@@ -26,7 +26,7 @@ RSpec.describe Mihari::Services::AlertProxy do
   context "with database fixture" do
     include_context "with database fixtures"
 
-    let(:rule) { Mihari::Rule.first }
+    let(:rule) { Mihari::Models::Rule.first }
     let(:data) do
       {
         rule_id: rule.id,

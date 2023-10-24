@@ -1,21 +1,21 @@
 # frozen_string_literal: true
 
 RSpec.describe Mihari::Emitters::Slack do
+  subject { described_class.new(artifacts: artifacts, rule: proxy) }
+
   include_context "with database fixtures"
 
-  let!(:rule) { Mihari::Rule.first }
+  let!(:rule) { Mihari::Models::Rule.first }
   let!(:proxy) { Mihari::Services::RuleProxy.from_model rule }
   let!(:artifacts) do
     [
-      Mihari::Artifact.new(data: "1.1.1.1"),
-      Mihari::Artifact.new(data: "github.com"),
-      Mihari::Artifact.new(data: "http://example.com"),
-      Mihari::Artifact.new(data: "44d88612fea8a8f36de82e1278abb02f"),
-      Mihari::Artifact.new(data: "example@gmail.com")
+      Mihari::Models::Artifact.new(data: "1.1.1.1"),
+      Mihari::Models::Artifact.new(data: "github.com"),
+      Mihari::Models::Artifact.new(data: "http://example.com"),
+      Mihari::Models::Artifact.new(data: "44d88612fea8a8f36de82e1278abb02f"),
+      Mihari::Models::Artifact.new(data: "example@gmail.com")
     ]
   end
-
-  subject { described_class.new(artifacts: artifacts, rule: proxy) }
 
   describe "#attachments" do
     it do

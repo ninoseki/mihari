@@ -58,7 +58,7 @@ module Mihari
       attr_reader :template
 
       #
-      # @param [Array<Mihari::Artifact>] artifacts
+      # @param [Array<Mihari::Models::Artifact>] artifacts
       # @param [Mihari::Services::Rule] rule
       # @param [Hash] **options
       #

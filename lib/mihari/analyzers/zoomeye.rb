@@ -65,7 +65,7 @@ module Mihari
       #
       # @param [Hash] response
       #
-      # @return [Array<Mihari::Artifact>]
+      # @return [Array<Mihari::Models::Artifact>]
       #
       def convert(res)
         matches = res["matches"] || []
@@ -73,9 +73,9 @@ module Mihari
           data = match["ip"]
 
           if data.is_a?(Array)
-            data.map { |d| Artifact.new(data: d, metadata: match) }
+            data.map { |d| Models::Artifact.new(data: d, metadata: match) }
           else
-            Artifact.new(data: data, metadata: match)
+            Models::Artifact.new(data: data, metadata: match)
           end
         end.flatten
       end

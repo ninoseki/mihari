@@ -10,7 +10,7 @@ module Mihari
           summary: "Get tags"
         }
         get "/" do
-          tags = Mihari::Tag.distinct.pluck(:name)
+          tags = Mihari::Models::Tag.distinct.pluck(:name)
           present({ tags: tags }, with: Entities::Tags)
         end
 
@@ -28,7 +28,7 @@ module Mihari
           name = params[:name].to_s
 
           result = Try do
-            Mihari::Tag.where(name: name).destroy_all
+            Mihari::Models::Tag.where(name: name).destroy_all
           end.to_result
 
           if result.success?

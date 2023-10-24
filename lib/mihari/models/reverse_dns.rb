@@ -1,29 +1,31 @@
 # frozen_string_literal: true
 
 module Mihari
-  class ReverseDnsName < ActiveRecord::Base
-    belongs_to :artifact
+  module Models
+    class ReverseDnsName < ActiveRecord::Base
+      belongs_to :artifact
 
-    class << self
-      include Dry::Monads[:result]
+      class << self
+        include Dry::Monads[:result]
 
-      #
-      # Build reverse DNS names
-      #
-      # @param [String] ip
-      # @param [Mihari::Enrichers::Shodan] enricher
-      #
-      # @return [Array<Mihari::ReverseDnsName>]
-      #
-      def build_by_ip(ip, enricher: Enrichers::Shodan.new)
-        result = enricher.query_result(ip).bind do |res|
-          if res.nil?
-            Success []
-          else
-            Success(res.hostnames.map { |name| new(name: name) })
+        #
+        # Build reverse DNS names
+        #
+        # @param [String] ip
+        # @param [Mihari::Enrichers::Shodan] enricher
+        #
+        # @return [Array<Mihari::Models::ReverseDnsName>]
+        #
+        def build_by_ip(ip, enricher: Enrichers::Shodan.new)
+          result = enricher.query_result(ip).bind do |res|
+            if res.nil?
+              Success []
+            else
+              Success(res.hostnames.map { |name| new(name: name) })
+            end
           end
+          result.value_or []
         end
-        result.value_or []
       end
     end
   end

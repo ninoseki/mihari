@@ -130,10 +130,10 @@ module Mihari
       end
 
       #
-      # @return [Mihari::Rule]
+      # @return [Mihari::Models::Rule]
       #
       def model
-        rule = Mihari::Rule.find(id)
+        rule = Mihari::Models::Rule.find(id)
 
         rule.title = title
         rule.description = description
@@ -141,7 +141,7 @@ module Mihari
 
         rule
       rescue ActiveRecord::RecordNotFound
-        Mihari::Rule.new(
+        Mihari::Models::Rule.new(
           id: id,
           title: title,
           description: description,
@@ -169,7 +169,7 @@ module Mihari
         end
 
         #
-        # @param [Mihari::Rule] model
+        # @param [Mihari::Models::Rule] model
         #
         # @return [Mihari::Services::Rule]
         #

@@ -9,7 +9,7 @@ RSpec.describe Mihari::Endpoints::Rules do
     Mihari::Endpoints::Rules
   end
 
-  let!(:rule) { Mihari::Rule.first }
+  let!(:rule) { Mihari::Models::Rule.first }
 
   describe "get /api/rules" do
     it "returns 200" do

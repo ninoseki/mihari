@@ -36,13 +36,13 @@ module Mihari
       #
       # @param [String] query
       #
-      # @return [Array<Mihari::Artifact>]
+      # @return [Array<Mihari::Models::Artifact>]
       #
       def ip_search(query)
         records = search_by_ip(query)
         records.filter_map do |record|
           data = record["hostname"]
-          Artifact.new(data: data, metadata: record)
+          Models::Artifact.new(data: data, metadata: record)
         end
       end
 
@@ -57,7 +57,7 @@ module Mihari
         records = search_by_mail(query)
         records.filter_map do |record|
           data = record["hostname"]
-          Artifact.new(data: data, metadata: record)
+          Models::Artifact.new(data: data, metadata: record)
         end
       end
 

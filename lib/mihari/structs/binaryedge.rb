@@ -69,7 +69,7 @@ module Mihari
         # @return [Array<Artifact>]
         #
         def artifacts
-          events.map { |event| Artifact.new(data: event.target.ip) }
+          events.map { |event| Models::Artifact.new(data: event.target.ip) }
         end
 
         class << self

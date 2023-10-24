@@ -1,9 +1,9 @@
 # frozen_string_literal: true
 
-RSpec.describe Mihari::Rule do
+RSpec.describe Mihari::Models::Rule do
   include_context "with database fixtures"
 
-  let!(:rule) { Mihari::Rule.first }
+  let!(:rule) { Mihari::Models::Rule.first }
 
   describe ".search" do
     it do

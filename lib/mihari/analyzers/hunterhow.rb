@@ -27,7 +27,7 @@ module Mihari
       end
 
       #
-      # @return [Array<Mihari::Artifact>]
+      # @return [Array<Mihari::Models::Artifact>]
       #
       def artifacts
         client.search_with_pagination(

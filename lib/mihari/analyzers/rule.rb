@@ -24,7 +24,7 @@ module Mihari
       #
       # Returns a list of artifacts matched with queries/analyzers (with the rule ID)
       #
-      # @return [Array<Mihari::Artifact>]
+      # @return [Array<Mihari::Models::Artifact>]
       #
       def artifacts
         analyzers.flat_map do |analyzer|
@@ -47,7 +47,7 @@ module Mihari
       # - Reject artifacts with false positive values
       # - Set rule ID
       #
-      # @return [Array<Mihari::Artifact>]
+      # @return [Array<Mihari::Models::Artifact>]
       #
       def normalized_artifacts
         valid_artifacts = artifacts.uniq(&:data).select(&:valid?)
@@ -58,7 +58,7 @@ module Mihari
       #
       # Uniquify artifacts (assure rule level uniqueness)
       #
-      # @return [Array<Mihari::Artifact>]
+      # @return [Array<Mihari::Models::Artifact>]
       #
       def unique_artifacts
         normalized_artifacts.select do |artifact|
@@ -69,7 +69,7 @@ module Mihari
       #
       # Enriched artifacts
       #
-      # @return [Array<Mihari::Artifact>]
+      # @return [Array<Mihari::Models::Artifact>]
       #
       def enriched_artifacts
         @enriched_artifacts ||= Parallel.map(unique_artifacts) do |artifact|
@@ -81,7 +81,7 @@ module Mihari
       #
       # Bulk emit
       #
-      # @return [Array<Mihari::Alert>]
+      # @return [Array<Mihari::Models::Alert>]
       #
       def bulk_emit
         return [] if enriched_artifacts.empty?
@@ -105,12 +105,12 @@ module Mihari
       #
       # Set artifacts & run emitters in parallel
       #
-      # @return [Mihari::Alert, nil]
+      # @return [Mihari::Models::Alert, nil]
       #
       def run
         alert_or_something = bulk_emit
-        # returns Mihari::Alert created by the database emitter
-        alert_or_something.find { |res| res.is_a?(Mihari::Alert) }
+        # returns Mihari::Models::Alert created by the database emitter
+        alert_or_something.find { |res| res.is_a?(Mihari::Models::Alert) }
       end
 
       private

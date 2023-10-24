@@ -10,7 +10,7 @@ module Mihari
           summary: "Get rule IDs"
         }
         get "/ids" do
-          rule_ids = Mihari::Rule.distinct.pluck(:id)
+          rule_ids = Mihari::Models::Rule.distinct.pluck(:id)
           present({ rule_ids: rule_ids }, with: Entities::RuleIDs)
         end
 
@@ -40,8 +40,8 @@ module Mihari
           filter = filter.to_h.symbolize_keys
 
           search_filter_with_pagenation = Structs::Filters::Rule::SearchFilterWithPagination.new(**filter)
-          rules = Mihari::Rule.search(search_filter_with_pagenation)
-          total = Mihari::Rule.count(search_filter_with_pagenation.without_pagination)
+          rules = Mihari::Models::Rule.search(search_filter_with_pagenation)
+          total = Mihari::Models::Rule.count(search_filter_with_pagenation.without_pagination)
 
           present(
             { rules: rules,
@@ -66,7 +66,7 @@ module Mihari
           id = params["id"].to_s
 
           result = Try do
-            Mihari::Rule.find(id)
+            Mihari::Models::Rule.find(id)
           end.to_result
 
           return present(result.value!, with: Entities::Rule) if result.success?
@@ -93,7 +93,7 @@ module Mihari
           id = params["id"].to_s
 
           result = Try do
-            Mihari::Services::RuleProxy.from_model(Mihari::Rule.find(id))
+            Mihari::Services::RuleProxy.from_model(Mihari::Models::Rule.find(id))
           end.to_result
 
           if result.success?
@@ -126,7 +126,7 @@ module Mihari
             Services::RuleProxy.from_yaml(yaml)
           end.to_result.bind do |rule|
             Try do
-              found = Mihari::Rule.find_by_id(rule.id)
+              found = Mihari::Models::Rule.find_by_id(rule.id)
               error!({ message: "ID:#{rule.id} is already registered" }, 400) unless found.nil?
               rule
             end.to_result
@@ -168,7 +168,7 @@ module Mihari
           yaml = params[:yaml]
 
           result = Try do
-            Mihari::Rule.find(id)
+            Mihari::Models::Rule.find(id)
           end.to_result.bind do |_|
             Try do
               Services::RuleProxy.from_yaml(yaml)
@@ -212,7 +212,7 @@ module Mihari
           id = params["id"].to_s
 
           result = Try do
-            rule = Mihari::Rule.find(id)
+            rule = Mihari::Models::Rule.find(id)
             rule.destroy
           end.to_result
 

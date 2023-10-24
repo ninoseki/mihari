@@ -132,7 +132,7 @@ module Mihari
       attr_reader :username
 
       #
-      # @param [Array<Mihari::Artifact>] artifacts
+      # @param [Array<Mihari::Models::Artifact>] artifacts
       # @param [Mihari::Services::Rule] rule
       # @param [Hash, nil] options
       # @param [Hash] **params
