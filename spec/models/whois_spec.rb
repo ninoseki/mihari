@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-RSpec.describe Mihari::WhoisRecord do
+RSpec.describe Mihari::Models::WhoisRecord do
   describe ".build_by_domain" do
     let!(:domain) { "example.com" }
 

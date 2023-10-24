@@ -9,14 +9,14 @@ module Mihari
       # @return [String, nil]
       attr_reader :api_key
 
-      # @return [Array<Mihari::Artifact>]
+      # @return [Array<Mihari::Models::Artifact>]
       attr_reader :artifacts
 
       # @return [Mihari::Services::Rule]
       attr_reader :rule
 
       #
-      # @param [Array<Mihari::Artifact>] artifacts
+      # @param [Array<Mihari::Models::Artifact>] artifacts
       # @param [Mihari::Services::Rule] rule
       # @param [Hash, nil] options
       # @param [Hash] **params
@@ -47,7 +47,7 @@ module Mihari
       #
       # Create a MISP event
       #
-      # @param [Arra<Mihari::Artifact>] artifacts
+      # @param [Arra<Mihari::Models::Artifact>] artifacts
       # @param [Mihari::Services::Rule] rule
       #
       # @return [::MISP::Event]
@@ -77,7 +77,7 @@ module Mihari
       #
       # Build a MISP attribute
       #
-      # @param [Mihari::Artifact] artifact
+      # @param [Mihari::Models::Artifact] artifact
       #
       # @return [Hash]
       #

@@ -35,7 +35,7 @@ module Mihari
             nil
           else
             data = property["value"]
-            Artifact.new(data: data, metadata: property)
+            Models::Artifact.new(data: data, metadata: property)
           end
         end
       end

@@ -18,7 +18,7 @@ module Mihari
           id = params[:id].to_i
 
           result = Try do
-            artifact = Mihari::Artifact.includes(
+            artifact = Mihari::Models::Artifact.includes(
               :autonomous_system,
               :geolocation,
               :whois_record,
@@ -26,9 +26,9 @@ module Mihari
               :reverse_dns_names
             ).find(id)
             # TODO: improve queries
-            alert_ids = Mihari::Artifact.where(data: artifact.data).pluck(:alert_id)
-            tag_ids = Mihari::Tagging.where(alert_id: alert_ids).pluck(:tag_id)
-            tag_names = Mihari::Tag.where(id: tag_ids).distinct.pluck(:name)
+            alert_ids = Mihari::Models::Artifact.where(data: artifact.data).pluck(:alert_id)
+            tag_ids = Mihari::Models::Tagging.where(alert_id: alert_ids).pluck(:tag_id)
+            tag_names = Mihari::Models::Tag.where(id: tag_ids).distinct.pluck(:name)
 
             artifact.tags = tag_names
 
@@ -60,7 +60,7 @@ module Mihari
           id = params["id"].to_i
 
           result = Try do
-            artifact = Mihari::Artifact.includes(
+            artifact = Mihari::Models::Artifact.includes(
               :autonomous_system,
               :geolocation,
               :whois_record,
@@ -102,7 +102,7 @@ module Mihari
           id = params["id"].to_i
 
           result = Try do
-            alert = Mihari::Artifact.find(id)
+            alert = Mihari::Models::Artifact.find(id)
             alert.destroy
           end.to_result
 

@@ -34,7 +34,7 @@ module Mihari
         parser = record.parser
         return nil if parser.available?
 
-        whois_record = WhoisRecord.new(
+        whois_record = Models::WhoisRecord.new(
           domain: domain,
           created_on: get_created_on(parser),
           updated_on: get_updated_on(parser),

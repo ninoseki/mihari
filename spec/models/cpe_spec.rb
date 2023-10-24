@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-RSpec.describe Mihari::CPE, vcr: "Mihari_Enrichers_Shodan/ip:1.1.1.1" do
+RSpec.describe Mihari::Models::CPE, vcr: "Mihari_Enrichers_Shodan/ip:1.1.1.1" do
   describe ".build_by_ip" do
     let!(:ip) { "1.1.1.1" }
 

@@ -16,7 +16,7 @@ module Mihari
       # @return [Boolean]
       #
       def diff?
-        model = Mihari::Rule.find(rule.id)
+        model = Mihari::Models::Rule.find(rule.id)
         model.data != rule.data.deep_stringify_keys
       rescue ActiveRecord::RecordNotFound
         false
@@ -27,14 +27,14 @@ module Mihari
       end
 
       #
-      # @return [Mihari::Alert, nil]
+      # @return [Mihari::Models::Alert, nil]
       #
       def run
         rule.analyzer.run
       end
 
       #
-      # @return [Dry::Monads::Result::Success<Mihari::Alert, nil>, Dry::Monads::Result::Failure]
+      # @return [Dry::Monads::Result::Success<Mihari::Models::Alert, nil>, Dry::Monads::Result::Failure]
       #
       def result
         Try[StandardError] { run }.to_result

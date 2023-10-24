@@ -45,7 +45,7 @@ module Mihari
         Mihari.config.ignore_error
       end
 
-      # @return [Array<String>, Array<Mihari::Artifact>]
+      # @return [Array<String>, Array<Mihari::Models::Artifact>]
       def artifacts
         raise NotImplementedError, "You must implement #{self.class}##{__method__}"
       end
@@ -55,14 +55,14 @@ module Mihari
       # - Convert data (string) into an artifact
       # - Reject an invalid artifact
       #
-      # @return [Array<Mihari::Artifact>]
+      # @return [Array<Mihari::Models::Artifact>]
       #
       def normalized_artifacts
         retry_on_error(times: retry_times, interval: retry_interval, exponential_backoff: retry_exponential_backoff) do
           artifacts.compact.sort.map do |artifact|
             # No need to set data_type manually
             # It is set automatically in #initialize
-            artifact = artifact.is_a?(Artifact) ? artifact : Artifact.new(data: artifact)
+            artifact = artifact.is_a?(Models::Artifact) ? artifact : Models::Artifact.new(data: artifact)
             artifact.source = self.class.class_key
             artifact
           end.select(&:valid?).uniq(&:data)
@@ -70,7 +70,7 @@ module Mihari
       end
 
       #
-      # @return [Dry::Monads::Result::Success<Array<Mihari::Artifact>>, Dry::Monads::Result::Failure]
+      # @return [Dry::Monads::Result::Success<Array<Mihari::Models::Artifact>>, Dry::Monads::Result::Failure]
       #
       def result
         Try[StandardError] { normalized_artifacts }.to_result

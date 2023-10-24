@@ -26,8 +26,8 @@ module Mihari
       # @return [Hash]
       #
       def data
-        if Mihari::Rule.exists?(path_or_id)
-          rule = Mihari::Rule.find(path_or_id)
+        if Mihari::Models::Rule.exists?(path_or_id)
+          rule = Mihari::Models::Rule.find(path_or_id)
           return rule.data
         end
 

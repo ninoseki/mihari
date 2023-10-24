@@ -19,7 +19,7 @@ module Mihari
         # @return [Mihari::AutonomousSystem]
         #
         def as
-          Mihari::AutonomousSystem.new(asn: normalize_asn(asn))
+          Mihari::Models::AutonomousSystem.new(asn: normalize_asn(asn))
         end
 
         class << self
@@ -63,7 +63,7 @@ module Mihari
           # then set geolocation as nil
           return nil if country.nil?
 
-          Mihari::Geolocation.new(
+          Mihari::Models::Geolocation.new(
             country: country,
             country_code: country_code
           )
@@ -99,7 +99,7 @@ module Mihari
         # @return [Mihari::Port]
         #
         def _port
-          Port.new(port: port)
+          Models::Port.new(port: port)
         end
 
         class << self
@@ -167,10 +167,10 @@ module Mihari
         end
 
         #
-        # @return [Mihari::Artifact]
+        # @return [Mihari::Models::Artifact]
         #
         def artifact
-          Artifact.new(
+          Models::Artifact.new(
             data: ip,
             metadata: metadata,
             autonomous_system: autonomous_system.as,
@@ -267,7 +267,7 @@ module Mihari
         end
 
         #
-        # @return [Array<Mihari::Artifact>]
+        # @return [Array<Mihari::Models::Artifact>]
         #
         def artifacts
           hits.map(&:artifact)

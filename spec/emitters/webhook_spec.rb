@@ -7,11 +7,11 @@ RSpec.describe Mihari::Emitters::Webhook, :vcr do
 
   let!(:artifacts) do
     [
-      Mihari::Artifact.new(data: "1.1.1.1"),
-      Mihari::Artifact.new(data: "github.com")
+      Mihari::Models::Artifact.new(data: "1.1.1.1"),
+      Mihari::Models::Artifact.new(data: "github.com")
     ]
   end
-  let!(:rule) { Mihari::Services::RuleProxy.from_model(Mihari::Rule.first) }
+  let!(:rule) { Mihari::Services::RuleProxy.from_model(Mihari::Models::Rule.first) }
 
   describe "#valid?" do
     context "without URL" do
@@ -40,8 +40,6 @@ RSpec.describe Mihari::Emitters::Webhook, :vcr do
   end
 
   describe "#emit" do
-    let!(:url) { "https://httpbin.org/post" }
-
     subject do
       described_class.new(
         artifacts: artifacts,
@@ -50,6 +48,8 @@ RSpec.describe Mihari::Emitters::Webhook, :vcr do
         headers: { "Content-Type": "application/json" }
       )
     end
+
+    let!(:url) { "https://httpbin.org/post" }
 
     it do
       res = subject.emit

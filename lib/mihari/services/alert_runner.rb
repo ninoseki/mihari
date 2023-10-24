@@ -13,7 +13,7 @@ module Mihari
       end
 
       #
-      # @return [Mihari::Alert]
+      # @return [Mihari::Models::Alert]
       #
       def run
         emitter = Emitters::Database.new(artifacts: alert.artifacts, rule: alert.rule)
@@ -21,7 +21,7 @@ module Mihari
       end
 
       #
-      # @return [Dry::Monads::Result::Success<Mihari::Alert, nil>, Dry::Monads::Result::Failure]
+      # @return [Dry::Monads::Result::Success<Mihari::Models::Alert, nil>, Dry::Monads::Result::Failure]
       #
       def result
         Try[StandardError] { run }.to_result

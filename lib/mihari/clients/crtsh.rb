@@ -19,7 +19,7 @@ module Mihari
       # @param [String, nil] match "=", "ILIKE", "LIKE", "single", "any" or nil
       # @param [String, nil] exclude "expired" or nil
       #
-      # @return [Array<Mihari::Artifact>]
+      # @return [Array<Mihari::Models::Artifact>]
       #
       def search(identity, match: nil, exclude: nil)
         params = { identity: identity, match: match, exclude: exclude, output: "json" }.compact
@@ -29,7 +29,7 @@ module Mihari
 
         parsed.map do |result|
           values = result["name_value"].to_s.lines.map(&:chomp)
-          values.map { |value| Artifact.new(data: value, metadata: result) }
+          values.map { |value| Models::Artifact.new(data: value, metadata: result) }
         end.flatten
       end
     end

@@ -121,7 +121,7 @@ RSpec.describe Mihari::Analyzers::Rule, :vcr do
     before do
       allow(subject).to receive(:valid_emitters).and_return([])
       allow(subject).to receive(:enriched_artifacts).and_return([
-        Mihari::Artifact.new(data: "1.1.1.1")
+        Mihari::Models::Artifact.new(data: "1.1.1.1")
       ])
 
       allow(Parallel).to receive(:processor_count).and_return(0)
@@ -143,7 +143,7 @@ RSpec.describe Mihari::Analyzers::Rule, :vcr do
         # set mocked classes as emitters
         allow(subject).to receive(:valid_emitters).and_return([emitter])
         allow(subject).to receive(:enriched_artifacts).and_return([
-          Mihari::Artifact.new(data: "1.1.1.1")
+          Mihari::Models::Artifact.new(data: "1.1.1.1")
         ])
         allow(Parallel).to receive(:processor_count).and_return(0)
       end

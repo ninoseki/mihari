@@ -27,7 +27,7 @@ module Mihari
         def geolocation
           return nil if country_name.nil? && country_code.nil?
 
-          Mihari::Geolocation.new(
+          Mihari::Models::Geolocation.new(
             country: country_name,
             country_code: country_code
           )
@@ -108,7 +108,7 @@ module Mihari
         def _asn
           return nil if asn.nil?
 
-          Mihari::AutonomousSystem.new(asn: normalize_asn(asn))
+          Mihari::Models::AutonomousSystem.new(asn: normalize_asn(asn))
         end
 
         class << self
@@ -192,20 +192,20 @@ module Mihari
         end
 
         #
-        # @return [Array<Mihari::Artifact>]
+        # @return [Array<Mihari::Models::Artifact>]
         #
         def artifacts
           matches.map do |match|
             metadata = collect_metadata_by_ip(match.ip_str)
 
             ports = collect_ports_by_ip(match.ip_str).map do |port|
-              Mihari::Port.new(port: port)
+              Mihari::Models::Port.new(port: port)
             end
             reverse_dns_names = collect_hostnames_by_ip(match.ip_str).map do |name|
-              Mihari::ReverseDnsName.new(name: name)
+              Mihari::Models::ReverseDnsName.new(name: name)
             end
 
-            Mihari::Artifact.new(
+            Mihari::Models::Artifact.new(
               data: match.ip_str,
               metadata: metadata,
               autonomous_system: match._asn,

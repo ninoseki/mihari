@@ -66,7 +66,7 @@ module Mihari
       #
       # Domain search
       #
-      # @return [Array<Mihari::Artifact>]
+      # @return [Array<Mihari::Models::Artifact>]
       #
       def domain_search
         res = client.domain_search(query)
@@ -74,14 +74,14 @@ module Mihari
         data = res["data"] || []
         data.filter_map do |item|
           data = item.dig("attributes", "ip_address")
-          data.nil? ? nil : Artifact.new(data: data, metadata: item)
+          data.nil? ? nil : Models::Artifact.new(data: data, metadata: item)
         end
       end
 
       #
       # IP search
       #
-      # @return [Array<Mihari::Artifact>]
+      # @return [Array<Mihari::Models::Artifact>]
       #
       def ip_search
         res = client.ip_search(query)
@@ -89,7 +89,7 @@ module Mihari
         data = res["data"] || []
         data.filter_map do |item|
           data = item.dig("attributes", "host_name")
-          Artifact.new(data: data, metadata: item)
+          Models::Artifact.new(data: data, metadata: item)
         end.uniq
       end
     end

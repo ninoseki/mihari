@@ -8,8 +8,8 @@ RSpec.describe Mihari::Endpoints::Artifacts, :vcr do
     Mihari::Endpoints::Artifacts
   end
 
-  let!(:artifact) { Mihari::Artifact.first }
-  let!(:alert) { Mihari::Alert.first }
+  let!(:artifact) { Mihari::Models::Artifact.first }
+  let!(:alert) { Mihari::Models::Alert.first }
 
   describe "get /api/artifacts/:id" do
     it "returns 400" do
@@ -33,18 +33,20 @@ RSpec.describe Mihari::Endpoints::Artifacts, :vcr do
 
     context "with enriched artifact" do
       before do
-        allow(Mihari::DnsRecord).to receive(:build_by_domain).and_return(
-          [Mihari::DnsRecord.new(resource: "A", value: Faker::Internet.unique.ip_v4_address)]
+        allow(Mihari::Models::DnsRecord).to receive(:build_by_domain).and_return(
+          [Mihari::Models::DnsRecord.new(resource: "A", value: Faker::Internet.unique.ip_v4_address)]
         )
-        allow(Mihari::ReverseDnsName).to receive(:build_by_ip).and_return(
-          [Mihari::ReverseDnsName.new(name: Faker::Internet.unique.domain_name)]
+        allow(Mihari::Models::ReverseDnsName).to receive(:build_by_ip).and_return(
+          [Mihari::Models::ReverseDnsName.new(name: Faker::Internet.unique.domain_name)]
         )
 
-        @enriched_domain_artifact = Mihari::Artifact.new(data: Faker::Internet.unique.domain_name, alert_id: alert.id)
+        @enriched_domain_artifact = Mihari::Models::Artifact.new(data: Faker::Internet.unique.domain_name,
+          alert_id: alert.id)
         @enriched_domain_artifact.enrich_dns
         @enriched_domain_artifact.save
 
-        @enriched_ip_artifact = Mihari::Artifact.new(data: Faker::Internet.unique.ip_v4_address, alert_id: alert.id)
+        @enriched_ip_artifact = Mihari::Models::Artifact.new(data: Faker::Internet.unique.ip_v4_address,
+          alert_id: alert.id)
         @enriched_ip_artifact.enrich_reverse_dns
         @enriched_ip_artifact.save
       end

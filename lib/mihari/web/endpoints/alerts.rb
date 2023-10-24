@@ -31,8 +31,8 @@ module Mihari
           filter = filter.to_h.symbolize_keys
 
           search_filter_with_pagination = Structs::Filters::Alert::SearchFilterWithPagination.new(**filter)
-          alerts = Mihari::Alert.search(search_filter_with_pagination)
-          total = Mihari::Alert.count(search_filter_with_pagination.without_pagination)
+          alerts = Mihari::Models::Alert.search(search_filter_with_pagination)
+          total = Mihari::Models::Alert.count(search_filter_with_pagination.without_pagination)
 
           present(
             {
@@ -59,7 +59,7 @@ module Mihari
           id = params["id"].to_i
 
           result = Try do
-            alert = Mihari::Alert.find(id)
+            alert = Mihari::Models::Alert.find(id)
             alert.destroy
           end.to_result
 

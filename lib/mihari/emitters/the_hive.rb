@@ -13,7 +13,7 @@ module Mihari
       attr_reader :api_version
 
       #
-      # @param [Array<Mihari::Artifact>] artifacts
+      # @param [Array<Mihari::Models::Artifact>] artifacts
       # @param [Mihari::Services::Rule] rule
       # @param [Hash, nil] options
       # @param [Hash] **params
