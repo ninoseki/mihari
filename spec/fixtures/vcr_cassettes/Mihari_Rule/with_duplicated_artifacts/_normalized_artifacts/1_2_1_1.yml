@@ -1,0 +1,79 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: https://crt.sh/?exclude=expired&identity=www.example.com&output=json
+    body:
+      encoding: ASCII-8BIT
+      string: ''
+    headers:
+      Connection:
+      - close
+      Host:
+      - crt.sh
+      User-Agent:
+      - http.rb/5.1.1
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - nginx
+      Date:
+      - Wed, 25 Oct 2023 11:37:03 GMT
+      Content-Type:
+      - application/json
+      Content-Length:
+      - '683'
+      Connection:
+      - close
+      Strict-Transport-Security:
+      - max-age=15768000; includeSubDomains; preload
+      Expect-Ct:
+      - preload
+    body:
+      encoding: UTF-8
+      string: '[{"issuer_ca_id":185756,"issuer_name":"C=US, O=DigiCert Inc, CN=DigiCert
+        TLS RSA SHA256 2020 CA1","common_name":"www.example.org","name_value":"www.example.com","id":8913351873,"entry_timestamp":"2023-03-17T16:26:38.016","not_before":"2023-01-13T00:00:00","not_after":"2024-02-13T23:59:59","serial_number":"0c1fcb184518c7e3866741236d6b73f1"},{"issuer_ca_id":185756,"issuer_name":"C=US,
+        O=DigiCert Inc, CN=DigiCert TLS RSA SHA256 2020 CA1","common_name":"www.example.org","name_value":"www.example.com","id":8396709327,"entry_timestamp":"2023-01-13T13:18:21.987","not_before":"2023-01-13T00:00:00","not_after":"2024-02-13T23:59:59","serial_number":"0c1fcb184518c7e3866741236d6b73f1"}]'
+  recorded_at: Wed, 25 Oct 2023 11:37:03 GMT
+- request:
+    method: get
+    uri: https://crt.sh/?exclude=expired&identity=www.example.com&output=json
+    body:
+      encoding: ASCII-8BIT
+      string: ''
+    headers:
+      Connection:
+      - close
+      Host:
+      - crt.sh
+      User-Agent:
+      - http.rb/5.1.1
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - nginx
+      Date:
+      - Wed, 25 Oct 2023 11:37:04 GMT
+      Content-Type:
+      - application/json
+      Content-Length:
+      - '683'
+      Connection:
+      - close
+      Strict-Transport-Security:
+      - max-age=15768000; includeSubDomains; preload
+      Expect-Ct:
+      - preload
+    body:
+      encoding: UTF-8
+      string: '[{"issuer_ca_id":185756,"issuer_name":"C=US, O=DigiCert Inc, CN=DigiCert
+        TLS RSA SHA256 2020 CA1","common_name":"www.example.org","name_value":"www.example.com","id":8913351873,"entry_timestamp":"2023-03-17T16:26:38.016","not_before":"2023-01-13T00:00:00","not_after":"2024-02-13T23:59:59","serial_number":"0c1fcb184518c7e3866741236d6b73f1"},{"issuer_ca_id":185756,"issuer_name":"C=US,
+        O=DigiCert Inc, CN=DigiCert TLS RSA SHA256 2020 CA1","common_name":"www.example.org","name_value":"www.example.com","id":8396709327,"entry_timestamp":"2023-01-13T13:18:21.987","not_before":"2023-01-13T00:00:00","not_after":"2024-02-13T23:59:59","serial_number":"0c1fcb184518c7e3866741236d6b73f1"}]'
+  recorded_at: Wed, 25 Oct 2023 11:37:04 GMT
+recorded_with: VCR 6.2.0

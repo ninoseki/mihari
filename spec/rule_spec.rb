@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-RSpec.describe Mihari::Analyzers::Rule, :vcr do
+RSpec.describe Mihari::Rule, :vcr do
   subject { described_class.new(rule) }
 
   include_context "with mocked logger"
@@ -30,7 +30,7 @@ RSpec.describe Mihari::Analyzers::Rule, :vcr do
     )
   end
 
-  describe "#artifacts", vcr: "Mihari_Analyzers_Rule/crt_sh:www.example.com" do
+  describe "#artifacts", vcr: "Mihari_Rule/crt_sh:www.example.com" do
     it do
       artifacts = subject.artifacts
       expect(artifacts).to be_an(Array)
@@ -55,7 +55,7 @@ RSpec.describe Mihari::Analyzers::Rule, :vcr do
     end
   end
 
-  context "with string false positive", vcr: "Mihari_Analyzers_Rule/crt_sh:www.example.com" do
+  context "with string false positive", vcr: "Mihari_Rule/crt_sh:www.example.com" do
     let(:falsepositives) { ["www.example.com"] }
 
     describe "#normalized_artifacts" do
@@ -67,7 +67,7 @@ RSpec.describe Mihari::Analyzers::Rule, :vcr do
     end
   end
 
-  context "with regexp false positive", vcr: "Mihari_Analyzers_Rule/crt_sh:www.example.com" do
+  context "with regexp false positive", vcr: "Mihari_Rule/crt_sh:www.example.com" do
     let(:falsepositives) { ["/[a-z.]+/"] }
 
     describe "#normalized_artifacts" do
@@ -79,7 +79,7 @@ RSpec.describe Mihari::Analyzers::Rule, :vcr do
     end
   end
 
-  context "with data types", vcr: "Mihari_Analyzers_Rule/crt_sh:www.example.com" do
+  context "with data types", vcr: "Mihari_Rule/crt_sh:www.example.com" do
     let(:data_types) { ["ip"] }
 
     describe "#normalized_artifacts" do

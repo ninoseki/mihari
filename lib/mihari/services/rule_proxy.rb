@@ -150,10 +150,10 @@ module Mihari
       end
 
       #
-      # @return [Mihari::Analyzers::Rule]
+      # @return [Mihari::Rule]
       #
       def analyzer
-        Mihari::Analyzers::Rule.new self
+        Mihari::Rule.new self
       end
 
       class << self

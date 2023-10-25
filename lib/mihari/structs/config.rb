@@ -71,7 +71,7 @@ module Mihari
         # @return [Mihari::Structs::Config, nil] config
         #
         def from_class(klass)
-          return nil if klass == Mihari::Analyzers::Rule
+          return nil if klass == Mihari::Rule
 
           type = get_type(klass)
           return nil if type.nil?
