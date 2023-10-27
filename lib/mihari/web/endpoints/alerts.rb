@@ -89,7 +89,7 @@ module Mihari
           extend Dry::Monads[:result, :try]
 
           result = Try do
-            proxy = Services::AlertProxy.new(params.to_snake_keys)
+            proxy = Services::AlertProxy.new(**params.to_snake_keys)
             runner = Services::AlertRunner.new(proxy)
             runner.run
           end.to_result
