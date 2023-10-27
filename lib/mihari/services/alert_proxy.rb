@@ -68,7 +68,10 @@ module Mihari
       # @return [Mihari::Rule]
       #
       def rule
-        @rule ||= Rule.new(Mihari::Models::Rule.find(rule_id).data)
+        @rule ||= [].tap do |out|
+          data = Mihari::Models::Rule.find(rule_id).data
+          out << Rule.new(**data)
+        end.first
       end
 
       class << self
