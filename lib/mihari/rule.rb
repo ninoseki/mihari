@@ -18,7 +18,7 @@ module Mihari
     #
     # @param [Hash] data
     #
-    def initialize(data)
+    def initialize(**data)
       @data = data.deep_symbolize_keys
       @errors = nil
       @base_time = Time.now.utc
@@ -223,7 +223,8 @@ module Mihari
       # @return [Mihari::Services::Rule]
       #
       def from_yaml(yaml)
-        new YAML.safe_load(ERB.new(yaml).result, permitted_classes: [Date, Symbol])
+        data = YAML.safe_load(ERB.new(yaml).result, permitted_classes: [Date, Symbol])
+        new(**data)
       end
 
       #
@@ -232,7 +233,7 @@ module Mihari
       # @return [Mihari::Services::Rule]
       #
       def from_model(model)
-        new model.data
+        new(**model.data)
       end
     end
 

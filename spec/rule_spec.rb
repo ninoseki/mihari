@@ -16,7 +16,7 @@ RSpec.describe Mihari::Rule, :vcr do
   let(:data_types) { Mihari::DEFAULT_DATA_TYPES }
   let!(:emitters) { [{ emitter: "database" }] }
   let(:rule) do
-    Mihari::Rule.new({
+    Mihari::Rule.new(
       title: title,
       description: description,
       tags: tags,
@@ -25,7 +25,7 @@ RSpec.describe Mihari::Rule, :vcr do
       data_types: data_types,
       falsepositives: falsepositives,
       emitters: emitters
-    })
+    )
   end
 
   describe "#artifacts", vcr: "Mihari_Rule/crt_sh:www.example.com" do
@@ -110,13 +110,11 @@ RSpec.describe Mihari::Rule, :vcr do
 
     let(:rule) do
       Mihari::Rule.new(
-        {
-          id: id,
-          title: title,
-          description: description,
-          tags: tags,
-          queries: queries
-        }
+        id: id,
+        title: title,
+        description: description,
+        tags: tags,
+        queries: queries
       )
     end
 

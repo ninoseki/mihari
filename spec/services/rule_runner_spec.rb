@@ -14,7 +14,7 @@ RSpec.describe Mihari::Services::RuleRunner do
       allowed_data_types: ["ip"]
     }
   end
-  let!(:rule) { Mihari::Rule.new(data) }
+  let!(:rule) { Mihari::Rule.new(**data) }
   let!(:runner) { Mihari::Services::RuleRunner.new(rule) }
 
   describe "#diff?" do

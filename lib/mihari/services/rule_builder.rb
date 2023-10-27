@@ -40,7 +40,7 @@ module Mihari
       end
 
       def result
-        Try[StandardError] { Rule.new(data) }.to_result
+        Try[StandardError] { Rule.new(**data) }.to_result
       end
     end
   end
