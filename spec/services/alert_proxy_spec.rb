@@ -9,7 +9,7 @@ RSpec.describe Mihari::Services::AlertProxy do
       artifacts: ["example.com", "1.1.1.1"]
     }
   end
-  let(:alert) { described_class.new(data) }
+  let(:alert) { described_class.new(**data) }
 
   describe "#errors?" do
     it "doesn't have any errors" do
@@ -33,7 +33,7 @@ RSpec.describe Mihari::Services::AlertProxy do
         artifacts: ["example.com", "1.1.1.1"]
       }
     end
-    let(:alert) { described_class.new(data) }
+    let(:alert) { described_class.new(**data) }
 
     describe "#rule" do
       it "doesn't raise ActiveRecord::RecordNotFound" do

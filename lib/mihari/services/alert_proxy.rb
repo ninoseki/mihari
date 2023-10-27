@@ -16,7 +16,7 @@ module Mihari
       #
       # @param [Hash] data
       #
-      def initialize(data)
+      def initialize(**data)
         @data = data.deep_symbolize_keys
         @errors = nil
 
@@ -83,7 +83,8 @@ module Mihari
         # @return [Mihari::Services::Alert]
         #
         def from_yaml(yaml)
-          new YAML.safe_load(yaml, permitted_classes: [Date, Symbol])
+          data = YAML.safe_load(yaml, permitted_classes: [Date, Symbol])
+          new(**data)
         end
       end
     end

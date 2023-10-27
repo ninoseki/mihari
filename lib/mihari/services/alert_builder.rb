@@ -36,7 +36,7 @@ module Mihari
       end
 
       def result
-        Try[StandardError] { AlertProxy.new(data) }.to_result
+        Try[StandardError] { AlertProxy.new(**data) }.to_result
       end
     end
   end
