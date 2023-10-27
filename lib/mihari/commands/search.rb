@@ -32,7 +32,7 @@ module Mihari
 
             no_commands do
               #
-              # @param [Mihari::Services::RuleProxy] rule
+              # @param [Mihari::Services::RuleRunner] rule
               #
               def check_diff(rule)
                 force_overwrite = options["force_overwrite"] || false

@@ -11,7 +11,7 @@ RSpec.describe Mihari::Emitters::Webhook, :vcr do
       Mihari::Models::Artifact.new(data: "github.com")
     ]
   end
-  let!(:rule) { Mihari::Services::RuleProxy.from_model(Mihari::Models::Rule.first) }
+  let!(:rule) { Mihari::Rule.from_model(Mihari::Models::Rule.first) }
 
   describe "#valid?" do
     context "without URL" do

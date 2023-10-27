@@ -5,7 +5,7 @@ module Mihari
     class RuleRunner
       include Dry::Monads[:result, :try]
 
-      # @return [Mihari::Services::RuleProxy]
+      # @return [Mihari::Rule]
       attr_reader :rule
 
       def initialize(rule)
@@ -30,7 +30,7 @@ module Mihari
       # @return [Mihari::Models::Alert, nil]
       #
       def run
-        rule.analyzer.run
+        rule.run
       end
 
       #

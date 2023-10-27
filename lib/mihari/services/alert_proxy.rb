@@ -65,10 +65,10 @@ module Mihari
       end
 
       #
-      # @return [Mihari::Services::RuleProxy]
+      # @return [Mihari::Rule]
       #
       def rule
-        @rule ||= Services::RuleProxy.new(Mihari::Models::Rule.find(rule_id).data)
+        @rule ||= Rule.new(Mihari::Models::Rule.find(rule_id).data)
       end
 
       class << self

@@ -3,23 +3,27 @@
 RSpec.shared_context "with database fixtures" do
   before_all do
     # create rules
-    rule1 = Mihari::Services::RuleProxy.new(
-      id: SecureRandom.uuid,
-      title: Faker::Name.unique.name,
-      description: Faker::Name.unique.name,
-      queries: [{ analyzer: "crtsh", query: "foo" }],
-      tags: [Faker::Name.unique.name],
-      emitters: [{ emitter: "database" }]
+    rule1 = Mihari::Rule.new(
+      {
+        id: SecureRandom.uuid,
+        title: Faker::Name.unique.name,
+        description: Faker::Name.unique.name,
+        queries: [{ analyzer: "crtsh", query: "foo" }],
+        tags: [Faker::Name.unique.name],
+        emitters: [{ emitter: "database" }]
+      }
     )
     rule1.model.save
 
-    rule2 = Mihari::Services::RuleProxy.new(
-      id: SecureRandom.uuid,
-      title: Faker::Name.unique.name,
-      description: Faker::Name.unique.name,
-      queries: [{ analyzer: "crtsh", query: "foo" }],
-      tags: [Faker::Name.unique.name],
-      emitters: [{ emitter: "database" }]
+    rule2 = Mihari::Rule.new(
+      {
+        id: SecureRandom.uuid,
+        title: Faker::Name.unique.name,
+        description: Faker::Name.unique.name,
+        queries: [{ analyzer: "crtsh", query: "foo" }],
+        tags: [Faker::Name.unique.name],
+        emitters: [{ emitter: "database" }]
+      }
     )
     rule2.model.save
 

@@ -1,8 +1,6 @@
 # frozen_string_literal: true
 
 RSpec.describe Mihari::Rule, :vcr do
-  subject { described_class.new(rule) }
-
   include_context "with mocked logger"
 
   let!(:id) { "test" }
@@ -18,7 +16,7 @@ RSpec.describe Mihari::Rule, :vcr do
   let(:data_types) { Mihari::DEFAULT_DATA_TYPES }
   let!(:emitters) { [{ emitter: "database" }] }
   let(:rule) do
-    Mihari::Services::RuleProxy.new(
+    Mihari::Rule.new({
       title: title,
       description: description,
       tags: tags,
@@ -27,14 +25,26 @@ RSpec.describe Mihari::Rule, :vcr do
       data_types: data_types,
       falsepositives: falsepositives,
       emitters: emitters
-    )
+    })
   end
 
   describe "#artifacts", vcr: "Mihari_Rule/crt_sh:www.example.com" do
     it do
-      artifacts = subject.artifacts
+      artifacts = rule.artifacts
       expect(artifacts).to be_an(Array)
       expect(artifacts.length).to eq(1) # = www.example.com
+    end
+  end
+
+  describe "#model" do
+    it "returns a model" do
+      expect(rule.model).to be_a Mihari::Models::Rule
+    end
+  end
+
+  describe "#errors?" do
+    it "doesn't have any errors" do
+      expect(rule.errors?).to be false
     end
   end
 
@@ -48,7 +58,7 @@ RSpec.describe Mihari::Rule, :vcr do
 
     describe "#normalized_artifacts" do
       it do
-        artifacts = subject.normalized_artifacts
+        artifacts = rule.normalized_artifacts
         expect(artifacts).to be_an(Array)
         expect(artifacts.length).to eq(1) # www.example.com
       end
@@ -60,7 +70,7 @@ RSpec.describe Mihari::Rule, :vcr do
 
     describe "#normalized_artifacts" do
       it do
-        artifacts = subject.normalized_artifacts
+        artifacts = rule.normalized_artifacts
         expect(artifacts).to be_an(Array)
         expect(artifacts.length).to eq(0)
       end
@@ -72,7 +82,7 @@ RSpec.describe Mihari::Rule, :vcr do
 
     describe "#normalized_artifacts" do
       it do
-        artifacts = subject.normalized_artifacts
+        artifacts = rule.normalized_artifacts
         expect(artifacts).to be_an(Array)
         expect(artifacts.length).to eq(0)
       end
@@ -84,7 +94,7 @@ RSpec.describe Mihari::Rule, :vcr do
 
     describe "#normalized_artifacts" do
       it do
-        artifacts = subject.normalized_artifacts
+        artifacts = rule.normalized_artifacts
         expect(artifacts).to be_an(Array)
         expect(artifacts.length).to eq(0)
       end
@@ -99,12 +109,14 @@ RSpec.describe Mihari::Rule, :vcr do
     end
 
     let(:rule) do
-      Mihari::Services::RuleProxy.new(
-        id: id,
-        title: title,
-        description: description,
-        tags: tags,
-        queries: queries
+      Mihari::Rule.new(
+        {
+          id: id,
+          title: title,
+          description: description,
+          tags: tags,
+          queries: queries
+        }
       )
     end
 
@@ -113,14 +125,14 @@ RSpec.describe Mihari::Rule, :vcr do
     end
 
     it do
-      expect { subject.artifacts }.to raise_error(Mihari::ConfigurationError, /Shodan is not configured correctly/)
+      expect { rule.artifacts }.to raise_error(Mihari::ConfigurationError, /Shodan is not configured correctly/)
     end
   end
 
   describe "#run" do
     before do
-      allow(subject).to receive(:valid_emitters).and_return([])
-      allow(subject).to receive(:enriched_artifacts).and_return([
+      allow(rule).to receive(:valid_emitters).and_return([])
+      allow(rule).to receive(:enriched_artifacts).and_return([
         Mihari::Models::Artifact.new(data: "1.1.1.1")
       ])
 
@@ -129,7 +141,7 @@ RSpec.describe Mihari::Rule, :vcr do
 
     it "does not raise any error" do
       expect do
-        subject.run
+        rule.run
         SemanticLogger.flush
       end.not_to output.to_stderr
     end
@@ -141,15 +153,15 @@ RSpec.describe Mihari::Rule, :vcr do
         allow(emitter).to receive(:valid?).and_return(true)
         allow(emitter).to receive(:result).and_return(Dry::Monads::Result::Failure.new("error"))
         # set mocked classes as emitters
-        allow(subject).to receive(:valid_emitters).and_return([emitter])
-        allow(subject).to receive(:enriched_artifacts).and_return([
+        allow(rule).to receive(:valid_emitters).and_return([emitter])
+        allow(rule).to receive(:enriched_artifacts).and_return([
           Mihari::Models::Artifact.new(data: "1.1.1.1")
         ])
         allow(Parallel).to receive(:processor_count).and_return(0)
       end
 
       it do
-        subject.run
+        rule.run
 
         # read logger output
         SemanticLogger.flush

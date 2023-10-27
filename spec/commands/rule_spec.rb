@@ -15,7 +15,7 @@ RSpec.describe Mihari::Commands::Rule do
       CLI.new.initialize_rule(filename, files)
 
       yaml = files.read(filename)
-      rule = Mihari::Services::RuleProxy.from_yaml(yaml)
+      rule = Mihari::Rule.from_yaml(yaml)
       expect(rule.errors?).to be false
       expect(rule.data).to be_a(Hash)
     end
