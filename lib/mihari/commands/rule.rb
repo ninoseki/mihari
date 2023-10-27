@@ -17,10 +17,7 @@ module Mihari
             # @param [String] path
             #
             def validate(path)
-              res = Dry::Monads::Try[ValidationError] do
-                Services::RuleProxy.from_yaml File.read(path)
-              end
-
+              res = Dry::Monads::Try[ValidationError] { Mihari::Rule.from_yaml File.read(path) }
               rule = res.value!
               puts rule.data.to_yaml
             end
@@ -43,13 +40,6 @@ module Mihari
 
             no_commands do
               #
-              # @return [Mihari::Services::Rule]
-              #
-              def rule
-                Services::RuleProxy.from_yaml File.read(File.expand_path("../templates/rule.yml.erb", __dir__))
-              end
-
-              #
               # Create a new rule
               #
               # @param [String] path
@@ -58,6 +48,7 @@ module Mihari
               # @return [nil]
               #
               def initialize_rule(path, files = Dry::Files.new)
+                rule = Mihari::Rule.from_yaml File.read(File.expand_path("../templates/rule.yml.erb", __dir__))
                 files.write(path, rule.yaml)
               end
             end

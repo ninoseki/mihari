@@ -92,10 +92,7 @@ module Mihari
 
           id = params["id"].to_s
 
-          result = Try do
-            Mihari::Services::RuleProxy.from_model(Mihari::Models::Rule.find(id))
-          end.to_result
-
+          result = Try { Rule.from_model(Mihari::Models::Rule.find(id)) }.to_result
           if result.success?
             result.value!.analyzer.run
             status 201
@@ -122,9 +119,7 @@ module Mihari
           extend Dry::Monads[:result, :try]
 
           yaml = params[:yaml]
-          result = Try do
-            Services::RuleProxy.from_yaml(yaml)
-          end.to_result.bind do |rule|
+          result = Try { Rule.from_yaml(yaml) }.to_result.bind do |rule|
             Try do
               found = Mihari::Models::Rule.find_by_id(rule.id)
               error!({ message: "ID:#{rule.id} is already registered" }, 400) unless found.nil?
@@ -170,9 +165,7 @@ module Mihari
           result = Try do
             Mihari::Models::Rule.find(id)
           end.to_result.bind do |_|
-            Try do
-              Services::RuleProxy.from_yaml(yaml)
-            end.to_result
+            Try { Rule.from_yaml(yaml) }.to_result
           end.bind do |rule|
             Try do
               rule.model.save

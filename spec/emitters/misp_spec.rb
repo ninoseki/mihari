@@ -7,7 +7,7 @@ RSpec.describe Mihari::Emitters::MISP, :vcr do
   include_context "with mocked logger"
 
   let!(:artifacts) { [Mihari::Models::Artifact.new(data: "1.1.1.1")] }
-  let!(:rule) { Mihari::Services::RuleProxy.from_model(Mihari::Models::Rule.first) }
+  let!(:rule) { Mihari::Rule.from_model(Mihari::Models::Rule.first) }
 
   describe "#valid?" do
     context "when MISP_URL & MISP_API_KEY are not given" do

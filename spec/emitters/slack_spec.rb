@@ -6,7 +6,7 @@ RSpec.describe Mihari::Emitters::Slack do
   include_context "with database fixtures"
 
   let!(:rule) { Mihari::Models::Rule.first }
-  let!(:proxy) { Mihari::Services::RuleProxy.from_model rule }
+  let!(:proxy) { Mihari::Rule.from_model rule }
   let!(:artifacts) do
     [
       Mihari::Models::Artifact.new(data: "1.1.1.1"),

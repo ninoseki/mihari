@@ -5,7 +5,7 @@ RSpec.describe Mihari::Emitters::Database do
 
   include_context "with database fixtures"
 
-  let(:rule) { Mihari::Services::RuleProxy.from_model(Mihari::Models::Rule.first) }
+  let(:rule) { Mihari::Rule.from_model(Mihari::Models::Rule.first) }
   let(:artifacts) { [Mihari::Models::Artifact.new(data: "1.1.1.1")] }
 
   describe "#emit", vcr: "Mihari_Enrichers_IPInfo/ip:1.1.1.1" do

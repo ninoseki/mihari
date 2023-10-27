@@ -11,12 +11,12 @@ module Mihari
       # @return [Array<Mihari::Models::Artifact>]
       attr_reader :artifacts
 
-      # @return [Mihari::Services::Rule]
+      # @return [Mihari::Rule]
       attr_reader :rule
 
       #
       # @param [Array<Mihari::Models::Artifact>] artifacts
-      # @param [Mihari::Services::RuleProxy] rule
+      # @param [Mihari::Rule] rule
       # @param [Hash, nil] options
       # @param [Hash] **_params
       #
@@ -38,9 +38,7 @@ module Mihari
             times: retry_times,
             interval: retry_interval,
             exponential_backoff: retry_exponential_backoff
-          ) do
-            emit
-          end
+          ) { emit }
         end.to_result
       end
 

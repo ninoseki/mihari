@@ -38,7 +38,7 @@ RSpec.describe Mihari::Services::AlertProxy do
     describe "#rule" do
       it "doesn't raise ActiveRecord::RecordNotFound" do
         rule = alert.rule
-        expect(rule).to be_a Mihari::Services::RuleProxy
+        expect(rule).to be_a Mihari::Rule
       end
     end
   end
