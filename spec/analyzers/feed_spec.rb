@@ -14,6 +14,7 @@ RSpec.describe Mihari::Analyzers::Feed, :vcr do
           selector: "map(&:data).unwrap.map(&:ioc)"
         )
       end
+
       it do
         expect(subject.artifacts).to be_an(Array)
       end
@@ -26,6 +27,7 @@ RSpec.describe Mihari::Analyzers::Feed, :vcr do
           selector: "map { |v| v[1] }"
         )
       end
+
       it do
         expect(subject.artifacts).to be_an(Array)
       end

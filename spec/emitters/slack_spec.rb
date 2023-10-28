@@ -1,13 +1,7 @@
 # frozen_string_literal: true
 
 RSpec.describe Mihari::Emitters::Slack do
-  subject do
-    [].tap do |out|
-      it = described_class.new(rule: proxy)
-      it.artifacts = artifacts
-      out << it
-    end.first
-  end
+  subject { described_class.new(rule: proxy) }
 
   include_context "with database fixtures"
 
@@ -24,9 +18,15 @@ RSpec.describe Mihari::Emitters::Slack do
   end
 
   describe "#attachments" do
+    before { subject.artifacts = artifacts }
+
     it do
-      subject.attachments.each do |a|
-        actions = a[:actions] || []
+      expect(subject.attachments.length).to be > 0
+    end
+
+    it do
+      subject.attachments.each do |attachment|
+        actions = attachment[:actions] || []
         actions.each do |action|
           expect(action[:url]).to match(/virustotal|urlscan|censys|shodan/)
         end

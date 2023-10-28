@@ -6,6 +6,6 @@ RSpec.describe Mihari do
   end
 
   it "has a config" do
-    expect(Mihari.config).not_to be nil
+    expect(described_class.config).not_to be nil
   end
 end

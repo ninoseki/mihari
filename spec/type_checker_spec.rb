@@ -6,6 +6,7 @@ RSpec.describe Mihari::TypeChecker do
   describe ".type" do
     context "when ip" do
       let!(:ip) { "1.1.1.1" }
+
       it do
         expect(subject.type(ip)).to eq("ip")
       end
@@ -13,6 +14,7 @@ RSpec.describe Mihari::TypeChecker do
 
     context "with domain" do
       let!(:domain) { "example.com" }
+
       it do
         expect(subject.type(domain)).to eq("domain")
       end

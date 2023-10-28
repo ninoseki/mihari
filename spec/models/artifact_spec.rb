@@ -8,7 +8,7 @@ RSpec.describe Mihari::Models::Artifact, :vcr do
   let!(:alert) { Mihari::Models::Alert.first }
   let!(:alert_id) { alert.id }
   let!(:rule_id) { alert.rule_id }
-  let!(:aritfact_data) { Mihari::Models::Artifact.where(alert_id: alert_id).first.data }
+  let!(:aritfact_data) { described_class.where(alert_id: alert_id).first.data }
 
   describe "#validate" do
     it do
@@ -59,42 +59,56 @@ RSpec.describe Mihari::Models::Artifact, :vcr do
   end
 
   describe "#enrich_whois" do
-    let!(:data) { "example.com" }
-
-    it do
-      artifact = described_class.new(data: data, alert_id: alert_id)
-      expect(artifact.whois_record).to be_nil
-
-      artifact.enrich_whois
-      expect(artifact.whois_record).not_to be_nil
+    let!(:enricher) do
+      enricher = double("whois_enricher")
+      allow(enricher).to receive(:query_result).and_return(
+        Dry::Monads::Result::Success.new(
+          Mihari::Models::WhoisRecord.new(domain: "example.com")
+        )
+      )
+      enricher
     end
 
-    context "with URL" do
-      let!(:data) { "https://example.com" }
+    context "with domain" do
+      let!(:data) { "example.com" }
 
       it do
         artifact = described_class.new(data: data, alert_id: alert_id)
         expect(artifact.whois_record).to be_nil
 
-        artifact.enrich_whois
+        artifact.enrich_whois enricher
+        expect(artifact.whois_record).not_to be_nil
+      end
+    end
+
+    context "with URL" do
+      let(:data) { "https://example.com" }
+
+      it do
+        artifact = described_class.new(data: data, alert_id: alert_id)
+        expect(artifact.whois_record).to be_nil
+
+        artifact.enrich_whois enricher
         expect(artifact.whois_record).not_to be_nil
       end
     end
   end
 
   describe "#enrich_dns" do
-    let!(:data) { "example.com" }
+    context "with domain" do
+      let!(:data) { "example.com" }
 
-    it do
-      artifact = described_class.new(data: data, alert_id: alert_id)
-      expect(artifact.dns_records.length).to eq(0)
+      it do
+        artifact = described_class.new(data: data, alert_id: alert_id)
+        expect(artifact.dns_records.length).to eq(0)
 
-      artifact.enrich_dns
-      expect(artifact.dns_records.length).to be > 0
+        artifact.enrich_dns
+        expect(artifact.dns_records.length).to be > 0
+      end
     end
 
     context "with URL" do
-      let!(:data) { "https://example.com" }
+      let(:data) { "https://example.com" }
 
       it do
         artifact = described_class.new(data: data, alert_id: alert_id)

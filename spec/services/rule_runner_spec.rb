@@ -15,7 +15,7 @@ RSpec.describe Mihari::Services::RuleRunner do
     }
   end
   let!(:rule) { Mihari::Rule.new(**data) }
-  let!(:runner) { Mihari::Services::RuleRunner.new(rule) }
+  let!(:runner) { described_class.new(rule) }
 
   describe "#diff?" do
     it do

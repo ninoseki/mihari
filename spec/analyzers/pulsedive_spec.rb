@@ -4,7 +4,7 @@ RSpec.describe Mihari::Analyzers::Pulsedive, :vcr do
   subject { described_class.new(query) }
 
   context "with ip" do
-    let!(:query) { "1.1.1.1" }
+    let(:query) { "1.1.1.1" }
 
     describe "#artifacts" do
       it do
@@ -14,7 +14,7 @@ RSpec.describe Mihari::Analyzers::Pulsedive, :vcr do
   end
 
   context "with domain" do
-    let!(:query) { "one.one.one.one" }
+    let(:query) { "one.one.one.one" }
 
     describe "#artifacts" do
       it do
@@ -24,7 +24,7 @@ RSpec.describe Mihari::Analyzers::Pulsedive, :vcr do
   end
 
   context "with invalid input" do
-    let!(:query) { "foo bar" }
+    let(:query) { "foo bar" }
 
     describe "#artifacts" do
       it do
@@ -34,7 +34,7 @@ RSpec.describe Mihari::Analyzers::Pulsedive, :vcr do
   end
 
   context "without API credentials" do
-    let!(:query) { "1.1.1.1" }
+    let(:query) { "1.1.1.1" }
 
     before do
       allow(Mihari.config).to receive(:pulsedive_api_key).and_return(nil)

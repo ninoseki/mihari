@@ -3,7 +3,7 @@
 RSpec.describe Mihari::Models::Rule do
   include_context "with database fixtures"
 
-  let!(:rule) { Mihari::Models::Rule.first }
+  let!(:rule) { described_class.first }
 
   describe ".search" do
     it do

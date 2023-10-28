@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Test
   include Mihari::Mixins::Refang
 end
