@@ -74,7 +74,7 @@ module Mihari
     #
     def emitter_to_class
       @emitter_to_class ||= emitters.flat_map do |klass|
-        klass.class_keys.map { |key| [key.downcase, klass] }
+        klass.class_keys.map { |key| [key, klass] }
       end.to_h
     end
 
@@ -88,7 +88,7 @@ module Mihari
     #
     def analyzer_to_class
       @analyzer_to_class ||= analyzers.flat_map do |klass|
-        klass.class_keys.map { |key| [key.downcase, klass] }
+        klass.class_keys.map { |key| [key, klass] }
       end.to_h
     end
 
@@ -102,7 +102,7 @@ module Mihari
     #
     def enricher_to_class
       @enricher_to_class ||= enrichers.flat_map do |klass|
-        klass.class_keys.map { |key| [key.downcase, klass] }
+        klass.class_keys.map { |key| [key, klass] }
       end.to_h
     end
 
@@ -131,7 +131,7 @@ module Mihari
 end
 
 # Core classes
-require "mihari/base"
+require "mihari/actor"
 require "mihari/database"
 require "mihari/http"
 require "mihari/type_checker"
@@ -233,6 +233,7 @@ require "mihari/structs/virustotal_intelligence"
 
 # Schemas
 require "mihari/schemas/macros"
+require "mihari/schemas/mixins"
 
 require "mihari/schemas/options"
 

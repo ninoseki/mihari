@@ -2,12 +2,7 @@
 
 module Mihari
   module Enrichers
-    class Base < Mihari::Base
-      include Mixins::Configurable
-      include Mixins::Retriable
-
-      include Dry::Monads[:result, :try]
-
+    class Base < Actor
       def initialize(options: nil)
         super(options: options)
       end

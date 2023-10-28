@@ -3,26 +3,30 @@
 module Mihari
   module Schemas
     module Enrichers
+      extend Schemas::Mixins
+
       IPInfo = Dry::Schema.Params do
-        required(:enricher).value(Types::String.enum("ipinfo"))
+        required(:enricher).value(Types::String.enum(*Mihari::Enrichers::IPInfo.class_keys))
         optional(:api_key).value(:string)
         optional(:options).hash(Options)
       end
 
       Whois = Dry::Schema.Params do
-        required(:enricher).value(Types::String.enum("whois"))
+        required(:enricher).value(Types::String.enum(*Mihari::Enrichers::Whois.class_keys))
         optional(:options).hash(Options)
       end
 
       Shodan = Dry::Schema.Params do
-        required(:enricher).value(Types::String.enum("shodan"))
+        required(:enricher).value(Types::String.enum(*Mihari::Enrichers::Shodan.class_keys))
         optional(:options).hash(Options)
       end
 
       GooglePublicDNS = Dry::Schema.Params do
-        required(:enricher).value(Types::String.enum("google_public_dns"))
+        required(:enricher).value(Types::String.enum(*Mihari::Enrichers::GooglePublicDNS.class_keys))
         optional(:options).hash(Options)
       end
     end
+
+    Enricher = Schemas::Enrichers.get_or_composition
   end
 end

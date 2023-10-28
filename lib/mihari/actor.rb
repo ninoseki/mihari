@@ -4,7 +4,12 @@ module Mihari
   #
   # Base class for Analyzer, Emitter and Enricher
   #
-  class Base
+  class Actor
+    include Dry::Monads[:result, :try]
+
+    include Mixins::Configurable
+    include Mixins::Retriable
+
     # @return [Hash]
     attr_reader :options
 
@@ -62,7 +67,7 @@ module Mihari
       # @return [Array<String>]
       #
       def class_keys
-        ([class_key] + [class_key_aliases]).flatten.compact
+        ([class_key] + [class_key_aliases]).flatten.compact.map(&:downcase)
       end
     end
   end
