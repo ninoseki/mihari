@@ -12,45 +12,42 @@ module Mihari
       # @return [String, nil]
       attr_reader :api_version
 
+      # @return [Array<Mihari::Models::Artifact>]
+      attr_accessor :artifacts
+
       #
-      # @param [Array<Mihari::Models::Artifact>] artifacts
       # @param [Mihari::Services::Rule] rule
       # @param [Hash, nil] options
       # @param [Hash] **params
       #
-      def initialize(artifacts:, rule:, options: nil, **params)
-        super(artifacts: artifacts, rule: rule, options: options)
+      def initialize(rule:, options: nil, **params)
+        super(rule: rule, options: options)
 
         @url = params[:url] || Mihari.config.thehive_url
         @api_key = params[:api_key] || Mihari.config.thehive_api_key
         @api_version = params[:api_version] || Mihari.config.thehive_api_version
+
+        @artifacts = []
       end
 
+      #
       # @return [Boolean]
-      def valid?
-        unless url? && api_key?
-          Mihari.logger.info("TheHive URL is not set") unless url?
-          Mihari.logger.info("TheHive API key is not set") unless api_key?
-          return false
-        end
-
-        unless ping?
-          Mihari.logger.info("TheHive URL (#{url}) is not reachable")
-          return false
-        end
-
-        true
+      #
+      def configured?
+        api_key? && url?
       end
 
       #
       # Create a Hive alert
       #
-      # @return [::MISP::Event]
+      # @param [Array<Mihari::Models::Artifact>] artifacts
       #
-      def emit
+      def emit(artifacts)
         return if artifacts.empty?
 
-        client.alert(payload)
+        @artifacts = artifacts
+
+        client.alert payload
       end
 
       #
@@ -145,31 +142,6 @@ module Mihari
           source: "mihari",
           source_ref: "1"
         }
-      end
-
-      #
-      # Check whether a URL is reachable or not
-      #
-      # @return [Boolean]
-      #
-      def ping?
-        base_url = url.end_with?("/") ? url[0..-2] : url
-
-        if normalized_api_version.nil?
-          # for v4
-          base_url = url.end_with?("/") ? url[0..-2] : url
-          public_url = "#{base_url}/index.html"
-        else
-          # for v5
-          public_url = "#{base_url}/api/v1/status/public"
-        end
-
-        http = Net::Ping::HTTP.new(public_url)
-
-        # use GET for v5
-        http.get_request = true if normalized_api_version
-
-        http.ping?
       end
     end
   end

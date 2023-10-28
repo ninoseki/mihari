@@ -131,18 +131,22 @@ module Mihari
       # @return [String]
       attr_reader :username
 
+      # @return [Array<Mihari::Models::Artifact>]
+      attr_accessor :artifacts
+
       #
-      # @param [Array<Mihari::Models::Artifact>] artifacts
       # @param [Mihari::Services::Rule] rule
       # @param [Hash, nil] options
       # @param [Hash] **params
       #
-      def initialize(artifacts:, rule:, options: nil, **params)
-        super(artifacts: artifacts, rule: rule, options: options)
+      def initialize(rule:, options: nil, **params)
+        super(rule: rule, options: options)
 
         @webhook_url = params[:webhook_url] || Mihari.config.slack_webhook_url
         @channel = params[:channel] || Mihari.config.slack_channel || DEFAULT_CHANNEL
         @username = DEFAULT_USERNAME
+
+        @artifacts = []
       end
 
       #
@@ -155,11 +159,9 @@ module Mihari
       end
 
       #
-      # Check webhook URL is set. Alias of #webhook_url?
-      #
       # @return [Boolean]
       #
-      def valid?
+      def configured?
         webhook_url?
       end
 
@@ -211,18 +213,19 @@ module Mihari
         ].join("\n")
       end
 
-      def emit
+      #
+      # @param [Array<Mihari::Models::Artifact>] artifacts
+      #
+      def emit(artifacts)
         return if artifacts.empty?
+
+        @artifacts = artifacts
 
         notifier.post(text: text, attachments: attachments, mrkdwn: true)
       end
 
       def configuration_keys
         %w[slack_webhook_url slack_channel]
-      end
-
-      def configured?
-        valid?
       end
     end
   end

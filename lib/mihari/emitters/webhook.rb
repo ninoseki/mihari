@@ -57,22 +57,40 @@ module Mihari
       # @return [String, nil]
       attr_reader :template
 
+      # @return [Array<Mihari::Models::Artifact>]
+      attr_accessor :artifacts
+
       #
-      # @param [Array<Mihari::Models::Artifact>] artifacts
       # @param [Mihari::Services::Rule] rule
       # @param [Hash] **options
       #
-      def initialize(artifacts:, rule:, options: nil, **params)
-        super(artifacts: artifacts, rule: rule, options: options)
+      def initialize(rule:, options: nil, **params)
+        super(rule: rule, options: options)
 
         @url = Addressable::URI.parse(params[:url])
         @headers = params[:headers] || {}
         @method = params[:method] || "POST"
         @template = params[:template]
+
+        @artifacts = []
       end
 
-      def emit
+      #
+      # @return [Boolean]
+      #
+      def configured?
+        return false if url.nil?
+
+        %w[http https].include? url.scheme.downcase
+      end
+
+      #
+      # @param [Array<Mihari::Models::Artifact>] artifacts
+      #
+      def emit(artifacts)
         return if artifacts.empty?
+
+        @artifacts = artifacts
 
         # returns body to prevent Parallel issue (Parallel fails to handle HTTP:Response object)
         case method
@@ -81,12 +99,6 @@ module Mihari
         when "POST"
           http.post(url, json: json).body.to_s
         end
-      end
-
-      def valid?
-        return false if url.nil?
-
-        %w[http https].include? url.scheme.downcase
       end
 
       private
@@ -101,17 +113,15 @@ module Mihari
       # @return [String]
       #
       def rendered_template
-        [].tap do |out|
-          options = {}
-          options[:template] = File.read(template) unless template.nil?
+        options = {}
+        options[:template] = File.read(template) unless template.nil?
 
-          payload_template = PayloadTemplate.new(
-            artifacts: artifacts,
-            rule: rule,
-            options: options
-          )
-          out << payload_template.result
-        end.first
+        payload_template = PayloadTemplate.new(
+          artifacts: artifacts,
+          rule: rule,
+          options: options
+        )
+        payload_template.result
       end
 
       #

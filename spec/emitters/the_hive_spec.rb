@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 RSpec.describe Mihari::Emitters::TheHive, :vcr do
-  subject { described_class.new(artifacts: artifacts, rule: rule) }
+  subject { described_class.new(rule: rule) }
 
   include_context "with database fixtures"
   include_context "with mocked logger"
@@ -9,13 +9,13 @@ RSpec.describe Mihari::Emitters::TheHive, :vcr do
   let!(:artifacts) { [Mihari::Models::Artifact.new(data: "1.1.1.1")] }
   let!(:rule) { Mihari::Rule.from_model(Mihari::Models::Rule.first) }
 
-  describe "#valid?" do
+  describe "#configured?" do
     before do
       allow(Mihari.config).to receive(:thehive_api_version).and_return("v4")
     end
 
     it do
-      expect(subject.valid?).to be(true)
+      expect(subject.configured?).to be(true)
     end
 
     it do
@@ -28,10 +28,12 @@ RSpec.describe Mihari::Emitters::TheHive, :vcr do
       end
 
       it do
-        expect(subject.valid?).to be(false)
+        expect(subject.configured?).to be(false)
       end
     end
+  end
 
+  describe "#normalized_api_version" do
     context "with THEHIVE_API_VERSION" do
       before do
         allow(Mihari.config).to receive(:thehive_api_version).and_return("v5")
@@ -52,7 +54,7 @@ RSpec.describe Mihari::Emitters::TheHive, :vcr do
     end
 
     it do
-      subject.emit
+      subject.emit artifacts
       expect(mock_client).to have_received(:alert)
     end
   end

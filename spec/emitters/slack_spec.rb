@@ -1,7 +1,13 @@
 # frozen_string_literal: true
 
 RSpec.describe Mihari::Emitters::Slack do
-  subject { described_class.new(artifacts: artifacts, rule: proxy) }
+  subject do
+    [].tap do |out|
+      it = described_class.new(rule: proxy)
+      it.artifacts = artifacts
+      out << it
+    end.first
+  end
 
   include_context "with database fixtures"
 
@@ -36,24 +42,24 @@ RSpec.describe Mihari::Emitters::Slack do
     end
   end
 
-  describe "#valid?" do
-    context "with SLAC_WEBHOOK_URL" do
+  describe "#configured?" do
+    context "with SLACK_WEBHOOK_URL" do
       before do
         allow(Mihari.config).to receive(:slack_webhook_url).and_return("http://example.com")
       end
 
       it do
-        expect(subject.valid?).to be(true)
+        expect(subject.configured?).to be(true)
       end
     end
 
-    context "without SLAC_WEBHOOK_URL" do
+    context "without SLACK_WEBHOOK_URL" do
       before do
         allow(Mihari.config).to receive(:slack_webhook_url).and_return(nil)
       end
 
       it do
-        expect(subject.valid?).to be(false)
+        expect(subject.configured?).to be(false)
       end
     end
   end
@@ -67,7 +73,7 @@ RSpec.describe Mihari::Emitters::Slack do
     end
 
     it do
-      subject.emit
+      subject.emit artifacts
       expect(mock).to have_received(:post).once
     end
   end
