@@ -1,14 +1,14 @@
 # frozen_string_literal: true
 
 RSpec.describe Mihari::Analyzers::VirusTotal, :vcr do
-  subject { described_class.new(query) }
+  subject(:analyzer) { described_class.new(query) }
 
   context "with ipv4" do
     let(:query) { "45.83.140.140" }
 
     describe "#artifacts" do
       it do
-        expect(subject.artifacts).to be_an(Array)
+        expect(analyzer.artifacts).to be_an(Array)
       end
     end
   end
@@ -18,7 +18,7 @@ RSpec.describe Mihari::Analyzers::VirusTotal, :vcr do
 
     describe "#artifacts" do
       it do
-        expect(subject.artifacts).to be_an(Array)
+        expect(analyzer.artifacts).to be_an(Array)
       end
     end
   end
@@ -28,7 +28,7 @@ RSpec.describe Mihari::Analyzers::VirusTotal, :vcr do
 
     describe "#artifacts" do
       it do
-        expect { subject.artifacts }.to raise_error(Mihari::ValueError)
+        expect { analyzer.artifacts }.to raise_error(Mihari::ValueError)
       end
     end
   end
@@ -41,7 +41,7 @@ RSpec.describe Mihari::Analyzers::VirusTotal, :vcr do
     end
 
     it do
-      expect { subject.artifacts }.to raise_error(ArgumentError)
+      expect { analyzer.artifacts }.to raise_error(ArgumentError)
     end
   end
 end

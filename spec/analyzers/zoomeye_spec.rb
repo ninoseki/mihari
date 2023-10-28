@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 RSpec.describe Mihari::Analyzers::ZoomEye, :vcr do
-  subject { described_class.new(query, type: type) }
+  subject(:analyzer) { described_class.new(query, type: type) }
 
   let(:type) { "host" }
 
@@ -9,7 +9,7 @@ RSpec.describe Mihari::Analyzers::ZoomEye, :vcr do
     let(:query) { "sagawa.apk" }
 
     it do
-      expect(subject.artifacts).to be_an(Array)
+      expect(analyzer.artifacts).to be_an(Array)
     end
   end
 
@@ -19,7 +19,7 @@ RSpec.describe Mihari::Analyzers::ZoomEye, :vcr do
 
     describe "#artifacts" do
       it do
-        expect(subject.artifacts).to be_an(Array)
+        expect(analyzer.artifacts).to be_an(Array)
       end
     end
   end
@@ -32,7 +32,7 @@ RSpec.describe Mihari::Analyzers::ZoomEye, :vcr do
     end
 
     it do
-      expect { subject.artifacts }.to raise_error(ArgumentError)
+      expect { analyzer.artifacts }.to raise_error(ArgumentError)
     end
   end
 end

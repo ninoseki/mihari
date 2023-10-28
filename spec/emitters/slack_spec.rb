@@ -1,12 +1,11 @@
 # frozen_string_literal: true
 
 RSpec.describe Mihari::Emitters::Slack do
-  subject { described_class.new(rule: proxy) }
+  subject(:emitter) { described_class.new(rule: rule) }
 
   include_context "with database fixtures"
 
-  let!(:rule) { Mihari::Models::Rule.first }
-  let!(:proxy) { Mihari::Rule.from_model rule }
+  let!(:rule) { Mihari::Rule.from_model Mihari::Models::Rule.first }
   let!(:artifacts) do
     [
       Mihari::Models::Artifact.new(data: "1.1.1.1"),
@@ -18,14 +17,14 @@ RSpec.describe Mihari::Emitters::Slack do
   end
 
   describe "#attachments" do
-    before { subject.artifacts = artifacts }
+    before { emitter.artifacts = artifacts }
 
     it do
-      expect(subject.attachments.length).to be > 0
+      expect(emitter.attachments.length).to be > 0
     end
 
     it do
-      subject.attachments.each do |attachment|
+      emitter.attachments.each do |attachment|
         actions = attachment[:actions] || []
         actions.each do |action|
           expect(action[:url]).to match(/virustotal|urlscan|censys|shodan/)
@@ -35,10 +34,10 @@ RSpec.describe Mihari::Emitters::Slack do
   end
 
   describe "#text" do
-    let!(:tags) { proxy.tags.join(", ") }
+    let!(:tags) { rule.tags.join(", ") }
 
     it do
-      expect(subject.text).to include("*Desc.*: #{rule.description}\n*Tags*: #{tags}")
+      expect(emitter.text).to include("*Desc.*: #{rule.description}\n*Tags*: #{tags}")
     end
   end
 
@@ -49,7 +48,7 @@ RSpec.describe Mihari::Emitters::Slack do
       end
 
       it do
-        expect(subject.configured?).to be(true)
+        expect(emitter.configured?).to be(true)
       end
     end
 
@@ -59,7 +58,7 @@ RSpec.describe Mihari::Emitters::Slack do
       end
 
       it do
-        expect(subject.configured?).to be(false)
+        expect(emitter.configured?).to be(false)
       end
     end
   end
@@ -73,7 +72,7 @@ RSpec.describe Mihari::Emitters::Slack do
     end
 
     it do
-      subject.emit artifacts
+      emitter.emit artifacts
       expect(mock).to have_received(:post).once
     end
   end

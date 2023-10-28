@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 RSpec.describe Mihari::Emitters::MISP, :vcr do
-  subject { described_class.new(rule: rule) }
+  subject(:emitter) { described_class.new(rule: rule) }
 
   include_context "with database fixtures"
   include_context "with mocked logger"
@@ -17,14 +17,14 @@ RSpec.describe Mihari::Emitters::MISP, :vcr do
       end
 
       it do
-        expect(subject.configured?).to be(false)
+        expect(emitter.configured?).to be(false)
       end
     end
   end
 
   describe "#emit" do
     it do
-      subject.emit artifacts
+      emitter.emit artifacts
     end
   end
 end

@@ -6,7 +6,7 @@ end
 
 RSpec.describe Test do
   describe "#refang" do
-    subject { described_class.new }
+    subject(:subject) { described_class.new }
 
     it do
       expect(subject.refang("1.1.1.1")).to eq("1.1.1.1")

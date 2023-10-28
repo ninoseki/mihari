@@ -1,13 +1,13 @@
 # frozen_string_literal: true
 
 RSpec.describe Mihari::Analyzers::Onyphe, :vcr do
-  subject { described_class.new(query) }
+  subject(:analyzer) { described_class.new(query) }
 
   let!(:query) { "4299114377898569169" }
 
   describe "#artifacts" do
     it do
-      artifacts = subject.artifacts
+      artifacts = analyzer.artifacts
       expect(artifacts).to be_an(Array)
 
       expect(artifacts.first.autonomous_system.asn).to eq(3462)
@@ -21,7 +21,7 @@ RSpec.describe Mihari::Analyzers::Onyphe, :vcr do
     end
 
     it do
-      expect { subject.artifacts }.to raise_error(ArgumentError)
+      expect { analyzer.artifacts }.to raise_error(ArgumentError)
     end
   end
 end

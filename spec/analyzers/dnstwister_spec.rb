@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 RSpec.describe Mihari::Analyzers::DNSTwister, :vcr do
-  subject { described_class.new(query) }
+  subject(:analyzer) { described_class.new(query) }
 
   let!(:query) { "example.com" }
 
@@ -11,7 +11,7 @@ RSpec.describe Mihari::Analyzers::DNSTwister, :vcr do
     end
 
     it do
-      expect(subject.artifacts).to be_an(Array)
+      expect(analyzer.artifacts).to be_an(Array)
     end
   end
 end
