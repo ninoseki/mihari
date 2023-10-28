@@ -21,17 +21,10 @@ module Mihari
       optional(:created_on).value(:date)
       optional(:updated_on).value(:date)
 
-      required(:queries).value(:array).each do
-        AnalyzerAPIKey | AnalyzerAPIKeyPagination | Censys | CIRCL | PassiveTotal | ZoomEye | Crtsh | Feed | HunterHow | DNSTwister
-      end
+      required(:queries).value(:array).each { Analyzer } # rubocop:disable Lint/Void
 
-      optional(:emitters).value(:array).each do
-        Emitters::Database | Emitters::MISP | Emitters::TheHive | Emitters::Slack | Emitters::Webhook
-      end.default(DEFAULT_EMITTERS)
-
-      optional(:enrichers).value(:array).each do
-        Enrichers::Whois | Enrichers::IPInfo | Enrichers::Shodan | Enrichers::GooglePublicDNS
-      end.default(DEFAULT_ENRICHERS)
+      optional(:emitters).value(:array).each { Emitter }.default(DEFAULT_EMITTERS) # rubocop:disable Lint/Void
+      optional(:enrichers).value(:array).each { Enricher }.default(DEFAULT_ENRICHERS) # rubocop:disable Lint/Void
 
       optional(:data_types).value(array[Types::DataTypes]).default(Mihari::Types::DataTypes.values)
       optional(:falsepositives).value(array[:string]).default([])

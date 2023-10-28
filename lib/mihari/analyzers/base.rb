@@ -2,12 +2,7 @@
 
 module Mihari
   module Analyzers
-    class Base < Mihari::Base
-      include Dry::Monads[:result, :try]
-
-      include Mixins::Configurable
-      include Mixins::Retriable
-
+    class Base < Actor
       # @return [String]
       attr_reader :query
 

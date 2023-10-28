@@ -2,12 +2,7 @@
 
 module Mihari
   module Emitters
-    class Base < Mihari::Base
-      include Dry::Monads[:result, :try]
-
-      include Mixins::Configurable
-      include Mixins::Retriable
-
+    class Base < Actor
       # @return [Array<Mihari::Models::Artifact>]
       attr_reader :artifacts
 
