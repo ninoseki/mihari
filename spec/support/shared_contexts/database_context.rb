@@ -28,25 +28,11 @@ RSpec.shared_context "with database fixtures" do
     reverse_dns_name = Mihari::Models::ReverseDnsName.new(name: Faker::Internet.unique.domain_name)
     dns_record = Mihari::Models::DnsRecord.new(resource: "A", value: Faker::Internet.unique.ip_v4_address)
 
-    Mihari::Emitters::Database.new(
-      artifacts: [
-        Mihari::Models::Artifact.new(
-          data: Faker::Internet.unique.ip_v4_address,
-          autonomous_system: as,
-          reverse_dns_names: [reverse_dns_name]
-        )
-      ],
-      rule: rule1
-    ).emit
-
-    Mihari::Emitters::Database.new(
-      artifacts: [
-        Mihari::Models::Artifact.new(
-          data: Faker::Internet.domain_name,
-          dns_records: [dns_record]
-        )
-      ],
-      rule: rule2
-    ).emit
+    Mihari::Emitters::Database.new(rule: rule1).emit([Mihari::Models::Artifact.new(
+      data: Faker::Internet.unique.ip_v4_address, autonomous_system: as, reverse_dns_names: [reverse_dns_name]
+    )])
+    Mihari::Emitters::Database.new(rule: rule2).emit([Mihari::Models::Artifact.new(
+      data: Faker::Internet.domain_name, dns_records: [dns_record]
+    )])
   end
 end

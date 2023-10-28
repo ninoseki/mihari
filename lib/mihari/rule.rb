@@ -35,11 +35,6 @@ module Mihari
       !@errors.empty?
     end
 
-    def validate!
-      validate_format!
-      validate_analyzer_configurations!
-    end
-
     def [](key)
       data key.to_sym
     end
@@ -174,8 +169,8 @@ module Mihari
 
       # NOTE: separate parallel execution and logging
       #       because the logger does not work along with Parallel
-      results = Parallel.map(valid_emitters) { |emitter| emitter.result }
-      results.zip(valid_emitters).map do |result_and_emitter|
+      results = Parallel.map(emitters) { |emitter| emitter.emit_result(enriched_artifacts) }
+      results.zip(emitters).map do |result_and_emitter|
         result, emitter = result_and_emitter
         Mihari.logger.info "Emission by #{emitter.class} is failed: #{result.failure}" if result.failure?
         Mihari.logger.info "Emission by #{emitter.class} is succeeded" if result.success?
@@ -189,8 +184,12 @@ module Mihari
     # @return [Mihari::Models::Alert, nil]
     #
     def run
+      # Validate analyzers & emitters before using them
+      analyzers
+      emitters
+
       alert_or_something = bulk_emit
-      # returns Mihari::Models::Alert created by the database emitter
+      # Return Mihari::Models::Alert created by the database emitter
       alert_or_something.find { |res| res.is_a?(Mihari::Models::Alert) }
     end
 
@@ -268,10 +267,13 @@ module Mihari
     # @return [Array<Mihari::Analyzers::Base>]
     #
     def analyzers
-      queries.map do |query_params|
+      @analyzers ||= queries.map do |query_params|
         analyzer_name = query_params[:analyzer]
         klass = get_analyzer_class(analyzer_name)
         klass.from_query(query_params)
+      end.map do |analyzer|
+        analyzer.validate_configuration!
+        analyzer
       end
     end
 
@@ -292,22 +294,18 @@ module Mihari
     # @return [Array<Mihari::Emitters::Base>]
     #
     def emitters
-      data[:emitters].map(&:deep_dup).map do |params|
+      @emitters ||= data[:emitters].map(&:deep_dup).map do |params|
         name = params[:emitter]
         options = params[:options]
 
         %i[emitter options].each { |key| params.delete key }
 
         klass = get_emitter_class(name)
-        klass.new(artifacts: enriched_artifacts, rule: self, options: options, **params)
+        klass.new(rule: self, options: options, **params)
+      end.map do |emitter|
+        emitter.validate_configuration!
+        emitter
       end
-    end
-
-    #
-    # @return [Array<Mihari::Emitters::Base>]
-    #
-    def valid_emitters
-      @valid_emitters ||= emitters.select(&:valid?)
     end
 
     #
@@ -341,7 +339,7 @@ module Mihari
     #
     # Validate the data format
     #
-    def validate_format!
+    def validate!
       contract = Schemas::RuleContract.new
       result = contract.call(data)
 
@@ -349,20 +347,6 @@ module Mihari
       @errors = result.errors
 
       raise ValidationError.new("Validation failed", errors) if errors?
-    end
-
-    #
-    # Validate configuration of analyzers
-    #
-    def validate_analyzer_configurations!
-      analyzers.map do |analyzer|
-        next if analyzer.configured?
-
-        joined = analyzer.configuration_keys.join(", ")
-        be = (analyzer.configuration_keys.length > 1) ? "are" : "is"
-        message = "#{analyzer.class.class_key} is not configured correctly. #{joined} #{be} missing."
-        raise ConfigurationError, message
-      end
     end
   end
 end

@@ -9,50 +9,39 @@ module Mihari
       # @return [String, nil]
       attr_reader :api_key
 
-      # @return [Array<Mihari::Models::Artifact>]
-      attr_reader :artifacts
-
       # @return [Mihari::Services::Rule]
       attr_reader :rule
 
+      # @return [Array<Mihari::Models::Artifact>]
+      attr_accessor :artifacts
+
       #
-      # @param [Array<Mihari::Models::Artifact>] artifacts
       # @param [Mihari::Services::Rule] rule
       # @param [Hash, nil] options
       # @param [Hash] **params
       #
-      def initialize(artifacts:, rule:, options: nil, **params)
-        super(artifacts: artifacts, rule: rule, options: options)
+      def initialize(rule:, options: nil, **params)
+        super(rule: rule, options: options)
 
         @url = params[:url] || Mihari.config.misp_url
         @api_key = params[:api_key] || Mihari.config.misp_api_key
+
+        @artifacts = []
       end
 
+      #
       # @return [Boolean]
-      def valid?
-        unless url? && api_key?
-          Mihari.logger.info("MISP URL is not set") unless url?
-          Mihari.logger.info("MISP API key is not set") unless api_key?
-          return false
-        end
-
-        unless ping?
-          Mihari.logger.info("MISP URL (#{url}) is not reachable")
-          return false
-        end
-
-        true
+      #
+      def configured?
+        api_key? && url?
       end
 
       #
       # Create a MISP event
       #
-      # @param [Arra<Mihari::Models::Artifact>] artifacts
-      # @param [Mihari::Services::Rule] rule
+      # @param [Array<Mihari::Models::Artifact>] artifacts
       #
-      # @return [::MISP::Event]
-      #
-      def emit
+      def emit(artifacts)
         return if artifacts.empty?
 
         client.create_event({
@@ -142,19 +131,6 @@ module Mihari
       #
       def api_key?
         !api_key.nil? && !api_key.empty?
-      end
-
-      #
-      # Check whether a URL is reachable or not
-      #
-      # @return [Boolean]
-      #
-      def ping?
-        base_url = url.end_with?("/") ? url[0..-2] : url
-        login_url = "#{base_url}/users/login"
-
-        http = Net::Ping::HTTP.new(login_url)
-        http.ping?
       end
     end
   end

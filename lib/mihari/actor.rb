@@ -48,6 +48,15 @@ module Mihari
       options[:timeout]
     end
 
+    def validate_configuration!
+      return if configured?
+
+      joined = configuration_keys.join(", ")
+      be = (configuration_keys.length > 1) ? "are" : "is"
+      message = "#{self.class.class_key} is not configured correctly. #{joined} #{be} missing."
+      raise ConfigurationError, message
+    end
+
     class << self
       #
       # @return [String]

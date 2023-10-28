@@ -3,16 +3,14 @@
 module Mihari
   module Emitters
     class Database < Base
-      def valid?
-        configured?
-      end
-
       #
       # Create an alert
       #
+      # @param [Array<Mihari::Models::Artifact>] artifacts
+      #
       # @return [Mihari::Models::Alert, nil]
       #
-      def emit
+      def emit(artifacts)
         return if artifacts.empty?
 
         tags = rule.tags.filter_map { |name| Models::Tag.find_or_create_by(name: name) }.uniq
