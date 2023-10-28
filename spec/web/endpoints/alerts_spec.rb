@@ -1,5 +1,4 @@
-require "json"
-require "time"
+# frozen_string_literal: true
 
 RSpec.describe Mihari::Endpoints::Alerts do
   include Rack::Test::Methods

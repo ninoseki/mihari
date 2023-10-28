@@ -15,29 +15,29 @@ RSpec.describe Mihari::Emitters::Webhook, :vcr do
 
   describe "#configured?" do
     context "without URL" do
-      subject { described_class.new(rule: rule) }
+      subject(:emitter) { described_class.new(rule: rule) }
 
       it do
-        expect(subject.configured?).to be false
+        expect(emitter.configured?).to be false
       end
     end
 
     context "with URL" do
-      subject { described_class.new(rule: rule, url: "http://example.com") }
+      subject(:emitter) { described_class.new(rule: rule, url: "http://example.com") }
 
       it do
-        expect(subject.configured?).to be true
+        expect(emitter.configured?).to be true
       end
     end
   end
 
   describe "#emit" do
-    subject { described_class.new(rule: rule, url: url, headers: { "Content-Type": "application/json" }) }
+    subject(:emitter) { described_class.new(rule: rule, url: url, headers: { "Content-Type": "application/json" }) }
 
     let!(:url) { "https://httpbin.org/post" }
 
     it do
-      res = subject.emit artifacts
+      res = emitter.emit artifacts
       json_data = JSON.parse(res)["json"]
       expect(json_data).to be_a(Hash)
     end

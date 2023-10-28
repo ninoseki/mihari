@@ -16,7 +16,7 @@ RSpec.describe Mihari::Rule, :vcr do
   let(:data_types) { Mihari::DEFAULT_DATA_TYPES }
   let!(:emitters) { [{ emitter: "database" }] }
   let(:rule) do
-    Mihari::Rule.new(
+    described_class.new(
       title: title,
       description: description,
       tags: tags,
@@ -109,7 +109,7 @@ RSpec.describe Mihari::Rule, :vcr do
     end
 
     let(:rule) do
-      Mihari::Rule.new(
+      described_class.new(
         id: id,
         title: title,
         description: description,
@@ -148,10 +148,11 @@ RSpec.describe Mihari::Rule, :vcr do
       before do
         # mock emitters
         emitter = double("emitter_instance")
-        allow(emitter).to receive(:valid?).and_return(true)
-        allow(emitter).to receive(:result).and_return(Dry::Monads::Result::Failure.new("error"))
+        allow(emitter).to receive(:configured?).and_return(true)
+        allow(emitter).to receive(:emit_result).and_return(Dry::Monads::Result::Failure.new("error"))
+
         # set mocked classes as emitters
-        allow(rule).to receive(:valid_emitters).and_return([emitter])
+        allow(rule).to receive(:emitters).and_return([emitter])
         allow(rule).to receive(:enriched_artifacts).and_return([
           Mihari::Models::Artifact.new(data: "1.1.1.1")
         ])

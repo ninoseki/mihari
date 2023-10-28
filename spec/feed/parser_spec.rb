@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 RSpec.describe Mihari::Feed::Parser do
-  subject { described_class.new data }
+  subject(:parser) { described_class.new data }
 
   let!(:data) do
     [{
@@ -13,17 +13,17 @@ RSpec.describe Mihari::Feed::Parser do
 
   describe "#parse" do
     it do
-      parsed = subject.parse "map(&:a).unwrap"
+      parsed = parser.parse "map(&:a).unwrap"
       expect(parsed).to eq(%w[a b c])
     end
 
     it do
-      parsed = subject.parse "map(&:b).unwrap.map(&:foo)"
+      parsed = parser.parse "map(&:b).unwrap.map(&:foo)"
       expect(parsed).to eq(%w[bar foo])
     end
 
     it do
-      parsed = subject.parse "map(&:c).unwrap.map { |v| v[1] }"
+      parsed = parser.parse "map(&:c).unwrap.map { |v| v[1] }"
       expect(parsed).is_a?(Array)
       expect(parsed).to eq(%w[2 5 8])
     end

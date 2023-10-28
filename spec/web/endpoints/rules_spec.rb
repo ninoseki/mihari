@@ -1,5 +1,4 @@
-require "json"
-require "securerandom"
+# frozen_string_literal: true
 
 RSpec.describe Mihari::Endpoints::Rules do
   include Rack::Test::Methods

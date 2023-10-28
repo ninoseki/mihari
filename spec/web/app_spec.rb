@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 RSpec.describe Mihari::App do
   include Rack::Test::Methods
 

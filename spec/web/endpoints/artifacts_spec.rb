@@ -1,4 +1,4 @@
-require "json"
+# frozen_string_literal: true
 
 RSpec.describe Mihari::Endpoints::Artifacts, :vcr do
   include Rack::Test::Methods

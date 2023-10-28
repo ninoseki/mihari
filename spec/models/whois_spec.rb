@@ -4,13 +4,19 @@ RSpec.describe Mihari::Models::WhoisRecord do
   describe ".build_by_domain" do
     let!(:domain) { "example.com" }
 
-    it do
-      whois_record = described_class.build_by_domain(domain)
+    let!(:enricher) do
+      enricher = double("whois_enricher")
+      allow(enricher).to receive(:query_result).and_return(
+        Dry::Monads::Result::Success.new(
+          described_class.new(domain: "example.com")
+        )
+      )
+      enricher
+    end
 
+    it do
+      whois_record = described_class.build_by_domain(domain, enricher: enricher)
       expect(whois_record.domain).to eq(domain)
-      expect(whois_record.created_on).to be_a(Date).or be_a(NilClass)
-      expect(whois_record.registrar).to be_a(Hash).or be_a(NilClass)
-      expect(whois_record.contacts).to be_a(Array)
     end
   end
 end

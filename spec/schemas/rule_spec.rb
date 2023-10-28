@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 RSpec.describe Mihari::Schemas::RuleContract do
-  let!(:contract) { Mihari::Schemas::RuleContract.new }
+  let!(:contract) { described_class.new }
   let!(:id) { "test" }
   let!(:description) { "test" }
   let!(:title) { "test" }

@@ -1,13 +1,13 @@
 # frozen_string_literal: true
 
 RSpec.describe Mihari::Analyzers::Censys, :vcr do
-  subject { described_class.new(query) }
+  subject(:analyzer) { described_class.new(query) }
 
   let!(:query) { "ip:1.1.1.1" }
 
   describe "#artifacts" do
     it do
-      artifacts = subject.artifacts
+      artifacts = analyzer.artifacts
 
       expect(artifacts).to be_an(Array)
       expect(artifacts.length).to eq(1)
@@ -27,7 +27,7 @@ RSpec.describe Mihari::Analyzers::Censys, :vcr do
     end
 
     it do
-      expect { subject.artifacts }.to raise_error(ArgumentError)
+      expect { analyzer.artifacts }.to raise_error(ArgumentError)
     end
   end
 end

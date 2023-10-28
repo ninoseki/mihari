@@ -5,7 +5,7 @@ class Test
 end
 
 RSpec.describe Test do
-  subject { described_class.new }
+  subject(:subject) { described_class.new }
 
   describe "#normalize_falsepositive" do
     it do

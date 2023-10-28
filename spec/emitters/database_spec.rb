@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 RSpec.describe Mihari::Emitters::Database do
-  subject { described_class.new(rule: rule) }
+  subject(:emitter) { described_class.new(rule: rule) }
 
   include_context "with database fixtures"
 
@@ -10,7 +10,7 @@ RSpec.describe Mihari::Emitters::Database do
 
   describe "#emit", vcr: "Mihari_Enrichers_IPInfo/ip:1.1.1.1" do
     it do
-      alert = subject.emit artifacts
+      alert = emitter.emit artifacts
       expect(alert).to be_a(Mihari::Models::Alert)
 
       created_artifacts = Mihari::Models::Artifact.where(alert_id: alert.id)
@@ -18,8 +18,8 @@ RSpec.describe Mihari::Emitters::Database do
     end
 
     it "does not create duplications" do
-      subject.emit artifacts
-      subject.emit artifacts
+      emitter.emit artifacts
+      emitter.emit artifacts
 
       expect(Mihari::Models::Tag.where(name: rule.tags.first).count).to eq(1)
     end

@@ -3,7 +3,7 @@
 RSpec.describe Mihari::Models::Alert do
   include_context "with database fixtures"
 
-  let!(:alert) { Mihari::Models::Alert.first }
+  let!(:alert) { described_class.first }
   let!(:artifact_data) { Mihari::Models::Artifact.where(alert_id: alert.id).first.data }
   let!(:tag_name) { alert.tags.first.name }
   let!(:asn) { Mihari::Models::AutonomousSystem.first.asn }
