@@ -16,7 +16,7 @@ module Mihari
     #
     # @param [Hash, nil] options
     #
-    def initialize(*_args, options: nil, **_kwargs)
+    def initialize(options: nil)
       @options = options || {}
     end
 

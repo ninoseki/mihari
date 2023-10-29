@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-RSpec.describe Mihari::Endpoints::Alerts do
+RSpec.describe Mihari::Web::Endpoints::Alerts do
   include Rack::Test::Methods
 
   include_context "with database fixtures"
@@ -9,7 +9,7 @@ RSpec.describe Mihari::Endpoints::Alerts do
   let!(:rule) { Mihari::Models::Rule.first }
 
   def app
-    Mihari::Endpoints::Alerts
+    Mihari::Web::Endpoints::Alerts
   end
 
   describe "delete /api/alerts/:id" do

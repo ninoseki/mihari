@@ -20,6 +20,9 @@ module Mihari
 
   class TimeoutError < HTTPError; end
 
+  #
+  # HTTP status code error
+  #
   class StatusCodeError < HTTPError
     # @return [Integer]
     attr_reader :status_code
@@ -40,6 +43,9 @@ module Mihari
     end
   end
 
+  #
+  # (dry-schema) Schema validation error
+  #
   class ValidationError < Error
     attr_reader :errors
 

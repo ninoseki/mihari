@@ -2,6 +2,9 @@
 
 module Mihari
   module Emitters
+    #
+    # MISP emitter
+    #
     class MISP < Base
       # @return [String, nil]
       attr_reader :url
@@ -9,16 +12,16 @@ module Mihari
       # @return [String, nil]
       attr_reader :api_key
 
-      # @return [Mihari::Services::Rule]
+      # @return [Mihari::Rule]
       attr_reader :rule
 
       # @return [Array<Mihari::Models::Artifact>]
       attr_accessor :artifacts
 
       #
-      # @param [Mihari::Services::Rule] rule
+      # @param [Mihari::Rule] rule
       # @param [Hash, nil] options
-      # @param [Hash] **params
+      # @param [Hash, nil] params
       #
       def initialize(rule:, options: nil, **params)
         super(rule: rule, options: options)

@@ -2,6 +2,9 @@
 
 module Mihari
   module Analyzers
+    #
+    # PassiveTotal analyzer
+    #
     class PassiveTotal < Base
       include Mixins::Refang
 

@@ -2,6 +2,9 @@
 
 module Mihari
   module Clients
+    #
+    # PulseDive API client
+    #
     class PulseDive < Base
       # @return [String]
       attr_reader :api_key
@@ -21,7 +24,7 @@ module Mihari
       end
 
       #
-      # @param [String] indicator_id
+      # @param [String] ip_or_domain
       #
       # @return [Hash]
       #

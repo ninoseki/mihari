@@ -1,12 +1,11 @@
 # frozen_string_literal: true
 
-require "net/https"
-
 module Mihari
   module Enrichers
+    #
+    # Shodan enricher
+    #
     class Shodan < Base
-      include Memist::Memoizable
-
       #
       # Query Shodan Internet DB
       #
@@ -21,7 +20,6 @@ module Mihari
 
         Structs::Shodan::InternetDBResponse.from_dynamic! data
       end
-      memoize :query
 
       private
 

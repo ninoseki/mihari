@@ -2,6 +2,9 @@
 
 module Mihari
   module Commands
+    #
+    # Database sub-commands
+    #
     module Database
       class << self
         def included(thor)

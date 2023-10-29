@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Mihari
   class Config
     # @return [String, nil]

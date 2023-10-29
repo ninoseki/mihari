@@ -2,6 +2,9 @@
 
 module Mihari
   module Clients
+    #
+    # BinaryEdge API client
+    #
     class BinaryEdge < Base
       #
       # @param [String] base_url
@@ -45,7 +48,7 @@ module Mihari
       # @param [Integer, nil] only_ips
       # @param [Integer] pagination_limit
       #
-      # @return [Enumerable<Structs::BinaryEdge::Response.>]
+      # @return [Enumerable<Structs::BinaryEdge::Response>]
       #
       def search_with_pagination(query, only_ips: nil, pagination_limit: Mihari.config.pagination_limit)
         Enumerator.new do |y|

@@ -2,6 +2,9 @@
 
 module Mihari
   module Models
+    #
+    # Artifact validator
+    #
     class ArtifactValidator < ActiveModel::Validator
       def validate(record)
         return if record.data_type
@@ -10,6 +13,9 @@ module Mihari
       end
     end
 
+    #
+    # Artifact model
+    #
     class Artifact < ActiveRecord::Base
       belongs_to :alert
 

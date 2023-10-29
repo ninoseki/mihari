@@ -2,6 +2,9 @@
 
 module Mihari
   module Services
+    #
+    # Alert runner
+    #
     class AlertRunner
       include Dry::Monads[:result, :try]
 

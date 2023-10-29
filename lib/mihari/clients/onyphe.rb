@@ -2,6 +2,9 @@
 
 module Mihari
   module Clients
+    #
+    # Onyphe API client
+    #
     class Onyphe < Base
       PAGE_SIZE = 10
 

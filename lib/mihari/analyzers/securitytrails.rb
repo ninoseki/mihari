@@ -2,6 +2,9 @@
 
 module Mihari
   module Analyzers
+    #
+    # SecurityTrails
+    #
     class SecurityTrails < Base
       include Mixins::Refang
 

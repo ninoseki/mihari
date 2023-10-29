@@ -219,7 +219,7 @@ module Mihari
       #
       # @param [String] yaml
       #
-      # @return [Mihari::Services::Rule]
+      # @return [Mihari::Rule]
       #
       def from_yaml(yaml)
         data = YAML.safe_load(ERB.new(yaml).result, permitted_classes: [Date, Symbol])
@@ -229,7 +229,7 @@ module Mihari
       #
       # @param [Mihari::Models::Rule] model
       #
-      # @return [Mihari::Services::Rule]
+      # @return [Mihari::Rule]
       #
       def from_model(model)
         new(**model.data)

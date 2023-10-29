@@ -1,17 +1,24 @@
+# frozen_string_literal: true
+
 module Mihari
-  module Middleware
-    class ErrorNotificationAdapter
-      include Mixins::ErrorNotification
+  module Web
+    module Middleware
+      #
+      # Error notification adapter for Rack app
+      #
+      class ErrorNotificationAdapter
+        include Mixins::ErrorNotification
 
-      def initialize(app)
-        @app = app
-      end
+        def initialize(app)
+          @app = app
+        end
 
-      def call(env)
-        with_error_notification do
-          status, headers, body = @app.call(env)
+        def call(env)
+          with_error_notification do
+            status, headers, body = @app.call(env)
 
-          [status, headers, body]
+            [status, headers, body]
+          end
         end
       end
     end

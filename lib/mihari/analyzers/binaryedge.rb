@@ -2,6 +2,9 @@
 
 module Mihari
   module Analyzers
+    #
+    # BinaryEdge analyzer
+    #
     class BinaryEdge < Base
       # @return [String, nil]
       attr_reader :api_key

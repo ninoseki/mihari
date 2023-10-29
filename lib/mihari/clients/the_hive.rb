@@ -2,6 +2,9 @@
 
 module Mihari
   module Clients
+    #
+    # TheHive API client
+    #
     class TheHive < Base
       #
       # @param [String] base_url

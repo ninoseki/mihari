@@ -4,6 +4,9 @@ require "http"
 
 module Mihari
   module HTTP
+    #
+    # Better error handling feature
+    #
     class BetterError < ::HTTP::Feature
       def wrap_response(response)
         unless response.status.success?
@@ -24,6 +27,9 @@ module Mihari
       ::HTTP::Options.register_feature(:better_error, self)
     end
 
+    #
+    # HTTP client factory
+    #
     class Factory
       class << self
         #

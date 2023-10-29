@@ -2,6 +2,9 @@
 
 module Mihari
   module Clients
+    #
+    # DNSTwister API client
+    #
     class DNSTwister < Base
       #
       # @param [String] base_url

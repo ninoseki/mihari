@@ -2,6 +2,9 @@
 
 module Mihari
   module Mixins
+    #
+    # Autonomous System mixin
+    #
     module AutonomousSystem
       #
       # Normalize ASN value

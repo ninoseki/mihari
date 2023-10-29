@@ -4,6 +4,9 @@ require "base64"
 
 module Mihari
   module Clients
+    #
+    # Censys API client
+    #
     class Censys < Base
       #
       # @param [String] base_url
@@ -36,8 +39,8 @@ module Mihari
       # For more details, see our documentation: https://search.censys.io/api/v2/docs
       #
       # @param [String] query the query to be executed.
-      # @params [Integer, nil] per_page the number of results to be returned for each page.
-      # @params [Integer, nil] cursor the cursor of the desired result set.
+      # @param [Integer, nil] per_page the number of results to be returned for each page.
+      # @param [Integer, nil] cursor the cursor of the desired result set.
       #
       # @return [Structs::Censys::Response]
       #

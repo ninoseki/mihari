@@ -3,8 +3,6 @@
 # standard libs
 require "ipaddr"
 require "json"
-require "net/http"
-require "net/https"
 require "resolv"
 require "yaml"
 
@@ -59,17 +57,23 @@ require "mihari/mixins/error_notification"
 require "mihari/mixins/refang"
 require "mihari/mixins/retriable"
 
+#
+# Mihari module
+#
 module Mihari
   class << self
     include Memist::Memoizable
 
+    #
+    # @return [Array<Mihari::Emitters::Base>]
+    #
     def emitters
       []
     end
     memoize :emitters
 
     #
-    # @return [Hash<String, Mihari::Enrichers::Base>]
+    # @return [Hash{String => Mihari::Enrichers::Base}]
     #
     def emitter_to_class
       @emitter_to_class ||= emitters.flat_map do |klass|
@@ -77,13 +81,16 @@ module Mihari
       end.to_h
     end
 
+    #
+    # @return [Array<Mihari::Analyzers::Base>]
+    #
     def analyzers
       []
     end
     memoize :analyzers
 
     #
-    # @return [Hash<String, Mihari::Analyzers::Base>]
+    # @return [Hash{String => Mihari::Analyzers::Base}]
     #
     def analyzer_to_class
       @analyzer_to_class ||= analyzers.flat_map do |klass|
@@ -91,13 +98,16 @@ module Mihari
       end.to_h
     end
 
+    #
+    # @return [Array<Mihari::Enrichers::Base>]
+    #
     def enrichers
       []
     end
     memoize :enrichers
 
     #
-    # @return [Hash<String, Mihari::Enrichers::Base>]
+    # @return [Hash{String => Mihari::Enrichers::Base}]
     #
     def enricher_to_class
       @enricher_to_class ||= enrichers.flat_map do |klass|
@@ -105,6 +115,9 @@ module Mihari
       end.to_h
     end
 
+    #
+    # @return [Mihari::Config]
+    #
     def config
       @config ||= Config.new
     end

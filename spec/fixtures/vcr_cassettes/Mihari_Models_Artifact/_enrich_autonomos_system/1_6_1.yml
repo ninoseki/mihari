@@ -4,7 +4,7 @@ http_interactions:
     method: get
     uri: https://ipinfo.io/1.1.1.1/json
     body:
-      encoding: UTF-8
+      encoding: ASCII-8BIT
       string: ''
     headers:
       Authorization:
@@ -14,7 +14,7 @@ http_interactions:
       Host:
       - ipinfo.io
       User-Agent:
-      - http.rb/5.0.4
+      - http.rb/5.1.1
   response:
     status:
       code: 200
@@ -23,7 +23,7 @@ http_interactions:
       Access-Control-Allow-Origin:
       - "*"
       X-Frame-Options:
-      - DENY
+      - SAMEORIGIN
       X-Xss-Protection:
       - 1; mode=block
       X-Content-Type-Options:
@@ -33,17 +33,19 @@ http_interactions:
       Content-Type:
       - application/json; charset=utf-8
       Content-Length:
-      - '515'
+      - '706'
       Date:
-      - Sat, 23 Oct 2021 02:59:11 GMT
+      - Sun, 29 Oct 2023 01:00:49 GMT
       X-Envoy-Upstream-Service-Time:
       - '3'
+      Strict-Transport-Security:
+      - max-age=2592000; includeSubDomains
       Vary:
       - Accept-Encoding
       Via:
       - 1.1 google
       Alt-Svc:
-      - clear
+      - h3=":443"; ma=2592000,h3-29=":443"; ma=2592000
       Connection:
       - close
     body:
@@ -53,11 +55,11 @@ http_interactions:
           "ip": "1.1.1.1",
           "hostname": "one.one.one.one",
           "anycast": true,
-          "city": "San Francisco",
+          "city": "Los Angeles",
           "region": "California",
           "country": "US",
-          "loc": "37.7621,-122.3971",
-          "postal": "94107",
+          "loc": "34.0522,-118.2437",
+          "postal": "90076",
           "timezone": "America/Los_Angeles",
           "asn": {
             "asn": "AS13335",
@@ -70,7 +72,18 @@ http_interactions:
             "name": "APNIC and Cloudflare DNS Resolver project",
             "domain": "cloudflare.com",
             "type": "hosting"
+          },
+          "domains": {
+            "ip": "1.1.1.1",
+            "total": 21985,
+            "domains": [
+              "6080dy2.com",
+              "xmoon.best",
+              "yuucn.com",
+              "ccbenz.com",
+              "happynothings031.xyz"
+            ]
           }
         }
-  recorded_at: Sat, 23 Oct 2021 02:59:11 GMT
-recorded_with: VCR 6.0.0
+  recorded_at: Sun, 29 Oct 2023 01:00:49 GMT
+recorded_with: VCR 6.2.0

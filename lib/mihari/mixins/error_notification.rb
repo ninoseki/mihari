@@ -2,6 +2,9 @@
 
 module Mihari
   module Mixins
+    #
+    # Error notification mixin
+    #
     module ErrorNotification
       #
       # Send an exception notification if there is any error in a block

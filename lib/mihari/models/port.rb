@@ -2,6 +2,9 @@
 
 module Mihari
   module Models
+    #
+    # Port model
+    #
     class Port < ActiveRecord::Base
       belongs_to :artifact
 

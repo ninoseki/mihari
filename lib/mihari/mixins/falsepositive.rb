@@ -2,6 +2,9 @@
 
 module Mihari
   module Mixins
+    #
+    # False positive mixins
+    #
     module FalsePositive
       include Memist::Memoizable
 

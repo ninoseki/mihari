@@ -1,6 +1,9 @@
 # frozen_string_literal: true
 
 module Mihari
+  #
+  # Artifact type checker
+  #
   class TypeChecker
     # @return [String]
     attr_reader :data
@@ -54,6 +57,7 @@ module Mihari
       return "ip" if ip?
       return "domain" if domain?
       return "url" if url?
+
       "mail" if mail?
     end
 

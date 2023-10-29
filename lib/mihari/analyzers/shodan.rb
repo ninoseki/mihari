@@ -2,6 +2,9 @@
 
 module Mihari
   module Analyzers
+    #
+    # Shodan analyzer
+    #
     class Shodan < Base
       # @return [String, nil]
       attr_reader :api_key

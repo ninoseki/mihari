@@ -2,6 +2,9 @@
 
 module Mihari
   module Analyzers
+    #
+    # VirusTotal analyzer
+    #
     class VirusTotal < Base
       include Mixins::Refang
 

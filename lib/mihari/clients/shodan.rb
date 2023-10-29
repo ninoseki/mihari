@@ -2,6 +2,9 @@
 
 module Mihari
   module Clients
+    #
+    # Shodan API client
+    #
     class Shodan < Base
       PAGE_SIZE = 100
 

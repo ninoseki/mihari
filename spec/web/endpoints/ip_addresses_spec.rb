@@ -2,11 +2,11 @@
 
 require "json"
 
-RSpec.describe Mihari::Endpoints::IPAddresses, :vcr do
+RSpec.describe Mihari::Web::Endpoints::IPAddresses, :vcr do
   include Rack::Test::Methods
 
   def app
-    Mihari::Endpoints::IPAddresses
+    Mihari::Web::Endpoints::IPAddresses
   end
 
   let!(:ip) { "1.1.1.1" }

@@ -2,6 +2,9 @@
 
 module Mihari
   module Analyzers
+    #
+    # DNSTwister analyzer
+    #
     class DNSTwister < Base
       include Mixins::Refang
 

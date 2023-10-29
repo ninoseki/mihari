@@ -2,12 +2,15 @@
 
 module Mihari
   module Clients
-    class UrlScan < Base
+    #
+    # urlscan.io API client
+    #
+    class Urlscan < Base
       #
       # @param [String] base_url
       # @param [String, nil] api_key
       # @param [Hash] headers
-      # @param [Integer, nil] interval
+      # @param [Integer, nil] pagination_interval
       # @param [Integer, nil] timeout
       #
       def initialize(

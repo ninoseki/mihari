@@ -2,6 +2,9 @@
 
 module Mihari
   module Commands
+    #
+    # Search sub-commands
+    #
     module Search
       class << self
         def included(thor)
@@ -32,7 +35,7 @@ module Mihari
 
             no_commands do
               #
-              # @param [Mihari::Services::RuleRunner] rule
+              # @param [Mihari::RuleRunner] rule
               #
               def check_diff(rule)
                 force_overwrite = options["force_overwrite"] || false
@@ -45,7 +48,7 @@ module Mihari
               end
 
               #
-              # @param [Mihari::Services::RuleRunner] runner
+              # @param [Mihari::RuleRunner] runner
               #
               def update_and_run(runner)
                 Dry::Monads::Try[StandardError] do

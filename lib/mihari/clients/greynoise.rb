@@ -2,6 +2,9 @@
 
 module Mihari
   module Clients
+    #
+    # GreyNoise API client
+    #
     class GreyNoise < Base
       PAGE_SIZE = 10_000
 

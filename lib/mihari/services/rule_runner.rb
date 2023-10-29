@@ -2,6 +2,9 @@
 
 module Mihari
   module Services
+    #
+    # Rule runner
+    #
     class RuleRunner
       include Dry::Monads[:result, :try]
 

@@ -2,6 +2,9 @@
 
 module Mihari
   module Mixins
+    #
+    # Configurable mixin
+    #
     module Configurable
       #
       # Check whether there are configuration key-values or not

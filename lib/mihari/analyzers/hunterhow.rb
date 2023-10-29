@@ -2,6 +2,9 @@
 
 module Mihari
   module Analyzers
+    #
+    # hunter.how analyzer
+    #
     class HunterHow < Base
       # @return [String, nil]
       attr_reader :api_key
@@ -14,6 +17,8 @@ module Mihari
 
       #
       # @param [String] query
+      # @param [Date] start_time
+      # @param [Date] end_time
       # @param [Hash, nil] options
       # @param [String, nil] api_key
       #

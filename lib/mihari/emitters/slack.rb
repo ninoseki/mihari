@@ -135,9 +135,9 @@ module Mihari
       attr_accessor :artifacts
 
       #
-      # @param [Mihari::Services::Rule] rule
+      # @param [Mihari::Rule] rule
       # @param [Hash, nil] options
-      # @param [Hash] **params
+      # @param [Hash, nil] params
       #
       def initialize(rule:, options: nil, **params)
         super(rule: rule, options: options)

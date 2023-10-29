@@ -7,6 +7,9 @@ require "yaml"
 
 module Mihari
   module Services
+    #
+    # Rule builder
+    #
     class RuleBuilder
       include Dry::Monads[:result, :try]
 

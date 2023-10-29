@@ -4,6 +4,9 @@ require "base64"
 
 module Mihari
   module Clients
+    #
+    # CIRCL passive DNS/SSL API client
+    #
     class CIRCL < Base
       #
       # @param [String] base_url

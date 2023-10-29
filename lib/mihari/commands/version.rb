@@ -2,6 +2,9 @@
 
 module Mihari
   module Commands
+    #
+    # Version sub-commands
+    #
     module Version
       class << self
         def included(thor)

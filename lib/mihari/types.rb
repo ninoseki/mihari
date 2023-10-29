@@ -1,6 +1,9 @@
 # frozen_string_literal: true
 
 module Mihari
+  #
+  # dry-type based types
+  #
   module Types
     include Dry.Types()
 

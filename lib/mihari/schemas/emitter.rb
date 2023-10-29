@@ -2,6 +2,9 @@
 
 module Mihari
   module Schemas
+    #
+    # Emitter schemas
+    #
     module Emitters
       extend Schemas::Mixins
 

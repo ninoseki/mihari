@@ -4,6 +4,9 @@ require "yaml"
 
 module Mihari
   module Models
+    #
+    # Rule model
+    #
     class Rule < ActiveRecord::Base
       has_many :alerts, dependent: :destroy
 

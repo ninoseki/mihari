@@ -1,12 +1,12 @@
 # frozen_string_literal: true
 
-RSpec.describe Mihari::Endpoints::Tags do
+RSpec.describe Mihari::Web::Endpoints::Tags do
   include Rack::Test::Methods
 
   include_context "with database fixtures"
 
   def app
-    Mihari::Endpoints::Tags
+    Mihari::Web::Endpoints::Tags
   end
 
   describe "get /api/tags" do

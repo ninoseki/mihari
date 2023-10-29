@@ -1,11 +1,11 @@
 # frozen_string_literal: true
 
-RSpec.describe Mihari::Endpoints::Rules do
+RSpec.describe Mihari::Web::Endpoints::Rules do
   include Rack::Test::Methods
   include_context "with database fixtures"
 
   def app
-    Mihari::Endpoints::Rules
+    Mihari::Web::Endpoints::Rules
   end
 
   let!(:rule) { Mihari::Models::Rule.first }

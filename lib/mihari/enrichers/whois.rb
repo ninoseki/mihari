@@ -4,6 +4,9 @@ require "whois-parser"
 
 module Mihari
   module Enrichers
+    #
+    # Whois enricher
+    #
     class Whois < Base
       # @return [Hash]
       attr_accessor :memo
@@ -20,9 +23,9 @@ module Mihari
       #
       # Query IAIA Whois API
       #
-      # @param [String] name
+      # @param [String] domain
       #
-      # @return [Mihari::WhoisRecord, nil]
+      # @return [Mihari::Models::WhoisRecord, nil]
       #
       def query(domain)
         domain = PublicSuffix.domain(domain)
@@ -71,7 +74,7 @@ module Mihari
       #
       # Get created_on
       #
-      # @param [::Whois::Parser:] parser
+      # @param [::Whois::Parser] parser
       #
       # @return [Date, nil]
       #
@@ -84,7 +87,7 @@ module Mihari
       #
       # Get updated_on
       #
-      # @param [::Whois::Parser:] parser
+      # @param [::Whois::Parser] parser
       #
       # @return [Date, nil]
       #
@@ -97,7 +100,7 @@ module Mihari
       #
       # Get expires_on
       #
-      # @param [::Whois::Parser:] parser
+      # @param [::Whois::Parser] parser
       #
       # @return [Date, nil]
       #
@@ -110,7 +113,7 @@ module Mihari
       #
       # Get registrar
       #
-      # @param [::Whois::Parser:] parser
+      # @param [::Whois::Parser] parser
       #
       # @return [Hash, nil]
       #
@@ -123,9 +126,9 @@ module Mihari
       #
       # Get contacts
       #
-      # @param [::Whois::Parser:] parser
+      # @param [::Whois::Parser] parser
       #
-      # @return [Array[Hash], nil]
+      # @return [Array<Hash>, nil]
       #
       def get_contacts(parser)
         parser.contacts.map(&:to_h)
