@@ -4,6 +4,9 @@ require "json"
 
 module Mihari
   module Services
+    #
+    # Alert proxy
+    #
     class AlertProxy
       # @return [Hash]
       attr_reader :data

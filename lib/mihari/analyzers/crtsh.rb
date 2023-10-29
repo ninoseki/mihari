@@ -2,6 +2,9 @@
 
 module Mihari
   module Analyzers
+    #
+    # crt.sh analyzer
+    #
     class Crtsh < Base
       # @return [Boolean]
       attr_reader :exclude_expired

@@ -13,6 +13,9 @@ def development_env?
   env == "development"
 end
 
+#
+# Mihari v5 DB schema
+#
 class V5Schema < ActiveRecord::Migration[7.1]
   def change
     create_table :rules, id: :string, if_not_exists: true do |t|
@@ -125,6 +128,9 @@ def schemas
 end
 
 module Mihari
+  #
+  # Database
+  #
   class Database
     class << self
       #

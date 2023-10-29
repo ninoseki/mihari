@@ -2,6 +2,9 @@
 
 module Mihari
   module Models
+    #
+    # AS model
+    #
     class AutonomousSystem < ActiveRecord::Base
       belongs_to :artifact
 

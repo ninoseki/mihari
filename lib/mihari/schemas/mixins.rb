@@ -1,5 +1,10 @@
+# frozen_string_literal: true
+
 module Mihari
   module Schemas
+    #
+    # Mixins for schemas
+    #
     module Mixins
       def get_or_composition
         schemas = constants.map { |sym| const_get sym }

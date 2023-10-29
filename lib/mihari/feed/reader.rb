@@ -4,6 +4,9 @@ require "csv"
 
 module Mihari
   module Feed
+    #
+    # Feed reader
+    #
     class Reader
       # @return [String]
       attr_reader :url

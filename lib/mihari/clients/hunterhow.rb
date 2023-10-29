@@ -4,6 +4,9 @@ require "base64"
 
 module Mihari
   module Clients
+    #
+    # hunter.how API client
+    #
     class HunterHow < Base
       PAGE_SIZE = 100
 

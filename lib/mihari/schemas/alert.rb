@@ -7,6 +7,9 @@ module Mihari
       required(:artifacts).value(array[:string])
     end
 
+    #
+    # Alert schema contract
+    #
     class AlertContract < Dry::Validation::Contract
       params(Alert)
     end

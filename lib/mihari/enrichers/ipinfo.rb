@@ -1,22 +1,23 @@
 # frozen_string_literal: true
 
-require "net/https"
-
 module Mihari
   module Enrichers
+    #
+    # IPInfo enricher
+    #
     class IPInfo < Base
-      include Memist::Memoizable
-
       # @return [String, nil]
       attr_reader :api_key
 
+      #
+      # @param [Hash, nil] options
+      # @param [String, nil] api_key
+      #
       def initialize(options: nil, api_key: nil)
         @api_key = api_key || Mihari.config.ipinfo_api_key
 
         super(options: options)
       end
-
-      private
 
       def configuration_keys
         %w[ipinfo_api_key]
@@ -36,7 +37,8 @@ module Mihari
 
         Structs::IPInfo::Response.from_dynamic! data
       end
-      memoize :query
+
+      private
 
       def headers
         authorization = api_key.nil? ? nil : "Bearer #{api_key}"

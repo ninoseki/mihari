@@ -2,6 +2,9 @@
 
 module Mihari
   module Clients
+    #
+    # crt.sh API client
+    #
     class Crtsh < Base
       #
       # @param [String] base_url

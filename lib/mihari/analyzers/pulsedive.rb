@@ -2,6 +2,9 @@
 
 module Mihari
   module Analyzers
+    #
+    # Pulsedive analyzer
+    #
     class Pulsedive < Base
       include Mixins::Refang
 

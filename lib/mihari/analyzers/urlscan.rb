@@ -2,6 +2,9 @@
 
 module Mihari
   module Analyzers
+    #
+    # urlscan.io analyzer
+    #
     class Urlscan < Base
       SUPPORTED_DATA_TYPES = %w[url domain ip].freeze
 
@@ -44,7 +47,7 @@ module Mihari
       private
 
       def client
-        @client ||= Clients::UrlScan.new(
+        @client ||= Clients::Urlscan.new(
           api_key: api_key,
           pagination_interval: pagination_interval,
           timeout: timeout

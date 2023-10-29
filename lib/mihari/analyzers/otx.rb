@@ -2,6 +2,9 @@
 
 module Mihari
   module Analyzers
+    #
+    # OTX analyzer
+    #
     class OTX < Base
       include Mixins::Refang
 

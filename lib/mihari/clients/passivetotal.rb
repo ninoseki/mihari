@@ -4,6 +4,9 @@ require "base64"
 
 module Mihari
   module Clients
+    #
+    # PassiveTotal API client
+    #
     class PassiveTotal < Base
       #
       # @param [String] base_url

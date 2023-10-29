@@ -2,6 +2,9 @@
 
 module Mihari
   module Schemas
+    #
+    # Enricher schemas
+    #
     module Enrichers
       extend Schemas::Mixins
 

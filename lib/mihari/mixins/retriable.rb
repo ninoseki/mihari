@@ -2,6 +2,9 @@
 
 module Mihari
   module Mixins
+    #
+    # Retriable mixin
+    #
     module Retriable
       DEFAULT_ON = [
         Errno::ECONNRESET,
@@ -12,7 +15,7 @@ module Mihari
         RetryableError,
         NetworkError,
         TimeoutError
-      ]
+      ].freeze
 
       #
       # Retry on error

@@ -8,7 +8,7 @@ RSpec.describe Mihari::Models::Artifact, :vcr do
   let!(:alert) { Mihari::Models::Alert.first }
   let!(:alert_id) { alert.id }
   let!(:rule_id) { alert.rule_id }
-  let!(:aritfact_data) { described_class.where(alert_id: alert_id).first.data }
+  let(:data) { described_class.where(alert_id: alert_id).first.data }
 
   describe "#validate" do
     it do
@@ -20,7 +20,7 @@ RSpec.describe Mihari::Models::Artifact, :vcr do
 
   describe "#unique?" do
     it do
-      artifact = described_class.new(data: aritfact_data, alert_id: alert_id)
+      artifact = described_class.new(data: data, alert_id: alert_id)
       artifact.rule_id = rule_id
 
       expect(artifact).not_to be_unique
@@ -32,7 +32,7 @@ RSpec.describe Mihari::Models::Artifact, :vcr do
     end
 
     context "with artifact_lifetime" do
-      let!(:data) { "9.9.9.9" }
+      let(:data) { "9.9.9.9" }
       let!(:artifact_lifetime) { 60 }
       let!(:base_time) { Time.now.utc }
 
@@ -96,7 +96,7 @@ RSpec.describe Mihari::Models::Artifact, :vcr do
 
   describe "#enrich_dns" do
     context "with domain" do
-      let!(:data) { "example.com" }
+      let(:data) { "example.com" }
 
       it do
         artifact = described_class.new(data: data, alert_id: alert_id)
@@ -120,8 +120,8 @@ RSpec.describe Mihari::Models::Artifact, :vcr do
     end
   end
 
-  describe "#enrich_dns", vcr: "Mihari_Enrichers_IPInfo/ip:1.1.1.1" do
-    let!(:data) { "1.1.1.1" }
+  describe "#enrich_dns" do
+    let(:data) { "1.1.1.1" }
 
     it do
       artifact = described_class.new(data: data, alert_id: alert_id)
@@ -132,8 +132,8 @@ RSpec.describe Mihari::Models::Artifact, :vcr do
     end
   end
 
-  describe "#enrich_autonomos_system", vcr: "Mihari_Enrichers_IPInfo/ip:1.1.1.1" do
-    let!(:data) { "1.1.1.1" }
+  describe "#enrich_autonomos_system" do
+    let(:data) { "1.1.1.1" }
 
     it do
       artifact = described_class.new(data: data, alert_id: alert_id)
@@ -145,35 +145,35 @@ RSpec.describe Mihari::Models::Artifact, :vcr do
   end
 
   describe "#enrich_by_enricher" do
-    context "with IPInfo", vcr: "Mihari_Enrichers_IPInfo/ip:1.1.1.1" do
-      let!(:data) { "1.1.1.1" }
+    context "with IPInfo" do
+      let(:data) { "1.1.1.1" }
 
       it do
         artifact = described_class.new(data: data, alert_id: alert_id)
         expect(artifact.autonomous_system).to eq(nil)
         expect(artifact.geolocation).to eq(nil)
 
-        artifact.enrich_by_enricher(Mihari::Enrichers::IPInfo.new)
+        artifact.enrich_by_enricher Mihari::Enrichers::IPInfo.new
         expect(artifact.autonomous_system).not_to eq(nil)
         expect(artifact.geolocation).not_to eq(nil)
       end
     end
 
-    context "with Shodan", vcr: "Mihari_Enrichers_Shodan/ip:1.1.1.1" do
-      let!(:data) { "1.1.1.1" }
+    context "with Shodan" do
+      let(:data) { "1.1.1.1" }
 
       it do
         artifact = described_class.new(data: data, alert_id: alert_id)
         expect(artifact.reverse_dns_names.empty?).to be true
         expect(artifact.ports.empty?).to be true
 
-        artifact.enrich_by_enricher(Mihari::Enrichers::Shodan.new)
+        artifact.enrich_by_enricher Mihari::Enrichers::Shodan.new
         expect(artifact.reverse_dns_names.empty?).to be false
         expect(artifact.ports.empty?).to be false
       end
     end
 
-    context "with Google Public DNS", :vcr do
+    context "with Google Public DNS" do
       let!(:data) { "example.com" }
 
       it do
@@ -186,7 +186,7 @@ RSpec.describe Mihari::Models::Artifact, :vcr do
     end
 
     context "with Whois" do
-      let!(:data) { "example.com" }
+      let(:data) { "example.com" }
 
       it do
         artifact = described_class.new(data: data, alert_id: alert_id)

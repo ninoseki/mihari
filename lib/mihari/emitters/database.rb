@@ -2,6 +2,9 @@
 
 module Mihari
   module Emitters
+    #
+    # Database emitter
+    #
     class Database < Base
       #
       # Create an alert

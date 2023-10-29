@@ -2,6 +2,9 @@
 
 module Mihari
   module Mixins
+    #
+    # Refang mixin
+    #
     module Refang
       #
       # Refang defanged indicator

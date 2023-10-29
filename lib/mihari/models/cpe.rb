@@ -2,6 +2,9 @@
 
 module Mihari
   module Models
+    #
+    # CPE model
+    #
     class CPE < ActiveRecord::Base
       belongs_to :artifact
 

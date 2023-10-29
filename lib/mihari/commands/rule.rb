@@ -4,6 +4,9 @@ require "pathname"
 
 module Mihari
   module Commands
+    #
+    # Rule sub-commands
+    #
     module Rule
       class << self
         def included(thor)

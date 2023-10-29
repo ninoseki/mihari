@@ -4,6 +4,9 @@ require "jr/cli/core_ext"
 
 module Mihari
   module Feed
+    #
+    # Feed parser
+    #
     class Parser
       # @return [Array<Hash>, Array<Array<String>>]
       attr_reader :data

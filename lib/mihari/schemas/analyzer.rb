@@ -2,6 +2,9 @@
 
 module Mihari
   module Schemas
+    #
+    # Analyzer schemas
+    #
     module Analyzers
       extend Schemas::Mixins
 

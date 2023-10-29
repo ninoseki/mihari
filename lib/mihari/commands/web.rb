@@ -2,6 +2,9 @@
 
 module Mihari
   module Commands
+    #
+    # Web sub-commands
+    #
     module Web
       class << self
         def included(thor)
@@ -20,7 +23,7 @@ module Mihari
               Mihari.config.hide_config_values = options["hide_config_values"]
               # set rack env as production
               ENV["RACK_ENV"] ||= options["rack_env"]
-              Mihari::App.run!(
+              Web::App.run!(
                 port: options["port"],
                 host: options["host"],
                 threads: options["threads"],

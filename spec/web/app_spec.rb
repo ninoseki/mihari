@@ -1,10 +1,10 @@
 # frozen_string_literal: true
 
-RSpec.describe Mihari::App do
+RSpec.describe Mihari::Web::App do
   include Rack::Test::Methods
 
   def app
-    Mihari::App.instance
+    described_class.instance
   end
 
   it "returns 200" do

@@ -9,17 +9,22 @@ require "mihari/web/endpoints/rules"
 require "mihari/web/endpoints/tags"
 
 module Mihari
-  class API < Grape::API
-    prefix "api"
-    format :json
+  module Web
+    #
+    # Grape API
+    #
+    class API < Grape::API
+      prefix "api"
+      format :json
 
-    mount Endpoints::Alerts
-    mount Endpoints::Artifacts
-    mount Endpoints::Configs
-    mount Endpoints::IPAddresses
-    mount Endpoints::Rules
-    mount Endpoints::Tags
+      mount Endpoints::Alerts
+      mount Endpoints::Artifacts
+      mount Endpoints::Configs
+      mount Endpoints::IPAddresses
+      mount Endpoints::Rules
+      mount Endpoints::Tags
 
-    add_swagger_documentation(api_version: "v1", info: { title: "Mihari API" })
+      add_swagger_documentation(api_version: "v1", info: { title: "Mihari API" })
+    end
   end
 end

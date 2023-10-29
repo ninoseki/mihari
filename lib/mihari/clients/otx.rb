@@ -2,6 +2,9 @@
 
 module Mihari
   module Clients
+    #
+    # OTX API client
+    #
     class OTX < Base
       #
       # @param [String] base_url

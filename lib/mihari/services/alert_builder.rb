@@ -8,6 +8,9 @@ require "yaml"
 
 module Mihari
   module Services
+    #
+    # Alert builder
+    #
     class AlertBuilder
       include Dry::Monads[:result, :try]
 

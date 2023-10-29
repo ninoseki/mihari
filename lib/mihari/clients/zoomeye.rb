@@ -2,6 +2,9 @@
 
 module Mihari
   module Clients
+    #
+    # ZoomEye API client
+    #
     class ZoomEye < Base
       PAGE_SIZE = 10
 

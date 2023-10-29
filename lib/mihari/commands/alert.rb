@@ -2,6 +2,9 @@
 
 module Mihari
   module Commands
+    #
+    # Alert sub-commands
+    #
     module Alert
       class << self
         def included(thor)

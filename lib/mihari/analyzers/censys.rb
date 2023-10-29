@@ -2,6 +2,9 @@
 
 module Mihari
   module Analyzers
+    #
+    # Censys analyzer
+    #
     class Censys < Base
       # @return [String, nil]
       attr_reader :id
@@ -12,7 +15,6 @@ module Mihari
       #
       # @param [String] query
       # @param [hash, nil] options
-      # @param [String, nil] api_key
       # @param [String, nil] id
       # @param [String, nil] secret
       #

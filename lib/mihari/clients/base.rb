@@ -2,6 +2,9 @@
 
 module Mihari
   module Clients
+    #
+    # Base class for API clients
+    #
     class Base
       # @return [String]
       attr_reader :base_url

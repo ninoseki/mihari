@@ -1,16 +1,17 @@
 # frozen_string_literal: true
 
-require "net/https"
-
 module Mihari
   module Enrichers
+    #
+    # Google Public DNS enricher
+    #
     class GooglePublicDNS < Base
       #
       # Query Google Public DNS
       #
       # @param [String] name
       #
-      # @return [Array<Mihari::Structs::Shodan::GooglePublicDNS::Response>]
+      # @return [Array<Mihari::Structs::GooglePublicDNS::Response>]
       #
       def query(name)
         %w[A AAAA CNAME TXT NS].filter_map do |resource_type|
@@ -24,7 +25,7 @@ module Mihari
       # @param [String] name
       # @param [String] resource_type
       #
-      # @return [Mihari::Structs::Shodan::GooglePublicDNS::Response, nil]
+      # @return [Mihari::Structs::GooglePublicDNS::Response, nil]
       #
       def query_by_type(name, resource_type)
         url = "https://dns.google/resolve"

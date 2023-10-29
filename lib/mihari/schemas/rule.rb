@@ -33,6 +33,9 @@ module Mihari
       optional(:artifact_ttl).value(:integer)
     end
 
+    #
+    # Rule schema contract
+    #
     class RuleContract < Dry::Validation::Contract
       include Mihari::Mixins::FalsePositive
 

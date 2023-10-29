@@ -2,6 +2,9 @@
 
 module Mihari
   module Analyzers
+    #
+    # ZoomEye analyzer
+    #
     class ZoomEye < Base
       # @return [String, nil]
       attr_reader :api_key
@@ -63,7 +66,7 @@ module Mihari
       #
       # Convert responses into an array of String
       #
-      # @param [Hash] response
+      # @param [Hash] res
       #
       # @return [Array<Mihari::Models::Artifact>]
       #

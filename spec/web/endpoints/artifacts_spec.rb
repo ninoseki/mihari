@@ -1,11 +1,11 @@
 # frozen_string_literal: true
 
-RSpec.describe Mihari::Endpoints::Artifacts, :vcr do
+RSpec.describe Mihari::Web::Endpoints::Artifacts, :vcr do
   include Rack::Test::Methods
   include_context "with database fixtures"
 
   def app
-    Mihari::Endpoints::Artifacts
+    Mihari::Web::Endpoints::Artifacts
   end
 
   let!(:artifact) { Mihari::Models::Artifact.first }

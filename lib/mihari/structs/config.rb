@@ -61,8 +61,14 @@ module Mihari
         #
         def get_dummy(klass)
           type = get_type(klass)
-          is_analyzer = type == "Analyzer"
-          is_analyzer ? klass.new("dummy") : klass.new(artifacts: [], rule: nil)
+          case type
+          when "Analyzer"
+            klass.new("dummy")
+          when "Emitter"
+            klass.new(rule: nil)
+          else
+            klass.new
+          end
         end
 
         #

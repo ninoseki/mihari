@@ -2,6 +2,9 @@
 
 module Mihari
   module Clients
+    #
+    # SecurityTrails API client
+    #
     class SecurityTrails < Base
       #
       # @param [String] base_url

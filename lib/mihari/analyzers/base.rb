@@ -2,6 +2,9 @@
 
 module Mihari
   module Analyzers
+    #
+    # Base class for analyzers
+    #
     class Base < Actor
       # @return [String]
       attr_reader :query

@@ -2,6 +2,9 @@
 
 module Mihari
   module Analyzers
+    #
+    # GreyNoise analyzer
+    #
     class GreyNoise < Base
       # @return [String, nil]
       attr_reader :api_key

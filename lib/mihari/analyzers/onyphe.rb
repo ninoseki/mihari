@@ -4,6 +4,9 @@ require "normalize_country"
 
 module Mihari
   module Analyzers
+    #
+    # Onyphe analyzer
+    #
     class Onyphe < Base
       # @return [String, nil]
       attr_reader :api_key

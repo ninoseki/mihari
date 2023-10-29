@@ -2,6 +2,9 @@
 
 module Mihari
   module Models
+    #
+    # Alert model
+    #
     class Alert < ActiveRecord::Base
       has_many :taggings, dependent: :destroy
       has_many :artifacts, dependent: :destroy
@@ -35,7 +38,7 @@ module Mihari
         #
         # Count alerts
         #
-        # @param [String, nil] artifact_data
+        # @param [Structs::Filters::Alert::SearchFilter] filter
         #
         # @return [Integer]
         #

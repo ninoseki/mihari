@@ -2,6 +2,9 @@
 
 module Mihari
   module Enrichers
+    #
+    # Base class for enrichers
+    #
     class Base < Actor
       def initialize(options: nil)
         super(options: options)

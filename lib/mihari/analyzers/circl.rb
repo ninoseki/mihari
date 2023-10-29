@@ -2,6 +2,9 @@
 
 module Mihari
   module Analyzers
+    #
+    # CIRCL passive DNS/SSL analyzer
+    #
     class CIRCL < Base
       include Mixins::Refang
 

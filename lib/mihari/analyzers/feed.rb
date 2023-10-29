@@ -5,6 +5,9 @@ require "mihari/feed/parser"
 
 module Mihari
   module Analyzers
+    #
+    # Feed analyzer
+    #
     class Feed < Base
       # @return [Hash, nil]
       attr_reader :data

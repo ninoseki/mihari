@@ -10,6 +10,10 @@ def ci_env?
   ENV["CI"]
 end
 
+def is_ruby2?
+  RUBY_VERSION.to_s.start_with?("2.")
+end
+
 Gem::Specification.new do |spec|
   spec.name = "mihari"
   spec.version = Mihari::VERSION
@@ -55,6 +59,8 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency "timecop", "~> 0.9"
   spec.add_development_dependency "vcr", "~> 6.2"
   spec.add_development_dependency "webmock", "~> 3.19"
+
+  spec.add_development_dependency "rubocop-yard", "~> 0.7" unless is_ruby2?
 
   unless ci_env?
     spec.add_development_dependency "lefthook", "~> 1.5"

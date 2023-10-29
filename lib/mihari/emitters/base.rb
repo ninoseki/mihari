@@ -2,6 +2,9 @@
 
 module Mihari
   module Emitters
+    #
+    # Base class for emitters
+    #
     class Base < Actor
       # @return [Mihari::Rule]
       attr_reader :rule
@@ -9,9 +12,8 @@ module Mihari
       #
       # @param [Mihari::Rule] rule
       # @param [Hash, nil] options
-      # @param [Hash] **_params
       #
-      def initialize(rule:, options: nil, **_params)
+      def initialize(rule:, options: nil)
         super(options: options)
 
         @rule = rule

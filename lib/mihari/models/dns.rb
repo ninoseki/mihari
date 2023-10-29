@@ -2,6 +2,9 @@
 
 module Mihari
   module Models
+    #
+    # DNS record model
+    #
     class DnsRecord < ActiveRecord::Base
       belongs_to :artifact
 

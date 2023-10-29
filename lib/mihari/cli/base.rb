@@ -2,6 +2,9 @@
 
 module Mihari
   module CLI
+    #
+    # Base class for Thor classes
+    #
     class Base < Thor
       class << self
         def exit_on_failure?

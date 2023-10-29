@@ -2,6 +2,9 @@
 
 module Mihari
   module Clients
+    #
+    # VirusTotal API client
+    #
     class VirusTotal < Base
       #
       # @param [String] base_url

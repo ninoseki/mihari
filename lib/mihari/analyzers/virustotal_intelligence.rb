@@ -2,6 +2,9 @@
 
 module Mihari
   module Analyzers
+    #
+    # VirusTotal Intelligence analyzer
+    #
     class VirusTotalIntelligence < Base
       # @return [String, nil]
       attr_reader :api_key
