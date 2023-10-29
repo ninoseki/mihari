@@ -11,7 +11,7 @@ def ci_env?
 end
 
 def is_ruby2?
-  RUBY_VERSION.to_s.start_with?("2.0")
+  RUBY_VERSION.to_s.start_with?("2.")
 end
 
 Gem::Specification.new do |spec|
