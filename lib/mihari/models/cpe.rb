@@ -20,7 +20,7 @@ module Mihari
         # @return [Array<Mihari::CPE>]
         #
         def build_by_ip(ip, enricher: Enrichers::Shodan.new)
-          result = enricher.query_result(ip).bind do |res|
+          result = enricher.result(ip).bind do |res|
             if res.nil?
               Success []
             else

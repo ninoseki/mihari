@@ -13,7 +13,7 @@ module Mihari
       #
       # @return [Mihari::Structs::Shodan::InternetDBResponse, nil]
       #
-      def query(ip)
+      def call(ip)
         url = "https://internetdb.shodan.io/#{ip}"
         res = http.get(url)
         data = JSON.parse(res.body.to_s)

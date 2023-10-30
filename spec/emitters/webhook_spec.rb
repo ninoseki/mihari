@@ -31,13 +31,13 @@ RSpec.describe Mihari::Emitters::Webhook, :vcr do
     end
   end
 
-  describe "#emit" do
+  describe "#call" do
     subject(:emitter) { described_class.new(rule: rule, url: url, headers: { "Content-Type": "application/json" }) }
 
     let!(:url) { "https://httpbin.org/post" }
 
     it do
-      res = emitter.emit artifacts
+      res = emitter.call artifacts
       json_data = JSON.parse(res)["json"]
       expect(json_data).to be_a(Hash)
     end

@@ -7,7 +7,7 @@ module Mihari
     #
     # Alert proxy
     #
-    class AlertProxy
+    class AlertProxy < Service
       # @return [Hash]
       attr_reader :data
 
@@ -20,6 +20,8 @@ module Mihari
       # @param [Hash] data
       #
       def initialize(**data)
+        super()
+
         @data = data.deep_symbolize_keys
         @errors = nil
 

@@ -5,29 +5,22 @@ module Mihari
     #
     # Alert runner
     #
-    class AlertRunner
-      include Dry::Monads[:result, :try]
-
+    class AlertRunner < Service
       # @return [Mihari::Services::AlertProxy]
       attr_reader :alert
 
       def initialize(alert)
+        super()
+
         @alert = alert
       end
 
       #
       # @return [Mihari::Models::Alert]
       #
-      def run
+      def call
         emitter = Emitters::Database.new(rule: alert.rule)
-        emitter.emit alert.artifacts
-      end
-
-      #
-      # @return [Dry::Monads::Result::Success<Mihari::Models::Alert, nil>, Dry::Monads::Result::Failure]
-      #
-      def result
-        Try[StandardError] { run }.to_result
+        emitter.call alert.artifacts
       end
     end
   end

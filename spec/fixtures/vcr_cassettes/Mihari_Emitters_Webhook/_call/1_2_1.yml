@@ -1,0 +1,52 @@
+---
+http_interactions:
+- request:
+    method: post
+    uri: https://httpbin.org/post
+    body:
+      encoding: ASCII-8BIT
+      string: '{"rule":{"id":"f134d136-42f6-4088-b34b-96bf17a0300f","title":"Renna
+        Marquardt","description":"Dr. Al Herzog"},"artifacts":["1.1.1.1","github.com"],"tags":["Man
+        Kling"]}'
+    headers:
+      Content-Type:
+      - application/json
+      Connection:
+      - close
+      Host:
+      - httpbin.org
+      User-Agent:
+      - http.rb/5.1.1
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Mon, 30 Oct 2023 11:47:38 GMT
+      Content-Type:
+      - application/json
+      Content-Length:
+      - '813'
+      Connection:
+      - close
+      Server:
+      - gunicorn/19.9.0
+      Access-Control-Allow-Origin:
+      - "*"
+      Access-Control-Allow-Credentials:
+      - 'true'
+    body:
+      encoding: UTF-8
+      string: "{\n  \"args\": {}, \n  \"data\": \"{\\\"rule\\\":{\\\"id\\\":\\\"f134d136-42f6-4088-b34b-96bf17a0300f\\\",\\\"title\\\":\\\"Renna
+        Marquardt\\\",\\\"description\\\":\\\"Dr. Al Herzog\\\"},\\\"artifacts\\\":[\\\"1.1.1.1\\\",\\\"github.com\\\"],\\\"tags\\\":[\\\"Man
+        Kling\\\"]}\", \n  \"files\": {}, \n  \"form\": {}, \n  \"headers\": {\n    \"Content-Length\":
+        \"168\", \n    \"Content-Type\": \"application/json\", \n    \"Host\": \"httpbin.org\",
+        \n    \"User-Agent\": \"http.rb/5.1.1\", \n    \"X-Amzn-Trace-Id\": \"Root=1-653f97da-2045a562590a859f3e7e92d0\"\n
+        \ }, \n  \"json\": {\n    \"artifacts\": [\n      \"1.1.1.1\", \n      \"github.com\"\n
+        \   ], \n    \"rule\": {\n      \"description\": \"Dr. Al Herzog\", \n      \"id\":
+        \"f134d136-42f6-4088-b34b-96bf17a0300f\", \n      \"title\": \"Renna Marquardt\"\n
+        \   }, \n    \"tags\": [\n      \"Man Kling\"\n    ]\n  }, \n  \"origin\":
+        \"133.218.37.191\", \n  \"url\": \"https://httpbin.org/post\"\n}\n"
+  recorded_at: Mon, 30 Oct 2023 11:47:38 GMT
+recorded_with: VCR 6.2.0

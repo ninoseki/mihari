@@ -4,9 +4,7 @@ module Mihari
   #
   # Base class for Analyzer, Emitter and Enricher
   #
-  class Actor
-    include Dry::Monads[:result, :try]
-
+  class Actor < Service
     include Mixins::Configurable
     include Mixins::Retriable
 
@@ -17,6 +15,8 @@ module Mihari
     # @param [Hash, nil] options
     #
     def initialize(options: nil)
+      super()
+
       @options = options || {}
     end
 
@@ -55,6 +55,16 @@ module Mihari
       be = (configuration_keys.length > 1) ? "are" : "is"
       message = "#{self.class.class_key} is not configured correctly. #{joined} #{be} missing."
       raise ConfigurationError, message
+    end
+
+    def result
+      Try[StandardError] do
+        retry_on_error(
+          times: retry_times,
+          interval: retry_interval,
+          exponential_backoff: retry_exponential_backoff
+        ) { call }
+      end.to_result
     end
 
     class << self

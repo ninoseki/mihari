@@ -139,7 +139,7 @@ RSpec.describe Mihari::Rule, :vcr do
 
     it "does not raise any error" do
       expect do
-        rule.run
+        rule.call
         SemanticLogger.flush
       end.not_to output.to_stderr
     end
@@ -149,7 +149,7 @@ RSpec.describe Mihari::Rule, :vcr do
         # mock emitters
         emitter = double("emitter_instance")
         allow(emitter).to receive(:configured?).and_return(true)
-        allow(emitter).to receive(:emit_result).and_return(Dry::Monads::Result::Failure.new("error"))
+        allow(emitter).to receive(:result).and_return(Dry::Monads::Result::Failure.new("error"))
 
         # set mocked classes as emitters
         allow(rule).to receive(:emitters).and_return([emitter])
@@ -160,7 +160,7 @@ RSpec.describe Mihari::Rule, :vcr do
       end
 
       it do
-        rule.run
+        rule.call
 
         # read logger output
         SemanticLogger.flush
