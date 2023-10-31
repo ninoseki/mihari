@@ -30,7 +30,7 @@ module Mihari
       #
       # @return [Mihari::Structs::IPInfo::Response, nil]
       #
-      def query(ip)
+      def call(ip)
         url = "https://ipinfo.io/#{ip}/json"
         res = http.get(url)
         data = JSON.parse(res.body.to_s)

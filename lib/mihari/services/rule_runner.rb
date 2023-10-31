@@ -5,13 +5,15 @@ module Mihari
     #
     # Rule runner
     #
-    class RuleRunner
+    class RuleRunner < Service
       include Dry::Monads[:result, :try]
 
       # @return [Mihari::Rule]
       attr_reader :rule
 
       def initialize(rule)
+        super()
+
         @rule = rule
       end
 
@@ -32,15 +34,8 @@ module Mihari
       #
       # @return [Mihari::Models::Alert, nil]
       #
-      def run
-        rule.run
-      end
-
-      #
-      # @return [Dry::Monads::Result::Success<Mihari::Models::Alert, nil>, Dry::Monads::Result::Failure]
-      #
-      def result
-        Try[StandardError] { run }.to_result
+      def call
+        rule.call
       end
     end
   end

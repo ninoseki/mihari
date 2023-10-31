@@ -143,7 +143,10 @@ module Mihari
 end
 
 # Core classes
+require "mihari/service"
+
 require "mihari/actor"
+
 require "mihari/database"
 require "mihari/http"
 require "mihari/type_checker"

@@ -11,9 +11,7 @@ module Mihari
     #
     # Alert builder
     #
-    class AlertBuilder
-      include Dry::Monads[:result, :try]
-
+    class AlertBuilder < Service
       # @return [String]
       attr_reader :path
 
@@ -23,6 +21,8 @@ module Mihari
       # @param [String] path
       #
       def initialize(path)
+        super()
+
         @path = path
       end
 
@@ -38,8 +38,8 @@ module Mihari
         )
       end
 
-      def result
-        Try[StandardError] { AlertProxy.new(**data) }.to_result
+      def call
+        AlertProxy.new(**data)
       end
     end
   end

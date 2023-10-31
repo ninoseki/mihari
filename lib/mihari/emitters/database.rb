@@ -13,7 +13,7 @@ module Mihari
       #
       # @return [Mihari::Models::Alert, nil]
       #
-      def emit(artifacts)
+      def call(artifacts)
         return if artifacts.empty?
 
         tags = rule.tags.filter_map { |name| Models::Tag.find_or_create_by(name: name) }.uniq

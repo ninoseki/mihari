@@ -13,7 +13,7 @@ module Mihari
       #
       # @return [Array<Mihari::Structs::GooglePublicDNS::Response>]
       #
-      def query(name)
+      def call(name)
         %w[A AAAA CNAME TXT NS].filter_map do |resource_type|
           query_by_type(name, resource_type)
         end

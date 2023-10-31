@@ -95,7 +95,7 @@ module Mihari
             result = Try do
               proxy = Services::AlertProxy.new(**params.to_snake_keys)
               runner = Services::AlertRunner.new(proxy)
-              runner.run
+              runner.call
             end.to_result
 
             if result.success?

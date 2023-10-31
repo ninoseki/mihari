@@ -22,9 +22,9 @@ RSpec.describe Mihari::Emitters::MISP, :vcr do
     end
   end
 
-  describe "#emit" do
+  describe "#call" do
     it do
-      emitter.emit artifacts
+      emitter.call artifacts
     end
   end
 end

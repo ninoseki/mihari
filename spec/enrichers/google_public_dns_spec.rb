@@ -3,7 +3,7 @@
 RSpec.describe Mihari::Enrichers::GooglePublicDNS, :vcr do
   subject(:enricher) { described_class.new }
 
-  describe ".query" do
+  describe ".query_by_type" do
     let!(:name) { "example.com" }
     let!(:type) { "A" }
 

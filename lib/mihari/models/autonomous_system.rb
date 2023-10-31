@@ -20,7 +20,7 @@ module Mihari
         # @return [Mihari::AutonomousSystem, nil]
         #
         def build_by_ip(ip, enricher: Enrichers::IPInfo.new)
-          result = enricher.query_result(ip).bind do |res|
+          result = enricher.result(ip).bind do |res|
             value = res&.asn
             if value.nil?
               Success nil

@@ -216,7 +216,7 @@ module Mihari
       #
       # @param [Array<Mihari::Models::Artifact>] artifacts
       #
-      def emit(artifacts)
+      def call(artifacts)
         return if artifacts.empty?
 
         @artifacts = artifacts

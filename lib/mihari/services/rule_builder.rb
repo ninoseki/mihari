@@ -10,9 +10,7 @@ module Mihari
     #
     # Rule builder
     #
-    class RuleBuilder
-      include Dry::Monads[:result, :try]
-
+    class RuleBuilder < Service
       # @return [String]
       attr_reader :path_or_id
 
@@ -22,6 +20,8 @@ module Mihari
       # @param [String] path_or_id
       #
       def initialize(path_or_id)
+        super()
+
         @path_or_id = path_or_id
       end
 
@@ -42,8 +42,8 @@ module Mihari
         )
       end
 
-      def result
-        Try[StandardError] { Rule.new(**data) }.to_result
+      def call
+        Rule.new(**data)
       end
     end
   end

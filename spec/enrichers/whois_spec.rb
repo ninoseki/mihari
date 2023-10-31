@@ -3,13 +3,13 @@
 RSpec.describe Mihari::Enrichers::Whois do
   subject(:enricher) { described_class.new }
 
-  describe ".query" do
+  describe ".call" do
     let!(:domain) { "example.com" }
 
     before { enricher.reset_cache }
 
     it do
-      whois_record = enricher.query(domain)
+      whois_record = enricher.call(domain)
       expect(whois_record.created_on&.iso8601).to eq("1992-01-01")
       expect(whois_record.registrar).to be_a(Hash).or be_a(NilClass)
       expect(whois_record.contacts).to be_a(Array)

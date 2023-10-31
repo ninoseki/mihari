@@ -23,9 +23,9 @@ module Mihari
                 builder = Services::RuleBuilder.new(path_or_id)
 
                 check_diff_l = ->(rule) { check_diff rule }
-                update_and_run_l = ->(runner) { update_and_run runner }
+                update_and_call_l = ->(runner) { update_and_call runner }
 
-                result = builder.result.bind(check_diff_l).bind(update_and_run_l)
+                result = builder.result.bind(check_diff_l).bind(update_and_call_l)
 
                 alert = result.value!
                 data = Entities::Alert.represent(alert)
@@ -50,10 +50,10 @@ module Mihari
               #
               # @param [Mihari::RuleRunner] runner
               #
-              def update_and_run(runner)
+              def update_and_call(runner)
                 Dry::Monads::Try[StandardError] do
                   runner.update_or_create
-                  runner.run
+                  runner.call
                 end.to_result
               end
             end

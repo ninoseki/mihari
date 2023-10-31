@@ -63,7 +63,7 @@ RSpec.describe Mihari::Emitters::Slack do
     end
   end
 
-  describe "#emit" do
+  describe "#call" do
     let!(:mock) { double("notifier") }
 
     before do
@@ -72,7 +72,7 @@ RSpec.describe Mihari::Emitters::Slack do
     end
 
     it do
-      emitter.emit artifacts
+      emitter.call artifacts
       expect(mock).to have_received(:post).once
     end
   end

@@ -22,21 +22,21 @@ module Mihari
       #
       # @param [Array<Mihari::Models::Artifact>] artifacts
       #
-      def emit_result(artifacts)
+      def call(artifacts)
+        raise NotImplementedError, "You must implement #{self.class}##{__method__}"
+      end
+
+      #
+      # @return [Dry::Monads::Result::Success<Object>, Dry::Monads::Result::Failure]
+      #
+      def result(artifacts)
         Try[StandardError] do
           retry_on_error(
             times: retry_times,
             interval: retry_interval,
             exponential_backoff: retry_exponential_backoff
-          ) { emit artifacts }
+          ) { call(artifacts) }
         end.to_result
-      end
-
-      #
-      # @param [Array<Mihari::Models::Artifact>] artifacts
-      #
-      def emit(artifacts)
-        raise NotImplementedError, "You must implement #{self.class}##{__method__}"
       end
 
       class << self

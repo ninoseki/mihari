@@ -22,7 +22,7 @@ module Mihari
         # @return [Mihari::Geolocation, nil]
         #
         def build_by_ip(ip, enricher: Enrichers::IPInfo.new)
-          result = enricher.query_result(ip).bind do |res|
+          result = enricher.result(ip).bind do |res|
             value = res&.country_code
             if value.nil?
               Success nil

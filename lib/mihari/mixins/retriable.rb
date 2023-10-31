@@ -14,7 +14,8 @@ module Mihari
         Timeout::Error,
         RetryableError,
         NetworkError,
-        TimeoutError
+        TimeoutError,
+        StatusCodeError
       ].freeze
 
       #

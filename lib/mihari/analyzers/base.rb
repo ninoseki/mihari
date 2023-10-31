@@ -56,22 +56,20 @@ module Mihari
       # @return [Array<Mihari::Models::Artifact>]
       #
       def normalized_artifacts
-        retry_on_error(times: retry_times, interval: retry_interval, exponential_backoff: retry_exponential_backoff) do
-          artifacts.compact.sort.map do |artifact|
-            # No need to set data_type manually
-            # It is set automatically in #initialize
-            artifact = artifact.is_a?(Models::Artifact) ? artifact : Models::Artifact.new(data: artifact)
-            artifact.source = self.class.class_key
-            artifact
-          end.select(&:valid?).uniq(&:data)
-        end
+        artifacts.compact.sort.map do |artifact|
+          # No need to set data_type manually
+          # It is set automatically in #initialize
+          artifact = artifact.is_a?(Models::Artifact) ? artifact : Models::Artifact.new(data: artifact)
+          artifact.source = self.class.class_key
+          artifact
+        end.select(&:valid?).uniq(&:data)
       end
 
       #
-      # @return [Dry::Monads::Result::Success<Array<Mihari::Models::Artifact>>, Dry::Monads::Result::Failure]
+      # @return [Array<Mihari::Models::Artifact>]
       #
-      def result
-        Try[StandardError] { normalized_artifacts }.to_result
+      def call
+        normalized_artifacts
       end
 
       class << self

@@ -61,7 +61,7 @@ RSpec.describe Mihari::Models::Artifact, :vcr do
   describe "#enrich_whois" do
     let!(:enricher) do
       enricher = double("whois_enricher")
-      allow(enricher).to receive(:query_result).and_return(
+      allow(enricher).to receive(:result).and_return(
         Dry::Monads::Result::Success.new(
           Mihari::Models::WhoisRecord.new(domain: "example.com")
         )

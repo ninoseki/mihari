@@ -3,13 +3,16 @@ Style/HashSyntax:
 Style/StringLiterals:
   EnforcedStyle: double_quotes
 Metrics/BlockLength:
+  Max: 100
   Exclude:
     - "spec/**/*"
     - "*.gemspec"
 Metrics/ClassLength:
   Enabled: false
 Metrics/MethodLength:
-  Max: 20
+  Max: 50
+Metrics/AbcSize:
+  Max: 50
 require:
   - rubocop-rspec
   - rubocop-yard

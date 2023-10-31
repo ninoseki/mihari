@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module Mihari
-  class Rule
+  class Rule < Service
     include Mixins::FalsePositive
 
     # @return [Hash]
@@ -19,6 +19,8 @@ module Mihari
     # @param [Hash] data
     #
     def initialize(**data)
+      super()
+
       @data = data.deep_symbolize_keys
       @errors = nil
       @base_time = Time.now.utc
@@ -109,16 +111,19 @@ module Mihari
     #
     def artifacts
       analyzers.flat_map do |analyzer|
+        # @type [Dry::Monads::Result::Success<Array<Mihari::Models::Artifact>>, Dry::Monads::Result::Failure]
         result = analyzer.result
 
-        raise result.failure if result.failure? && !analyzer.ignore_error?
-
-        artifacts = result.value!
-        artifacts.map do |artifact|
-          artifact.rule_id = id
-          artifact
+        if result.failure?
+          raise result.failure unless analyzer.ignore_error?
+        else
+          artifacts = result.value!
+          artifacts.map do |artifact|
+            artifact.rule_id = id
+            artifact
+          end
         end
-      end
+      end.compact
     end
 
     #
@@ -169,7 +174,7 @@ module Mihari
 
       # NOTE: separate parallel execution and logging
       #       because the logger does not work along with Parallel
-      results = Parallel.map(emitters) { |emitter| emitter.emit_result(enriched_artifacts) }
+      results = Parallel.map(emitters) { |emitter| emitter.result enriched_artifacts }
       results.zip(emitters).map do |result_and_emitter|
         result, emitter = result_and_emitter
         Mihari.logger.info "Emission by #{emitter.class} is failed: #{result.failure}" if result.failure?
@@ -183,7 +188,7 @@ module Mihari
     #
     # @return [Mihari::Models::Alert, nil]
     #
-    def run
+    def call
       # Validate analyzers & emitters before using them
       analyzers
       emitters

@@ -45,7 +45,7 @@ RSpec.describe Mihari::Emitters::TheHive, :vcr do
     end
   end
 
-  describe "#emit" do
+  describe "#call" do
     let!(:mock_client) { double("client") }
 
     before do
@@ -54,7 +54,7 @@ RSpec.describe Mihari::Emitters::TheHive, :vcr do
     end
 
     it do
-      emitter.emit artifacts
+      emitter.call artifacts
       expect(mock_client).to have_received(:alert)
     end
   end

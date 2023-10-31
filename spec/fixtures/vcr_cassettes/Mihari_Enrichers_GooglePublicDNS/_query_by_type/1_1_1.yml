@@ -1,0 +1,55 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: https://dns.google/resolve?name=example.com&type=A
+    body:
+      encoding: ASCII-8BIT
+      string: ''
+    headers:
+      Connection:
+      - close
+      Host:
+      - dns.google
+      User-Agent:
+      - http.rb/5.1.1
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      X-Content-Type-Options:
+      - nosniff
+      Strict-Transport-Security:
+      - max-age=31536000; includeSubDomains; preload
+      Access-Control-Allow-Origin:
+      - "*"
+      Date:
+      - Mon, 30 Oct 2023 11:47:41 GMT
+      Expires:
+      - Mon, 30 Oct 2023 11:47:41 GMT
+      Cache-Control:
+      - private, max-age=4831
+      Content-Type:
+      - application/json; charset=UTF-8
+      Server:
+      - HTTP server (unknown)
+      X-Xss-Protection:
+      - '0'
+      X-Frame-Options:
+      - SAMEORIGIN
+      Alt-Svc:
+      - h3=":443"; ma=2592000,h3-29=":443"; ma=2592000
+      Accept-Ranges:
+      - none
+      Vary:
+      - Accept-Encoding
+      Connection:
+      - close
+      Transfer-Encoding:
+      - chunked
+    body:
+      encoding: UTF-8
+      string: '{"Status":0,"TC":false,"RD":true,"RA":true,"AD":true,"CD":false,"Question":[{"name":"example.com.","type":1}],"Answer":[{"name":"example.com.","type":1,"TTL":4831,"data":"93.184.216.34"}]}'
+  recorded_at: Mon, 30 Oct 2023 11:47:41 GMT
+recorded_with: VCR 6.2.0

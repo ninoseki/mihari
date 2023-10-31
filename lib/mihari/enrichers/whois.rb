@@ -27,7 +27,7 @@ module Mihari
       #
       # @return [Mihari::Models::WhoisRecord, nil]
       #
-      def query(domain)
+      def call(domain)
         domain = PublicSuffix.domain(domain)
 
         # check memo
