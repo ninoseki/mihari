@@ -81,10 +81,11 @@ VCR.configure do |config|
   passwords = Mihari.config.keys.select { |key| key.end_with?("_PASSWORD") }
   secrets = Mihari.config.keys.select { |key| key.end_with?("_SECRET") }
   usernames = Mihari.config.keys.select { |key| key.end_with?("_USERNAME") }
+  emails = Mihari.config.keys.select { |key| key.end_with?("_EMAIL") }
   ids = Mihari.config.keys.select { |key| key.end_with?("_ID") }
   api_urls = Mihari.config.keys.select { |key| key != "DATABASE_URL" && key.end_with?("_URL") }
 
-  (api_keys + passwords + secrets + usernames + ids).each do |key|
+  (api_keys + passwords + secrets + usernames + ids + emails).each do |key|
     ENV[key] = Digest::MD5.hexdigest(key) if ci_env? || !ENV.key?(key)
     config.filter_sensitive_data("<#{key}>") { ENV[key] }
   end
