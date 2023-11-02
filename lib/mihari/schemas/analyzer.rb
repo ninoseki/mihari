@@ -64,6 +64,14 @@ module Mihari
         optional(:options).hash(AnalyzerOptions)
       end
 
+      Fofa = Dry::Schema.Params do
+        required(:analyzer).value(Types::String.enum(*Mihari::Analyzers::Fofa.class_keys))
+        required(:query).value(:string)
+        optional(:api_key).value(:string)
+        optional(:email).value(:string)
+        optional(:options).hash(AnalyzerPaginationOptions)
+      end
+
       PassiveTotal = Dry::Schema.Params do
         required(:analyzer).value(Types::String.enum(*Mihari::Analyzers::PassiveTotal.class_keys))
         required(:query).value(:string)
