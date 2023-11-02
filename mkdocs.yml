@@ -29,6 +29,7 @@ markdown_extensions:
       permalink: true
   - admonition
   - pymdownx.details
-  - pymdownx.superfences
-  - pymdownx.highlight
   - pymdownx.extra
+  - pymdownx.highlight
+  - pymdownx.magiclink
+  - pymdownx.superfences

@@ -6,6 +6,7 @@
 - [crt.sh](crtsh.md)
 - [dnstwister](dnstwister.md)
 - [Feed](feed.md)
+- [Fofa](fofa.md)
 - [GreyNoise](greynoise.md)
 - [HunterHow](hunterhow.md)
 - [Onyphe](onyphe.md)

@@ -24,6 +24,7 @@ Mihari supports the following services by default.
 - [CIRCL passive DNS](https://www.circl.lu/services/passive-dns/) / [passive SSL](https://www.circl.lu/services/passive-ssl/)
 - [crt.sh](https://crt.sh/)
 - [dnstwister](https://dnstwister.report/)
+- [Fofa](https://en.fofa.info/)
 - [GreyNoise](https://www.greynoise.io/)
 - [HunterHow](https://hunter.how/)
 - [Onyphe](https://onyphe.io)

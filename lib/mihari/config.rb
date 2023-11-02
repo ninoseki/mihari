@@ -21,6 +21,12 @@ module Mihari
     attr_reader :database_url
 
     # @return [String, nil]
+    attr_reader :fofa_api_key
+
+    # @return [String, nil]
+    attr_reader :fofa_email
+
+    # @return [String, nil]
     attr_reader :greynoise_api_key
 
     # @return [String, nil]
@@ -118,6 +124,9 @@ module Mihari
       @circl_passive_username = ENV.fetch("CIRCL_PASSIVE_USERNAME", nil)
 
       @database_url = URI(ENV.fetch("DATABASE_URL", "sqlite3:///mihari.db"))
+
+      @fofa_api_key = ENV.fetch("FOFA_API_KEY", nil)
+      @fofa_email = ENV.fetch("FOFA_EMAIL", nil)
 
       @greynoise_api_key = ENV.fetch("GREYNOISE_API_KEY", nil)
 
