@@ -35,7 +35,7 @@ module Mihari
       # @param [Integer] size Maximum amount of results to grab
       # @param [Integer, nil] scroll Scroll token to paginate through results
       #
-      # @return [Hash]
+      # @return [Mihari::Structs::GreyNoise::Response]
       #
       def gnql_search(query, size: PAGE_SIZE, scroll: nil)
         params = { query: query, size: size, scroll: scroll }.compact
@@ -48,7 +48,7 @@ module Mihari
       # @param [Integer] size
       # @param [Integer] pagination_limit
       #
-      # @return [Enumerable<Structs::GreyNoise::Response>]
+      # @return [Enumerable<Mihari::Structs::GreyNoise::Response>]
       #
       def gnql_search_with_pagination(query, size: PAGE_SIZE, pagination_limit: Mihari.config.pagination_limit)
         scroll = nil

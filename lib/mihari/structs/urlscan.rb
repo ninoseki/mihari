@@ -4,30 +4,17 @@ module Mihari
   module Structs
     module Urlscan
       class Page < Dry::Struct
+        # @!attribute [r] domain
+        #   @return [String]
         attribute :domain, Types::String.optional
+
+        # @!attribute [r] ip
+        #   @return [String, nil]
         attribute :ip, Types::String.optional
+
+        # @!attribute [r] url
+        #   @return [String]
         attribute :url, Types::String
-
-        #
-        # @return [String, nil]
-        #
-        def domain
-          attributes[:domain]
-        end
-
-        #
-        # @return [String, nil]
-        #
-        def ip
-          attributes[:ip]
-        end
-
-        #
-        # @return [String]
-        #
-        def url
-          attributes[:url]
-        end
 
         class << self
           #
@@ -47,38 +34,21 @@ module Mihari
       end
 
       class Result < Dry::Struct
+        # @!attribute [r] page
+        #   @return [Page]
         attribute :page, Page
+
+        # @!attribute [r] pid
+        #   @return [String]
         attribute :id, Types::String
-        attribute :sort, Types.Array(Types::String | Types::Integer)
+
+        # @!attribute [r] sort
+        #   @return [Array<String, Integer>]
+        attribute :sort, Types.Array(Types::String | Types::Int)
+
+        # @!attribute [r] metadata
+        #   @return [Hash]
         attribute :metadata, Types::Hash
-
-        #
-        # @return [Page]
-        #
-        def page
-          attributes[:page]
-        end
-
-        #
-        # @return [String]
-        #
-        def id
-          attributes[:id]
-        end
-
-        #
-        # @return [Array<String, Integer>]
-        #
-        def sort
-          attributes[:sort]
-        end
-
-        #
-        # @return [Array<String, Integer>]
-        #
-        def metadata
-          attributes[:metadata]
-        end
 
         #
         # @return [Array<Mihari::Models::Artifact>]
@@ -107,22 +77,13 @@ module Mihari
       end
 
       class Response < Dry::Struct
+        # @!attribute [r] results
+        #   @return [Array<Result>]
         attribute :results, Types.Array(Result)
+
+        # @!attribute [r] has_more
+        #   @return [Boolean]
         attribute :has_more, Types::Bool
-
-        #
-        # @return [Array<Result>]
-        #
-        def results
-          attributes[:results]
-        end
-
-        #
-        # @return [Boolean]
-        #
-        def has_more
-          attributes[:has_more]
-        end
 
         #
         # @return [Array<Mihari::Models::Artifact>]

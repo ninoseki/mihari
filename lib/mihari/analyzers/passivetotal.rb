@@ -65,7 +65,7 @@ module Mihari
       private
 
       def client
-        @client ||= Clients::PassiveTotal.new(username: username, api_key: api_key, timeout: timeout)
+        Clients::PassiveTotal.new(username: username, api_key: api_key, timeout: timeout)
       end
 
       #

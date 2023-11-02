@@ -6,30 +6,17 @@ module Mihari
       class Metadata < Dry::Struct
         include Mixins::AutonomousSystem
 
+        # @!attribute [r] country
+        #   @return [String]
         attribute :country, Types::String
+
+        # @!attribute [r] country_code
+        #   @return [String]
         attribute :country_code, Types::String
+
+        # @!attribute [r] asn
+        #   @return [String]
         attribute :asn, Types::String
-
-        #
-        # @return [String]
-        #
-        def country
-          attributes[:country]
-        end
-
-        #
-        # @return [String]
-        #
-        def country_code
-          attributes[:country_code]
-        end
-
-        #
-        # @return [String]
-        #
-        def asn
-          attributes[:asn]
-        end
 
         #
         # @return [Mihari::AutonomousSystem]
@@ -66,30 +53,17 @@ module Mihari
       end
 
       class Datum < Dry::Struct
+        # @!attribute [r] ip
+        #   @return [String]
         attribute :ip, Types::String
+
+        # @!attribute [r] metadata
+        #   @return [Metadata]
         attribute :metadata, Metadata
+
+        # @!attribute [r] metadata_
+        #   @return [Hash]
         attribute :metadata_, Types::Hash
-
-        #
-        # @return [String]
-        #
-        def ip
-          attributes[:ip]
-        end
-
-        #
-        # @return [Metadata]
-        #
-        def metadata
-          attributes[:metadata]
-        end
-
-        #
-        # @return [Hash]
-        #
-        def metadata_
-          attributes[:metadata_]
-        end
 
         #
         # @return [Mihari::Models::Artifact]
@@ -121,54 +95,29 @@ module Mihari
       end
 
       class Response < Dry::Struct
+        # @!attribute [r] complete
+        #   @return [Boolean]
         attribute :complete, Types::Bool
+
+        # @!attribute [r] count
+        #   @return [Integer]
         attribute :count, Types::Int
+
+        # @!attribute [r] data
+        #   @return [Array<Datnum>]
         attribute :data, Types.Array(Datum)
+
+        # @!attribute [r] message
+        #   @return [String]
         attribute :message, Types::String
+
+        # @!attribute [r] query
+        #   @return [String]
         attribute :query, Types::String
+
+        # @!attribute [r] scroll
+        #   @return [String, nil]
         attribute :scroll, Types::String.optional
-
-        #
-        # @return [Boolean]
-        #
-        def complete
-          attributes[:complete]
-        end
-
-        #
-        # @return [Integer]
-        #
-        def count
-          attributes[:count]
-        end
-
-        #
-        # @return [Array<Datum>]
-        #
-        def data
-          attributes[:data]
-        end
-
-        #
-        # @return [String]
-        #
-        def message
-          attributes[:message]
-        end
-
-        #
-        # @return [String]
-        #
-        def query
-          attributes[:query]
-        end
-
-        #
-        # @return [String, nil]
-        #
-        def scroll
-          attributes[:scroll]
-        end
 
         #
         # @return [Array<Mihari::Models::Artifact>]

@@ -36,7 +36,7 @@ module Mihari
       # @param [String] query
       # @param [Integer] page
       #
-      # @return [Structs::Onyphe::Response]
+      # @return [Mihari::Structs::Onyphe::Response]
       #
       def datascan(query, page: 1)
         params = { page: page, apikey: api_key }
@@ -48,7 +48,7 @@ module Mihari
       # @param [String] query
       # @param [Integer] pagination_limit
       #
-      # @return [Enumerable<Structs::Onyphe::Response>]
+      # @return [Enumerable<Mihari::Structs::Onyphe::Response>]
       #
       def datascan_with_pagination(query, pagination_limit: Mihari.config.pagination_limit)
         Enumerator.new do |y|

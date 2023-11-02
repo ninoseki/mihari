@@ -54,7 +54,7 @@ module Mihari
       private
 
       def client
-        @client = Clients::VirusTotal.new(api_key: api_key)
+        Clients::VirusTotal.new(api_key: api_key)
       end
 
       #

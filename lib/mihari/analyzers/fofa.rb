@@ -35,13 +35,25 @@ module Mihari
         %w[fofa_api_key fofa_email]
       end
 
+      def configured?
+        api_key? && email?
+      end
+
       private
+
+      def api_key?
+        !api_key.nil?
+      end
+
+      def email?
+        !email.nil?
+      end
 
       #
       # @return [Mihari::Clients::Fofa]
       #
       def client
-        @client ||= Clients::Fofa.new(
+        Clients::Fofa.new(
           api_key: api_key,
           email: email,
           pagination_interval: pagination_interval,

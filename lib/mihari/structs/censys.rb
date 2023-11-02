@@ -6,14 +6,9 @@ module Mihari
       class AutonomousSystem < Dry::Struct
         include Mixins::AutonomousSystem
 
+        # @!attribute [r] asn
+        #   @return [Integer]
         attribute :asn, Types::Int
-
-        #
-        # @return [Integer]
-        #
-        def asn
-          attributes[:asn]
-        end
 
         #
         # @return [Mihari::AutonomousSystem]
@@ -38,22 +33,13 @@ module Mihari
       end
 
       class Location < Dry::Struct
+        # @!attribute [r] country
+        #   @return [String, nil]
         attribute :country, Types::String.optional
+
+        # @!attribute [r] country_code
+        #   @return [String, nil]
         attribute :country_code, Types::String.optional
-
-        #
-        # @return [String, nil]
-        #
-        def country
-          attributes[:country]
-        end
-
-        #
-        # @return [String, nil]
-        #
-        def country_code
-          attributes[:country_code]
-        end
 
         #
         # @return [Mihari::Geolocation] <description>
@@ -86,14 +72,9 @@ module Mihari
       end
 
       class Service < Dry::Struct
-        attribute :port, Types::Integer
-
-        #
-        # @return [Integer]
-        #
-        def port
-          attributes[:port]
-        end
+        # @!attribute [r] port
+        #   @return [Integer, nil]
+        attribute :port, Types::Int
 
         #
         # @return [Mihari::Port]
@@ -118,46 +99,25 @@ module Mihari
       end
 
       class Hit < Dry::Struct
+        # @!attribute [r] ip
+        #   @return [String]
         attribute :ip, Types::String
+
+        # @!attribute [r] location
+        #   @return [Location]
         attribute :location, Location
+
+        # @!attribute [r] autonomous_system
+        #   @return [AutonomousSystem]
         attribute :autonomous_system, AutonomousSystem
+
+        # @!attribute [r] metadata
+        #   @return [Hash]
         attribute :metadata, Types::Hash
+
+        # @!attribute [r] services
+        #   @return [Array<Service>]
         attribute :services, Types.Array(Service)
-
-        #
-        # @return [String]
-        #
-        def ip
-          attributes[:ip]
-        end
-
-        #
-        # @return [Location]
-        #
-        def location
-          attributes[:location]
-        end
-
-        #
-        # @return [AutonomousSystem]
-        #
-        def autonomous_system
-          attributes[:autonomous_system]
-        end
-
-        #
-        # @return [Hash]
-        #
-        def metadata
-          attributes[:metadata]
-        end
-
-        #
-        # @return [Array<Service>]
-        #
-        def services
-          attributes[:services]
-        end
 
         #
         # @return [Array<Mihari::Port>]
@@ -199,22 +159,13 @@ module Mihari
       end
 
       class Links < Dry::Struct
+        # @!attribute [r] next
+        #   @return [String, nil]
         attribute :next, Types::String.optional
+
+        # @!attribute [r] prev
+        #   @return [String, nil]
         attribute :prev, Types::String.optional
-
-        #
-        # @return [String, nil]
-        #
-        def next
-          attributes[:next]
-        end
-
-        #
-        # @return [String, nil]
-        #
-        def prev
-          attributes[:prev]
-        end
 
         class << self
           #
@@ -233,38 +184,21 @@ module Mihari
       end
 
       class Result < Dry::Struct
+        # @!attribute [r] query
+        #   @return [String]
         attribute :query, Types::String
+
+        # @!attribute [r] total
+        #   @return [Integer]
         attribute :total, Types::Int
+
+        # @!attribute [r] hits
+        #   @return [Array<Hit>]
         attribute :hits, Types.Array(Hit)
+
+        # @!attribute [r] links
+        #   @return [Links]
         attribute :links, Links
-
-        #
-        # @return [String]
-        #
-        def query
-          attributes[:query]
-        end
-
-        #
-        # @return [Integer]
-        #
-        def total
-          attributes[:total]
-        end
-
-        #
-        # @return [Array<Hit>]
-        #
-        def hits
-          attributes[:hits]
-        end
-
-        #
-        # @return [Links]
-        #
-        def links
-          attributes[:links]
-        end
 
         #
         # @return [Array<Mihari::Models::Artifact>]
@@ -292,30 +226,17 @@ module Mihari
       end
 
       class Response < Dry::Struct
+        # @!attribute [r] code
+        #   @return [Integer]
         attribute :code, Types::Int
+
+        # @!attribute [r] status
+        #   @return [String]
         attribute :status, Types::String
+
+        # @!attribute [r] result
+        #   @return [Result]
         attribute :result, Result
-
-        #
-        # @return [Integer]
-        #
-        def code
-          attributes[:code]
-        end
-
-        #
-        # @return [String]
-        #
-        def status
-          attributes[:status]
-        end
-
-        #
-        # @return [Result]
-        #
-        def result
-          attributes[:result]
-        end
 
         class << self
           #

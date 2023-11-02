@@ -4,14 +4,9 @@ module Mihari
   module Structs
     module BinaryEdge
       class Target < Dry::Struct
+        # @!attribute [r] ip
+        #   @return [String]
         attribute :ip, Types::String
-
-        #
-        # @return [String]
-        #
-        def ip
-          attributes[:ip]
-        end
 
         class << self
           def from_dynamic!(d)
@@ -24,14 +19,9 @@ module Mihari
       end
 
       class Event < Dry::Struct
+        # @!attribute [r] target
+        #   @return [Target]
         attribute :target, Target
-
-        #
-        # @return [Target]
-        #
-        def target
-          attributes[:target]
-        end
 
         class << self
           def from_dynamic!(d)
@@ -45,27 +35,20 @@ module Mihari
 
       class Response < Dry::Struct
         # @!attribute [r] page
-        # @return [Integer]
-        attribute :page, Types::Integer
+        #   @return [Integer]
+        attribute :page, Types::Int
 
         # @!attribute [r] pagesize
-        # @return [Integer]
-        attribute :pagesize, Types::Integer
+        #   @return [Integer]
+        attribute :pagesize, Types::Int
 
         # @!attribute [r] total
-        # @return [Integer]
-        attribute :total, Types::Integer
+        #   @return [Integer]
+        attribute :total, Types::Int
 
         # @!attribute [r] events
-        # @return [Array<Event>]
+        #   @return [Array<Event>]
         attribute :events, Types.Array(Event)
-
-        #
-        # @return [Array<Event>]
-        #
-        def events
-          attributes[:events]
-        end
 
         #
         # @return [Array<Artifact>]

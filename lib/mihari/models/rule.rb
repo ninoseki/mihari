@@ -26,7 +26,7 @@ module Mihari
         #
         # Search rules
         #
-        # @param [Structs::Filters::Rule::SearchFilterWithPagination] filter
+        # @param [Mihari::Structs::Filters::Rule::SearchFilterWithPagination] filter
         #
         # @return [Array<Rule>]
         #
@@ -49,7 +49,7 @@ module Mihari
         #
         # Count alerts
         #
-        # @param [Structs::Filters::Rule::SearchFilterWithPagination] filter
+        # @param [Mihari::Structs::Filters::Rule::SearchFilterWithPagination] filter
         #
         # @return [Integer]
         #
@@ -61,7 +61,7 @@ module Mihari
         private
 
         #
-        # @param [Structs::Filters::Rule::SearchFilter] filter
+        # @param [Mihari::Structs::Filters::Rule::SearchFilter] filter
         #
         # @return [Mihari::Models::Rule]
         #

@@ -4,46 +4,25 @@ module Mihari
   module Structs
     module IPInfo
       class Response < Dry::Struct
+        # @!attribute [r] ip
+        #   @return [String]
         attribute :ip, Types::String
+
+        # @!attribute [r] hostname
+        #   @return [String, nil]
         attribute :hostname, Types::String.optional
+
+        # @!attribute [r] loc
+        #   @return [String, nil]
         attribute :loc, Types::String.optional
+
+        # @!attribute [r] country_code
+        #   @return [String, nil]
         attribute :country_code, Types::String.optional
-        attribute :asn, Types::Integer.optional
 
-        #
-        # @return [String]
-        #
-        def ip
-          attributes[:ip]
-        end
-
-        #
-        # @return [String, nil]
-        #
-        def hostname
-          attributes[:hostname]
-        end
-
-        #
-        # @return [String, nil]
-        #
-        def loc
-          attributes[:loc]
-        end
-
-        #
-        # @return [String, nil]
-        #
-        def country_code
-          attributes[:country_code]
-        end
-
-        #
-        # @return [Integer, nil]
-        #
-        def asn
-          attributes[:asn]
-        end
+        # @!attribute [r] asn
+        #   @return [Integer, nil]
+        attribute :asn, Types::Int.optional
 
         class << self
           include Mixins::AutonomousSystem

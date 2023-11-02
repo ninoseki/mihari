@@ -34,7 +34,7 @@ module Mihari
       private
 
       def client
-        @client ||= Clients::GreyNoise.new(
+        Clients::GreyNoise.new(
           api_key: api_key,
           pagination_interval: pagination_interval,
           timeout: timeout

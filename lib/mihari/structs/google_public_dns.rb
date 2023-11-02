@@ -12,30 +12,17 @@ module Mihari
       }.freeze
 
       class Answer < Dry::Struct
+        # @!attribute [r] name
+        #   @return [String]
         attribute :name, Types::String
+
+        # @!attribute [r] data
+        #   @return [String]
         attribute :data, Types::String
+
+        # @!attribute [r] resource_type
+        #   @return [String]
         attribute :resource_type, Types::String
-
-        #
-        # @return [String]
-        #
-        def name
-          attributes[:name]
-        end
-
-        #
-        # @return [String]
-        #
-        def data
-          attributes[:data]
-        end
-
-        #
-        # @return [String]
-        #
-        def resource_type
-          attributes[:resource_type]
-        end
 
         class << self
           #
@@ -56,14 +43,9 @@ module Mihari
       end
 
       class Response < Dry::Struct
+        # @!attribute [r] answers
+        #   @return [Array<Answer>]
         attribute :answers, Types.Array(Answer)
-
-        #
-        # @return [Array<Answer>]
-        #
-        def answers
-          attributes[:answers]
-        end
 
         class << self
           #

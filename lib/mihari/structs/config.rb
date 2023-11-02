@@ -3,38 +3,21 @@
 module Mihari
   module Structs
     class Config < Dry::Struct
+      # @!attribute [r] name
+      #   @return [String]
       attribute :name, Types::String
+
+      # @!attribute [r] type
+      #   @return [String]
       attribute :type, Types::String
+
+      # @!attribute [r] is_configured
+      #   @return [Boolean]
       attribute :is_configured, Types::Bool
+
+      # @!attribute [r] values
+      #   @return [Array<Hash>, nil]
       attribute :values, Types.Array(Types::Hash).optional
-
-      #
-      # @return [String]
-      #
-      def name
-        attributes[:name]
-      end
-
-      #
-      # @return [String]
-      #
-      def type
-        attributes[:type]
-      end
-
-      #
-      # @return [Boolean]
-      #
-      def is_configured
-        attributes[:is_configured]
-      end
-
-      #
-      # @return [Array<Hash>]
-      #
-      def values
-        attributes[:values]
-      end
 
       class << self
         #

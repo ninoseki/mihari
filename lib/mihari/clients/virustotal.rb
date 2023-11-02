@@ -49,7 +49,7 @@ module Mihari
       # @param [String] query
       # @param [String, nil] cursor
       #
-      # @return [Structs::VirusTotalIntelligence::Response]
+      # @return [Mihari::Structs::VirusTotalIntelligence::Response]
       #
       def intel_search(query, cursor: nil)
         params = { query: query, cursor: cursor }.compact
@@ -61,7 +61,7 @@ module Mihari
       # @param [String] query
       # @param [Integer] pagination_limit
       #
-      # @return [Enumerable<Structs::VirusTotalIntelligence::Response>]
+      # @return [Enumerable<Mihari::Structs::VirusTotalIntelligence::Response>]
       #
       def intel_search_with_pagination(query, pagination_limit: Mihari.config.pagination_limit)
         cursor = nil

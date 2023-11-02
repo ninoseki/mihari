@@ -41,7 +41,7 @@ module Mihari
       # @param [String] start_time
       # @param [String] end_time
       #
-      # @return [Structs::HunterHow::Response]
+      # @return [Mihari::Structs::HunterHow::Response]
       #
       def search(query, start_time:, end_time:, page: 1, page_size: PAGE_SIZE)
         params = {
@@ -63,7 +63,7 @@ module Mihari
       # @param [String] start_time
       # @param [String] end_time
       #
-      # @return [Enumerable<Structs::HunterHow::Response>]
+      # @return [Enumerable<Mihari::Structs::HunterHow::Response>]
       #
       def search_with_pagination(
         query,

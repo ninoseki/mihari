@@ -30,7 +30,7 @@ module Mihari
       # @param [Integer] page Default 1, Maximum: 500
       # @param [Integer, nil] only_ips If selected, only output IP addresses, ports and protocols.
       #
-      # @return [Structs::BinaryEdge::Response]
+      # @return [Mihari::Structs::BinaryEdge::Response]
       #
       def search(query, page: 1, only_ips: nil)
         params = {
@@ -48,7 +48,7 @@ module Mihari
       # @param [Integer, nil] only_ips
       # @param [Integer] pagination_limit
       #
-      # @return [Enumerable<Structs::BinaryEdge::Response>]
+      # @return [Enumerable<Mihari::Structs::BinaryEdge::Response>]
       #
       def search_with_pagination(query, only_ips: nil, pagination_limit: Mihari.config.pagination_limit)
         Enumerator.new do |y|

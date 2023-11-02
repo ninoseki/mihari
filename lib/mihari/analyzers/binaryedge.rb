@@ -35,7 +35,7 @@ module Mihari
       # @return [Mihari::Clients::BinaryEdge]
       #
       def client
-        @client ||= Clients::BinaryEdge.new(
+        Clients::BinaryEdge.new(
           api_key: api_key,
           pagination_interval: pagination_interval,
           timeout: timeout
