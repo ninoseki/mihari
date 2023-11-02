@@ -32,7 +32,7 @@ module Mihari
       # @param [Integer, nil] size
       # @param [String, nil] search_after
       #
-      # @return [Structs::Urlscan::Response]
+      # @return [Mihari::Structs::Urlscan::Response]
       #
       def search(q, size: nil, search_after: nil)
         params = { q: q, size: size, search_after: search_after }.compact
@@ -45,7 +45,7 @@ module Mihari
       # @param [Integer, nil] size
       # @param [Integer] pagination_limit
       #
-      # @return [Enumerable<Structs::Urlscan::Response>]
+      # @return [Enumerable<Mihari::Structs::Urlscan::Response>]
       #
       def search_with_pagination(q, size: nil, pagination_limit: Mihari.config.pagination_limit)
         search_after = nil

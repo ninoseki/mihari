@@ -4,22 +4,13 @@ module Mihari
   module Structs
     module Shodan
       class Location < Dry::Struct
+        # @!attribute [r] country_code
+        #   @return [String, nil]
         attribute :country_code, Types::String.optional
+
+        # @!attribute [r] country_name
+        #   @return [String, nil]
         attribute :country_name, Types::String.optional
-
-        #
-        # @return [String, nil]
-        #
-        def country_code
-          attributes[:country_code]
-        end
-
-        #
-        # @return [String, nil]
-        #
-        def country_name
-          attributes[:country_name]
-        end
 
         #
         # @return [Mihari::Geolocation, nil]
@@ -52,55 +43,33 @@ module Mihari
       class Match < Dry::Struct
         include Mixins::AutonomousSystem
 
+        # @!attribute [r] asn
+        #   @return [String, nil]
         attribute :asn, Types::String.optional
+
+        # @!attribute [r] hostname
+        #   @return [Array<String>]
         attribute :hostnames, Types.Array(Types::String)
+
+        # @!attribute [r] location
+        #   @return [Location]
         attribute :location, Location
+
+        # @!attribute [r] domains
+        #   @return [Array<String>]
         attribute :domains, Types.Array(Types::String)
+
+        # @!attribute [r] ip_str
+        #   @return [String]
         attribute :ip_str, Types::String
-        attribute :port, Types::Integer
+
+        # @!attribute [r] port
+        #   @return [Integer]
+        attribute :port, Types::Int
+
+        # @!attribute [r] metadata
+        #   @return [Hash]
         attribute :metadata, Types::Hash
-
-        #
-        # @return [String, nil]
-        #
-        def asn
-          attributes[:asn]
-        end
-
-        #
-        # @return [Array<String>]
-        #
-        def hostnames
-          attributes[:hostnames]
-        end
-
-        #
-        # @return [Location]
-        #
-        def location
-          attributes[:location]
-        end
-
-        #
-        # @return [String]
-        #
-        def ip_str
-          attributes[:ip_str]
-        end
-
-        #
-        # @return [Integer]
-        #
-        def port
-          attributes[:port]
-        end
-
-        #
-        # @return [Hash]
-        #
-        def metadata
-          attributes[:metadata]
-        end
 
         #
         # @return [Mihari::AutonomousSystem, nil]
@@ -141,22 +110,13 @@ module Mihari
       end
 
       class Response < Dry::Struct
+        # @!attribute [r] matches
+        #   @return [Array<Match>]
         attribute :matches, Types.Array(Match)
+
+        # @!attribute [r] total
+        #   @return [Integer]
         attribute :total, Types::Int
-
-        #
-        # @return [Array<Match>]
-        #
-        def matches
-          attributes[:matches]
-        end
-
-        #
-        # @return [Integer]
-        #
-        def total
-          attributes[:total]
-        end
 
         #
         # Collect metadata from matches
@@ -233,54 +193,29 @@ module Mihari
       end
 
       class InternetDBResponse < Dry::Struct
+        # @!attribute [r] ip
+        #   @return [String]
         attribute :ip, Types::String
+
+        # @!attribute [r] ports
+        #   @return [Array<Integer>]
         attribute :ports, Types.Array(Types::Int)
+
+        # @!attribute [r] cpes
+        #   @return [Array<String>]
         attribute :cpes, Types.Array(Types::String)
+
+        # @!attribute [r] hostnames
+        #   @return [Array<String>]
         attribute :hostnames, Types.Array(Types::String)
+
+        # @!attribute [r] tags
+        #   @return [Array<String>]
         attribute :tags, Types.Array(Types::String)
+
+        # @!attribute [r] vulns
+        #   @return [Array<String>]
         attribute :vulns, Types.Array(Types::String)
-
-        #
-        # @return [String]
-        #
-        def ip
-          attributes[:ip]
-        end
-
-        #
-        # @return [Array<Integer>]
-        #
-        def ports
-          attributes[:ports]
-        end
-
-        #
-        # @return [Array<String>]
-        #
-        def cpes
-          attributes[:cpes]
-        end
-
-        #
-        # @return [Array<String>]
-        #
-        def hostnames
-          attributes[:hostnames]
-        end
-
-        #
-        # @return [Array<String>]
-        #
-        def tags
-          attributes[:tags]
-        end
-
-        #
-        # @return [Array<String>]
-        #
-        def vulns
-          attributes[:vulns]
-        end
 
         class << self
           #

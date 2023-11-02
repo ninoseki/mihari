@@ -42,7 +42,7 @@ module Mihari
       # @param [Integer, nil] per_page the number of results to be returned for each page.
       # @param [Integer, nil] cursor the cursor of the desired result set.
       #
-      # @return [Structs::Censys::Response]
+      # @return [Mihari::Structs::Censys::Response]
       #
       def search(query, per_page: nil, cursor: nil)
         params = { q: query, per_page: per_page, cursor: cursor }.compact
@@ -55,7 +55,7 @@ module Mihari
       # @param [Integer, nil] per_page
       # @param [Integer] pagination_limit
       #
-      # @return [Enumerable<Structs::Censys::Response>]
+      # @return [Enumerable<Mihari::Structs::Censys::Response>]
       #
       def search_with_pagination(query, per_page: nil, pagination_limit: Mihari.config.pagination_limit)
         cursor = nil

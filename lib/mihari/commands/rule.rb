@@ -51,7 +51,13 @@ module Mihari
               # @return [nil]
               #
               def initialize_rule(path, files = Dry::Files.new)
-                rule = Mihari::Rule.from_yaml File.read(File.expand_path("../templates/rule.yml.erb", __dir__))
+                rule = Mihari::Rule.new(
+                  id: SecureRandom.uuid,
+                  title: "Title goes here",
+                  description: "Description goes here",
+                  created_on: Date.today,
+                  queries: []
+                )
                 files.write(path, rule.yaml)
               end
             end

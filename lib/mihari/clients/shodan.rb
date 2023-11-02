@@ -37,7 +37,7 @@ module Mihari
       # @param [Integer] page
       # @param [Boolean] minify
       #
-      # @return [Structs::Shodan::Result]
+      # @return [Mihari::Structs::Shodan::Result]
       #
       def search(query, page: 1, minify: true)
         params = {
@@ -55,7 +55,7 @@ module Mihari
       # @param [Boolean] minify
       # @param [Integer] pagination_limit
       #
-      # @return [Enumerable<Structs::Shodan::Response>]
+      # @return [Enumerable<Mihari::Structs::Shodan::Response>]
       #
       def search_with_pagination(query, minify: true, pagination_limit: Mihari.config.pagination_limit)
         Enumerator.new do |y|

@@ -54,7 +54,7 @@ module Mihari
       # @return [Mihari::Clients::Censys]
       #
       def client
-        @client ||= Clients::Censys.new(
+        Clients::Censys.new(
           id: id,
           secret: secret,
           pagination_interval: pagination_interval,

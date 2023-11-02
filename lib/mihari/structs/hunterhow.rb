@@ -4,16 +4,17 @@ module Mihari
   module Structs
     module HunterHow
       class ListItem < Dry::Struct
+        # @!attribute [r] domain
+        #   @return [String]
         attribute :domain, Types::String
-        attribute :ip, Types::String
-        attribute :port, Types::Integer
 
-        #
-        # @return [String]
-        #
-        def ip
-          attributes[:ip]
-        end
+        # @!attribute [r] ip
+        #   @return [String]
+        attribute :ip, Types::String
+
+        # @!attribute [r] port
+        #   @return [Integer]
+        attribute :port, Types::Int
 
         #
         # @return [Mihari::Models::Artifact]
@@ -40,15 +41,13 @@ module Mihari
       end
 
       class DataClass < Dry::Struct
+        # @!attribute [r] list
+        #   @return [Array<ListItem>]
         attribute :list, Types.Array(ListItem)
-        attribute :total, Types::Integer
 
-        #
-        # @return [Array<ListItem>]
-        #
-        def list
-          attributes[:list]
-        end
+        # @!attribute [r] total
+        #   @return [Integer]
+        attribute :total, Types::Int
 
         #
         # @return [Array<Mihari::Models::Artifact>]
@@ -74,16 +73,17 @@ module Mihari
       end
 
       class Response < Dry::Struct
-        attribute :code, Types::Integer
-        attribute :data, DataClass
-        attribute :message, Types::String
+        # @!attribute [r] code
+        #   @return [Integer]
+        attribute :code, Types::Int
 
-        #
-        # @return [DataClass]
-        #
-        def data
-          attributes[:data]
-        end
+        # @!attribute [r] data
+        #   @return [DataClass]
+        attribute :data, DataClass
+
+        # @!attribute [r] message
+        #   @return [String]
+        attribute :message, Types::String
 
         class << self
           #

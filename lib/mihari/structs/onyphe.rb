@@ -6,38 +6,22 @@ module Mihari
       class Result < Dry::Struct
         include Mixins::AutonomousSystem
 
+        # @!attribute [r] asn
+        #   @return [String]
         attribute :asn, Types::String
+
+        # @!attribute [r] country_code
+        #   @return [String, nll]
         attribute :country_code, Types::String.optional
+
+        # @!attribute [r] ip
+        #   @return [String]
+
         attribute :ip, Types::String
+
+        # @!attribute [r] metadata
+        #   @return [Hash]
         attribute :metadata, Types::Hash
-
-        #
-        # @return [String]
-        #
-        def asn
-          attributes[:asn]
-        end
-
-        #
-        # @return [String, nil]
-        #
-        def country_code
-          attributes[:country_code]
-        end
-
-        #
-        # @return [String]
-        #
-        def ip
-          attributes[:ip]
-        end
-
-        #
-        # @return [Hash]
-        #
-        def metadata
-          attributes[:metadata]
-        end
 
         #
         # @return [Mihari::Models::Artifact]
@@ -90,62 +74,33 @@ module Mihari
       end
 
       class Response < Dry::Struct
+        # @!attribute [r] count
+        #   @return [Integer]
         attribute :count, Types::Int
+
+        # @!attribute [r] error
+        #   @return [Integer]
         attribute :error, Types::Int
+
+        # @!attribute [r] max_page
+        #   @return [Integer]
         attribute :max_page, Types::Int
+
+        # @!attribute [r] page
+        #   @return [Integer]
         attribute :page, Types::Int
+
+        # @!attribute [r] results
+        #   @return [Array<Result>]
         attribute :results, Types.Array(Result)
+
+        # @!attribute [r] status
+        #   @return [String]
         attribute :status, Types::String
+
+        # @!attribute [r] total
+        #   @return [Integer]
         attribute :total, Types::Int
-
-        #
-        # @return [Integer]
-        #
-        def count
-          attributes[:count]
-        end
-
-        #
-        # @return [Integer]
-        #
-        def error
-          attributes[:error]
-        end
-
-        #
-        # @return [Integer]
-        #
-        def max_page
-          attributes[:max_page]
-        end
-
-        #
-        # @return [Integer]
-        #
-        def page
-          attributes[:page]
-        end
-
-        #
-        # @return [Array<Result>]
-        #
-        def results
-          attributes[:results]
-        end
-
-        #
-        # @return [String]
-        #
-        def status
-          attributes[:status]
-        end
-
-        #
-        # @return [Integer]
-        #
-        def total
-          attributes[:total]
-        end
 
         #
         # @return [Array<Mihari::Models::Artifact>]

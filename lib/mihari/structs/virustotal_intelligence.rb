@@ -4,14 +4,9 @@ module Mihari
   module Structs
     module VirusTotalIntelligence
       class ContextAttributes < Dry::Struct
+        # @!attribute [r] url
+        #   @return [String, nil]
         attribute :url, Types::String.optional
-
-        #
-        # @return [String, nil]
-        #
-        def url
-          attributes[:url]
-        end
 
         class << self
           #
@@ -27,38 +22,21 @@ module Mihari
       end
 
       class Datum < Dry::Struct
+        # @!attribute [r] type
+        #   @return [String]
         attribute :type, Types::String
+
+        # @!attribute [r] id
+        #   @return [String]
         attribute :id, Types::String
+
+        # @!attribute [r] context_attributes
+        #   @return [ContextAttributes, nil]
         attribute :context_attributes, ContextAttributes.optional
+
+        # @!attribute [r] metadata
+        #   @return [Hash]
         attribute :metadata, Types::Hash
-
-        #
-        # @return [String]
-        #
-        def type
-          attributes[:type]
-        end
-
-        #
-        # @return [String]
-        #
-        def id
-          attributes[:id]
-        end
-
-        #
-        # @return [ContextAttributes, nil]
-        #
-        def context_attributes
-          attributes[:context_attributes]
-        end
-
-        #
-        # @return [Hash, nil]
-        #
-        def metadata
-          attributes[:metadata]
-        end
 
         #
         # @return [String, nil]
@@ -108,14 +86,9 @@ module Mihari
       end
 
       class Meta < Dry::Struct
+        # @!attribute [r] cursor
+        #   @return [String, nil]
         attribute :cursor, Types::String.optional
-
-        #
-        # @return [String, nil]
-        #
-        def cursor
-          attributes[:cursor]
-        end
 
         class << self
           #
@@ -133,22 +106,13 @@ module Mihari
       end
 
       class Response < Dry::Struct
+        # @!attribute [r] meta
+        #   @return [Meta]
         attribute :meta, Meta
+
+        # @!attribute [r] data
+        #   @return [Array<Datum>]
         attribute :data, Types.Array(Datum)
-
-        #
-        # @return [Meta]
-        #
-        def meta
-          attributes[:meta]
-        end
-
-        #
-        # @return [Array<Datum>]
-        #
-        def data
-          attributes[:data]
-        end
 
         #
         # @return [Array<Mihari::Models::Artifact>]

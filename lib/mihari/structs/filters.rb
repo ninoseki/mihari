@@ -5,15 +5,34 @@ module Mihari
     module Filters
       module Alert
         class SearchFilter < Dry::Struct
+          # @!attribute [r] artifact_data
+          #   @return [String, nil]
           attribute? :artifact_data, Types::String.optional
+
+          # @!attribute [r] rule_id
+          #   @return [String, nil]
           attribute? :rule_id, Types::String.optional
+
+          # @!attribute [r] tag_name
+          #   @return [String, nil]
           attribute? :tag_name, Types::String.optional
+
+          # @!attribute [r] from_at
+          #   @return [DateTime, nil]
           attribute? :from_at, Types::DateTime.optional
+
+          # @!attribute [r] to_at
+          #   @return [DateTime, nil]
           attribute? :to_at, Types::DateTime.optional
         end
 
         class SearchFilterWithPagination < SearchFilter
+          # @!attribute [r] page
+          #   @return [Integer, nil]
           attribute? :page, Types::Int.default(1)
+
+          # @!attribute [r] limit
+          #   @return [Integer, nil]
           attribute? :limit, Types::Int.default(10)
 
           def without_pagination
@@ -30,15 +49,34 @@ module Mihari
 
       module Rule
         class SearchFilter < Dry::Struct
+          # @!attribute [r] description
+          #   @return [String, nil]
           attribute? :description, Types::String.optional
+
+          # @!attribute [r] tag_name
+          #   @return [String, nil]
           attribute? :tag_name, Types::String.optional
+
+          # @!attribute [r] title
+          #   @return [String, nil]
           attribute? :title, Types::String.optional
+
+          # @!attribute [r] from_at
+          #   @return [DateTime, nil]
           attribute? :from_at, Types::DateTime.optional
+
+          # @!attribute [r] to_at
+          #   @return [DateTime, nil]
           attribute? :to_at, Types::DateTime.optional
         end
 
         class SearchFilterWithPagination < SearchFilter
+          # @!attribute [r] page
+          #   @return [Integer, nil]
           attribute? :page, Types::Int.default(1)
+
+          # @!attribute [r] limit
+          #   @return [Integer, nil]
           attribute? :limit, Types::Int.default(10)
 
           def without_pagination

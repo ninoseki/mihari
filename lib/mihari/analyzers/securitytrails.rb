@@ -59,7 +59,7 @@ module Mihari
       private
 
       def client
-        @client ||= Clients::SecurityTrails.new(api_key: api_key, timeout: timeout)
+        Clients::SecurityTrails.new(api_key: api_key, timeout: timeout)
       end
 
       #
