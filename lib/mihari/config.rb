@@ -1,189 +1,167 @@
 # frozen_string_literal: true
 
+require "anyway_config"
+
 module Mihari
-  class Config
-    # @return [String, nil]
-    attr_reader :binaryedge_api_key
+  class Config < Anyway::Config
+    config_name :mihari
+    env_prefix ""
 
-    # @return [String, nil]
-    attr_reader :censys_id
+    attr_config(
+      # analyzers, emitters & enrichers
+      binaryedge_api_key: nil,
+      censys_id: nil,
+      censys_secret: nil,
+      circl_passive_password: nil,
+      circl_passive_username: nil,
+      database_url: URI("sqlite3:///mihari.db"),
+      fofa_api_key: nil,
+      fofa_email: nil,
+      greynoise_api_key: nil,
+      hunterhow_api_key: nil,
+      ipinfo_api_key: nil,
+      misp_api_key: nil,
+      misp_url: nil,
+      onyphe_api_key: nil,
+      otx_api_key: nil,
+      passivetotal_api_key: nil,
+      passivetotal_username: nil,
+      pulsedive_api_key: nil,
+      securitytrails_api_key: nil,
+      shodan_api_key: nil,
+      slack_channel: nil,
+      slack_webhook_url: nil,
+      thehive_api_key: nil,
+      thehive_api_version: nil,
+      thehive_url: nil,
+      urlscan_api_key: nil,
+      virustotal_api_key: nil,
+      zoomeye_api_key: nil,
+      # others
+      hide_config_values: true,
+      ignore_error: false,
+      pagination_interval: 0,
+      pagination_limit: 100,
+      retry_exponential_backoff: true,
+      retry_interval: 5,
+      retry_times: 3,
+      sentry_dsn: nil
+    )
 
-    # @return [String, nil]
-    attr_reader :censys_secret
+    # @!attribute [r] binaryedge_api_key
+    #   @return [String, nil]
 
-    # @return [String, nil]
-    attr_reader :circl_passive_password
+    # @!attribute [r] censys_id
+    #   @return [String, nil]
 
-    # @return [String, nil]
-    attr_reader :circl_passive_username
+    # @!attribute [r] circl_passive_password
+    #   @return [String, nil]
 
-    # @return [URI]
-    attr_reader :database_url
+    # @!attribute [r] circl_passive_username
+    #   @return [String, nil]
 
-    # @return [String, nil]
-    attr_reader :fofa_api_key
+    # @!attribute [r] database_url
+    #   @return [String, nil]
 
-    # @return [String, nil]
-    attr_reader :fofa_email
+    # @!attribute [r] fofa_api_key
+    #   @return [String, nil]
 
-    # @return [String, nil]
-    attr_reader :greynoise_api_key
+    # @!attribute [r] fofa_email
+    #   @return [String, nil]
 
-    # @return [String, nil]
-    attr_reader :hunterhow_api_key
+    # @!attribute [r] greynoise_api_key
+    #   @return [String, nil]
 
-    # @return [String, nil]
-    attr_reader :ipinfo_api_key
+    # @!attribute [r] hunterhow_api_key
+    #   @return [String, nil]
 
-    # @return [String, nil]
-    attr_reader :misp_url
+    # @!attribute [r] ipinfo_api_key
+    #   @return [String, nil]
 
-    # @return [String, nil]
-    attr_reader :misp_api_key
+    # @!attribute [r] misp_url
+    #   @return [String, nil]
 
-    # @return [String, nil]
-    attr_reader :onyphe_api_key
+    # @!attribute [r] misp_api_key
+    #   @return [String, nil]
 
-    # @return [String, nil]
-    attr_reader :otx_api_key
+    # @!attribute [r] onyphe_api_key
+    #   @return [String, nil]
 
-    # @return [String, nil]
-    attr_reader :passivetotal_api_key
+    # @!attribute [r] otx_api_key
+    #   @return [String, nil]
 
-    # @return [String, nil]
-    attr_reader :passivetotal_username
+    # @!attribute [r] passivetotal_api_key
+    #   @return [String, nil]
 
-    # @return [String, nil]
-    attr_reader :pulsedive_api_key
+    # @!attribute [r] passivetotal_username
+    #   @return [String, nil]
 
-    # @return [String, nil]
-    attr_reader :securitytrails_api_key
+    # @!attribute [r] pulsedive_api_key
+    #   @return [String, nil]
 
-    # @return [String, nil]
-    attr_reader :shodan_api_key
+    # @!attribute [r] securitytrails_api_key
+    #   @return [String, nil]
 
-    # @return [String, nil]
-    attr_reader :slack_channel
+    # @!attribute [r] shodan_api_key
+    #   @return [String, nil]
 
-    # @return [String, nil]
-    attr_reader :slack_webhook_url
+    # @!attribute [r] slack_channel
+    #   @return [String, nil]
 
-    # @return [String, nil]
-    attr_reader :thehive_url
+    # @!attribute [r] slack_webhook_url
+    #   @return [String, nil]
 
-    # @return [String, nil]
-    attr_reader :thehive_api_key
+    # @!attribute [r] thehive_url
+    #   @return [String, nil]
 
-    # @return [String, nil]
-    attr_reader :thehive_api_version
+    # @!attribute [r] thehive_api_key
+    #   @return [String, nil]
 
-    # @return [String, nil]
-    attr_reader :urlscan_api_key
+    # @!attribute [r] thehive_api_version
+    #   @return [String, nil]
 
-    # @return [String, nil]
-    attr_reader :virustotal_api_key
+    # @!attribute [r] urlscan_api_key
+    #   @return [String, nil]
 
-    # @return [String, nil]
-    attr_reader :zoomeye_api_key
+    # @!attribute [r] virustotal_api_key
+    #   @return [String, nil]
 
-    # @return [String, nil]
-    attr_reader :sentry_dsn
+    # @!attribute [r] zoomeye_api_key
+    #   @return [String, nil]
 
-    # @return [Boolean]
-    attr_accessor :hide_config_values
+    # @!attribute [r] sentry_dsn
+    #   @return [String, nil]
 
-    # @return [Integer]
-    attr_reader :retry_interval
+    # @!attribute [r] retry_interval
+    #   @return [Integer]
 
-    # @return [Integer]
-    attr_reader :retry_times
+    # @!attribute [r] retry_times
+    #   @return [Integer]
 
-    # @return [Boolean]
-    attr_reader :retry_exponential_backoff
+    # @!attribute [r] retry_exponential_backoff
+    #   @return [Boolean]
 
-    # @return [Integer]
-    attr_reader :pagination_interval
+    # @!attribute [r] pagination_interval
+    #   @return [Integer]
 
-    # @return [Integer]
-    attr_reader :pagination_limit
+    # @!attribute [r] pagination_limit
+    #   @return [Integer]
 
-    # @return [Boolean]
-    attr_reader :ignore_error
+    # @!attribute [r] ignore_error
+    #   @return [Boolean]
 
-    def initialize
-      load
-    end
+    # @!attribute [rw] hide_config_values
+    #   @return [Boolean]
 
-    def load
-      @binaryedge_api_key = ENV.fetch("BINARYEDGE_API_KEY", nil)
-
-      @censys_id = ENV.fetch("CENSYS_ID", nil)
-      @censys_secret = ENV.fetch("CENSYS_SECRET", nil)
-
-      @circl_passive_password = ENV.fetch("CIRCL_PASSIVE_PASSWORD", nil)
-      @circl_passive_username = ENV.fetch("CIRCL_PASSIVE_USERNAME", nil)
-
-      @database_url = URI(ENV.fetch("DATABASE_URL", "sqlite3:///mihari.db"))
-
-      @fofa_api_key = ENV.fetch("FOFA_API_KEY", nil)
-      @fofa_email = ENV.fetch("FOFA_EMAIL", nil)
-
-      @greynoise_api_key = ENV.fetch("GREYNOISE_API_KEY", nil)
-
-      @ipinfo_api_key = ENV.fetch("IPINFO_API_KEY", nil)
-
-      @hunterhow_api_key = ENV.fetch("HUNTERHOW_API_KEY", nil)
-
-      @misp_url = ENV.fetch("MISP_URL", nil)
-      @misp_api_key = ENV.fetch("MISP_API_KEY", nil)
-
-      @onyphe_api_key = ENV.fetch("ONYPHE_API_KEY", nil)
-
-      @otx_api_key = ENV.fetch("OTX_API_KEY", nil)
-
-      @passivetotal_api_key = ENV.fetch("PASSIVETOTAL_API_KEY", nil)
-      @passivetotal_username = ENV.fetch("PASSIVETOTAL_USERNAME", nil)
-
-      @pulsedive_api_key = ENV.fetch("PULSEDIVE_API_KEY", nil)
-
-      @securitytrails_api_key = ENV.fetch("SECURITYTRAILS_API_KEY", nil)
-
-      @shodan_api_key = ENV.fetch("SHODAN_API_KEY", nil)
-
-      @slack_channel = ENV.fetch("SLACK_CHANNEL", nil)
-      @slack_webhook_url = ENV.fetch("SLACK_WEBHOOK_URL", nil)
-
-      @thehive_url = ENV.fetch("THEHIVE_URL", nil)
-      @thehive_api_key = ENV.fetch("THEHIVE_API_KEY", nil)
-      @thehive_api_version = ENV.fetch("THEHIVE_API_VERSION", nil)
-
-      @urlscan_api_key = ENV.fetch("URLSCAN_API_KEY", nil)
-
-      @virustotal_api_key = ENV.fetch("VIRUSTOTAL_API_KEY", nil)
-
-      @zoomeye_api_key = ENV.fetch("ZOOMEYE_API_KEY", nil)
-
-      @sentry_dsn = ENV.fetch("SENTRY_DSN", nil)
-
-      @hide_config_values = ENV.fetch("HIDE_CONFIG_VALUES", true)
-
-      @retry_times = ENV.fetch("RETRY_TIMES", 3).to_i
-      @retry_interval = ENV.fetch("RETRY_INTERVAL", 5).to_i
-      @retry_exponential_backoff = ENV.fetch("RETRY_EXPONENTIAL_BACKOFF", true).to_s.downcase == "true"
-
-      @pagination_interval = ENV.fetch("PAGINATION_INTERVAL", 0).to_i
-      @pagination_limit = ENV.fetch("PAGINATION_LIMIT", 100).to_i
-
-      @ignore_error = ENV.fetch("IGNORE_ERROR", false)
+    def database_url=(val)
+      super URI(val.to_s)
     end
 
     #
     # @return [Array<String>]
     #
     def keys
-      instance_variables.map do |key|
-        key[1..].to_s.upcase
-      end
+      to_h.keys.map(&:to_s).map(&:upcase)
     end
   end
 end
