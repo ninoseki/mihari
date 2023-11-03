@@ -69,6 +69,7 @@ Gem::Specification.new do |spec|
 
   spec.add_dependency "activerecord", "7.1.1"
   spec.add_dependency "addressable", "2.8.5"
+  spec.add_dependency "anyway_config", "2.5.4"
   spec.add_dependency "awrence", "2.0.1"
   spec.add_dependency "dotenv", "2.8.1"
   spec.add_dependency "dry-container", "0.11.0"

@@ -110,7 +110,7 @@ VCR.configure do |config|
 end
 
 # reload dummy/sanitized config values
-Mihari.config.load
+Mihari.config.reload
 
 # require shared recipes & shared contexts
 require "test_prof/recipes/rspec/before_all"
