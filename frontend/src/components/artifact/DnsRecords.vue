@@ -3,15 +3,9 @@
     <div class="control" v-for="(dnsRecord, index) in dnsRecords" :key="index">
       <div class="tags has-addons are-medium">
         <span class="tag is-dark"> {{ dnsRecord.resource }}</span>
-        <router-link
-          class="tag"
-          :to="{
-            name: 'Alerts',
-            query: { dnsRecord: dnsRecord.value }
-          }"
-        >
+        <span class="tag">
           {{ truncate(dnsRecord.value, 50) }}
-        </router-link>
+        </span>
       </div>
     </div>
   </div>

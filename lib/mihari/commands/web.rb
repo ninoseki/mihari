@@ -23,7 +23,7 @@ module Mihari
               Mihari.config.hide_config_values = options["hide_config_values"]
               # set rack env as production
               ENV["RACK_ENV"] ||= options["rack_env"]
-              Web::App.run!(
+              Mihari::Web::App.run!(
                 port: options["port"],
                 host: options["host"],
                 threads: options["threads"],

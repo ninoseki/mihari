@@ -20,7 +20,7 @@
     </div>
     <div class="control">
       <div class="tags has-addons are-medium">
-        <span class="tag is-dark">Exipres on</span>
+        <span class="tag is-dark">Expires on</span>
         <span class="tag is-light">{{ whoisRecord.expiresOn || "N/A" }}</span>
       </div>
     </div>
