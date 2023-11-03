@@ -124,24 +124,11 @@ export default defineComponent({
 
     const artifact = ref<string | undefined>(undefined)
     const fromAt = ref<string | undefined>(undefined)
-    const tagInput = toRef(props, "tag")
+    const tagInput = ref<string | undefined>(props.tag)
     const ruleId = ref<string | undefined>(undefined)
     const toAt = ref<string | undefined>(undefined)
-    const asn = ref<number | undefined>(undefined)
-    const dnsRecord = ref<string | undefined>(undefined)
-    const reverseDnsName = ref<string | undefined>(undefined)
 
     const updateByQueryParams = () => {
-      const asn_ = route.query["asn"]
-      const normalizedAsn = normalizeQueryParam(asn_)
-      asn.value = normalizedAsn === undefined ? undefined : parseInt(normalizedAsn)
-
-      const dnsRecord_ = route.query["dnsRecord"]
-      dnsRecord.value = normalizeQueryParam(dnsRecord_)
-
-      const reverseDnsName_ = route.query["reverseDnsName"]
-      reverseDnsName.value = normalizeQueryParam(reverseDnsName_)
-
       const tag_ = route.query["tag"]
       if (tagInput.value === undefined) {
         tagInput.value = normalizeQueryParam(tag_)

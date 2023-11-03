@@ -1,14 +1,8 @@
 <template>
   <div class="tags are-medium">
-    <router-link
-      class="tag"
-      :to="{
-        name: 'Alerts',
-        query: { asn: autonomousSystem.asn }
-      }"
-    >
+    <span class="tag">
       {{ autonomousSystem.asn }}
-    </router-link>
+    </span>
   </div>
 </template>
 
