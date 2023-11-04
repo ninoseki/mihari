@@ -7,6 +7,21 @@ module Mihari
       # Tag API endpoint
       #
       class Tags < Grape::API
+        class TagDestroyer < Service
+          # @return [String]
+          attr_reader :name
+
+          def initialize(name)
+            super()
+
+            @name = name
+          end
+
+          def call
+            Mihari::Models::Tag.where(name: name).destroy_all
+          end
+        end
+
         namespace :tags do
           desc "Get tags", {
             is_array: true,
@@ -27,14 +42,8 @@ module Mihari
             requires :name, type: String
           end
           delete "/:name" do
-            extend Dry::Monads[:result, :try]
-
             name = params[:name].to_s
-
-            result = Try do
-              Mihari::Models::Tag.where(name: name).destroy_all
-            end.to_result
-
+            result = TagDestroyer.new(name).result
             if result.success?
               status 204
               return present({ message: "" }, with: Entities::Message)
@@ -44,9 +53,8 @@ module Mihari
             case failure
             when ActiveRecord::RecordNotFound
               error!({ message: "Name:#{name} is not found" }, 404)
-            else
-              raise failure
             end
+            raise failure
           end
         end
       end

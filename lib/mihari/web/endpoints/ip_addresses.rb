@@ -7,6 +7,21 @@ module Mihari
       # IP address API endpoint
       #
       class IPAddresses < Grape::API
+        class IPGetter < Service
+          # @return [String]
+          attr_reader :ip
+
+          def initialize(ip)
+            super()
+
+            @ip = ip
+          end
+
+          def call
+            Mihari::Enrichers::IPInfo.new.call ip
+          end
+        end
+
         namespace :ip_addresses do
           desc "Get an IP address", {
             success: Entities::IPAddress,
@@ -18,11 +33,15 @@ module Mihari
           end
           get "/:ip", requirements: { ip: %r{[^/]+} } do
             ip = params[:ip].to_s
+            result = IPGetter.result(ip)
+            return present(result.value!, with: Entities::IPAddress) if result.success?
 
-            data = Enrichers::IPInfo.new.call(ip)
-            error!({ message: "IP:#{ip} is not found" }, 404) if data.nil?
-
-            present data, with: Entities::IPAddress
+            failure = result.failure
+            case failure
+            when Mihari::StatusCodeError
+              error!({ message: "ID:#{id} is not found" }, 404) if failure.status_code == 404
+            end
+            raise failure
           end
         end
       end

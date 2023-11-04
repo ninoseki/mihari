@@ -28,8 +28,6 @@ module Mihari
           #
           # @param [Hash] d
           #
-          # @return [Answer]
-          #
           def from_dynamic!(d)
             d = Types::Hash[d]
             resource_type = INT_TYPE_TO_TYPE[d.fetch("type")]
@@ -50,8 +48,6 @@ module Mihari
         class << self
           #
           # @param [Hash] d
-          #
-          # @return [Response]
           #
           def from_dynamic!(d)
             d = Types::Hash[d]

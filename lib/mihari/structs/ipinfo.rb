@@ -30,8 +30,6 @@ module Mihari
           #
           # @param [Hash] d
           #
-          # @return [Response]
-          #
           def from_dynamic!(d)
             d = d.deep_stringify_keys
             d = Types::Hash[d]

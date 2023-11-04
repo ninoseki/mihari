@@ -21,8 +21,6 @@ module Mihari
           #
           # @param [Hash] d
           #
-          # @return [AutonomousSystem]
-          #
           def from_dynamic!(d)
             d = Types::Hash[d]
             new(
@@ -59,8 +57,6 @@ module Mihari
           #
           # @param [Hash] d
           #
-          # @return [Location]
-          #
           def from_dynamic!(d)
             d = Types::Hash[d]
             new(
@@ -86,8 +82,6 @@ module Mihari
         class << self
           #
           # @param [Hash] d
-          #
-          # @return [Service]
           #
           def from_dynamic!(d)
             d = Types::Hash[d]
@@ -143,8 +137,6 @@ module Mihari
           #
           # @param [Hash] d
           #
-          # @return [Hit]
-          #
           def from_dynamic!(d)
             d = Types::Hash[d]
             new(
@@ -170,8 +162,6 @@ module Mihari
         class << self
           #
           # @param [Hash] d
-          #
-          # @return [Links]
           #
           def from_dynamic!(d)
             d = Types::Hash[d]
@@ -211,8 +201,6 @@ module Mihari
           #
           # @param [Hash] d
           #
-          # @return [Result]
-          #
           def from_dynamic!(d)
             d = Types::Hash[d]
             new(
@@ -241,8 +229,6 @@ module Mihari
         class << self
           #
           # @param [Hash] d
-          #
-          # @return [Response]
           #
           def from_dynamic!(d)
             d = Types::Hash[d]

@@ -7,6 +7,153 @@ module Mihari
       # Rule API endpoint
       #
       class Rules < Grape::API
+        class RuleSearcher < Mihari::Service
+          class ResultValue
+            # @return [Array<Mihari::Models::Rule>]
+            attr_reader :rules
+
+            # @return [Integer]
+            attr_reader :total
+
+            # @return [Mihari::Structs::Filters::Rule::SearchFilterWithPagination]
+            attr_reader :filter
+
+            #
+            # @param [Array<Mihari::Models::Rule>] rules
+            # @param [Integer] total
+            # @param [Mihari::Structs::Filters::Rule::SearchFilterWithPagination] filter
+            #
+            def initialize(rules:, total:, filter:)
+              @rules = rules
+              @total = total
+              @filter = filter
+            end
+          end
+
+          # @return [Hash]
+          attr_reader :params
+
+          def initialize(params)
+            super()
+
+            @params = params
+          end
+
+          #
+          # @return [ResultValue]
+          #
+          def call
+            filter = params.to_h.to_snake_keys
+
+            # normalize keys
+            filter["tag_name"] = filter["tag"]
+            # symbolize hash keys
+            filter = filter.to_h.symbolize_keys
+
+            search_filter_with_pagination = Mihari::Structs::Filters::Rule::SearchFilterWithPagination.new(**filter)
+            rules = Mihari::Models::Rule.search(search_filter_with_pagination)
+            total = Mihari::Models::Rule.count(search_filter_with_pagination.without_pagination)
+
+            ResultValue.new(rules: rules, total: total, filter: filter)
+          end
+        end
+
+        class RuleGetter < Service
+          # @return [String]
+          attr_reader :id
+
+          def initialize(id)
+            super()
+
+            @id = id
+          end
+
+          def call
+            Mihari::Models::Rule.find id
+          end
+        end
+
+        class RuleRunner < Service
+          # @return [String]
+          attr_reader :id
+
+          def initialize(id)
+            super()
+
+            @id = id
+          end
+
+          def call
+            rule = Mihari::Rule.from_model(Mihari::Models::Rule.find(id))
+            rule.call
+          end
+        end
+
+        class RuleCreator < Service
+          # @return [String]
+          attr_reader :yaml
+
+          def initialize(yaml)
+            super()
+
+            @yaml = yaml
+          end
+
+          #
+          # @return [Mihari::Models::Rule]
+          #
+          def call
+            rule = Rule.from_yaml(yaml)
+
+            found = Mihari::Models::Rule.find_by_id(rule.id)
+            error!({ message: "ID:#{rule.id} is already registered" }, 400) unless found.nil?
+
+            rule.model.save
+            rule
+          end
+        end
+
+        class RuleUpdater < Service
+          # @return [String]
+          attr_reader :id
+
+          # @return [String]
+          attr_reader :yaml
+
+          def initialize(id:, yaml:)
+            super()
+
+            @id = id
+            @yaml = yaml
+          end
+
+          #
+          # @return [Mihari::Models::Rule]
+          #
+          def call
+            Mihari::Models::Rule.find(id)
+
+            rule = Rule.from_yaml(yaml)
+            rule.model.save
+            rule
+          end
+        end
+
+        class RuleDestroyer < Service
+          # @return [String]
+          attr_reader :id
+
+          def initialize(id)
+            super()
+
+            @id = id
+          end
+
+          def call
+            Mihari::Models::Rule.find(id).destroy
+          end
+        end
+
         namespace :rules do
           desc "Get Rule IDs", {
             is_array: true,
@@ -27,33 +174,21 @@ module Mihari
           params do
             optional :page, type: Integer, default: 1
             optional :limit, type: Integer, default: 10
-
             optional :title, type: String
             optional :description, type: String
             optional :tag, type: String
-
             optional :fromAt, type: DateTime
             optional :toAt, type: DateTime
           end
           get "/" do
-            filter = params.to_h.to_snake_keys
-
-            # normalize keys
-            filter["tag_name"] = filter["tag"]
-            # symbolize hash keys
-            filter = filter.to_h.symbolize_keys
-
-            search_filter_with_pagenation = Structs::Filters::Rule::SearchFilterWithPagination.new(**filter)
-            rules = Mihari::Models::Rule.search(search_filter_with_pagenation)
-            total = Mihari::Models::Rule.count(search_filter_with_pagenation.without_pagination)
-
-            present(
-              { rules: rules,
-                total: total,
-                current_page: filter[:page].to_i,
-                page_size: filter[:limit].to_i },
-              with: Entities::RulesWithPagination
-            )
+            value = RuleSearcher.call(params.to_h)
+            present({
+              rules: value.rules,
+              total: value.total,
+              current_page: value.filter[:page].to_i,
+              page_size: value.filter[:limit].to_i
+            },
+              with: Entities::RulesWithPagination)
           end
 
           desc "Get a rule", {
@@ -65,23 +200,16 @@ module Mihari
             requires :id, type: String
           end
           get "/:id" do
-            extend Dry::Monads[:result, :try]
-
-            id = params["id"].to_s
-
-            result = Try do
-              Mihari::Models::Rule.find(id)
-            end.to_result
-
+            id = params[:id].to_s
+            result = RuleGetter.result(params[:id].to_s)
             return present(result.value!, with: Entities::Rule) if result.success?
 
             failure = result.failure
             case failure
             when ActiveRecord::RecordNotFound
               error!({ message: "ID:#{id} is not found" }, 404)
-            else
-              raise failure
             end
+            raise failure
           end
 
           desc "Run a rule", {
@@ -92,24 +220,19 @@ module Mihari
             requires :id, type: String
           end
           get "/:id/run" do
-            extend Dry::Monads[:result, :try]
-
-            id = params["id"].to_s
-
-            result = Try { Rule.from_model(Mihari::Models::Rule.find(id)) }.to_result
+            id = params[:id].to_s
+            result = RuleRunner.result(id)
             if result.success?
-              result.value!.analyzer.run
               status 201
-              return present({ message: "ID:#{id} is ran successfully" }, with: Entities::Message)
+              return present({ message: "ID:#{id}} ran successfully" }, with: Entities::Message)
             end
 
             failure = result.failure
             case failure
             when ActiveRecord::RecordNotFound
               error!({ message: "ID:#{id} is not found" }, 404)
-            else
-              raise failure
             end
+            raise failure
           end
 
           desc "Create a rule", {
@@ -120,22 +243,7 @@ module Mihari
             requires :yaml, type: String, documentation: { param_type: "body" }
           end
           post "/" do
-            extend Dry::Monads[:result, :try]
-
-            yaml = params[:yaml]
-            result = Try { Rule.from_yaml(yaml) }.to_result.bind do |rule|
-              Try do
-                found = Mihari::Models::Rule.find_by_id(rule.id)
-                error!({ message: "ID:#{rule.id} is already registered" }, 400) unless found.nil?
-                rule
-              end.to_result
-            end.bind do |rule|
-              Try do
-                rule.model.save
-                rule
-              end.to_result
-            end
-
+            result = RuleCreator.result(params[:yaml])
             if result.success?
               status 201
               return present(result.value!.model, with: Entities::Rule)
@@ -146,10 +254,9 @@ module Mihari
             when Psych::SyntaxError
               error!({ message: failure.message }, 400)
             when ValidationError
-              error!({ message: "Data format is invalid", details: failure.errors.to_h }, 400)
-            else
-              raise failure
+              error!({ message: "Rule format is invalid", details: failure.errors.to_h }, 400)
             end
+            raise failure
           end
 
           desc "Update a rule", {
@@ -161,22 +268,8 @@ module Mihari
             requires :yaml, type: String, documentation: { param_type: "body" }
           end
           put "/" do
-            extend Dry::Monads[:result, :try]
-
-            id = params[:id]
-            yaml = params[:yaml]
-
-            result = Try do
-              Mihari::Models::Rule.find(id)
-            end.to_result.bind do |_|
-              Try { Rule.from_yaml(yaml) }.to_result
-            end.bind do |rule|
-              Try do
-                rule.model.save
-                rule
-              end.to_result
-            end
-
+            id = params[:id].to_s
+            result = RuleUpdater.result(id: id, yaml: params[:yaml].to_s)
             if result.success?
               status 201
               return present(result.value!.model, with: Entities::Rule)
@@ -189,10 +282,9 @@ module Mihari
             when Psych::SyntaxError
               error!({ message: failure.message }, 400)
             when ValidationError
-              error!({ message: "Data format is invalid", details: failure.errors.to_h }, 400)
-            else
-              raise failure
+              error!({ message: "Rule format is invalid", details: failure.errors.to_h }, 400)
             end
+            raise failure
           end
 
           desc "Delete a rule", {
@@ -204,15 +296,8 @@ module Mihari
             requires :id, type: String
           end
           delete "/:id" do
-            extend Dry::Monads[:result, :try]
-
-            id = params["id"].to_s
-
-            result = Try do
-              rule = Mihari::Models::Rule.find(id)
-              rule.destroy
-            end.to_result
-
+            id = params[:id].to_s
+            result = RuleDestroyer.result(id)
             if result.success?
               status 204
               return present({ message: "ID:#{id} is deleted" }, with: Entities::Message)
@@ -222,9 +307,8 @@ module Mihari
             case failure
             when ActiveRecord::RecordNotFound
               error!({ message: "ID:#{id} is not found" }, 404)
-            else
-              raise failure
             end
+            raise failure
           end
         end
       end

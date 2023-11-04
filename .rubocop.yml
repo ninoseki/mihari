@@ -3,7 +3,7 @@ Style/HashSyntax:
 Style/StringLiterals:
   EnforcedStyle: double_quotes
 Metrics/BlockLength:
-  Max: 100
+  Max: 150
   Exclude:
     - "spec/**/*"
     - "*.gemspec"

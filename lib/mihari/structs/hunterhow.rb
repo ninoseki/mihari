@@ -27,8 +27,6 @@ module Mihari
           #
           # @param [Hash] d
           #
-          # @return [ListItem]
-          #
           def from_dynamic!(d)
             d = Types::Hash[d]
             new(
@@ -60,8 +58,6 @@ module Mihari
           #
           # @param [Hash] d
           #
-          # @return [DataClass]
-          #
           def from_dynamic!(d)
             d = Types::Hash[d]
             new(
@@ -88,8 +84,6 @@ module Mihari
         class << self
           #
           # @param [Hash] d
-          #
-          # @return [Response]
           #
           def from_dynamic!(d)
             d = Types::Hash[d]

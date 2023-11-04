@@ -7,6 +7,76 @@ module Mihari
       # Artifact API endpoint
       #
       class Artifacts < Grape::API
+        class ArtifactGetter < Service
+          # @return [Integer]
+          attr_reader :id
+
+          def initialize(id)
+            super()
+
+            @id = id
+          end
+
+          def call
+            artifact = Mihari::Models::Artifact.includes(
+              :autonomous_system,
+              :geolocation,
+              :whois_record,
+              :dns_records,
+              :reverse_dns_names
+            ).find(id)
+            # TODO: improve queries
+            alert_ids = Mihari::Models::Artifact.where(data: artifact.data).pluck(:alert_id)
+            tag_ids = Mihari::Models::Tagging.where(alert_id: alert_ids).pluck(:tag_id)
+            tag_names = Mihari::Models::Tag.where(id: tag_ids).distinct.pluck(:name)
+
+            artifact.tags = tag_names
+
+            artifact
+          end
+        end
+
+        class ArtifactEnricher < Service
+          # @return [Integer]
+          attr_reader :id
+
+          def initialize(id)
+            super()
+
+            @id = id
+          end
+
+          def call
+            artifact = Mihari::Models::Artifact.includes(
+              :autonomous_system,
+              :geolocation,
+              :whois_record,
+              :dns_records,
+              :reverse_dns_names,
+              :cpes,
+              :ports
+            ).find(id)
+
+            artifact.enrich_all
+            artifact.save
+          end
+        end
+
+        class ArtifactDestroyer < Service
+          # @return [String]
+          attr_reader :id
+
+          def initialize(id)
+            super()
+
+            @id = id
+          end
+
+          def call
+            Mihari::Models::Artifact.find(id).destroy
+          end
+        end
+
         namespace :artifacts do
           desc "Get an artifact", {
             success: Entities::Artifact,
@@ -17,37 +87,16 @@ module Mihari
             requires :id, type: Integer
           end
           get "/:id" do
-            extend Dry::Monads[:result, :try]
-
             id = params[:id].to_i
-
-            result = Try do
-              artifact = Mihari::Models::Artifact.includes(
-                :autonomous_system,
-                :geolocation,
-                :whois_record,
-                :dns_records,
-                :reverse_dns_names
-              ).find(id)
-              # TODO: improve queries
-              alert_ids = Mihari::Models::Artifact.where(data: artifact.data).pluck(:alert_id)
-              tag_ids = Mihari::Models::Tagging.where(alert_id: alert_ids).pluck(:tag_id)
-              tag_names = Mihari::Models::Tag.where(id: tag_ids).distinct.pluck(:name)
-
-              artifact.tags = tag_names
-
-              artifact
-            end.to_result
-
+            result = ArtifactGetter.result(id)
             return present(result.value!, with: Entities::Artifact) if result.success?
 
             failure = result.failure
             case failure
             when ActiveRecord::RecordNotFound
               error!({ message: "ID:#{id} is not found" }, 404)
-            else
-              raise failure
             end
+            raise failure
           end
 
           desc "Enrich an artifact", {
@@ -59,25 +108,8 @@ module Mihari
             requires :id, type: Integer
           end
           get "/:id/enrich" do
-            extend Dry::Monads[:result, :try]
-
             id = params["id"].to_i
-
-            result = Try do
-              artifact = Mihari::Models::Artifact.includes(
-                :autonomous_system,
-                :geolocation,
-                :whois_record,
-                :dns_records,
-                :reverse_dns_names,
-                :cpes,
-                :ports
-              ).find(id)
-
-              artifact.enrich_all
-              artifact.save
-            end.to_result
-
+            result = ArtifactEnricher.result(id)
             if result.success?
               status 201
               return present({ message: "" }, with: Entities::Message)
@@ -87,9 +119,8 @@ module Mihari
             case failure
             when ActiveRecord::RecordNotFound
               error!({ message: "ID:#{id} is not found" }, 404)
-            else
-              raise failure
             end
+            raise failure
           end
 
           desc "Delete an artifact", {
@@ -101,15 +132,8 @@ module Mihari
             requires :id, type: Integer
           end
           delete "/:id" do
-            extend Dry::Monads[:result, :try]
-
             id = params["id"].to_i
-
-            result = Try do
-              alert = Mihari::Models::Artifact.find(id)
-              alert.destroy
-            end.to_result
-
+            result = ArtifactDestroyer.result(id)
             if result.success?
               status 204
               return present({ message: "" }, with: Entities::Message)
@@ -119,9 +143,8 @@ module Mihari
             case failure
             when ActiveRecord::RecordNotFound
               error!({ message: "ID:#{id} is not found" }, 404)
-            else
-              raise failure
             end
+            raise failure
           end
         end
       end

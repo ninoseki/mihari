@@ -27,6 +27,9 @@ module Mihari
         attribute? :results, Types.Array(Types.Array(Types::String)).optional
 
         class << self
+          #
+          # @param [Hash] d
+          #
           def from_dynamic!(d)
             new(
               error: d.fetch("error"),
