@@ -12,5 +12,15 @@ module Mihari
     def result
       Try[StandardError] { call }.to_result
     end
+
+    class << self
+      def call(*, **)
+        new(*, **).call
+      end
+
+      def result(*, **)
+        new(*, **).result
+      end
+    end
   end
 end

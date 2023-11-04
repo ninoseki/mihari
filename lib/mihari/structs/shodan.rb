@@ -221,8 +221,6 @@ module Mihari
           #
           # @param [Hash] d
           #
-          # @return [InternetDBResponse]
-          #
           def from_dynamic!(d)
             d = Types::Hash[d]
             new(

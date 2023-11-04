@@ -9,6 +9,9 @@ module Mihari
         attribute :ip, Types::String
 
         class << self
+          #
+          # @param [Hash] d
+          #
           def from_dynamic!(d)
             d = Types::Hash[d]
             new(
@@ -24,6 +27,9 @@ module Mihari
         attribute :target, Target
 
         class << self
+          #
+          # @param [Hash] d
+          #
           def from_dynamic!(d)
             d = Types::Hash[d]
             new(
@@ -58,6 +64,9 @@ module Mihari
         end
 
         class << self
+          #
+          # @param [Hash] d
+          #
           def from_dynamic!(d)
             d = Types::Hash[d]
             new(
