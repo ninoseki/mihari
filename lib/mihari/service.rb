@@ -9,8 +9,8 @@ module Mihari
       raise NotImplementedError, "You must implement #{self.class}##{__method__}"
     end
 
-    def result(*, **)
-      Try[StandardError] { call(*, **) }.to_result
+    def result(...)
+      Try[StandardError] { call(...) }.to_result
     end
 
     class << self
