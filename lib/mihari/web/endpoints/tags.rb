@@ -37,7 +37,7 @@ module Mihari
           end
           delete "/:name" do
             name = params[:name].to_s
-            result = TagDestroyer.new(name).result
+            result = TagDestroyer.result(name)
             if result.success?
               status 204
               return present({ message: "" }, with: Entities::Message)
