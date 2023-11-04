@@ -28,7 +28,7 @@ module Mihari
       #
       # @param [String] ip
       #
-      # @return [Mihari::Structs::IPInfo::Response, nil]
+      # @return [Mihari::Structs::IPInfo::Response]
       #
       def call(ip)
         url = "https://ipinfo.io/#{ip}/json"
