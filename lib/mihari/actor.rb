@@ -2,9 +2,11 @@
 
 module Mihari
   #
-  # Base class for Analyzer, Emitter and Enricher
+  # Yet another base service class for Analyzer, Emitter and Enricher
   #
-  class Actor < Service
+  class Actor
+    include Dry::Monads[:result, :try]
+
     include Mixins::Configurable
     include Mixins::Retriable
 
@@ -57,13 +59,17 @@ module Mihari
       raise ConfigurationError, message
     end
 
-    def result
+    def call(*args, **kwargs)
+      raise NotImplementedError, "You must implement #{self.class}##{__method__}"
+    end
+
+    def result(...)
       Try[StandardError] do
         retry_on_error(
           times: retry_times,
           interval: retry_interval,
           exponential_backoff: retry_exponential_backoff
-        ) { call }
+        ) { call(...) }
       end.to_result
     end
 
