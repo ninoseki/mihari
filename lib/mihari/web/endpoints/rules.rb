@@ -30,19 +30,12 @@ module Mihari
             end
           end
 
-          # @return [Hash]
-          attr_reader :params
-
-          def initialize(params)
-            super()
-
-            @params = params
-          end
-
+          #
+          # @params [Hash]
           #
           # @return [ResultValue]
           #
-          def call
+          def call(params)
             filter = params.to_h.to_snake_keys
 
             # normalize keys
@@ -59,50 +52,33 @@ module Mihari
         end
 
         class RuleGetter < Service
-          # @return [String]
-          attr_reader :id
-
-          def initialize(id)
-            super()
-
-            @id = id
-          end
-
-          def call
+          #
+          # @params [String] id
+          #
+          # @return [Mihari::Models::Rule]
+          #
+          def call(id)
             Mihari::Models::Rule.find id
           end
         end
 
         class RuleRunner < Service
-          # @return [String]
-          attr_reader :id
-
-          def initialize(id)
-            super()
-
-            @id = id
-          end
-
-          def call
+          #
+          # @param [String] id
+          #
+          def call(id)
             rule = Mihari::Rule.from_model(Mihari::Models::Rule.find(id))
             rule.call
           end
         end
 
         class RuleCreator < Service
-          # @return [String]
-          attr_reader :yaml
-
-          def initialize(yaml)
-            super()
-
-            @yaml = yaml
-          end
-
+          #
+          # @params [String]
           #
           # @return [Mihari::Models::Rule]
           #
-          def call
+          def call(yaml)
             rule = Rule.from_yaml(yaml)
 
             found = Mihari::Models::Rule.find_by_id(rule.id)
@@ -114,23 +90,13 @@ module Mihari
         end
 
         class RuleUpdater < Service
-          # @return [String]
-          attr_reader :id
-
-          # @return [String]
-          attr_reader :yaml
-
-          def initialize(id:, yaml:)
-            super()
-
-            @id = id
-            @yaml = yaml
-          end
-
+          #
+          # @params [String] id
+          # @params [String] yaml
           #
           # @return [Mihari::Models::Rule]
           #
-          def call
+          def call(id:, yaml:)
             Mihari::Models::Rule.find(id)
 
             rule = Rule.from_yaml(yaml)
@@ -140,16 +106,10 @@ module Mihari
         end
 
         class RuleDestroyer < Service
-          # @return [String]
-          attr_reader :id
-
-          def initialize(id)
-            super()
-
-            @id = id
-          end
-
-          def call
+          #
+          # @param [String] id
+          #
+          def call(id)
             Mihari::Models::Rule.find(id).destroy
           end
         end

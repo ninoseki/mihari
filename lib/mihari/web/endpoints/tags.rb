@@ -8,16 +8,10 @@ module Mihari
       #
       class Tags < Grape::API
         class TagDestroyer < Service
-          # @return [String]
-          attr_reader :name
-
-          def initialize(name)
-            super()
-
-            @name = name
-          end
-
-          def call
+          #
+          # @param [String] name
+          #
+          def call(name)
             Mihari::Models::Tag.where(name: name).destroy_all
           end
         end

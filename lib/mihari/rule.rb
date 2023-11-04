@@ -218,6 +218,20 @@ module Mihari
       )
     end
 
+    #
+    # @return [Boolean]
+    #
+    def diff?
+      model = Mihari::Models::Rule.find(id)
+      model.data != data.deep_stringify_keys
+    rescue ActiveRecord::RecordNotFound
+      false
+    end
+
+    def update_or_create
+      model.save
+    end
+
     class << self
       #
       # Load rule from YAML string

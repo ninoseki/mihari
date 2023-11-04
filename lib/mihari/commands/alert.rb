@@ -17,11 +17,13 @@ module Mihari
             #
             def add(path)
               Mihari::Database.with_db_connection do
-                builder = Services::AlertBuilder.new(path)
+                result = Dry::Monads::Try[StandardError] do
+                  # @type [Mihari::Services::AlertProxy]
+                  proxy = Mihari::Services::AlertBuilder.call(path)
+                  Mihari::Services::AlertRunner.call(proxy)
+                end.to_result
 
-                runner_result_l = ->(proxy) { Services::AlertRunner.new(proxy).result }
-                result = builder.result.bind(runner_result_l)
-
+                # @type [Mihari::Models::Alert]
                 alert = result.value!
                 data = Entities::Alert.represent(alert)
                 puts JSON.pretty_generate(data.as_json)

@@ -8,16 +8,12 @@ module Mihari
       #
       class IPAddresses < Grape::API
         class IPGetter < Service
-          # @return [String]
-          attr_reader :ip
-
-          def initialize(ip)
-            super()
-
-            @ip = ip
-          end
-
-          def call
+          #
+          # @param [String] ip
+          #
+          # @return [Mihari::Structs::IPInfo::Response]
+          #
+          def call(ip)
             Mihari::Enrichers::IPInfo.new.call ip
           end
         end

@@ -6,19 +6,12 @@ module Mihari
     # Alert runner
     #
     class AlertRunner < Service
-      # @return [Mihari::Services::AlertProxy]
-      attr_reader :alert
-
-      def initialize(alert)
-        super()
-
-        @alert = alert
-      end
-
+      #
+      # @param [Mihari::Services::AlertProxy] alert
       #
       # @return [Mihari::Models::Alert]
       #
-      def call
+      def call(alert)
         emitter = Emitters::Database.new(rule: alert.rule)
         emitter.call alert.artifacts
       end

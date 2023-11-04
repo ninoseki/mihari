@@ -171,4 +171,10 @@ RSpec.describe Mihari::Rule, :vcr do
       end
     end
   end
+
+  describe "#diff" do
+    it do
+      expect(rule.diff?).to eq(false)
+    end
+  end
 end

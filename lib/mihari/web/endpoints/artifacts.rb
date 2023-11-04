@@ -8,16 +8,12 @@ module Mihari
       #
       class Artifacts < Grape::API
         class ArtifactGetter < Service
-          # @return [Integer]
-          attr_reader :id
-
-          def initialize(id)
-            super()
-
-            @id = id
-          end
-
-          def call
+          #
+          # @param [Integer] id
+          #
+          # @return [Mihari::Models::Artifact]
+          #
+          def call(id)
             artifact = Mihari::Models::Artifact.includes(
               :autonomous_system,
               :geolocation,
@@ -37,16 +33,10 @@ module Mihari
         end
 
         class ArtifactEnricher < Service
-          # @return [Integer]
-          attr_reader :id
-
-          def initialize(id)
-            super()
-
-            @id = id
-          end
-
-          def call
+          #
+          # @param [String] id
+          #
+          def call(id)
             artifact = Mihari::Models::Artifact.includes(
               :autonomous_system,
               :geolocation,
@@ -63,16 +53,10 @@ module Mihari
         end
 
         class ArtifactDestroyer < Service
-          # @return [String]
-          attr_reader :id
-
-          def initialize(id)
-            super()
-
-            @id = id
-          end
-
-          def call
+          #
+          # @param [Integer] id
+          #
+          def call(id)
             Mihari::Models::Artifact.find(id).destroy
           end
         end

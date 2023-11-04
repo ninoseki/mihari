@@ -30,19 +30,12 @@ module Mihari
             end
           end
 
-          # @return [Hash]
-          attr_reader :params
-
-          def initialize(params)
-            super()
-
-            @params = params
-          end
-
+          #
+          # @param [Hash] params
           #
           # @return [ResultValue]
           #
-          def call
+          def call(params)
             filter = params.to_h.to_snake_keys
 
             # normalize keys
@@ -60,36 +53,22 @@ module Mihari
         end
 
         class AlertCreator < Service
-          # @return [Hash]
-          attr_reader :params
-
-          def initialize(params)
-            super()
-
-            @params = params
-          end
-
+          #
+          # @param [Hash] params
           #
           # @return [Mihari::Models::Alert]
           #
-          def call
+          def call(params)
             proxy = Services::AlertProxy.new(**params.to_snake_keys)
-            runner = Services::AlertRunner.new(proxy)
-            runner.call
+            Services::AlertRunner.call proxy
           end
         end
 
         class AlertDestroyer < Service
-          # @return [String]
-          attr_reader :id
-
-          def initialize(id)
-            super()
-
-            @id = id
-          end
-
-          def call
+          #
+          # @param [String] id
+          #
+          def call(id)
             Mihari::Models::Alert.find(id).destroy
           end
         end

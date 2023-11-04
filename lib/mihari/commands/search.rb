@@ -20,41 +20,22 @@ module Mihari
             #
             def search(path_or_id)
               Mihari::Database.with_db_connection do
-                builder = Services::RuleBuilder.new(path_or_id)
+                result = Dry::Monads::Try[StandardError] do
+                  # @type [Mihari::Rule]
+                  rule = Services::RuleBuilder.call(path_or_id)
 
-                check_diff_l = ->(rule) { check_diff rule }
-                update_and_call_l = ->(runner) { update_and_call runner }
+                  force_overwrite = options["force_overwrite"] || false
+                  message = "There is a diff in the rule. Are you sure you want to overwrite the rule? (y/n)"
+                  exit 0 if rule.diff? && !force_overwrite && !yes?(message)
 
-                result = builder.result.bind(check_diff_l).bind(update_and_call_l)
+                  rule.update_or_create
+                  rule.call
+                end.to_result
 
+                # @type [Mihari::Models::Alert]
                 alert = result.value!
                 data = Entities::Alert.represent(alert)
                 puts JSON.pretty_generate(data.as_json)
-              end
-            end
-
-            no_commands do
-              #
-              # @param [Mihari::RuleRunner] rule
-              #
-              def check_diff(rule)
-                force_overwrite = options["force_overwrite"] || false
-                message = "There is a diff in the rule. Are you sure you want to overwrite the rule? (y/n)"
-                runner = Services::RuleRunner.new(rule)
-
-                exit 0 if runner.diff? && !force_overwrite && !yes?(message)
-
-                Success runner
-              end
-
-              #
-              # @param [Mihari::RuleRunner] runner
-              #
-              def update_and_call(runner)
-                Dry::Monads::Try[StandardError] do
-                  runner.update_or_create
-                  runner.call
-                end.to_result
               end
             end
           end
