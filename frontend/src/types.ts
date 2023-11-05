@@ -92,7 +92,7 @@ export interface Artifact {
 }
 
 export interface ArtifactWithTags extends Artifact {
-  tags: string[]
+  tags: Tag[]
 }
 
 export interface Alert {

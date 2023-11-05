@@ -16,6 +16,7 @@ nav:
   - Usage: usage.md
   - Configuration: configuration.md
   - Tips:
+      - Docker: docker.md
       - GitHub Actions: github_actions.md
       - Alternatives: alternatives.md
   - References:

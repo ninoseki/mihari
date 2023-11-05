@@ -1,9 +1,9 @@
 FROM ruby:3.2.2-alpine3.18
 
-RUN apk --no-cache add git build-base ruby-dev sqlite-dev postgresql-dev mysql-client mysql-dev && \
-  gem install pg mysql2
+RUN apk --no-cache add git build-base ruby-dev postgresql-dev && \
+  gem install pg
 
-ARG MIHARI_VERSION=5.3.1
+ARG MIHARI_VERSION=5.7.0
 
 RUN gem install mihari -v ${MIHARI_VERSION}
 

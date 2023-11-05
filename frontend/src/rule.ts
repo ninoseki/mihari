@@ -6,7 +6,8 @@ export function getRuleTemplate(): string {
   const id = v4()
   const now = dayjs()
 
-  return dedent`id: ${id}
+  return dedent`---
+                id: ${id}
                 title: Title goes here
                 description: Description goes here
                 created_on: ${now.format("YYYY-MM-DD")}

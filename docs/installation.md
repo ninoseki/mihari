@@ -23,9 +23,3 @@ gem install mysql2
 ```bash
 gem install pg
 ```
-
-# Docker
-
-You can built the Docker image by yourself.
-
-`Dockerfile` is available at [https://github.com/ninoseki/mihari/tree/master/docker](https://github.com/ninoseki/mihari/tree/master/docker).
