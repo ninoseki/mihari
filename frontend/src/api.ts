@@ -94,8 +94,8 @@ export const API = {
     await client.delete<void>(`/api/rules/${id}`)
   },
 
-  async deleteTag(name: string): Promise<void> {
-    await client.delete(`/api/tags/${name}`)
+  async deleteTag(id: number): Promise<void> {
+    await client.delete(`/api/tags/${id}`)
   },
 
   async getIPInfo(ipAddress: string): Promise<IPInfo> {

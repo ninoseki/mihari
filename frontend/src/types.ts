@@ -17,6 +17,7 @@ export interface Config {
 }
 
 export interface Tag {
+  id: number
   name: string
 }
 
