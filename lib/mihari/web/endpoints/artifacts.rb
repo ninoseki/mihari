@@ -24,9 +24,9 @@ module Mihari
             # TODO: improve queries
             alert_ids = Mihari::Models::Artifact.where(data: artifact.data).pluck(:alert_id)
             tag_ids = Mihari::Models::Tagging.where(alert_id: alert_ids).pluck(:tag_id)
-            tag_names = Mihari::Models::Tag.where(id: tag_ids).distinct.pluck(:name)
+            tags = Mihari::Models::Tag.where(id: tag_ids)
 
-            artifact.tags = tag_names
+            artifact.tags = tags
 
             artifact
           end

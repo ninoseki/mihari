@@ -22,6 +22,12 @@ module Mihari
     # Rack + Grape based web app
     #
     class App
+      # @return [Array<String>]
+      attr_reader :filenames
+
+      # @return [Rack::Static]
+      attr_reader :rack_static
+
       def initialize
         @filenames = ["", ".html", "index.html", "/index.html"]
         @rack_static = Rack::Static.new(
@@ -29,6 +35,20 @@ module Mihari
           root: File.expand_path("./public", __dir__),
           urls: ["/"]
         )
+      end
+
+      def call(env)
+        status, headers, body = API.call(env)
+        return [status, headers, body] unless headers["X-Cascade"] == "pass"
+
+        # Check if the App wants us to pass the response along to others
+        request_path = env["PATH_INFO"]
+        filenames.each do |path|
+          static_status, static_headers, static_body = rack_static.call(env.merge("PATH_INFO" => request_path + path))
+          return [static_status, static_headers, static_body] if static_status != 404
+        end
+
+        [status, headers, body]
       end
 
       class << self
@@ -70,23 +90,6 @@ module Mihari
             # do nothing
           end
         end
-      end
-
-      def call(env)
-        # api
-        api_response = API.call(env)
-
-        # Check if the App wants us to pass the response along to others
-        if api_response[1]["X-Cascade"] == "pass"
-          # static files
-          request_path = env["PATH_INFO"]
-          @filenames.each do |path|
-            response = @rack_static.call(env.merge("PATH_INFO" => request_path + path))
-            return response if response[0] != 404
-          end
-        end
-
-        api_response
       end
     end
   end
