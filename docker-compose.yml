@@ -1,0 +1,41 @@
+version: "3"
+services:
+  database:
+    image: postgres:16
+    volumes:
+      - postgresql:/var/lib/postgresql/data
+    ports:
+      - 5432:${POSTRES_PORT:-5432}
+    environment:
+      - POSTGRES_USER=${POSTGRES_USER:-user}
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD:-password}
+      - POSTGRES_DB=${POSTGRES_DB:-mihari}
+    restart: always
+
+  mihari-init:
+    build:
+      context: ./
+      dockerfile: Dockerfile
+    environment:
+      - DATABASE_URL=${DATABASE_URL:-postgresql://${POSTGRES_USER:-user}:${POSTGRES_PASSWORD:-password}@database:${POSTRES_PORT:-5432}/${POSTGRES_DB:-mihari}}
+    entrypoint: ["mihari", "db", "migrate"]
+    depends_on:
+      - database
+
+  mihari:
+    build:
+      context: ./
+      dockerfile: Dockerfile
+    ports:
+      - 9292:${MIHARI_PORT:-9292}
+    environment:
+      - DATABASE_URL=${DATABASE_URL:-postgresql://${POSTGRES_USER:-user}:${POSTGRES_PASSWORD:-password}@database:${POSTRES_PORT:-5432}/${POSTGRES_DB:-mihari}}
+    env_file:
+      - .env
+    entrypoint: ["mihari", "web", "--host", "0.0.0.0"]
+    restart: always
+    depends_on:
+      - mihari-init
+
+volumes:
+  postgresql:
