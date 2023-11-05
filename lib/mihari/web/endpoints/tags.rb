@@ -9,10 +9,10 @@ module Mihari
       class Tags < Grape::API
         class TagDestroyer < Service
           #
-          # @param [String] name
+          # @param [Integer] id
           #
-          def call(name)
-            Mihari::Models::Tag.where(name: name).destroy_all
+          def call(id)
+            Mihari::Models::Tag.find(id).destroy
           end
         end
 
@@ -33,11 +33,11 @@ module Mihari
             summary: "Delete a tag"
           }
           params do
-            requires :name, type: String
+            requires :id, type: Integer
           end
-          delete "/:name" do
-            name = params[:name].to_s
-            result = TagDestroyer.result(name)
+          delete "/:id" do
+            id = params[:id].to_i
+            result = TagDestroyer.result(id)
             if result.success?
               status 204
               return present({ message: "" }, with: Entities::Message)
@@ -46,7 +46,7 @@ module Mihari
             failure = result.failure
             case failure
             when ActiveRecord::RecordNotFound
-              error!({ message: "Name:#{name} is not found" }, 404)
+              error!({ message: "ID:#{id} is not found" }, 404)
             end
             raise failure
           end

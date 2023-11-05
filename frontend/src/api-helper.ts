@@ -32,8 +32,8 @@ export function generateGetTagsTask(): Task<string[], []> {
   })
 }
 
-export function generateDeleteTagTask(): Task<void, [string]> {
-  return useAsyncTask<void, [string]>(async (_signal, tag) => {
+export function generateDeleteTagTask(): Task<void, [number]> {
+  return useAsyncTask<void, [number]>(async (_signal, tag) => {
     return await API.deleteTag(tag)
   })
 }

@@ -3,6 +3,7 @@
 module Mihari
   module Entities
     class Tag < Grape::Entity
+      expose :id, documentation: { type: Integer, required: true }
       expose :name, documentation: { type: String, required: true }
     end
 
