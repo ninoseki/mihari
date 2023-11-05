@@ -11,12 +11,15 @@ module Mihari
     # Rule builder
     #
     class RuleBuilder < Service
+      # @return [String]
+      attr_reader :path_or_id
+
       #
       # @param [String] path_or_id
       #
       # @return [Hash]
       #
-      def data(path_or_id)
+      def data
         if Mihari::Models::Rule.exists?(path_or_id)
           rule = Mihari::Models::Rule.find(path_or_id)
           return rule.data
@@ -36,7 +39,9 @@ module Mihari
       # @return [Mihari::Rule]
       #
       def call(path_or_id)
-        Rule.new(**data(path_or_id))
+        @path_or_id = path_or_id
+
+        Rule.new(**data)
       end
     end
   end

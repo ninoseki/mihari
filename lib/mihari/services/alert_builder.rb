@@ -88,12 +88,15 @@ module Mihari
     # Alert builder
     #
     class AlertBuilder < Service
+      # @return [String]
+      attr_reader :path
+
       #
       # @param [String] path
       #
       # @return [Hash]
       #
-      def data(path)
+      def data
         raise ArgumentError, "#{path} does not exist" unless Pathname(path).exist?
 
         YAML.safe_load(
@@ -108,7 +111,8 @@ module Mihari
       # @return [Mihari::AlertProxy]
       #
       def call(path)
-        AlertProxy.new(**data(path))
+        @path = path
+        AlertProxy.new(**data)
       end
     end
   end
