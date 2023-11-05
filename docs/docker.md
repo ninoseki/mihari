@@ -4,7 +4,7 @@ You can use Mihari with Docker Compose.
 
 ```bash
 git clone https://github.com/ninoseki/mihari
-cd mihari
+cd mihari/docker
 docker compose up -d
 ```
 
