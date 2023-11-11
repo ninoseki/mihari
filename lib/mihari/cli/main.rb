@@ -4,6 +4,8 @@ require "thor"
 require "thor/hollaback"
 
 # Commands
+require "mihari/commands/mixins"
+
 require "mihari/commands/alert"
 require "mihari/commands/database"
 require "mihari/commands/search"
