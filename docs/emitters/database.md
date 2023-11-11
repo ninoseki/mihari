@@ -16,7 +16,3 @@ emitter: database
 !!! note
 
     You have to initialize the database by `mihari db migrate`.
-
-## ER Diagram
-
-![](https://imgur.com/krhoSgh.png)

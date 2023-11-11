@@ -4,7 +4,12 @@ Mihari has [Sigma](https://github.com/SigmaHQ/sigma) like format to describe a s
 
 Mihari has three main components to compose a rule.
 
-![](https://imgur.com/BBT99BG.png)
+```mermaid
+graph LR
+  Analyzers["Analyzers (Queries)"] --> |Artifacts| Enrichers[Enrichers]
+  Enrichers --> |"(Enriched) Artifacts"| Emitters[Emitters]
+  Emitters --> |Alert| Database[(Database)]
+```
 
 - Analyzers/Queries: a list of queries (analyzers) that builds a list of artifacts
 - Enrichers: a list of enrichers that enriches a list of artifacts
