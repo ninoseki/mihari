@@ -39,8 +39,7 @@ module Mihari
       #
       def gnql_search(query, size: PAGE_SIZE, scroll: nil)
         params = { query: query, size: size, scroll: scroll }.compact
-        res = get("/v2/experimental/gnql", params: params)
-        Structs::GreyNoise::Response.from_dynamic! JSON.parse(res.body.to_s)
+        Structs::GreyNoise::Response.from_dynamic! get_json("/v2/experimental/gnql", params: params)
       end
 
       #

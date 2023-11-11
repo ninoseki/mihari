@@ -27,9 +27,8 @@ module Mihari
       def search(identity, match: nil, exclude: nil)
         params = { identity: identity, match: match, exclude: exclude, output: "json" }.compact
 
-        res = get("/", params: params)
-        parsed = JSON.parse(res.body.to_s)
-
+        # @type [Array[Hash]]
+        parsed = get_json("/", params: params)
         parsed.map do |result|
           values = result["name_value"].to_s.lines.map(&:chomp)
           values.map { |value| Models::Artifact.new(data: value, metadata: result) }

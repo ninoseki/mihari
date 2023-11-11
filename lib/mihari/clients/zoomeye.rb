@@ -31,6 +31,13 @@ module Mihari
       end
 
       #
+      # @return [::HTTP::Client]
+      #
+      def http
+        @http ||= HTTP::Factory.build(headers: headers, timeout: timeout, raise_exception: false)
+      end
+
+      #
       # Search the Host devices
       #
       # @param [String] query Query string
@@ -45,8 +52,7 @@ module Mihari
           page: page,
           facets: facets
         }.compact
-
-        _get("/host/search", params: params)
+        get_json "/host/search", params: params
       end
 
       #
@@ -88,8 +94,7 @@ module Mihari
           page: page,
           facets: facets
         }.compact
-
-        _get("/web/search", params: params)
+        get_json "/web/search", params: params
       end
 
       #
@@ -114,21 +119,6 @@ module Mihari
             sleep_pagination_interval
           end
         end
-      end
-
-      private
-
-      #
-      # @param [String] path
-      # @param [Hash] params
-      #
-      # @return [Hash, nil]
-      #
-      def _get(path, params: {})
-        res = get(path, params: params)
-        JSON.parse(res.body.to_s)
-      rescue HTTPError
-        nil
       end
     end
   end

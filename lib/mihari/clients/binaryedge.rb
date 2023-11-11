@@ -38,9 +38,7 @@ module Mihari
           page: page,
           only_ips: only_ips
         }.compact
-
-        res = get("/query/search", params: params)
-        Structs::BinaryEdge::Response.from_dynamic! JSON.parse(res.body.to_s)
+        Structs::BinaryEdge::Response.from_dynamic! get_json("/query/search", params: params)
       end
 
       #

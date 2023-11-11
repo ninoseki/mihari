@@ -46,8 +46,7 @@ module Mihari
           minify: minify,
           key: api_key
         }
-        res = get("/shodan/host/search", params: params)
-        Structs::Shodan::Response.from_dynamic! JSON.parse(res.body.to_s)
+        Structs::Shodan::Response.from_dynamic! get_json("/shodan/host/search", params: params)
       end
 
       #

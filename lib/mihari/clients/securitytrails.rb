@@ -70,7 +70,7 @@ module Mihari
       # @return [Array<Hash>]
       #
       def search_by_mail(mail)
-        res = _post "/v1/domains/list", json: { filter: { whois_email: mail } }
+        res = post_json "/v1/domains/list", json: { filter: { whois_email: mail } }
         res["records"] || []
       end
 
@@ -80,7 +80,7 @@ module Mihari
       # @return [Array<Hash>]
       #
       def search_by_ip(ip)
-        res = _post "/v1/domains/list", json: { filter: { ipv4: ip } }
+        res = post_json "/v1/domains/list", json: { filter: { ipv4: ip } }
         res["records"] || []
       end
 
@@ -114,29 +114,7 @@ module Mihari
       # @return [Array<Hash>]
       #
       def get_dns_history(domain, type:, page:)
-        _get "/v1/history/#{domain}/dns/#{type}", params: { page: page }
-      end
-
-      #
-      # @param [String] path
-      # @param [Hash, nil] params
-      #
-      # @return [Hash]
-      #
-      def _get(path, params:)
-        res = get(path, params: params)
-        JSON.parse(res.body.to_s)
-      end
-
-      #
-      # @param [String] path
-      # @param [Hash, nil] json
-      #
-      # @return [Hash]
-      #
-      def _post(path, json:)
-        res = post(path, json: json)
-        JSON.parse(res.body.to_s)
+        get_json "/v1/history/#{domain}/dns/#{type}", params: { page: page }
       end
     end
   end

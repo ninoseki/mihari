@@ -27,8 +27,7 @@ module Mihari
       # @return [Hash]
       #
       def create_event(payload)
-        res = post("/events/add", json: payload)
-        JSON.parse(res.body.to_s)
+        post_json("/events/add", json: payload)
       end
     end
   end

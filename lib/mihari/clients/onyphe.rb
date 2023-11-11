@@ -40,8 +40,7 @@ module Mihari
       #
       def datascan(query, page: 1)
         params = { page: page, apikey: api_key }
-        res = get("/api/v2/simple/datascan/#{query}", params: params)
-        Structs::Onyphe::Response.from_dynamic! JSON.parse(res.body.to_s)
+        Structs::Onyphe::Response.from_dynamic! get_json("/api/v2/simple/datascan/#{query}", params: params)
       end
 
       #

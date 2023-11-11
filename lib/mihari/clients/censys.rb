@@ -46,8 +46,7 @@ module Mihari
       #
       def search(query, per_page: nil, cursor: nil)
         params = { q: query, per_page: per_page, cursor: cursor }.compact
-        res = get("/api/v2/hosts/search", params: params)
-        Structs::Censys::Response.from_dynamic! JSON.parse(res.body.to_s)
+        Structs::Censys::Response.from_dynamic! get_json("/api/v2/hosts/search", params: params)
       end
 
       #
