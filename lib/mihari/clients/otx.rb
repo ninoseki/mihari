@@ -65,7 +65,7 @@ module Mihari
       # @return [Hash]
       #
       def query_by_ip(ip)
-        _get "/api/v1/indicators/IPv4/#{ip}/passive_dns"
+        get_json "/api/v1/indicators/IPv4/#{ip}/passive_dns"
       end
 
       #
@@ -74,19 +74,7 @@ module Mihari
       # @return [Hash]
       #
       def query_by_domain(domain)
-        _get "/api/v1/indicators/domain/#{domain}/passive_dns"
-      end
-
-      private
-
-      #
-      # @param [String] path
-      #
-      # @return [Hash]
-      #
-      def _get(path)
-        res = get(path)
-        JSON.parse(res.body.to_s)
+        get_json "/api/v1/indicators/domain/#{domain}/passive_dns"
       end
     end
   end

@@ -9,7 +9,10 @@ module Mihari
       class << self
         def included(thor)
           thor.class_eval do
+            include Mixins
+
             desc "migrate", "Migrate DB schemas"
+            around :with_db_connection
             method_option :verbose, type: :boolean, default: true
             #
             # @param [String] direction
@@ -17,7 +20,7 @@ module Mihari
             def migrate(direction = "up")
               ActiveRecord::Migration.verbose = options["verbose"]
 
-              Mihari::Database.with_db_connection { Mihari::Database.migrate direction.to_sym }
+              Mihari::Database.migrate direction.to_sym
             end
           end
         end

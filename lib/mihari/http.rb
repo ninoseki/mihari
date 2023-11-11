@@ -9,14 +9,13 @@ module Mihari
     #
     class BetterError < ::HTTP::Feature
       def wrap_response(response)
-        unless response.status.success?
-          raise StatusCodeError.new(
-            "Unsuccessful response code returned: #{response.code}",
-            response.code,
-            response.body.to_s
-          )
-        end
-        response
+        return response if response.status.success?
+
+        raise StatusCodeError.new(
+          "Unsuccessful response code returned: #{response.code}",
+          response.code,
+          response.body.to_s
+        )
       end
 
       def on_error(_request, error)
@@ -35,12 +34,15 @@ module Mihari
         #
         # @param [Integer, nil] timeout
         # @param [Hash] headers
+        # @param [Boolean] raise_exception
         #
         # @return [::HTTP::Client]
         #
-        def build(headers: {}, timeout: nil)
-          client = ::HTTP.use(:better_error).headers(headers)
-          client.timeout(timeout) unless timeout.nil?
+        # @param [Object] raise_exception
+        def build(headers: {}, timeout: nil, raise_exception: true)
+          client = raise_exception ? ::HTTP.use(:better_error) : ::HTTP
+          client = client.headers(headers)
+          client = client.timeout(timeout) unless timeout.nil?
           client
         end
       end

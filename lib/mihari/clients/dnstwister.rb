@@ -23,8 +23,7 @@ module Mihari
       # @return [Array<String>]
       #
       def fuzz(domain)
-        res = get("/api/fuzz/#{to_hex(domain)}")
-        res = JSON.parse(res.body.to_s)
+        res = get_json("/api/fuzz/#{to_hex(domain)}")
         fuzzy_domains = res["fuzzy_domains"] || []
         fuzzy_domains.map { |d| d["domain"] }
       end

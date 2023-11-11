@@ -36,8 +36,7 @@ module Mihari
       #
       def search(q, size: nil, search_after: nil)
         params = { q: q, size: size, search_after: search_after }.compact
-        res = get("/api/v1/search/", params: params)
-        Structs::Urlscan::Response.from_dynamic! JSON.parse(res.body.to_s)
+        Structs::Urlscan::Response.from_dynamic! get_json("/api/v1/search/", params: params)
       end
 
       #

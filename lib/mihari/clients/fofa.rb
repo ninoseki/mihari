@@ -52,8 +52,7 @@ module Mihari
       def search(query, page:, size: PAGE_SIZE)
         qbase64 = Base64.urlsafe_encode64(query)
         params = { qbase64: qbase64, size: size, page: page, email: email, key: api_key }.compact
-        res = get("/api/v1/search/all", params: params)
-        Structs::Fofa::Response.from_dynamic! JSON.parse(res.body.to_s)
+        Structs::Fofa::Response.from_dynamic! get_json("/api/v1/search/all", params: params)
       end
 
       #
@@ -71,7 +70,6 @@ module Mihari
             y.yield res
 
             break if res.error
-
             break if (res.results || []).length < size
 
             sleep_pagination_interval

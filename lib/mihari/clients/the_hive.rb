@@ -29,8 +29,7 @@ module Mihari
       #
       def alert(json)
         json = json.to_camelback_keys.compact
-        res = post("/alert", json: json)
-        JSON.parse(res.body.to_s)
+        post_json("/alert", json: json)
       end
     end
   end

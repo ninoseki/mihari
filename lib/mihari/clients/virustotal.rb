@@ -33,7 +33,7 @@ module Mihari
       # @return [Hash]
       #
       def domain_search(query)
-        _get("/api/v3/domains/#{query}/resolutions")
+        get_json "/api/v3/domains/#{query}/resolutions"
       end
 
       #
@@ -42,7 +42,7 @@ module Mihari
       # @return [Hash]
       #
       def ip_search(query)
-        _get("/api/v3/ip_addresses/#{query}/resolutions")
+        get_json "/api/v3/ip_addresses/#{query}/resolutions"
       end
 
       #
@@ -53,8 +53,7 @@ module Mihari
       #
       def intel_search(query, cursor: nil)
         params = { query: query, cursor: cursor }.compact
-        res = _get("/api/v3/intelligence/search", params: params)
-        Structs::VirusTotalIntelligence::Response.from_dynamic! res
+        Structs::VirusTotalIntelligence::Response.from_dynamic! get_json("/api/v3/intelligence/search", params: params)
       end
 
       #
@@ -78,19 +77,6 @@ module Mihari
             sleep_pagination_interval
           end
         end
-      end
-
-      private
-
-      #
-      # @param [String] path
-      # @param [Hash] params
-      #
-      # @return [Hash]
-      #
-      def _get(path, params: {})
-        res = get(path, params: params)
-        JSON.parse(res.body.to_s)
       end
     end
   end

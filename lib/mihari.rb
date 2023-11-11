@@ -53,7 +53,6 @@ require "mihari/config"
 require "mihari/mixins/autonomous_system"
 require "mihari/mixins/configurable"
 require "mihari/mixins/falsepositive"
-require "mihari/mixins/error_notification"
 require "mihari/mixins/refang"
 require "mihari/mixins/retriable"
 

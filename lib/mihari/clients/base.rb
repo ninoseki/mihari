@@ -41,7 +41,7 @@ module Mihari
       # @return [::HTTP::Client]
       #
       def http
-        HTTP::Factory.build headers: headers, timeout: timeout
+        @http ||= HTTP::Factory.build(headers: headers, timeout: timeout)
       end
 
       #
@@ -65,12 +65,34 @@ module Mihari
 
       #
       # @param [String] path
+      # @param [Hash, nil] params
+      #
+      # @return [Hash]
+      #
+      def get_json(path, params: nil)
+        res = get(path, params: params)
+        JSON.parse res.body.to_s
+      end
+
+      #
+      # @param [String] path
       # @param [Hash, nil] json
       #
       # @return [::HTTP::Response]
       #
       def post(path, json: {})
         http.post(url_for(path), json: json)
+      end
+
+      #
+      # @param [String] path
+      # @param [Hash, nil] json
+      #
+      # @return [Hash]
+      #
+      def post_json(path, json: {})
+        res = http.post(url_for(path), json: json)
+        JSON.parse res.body.to_s
       end
     end
   end

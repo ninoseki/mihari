@@ -52,8 +52,7 @@ module Mihari
           end_time: end_time,
           "api-key": api_key
         }.compact
-        res = get("/search", params: params)
-        Structs::HunterHow::Response.from_dynamic! JSON.parse(res.body.to_s)
+        Structs::HunterHow::Response.from_dynamic! get_json("/search", params: params)
       end
 
       #

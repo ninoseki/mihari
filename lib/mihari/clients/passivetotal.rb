@@ -33,7 +33,7 @@ module Mihari
       #
       def passive_dns_search(query)
         params = { query: query }
-        res = _get("/v2/dns/passive/unique", params: params)
+        res = get_json("/v2/dns/passive/unique", params: params)
         res["results"] || []
       end
 
@@ -49,7 +49,7 @@ module Mihari
           query: query,
           field: "email"
         }.compact
-        res = _get("/v2/whois/search", params: params)
+        res = get_json("/v2/whois/search", params: params)
         results = res["results"] || []
         results.map do |result|
           data = result["domain"]
@@ -66,25 +66,12 @@ module Mihari
       #
       def ssl_search(query)
         params = { query: query }
-        res = _get("/v2/ssl-certificate/history", params: params)
+        res = get_json("/v2/ssl-certificate/history", params: params)
         results = res["results"] || []
         results.map do |result|
           data = result["ipAddresses"]
           data.map { |d| Models::Artifact.new(data: d, metadata: result) }
         end.flatten
-      end
-
-      private
-
-      #
-      # @param [String] path
-      # @param [Hash] params
-      #
-      # @return [Hash]
-      #
-      def _get(path, params: {})
-        res = get(path, params: params)
-        JSON.parse(res.body.to_s)
       end
     end
   end
