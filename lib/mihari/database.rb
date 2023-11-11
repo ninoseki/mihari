@@ -134,7 +134,7 @@ module Mihari
   class Database
     class << self
       #
-      # DB migraration
+      # DB migration
       #
       # @param [Symbol] direction
       #
