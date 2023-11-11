@@ -16,14 +16,16 @@ nav:
   - Usage: usage.md
   - Configuration: configuration.md
   - Tips:
-      - Docker: docker.md
-      - GitHub Actions: github_actions.md
-      - Alternatives: alternatives.md
+      - Docker: tips/docker.md
+      - GitHub Actions: tips/github_actions.md
+      - Superset: tips/superset.md
+      - Alternatives: tips/alternatives.md
   - References:
-      - Analyzers: "analyzers/index.md"
-      - Enrichers: "enrichers/index.md"
-      - Emitters: "emitters/index.md"
-      - Tags: "./tags.md"
+      - Analyzers: analyzers/index.md
+      - Enrichers: enrichers/index.md
+      - Emitters: emitters/index.md
+      - Database: database.md
+      - Tags: tags.md
 
 markdown_extensions:
   - toc:
@@ -33,4 +35,8 @@ markdown_extensions:
   - pymdownx.extra
   - pymdownx.highlight
   - pymdownx.magiclink
-  - pymdownx.superfences
+  - pymdownx.superfences:
+      custom_fences:
+        - name: mermaid
+          class: mermaid
+          format: !!python/name:pymdownx.superfences.fence_code_format
