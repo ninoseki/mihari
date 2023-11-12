@@ -7,6 +7,10 @@ module Mihari
       # Error notification adapter for Rack app
       #
       class ErrorNotificationAdapter
+        include Mihari::Mixins::UnwrapError
+
+        attr_reader :app
+
         def initialize(app)
           @app = app
         end
@@ -14,16 +18,15 @@ module Mihari
         def with_error_notification
           yield
         rescue StandardError => e
-          Mihari.logger.error e
+          unwrapped = unwrap_error(e)
+          Mihari.logger.error unwrapped
+          Sentry.capture_exception(unwrapped) if Sentry.initialized?
 
-          Sentry.capture_exception(e) if Sentry.initialized?
+          raise unwrapped
         end
 
         def call(env)
-          with_error_notification do
-            status, headers, body = @app.call(env)
-            [status, headers, body]
-          end
+          with_error_notification { app.call(env) }
         end
       end
     end

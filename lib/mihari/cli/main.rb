@@ -32,19 +32,9 @@ module Mihari
       include Mihari::Commands::Version
       include Mihari::Commands::Web
 
+      include Mihari::Mixins::UnwrapError
+
       no_commands do
-        def unwrap_error(err)
-          return err unless err.is_a?(Dry::Monads::UnwrapError)
-
-          # NOTE: UnwrapError's receiver can be either of:
-          #       - Dry::Monads::Try::Error
-          #       - Dry::Monads::Result::Failure
-          receiver = err.receiver
-          return receiver.exception if receiver.is_a?(Dry::Monads::Try::Error)
-
-          receiver.failure
-        end
-
         def safe_execute
           yield
         rescue StandardError => e

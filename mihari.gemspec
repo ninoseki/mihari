@@ -40,6 +40,8 @@ Gem::Specification.new do |spec|
   spec.executables = spec.files.grep(%r{^exe/}) { |f| File.basename(f) }
   spec.require_paths = ["lib"]
 
+  spec.add_development_dependency "better_errors", "~> 2.10"
+  spec.add_development_dependency "binding_of_caller", "~> 1.0"
   spec.add_development_dependency "bundler", "~> 2.4"
   spec.add_development_dependency "coveralls_reborn", "~> 0.28"
   spec.add_development_dependency "fakefs", "~> 2.5"
