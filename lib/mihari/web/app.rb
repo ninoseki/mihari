@@ -64,6 +64,8 @@ module Mihari
             use Middleware::ConnectionAdapter
             use Middleware::ErrorNotificationAdapter
 
+            use BetterErrors::Middleware if ENV["RACK_ENV"] == "development" && defined?(BetterErrors::Middleware)
+
             run App.new
           end.to_app
         end

@@ -55,6 +55,7 @@ require "mihari/mixins/configurable"
 require "mihari/mixins/falsepositive"
 require "mihari/mixins/refang"
 require "mihari/mixins/retriable"
+require "mihari/mixins/unwrap_error"
 
 #
 # Mihari module
