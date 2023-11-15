@@ -37,7 +37,7 @@
     "vue3-ace-editor": "^2.2.4"
   },
   "devDependencies": {
-    "@redocly/cli": "1.4.0",
+    "@redocly/cli": "1.4.1",
     "@rushstack/eslint-patch": "^1.5.1",
     "@tsconfig/node20": "^20.1.2",
     "@types/jsdom": "^21.1.5",
