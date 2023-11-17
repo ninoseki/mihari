@@ -10,10 +10,6 @@ def ci_env?
   ENV["CI"]
 end
 
-def is_ruby2?
-  RUBY_VERSION.to_s.start_with?("2.")
-end
-
 Gem::Specification.new do |spec|
   spec.name = "mihari"
   spec.version = Mihari::VERSION
@@ -50,19 +46,20 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency "mysql2", "~> 0.5"
   spec.add_development_dependency "pg", "~> 1.5"
   spec.add_development_dependency "rack-test", "~> 2.1"
-  spec.add_development_dependency "rake", "~> 13.0"
+  spec.add_development_dependency "rake", "~> 13.1"
   spec.add_development_dependency "rb-fsevent", "~> 0.11"
   spec.add_development_dependency "rerun", "~> 0.14"
   spec.add_development_dependency "rspec", "~> 3.12"
+  spec.add_development_dependency "rspec-parameterized", "~> 1.0"
   spec.add_development_dependency "rubocop-rspec", "~> 2.25"
   spec.add_development_dependency "simplecov-lcov", "~> 0.8"
-  spec.add_development_dependency "standard", "~> 1.31"
+  spec.add_development_dependency "standard", "~> 1.32"
   spec.add_development_dependency "test-prof", "~> 1.2"
   spec.add_development_dependency "timecop", "~> 0.9"
   spec.add_development_dependency "vcr", "~> 6.2"
   spec.add_development_dependency "webmock", "~> 3.19"
 
-  spec.add_development_dependency "rubocop-yard", "~> 0.7" unless is_ruby2?
+  spec.add_development_dependency "rubocop-yard", "~> 0.8" unless RUBY_VERSION.to_s.start_with?("2.")
 
   unless ci_env?
     spec.add_development_dependency "lefthook", "~> 1.5"
@@ -81,9 +78,9 @@ Gem::Specification.new do |spec|
   spec.add_dependency "dry-struct", "1.6.0"
   spec.add_dependency "dry-validation", "1.10.0"
   spec.add_dependency "email_address", "0.2.4"
-  spec.add_dependency "grape", "1.8.0"
+  spec.add_dependency "grape", "2.0.0"
   spec.add_dependency "grape-entity", "1.0.0"
-  spec.add_dependency "grape-swagger", "1.6.1"
+  spec.add_dependency "grape-swagger", "2.0.0"
   spec.add_dependency "grape-swagger-entity", "0.5.2"
   spec.add_dependency "http", "5.1.1"
   spec.add_dependency "jr-cli", "0.6.0"

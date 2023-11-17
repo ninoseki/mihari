@@ -7,9 +7,10 @@ RSpec.describe Mihari::Web::App do
     described_class.instance
   end
 
-  it "returns 200" do
-    paths = %w[/ /api/alerts /api/tags /api/configs]
-    paths.each do |path|
+  where(:path) { %w[/ /api/alerts /api/tags /api/configs] }
+
+  with_them do
+    it "returns 200" do
       get path
       expect(last_response).to be_ok
     end

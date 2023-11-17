@@ -7,6 +7,7 @@ require "digest"
 require "fakefs/safe"
 require "faker"
 require "rack/test"
+require "rspec-parameterized"
 require "simplecov"
 require "vcr"
 
