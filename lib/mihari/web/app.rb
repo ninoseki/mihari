@@ -39,7 +39,7 @@ module Mihari
 
       def call(env)
         status, headers, body = API.call(env)
-        return [status, headers, body] unless headers["X-Cascade"] == "pass"
+        return [status, headers, body] unless headers["x-cascade"] == "pass"
 
         # Check if the App wants us to pass the response along to others
         request_path = env["PATH_INFO"]
