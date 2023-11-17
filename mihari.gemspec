@@ -20,7 +20,7 @@ Gem::Specification.new do |spec|
   spec.homepage = "https://github.com/ninoseki/mihari"
   spec.license = "MIT"
 
-  spec.required_ruby_version = ">= 2.7"
+  spec.required_ruby_version = ">= 3.1"
 
   spec.metadata["rubygems_mfa_required"] = "true"
 
@@ -52,14 +52,13 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency "rspec", "~> 3.12"
   spec.add_development_dependency "rspec-parameterized", "~> 1.0"
   spec.add_development_dependency "rubocop-rspec", "~> 2.25"
+  spec.add_development_dependency "rubocop-yard", "~> 0.8"
   spec.add_development_dependency "simplecov-lcov", "~> 0.8"
   spec.add_development_dependency "standard", "~> 1.32"
   spec.add_development_dependency "test-prof", "~> 1.2"
   spec.add_development_dependency "timecop", "~> 0.9"
   spec.add_development_dependency "vcr", "~> 6.2"
   spec.add_development_dependency "webmock", "~> 3.19"
-
-  spec.add_development_dependency "rubocop-yard", "~> 0.8" unless RUBY_VERSION.to_s.start_with?("2.")
 
   unless ci_env?
     spec.add_development_dependency "lefthook", "~> 1.5"
