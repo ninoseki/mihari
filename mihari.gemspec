@@ -88,7 +88,7 @@ Gem::Specification.new do |spec|
   spec.add_dependency "normalize_country", "0.3.2"
   spec.add_dependency "parallel", "1.23.0"
   spec.add_dependency "plissken", "2.0.1"
-  spec.add_dependency "public_suffix", "5.0.3"
+  spec.add_dependency "public_suffix", "5.0.4"
   spec.add_dependency "puma", "6.4.0"
   spec.add_dependency "rack", "3.0.8"
   spec.add_dependency "rack-cors", "2.0.1"

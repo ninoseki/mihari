@@ -38,6 +38,10 @@ paths:
           description: Create an alert
           schema:
             "$ref": "#/definitions/Mihari_Entities_Alert"
+        "404":
+          description: ""
+          schema:
+            "$ref": "#/definitions/Mihari_Entities_Message"
       tags:
         - alerts
     get:
@@ -87,10 +91,6 @@ paths:
             type: array
             items:
               "$ref": "#/definitions/Mihari_Entities_AlertsWithPagination"
-        "404":
-          description: Not found
-          schema:
-            "$ref": "#/definitions/Mihari_Entities_Message"
       tags:
         - alerts
   "/api/alerts/{id}":
@@ -106,12 +106,12 @@ paths:
           format: int32
           required: true
       responses:
-        "200":
+        "204":
           description: Delete an alert
           schema:
             "$ref": "#/definitions/Mihari_Entities_Message"
         "404":
-          description: Not found
+          description: ""
           schema:
             "$ref": "#/definitions/Mihari_Entities_Message"
       tags:
@@ -129,12 +129,12 @@ paths:
           format: int32
           required: true
       responses:
-        "200":
+        "204":
           description: Delete an artifact
           schema:
             "$ref": "#/definitions/Mihari_Entities_Message"
         "404":
-          description: Not found
+          description: ""
           schema:
             "$ref": "#/definitions/Mihari_Entities_Message"
       tags:
@@ -156,7 +156,7 @@ paths:
           schema:
             "$ref": "#/definitions/Mihari_Entities_Artifact"
         "404":
-          description: Not found
+          description: ""
           schema:
             "$ref": "#/definitions/Mihari_Entities_Message"
       tags:
@@ -174,12 +174,12 @@ paths:
           format: int32
           required: true
       responses:
-        "200":
+        "201":
           description: Enrich an artifact
           schema:
             "$ref": "#/definitions/Mihari_Entities_Message"
         "404":
-          description: Not found
+          description: ""
           schema:
             "$ref": "#/definitions/Mihari_Entities_Message"
       tags:
@@ -216,7 +216,7 @@ paths:
           schema:
             "$ref": "#/definitions/Mihari_Entities_IPAddress"
         "404":
-          description: Not found
+          description: ""
           schema:
             "$ref": "#/definitions/Mihari_Entities_Message"
       tags:
@@ -233,12 +233,12 @@ paths:
           type: string
           required: true
       responses:
-        "200":
+        "204":
           description: Delete a rule
           schema:
             "$ref": "#/definitions/Mihari_Entities_Message"
         "404":
-          description: Not found
+          description: ""
           schema:
             "$ref": "#/definitions/Mihari_Entities_Message"
       tags:
@@ -259,7 +259,7 @@ paths:
           schema:
             "$ref": "#/definitions/Mihari_Entities_Rule"
         "404":
-          description: Not found
+          description: ""
           schema:
             "$ref": "#/definitions/Mihari_Entities_Message"
       tags:
@@ -279,10 +279,14 @@ paths:
           schema:
             "$ref": "#/definitions/putApiRules"
       responses:
-        "200":
+        "201":
           description: Update a rule
           schema:
             "$ref": "#/definitions/Mihari_Entities_Rule"
+        "404":
+          description: ""
+          schema:
+            "$ref": "#/definitions/Mihari_Entities_Message"
       tags:
         - rules
     post:
@@ -303,6 +307,10 @@ paths:
           description: Create a rule
           schema:
             "$ref": "#/definitions/Mihari_Entities_Rule"
+        "404":
+          description: ""
+          schema:
+            "$ref": "#/definitions/Mihari_Entities_Message"
       tags:
         - rules
     get:
@@ -352,10 +360,6 @@ paths:
             type: array
             items:
               "$ref": "#/definitions/Mihari_Entities_RulesWithPagination"
-        "404":
-          description: Not found
-          schema:
-            "$ref": "#/definitions/Mihari_Entities_Message"
       tags:
         - rules
   "/api/rules/{id}/run":
@@ -370,8 +374,12 @@ paths:
           type: string
           required: true
       responses:
-        "200":
+        "201":
           description: Run a rule
+          schema:
+            "$ref": "#/definitions/Mihari_Entities_Message"
+        "404":
+          description: ""
           schema:
             "$ref": "#/definitions/Mihari_Entities_Message"
       tags:
@@ -391,7 +399,7 @@ paths:
               "$ref": "#/definitions/Mihari_Entities_RuleIDs"
       tags:
         - rules
-  "/api/tags/{name}":
+  "/api/tags/{id}":
     delete:
       summary: Delete a tag
       description: Delete a tag
@@ -399,16 +407,17 @@ paths:
         - application/json
       parameters:
         - in: path
-          name: name
-          type: string
+          name: id
+          type: integer
+          format: int32
           required: true
       responses:
-        "200":
+        "204":
           description: Delete a tag
           schema:
             "$ref": "#/definitions/Mihari_Entities_Message"
         "404":
-          description: Not found
+          description: ""
           schema:
             "$ref": "#/definitions/Mihari_Entities_Message"
       tags:
@@ -491,9 +500,13 @@ definitions:
   Mihari_Entities_Tag:
     type: object
     properties:
+      id:
+        type: integer
+        format: int32
       name:
         type: string
     required:
+      - id
       - name
   Mihari_Entities_Message:
     type: object
