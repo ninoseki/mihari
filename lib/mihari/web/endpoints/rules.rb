@@ -128,7 +128,6 @@ module Mihari
           desc "Search rules", {
             is_array: true,
             success: Entities::RulesWithPagination,
-            failure: [{ code: 404, message: "Not found", model: Entities::Message }],
             summary: "Search rules"
           }
           params do
@@ -153,7 +152,7 @@ module Mihari
 
           desc "Get a rule", {
             success: Entities::Rule,
-            failure: [{ code: 404, message: "Not found", model: Entities::Message }],
+            failure: [{ code: 404, model: Entities::Message }],
             summary: "Get a rule"
           }
           params do
@@ -164,50 +163,48 @@ module Mihari
             result = RuleGetter.result(params[:id].to_s)
             return present(result.value!, with: Entities::Rule) if result.success?
 
-            failure = result.failure
-            case failure
+            case result.failure
             when ActiveRecord::RecordNotFound
               error!({ message: "ID:#{id} is not found" }, 404)
             end
-            raise failure
+            raise result.failure
           end
 
           desc "Run a rule", {
-            success: Entities::Message,
+            success: { code: 201, model: Entities::Message },
+            failure: [{ code: 404, model: Entities::Message }],
             summary: "Run a rule"
           }
           params do
             requires :id, type: String
           end
           get "/:id/run" do
+            status 201
+
             id = params[:id].to_s
             result = RuleRunner.result(id)
-            if result.success?
-              status 201
-              return present({ message: "ID:#{id}} ran successfully" }, with: Entities::Message)
-            end
+            return present({ message: "ID:#{id}} has been ran" }, with: Entities::Message) if result.success?
 
-            failure = result.failure
-            case failure
+            case result.failure
             when ActiveRecord::RecordNotFound
               error!({ message: "ID:#{id} is not found" }, 404)
             end
-            raise failure
+            raise result.failure
           end
 
           desc "Create a rule", {
-            success: Entities::Rule,
+            success: { code: 201, model: Entities::Rule },
+            failure: [{ code: 404, model: Entities::Message }],
             summary: "Create a rule"
           }
           params do
             requires :yaml, type: String, documentation: { param_type: "body" }
           end
           post "/" do
+            status 201
+
             result = RuleCreator.result(params[:yaml])
-            if result.success?
-              status 201
-              return present(result.value!.model, with: Entities::Rule)
-            end
+            return present(result.value!.model, with: Entities::Rule) if result.success?
 
             failure = result.failure
             case failure
@@ -220,7 +217,8 @@ module Mihari
           end
 
           desc "Update a rule", {
-            success: Entities::Rule,
+            success: { code: 201, model: Entities::Rule },
+            failure: [{ code: 404, model: Entities::Message }],
             summary: "Update a rule"
           }
           params do
@@ -228,12 +226,11 @@ module Mihari
             requires :yaml, type: String, documentation: { param_type: "body" }
           end
           put "/" do
+            status 201
+
             id = params[:id].to_s
             result = RuleUpdater.result(id: id, yaml: params[:yaml].to_s)
-            if result.success?
-              status 201
-              return present(result.value!.model, with: Entities::Rule)
-            end
+            return present(result.value!.model, with: Entities::Rule) if result.success?
 
             failure = result.failure
             case failure
@@ -248,27 +245,25 @@ module Mihari
           end
 
           desc "Delete a rule", {
-            success: Entities::Message,
-            failure: [{ code: 404, message: "Not found", model: Entities::Message }],
+            success: { code: 204, model: Entities::Message },
+            failure: [{ code: 404, model: Entities::Message }],
             summary: "Delete a rule"
           }
           params do
             requires :id, type: String
           end
           delete "/:id" do
+            status 204
+
             id = params[:id].to_s
             result = RuleDestroyer.result(id)
-            if result.success?
-              status 204
-              return present({ message: "ID:#{id} is deleted" }, with: Entities::Message)
-            end
+            return present({ message: "ID:#{id} is deleted" }, with: Entities::Message) if result.success?
 
-            failure = result.failure
-            case failure
+            case result.failure
             when ActiveRecord::RecordNotFound
               error!({ message: "ID:#{id} is not found" }, 404)
             end
-            raise failure
+            raise result.failure
           end
         end
       end

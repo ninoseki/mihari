@@ -261,7 +261,6 @@ require "mihari/schemas/rule"
 
 # Services
 require "mihari/services/rule_builder"
-require "mihari/services/rule_runner"
 
 require "mihari/services/alert_builder"
 require "mihari/services/alert_runner"

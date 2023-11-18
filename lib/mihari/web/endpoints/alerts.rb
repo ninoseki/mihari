@@ -77,7 +77,6 @@ module Mihari
           desc "Search alerts", {
             is_array: true,
             success: Entities::AlertsWithPagination,
-            failure: [{ code: 404, message: "Not found", model: Entities::Message }],
             summary: "Search alerts"
           }
           params do
@@ -103,31 +102,30 @@ module Mihari
           end
 
           desc "Delete an alert", {
-            success: Entities::Message,
-            failure: [{ code: 404, message: "Not found", model: Entities::Message }],
+            success: { code: 204, model: Entities::Message },
+            failure: [{ code: 404, model: Entities::Message }],
             summary: "Delete an alert"
           }
           params do
             requires :id, type: Integer
           end
           delete "/:id" do
+            status 204
+
             id = params["id"].to_i
             result = AlertDestroyer.result(id)
-            if result.success?
-              status 204
-              return present({ message: "" }, with: Entities::Message)
-            end
+            return present({ message: "" }, with: Entities::Message) if result.success?
 
-            failure = result.failure
-            case failure
+            case result.failure
             when ActiveRecord::RecordNotFound
               error!({ message: "ID:#{id} is not found" }, 404)
             end
-            raise failure
+            raise result.failure
           end
 
           desc "Create an alert", {
-            success: Entities::Alert,
+            success: { code: 201, model: Entities::Alert },
+            failure: [{ code: 404, model: Entities::Message }],
             summary: "Create an alert"
           }
           params do
@@ -135,18 +133,16 @@ module Mihari
             requires :artifacts, type: Array, documentation: { type: String, is_array: true, param_type: "body" }
           end
           post "/" do
-            result = AlertCreator.result(params)
-            if result.success?
-              status 201
-              return present(result.value!, with: Entities::Alert)
-            end
+            status 201
 
-            failure = result.failure
-            case failure
+            result = AlertCreator.result(params)
+            return present(result.value!, with: Entities::Alert) if result.success?
+
+            case result.failure
             when ActiveRecord::RecordNotFound
               error!({ message: "Rule:#{params["ruleId"]} is not found" }, 404)
             end
-            raise failure
+            raise result.failure
           end
         end
       end

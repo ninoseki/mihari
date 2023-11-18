@@ -17,7 +17,6 @@ module Mihari
             configs = (Mihari.analyzers + Mihari.emitters + Mihari.enrichers).filter_map do |klass|
               Mihari::Structs::Config.from_class(klass)
             end
-
             present(configs, with: Entities::Config)
           end
         end

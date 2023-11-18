@@ -34,10 +34,7 @@ module Mihari
       def artifacts
         # @type [Array<Mihari::Models::Artifact>]
         artifacts = client.search_with_pagination(query, pagination_limit: pagination_limit).map(&:artifacts).flatten
-
-        artifacts.select do |artifact|
-          allowed_data_types.include? artifact.data_type
-        end
+        artifacts.select { |artifact| allowed_data_types.include? artifact.data_type }
       end
 
       def configuration_keys

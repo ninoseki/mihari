@@ -25,9 +25,7 @@ module Mihari
         raise ValueError, "#{query}(type: #{type || "unknown"}) is not supported." unless valid_type?
 
         domains = client.fuzz(query)
-        Parallel.map(domains) do |domain|
-          resolvable?(domain) ? domain : nil
-        end.compact
+        Parallel.map(domains) { |domain| resolvable?(domain) ? domain : nil }.compact
       end
 
       private
@@ -55,7 +53,7 @@ module Mihari
       def resolvable?(domain)
         Resolv.getaddress domain
         true
-      rescue Resolv::ResolvError => _e
+      rescue Resolv::ResolvError
         false
       end
     end

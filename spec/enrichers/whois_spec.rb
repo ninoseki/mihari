@@ -6,8 +6,6 @@ RSpec.describe Mihari::Enrichers::Whois do
   describe ".call" do
     let!(:domain) { "example.com" }
 
-    before { enricher.reset_cache }
-
     it do
       whois_record = enricher.call(domain)
       expect(whois_record.created_on&.iso8601).to eq("1992-01-01")

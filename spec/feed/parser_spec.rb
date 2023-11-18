@@ -24,7 +24,6 @@ RSpec.describe Mihari::Feed::Parser do
 
     it do
       parsed = parser.parse "map(&:c).unwrap.map { |v| v[1] }"
-      expect(parsed).is_a?(Array)
       expect(parsed).to eq(%w[2 5 8])
     end
   end

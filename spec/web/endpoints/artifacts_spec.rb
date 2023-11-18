@@ -53,9 +53,7 @@ RSpec.describe Mihari::Web::Endpoints::Artifacts, :vcr do
 
       it "has dnsRecords" do
         get "/api/artifacts/#{@enriched_domain_artifact.id}"
-
         json = JSON.parse(last_response.body.to_s)
-
         # the artifact is domain so it should have dns_records
         expect(json["reverseDnsNames"]).to eq(nil)
         expect(json["dnsRecords"]).to be_an(Array)
@@ -63,9 +61,7 @@ RSpec.describe Mihari::Web::Endpoints::Artifacts, :vcr do
 
       it "has reverseDnsNames" do
         get "/api/artifacts/#{@enriched_ip_artifact.id}"
-
         json = JSON.parse(last_response.body.to_s)
-
         # the artifact is domain so it should have reverse_dns_names
         expect(json["reverseDnsNames"]).to be_an(Array)
         expect(json["dnsRecords"]).to eq(nil)

@@ -63,11 +63,9 @@ RSpec.describe Mihari::Web::Endpoints::Alerts do
     end
 
     context "with valid params" do
+      let!(:payload) { { ruleId: rule.id, artifacts: ["1.1.1.1"] } }
+
       it "returns 201" do
-        payload = {
-          ruleId: rule.id,
-          artifacts: ["1.1.1.1"]
-        }
         post("/api/alerts/", payload.to_json, "CONTENT_TYPE" => "application/json")
         expect(last_response.status).to eq(201)
       end

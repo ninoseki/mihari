@@ -192,9 +192,7 @@ module Mihari
       # @return [Array<Mihari::Emitters::Attachment>]
       #
       def attachments
-        artifacts.map do |artifact|
-          Attachment.new(data: artifact.data, data_type: artifact.data_type).to_a
-        end.flatten
+        artifacts.map { |artifact| Attachment.new(data: artifact.data, data_type: artifact.data_type).to_a }.flatten
       end
 
       #
@@ -205,7 +203,6 @@ module Mihari
       def text
         tags = rule.tags
         tags = ["N/A"] if tags.empty?
-
         [
           "*#{rule.title}*",
           "*Desc.*: #{rule.description}",
@@ -217,9 +214,9 @@ module Mihari
       # @param [Array<Mihari::Models::Artifact>] artifacts
       #
       def call(artifacts)
-        return if artifacts.empty?
-
         @artifacts = artifacts
+
+        return if artifacts.empty?
 
         notifier.post(text: text, attachments: attachments, mrkdwn: true)
       end

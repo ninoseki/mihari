@@ -8,16 +8,18 @@ RSpec.describe Test do
   describe "#refang" do
     subject(:subject) { described_class.new }
 
-    it do
-      expect(subject.refang("1.1.1.1")).to eq("1.1.1.1")
+    where(:value, :expected) do
+      [
+        ["1.1.1.1", "1.1.1.1"],
+        ["1.1.1[.]1", "1.1.1.1"],
+        ["1.1.1(.)1", "1.1.1.1"]
+      ]
     end
 
-    it do
-      expect(subject.refang("1.1.1[.]1")).to eq("1.1.1.1")
-    end
-
-    it do
-      expect(subject.refang("1.1.1(.)1")).to eq("1.1.1.1")
+    with_them do
+      it do
+        expect(subject.refang(value)).to eq(expected)
+      end
     end
   end
 end

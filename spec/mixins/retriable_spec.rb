@@ -33,7 +33,6 @@ RSpec.describe RetriableTest do
 
     it do
       expect { subject.foo }.to raise_error(Net::OpenTimeout)
-
       expect(subject.count).to eq(subject.times)
     end
   end

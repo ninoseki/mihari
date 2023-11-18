@@ -113,15 +113,15 @@ module Mihari
       analyzers.flat_map do |analyzer|
         # @type [Dry::Monads::Result::Success<Array<Mihari::Models::Artifact>>, Dry::Monads::Result::Failure]
         result = analyzer.result
-
-        if result.failure?
-          raise result.failure unless analyzer.ignore_error?
-        else
+        case result
+        when Success
           artifacts = result.value!
           artifacts.map do |artifact|
             artifact.rule_id = id
             artifact
           end
+        else
+          raise result.failure unless analyzer.ignore_error?
         end
       end.compact
     end
@@ -177,8 +177,14 @@ module Mihari
       results = Parallel.map(emitters) { |emitter| emitter.result enriched_artifacts }
       results.zip(emitters).map do |result_and_emitter|
         result, emitter = result_and_emitter
-        Mihari.logger.info "Emission by #{emitter.class} is failed: #{result.failure}" if result.failure?
-        Mihari.logger.info "Emission by #{emitter.class} is succeeded" if result.success?
+
+        case result
+        when Success
+          Mihari.logger.info "Emission by #{emitter.class} succeed"
+        else
+          Mihari.logger.info "Emission by #{emitter.class} failed: #{result.failure}"
+        end
+
         result.value_or nil
       end.compact
     end
@@ -289,8 +295,7 @@ module Mihari
       @analyzers ||= queries.map do |query_params|
         analyzer_name = query_params[:analyzer]
         klass = get_analyzer_class(analyzer_name)
-        klass.from_query(query_params)
-      end.map do |analyzer|
+        analyzer = klass.from_query(query_params)
         analyzer.validate_configuration!
         analyzer
       end
@@ -320,8 +325,7 @@ module Mihari
         %i[emitter options].each { |key| params.delete key }
 
         klass = get_emitter_class(name)
-        klass.new(rule: self, options: options, **params)
-      end.map do |emitter|
+        emitter = klass.new(rule: self, options: options, **params)
         emitter.validate_configuration!
         emitter
       end

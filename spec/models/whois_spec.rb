@@ -5,7 +5,7 @@ RSpec.describe Mihari::Models::WhoisRecord do
     let!(:domain) { "example.com" }
 
     let!(:enricher) do
-      enricher = double("whois_enricher")
+      enricher = instance_double("whois_enricher")
       allow(enricher).to receive(:result).and_return(
         Dry::Monads::Result::Success.new(
           described_class.new(domain: "example.com")

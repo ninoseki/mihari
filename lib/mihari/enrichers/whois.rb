@@ -52,10 +52,6 @@ module Mihari
         whois_record
       end
 
-      def reset_cache
-        @memo = {}
-      end
-
       private
 
       #

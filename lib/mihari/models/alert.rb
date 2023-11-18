@@ -30,7 +30,6 @@ module Mihari
           offset = (page - 1) * limit
 
           relation = build_relation(filter.without_pagination)
-
           alert_ids = relation.limit(limit).offset(offset).order(id: :desc).pluck(:id).uniq
           eager_load(:artifacts, :tags).where(id: [alert_ids]).order(id: :desc)
         end
@@ -75,8 +74,7 @@ module Mihari
         def build_relation(filter)
           artifact_ids = get_artifact_ids_by_filter(filter)
 
-          relation = self
-          relation = relation.includes(:artifacts, :tags)
+          relation = includes(:artifacts, :tags)
 
           relation = relation.where(artifacts: { id: artifact_ids }) unless artifact_ids.empty?
           relation = relation.where(tags: { name: filter.tag_name }) if filter.tag_name

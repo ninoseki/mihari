@@ -9,6 +9,7 @@ require "faker"
 require "rack/test"
 require "rspec-parameterized"
 require "simplecov"
+require "timecop"
 require "vcr"
 
 require "dotenv/load"

@@ -66,8 +66,7 @@ module Mihari
         # @return [Mihari::Models::Rule]
         #
         def build_relation(filter)
-          relation = self
-          relation = relation.includes(alerts: :tags)
+          relation = includes(alerts: :tags)
 
           relation = relation.where(alerts: { tags: { name: filter.tag_name } }) if filter.tag_name
 

@@ -8,11 +8,7 @@ RSpec.shared_context "with mocked logger" do
     SemanticLogger["Mihari"]
   end
 
-  before do
-    allow(Mihari).to receive(:logger).and_return(logger)
-  end
+  before { allow(Mihari).to receive(:logger).and_return(logger) }
 
-  after do
-    SemanticLogger.flush
-  end
+  after { SemanticLogger.flush }
 end

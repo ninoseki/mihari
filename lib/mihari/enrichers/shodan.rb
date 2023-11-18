@@ -16,9 +16,7 @@ module Mihari
       def call(ip)
         url = "https://internetdb.shodan.io/#{ip}"
         res = http.get(url)
-        data = JSON.parse(res.body.to_s)
-
-        Structs::Shodan::InternetDBResponse.from_dynamic! data
+        Structs::Shodan::InternetDBResponse.from_dynamic! JSON.parse(res.body.to_s)
       end
 
       private

@@ -46,10 +46,10 @@ RSpec.describe Mihari::Emitters::TheHive, :vcr do
   end
 
   describe "#call" do
-    let!(:mock_client) { double("client") }
+    let!(:mock_client) { instance_double("client") }
 
     before do
-      allow(subject).to receive(:client).and_return(mock_client)
+      allow(emitter).to receive(:client).and_return(mock_client)
       allow(mock_client).to receive(:alert)
     end
 

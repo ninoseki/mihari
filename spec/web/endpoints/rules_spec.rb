@@ -53,17 +53,15 @@ RSpec.describe Mihari::Web::Endpoints::Rules do
 
   describe "put /api/rules/" do
     let!(:title) { "updated" }
-
-    it "returns 204" do
+    let!(:data) do
       data = rule.data.deep_dup
       data["title"] = title
+      data
+    end
+    let!(:payload) { { id: rule.id, yaml: data.to_yaml } }
 
-      payload = {
-        id: rule.id,
-        yaml: data.to_yaml
-      }
+    it "returns 204" do
       put("/api/rules/", payload.to_json, "CONTENT_TYPE" => "application/json")
-
       expect(last_response.status).to eq(201)
 
       res = JSON.parse(last_response.body)
@@ -73,13 +71,15 @@ RSpec.describe Mihari::Web::Endpoints::Rules do
   end
 
   describe "post /api/rules/" do
-    it "returns 201" do
+    let!(:data) do
       data = rule.data.deep_dup
       data["id"] = SecureRandom.uuid
-      payload = { yaml: data.to_yaml }
+      data
+    end
+    let!(:payload) { { yaml: data.to_yaml } }
 
+    it "returns 201" do
       post("/api/rules/", payload.to_json, "CONTENT_TYPE" => "application/json")
-
       expect(last_response.status).to eq(201)
     end
   end

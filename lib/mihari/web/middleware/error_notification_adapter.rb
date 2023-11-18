@@ -19,6 +19,7 @@ module Mihari
           yield
         rescue StandardError => e
           unwrapped = unwrap_error(e)
+
           Mihari.logger.error unwrapped
           Sentry.capture_exception(unwrapped) if Sentry.initialized?
 

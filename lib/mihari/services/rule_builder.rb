@@ -20,10 +20,8 @@ module Mihari
       # @return [Hash]
       #
       def data
-        if Mihari::Models::Rule.exists?(path_or_id)
-          rule = Mihari::Models::Rule.find(path_or_id)
-          return rule.data
-        end
+        result = Try { Mihari::Models::Rule.find path_or_id }.to_result
+        return result.value! if result.success?
 
         raise ArgumentError, "#{path_or_id} does not exist" unless Pathname(path_or_id).exist?
 
