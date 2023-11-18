@@ -43,9 +43,9 @@ module Mihari
       # @param [Array<Mihari::Models::Artifact>] artifacts
       #
       def call(artifacts)
-        return if artifacts.empty?
-
         @artifacts = artifacts
+
+        return if artifacts.empty?
 
         client.alert payload
       end
@@ -61,11 +61,7 @@ module Mihari
         @normalized_api_version ||= [].tap do |out|
           # v4 does not have version prefix in path (/api/)
           # v5 has version prefix in path (/api/v1/)
-          table = {
-            "" => nil,
-            "v4" => nil,
-            "v5" => "v1"
-          }
+          table = { "" => nil, "v4" => nil, "v5" => "v1" }
           out << table[api_version.to_s.downcase]
         end.first
       end

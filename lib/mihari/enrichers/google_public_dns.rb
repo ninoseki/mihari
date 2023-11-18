@@ -14,9 +14,7 @@ module Mihari
       # @return [Array<Mihari::Structs::GooglePublicDNS::Response>]
       #
       def call(name)
-        %w[A AAAA CNAME TXT NS].filter_map do |resource_type|
-          query_by_type(name, resource_type)
-        end
+        %w[A AAAA CNAME TXT NS].filter_map { |resource_type| query_by_type(name, resource_type) }
       end
 
       #
@@ -31,10 +29,7 @@ module Mihari
         url = "https://dns.google/resolve"
         params = { name: name, type: resource_type }
         res = http.get(url, params: params)
-
-        data = JSON.parse(res.body.to_s)
-
-        Structs::GooglePublicDNS::Response.from_dynamic! data
+        Structs::GooglePublicDNS::Response.from_dynamic! JSON.parse(res.body.to_s)
       rescue HTTPError
         nil
       end

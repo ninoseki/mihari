@@ -10,39 +10,41 @@ RSpec.describe Mihari::Models::Alert do
   let!(:reverse_dns_name) { Mihari::Models::ReverseDnsName.first.name }
   let!(:dns_record) { Mihari::Models::DnsRecord.first.value }
 
+  let(:tag_filter) do
+    Mihari::Structs::Filters::Alert::SearchFilterWithPagination.new(
+      tag_name: tag_name
+    )
+  end
+  let(:artifact_filter) do
+    Mihari::Structs::Filters::Alert::SearchFilterWithPagination.new(
+      artifact_data: artifact_data
+    )
+  end
+  let(:empty_rule_filter) do
+    Mihari::Structs::Filters::Alert::SearchFilterWithPagination.new(
+      rule_id: "404"
+    )
+  end
+
   describe ".search" do
     it do
-      alerts = described_class.search(
-        Mihari::Structs::Filters::Alert::SearchFilterWithPagination.new
-      )
+      alerts = described_class.search(Mihari::Structs::Filters::Alert::SearchFilterWithPagination.new)
       expect(alerts.length).to be >= 2
     end
 
-    it do
-      alerts = described_class.search(
-        Mihari::Structs::Filters::Alert::SearchFilterWithPagination.new(
-          tag_name: tag_name
-        )
-      )
-      expect(alerts.length).to eq(1)
+    where(:filter, :expected) do
+      [
+        [ref(:tag_filter), 1],
+        [ref(:artifact_filter), 1],
+        [ref(:empty_rule_filter), 0]
+      ]
     end
 
-    it do
-      alerts = described_class.search(
-        Mihari::Structs::Filters::Alert::SearchFilterWithPagination.new(
-          artifact_data: artifact_data
-        )
-      )
-      expect(alerts.length).to eq(1)
-    end
-
-    it do
-      alerts = described_class.search(
-        Mihari::Structs::Filters::Alert::SearchFilterWithPagination.new(
-          rule_id: "404"
-        )
-      )
-      expect(alerts.length).to eq(0)
+    with_them do
+      it do
+        alerts = described_class.search(filter)
+        expect(alerts.length).to eq(expected)
+      end
     end
   end
 
@@ -54,31 +56,19 @@ RSpec.describe Mihari::Models::Alert do
       expect(count).to be >= 2
     end
 
-    it do
-      count = described_class.count(
-        Mihari::Structs::Filters::Alert::SearchFilter.new(
-          tag_name: tag_name
-        )
-      )
-      expect(count).to eq(1)
+    where(:filter, :expected) do
+      [
+        [ref(:tag_filter), 1],
+        [ref(:artifact_filter), 1],
+        [ref(:empty_rule_filter), 0]
+      ]
     end
 
-    it do
-      count = described_class.count(
-        Mihari::Structs::Filters::Alert::SearchFilter.new(
-          artifact_data: artifact_data
-        )
-      )
-      expect(count).to eq(1)
-    end
-
-    it do
-      count = described_class.count(
-        Mihari::Structs::Filters::Alert::SearchFilter.new(
-          rule_id: "404"
-        )
-      )
-      expect(count).to eq(0)
+    with_them do
+      it do
+        count = described_class.count(filter)
+        expect(count).to eq(expected)
+      end
     end
   end
 end

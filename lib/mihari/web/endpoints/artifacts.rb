@@ -64,7 +64,7 @@ module Mihari
         namespace :artifacts do
           desc "Get an artifact", {
             success: Entities::Artifact,
-            failure: [{ code: 404, message: "Not found", model: Entities::Message }],
+            failure: [{ code: 404, model: Entities::Message }],
             summary: "Get an artifact"
           }
           params do
@@ -75,60 +75,55 @@ module Mihari
             result = ArtifactGetter.result(id)
             return present(result.value!, with: Entities::Artifact) if result.success?
 
-            failure = result.failure
-            case failure
+            case result.failure
             when ActiveRecord::RecordNotFound
               error!({ message: "ID:#{id} is not found" }, 404)
             end
-            raise failure
+            raise result.failure
           end
 
           desc "Enrich an artifact", {
-            success: Entities::Message,
-            failure: [{ code: 404, message: "Not found", model: Entities::Message }],
+            success: { code: 201, model: Entities::Message },
+            failure: [{ code: 404, model: Entities::Message }],
             summary: "Enrich an artifact"
           }
           params do
             requires :id, type: Integer
           end
           get "/:id/enrich" do
+            status 201
+
             id = params["id"].to_i
             result = ArtifactEnricher.result(id)
-            if result.success?
-              status 201
-              return present({ message: "" }, with: Entities::Message)
-            end
+            return present({ message: "#{id} has been enriched" }, with: Entities::Message) if result.success?
 
-            failure = result.failure
-            case failure
+            case result.failure
             when ActiveRecord::RecordNotFound
               error!({ message: "ID:#{id} is not found" }, 404)
             end
-            raise failure
+            raise result.failure
           end
 
           desc "Delete an artifact", {
-            success: Entities::Message,
-            failure: [{ code: 404, message: "Not found", model: Entities::Message }],
+            success: { code: 204, model: Entities::Message },
+            failure: [{ code: 404, model: Entities::Message }],
             summary: "Delete an artifact"
           }
           params do
             requires :id, type: Integer
           end
           delete "/:id" do
+            status 204
+
             id = params["id"].to_i
             result = ArtifactDestroyer.result(id)
-            if result.success?
-              status 204
-              return present({ message: "" }, with: Entities::Message)
-            end
+            return present({ message: "" }, with: Entities::Message) if result.success?
 
-            failure = result.failure
-            case failure
+            case result.failure
             when ActiveRecord::RecordNotFound
               error!({ message: "ID:#{id} is not found" }, 404)
             end
-            raise failure
+            raise result.failure
           end
         end
       end

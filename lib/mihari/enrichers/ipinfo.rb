@@ -33,9 +33,7 @@ module Mihari
       def call(ip)
         url = "https://ipinfo.io/#{ip}/json"
         res = http.get(url)
-        data = JSON.parse(res.body.to_s)
-
-        Structs::IPInfo::Response.from_dynamic! data
+        Structs::IPInfo::Response.from_dynamic! JSON.parse(res.body.to_s)
       end
 
       private

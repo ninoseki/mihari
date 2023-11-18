@@ -1,9 +1,7 @@
 # frozen_string_literal: true
 
 # Make possible to use upper case acronyms in class names
-ActiveSupport::Inflector.inflections(:en) do |inflect|
-  inflect.acronym "CPE"
-end
+ActiveSupport::Inflector.inflections(:en) { |inflect| inflect.acronym "CPE" }
 
 def env
   ENV["APP_ENV"] || ENV["RACK_ENV"]
@@ -175,7 +173,7 @@ module Mihari
         Mihari::Database.connect
         yield
       rescue ActiveRecord::StatementInvalid
-        Mihari.logger.error("You haven't finished the DB migration! Please run 'mihari db migrate'.")
+        Mihari.logger.error("The DB migration is not yet complete. Please run 'mihari db migrate'.")
       ensure
         Mihari::Database.close
       end

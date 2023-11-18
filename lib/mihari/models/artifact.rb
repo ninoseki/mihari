@@ -78,7 +78,7 @@ module Mihari
       end
 
       #
-      # Enrich(add) whois record
+      # Enrich whois record
       #
       # @param [Mihari::Enrichers::Whois] enricher
       #
@@ -89,7 +89,7 @@ module Mihari
       end
 
       #
-      # Enrich(add) DNS records
+      # Enrich DNS records
       #
       # @param [Mihari::Enrichers::GooglePublicDNS] enricher
       #
@@ -100,7 +100,7 @@ module Mihari
       end
 
       #
-      # Enrich(add) reverse DNS names
+      # Enrich reverse DNS names
       #
       # @param [Mihari::Enrichers::Shodan] enricher
       #
@@ -111,7 +111,7 @@ module Mihari
       end
 
       #
-      # Enrich(add) geolocation
+      # Enrich geolocation
       #
       # @param [Mihari::Enrichers::IPInfo] enricher
       #
@@ -192,9 +192,7 @@ module Mihari
       #
       def enrich_by_enricher(enricher)
         methods = ENRICH_METHODS_BY_ENRICHER[enricher.class] || []
-        methods.each do |method|
-          send(method, enricher) if respond_to?(method)
-        end
+        methods.each { |method| send(method, enricher) if respond_to?(method) }
       end
 
       private

@@ -7,7 +7,7 @@ RSpec.describe Mihari::Analyzers::DNSTwister, :vcr do
 
   describe "#artifacts" do
     before do
-      allow(Resolv).to receive(:getaddress).and_return("1.1.1.1")
+      allow(analyzer).to receive(:resolvable?).and_return(true)
     end
 
     it do

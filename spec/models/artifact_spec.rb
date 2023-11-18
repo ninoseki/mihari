@@ -1,7 +1,5 @@
 # frozen_string_literal: true
 
-require "timecop"
-
 RSpec.describe Mihari::Models::Artifact, :vcr do
   include_context "with database fixtures"
 
@@ -22,17 +20,16 @@ RSpec.describe Mihari::Models::Artifact, :vcr do
     it do
       artifact = described_class.new(data: data, alert_id: alert_id)
       artifact.rule_id = rule_id
-
       expect(artifact).not_to be_unique
     end
 
     it do
-      artifact = described_class.new(data: "2.2.2.2", alert_id: alert_id)
+      artifact = described_class.new(data: Faker::Internet.unique.ip_v4_address, alert_id: alert_id)
       expect(artifact).to be_unique
     end
 
     context "with artifact_lifetime" do
-      let(:data) { "9.9.9.9" }
+      let(:data) { Faker::Internet.unique.ip_v4_address }
       let!(:artifact_lifetime) { 60 }
       let!(:base_time) { Time.now.utc }
 
@@ -60,7 +57,7 @@ RSpec.describe Mihari::Models::Artifact, :vcr do
 
   describe "#enrich_whois" do
     let!(:enricher) do
-      enricher = double("whois_enricher")
+      enricher = instance_double("whois_enricher")
       allow(enricher).to receive(:result).and_return(
         Dry::Monads::Result::Success.new(
           Mihari::Models::WhoisRecord.new(domain: "example.com")
@@ -70,7 +67,7 @@ RSpec.describe Mihari::Models::Artifact, :vcr do
     end
 
     context "with domain" do
-      let!(:data) { "example.com" }
+      let(:data) { "example.com" }
 
       it do
         artifact = described_class.new(data: data, alert_id: alert_id)
@@ -132,7 +129,7 @@ RSpec.describe Mihari::Models::Artifact, :vcr do
     end
   end
 
-  describe "#enrich_autonomos_system" do
+  describe "#enrich_autonomous_system" do
     let(:data) { "1.1.1.1" }
 
     it do
@@ -174,7 +171,7 @@ RSpec.describe Mihari::Models::Artifact, :vcr do
     end
 
     context "with Google Public DNS" do
-      let!(:data) { "example.com" }
+      let(:data) { "example.com" }
 
       it do
         artifact = described_class.new(data: data, alert_id: alert_id)

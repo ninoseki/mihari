@@ -14,10 +14,7 @@ module Mihari
       # @return [String]
       #
       def refang(indicator)
-        return indicator.gsub("[.]", ".").gsub("(.)", ".") if indicator.is_a?(String)
-
-        # for RSpec & Ruby 2.7
-        indicator
+        indicator.gsub("[.]", ".").gsub("(.)", ".")
       end
     end
   end

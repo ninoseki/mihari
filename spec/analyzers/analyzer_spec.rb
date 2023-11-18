@@ -1,7 +1,5 @@
 # frozen_string_literal: true
 
-require "stringio"
-
 class Test < Mihari::Analyzers::Base
   public :normalized_artifacts
 
@@ -38,8 +36,7 @@ RSpec.describe Mihari::Analyzers::Base, :vcr do
 
   describe "#normalized_artifacts" do
     it do
-      artifacts = %w[1.1.1.1 2.2.2.2 example.com google.com]
-      expect(test.normalized_artifacts.map(&:data)).to eq(artifacts)
+      expect(test.normalized_artifacts.map(&:data)).to eq(%w[1.1.1.1 2.2.2.2 example.com google.com])
     end
   end
 end

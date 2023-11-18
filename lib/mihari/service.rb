@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Mihari
   #
   # Base class for services

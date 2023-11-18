@@ -25,10 +25,8 @@ RSpec.describe Mihari::Emitters::Slack do
 
     it do
       emitter.attachments.each do |attachment|
-        actions = attachment[:actions] || []
-        actions.each do |action|
-          expect(action[:url]).to match(/virustotal|urlscan|censys|shodan/)
-        end
+        urls = (attachment[:actions] || []).map { |action| action[:url] }
+        expect(urls).to all(match(/virustotal|urlscan|censys|shodan/))
       end
     end
   end
@@ -64,7 +62,7 @@ RSpec.describe Mihari::Emitters::Slack do
   end
 
   describe "#call" do
-    let!(:mock) { double("notifier") }
+    let!(:mock) { instance_double("notifier") }
 
     before do
       allow(::Slack::Notifier).to receive(:new).and_return(mock)

@@ -1,7 +1,5 @@
 # frozen_string_literal: true
 
-require "yaml"
-
 RSpec.describe Mihari::Services::AlertProxy do
   let(:data) do
     {
@@ -37,8 +35,7 @@ RSpec.describe Mihari::Services::AlertProxy do
 
     describe "#rule" do
       it "doesn't raise ActiveRecord::RecordNotFound" do
-        rule = alert.rule
-        expect(rule).to be_a Mihari::Rule
+        expect(alert.rule).to be_a Mihari::Rule
       end
     end
   end

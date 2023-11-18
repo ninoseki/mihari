@@ -2,9 +2,13 @@
 
 RSpec.describe Mihari::Structs::Config do
   describe ".from_class" do
+    subject(:config) { described_class.from_class(Mihari::Emitters::Database) }
+
     it do
-      config = described_class.from_class(Mihari::Emitters::Database)
       expect(config.name).to eq("Database")
+    end
+
+    it do
       expect(config.is_configured).to be true
     end
   end

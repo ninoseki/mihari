@@ -19,7 +19,6 @@ module Mihari
             #
             def migrate(direction = "up")
               ActiveRecord::Migration.verbose = options["verbose"]
-
               Mihari::Database.migrate direction.to_sym
             end
           end
