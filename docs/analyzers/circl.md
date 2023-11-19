@@ -30,8 +30,8 @@ username: ...
 
 ### Username
 
-`username` (`string`) is a username. Optional. Defaults to `ENV[”CIRCL_PASSIVE_USERNAME”]`.
+`username` (`string`) is a username. Optional. Configurable via `CIRCL_PASSIVE_USERNAME`.
 
 ### Password
 
-`password` (`string`) is a password. Optional. Defaults to `ENV[”CIRCL_PASSIVE_PASSWORD”]`.
+`password` (`string`) is a password. Optional. Configurable via `CIRCL_PASSIVE_PASSWORD`.

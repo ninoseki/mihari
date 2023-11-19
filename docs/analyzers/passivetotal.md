@@ -45,8 +45,8 @@ api_key: ...
 
 ### Username
 
-`username` (`string`) is a username. Optional. Defaults to `ENV[”PASSIVETOTAL_USERNAME"]`.
+`username` (`string`) is a username. Optional. Configurable via `PASSIVETOTAL_USERNAME` environment variable.
 
 ### API Key
 
-`api_key` (`string`) is an API key. Optional. Defaults to `ENV[”PASSIVETOTAL_API_KEY"]`.
+`api_key` (`string`) is an API key. Optional. Configurable via `PASSIVETOTAL_API_KEY` environment variable.

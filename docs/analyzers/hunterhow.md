@@ -30,4 +30,4 @@ end_time: ...
 
 ### API key
 
-`api_key` (`string`) is an API key. Optional. Defaults to `ENV[”HUNTERHOW_API_KEY"]`.
+`api_key` (`string`) is an API key. Optional. Configurable via `HUNTERHOW_API_KEY`.

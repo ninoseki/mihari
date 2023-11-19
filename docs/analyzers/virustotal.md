@@ -40,4 +40,4 @@ api_key: ...
 
 ### API Key
 
-`api_key` (`string`) is an API key. Optional. Defaults to `ENV[”VIRUSTOTAL_API_KEY"]`.
+`api_key` (`string`) is an API key. Optional. Configurable via `VIRUSTOTAL_API_KEY` environment variable.

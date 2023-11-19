@@ -2,7 +2,7 @@
 
 Configuration can be done via environment variables.
 
-| Environmental Variable    | Description                    | Default                |
+| Environment Variable      | Description                    | Default                |
 | ------------------------- | ------------------------------ | ---------------------- |
 | DATABASE_URL              | Database URL                   | `sqlite3:///mihari.db` |
 | BINARYEDGE_API_KEY        | BinaryEdge API key             |                        |
