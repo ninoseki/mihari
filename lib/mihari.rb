@@ -135,8 +135,7 @@ module Mihari
 
       Sentry.init do |config|
         config.dsn = Mihari.config.sentry_dsn
-
-        config.traces_sample_rate = 0.5
+        config.traces_sample_rate = Mihari.config.sentry_trace_sample_rate
       end
     end
   end
@@ -291,5 +290,5 @@ require "mihari/web/app"
 # CLIs
 require "mihari/cli/main"
 
-# initialize Sentry
+# initialize Sentry (if it's possible)
 Mihari.initialize_sentry
