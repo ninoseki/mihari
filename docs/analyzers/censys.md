@@ -24,8 +24,8 @@ secret: ...
 
 ### ID
 
-`id` (`string`) is a Cencys ID. Optional. Defaults to `ENV[”CENSYS_ID”]`.
+`id` (`string`) is a Cencys ID. Optional. Configurable via `CENSYS_ID` environment variable.
 
 ### Secret
 
-`secret` (`string`) is a Cencys secret. Optional. Defaults to `ENV[”CENSYS_SECRET”]`.
+`secret` (`string`) is a Cencys secret. Optional. Configurable via `CENSYS_SECRET` environment variable.

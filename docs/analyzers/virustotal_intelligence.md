@@ -22,7 +22,7 @@ api_key: ...
 
 ### Analyzer
 
-`analyzer` (`string`) should be either of `virustotal_intelligence` and ``.
+`analyzer` (`string`) should be either of `virustotal_intelligence` and `vt_intel`.
 
 ### Query
 
@@ -30,4 +30,4 @@ api_key: ...
 
 ### API Key
 
-`api_key` (`string`) is an API key. Optional. Defaults to `ENV[”VIRUSTOTAL_API_KEY"]`.
+`api_key` (`string`) is an API key. Optional. Configurable via `VIRUSTOTAL_API_KEY` environment variable.

@@ -24,8 +24,8 @@ email: ...
 
 ### API Key
 
-`api_key` (`string`) is an API key. Optional. Defaults to `ENV[”FOFA_API_KEY"]`.
+`api_key` (`string`) is an API key. Optional. Configurable via `FOFA_API_KEY"`.
 
 ### Email
 
-`email` (`string`) is an email. Optional. Defaults to `ENV[”FOFA_EMAIL"]`.
+`email` (`string`) is an email. Optional. Configurable via `FOFA_EMAIL`.
