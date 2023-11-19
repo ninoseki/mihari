@@ -3,8 +3,8 @@
 class Test < Mihari::Analyzers::Base
   public :normalized_artifacts
 
-  def initialize
-    super("dummy")
+  def initialize(query = "dummy")
+    super(query)
   end
 
   def artifacts

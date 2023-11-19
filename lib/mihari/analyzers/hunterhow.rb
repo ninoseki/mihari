@@ -22,7 +22,7 @@ module Mihari
       # @param [Hash, nil] options
       # @param [String, nil] api_key
       #
-      def initialize(query, start_time:, end_time:, options: nil, api_key: nil)
+      def initialize(query, start_time: nil, end_time: nil, options: nil, api_key: nil)
         super(query, options: options)
 
         @api_key = api_key || Mihari.config.hunterhow_api_key
