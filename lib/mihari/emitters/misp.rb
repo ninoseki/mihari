@@ -56,11 +56,11 @@ module Mihari
         })
       end
 
-      private
-
       def configuration_keys
         %w[misp_url misp_api_key]
       end
+
+      private
 
       def client
         @client ||= Clients::MISP.new(url, api_key: api_key, timeout: timeout)

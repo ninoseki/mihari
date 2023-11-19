@@ -66,11 +66,11 @@ module Mihari
         end.first
       end
 
-      private
-
       def configuration_keys
         %w[thehive_url thehive_api_key]
       end
+
+      private
 
       def client
         @client ||= Clients::TheHive.new(url, api_key: api_key, api_version: normalized_api_version, timeout: timeout)
