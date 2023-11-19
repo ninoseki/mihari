@@ -19,6 +19,7 @@ nav:
       - Docker: tips/docker.md
       - GitHub Actions: tips/github_actions.md
       - Superset: tips/superset.md
+      - Sentry: tips/sentry.md
       - Alternatives: tips/alternatives.md
   - References:
       - Analyzers: analyzers/index.md
