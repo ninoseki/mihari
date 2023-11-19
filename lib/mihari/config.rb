@@ -45,7 +45,8 @@ module Mihari
       retry_exponential_backoff: true,
       retry_interval: 5,
       retry_times: 3,
-      sentry_dsn: nil
+      sentry_dsn: nil,
+      sentry_trace_sample_rate: 0.25
     )
 
     # @!attribute [r] binaryedge_api_key
@@ -131,6 +132,9 @@ module Mihari
 
     # @!attribute [r] sentry_dsn
     #   @return [String, nil]
+
+    # @!attribute [r] sentry_trace_sample_rate
+    #   @return [Float]
 
     # @!attribute [r] retry_interval
     #   @return [Integer]

@@ -53,17 +53,17 @@ module Mihari
 
       class << self
         def instance
-          @instance ||= Rack::Builder.new do
+          Rack::Builder.new do
             use Rack::Cors do
               allow do
                 origins "*"
                 resource "*", headers: :any, methods: %i[get post put delete options]
               end
             end
-
             use Middleware::ConnectionAdapter
             use Middleware::ErrorNotificationAdapter
 
+            use Sentry::Rack::CaptureExceptions if Sentry.initialized?
             use BetterErrors::Middleware if ENV["RACK_ENV"] == "development" && defined?(BetterErrors::Middleware)
 
             run App.new
