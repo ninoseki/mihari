@@ -84,7 +84,7 @@ Gem::Specification.new do |spec|
   spec.add_dependency "http", "5.1.1"
   spec.add_dependency "jr-cli", "0.6.0"
   spec.add_dependency "launchy", "2.5.2"
-  spec.add_dependency "memist", "2.0.2"
+  spec.add_dependency "memo_wise", "1.8.0"
   spec.add_dependency "normalize_country", "0.3.2"
   spec.add_dependency "parallel", "1.23.0"
   spec.add_dependency "plissken", "2.0.1"

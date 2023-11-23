@@ -32,7 +32,7 @@ require "grape-entity"
 require "addressable/uri"
 require "awrence"
 require "email_address"
-require "memist"
+require "memo_wise"
 require "parallel"
 require "plissken"
 require "public_suffix"
@@ -62,7 +62,7 @@ require "mihari/mixins/unwrap_error"
 #
 module Mihari
   class << self
-    include Memist::Memoizable
+    prepend MemoWise
 
     #
     # @return [Array<Mihari::Emitters::Base>]
@@ -70,7 +70,7 @@ module Mihari
     def emitters
       []
     end
-    memoize :emitters
+    memo_wise :emitters
 
     #
     # @return [Hash{String => Mihari::Enrichers::Base}]
@@ -87,7 +87,7 @@ module Mihari
     def analyzers
       []
     end
-    memoize :analyzers
+    memo_wise :analyzers
 
     #
     # @return [Hash{String => Mihari::Analyzers::Base}]
@@ -104,7 +104,7 @@ module Mihari
     def enrichers
       []
     end
-    memoize :enrichers
+    memo_wise :enrichers
 
     #
     # @return [Hash{String => Mihari::Enrichers::Base}]
@@ -127,7 +127,7 @@ module Mihari
       SemanticLogger.add_appender(io: $stderr, formatter: :color)
       SemanticLogger["Mihari"]
     end
-    memoize :logger
+    memo_wise :logger
 
     def initialize_sentry
       return if Mihari.config.sentry_dsn.nil?

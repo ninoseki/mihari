@@ -6,7 +6,7 @@ module Mihari
     # Base class for enrichers
     #
     class Base < Actor
-      include Memist::Memoizable
+      prepend MemoWise
 
       def initialize(options: nil)
         super(options: options)

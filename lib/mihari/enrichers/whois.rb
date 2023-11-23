@@ -47,7 +47,7 @@ module Mihari
           contacts: get_contacts(parser)
         )
       end
-      memoize :_call
+      memo_wise :_call
 
       #
       # @return [::Whois::Client]
