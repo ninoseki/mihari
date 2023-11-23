@@ -6,7 +6,7 @@ require "slack-notifier"
 module Mihari
   module Emitters
     class Attachment
-      include Memist::Memoizable
+      prepend MemoWise
 
       # @return [String]
       attr_reader :data
@@ -76,7 +76,7 @@ module Mihari
           "https://urlscan.io/domain/#{uri.hostname}"
         end
       end
-      memoize :_urlscan_link
+      memo_wise :_urlscan_link
 
       # @return [String, nil]
       def _vt_link
@@ -93,19 +93,19 @@ module Mihari
           "https://www.virustotal.com/#/search/#{data}"
         end
       end
-      memoize :_vt_link
+      memo_wise :_vt_link
 
       # @return [String, nil]
       def _censys_link
         (data_type == "ip") ? "https://search.censys.io/hosts/#{data}" : nil
       end
-      memoize :_censys_link
+      memo_wise :_censys_link
 
       # @return [String, nil]
       def _shodan_link
         (data_type == "ip") ? "https://www.shodan.io/host/#{data}" : nil
       end
-      memoize :_shodan_link
+      memo_wise :_shodan_link
 
       # @return [String]
       def sha256

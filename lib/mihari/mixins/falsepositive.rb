@@ -6,7 +6,7 @@ module Mihari
     # False positive mixins
     #
     module FalsePositive
-      include Memist::Memoizable
+      prepend MemoWise
 
       #
       # Normalize a falsepositive value
@@ -22,7 +22,7 @@ module Mihari
         value_without_slashes = value[1..-2]
         Regexp.compile value_without_slashes.to_s
       end
-      memoize :normalize_falsepositive
+      memo_wise :normalize_falsepositive
 
       #
       # Check whether a value is valid format as a disallowed data value

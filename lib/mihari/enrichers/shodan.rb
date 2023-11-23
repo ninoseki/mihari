@@ -18,7 +18,7 @@ module Mihari
         res = http.get(url)
         Structs::Shodan::InternetDBResponse.from_dynamic! JSON.parse(res.body.to_s)
       end
-      memoize :call
+      memo_wise :call
 
       private
 
