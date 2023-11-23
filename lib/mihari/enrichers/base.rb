@@ -6,6 +6,8 @@ module Mihari
     # Base class for enrichers
     #
     class Base < Actor
+      include Memist::Memoizable
+
       def initialize(options: nil)
         super(options: options)
       end

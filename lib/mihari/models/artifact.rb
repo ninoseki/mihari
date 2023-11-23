@@ -158,13 +158,13 @@ module Mihari
       # Enrich all the enrichable relationships of the artifact
       #
       def enrich_all
-        enrich_autonomous_system
+        enrich_autonomous_system ipinfo
         enrich_dns
-        enrich_geolocation
-        enrich_reverse_dns
+        enrich_geolocation ipinfo
+        enrich_reverse_dns shodan
         enrich_whois
-        enrich_ports
-        enrich_cpes
+        enrich_ports shodan
+        enrich_cpes shodan
       end
 
       ENRICH_METHODS_BY_ENRICHER = {
@@ -196,6 +196,14 @@ module Mihari
       end
 
       private
+
+      def ipinfo
+        @ipinfo ||= Enrichers::IPInfo.new
+      end
+
+      def shodan
+        @shodan ||= Enrichers::Shodan.new
+      end
 
       def normalize_as_domain(url_or_domain)
         return url_or_domain if data_type == "domain"

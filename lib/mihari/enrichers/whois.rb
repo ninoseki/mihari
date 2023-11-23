@@ -8,16 +8,11 @@ module Mihari
     # Whois enricher
     #
     class Whois < Base
-      # @return [Hash]
-      attr_accessor :memo
-
       #
       # @param [Hash, nil] options
       #
       def initialize(options: nil)
         super(options: options)
-
-        @memo = {}
       end
 
       #
@@ -28,16 +23,22 @@ module Mihari
       # @return [Mihari::Models::WhoisRecord, nil]
       #
       def call(domain)
-        domain = PublicSuffix.domain(domain)
+        _call PublicSuffix.domain(domain)
+      end
 
-        # check memo
-        return memo[domain].dup if memo.key?(domain)
+      private
 
+      #
+      # @param [String] domain
+      #
+      # @return [Mihari::Models::WhoisRecord, nil]
+      #
+      def _call(domain)
         record = whois.lookup(domain)
         parser = record.parser
         return nil if parser.available?
 
-        whois_record = Models::WhoisRecord.new(
+        Models::WhoisRecord.new(
           domain: domain,
           created_on: get_created_on(parser),
           updated_on: get_updated_on(parser),
@@ -45,14 +46,8 @@ module Mihari
           registrar: get_registrar(parser),
           contacts: get_contacts(parser)
         )
-
-        # set memo
-        memo[domain] = whois_record
-
-        whois_record
       end
-
-      private
+      memoize :_call
 
       #
       # @return [::Whois::Client]

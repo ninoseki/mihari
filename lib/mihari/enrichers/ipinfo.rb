@@ -35,6 +35,7 @@ module Mihari
         res = http.get(url)
         Structs::IPInfo::Response.from_dynamic! JSON.parse(res.body.to_s)
       end
+      memoize :call
 
       private
 
