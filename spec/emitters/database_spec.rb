@@ -9,10 +9,13 @@ RSpec.describe Mihari::Emitters::Database do
   let!(:artifacts) { [Mihari::Models::Artifact.new(data: "1.1.1.1")] }
 
   describe "#call", vcr: "Mihari_Enrichers_IPInfo/ip:1.1.1.1" do
-    it do
-      alert = emitter.call artifacts
-      expect(alert).to be_a(Mihari::Models::Alert)
+    let!(:alert) { emitter.call artifacts }
 
+    it do
+      expect(alert).to be_a(Mihari::Models::Alert)
+    end
+
+    it do
       created_artifacts = Mihari::Models::Artifact.where(alert_id: alert.id)
       expect(created_artifacts.length).to eq(artifacts.length)
     end

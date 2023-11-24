@@ -35,9 +35,9 @@ http_interactions:
       Content-Length:
       - '708'
       Date:
-      - Sat, 18 Nov 2023 02:41:37 GMT
+      - Fri, 24 Nov 2023 00:22:34 GMT
       X-Envoy-Upstream-Service-Time:
-      - '4'
+      - '3'
       Strict-Transport-Security:
       - max-age=2592000; includeSubDomains
       Vary:
@@ -85,5 +85,5 @@ http_interactions:
             ]
           }
         }
-  recorded_at: Sat, 18 Nov 2023 02:41:37 GMT
+  recorded_at: Fri, 24 Nov 2023 00:22:34 GMT
 recorded_with: VCR 6.2.0

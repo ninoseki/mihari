@@ -1,0 +1,55 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: https://internetdb.shodan.io/1.1.1.1
+    body:
+      encoding: ASCII-8BIT
+      string: ''
+    headers:
+      Connection:
+      - close
+      Host:
+      - internetdb.shodan.io
+      User-Agent:
+      - http.rb/5.1.1
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Fri, 24 Nov 2023 00:22:33 GMT
+      Content-Type:
+      - application/json
+      Content-Length:
+      - '114'
+      Connection:
+      - close
+      Cache-Control:
+      - public, max-age=432000
+      Last-Modified:
+      - Wed, 22 Nov 2023 20:49:13 GMT
+      Cf-Cache-Status:
+      - HIT
+      Age:
+      - '83634'
+      Expires:
+      - Wed, 29 Nov 2023 00:22:33 GMT
+      Accept-Ranges:
+      - bytes
+      Permissions-Policy:
+      - interest-cohort=()
+      Access-Control-Allow-Origin:
+      - "*"
+      Server:
+      - cloudflare
+      Cf-Ray:
+      - 82ad7f8d59c4688c-NRT
+      Alt-Svc:
+      - h3=":443"; ma=86400
+    body:
+      encoding: UTF-8
+      string: '{"cpes":[],"hostnames":["one.one.one.one"],"ip":"1.1.1.1","ports":[53,80,443,2082,2086,8443],"tags":[],"vulns":[]}'
+  recorded_at: Fri, 24 Nov 2023 00:22:33 GMT
+recorded_with: VCR 6.2.0
