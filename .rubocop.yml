@@ -13,6 +13,10 @@ Metrics/MethodLength:
   Max: 50
 Metrics/AbcSize:
   Max: 50
+RSpec/MultipleMemoizedHelpers:
+  Max: 10
+RSpec/ExampleLength:
+  Max: 20
 require:
   - rubocop-rspec
   - rubocop-yard
