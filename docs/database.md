@@ -1,3 +1,3 @@
 # Database (ER Diagram)
 
-![img](https://i.imgur.com/krhoSgh.png)
+![img](https://i.imgur.com/I0lm9DR.png)
