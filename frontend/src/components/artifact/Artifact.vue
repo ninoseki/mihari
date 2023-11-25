@@ -1,9 +1,5 @@
 <template>
   <div class="column">
-    <div v-if="enrichArtifactTask.isRunning">
-      <Loading></Loading>
-      <hr />
-    </div>
     <h2 class="is-size-2 mb-4">Artifact</h2>
     <div class="columns">
       <div
@@ -30,35 +26,47 @@
       <div class="column">
         <div class="block">
           <h4 class="is-size-4 mb-2">Information</h4>
+          <span class="buttons is-pulled-right">
+            <a class="button is-link is-light is-small" :href="href" target="_blank">
+              <span>JSON</span>
+              <span class="icon is-small">
+                <font-awesome-icon icon="barcode"></font-awesome-icon>
+              </span>
+            </a>
+            <button
+              class="button is-info is-light is-small"
+              @click="flipShowMetadata"
+              v-if="artifact.metadata"
+            >
+              <span>Metadata</span>
+              <span class="icon is-small">
+                <font-awesome-icon icon="info-circle"></font-awesome-icon>
+              </span>
+            </button>
+            <button class="button is-primary is-light is-small" @click="enrichArtifact">
+              <span>Enrich</span>
+              <span class="icon is-small">
+                <font-awesome-icon
+                  icon="spinner"
+                  spin
+                  v-if="enrichArtifactTask.isRunning"
+                ></font-awesome-icon>
+                <font-awesome-icon icon="lightbulb" v-else></font-awesome-icon>
+              </span>
+            </button>
+
+            <button class="button is-light is-small" @click="deleteArtifact">
+              <span>Delete</span>
+              <span class="icon is-small">
+                <font-awesome-icon icon="times"></font-awesome-icon>
+              </span>
+            </button>
+          </span>
           <table class="table is-fullwidth is-completely-borderless">
             <tr>
               <th>ID</th>
               <td>
                 {{ artifact.id }}
-                <span class="buttons is-pulled-right">
-                  <button class="button is-primary is-light is-small" @click="enrichArtifact">
-                    <span>Enrich</span>
-                    <span class="icon is-small">
-                      <font-awesome-icon icon="lightbulb"></font-awesome-icon>
-                    </span>
-                  </button>
-                  <button
-                    class="button is-info is-light is-small"
-                    @click="flipShowMetadata"
-                    v-if="artifact.metadata"
-                  >
-                    <span>Metadata</span>
-                    <span class="icon is-small">
-                      <font-awesome-icon icon="info-circle"></font-awesome-icon>
-                    </span>
-                  </button>
-                  <button class="button is-light is-small" @click="deleteArtifact">
-                    <span>Delete</span>
-                    <span class="icon is-small">
-                      <font-awesome-icon icon="times"></font-awesome-icon>
-                    </span>
-                  </button>
-                </span>
               </td>
             </tr>
             <tr>
@@ -67,11 +75,15 @@
             </tr>
             <tr>
               <th>Data</th>
-              <td>{{ artifact.data }}</td>
+              <td>{{ truncate(artifact.data, 64) }}</td>
             </tr>
             <tr>
               <th>Source</th>
               <td>{{ artifact.source }}</td>
+            </tr>
+            <tr>
+              <th>Query</th>
+              <td>{{ truncate(artifact.query || "N/A", 64) }}</td>
             </tr>
             <tr v-if="artifact.tags.length > 0">
               <th>Tags</th>
@@ -88,7 +100,7 @@
                 <button class="delete" aria-label="close" @click="flipShowMetadata"></button>
               </header>
               <section class="modal-card-body">
-                <VueJsonPretty :data="artifact.metadata as any"></VueJsonPretty>
+                <VueJsonPretty :data="artifact.metadata"></VueJsonPretty>
               </section>
             </div>
           </div>
@@ -134,6 +146,7 @@
 <script lang="ts">
 import "vue-json-pretty/lib/styles.css"
 
+import truncate from "truncate"
 import { computed, defineComponent, onMounted, type PropType, ref } from "vue"
 import VueJsonPretty from "vue-json-pretty"
 import { useRouter } from "vue-router"
@@ -153,7 +166,6 @@ import ReverseDnsNames from "@/components/artifact/ReverseDnsNames.vue"
 import Tags from "@/components/artifact/Tags.vue"
 import WhoisRecord from "@/components/artifact/WhoisRecord.vue"
 import Links from "@/components/link/Links.vue"
-import Loading from "@/components/Loading.vue"
 import type { ArtifactWithTags, GCS } from "@/types"
 import { getGCSByCountryCode, getGCSByIPInfo } from "@/utils"
 
@@ -170,7 +182,6 @@ export default defineComponent({
     AS,
     DnsRecords,
     Links,
-    Loading,
     ReverseDnsNames,
     Tags,
     VueJsonPretty,
@@ -183,6 +194,10 @@ export default defineComponent({
     const googleMapSrc = ref<string | undefined>(undefined)
     const countryCode = ref<string | undefined>(undefined)
     const showMetadata = ref(false)
+
+    const href = computed(() => {
+      return `/api/artifacts/${props.artifact.id}`
+    })
 
     const router = useRouter()
 
@@ -226,6 +241,10 @@ export default defineComponent({
       context.emit("refresh")
     }
 
+    const flipShowMetadata = () => {
+      showMetadata.value = !showMetadata.value
+    }
+
     onMounted(async () => {
       if (props.artifact.dataType === "ip") {
         let gcs: GCS | undefined = undefined
@@ -243,20 +262,18 @@ export default defineComponent({
       }
     })
 
-    const flipShowMetadata = () => {
-      showMetadata.value = !showMetadata.value
-    }
-
     return {
       countryCode,
-      enrichArtifactTask,
-      getAlertsTask,
-      googleMapSrc,
-      showMetadata,
-      urlscanLiveshotSrc,
       deleteArtifact,
       enrichArtifact,
-      flipShowMetadata
+      enrichArtifactTask,
+      flipShowMetadata,
+      getAlertsTask,
+      googleMapSrc,
+      href,
+      showMetadata,
+      truncate,
+      urlscanLiveshotSrc
     }
   }
 })

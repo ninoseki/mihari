@@ -11,6 +11,7 @@ module Mihari
       expose :data, documentation: { type: String, required: true }
       expose :data_type, documentation: { type: String, required: true }, as: :dataType
       expose :source, documentation: { type: String, required: true }
+      expose :query, documentation: { type: String, required: false }
       expose :tags, documentation: { type: String, is_array: true }
     end
 

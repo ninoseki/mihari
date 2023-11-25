@@ -78,7 +78,8 @@ export interface Artifact {
   data: string
   dataType: string
   source: string
-  metadata: unknown | null
+  query: string | null
+  metadata: any | null
   createdAt: string
 
   autonomousSystem: AutonomousSystem | null

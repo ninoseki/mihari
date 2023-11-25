@@ -1,9 +1,5 @@
 <template>
   <div class="column">
-    <div v-if="runRuleTask.isRunning">
-      <Loading></Loading>
-      <hr />
-    </div>
     <div v-if="runRuleTask.last?.error">
       <ErrorMessage :error="runRuleTask.last.error"></ErrorMessage>
       <hr />
@@ -14,7 +10,8 @@
         <button class="button is-primary is-light is-small" @click="runRule">
           <span>Run</span>
           <span class="icon is-small">
-            <font-awesome-icon icon="arrow-right"></font-awesome-icon>
+            <font-awesome-icon icon="spinner" spin v-if="runRuleTask.isRunning"></font-awesome-icon>
+            <font-awesome-icon icon="arrow-right" v-else></font-awesome-icon>
           </span>
         </button>
         <router-link
@@ -51,7 +48,6 @@ import { useRouter } from "vue-router"
 import { generateDeleteRuleTask, generateRunRuleTask } from "@/api-helper"
 import Alerts from "@/components/alert/AlertsWithPagination.vue"
 import ErrorMessage from "@/components/ErrorMessage.vue"
-import Loading from "@/components/Loading.vue"
 import YAML from "@/components/rule/YAML.vue"
 import type { Rule } from "@/types"
 
@@ -66,7 +62,6 @@ export default defineComponent({
   components: {
     YAML,
     Alerts,
-    Loading,
     ErrorMessage
   },
   emits: ["refresh"],

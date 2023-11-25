@@ -8,7 +8,7 @@
       <router-link
         class="tag is-link is-light"
         :to="{ name: 'Artifact', params: { id: artifact.id } }"
-        >{{ artifact.data }}</router-link
+        >{{ truncate(artifact.data, 32) }}</router-link
       >
       <span class="tag is-delete" v-if="isDeleteButtonEnabled" @click="deleteArtifact"></span>
     </div>
@@ -16,6 +16,7 @@
 </template>
 
 <script lang="ts">
+import truncate from "truncate"
 import { defineComponent, type PropType, ref } from "vue"
 
 import { generateDeleteArtifactTask } from "@/api-helper"
@@ -53,11 +54,12 @@ export default defineComponent({
     }
 
     return {
-      isDeleted,
       deleteArtifact,
-      showDeleteButton,
       hideDeleteButton,
-      isDeleteButtonEnabled
+      isDeleteButtonEnabled,
+      isDeleted,
+      showDeleteButton,
+      truncate
     }
   }
 })

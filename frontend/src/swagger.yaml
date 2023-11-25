@@ -488,6 +488,8 @@ definitions:
         type: string
       source:
         type: string
+      query:
+        type: string
       tags:
         type: array
         items:
@@ -549,6 +551,8 @@ definitions:
       dataType:
         type: string
       source:
+        type: string
+      query:
         type: string
       tags:
         type: array
