@@ -78,7 +78,7 @@ module Mihari
       # @return [String]
       #
       def class_key
-        to_s.split("::").last
+        to_s.split("::").last.downcase
       end
 
       #

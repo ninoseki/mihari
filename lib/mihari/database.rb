@@ -111,6 +111,12 @@ class V5Schema < ActiveRecord::Migration[7.1]
   end
 end
 
+class V61Schema < ActiveRecord::Migration[7.1]
+  def change
+    add_column :artifacts, :query, :string
+  end
+end
+
 def adapter
   return "postgresql" if %w[postgresql postgres].include?(Mihari.config.database_url.scheme)
   return "mysql2" if Mihari.config.database_url.scheme == "mysql2"
@@ -122,7 +128,7 @@ end
 # @return [Array<ActiveRecord::Migration>] schemas
 #
 def schemas
-  [V5Schema]
+  [V5Schema, V61Schema]
 end
 
 module Mihari

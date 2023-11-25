@@ -60,7 +60,10 @@ module Mihari
           # No need to set data_type manually
           # It is set automatically in #initialize
           artifact = artifact.is_a?(Models::Artifact) ? artifact : Models::Artifact.new(data: artifact)
+
           artifact.source = self.class.class_key
+          artifact.query = query
+
           artifact
         end.select(&:valid?).uniq(&:data)
       end

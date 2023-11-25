@@ -5,13 +5,11 @@ import { defineConfig } from "vite"
 
 const env = process.env
 const target = env.BACKEND_URL || "http://localhost:9292/"
-const port = parseInt(env.port || "8080")
 
 // https://vitejs.dev/config/
 export default defineConfig({
   plugins: [vue()],
   server: {
-    port,
     proxy: {
       "/api": target
     }

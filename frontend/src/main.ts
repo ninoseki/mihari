@@ -5,6 +5,7 @@ import "font-awesome-animation/css/font-awesome-animation.min.css"
 import { library } from "@fortawesome/fontawesome-svg-core"
 import {
   faArrowRight,
+  faBarcode,
   faCheck,
   faEdit,
   faExclamation,
@@ -23,6 +24,7 @@ import router from "@/router"
 
 library.add(
   faArrowRight,
+  faBarcode,
   faCheck,
   faEdit,
   faExclamation,
