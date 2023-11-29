@@ -62,6 +62,7 @@ Gem::Specification.new do |spec|
 
   unless ci_env?
     spec.add_development_dependency "lefthook", "~> 1.5"
+    spec.add_development_dependency "ruby-lsp-rspec", "~> 0.1"
     spec.add_development_dependency "solargraph", "~> 0.49"
   end
 
@@ -96,7 +97,7 @@ Gem::Specification.new do |spec|
   spec.add_dependency "semantic_logger", "4.15.0"
   spec.add_dependency "sentry-ruby", "5.13.0"
   spec.add_dependency "slack-notifier", "2.4.0"
-  spec.add_dependency "sqlite3", "1.6.8"
+  spec.add_dependency "sqlite3", "~> 1.6"
   spec.add_dependency "thor", "1.3.0"
   spec.add_dependency "thor-hollaback", "0.2.1"
   spec.add_dependency "uuidtools", "2.2.0"
