@@ -110,9 +110,7 @@ module Mihari
     # @return [Array<Mihari::Models::Artifact>]
     #
     def artifacts
-      analyzers.flat_map do |analyzer|
-        # @type [Dry::Monads::Result::Success<Array<Mihari::Models::Artifact>>, Dry::Monads::Result::Failure]
-        result = analyzer.result
+      analyzer_results.flat_map do |result|
         case result
         when Success
           artifacts = result.value!
@@ -123,7 +121,7 @@ module Mihari
         else
           raise result.failure unless analyzer.ignore_error?
         end
-      end.compact
+      end
     end
 
     #
@@ -292,13 +290,28 @@ module Mihari
     # @return [Array<Mihari::Analyzers::Base>]
     #
     def analyzers
-      @analyzers ||= queries.map do |query_params|
-        analyzer_name = query_params[:analyzer]
+      @analyzers ||= queries.map do |params|
+        analyzer_name = params[:analyzer]
         klass = get_analyzer_class(analyzer_name)
-        analyzer = klass.from_query(query_params)
+        analyzer = klass.from_query(params)
         analyzer.validate_configuration!
         analyzer
       end
+    end
+
+    def parallel_analyzers
+      analyzers.select(&:parallel?)
+    end
+
+    def serial_analyzers
+      analyzers.reject(&:parallel?)
+    end
+
+    # @return [Array<Dry::Monads::Result::Success<Array<Mihari::Models::Artifact>>, Dry::Monads::Result::Failure>]
+    def analyzer_results
+      parallel_results = Parallel.map(parallel_analyzers) { |analyzer| analyzer.result }
+      serial_results = serial_analyzers.map(&:result)
+      parallel_results + serial_results
     end
 
     #
