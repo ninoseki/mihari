@@ -147,7 +147,7 @@ RSpec.describe Mihari::Rule, :vcr do
     context "when a notifier raises an error" do
       before do
         # mock emitters
-        emitter = double("emitter_instance")
+        emitter = instance_double("emitter_instance")
         allow(emitter).to receive(:configured?).and_return(true)
         allow(emitter).to receive(:result).and_return(Dry::Monads::Result::Failure.new("error"))
 

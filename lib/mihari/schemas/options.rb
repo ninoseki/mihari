@@ -15,7 +15,11 @@ module Mihari
       optional(:ignore_error).value(:bool).default(Mihari.config.ignore_error)
     end
 
-    AnalyzerOptions = Options | IgnoreErrorOptions
+    ParallelOptions = Dry::Schema.Params do
+      optional(:parallel).value(:bool).default(Mihari.config.parallel)
+    end
+
+    AnalyzerOptions = Options | IgnoreErrorOptions | ParallelOptions
 
     PaginationOptions = Dry::Schema.Params do
       optional(:pagination_interval).value(:integer).default(Mihari.config.pagination_interval)

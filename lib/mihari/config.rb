@@ -42,6 +42,7 @@ module Mihari
       ignore_error: false,
       pagination_interval: 0,
       pagination_limit: 100,
+      parallel: false,
       retry_exponential_backoff: true,
       retry_interval: 5,
       retry_times: 3,
@@ -150,6 +151,9 @@ module Mihari
 
     # @!attribute [r] pagination_limit
     #   @return [Integer]
+
+    # @!attribute [r] parallel
+    #   @return [Boolean]
 
     # @!attribute [r] ignore_error
     #   @return [Boolean]

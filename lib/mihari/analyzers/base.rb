@@ -37,10 +37,14 @@ module Mihari
       # @return [Boolean]
       #
       def ignore_error?
-        ignore_error = options[:ignore_error]
-        return ignore_error unless ignore_error.nil?
+        options[:ignore_error] || Mihari.config.ignore_error
+      end
 
-        Mihari.config.ignore_error
+      #
+      # @return [Boolean]
+      #
+      def parallel?
+        options[:parallel] || Mihari.config.parallel
       end
 
       # @return [Array<String>, Array<Mihari::Models::Artifact>]

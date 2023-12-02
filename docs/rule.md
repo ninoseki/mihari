@@ -67,6 +67,7 @@ data_types:
   - url
   - mail
 falsepositives: []
+artifact_ttl: null
 ```
 
 ## Components
@@ -90,7 +91,7 @@ Also a rule can have `updated_on` that is a date of a rule modification. Optiona
 
 ### Tags
 
-`tags` (`array[:string]`) is a list of tags of a rule.
+`tags` (`array[:string]`) is a list of tags of a rule. Optional. Defaults to `[]`.
 
 ### Author
 
@@ -144,11 +145,25 @@ Defaults to:
 
 ### False positives
 
-`falsepositives` (`array[:string]`) is a list of false positive values. A string or regexp can be used in here.
+`falsepositives` (`array[:string]`) is a list of false positive values. Optional. A string or regexp can be used in here.
+
+For example,
+
+```yaml
+falsepositives:
+  - 127.0.0.1
+  - /^example\.(com|net)$/
+```
+
+rejects:
+
+- `127.0.0.1`
+- `example.com`
+- `example.net`
 
 ### Artifact TTL
 
-`artifact_ttl` (`integer` / alias: `artifact_lifetime`) is an integer value of artifact TTL (Time-To-Live) in seconds.
+`artifact_ttl` (`integer` / alias: `artifact_lifetime`) is an integer value of artifact TTL (Time-To-Live) in seconds. Optional.
 
 Mihari rejects a same artifact in a same rule in general.
 

@@ -32,6 +32,7 @@ options:
   retry_exponential_backoff: ...
   timeout: ...
   ignore_error: ...
+  parallel: ...
 ```
 
 Also the following analyzers can have pagination options.
@@ -91,6 +92,10 @@ queries:
   - analyzer: censys
     query: ip:8.8.8.8
 ```
+
+### Parallel
+
+`parallel` (`bool`) controls whether to do the parallel query execution or not. Optional. Defaults to `false`. Configurable via `PARALLEL` environment variable.
 
 ### Pagination Interval
 
