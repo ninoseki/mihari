@@ -63,7 +63,7 @@ module Mihari
     #   @return [String, nil]
 
     # @!attribute [r] database_url
-    #   @return [String, nil]
+    #   @return [URI, nil]
 
     # @!attribute [r] fofa_api_key
     #   @return [String, nil]
