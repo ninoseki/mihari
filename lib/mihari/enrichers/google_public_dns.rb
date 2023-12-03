@@ -11,27 +11,10 @@ module Mihari
       #
       # @param [String] name
       #
-      # @return [Array<Mihari::Structs::GooglePublicDNS::Response>]
+      # @return [Mihari::Structs::GooglePublicDNS::Response]
       #
       def call(name)
-        %w[A AAAA CNAME TXT NS].filter_map { |resource_type| query_by_type(name, resource_type) }
-      end
-
-      #
-      # Query Google Public DNS by resource type
-      #
-      # @param [String] name
-      # @param [String] resource_type
-      #
-      # @return [Mihari::Structs::GooglePublicDNS::Response, nil]
-      #
-      def query_by_type(name, resource_type)
-        url = "https://dns.google/resolve"
-        params = { name: name, type: resource_type }
-        res = http.get(url, params: params)
-        Structs::GooglePublicDNS::Response.from_dynamic! JSON.parse(res.body.to_s)
-      rescue HTTPError
-        nil
+        Try { client.query_all(name) }.to_result.value_or([])
       end
 
       class << self
@@ -45,8 +28,8 @@ module Mihari
 
       private
 
-      def http
-        HTTP::Factory.build timeout: timeout
+      def client
+        @client ||= Clients::GooglePublicDNS.new
       end
     end
   end

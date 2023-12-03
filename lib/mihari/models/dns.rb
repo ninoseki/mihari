@@ -20,13 +20,9 @@ module Mihari
         # @return [Array<Mihari::Models::DnsRecord>]
         #
         def build_by_domain(domain, enricher: Enrichers::GooglePublicDNS.new)
-          result = enricher.result(domain).bind do |responses|
+          result = enricher.result(domain).bind do |res|
             Success(
-              responses.map do |res|
-                res.answers.map do |answer|
-                  new(resource: answer.resource_type, value: answer.data)
-                end
-              end.flatten
+              res.answers.map { |answer| new(resource: answer.resource_type, value: answer.data) }
             )
           end
           result.value_or []
