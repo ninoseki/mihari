@@ -154,7 +154,7 @@ module Mihari
 
         case adapter
         when "postgresql", "mysql2"
-          ActiveRecord::Base.establish_connection(Mihari.config.database_url.to_s)
+          ActiveRecord::Base.establish_connection Mihari.config.database_url.to_s
         else
           ActiveRecord::Base.establish_connection(
             adapter: adapter,
@@ -162,8 +162,6 @@ module Mihari
           )
         end
         ActiveRecord::Base.logger = Logger.new($stdout) if development_env?
-      rescue StandardError => e
-        Mihari.logger.error e
       end
 
       #
