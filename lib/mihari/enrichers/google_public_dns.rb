@@ -14,7 +14,7 @@ module Mihari
       # @return [Mihari::Structs::GooglePublicDNS::Response]
       #
       def call(name)
-        Try { client.query_all(name) }.to_result.value_or([])
+        client.query_all name
       end
 
       class << self
@@ -29,7 +29,7 @@ module Mihari
       private
 
       def client
-        @client ||= Clients::GooglePublicDNS.new
+        Clients::GooglePublicDNS.new
       end
     end
   end

@@ -25,11 +25,11 @@ http_interactions:
       Access-Control-Allow-Origin:
       - "*"
       Date:
-      - Sun, 03 Dec 2023 08:57:38 GMT
+      - Sun, 03 Dec 2023 09:18:23 GMT
       Expires:
-      - Sun, 03 Dec 2023 08:57:38 GMT
+      - Sun, 03 Dec 2023 09:18:23 GMT
       Cache-Control:
-      - private, max-age=18312
+      - private, max-age=17067
       Content-Type:
       - application/json; charset=UTF-8
       Server:
@@ -50,7 +50,7 @@ http_interactions:
       - chunked
     body:
       encoding: UTF-8
-      string: '{"Status":0,"TC":false,"RD":true,"RA":true,"AD":true,"CD":false,"Question":[{"name":"example.com.","type":255}],"Answer":[{"name":"example.com.","type":1,"TTL":18312,"data":"93.184.216.34"},{"name":"example.com.","type":46,"TTL":18312,"data":"a
+      string: '{"Status":0,"TC":false,"RD":true,"RA":true,"AD":true,"CD":false,"Question":[{"name":"example.com.","type":255}],"Answer":[{"name":"example.com.","type":1,"TTL":17067,"data":"93.184.216.34"},{"name":"example.com.","type":46,"TTL":17067,"data":"a
         13 2 86400 1703390384 1701578884 46981 example.com. sMfINE65drZQNue1+ULamI2S4v57ik72iMlhpyT4+qkNoLvrXL5+W/yOfGkV8p21FmsjRJJWr6iPYLYnaDeWUw=="}]}'
-  recorded_at: Sun, 03 Dec 2023 08:57:38 GMT
+  recorded_at: Sun, 03 Dec 2023 09:18:23 GMT
 recorded_with: VCR 6.2.0
