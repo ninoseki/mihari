@@ -22,7 +22,7 @@ module Mihari
       def initialize(query, options: nil, api_key: nil)
         super(refang(query), options: options)
 
-        @type = TypeChecker.type(query)
+        @type = DataType.type(query)
 
         @api_key = api_key || Mihari.config.virustotal_api_key
       end

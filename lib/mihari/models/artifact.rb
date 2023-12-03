@@ -46,7 +46,7 @@ module Mihari
 
         super(*args, **kwargs)
 
-        self.data_type = TypeChecker.type(data)
+        self.data_type = DataType.type(data)
 
         @tags = []
         @rule_id = ""

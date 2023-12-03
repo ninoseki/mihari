@@ -18,7 +18,7 @@ module Mihari
       def initialize(query, options: nil)
         super(refang(query), options: options)
 
-        @type = TypeChecker.type(query)
+        @type = DataType.type(query)
       end
 
       def artifacts

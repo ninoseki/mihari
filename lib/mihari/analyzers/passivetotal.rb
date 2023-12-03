@@ -26,7 +26,7 @@ module Mihari
       def initialize(query, options: nil, api_key: nil, username: nil)
         super(refang(query), options: options)
 
-        @type = TypeChecker.type(query)
+        @type = DataType.type(query)
 
         @username = username || Mihari.config.passivetotal_username
         @api_key = api_key || Mihari.config.passivetotal_api_key

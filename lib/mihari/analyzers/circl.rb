@@ -26,7 +26,7 @@ module Mihari
       def initialize(query, options: nil, username: nil, password: nil)
         super(refang(query), options: options)
 
-        @type = TypeChecker.type(query)
+        @type = DataType.type(query)
 
         @username = username || Mihari.config.circl_passive_username
         @password = password || Mihari.config.circl_passive_password

@@ -148,7 +148,7 @@ require "mihari/actor"
 
 require "mihari/database"
 require "mihari/http"
-require "mihari/type_checker"
+require "mihari/data_type"
 require "mihari/rule"
 
 # Enrichers
