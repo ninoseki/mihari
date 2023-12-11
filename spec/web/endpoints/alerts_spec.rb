@@ -5,8 +5,8 @@ RSpec.describe Mihari::Web::Endpoints::Alerts do
 
   include_context "with database fixtures"
 
-  let!(:alert) { Mihari::Models::Alert.first }
-  let!(:rule) { Mihari::Models::Rule.first }
+  let_it_be(:alert) { Mihari::Models::Alert.first }
+  let_it_be(:rule) { Mihari::Models::Rule.first }
 
   def app
     Mihari::Web::Endpoints::Alerts

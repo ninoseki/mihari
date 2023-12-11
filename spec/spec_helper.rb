@@ -115,6 +115,7 @@ end
 Mihari.config.reload
 
 # require shared recipes & shared contexts
+require "test_prof/recipes/rspec/let_it_be"
 require "test_prof/recipes/rspec/before_all"
 
 require_relative "support/shared_contexts/database_context"

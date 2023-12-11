@@ -3,12 +3,12 @@
 RSpec.describe Mihari::Models::Alert do
   include_context "with database fixtures"
 
-  let!(:alert) { described_class.first }
-  let!(:artifact_data) { Mihari::Models::Artifact.where(alert_id: alert.id).first.data }
-  let!(:tag_name) { alert.tags.first.name }
-  let!(:asn) { Mihari::Models::AutonomousSystem.first.asn }
-  let!(:reverse_dns_name) { Mihari::Models::ReverseDnsName.first.name }
-  let!(:dns_record) { Mihari::Models::DnsRecord.first.value }
+  let_it_be(:alert) { described_class.first }
+  let_it_be(:artifact_data) { Mihari::Models::Artifact.where(alert_id: alert.id).first.data }
+  let_it_be(:tag_name) { alert.tags.first.name }
+  let_it_be(:asn) { Mihari::Models::AutonomousSystem.first.asn }
+  let_it_be(:reverse_dns_name) { Mihari::Models::ReverseDnsName.first.name }
+  let_it_be(:dns_record) { Mihari::Models::DnsRecord.first.value }
 
   let(:tag_filter) do
     Mihari::Structs::Filters::Alert::SearchFilterWithPagination.new(

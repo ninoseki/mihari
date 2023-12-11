@@ -3,10 +3,10 @@
 RSpec.describe Mihari::Models::Artifact, :vcr do
   include_context "with database fixtures"
 
-  let!(:alert) { Mihari::Models::Alert.first }
-  let!(:alert_id) { alert.id }
-  let!(:rule_id) { alert.rule_id }
-  let(:data) { described_class.where(alert_id: alert_id).first.data }
+  let_it_be(:alert) { Mihari::Models::Alert.first }
+  let_it_be(:alert_id) { alert.id }
+  let_it_be(:rule_id) { alert.rule_id }
+  let_it_be(:data) { described_class.where(alert_id: alert_id).first.data }
 
   describe "#validate" do
     it do

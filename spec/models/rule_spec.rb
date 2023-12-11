@@ -3,7 +3,7 @@
 RSpec.describe Mihari::Models::Rule do
   include_context "with database fixtures"
 
-  let!(:rule) { described_class.first }
+  let_it_be(:rule) { described_class.first }
 
   let(:tag_filter) do
     Mihari::Structs::Filters::Rule::SearchFilterWithPagination.new(

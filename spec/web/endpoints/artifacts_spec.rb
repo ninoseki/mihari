@@ -2,6 +2,7 @@
 
 RSpec.describe Mihari::Web::Endpoints::Artifacts, :vcr do
   include Rack::Test::Methods
+
   include_context "with database fixtures"
 
   def app
@@ -9,7 +10,8 @@ RSpec.describe Mihari::Web::Endpoints::Artifacts, :vcr do
   end
 
   let!(:artifact) { Mihari::Models::Artifact.first }
-  let!(:alert) { Mihari::Models::Alert.first }
+
+  let_it_be(:alert) { Mihari::Models::Alert.first }
 
   describe "get /api/artifacts/:id" do
     it "returns 400" do
