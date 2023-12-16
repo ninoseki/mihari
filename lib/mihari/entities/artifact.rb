@@ -42,5 +42,13 @@ module Mihari
         status.ports.empty? ? nil : status.ports
       end
     end
+
+    class ArtifactsWithPagination < Grape::Entity
+      expose :artifacts, using: Entities::Artifact,
+        documentation: { type: Entities::Artifact, is_array: true, required: true }
+      expose :total, documentation: { type: Integer, required: true }
+      expose :current_page, documentation: { type: Integer, required: true }, as: :currentPage
+      expose :page_size, documentation: { type: Integer, required: true }, as: :pageSize
+    end
   end
 end

@@ -3,19 +3,19 @@
 module Mihari
   module Structs
     module Filters
-      module Alert
+      module Artifact
         class SearchFilter < Dry::Struct
-          # @!attribute [r] artifact_data
+          # @!attribute [r] data_type
           #   @return [String, nil]
-          attribute? :artifact_data, Types::String.optional
+          attribute? :data_type, Types::String.optional
 
           # @!attribute [r] rule_id
           #   @return [String, nil]
           attribute? :rule_id, Types::String.optional
 
-          # @!attribute [r] tag_name
+          # @!attribute [r] tag
           #   @return [String, nil]
-          attribute? :tag_name, Types::String.optional
+          attribute? :tag, Types::String.optional
 
           # @!attribute [r] from_at
           #   @return [DateTime, nil]
@@ -37,10 +37,54 @@ module Mihari
 
           def without_pagination
             SearchFilter.new(
-              artifact_data: artifact_data,
+              data_type: data_type,
               from_at: from_at,
               rule_id: rule_id,
-              tag_name: tag_name,
+              tag: tag,
+              to_at: to_at
+            )
+          end
+        end
+      end
+
+      module Alert
+        class SearchFilter < Dry::Struct
+          # @!attribute [r] artifact
+          #   @return [String, nil]
+          attribute? :artifact, Types::String.optional
+
+          # @!attribute [r] rule_id
+          #   @return [String, nil]
+          attribute? :rule_id, Types::String.optional
+
+          # @!attribute [r] tag
+          #   @return [String, nil]
+          attribute? :tag, Types::String.optional
+
+          # @!attribute [r] from_at
+          #   @return [DateTime, nil]
+          attribute? :from_at, Types::DateTime.optional
+
+          # @!attribute [r] to_at
+          #   @return [DateTime, nil]
+          attribute? :to_at, Types::DateTime.optional
+        end
+
+        class SearchFilterWithPagination < SearchFilter
+          # @!attribute [r] page
+          #   @return [Integer, nil]
+          attribute? :page, Types::Int.default(1)
+
+          # @!attribute [r] limit
+          #   @return [Integer, nil]
+          attribute? :limit, Types::Int.default(10)
+
+          def without_pagination
+            SearchFilter.new(
+              artifact: artifact,
+              from_at: from_at,
+              rule_id: rule_id,
+              tag: tag,
               to_at: to_at
             )
           end
@@ -53,9 +97,9 @@ module Mihari
           #   @return [String, nil]
           attribute? :description, Types::String.optional
 
-          # @!attribute [r] tag_name
+          # @!attribute [r] tag
           #   @return [String, nil]
-          attribute? :tag_name, Types::String.optional
+          attribute? :tag, Types::String.optional
 
           # @!attribute [r] title
           #   @return [String, nil]
@@ -83,7 +127,7 @@ module Mihari
             SearchFilter.new(
               description: description,
               from_at: from_at,
-              tag_name: tag_name,
+              tag: tag,
               title: title,
               to_at: to_at
             )

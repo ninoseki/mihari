@@ -36,18 +36,10 @@ module Mihari
           # @return [ResultValue]
           #
           def call(params)
-            filter = params.to_h.to_snake_keys
-
-            # normalize keys
-            filter["artifact_data"] = filter["artifact"]
-            filter["tag_name"] = filter["tag"]
-            # symbolize hash keys
-            filter = filter.to_h.symbolize_keys
-
+            filter = params.to_h.to_snake_keys.symbolize_keys
             search_filter_with_pagination = Structs::Filters::Alert::SearchFilterWithPagination.new(**filter)
             alerts = Mihari::Models::Alert.search(search_filter_with_pagination)
             total = Mihari::Models::Alert.count(search_filter_with_pagination.without_pagination)
-
             ResultValue.new(alerts: alerts, total: total, filter: filter)
           end
         end
@@ -83,7 +75,7 @@ module Mihari
             optional :page, type: Integer, default: 1
             optional :limit, type: Integer, default: 10
             optional :artifact, type: String
-            optional :rule_id, type: String
+            optional :ruleId, type: String
             optional :tag, type: String
             optional :fromAt, type: DateTime
             optional :toAt, type: DateTime

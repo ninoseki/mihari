@@ -30,8 +30,7 @@ module Mihari
           offset = (page - 1) * limit
 
           relation = build_relation(filter.without_pagination)
-          alert_ids = relation.limit(limit).offset(offset).order(id: :desc).pluck(:id).uniq
-          eager_load(:artifacts, :tags).where(id: [alert_ids]).order(id: :desc)
+          relation.limit(limit).offset(offset).order(id: :desc)
         end
 
         #
@@ -51,36 +50,14 @@ module Mihari
         #
         # @param [Mihari::Structs::Filters::Alert::SearchFilter] filter
         #
-        # @return [Array<Integer>]
-        #
-        def get_artifact_ids_by_filter(filter)
-          artifact_ids = []
-
-          if filter.artifact_data
-            artifact = Artifact.where(data: filter.artifact_data)
-            artifact_ids = artifact.pluck(:id)
-            # set invalid ID if nothing is matched with the filters
-            artifact_ids = [-1] if artifact_ids.empty?
-          end
-
-          artifact_ids
-        end
-
-        #
-        # @param [Mihari::Structs::Filters::Alert::SearchFilter] filter
-        #
         # @return [Mihari::Models::Alert]
         #
         def build_relation(filter)
-          artifact_ids = get_artifact_ids_by_filter(filter)
+          relation = eager_load(:artifacts, :tags)
 
-          relation = includes(:artifacts, :tags)
-
-          relation = relation.where(artifacts: { id: artifact_ids }) unless artifact_ids.empty?
-          relation = relation.where(tags: { name: filter.tag_name }) if filter.tag_name
-
+          relation = relation.where(artifacts: { data: filter.artifact }) if filter.artifact
+          relation = relation.where(tags: { name: filter.tag }) if filter.tag
           relation = relation.where(rule_id: filter.rule_id) if filter.rule_id
-
           relation = relation.where("alerts.created_at >= ?", filter.from_at) if filter.from_at
           relation = relation.where("alerts.created_at <= ?", filter.to_at) if filter.to_at
 
