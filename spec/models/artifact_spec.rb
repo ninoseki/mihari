@@ -4,9 +4,17 @@ RSpec.describe Mihari::Models::Artifact, :vcr do
   include_context "with database fixtures"
 
   let_it_be(:alert) { Mihari::Models::Alert.first }
+  let_it_be(:tag) { alert.tags.first.name }
   let_it_be(:alert_id) { alert.id }
   let_it_be(:rule_id) { alert.rule_id }
   let_it_be(:data) { described_class.where(alert_id: alert_id).first.data }
+
+  let(:tag_filter) do
+    Mihari::Structs::Filters::Artifact::SearchFilterWithPagination.new(tag: tag)
+  end
+  let(:empty_rule_filter) do
+    Mihari::Structs::Filters::Artifact::SearchFilterWithPagination.new(rule_id: "404")
+  end
 
   describe "#validate" do
     it do
@@ -223,6 +231,40 @@ RSpec.describe Mihari::Models::Artifact, :vcr do
         artifact.enrich_by_enricher(enricher)
         expect(artifact.whois_record).not_to be_nil
       end
+    end
+  end
+
+  describe ".search" do
+    it do
+      artifacts = described_class.search(Mihari::Structs::Filters::Artifact::SearchFilterWithPagination.new)
+      expect(artifacts.length).to be >= alert.artifacts.length
+    end
+
+    it do
+      artifacts = described_class.search(tag_filter)
+      expect(artifacts.length).to be >= alert.artifacts.length
+    end
+
+    it do
+      artifacts = described_class.search(empty_rule_filter)
+      expect(artifacts.length).to eq(0)
+    end
+  end
+
+  describe ".count" do
+    it do
+      count = described_class.count(Mihari::Structs::Filters::Artifact::SearchFilter.new)
+      expect(count).to be >= alert.artifacts.length
+    end
+
+    it do
+      count = described_class.count(tag_filter)
+      expect(count).to be >= alert.artifacts.length
+    end
+
+    it do
+      count = described_class.count(empty_rule_filter)
+      expect(count).to eq(0)
     end
   end
 end

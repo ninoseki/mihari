@@ -40,10 +40,7 @@ module Mihari
           offset = (page - 1) * limit
 
           relation = build_relation(filter.without_pagination)
-
-          # TODO: improve queires
-          rule_ids = relation.limit(limit).offset(offset).order(created_at: :desc).pluck(:id).uniq
-          where(id: [rule_ids]).order(created_at: :desc)
+          relation.limit(limit).offset(offset).order(created_at: :desc)
         end
 
         #
@@ -68,7 +65,7 @@ module Mihari
         def build_relation(filter)
           relation = includes(alerts: :tags)
 
-          relation = relation.where(alerts: { tags: { name: filter.tag_name } }) if filter.tag_name
+          relation = relation.where(alerts: { tags: { name: filter.tag } }) if filter.tag
 
           relation = relation.where("rules.title LIKE ?", "%#{filter.title}%") if filter.title
           relation = relation.where("rules.description LIKE ?", "%#{filter.description}%") if filter.description

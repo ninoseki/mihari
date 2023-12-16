@@ -36,17 +36,10 @@ module Mihari
           # @return [ResultValue]
           #
           def call(params)
-            filter = params.to_h.to_snake_keys
-
-            # normalize keys
-            filter["tag_name"] = filter["tag"]
-            # symbolize hash keys
-            filter = filter.to_h.symbolize_keys
-
+            filter = params.to_h.to_snake_keys.symbolize_keys
             search_filter_with_pagination = Mihari::Structs::Filters::Rule::SearchFilterWithPagination.new(**filter)
             rules = Mihari::Models::Rule.search(search_filter_with_pagination)
             total = Mihari::Models::Rule.count(search_filter_with_pagination.without_pagination)
-
             ResultValue.new(rules: rules, total: total, filter: filter)
           end
         end

@@ -4,26 +4,20 @@ RSpec.describe Mihari::Models::Alert do
   include_context "with database fixtures"
 
   let_it_be(:alert) { described_class.first }
-  let_it_be(:artifact_data) { Mihari::Models::Artifact.where(alert_id: alert.id).first.data }
-  let_it_be(:tag_name) { alert.tags.first.name }
+  let_it_be(:artifact) { Mihari::Models::Artifact.where(alert_id: alert.id).first.data }
+  let_it_be(:tag) { alert.tags.first.name }
   let_it_be(:asn) { Mihari::Models::AutonomousSystem.first.asn }
   let_it_be(:reverse_dns_name) { Mihari::Models::ReverseDnsName.first.name }
   let_it_be(:dns_record) { Mihari::Models::DnsRecord.first.value }
 
   let(:tag_filter) do
-    Mihari::Structs::Filters::Alert::SearchFilterWithPagination.new(
-      tag_name: tag_name
-    )
+    Mihari::Structs::Filters::Alert::SearchFilterWithPagination.new(tag: tag)
   end
   let(:artifact_filter) do
-    Mihari::Structs::Filters::Alert::SearchFilterWithPagination.new(
-      artifact_data: artifact_data
-    )
+    Mihari::Structs::Filters::Alert::SearchFilterWithPagination.new(artifact: artifact)
   end
   let(:empty_rule_filter) do
-    Mihari::Structs::Filters::Alert::SearchFilterWithPagination.new(
-      rule_id: "404"
-    )
+    Mihari::Structs::Filters::Alert::SearchFilterWithPagination.new(rule_id: "404")
   end
 
   describe ".search" do

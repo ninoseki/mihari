@@ -7,12 +7,12 @@ RSpec.describe Mihari::Models::Rule do
 
   let(:tag_filter) do
     Mihari::Structs::Filters::Rule::SearchFilterWithPagination.new(
-      tag_name: rule.tags.first.name
+      tag: rule.tags.first.name
     )
   end
   let(:empty_tag_filter) do
     Mihari::Structs::Filters::Rule::SearchFilterWithPagination.new(
-      tag_name: "404_not_found"
+      tag: "404_not_found"
     )
   end
   let(:title_filter) do

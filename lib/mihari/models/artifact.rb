@@ -78,6 +78,18 @@ module Mihari
       end
 
       #
+      # Count artifacts
+      #
+      # @param [Mihari::Structs::Filters::Artifact::SearchFilter] filter
+      #
+      # @return [Integer]
+      #
+      def count(filter)
+        relation = build_relation(filter)
+        relation.distinct("artifact.id").count
+      end
+
+      #
       # Enrich whois record
       #
       # @param [Mihari::Enrichers::Whois] enricher
@@ -105,7 +117,7 @@ module Mihari
       # @param [Mihari::Enrichers::Shodan] enricher
       #
       def enrich_reverse_dns(enricher = Enrichers::Shodan.new)
-        return unless can_enrich_revese_dns?
+        return unless can_enrich_reverse_dns?
 
         self.reverse_dns_names = ReverseDnsName.build_by_ip(data, enricher: enricher)
       end
@@ -195,6 +207,56 @@ module Mihari
         methods.each { |method| send(method, enricher) if respond_to?(method) }
       end
 
+      class << self
+        #
+        # Search artifacts
+        #
+        # @param [Mihari::Structs::Filters::Artifact::SearchFilterWithPagination] filter
+        #
+        # @return [Array<Artifact>]
+        #
+        def search(filter)
+          limit = filter.limit.to_i
+          raise ArgumentError, "limit should be bigger than zero" unless limit.positive?
+
+          page = filter.page.to_i
+          raise ArgumentError, "page should be bigger than zero" unless page.positive?
+
+          offset = (page - 1) * limit
+
+          relation = build_relation(filter.without_pagination)
+          relation.limit(limit).offset(offset).order(id: :desc)
+        end
+
+        #
+        # Count artifacts
+        #
+        # @param [Mihari::Structs::Filters::Artifact::SearchFilter] filter
+        #
+        # @return [Integer]
+        #
+        def count(filter)
+          relation = build_relation(filter)
+          relation.distinct("artifacts.id").count
+        end
+
+        #
+        # @param [Mihari::Structs::Filters::Artifact::SearchFilter] filter
+        #
+        # @return [Mihari::Models::Artifact]
+        #
+        def build_relation(filter)
+          relation = eager_load(alert: :tags)
+
+          relation = relation.where(alert: { rule_id: filter.rule_id }) if filter.rule_id
+          relation = relation.where(alert: { tags: { name: filter.tag } }) if filter.tag
+          relation = relation.where("artifacts.created_at >= ?", filter.from_at) if filter.from_at
+          relation = relation.where("artifacts.created_at <= ?", filter.to_at) if filter.to_at
+
+          relation
+        end
+      end
+
       private
 
       def ipinfo
@@ -219,7 +281,7 @@ module Mihari
         %w[domain url].include?(data_type) && dns_records.empty?
       end
 
-      def can_enrich_revese_dns?
+      def can_enrich_reverse_dns?
         data_type == "ip" && reverse_dns_names.empty?
       end
 
