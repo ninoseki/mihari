@@ -107,8 +107,8 @@ module Mihari
           params do
             optional :page, type: Integer, default: 1
             optional :limit, type: Integer, default: 10
-            optional :data_type, type: String
-            optional :rule_id, type: String
+            optional :dataType, type: String
+            optional :ruleId, type: String
             optional :tag, type: String
             optional :fromAt, type: DateTime
             optional :toAt, type: DateTime

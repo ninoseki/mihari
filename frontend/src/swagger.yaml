@@ -67,7 +67,7 @@ paths:
           type: string
           required: false
         - in: query
-          name: rule_id
+          name: ruleId
           type: string
           required: false
         - in: query
@@ -182,6 +182,56 @@ paths:
           description: ""
           schema:
             "$ref": "#/definitions/Mihari_Entities_Message"
+      tags:
+        - artifacts
+  "/api/artifacts":
+    get:
+      summary: Search artifacts
+      description: Search artifacts
+      produces:
+        - application/json
+      parameters:
+        - in: query
+          name: page
+          type: integer
+          format: int32
+          default: 1
+          required: false
+        - in: query
+          name: limit
+          type: integer
+          format: int32
+          default: 10
+          required: false
+        - in: query
+          name: dataType
+          type: string
+          required: false
+        - in: query
+          name: ruleId
+          type: string
+          required: false
+        - in: query
+          name: tag
+          type: string
+          required: false
+        - in: query
+          name: fromAt
+          type: string
+          format: date-time
+          required: false
+        - in: query
+          name: toAt
+          type: string
+          format: date-time
+          required: false
+      responses:
+        "200":
+          description: Search artifacts
+          schema:
+            type: array
+            items:
+              "$ref": "#/definitions/Mihari_Entities_ArtifactsWithPagination"
       tags:
         - artifacts
   "/api/configs":
@@ -661,6 +711,28 @@ definitions:
         format: int32
     required:
       - port
+  Mihari_Entities_ArtifactsWithPagination:
+    type: object
+    properties:
+      artifacts:
+        type: array
+        items:
+          "$ref": "#/definitions/Mihari_Entities_Artifact"
+      total:
+        type: integer
+        format: int32
+      currentPage:
+        type: integer
+        format: int32
+      pageSize:
+        type: integer
+        format: int32
+    required:
+      - artifacts
+      - total
+      - currentPage
+      - pageSize
+    description: Mihari_Entities_ArtifactsWithPagination model
   Mihari_Entities_Config:
     type: object
     properties:
