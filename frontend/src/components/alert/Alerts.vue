@@ -29,6 +29,10 @@ export default defineComponent({
     Pagination
   },
   props: {
+    page: {
+      type: String,
+      required: true
+    },
     alerts: {
       type: Object as PropType<Alerts>,
       required: true
