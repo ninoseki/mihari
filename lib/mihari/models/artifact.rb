@@ -250,6 +250,7 @@ module Mihari
 
           relation = relation.where(alert: { rule_id: filter.rule_id }) if filter.rule_id
           relation = relation.where(alert: { tags: { name: filter.tag } }) if filter.tag
+          relation = relation.where(data_type: filter.data_type) if filter.data_type
           relation = relation.where("artifacts.created_at >= ?", filter.from_at) if filter.from_at
           relation = relation.where("artifacts.created_at <= ?", filter.to_at) if filter.to_at
 
