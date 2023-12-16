@@ -1,6 +1,7 @@
 <template>
   <Loading v-if="getAlertsTask.isRunning"></Loading>
   <Alerts
+    :page="page.toString()"
     :alerts="getAlertsTask.last.value"
     v-if="getAlertsTask.last?.value"
     @refresh-page="refreshPage"
@@ -80,6 +81,7 @@ export default defineComponent({
     })
 
     return {
+      page,
       getAlertsTask,
       refreshPage,
       updatePage,

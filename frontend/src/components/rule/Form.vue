@@ -86,11 +86,11 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, type PropType, ref, toRef, watch } from "vue"
-import { useRoute } from "vue-router"
+import { useRouteQuery } from "@vueuse/router"
+import { defineComponent, type PropType, watch } from "vue"
 
 import type { RuleSearchParams } from "@/types"
-import { normalizeQueryParam } from "@/utils"
+import { normalizeQuery } from "@/utils"
 
 export default defineComponent({
   name: "RulesForm",
@@ -100,7 +100,7 @@ export default defineComponent({
       required: true
     },
     page: {
-      type: Number,
+      type: String,
       required: true
     },
     tag: {
@@ -109,31 +109,20 @@ export default defineComponent({
     }
   },
   setup(props) {
-    const route = useRoute()
-
-    const description = ref<string | undefined>(undefined)
-    const fromAt = ref<string | undefined>(undefined)
-    const tagInput = toRef(props, "tag")
-    const title = ref<string | undefined>(undefined)
-    const toAt = ref<string | undefined>(undefined)
-
-    const updateByQueryParams = () => {
-      const tag_ = route.query["tag"]
-      if (tagInput.value === undefined) {
-        tagInput.value = normalizeQueryParam(tag_)
-      }
-    }
+    const description = useRouteQuery("description")
+    const fromAt = useRouteQuery("fromAt")
+    const tagInput = useRouteQuery("tag", props.tag || null)
+    const title = useRouteQuery("title")
+    const toAt = useRouteQuery("toAt")
 
     const getSearchParams = (): RuleSearchParams => {
-      updateByQueryParams()
-
       const params: RuleSearchParams = {
-        description: description.value === "" ? undefined : description.value,
-        page: props.page,
-        tag: tagInput.value === "" ? undefined : tagInput.value,
-        title: title.value === "" ? undefined : title.value,
-        toAt: toAt.value === "" ? undefined : toAt.value,
-        fromAt: fromAt.value === "" ? undefined : fromAt.value
+        description: normalizeQuery(description.value),
+        page: parseInt(props.page),
+        tag: normalizeQuery(tagInput.value),
+        title: normalizeQuery(description.value),
+        toAt: normalizeQuery(toAt.value),
+        fromAt: normalizeQuery(fromAt.value)
       }
       return params
     }
@@ -141,7 +130,7 @@ export default defineComponent({
     watch(
       () => props.tag,
       () => {
-        tagInput.value = props.tag
+        tagInput.value = props.tag || null
       }
     )
 

@@ -30,6 +30,7 @@
     <AlertsComponent
       :alerts="getAlertsTask.last.value"
       v-if="getAlertsTask.last?.value"
+      :page="page"
       @refresh-page="refreshPage"
       @update-page="updatePage"
       @update-tag="updateTag"
@@ -38,6 +39,7 @@
 </template>
 
 <script lang="ts">
+import { useRouteQuery } from "@vueuse/router"
 import { defineComponent, nextTick, onMounted, ref, watch } from "vue"
 
 import { generateGetAlertsTask, generateGetRuleSetTask, generateGetTagsTask } from "@/api-helper"
@@ -56,7 +58,7 @@ export default defineComponent({
     ErrorMessage
   },
   setup() {
-    const page = ref(1)
+    const page = useRouteQuery<string>("page", "1")
     const tag = ref<string | undefined>(undefined)
     const form = ref<InstanceType<typeof FormComponent>>()
 
@@ -70,17 +72,15 @@ export default defineComponent({
     }
 
     const updatePage = (newPage: number) => {
-      page.value = newPage
+      page.value = newPage.toString()
     }
 
     const resetPage = () => {
-      page.value = 1
+      page.value = "1"
     }
 
     const search = async () => {
-      // reset page
       resetPage()
-
       await getAlerts()
     }
 
