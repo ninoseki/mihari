@@ -38,7 +38,7 @@ Gem::Specification.new do |spec|
 
   spec.add_development_dependency "better_errors", "~> 2.10"
   spec.add_development_dependency "binding_of_caller", "~> 1.0"
-  spec.add_development_dependency "bundler", "~> 2.4"
+  spec.add_development_dependency "bundler", "~> 2.5"
   spec.add_development_dependency "coveralls_reborn", "~> 0.28"
   spec.add_development_dependency "fakefs", "~> 2.5"
   spec.add_development_dependency "faker", "~> 3.2"
@@ -63,11 +63,11 @@ Gem::Specification.new do |spec|
   unless ci_env?
     spec.add_development_dependency "lefthook", "~> 1.5"
     spec.add_development_dependency "ruby-lsp-rspec", "~> 0.1"
-    spec.add_development_dependency "solargraph", "~> 0.49"
+    spec.add_development_dependency "solargraph", "~> 0.50"
   end
 
   spec.add_dependency "activerecord", "7.1.2"
-  spec.add_dependency "addressable", "2.8.5"
+  spec.add_dependency "addressable", "~> 2.8"
   spec.add_dependency "anyway_config", "2.5.4"
   spec.add_dependency "awrence", "2.0.1"
   spec.add_dependency "dotenv", "2.8.1"
@@ -87,7 +87,7 @@ Gem::Specification.new do |spec|
   spec.add_dependency "launchy", "2.5.2"
   spec.add_dependency "memo_wise", "1.8.0"
   spec.add_dependency "normalize_country", "0.3.2"
-  spec.add_dependency "parallel", "1.23.0"
+  spec.add_dependency "parallel", "1.24.0"
   spec.add_dependency "plissken", "2.0.1"
   spec.add_dependency "public_suffix", "5.0.4"
   spec.add_dependency "puma", "6.4.0"
