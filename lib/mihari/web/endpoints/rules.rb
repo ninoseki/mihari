@@ -7,43 +7,6 @@ module Mihari
       # Rule API endpoint
       #
       class Rules < Grape::API
-        class RuleSearcher < Mihari::Service
-          class ResultValue
-            # @return [Array<Mihari::Models::Rule>]
-            attr_reader :rules
-
-            # @return [Integer]
-            attr_reader :total
-
-            # @return [Mihari::Structs::Filters::Rule::SearchFilterWithPagination]
-            attr_reader :filter
-
-            #
-            # @param [Array<Mihari::Models::Rule>] rules
-            # @param [Integer] total
-            # @param [Mihari::Structs::Filters::Rule::SearchFilterWithPagination] filter
-            #
-            def initialize(rules:, total:, filter:)
-              @rules = rules
-              @total = total
-              @filter = filter
-            end
-          end
-
-          #
-          # @params [Hash]
-          #
-          # @return [ResultValue]
-          #
-          def call(params)
-            normalized = params.to_h.to_snake_keys.symbolize_keys
-            filter = Structs::Filters::Search.new(**normalized)
-            rules = Mihari::Models::Rule.search_by_filter(filter)
-            total = Mihari::Models::Rule.count_by_filter(filter)
-            ResultValue.new(rules: rules, total: total, filter: filter)
-          end
-        end
-
         class RuleGetter < Service
           #
           # @params [String] id
@@ -119,9 +82,9 @@ module Mihari
             optional :limit, type: Integer, default: 10
           end
           get "/" do
-            value = RuleSearcher.call(params.to_h)
+            value = Services::RuleSearcher.call(params.to_h)
             present({
-              rules: value.rules,
+              rules: value.results,
               total: value.total,
               current_page: value.filter[:page].to_i,
               page_size: value.filter[:limit].to_i

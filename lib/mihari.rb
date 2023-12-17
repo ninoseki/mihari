@@ -265,10 +265,10 @@ require "mihari/schemas/analyzer"
 require "mihari/schemas/rule"
 
 # Services
-require "mihari/services/rule_builder"
-
 require "mihari/services/alert_builder"
 require "mihari/services/alert_runner"
+require "mihari/services/rule_builder"
+require "mihari/services/searchers"
 
 # Entities
 require "mihari/entities/message"
