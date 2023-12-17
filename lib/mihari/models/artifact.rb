@@ -22,20 +22,25 @@ module Mihari
       has_one :autonomous_system, dependent: :destroy
       has_one :geolocation, dependent: :destroy
       has_one :whois_record, dependent: :destroy
+      has_one :rule, through: :alert
 
       has_many :cpes, dependent: :destroy
       has_many :dns_records, dependent: :destroy
       has_many :ports, dependent: :destroy
       has_many :reverse_dns_names, dependent: :destroy
+      has_many :tags, through: :alert
+
+      include SearchCop
+
+      search_scope :search do
+        attributes :data, :data_type, :source, :query, :created_at, :updated_at, "rule.id", "rule.title"
+        attributes tag: "tags.name"
+      end
 
       include ActiveModel::Validations
 
       validates_with ArtifactValidator
 
-      # @return [Array<Mihari::Tag>] Tags
-      attr_accessor :tags
-
-      # @return [String, nil] Rule ID
       attr_accessor :rule_id
 
       def initialize(*args, **kwargs)
@@ -47,8 +52,6 @@ module Mihari
         super(*args, **kwargs)
 
         self.data_type = DataType.type(data)
-
-        @tags = []
         @rule_id = ""
       end
 
@@ -75,18 +78,6 @@ module Mihari
 
         decayed_at = base_time - (artifact_lifetime || -1).seconds
         artifact.created_at < decayed_at
-      end
-
-      #
-      # Count artifacts
-      #
-      # @param [Mihari::Structs::Filters::Artifact::SearchFilter] filter
-      #
-      # @return [Integer]
-      #
-      def count(filter)
-        relation = build_relation(filter)
-        relation.distinct("artifact.id").count
       end
 
       #
@@ -208,34 +199,15 @@ module Mihari
       end
 
       class << self
-        include Paginationable
+        include Searchable
 
-        # @!method search(filter)
-        #   @param [Mihari::Structs::Filters::Artifact::SearchFilter] filter
-        #   @return [Array<Mihari::Models::Artifact>]
+        # @!method search_by_filter(filter)
+        #   @param [Mihari::Structs::Filters::Search] filter
+        #   @return [Array<Mihari::Models::Alert>]
 
-        # @!method count(filter)
-        #   @param [Mihari::Structs::Filters::Artifact::SearchFilter] filter
+        # @!method count_by_filter(filter)
+        #   @param [Mihari::Structs::Filters::Search] filter
         #   @return [Integer]
-
-        private
-
-        #
-        # @param [Mihari::Structs::Filters::Artifact::SearchFilter] filter
-        #
-        # @return [Mihari::Models::Artifact]
-        #
-        def build_relation(filter)
-          relation = eager_load(alert: :tags)
-
-          relation = relation.where(alert: { rule_id: filter.rule_id }) if filter.rule_id
-          relation = relation.where(alert: { tags: { name: filter.tag } }) if filter.tag
-          relation = relation.where(data_type: filter.data_type) if filter.data_type
-          relation = relation.where("artifacts.created_at >= ?", filter.from_at) if filter.from_at
-          relation = relation.where("artifacts.created_at <= ?", filter.to_at) if filter.to_at
-
-          relation
-        end
       end
 
       private

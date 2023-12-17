@@ -5,7 +5,7 @@
       v-on:mouseover="showDeleteButton"
       v-on:mouseleave="hideDeleteButton"
     >
-      <span class="tag is-info is-light" @click="updateTag">{{ tag.name }}</span>
+      <span class="tag is-info is-light">{{ tag.name }}</span>
       <a class="tag is-delete" v-if="isDeleteButtonEnabled" @click="deleteTag"></a>
     </div>
   </div>
@@ -25,7 +25,7 @@ export default defineComponent({
       required: true
     }
   },
-  setup(props, context) {
+  setup(props) {
     const isDeleted = ref(false)
     const isDeleteButtonEnabled = ref(false)
 
@@ -50,12 +50,7 @@ export default defineComponent({
       isDeleteButtonEnabled.value = false
     }
 
-    const updateTag = () => {
-      context.emit("update-tag", props.tag.name)
-    }
-
     return {
-      updateTag,
       isDeleted,
       deleteTag,
       showDeleteButton,

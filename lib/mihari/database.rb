@@ -12,9 +12,9 @@ def development_env?
 end
 
 #
-# Mihari v5 DB schema
+# Mihari v7 DB schema
 #
-class V5Schema < ActiveRecord::Migration[7.1]
+class V7Schema < ActiveRecord::Migration[7.1]
   def change
     create_table :rules, id: :string, if_not_exists: true do |t|
       t.string :title, null: false
@@ -33,6 +33,7 @@ class V5Schema < ActiveRecord::Migration[7.1]
       t.string :data, null: false
       t.string :data_type, null: false
       t.string :source
+      t.string :query
       t.json :metadata
       t.timestamps
 
@@ -102,18 +103,12 @@ class V5Schema < ActiveRecord::Migration[7.1]
 
     create_table :taggings, if_not_exists: true do |t|
       t.integer :tag_id
-      t.integer :alert_id
+      t.string :rule_id
       t.datetime :created_at
     end
 
     add_index :taggings, :tag_id, if_not_exists: true
-    add_index :taggings, %i[tag_id alert_id], unique: true, if_not_exists: true
-  end
-end
-
-class V61Schema < ActiveRecord::Migration[7.1]
-  def change
-    add_column :artifacts, :query, :string
+    add_index :taggings, %i[tag_id rule_id], unique: true, if_not_exists: true
   end
 end
 
@@ -128,7 +123,7 @@ end
 # @return [Array<ActiveRecord::Migration>] schemas
 #
 def schemas
-  [V5Schema, V61Schema]
+  [V7Schema]
 end
 
 module Mihari

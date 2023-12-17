@@ -84,10 +84,19 @@ module Mihari
     end
 
     #
-    # @return [Array<String>]
+    # @return [Array<Mihari::Models::Tag>]
     #
     def tags
-      data[:tags]
+      data[:tags].uniq.filter_map do |name|
+        Models::Tag.find_or_create_by(name: name)
+      end
+    end
+
+    #
+    # @return [Array<Mihari::Models::Tagging>]
+    #
+    def taggings
+      tags.map { |tag| Models::Tagging.find_or_create_by(tag_id: tag.id, rule_id: id) }
     end
 
     #
@@ -211,6 +220,7 @@ module Mihari
       rule.title = title
       rule.description = description
       rule.data = data
+      rule.taggings = taggings
 
       rule
     rescue ActiveRecord::RecordNotFound
@@ -218,7 +228,8 @@ module Mihari
         id: id,
         title: title,
         description: description,
-        data: data
+        data: data,
+        taggings: taggings
       )
     end
 

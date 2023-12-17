@@ -12,6 +12,7 @@ import {
   faInfoCircle,
   faLightbulb,
   faPlus,
+  faQuestion,
   faSearch,
   faSpinner,
   faTimes
@@ -33,7 +34,8 @@ library.add(
   faPlus,
   faSearch,
   faSpinner,
-  faTimes
+  faTimes,
+  faQuestion
 )
 
 const app = createApp(App)

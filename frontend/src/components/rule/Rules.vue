@@ -18,7 +18,7 @@
           {{ rule.description }}
         </td>
         <td>
-          <Tags :tags="rule.tags" @update-tag="updateTag"></Tags>
+          <Tags :tags="rule.tags"></Tags>
         </td>
       </tr>
     </table>
@@ -51,7 +51,7 @@ export default defineComponent({
     Pagination,
     Tags
   },
-  emits: ["update-page", "refresh-page", "update-tag"],
+  emits: ["update-page", "refresh-page"],
   setup(props, context) {
     const scrollToTop = () => {
       window.scrollTo({
@@ -69,16 +69,11 @@ export default defineComponent({
       context.emit("refresh-page")
     }
 
-    const updateTag = (tag: string) => {
-      scrollToTop()
-      context.emit("update-tag", tag)
-    }
-
     const hasRules = computed(() => {
       return props.rules.rules.length > 0
     })
 
-    return { updatePage, refreshPage, updateTag, hasRules }
+    return { updatePage, refreshPage, hasRules }
   }
 })
 </script>

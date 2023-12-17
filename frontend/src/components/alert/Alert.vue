@@ -30,7 +30,7 @@
       <tr v-if="alert.tags.length > 0">
         <th>Tags</th>
         <td>
-          <Tags :tags="alert.tags" @update-tag="updateTag"></Tags>
+          <Tags :tags="alert.tags"></Tags>
         </td>
       </tr>
     </table>
@@ -59,11 +59,8 @@ export default defineComponent({
       required: true
     }
   },
+  emits: ["refresh-page"],
   setup(props, context) {
-    const updateTag = (tag: string) => {
-      context.emit("update-tag", tag)
-    }
-
     const deleteAlertTask = generateDeleteAlertTask()
 
     const deleteAlert = async () => {
@@ -77,7 +74,6 @@ export default defineComponent({
     }
 
     return {
-      updateTag,
       deleteAlert,
       getLocalDatetime,
       getHumanizedRelativeTime

@@ -12,12 +12,12 @@ module Mihari
       expose :data_type, documentation: { type: String, required: true }, as: :dataType
       expose :source, documentation: { type: String, required: true }
       expose :query, documentation: { type: String, required: false }
-      expose :tags, documentation: { type: String, is_array: true }
     end
 
     class Artifact < BaseArtifact
       # NOTE: do not define metadata in BaseArtifact since metadata can be relatively big
       expose :metadata, documentation: { type: Hash }
+      expose :tags, using: Entities::Tag, documentation: { type: Entities::Tag, is_array: true, required: true }
 
       expose :autonomous_system, using: Entities::AutonomousSystem,
         documentation: { type: Entities::AutonomousSystem, required: false }, as: :autonomousSystem
