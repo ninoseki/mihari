@@ -1,9 +1,28 @@
 # frozen_string_literal: true
 
-require "json"
-
-RSpec.describe Mihari::Emitters::Webhook, :vcr do
+RSpec.describe Mihari::Emitters::Webhook do
   include_context "with database fixtures"
+
+  before(:all) do
+    @server = server_builder do |http|
+      http.mount_proc("/post") do |req, res|
+        body = req.body.to_s
+
+        res.status = 200
+        res.content_length = body.size
+        res.content_type = "text/json"
+        res.body = body
+      end
+    end
+    @server.start
+  end
+
+  after(:all) { @server.stop }
+
+  let!(:host) { HOST }
+  let!(:port) { @server.port }
+  let!(:base_url) { "http://#{host}:#{port}" }
+  let!(:url) { "#{base_url}/post" }
 
   let!(:artifacts) do
     [
@@ -24,7 +43,7 @@ RSpec.describe Mihari::Emitters::Webhook, :vcr do
     end
 
     context "with URL" do
-      subject(:emitter) { described_class.new(rule: rule, url: "http://example.com") }
+      subject(:emitter) { described_class.new(rule: rule, url: url) }
 
       it do
         expect(emitter.configured?).to be true
@@ -35,12 +54,12 @@ RSpec.describe Mihari::Emitters::Webhook, :vcr do
   describe "#call" do
     subject(:emitter) { described_class.new(rule: rule, url: url, headers: { "Content-Type": "application/json" }) }
 
-    let!(:url) { "https://httpbin.org/post" }
-
     it do
       res = emitter.call artifacts
-      json_data = JSON.parse(res)["json"]
-      expect(json_data).to be_a(Hash)
+      json = JSON.parse(res)
+      expect(json["rule"]["id"]).to eq(rule.id)
+      expect(json["artifacts"]).to eq(artifacts.map(&:data))
+      expect(json["tags"]).to eq(rule.tags.map(&:name))
     end
   end
 end
