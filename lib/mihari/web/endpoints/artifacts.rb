@@ -14,21 +14,13 @@ module Mihari
           # @return [Mihari::Models::Artifact]
           #
           def call(id)
-            artifact = Mihari::Models::Artifact.includes(
+            Mihari::Models::Artifact.includes(
               :autonomous_system,
               :geolocation,
               :whois_record,
               :dns_records,
               :reverse_dns_names
             ).find(id)
-            # TODO: improve queries
-            alert_ids = Mihari::Models::Artifact.where(data: artifact.data).pluck(:alert_id)
-            tag_ids = Mihari::Models::Tagging.where(alert_id: alert_ids).pluck(:tag_id)
-            tags = Mihari::Models::Tag.where(id: tag_ids)
-
-            artifact.tags = tags
-
-            artifact
           end
         end
 
@@ -90,10 +82,10 @@ module Mihari
           # @return [ResultValue]
           #
           def call(params)
-            filter = params.to_h.to_snake_keys.symbolize_keys
-            search_filter_with_pagination = Structs::Filters::Artifact::SearchFilterWithPagination.new(**filter)
-            artifacts = Mihari::Models::Artifact.search(search_filter_with_pagination)
-            total = Mihari::Models::Artifact.count(search_filter_with_pagination.without_pagination)
+            normalized = params.to_h.to_snake_keys.symbolize_keys
+            filter = Structs::Filters::Search.new(**normalized)
+            artifacts = Mihari::Models::Artifact.search_by_filter(filter)
+            total = Mihari::Models::Artifact.count_by_filter(filter)
             ResultValue.new(artifacts: artifacts, total: total, filter: filter)
           end
         end
@@ -105,13 +97,9 @@ module Mihari
             summary: "Search artifacts"
           }
           params do
+            optional :q, type: String, default: ""
             optional :page, type: Integer, default: 1
             optional :limit, type: Integer, default: 10
-            optional :dataType, type: String
-            optional :ruleId, type: String
-            optional :tag, type: String
-            optional :fromAt, type: DateTime
-            optional :toAt, type: DateTime
           end
           get "/" do
             value = ArtifactSearcher.call(params.to_h)

@@ -16,6 +16,9 @@ require "active_support/core_ext/object/deep_dup"
 
 require "active_record"
 
+# Search Cop
+require "search_cop"
+
 # dry-rb
 require "dry/files"
 require "dry/monads"

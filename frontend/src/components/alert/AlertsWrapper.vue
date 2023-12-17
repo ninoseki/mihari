@@ -1,30 +1,58 @@
 <template>
   <div class="box mb-6">
-    <FormComponent
-      ref="form"
-      :ruleSet="getRuleSetTask.last?.value || []"
-      :tags="getTagsTask.last?.value || []"
-      :page="page"
-      :tag="tag"
-    ></FormComponent>
-    <hr />
-    <div class="columns">
-      <div class="column">
-        <div class="field is-grouped is-grouped-centered">
-          <p class="control">
-            <a class="button is-primary" @click="search">
-              <span class="icon is-small">
-                <font-awesome-icon icon="search"></font-awesome-icon>
-              </span>
-              <span>Search</span>
-            </a>
-          </p>
-        </div>
-      </div>
+    <div class="field has-addons">
+      <p class="control is-expanded">
+        <input class="input" type="text" v-model="q" />
+      </p>
+      <p class="control">
+        <a class="button is-primary" @click="search">
+          <span class="icon is-small">
+            <font-awesome-icon icon="search"></font-awesome-icon>
+          </span>
+          <span>Search</span>
+        </a>
+      </p>
+      <p class="control">
+        <a class="button is-info" @click="toggleShowHelp">
+          <span class="icon is-small">
+            <font-awesome-icon icon="question"></font-awesome-icon>
+          </span>
+          <span>Help</span>
+        </a>
+      </p>
+    </div>
+    <div class="content mt-3" v-if="showHelp">
+      <h4 class="is-size-4">Help</h4>
+      <ul>
+        <li>
+          You can group and concatenate search terms with brackets <code>( )</code>,
+          <code>AND</code>, <code>OR</code> and <code>NOT</code>.
+        </li>
+        <li>
+          Searchable fields are
+          <code>rule.id</code>, <code>rule.tittle</code>, <code>artifact.data</code>
+          <code>artifact.data_type</code>, <code>artifact.source</code>, <code>tag</code>,
+          <code>created_at</code> and <code>updated_at</code>.
+        </li>
+      </ul>
+      <h4 class="is-size-4">Examples</h4>
+      <ul>
+        <li>
+          <router-link
+            :to="{ name: 'Alerts', query: { q: 'rule.id:foo AND artifact.data:example.com' } }"
+            >rule.id:foo AND artifact.data:example.com</router-link
+          >
+        </li>
+        <li>
+          <router-link
+            :to="{ name: 'Alerts', query: { q: 'tag:foo AND created_at >= 2020-01-01' } }"
+            >tag:foo AND created_at >= 2020-01-01</router-link
+          >
+        </li>
+      </ul>
     </div>
   </div>
   <div v-if="getAlertsTask.performCount > 0">
-    <hr />
     <Loading v-if="getAlertsTask.isRunning"></Loading>
     <ErrorMessage v-if="getAlertsTask.isError" :error="getAlertsTask.last?.error"></ErrorMessage>
     <AlertsComponent
@@ -33,41 +61,37 @@
       :page="page"
       @refresh-page="refreshPage"
       @update-page="updatePage"
-      @update-tag="updateTag"
     ></AlertsComponent>
   </div>
 </template>
 
 <script lang="ts">
 import { useRouteQuery } from "@vueuse/router"
-import { defineComponent, nextTick, onMounted, ref, watch } from "vue"
+import { defineComponent, onMounted, ref, watch } from "vue"
 
-import { generateGetAlertsTask, generateGetRuleSetTask, generateGetTagsTask } from "@/api-helper"
+import { generateGetAlertsTask, generateGetTagsTask } from "@/api-helper"
 import AlertsComponent from "@/components/alert/Alerts.vue"
-import FormComponent from "@/components/alert/Form.vue"
 import ErrorMessage from "@/components/ErrorMessage.vue"
 import Loading from "@/components/Loading.vue"
-import type { AlertSearchParams } from "@/types"
+import type { SearchParams } from "@/types"
 
 export default defineComponent({
   name: "AlertsWrapper",
   components: {
     AlertsComponent,
-    FormComponent,
     Loading,
     ErrorMessage
   },
   setup() {
     const page = useRouteQuery<string>("page", "1")
-    const tag = ref<string | undefined>(undefined)
-    const form = ref<InstanceType<typeof FormComponent>>()
+    const q = useRouteQuery<string>("q", "")
+    const showHelp = ref(false)
 
     const getAlertsTask = generateGetAlertsTask()
     const getTagsTask = generateGetTagsTask()
-    const getRuleSetTask = generateGetRuleSetTask()
 
     const getAlerts = async () => {
-      const params = form.value?.getSearchParams() as AlertSearchParams
+      const params: SearchParams = { q: q.value, page: parseInt(page.value) }
       return await getAlertsTask.perform(params)
     }
 
@@ -84,44 +108,35 @@ export default defineComponent({
       await getAlerts()
     }
 
-    const updateTag = (newTag: string | undefined) => {
-      if (tag.value === newTag) {
-        tag.value = undefined
-      } else {
-        tag.value = newTag
-      }
-
-      nextTick(async () => await search())
-    }
-
     const refreshPage = async () => {
       // it is just an alias of search
       // this function will be invoked when an alert is deleted
       await search()
     }
 
+    const toggleShowHelp = () => {
+      showHelp.value = !showHelp.value
+    }
+
     onMounted(async () => {
       getTagsTask.perform()
-      getRuleSetTask.perform()
-
       await getAlerts()
     })
 
-    watch([page, tag], async () => {
-      nextTick(async () => await getAlerts())
+    watch(page, async () => {
+      await getAlerts()
     })
 
     return {
       getAlertsTask,
-      getRuleSetTask,
       getTagsTask,
+      page,
+      q,
       refreshPage,
       search,
-      tag,
-      updatePage,
-      updateTag,
-      form,
-      page
+      showHelp,
+      toggleShowHelp,
+      updatePage
     }
   }
 })

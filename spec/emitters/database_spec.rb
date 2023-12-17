@@ -19,11 +19,5 @@ RSpec.describe Mihari::Emitters::Database do
       created_artifacts = Mihari::Models::Artifact.where(alert_id: alert.id)
       expect(created_artifacts.length).to eq(artifacts.length)
     end
-
-    it "does not create duplications" do
-      2.times { emitter.call artifacts }
-
-      expect(Mihari::Models::Tag.where(name: rule.tags.first).count).to eq(1)
-    end
   end
 end

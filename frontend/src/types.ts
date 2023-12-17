@@ -25,10 +25,6 @@ export interface Tags {
   tags: string[]
 }
 
-export interface RuleSet {
-  ruleIds: string[]
-}
-
 export interface DnsRecord {
   resource: string
   value: string
@@ -113,12 +109,8 @@ export interface PaginationParams {
   page: number | undefined
 }
 
-export interface AlertSearchParams extends PaginationParams {
-  artifact: string | undefined
-  ruleId: string | undefined
-  tag: string | undefined
-  fromAt: string | undefined
-  toAt: string | undefined
+export interface SearchParams extends PaginationParams {
+  q: string
 }
 
 export interface IPInfo {
@@ -179,12 +171,4 @@ export interface Query {
 
 export interface Rules extends Pagination {
   rules: Rule[]
-}
-
-export interface RuleSearchParams extends PaginationParams {
-  description: string | undefined
-  tag: string | undefined
-  title: string | undefined
-  fromAt: string | undefined
-  toAt: string | undefined
 }

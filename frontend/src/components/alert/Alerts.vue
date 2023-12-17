@@ -4,7 +4,6 @@
     :alert="alert"
     :key="index"
     @refresh-page="refreshPage"
-    @update-tag="updateTag"
   ></Alert>
   <Pagination
     :total="alerts.total"
@@ -38,7 +37,7 @@ export default defineComponent({
       required: true
     }
   },
-  emits: ["update-page", "refresh-page", "update-tag"],
+  emits: ["update-page", "refresh-page"],
   setup(_, context) {
     const scrollToTop = () => {
       window.scrollTo({
@@ -56,12 +55,7 @@ export default defineComponent({
       context.emit("refresh-page")
     }
 
-    const updateTag = (tag: string) => {
-      scrollToTop()
-      context.emit("update-tag", tag)
-    }
-
-    return { updatePage, updateTag, refreshPage }
+    return { updatePage, refreshPage }
   }
 })
 </script>

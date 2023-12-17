@@ -2,16 +2,6 @@
 
 module Mihari
   module Entities
-    class Query < Grape::Entity
-      expose :analyzer, documentation: { type: String, required: true }
-      expose :query, documentation: { type: String, required: true }
-      expose :interval, documentation: { type: Integer, required: false }
-    end
-
-    class Emitter < Grape::Entity
-      expose :emitter, documentation: { type: String, required: true }
-    end
-
     class Rule < Grape::Entity
       expose :id, documentation: { type: String, required: true }
       expose :title, documentation: { type: String, required: true }
@@ -19,7 +9,6 @@ module Mihari
       expose :yaml, documentation: { type: String, required: true }
       expose :created_at, documentation: { type: DateTime, required: true }, as: :createdAt
       expose :updated_at, documentation: { type: DateTime, required: true }, as: :updatedAt
-
       expose :tags, using: Entities::Tag, documentation: { type: Entities::Tag, is_array: true, required: true }
     end
 
@@ -28,10 +17,6 @@ module Mihari
       expose :total, documentation: { type: Integer, required: true }
       expose :current_page, documentation: { type: Integer, required: true }, as: :currentPage
       expose :page_size, documentation: { type: Integer, required: true }, as: :pageSize
-    end
-
-    class RuleIDs < Grape::Entity
-      expose :rule_ids, documentation: { type: [String], required: true }, as: :ruleIds
     end
   end
 end

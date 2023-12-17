@@ -6,7 +6,7 @@ module Mihari
     # Tagging model
     #
     class Tagging < ActiveRecord::Base
-      belongs_to :alert
+      belongs_to :rule
       belongs_to :tag
     end
   end

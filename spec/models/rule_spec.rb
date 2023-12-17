@@ -4,43 +4,30 @@ RSpec.describe Mihari::Models::Rule do
   include_context "with database fixtures"
 
   let_it_be(:rule) { described_class.first }
+  let_it_be(:tag) { rule.tags.first.name }
 
   let(:tag_filter) do
-    Mihari::Structs::Filters::Rule::SearchFilterWithPagination.new(
-      tag: rule.tags.first.name
-    )
+    Mihari::Structs::Filters::Search.new(q: "tag:#{tag}")
   end
   let(:empty_tag_filter) do
-    Mihari::Structs::Filters::Rule::SearchFilterWithPagination.new(
-      tag: "404_not_found"
-    )
+    Mihari::Structs::Filters::Search.new(q: "tag:404_not_found")
   end
   let(:title_filter) do
-    Mihari::Structs::Filters::Rule::SearchFilterWithPagination.new(
-      title: rule.title
-    )
+    Mihari::Structs::Filters::Search.new(q: "title:#{rule.title}")
   end
   let(:empty_title_filter) do
-    Mihari::Structs::Filters::Rule::SearchFilterWithPagination.new(
-      title: "404_not_found"
-    )
+    Mihari::Structs::Filters::Search.new(q: "title:404_not_found")
   end
   let(:description_filter) do
-    Mihari::Structs::Filters::Rule::SearchFilterWithPagination.new(
-      description: rule.description
-    )
+    Mihari::Structs::Filters::Search.new(q: "description:#{rule.description}")
   end
   let(:empty_description_filter) do
-    Mihari::Structs::Filters::Rule::SearchFilterWithPagination.new(
-      description: "404_not_found"
-    )
+    Mihari::Structs::Filters::Search.new(q: "description:404_not_found")
   end
 
-  describe ".search" do
+  describe ".search_by_filter" do
     it do
-      alerts = described_class.search(
-        Mihari::Structs::Filters::Rule::SearchFilterWithPagination.new
-      )
+      alerts = described_class.search_by_filter(Mihari::Structs::Filters::Search.new(q: ""))
       expect(alerts.length).to be >= 2
     end
 
@@ -57,16 +44,16 @@ RSpec.describe Mihari::Models::Rule do
 
     with_them do
       it do
-        alerts = described_class.search(filter)
+        alerts = described_class.search_by_filter(filter)
         expect(alerts.length).to eq(expected)
       end
     end
   end
 
-  describe ".count" do
+  describe ".count_by_filter" do
     it do
-      count = described_class.count(
-        Mihari::Structs::Filters::Rule::SearchFilter.new
+      count = described_class.count_by_filter(
+        Mihari::Structs::Filters::Search.new(q: "")
       )
       expect(count).to be >= 2
     end
@@ -84,7 +71,7 @@ RSpec.describe Mihari::Models::Rule do
 
     with_them do
       it do
-        count = described_class.count(filter)
+        count = described_class.count_by_filter(filter)
         expect(count).to eq(expected)
       end
     end

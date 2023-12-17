@@ -16,10 +16,7 @@ module Mihari
       def call(artifacts)
         return if artifacts.empty?
 
-        tags = rule.tags.filter_map { |name| Models::Tag.find_or_create_by(name: name) }.uniq
-        taggings = tags.map { |tag| Models::Tagging.new(tag_id: tag.id) }
-
-        alert = Models::Alert.new(artifacts: artifacts, taggings: taggings, rule_id: rule.id)
+        alert = Models::Alert.new(artifacts: artifacts, rule_id: rule.id)
         alert.save
         alert
       end

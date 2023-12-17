@@ -2,15 +2,13 @@ import axios from "axios"
 
 import type {
   Alerts,
-  AlertSearchParams,
   ArtifactWithTags,
   Config,
   CreateRule,
   IPInfo,
   Rule,
   Rules,
-  RuleSearchParams,
-  RuleSet,
+  SearchParams,
   Tags,
   UpdateRule
 } from "@/types"
@@ -27,7 +25,7 @@ export const API = {
     return res.data
   },
 
-  async getAlerts(params: AlertSearchParams): Promise<Alerts> {
+  async getAlerts(params: SearchParams): Promise<Alerts> {
     params.page = params.page || 1
     const res = await client.get<Alerts>("/api/alerts", {
       params: params
@@ -38,11 +36,6 @@ export const API = {
   async getTags(): Promise<string[]> {
     const res = await client.get<Tags>("/api/tags")
     return res.data.tags
-  },
-
-  async getRuleSet(): Promise<string[]> {
-    const res = await client.get<RuleSet>("/api/rules/ids")
-    return res.data.ruleIds
   },
 
   async deleteAlert(id: string): Promise<void> {
@@ -63,7 +56,7 @@ export const API = {
     await client.delete(`/api/artifacts/${id}`)
   },
 
-  async getRules(params: RuleSearchParams): Promise<Rules> {
+  async getRules(params: SearchParams): Promise<Rules> {
     params.page = params.page || 1
     const res = await client.get<Rules>("/api/rules", {
       params: params

@@ -36,10 +36,10 @@ module Mihari
           # @return [ResultValue]
           #
           def call(params)
-            filter = params.to_h.to_snake_keys.symbolize_keys
-            search_filter_with_pagination = Mihari::Structs::Filters::Rule::SearchFilterWithPagination.new(**filter)
-            rules = Mihari::Models::Rule.search(search_filter_with_pagination)
-            total = Mihari::Models::Rule.count(search_filter_with_pagination.without_pagination)
+            normalized = params.to_h.to_snake_keys.symbolize_keys
+            filter = Structs::Filters::Search.new(**normalized)
+            rules = Mihari::Models::Rule.search_by_filter(filter)
+            total = Mihari::Models::Rule.count_by_filter(filter)
             ResultValue.new(rules: rules, total: total, filter: filter)
           end
         end
@@ -108,29 +108,15 @@ module Mihari
         end
 
         namespace :rules do
-          desc "Get Rule IDs", {
-            is_array: true,
-            success: Entities::RuleIDs,
-            summary: "Get rule IDs"
-          }
-          get "/ids" do
-            rule_ids = Mihari::Models::Rule.distinct.pluck(:id)
-            present({ rule_ids: rule_ids }, with: Entities::RuleIDs)
-          end
-
           desc "Search rules", {
             is_array: true,
             success: Entities::RulesWithPagination,
             summary: "Search rules"
           }
           params do
+            optional :q, type: String, default: ""
             optional :page, type: Integer, default: 1
             optional :limit, type: Integer, default: 10
-            optional :title, type: String
-            optional :description, type: String
-            optional :tag, type: String
-            optional :fromAt, type: DateTime
-            optional :toAt, type: DateTime
           end
           get "/" do
             value = RuleSearcher.call(params.to_h)

@@ -201,7 +201,7 @@ module Mihari
       # @return [String]
       #
       def text
-        tags = rule.tags
+        tags = rule.tags.map(&:name)
         tags = ["N/A"] if tags.empty?
         [
           "*#{rule.title}*",

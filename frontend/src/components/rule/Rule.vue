@@ -36,7 +36,6 @@
   <hr />
   <div class="column">
     <h2 class="is-size-2 mb-4">Related alerts</h2>
-
     <Alerts :ruleId="rule.id"></Alerts>
   </div>
 </template>

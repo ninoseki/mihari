@@ -31,25 +31,10 @@ RSpec.describe Mihari::Web::Endpoints::Alerts do
   end
 
   describe "get /api/alerts" do
-    context "with invalid DateTime" do
+    context "with invalid page type" do
       it "returns 400" do
-        get "/api/alerts", { fromAt: "foo" }
+        get "/api/alerts", { page: "foo" }
         expect(last_response.status).to eq(400)
-      end
-
-      it "returns 400" do
-        get "/api/alerts", { fromAt: "2021-05" }
-        expect(last_response.status).to eq(400)
-      end
-    end
-
-    context "with valid DateTime" do
-      it "returns 200" do
-        get "/api/alerts", { fromAt: Time.now }
-        expect(last_response.status).to eq(200)
-
-        json = JSON.parse(last_response.body.to_s)
-        expect(json).to be_a(Hash)
       end
     end
   end

@@ -51,6 +51,11 @@ paths:
         - application/json
       parameters:
         - in: query
+          name: q
+          type: string
+          default: ""
+          required: false
+        - in: query
           name: page
           type: integer
           format: int32
@@ -61,28 +66,6 @@ paths:
           type: integer
           format: int32
           default: 10
-          required: false
-        - in: query
-          name: artifact
-          type: string
-          required: false
-        - in: query
-          name: ruleId
-          type: string
-          required: false
-        - in: query
-          name: tag
-          type: string
-          required: false
-        - in: query
-          name: fromAt
-          type: string
-          format: date-time
-          required: false
-        - in: query
-          name: toAt
-          type: string
-          format: date-time
           required: false
       responses:
         "200":
@@ -192,6 +175,11 @@ paths:
         - application/json
       parameters:
         - in: query
+          name: q
+          type: string
+          default: ""
+          required: false
+        - in: query
           name: page
           type: integer
           format: int32
@@ -202,28 +190,6 @@ paths:
           type: integer
           format: int32
           default: 10
-          required: false
-        - in: query
-          name: dataType
-          type: string
-          required: false
-        - in: query
-          name: ruleId
-          type: string
-          required: false
-        - in: query
-          name: tag
-          type: string
-          required: false
-        - in: query
-          name: fromAt
-          type: string
-          format: date-time
-          required: false
-        - in: query
-          name: toAt
-          type: string
-          format: date-time
           required: false
       responses:
         "200":
@@ -370,6 +336,11 @@ paths:
         - application/json
       parameters:
         - in: query
+          name: q
+          type: string
+          default: ""
+          required: false
+        - in: query
           name: page
           type: integer
           format: int32
@@ -380,28 +351,6 @@ paths:
           type: integer
           format: int32
           default: 10
-          required: false
-        - in: query
-          name: title
-          type: string
-          required: false
-        - in: query
-          name: description
-          type: string
-          required: false
-        - in: query
-          name: tag
-          type: string
-          required: false
-        - in: query
-          name: fromAt
-          type: string
-          format: date-time
-          required: false
-        - in: query
-          name: toAt
-          type: string
-          format: date-time
           required: false
       responses:
         "200":
@@ -432,21 +381,6 @@ paths:
           description: ""
           schema:
             "$ref": "#/definitions/Mihari_Entities_Message"
-      tags:
-        - rules
-  "/api/rules/ids":
-    get:
-      summary: Get rule IDs
-      description: Get Rule IDs
-      produces:
-        - application/json
-      responses:
-        "200":
-          description: Get Rule IDs
-          schema:
-            type: array
-            items:
-              "$ref": "#/definitions/Mihari_Entities_RuleIDs"
       tags:
         - rules
   "/api/tags/{id}":
@@ -540,10 +474,6 @@ definitions:
         type: string
       query:
         type: string
-      tags:
-        type: array
-        items:
-          type: string
     required:
       - id
       - data
@@ -604,12 +534,12 @@ definitions:
         type: string
       query:
         type: string
+      metadata:
+        type: object
       tags:
         type: array
         items:
-          type: string
-      metadata:
-        type: object
+          "$ref": "#/definitions/Mihari_Entities_Tag"
       autonomousSystem:
         "$ref": "#/definitions/Mihari_Entities_AutonomousSystem"
       geolocation:
@@ -637,6 +567,7 @@ definitions:
       - data
       - dataType
       - source
+      - tags
     description: Mihari_Entities_Artifact model
   Mihari_Entities_AutonomousSystem:
     type: object
@@ -842,14 +773,6 @@ definitions:
       - currentPage
       - pageSize
     description: Mihari_Entities_RulesWithPagination model
-  Mihari_Entities_RuleIDs:
-    type: object
-    properties:
-      ruleIds:
-        type: string
-    required:
-      - ruleIds
-    description: Mihari_Entities_RuleIDs model
   Mihari_Entities_Tags:
     type: object
     properties:

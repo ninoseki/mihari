@@ -6,18 +6,17 @@
     v-if="getAlertsTask.last?.value"
     @refresh-page="refreshPage"
     @update-page="updatePage"
-    @update-tag="updateTag"
   >
   </Alerts>
 </template>
 
 <script lang="ts">
-import { defineComponent, nextTick, onMounted, ref, watch } from "vue"
+import { defineComponent, onMounted, ref, watch } from "vue"
 
 import { generateGetAlertsTask } from "@/api-helper"
 import Alerts from "@/components/alert/Alerts.vue"
 import Loading from "@/components/Loading.vue"
-import type { AlertSearchParams } from "@/types"
+import type { SearchParams } from "@/types"
 
 export default defineComponent({
   name: "AlertsWithPagination",
@@ -35,18 +34,14 @@ export default defineComponent({
   },
   setup(props) {
     const page = ref(1)
-    const tag = ref<string | undefined>(undefined)
+    const q = ref(`rule.id:${props.ruleId}`)
 
     const getAlertsTask = generateGetAlertsTask()
 
     const getAlerts = async () => {
-      const params: AlertSearchParams = {
-        artifact: props.artifact,
-        page: page.value,
-        ruleId: props.ruleId,
-        tag: tag.value,
-        toAt: undefined,
-        fromAt: undefined
+      const params: SearchParams = {
+        q: q.value,
+        page: page.value
       }
       return await getAlertsTask.perform(params)
     }
@@ -64,28 +59,19 @@ export default defineComponent({
       await getAlerts()
     }
 
-    const updateTag = (newTag: string | undefined) => {
-      if (tag.value === newTag) {
-        tag.value = undefined
-      } else {
-        tag.value = newTag
-      }
-    }
-
     onMounted(async () => {
       await getAlerts()
     })
 
-    watch([props, page, tag], async () => {
-      nextTick(async () => await getAlerts())
+    watch([props, page], async () => {
+      await getAlerts()
     })
 
     return {
       page,
       getAlertsTask,
       refreshPage,
-      updatePage,
-      updateTag
+      updatePage
     }
   }
 })

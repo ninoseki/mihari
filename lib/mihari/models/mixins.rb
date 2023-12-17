@@ -1,7 +1,12 @@
 module Mihari
   module Models
-    module Paginationable
-      def search(filter)
+    module Searchable
+      #
+      # @param [Mihari::Structs::Filters::Search] filter
+      #
+      # @return [Array<Mihari::Models::Rule>]
+      #
+      def search_by_filter(filter)
         limit = filter.limit.to_i
         raise ArgumentError, "limit should be bigger than zero" unless limit.positive?
 
@@ -10,16 +15,27 @@ module Mihari
 
         offset = (page - 1) * limit
 
-        relation = build_relation(filter.without_pagination)
-        relation.limit(limit).offset(offset).order(id: :desc)
+        relation = build_relation(filter)
+        relation.limit(limit).offset(offset).order(created_at: :desc)
       end
 
       #
-      # @return [Integer]
+      # @param [Mihari::Structs::Filters::Search] filter
       #
-      def count(filter)
+      # @return [Array<Mihari::Models::Rule>]
+      #
+      def count_by_filter(filter)
         relation = build_relation(filter)
-        relation.distinct("alerts.id").count
+        relation.distinct(:id).count
+      end
+
+      private
+
+      #
+      # @param [Mihari::Structs::Filters::Search] filter
+      #
+      def build_relation(filter)
+        filter.q.empty? ? all : search(filter.q)
       end
     end
   end

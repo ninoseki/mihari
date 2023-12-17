@@ -25,7 +25,7 @@ RSpec.describe Mihari::Web::Endpoints::Rules do
 
   describe "get /api/rules/:id" do
     it "returns 404" do
-      get "/api/rules/99999"
+      get "/api/rules/#{Faker::Internet.unique.slug}"
       expect(last_response.status).to eq(404)
     end
 
@@ -41,7 +41,7 @@ RSpec.describe Mihari::Web::Endpoints::Rules do
 
   describe "delete /api/rules/:id" do
     it "returns 404" do
-      delete "/api/rules/99999"
+      delete "/api/rules/#{Faker::Internet.unique.slug}"
       expect(last_response.status).to eq(404)
     end
 

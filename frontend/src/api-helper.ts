@@ -3,19 +3,18 @@ import { type Task, useAsyncTask } from "vue-concurrency"
 import { API } from "@/api"
 import type {
   Alerts,
-  AlertSearchParams,
   ArtifactWithTags,
   Config,
   CreateRule,
   IPInfo,
   Rule,
   Rules,
-  RuleSearchParams,
+  SearchParams,
   UpdateRule
 } from "@/types"
 
-export function generateGetAlertsTask(): Task<Alerts, [AlertSearchParams]> {
-  return useAsyncTask<Alerts, [AlertSearchParams]>(async (_signal, params) => {
+export function generateGetAlertsTask(): Task<Alerts, [SearchParams]> {
+  return useAsyncTask<Alerts, [SearchParams]>(async (_signal, params) => {
     return await API.getAlerts(params)
   })
 }
@@ -35,12 +34,6 @@ export function generateGetTagsTask(): Task<string[], []> {
 export function generateDeleteTagTask(): Task<void, [number]> {
   return useAsyncTask<void, [number]>(async (_signal, tag) => {
     return await API.deleteTag(tag)
-  })
-}
-
-export function generateGetRuleSetTask(): Task<string[], []> {
-  return useAsyncTask<string[], []>(async () => {
-    return await API.getRuleSet()
   })
 }
 
@@ -74,8 +67,8 @@ export function generateGetIPTask(): Task<IPInfo, [string]> {
   })
 }
 
-export function generateGetRulesTask(): Task<Rules, [RuleSearchParams]> {
-  return useAsyncTask<Rules, [RuleSearchParams]>(async (_signal, params: RuleSearchParams) => {
+export function generateGetRulesTask(): Task<Rules, [SearchParams]> {
+  return useAsyncTask<Rules, [SearchParams]>(async (_signal, params: SearchParams) => {
     return await API.getRules(params)
   })
 }

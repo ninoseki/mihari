@@ -10,10 +10,10 @@ RSpec.describe Mihari::Models::Artifact, :vcr do
   let_it_be(:data) { described_class.where(alert_id: alert_id).first.data }
 
   let(:tag_filter) do
-    Mihari::Structs::Filters::Artifact::SearchFilterWithPagination.new(tag: tag)
+    Mihari::Structs::Filters::Search.new(q: "tag:#{tag}")
   end
   let(:empty_rule_filter) do
-    Mihari::Structs::Filters::Artifact::SearchFilterWithPagination.new(rule_id: "404")
+    Mihari::Structs::Filters::Search.new(q: "rule.id:404_not_found")
   end
 
   describe "#validate" do
@@ -234,36 +234,36 @@ RSpec.describe Mihari::Models::Artifact, :vcr do
     end
   end
 
-  describe ".search" do
+  describe ".search_by_filter" do
     it do
-      artifacts = described_class.search(Mihari::Structs::Filters::Artifact::SearchFilterWithPagination.new)
+      artifacts = described_class.search_by_filter(Mihari::Structs::Filters::Search.new(q: ""))
       expect(artifacts.length).to be >= alert.artifacts.length
     end
 
     it do
-      artifacts = described_class.search(tag_filter)
+      artifacts = described_class.search_by_filter(tag_filter)
       expect(artifacts.length).to be >= alert.artifacts.length
     end
 
     it do
-      artifacts = described_class.search(empty_rule_filter)
+      artifacts = described_class.search_by_filter(empty_rule_filter)
       expect(artifacts.length).to eq(0)
     end
   end
 
-  describe ".count" do
+  describe ".count_by_filter" do
     it do
-      count = described_class.count(Mihari::Structs::Filters::Artifact::SearchFilter.new)
+      count = described_class.count_by_filter(Mihari::Structs::Filters::Search.new(q: ""))
       expect(count).to be >= alert.artifacts.length
     end
 
     it do
-      count = described_class.count(tag_filter)
+      count = described_class.count_by_filter(tag_filter)
       expect(count).to be >= alert.artifacts.length
     end
 
     it do
-      count = described_class.count(empty_rule_filter)
+      count = described_class.count_by_filter(empty_rule_filter)
       expect(count).to eq(0)
     end
   end

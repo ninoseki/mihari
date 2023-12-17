@@ -1,11 +1,6 @@
 <template>
   <div class="field is-grouped is-grouped-multiline">
-    <TagComponent
-      v-for="tag in tags"
-      :tag="tag"
-      :key="tag.name"
-      @update-tag="updateTag"
-    ></TagComponent>
+    <TagComponent v-for="tag in tags" :tag="tag" :key="tag.name"></TagComponent>
   </div>
 </template>
 
@@ -26,12 +21,6 @@ export default defineComponent({
       required: true
     }
   },
-  setup(_, context) {
-    const updateTag = (tag: string) => {
-      context.emit("update-tag", tag)
-    }
-
-    return { updateTag }
-  }
+  setup() {}
 })
 </script>

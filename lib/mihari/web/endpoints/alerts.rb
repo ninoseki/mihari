@@ -15,13 +15,13 @@ module Mihari
             # @return [Integer]
             attr_reader :total
 
-            # @return [Mihari::Structs::Filters::Alert::SearchFilterWithPagination]
+            # @return [Mihari::Structs::Filters::Search]
             attr_reader :filter
 
             #
             # @param [Array<Mihari::Models::Alert>] alerts
             # @param [Integer] total
-            # @param [Mihari::Structs::Filters::Alert::SearchFilterWithPagination] filter
+            # @param [Mihari::Structs::Filters::Search] filter
             #
             def initialize(alerts:, total:, filter:)
               @alerts = alerts
@@ -36,11 +36,13 @@ module Mihari
           # @return [ResultValue]
           #
           def call(params)
-            filter = params.to_h.to_snake_keys.symbolize_keys
-            search_filter_with_pagination = Structs::Filters::Alert::SearchFilterWithPagination.new(**filter)
-            alerts = Mihari::Models::Alert.search(search_filter_with_pagination)
-            total = Mihari::Models::Alert.count(search_filter_with_pagination.without_pagination)
-            ResultValue.new(alerts: alerts, total: total, filter: filter)
+            normalized = params.to_h.to_snake_keys.symbolize_keys
+            filter = Structs::Filters::Search.new(**normalized)
+            ResultValue.new(
+              total: Models::Alert.count_by_filter(filter),
+              alerts: Models::Alert.search_by_filter(filter),
+              filter: filter
+            )
           end
         end
 
@@ -72,13 +74,9 @@ module Mihari
             summary: "Search alerts"
           }
           params do
+            optional :q, type: String, default: ""
             optional :page, type: Integer, default: 1
             optional :limit, type: Integer, default: 10
-            optional :artifact, type: String
-            optional :ruleId, type: String
-            optional :tag, type: String
-            optional :fromAt, type: DateTime
-            optional :toAt, type: DateTime
           end
           get "/" do
             value = AlertSearcher.call(params.to_h)

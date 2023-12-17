@@ -32,7 +32,7 @@ RSpec.describe Mihari::Emitters::Slack do
   end
 
   describe "#text" do
-    let!(:tags) { rule.tags.join(", ") }
+    let!(:tags) { rule.tags.map(&:name).join(", ") }
 
     it do
       expect(emitter.text).to include("*Desc.*: #{rule.description}\n*Tags*: #{tags}")
