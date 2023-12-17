@@ -159,6 +159,8 @@ require "mihari/enrichers/shodan"
 require "mihari/enrichers/whois"
 
 # Models
+require "mihari/models/mixins"
+
 require "mihari/models/alert"
 require "mihari/models/artifact"
 require "mihari/models/autonomous_system"
