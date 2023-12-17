@@ -43,6 +43,7 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency "fakefs", "~> 2.5"
   spec.add_development_dependency "faker", "~> 3.2"
   spec.add_development_dependency "fuubar", "~> 2.5"
+  spec.add_development_dependency "glint", "~> 0.1"
   spec.add_development_dependency "mysql2", "~> 0.5"
   spec.add_development_dependency "pg", "~> 1.5"
   spec.add_development_dependency "rack-test", "~> 2.1"
@@ -59,6 +60,7 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency "timecop", "~> 0.9"
   spec.add_development_dependency "vcr", "~> 6.2"
   spec.add_development_dependency "webmock", "~> 3.19"
+  spec.add_development_dependency "webrick", "~> 1.8"
 
   unless ci_env?
     spec.add_development_dependency "lefthook", "~> 1.5"

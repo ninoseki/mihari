@@ -4,7 +4,7 @@ require "erb"
 
 module Mihari
   module Emitters
-    class PayloadTemplate < ERB
+    class ERBTemplate < ERB
       class << self
         def template
           %{
@@ -22,7 +22,7 @@ module Mihari
               ],
               "tags": [
                 <% @rule.tags.each_with_index do |tag, idx| %>
-                  "<%= tag %>"
+                  "<%= tag.name %>"
                   <%= ',' if idx < (@rule.tags.length - 1) %>
                 <% end %>
               ]
@@ -113,23 +113,23 @@ module Mihari
       #
       # @return [String]
       #
-      def rendered_template
+      def render
         options = {}
         options[:template] = File.read(template) unless template.nil?
 
-        payload_template = PayloadTemplate.new(
+        erb_template = ERBTemplate.new(
           artifacts: artifacts,
           rule: rule,
           options: options
         )
-        payload_template.result
+        erb_template.result
       end
 
       #
       # @return [Hash]
       #
       def json
-        JSON.parse rendered_template
+        JSON.parse render
       end
     end
   end

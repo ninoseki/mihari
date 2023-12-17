@@ -6,11 +6,13 @@ require "base64"
 require "digest"
 require "fakefs/safe"
 require "faker"
+require "glint"
 require "rack/test"
 require "rspec-parameterized"
 require "simplecov"
 require "timecop"
 require "vcr"
+require "webrick"
 
 require "dotenv/load"
 
@@ -77,7 +79,7 @@ VCR.configure do |config|
   config.cassette_library_dir = "spec/fixtures/vcr_cassettes"
   config.configure_rspec_metadata!
   config.hook_into :webmock
-  config.ignore_localhost = false
+  config.ignore_localhost = true
 
   api_keys = Mihari.config.keys.select { |key| key.end_with?("_API_KEY") }
   passwords = Mihari.config.keys.select { |key| key.end_with?("_PASSWORD") }
@@ -115,8 +117,8 @@ end
 Mihari.config.reload
 
 # require shared recipes & shared contexts
-require "test_prof/recipes/rspec/let_it_be"
 require "test_prof/recipes/rspec/before_all"
+require "test_prof/recipes/rspec/let_it_be"
 
 require_relative "support/shared_contexts/database_context"
 require_relative "support/shared_contexts/logger_context"
@@ -144,4 +146,28 @@ RSpec.configure do |config|
   config.before(:suite) do
     Mihari::Database.close
   end
+end
+
+HOST = "localhost"
+
+def server_builder
+  server = Glint::Server.new do |port|
+    http = WEBrick::HTTPServer.new(
+      BindAddress: HOST,
+      Port: port,
+      Logger: WEBrick::Log.new(File.open(File::NULL, "w")),
+      AccessLog: []
+    )
+
+    yield http
+
+    trap(:INT) { http.shutdown }
+    trap(:TERM) { http.shutdown }
+
+    http.start
+  end
+
+  Glint::Server.info[:http_server] = { host: HOST, port: server.port }
+
+  server
 end
