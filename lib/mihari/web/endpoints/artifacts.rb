@@ -53,43 +53,6 @@ module Mihari
           end
         end
 
-        class ArtifactSearcher < Mihari::Service
-          class ResultValue
-            # @return [Array<Mihari::Models::Artifacts>]
-            attr_reader :artifacts
-
-            # @return [Integer]
-            attr_reader :total
-
-            # @return [Mihari::Structs::Filters::Artifact::SearchFilterWithPagination]
-            attr_reader :filter
-
-            #
-            # @param [Array<Mihari::Models::Artifact>] artifacts
-            # @param [Integer] total
-            # @param [Mihari::Structs::Filters::Artifacts::SearchFilterWithPagination] filter
-            #
-            def initialize(artifacts:, total:, filter:)
-              @artifacts = artifacts
-              @total = total
-              @filter = filter
-            end
-          end
-
-          #
-          # @param [Hash] params
-          #
-          # @return [ResultValue]
-          #
-          def call(params)
-            normalized = params.to_h.to_snake_keys.symbolize_keys
-            filter = Structs::Filters::Search.new(**normalized)
-            artifacts = Mihari::Models::Artifact.search_by_filter(filter)
-            total = Mihari::Models::Artifact.count_by_filter(filter)
-            ResultValue.new(artifacts: artifacts, total: total, filter: filter)
-          end
-        end
-
         namespace :artifacts do
           desc "Search artifacts", {
             is_array: true,
@@ -102,10 +65,10 @@ module Mihari
             optional :limit, type: Integer, default: 10
           end
           get "/" do
-            value = ArtifactSearcher.call(params.to_h)
+            value = Services::ArtifactSearcher.call(params.to_h)
             present(
               {
-                artifacts: value.artifacts,
+                artifacts: value.results,
                 total: value.total,
                 current_page: value.filter[:page].to_i,
                 page_size: value.filter[:limit].to_i

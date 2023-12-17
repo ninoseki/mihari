@@ -7,45 +7,6 @@ module Mihari
       # Alert API endpoint
       #
       class Alerts < Grape::API
-        class AlertSearcher < Mihari::Service
-          class ResultValue
-            # @return [Array<Mihari::Models::Alert>]
-            attr_reader :alerts
-
-            # @return [Integer]
-            attr_reader :total
-
-            # @return [Mihari::Structs::Filters::Search]
-            attr_reader :filter
-
-            #
-            # @param [Array<Mihari::Models::Alert>] alerts
-            # @param [Integer] total
-            # @param [Mihari::Structs::Filters::Search] filter
-            #
-            def initialize(alerts:, total:, filter:)
-              @alerts = alerts
-              @total = total
-              @filter = filter
-            end
-          end
-
-          #
-          # @param [Hash] params
-          #
-          # @return [ResultValue]
-          #
-          def call(params)
-            normalized = params.to_h.to_snake_keys.symbolize_keys
-            filter = Structs::Filters::Search.new(**normalized)
-            ResultValue.new(
-              total: Models::Alert.count_by_filter(filter),
-              alerts: Models::Alert.search_by_filter(filter),
-              filter: filter
-            )
-          end
-        end
-
         class AlertCreator < Service
           #
           # @param [Hash] params
@@ -79,10 +40,10 @@ module Mihari
             optional :limit, type: Integer, default: 10
           end
           get "/" do
-            value = AlertSearcher.call(params.to_h)
+            value = Services::AlertSearcher.call(params.to_h)
             present(
               {
-                alerts: value.alerts,
+                alerts: value.results,
                 total: value.total,
                 current_page: value.filter[:page].to_i,
                 page_size: value.filter[:limit].to_i
