@@ -13,37 +13,15 @@ module Mihari
       belongs_to :rule
 
       class << self
-        #
-        # Search alerts
-        #
-        # @param [Mihari::Structs::Filters::Alert::SearchFilterWithPagination] filter
-        #
-        # @return [Array<Alert>]
-        #
-        def search(filter)
-          limit = filter.limit.to_i
-          raise ArgumentError, "limit should be bigger than zero" unless limit.positive?
+        include Paginationable
 
-          page = filter.page.to_i
-          raise ArgumentError, "page should be bigger than zero" unless page.positive?
+        # @!method search(filter)
+        #   @param [Mihari::Structs::Filters::Alert::SearchFilter] filter
+        #   @return [Array<Mihari::Models::Alert>]
 
-          offset = (page - 1) * limit
-
-          relation = build_relation(filter.without_pagination)
-          relation.limit(limit).offset(offset).order(id: :desc)
-        end
-
-        #
-        # Count alerts
-        #
-        # @param [Mihari::Structs::Filters::Alert::SearchFilter] filter
-        #
-        # @return [Integer]
-        #
-        def count(filter)
-          relation = build_relation(filter)
-          relation.distinct("alerts.id").count
-        end
+        # @!method count(filter)
+        #   @param [Mihari::Structs::Filters::Alert::SearchFilter] filter
+        #   @return [Integer]
 
         private
 

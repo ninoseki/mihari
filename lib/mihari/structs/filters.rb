@@ -3,6 +3,26 @@
 module Mihari
   module Structs
     module Filters
+      class PaginationMixin < Dry::Struct
+        # @!attribute [r] page
+        #   @return [Integer, nil]
+        attribute? :page, Types::Int.default(1)
+
+        # @!attribute [r] limit
+        #   @return [Integer, nil]
+        attribute? :limit, Types::Int.default(10)
+      end
+
+      class DateTimeMixin < Dry::Struct
+        # @!attribute [r] from_at
+        #   @return [DateTime, nil]
+        attribute? :from_at, Types::DateTime.optional
+
+        # @!attribute [r] to_at
+        #   @return [DateTime, nil]
+        attribute? :to_at, Types::DateTime.optional
+      end
+
       module Artifact
         class SearchFilter < Dry::Struct
           # @!attribute [r] data_type
@@ -17,23 +37,21 @@ module Mihari
           #   @return [String, nil]
           attribute? :tag, Types::String.optional
 
+          attributes_from DateTimeMixin
           # @!attribute [r] from_at
           #   @return [DateTime, nil]
-          attribute? :from_at, Types::DateTime.optional
 
           # @!attribute [r] to_at
           #   @return [DateTime, nil]
-          attribute? :to_at, Types::DateTime.optional
         end
 
         class SearchFilterWithPagination < SearchFilter
+          attributes_from PaginationMixin
           # @!attribute [r] page
           #   @return [Integer, nil]
-          attribute? :page, Types::Int.default(1)
 
           # @!attribute [r] limit
           #   @return [Integer, nil]
-          attribute? :limit, Types::Int.default(10)
 
           def without_pagination
             SearchFilter.new(
@@ -61,23 +79,21 @@ module Mihari
           #   @return [String, nil]
           attribute? :tag, Types::String.optional
 
+          attributes_from DateTimeMixin
           # @!attribute [r] from_at
           #   @return [DateTime, nil]
-          attribute? :from_at, Types::DateTime.optional
 
           # @!attribute [r] to_at
           #   @return [DateTime, nil]
-          attribute? :to_at, Types::DateTime.optional
         end
 
         class SearchFilterWithPagination < SearchFilter
+          attributes_from PaginationMixin
           # @!attribute [r] page
           #   @return [Integer, nil]
-          attribute? :page, Types::Int.default(1)
 
           # @!attribute [r] limit
           #   @return [Integer, nil]
-          attribute? :limit, Types::Int.default(10)
 
           def without_pagination
             SearchFilter.new(
@@ -105,23 +121,21 @@ module Mihari
           #   @return [String, nil]
           attribute? :title, Types::String.optional
 
+          attributes_from DateTimeMixin
           # @!attribute [r] from_at
           #   @return [DateTime, nil]
-          attribute? :from_at, Types::DateTime.optional
 
           # @!attribute [r] to_at
           #   @return [DateTime, nil]
-          attribute? :to_at, Types::DateTime.optional
         end
 
         class SearchFilterWithPagination < SearchFilter
+          attributes_from PaginationMixin
           # @!attribute [r] page
           #   @return [Integer, nil]
-          attribute? :page, Types::Int.default(1)
 
           # @!attribute [r] limit
           #   @return [Integer, nil]
-          attribute? :limit, Types::Int.default(10)
 
           def without_pagination
             SearchFilter.new(
