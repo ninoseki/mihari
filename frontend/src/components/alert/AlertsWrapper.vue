@@ -30,9 +30,9 @@
         </li>
         <li>
           Searchable fields are
-          <code>rule.id</code>, <code>rule.tittle</code>, <code>artifact.data</code>
-          <code>artifact.data_type</code>, <code>artifact.source</code>, <code>tag</code>,
-          <code>created_at</code> and <code>updated_at</code>.
+          <code>rule.id</code>, <code>rule.tittle</code>, <code>rule.description</code>,
+          <code>artifact.data</code> <code>artifact.data_type</code>, <code>artifact.source</code>,
+          <code>tag</code>, <code>created_at</code> and <code>updated_at</code>.
         </li>
       </ul>
       <h4 class="is-size-4">Examples</h4>

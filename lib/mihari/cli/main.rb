@@ -16,6 +16,7 @@ require "mihari/commands/web"
 require "mihari/cli/base"
 
 require "mihari/cli/alert"
+require "mihari/cli/artifact"
 require "mihari/cli/database"
 require "mihari/cli/rule"
 
@@ -28,6 +29,7 @@ module Mihari
       class_option :debug, desc: "Sets up debug mode", aliases: ["-d"], type: :boolean
       class_around :safe_execute
 
+      include Mihari::Commands::Artifact
       include Mihari::Commands::Search
       include Mihari::Commands::Version
       include Mihari::Commands::Web
@@ -62,6 +64,9 @@ module Mihari
 
       desc "alert", "Sub commands for alert"
       subcommand "alert", Alert
+
+      desc "artifact", "Sub commands for artifact"
+      subcommand "artifact", Artifact
     end
   end
 end

@@ -33,7 +33,8 @@ module Mihari
       include SearchCop
 
       search_scope :search do
-        attributes :data, :data_type, :source, :query, :created_at, :updated_at, "rule.id", "rule.title"
+        attributes :data, :data_type, :source, :query, :created_at, :updated_at, "rule.id", "rule.title",
+          "rule.description"
         attributes tag: "tags.name"
       end
 
