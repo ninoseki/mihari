@@ -27,12 +27,18 @@ See [Database](./emitters/database.md) for detailed database configuration.
 
 ## `mihari rule`
 
-This sub command is for validating/initializing a rule.
+This sub command is for initializing, validating a rule and also searching rules.
 
 ```bash
 mihari rule init /path/to/rule.yml
 mihari rule validate /path/to/rule.yml
+mihari rule search
 ```
+
+!!! note
+
+    - You can group and concatenate search terms with brackets `( )`, `AND`, `OR` and `NOT`.
+    - Searchable fields are `title`, `description`, `tag`, `created_at` and `updated_at`.
 
 ## `mihari search`
 
@@ -55,13 +61,32 @@ It can be suppressed by providing `-f`.
 mihari search -f /path/to/rule.yml
 ```
 
-## `mihari add`
+## `mihari alert`
 
-You may want to add an alert manually. You can do that by this command.
+This sub command is for adding an alert and also searching alerts.
 
 ```bash
-mihari alert /path/to/alert.yml
+mihari alert add /path/to/alert.yml
+mihari alert search
 ```
+
+!!! note
+
+    - You can group and concatenate search terms with brackets `( )`, `AND`, `OR` and `NOT`.
+    - Searchable fields are `rule.id`, `rule.title`, `rule.description`, `artifact.data`, `artifact.data_type`, `artifact.source`, `tag`, `created_at` and `updated_at`.
+
+## `mihari artifacts`
+
+This sub command is for searching artifacts.
+
+```bash
+mihari artifact search
+```
+
+!!! note
+
+    - You can group and concatenate search terms with brackets `( )`, `AND`, `OR` and `NOT`.
+    - Searchable fields are `data`, `data_type`, `source`, `query`, `rule.id`, `rule.title`, `rule.description`, `tag`, `created_at` and `updated_at`.
 
 ## `mihari web`
 

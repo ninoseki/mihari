@@ -44,7 +44,7 @@ module Mihari
     end
 
     class ArtifactsWithPagination < Grape::Entity
-      expose :artifacts, using: Entities::Artifact,
+      expose :artifacts, using: Entities::BaseArtifact,
         documentation: { type: Entities::Artifact, is_array: true, required: true }
       expose :total, documentation: { type: Integer, required: true }
       expose :current_page, documentation: { type: Integer, required: true }, as: :currentPage
