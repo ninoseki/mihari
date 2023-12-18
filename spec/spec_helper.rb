@@ -6,13 +6,11 @@ require "base64"
 require "digest"
 require "fakefs/safe"
 require "faker"
-require "glint"
 require "rack/test"
 require "rspec-parameterized"
 require "simplecov"
 require "timecop"
 require "vcr"
-require "webrick"
 
 require "dotenv/load"
 
@@ -120,6 +118,7 @@ Mihari.config.reload
 require "test_prof/recipes/rspec/before_all"
 require "test_prof/recipes/rspec/let_it_be"
 
+require_relative "support/helpers"
 require_relative "support/shared_contexts/database_context"
 require_relative "support/shared_contexts/logger_context"
 
@@ -134,6 +133,8 @@ RSpec.configure do |config|
     c.syntax = :expect
   end
 
+  config.include Spec::Support::Helpers
+
   config.order = "random"
 
   config.before(:suite) do
@@ -146,28 +147,4 @@ RSpec.configure do |config|
   config.before(:suite) do
     Mihari::Database.close
   end
-end
-
-HOST = "localhost"
-
-def server_builder
-  server = Glint::Server.new do |port|
-    http = WEBrick::HTTPServer.new(
-      BindAddress: HOST,
-      Port: port,
-      Logger: WEBrick::Log.new(File.open(File::NULL, "w")),
-      AccessLog: []
-    )
-
-    yield http
-
-    trap(:INT) { http.shutdown }
-    trap(:TERM) { http.shutdown }
-
-    http.start
-  end
-
-  Glint::Server.info[:http_server] = { host: HOST, port: server.port }
-
-  server
 end
