@@ -7,27 +7,6 @@ module Mihari
       # Rule API endpoint
       #
       class Rules < Grape::API
-        class RuleGetter < Service
-          #
-          # @params [String] id
-          #
-          # @return [Mihari::Models::Rule]
-          #
-          def call(id)
-            Mihari::Models::Rule.find id
-          end
-        end
-
-        class RuleRunner < Service
-          #
-          # @param [String] id
-          #
-          def call(id)
-            rule = Mihari::Rule.from_model(Mihari::Models::Rule.find(id))
-            rule.call
-          end
-        end
-
         class RuleCreator < Service
           #
           # @params [String]
@@ -58,15 +37,6 @@ module Mihari
             rule = Rule.from_yaml(yaml)
             rule.model.save
             rule
-          end
-        end
-
-        class RuleDestroyer < Service
-          #
-          # @param [String] id
-          #
-          def call(id)
-            Mihari::Models::Rule.find(id).destroy
           end
         end
 
@@ -102,7 +72,7 @@ module Mihari
           end
           get "/:id" do
             id = params[:id].to_s
-            result = RuleGetter.result(params[:id].to_s)
+            result = Services::RuleGetter.result(params[:id].to_s)
             return present(result.value!, with: Entities::Rule) if result.success?
 
             case result.failure
@@ -198,7 +168,7 @@ module Mihari
             status 204
 
             id = params[:id].to_s
-            result = RuleDestroyer.result(id)
+            result = Services::RuleDestroyer.result(id)
             return present({ message: "ID:#{id} is deleted" }, with: Entities::Message) if result.success?
 
             case result.failure

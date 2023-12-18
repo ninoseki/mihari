@@ -49,6 +49,28 @@ module Mihari
               )
               puts JSON.pretty_generate(data.as_json)
             end
+
+            desc "get [ID]", "Get an alert"
+            around :with_db_connection
+            #
+            # @param [Integer] id
+            #
+            def get(id)
+              result = Services::AlertGetter.result(id)
+              value = result.value!
+              data = Entities::Alert.represent(value)
+              puts JSON.pretty_generate(data.as_json)
+            end
+
+            desc "delete [ID]", "Delete an alert"
+            around :with_db_connection
+            #
+            # @param [Integer] id
+            #
+            def delete(id)
+              result = Services::AlertDestroyer.result(id)
+              result.value!
+            end
           end
         end
       end

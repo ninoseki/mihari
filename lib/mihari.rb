@@ -265,9 +265,11 @@ require "mihari/schemas/analyzer"
 require "mihari/schemas/rule"
 
 # Services
-require "mihari/services/alert_builder"
-require "mihari/services/alert_runner"
-require "mihari/services/rule_builder"
+require "mihari/services/builders"
+require "mihari/services/destroyers"
+require "mihari/services/enrichers"
+require "mihari/services/getters"
+require "mihari/services/runners"
 require "mihari/services/searchers"
 
 # Entities

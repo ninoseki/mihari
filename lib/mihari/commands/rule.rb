@@ -63,6 +63,25 @@ module Mihari
               puts JSON.pretty_generate(data.as_json)
             end
 
+            desc "get [ID]", "Get a rule"
+            around :with_db_connection
+            def get(id)
+              result = Services::RuleGetter.result(id)
+              value = result.value!
+              data = Entities::Rule.represent(value)
+              puts JSON.pretty_generate(data.as_json)
+            end
+
+            desc "delete [ID]", "Delete a rule"
+            around :with_db_connection
+            #
+            # @param [String] id
+            #
+            def delete(id)
+              result = Services::RuleDestroyer.result(id)
+              result.value!
+            end
+
             no_commands do
               #
               # Create a new rule
