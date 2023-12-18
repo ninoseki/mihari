@@ -71,10 +71,10 @@ module Mihari
         end
 
         namespace :rules do
-          desc "Search rules", {
+          desc "List/search rules", {
             is_array: true,
             success: Entities::RulesWithPagination,
-            summary: "Search rules"
+            summary: "List/search rules"
           }
           params do
             optional :q, type: String, default: ""

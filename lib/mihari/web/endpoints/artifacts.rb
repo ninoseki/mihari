@@ -54,10 +54,10 @@ module Mihari
         end
 
         namespace :artifacts do
-          desc "Search artifacts", {
+          desc "List/search artifacts", {
             is_array: true,
             success: Entities::ArtifactsWithPagination,
-            summary: "Search artifacts"
+            summary: "List/search artifacts"
           }
           params do
             optional :q, type: String, default: ""
