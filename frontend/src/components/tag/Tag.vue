@@ -6,7 +6,7 @@
       v-on:mouseleave="hideDeleteButton"
     >
       <span class="tag is-info is-light">{{ tag.name }}</span>
-      <a class="tag is-delete" v-if="isDeleteButtonEnabled" @click="deleteTag"></a>
+      <a class="tag is-delete" v-if="isDeleteButtonEnabled && deletable" @click="deleteTag"></a>
     </div>
   </div>
 </template>
@@ -23,6 +23,10 @@ export default defineComponent({
     tag: {
       type: Object as PropType<Tag>,
       required: true
+    },
+    deletable: {
+      type: Boolean,
+      default: false
     }
   },
   setup(props) {

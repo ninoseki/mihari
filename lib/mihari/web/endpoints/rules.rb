@@ -94,7 +94,7 @@ module Mihari
             status 201
 
             id = params[:id].to_s
-            result = RuleRunner.result(id)
+            result = Services::RuleRunner.result(id)
             return present({ message: "ID:#{id}} has been ran" }, with: Entities::Message) if result.success?
 
             case result.failure
