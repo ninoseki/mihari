@@ -29,10 +29,10 @@ module Mihari
         end
 
         namespace :alerts do
-          desc "Search alerts", {
+          desc "List/search alerts", {
             is_array: true,
             success: Entities::AlertsWithPagination,
-            summary: "Search alerts"
+            summary: "List/search alerts"
           }
           params do
             optional :q, type: String, default: ""

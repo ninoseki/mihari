@@ -30,14 +30,14 @@ module Mihari
               puts JSON.pretty_generate(data.as_json)
             end
 
-            desc "search", "Search alerts"
+            desc "list [QUERY]", "List/search alerts"
             around :with_db_connection
             method_option :page, type: :numeric, default: 1
             method_option :limit, type: :numeric, default: 10
             #
             # @param [String] q
             #
-            def search(q = "")
+            def list(q = "")
               filter = Structs::Filters::Search.new(q: q, page: options["page"], limit: options["limit"])
               result = Services::AlertSearcher.result(filter)
               value = result.value!

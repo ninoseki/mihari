@@ -17,10 +17,10 @@ module Mihari
         end
 
         namespace :tags do
-          desc "Get tags", {
+          desc "List tags", {
             is_array: true,
             success: Entities::Tags,
-            summary: "Get tags"
+            summary: "List tags"
           }
           get "/" do
             tags = Mihari::Models::Tag.distinct.pluck(:name)

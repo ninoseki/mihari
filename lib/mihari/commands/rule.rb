@@ -9,6 +9,7 @@ module Mihari
     #
     module Rule
       class << self
+        # rubocop:disable Metrics/AbcSize
         def included(thor)
           thor.class_eval do
             include Mixins
@@ -42,14 +43,14 @@ module Mihari
               puts "A new rule file has been initialized: #{path}."
             end
 
-            desc "search", "Search rules"
+            desc "list", "List/search rules"
             around :with_db_connection
             method_option :page, type: :numeric, default: 1
             method_option :limit, type: :numeric, default: 10
             #
             # @param [String] q
             #
-            def search(q = "")
+            def list(q = "")
               filter = Structs::Filters::Search.new(q: q, page: options["page"], limit: options["limit"])
               result = Services::RuleSearcher.result(filter)
               value = result.value!
@@ -84,6 +85,7 @@ module Mihari
             end
           end
         end
+        # rubocop:enable Metrics/AbcSize
       end
     end
   end
