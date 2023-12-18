@@ -18,7 +18,7 @@
           {{ rule.description }}
         </td>
         <td>
-          <Tags :tags="rule.tags"></Tags>
+          <Tags :tags="rule.tags" :deletable="true"></Tags>
         </td>
       </tr>
     </table>

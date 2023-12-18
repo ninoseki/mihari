@@ -1,6 +1,11 @@
 <template>
   <div class="field is-grouped is-grouped-multiline">
-    <TagComponent v-for="tag in tags" :tag="tag" :key="tag.name"></TagComponent>
+    <TagComponent
+      v-for="tag in tags"
+      :tag="tag"
+      :key="tag.name"
+      :deletable="deletable"
+    ></TagComponent>
   </div>
 </template>
 
@@ -19,6 +24,10 @@ export default defineComponent({
     tags: {
       type: Array as PropType<Tag[]>,
       required: true
+    },
+    deletable: {
+      type: Boolean,
+      default: false
     }
   },
   setup() {}
