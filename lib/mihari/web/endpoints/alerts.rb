@@ -19,15 +19,6 @@ module Mihari
           end
         end
 
-        class AlertDestroyer < Service
-          #
-          # @param [String] id
-          #
-          def call(id)
-            Mihari::Models::Alert.find(id).destroy
-          end
-        end
-
         namespace :alerts do
           desc "List/search alerts", {
             is_array: true,
@@ -52,6 +43,26 @@ module Mihari
             )
           end
 
+          desc "Get an alert", {
+            success: Entities::Alert,
+            failure: [{ code: 404, model: Entities::Message }],
+            summary: "Get an alert"
+          }
+          params do
+            requires :id, type: Integer
+          end
+          get "/:id" do
+            id = params[:id].to_i
+            result = Services::AlertGetter.result(id)
+            return present(result.value!, with: Entities::Alert) if result.success?
+
+            case result.failure
+            when ActiveRecord::RecordNotFound
+              error!({ message: "ID:#{id} is not found" }, 404)
+            end
+            raise result.failure
+          end
+
           desc "Delete an alert", {
             success: { code: 204, model: Entities::Message },
             failure: [{ code: 404, model: Entities::Message }],
@@ -64,7 +75,7 @@ module Mihari
             status 204
 
             id = params["id"].to_i
-            result = AlertDestroyer.result(id)
+            result = Services::AlertDestroyer.result(id)
             return present({ message: "" }, with: Entities::Message) if result.success?
 
             case result.failure

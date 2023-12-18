@@ -7,15 +7,6 @@ module Mihari
       # Tag API endpoint
       #
       class Tags < Grape::API
-        class TagDestroyer < Service
-          #
-          # @param [Integer] id
-          #
-          def call(id)
-            Mihari::Models::Tag.find(id).destroy
-          end
-        end
-
         namespace :tags do
           desc "List tags", {
             is_array: true,
@@ -39,7 +30,7 @@ module Mihari
             status 204
 
             id = params[:id].to_i
-            result = TagDestroyer.result(id)
+            result = Services::TagDestroyer.result(id)
             return present({ message: "" }, with: Entities::Message) if result.success?
 
             case result.failure

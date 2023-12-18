@@ -30,6 +30,28 @@ module Mihari
               )
               puts JSON.pretty_generate(data.as_json)
             end
+
+            desc "get [ID]", "Get an artifact"
+            around :with_db_connection
+            #
+            # @param [Integer] id
+            #
+            def get(id)
+              result = Services::ArtifactGetter.result(id)
+              value = result.value!
+              data = Entities::Artifact.represent(value)
+              puts JSON.pretty_generate(data.as_json)
+            end
+
+            desc "delete [ID]", "Delete an artifact"
+            around :with_db_connection
+            #
+            # @param [Integer] id
+            #
+            def delete(id)
+              result = Services::ArtifactDestroyer.result(id)
+              result.value!
+            end
           end
         end
       end

@@ -7,52 +7,6 @@ module Mihari
       # Artifact API endpoint
       #
       class Artifacts < Grape::API
-        class ArtifactGetter < Service
-          #
-          # @param [Integer] id
-          #
-          # @return [Mihari::Models::Artifact]
-          #
-          def call(id)
-            Mihari::Models::Artifact.includes(
-              :autonomous_system,
-              :geolocation,
-              :whois_record,
-              :dns_records,
-              :reverse_dns_names
-            ).find(id)
-          end
-        end
-
-        class ArtifactEnricher < Service
-          #
-          # @param [String] id
-          #
-          def call(id)
-            artifact = Mihari::Models::Artifact.includes(
-              :autonomous_system,
-              :geolocation,
-              :whois_record,
-              :dns_records,
-              :reverse_dns_names,
-              :cpes,
-              :ports
-            ).find(id)
-
-            artifact.enrich_all
-            artifact.save
-          end
-        end
-
-        class ArtifactDestroyer < Service
-          #
-          # @param [Integer] id
-          #
-          def call(id)
-            Mihari::Models::Artifact.find(id).destroy
-          end
-        end
-
         namespace :artifacts do
           desc "List/search artifacts", {
             is_array: true,
@@ -87,7 +41,7 @@ module Mihari
           end
           get "/:id" do
             id = params[:id].to_i
-            result = ArtifactGetter.result(id)
+            result = Services::ArtifactGetter.result(id)
             return present(result.value!, with: Entities::Artifact) if result.success?
 
             case result.failure
@@ -109,7 +63,7 @@ module Mihari
             status 201
 
             id = params["id"].to_i
-            result = ArtifactEnricher.result(id)
+            result = Services::ArtifactEnricher.result(id)
             return present({ message: "#{id} has been enriched" }, with: Entities::Message) if result.success?
 
             case result.failure
@@ -131,7 +85,7 @@ module Mihari
             status 204
 
             id = params["id"].to_i
-            result = ArtifactDestroyer.result(id)
+            result = Services::ArtifactDestroyer.result(id)
             return present({ message: "" }, with: Entities::Message) if result.success?
 
             case result.failure
