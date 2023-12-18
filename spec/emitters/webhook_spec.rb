@@ -19,7 +19,7 @@ RSpec.describe Mihari::Emitters::Webhook do
 
   after(:all) { @server.stop }
 
-  let!(:host) { HOST }
+  let!(:host) { "localhost" }
   let!(:port) { @server.port }
   let!(:base_url) { "http://#{host}:#{port}" }
   let!(:url) { "#{base_url}/post" }
