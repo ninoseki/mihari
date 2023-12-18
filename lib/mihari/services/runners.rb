@@ -16,5 +16,18 @@ module Mihari
         emitter.call alert.artifacts
       end
     end
+
+    #
+    # Rule runner
+    #
+    class RuleRunner < Service
+      #
+      # @param [String] id
+      #
+      def call(id)
+        rule = Mihari::Rule.from_model(Mihari::Models::Rule.find(id))
+        rule.call
+      end
+    end
   end
 end
