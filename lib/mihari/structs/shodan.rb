@@ -16,7 +16,7 @@ module Mihari
         # @return [Mihari::Geolocation, nil]
         #
         def geolocation
-          return nil if country_name.nil? && country_code.nil?
+          return nil if country_name.nil? || country_code.nil?
 
           Mihari::Models::Geolocation.new(
             country: country_name,
