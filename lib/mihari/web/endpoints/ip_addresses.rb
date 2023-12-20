@@ -24,7 +24,7 @@ module Mihari
             failure = result.failure
             case failure
             when Mihari::StatusCodeError
-              error!({ message: "ID:#{id} is not found" }, 404) if failure.status_code == 404
+              error!({ message: "ID:#{id} not found" }, 404) if failure.status_code == 404
             end
             raise failure
           end

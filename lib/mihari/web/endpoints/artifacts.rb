@@ -46,7 +46,7 @@ module Mihari
 
             case result.failure
             when ActiveRecord::RecordNotFound
-              error!({ message: "ID:#{id} is not found" }, 404)
+              error!({ message: "ID:#{id} not found" }, 404)
             end
             raise result.failure
           end
@@ -68,7 +68,7 @@ module Mihari
 
             case result.failure
             when ActiveRecord::RecordNotFound
-              error!({ message: "ID:#{id} is not found" }, 404)
+              error!({ message: "ID:#{id} not found" }, 404)
             end
             raise result.failure
           end
@@ -90,7 +90,7 @@ module Mihari
 
             case result.failure
             when ActiveRecord::RecordNotFound
-              error!({ message: "ID:#{id} is not found" }, 404)
+              error!({ message: "ID:#{id} not found" }, 404)
             end
             raise result.failure
           end

@@ -77,7 +77,7 @@ module Mihari
 
             case result.failure
             when ActiveRecord::RecordNotFound
-              error!({ message: "ID:#{id} is not found" }, 404)
+              error!({ message: "ID:#{id} not found" }, 404)
             end
             raise result.failure
           end
@@ -103,7 +103,7 @@ module Mihari
 
             case result.failure
             when ActiveRecord::RecordNotFound
-              error!({ message: "ID:#{id} is not found" }, 404)
+              error!({ message: "ID:#{id} not found" }, 404)
             end
             raise result.failure
           end
@@ -151,7 +151,7 @@ module Mihari
             failure = result.failure
             case failure
             when ActiveRecord::RecordNotFound
-              error!({ message: "ID:#{id} is not found" }, 404)
+              error!({ message: "ID:#{id} not found" }, 404)
             when Psych::SyntaxError
               error!({ message: failure.message }, 400)
             when ValidationError
@@ -177,7 +177,7 @@ module Mihari
 
             case result.failure
             when ActiveRecord::RecordNotFound
-              error!({ message: "ID:#{id} is not found" }, 404)
+              error!({ message: "ID:#{id} not found" }, 404)
             end
             raise result.failure
           end
