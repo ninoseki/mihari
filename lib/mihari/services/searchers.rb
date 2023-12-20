@@ -67,5 +67,23 @@ module Mihari
         Models::Rule
       end
     end
+
+    class TagSearcher < BaseSearcher
+      def klass
+        Models::Tag
+      end
+    end
+
+    class ConfigSearcher < Service
+      #
+      # @return [Array<Mihari::Structs::Config>]
+      #
+      def call
+        # NOTE: literally it does not search but list configs
+        (Mihari.analyzers + Mihari.emitters + Mihari.enrichers).filter_map do |klass|
+          Mihari::Structs::Config.from_class klass
+        end
+      end
+    end
   end
 end

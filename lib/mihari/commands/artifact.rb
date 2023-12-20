@@ -43,6 +43,15 @@ module Mihari
               puts JSON.pretty_generate(data.as_json)
             end
 
+            desc "enrich [ID]", "Enrich an artifact"
+            around :with_db_connection
+            #
+            # @param [Integer] id
+            #
+            def enrich(id)
+              Services::ArtifactEnricher.result(id)
+            end
+
             desc "delete [ID]", "Delete an artifact"
             around :with_db_connection
             #

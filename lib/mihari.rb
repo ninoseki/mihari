@@ -277,7 +277,7 @@ require "mihari/services/proxies"
 require "mihari/services/searchers"
 
 # Entities
-require "mihari/entities/message"
+require "mihari/entities/mixins"
 
 require "mihari/entities/autonomous_system"
 require "mihari/entities/config"
@@ -285,6 +285,7 @@ require "mihari/entities/cpe"
 require "mihari/entities/dns"
 require "mihari/entities/geolocation"
 require "mihari/entities/ip_address"
+require "mihari/entities/message"
 require "mihari/entities/port"
 require "mihari/entities/reverse_dns"
 require "mihari/entities/tag"

@@ -17,6 +17,7 @@ require "mihari/cli/base"
 
 require "mihari/cli/alert"
 require "mihari/cli/artifact"
+require "mihari/cli/config"
 require "mihari/cli/database"
 require "mihari/cli/rule"
 require "mihari/cli/tag"
@@ -31,6 +32,7 @@ module Mihari
       class_around :safe_execute
 
       include Mihari::Commands::Artifact
+      include Mihari::Commands::Config
       include Mihari::Commands::Search
       include Mihari::Commands::Tag
       include Mihari::Commands::Version
@@ -72,6 +74,9 @@ module Mihari
 
       desc "tag", "Sub commands for tag"
       subcommand "tag", Tag
+
+      desc "config", "Sub commands for config"
+      subcommand "config", Config
     end
   end
 end

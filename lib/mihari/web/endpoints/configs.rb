@@ -8,15 +8,13 @@ module Mihari
       #
       class Configs < Grape::API
         namespace :configs do
-          desc "Get configs", {
+          desc "list configs", {
             is_array: true,
             success: Entities::Config,
-            summary: "Get configs"
+            summary: "List configs"
           }
           get "/" do
-            configs = (Mihari.analyzers + Mihari.emitters + Mihari.enrichers).filter_map do |klass|
-              Mihari::Structs::Config.from_class(klass)
-            end
+            configs = Services::ConfigSearcher.call
             present(configs, with: Entities::Config)
           end
         end
