@@ -68,7 +68,7 @@ module Mihari
           begin
             instance = get_dummy(klass)
             new(
-              name: klass.to_s.split("::").last.to_s,
+              name: klass.to_s.split("::").last.to_s.downcase,
               values: instance.configuration_values,
               is_configured: instance.configured?,
               type: type

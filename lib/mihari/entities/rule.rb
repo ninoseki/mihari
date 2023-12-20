@@ -12,7 +12,7 @@ module Mihari
       expose :tags, using: Entities::Tag, documentation: { type: Entities::Tag, is_array: true, required: true }
     end
 
-    class RulesWithPagination < PaginationMixin
+    class RulesWithPagination < Pagination
       expose :rules, using: Entities::Rule, documentation: { type: Entities::Rule, is_array: true, required: true }
     end
   end

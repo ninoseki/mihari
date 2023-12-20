@@ -9,8 +9,6 @@ module Mihari
       class << self
         def included(thor)
           thor.class_eval do
-            include Mixins
-
             desc "list", "List config"
             def list
               configs = Services::ConfigSearcher.call

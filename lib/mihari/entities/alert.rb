@@ -15,7 +15,7 @@ module Mihari
       expose :tags, using: Entities::Tag, documentation: { type: Entities::Tag, is_array: true, required: true }
     end
 
-    class AlertsWithPagination < PaginationMixin
+    class AlertsWithPagination < Pagination
       expose :alerts, using: Entities::Alert, documentation: { type: Entities::Alert, is_array: true, required: true }
     end
   end

@@ -277,7 +277,7 @@ require "mihari/services/proxies"
 require "mihari/services/searchers"
 
 # Entities
-require "mihari/entities/mixins"
+require "mihari/entities/pagination"
 
 require "mihari/entities/autonomous_system"
 require "mihari/entities/config"

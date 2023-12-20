@@ -7,7 +7,7 @@ module Mihari
       expose :name, documentation: { type: String, required: true }
     end
 
-    class TagsWithPagination < PaginationMixin
+    class TagsWithPagination < Pagination
       expose :tags, using: Entities::Tag, documentation: { type: Entities::Tag, is_array: true, required: true }
     end
   end
