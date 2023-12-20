@@ -41,5 +41,16 @@ module Mihari
         Mihari::Models::Rule.find id
       end
     end
+
+    class IPGetter < Service
+      #
+      # @param [String] ip
+      #
+      # @return [Mihari::Structs::IPInfo::Response]
+      #
+      def call(ip)
+        Mihari::Enrichers::IPInfo.new.call ip
+      end
+    end
   end
 end

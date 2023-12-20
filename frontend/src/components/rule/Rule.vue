@@ -1,17 +1,21 @@
 <template>
   <div class="column">
-    <div v-if="runRuleTask.last?.error">
-      <ErrorMessage :error="runRuleTask.last.error"></ErrorMessage>
+    <div v-if="searchRuleTask.last?.error">
+      <ErrorMessage :error="searchRuleTask.last.error"></ErrorMessage>
       <hr />
     </div>
     <h2 class="is-size-2 mb-4">Rule</h2>
     <p class="block is-clearfix">
       <span class="buttons is-pulled-right">
-        <button class="button is-primary is-light is-small" @click="runRule">
-          <span>Run</span>
+        <button class="button is-primary is-light is-small" @click="searchRule">
+          <span>Search</span>
           <span class="icon is-small">
-            <font-awesome-icon icon="spinner" spin v-if="runRuleTask.isRunning"></font-awesome-icon>
-            <font-awesome-icon icon="arrow-right" v-else></font-awesome-icon>
+            <font-awesome-icon
+              icon="spinner"
+              spin
+              v-if="searchRuleTask.isRunning"
+            ></font-awesome-icon>
+            <font-awesome-icon icon="magnifying-glass" v-else></font-awesome-icon>
           </span>
         </button>
         <router-link
@@ -44,7 +48,7 @@
 import { defineComponent, type PropType } from "vue"
 import { useRouter } from "vue-router"
 
-import { generateDeleteRuleTask, generateRunRuleTask } from "@/api-helper"
+import { generateDeleteRuleTask, generateSearchRuleTask } from "@/api-helper"
 import Alerts from "@/components/alert/AlertsWithPagination.vue"
 import ErrorMessage from "@/components/ErrorMessage.vue"
 import YAML from "@/components/rule/YAML.vue"
@@ -68,7 +72,7 @@ export default defineComponent({
     const router = useRouter()
 
     const deleteRuleTask = generateDeleteRuleTask()
-    const runRuleTask = generateRunRuleTask()
+    const searchRuleTask = generateSearchRuleTask()
 
     const deleteRule = async () => {
       const result = window.confirm(`Are you sure you want to delete ${props.rule.id}?`)
@@ -79,15 +83,15 @@ export default defineComponent({
       }
     }
 
-    const runRule = async () => {
-      await runRuleTask.perform(props.rule.id)
+    const searchRule = async () => {
+      await searchRuleTask.perform(props.rule.id)
       context.emit("refresh")
     }
 
     return {
       deleteRule,
-      runRule,
-      runRuleTask
+      searchRule,
+      searchRuleTask
     }
   }
 })

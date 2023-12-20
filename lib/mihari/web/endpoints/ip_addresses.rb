@@ -7,17 +7,6 @@ module Mihari
       # IP address API endpoint
       #
       class IPAddresses < Grape::API
-        class IPGetter < Service
-          #
-          # @param [String] ip
-          #
-          # @return [Mihari::Structs::IPInfo::Response]
-          #
-          def call(ip)
-            Mihari::Enrichers::IPInfo.new.call ip
-          end
-        end
-
         namespace :ip_addresses do
           desc "Get an IP address", {
             success: Entities::IPAddress,
@@ -29,7 +18,7 @@ module Mihari
           end
           get "/:ip", requirements: { ip: %r{[^/]+} } do
             ip = params[:ip].to_s
-            result = IPGetter.result(ip)
+            result = Services::IPGetter.result(ip)
             return present(result.value!, with: Entities::IPAddress) if result.success?
 
             failure = result.failure

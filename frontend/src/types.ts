@@ -22,7 +22,7 @@ export interface Tag {
 }
 
 export interface Tags {
-  tags: string[]
+  tags: Tag[]
 }
 
 export interface DnsRecord {

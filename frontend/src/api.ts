@@ -69,8 +69,8 @@ export const API = {
     return res.data
   },
 
-  async runRule(id: string): Promise<void> {
-    await client.get<void>(`/api/rules/${id}/run`)
+  async searchRule(id: string): Promise<void> {
+    await client.get<void>(`/api/rules/${id}/search`)
   },
 
   async createRule(payload: CreateRule): Promise<Rule> {

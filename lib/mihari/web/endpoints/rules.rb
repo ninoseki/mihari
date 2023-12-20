@@ -82,7 +82,7 @@ module Mihari
             raise result.failure
           end
 
-          desc "Run a rule", {
+          desc "Search by a rule", {
             success: { code: 201, model: Entities::Message },
             failure: [{ code: 404, model: Entities::Message }],
             summary: "Run a rule"
@@ -90,12 +90,16 @@ module Mihari
           params do
             requires :id, type: String
           end
-          get "/:id/run" do
+          get "/:id/search" do
             status 201
 
             id = params[:id].to_s
-            result = Services::RuleRunner.result(id)
-            return present({ message: "ID:#{id}} has been ran" }, with: Entities::Message) if result.success?
+
+            result = Dry::Monads::Try[StandardError] do
+              rule = Mihari::Rule.from_model(Mihari::Models::Rule.find(id))
+              rule.call
+            end.to_result
+            return present({ message: "ID:#{id}}'s search has been succeed" }, with: Entities::Message) if result.success?
 
             case result.failure
             when ActiveRecord::RecordNotFound

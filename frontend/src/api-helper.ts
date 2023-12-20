@@ -85,9 +85,9 @@ export function generateDeleteRuleTask(): Task<void, [string]> {
   })
 }
 
-export function generateRunRuleTask(): Task<void, [string]> {
+export function generateSearchRuleTask(): Task<void, [string]> {
   return useAsyncTask<void, [string]>(async (_signal, id) => {
-    return await API.runRule(id)
+    return await API.searchRule(id)
   })
 }
 

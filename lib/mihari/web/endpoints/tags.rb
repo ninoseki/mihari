@@ -14,7 +14,7 @@ module Mihari
             summary: "List tags"
           }
           get "/" do
-            tags = Mihari::Models::Tag.distinct.pluck(:name)
+            tags = Mihari::Models::Tag.all
             present({ tags: tags }, with: Entities::Tags)
           end
 
