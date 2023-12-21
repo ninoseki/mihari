@@ -11,7 +11,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, onMounted, ref, watch } from "vue"
+import { computed, defineComponent, onMounted, ref, watch } from "vue"
 
 import { generateGetAlertsTask } from "@/api-helper"
 import Alerts from "@/components/alert/Alerts.vue"
@@ -23,9 +23,6 @@ export default defineComponent({
   props: {
     ruleId: {
       type: String
-    },
-    artifact: {
-      type: String
     }
   },
   components: {
@@ -34,7 +31,9 @@ export default defineComponent({
   },
   setup(props) {
     const page = ref(1)
-    const q = ref(`rule.id:${props.ruleId}`)
+    const q = computed(() => {
+      return `rule.id:"${props.ruleId}"`
+    })
 
     const getAlertsTask = generateGetAlertsTask()
 

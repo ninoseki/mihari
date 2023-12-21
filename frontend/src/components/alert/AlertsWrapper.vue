@@ -1,5 +1,5 @@
 <template>
-  <div class="box mb-6">
+  <div class="mb-6">
     <div class="field has-addons">
       <p class="control is-expanded">
         <input class="input" type="text" v-model="q" />

@@ -6,7 +6,7 @@
           <tr>
             <th>Name</th>
             <th>Type</th>
-            <th>Configured</th>
+            <th>Configured?</th>
             <th>Key-value(s)</th>
           </tr>
         </thead>
@@ -33,13 +33,16 @@
               </button>
             </td>
             <td>
-              <ul>
-                <li v-for="(kv, index) in config.values" :key="index">
-                  <strong> {{ kv.key }} </strong>:
-                  <code v-if="kv.value">{{ kv.value }}</code>
-                  <span v-else>N/A</span>
-                </li>
-              </ul>
+              <div class="field is-grouped is-grouped-multiline">
+                <div class="control" v-for="(kv, index) in config.values" :key="index">
+                  <div class="tags has-addons">
+                    <span class="tag is-dark"> {{ kv.key }}</span>
+                    <span class="tag" :class="{ 'is-success': kv.value, 'is-warning': !kv.value }">
+                      {{ kv.value || "N/A" }}</span
+                    >
+                  </div>
+                </div>
+              </div>
             </td>
           </tr>
         </tbody>

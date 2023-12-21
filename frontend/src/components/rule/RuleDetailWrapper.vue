@@ -10,7 +10,7 @@ import { defineComponent, onMounted, watch } from "vue"
 import { generateGetRuleTask } from "@/api-helper"
 import ErrorMessage from "@/components/ErrorMessage.vue"
 import Loading from "@/components/Loading.vue"
-import Rule from "@/components/rule/Rule.vue"
+import Rule from "@/components/rule/RuleDetail.vue"
 
 export default defineComponent({
   name: "RuleWrapper",

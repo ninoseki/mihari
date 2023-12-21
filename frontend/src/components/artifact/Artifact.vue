@@ -16,10 +16,8 @@
           <iframe class="mb-4" :src="googleMapSrc" width="100%" height="240px"></iframe>
         </div>
         <div v-if="urlscanLiveshotSrc">
-          <h4 class="is-size-4 mb-2">
-            Live screenshot
-            <span class="has-text-grey">Hover to expand</span>
-          </h4>
+          <h4 class="is-size-4 mb-2">Live screenshot</h4>
+          <p class="help">Hover to expand</p>
           <img :src="urlscanLiveshotSrc" class="liveshot" alt="liveshot" />
         </div>
       </div>
@@ -54,7 +52,6 @@
                 <font-awesome-icon icon="lightbulb" v-else></font-awesome-icon>
               </span>
             </button>
-
             <button class="button is-light is-small" @click="deleteArtifact">
               <span>Delete</span>
               <span class="icon is-small">
@@ -136,11 +133,6 @@
       <Links :data="artifact.data" :type="artifact.dataType"></Links>
     </div>
   </div>
-  <hr />
-  <div class="column">
-    <h2 class="is-size-2 mb-4">Related alerts</h2>
-    <Alerts :artifact="artifact.data"></Alerts>
-  </div>
 </template>
 
 <script lang="ts">
@@ -157,7 +149,6 @@ import {
   generateGetAlertsTask,
   generateGetIPTask
 } from "@/api-helper"
-import Alerts from "@/components/alert/AlertsWithPagination.vue"
 import AS from "@/components/artifact/AS.vue"
 import CPEs from "@/components/artifact/CPEs.vue"
 import DnsRecords from "@/components/artifact/DnsRecords.vue"
@@ -178,7 +169,6 @@ export default defineComponent({
     }
   },
   components: {
-    Alerts,
     AS,
     DnsRecords,
     Links,

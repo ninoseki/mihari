@@ -8,10 +8,10 @@ module Mihari
       #
       def search_by_filter(filter)
         limit = filter.limit.to_i
-        raise ArgumentError, "limit should be bigger than zero" unless limit.positive?
+        raise ArgumentError, "limit should be greater than or equal to zero" if limit.negative?
 
         page = filter.page.to_i
-        raise ArgumentError, "page should be bigger than zero" unless page.positive?
+        raise ArgumentError, "page should be greater than zero" unless page.positive?
 
         offset = (page - 1) * limit
 

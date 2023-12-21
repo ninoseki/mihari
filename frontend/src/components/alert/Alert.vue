@@ -4,13 +4,23 @@
       <tr>
         <th>ID</th>
         <td>
-          {{ alert.id }}
-          <button class="button is-light is-small is-pulled-right" @click="deleteAlert">
-            <span>Delete</span>
-            <span class="icon is-small">
-              <font-awesome-icon icon="times"></font-awesome-icon>
+          <p>
+            <span class="buttons is-pulled-right">
+              <a class="button is-link is-light is-small" :href="href" target="_blank">
+                <span>JSON</span>
+                <span class="icon is-small">
+                  <font-awesome-icon icon="barcode"></font-awesome-icon>
+                </span>
+              </a>
+              <button class="button is-light is-small" @click="deleteAlert">
+                <span>Delete</span>
+                <span class="icon is-small">
+                  <font-awesome-icon icon="times"></font-awesome-icon>
+                </span>
+              </button>
             </span>
-          </button>
+          </p>
+          {{ alert.id }}
         </td>
       </tr>
       <tr>
@@ -39,7 +49,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, type PropType } from "vue"
+import { computed, defineComponent, type PropType } from "vue"
 
 import { generateDeleteAlertTask } from "@/api-helper"
 import Artifacts from "@/components/artifact/ArtifactTags.vue"
@@ -73,7 +83,12 @@ export default defineComponent({
       }
     }
 
+    const href = computed(() => {
+      return `/api/alerts/${props.alert.id}`
+    })
+
     return {
+      href,
       deleteAlert,
       getLocalDatetime,
       getHumanizedRelativeTime

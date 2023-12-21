@@ -1,5 +1,5 @@
 <template>
-  <div class="box mb-6">
+  <div class="mb-6">
     <div class="field has-addons">
       <p class="control is-expanded">
         <input class="input" type="text" v-model="q" />
@@ -51,7 +51,7 @@
     <Rules
       :rules="getRulesTask.last.value"
       v-if="getRulesTask.last?.value"
-      @refresh-page="refreshPage"
+      @refresh="refresh"
       @update-page="updatePage"
     ></Rules>
   </div>
@@ -100,9 +100,7 @@ export default defineComponent({
       await getRules()
     }
 
-    const refreshPage = async () => {
-      // it is just an alias of search
-      // this function will be invoked when a rule is deleted
+    const refresh = async () => {
       await search()
     }
 
@@ -124,7 +122,7 @@ export default defineComponent({
       getTagsTask,
       page,
       q,
-      refreshPage,
+      refresh,
       search,
       showHelp,
       toggleShowHelp,
