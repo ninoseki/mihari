@@ -13,7 +13,7 @@ module Mihari
     end
 
     class RulesWithPagination < Pagination
-      expose :rules, using: Entities::Rule, documentation: { type: Entities::Rule, is_array: true, required: true }
+      expose :results, using: Entities::Rule, documentation: { type: Entities::Rule, is_array: true, required: true }
     end
   end
 end

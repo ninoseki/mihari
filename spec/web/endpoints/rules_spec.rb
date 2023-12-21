@@ -18,7 +18,7 @@ RSpec.describe Mihari::Web::Endpoints::Rules do
       json = JSON.parse(last_response.body.to_s)
       expect(json).to be_a(Hash)
 
-      rule_ids = json["rules"].map { |rule| rule["id"] }
+      rule_ids = json["results"].map { |rule| rule["id"] }
       expect(rule_ids).to include rule.id
     end
   end

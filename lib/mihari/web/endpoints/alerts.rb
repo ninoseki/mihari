@@ -22,7 +22,7 @@ module Mihari
             value = Services::AlertSearcher.call(params.to_h)
             present(
               {
-                alerts: value.results,
+                results: value.results,
                 total: value.total,
                 current_page: value.filter[:page].to_i,
                 page_size: value.filter[:limit].to_i

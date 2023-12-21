@@ -31,6 +31,14 @@ RSpec.describe Mihari::Web::Endpoints::Alerts do
   end
 
   describe "get /api/alerts" do
+    it "returns 200" do
+      get "/api/alerts"
+      expect(last_response.status).to eq(200)
+
+      json = JSON.parse(last_response.body.to_s)
+      expect(json).to be_a(Hash)
+    end
+
     context "with invalid page type" do
       it "returns 400" do
         get "/api/alerts", { page: "foo" }

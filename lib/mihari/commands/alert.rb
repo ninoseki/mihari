@@ -46,7 +46,7 @@ module Mihari
               result = Services::AlertSearcher.result(filter)
               value = result.value!
               data = Entities::AlertsWithPagination.represent(
-                alerts: value.results,
+                results: value.results,
                 total: value.total,
                 current_page: value.filter[:page].to_i,
                 page_size: value.filter[:limit].to_i

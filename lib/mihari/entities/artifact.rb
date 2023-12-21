@@ -44,7 +44,7 @@ module Mihari
     end
 
     class ArtifactsWithPagination < Pagination
-      expose :artifacts, using: Entities::BaseArtifact,
+      expose :results, using: Entities::BaseArtifact,
         documentation: { type: Entities::Artifact, is_array: true, required: true }
     end
   end

@@ -8,7 +8,7 @@ module Mihari
     end
 
     class TagsWithPagination < Pagination
-      expose :tags, using: Entities::Tag, documentation: { type: Entities::Tag, is_array: true, required: true }
+      expose :results, using: Entities::Tag, documentation: { type: Entities::Tag, is_array: true, required: true }
     end
   end
 end

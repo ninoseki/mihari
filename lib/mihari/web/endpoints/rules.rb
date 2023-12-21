@@ -54,7 +54,7 @@ module Mihari
           get "/" do
             value = Services::RuleSearcher.call(params.to_h)
             present({
-              rules: value.results,
+              results: value.results,
               total: value.total,
               current_page: value.filter[:page].to_i,
               page_size: value.filter[:limit].to_i
@@ -99,7 +99,10 @@ module Mihari
               rule = Mihari::Rule.from_model(Mihari::Models::Rule.find(id))
               rule.call
             end.to_result
-            return present({ message: "ID:#{id}}'s search has been succeed" }, with: Entities::Message) if result.success?
+            if result.success?
+              return present({ message: "ID:#{id}}'s search has been succeed" },
+                with: Entities::Message)
+            end
 
             case result.failure
             when ActiveRecord::RecordNotFound

@@ -16,7 +16,7 @@ module Mihari
     end
 
     class AlertsWithPagination < Pagination
-      expose :alerts, using: Entities::Alert, documentation: { type: Entities::Alert, is_array: true, required: true }
+      expose :results, using: Entities::Alert, documentation: { type: Entities::Alert, is_array: true, required: true }
     end
   end
 end

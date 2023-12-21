@@ -1,6 +1,6 @@
 <template>
   <Alert
-    v-for="(alert, index) in alerts.alerts"
+    v-for="(alert, index) in alerts.results"
     :alert="alert"
     :key="index"
     @refresh-page="refreshPage"
@@ -11,7 +11,7 @@
     :pageSize="alerts.pageSize"
     @update-page="updatePage"
   ></Pagination>
-  <p class="help">({{ alerts.total }} results in total, {{ alerts.alerts.length }} shown)</p>
+  <p class="help">({{ alerts.total }} results in total, {{ alerts.results.length }} shown)</p>
 </template>
 
 <script lang="ts">

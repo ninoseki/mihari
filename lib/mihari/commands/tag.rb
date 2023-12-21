@@ -24,7 +24,7 @@ module Mihari
               result = Services::TagSearcher.result(filter)
               value = result.value!
               data = Entities::TagsWithPagination.represent(
-                tags: value.results,
+                results: value.results,
                 total: value.total,
                 current_page: value.filter[:page].to_i,
                 page_size: value.filter[:limit].to_i

@@ -22,7 +22,7 @@ export interface Tag {
 }
 
 export interface Tags extends Pagination {
-  tags: Tag[]
+  results: Tag[]
 }
 
 export interface DnsRecord {
@@ -102,7 +102,7 @@ export interface Alert {
 }
 
 export interface Alerts extends Pagination {
-  alerts: Alert[]
+  results: Alert[]
 }
 
 export interface PaginationParams {
@@ -170,5 +170,5 @@ export interface Query {
 }
 
 export interface Rules extends Pagination {
-  rules: Rule[]
+  results: Rule[]
 }
