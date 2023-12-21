@@ -21,7 +21,7 @@ export interface Tag {
   name: string
 }
 
-export interface Tags {
+export interface Tags extends Pagination {
   tags: Tag[]
 }
 

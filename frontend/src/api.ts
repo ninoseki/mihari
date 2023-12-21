@@ -33,9 +33,9 @@ export const API = {
     return res.data
   },
 
-  async getTags(): Promise<string[]> {
+  async getTags(): Promise<Tags> {
     const res = await client.get<Tags>("/api/tags")
-    return res.data.tags
+    return res.data
   },
 
   async deleteAlert(id: string): Promise<void> {
