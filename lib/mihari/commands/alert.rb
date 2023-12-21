@@ -12,16 +12,20 @@ module Mihari
             include Dry::Monads[:result, :try]
             include Mixins
 
-            desc "add [PATH]", "Add an alert"
+            desc "create [PATH]", "Create an alert"
             around :with_db_connection
             #
             # @param [String] path
             #
-            def add(path)
+            def create(path)
               result = Dry::Monads::Try[StandardError] do
-                # @type [Mihari::Services::AlertProxy]
-                proxy = Mihari::Services::AlertBuilder.call(path)
-                Mihari::Services::AlertRunner.call proxy
+                raise ArgumentError, "#{path} does not exist" unless Pathname(path).exist?
+
+                params = YAML.safe_load(
+                  ERB.new(File.read(path)).result,
+                  permitted_classes: [Date, Symbol]
+                )
+                Services::AlertCreator.call params
               end.to_result
 
               # @type [Mihari::Models::Alert]
@@ -42,7 +46,7 @@ module Mihari
               result = Services::AlertSearcher.result(filter)
               value = result.value!
               data = Entities::AlertsWithPagination.represent(
-                alerts: value.results,
+                results: value.results,
                 total: value.total,
                 current_page: value.filter[:page].to_i,
                 page_size: value.filter[:limit].to_i

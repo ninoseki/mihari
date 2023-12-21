@@ -7,8 +7,8 @@ module Mihari
       expose :name, documentation: { type: String, required: true }
     end
 
-    class Tags < Grape::Entity
-      expose :tags, documentation: { type: [String], required: true }
+    class TagsWithPagination < Pagination
+      expose :results, using: Entities::Tag, documentation: { type: Entities::Tag, is_array: true, required: true }
     end
   end
 end

@@ -22,7 +22,7 @@ module Mihari
             value = Services::ArtifactSearcher.call(params.to_h)
             present(
               {
-                artifacts: value.results,
+                results: value.results,
                 total: value.total,
                 current_page: value.filter[:page].to_i,
                 page_size: value.filter[:limit].to_i

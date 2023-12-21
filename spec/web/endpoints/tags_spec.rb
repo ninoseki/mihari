@@ -16,7 +16,7 @@ RSpec.describe Mihari::Web::Endpoints::Tags do
 
       json = JSON.parse(last_response.body.to_s)
       expect(json).to be_a(Hash)
-      expect(json["tags"]).to be_an(Array)
+      expect(json["results"]).to be_an(Array)
     end
   end
 end

@@ -10,6 +10,7 @@ import type {
   Rule,
   Rules,
   SearchParams,
+  Tags,
   UpdateRule
 } from "@/types"
 
@@ -25,8 +26,8 @@ export function generateDeleteAlertTask(): Task<void, [string]> {
   })
 }
 
-export function generateGetTagsTask(): Task<string[], []> {
-  return useAsyncTask<string[], []>(async () => {
+export function generateGetTagsTask(): Task<Tags, []> {
+  return useAsyncTask<Tags, []>(async () => {
     return await API.getTags()
   })
 }
@@ -85,9 +86,9 @@ export function generateDeleteRuleTask(): Task<void, [string]> {
   })
 }
 
-export function generateRunRuleTask(): Task<void, [string]> {
+export function generateSearchRuleTask(): Task<void, [string]> {
   return useAsyncTask<void, [string]>(async (_signal, id) => {
-    return await API.runRule(id)
+    return await API.searchRule(id)
   })
 }
 

@@ -7,7 +7,7 @@
         <th>Description</th>
         <th>Tags</th>
       </tr>
-      <tr v-for="rule in rules.rules" :key="rule.id">
+      <tr v-for="rule in rules.results" :key="rule.id">
         <td>
           <router-link :to="{ name: 'Rule', params: { id: rule.id } }">{{ rule.id }}</router-link>
         </td>
@@ -29,7 +29,7 @@
     :pageSize="rules.pageSize"
     @update-page="updatePage"
   ></Pagination>
-  <p class="help">({{ rules.total }} results in total, {{ rules.rules.length }} shown)</p>
+  <p class="help">({{ rules.total }} results in total, {{ rules.results.length }} shown)</p>
 </template>
 
 <script lang="ts">
@@ -70,7 +70,7 @@ export default defineComponent({
     }
 
     const hasRules = computed(() => {
-      return props.rules.rules.length > 0
+      return props.rules.results.length > 0
     })
 
     return { updatePage, refreshPage, hasRules }

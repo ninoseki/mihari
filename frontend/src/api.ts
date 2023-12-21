@@ -33,9 +33,9 @@ export const API = {
     return res.data
   },
 
-  async getTags(): Promise<string[]> {
+  async getTags(): Promise<Tags> {
     const res = await client.get<Tags>("/api/tags")
-    return res.data.tags
+    return res.data
   },
 
   async deleteAlert(id: string): Promise<void> {
@@ -69,8 +69,8 @@ export const API = {
     return res.data
   },
 
-  async runRule(id: string): Promise<void> {
-    await client.get<void>(`/api/rules/${id}/run`)
+  async searchRule(id: string): Promise<void> {
+    await client.get<void>(`/api/rules/${id}/search`)
   },
 
   async createRule(payload: CreateRule): Promise<Rule> {

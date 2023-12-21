@@ -10,12 +10,25 @@ module Mihari
         namespace :tags do
           desc "List tags", {
             is_array: true,
-            success: Entities::Tags,
+            success: Entities::TagsWithPagination,
             summary: "List tags"
           }
+          params do
+            optional :q, type: String, default: ""
+            optional :page, type: Integer, default: 1
+            optional :limit, type: Integer, default: 10
+          end
           get "/" do
-            tags = Mihari::Models::Tag.distinct.pluck(:name)
-            present({ tags: tags }, with: Entities::Tags)
+            value = Services::TagSearcher.call(params.to_h)
+            present(
+              {
+                results: value.results,
+                total: value.total,
+                current_page: value.filter[:page].to_i,
+                page_size: value.filter[:limit].to_i
+              },
+              with: Entities::TagsWithPagination
+            )
           end
 
           desc "Delete a tag", {

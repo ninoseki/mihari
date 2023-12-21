@@ -13,6 +13,16 @@ RSpec.describe Mihari::Web::Endpoints::Artifacts, :vcr do
 
   let_it_be(:alert) { Mihari::Models::Alert.first }
 
+  describe "get /api/artifacts" do
+    it "returns 200" do
+      get "/api/artifacts"
+      expect(last_response.status).to eq(200)
+
+      json = JSON.parse(last_response.body.to_s)
+      expect(json).to be_a(Hash)
+    end
+  end
+
   describe "get /api/artifacts/:id" do
     it "returns 400" do
       get "/api/artifacts/foo"

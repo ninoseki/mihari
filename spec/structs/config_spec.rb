@@ -5,7 +5,7 @@ RSpec.describe Mihari::Structs::Config do
     subject(:config) { described_class.from_class(Mihari::Emitters::Database) }
 
     it do
-      expect(config.name).to eq("Database")
+      expect(config.name).to eq("database")
     end
 
     it do

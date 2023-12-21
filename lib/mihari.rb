@@ -1,8 +1,11 @@
 # frozen_string_literal: true
 
 # standard libs
+require "date"
+require "erb"
 require "ipaddr"
 require "json"
+require "pathname"
 require "resolv"
 require "yaml"
 
@@ -266,14 +269,15 @@ require "mihari/schemas/rule"
 
 # Services
 require "mihari/services/builders"
+require "mihari/services/creators"
 require "mihari/services/destroyers"
 require "mihari/services/enrichers"
 require "mihari/services/getters"
-require "mihari/services/runners"
+require "mihari/services/proxies"
 require "mihari/services/searchers"
 
 # Entities
-require "mihari/entities/message"
+require "mihari/entities/pagination"
 
 require "mihari/entities/autonomous_system"
 require "mihari/entities/config"
@@ -281,6 +285,7 @@ require "mihari/entities/cpe"
 require "mihari/entities/dns"
 require "mihari/entities/geolocation"
 require "mihari/entities/ip_address"
+require "mihari/entities/message"
 require "mihari/entities/port"
 require "mihari/entities/reverse_dns"
 require "mihari/entities/tag"

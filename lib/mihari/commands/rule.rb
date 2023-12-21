@@ -55,7 +55,7 @@ module Mihari
               result = Services::RuleSearcher.result(filter)
               value = result.value!
               data = Entities::RulesWithPagination.represent(
-                rules: value.results,
+                results: value.results,
                 total: value.total,
                 current_page: value.filter[:page].to_i,
                 page_size: value.filter[:limit].to_i

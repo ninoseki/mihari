@@ -26,9 +26,12 @@ services:
     build:
       context: ./
       dockerfile: Dockerfile
+      args:
+        - MIHARI_VERSION=${MIHARI_VERSION:-6.2.0}
     ports:
       - 9292:${MIHARI_PORT:-9292}
     environment:
+      - MIHARI_VERSION=${MIHARI_VERSION:-6.2.0}
       - DATABASE_URL=${DATABASE_URL:-postgresql://${POSTGRES_USER:-user}:${POSTGRES_PASSWORD:-password}@database:${POSTRES_PORT:-5432}/${POSTGRES_DB:-mihari}}
     env_file:
       - .env

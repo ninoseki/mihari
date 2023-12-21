@@ -7,18 +7,6 @@ module Mihari
       # Alert API endpoint
       #
       class Alerts < Grape::API
-        class AlertCreator < Service
-          #
-          # @param [Hash] params
-          #
-          # @return [Mihari::Models::Alert]
-          #
-          def call(params)
-            proxy = Services::AlertProxy.new(**params.to_snake_keys)
-            Services::AlertRunner.call proxy
-          end
-        end
-
         namespace :alerts do
           desc "List/search alerts", {
             is_array: true,
@@ -34,7 +22,7 @@ module Mihari
             value = Services::AlertSearcher.call(params.to_h)
             present(
               {
-                alerts: value.results,
+                results: value.results,
                 total: value.total,
                 current_page: value.filter[:page].to_i,
                 page_size: value.filter[:limit].to_i
@@ -97,7 +85,7 @@ module Mihari
           post "/" do
             status 201
 
-            result = AlertCreator.result(params)
+            result = Services::AlertCreator.result(params)
             return present(result.value!, with: Entities::Alert) if result.success?
 
             case result.failure

@@ -11,6 +11,7 @@ import {
   faExclamation,
   faInfoCircle,
   faLightbulb,
+  faMagnifyingGlass,
   faPlus,
   faQuestion,
   faSearch,
@@ -35,7 +36,8 @@ library.add(
   faSearch,
   faSpinner,
   faTimes,
-  faQuestion
+  faQuestion,
+  faMagnifyingGlass
 )
 
 const app = createApp(App)

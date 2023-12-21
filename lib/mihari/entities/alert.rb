@@ -15,11 +15,8 @@ module Mihari
       expose :tags, using: Entities::Tag, documentation: { type: Entities::Tag, is_array: true, required: true }
     end
 
-    class AlertsWithPagination < Grape::Entity
-      expose :alerts, using: Entities::Alert, documentation: { type: Entities::Alert, is_array: true, required: true }
-      expose :total, documentation: { type: Integer, required: true }
-      expose :current_page, documentation: { type: Integer, required: true }, as: :currentPage
-      expose :page_size, documentation: { type: Integer, required: true }, as: :pageSize
+    class AlertsWithPagination < Pagination
+      expose :results, using: Entities::Alert, documentation: { type: Entities::Alert, is_array: true, required: true }
     end
   end
 end
