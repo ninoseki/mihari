@@ -4,6 +4,7 @@ import { AnyRun } from "./anyrun"
 import { Censys } from "./censys"
 import { Crtsh } from "./crtsh"
 import { DNSlyticsForDomain, DNSlyticsForIP } from "./dnslytics"
+import { EmailRep } from "./emailrep"
 import { GreyNoise } from "./greynoise"
 import { Intezer } from "./intezer"
 import { OtxForDomain, OtxForIP } from "./otx"
@@ -23,6 +24,7 @@ export const Links: Link[] = [
   new Crtsh(),
   new DNSlyticsForDomain(),
   new DNSlyticsForIP(),
+  new EmailRep(),
   new GreyNoise(),
   new Intezer(),
   new OtxForDomain(),

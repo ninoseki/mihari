@@ -6,9 +6,11 @@ import { library } from "@fortawesome/fontawesome-svg-core"
 import {
   faArrowRight,
   faBarcode,
+  faBell,
   faCheck,
   faEdit,
   faExclamation,
+  faFile,
   faInfoCircle,
   faLightbulb,
   faMagnifyingGlass,
@@ -16,7 +18,9 @@ import {
   faQuestion,
   faSearch,
   faSpinner,
-  faTimes
+  faTicket,
+  faTimes,
+  faTriangleExclamation
 } from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome"
 import { createApp } from "vue"
@@ -37,7 +41,11 @@ library.add(
   faSpinner,
   faTimes,
   faQuestion,
-  faMagnifyingGlass
+  faMagnifyingGlass,
+  faFile,
+  faBell,
+  faTicket,
+  faTriangleExclamation
 )
 
 const app = createApp(App)

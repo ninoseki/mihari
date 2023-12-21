@@ -1,57 +1,44 @@
 <template>
-  <div class="column">
-    <div v-if="searchRuleTask.last?.error">
-      <ErrorMessage :error="searchRuleTask.last.error"></ErrorMessage>
-      <hr />
-    </div>
-    <h2 class="is-size-2 mb-4">Rule</h2>
-    <p class="block is-clearfix">
-      <span class="buttons is-pulled-right">
-        <button class="button is-primary is-light is-small" @click="searchRule">
-          <span>Search</span>
-          <span class="icon is-small">
-            <font-awesome-icon
-              icon="spinner"
-              spin
-              v-if="searchRuleTask.isRunning"
-            ></font-awesome-icon>
-            <font-awesome-icon icon="magnifying-glass" v-else></font-awesome-icon>
-          </span>
-        </button>
-        <router-link
-          class="button is-info is-light is-small"
-          :to="{ name: 'EditRule', params: { id: rule.id } }"
-        >
-          <span>Edit</span>
-          <span class="icon is-small">
-            <font-awesome-icon icon="edit"></font-awesome-icon>
-          </span>
-        </router-link>
-        <button class="button is-light is-small" @click="deleteRule">
-          <span>Delete</span>
-          <span class="icon is-small">
-            <font-awesome-icon icon="times"></font-awesome-icon>
-          </span>
-        </button>
-      </span>
-    </p>
-    <YAML :yaml="rule.yaml"></YAML>
-  </div>
-  <hr />
-  <div class="column">
-    <h2 class="is-size-2 mb-4">Related alerts</h2>
-    <Alerts :ruleId="rule.id"></Alerts>
+  <div class="box">
+    <table class="table is-fullwidth is-completely-borderless">
+      <tr>
+        <th>ID</th>
+        <td>
+          <p>
+            <ActionButtons :rule="rule" @set-error="setError" />
+          </p>
+          <router-link :to="{ name: 'Rule', params: { id: rule.id } }">{{ rule.id }}</router-link>
+        </td>
+      </tr>
+      <tr>
+        <th>Title</th>
+        <td>
+          {{ rule.title }}
+        </td>
+      </tr>
+      <tr>
+        <th>Description</th>
+        <td>
+          {{ rule.description }}
+        </td>
+      </tr>
+      <tr v-if="rule.tags.length > 0">
+        <th>Tags</th>
+        <td>
+          <Tags :tags="rule.tags" />
+        </td>
+      </tr>
+    </table>
+    <p class="block is-clearfix"></p>
+    <p class="help">Created at: {{ rule.createdAt }}</p>
   </div>
 </template>
 
 <script lang="ts">
 import { defineComponent, type PropType } from "vue"
-import { useRouter } from "vue-router"
 
-import { generateDeleteRuleTask, generateSearchRuleTask } from "@/api-helper"
-import Alerts from "@/components/alert/AlertsWithPagination.vue"
-import ErrorMessage from "@/components/ErrorMessage.vue"
-import YAML from "@/components/rule/YAML.vue"
+import ActionButtons from "@/components/rule/ActionButtons.vue"
+import Tags from "@/components/tag/Tags.vue"
 import type { Rule } from "@/types"
 
 export default defineComponent({
@@ -62,37 +49,14 @@ export default defineComponent({
       required: true
     }
   },
-  components: {
-    YAML,
-    Alerts,
-    ErrorMessage
-  },
-  emits: ["refresh"],
-  setup(props, context) {
-    const router = useRouter()
-
-    const deleteRuleTask = generateDeleteRuleTask()
-    const searchRuleTask = generateSearchRuleTask()
-
-    const deleteRule = async () => {
-      const result = window.confirm(`Are you sure you want to delete ${props.rule.id}?`)
-
-      if (result) {
-        await deleteRuleTask.perform(props.rule.id)
-        router.push("/")
-      }
+  components: { ActionButtons, Tags },
+  emits: ["set-error"],
+  setup(_, context) {
+    const setError = (newError: unknown) => {
+      context.emit("set-error", newError)
     }
 
-    const searchRule = async () => {
-      await searchRuleTask.perform(props.rule.id)
-      context.emit("refresh")
-    }
-
-    return {
-      deleteRule,
-      searchRule,
-      searchRuleTask
-    }
+    return { setError }
   }
 })
 </script>

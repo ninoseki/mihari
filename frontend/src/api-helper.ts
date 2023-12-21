@@ -3,6 +3,7 @@ import { type Task, useAsyncTask } from "vue-concurrency"
 import { API } from "@/api"
 import type {
   Alerts,
+  Artifacts,
   ArtifactWithTags,
   Config,
   CreateRule,
@@ -101,5 +102,11 @@ export function generateCreateRuleTask(): Task<Rule, [CreateRule]> {
 export function generateUpdateRuleTask(): Task<Rule, [UpdateRule]> {
   return useAsyncTask<Rule, [UpdateRule]>(async (_signal, payload) => {
     return await API.updateRule(payload)
+  })
+}
+
+export function generateGetArtifactsTask(): Task<Artifacts, [SearchParams]> {
+  return useAsyncTask<Artifacts, [SearchParams]>(async (_signal, params) => {
+    return await API.getArtifacts(params)
   })
 }

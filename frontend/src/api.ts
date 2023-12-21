@@ -2,6 +2,7 @@ import axios from "axios"
 
 import type {
   Alerts,
+  Artifacts,
   ArtifactWithTags,
   Config,
   CreateRule,
@@ -44,6 +45,14 @@ export const API = {
 
   async getArtifact(id: string): Promise<ArtifactWithTags> {
     const res = await client.get(`/api/artifacts/${id}`)
+    return res.data
+  },
+
+  async getArtifacts(params: SearchParams): Promise<Artifacts> {
+    params.page = params.page || 1
+    const res = await client.get<Artifacts>("/api/artifacts", {
+      params: params
+    })
     return res.data
   },
 

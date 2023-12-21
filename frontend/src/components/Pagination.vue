@@ -9,10 +9,10 @@
       </li>
     </ul>
     <ul class="pagination-list" v-else>
-      <li v-if="hasPreviousPage && isPreviousPageNotFirst">
+      <li v-if="hasPreviousPage && !isPreviousPageFirst">
         <a class="pagination-link mt-2" @click="updatePage(1)"> 1</a>
       </li>
-      <li v-if="hasPreviousPage && isPreviousPageNotFirst">
+      <li v-if="hasPreviousPage && !isPreviousPageFirst && !isNextPage(2)">
         <span class="pagination-ellipsis">&hellip;</span>
       </li>
       <li v-if="hasPreviousPage">
@@ -30,10 +30,10 @@
           {{ currentPage + 1 }}</a
         >
       </li>
-      <li v-if="hasNextPage && isNextPageNotLast">
+      <li v-if="hasNextPage && !isNextPageLast && !isNextPage(totalPageCount - 1)">
         <span class="pagination-ellipsis">&hellip;</span>
       </li>
-      <li v-if="hasNextPage && isNextPageNotLast">
+      <li v-if="hasNextPage && !isNextPageLast">
         <a class="pagination-link mt-2" @click="updatePage(totalPageCount)">{{ totalPageCount }}</a>
       </li>
     </ul>
@@ -61,6 +61,10 @@ export default defineComponent({
   },
   emits: ["update-page"],
   setup(props, context) {
+    const isNextPage = (page: number): boolean => {
+      return page === props.currentPage + 1 || page === props.currentPage - 1
+    }
+
     const totalPageCount = computed(() => {
       return Math.ceil(props.total / props.pageSize)
     })
@@ -73,16 +77,16 @@ export default defineComponent({
       return props.currentPage > 1
     })
 
-    const isPreviousPageNotFirst = computed(() => {
-      return props.currentPage - 1 !== 1
+    const isPreviousPageFirst = computed(() => {
+      return props.currentPage - 1 === 1
     })
 
     const hasNextPage = computed(() => {
       return props.currentPage < totalPageCount.value
     })
 
-    const isNextPageNotLast = computed(() => {
-      return props.currentPage + 1 !== totalPageCount.value
+    const isNextPageLast = computed(() => {
+      return props.currentPage + 1 === totalPageCount.value
     })
 
     const updatePage = (page: number) => {
@@ -91,11 +95,12 @@ export default defineComponent({
 
     return {
       updatePage,
+      isNextPage,
       hasNextPage,
       hasOnlyOnePage,
       hasPreviousPage,
-      isNextPageNotLast,
-      isPreviousPageNotFirst,
+      isNextPageLast,
+      isPreviousPageFirst,
       totalPageCount
     }
   }

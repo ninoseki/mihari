@@ -27,13 +27,8 @@ export default defineComponent({
     }
   },
   setup(props) {
-    const links = Links
     const selectedLinks = computed((): Link[] => {
-      if (props.type === undefined) {
-        return links
-      }
-
-      return links.filter((link) => link.type === props.type)
+      return Links.filter((link) => link.type === props.type)
     })
 
     return { selectedLinks }

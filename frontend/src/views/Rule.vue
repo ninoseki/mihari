@@ -6,7 +6,7 @@
 import { useTitle } from "@vueuse/core"
 import { defineComponent, onMounted, watch } from "vue"
 
-import Rule from "@/components/rule/RuleWrapper.vue"
+import Rule from "@/components/rule/RuleDetailWrapper.vue"
 
 export default defineComponent({
   name: "RuleView",

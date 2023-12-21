@@ -105,12 +105,10 @@ export interface Alerts extends Pagination {
   results: Alert[]
 }
 
-export interface PaginationParams {
-  page: number | undefined
-}
-
-export interface SearchParams extends PaginationParams {
+export interface SearchParams {
   q: string
+  page: number | null
+  limit?: number | null
 }
 
 export interface IPInfo {
@@ -133,7 +131,7 @@ export interface Country {
   long: number
 }
 
-export type LinkType = "ip" | "domain" | "url" | "hash"
+export type LinkType = "ip" | "domain" | "url" | "hash" | "mail"
 
 export interface Link {
   name: string
@@ -171,4 +169,8 @@ export interface Query {
 
 export interface Rules extends Pagination {
   results: Rule[]
+}
+
+export interface Artifacts extends Pagination {
+  results: Artifact[]
 }
