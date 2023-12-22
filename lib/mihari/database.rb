@@ -3,14 +3,6 @@
 # Make possible to use upper case acronyms in class names
 ActiveSupport::Inflector.inflections(:en) { |inflect| inflect.acronym "CPE" }
 
-def env
-  ENV["APP_ENV"] || ENV["RACK_ENV"]
-end
-
-def development_env?
-  env == "development"
-end
-
 #
 # Mihari v7 DB schema
 #
@@ -156,7 +148,7 @@ module Mihari
             database: Mihari.config.database_url.path[1..]
           )
         end
-        ActiveRecord::Base.logger = Logger.new($stdout) if development_env?
+        ActiveRecord::Base.logger = Logger.new($stdout) if Mihari.development?
       end
 
       #

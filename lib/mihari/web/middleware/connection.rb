@@ -6,7 +6,7 @@ module Mihari
       #
       # DB connection adapter for Rack app
       #
-      class ConnectionAdapter
+      class Connection
         attr_reader :app
 
         def initialize(app)

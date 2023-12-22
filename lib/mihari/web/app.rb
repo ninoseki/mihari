@@ -11,8 +11,8 @@ require "rack/handler/puma"
 require "grape-swagger"
 require "grape-swagger-entity"
 
-require "mihari/web/middleware/connection_adapter"
-require "mihari/web/middleware/error_notification_adapter"
+require "mihari/web/middleware/connection"
+require "mihari/web/middleware/capture_exceptions"
 
 require "mihari/web/api"
 
@@ -60,11 +60,10 @@ module Mihari
                 resource "*", headers: :any, methods: %i[get post put delete options]
               end
             end
-            use Middleware::ConnectionAdapter
-            use Middleware::ErrorNotificationAdapter
+            use Middleware::Connection
+            use Middleware::CaptureExceptions
 
-            use Sentry::Rack::CaptureExceptions if Sentry.initialized?
-            use BetterErrors::Middleware if ENV["RACK_ENV"] == "development" && defined?(BetterErrors::Middleware)
+            use BetterErrors::Middleware if Mihari.development? && defined?(BetterErrors::Middleware)
 
             run App.new
           end.to_app
@@ -86,7 +85,7 @@ module Mihari
             Verbose: verbose,
             worker_timeout: worker_timeout
           ) do |_|
-            Launchy.open(url) if ENV["RACK_ENV"] != "development" && open
+            Launchy.open(url) if Mihari.development? && open
           rescue Launchy::CommandNotFoundError
             # ref. https://github.com/ninoseki/mihari/issues/477
             # do nothing
