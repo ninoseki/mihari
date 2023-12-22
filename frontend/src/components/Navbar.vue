@@ -9,7 +9,7 @@
         <router-link class="navbar-item" :to="{ name: 'Alerts' }">Alerts</router-link>
         <router-link class="navbar-item" :to="{ name: 'Rules' }">Rules</router-link>
         <router-link class="navbar-item" :to="{ name: 'NewRule' }">New Rule</router-link>
-        <router-link class="navbar-item" :to="{ name: 'Configuration' }">Configuration</router-link>
+        <router-link class="navbar-item" :to="{ name: 'Config' }">Config</router-link>
         <a class="navbar-item"
           ><a href="/redoc-static.html" target="_blank" class="navbar-item">API</a></a
         >

@@ -12,9 +12,9 @@ plugins:
 nav:
   - Requirements: requirements.md
   - Installation: installation.md
-  - How to Write a Rule: rule.md
-  - Usage: usage.md
+  - Rule: rule.md
   - Configuration: configuration.md
+  - Usage: usage.md
   - Tips:
       - Docker: tips/docker.md
       - GitHub Actions: tips/github_actions.md

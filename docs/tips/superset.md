@@ -19,7 +19,7 @@ ORDER BY artifacts.created_at DESC
 
 This query generates a result like the following:
 
-![img](https://i.imgur.com/3nugPCV.png)
+![img](https://github.com/ninoseki/mihari/raw/master/images/superset1.png)
 
 You can visualize the data with the following configuration:
 
@@ -27,4 +27,4 @@ You can visualize the data with the following configuration:
 - Country column: `country_code`
 - Metric: `count(data)`
 
-![img](https://i.imgur.com/O7ZM3mu.png)
+![img](https://github.com/ninoseki/mihari/raw/master/images/superset2.png)
