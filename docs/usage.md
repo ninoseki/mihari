@@ -1,44 +1,80 @@
 # Usage
 
+## CLI
+
 ```bash
 $ mihari
 Commands:
   mihari --version, -v        # Print the version
   mihari alert                # Sub commands for alert
+  mihari artifact             # Sub commands for artifact
+  mihari config               # Sub commands for config
   mihari db                   # Sub commands for DB
+  mihari delete [ID]          # Delete a tag
+  mihari enrich [ID]          # Enrich an artifact
+  mihari get [ID]             # Get an artifact
   mihari help [COMMAND]       # Describe available commands or one specific command
+  mihari list                 # List/search tags
   mihari rule                 # Sub commands for rule
   mihari search [PATH_OR_ID]  # Search by a rule (Outputs null if there is no new finding)
+  mihari tag                  # Sub commands for tag
   mihari web                  # Launch the web app
 
 Options:
   -d, [--debug], [--no-debug]  # Sets up debug mode
 ```
 
-## `mihari db`
-
-This sub command is for initializing/migrating database.
+## `mihari alert`
 
 ```bash
-mihari db migrate
+$ mihari alert
+Commands:
+  mihari alert create [PATH]   # Create an alert
+  mihari alert delete [ID]     # Delete an alert
+  mihari alert get [ID]        # Get an alert
+  mihari alert help [COMMAND]  # Describe subcommands or one specific subcommand
+  mihari alert list [QUERY]    # List/search alerts
+```
+
+## `mihari artifact`
+
+```bash
+$ mihari artifact
+Commands:
+  mihari artifact delete [ID]     # Delete an artifact
+  mihari artifact enrich [ID]     # Enrich an artifact
+  mihari artifact get [ID]        # Get an artifact
+  mihari artifact help [COMMAND]  # Describe subcommands or one specific subcommand
+  mihari artifact list [QUERY]    # List/search artifac
+```
+
+!!! note
+
+## `mihari db`
+
+This subcommand is for initializing/migrating database.
+
+```bash
+$ mihari db
+Commands:
+  mihari db help [COMMAND]  # Describe subcommands or one specific subcommand
+  mihari db migrate         # Migrate DB schemas
 ```
 
 See [Database](./emitters/database.md) for detailed database configuration.
 
 ## `mihari rule`
 
-This sub command is for initializing, validating a rule and also searching rules.
-
 ```bash
-mihari rule init /path/to/rule.yml
-mihari rule validate /path/to/rule.yml
-mihari rule search
+$ mihari rule
+Commands:
+  mihari rule delete [ID]      # Delete a rule
+  mihari rule get [ID]         # Get a rule
+  mihari rule help [COMMAND]   # Describe subcommands or one specific subcommand
+  mihari rule init [PATH]      # Initialize a new rule file
+  mihari rule list [QUERY]     # List/search rules
+  mihari rule validate [PATH]  # Validate a rule file
 ```
-
-!!! note
-
-    - You can group and concatenate search terms with brackets `( )`, `AND`, `OR` and `NOT`.
-    - Searchable fields are `title`, `description`, `tag`, `created_at` and `updated_at`.
 
 ## `mihari search`
 
@@ -61,32 +97,15 @@ It can be suppressed by providing `-f`.
 mihari search -f /path/to/rule.yml
 ```
 
-## `mihari alert`
-
-This sub command is for adding an alert and also searching alerts.
+## `mihari tag`
 
 ```bash
-mihari alert add /path/to/alert.yml
-mihari alert search
+$ mihari tag                                                                                                                                 20:31:05
+Commands:
+  mihari tag delete [ID]     # Delete a tag
+  mihari tag help [COMMAND]  # Describe subcommands or one specific subcommand
+  mihari tag list            # List/search tags
 ```
-
-!!! note
-
-    - You can group and concatenate search terms with brackets `( )`, `AND`, `OR` and `NOT`.
-    - Searchable fields are `rule.id`, `rule.title`, `rule.description`, `artifact.data`, `artifact.data_type`, `artifact.source`, `tag`, `created_at` and `updated_at`.
-
-## `mihari artifacts`
-
-This sub command is for searching artifacts.
-
-```bash
-mihari artifact search
-```
-
-!!! note
-
-    - You can group and concatenate search terms with brackets `( )`, `AND`, `OR` and `NOT`.
-    - Searchable fields are `data`, `data_type`, `source`, `query`, `rule.id`, `rule.title`, `rule.description`, `tag`, `created_at` and `updated_at`.
 
 ## `mihari web`
 
@@ -96,7 +115,7 @@ This command is for launching the built-in web app.
 mihari web
 ```
 
-It stars the app with `localhost:9292`. You can configure it by providing options.
+It stars the app with `localhost:9292`. You can configure it by providing following options:
 
 ```bash
 $ mihari help web
@@ -126,3 +145,26 @@ Options:
 
     The built-in web app offers API to interact with Mihari.
     The API docs are available on `/redoc-static.html`
+
+## Search
+
+Mihari provides listing/search feature via CLI & API.
+
+You can group and concatenate search terms with brackets `( )`, `AND`, `OR` and `NOT`.
+
+Searchable fields are
+
+| Type       | Searchable fields                                                                                                                           |
+| ---------- | ------------------------------------------------------------------------------------------------------------------------------------------- |
+| `alert`    | `rule.id`, `rule.title`, `rule.description`, `artifact.data`, `artifact.data_type`, `artifact.source`, `tag`, `created_at` and `updated_at` |
+| `artifact` | `data`, `data_type`, `source`, `query`, `rule.id`, `rule.title`, `rule.description`, `tag`, `created_at` and `updated_at`                   |
+| `rule`     | `title`, `description`, `tag`, `created_at` and `updated_at`                                                                                |
+| `tag`      | `name`                                                                                                                                      |
+
+## Examples
+
+```bash
+mihari alert list "rule.id:foo"
+mihari artifact list "rule.id: foo AND data_type:ip"
+mihari rule list "description:foo OR title:bar"
+```

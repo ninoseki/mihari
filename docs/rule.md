@@ -1,4 +1,4 @@
-# How to Write a Rule
+# Rule
 
 Mihari has [Sigma](https://github.com/SigmaHQ/sigma) like format to describe a set of search queries to express a rule.
 

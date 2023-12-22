@@ -9,7 +9,7 @@ import { defineComponent } from "vue"
 import Configs from "@/components/config/ConfigsWrapper.vue"
 
 export default defineComponent({
-  name: "ConfigurationView",
+  name: "ConfigView",
   components: {
     Configs
   },
