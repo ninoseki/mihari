@@ -135,6 +135,20 @@ module Mihari
     end
     memo_wise :logger
 
+    #
+    # @return [String]
+    #
+    def env
+      ENV["APP_ENV"] || ENV["RACK_ENV"]
+    end
+
+    #
+    # @return [Boolean]
+    #
+    def development?
+      env == "development"
+    end
+
     def initialize_sentry
       return if Mihari.config.sentry_dsn.nil?
       return if Sentry.initialized?
@@ -142,6 +156,7 @@ module Mihari
       Sentry.init do |config|
         config.dsn = Mihari.config.sentry_dsn
         config.traces_sample_rate = Mihari.config.sentry_trace_sample_rate
+        config.breadcrumbs_logger = %i[sentry_logger http_logger]
       end
     end
   end
