@@ -60,11 +60,11 @@ module Mihari
       # Check uniqueness of artifact
       #
       # @param [Time, nil] base_time Base time to check decaying
-      # @param [Integer, nil] artifact_lifetime Artifact lifetime (TTL) in seconds
+      # @param [Integer, nil] artifact_ttl Artifact TTL in seconds
       #
       # @return [Boolean] true if it is unique. Otherwise false.
       #
-      def unique?(base_time: nil, artifact_lifetime: nil)
+      def unique?(base_time: nil, artifact_ttl: nil)
         artifact = self.class.joins(:alert).where(
           data: data,
           alert: { rule_id: rule_id }
@@ -72,12 +72,12 @@ module Mihari
         return true if artifact.nil?
 
         # check whether the artifact is decayed or not
-        return false if artifact_lifetime.nil?
+        return false if artifact_ttl.nil?
 
         # use the current UTC time if base_time is not given (for testing)
         base_time ||= Time.now.utc
 
-        decayed_at = base_time - (artifact_lifetime || -1).seconds
+        decayed_at = base_time - (artifact_ttl || -1).seconds
         artifact.created_at < decayed_at
       end
 

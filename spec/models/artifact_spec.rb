@@ -38,7 +38,7 @@ RSpec.describe Mihari::Models::Artifact, :vcr do
 
     context "with artifact_lifetime" do
       let(:data) { Faker::Internet.unique.ip_v4_address }
-      let!(:artifact_lifetime) { 60 }
+      let!(:artifact_ttl) { 60 }
       let!(:base_time) { Time.now.utc }
 
       it do
@@ -49,16 +49,16 @@ RSpec.describe Mihari::Models::Artifact, :vcr do
         artifact = described_class.new(data: data, alert_id: alert_id)
         artifact.rule_id = rule_id
 
-        expect(artifact.unique?(base_time: base_time, artifact_lifetime: artifact_lifetime)).to be false
+        expect(artifact.unique?(base_time: base_time, artifact_ttl: artifact_ttl)).to be false
       end
 
       it do
-        Timecop.freeze(base_time - (artifact_lifetime + 1).seconds) do
+        Timecop.freeze(base_time - (artifact_ttl + 1).seconds) do
           described_class.create(data: data, alert_id: alert_id)
         end
 
         artifact = described_class.new(data: data, alert_id: alert_id)
-        expect(artifact.unique?(base_time: base_time, artifact_lifetime: artifact_lifetime)).to be true
+        expect(artifact.unique?(base_time: base_time, artifact_ttl: artifact_ttl)).to be true
       end
     end
   end
