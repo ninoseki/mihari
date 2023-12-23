@@ -36,11 +36,11 @@ export default defineComponent({
     const deleteTagTask = generateDeleteTagTask()
 
     const deleteTag = async () => {
-      const result = window.confirm(
+      const confirmed = window.confirm(
         `Are you sure you want to delete ${props.tag.name} (ID: ${props.tag.id})?`
       )
 
-      if (result) {
+      if (confirmed) {
         await deleteTagTask.perform(props.tag.id)
         isDeleted.value = true
       }

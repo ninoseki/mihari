@@ -1,5 +1,5 @@
 <template>
-  <div class="mb-6">
+  <div class="block">
     <div class="field has-addons">
       <p class="control is-expanded">
         <input class="input" type="text" v-model="q" />
@@ -45,14 +45,14 @@
       </ul>
     </div>
   </div>
-  <div v-if="getRulesTask.performCount > 0">
+  <div class="block" v-if="getRulesTask.performCount > 0">
     <Loading v-if="getRulesTask.isRunning"></Loading>
     <ErrorMessage v-if="getRulesTask.isError" :error="getRulesTask.last?.error"></ErrorMessage>
     <Rules
       :rules="getRulesTask.last.value"
       v-if="getRulesTask.last?.value"
-      @refresh="refresh"
-      @update-page="updatePage"
+      @refresh="onRefresh"
+      @update-page="onUpdatePage"
     ></Rules>
   </div>
 </template>
@@ -87,20 +87,20 @@ export default defineComponent({
       return await getRulesTask.perform(params)
     }
 
-    const updatePage = (newPage: number) => {
+    const onUpdatePage = (newPage: number) => {
       page.value = newPage.toString()
     }
 
-    const resetPage = () => {
+    const onResetPage = () => {
       page.value = "1"
     }
 
     const search = async () => {
-      resetPage()
+      onResetPage()
       await getRules()
     }
 
-    const refresh = async () => {
+    const onRefresh = async () => {
       await search()
     }
 
@@ -122,11 +122,11 @@ export default defineComponent({
       getTagsTask,
       page,
       q,
-      refresh,
+      onRefresh,
       search,
       showHelp,
       toggleShowHelp,
-      updatePage
+      onUpdatePage
     }
   }
 })

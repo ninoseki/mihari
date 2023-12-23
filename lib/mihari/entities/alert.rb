@@ -3,11 +3,7 @@
 module Mihari
   module Entities
     class Alert < Grape::Entity
-      expose :id,
-        documentation: { type: String, required: true,
-                         desc: "String representation of the ID" } do |alert, _options|
-        alert.id.to_s
-      end
+      expose :id, documentation: { type: Integer, required: true }
       expose :rule_id, documentation: { type: String, required: true }, as: :ruleId
       expose :created_at, documentation: { type: DateTime, required: true }, as: :createdAt
 

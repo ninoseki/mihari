@@ -9,7 +9,7 @@ module Mihari
     #
     module Rule
       class << self
-        # rubocop:disable Metrics/AbcSize
+        # rubocop:disable Metrics/AbcSize, Metrics/MethodLength
         def included(thor)
           thor.class_eval do
             include Mixins
@@ -43,7 +43,7 @@ module Mihari
               puts "A new rule file has been initialized: #{path}."
             end
 
-            desc "list", "List/search rules"
+            desc "list [QUERY]", "List/search rules"
             around :with_db_connection
             method_option :page, type: :numeric, default: 1
             method_option :limit, type: :numeric, default: 10
@@ -104,7 +104,7 @@ module Mihari
             end
           end
         end
-        # rubocop:enable Metrics/AbcSize
+        # rubocop:enable Metrics/AbcSize, Metrics/MethodLength
       end
     end
   end

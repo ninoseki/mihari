@@ -37,9 +37,9 @@ export default defineComponent({
     const deleteArtifactTask = generateDeleteArtifactTask()
 
     const deleteArtifact = async () => {
-      const result = window.confirm(`Are you sure you want to delete ${props.artifact.data}?`)
+      const confirmed = window.confirm(`Are you sure you want to delete ${props.artifact.data}?`)
 
-      if (result) {
+      if (confirmed) {
         await deleteArtifactTask.perform(props.artifact.id)
         isDeleted.value = true
       }

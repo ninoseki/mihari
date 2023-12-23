@@ -1,5 +1,6 @@
 import { createRouter, createWebHashHistory, type RouteRecordRaw } from "vue-router"
 
+import Alert from "@/views/Alert.vue"
 import Alerts from "@/views/Alerts.vue"
 import Artifact from "@/views/Artifact.vue"
 import Config from "@/views/Config.vue"
@@ -13,6 +14,12 @@ const routes: Array<RouteRecordRaw> = [
     path: "/",
     name: "Alerts",
     component: Alerts
+  },
+  {
+    path: "/alerts/:id",
+    name: "Alert",
+    component: Alert,
+    props: true
   },
   {
     path: "/config",

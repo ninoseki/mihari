@@ -1,18 +1,16 @@
 <template>
-  <div class="box">
-    <ErrorMessage
-      class="block"
-      :error="error"
-      v-if="error"
-      :disposable="true"
-      @dispose="onDisposeError"
-    ></ErrorMessage>
-    <p>
-      <ActionButtons :alert="alert" @delete="onDelete" @set-error="onSetError"></ActionButtons>
+  <ErrorMessage
+    class="block"
+    :error="error"
+    v-if="error"
+    :disposable="true"
+    @dispose="onDisposeError"
+  ></ErrorMessage>
+  <div class="block">
+    <h2 class="is-size-2">{{ alert.id }}</h2>
+    <p class="is-clearfix">
+      <ActionButtons :alert="alert" @delete="onDelete" @set-error="onSetError" />
     </p>
-    <router-link class="is-size-4" :to="{ name: 'Alert', params: { id: alert.id } }">{{
-      alert.id
-    }}</router-link>
     <table class="table is-fullwidth is-completely-borderless">
       <tr>
         <th>Rule</th>
@@ -37,12 +35,18 @@
     </table>
     <p class="help">Created at: {{ alert.createdAt }}</p>
   </div>
+  <hr />
+  <div class="block">
+    <h2 class="is-size-2 block">Related Alerts</h2>
+    <Alerts :rule-id="alert.ruleId" :exclude-alert-id="alert.id"></Alerts>
+  </div>
 </template>
 
 <script lang="ts">
 import { defineComponent, type PropType, ref } from "vue"
 
 import ActionButtons from "@/components/alert/ActionButtons.vue"
+import Alerts from "@/components/alert/AlertsWithPagination.vue"
 import Artifacts from "@/components/artifact/ArtifactTags.vue"
 import ErrorMessage from "@/components/ErrorMessage.vue"
 import Tags from "@/components/tag/Tags.vue"
@@ -50,10 +54,11 @@ import type { Alert } from "@/types"
 import { getHumanizedRelativeTime, getLocalDatetime } from "@/utils"
 
 export default defineComponent({
-  name: "AlertItem",
+  name: "AlertDetail",
   components: {
     Artifacts,
     Tags,
+    Alerts,
     ActionButtons,
     ErrorMessage
   },

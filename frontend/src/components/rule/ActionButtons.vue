@@ -1,13 +1,13 @@
 <template>
   <span class="buttons is-pulled-right">
     <router-link
-      class="button is-warning is-light is-small"
+      class="button is-warning is-small is-rounded"
       :to="{ name: 'Alerts', query: { q: q } }"
     >
       <span>Alerts:</span>
       <span>{{ getAlertsTask.last?.value?.total }}</span>
     </router-link>
-    <a class="button is-small is-light is-success">
+    <a class="button is-small is-success is-rounded">
       <span>Artifacts:</span>
       <span>{{ getArtifactsTask.last?.value?.total }}</span>
     </a>
@@ -69,7 +69,7 @@ export default defineComponent({
       required: true
     }
   },
-  emits: ["refresh", "set-error"],
+  emits: ["refresh", "set-error", "delete"],
   setup(props, context) {
     const href = computed(() => {
       return `/api/rules/${props.rule.id}`
@@ -85,12 +85,12 @@ export default defineComponent({
     const getArtifactsTask = generateGetArtifactsTask()
 
     const deleteRule = async () => {
-      const result = window.confirm(`Are you sure you want to delete ${props.rule.id}?`)
+      const confirmed = window.confirm(`Are you sure you want to delete ${props.rule.id}?`)
 
-      if (result) {
+      if (confirmed) {
         try {
           await deleteRuleTask.perform(props.rule.id)
-          context.emit("refresh")
+          context.emit("delete")
         } catch (err) {
           context.emit("set-error")
         }

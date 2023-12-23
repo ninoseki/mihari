@@ -1,15 +1,26 @@
 <template>
   <div class="box">
+    <ErrorMessage
+      class="block"
+      :error="error"
+      v-if="error"
+      :disposable="true"
+      @dispose="onDisposeError"
+    ></ErrorMessage>
+    <div class="block">
+      <p>
+        <ActionButtons
+          :rule="rule"
+          @set-error="onSetError"
+          @delete="onDelete"
+          @refresh="onRefresh"
+        />
+      </p>
+      <router-link class="is-size-4" :to="{ name: 'Rule', params: { id: rule.id } }">{{
+        rule.id
+      }}</router-link>
+    </div>
     <table class="table is-fullwidth is-completely-borderless">
-      <tr>
-        <th>ID</th>
-        <td>
-          <p>
-            <ActionButtons :rule="rule" @set-error="setError" />
-          </p>
-          <router-link :to="{ name: 'Rule', params: { id: rule.id } }">{{ rule.id }}</router-link>
-        </td>
-      </tr>
       <tr>
         <th>Title</th>
         <td>
@@ -35,8 +46,9 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, type PropType } from "vue"
+import { defineComponent, type PropType, ref } from "vue"
 
+import ErrorMessage from "@/components/ErrorMessage.vue"
 import ActionButtons from "@/components/rule/ActionButtons.vue"
 import Tags from "@/components/tag/Tags.vue"
 import type { Rule } from "@/types"
@@ -49,14 +61,28 @@ export default defineComponent({
       required: true
     }
   },
-  components: { ActionButtons, Tags },
-  emits: ["set-error"],
+  components: { ActionButtons, Tags, ErrorMessage },
+  emits: ["refresh", "delete"],
   setup(_, context) {
-    const setError = (newError: unknown) => {
-      context.emit("set-error", newError)
+    const error = ref<unknown>(undefined)
+
+    const onSetError = (newError: unknown) => {
+      error.value = newError
     }
 
-    return { setError }
+    const onDisposeError = () => {
+      error.value = undefined
+    }
+
+    const onRefresh = () => {
+      context.emit("refresh")
+    }
+
+    const onDelete = () => {
+      context.emit("delete")
+    }
+
+    return { onSetError, onDisposeError, onRefresh, onDelete, error }
   }
 })
 </script>

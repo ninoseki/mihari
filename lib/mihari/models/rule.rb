@@ -13,7 +13,7 @@ module Mihari
       include SearchCop
 
       search_scope :search do
-        attributes :title, :description, :created_at, :updated_at
+        attributes :id, :title, :description, :created_at, :updated_at
         attributes tag: "tags.name"
       end
 

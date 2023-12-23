@@ -4,13 +4,13 @@
       v-for="(alert, index) in alerts.results"
       :alert="alert"
       :key="index"
-      @refresh-page="refreshPage"
+      @delete="onDelete"
     ></Alert>
     <Pagination
       :total="alerts.total"
       :currentPage="alerts.currentPage"
       :pageSize="alerts.pageSize"
-      @update-page="updatePage"
+      @update-page="onUpdatePage"
     ></Pagination>
     <p class="help">({{ alerts.total }} results in total, {{ alerts.results.length }} shown)</p>
   </div>
@@ -44,19 +44,11 @@ export default defineComponent({
   },
   emits: ["update-page", "refresh-page"],
   setup(props, context) {
-    const scrollToTop = () => {
-      window.scrollTo({
-        top: 0
-      })
-    }
-
-    const updatePage = (page: number) => {
-      scrollToTop()
+    const onUpdatePage = (page: number) => {
       context.emit("update-page", page)
     }
 
-    const refreshPage = () => {
-      scrollToTop()
+    const onDelete = () => {
       context.emit("refresh-page")
     }
 
@@ -64,7 +56,7 @@ export default defineComponent({
       return props.alerts.results.length > 0
     })
 
-    return { updatePage, refreshPage, hasAlerts }
+    return { onUpdatePage, onDelete, hasAlerts }
   }
 })
 </script>
