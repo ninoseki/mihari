@@ -29,7 +29,6 @@ module Mihari
       optional(:data_types).value(array[Types::DataTypes]).default(Mihari::Types::DataTypes.values)
       optional(:falsepositives).value(array[:string]).default([])
 
-      optional(:artifact_lifetime).value(:integer)
       optional(:artifact_ttl).value(:integer)
     end
 

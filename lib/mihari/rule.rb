@@ -109,8 +109,8 @@ module Mihari
     #
     # @return [Integer, nil]
     #
-    def artifact_lifetime
-      data[:artifact_lifetime] || data[:artifact_ttl]
+    def artifact_ttl
+      data[:artifact_ttl]
     end
 
     #
@@ -155,7 +155,7 @@ module Mihari
     #
     def unique_artifacts
       normalized_artifacts.select do |artifact|
-        artifact.unique?(base_time: base_time, artifact_lifetime: artifact_lifetime)
+        artifact.unique?(base_time: base_time, artifact_ttl: artifact_ttl)
       end
     end
 

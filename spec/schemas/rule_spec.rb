@@ -138,7 +138,7 @@ RSpec.describe Mihari::Schemas::RuleContract do
     end
   end
 
-  context "with invalid artifact_lifetime" do
+  context "with invalid artifact_ttl" do
     it do
       result = contract.call(
         id: id,
@@ -147,7 +147,7 @@ RSpec.describe Mihari::Schemas::RuleContract do
         queries: [
           { analyzer: "shodan", query: "foo" }
         ],
-        artifact_lifetime: "foo" # should be an integer
+        artifact_ttl: "foo" # should be an integer
       )
       expect(result.errors.empty?).to be false
     end

@@ -163,7 +163,7 @@ rejects:
 
 ### Artifact TTL
 
-`artifact_ttl` (`integer` / alias: `artifact_lifetime`) is an integer value of artifact TTL (Time-To-Live) in seconds. Optional.
+`artifact_ttl` (`integer`) is an integer value of artifact TTL (Time-To-Live) in seconds. Optional.
 
 Mihari rejects a same artifact in a same rule in general.
 
