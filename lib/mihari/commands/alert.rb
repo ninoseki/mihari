@@ -7,6 +7,7 @@ module Mihari
     #
     module Alert
       class << self
+        # rubocop:disable Metrics/AbcSize
         def included(thor)
           thor.class_eval do
             include Dry::Monads[:result, :try]
@@ -77,6 +78,7 @@ module Mihari
             end
           end
         end
+        # rubocop:enable Metrics/AbcSize
       end
     end
   end

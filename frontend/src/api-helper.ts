@@ -2,6 +2,7 @@ import { type Task, useAsyncTask } from "vue-concurrency"
 
 import { API } from "@/api"
 import type {
+  Alert,
   Alerts,
   Artifacts,
   ArtifactWithTags,
@@ -21,8 +22,8 @@ export function generateGetAlertsTask(): Task<Alerts, [SearchParams]> {
   })
 }
 
-export function generateDeleteAlertTask(): Task<void, [string]> {
-  return useAsyncTask<void, [string]>(async (_signal, id) => {
+export function generateDeleteAlertTask(): Task<void, [number]> {
+  return useAsyncTask<void, [number]>(async (_signal, id) => {
     return await API.deleteAlert(id)
   })
 }
@@ -39,20 +40,20 @@ export function generateDeleteTagTask(): Task<void, [number]> {
   })
 }
 
-export function generateGetArtifactTask(): Task<ArtifactWithTags, [string]> {
-  return useAsyncTask<ArtifactWithTags, [string]>(async (_signal, id) => {
+export function generateGetArtifactTask(): Task<ArtifactWithTags, [number]> {
+  return useAsyncTask<ArtifactWithTags, [number]>(async (_signal, id) => {
     return await API.getArtifact(id)
   })
 }
 
-export function generateDeleteArtifactTask(): Task<void, [string]> {
-  return useAsyncTask<void, [string]>(async (_signal, id) => {
+export function generateDeleteArtifactTask(): Task<void, [number]> {
+  return useAsyncTask<void, [number]>(async (_signal, id) => {
     return await API.deleteArtifact(id)
   })
 }
 
-export function generateEnrichArtifactTask(): Task<void, [string]> {
-  return useAsyncTask<void, [string]>(async (_signal, id) => {
+export function generateEnrichArtifactTask(): Task<void, [number]> {
+  return useAsyncTask<void, [number]>(async (_signal, id) => {
     return await API.enrichArtifact(id)
   })
 }
@@ -108,5 +109,11 @@ export function generateUpdateRuleTask(): Task<Rule, [UpdateRule]> {
 export function generateGetArtifactsTask(): Task<Artifacts, [SearchParams]> {
   return useAsyncTask<Artifacts, [SearchParams]>(async (_signal, params) => {
     return await API.getArtifacts(params)
+  })
+}
+
+export function generateGetAlertTask(): Task<Alert, [number]> {
+  return useAsyncTask<Alert, [number]>(async (_signal, id) => {
+    return await API.getAlert(id)
   })
 }

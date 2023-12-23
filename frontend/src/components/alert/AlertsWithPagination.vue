@@ -4,8 +4,8 @@
     :page="page.toString()"
     :alerts="getAlertsTask.last.value"
     v-if="getAlertsTask.last?.value"
-    @refresh-page="refreshPage"
-    @update-page="updatePage"
+    @refresh-page="onRefreshPage"
+    @update-page="onUpdatePage"
   >
   </Alerts>
 </template>
@@ -22,7 +22,12 @@ export default defineComponent({
   name: "AlertsWithPagination",
   props: {
     ruleId: {
-      type: String
+      type: String,
+      required: true
+    },
+    excludeAlertId: {
+      type: Number,
+      required: false
     }
   },
   components: {
@@ -32,7 +37,10 @@ export default defineComponent({
   setup(props) {
     const page = ref(1)
     const q = computed(() => {
-      return `rule.id:"${props.ruleId}"`
+      if (!props.excludeAlertId) {
+        return `rule.id:"${props.ruleId}"`
+      }
+      return `rule.id:"${props.ruleId}" AND NOT id:${props.excludeAlertId}`
     })
 
     const getAlertsTask = generateGetAlertsTask()
@@ -45,16 +53,16 @@ export default defineComponent({
       return await getAlertsTask.perform(params)
     }
 
-    const updatePage = (newPage: number) => {
+    const onUpdatePage = (newPage: number) => {
       page.value = newPage
     }
 
-    const resetPage = () => {
+    const onResetPage = () => {
       page.value = 1
     }
 
-    const refreshPage = async () => {
-      resetPage()
+    const onRefreshPage = async () => {
+      onResetPage()
       await getAlerts()
     }
 
@@ -69,8 +77,8 @@ export default defineComponent({
     return {
       page,
       getAlertsTask,
-      refreshPage,
-      updatePage
+      onRefreshPage,
+      onUpdatePage
     }
   }
 })

@@ -1,109 +1,104 @@
 <template>
-  <div class="column">
-    <h2 class="is-size-2 mb-4">Artifact</h2>
-    <div class="columns">
-      <div
-        class="column is-half"
-        v-if="googleMapSrc !== undefined || urlscanLiveshotSrc !== undefined"
-      >
-        <div v-if="googleMapSrc">
-          <h4 class="is-size-4 mb-2">
-            Geolocation
-            <span class="has-text-grey">{{
-              countryCode || artifact.geolocation?.countryCode
-            }}</span>
-          </h4>
-          <iframe class="mb-4" :src="googleMapSrc" width="100%" height="240px"></iframe>
-        </div>
-        <div v-if="urlscanLiveshotSrc">
-          <h4 class="is-size-4 mb-2">Live screenshot</h4>
-          <p class="help">Hover to expand</p>
-          <img :src="urlscanLiveshotSrc" class="liveshot" alt="liveshot" />
-        </div>
-      </div>
-      <div class="column">
-        <div class="block">
-          <h4 class="is-size-4 mb-2">Information</h4>
-          <span class="buttons is-pulled-right">
-            <a class="button is-link is-light is-small" :href="href" target="_blank">
-              <span>JSON</span>
-              <span class="icon is-small">
-                <font-awesome-icon icon="barcode"></font-awesome-icon>
-              </span>
-            </a>
-            <button
-              class="button is-info is-light is-small"
-              @click="flipShowMetadata"
-              v-if="artifact.metadata"
-            >
-              <span>Metadata</span>
-              <span class="icon is-small">
-                <font-awesome-icon icon="info-circle"></font-awesome-icon>
-              </span>
-            </button>
-            <button class="button is-primary is-light is-small" @click="enrichArtifact">
-              <span>Enrich</span>
-              <span class="icon is-small">
-                <font-awesome-icon
-                  icon="spinner"
-                  spin
-                  v-if="enrichArtifactTask.isRunning"
-                ></font-awesome-icon>
-                <font-awesome-icon icon="lightbulb" v-else></font-awesome-icon>
-              </span>
-            </button>
-            <button class="button is-light is-small" @click="deleteArtifact">
-              <span>Delete</span>
-              <span class="icon is-small">
-                <font-awesome-icon icon="times"></font-awesome-icon>
-              </span>
-            </button>
+  <div class="block">
+    <h2 class="is-size-2">{{ artifact.id }}</h2>
+    <p class="is-clearfix">
+      <span class="buttons is-pulled-right">
+        <a class="button is-link is-light is-small" :href="href" target="_blank">
+          <span>JSON</span>
+          <span class="icon is-small">
+            <font-awesome-icon icon="barcode"></font-awesome-icon>
           </span>
-          <table class="table is-fullwidth is-completely-borderless">
-            <tr>
-              <th>ID</th>
-              <td>
-                {{ artifact.id }}
-              </td>
-            </tr>
-            <tr>
-              <th>Data type</th>
-              <td>{{ artifact.dataType }}</td>
-            </tr>
-            <tr>
-              <th>Data</th>
-              <td>{{ truncate(artifact.data, 64) }}</td>
-            </tr>
-            <tr>
-              <th>Source</th>
-              <td>{{ artifact.source }}</td>
-            </tr>
-            <tr>
-              <th>Query</th>
-              <td>{{ truncate(artifact.query || "N/A", 64) }}</td>
-            </tr>
-            <tr v-if="artifact.tags.length > 0">
-              <th>Tags</th>
-              <td><Tags :tags="artifact.tags"></Tags></td>
-            </tr>
-          </table>
-        </div>
-        <div v-if="artifact.metadata && showMetadata">
-          <div class="modal is-active">
-            <div class="modal-background" @click="flipShowMetadata"></div>
-            <div class="modal-card">
-              <header class="modal-card-head">
-                <p class="modal-card-title">Metadata</p>
-                <button class="delete" aria-label="close" @click="flipShowMetadata"></button>
-              </header>
-              <section class="modal-card-body">
-                <VueJsonPretty :data="artifact.metadata"></VueJsonPretty>
-              </section>
-            </div>
+        </a>
+        <button
+          class="button is-info is-light is-small"
+          @click="flipShowMetadata"
+          v-if="artifact.metadata"
+        >
+          <span>Metadata</span>
+          <span class="icon is-small">
+            <font-awesome-icon icon="info-circle"></font-awesome-icon>
+          </span>
+        </button>
+        <button class="button is-primary is-light is-small" @click="enrichArtifact">
+          <span>Enrich</span>
+          <span class="icon is-small">
+            <font-awesome-icon
+              icon="spinner"
+              spin
+              v-if="enrichArtifactTask.isRunning"
+            ></font-awesome-icon>
+            <font-awesome-icon icon="lightbulb" v-else></font-awesome-icon>
+          </span>
+        </button>
+        <button class="button is-light is-small" @click="deleteArtifact">
+          <span>Delete</span>
+          <span class="icon is-small">
+            <font-awesome-icon icon="times"></font-awesome-icon>
+          </span>
+        </button>
+      </span>
+    </p>
+  </div>
+  <div class="columns">
+    <div
+      class="column is-half"
+      v-if="googleMapSrc !== undefined || urlscanLiveshotSrc !== undefined"
+    >
+      <div v-if="googleMapSrc">
+        <h4 class="is-size-4">
+          Geolocation
+          <span class="has-text-grey">{{ countryCode || artifact.geolocation?.countryCode }}</span>
+        </h4>
+        <iframe class="mb-4" :src="googleMapSrc" width="100%" height="240px"></iframe>
+      </div>
+      <div v-if="urlscanLiveshotSrc">
+        <h4 class="is-size-4">Live screenshot</h4>
+        <p class="help">Hover to expand</p>
+        <img :src="urlscanLiveshotSrc" class="liveshot" alt="liveshot" />
+      </div>
+    </div>
+    <div class="column">
+      <h4 class="is-size-4">Information</h4>
+
+      <table class="table is-fullwidth is-completely-borderless">
+        <tr>
+          <th>Data</th>
+          <td>{{ truncate(artifact.data, 64) }}</td>
+        </tr>
+        <tr>
+          <th>Data type</th>
+          <td>{{ artifact.dataType }}</td>
+        </tr>
+        <tr>
+          <th>Source</th>
+          <td>{{ artifact.source }}</td>
+        </tr>
+        <tr>
+          <th>Query</th>
+          <td>{{ truncate(artifact.query || "N/A", 64) }}</td>
+        </tr>
+        <tr v-if="artifact.tags.length > 0">
+          <th>Tags</th>
+          <td><Tags :tags="artifact.tags"></Tags></td>
+        </tr>
+      </table>
+      <div v-if="artifact.metadata && showMetadata">
+        <div class="modal is-active">
+          <div class="modal-background" @click="flipShowMetadata"></div>
+          <div class="modal-card">
+            <header class="modal-card-head">
+              <p class="modal-card-title">Metadata</p>
+              <button class="delete" aria-label="close" @click="flipShowMetadata"></button>
+            </header>
+            <section class="modal-card-body">
+              <VueJsonPretty :data="artifact.metadata"></VueJsonPretty>
+            </section>
           </div>
         </div>
       </div>
     </div>
+  </div>
+  <div class="block">
     <div class="block" v-if="artifact.autonomousSystem">
       <h4 class="is-size-4 mb-2">AS</h4>
       <AS :autonomousSystem="artifact.autonomousSystem"></AS>
@@ -141,7 +136,6 @@ import "vue-json-pretty/lib/styles.css"
 import truncate from "truncate"
 import { computed, defineComponent, onMounted, type PropType, ref } from "vue"
 import VueJsonPretty from "vue-json-pretty"
-import { useRouter } from "vue-router"
 
 import {
   generateDeleteArtifactTask,
@@ -179,7 +173,7 @@ export default defineComponent({
     CPEs,
     Ports
   },
-  emits: ["refresh"],
+  emits: ["refresh", "delete"],
   setup(props, context) {
     const googleMapSrc = ref<string | undefined>(undefined)
     const countryCode = ref<string | undefined>(undefined)
@@ -188,8 +182,6 @@ export default defineComponent({
     const href = computed(() => {
       return `/api/artifacts/${props.artifact.id}`
     })
-
-    const router = useRouter()
 
     const urlscanLiveshotSrc = computed<string | undefined>(() => {
       if (props.artifact.dataType === "domain") {
@@ -218,11 +210,11 @@ export default defineComponent({
     const enrichArtifactTask = generateEnrichArtifactTask()
 
     const deleteArtifact = async () => {
-      const result = window.confirm(`Are you sure you want to delete ${props.artifact.data}?`)
+      const confirmed = window.confirm(`Are you sure you want to delete ${props.artifact.data}?`)
 
-      if (result) {
+      if (confirmed) {
         await deleteArtifactTask.perform(props.artifact.id)
-        router.push("/")
+        context.emit("delete")
       }
     }
 

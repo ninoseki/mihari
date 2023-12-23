@@ -1,5 +1,5 @@
 <template>
-  <div class="mb-6">
+  <div class="block">
     <div class="field has-addons">
       <p class="control is-expanded">
         <input class="input" type="text" v-model="q" />
@@ -21,7 +21,7 @@
         </a>
       </p>
     </div>
-    <div class="content mt-3" v-if="showHelp">
+    <div class="content" v-if="showHelp">
       <h4 class="is-size-4">Help</h4>
       <ul>
         <li>
@@ -52,15 +52,15 @@
       </ul>
     </div>
   </div>
-  <div v-if="getAlertsTask.performCount > 0">
+  <div class="block" v-if="getAlertsTask.performCount > 0">
     <Loading v-if="getAlertsTask.isRunning"></Loading>
     <ErrorMessage v-if="getAlertsTask.isError" :error="getAlertsTask.last?.error"></ErrorMessage>
     <AlertsComponent
       :alerts="getAlertsTask.last.value"
       v-if="getAlertsTask.last?.value"
       :page="page"
-      @refresh-page="refreshPage"
-      @update-page="updatePage"
+      @refresh-page="onRefreshPage"
+      @update-page="onUpdatePage"
     ></AlertsComponent>
   </div>
 </template>
@@ -69,7 +69,7 @@
 import { useRouteQuery } from "@vueuse/router"
 import { defineComponent, onMounted, ref, watch } from "vue"
 
-import { generateGetAlertsTask, generateGetTagsTask } from "@/api-helper"
+import { generateGetAlertsTask } from "@/api-helper"
 import AlertsComponent from "@/components/alert/Alerts.vue"
 import ErrorMessage from "@/components/ErrorMessage.vue"
 import Loading from "@/components/Loading.vue"
@@ -88,14 +88,13 @@ export default defineComponent({
     const showHelp = ref(false)
 
     const getAlertsTask = generateGetAlertsTask()
-    const getTagsTask = generateGetTagsTask()
 
     const getAlerts = async () => {
       const params: SearchParams = { q: q.value, page: parseInt(page.value) }
       return await getAlertsTask.perform(params)
     }
 
-    const updatePage = (newPage: number) => {
+    const onUpdatePage = (newPage: number) => {
       page.value = newPage.toString()
     }
 
@@ -103,15 +102,15 @@ export default defineComponent({
       page.value = "1"
     }
 
-    const search = async () => {
-      resetPage()
-      await getAlerts()
-    }
-
-    const refreshPage = async () => {
+    const onRefreshPage = async () => {
       // it is just an alias of search
       // this function will be invoked when an alert is deleted
       await search()
+    }
+
+    const search = async () => {
+      resetPage()
+      await getAlerts()
     }
 
     const toggleShowHelp = () => {
@@ -119,7 +118,6 @@ export default defineComponent({
     }
 
     onMounted(async () => {
-      getTagsTask.perform()
       await getAlerts()
     })
 
@@ -129,14 +127,13 @@ export default defineComponent({
 
     return {
       getAlertsTask,
-      getTagsTask,
       page,
       q,
-      refreshPage,
+      onRefreshPage,
       search,
       showHelp,
       toggleShowHelp,
-      updatePage
+      onUpdatePage
     }
   }
 })

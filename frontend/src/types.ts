@@ -70,7 +70,7 @@ export interface Port {
 }
 
 export interface Artifact {
-  id: string
+  id: number
   data: string
   dataType: string
   source: string
@@ -93,7 +93,7 @@ export interface ArtifactWithTags extends Artifact {
 }
 
 export interface Alert {
-  id: string
+  id: number
   ruleId: string
   createdAt: string
 

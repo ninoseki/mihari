@@ -1,17 +1,17 @@
 <template>
-  <Artifact :id="parseInt(id)"></Artifact>
+  <Alert :id="parseInt(id)"></Alert>
 </template>
 
 <script lang="ts">
 import { useTitle } from "@vueuse/core"
 import { defineComponent, onMounted, watch } from "vue"
 
-import Artifact from "@/components/artifact/ArtifactWrapper.vue"
+import Alert from "@/components/alert/AlertDetailWrapper.vue"
 
 export default defineComponent({
-  name: "ArtifactView",
+  name: "AlertView",
   components: {
-    Artifact
+    Alert
   },
   props: {
     id: {
@@ -21,7 +21,7 @@ export default defineComponent({
   },
   setup(props) {
     const updateTitle = () => {
-      useTitle(`Artifact:${props.id} - Mihari`)
+      useTitle(`Alert:${props.id} - Mihari`)
     }
 
     onMounted(() => {

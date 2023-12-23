@@ -1,6 +1,6 @@
 <template>
-  <div class="column">
-    <h2 class="is-size-2 mb-4">Edit rule: {{ rule.id }}</h2>
+  <div class="block">
+    <h2 class="is-size-2 block">Edit rule: {{ rule.id }}</h2>
     <InputForm v-model:yaml="yaml" @update-yaml="updateYAML"></InputForm>
     <div class="field is-grouped is-grouped-centered">
       <p class="control">
@@ -12,10 +12,10 @@
         </a>
       </p>
     </div>
-    <div v-if="updateRuleTask.last?.error">
-      <hr />
-      <ErrorMessage :error="updateRuleTask.last?.error"></ErrorMessage>
-    </div>
+  </div>
+  <div class="block" v-if="updateRuleTask.last?.error">
+    <hr />
+    <ErrorMessage :error="updateRuleTask.last?.error"></ErrorMessage>
   </div>
 </template>
 

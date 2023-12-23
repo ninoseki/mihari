@@ -1,6 +1,7 @@
 import axios from "axios"
 
 import type {
+  Alert,
   Alerts,
   Artifacts,
   ArtifactWithTags,
@@ -14,11 +15,7 @@ import type {
   UpdateRule
 } from "@/types"
 
-const client = axios.create({
-  headers: {
-    Accept: "application/json"
-  }
-})
+const client = axios.create()
 
 export const API = {
   async getConfigs(): Promise<Config[]> {
@@ -34,16 +31,21 @@ export const API = {
     return res.data
   },
 
+  async getAlert(id: number): Promise<Alert> {
+    const res = await client.get<Alert>(`/api/alerts/${id}`)
+    return res.data
+  },
+
   async getTags(): Promise<Tags> {
     const res = await client.get<Tags>("/api/tags")
     return res.data
   },
 
-  async deleteAlert(id: string): Promise<void> {
+  async deleteAlert(id: number): Promise<void> {
     await client.delete(`/api/alerts/${id}`)
   },
 
-  async getArtifact(id: string): Promise<ArtifactWithTags> {
+  async getArtifact(id: number): Promise<ArtifactWithTags> {
     const res = await client.get(`/api/artifacts/${id}`)
     return res.data
   },
@@ -56,12 +58,12 @@ export const API = {
     return res.data
   },
 
-  async enrichArtifact(id: string): Promise<void> {
+  async enrichArtifact(id: number): Promise<void> {
     await client.get(`/api/artifacts/${id}/enrich`)
     return
   },
 
-  async deleteArtifact(id: string): Promise<void> {
+  async deleteArtifact(id: number): Promise<void> {
     await client.delete(`/api/artifacts/${id}`)
   },
 

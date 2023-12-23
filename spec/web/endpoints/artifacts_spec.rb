@@ -40,7 +40,7 @@ RSpec.describe Mihari::Web::Endpoints::Artifacts, :vcr do
 
       json = JSON.parse(last_response.body.to_s)
       expect(json).to be_a(Hash)
-      expect(json["id"]).to eq(artifact.id.to_s)
+      expect(json["id"]).to eq(artifact.id)
     end
 
     context "with enriched artifact" do

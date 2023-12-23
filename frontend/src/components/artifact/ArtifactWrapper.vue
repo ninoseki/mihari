@@ -3,13 +3,15 @@
   <ErrorMessage v-if="getArtifactTask.isError" :error="getArtifactTask.last?.error"></ErrorMessage>
   <ArtifactComponent
     :artifact="getArtifactTask.last.value"
-    @refresh="refresh"
+    @refresh="onRefresh"
+    @delete="onDelete"
     v-if="getArtifactTask.last?.value"
   ></ArtifactComponent>
 </template>
 
 <script lang="ts">
 import { defineComponent, onMounted, watch } from "vue"
+import { useRouter } from "vue-router"
 
 import { generateGetArtifactTask } from "@/api-helper"
 import ArtifactComponent from "@/components/artifact/Artifact.vue"
@@ -25,19 +27,24 @@ export default defineComponent({
   },
   props: {
     id: {
-      type: String,
+      type: Number,
       required: true
     }
   },
   setup(props) {
     const getArtifactTask = generateGetArtifactTask()
+    const router = useRouter()
 
     const getArtifact = async () => {
       await getArtifactTask.perform(props.id)
     }
 
-    const refresh = async () => {
+    const onRefresh = async () => {
       await getArtifact()
+    }
+
+    const onDelete = async () => {
+      router.push("/")
     }
 
     onMounted(async () => {
@@ -50,7 +57,8 @@ export default defineComponent({
 
     return {
       getArtifactTask,
-      refresh
+      onRefresh,
+      onDelete
     }
   }
 })
