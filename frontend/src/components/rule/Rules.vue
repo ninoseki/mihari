@@ -1,6 +1,6 @@
 <template>
   <div class="block" v-if="hasRules">
-    <RuleComponent
+    <Rule
       v-for="rule in rules.results"
       :rule="rule"
       :key="rule.id"
@@ -24,7 +24,7 @@
 import { computed, defineComponent, type PropType, ref } from "vue"
 
 import Pagination from "@/components/Pagination.vue"
-import RuleComponent from "@/components/rule/Rule.vue"
+import Rule from "@/components/rule/Rule.vue"
 import type { Rules } from "@/types"
 
 export default defineComponent({
@@ -37,7 +37,7 @@ export default defineComponent({
   },
   components: {
     Pagination,
-    RuleComponent
+    Rule
   },
   emits: ["update-page", "refresh"],
   setup(props, context) {
@@ -48,7 +48,7 @@ export default defineComponent({
     }
 
     const onRefresh = () => {
-      context.emit("refresh")
+      context.emit("update-page", 1)
     }
 
     const hasRules = computed(() => {

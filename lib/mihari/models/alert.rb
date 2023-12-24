@@ -14,7 +14,7 @@ module Mihari
       include SearchCop
 
       search_scope :search do
-        attributes :id, :created_at, :updated_at, "rule.id", "rule.title", "rule.description"
+        attributes :id, :created_at, "rule.id", "rule.title", "rule.description"
         attributes "artifact.data" => "artifacts.data"
         attributes "artifact.data_type" => "artifacts.data_type"
         attributes "artifact.source" => "artifacts.source"

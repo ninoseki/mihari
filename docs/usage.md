@@ -152,12 +152,12 @@ Search query supports `AND`, `OR`, `:`, `=`, `!=`, `<`, `<=`, `>`, `>=`, `NOT` a
 
 Searchable fields are
 
-| Type       | Searchable fields                                                                                                                                                   |
-| ---------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `alert`    | `id`, `tag`, `created_at`, `updated_at`, `rule.id`, `rule.title`, `rule.description`, `artifact.data`, `artifact.data_type`, `artifact.source` and `artifact.query` |
-| `artifact` | `id`, `data`, `data_type`, `source`, `query`, `tag`, `rule.id`, `rule.title`, `rule.description`, `tag`, `created_at` and `updated_at`                              |
-| `rule`     | `id`, `title`, `description`, `tag`, `created_at` and `updated_at`                                                                                                  |
-| `tag`      | `id` and `name`                                                                                                                                                     |
+| Type       | Searchable fields                                                                                                                                     |
+| ---------- | ----------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `alert`    | `id`, `tag`, `created_at`, `rule.id`, `rule.title`, `rule.description`, `artifact.data`, `artifact.data_type`, `artifact.source` and `artifact.query` |
+| `artifact` | `id`, `data`, `data_type`, `source`, `query`, `tag`, `rule.id`, `rule.title`, `rule.description`, `tag` and `created_at`                              |
+| `rule`     | `id`, `title`, `description`, `tag`, `created_at` and `updated_at`                                                                                    |
+| `tag`      | `id` and `name`                                                                                                                                       |
 
 ## Examples
 

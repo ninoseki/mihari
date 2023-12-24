@@ -1,9 +1,9 @@
 <template>
   <div v-if="hasAlerts">
     <Alert
-      v-for="(alert, index) in alerts.results"
+      v-for="alert in alerts.results"
       :alert="alert"
-      :key="index"
+      :key="alert.id"
       @delete="onDelete"
     ></Alert>
     <Pagination
@@ -42,14 +42,14 @@ export default defineComponent({
       required: true
     }
   },
-  emits: ["update-page", "refresh-page"],
+  emits: ["update-page"],
   setup(props, context) {
     const onUpdatePage = (page: number) => {
       context.emit("update-page", page)
     }
 
     const onDelete = () => {
-      context.emit("refresh-page")
+      context.emit("update-page", 1)
     }
 
     const hasAlerts = computed(() => {

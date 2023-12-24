@@ -20,15 +20,7 @@
     <button class="button is-primary is-light is-small" @click="searchRule">
       <span>Search</span>
       <span class="icon is-small">
-        <font-awesome-icon
-          icon="triangle-exclamation"
-          v-if="searchRuleTask.isError"
-        ></font-awesome-icon>
-        <font-awesome-icon
-          icon="spinner"
-          spin
-          v-else-if="searchRuleTask.isRunning"
-        ></font-awesome-icon>
+        <font-awesome-icon icon="spinner" spin v-if="searchRuleTask.isRunning"></font-awesome-icon>
         <font-awesome-icon icon="magnifying-glass" v-else></font-awesome-icon>
       </span>
     </button>

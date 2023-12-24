@@ -21,7 +21,7 @@
         </a>
       </p>
     </div>
-    <div class="content" v-if="showHelp">
+    <div class="content mt-3" v-if="showHelp">
       <h4 class="is-size-4">Help</h4>
       <ul>
         <li>
@@ -30,38 +30,24 @@
           <code>&gt;=</code>, <code>NOT</code> and <code>()</code>.
         </li>
         <li>
-          Searchable fields are <code>id</code>, <code>tag</code>, <code>created_at</code>,
-          <code>rule.id</code>, <code>rule.title</code>, <code>rule.description</code>,
-          <code>artifact.data</code>, <code>artifact.data_type</code>,
-          <code>artifact.source</code> and <code>artifact.query</code>.
-        </li>
-      </ul>
-      <h4 class="is-size-4">Examples</h4>
-      <ul>
-        <li>
-          <router-link
-            :to="{ name: 'Alerts', query: { q: 'rule.id:foo AND artifact.data:example.com' } }"
-            >rule.id:foo AND artifact.data:example.com</router-link
-          >
-        </li>
-        <li>
-          <router-link
-            :to="{ name: 'Alerts', query: { q: 'tag:foo AND created_at >= 2020-01-01' } }"
-            >tag:foo AND created_at >= 2020-01-01</router-link
-          >
+          <code>id</code>, <code>data</code>, <code>data_type</code>, <code>source</code>,
+          <code>query</code>, <code>tag</code>, <code>rule.id</code>, <code>rule.title</code>,
+          <code>rule.description</code>, <code>tag</code> and <code>created_at</code>.
         </li>
       </ul>
     </div>
   </div>
-  <div class="block" v-if="getAlertsTask.performCount > 0">
-    <Loading v-if="getAlertsTask.isRunning"></Loading>
-    <ErrorMessage v-if="getAlertsTask.isError" :error="getAlertsTask.last?.error"></ErrorMessage>
-    <AlertsComponent
-      :alerts="getAlertsTask.last.value"
-      v-if="getAlertsTask.last?.value"
-      :page="page"
+  <div class="block" v-if="getArtifactsTask.performCount > 0">
+    <Loading v-if="getArtifactsTask.isRunning"></Loading>
+    <ErrorMessage
+      v-if="getArtifactsTask.isError"
+      :error="getArtifactsTask.last?.error"
+    ></ErrorMessage>
+    <Artifacts
+      :artifacts="getArtifactsTask.last.value"
+      v-if="getArtifactsTask.last?.value"
       @update-page="onUpdatePage"
-    ></AlertsComponent>
+    ></Artifacts>
   </div>
 </template>
 
@@ -69,16 +55,16 @@
 import { useRouteQuery } from "@vueuse/router"
 import { defineComponent, onMounted, ref, watch } from "vue"
 
-import { generateGetAlertsTask } from "@/api-helper"
-import AlertsComponent from "@/components/alert/Alerts.vue"
+import { generateGetArtifactsTask } from "@/api-helper"
+import Artifacts from "@/components/artifact/Artifacts.vue"
 import ErrorMessage from "@/components/ErrorMessage.vue"
 import Loading from "@/components/Loading.vue"
 import type { SearchParams } from "@/types"
 
 export default defineComponent({
-  name: "AlertsWrapper",
+  name: "ArtifactsWrapper",
   components: {
-    AlertsComponent,
+    Artifacts,
     Loading,
     ErrorMessage
   },
@@ -87,20 +73,21 @@ export default defineComponent({
     const q = useRouteQuery<string>("q", "")
     const showHelp = ref(false)
 
-    const getAlertsTask = generateGetAlertsTask()
+    const getArtifactsTask = generateGetArtifactsTask()
 
-    const getAlerts = async () => {
+    const getArtifacts = async () => {
       const params: SearchParams = { q: q.value, page: parseInt(page.value) }
-      return await getAlertsTask.perform(params)
+      return await getArtifactsTask.perform(params)
     }
 
     const onUpdatePage = (newPage: number) => {
+      console.log(newPage)
       page.value = newPage.toString()
     }
 
     const search = async () => {
       page.value = "1"
-      await getAlerts()
+      await getArtifacts()
     }
 
     const toggleShowHelp = () => {
@@ -108,15 +95,15 @@ export default defineComponent({
     }
 
     onMounted(async () => {
-      await getAlerts()
+      await getArtifacts()
     })
 
     watch(page, async () => {
-      await getAlerts()
+      await getArtifacts()
     })
 
     return {
-      getAlertsTask,
+      getArtifactsTask,
       page,
       q,
       search,

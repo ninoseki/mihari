@@ -44,7 +44,7 @@
 import { computed, defineComponent } from "vue"
 
 export default defineComponent({
-  name: "AlertsPagination",
+  name: "PaginationItem",
   props: {
     currentPage: {
       type: Number,

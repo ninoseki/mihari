@@ -6,7 +6,7 @@
 import { useTitle } from "@vueuse/core"
 import { defineComponent, onMounted, watch } from "vue"
 
-import Artifact from "@/components/artifact/ArtifactWrapper.vue"
+import Artifact from "@/components/artifact/ArtifactDetailWrapper.vue"
 
 export default defineComponent({
   name: "ArtifactView",

@@ -7,6 +7,7 @@
       <div class="navbar-start"></div>
       <div class="navbar-end">
         <router-link class="navbar-item" :to="{ name: 'Alerts' }">Alerts</router-link>
+        <router-link class="navbar-item" :to="{ name: 'Artifacts' }">Artifacts</router-link>
         <router-link class="navbar-item" :to="{ name: 'Rules' }">Rules</router-link>
         <router-link class="navbar-item" :to="{ name: 'NewRule' }">New Rule</router-link>
         <router-link class="navbar-item" :to="{ name: 'Config' }">Config</router-link>
