@@ -63,8 +63,16 @@ module Mihari
         @artifacts ||= data[:artifacts].map do |data|
           artifact = Models::Artifact.new(data: data)
           artifact.rule_id = rule_id
+          artifact.source = source
           artifact
         end.uniq(&:data).select(&:valid?)
+      end
+
+      #
+      # @return [String, nil]
+      #
+      def source
+        @source ||= data[:source]
       end
 
       #
