@@ -14,7 +14,7 @@ module Mihari
       censys_secret: nil,
       circl_passive_password: nil,
       circl_passive_username: nil,
-      database_url: URI("sqlite3:///mihari.db"),
+      database_url: URI("sqlite3:mihari.db"),
       fofa_api_key: nil,
       fofa_email: nil,
       greynoise_api_key: nil,
@@ -63,7 +63,7 @@ module Mihari
     #   @return [String, nil]
 
     # @!attribute [r] database_url
-    #   @return [URI, nil]
+    #   @return [URI]
 
     # @!attribute [r] fofa_api_key
     #   @return [String, nil]
@@ -158,7 +158,7 @@ module Mihari
     # @!attribute [r] ignore_error
     #   @return [Boolean]
 
-    # @!attribute [rw] hide_config_values
+    # @!attribute [r] hide_config_values
     #   @return [Boolean]
 
     def database_url=(val)

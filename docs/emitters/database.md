@@ -14,7 +14,7 @@ emitter: database
 
 ### Database URL
 
-`database_url` (`string`) is a database URL. Defaults to `sqlite3:///mihari.db`. Configurable via `DATABASE_URL` environment variable.
+`database_url` (`string`) is a database URL. Defaults to `sqlite3:mihari.db`. Configurable via `DATABASE_URL` environment variable.
 
 If you want to use MySQL or PostgreSQL, please set a database URL for that.
 

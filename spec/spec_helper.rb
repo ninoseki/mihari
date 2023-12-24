@@ -64,7 +64,7 @@ require "coveralls"
 # for Rack app / Sinatra controllers
 ENV["APP_ENV"] = "test"
 # Use in-memory SQLite in local test
-ENV["DATABASE_URL"] = "sqlite3:///:memory:" unless ci_env?
+ENV["DATABASE_URL"] = "sqlite3::memory:" unless ci_env?
 
 require "mihari"
 
