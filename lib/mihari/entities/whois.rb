@@ -11,6 +11,7 @@ module Mihari
       expose :contacts, documentation: { type: Hash, is_array: true, required: true } do |whois_record, _options|
         whois_record.contacts.map(&:to_camelback_keys)
       end
+      expose :created_at, documentation: { type: DateTime, required: true }, as: :createdAt
     end
   end
 end

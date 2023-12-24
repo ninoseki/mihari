@@ -1,27 +1,21 @@
 <template>
-  <Artifact :id="parseInt(id)"></Artifact>
+  <Artifacts />
 </template>
 
 <script lang="ts">
 import { useTitle } from "@vueuse/core"
 import { defineComponent, onMounted, watch } from "vue"
 
-import Artifact from "@/components/artifact/ArtifactDetailWrapper.vue"
+import Artifacts from "@/components/artifact/ArtifactsWrapper.vue"
 
 export default defineComponent({
-  name: "ArtifactView",
+  name: "ArtifactsView",
   components: {
-    Artifact
-  },
-  props: {
-    id: {
-      type: String,
-      required: true
-    }
+    Artifacts
   },
   setup(props) {
     const updateTitle = () => {
-      useTitle(`Artifact:${props.id} - Mihari`)
+      useTitle(`Artifacts - Mihari`)
     }
 
     onMounted(() => {

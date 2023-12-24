@@ -14,12 +14,12 @@ import { defineComponent, onMounted, watch } from "vue"
 import { useRouter } from "vue-router"
 
 import { generateGetArtifactTask } from "@/api-helper"
-import ArtifactComponent from "@/components/artifact/Artifact.vue"
+import ArtifactComponent from "@/components/artifact/ArtifactDetail.vue"
 import ErrorMessage from "@/components/ErrorMessage.vue"
 import Loading from "@/components/Loading.vue"
 
 export default defineComponent({
-  name: "ArtifactWrapper",
+  name: "ArtifactDetailWrapper",
   components: {
     ArtifactComponent,
     Loading,

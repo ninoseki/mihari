@@ -51,7 +51,6 @@
     <Rules
       :rules="getRulesTask.last.value"
       v-if="getRulesTask.last?.value"
-      @refresh="onRefresh"
       @update-page="onUpdatePage"
     ></Rules>
   </div>
@@ -61,7 +60,7 @@
 import { useRouteQuery } from "@vueuse/router"
 import { defineComponent, onMounted, ref, watch } from "vue"
 
-import { generateGetRulesTask, generateGetTagsTask } from "@/api-helper"
+import { generateGetRulesTask } from "@/api-helper"
 import ErrorMessage from "@/components/ErrorMessage.vue"
 import Loading from "@/components/Loading.vue"
 import Rules from "@/components/rule/Rules.vue"
@@ -80,7 +79,6 @@ export default defineComponent({
     const showHelp = ref(false)
 
     const getRulesTask = generateGetRulesTask()
-    const getTagsTask = generateGetTagsTask()
 
     const getRules = async () => {
       const params: SearchParams = { q: q.value, page: parseInt(page.value) }
@@ -91,17 +89,9 @@ export default defineComponent({
       page.value = newPage.toString()
     }
 
-    const onResetPage = () => {
-      page.value = "1"
-    }
-
     const search = async () => {
-      onResetPage()
+      page.value = "1"
       await getRules()
-    }
-
-    const onRefresh = async () => {
-      await search()
     }
 
     const toggleShowHelp = () => {
@@ -109,7 +99,6 @@ export default defineComponent({
     }
 
     onMounted(async () => {
-      getTagsTask.perform()
       await getRules()
     })
 
@@ -119,10 +108,8 @@ export default defineComponent({
 
     return {
       getRulesTask,
-      getTagsTask,
       page,
       q,
-      onRefresh,
       search,
       showHelp,
       toggleShowHelp,

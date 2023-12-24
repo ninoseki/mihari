@@ -16,7 +16,7 @@ class V7Schema < ActiveRecord::Migration[7.1]
     end
 
     create_table :alerts, if_not_exists: true do |t|
-      t.timestamps
+      t.datetime :created_at
 
       t.belongs_to :rule, foreign_key: true, type: :string, null: false
     end
@@ -27,7 +27,7 @@ class V7Schema < ActiveRecord::Migration[7.1]
       t.string :source
       t.string :query
       t.json :metadata
-      t.timestamps
+      t.datetime :created_at
 
       t.belongs_to :alert, foreign_key: true, null: false
     end

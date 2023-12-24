@@ -4,7 +4,6 @@
     :page="page.toString()"
     :alerts="getAlertsTask.last.value"
     v-if="getAlertsTask.last?.value"
-    @refresh-page="onRefreshPage"
     @update-page="onUpdatePage"
   >
   </Alerts>
@@ -57,15 +56,6 @@ export default defineComponent({
       page.value = newPage
     }
 
-    const onResetPage = () => {
-      page.value = 1
-    }
-
-    const onRefreshPage = async () => {
-      onResetPage()
-      await getAlerts()
-    }
-
     onMounted(async () => {
       await getAlerts()
     })
@@ -77,7 +67,6 @@ export default defineComponent({
     return {
       page,
       getAlertsTask,
-      onRefreshPage,
       onUpdatePage
     }
   }
