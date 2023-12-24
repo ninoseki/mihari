@@ -5,6 +5,7 @@ module Mihari
     Alert = Dry::Schema.Params do
       required(:rule_id).value(:string)
       required(:artifacts).value(array[:string])
+      optional(:source).value(:string)
     end
 
     #
