@@ -25,14 +25,16 @@
       <h4 class="is-size-4">Help</h4>
       <ul>
         <li>
-          You can group and concatenate search terms with brackets <code>( )</code>,
-          <code>AND</code>, <code>OR</code> and <code>NOT</code>.
+          Search query supports <code>AND</code>, <code>OR</code>, <code>:</code>, <code>=</code>,
+          <code>!=</code>, <code>&lt;</code>, <code>&lt;=</code>, <code>&gt;</code>,
+          <code>&gt;=</code>, <code>NOT</code> and <code>()</code>.
         </li>
         <li>
-          Searchable fields are
-          <code>rule.id</code>, <code>rule.tittle</code>, <code>rule.description</code>,
-          <code>artifact.data</code> <code>artifact.data_type</code>, <code>artifact.source</code>,
-          <code>tag</code>, <code>created_at</code> and <code>updated_at</code>.
+          Searchable fields are <code>id</code>, <code>tag</code>, <code>created_at</code>,
+          <code>updated_at</code>, <code>rule.id</code>, <code>rule.title</code>,
+          <code>rule.description</code>, <code>artifact.data</code>,
+          <code>artifact.data_type</code>, <code>artifact.source</code> and
+          <code>artifact.query</code>.
         </li>
       </ul>
       <h4 class="is-size-4">Examples</h4>
