@@ -13,7 +13,6 @@ module Mihari
         def included(thor)
           thor.class_eval do
             include Mixins
-            include Dry::Monads[:try, :result]
 
             desc "validate [PATH]", "Validate a rule file"
             #

@@ -28,4 +28,14 @@ RSpec.describe Mihari::HTTP::Factory, :vcr do
       end
     end
   end
+
+  describe ".get" do
+    context "with 404" do
+      it do
+        expect do
+          described_class.build.get("https://httpbin.org/status/404")
+        end.to raise_error(Mihari::StatusCodeError)
+      end
+    end
+  end
 end

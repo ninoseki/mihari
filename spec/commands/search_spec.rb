@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class CLI < Mihari::CLI::Base
+class SearchCLI < Mihari::CLI::Base
   include Mihari::Commands::Search
 end
 
@@ -17,7 +17,7 @@ RSpec.describe Mihari::Commands::Search, :vcr do
     let!(:rule_id) { YAML.safe_load(data)["id"] }
 
     it do
-      expect { CLI.start ["search", "-f", path] }.to output(include(rule_id)).to_stdout
+      expect { SearchCLI.start ["search", "-f", path] }.to output(include(rule_id)).to_stdout
     end
   end
 end
