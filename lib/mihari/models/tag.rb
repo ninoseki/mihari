@@ -11,7 +11,7 @@ module Mihari
       include SearchCop
 
       search_scope :search do
-        attributes :name
+        attributes :id, :name
       end
 
       class << self

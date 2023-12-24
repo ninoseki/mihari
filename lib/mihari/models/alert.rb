@@ -18,6 +18,7 @@ module Mihari
         attributes "artifact.data" => "artifacts.data"
         attributes "artifact.data_type" => "artifacts.data_type"
         attributes "artifact.source" => "artifacts.source"
+        attributes "artifact.query" => "artifacts.query"
         attributes tag: "tags.name"
       end
 

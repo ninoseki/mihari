@@ -150,16 +150,16 @@ Options:
 
 Mihari provides listing/search feature via CLI & API.
 
-You can group and concatenate search terms with brackets `( )`, `AND`, `OR` and `NOT`.
+Search query supports `AND`, `OR`, `:`, `=`, `!=`, `<`, `<=`, `>`, `>=`, `NOT` and `()`.
 
 Searchable fields are
 
-| Type       | Searchable fields                                                                                                                           |
-| ---------- | ------------------------------------------------------------------------------------------------------------------------------------------- |
-| `alert`    | `rule.id`, `rule.title`, `rule.description`, `artifact.data`, `artifact.data_type`, `artifact.source`, `tag`, `created_at` and `updated_at` |
-| `artifact` | `data`, `data_type`, `source`, `query`, `rule.id`, `rule.title`, `rule.description`, `tag`, `created_at` and `updated_at`                   |
-| `rule`     | `title`, `description`, `tag`, `created_at` and `updated_at`                                                                                |
-| `tag`      | `name`                                                                                                                                      |
+| Type       | Searchable fields                                                                                                                                                   |
+| ---------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `alert`    | `id`, `tag`, `created_at`, `updated_at`, `rule.id`, `rule.title`, `rule.description`, `artifact.data`, `artifact.data_type`, `artifact.source` and `artifact.query` |
+| `artifact` | `id`, `data`, `data_type`, `source`, `query`, `tag`, `rule.id`, `rule.title`, `rule.description`, `tag`, `created_at` and `updated_at`                              |
+| `rule`     | `id`, `title`, `description`, `tag`, `created_at` and `updated_at`                                                                                                  |
+| `tag`      | `id` and `name`                                                                                                                                                     |
 
 ## Examples
 
