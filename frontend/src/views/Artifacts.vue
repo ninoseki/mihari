@@ -4,7 +4,7 @@
 
 <script lang="ts">
 import { useTitle } from "@vueuse/core"
-import { defineComponent, onMounted, watch } from "vue"
+import { defineComponent, onMounted } from "vue"
 
 import Artifacts from "@/components/artifact/ArtifactsWrapper.vue"
 
@@ -13,7 +13,7 @@ export default defineComponent({
   components: {
     Artifacts
   },
-  setup(props) {
+  setup() {
     const updateTitle = () => {
       useTitle(`Artifacts - Mihari`)
     }
@@ -21,13 +21,6 @@ export default defineComponent({
     onMounted(() => {
       updateTitle()
     })
-
-    watch(
-      () => props.id,
-      () => {
-        updateTitle()
-      }
-    )
   }
 })
 </script>
