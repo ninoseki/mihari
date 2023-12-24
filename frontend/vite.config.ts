@@ -6,7 +6,6 @@ import { defineConfig } from "vite"
 const env = process.env
 const target = env.BACKEND_URL || "http://localhost:9292/"
 
-// https://vitejs.dev/config/
 export default defineConfig({
   plugins: [vue()],
   server: {
@@ -16,8 +15,7 @@ export default defineConfig({
   },
   resolve: {
     alias: {
-      "@": fileURLToPath(new URL("./src", import.meta.url)),
-      caf: "caf/caf"
+      "@": fileURLToPath(new URL("./src", import.meta.url))
     }
   }
 })
