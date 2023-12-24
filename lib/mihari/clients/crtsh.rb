@@ -30,7 +30,7 @@ module Mihari
         # @type [Array[Hash]]
         parsed = get_json("/", params: params)
         parsed.map do |result|
-          values = result["name_value"].to_s.lines.map(&:chomp)
+          values = result["name_value"].to_s.lines.map(&:chomp).reject { |value| value.starts_with?("*.") }
           values.map { |value| Models::Artifact.new(data: value, metadata: result) }
         end.flatten
       end
