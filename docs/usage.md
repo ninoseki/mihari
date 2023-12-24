@@ -133,8 +133,6 @@ Options:
                                                      # Default: true
   [--worker-timeout=N]                               # Worker timeout value (in seconds)
                                                      # Default: 60
-  [--hide-config-values], [--no-hide-config-values]  # Whether to hide config values or not
-                                                     # Default: true
   [--open], [--no-open]                              # Whether to open the app in browser or not
                                                      # Default: true
   [--rack-env=RACK_ENV]                              # Rack environment
