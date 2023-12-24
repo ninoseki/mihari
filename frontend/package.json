@@ -32,7 +32,7 @@
     "url-parse": "^1.5.10",
     "uuidv4": "^6.2.13",
     "vue": "^3.3.13",
-    "vue-concurrency": "^4.0.1",
+    "vue-concurrency": "^5.0.0",
     "vue-json-pretty": "^2.3.0",
     "vue-router": "^4.2.5",
     "vue3-ace-editor": "^2.2.4"
