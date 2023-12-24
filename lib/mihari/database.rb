@@ -104,13 +104,6 @@ class V7Schema < ActiveRecord::Migration[7.1]
   end
 end
 
-def adapter
-  return "postgresql" if %w[postgresql postgres].include?(Mihari.config.database_url.scheme)
-  return "mysql2" if Mihari.config.database_url.scheme == "mysql2"
-
-  "sqlite3"
-end
-
 #
 # @return [Array<ActiveRecord::Migration>] schemas
 #
@@ -139,15 +132,7 @@ module Mihari
       def connect
         return if ActiveRecord::Base.connected?
 
-        case adapter
-        when "postgresql", "mysql2"
-          ActiveRecord::Base.establish_connection Mihari.config.database_url.to_s
-        else
-          ActiveRecord::Base.establish_connection(
-            adapter: adapter,
-            database: Mihari.config.database_url.path[1..]
-          )
-        end
+        ActiveRecord::Base.establish_connection Mihari.config.database_url.to_s
         ActiveRecord::Base.logger = Logger.new($stdout) if Mihari.development?
       end
 
@@ -167,6 +152,15 @@ module Mihari
         Mihari.logger.error("The DB migration is not yet complete. Please run 'mihari db migrate'.")
       ensure
         Mihari::Database.close
+      end
+
+      private
+
+      def adapter
+        return "postgresql" if %w[postgresql postgres].include?(Mihari.config.database_url.scheme)
+        return "mysql2" if Mihari.config.database_url.scheme == "mysql2"
+
+        "sqlite3"
       end
     end
   end
