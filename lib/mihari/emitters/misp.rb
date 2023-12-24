@@ -56,8 +56,10 @@ module Mihari
         })
       end
 
-      def configuration_keys
-        %w[misp_url misp_api_key]
+      class << self
+        def configuration_keys
+          %w[misp_url misp_api_key]
+        end
       end
 
       private

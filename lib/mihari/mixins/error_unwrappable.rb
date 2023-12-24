@@ -3,9 +3,9 @@
 module Mihari
   module Mixins
     #
-    # Unwrap error mixins
+    # Error unwrappable mixins
     #
-    module UnwrapError
+    module ErrorUnwrappable
       def unwrap_error(err)
         return err unless err.is_a?(Dry::Monads::UnwrapError)
 

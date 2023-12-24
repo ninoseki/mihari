@@ -6,7 +6,7 @@ module Mihari
     # SecurityTrails
     #
     class SecurityTrails < Base
-      include Mixins::Refang
+      include Mixins::Refangable
 
       # @return [String, nil]
       attr_reader :type
@@ -43,11 +43,11 @@ module Mihari
         end
       end
 
-      def configuration_keys
-        %w[securitytrails_api_key]
-      end
-
       class << self
+        def configuration_keys
+          %w[securitytrails_api_key]
+        end
+
         #
         # @return [Array<String>, nil]
         #

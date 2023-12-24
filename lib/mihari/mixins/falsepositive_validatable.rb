@@ -3,9 +3,9 @@
 module Mihari
   module Mixins
     #
-    # False positive mixins
+    # False positive validatable mixins
     #
-    module FalsePositive
+    module FalsePositiveValidatable
       prepend MemoWise
 
       #

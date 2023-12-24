@@ -37,8 +37,10 @@ module Mihari
         artifacts.select { |artifact| allowed_data_types.include? artifact.data_type }
       end
 
-      def configuration_keys
-        %w[urlscan_api_key]
+      class << self
+        def configuration_keys
+          %w[urlscan_api_key]
+        end
       end
 
       private

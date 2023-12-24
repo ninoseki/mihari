@@ -4,7 +4,7 @@ module Mihari
   module Structs
     module Censys
       class AutonomousSystem < Dry::Struct
-        include Mixins::AutonomousSystem
+        include Mixins::AutonomousSystemNormalizable
 
         # @!attribute [r] asn
         #   @return [Integer]

@@ -4,15 +4,15 @@ export interface Pagination {
   pageSize: number
 }
 
-export interface ConfigValue {
+export interface ConfigItem {
   key: string
   value: string | null
 }
 
 export interface Config {
   name: string
-  isConfigured: boolean
-  values: ConfigValue[]
+  configured: boolean
+  items: ConfigItem[]
   type: string
 }
 

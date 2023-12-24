@@ -6,7 +6,7 @@ module Mihari
     # CIRCL passive DNS/SSL analyzer
     #
     class CIRCL < Base
-      include Mixins::Refang
+      include Mixins::Refangable
 
       # @return [String, nil]
       attr_reader :type
@@ -47,8 +47,10 @@ module Mihari
         configuration_keys? || (username? && password?)
       end
 
-      def configuration_keys
-        %w[circl_passive_password circl_passive_username]
+      class << self
+        def configuration_keys
+          %w[circl_passive_password circl_passive_username]
+        end
       end
 
       private

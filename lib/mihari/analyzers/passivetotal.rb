@@ -6,7 +6,7 @@ module Mihari
     # PassiveTotal analyzer
     #
     class PassiveTotal < Base
-      include Mixins::Refang
+      include Mixins::Refangable
 
       # @return [String, nil]
       attr_reader :type
@@ -49,8 +49,10 @@ module Mihari
         configuration_keys? || (username? && api_key?)
       end
 
-      def configuration_keys
-        %w[passivetotal_username passivetotal_api_key]
+      class << self
+        def configuration_keys
+          %w[passivetotal_username passivetotal_api_key]
+        end
       end
 
       class << self

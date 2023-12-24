@@ -38,7 +38,7 @@ module Mihari
       include Mihari::Commands::Version
       include Mihari::Commands::Web
 
-      include Mihari::Mixins::UnwrapError
+      include Mixins::ErrorUnwrappable
 
       no_commands do
         def safe_execute

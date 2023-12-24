@@ -11,12 +11,6 @@ require "yaml"
 
 # Active Support & Active Record
 require "active_support"
-
-require "active_support/core_ext/hash"
-require "active_support/core_ext/integer/time"
-require "active_support/core_ext/numeric/time"
-require "active_support/core_ext/object/deep_dup"
-
 require "active_record"
 
 # Search Cop
@@ -56,12 +50,12 @@ require "mihari/errors"
 require "mihari/config"
 
 # Mixins
-require "mihari/mixins/autonomous_system"
+require "mihari/mixins/autonomous_system_normalizable"
 require "mihari/mixins/configurable"
-require "mihari/mixins/falsepositive"
-require "mihari/mixins/refang"
+require "mihari/mixins/falsepositive_validatable"
+require "mihari/mixins/refangable"
 require "mihari/mixins/retriable"
-require "mihari/mixins/unwrap_error"
+require "mihari/mixins/error_unwrappable"
 
 #
 # Mihari module

@@ -27,8 +27,10 @@ module Mihari
         ).map(&:artifacts).flatten
       end
 
-      def configuration_keys
-        %w[greynoise_api_key]
+      class << self
+        def configuration_keys
+          %w[greynoise_api_key]
+        end
       end
 
       private

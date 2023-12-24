@@ -5,7 +5,7 @@ module Mihari
     #
     # Autonomous System mixin
     #
-    module AutonomousSystem
+    module AutonomousSystemNormalizable
       #
       # Normalize ASN value
       #

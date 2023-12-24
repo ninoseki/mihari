@@ -6,7 +6,7 @@ module Mihari
     # VirusTotal analyzer
     #
     class VirusTotal < Base
-      include Mixins::Refang
+      include Mixins::Refangable
 
       # @return [String]
       attr_reader :type
@@ -38,11 +38,11 @@ module Mihari
         end
       end
 
-      def configuration_keys
-        %w[virustotal_api_key]
-      end
-
       class << self
+        def configuration_keys
+          %w[virustotal_api_key]
+        end
+
         #
         # @return [Array<String>, nil]
         #

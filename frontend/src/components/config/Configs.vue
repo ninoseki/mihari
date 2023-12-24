@@ -7,7 +7,7 @@
             <th>Name</th>
             <th>Type</th>
             <th>Configured?</th>
-            <th>Key-value(s)</th>
+            <th>Items</th>
           </tr>
         </thead>
         <tbody>
@@ -19,7 +19,7 @@
               {{ config.type }}
             </td>
             <td>
-              <button class="button is-success is-small ml-1" v-if="config.isConfigured">
+              <button class="button is-success is-small ml-1" v-if="config.configured">
                 <span class="icon is-small">
                   <font-awesome-icon icon="check"></font-awesome-icon>
                 </span>
@@ -34,11 +34,14 @@
             </td>
             <td>
               <div class="field is-grouped is-grouped-multiline">
-                <div class="control" v-for="(kv, index) in config.values" :key="index">
+                <div class="control" v-for="(item, index) in config.items" :key="index">
                   <div class="tags has-addons">
-                    <span class="tag is-dark"> {{ kv.key }}</span>
-                    <span class="tag" :class="{ 'is-success': kv.value, 'is-warning': !kv.value }">
-                      {{ kv.value || "N/A" }}</span
+                    <span class="tag is-dark"> {{ item.key }}</span>
+                    <span
+                      class="tag"
+                      :class="{ 'is-success': item.value, 'is-warning': !item.value }"
+                    >
+                      {{ item.value || "N/A" }}</span
                     >
                   </div>
                 </div>
