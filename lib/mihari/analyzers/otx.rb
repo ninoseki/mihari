@@ -6,7 +6,7 @@ module Mihari
     # OTX analyzer
     #
     class OTX < Base
-      include Mixins::Refang
+      include Mixins::Refangable
 
       # @return [String, nil]
       attr_reader :type
@@ -38,8 +38,10 @@ module Mihari
         end
       end
 
-      def configuration_keys
-        %w[otx_api_key]
+      class << self
+        def configuration_keys
+          %w[otx_api_key]
+        end
       end
 
       private

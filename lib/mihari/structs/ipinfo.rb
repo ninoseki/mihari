@@ -25,7 +25,7 @@ module Mihari
         attribute :asn, Types::Int.optional
 
         class << self
-          include Mixins::AutonomousSystem
+          include Mixins::AutonomousSystemNormalizable
 
           #
           # @param [Hash] d

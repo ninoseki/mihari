@@ -21,8 +21,10 @@ module Mihari
         alert
       end
 
-      def configuration_keys
-        %w[database_url]
+      class << self
+        def configuration_keys
+          %w[database_url]
+        end
       end
     end
   end

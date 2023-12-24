@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class Test
-  include Mihari::Mixins::FalsePositive
+  include Mihari::Mixins::FalsePositiveValidatable
 end
 
 RSpec.describe Test do

@@ -40,8 +40,10 @@ module Mihari
         end
       end
 
-      def configuration_keys
-        %w[zoomeye_api_key]
+      class << self
+        def configuration_keys
+          %w[zoomeye_api_key]
+        end
       end
 
       private

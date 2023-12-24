@@ -9,7 +9,7 @@ RSpec.describe Mihari::Structs::Config do
     end
 
     it do
-      expect(config.is_configured).to be true
+      expect(config.configured).to be true
     end
   end
 end

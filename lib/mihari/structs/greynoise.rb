@@ -4,7 +4,7 @@ module Mihari
   module Structs
     module GreyNoise
       class Metadata < Dry::Struct
-        include Mixins::AutonomousSystem
+        include Mixins::AutonomousSystemNormalizable
 
         # @!attribute [r] country
         #   @return [String]

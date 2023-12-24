@@ -2,7 +2,7 @@
 
 module Mihari
   class Rule < Service
-    include Mixins::FalsePositive
+    include Mixins::FalsePositiveValidatable
 
     # @return [Hash]
     attr_reader :data

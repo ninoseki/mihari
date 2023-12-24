@@ -19,10 +19,6 @@ module Mihari
         super(options: options)
       end
 
-      def configuration_keys
-        %w[ipinfo_api_key]
-      end
-
       #
       # Query IPInfo
       #
@@ -36,6 +32,12 @@ module Mihari
         Structs::IPInfo::Response.from_dynamic! JSON.parse(res.body.to_s)
       end
       memo_wise :call
+
+      class << self
+        def configuration_keys
+          %w[ipinfo_api_key]
+        end
+      end
 
       private
 

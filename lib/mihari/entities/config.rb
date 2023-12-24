@@ -5,8 +5,8 @@ module Mihari
     class Config < Grape::Entity
       expose :name, documentation: { type: String, required: true }
       expose :type, documentation: { type: String, required: true }
-      expose :values, documentation: { type: String, is_array: true, required: true }
-      expose :is_configured, documentation: { type: Grape::API::Boolean, required: true }, as: :isConfigured
+      expose :items, documentation: { type: Hash, is_array: true, required: true }
+      expose :configured, documentation: { type: Grape::API::Boolean, required: true }
     end
   end
 end

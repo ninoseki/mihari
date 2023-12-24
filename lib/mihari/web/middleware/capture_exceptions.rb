@@ -7,7 +7,7 @@ module Mihari
       # Customized Sentry::Rack::CaptureExceptions
       #
       class CaptureExceptions < Sentry::Rack::CaptureExceptions
-        include Mihari::Mixins::UnwrapError
+        include Mixins::ErrorUnwrappable
 
         private
 

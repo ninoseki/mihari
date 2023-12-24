@@ -66,8 +66,10 @@ module Mihari
         end.first
       end
 
-      def configuration_keys
-        %w[thehive_url thehive_api_key]
+      class << self
+        def configuration_keys
+          %w[thehive_url thehive_api_key]
+        end
       end
 
       private

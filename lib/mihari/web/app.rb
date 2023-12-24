@@ -85,7 +85,7 @@ module Mihari
             Verbose: verbose,
             worker_timeout: worker_timeout
           ) do |_|
-            Launchy.open(url) if Mihari.development? && open
+            Launchy.open(url) if !Mihari.development? && open
           rescue Launchy::CommandNotFoundError
             # ref. https://github.com/ninoseki/mihari/issues/477
             # do nothing

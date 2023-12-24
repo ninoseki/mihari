@@ -31,12 +31,14 @@ module Mihari
         end.flatten.compact
       end
 
-      def configuration_keys
-        %w[fofa_api_key fofa_email]
-      end
-
       def configured?
         api_key? && email?
+      end
+
+      class << self
+        def configuration_keys
+          %w[fofa_api_key fofa_email]
+        end
       end
 
       private

@@ -3,9 +3,9 @@
 module Mihari
   module Mixins
     #
-    # Refang mixin
+    # Refangable mixin
     #
-    module Refang
+    module Refangable
       #
       # Refang defanged indicator
       #

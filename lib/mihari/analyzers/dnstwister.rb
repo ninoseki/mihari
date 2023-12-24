@@ -6,7 +6,7 @@ module Mihari
     # DNSTwister analyzer
     #
     class DNSTwister < Base
-      include Mixins::Refang
+      include Mixins::Refangable
 
       # @return [String]
       attr_reader :type

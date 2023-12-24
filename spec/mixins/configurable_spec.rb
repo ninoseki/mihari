@@ -9,8 +9,10 @@ class ConfigurableTest
     @api_key = api_key
   end
 
-  def configuration_keys
-    %w[shodan_api_key]
+  class << self
+    def configuration_keys
+      %w[shodan_api_key]
+    end
   end
 end
 

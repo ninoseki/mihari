@@ -24,8 +24,10 @@ module Mihari
         client.intel_search_with_pagination(query, pagination_limit: pagination_limit).map(&:artifacts).flatten
       end
 
-      def configuration_keys
-        %w[virustotal_api_key]
+      class << self
+        def configuration_keys
+          %w[virustotal_api_key]
+        end
       end
 
       class << self

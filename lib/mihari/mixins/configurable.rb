@@ -6,15 +6,17 @@ module Mihari
     # Configurable mixin
     #
     module Configurable
+      extend ActiveSupport::Concern
+
       #
       # Check whether there are configuration key-values or not
       #
       # @return [Boolean]
       #
       def configuration_keys?
-        return true if configuration_keys.empty?
+        return true if self.class.configuration_keys.empty?
 
-        configuration_keys.all? { |key| Mihari.config.send(key) }
+        self.class.configuration_keys.all? { |key| Mihari.config.send(key) }
       end
 
       #
@@ -26,28 +28,30 @@ module Mihari
         configuration_keys? || api_key?
       end
 
-      #
-      # Configuration values
-      #
-      # @return [Array<Hash>, nil] Configuration values as a list of hash. Returns nil if there is any keys.
-      #
-      def configuration_values
-        return nil if configuration_keys.empty?
+      class_methods do
+        #
+        # Configuration items
+        #
+        # @return [Array<Hash>] Configuration values as a list of hash. Returns nil if there is any keys.
+        #
+        def configuration_items
+          return nil if configuration_keys.empty?
 
-        configuration_keys.map do |key|
-          value = Mihari.config.send(key)
-          value = "REDACTED" if value && Mihari.config.hide_config_values
-          { key: key.upcase, value: value }
+          configuration_keys.map do |key|
+            value = Mihari.config.send(key)
+            value = "REDACTED" if value && Mihari.config.hide_config_values
+            { key: key.upcase, value: value }
+          end
         end
-      end
 
-      #
-      # Configuration keys
-      #
-      # @return [Array<String>] A list of configuration keys
-      #
-      def configuration_keys
-        []
+        #
+        # Configuration keys
+        #
+        # @return [Array<String>] A list of configuration keys
+        #
+        def configuration_keys
+          []
+        end
       end
 
       private

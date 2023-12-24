@@ -27,7 +27,7 @@ RSpec.describe Mihari.config do
 
   context "with analyzer configuration keys" do
     where(:key) do
-      Mihari.analyzers.map { |klass| klass.new("dummy").configuration_keys }.flatten
+      Mihari.analyzers.map(&:configuration_keys).flatten
     end
 
     with_them do
@@ -39,7 +39,7 @@ RSpec.describe Mihari.config do
 
   context "with emitter configuration keys" do
     where(:key) do
-      Mihari.emitters.map { |klass| klass.new(rule: nil).configuration_keys }.flatten
+      Mihari.emitters.map(&:configuration_keys).flatten
     end
 
     with_them do
@@ -51,7 +51,7 @@ RSpec.describe Mihari.config do
 
   context "with enricher configuration keys" do
     where(:key) do
-      Mihari.enrichers.map { |klass| klass.new.configuration_keys }.flatten
+      Mihari.enrichers.map(&:configuration_keys).flatten
     end
 
     with_them do

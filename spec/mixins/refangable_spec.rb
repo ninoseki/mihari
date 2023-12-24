@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class Test
-  include Mihari::Mixins::Refang
+  include Mihari::Mixins::Refangable
 end
 
 RSpec.describe Test do

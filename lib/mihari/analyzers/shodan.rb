@@ -27,8 +27,10 @@ module Mihari
         ).map(&:artifacts).flatten.uniq(&:data)
       end
 
-      def configuration_keys
-        %w[shodan_api_key]
+      class << self
+        def configuration_keys
+          %w[shodan_api_key]
+        end
       end
 
       private
