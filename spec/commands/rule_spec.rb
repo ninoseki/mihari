@@ -5,7 +5,9 @@ class RuleCLI < Mihari::CLI::Base
 end
 
 RSpec.describe Mihari::Commands::Rule do
-  let!(:rule) { Mihari::Models::Rule.first }
+  include_context "with database fixtures"
+
+  let_it_be(:rule) { Mihari::Models::Rule.first }
 
   describe "#initialize_rule" do
     let!(:files) { Dry::Files.new(memory: true) }
@@ -58,7 +60,7 @@ RSpec.describe Mihari::Commands::Rule do
 
   describe "#get" do
     it do
-      expect { RuleCLI.start ["get", rule.id.to_s] }.to output(include(rule.id)).to_stdout
+      expect { RuleCLI.start ["get", rule.id] }.to output(include(rule.id)).to_stdout
     end
   end
 end
