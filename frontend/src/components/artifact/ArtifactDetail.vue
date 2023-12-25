@@ -95,6 +95,7 @@
 </template>
 
 <script lang="ts">
+import type { AxiosError } from "axios"
 import truncate from "truncate"
 import { computed, defineComponent, onMounted, type PropType, ref } from "vue"
 
@@ -137,9 +138,9 @@ export default defineComponent({
     const googleMapSrc = ref<string | undefined>(undefined)
     const countryCode = ref<string | undefined>(undefined)
 
-    const error = ref<unknown>(undefined)
+    const error = ref<AxiosError | undefined>()
 
-    const onSetError = (newError: unknown) => {
+    const onSetError = (newError: AxiosError) => {
       error.value = newError
     }
 

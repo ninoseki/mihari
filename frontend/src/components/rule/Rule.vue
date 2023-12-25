@@ -46,6 +46,7 @@
 </template>
 
 <script lang="ts">
+import type { AxiosError } from "axios"
 import { defineComponent, type PropType, ref } from "vue"
 
 import ErrorMessage from "@/components/ErrorMessage.vue"
@@ -64,9 +65,9 @@ export default defineComponent({
   components: { ActionButtons, Tags, ErrorMessage },
   emits: ["refresh", "delete"],
   setup(_, context) {
-    const error = ref<unknown>(undefined)
+    const error = ref<AxiosError | undefined>()
 
-    const onSetError = (newError: unknown) => {
+    const onSetError = (newError: AxiosError) => {
       error.value = newError
     }
 

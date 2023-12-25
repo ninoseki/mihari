@@ -16,6 +16,7 @@
 </template>
 
 <script lang="ts">
+import axios from "axios"
 import { computed, defineComponent, type PropType } from "vue"
 
 import { generateDeleteAlertTask } from "@/api-helper"
@@ -45,7 +46,9 @@ export default defineComponent({
           await deleteAlertTask.perform(props.alert.id)
           context.emit("delete")
         } catch (err) {
-          context.emit("set-error", err)
+          if (axios.isAxiosError(err)) {
+            context.emit("set-error", err)
+          }
         }
       }
     }

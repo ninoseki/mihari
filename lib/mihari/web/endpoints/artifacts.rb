@@ -33,7 +33,7 @@ module Mihari
 
           desc "Get an artifact", {
             success: Entities::Artifact,
-            failure: [{ code: 404, model: Entities::Message }],
+            failure: [{ code: 404, model: Entities::ErrorMessage }],
             summary: "Get an artifact"
           }
           params do
@@ -53,7 +53,7 @@ module Mihari
 
           desc "Enrich an artifact", {
             success: { code: 201, model: Entities::Message },
-            failure: [{ code: 404, model: Entities::Message }],
+            failure: [{ code: 404, model: Entities::ErrorMessage }],
             summary: "Enrich an artifact"
           }
           params do
@@ -75,7 +75,7 @@ module Mihari
 
           desc "Delete an artifact", {
             success: { code: 204, model: Entities::Message },
-            failure: [{ code: 404, model: Entities::Message }],
+            failure: [{ code: 404, model: Entities::ErrorMessage }],
             summary: "Delete an artifact"
           }
           params do

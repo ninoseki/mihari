@@ -43,6 +43,7 @@
 </template>
 
 <script lang="ts">
+import axios from "axios"
 import { computed, defineComponent, onMounted, type PropType } from "vue"
 
 import {
@@ -84,7 +85,9 @@ export default defineComponent({
           await deleteRuleTask.perform(props.rule.id)
           context.emit("delete")
         } catch (err) {
-          context.emit("set-error")
+          if (axios.isAxiosError(err)) {
+            context.emit("set-error")
+          }
         }
       }
     }
@@ -94,7 +97,9 @@ export default defineComponent({
         await searchRuleTask.perform(props.rule.id)
         context.emit("refresh")
       } catch (err) {
-        context.emit("set-error", err)
+        if (axios.isAxiosError(err)) {
+          context.emit("set-error", err)
+        }
       }
     }
 

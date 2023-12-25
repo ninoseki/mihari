@@ -53,6 +53,7 @@
 <script lang="ts">
 import "vue-json-pretty/lib/styles.css"
 
+import axios from "axios"
 import truncate from "truncate"
 import { computed, defineComponent, type PropType, ref } from "vue"
 import VueJsonPretty from "vue-json-pretty"
@@ -87,7 +88,9 @@ export default defineComponent({
           await deleteArtifactTask.perform(props.artifact.id)
           context.emit("delete")
         } catch (err) {
-          context.emit("set-error", err)
+          if (axios.isAxiosError(err)) {
+            context.emit("set-error", err)
+          }
         }
       }
     }
@@ -97,7 +100,9 @@ export default defineComponent({
         await enrichArtifactTask.perform(props.artifact.id)
         context.emit("refresh")
       } catch (err) {
-        context.emit("set-error", err)
+        if (axios.isAxiosError(err)) {
+          context.emit("set-error", err)
+        }
       }
     }
 
