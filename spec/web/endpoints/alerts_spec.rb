@@ -5,7 +5,7 @@ RSpec.describe Mihari::Web::Endpoints::Alerts do
 
   include_context "with database fixtures"
 
-  let_it_be(:alert) { Mihari::Models::Alert.first }
+  let!(:alert) { Mihari::Models::Alert.first }
   let_it_be(:rule) { Mihari::Models::Rule.first }
 
   def app
@@ -44,6 +44,21 @@ RSpec.describe Mihari::Web::Endpoints::Alerts do
         get "/api/alerts", { page: "foo" }
         expect(last_response.status).to eq(400)
       end
+    end
+  end
+
+  describe "get /api/alerts/:id" do
+    it "returns 200" do
+      get "/api/alerts/#{alert.id}"
+      expect(last_response.status).to eq(200)
+
+      json = JSON.parse(last_response.body.to_s)
+      expect(json).to be_a(Hash)
+    end
+
+    it "returns 404" do
+      get "/api/alerts/0"
+      expect(last_response.status).to eq(404)
     end
   end
 
