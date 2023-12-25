@@ -33,7 +33,7 @@ module Mihari
 
           desc "Delete a tag", {
             success: { code: 204, model: Entities::Message },
-            failure: [{ code: 404, model: Entities::Message }],
+            failure: [{ code: 404, model: Entities::ErrorMessage }],
             summary: "Delete a tag"
           }
           params do

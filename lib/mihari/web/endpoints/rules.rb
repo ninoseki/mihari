@@ -64,7 +64,7 @@ module Mihari
 
           desc "Get a rule", {
             success: Entities::Rule,
-            failure: [{ code: 404, model: Entities::Message }],
+            failure: [{ code: 404, model: Entities::ErrorMessage }],
             summary: "Get a rule"
           }
           params do
@@ -84,7 +84,7 @@ module Mihari
 
           desc "Search by a rule", {
             success: { code: 201, model: Entities::Message },
-            failure: [{ code: 404, model: Entities::Message }],
+            failure: [{ code: 404, model: Entities::ErrorMessage }],
             summary: "Run a rule"
           }
           params do
@@ -113,7 +113,7 @@ module Mihari
 
           desc "Create a rule", {
             success: { code: 201, model: Entities::Rule },
-            failure: [{ code: 404, model: Entities::Message }],
+            failure: [{ code: 404, model: Entities::ErrorMessage }],
             summary: "Create a rule"
           }
           params do
@@ -130,14 +130,14 @@ module Mihari
             when Psych::SyntaxError
               error!({ message: failure.message }, 400)
             when ValidationError
-              error!({ message: "Rule format is invalid", details: failure.errors.to_h }, 400)
+              error!({ message: "Rule format is invalid", detail: failure.errors.to_h }, 400)
             end
             raise failure
           end
 
           desc "Update a rule", {
             success: { code: 201, model: Entities::Rule },
-            failure: [{ code: 404, model: Entities::Message }],
+            failure: [{ code: 404, model: Entities::ErrorMessage }],
             summary: "Update a rule"
           }
           params do
@@ -158,14 +158,14 @@ module Mihari
             when Psych::SyntaxError
               error!({ message: failure.message }, 400)
             when ValidationError
-              error!({ message: "Rule format is invalid", details: failure.errors.to_h }, 400)
+              error!({ message: "Rule format is invalid", detail: failure.errors.to_h }, 400)
             end
             raise failure
           end
 
           desc "Delete a rule", {
             success: { code: 204, model: Entities::Message },
-            failure: [{ code: 404, model: Entities::Message }],
+            failure: [{ code: 404, model: Entities::ErrorMessage }],
             summary: "Delete a rule"
           }
           params do

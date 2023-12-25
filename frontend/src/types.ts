@@ -174,3 +174,8 @@ export interface Rules extends Pagination {
 export interface Artifacts extends Pagination {
   results: Artifact[]
 }
+
+export interface ErrorMessage {
+  message: string
+  detail?: any
+}

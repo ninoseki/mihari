@@ -21,6 +21,7 @@
 </template>
 
 <script lang="ts">
+import type { AxiosError } from "axios"
 import { computed, defineComponent, type PropType, ref } from "vue"
 
 import Pagination from "@/components/Pagination.vue"
@@ -41,7 +42,7 @@ export default defineComponent({
   },
   emits: ["update-page", "refresh"],
   setup(props, context) {
-    const error = ref<unknown>(undefined)
+    const error = ref<AxiosError | undefined>()
 
     const onUpdatePage = (page: number) => {
       context.emit("update-page", page)

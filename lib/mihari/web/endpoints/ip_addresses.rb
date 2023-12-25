@@ -10,7 +10,7 @@ module Mihari
         namespace :ip_addresses do
           desc "Get an IP address", {
             success: Entities::IPAddress,
-            failure: [{ code: 404, model: Entities::Message }],
+            failure: [{ code: 404, model: Entities::ErrorMessage }],
             summary: "Get an IP address"
           }
           params do

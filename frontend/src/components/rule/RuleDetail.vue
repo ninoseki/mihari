@@ -21,6 +21,7 @@
 </template>
 
 <script lang="ts">
+import type { AxiosError } from "axios"
 import { defineComponent, type PropType, ref } from "vue"
 
 import Alerts from "@/components/alert/AlertsWithPagination.vue"
@@ -45,7 +46,7 @@ export default defineComponent({
   },
   emits: ["refresh", "delete"],
   setup(_, context) {
-    const error = ref<unknown>(undefined)
+    const error = ref<AxiosError | undefined>()
 
     const onRefresh = () => {
       context.emit("refresh")
@@ -55,7 +56,7 @@ export default defineComponent({
       context.emit("delete")
     }
 
-    const onSetError = (newError: unknown) => {
+    const onSetError = (newError: AxiosError) => {
       error.value = newError
     }
 

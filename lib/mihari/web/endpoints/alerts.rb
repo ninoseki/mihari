@@ -33,7 +33,7 @@ module Mihari
 
           desc "Get an alert", {
             success: Entities::Alert,
-            failure: [{ code: 404, model: Entities::Message }],
+            failure: [{ code: 404, model: Entities::ErrorMessage }],
             summary: "Get an alert"
           }
           params do
@@ -53,7 +53,7 @@ module Mihari
 
           desc "Delete an alert", {
             success: { code: 204, model: Entities::Message },
-            failure: [{ code: 404, model: Entities::Message }],
+            failure: [{ code: 404, model: Entities::ErrorMessage }],
             summary: "Delete an alert"
           }
           params do
@@ -75,7 +75,7 @@ module Mihari
 
           desc "Create an alert", {
             success: { code: 201, model: Entities::Alert },
-            failure: [{ code: 404, model: Entities::Message }],
+            failure: [{ code: 404, model: Entities::ErrorMessage }],
             summary: "Create an alert"
           }
           params do
