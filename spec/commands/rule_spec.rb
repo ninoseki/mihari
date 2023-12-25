@@ -5,6 +5,10 @@ class RuleCLI < Mihari::CLI::Base
 end
 
 RSpec.describe Mihari::Commands::Rule do
+  include_context "with database fixtures"
+
+  let_it_be(:rule) { Mihari::Models::Rule.first }
+
   describe "#initialize_rule" do
     let!(:files) { Dry::Files.new(memory: true) }
     let!(:filename) { "/tmp/foo.yml" }
@@ -45,6 +49,18 @@ RSpec.describe Mihari::Commands::Rule do
         # TODO: assert UnwrapError
         expect { RuleCLI.start ["validate", path] }.to raise_error(Dry::Monads::UnwrapError)
       end
+    end
+  end
+
+  describe "#list" do
+    it do
+      expect { RuleCLI.start ["list"] }.to output(include(rule.id)).to_stdout
+    end
+  end
+
+  describe "#get" do
+    it do
+      expect { RuleCLI.start ["get", rule.id] }.to output(include(rule.id)).to_stdout
     end
   end
 end
