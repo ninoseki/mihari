@@ -1,8 +1,6 @@
 # frozen_string_literal: true
 
-require "yaml"
-
-class CLI < Mihari::CLI::Base
+class RuleCLI < Mihari::CLI::Base
   include Mihari::Commands::Rule
 end
 
@@ -12,7 +10,7 @@ RSpec.describe Mihari::Commands::Rule do
     let!(:filename) { "/tmp/foo.yml" }
 
     it do
-      CLI.new.initialize_rule(filename, files)
+      RuleCLI.new.initialize_rule(filename, files)
 
       yaml = files.read(filename)
       rule = Mihari::Rule.from_yaml(yaml)
@@ -27,7 +25,7 @@ RSpec.describe Mihari::Commands::Rule do
     after { FileUtils.rm path, force: true }
 
     it do
-      expect { CLI.start ["init", path] }.to output(include("A new rule file has been initialized")).to_stdout
+      expect { RuleCLI.start ["init", path] }.to output(include("A new rule file has been initialized")).to_stdout
     end
   end
 
@@ -37,7 +35,7 @@ RSpec.describe Mihari::Commands::Rule do
     let!(:rule_id) { YAML.safe_load(data)["id"] }
 
     it do
-      expect { CLI.start ["validate", path] }.to output(include(rule_id)).to_stdout
+      expect { RuleCLI.start ["validate", path] }.to output(include(rule_id)).to_stdout
     end
 
     context "with invalid rule" do
@@ -45,7 +43,7 @@ RSpec.describe Mihari::Commands::Rule do
 
       it do
         # TODO: assert UnwrapError
-        expect { CLI.start ["validate", path] }.to raise_error(Dry::Monads::UnwrapError)
+        expect { RuleCLI.start ["validate", path] }.to raise_error(Dry::Monads::UnwrapError)
       end
     end
   end

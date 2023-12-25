@@ -9,7 +9,6 @@ module Mihari
       class << self
         def included(thor)
           thor.class_eval do
-            include Dry::Monads[:result, :try]
             include Mixins
 
             desc "list", "List/search tags"

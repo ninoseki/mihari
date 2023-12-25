@@ -9,7 +9,6 @@ module Mihari
       class << self
         def included(thor)
           thor.class_eval do
-            include Dry::Monads[:try, :result]
             include Mixins
 
             desc "search [PATH_OR_ID]", "Search by a rule (Outputs null if there is no new finding)"

@@ -10,7 +10,6 @@ module Mihari
         # rubocop:disable Metrics/AbcSize
         def included(thor)
           thor.class_eval do
-            include Dry::Monads[:result, :try]
             include Mixins
 
             desc "create [PATH]", "Create an alert"
