@@ -9,20 +9,6 @@ RSpec.describe Mihari::Commands::Rule do
 
   let_it_be(:rule) { Mihari::Models::Rule.first }
 
-  describe "#initialize_rule" do
-    let!(:files) { Dry::Files.new(memory: true) }
-    let!(:filename) { "/tmp/foo.yml" }
-
-    it do
-      RuleCLI.new.initialize_rule(filename, files)
-
-      yaml = files.read(filename)
-      rule = Mihari::Rule.from_yaml(yaml)
-      expect(rule.errors?).to be false
-      expect(rule.data).to be_a(Hash)
-    end
-  end
-
   describe "#rule" do
     let!(:path) { "/tmp/#{SecureRandom.uuid}.yml" }
 

@@ -18,7 +18,8 @@ module Mihari
             # @param [String] path
             #
             def create(path)
-              result = Dry::Monads::Try[StandardError] do
+              # @type [Mihari::Models::Alert]
+              alert = Dry::Monads::Try[StandardError] do
                 raise ArgumentError, "#{path} does not exist" unless Pathname(path).exist?
 
                 params = YAML.safe_load(
@@ -26,10 +27,7 @@ module Mihari
                   permitted_classes: [Date, Symbol]
                 )
                 Services::AlertCreator.call params
-              end.to_result
-
-              # @type [Mihari::Models::Alert]
-              alert = result.value!
+              end.value!
               data = Entities::Alert.represent(alert)
               puts JSON.pretty_generate(data.as_json)
             end
@@ -43,8 +41,7 @@ module Mihari
             #
             def list(q = "")
               filter = Structs::Filters::Search.new(q: q, page: options["page"], limit: options["limit"])
-              result = Services::AlertSearcher.result(filter)
-              value = result.value!
+              value = Services::AlertSearcher.result(filter).value!
               data = Entities::AlertsWithPagination.represent(
                 results: value.results,
                 total: value.total,
@@ -60,8 +57,7 @@ module Mihari
             # @param [Integer] id
             #
             def get(id)
-              result = Services::AlertGetter.result(id)
-              value = result.value!
+              value = Services::AlertGetter.result(id).value!
               data = Entities::Alert.represent(value)
               puts JSON.pretty_generate(data.as_json)
             end
@@ -72,8 +68,7 @@ module Mihari
             # @param [Integer] id
             #
             def delete(id)
-              result = Services::AlertDestroyer.result(id)
-              result.value!
+              Services::AlertDestroyer.result(id).value!
             end
           end
         end

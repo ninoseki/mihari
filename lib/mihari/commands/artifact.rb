@@ -20,8 +20,7 @@ module Mihari
             #
             def list(q = "")
               filter = Structs::Filters::Search.new(q: q, page: options["page"], limit: options["limit"])
-              result = Services::ArtifactSearcher.result(filter)
-              value = result.value!
+              value = Services::ArtifactSearcher.result(filter).value!
               data = Entities::ArtifactsWithPagination.represent(
                 results: value.results,
                 total: value.total,
@@ -37,8 +36,7 @@ module Mihari
             # @param [Integer] id
             #
             def get(id)
-              result = Services::ArtifactGetter.result(id)
-              value = result.value!
+              value = Services::ArtifactGetter.result(id).value!
               data = Entities::Artifact.represent(value)
               puts JSON.pretty_generate(data.as_json)
             end
@@ -58,8 +56,7 @@ module Mihari
             # @param [Integer] id
             #
             def delete(id)
-              result = Services::ArtifactDestroyer.result(id)
-              result.value!
+              Services::ArtifactDestroyer.result(id).value!
             end
           end
         end

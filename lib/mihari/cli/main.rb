@@ -31,10 +31,7 @@ module Mihari
       class_option :debug, desc: "Sets up debug mode", aliases: ["-d"], type: :boolean
       class_around :safe_execute
 
-      include Mihari::Commands::Artifact
-      include Mihari::Commands::Config
       include Mihari::Commands::Search
-      include Mihari::Commands::Tag
       include Mihari::Commands::Version
       include Mihari::Commands::Web
 
