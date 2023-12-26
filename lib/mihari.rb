@@ -282,6 +282,7 @@ require "mihari/services/creators"
 require "mihari/services/destroyers"
 require "mihari/services/enrichers"
 require "mihari/services/getters"
+require "mihari/services/initializers"
 require "mihari/services/proxies"
 require "mihari/services/searchers"
 

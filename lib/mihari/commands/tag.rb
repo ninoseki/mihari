@@ -20,8 +20,7 @@ module Mihari
             #
             def list(q = "")
               filter = Structs::Filters::Search.new(q: q, page: options["page"], limit: options["limit"])
-              result = Services::TagSearcher.result(filter)
-              value = result.value!
+              value = Services::TagSearcher.result(filter).value!
               data = Entities::TagsWithPagination.represent(
                 results: value.results,
                 total: value.total,
@@ -37,8 +36,7 @@ module Mihari
             # @param [Integer] id
             #
             def delete(id)
-              result = Services::TagDestroyer.result(id)
-              result.value!
+              Services::TagDestroyer.result(id).value!
             end
           end
         end

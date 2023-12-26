@@ -144,7 +144,7 @@ RSpec.configure do |config|
     Mihari::Database.migrate :up
   end
 
-  config.before(:suite) do
+  config.after(:suite) do
     Mihari::Database.close
   end
 end
