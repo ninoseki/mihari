@@ -5,11 +5,10 @@ class TagCLI < Mihari::CLI::Base
 end
 
 RSpec.describe Mihari::Commands::Tag do
-  include_context "with database fixtures"
+  let_it_be(:rule) { FactoryBot.create(:rule) }
+  let_it_be(:tag) { rule.tags.first }
 
   describe "#list" do
-    let_it_be(:tag) { Mihari::Models::Tag.first }
-
     it do
       expect { TagCLI.start ["list"] }.to output(include(tag.name)).to_stdout
     end

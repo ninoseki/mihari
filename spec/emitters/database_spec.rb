@@ -3,10 +3,8 @@
 RSpec.describe Mihari::Emitters::Database do
   subject(:emitter) { described_class.new(rule: rule) }
 
-  include_context "with database fixtures"
-
-  let_it_be(:rule) { Mihari::Rule.from_model(Mihari::Models::Rule.first) }
-  let_it_be(:artifacts) { [Mihari::Models::Artifact.new(data: "1.1.1.1")] }
+  let_it_be(:rule) { Mihari::Rule.from_model FactoryBot.create(:rule) }
+  let!(:artifacts) { [Mihari::Models::Artifact.new(data: "1.1.1.1")] }
 
   describe "#call", vcr: "Mihari_Enrichers_IPInfo/ip:1.1.1.1" do
     let!(:alert) { emitter.call artifacts }

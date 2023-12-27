@@ -5,9 +5,7 @@ class ArtifactCLI < Mihari::CLI::Base
 end
 
 RSpec.describe Mihari::Commands::Artifact do
-  include_context "with database fixtures"
-
-  let_it_be(:artifact) { Mihari::Models::Artifact.first }
+  let_it_be(:artifact) { FactoryBot.create(:artifact, :ip) }
 
   describe "#list" do
     it do

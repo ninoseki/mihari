@@ -3,11 +3,10 @@
 RSpec.describe Mihari::Emitters::MISP, :vcr do
   subject(:emitter) { described_class.new(rule: rule) }
 
-  include_context "with database fixtures"
   include_context "with mocked logger"
 
+  let_it_be(:rule) { Mihari::Rule.from_model FactoryBot.create(:rule) }
   let!(:artifacts) { [Mihari::Models::Artifact.new(data: "1.1.1.1")] }
-  let!(:rule) { Mihari::Rule.from_model(Mihari::Models::Rule.first) }
 
   describe "#configured?" do
     context "when MISP_URL & MISP_API_KEY are not given" do

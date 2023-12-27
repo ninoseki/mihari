@@ -3,9 +3,7 @@
 RSpec.describe Mihari::Emitters::Slack do
   subject(:emitter) { described_class.new(rule: rule) }
 
-  include_context "with database fixtures"
-
-  let_it_be(:rule) { Mihari::Rule.from_model Mihari::Models::Rule.first }
+  let_it_be(:rule) { Mihari::Rule.from_model FactoryBot.create(:rule) }
   let!(:artifacts) do
     [
       Mihari::Models::Artifact.new(data: "1.1.1.1"),

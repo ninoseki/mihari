@@ -2,13 +2,13 @@
 
 RSpec.describe Mihari::Web::Endpoints::Rules do
   include Rack::Test::Methods
-  include_context "with database fixtures"
+
+  let_it_be(:rule) { FactoryBot.create(:rule) }
+  let_it_be(:rule_to_delete) { FactoryBot.create(:rule) }
 
   def app
     Mihari::Web::Endpoints::Rules
   end
-
-  let!(:rule) { Mihari::Models::Rule.first }
 
   describe "get /api/rules" do
     it "returns 200" do
@@ -46,7 +46,7 @@ RSpec.describe Mihari::Web::Endpoints::Rules do
     end
 
     it "returns 204" do
-      delete "/api/rules/#{rule.id}"
+      delete "/api/rules/#{rule_to_delete.id}"
       expect(last_response.status).to eq(204)
     end
   end

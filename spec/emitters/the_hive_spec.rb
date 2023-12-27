@@ -3,11 +3,10 @@
 RSpec.describe Mihari::Emitters::TheHive, :vcr do
   subject(:emitter) { described_class.new(rule: rule) }
 
-  include_context "with database fixtures"
   include_context "with mocked logger"
 
+  let_it_be(:rule) { Mihari::Rule.from_model FactoryBot.create(:rule) }
   let!(:artifacts) { [Mihari::Models::Artifact.new(data: "1.1.1.1")] }
-  let!(:rule) { Mihari::Rule.from_model(Mihari::Models::Rule.first) }
 
   describe "#configured?" do
     before do

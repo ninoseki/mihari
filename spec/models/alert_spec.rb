@@ -1,20 +1,15 @@
 # frozen_string_literal: true
 
 RSpec.describe Mihari::Models::Alert do
-  include_context "with database fixtures"
-
-  let_it_be(:alert) { described_class.first }
-  let_it_be(:artifact) { Mihari::Models::Artifact.where(alert_id: alert.id).first.data }
-  let_it_be(:tag) { alert.rule.tags.first.name }
-  let_it_be(:asn) { Mihari::Models::AutonomousSystem.first.asn }
-  let_it_be(:reverse_dns_name) { Mihari::Models::ReverseDnsName.first.name }
-  let_it_be(:dns_record) { Mihari::Models::DnsRecord.first.value }
+  let_it_be(:alert) { FactoryBot.create(:alert_with_artifacts) }
+  let_it_be(:artifact) { alert.artifacts.first }
+  let_it_be(:tag) { alert.tags.first }
 
   let(:tag_filter) do
-    Mihari::Structs::Filters::Search.new(q: "tag:#{tag}")
+    Mihari::Structs::Filters::Search.new(q: "tag:#{tag.name}")
   end
   let(:artifact_filter) do
-    Mihari::Structs::Filters::Search.new(q: "artifact.data:#{artifact}")
+    Mihari::Structs::Filters::Search.new(q: "artifact.data:#{artifact.data}")
   end
   let(:empty_rule_filter) do
     Mihari::Structs::Filters::Search.new(q: "rule.id:404_not_found")
@@ -23,7 +18,7 @@ RSpec.describe Mihari::Models::Alert do
   describe ".search_by_filter" do
     it do
       alerts = described_class.search_by_filter(Mihari::Structs::Filters::Search.new(q: ""))
-      expect(alerts.length).to be >= 2
+      expect(alerts.length).to be >= 1
     end
 
     where(:filter, :expected) do
@@ -47,7 +42,7 @@ RSpec.describe Mihari::Models::Alert do
       count = described_class.count_by_filter(
         Mihari::Structs::Filters::Search.new(q: "")
       )
-      expect(count).to be >= 2
+      expect(count).to be >= 1
     end
 
     where(:filter, :expected) do

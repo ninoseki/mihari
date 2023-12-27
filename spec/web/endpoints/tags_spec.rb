@@ -3,8 +3,6 @@
 RSpec.describe Mihari::Web::Endpoints::Tags do
   include Rack::Test::Methods
 
-  include_context "with database fixtures"
-
   def app
     Mihari::Web::Endpoints::Tags
   end

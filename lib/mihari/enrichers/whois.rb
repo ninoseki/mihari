@@ -23,7 +23,7 @@ module Mihari
       # @return [Mihari::Models::WhoisRecord, nil]
       #
       def call(domain)
-        _call PublicSuffix.domain(domain)
+        memoized_call PublicSuffix.domain(domain)
       end
 
       private
@@ -33,7 +33,7 @@ module Mihari
       #
       # @return [Mihari::Models::WhoisRecord, nil]
       #
-      def _call(domain)
+      def memoized_call(domain)
         record = whois.lookup(domain)
         parser = record.parser
         return nil if parser.available?
@@ -47,7 +47,7 @@ module Mihari
           contacts: get_contacts(parser)
         )
       end
-      memo_wise :_call
+      memo_wise :memoized_call
 
       #
       # @return [::Whois::Client]

@@ -1,16 +1,13 @@
 # frozen_string_literal: true
 
 RSpec.describe Mihari::Models::Artifact, :vcr do
-  include_context "with database fixtures"
-
-  let_it_be(:alert) { Mihari::Models::Alert.first }
-  let_it_be(:tag) { alert.tags.first.name }
-  let_it_be(:alert_id) { alert.id }
-  let_it_be(:rule_id) { alert.rule_id }
-  let_it_be(:data) { described_class.where(alert_id: alert_id).first.data }
+  let_it_be(:artifact) { FactoryBot.create(:artifact) }
+  let_it_be(:tag) { artifact.tags.first }
+  let_it_be(:alert) { artifact.alert }
+  let_it_be(:rule) { artifact.rule }
 
   let(:tag_filter) do
-    Mihari::Structs::Filters::Search.new(q: "tag:#{tag}")
+    Mihari::Structs::Filters::Search.new(q: "tag:#{tag.name}")
   end
   let(:empty_rule_filter) do
     Mihari::Structs::Filters::Search.new(q: "rule.id:404_not_found")
@@ -18,22 +15,22 @@ RSpec.describe Mihari::Models::Artifact, :vcr do
 
   describe "#validate" do
     it do
-      artifact = described_class.new(data: "9.9.9.9", alert_id: alert_id)
-      expect(artifact).to be_valid
-      expect(artifact.data_type).to eq("ip")
+      obj = described_class.new(data: Faker::Internet.ip_v4_address, alert_id: alert.id)
+      expect(obj).to be_valid
+      expect(obj.data_type).to eq("ip")
     end
   end
 
   describe "#unique?" do
     it do
-      artifact = described_class.new(data: data, alert_id: alert_id)
-      artifact.rule_id = rule_id
-      expect(artifact).not_to be_unique
+      obj = described_class.new(data: artifact.data, alert_id: alert.id)
+      obj.rule_id = rule.id
+      expect(obj).not_to be_unique
     end
 
     it do
-      artifact = described_class.new(data: Faker::Internet.unique.ip_v4_address, alert_id: alert_id)
-      expect(artifact).to be_unique
+      obj = described_class.new(data: Faker::Internet.unique.ip_v4_address, alert_id: alert.id)
+      expect(obj).to be_unique
     end
 
     context "with artifact_lifetime" do
@@ -43,22 +40,22 @@ RSpec.describe Mihari::Models::Artifact, :vcr do
 
       it do
         Timecop.freeze(base_time) do
-          described_class.create(data: data, alert_id: alert_id)
+          described_class.create(data: artifact.data, alert_id: alert.id)
         end
 
-        artifact = described_class.new(data: data, alert_id: alert_id)
-        artifact.rule_id = rule_id
+        obj = described_class.new(data: artifact.data, alert_id: alert.id)
+        obj.rule_id = rule.id
 
-        expect(artifact.unique?(base_time: base_time, artifact_ttl: artifact_ttl)).to be false
+        expect(obj.unique?(base_time: base_time, artifact_ttl: artifact_ttl)).to be false
       end
 
       it do
         Timecop.freeze(base_time - (artifact_ttl + 1).seconds) do
-          described_class.create(data: data, alert_id: alert_id)
+          described_class.create(data: artifact.data, alert_id: alert.id)
         end
 
-        artifact = described_class.new(data: data, alert_id: alert_id)
-        expect(artifact.unique?(base_time: base_time, artifact_ttl: artifact_ttl)).to be true
+        obj = described_class.new(data: artifact.data, alert_id: alert.id)
+        expect(obj.unique?(base_time: base_time, artifact_ttl: artifact_ttl)).to be true
       end
     end
   end
@@ -76,7 +73,7 @@ RSpec.describe Mihari::Models::Artifact, :vcr do
 
     context "with domain" do
       let(:data) { "example.com" }
-      let(:artifact) { described_class.new(data: data, alert_id: alert_id) }
+      let(:artifact) { described_class.new(data: data, alert_id: alert.id) }
 
       it do
         expect(artifact.whois_record).to be_nil
@@ -90,7 +87,7 @@ RSpec.describe Mihari::Models::Artifact, :vcr do
 
     context "with URL" do
       let(:data) { "https://example.com" }
-      let(:artifact) { described_class.new(data: data, alert_id: alert_id) }
+      let(:artifact) { described_class.new(data: data, alert_id: alert.id) }
 
       it do
         expect(artifact.whois_record).to be_nil
@@ -106,7 +103,7 @@ RSpec.describe Mihari::Models::Artifact, :vcr do
   describe "#enrich_dns" do
     context "with domain" do
       let(:data) { "example.com" }
-      let(:artifact) { described_class.new(data: data, alert_id: alert_id) }
+      let(:artifact) { described_class.new(data: data, alert_id: alert.id) }
 
       it do
         expect(artifact.dns_records.length).to eq(0)
@@ -120,10 +117,10 @@ RSpec.describe Mihari::Models::Artifact, :vcr do
 
     context "with URL" do
       let(:data) { "https://example.com" }
-      let(:artifact) { described_class.new(data: data, alert_id: alert_id) }
+      let(:artifact) { described_class.new(data: data, alert_id: alert.id) }
 
       it do
-        artifact = described_class.new(data: data, alert_id: alert_id)
+        artifact = described_class.new(data: data, alert_id: alert.id)
         expect(artifact.dns_records.length).to eq(0)
       end
 
@@ -136,7 +133,7 @@ RSpec.describe Mihari::Models::Artifact, :vcr do
 
   describe "#enrich_geolocation" do
     let(:data) { "1.1.1.1" }
-    let(:artifact) { described_class.new(data: data, alert_id: alert_id) }
+    let(:artifact) { described_class.new(data: data, alert_id: alert.id) }
 
     it do
       expect(artifact.geolocation).to eq(nil)
@@ -150,7 +147,7 @@ RSpec.describe Mihari::Models::Artifact, :vcr do
 
   describe "#enrich_autonomous_system" do
     let(:data) { "1.1.1.1" }
-    let(:artifact) { described_class.new(data: data, alert_id: alert_id) }
+    let(:artifact) { described_class.new(data: data, alert_id: alert.id) }
 
     it do
       expect(artifact.autonomous_system).to eq(nil)
@@ -165,7 +162,7 @@ RSpec.describe Mihari::Models::Artifact, :vcr do
   describe "#enrich_by_enricher" do
     context "with IPInfo" do
       let(:data) { "1.1.1.1" }
-      let(:artifact) { described_class.new(data: data, alert_id: alert_id) }
+      let(:artifact) { described_class.new(data: data, alert_id: alert.id) }
 
       it do
         expect(artifact.autonomous_system).to eq(nil)
@@ -181,7 +178,7 @@ RSpec.describe Mihari::Models::Artifact, :vcr do
 
     context "with Shodan" do
       let(:data) { "1.1.1.1" }
-      let(:artifact) { described_class.new(data: data, alert_id: alert_id) }
+      let(:artifact) { described_class.new(data: data, alert_id: alert.id) }
 
       it do
         expect(artifact.reverse_dns_names.empty?).to be true
@@ -197,7 +194,7 @@ RSpec.describe Mihari::Models::Artifact, :vcr do
 
     context "with Google Public DNS" do
       let(:data) { "example.com" }
-      let(:artifact) { described_class.new(data: data, alert_id: alert_id) }
+      let(:artifact) { described_class.new(data: data, alert_id: alert.id) }
 
       it do
         expect(artifact.dns_records.empty?).to be true
@@ -211,7 +208,7 @@ RSpec.describe Mihari::Models::Artifact, :vcr do
 
     context "with Whois" do
       let(:data) { "example.com" }
-      let(:artifact) { described_class.new(data: data, alert_id: alert_id) }
+      let(:artifact) { described_class.new(data: data, alert_id: alert.id) }
       let!(:enricher) do
         enricher = instance_double("whois_enricher")
         allow(enricher).to receive(:result).and_return(
