@@ -34,8 +34,15 @@ module Mihari
       include SearchCop
 
       search_scope :search do
-        attributes :id, :data, :data_type, :source, :query, :created_at, "rule.id", "rule.title", "rule.description"
+        attributes :id, :data, :data_type, :source, :query, :created_at, "alert.id", "rule.id", "rule.title", "rule.description"
         attributes tag: "tags.name"
+        attributes asn: "autonomous_system.asn"
+        attributes country_code: "geolocation.country_code"
+        attributes "dns_record.value": "dns_records.value"
+        attributes "dns_record.resource": "dns_records.resource"
+        attributes reverse_dns_name: "reverse_dns_names.name"
+        attributes cpe: "cpes.name"
+        attributes port: "ports.port"
       end
 
       validates_with ArtifactValidator
