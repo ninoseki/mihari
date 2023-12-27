@@ -32,7 +32,10 @@
         <li>
           <code>id</code>, <code>data</code>, <code>data_type</code>, <code>source</code>,
           <code>query</code>, <code>tag</code>, <code>rule.id</code>, <code>rule.title</code>,
-          <code>rule.description</code>, <code>tag</code> and <code>created_at</code>.
+          <code>rule.description</code>, <code>tag</code>,<code>created_at</code>, <code>asn</code>,
+          <code>country_code</code>, <code>dns_record.value</code>,
+          <code>dns_record.resource</code>, <code>reverse_dns_name</code>, <code>cpe</code> and
+          <code>port</code>.
         </li>
       </ul>
     </div>

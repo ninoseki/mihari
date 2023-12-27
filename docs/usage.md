@@ -10,13 +10,9 @@ Commands:
   mihari artifact             # Sub commands for artifact
   mihari config               # Sub commands for config
   mihari db                   # Sub commands for DB
-  mihari delete [ID]          # Delete a tag
-  mihari enrich [ID]          # Enrich an artifact
-  mihari get [ID]             # Get an artifact
   mihari help [COMMAND]       # Describe available commands or one specific command
-  mihari list                 # List/search tags
   mihari rule                 # Sub commands for rule
-  mihari search [PATH_OR_ID]  # Search by a rule (Outputs null if there is no new finding)
+  mihari search [PATH_OR_ID]  # Search by a rule
   mihari tag                  # Sub commands for tag
   mihari web                  # Launch the web app
 
@@ -45,7 +41,7 @@ Commands:
   mihari artifact enrich [ID]     # Enrich an artifact
   mihari artifact get [ID]        # Get an artifact
   mihari artifact help [COMMAND]  # Describe subcommands or one specific subcommand
-  mihari artifact list [QUERY]    # List/search artifac
+  mihari artifact list [QUERY]    # List/search artifact
 ```
 
 !!! note
@@ -68,17 +64,18 @@ See [Database](./emitters/database.md) for detailed database configuration.
 ```bash
 $ mihari rule
 Commands:
-  mihari rule delete [ID]      # Delete a rule
-  mihari rule get [ID]         # Get a rule
-  mihari rule help [COMMAND]   # Describe subcommands or one specific subcommand
-  mihari rule init [PATH]      # Initialize a new rule file
-  mihari rule list [QUERY]     # List/search rules
-  mihari rule validate [PATH]  # Validate a rule file
+  mihari rule delete [ID]          # Delete a rule
+  mihari rule get [ID]             # Get a rule
+  mihari rule help [COMMAND]       # Describe subcommands or one specific subcommand
+  mihari rule init [PATH]          # Initialize a new rule file
+  mihari rule list [QUERY]         # List/search rules
+  mihari rule search [PATH_OR_ID]  # Search by a rule
+  mihari rule validate [PATH]      # Validate a rule file
 ```
 
 ## `mihari search`
 
-This is a command for running a rule.
+This is a command to execute a rule. A shorthand for `mihari rule search`.
 
 ```bash
 mihari search /path/to/rule.yml
@@ -100,7 +97,7 @@ mihari search -f /path/to/rule.yml
 ## `mihari tag`
 
 ```bash
-$ mihari tag                                                                                                                                 20:31:05
+$ mihari tag
 Commands:
   mihari tag delete [ID]     # Delete a tag
   mihari tag help [COMMAND]  # Describe subcommands or one specific subcommand
@@ -152,12 +149,12 @@ Search query supports `AND`, `OR`, `:`, `=`, `!=`, `<`, `<=`, `>`, `>=`, `NOT` a
 
 Searchable fields are
 
-| Type       | Searchable fields                                                                                                                                     |
-| ---------- | ----------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `alert`    | `id`, `tag`, `created_at`, `rule.id`, `rule.title`, `rule.description`, `artifact.data`, `artifact.data_type`, `artifact.source` and `artifact.query` |
-| `artifact` | `id`, `data`, `data_type`, `source`, `query`, `tag`, `rule.id`, `rule.title`, `rule.description`, `tag` and `created_at`                              |
-| `rule`     | `id`, `title`, `description`, `tag`, `created_at` and `updated_at`                                                                                    |
-| `tag`      | `id` and `name`                                                                                                                                       |
+| Type       | Searchable fields                                                                                                                                                                                                            |
+| ---------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `alert`    | `id`, `tag`, `created_at`, `rule.id`, `rule.title`, `rule.description`, `artifact.data`, `artifact.data_type`, `artifact.source` and `artifact.query`                                                                        |
+| `artifact` | `id`, `data`, `data_type`, `source`, `query`, `tag`, `rule.id`, `rule.title`, `rule.description`, `tag`,`created_at`, `asn`, `country_code`, `dns_record.value`, `dns_record.resource`, `reverse_dns_name`, `cpe` and `port` |
+| `rule`     | `id`, `title`, `description`, `tag`, `created_at` and `updated_at`                                                                                                                                                           |
+| `tag`      | `id` and `name`                                                                                                                                                                                                              |
 
 ## Examples
 
