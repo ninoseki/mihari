@@ -5,8 +5,6 @@ class ConfigCLI < Mihari::CLI::Base
 end
 
 RSpec.describe Mihari::Commands::Config do
-  include_context "with database fixtures"
-
   let!(:key) { Mihari.config.keys.first }
 
   describe "#list" do

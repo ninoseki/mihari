@@ -5,9 +5,7 @@ class AlertCLI < Mihari::CLI::Base
 end
 
 RSpec.describe Mihari::Commands::Alert do
-  include_context "with database fixtures"
-
-  let_it_be(:alert) { Mihari::Models::Alert.first }
+  let_it_be(:alert) { FactoryBot.create(:alert) }
 
   describe "#list" do
     it do

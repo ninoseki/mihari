@@ -3,7 +3,7 @@
 RSpec.describe Mihari::Enrichers::Whois do
   subject(:enricher) { described_class.new }
 
-  describe ".call" do
+  describe "#call" do
     let!(:domain) { "example.com" }
 
     it do

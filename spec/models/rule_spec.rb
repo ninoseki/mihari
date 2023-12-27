@@ -1,13 +1,11 @@
 # frozen_string_literal: true
 
 RSpec.describe Mihari::Models::Rule do
-  include_context "with database fixtures"
-
-  let_it_be(:rule) { described_class.first }
-  let_it_be(:tag) { rule.tags.first.name }
+  let_it_be(:rule) { FactoryBot.create(:rule_with_alerts) }
+  let_it_be(:tag) { rule.tags.first }
 
   let(:tag_filter) do
-    Mihari::Structs::Filters::Search.new(q: "tag:#{tag}")
+    Mihari::Structs::Filters::Search.new(q: "tag:#{tag.name}")
   end
   let(:empty_tag_filter) do
     Mihari::Structs::Filters::Search.new(q: "tag:404_not_found")
@@ -28,7 +26,7 @@ RSpec.describe Mihari::Models::Rule do
   describe ".search_by_filter" do
     it do
       alerts = described_class.search_by_filter(Mihari::Structs::Filters::Search.new(q: ""))
-      expect(alerts.length).to be >= 2
+      expect(alerts.length).to be >= 1
     end
 
     where(:filter, :expected) do
@@ -55,7 +53,7 @@ RSpec.describe Mihari::Models::Rule do
       count = described_class.count_by_filter(
         Mihari::Structs::Filters::Search.new(q: "")
       )
-      expect(count).to be >= 2
+      expect(count).to be >= 1
     end
 
     where(:filter, :expected) do

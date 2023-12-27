@@ -4,6 +4,7 @@ require "bundler/setup"
 
 require "base64"
 require "digest"
+require "factory_bot"
 require "fakefs/safe"
 require "faker"
 require "rack/test"
@@ -111,16 +112,19 @@ VCR.configure do |config|
   end
 end
 
+require "test_prof/recipes/rspec/before_all"
+require "test_prof/recipes/rspec/let_it_be"
+
 # reload dummy/sanitized config values
 Mihari.config.reload
 
 # require shared recipes & shared contexts
-require "test_prof/recipes/rspec/before_all"
-require "test_prof/recipes/rspec/let_it_be"
-
 require_relative "support/helpers"
-require_relative "support/shared_contexts/database_context"
 require_relative "support/shared_contexts/logger_context"
+
+require_relative "factories/alerts"
+require_relative "factories/artifacts"
+require_relative "factories/rules"
 
 RSpec.configure do |config|
   # Enable flags like --only-failures and --next-failure

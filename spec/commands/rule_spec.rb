@@ -5,9 +5,7 @@ class RuleCLI < Mihari::CLI::Base
 end
 
 RSpec.describe Mihari::Commands::Rule do
-  include_context "with database fixtures"
-
-  let_it_be(:rule) { Mihari::Models::Rule.first }
+  let_it_be(:rule) { FactoryBot.create(:rule) }
 
   describe "#rule" do
     let!(:path) { "/tmp/#{SecureRandom.uuid}.yml" }

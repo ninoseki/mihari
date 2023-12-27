@@ -30,6 +30,7 @@ module Mihari
       has_many :reverse_dns_names, dependent: :destroy
       has_many :tags, through: :alert
 
+      include ActiveModel::Validations
       include SearchCop
 
       search_scope :search do
@@ -37,26 +38,15 @@ module Mihari
         attributes tag: "tags.name"
       end
 
-      include ActiveModel::Validations
-
       validates_with ArtifactValidator
 
+      after_initialize :set_data_type, :set_rule_id, if: :new_record?
+
+      # @return [String, nil]
       attr_accessor :rule_id
 
-      def initialize(*args, **kwargs)
-        attrs = args.first || kwargs
-        data_ = attrs[:data]
-
-        raise TypeError if data_.is_a?(Array) || data_.is_a?(Hash)
-
-        super(*args, **kwargs)
-
-        self.data_type = DataType.type(data)
-        @rule_id = ""
-      end
-
       #
-      # Check uniqueness of artifact
+      # Check uniqueness
       #
       # @param [Time, nil] base_time Base time to check decaying
       # @param [Integer, nil] artifact_ttl Artifact TTL in seconds
@@ -211,6 +201,14 @@ module Mihari
       end
 
       private
+
+      def set_data_type
+        self.data_type = DataType.type(data)
+      end
+
+      def set_rule_id
+        @rule_id ||= nil
+      end
 
       def ipinfo
         @ipinfo ||= Enrichers::IPInfo.new

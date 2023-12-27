@@ -1,8 +1,6 @@
 # frozen_string_literal: true
 
 RSpec.describe Mihari::Emitters::Webhook do
-  include_context "with database fixtures"
-
   before(:all) do
     @server = server_builder do |http|
       http.mount_proc("/post") do |req, res|
@@ -31,7 +29,7 @@ RSpec.describe Mihari::Emitters::Webhook do
     ]
   end
 
-  let_it_be(:rule) { Mihari::Rule.from_model(Mihari::Models::Rule.first) }
+  let_it_be(:rule) { Mihari::Rule.from_model FactoryBot.create(:rule) }
 
   describe "#configured?" do
     context "without URL" do

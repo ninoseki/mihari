@@ -3,10 +3,9 @@
 RSpec.describe Mihari::Web::Endpoints::Alerts do
   include Rack::Test::Methods
 
-  include_context "with database fixtures"
-
-  let!(:alert) { Mihari::Models::Alert.first }
-  let_it_be(:rule) { Mihari::Models::Rule.first }
+  let_it_be(:rule) { FactoryBot.create(:rule_with_alerts) }
+  let_it_be(:alert) { rule.alerts.first }
+  let_it_be(:alert_to_delete) { FactoryBot.create(:alert) }
 
   def app
     Mihari::Web::Endpoints::Alerts
@@ -19,13 +18,12 @@ RSpec.describe Mihari::Web::Endpoints::Alerts do
     end
 
     it "returns 404" do
-      delete "/api/alerts/99999"
+      delete "/api/alerts/0"
       expect(last_response.status).to eq(404)
     end
 
     it "returns 204" do
-      alert_id = alert.id
-      delete "/api/alerts/#{alert_id}"
+      delete "/api/alerts/#{alert_to_delete.id}"
       expect(last_response.status).to eq(204)
     end
   end
