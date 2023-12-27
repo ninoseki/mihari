@@ -125,6 +125,7 @@ require_relative "support/shared_contexts/logger_context"
 require_relative "factories/alerts"
 require_relative "factories/artifacts"
 require_relative "factories/rules"
+require_relative "factories/tags"
 
 RSpec.configure do |config|
   # Enable flags like --only-failures and --next-failure

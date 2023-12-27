@@ -9,6 +9,7 @@ module Mihari
     #
     class Rule < Base
       include Mihari::Commands::Rule
+      include Mihari::Commands::Search
     end
   end
 end
