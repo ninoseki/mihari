@@ -1,8 +1,4 @@
 FactoryBot.define do
-  factory :tag, class: "Mihari::Models::Tag" do
-    name { Faker::Internet.unique.slug }
-  end
-
   factory :rule, class: "Mihari::Models::Rule" do
     id { Faker::Internet.unique.uuid }
     title { Faker::Internet.unique.slug }
