@@ -19,7 +19,17 @@ module Mihari
           get "/:ip", requirements: { ip: %r{[^/]+} } do
             ip = params[:ip].to_s
             result = Services::IPGetter.result(ip)
-            return present(result.value!, with: Entities::IPAddress) if result.success?
+            if result.success?
+              value = result.value!
+              return present(
+                {
+                  country_code: value.country_code,
+                  asn: value.asn,
+                  loc: value.loc
+                },
+                with: Entities::IPAddress
+              )
+            end
 
             failure = result.failure
             case failure

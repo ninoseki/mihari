@@ -6,7 +6,7 @@ export interface Pagination {
 
 export interface ConfigItem {
   key: string
-  value: string | null
+  value?: string
 }
 
 export interface Config {
@@ -31,20 +31,20 @@ export interface DnsRecord {
 }
 
 export interface Contact {
-  name: string | null
-  organization: string | null
+  name?: string
+  organization?: string
 }
 
 export interface Registrar {
-  name: string | null
-  organization: string | null
+  name?: string
+  organization?: string
 }
 
 export interface WhoisRecord {
-  createdOn: Date | null
-  updatedOn: Date | null
-  expiresOn: Date | null
-  registrar: Registrar | null
+  createdOn?: Date
+  updatedOn?: Date
+  expiresOn?: Date
+  registrar?: Registrar
   contacts: Contact[]
 }
 
@@ -74,18 +74,18 @@ export interface Artifact {
   data: string
   dataType: string
   source: string
-  query: string | null
-  metadata: any | null
+  query?: string
+  metadata?: any
   createdAt: string
 
-  autonomousSystem: AutonomousSystem | null
-  whoisRecord: WhoisRecord | null
-  geolocation: Geolocation | null
+  autonomousSystem?: AutonomousSystem
+  whoisRecord?: WhoisRecord
+  geolocation?: Geolocation
 
-  dnsRecords: DnsRecord[] | null
-  reverseDnsNames: ReverseDnsName[] | null
-  cpes: CPE[] | null
-  ports: Port[] | null
+  dnsRecords?: DnsRecord[]
+  reverseDnsNames?: ReverseDnsName[]
+  cpes?: CPE[]
+  ports?: Port[]
 }
 
 export interface ArtifactWithTags extends Artifact {
@@ -107,16 +107,14 @@ export interface Alerts extends Pagination {
 
 export interface SearchParams {
   q: string
-  page: number | null
-  limit?: number | null
+  page?: number
+  limit?: number
 }
 
 export interface IPInfo {
-  ip: string
-  hostname: string | null
-  loc: string
   countryCode: string
-  asn: string
+  asn?: string
+  loc?: string
 }
 
 export interface GCS {
@@ -164,7 +162,6 @@ export interface UpdateRule {
 export interface Query {
   analyzer: string
   query: string
-  interval: null
 }
 
 export interface Rules extends Pagination {

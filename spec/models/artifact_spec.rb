@@ -170,7 +170,7 @@ RSpec.describe Mihari::Models::Artifact, :vcr do
       end
 
       it do
-        artifact.enrich_by_enricher Mihari::Enrichers::IPInfo.new
+        artifact.enrich_by_enricher Mihari::Enrichers::MMDB.new
         expect(artifact.autonomous_system).not_to eq(nil)
         expect(artifact.geolocation).not_to eq(nil)
       end

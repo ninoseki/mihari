@@ -2,17 +2,15 @@
 http_interactions:
 - request:
     method: get
-    uri: https://ipinfo.io/1.1.1.1/json
+    uri: https://ip.circl.lu/geolookup/1.1.1.1
     body:
       encoding: ASCII-8BIT
       string: ''
     headers:
-      Authorization:
-      - Bearer <IPINFO_API_KEY>
       Connection:
       - close
       Host:
-      - ipinfo.io
+      - ip.circl.lu
       User-Agent:
       - http.rb/5.1.1
   response:
@@ -20,70 +18,31 @@ http_interactions:
       code: 200
       message: OK
     headers:
-      Access-Control-Allow-Origin:
-      - "*"
-      X-Frame-Options:
-      - SAMEORIGIN
-      X-Xss-Protection:
-      - 1; mode=block
-      X-Content-Type-Options:
-      - nosniff
-      Referrer-Policy:
-      - strict-origin-when-cross-origin
-      Content-Type:
-      - application/json; charset=utf-8
-      Content-Length:
-      - '708'
       Date:
-      - Fri, 24 Nov 2023 00:22:32 GMT
-      X-Envoy-Upstream-Service-Time:
-      - '3'
+      - Thu, 28 Dec 2023 11:09:02 GMT
+      Server:
+      - WSGIServer/0.2 CPython/3.8.10
       Strict-Transport-Security:
-      - max-age=2592000; includeSubDomains
-      Vary:
-      - Accept-Encoding
-      Via:
-      - 1.1 google
-      Alt-Svc:
-      - h3=":443"; ma=2592000,h3-29=":443"; ma=2592000
+      - max-age=15768000
+      Content-Type:
+      - application/json
+      Content-Length:
+      - '906'
       Connection:
       - close
     body:
       encoding: UTF-8
-      string: |-
-        {
-          "ip": "1.1.1.1",
-          "hostname": "one.one.one.one",
-          "anycast": true,
-          "city": "Los Angeles",
-          "region": "California",
-          "country": "US",
-          "loc": "34.0522,-118.2437",
-          "postal": "90076",
-          "timezone": "America/Los_Angeles",
-          "asn": {
-            "asn": "AS13335",
-            "name": "Cloudflare, Inc.",
-            "domain": "cloudflare.com",
-            "route": "1.1.1.0/24",
-            "type": "hosting"
-          },
-          "company": {
-            "name": "APNIC and Cloudflare DNS Resolver project",
-            "domain": "cloudflare.com",
-            "type": "hosting"
-          },
-          "domains": {
-            "ip": "1.1.1.1",
-            "total": 22342,
-            "domains": [
-              "xmoon.best",
-              "yuucn.com",
-              "ccbenz.com",
-              "happynothings031.xyz",
-              "rapidplex.com"
-            ]
-          }
-        }
-  recorded_at: Fri, 24 Nov 2023 00:22:32 GMT
+      string: '[{"country": {"iso_code": "US"}, "meta": {"description": {"en": "Geo
+        Open MMDB database - https://github.com/adulau/mmdb-server"}, "build_db":
+        "2023-11-20 12:50:37", "db_source": "GeoOpen-Country", "nb_nodes": 1315572},
+        "ip": "1.1.1.1", "country_info": {"Country": "United States", "Alpha-2 code":
+        "US", "Alpha-3 code": "USA", "Numeric code": "840", "Latitude (average)":
+        "38", "Longitude (average)": "-97"}}, {"country": {"iso_code": "US", "AutonomousSystemNumber":
+        "13335", "AutonomousSystemOrganization": "CLOUDFLARENET"}, "meta": {"description":
+        {"en": "Geo Open MMDB database - https://github.com/adulau/mmdb-server"},
+        "build_db": "2023-11-20 15:49:14", "db_source": "GeoOpen-Country-ASN", "nb_nodes":
+        1316075}, "ip": "1.1.1.1", "country_info": {"Country": "United States", "Alpha-2
+        code": "US", "Alpha-3 code": "USA", "Numeric code": "840", "Latitude (average)":
+        "38", "Longitude (average)": "-97"}}]'
+  recorded_at: Thu, 28 Dec 2023 11:09:02 GMT
 recorded_with: VCR 6.2.0

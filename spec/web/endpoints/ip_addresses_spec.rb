@@ -2,7 +2,7 @@
 
 require "json"
 
-RSpec.describe Mihari::Web::Endpoints::IPAddresses, :vcr do
+RSpec.describe Mihari::Web::Endpoints::IPAddresses, vcr: "Mihari_Enrichers_MMDB/ip:1.1.1.1" do
   include Rack::Test::Methods
 
   def app
@@ -18,7 +18,6 @@ RSpec.describe Mihari::Web::Endpoints::IPAddresses, :vcr do
 
       json = JSON.parse(last_response.body.to_s)
       expect(json).to be_a(Hash)
-      expect(json["ip"]).to eq(ip)
     end
   end
 end

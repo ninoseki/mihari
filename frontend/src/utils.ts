@@ -20,13 +20,13 @@ export function getHumanizedRelativeTime(datetime: string): string {
 
 export function getGCSByCountryCode(countryCode: string): GCS | undefined {
   const country = getCountryByCode(countryCode)
-  if (country !== undefined) {
+  if (country) {
     return { lat: country.lat, long: country.long }
   }
 }
 
 export function getGCSByIPInfo(ipinfo: IPInfo): GCS | undefined {
-  if (ipinfo.loc !== undefined) {
+  if (ipinfo.loc) {
     const numbers = ipinfo.loc.split(",")
     if (numbers.length === 2) {
       const lat = numbers[0]
