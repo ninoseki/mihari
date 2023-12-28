@@ -63,8 +63,19 @@ module Mihari
             status 201
 
             id = params["id"].to_i
-            result = Services::ArtifactEnricher.result(id)
-            return present({ message: "#{id} has been enriched" }, with: Entities::Message) if result.success?
+
+            queued = true
+            result = Dry::Monads::Try[StandardError] do
+              if Mihari.sidekiq?
+                Jobs::ArtifactEnrichJob.perform_async id
+              else
+                Services::ArtifactEnricher.call id
+                queued = false
+              end
+            end.to_result
+
+            message = queued ? "ID:#{id}'s enrichment has been queued" : "ID:#{id}'s enrichment has been succeeded"
+            return present({ message: message, queued: queued }, with: Entities::QueueMessage) if result.success?
 
             case result.failure
             when ActiveRecord::RecordNotFound

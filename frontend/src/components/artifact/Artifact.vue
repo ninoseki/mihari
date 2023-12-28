@@ -7,12 +7,20 @@
       :disposable="true"
       @dispose="onDisposeError"
     ></ErrorMessage>
+    <Message
+      class="block"
+      :message="message"
+      v-if="message"
+      :disposable="true"
+      @dispose="onDisposeMessage"
+    ></Message>
     <div class="block">
       <p>
         <ActionButtons
           :artifact="artifact"
           @delete="onDelete"
           @set-error="onSetError"
+          @set-message="onSetMessage"
         ></ActionButtons>
       </p>
       <router-link class="is-size-4" :to="{ name: 'Artifact', params: { id: artifact.id } }">{{
@@ -55,7 +63,8 @@ import { defineComponent, type PropType, ref } from "vue"
 
 import ActionButtons from "@/components/artifact/ActionButtons.vue"
 import ErrorMessage from "@/components/ErrorMessage.vue"
-import type { Artifact } from "@/types"
+import Message from "@/components/Message.vue"
+import type { Artifact, QueueMessage } from "@/types"
 
 export default defineComponent({
   name: "ArtifactsItem",
@@ -69,6 +78,7 @@ export default defineComponent({
   emits: ["delete"],
   setup(_, context) {
     const error = ref<AxiosError | undefined>()
+    const message = ref<QueueMessage>()
 
     const onSetError = (newError: AxiosError) => {
       error.value = newError
@@ -82,7 +92,26 @@ export default defineComponent({
       context.emit("delete")
     }
 
-    return { onSetError, onDisposeError, onDelete, error, truncate }
+    const onSetMessage = (newMessage: QueueMessage) => {
+      if (newMessage.queued) {
+        message.value = newMessage
+      }
+    }
+
+    const onDisposeMessage = () => {
+      message.value = undefined
+    }
+
+    return {
+      onSetError,
+      onDisposeError,
+      onDelete,
+      error,
+      truncate,
+      message,
+      onSetMessage,
+      onDisposeMessage
+    }
   }
 })
 </script>

@@ -6,6 +6,13 @@
     :disposable="true"
     @dispose="onDisposeError"
   ></ErrorMessage>
+  <Message
+    class="block"
+    :message="message"
+    v-if="message"
+    :disposable="true"
+    @dispose="onDisposeMessage"
+  ></Message>
   <div class="block">
     <h2 class="is-size-2">{{ artifact.id }}</h2>
     <p class="is-clearfix">
@@ -13,7 +20,7 @@
         :artifact="artifact"
         @delete="onDelete"
         @set-error="onSetError"
-        @refresh="onRefresh"
+        @set-message="onSetMessage"
       ></ActionButtons>
     </p>
   </div>
@@ -110,7 +117,8 @@ import Tags from "@/components/artifact/Tags.vue"
 import WhoisRecord from "@/components/artifact/WhoisRecord.vue"
 import ErrorMessage from "@/components/ErrorMessage.vue"
 import Links from "@/components/link/Links.vue"
-import type { ArtifactWithTags, GCS } from "@/types"
+import Message from "@/components/Message.vue"
+import type { ArtifactWithTags, GCS, QueueMessage } from "@/types"
 import { getGCSByCountryCode, getGCSByIPInfo } from "@/utils"
 
 export default defineComponent({
@@ -131,7 +139,8 @@ export default defineComponent({
     WhoisRecord,
     CPEs,
     Ports,
-    ErrorMessage
+    ErrorMessage,
+    Message
   },
   emits: ["refresh", "delete"],
   setup(props, context) {
@@ -139,6 +148,7 @@ export default defineComponent({
     const countryCode = ref<string | undefined>(undefined)
 
     const error = ref<AxiosError | undefined>()
+    const message = ref<QueueMessage>()
 
     const onSetError = (newError: AxiosError) => {
       error.value = newError
@@ -152,8 +162,16 @@ export default defineComponent({
       context.emit("delete")
     }
 
-    const onRefresh = () => {
-      context.emit("refresh")
+    const onSetMessage = (newMessage: QueueMessage) => {
+      if (newMessage.queued) {
+        message.value = newMessage
+      } else {
+        context.emit("refresh")
+      }
+    }
+
+    const onDisposeMessage = () => {
+      message.value = undefined
     }
 
     const urlscanLiveshotSrc = computed<string | undefined>(() => {
@@ -204,10 +222,12 @@ export default defineComponent({
       truncate,
       urlscanLiveshotSrc,
       onDelete,
-      onRefresh,
       onSetError,
       error,
-      onDisposeError
+      onDisposeError,
+      message,
+      onDisposeMessage,
+      onSetMessage
     }
   }
 })
