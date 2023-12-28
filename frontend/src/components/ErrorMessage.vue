@@ -1,6 +1,6 @@
 <template>
   <div class="notification is-danger is-light">
-    <button class="delete" v-if="disposable" @click="disposeError"></button>
+    <button class="delete" v-if="disposable" @click="dispose"></button>
     <p v-if="data">{{ data.message }}</p>
     <p v-else>{{ error }}</p>
   </div>
@@ -44,11 +44,11 @@ export default defineComponent({
       return undefined
     })
 
-    const disposeError = () => {
+    const dispose = () => {
       context.emit("dispose")
     }
 
-    return { disposeError, data }
+    return { dispose, data }
   }
 })
 </script>

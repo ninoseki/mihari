@@ -7,6 +7,7 @@ require "ipaddr"
 require "json"
 require "pathname"
 require "resolv"
+require "securerandom"
 require "yaml"
 
 # Active Support & Active Record
@@ -141,6 +142,13 @@ module Mihari
     #
     def development?
       env == "development"
+    end
+
+    #
+    # @return [Boolean]
+    #
+    def sidekiq?
+      Dry::Monads::Try[StandardError] { Sidekiq::ProcessSet.new.any? }.recover { false }.value!
     end
 
     def initialize_sentry
@@ -295,7 +303,7 @@ require "mihari/entities/cpe"
 require "mihari/entities/dns"
 require "mihari/entities/geolocation"
 require "mihari/entities/ip_address"
-require "mihari/entities/message"
+require "mihari/entities/messages"
 require "mihari/entities/port"
 require "mihari/entities/reverse_dns"
 require "mihari/entities/tag"
@@ -307,11 +315,5 @@ require "mihari/entities/alert"
 
 require "mihari/entities/rule"
 
-# Web app
-require "mihari/web/app"
-
-# CLIs
-require "mihari/cli/main"
-
-# initialize Sentry (if it's possible)
+# Initialize Sentry (if it's possible)
 Mihari.initialize_sentry

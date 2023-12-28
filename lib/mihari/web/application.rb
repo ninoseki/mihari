@@ -1,20 +1,28 @@
 # frozen_string_literal: true
 
-require "launchy"
-
+# Rack
 require "rack"
-require "rackup"
 require "rack/cors"
+require "rack/session"
+require "rackup"
 
 require "rack/handler/puma"
 
+# Grape
 require "grape-swagger"
 require "grape-swagger-entity"
+
+require "launchy"
 
 require "mihari/web/middleware/connection"
 require "mihari/web/middleware/capture_exceptions"
 
 require "mihari/web/api"
+
+# Sidekiq
+require "sidekiq/web"
+
+require "mihari/sidekiq/application"
 
 module Mihari
   module Web
@@ -62,8 +70,15 @@ module Mihari
             end
             use Middleware::Connection
             use Middleware::CaptureExceptions
-
             use BetterErrors::Middleware if Mihari.development? && defined?(BetterErrors::Middleware)
+
+            if Mihari.sidekiq?
+              use Rack::Session::Cookie, secret: SecureRandom.hex(32), same_site: true, max_age: 86_400
+
+              map "/sidekiq" do
+                run Sidekiq::Web
+              end
+            end
 
             run App.new
           end.to_app

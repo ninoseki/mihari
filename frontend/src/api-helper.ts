@@ -9,6 +9,8 @@ import type {
   Config,
   CreateRule,
   IPInfo,
+  Message,
+  QueueMessage,
   Rule,
   Rules,
   SearchParams,
@@ -22,8 +24,8 @@ export function generateGetAlertsTask(): Task<Alerts, [SearchParams]> {
   })
 }
 
-export function generateDeleteAlertTask(): Task<void, [number]> {
-  return useAsyncTask<void, [number]>(async (_signal, id) => {
+export function generateDeleteAlertTask(): Task<Message, [number]> {
+  return useAsyncTask<Message, [number]>(async (_signal, id) => {
     return await API.deleteAlert(id)
   })
 }
@@ -34,8 +36,8 @@ export function generateGetTagsTask(): Task<Tags, []> {
   })
 }
 
-export function generateDeleteTagTask(): Task<void, [number]> {
-  return useAsyncTask<void, [number]>(async (_signal, tag) => {
+export function generateDeleteTagTask(): Task<Message, [number]> {
+  return useAsyncTask<Message, [number]>(async (_signal, tag) => {
     return await API.deleteTag(tag)
   })
 }
@@ -46,14 +48,14 @@ export function generateGetArtifactTask(): Task<ArtifactWithTags, [number]> {
   })
 }
 
-export function generateDeleteArtifactTask(): Task<void, [number]> {
-  return useAsyncTask<void, [number]>(async (_signal, id) => {
+export function generateDeleteArtifactTask(): Task<Message, [number]> {
+  return useAsyncTask<Message, [number]>(async (_signal, id) => {
     return await API.deleteArtifact(id)
   })
 }
 
-export function generateEnrichArtifactTask(): Task<void, [number]> {
-  return useAsyncTask<void, [number]>(async (_signal, id) => {
+export function generateEnrichArtifactTask(): Task<Message, [number]> {
+  return useAsyncTask<Message, [number]>(async (_signal, id) => {
     return await API.enrichArtifact(id)
   })
 }
@@ -82,14 +84,14 @@ export function generateGetRuleTask(): Task<Rule, [string]> {
   })
 }
 
-export function generateDeleteRuleTask(): Task<void, [string]> {
-  return useAsyncTask<void, [string]>(async (_signal, id: string) => {
+export function generateDeleteRuleTask(): Task<Message, [string]> {
+  return useAsyncTask<Message, [string]>(async (_signal, id: string) => {
     return await API.deleteRule(id)
   })
 }
 
-export function generateSearchRuleTask(): Task<void, [string]> {
-  return useAsyncTask<void, [string]>(async (_signal, id) => {
+export function generateSearchRuleTask(): Task<QueueMessage, [string]> {
+  return useAsyncTask<QueueMessage, [string]>(async (_signal, id) => {
     return await API.searchRule(id)
   })
 }

@@ -79,6 +79,20 @@ module Mihari
         normalized_artifacts
       end
 
+      def result(...)
+        res = Try[StandardError] do
+          retry_on_error(times: retry_times, interval: retry_interval,
+            exponential_backoff: retry_exponential_backoff) do
+            call(...)
+          end
+        end
+
+        return Success([]) if res.error? && ignore_error?
+        return Failure(res.exception) if res.error?
+
+        Success(res.value!)
+      end
+
       class << self
         #
         # Initialize an analyzer by query params

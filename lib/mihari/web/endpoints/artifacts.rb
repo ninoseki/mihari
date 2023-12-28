@@ -59,7 +59,7 @@ module Mihari
           params do
             requires :id, type: Integer
           end
-          get "/:id/enrich" do
+          post "/:id/enrich" do
             status 201
 
             id = params["id"].to_i

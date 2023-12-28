@@ -62,7 +62,7 @@ export default defineComponent({
       required: true
     }
   },
-  emits: ["refresh", "set-error", "delete"],
+  emits: ["set-message", "set-error", "delete"],
   setup(props, context) {
     const href = computed(() => {
       return `/api/rules/${props.rule.id}`
@@ -94,8 +94,8 @@ export default defineComponent({
 
     const searchRule = async () => {
       try {
-        await searchRuleTask.perform(props.rule.id)
-        context.emit("refresh")
+        const message = await searchRuleTask.perform(props.rule.id)
+        context.emit("set-message", message)
       } catch (err) {
         if (axios.isAxiosError(err)) {
           context.emit("set-error", err)

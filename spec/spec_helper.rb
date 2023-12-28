@@ -69,6 +69,9 @@ ENV["DATABASE_URL"] = "sqlite3::memory:" unless ci_env?
 
 require "mihari"
 
+require "mihari/cli/application"
+require "mihari/web/application"
+
 def authorization_field(username, password)
   token = "#{username}:#{password}"
   "Basic #{Base64.strict_encode64(token)}"

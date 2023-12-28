@@ -8,8 +8,20 @@
       :disposable="true"
       @dispose="onDisposeError"
     ></ErrorMessage>
+    <MessageComponent
+      class="block"
+      :message="message"
+      v-if="message"
+      :disposable="true"
+      @dispose="onDisposeMessage"
+    ></MessageComponent>
     <p class="block is-clearfix">
-      <ActionButtons :rule="rule" @refresh="onRefresh" @delete="onDelete" @set-error="onSetError" />
+      <ActionButtons
+        :rule="rule"
+        @set-message="onSetMessage"
+        @delete="onDelete"
+        @set-error="onSetError"
+      />
     </p>
     <YAML :yaml="rule.yaml"></YAML>
   </div>
@@ -26,9 +38,10 @@ import { defineComponent, type PropType, ref } from "vue"
 
 import Alerts from "@/components/alert/AlertsWithPagination.vue"
 import ErrorMessage from "@/components/ErrorMessage.vue"
+import MessageComponent from "@/components/Message.vue"
 import ActionButtons from "@/components/rule/ActionButtons.vue"
 import YAML from "@/components/rule/YAML.vue"
-import type { Rule } from "@/types"
+import type { Message, QueueMessage, Rule } from "@/types"
 
 export default defineComponent({
   name: "RuleDetailItem",
@@ -42,15 +55,13 @@ export default defineComponent({
     YAML,
     Alerts,
     ErrorMessage,
+    MessageComponent,
     ActionButtons
   },
-  emits: ["refresh", "delete"],
+  emits: ["delete", "refresh"],
   setup(_, context) {
-    const error = ref<AxiosError | undefined>()
-
-    const onRefresh = () => {
-      context.emit("refresh")
-    }
+    const error = ref<AxiosError>()
+    const message = ref<Message>()
 
     const onDelete = () => {
       context.emit("delete")
@@ -64,7 +75,32 @@ export default defineComponent({
       error.value = undefined
     }
 
-    return { onRefresh, onSetError, error, onDisposeError, onDelete }
+    const onSetMessage = (newMessage: QueueMessage) => {
+      if (newMessage.queued) {
+        message.value = newMessage
+      } else {
+        context.emit("refresh")
+      }
+    }
+
+    const onDisposeMessage = () => {
+      message.value = undefined
+    }
+
+    const onRefresh = () => {
+      context.emit("refresh")
+    }
+
+    return {
+      onSetMessage,
+      onDisposeMessage,
+      message,
+      onSetError,
+      error,
+      onDisposeError,
+      onDelete,
+      onRefresh
+    }
   }
 })
 </script>

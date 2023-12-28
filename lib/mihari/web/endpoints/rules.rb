@@ -83,26 +83,32 @@ module Mihari
           end
 
           desc "Search by a rule", {
-            success: { code: 201, model: Entities::Message },
+            success: { code: 201, model: Entities::QueueMessage },
             failure: [{ code: 404, model: Entities::ErrorMessage }],
             summary: "Run a rule"
           }
           params do
             requires :id, type: String
           end
-          get "/:id/search" do
+          post "/:id/search" do
             status 201
 
             id = params[:id].to_s
 
+            queued = true
             result = Dry::Monads::Try[StandardError] do
               rule = Mihari::Rule.from_model(Mihari::Models::Rule.find(id))
-              rule.call
+
+              if Mihari.sidekiq?
+                Jobs::SearchJob.perform_async rule.id
+              else
+                rule.call
+                queued = false
+              end
             end.to_result
-            if result.success?
-              return present({ message: "ID:#{id}}'s search has been succeed" },
-                with: Entities::Message)
-            end
+
+            message = queued ? "ID:#{id}'s search has been queued" : "ID:#{id}'s search has been succeed"
+            return present({ message: message, queued: queued }, with: Entities::QueueMessage) if result.success?
 
             case result.failure
             when ActiveRecord::RecordNotFound
