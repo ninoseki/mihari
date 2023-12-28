@@ -9,16 +9,18 @@ module Mihari
       class << self
         def included(thor)
           thor.class_eval do
-            desc "web", "Launch the web app"
+            desc "web", "Start the web app"
             method_option :port, type: :numeric, default: 9292, desc: "Hostname to listen on"
             method_option :host, type: :string, default: "localhost", desc: "Port to listen on"
             method_option :threads, type: :string, default: "0:5", desc: "min:max threads to use"
             method_option :verbose, type: :boolean, default: true, desc: "Report each request"
             method_option :worker_timeout, type: :numeric, default: 60, desc: "Worker timeout value (in seconds)"
             method_option :open, type: :boolean, default: true, desc: "Whether to open the app in browser or not"
-            method_option :rack_env, type: :string, default: "production", desc: "Rack environment"
+            method_option :env, type: :string, default: "production", desc: "Environment"
             def web
-              ENV["RACK_ENV"] ||= options["rack_env"]
+              require "mihari/web/application"
+
+              ENV["APP_ENV"] ||= options["env"]
 
               Mihari::Web::App.run!(
                 port: options["port"],

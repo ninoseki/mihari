@@ -1,5 +1,6 @@
 <template>
   <Loading v-if="getAlertsTask.isRunning"></Loading>
+  <ErrorMessage v-if="getAlertsTask.isError" :error="getAlertsTask.last?.error"></ErrorMessage>
   <Alerts
     :page="page.toString()"
     :alerts="getAlertsTask.last.value"
@@ -14,6 +15,7 @@ import { computed, defineComponent, onMounted, ref, watch } from "vue"
 
 import { generateGetAlertsTask } from "@/api-helper"
 import Alerts from "@/components/alert/Alerts.vue"
+import ErrorMessage from "@/components/ErrorMessage.vue"
 import Loading from "@/components/Loading.vue"
 import type { SearchParams } from "@/types"
 
@@ -31,7 +33,8 @@ export default defineComponent({
   },
   components: {
     Alerts,
-    Loading
+    Loading,
+    ErrorMessage
   },
   setup(props) {
     const page = ref(1)

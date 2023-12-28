@@ -9,6 +9,7 @@ require "mihari/commands/mixins"
 require "mihari/commands/alert"
 require "mihari/commands/database"
 require "mihari/commands/search"
+require "mihari/commands/sidekiq"
 require "mihari/commands/version"
 require "mihari/commands/web"
 
@@ -27,11 +28,12 @@ module Mihari
     #
     # Main CLI class
     #
-    class Main < Base
-      class_option :debug, desc: "Sets up debug mode", aliases: ["-d"], type: :boolean
+    class App < Base
+      class_option :debug, desc: "Set up debug mode", aliases: ["-d"], type: :boolean
       class_around :safe_execute
 
       include Mihari::Commands::Search
+      include Mihari::Commands::Sidekiq
       include Mihari::Commands::Version
       include Mihari::Commands::Web
 

@@ -34,15 +34,16 @@ Alternatively you can set values through `.env` file. Values in `.env` file will
 
 ## Others
 
-| Environment Variable      | Description                               | Default |
-| ------------------------- | ----------------------------------------- | ------- |
-| HIDE_CONFIG_VALUES        | Whether to hide config values from output | true    |
-| IGNORE_ERROR              | Whether to ignore error while querying    | false   |
-| PAGINATION_INTERVAL       | Pagination interval                       | 0       |
-| PAGINATION_LIMIT          | Pagination limit                          | 100     |
-| PARALLEL                  | Whether to run queries in parallel        | false   |
-| RETRY_EXPONENTIAL_BACKOFF | Retry exponential back off                | true    |
-| RETRY_INTERVAL            | Retry interval                            | 5       |
-| RETRY_TIMES               | Retry times                               | 3       |
-| SENTRY_DSN                | Sentry DSN                                |         |
-| SENTRY_TRACE_SAMPLE_RATE  | Sentry trace sample rate                  | 0.25    |
+| Environment Variable      | Description                               | Default                  |
+| ------------------------- | ----------------------------------------- | ------------------------ |
+| HIDE_CONFIG_VALUES        | Whether to hide config values from output | `true`                   |
+| IGNORE_ERROR              | Whether to ignore error while querying    | `false`                  |
+| PAGINATION_INTERVAL       | Pagination interval                       | `0`                      |
+| PAGINATION_LIMIT          | Pagination limit                          | `100`                    |
+| PARALLEL                  | Whether to run queries in parallel        | `false`                  |
+| REDIS_URL                 | Redis URL for Sidekiq                     | `redis://localhost:6379` |
+| RETRY_EXPONENTIAL_BACKOFF | Retry exponential back off                | `true`                   |
+| RETRY_INTERVAL            | Retry interval                            | `5`                      |
+| RETRY_TIMES               | Retry times                               | `3`                      |
+| SENTRY_DSN                | Sentry DSN                                |                          |
+| SENTRY_TRACE_SAMPLE_RATE  | Sentry trace sample rate                  | `0.25`                   |

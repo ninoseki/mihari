@@ -4,5 +4,6 @@
 $LOAD_PATH.unshift("#{__dir__}/../lib")
 
 require "mihari"
+require "mihari/cli/application"
 
-Mihari::CLI::Main.start
+Mihari::CLI::App.start

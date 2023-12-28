@@ -13,14 +13,15 @@ Commands:
   mihari help [COMMAND]       # Describe available commands or one specific command
   mihari rule                 # Sub commands for rule
   mihari search [PATH_OR_ID]  # Search by a rule
+  mihari sidekiq              # Start Sidekiq
   mihari tag                  # Sub commands for tag
-  mihari web                  # Launch the web app
+  mihari web                  # Start the web app
 
 Options:
-  -d, [--debug], [--no-debug]  # Sets up debug mode
+  -d, [--debug], [--no-debug]  # Set up debug mode
 ```
 
-## `mihari alert`
+### `mihari alert`
 
 ```bash
 $ mihari alert
@@ -32,7 +33,7 @@ Commands:
   mihari alert list [QUERY]    # List/search alerts
 ```
 
-## `mihari artifact`
+### `mihari artifact`
 
 ```bash
 $ mihari artifact
@@ -46,7 +47,7 @@ Commands:
 
 !!! note
 
-## `mihari db`
+### `mihari db`
 
 This subcommand is for initializing/migrating database.
 
@@ -59,7 +60,7 @@ Commands:
 
 See [Database](./emitters/database.md) for detailed database configuration.
 
-## `mihari rule`
+### `mihari rule`
 
 ```bash
 $ mihari rule
@@ -73,7 +74,7 @@ Commands:
   mihari rule validate [PATH]      # Validate a rule file
 ```
 
-## `mihari search`
+### `mihari search`
 
 This is a command to execute a rule. A shorthand for `mihari rule search`.
 
@@ -94,7 +95,7 @@ It can be suppressed by providing `-f`.
 mihari search -f /path/to/rule.yml
 ```
 
-## `mihari tag`
+### `mihari tag`
 
 ```bash
 $ mihari tag
@@ -104,9 +105,9 @@ Commands:
   mihari tag list            # List/search tags
 ```
 
-## `mihari web`
+### `mihari web`
 
-This command is for launching the built-in web app.
+This command is for starting the built-in web app.
 
 ```bash
 mihari web
@@ -120,20 +121,20 @@ Usage:
   mihari web
 
 Options:
-  [--port=N]                                         # Hostname to listen on
-                                                     # Default: 9292
-  [--host=HOST]                                      # Port to listen on
-                                                     # Default: localhost
-  [--threads=THREADS]                                # min:max threads to use
-                                                     # Default: 0:5
-  [--verbose], [--no-verbose]                        # Report each request
-                                                     # Default: true
-  [--worker-timeout=N]                               # Worker timeout value (in seconds)
-                                                     # Default: 60
-  [--open], [--no-open]                              # Whether to open the app in browser or not
-                                                     # Default: true
-  [--rack-env=RACK_ENV]                              # Rack environment
-                                                     # Default: production
+      [--port=N]                   # Hostname to listen on
+                                   # Default: 9292
+      [--host=HOST]                # Port to listen on
+                                   # Default: localhost
+      [--threads=THREADS]          # min:max threads to use
+                                   # Default: 0:5
+      [--verbose], [--no-verbose]  # Report each request
+                                   # Default: true
+      [--worker-timeout=N]         # Worker timeout value (in seconds)
+                                   # Default: 60
+      [--open], [--no-open]        # Whether to open the app in browser or not
+                                   # Default: true
+      [--env=ENV]                  # Environment
+                                   # Default: production
 ```
 
 !!! tip
@@ -141,7 +142,25 @@ Options:
     The built-in web app offers API to interact with Mihari.
     The API docs are available on `/redoc-static.html`
 
-## Search
+### `mihari sidekiq`
+
+This command is for starting Sidekiq. See [Sidekiq](./tips/sidekiq.md) for details.
+
+```bash
+$ mihari help sidekiq
+Usage:
+  mihari sidekiq
+
+Options:
+      [--env=ENV]              # Environment
+                               # Default: production
+  -c, [--concurrency=N]        # Sidekiq concurrency
+                               # Default: 5
+```
+
+## Hints
+
+### Search
 
 Mihari provides listing/search feature via CLI & API.
 
@@ -156,7 +175,7 @@ Searchable fields are
 | `rule`     | `id`, `title`, `description`, `tag`, `created_at` and `updated_at`                                                                                                                                                           |
 | `tag`      | `id` and `name`                                                                                                                                                                                                              |
 
-## Examples
+**Examples**
 
 ```bash
 mihari alert list "rule.id:foo"

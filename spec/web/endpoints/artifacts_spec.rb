@@ -43,7 +43,7 @@ RSpec.describe Mihari::Web::Endpoints::Artifacts, :vcr do
 
   describe "get /api/artifacts/:id/enrich" do
     it "returns 201" do
-      get "/api/artifacts/#{artifact.id}/enrich"
+      post "/api/artifacts/#{artifact.id}/enrich"
       expect(last_response.status).to eq(201)
     end
   end

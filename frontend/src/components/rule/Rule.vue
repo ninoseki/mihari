@@ -7,13 +7,20 @@
       :disposable="true"
       @dispose="onDisposeError"
     ></ErrorMessage>
+    <MessageComponent
+      class="block"
+      :message="message"
+      v-if="message"
+      :disposable="true"
+      @dispose="onDisposeMessage"
+    ></MessageComponent>
     <div class="block">
       <p>
         <ActionButtons
           :rule="rule"
           @set-error="onSetError"
           @delete="onDelete"
-          @refresh="onRefresh"
+          @set-message="onSetMessage"
         />
       </p>
       <router-link class="is-size-4" :to="{ name: 'Rule', params: { id: rule.id } }">{{
@@ -50,9 +57,10 @@ import type { AxiosError } from "axios"
 import { defineComponent, type PropType, ref } from "vue"
 
 import ErrorMessage from "@/components/ErrorMessage.vue"
+import MessageComponent from "@/components/Message.vue"
 import ActionButtons from "@/components/rule/ActionButtons.vue"
 import Tags from "@/components/tag/Tags.vue"
-import type { Rule } from "@/types"
+import type { Message, QueueMessage, Rule } from "@/types"
 
 export default defineComponent({
   name: "RuleItem",
@@ -62,10 +70,11 @@ export default defineComponent({
       required: true
     }
   },
-  components: { ActionButtons, Tags, ErrorMessage },
-  emits: ["refresh", "delete"],
+  components: { ActionButtons, Tags, ErrorMessage, MessageComponent },
+  emits: ["delete"],
   setup(_, context) {
-    const error = ref<AxiosError | undefined>()
+    const error = ref<AxiosError>()
+    const message = ref<Message>()
 
     const onSetError = (newError: AxiosError) => {
       error.value = newError
@@ -75,15 +84,27 @@ export default defineComponent({
       error.value = undefined
     }
 
-    const onRefresh = () => {
-      context.emit("refresh")
+    const onSetMessage = (newMessage: QueueMessage) => {
+      message.value = newMessage
+    }
+
+    const onDisposeMessage = () => {
+      message.value = undefined
     }
 
     const onDelete = () => {
       context.emit("delete")
     }
 
-    return { onSetError, onDisposeError, onRefresh, onDelete, error }
+    return {
+      onSetError,
+      onDisposeError,
+      onSetMessage,
+      onDelete,
+      error,
+      message,
+      onDisposeMessage
+    }
   }
 })
 </script>

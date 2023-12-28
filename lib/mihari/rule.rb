@@ -120,15 +120,10 @@ module Mihari
     #
     def artifacts
       analyzer_results.flat_map do |result|
-        case result
-        when Success
-          artifacts = result.value!
-          artifacts.map do |artifact|
-            artifact.rule_id = id
-            artifact
-          end
-        else
-          raise result.failure unless analyzer.ignore_error?
+        artifacts = result.value!
+        artifacts.map do |artifact|
+          artifact.rule_id = id
+          artifact
         end
       end
     end

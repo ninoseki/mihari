@@ -8,6 +8,8 @@ import type {
   Config,
   CreateRule,
   IPInfo,
+  Message,
+  QueueMessage,
   Rule,
   Rules,
   SearchParams,
@@ -41,12 +43,13 @@ export const API = {
     return res.data
   },
 
-  async deleteAlert(id: number): Promise<void> {
-    await client.delete(`/api/alerts/${id}`)
+  async deleteAlert(id: number): Promise<Message> {
+    const res = await client.delete<Message>(`/api/alerts/${id}`)
+    return res.data
   },
 
   async getArtifact(id: number): Promise<ArtifactWithTags> {
-    const res = await client.get(`/api/artifacts/${id}`)
+    const res = await client.get<ArtifactWithTags>(`/api/artifacts/${id}`)
     return res.data
   },
 
@@ -58,13 +61,14 @@ export const API = {
     return res.data
   },
 
-  async enrichArtifact(id: number): Promise<void> {
-    await client.get(`/api/artifacts/${id}/enrich`)
-    return
+  async enrichArtifact(id: number): Promise<Message> {
+    const res = await client.post<Message>(`/api/artifacts/${id}/enrich`)
+    return res.data
   },
 
-  async deleteArtifact(id: number): Promise<void> {
-    await client.delete(`/api/artifacts/${id}`)
+  async deleteArtifact(id: number): Promise<Message> {
+    const res = await client.delete<Message>(`/api/artifacts/${id}`)
+    return res.data
   },
 
   async getRules(params: SearchParams): Promise<Rules> {
@@ -80,8 +84,9 @@ export const API = {
     return res.data
   },
 
-  async searchRule(id: string): Promise<void> {
-    await client.get<void>(`/api/rules/${id}/search`)
+  async searchRule(id: string): Promise<QueueMessage> {
+    const res = await client.post<QueueMessage>(`/api/rules/${id}/search`)
+    return res.data
   },
 
   async createRule(payload: CreateRule): Promise<Rule> {
@@ -94,12 +99,14 @@ export const API = {
     return res.data
   },
 
-  async deleteRule(id: string): Promise<void> {
-    await client.delete<void>(`/api/rules/${id}`)
+  async deleteRule(id: string): Promise<Message> {
+    const res = await client.delete<Message>(`/api/rules/${id}`)
+    return res.data
   },
 
-  async deleteTag(id: number): Promise<void> {
-    await client.delete(`/api/tags/${id}`)
+  async deleteTag(id: number): Promise<Message> {
+    const res = await client.delete<Message>(`/api/tags/${id}`)
+    return res.data
   },
 
   async getIPInfo(ipAddress: string): Promise<IPInfo> {

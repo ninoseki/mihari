@@ -16,6 +16,7 @@ nav:
   - Configuration: configuration.md
   - Usage: usage.md
   - Tips:
+      - Sidekiq: tips/sidekiq.md
       - Docker: tips/docker.md
       - GitHub Actions: tips/github_actions.md
       - Superset: tips/superset.md

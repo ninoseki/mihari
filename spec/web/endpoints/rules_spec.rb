@@ -83,4 +83,14 @@ RSpec.describe Mihari::Web::Endpoints::Rules do
       expect(last_response.status).to eq(201)
     end
   end
+
+  describe "post /api/rules/:id/search" do
+    it "returns 201" do
+      post "/api/rules/#{rule.id}/search"
+      expect(last_response.status).to eq(201)
+
+      json = JSON.parse(last_response.body.to_s)
+      expect(json).to be_a(Hash)
+    end
+  end
 end

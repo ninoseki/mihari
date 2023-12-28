@@ -1,8 +1,10 @@
-require "./lib/mihari"
+$LOAD_PATH.unshift("#{__dir__}/../lib")
+
+require "mihari"
+require "mihari/web/application"
 
 require "better_errors"
 
-# set rack env as development
-ENV["RACK_ENV"] ||= "development"
+ENV["APP_ENV"] ||= "development"
 
 run Mihari::Web::App.instance

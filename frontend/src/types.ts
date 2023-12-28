@@ -175,7 +175,14 @@ export interface Artifacts extends Pagination {
   results: Artifact[]
 }
 
-export interface ErrorMessage {
+export interface Message {
   message: string
+}
+
+export interface ErrorMessage extends Message {
   detail?: any
+}
+
+export interface QueueMessage extends Message {
+  queued: boolean
 }
