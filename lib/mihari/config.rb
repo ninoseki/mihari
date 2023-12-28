@@ -19,7 +19,6 @@ module Mihari
       fofa_email: nil,
       greynoise_api_key: nil,
       hunterhow_api_key: nil,
-      ipinfo_api_key: nil,
       misp_api_key: nil,
       misp_url: nil,
       onyphe_api_key: nil,
@@ -77,9 +76,6 @@ module Mihari
     #   @return [String, nil]
 
     # @!attribute [r] hunterhow_api_key
-    #   @return [String, nil]
-
-    # @!attribute [r] ipinfo_api_key
     #   @return [String, nil]
 
     # @!attribute [r] misp_url

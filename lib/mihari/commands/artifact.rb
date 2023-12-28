@@ -47,7 +47,7 @@ module Mihari
             # @param [Integer] id
             #
             def enrich(id)
-              Services::ArtifactEnricher.result(id)
+              Services::ArtifactEnricher.result(id).value!
             end
 
             desc "delete [ID]", "Delete an artifact"

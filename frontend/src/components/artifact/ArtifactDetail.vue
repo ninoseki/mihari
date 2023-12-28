@@ -25,10 +25,7 @@
     </p>
   </div>
   <div class="columns">
-    <div
-      class="column is-half"
-      v-if="googleMapSrc !== undefined || urlscanLiveshotSrc !== undefined"
-    >
+    <div class="column is-half" v-if="googleMapSrc || urlscanLiveshotSrc">
       <div v-if="googleMapSrc">
         <h4 class="is-size-4">
           Geolocation
@@ -188,7 +185,7 @@ export default defineComponent({
     })
 
     const getGoogleMapSrc = (gcs: GCS | undefined): string | undefined => {
-      if (gcs !== undefined) {
+      if (gcs) {
         return `https://maps.google.co.jp/maps?output=embed&q=${gcs.lat},${gcs.long}&z=3`
       }
 
@@ -202,7 +199,7 @@ export default defineComponent({
       if (props.artifact.dataType === "ip") {
         let gcs: GCS | undefined = undefined
 
-        if (props.artifact.geolocation === null) {
+        if (!props.artifact.geolocation) {
           // Use IPInfo if an artifact does not have geolocation
           const ipinfo = await getIPInfoTask.perform(props.artifact.data)
           gcs = getGCSByIPInfo(ipinfo)

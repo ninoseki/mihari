@@ -8,9 +8,8 @@ module Mihari
     module Enrichers
       extend Schemas::Mixins
 
-      IPInfo = Dry::Schema.Params do
-        required(:enricher).value(Types::String.enum(*Mihari::Enrichers::IPInfo.class_keys))
-        optional(:api_key).value(:string)
+      MMDB = Dry::Schema.Params do
+        required(:enricher).value(Types::String.enum(*Mihari::Enrichers::MMDB.class_keys))
         optional(:options).hash(Options)
       end
 

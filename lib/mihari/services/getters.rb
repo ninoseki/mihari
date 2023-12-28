@@ -46,10 +46,10 @@ module Mihari
       #
       # @param [String] ip
       #
-      # @return [Mihari::Structs::IPInfo::Response]
+      # @return [Mihari::Structs::MMDB::Response]
       #
       def call(ip)
-        Mihari::Enrichers::IPInfo.new.call ip
+        Mihari::Enrichers::MMDB.new.call ip
       end
     end
   end

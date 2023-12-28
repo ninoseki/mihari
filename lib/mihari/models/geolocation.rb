@@ -17,11 +17,11 @@ module Mihari
         # Build Geolocation
         #
         # @param [String] ip
-        # @param [Mihari::Enrichers::IPinfo] enricher
+        # @param [Mihari::Enrichers::MMDB] enricher
         #
         # @return [Mihari::Geolocation, nil]
         #
-        def build_by_ip(ip, enricher: Enrichers::IPInfo.new)
+        def build_by_ip(ip, enricher: Enrichers::MMDB.new)
           result = enricher.result(ip).bind do |res|
             value = res&.country_code
             if value.nil?

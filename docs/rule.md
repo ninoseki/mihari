@@ -52,7 +52,7 @@ queries:
     query: ip:8.8.8.8
 enrichers:
   - enricher: whois
-  - enricher: ipinfo
+  - enricher: mmdb
   - enricher: shodan
   - enricher: google_public_dns
 emitters:
@@ -118,7 +118,7 @@ See [Enrichers](./enrichers/index.md) to know details of each enricher.
 Defaults to:
 
 - `google_public_dns`
-- `ipinfo`
+- `mmdb`
 - `shodan`
 - `whois`
 

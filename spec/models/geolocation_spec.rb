@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-RSpec.describe Mihari::Models::Geolocation, vcr: "Mihari_Enrichers_IPInfo/ip:1.1.1.1" do
+RSpec.describe Mihari::Models::Geolocation, vcr: "Mihari_Enrichers_MMDB/ip:1.1.1.1" do
   describe ".build_by_ip" do
     let!(:ip) { "1.1.1.1" }
 

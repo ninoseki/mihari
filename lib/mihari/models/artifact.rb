@@ -34,7 +34,8 @@ module Mihari
       include SearchCop
 
       search_scope :search do
-        attributes :id, :data, :data_type, :source, :query, :created_at, "alert.id", "rule.id", "rule.title", "rule.description"
+        attributes :id, :data, :data_type, :source, :query, :created_at, "alert.id", "rule.id", "rule.title",
+          "rule.description"
         attributes tag: "tags.name"
         attributes asn: "autonomous_system.asn"
         attributes country_code: "geolocation.country_code"
@@ -115,7 +116,7 @@ module Mihari
       #
       # @param [Mihari::Enrichers::IPInfo] enricher
       #
-      def enrich_geolocation(enricher = Enrichers::IPInfo.new)
+      def enrich_geolocation(enricher = Enrichers::MMDB.new)
         return unless can_enrich_geolocation?
 
         self.geolocation = Geolocation.build_by_ip(data, enricher: enricher)
@@ -126,7 +127,7 @@ module Mihari
       #
       # @param [Mihari::Enrichers::IPInfo] enricher
       #
-      def enrich_autonomous_system(enricher = Enrichers::IPInfo.new)
+      def enrich_autonomous_system(enricher = Enrichers::MMDB.new)
         return unless can_enrich_autonomous_system?
 
         self.autonomous_system = AutonomousSystem.build_by_ip(data, enricher: enricher)
@@ -158,9 +159,9 @@ module Mihari
       # Enrich all the enrichable relationships of the artifact
       #
       def enrich_all
-        enrich_autonomous_system ipinfo
+        enrich_autonomous_system mmdb
         enrich_dns
-        enrich_geolocation ipinfo
+        enrich_geolocation mmdb
         enrich_reverse_dns shodan
         enrich_whois
         enrich_ports shodan
@@ -171,7 +172,7 @@ module Mihari
         Enrichers::Whois => %i[
           enrich_whois
         ],
-        Enrichers::IPInfo => %i[
+        Enrichers::MMDB => %i[
           enrich_autonomous_system
           enrich_geolocation
         ],
@@ -217,8 +218,8 @@ module Mihari
         @rule_id ||= nil
       end
 
-      def ipinfo
-        @ipinfo ||= Enrichers::IPInfo.new
+      def mmdb
+        @mmdb ||= Enrichers::MMDB.new
       end
 
       def shodan
