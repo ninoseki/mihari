@@ -8,13 +8,13 @@
       :disposable="true"
       @dispose="onDisposeError"
     ></ErrorMessage>
-    <MessageComponent
+    <Message
       class="block"
       :message="message"
       v-if="message"
       :disposable="true"
       @dispose="onDisposeMessage"
-    ></MessageComponent>
+    ></Message>
     <p class="block is-clearfix">
       <ActionButtons
         :rule="rule"
@@ -38,10 +38,10 @@ import { defineComponent, type PropType, ref } from "vue"
 
 import Alerts from "@/components/alert/AlertsWithPagination.vue"
 import ErrorMessage from "@/components/ErrorMessage.vue"
-import MessageComponent from "@/components/Message.vue"
+import Message from "@/components/Message.vue"
 import ActionButtons from "@/components/rule/ActionButtons.vue"
 import YAML from "@/components/rule/YAML.vue"
-import type { Message, QueueMessage, Rule } from "@/types"
+import type { QueueMessage, Rule } from "@/types"
 
 export default defineComponent({
   name: "RuleDetailItem",
@@ -55,13 +55,13 @@ export default defineComponent({
     YAML,
     Alerts,
     ErrorMessage,
-    MessageComponent,
+    Message,
     ActionButtons
   },
   emits: ["delete", "refresh"],
   setup(_, context) {
     const error = ref<AxiosError>()
-    const message = ref<Message>()
+    const message = ref<QueueMessage>()
 
     const onDelete = () => {
       context.emit("delete")

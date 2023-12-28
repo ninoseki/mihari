@@ -54,8 +54,8 @@ export function generateDeleteArtifactTask(): Task<Message, [number]> {
   })
 }
 
-export function generateEnrichArtifactTask(): Task<Message, [number]> {
-  return useAsyncTask<Message, [number]>(async (_signal, id) => {
+export function generateEnrichArtifactTask(): Task<QueueMessage, [number]> {
+  return useAsyncTask<QueueMessage, [number]>(async (_signal, id) => {
     return await API.enrichArtifact(id)
   })
 }

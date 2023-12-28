@@ -70,7 +70,7 @@ export default defineComponent({
     }
   },
   components: { VueJsonPretty },
-  emits: ["refresh", "delete", "set-error"],
+  emits: ["delete", "set-error", "set-message"],
   setup(props, context) {
     const href = computed(() => {
       return `/api/artifacts/${props.artifact.id}`
@@ -97,8 +97,8 @@ export default defineComponent({
 
     const enrichArtifact = async () => {
       try {
-        await enrichArtifactTask.perform(props.artifact.id)
-        context.emit("refresh")
+        const message = await enrichArtifactTask.perform(props.artifact.id)
+        context.emit("set-message", message)
       } catch (err) {
         if (axios.isAxiosError(err)) {
           context.emit("set-error", err)

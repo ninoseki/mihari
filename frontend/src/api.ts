@@ -61,8 +61,8 @@ export const API = {
     return res.data
   },
 
-  async enrichArtifact(id: number): Promise<Message> {
-    const res = await client.post<Message>(`/api/artifacts/${id}/enrich`)
+  async enrichArtifact(id: number): Promise<QueueMessage> {
+    const res = await client.post<QueueMessage>(`/api/artifacts/${id}/enrich`)
     return res.data
   },
 

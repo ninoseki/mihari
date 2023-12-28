@@ -130,23 +130,30 @@ module Mihari
       # Establish DB connection
       #
       def connect
-        return if ActiveRecord::Base.connected?
+        return if connected?
 
         ActiveRecord::Base.establish_connection Mihari.config.database_url.to_s
         ActiveRecord::Base.logger = Logger.new($stdout) if Mihari.development?
       end
 
       #
+      # @return [Boolean]
+      #
+      def connected?
+        ActiveRecord::Base.connected?
+      end
+
+      #
       # Close DB connection(s)
       #
       def close
-        return unless ActiveRecord::Base.connected?
+        return unless connected?
 
         ActiveRecord::Base.connection_handler.clear_active_connections!
       end
 
       def with_db_connection
-        Mihari::Database.connect
+        Mihari::Database.connect unless connected?
         yield
       rescue ActiveRecord::StatementInvalid
         Mihari.logger.error("The DB migration is not yet complete. Please run 'mihari db migrate'.")
