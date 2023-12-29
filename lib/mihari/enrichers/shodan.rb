@@ -14,16 +14,14 @@ module Mihari
       # @return [Mihari::Structs::Shodan::InternetDBResponse, nil]
       #
       def call(ip)
-        url = "https://internetdb.shodan.io/#{ip}"
-        res = http.get(url)
-        Structs::Shodan::InternetDBResponse.from_dynamic! JSON.parse(res.body.to_s)
+        client.query ip
       end
       memo_wise :call
 
       private
 
-      def http
-        HTTP::Factory.build timeout: timeout
+      def client
+        @client ||= Clients::ShodanInternetDB.new(timeout: timeout)
       end
     end
   end
