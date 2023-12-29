@@ -2,25 +2,11 @@
 
 RSpec.describe Mihari::Emitters::Webhook do
   before(:all) do
-    @server = server_builder do |http|
-      http.mount_proc("/post") do |req, res|
-        body = req.body.to_s
-
-        res.status = 200
-        res.content_length = body.size
-        res.content_type = "text/json"
-        res.body = body
-      end
-    end
-    @server.start
+    @server = fake_httpbin_server
+    @server.boot
   end
 
-  after(:all) { @server.stop }
-
-  let!(:host) { "localhost" }
-  let!(:port) { @server.port }
-  let!(:base_url) { "http://#{host}:#{port}" }
-  let!(:url) { "#{base_url}/post" }
+  let!(:url) { "#{@server.base_url}/post" }
 
   let!(:artifacts) do
     [
@@ -54,7 +40,7 @@ RSpec.describe Mihari::Emitters::Webhook do
 
     it do
       res = emitter.call artifacts
-      json = JSON.parse(res)
+      json = JSON.parse(res)["json"]
       expect(json["rule"]["id"]).to eq(rule.id)
       expect(json["artifacts"]).to eq(artifacts.map(&:data))
       expect(json["tags"]).to eq(rule.tags.map(&:name))

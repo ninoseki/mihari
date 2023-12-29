@@ -1,40 +1,50 @@
 # frozen_string_literal: true
 
-RSpec.describe Mihari::HTTP::Factory, :vcr do
-  describe ".post" do
-    let!(:payload) { { foo: "bar" } }
+RSpec.describe Mihari::HTTP::Factory do
+  before(:all) do
+    @server = fake_httpbin_server
+    @server.boot
+  end
 
+  describe ".get" do
+    context "with 200" do
+      it do
+        res = described_class.build.get("#{@server.base_url}/get")
+        json = JSON.parse(res.body.to_s)
+        expect(json["headers"]["User-Agent"]).to start_with("mihari/")
+      end
+    end
+
+    context "with 404" do
+      it do
+        expect do
+          described_class.build.get("#{@server.base_url}/status/404")
+        end.to raise_error(Mihari::StatusCodeError)
+      end
+    end
+  end
+
+  describe ".post" do
     context "with application/x-www-form-urlencoded" do
-      let(:headers) { { foo: "bar", "content-type": "application/x-www-form-urlencoded" } }
+      let!(:form) { { foo: "bar" } }
+      let(:headers) { { "content-type": "application/x-www-form-urlencoded" } }
 
       it do
-        res = described_class.build(headers: headers).post("https://httpbin.org/post", form: payload)
+        res = described_class.build(headers: headers).post("#{@server.base_url}/post", form: form)
         data = JSON.parse(res.body.to_s)
-        expect(data.dig("headers", "Foo")).to eq("bar")
         expect(data.dig("form", "foo")).to eq("bar")
       end
     end
 
     context "with application/json" do
-      let(:headers) { { foo: "bar", "content-type": "application/json" } }
+      let!(:json) { { foo: "bar" } }
+      let(:headers) { { "content-type": "application/json" } }
 
       it do
-        res = described_class.build(headers: headers).post("https://httpbin.org/post", json: payload)
+        res = described_class.build(headers: headers).post("#{@server.base_url}/post", json: json)
         data = JSON.parse(res.body.to_s)
-        expect(data.dig("headers", "Foo")).to eq("bar")
-
         inner_data = JSON.parse(data["data"])
         expect(inner_data["foo"]).to eq("bar")
-      end
-    end
-  end
-
-  describe ".get" do
-    context "with 404" do
-      it do
-        expect do
-          described_class.build.get("https://httpbin.org/status/404")
-        end.to raise_error(Mihari::StatusCodeError)
       end
     end
   end
