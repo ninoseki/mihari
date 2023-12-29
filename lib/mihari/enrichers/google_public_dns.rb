@@ -29,7 +29,7 @@ module Mihari
       private
 
       def client
-        Clients::GooglePublicDNS.new
+        Clients::GooglePublicDNS.new(timeout: timeout)
       end
     end
   end
