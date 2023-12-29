@@ -31,6 +31,7 @@ module Mihari
     #
     class Factory
       class << self
+        USER_AGENT = "mihari/#{Mihari::VERSION}"
         #
         # @param [Integer, nil] timeout
         # @param [Hash] headers
@@ -41,6 +42,9 @@ module Mihari
         # @param [Object] raise_exception
         def build(headers: {}, timeout: nil, raise_exception: true)
           client = raise_exception ? ::HTTP.use(:better_error) : ::HTTP
+
+          headers["User-Agent"] ||= USER_AGENT
+
           client = client.headers(headers)
           client = client.timeout(timeout) unless timeout.nil?
           client
