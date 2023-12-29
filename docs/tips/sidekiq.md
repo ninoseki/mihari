@@ -11,7 +11,7 @@ More specifically, the following API endpoints use Sidekiq when Sidekiq is runni
 
 !!! note
 
-    Please make sure that you have a running Redis & `REDIS_URL` environment variable is set.
+    Please make sure that you have a running Redis & `SIDEKIQ_REDIS_URL` environment variable is set.
 
 ```bash
 # Start Sidekiq

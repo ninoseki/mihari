@@ -90,7 +90,9 @@ VCR.configure do |config|
   usernames = Mihari.config.keys.select { |key| key.end_with?("_USERNAME") }
   emails = Mihari.config.keys.select { |key| key.end_with?("_EMAIL") }
   ids = Mihari.config.keys.select { |key| key.end_with?("_ID") }
-  api_urls = Mihari.config.keys.select { |key| key != "DATABASE_URL" && key.end_with?("_URL") }
+  api_urls = Mihari.config.keys.select do |key|
+    key != "DATABASE_URL" && key != "SIDEKIQ_REDIS_URL" && key.end_with?("_URL")
+  end
 
   (api_keys + passwords + secrets + usernames + ids + emails).each do |key|
     ENV[key] = Digest::MD5.hexdigest(key) if ci_env? || !ENV.key?(key)
@@ -125,6 +127,7 @@ Mihari.config.reload
 # require shared recipes & shared contexts
 require_relative "support/helpers"
 require_relative "support/shared_contexts/logger_context"
+require_relative "support/shared_contexts/sidekiq_context"
 
 require_relative "factories/alerts"
 require_relative "factories/artifacts"

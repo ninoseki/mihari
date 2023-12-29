@@ -37,7 +37,7 @@ module Mihari
       virustotal_api_key: nil,
       zoomeye_api_key: nil,
       # sidekiq
-      redis_url: URI("redis://localhost:6379"),
+      sidekiq_redis_url: nil,
       # others
       hide_config_values: true,
       ignore_error: false,
@@ -159,15 +159,15 @@ module Mihari
     # @!attribute [r] hide_config_values
     #   @return [Boolean]
 
-    # @!attribute [r] redis_url
-    #   @return [URI]
+    # @!attribute [r] sidekiq_redis_url
+    #   @return [URI, nil]
 
     def database_url=(val)
       super(URI(val.to_s))
     end
 
-    def redis_url=(val)
-      super(URI(val.to_s))
+    def sidekiq_redis_url=(val)
+      super(val.nil? ? val : URI(val.to_s))
     end
 
     #
