@@ -1,4 +1,6 @@
 RSpec.describe Mihari::Jobs::SearchJob do
+  include_context "with faked Sidekiq configuration"
+
   let_it_be(:rule) { FactoryBot.create(:rule) }
 
   it do

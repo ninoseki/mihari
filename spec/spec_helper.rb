@@ -125,6 +125,7 @@ Mihari.config.reload
 # require shared recipes & shared contexts
 require_relative "support/helpers"
 require_relative "support/shared_contexts/logger_context"
+require_relative "support/shared_contexts/sidekiq_context"
 
 require_relative "factories/alerts"
 require_relative "factories/artifacts"
