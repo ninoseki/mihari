@@ -6,44 +6,61 @@ Alternatively you can set values through `.env` file. Values in `.env` file will
 
 ## Analyzers, Emitters And Enrichers
 
-| Environment Variable   | Description                    | Default             |
-| ---------------------- | ------------------------------ | ------------------- |
-| BINARYEDGE_API_KEY     | BinaryEdge API key             |                     |
-| CENSYS_ID              | Censys API ID                  |                     |
-| CENSYS_SECRET          | Censys secret                  |                     |
-| CIRCL_PASSIVE_PASSWORD | CIRCL passive DNS/SSL password |                     |
-| CIRCL_PASSIVE_USERNAME | CIRCL passive DNS/SSL username |                     |
-| DATABASE_URL           | Database URL                   | `sqlite3:mihari.db` |
-| IPINFO_API_KEY         | IPInfo API key (token)         |                     |
-| MISP_API_KEY           | MISP API key                   |                     |
-| MISP_URL               | MISP URL                       |                     |
-| ONYPHE_API_KEY         | Onyphe API key                 |                     |
-| OTX_API_KEY            | OTX API key                    |                     |
-| PASSIVETOTAL_API_KEY   | PassiveTotal API key           |                     |
-| PASSIVETOTAL_USERNAME  | PassiveTotal username          |                     |
-| PULSEDIVE_API_KEY      | Pulsedive API key              |                     |
-| SECURITYTRAILS_API_KEY | SecurityTrails API key         |                     |
-| SHODAN_API_KEY         | Shodan API key                 |                     |
-| SLACK_CHANNEL          | Slack channel name             | `#general`          |
-| SLACK_WEBHOOK_URL      | Slack Webhook URL              |                     |
-| THEHIVE_API_KEY        | TheHive API key,               |                     |
-| THEHIVE_URL            | TheHive URL                    |                     |
-| URLSCAN_API_KEY        | urlscan.io API key             |                     |
-| VIRUSTOTAL_API_KEY     | VirusTotal API key             |                     |
-| ZOOMEYE_API_KEY        | ZoomEye API key                |                     |
+| Environment Variable   | Type   | Description                    | Default             |
+| ---------------------- | ------ | ------------------------------ | ------------------- |
+| BINARYEDGE_API_KEY     | String | BinaryEdge API key             |                     |
+| CENSYS_ID              | String | Censys API ID                  |                     |
+| CENSYS_SECRET          | String | Censys secret                  |                     |
+| CIRCL_PASSIVE_PASSWORD | String | CIRCL passive DNS/SSL password |                     |
+| CIRCL_PASSIVE_USERNAME | String | CIRCL passive DNS/SSL username |                     |
+| DATABASE_URL           | String | Database URL                   | `sqlite3:mihari.db` |
+| MISP_API_KEY           | String | MISP API key                   |                     |
+| MISP_URL               | String | MISP URL                       |                     |
+| ONYPHE_API_KEY         | String | Onyphe API key                 |                     |
+| OTX_API_KEY            | String | OTX API key                    |                     |
+| PASSIVETOTAL_API_KEY   | String | PassiveTotal API key           |                     |
+| PASSIVETOTAL_USERNAME  | String | PassiveTotal username          |                     |
+| PULSEDIVE_API_KEY      | String | Pulsedive API key              |                     |
+| SECURITYTRAILS_API_KEY | String | SecurityTrails API key         |                     |
+| SHODAN_API_KEY         | String | Shodan API key                 |                     |
+| SLACK_CHANNEL          | String | Slack channel name             | `#general`          |
+| SLACK_WEBHOOK_URL      | String | Slack Webhook URL              |                     |
+| THEHIVE_API_KEY        | String | TheHive API key,               |                     |
+| THEHIVE_URL            | String | TheHive URL                    |                     |
+| URLSCAN_API_KEY        | String | urlscan.io API key             |                     |
+| VIRUSTOTAL_API_KEY     | String | VirusTotal API key             |                     |
+| ZOOMEYE_API_KEY        | String | ZoomEye API key                |                     |
+
+!!! tip
+
+    A typical form of a database URL is `dialect+driver://username:password@host:port/database`. See [Database](./emitters/database.md) for details.
+
+## Analyzers/Enrichers/Emitters
+
+| Environment Variable      | Type    | Description                               | Default |
+| ------------------------- | ------- | ----------------------------------------- | ------- |
+| IGNORE_ERROR              | Boolean | Whether to ignore error while querying    | `false` |
+| PAGINATION_INTERVAL       | Integer | Pagination interval                       | `0`     |
+| PAGINATION_LIMIT          | Integer | Pagination limit                          | `100`   |
+| PARALLEL                  | Boolean | Whether to run queries in parallel        | `false` |
+| RETRY_EXPONENTIAL_BACKOFF | Boolean | Whether to use retry exponential back off | `true`  |
+| RETRY_INTERVAL            | Integer | Retry interval                            | `5`     |
+| RETRY_TIMES               | Integer | Retry times                               | `3`     |
+
+## Sidekiq
+
+| Environment Variable | Type   | Description           | Default |
+| -------------------- | ------ | --------------------- | ------- |
+| SIDEKIQ_REDIS_URL    | String | Redis URL for Sidekiq |         |
+
+!!! tip
+
+    A typical form of a Redis URL is `redis://username:password@host:port`. (e.g. `redis://localhost:6379`)
 
 ## Others
 
-| Environment Variable      | Description                               | Default                  |
-| ------------------------- | ----------------------------------------- | ------------------------ |
-| HIDE_CONFIG_VALUES        | Whether to hide config values from output | `true`                   |
-| IGNORE_ERROR              | Whether to ignore error while querying    | `false`                  |
-| PAGINATION_INTERVAL       | Pagination interval                       | `0`                      |
-| PAGINATION_LIMIT          | Pagination limit                          | `100`                    |
-| PARALLEL                  | Whether to run queries in parallel        | `false`                  |
-| REDIS_URL                 | Redis URL for Sidekiq                     | `redis://localhost:6379` |
-| RETRY_EXPONENTIAL_BACKOFF | Retry exponential back off                | `true`                   |
-| RETRY_INTERVAL            | Retry interval                            | `5`                      |
-| RETRY_TIMES               | Retry times                               | `3`                      |
-| SENTRY_DSN                | Sentry DSN                                |                          |
-| SENTRY_TRACE_SAMPLE_RATE  | Sentry trace sample rate                  | `0.25`                   |
+| Environment Variable     | Type    | Description                               | Default |
+| ------------------------ | ------- | ----------------------------------------- | ------- |
+| HIDE_CONFIG_VALUES       | Boolean | Whether to hide config values from output | `true`  |
+| SENTRY_DSN               | String  | Sentry DSN                                |         |
+| SENTRY_TRACE_SAMPLE_RATE | Float   | Sentry trace sample rate                  | `0.25`  |

@@ -18,5 +18,5 @@ emitter: database
 
 If you want to use MySQL or PostgreSQL, please set a database URL for that.
 
-- MySQL: `mysql2://username:password@host:3306/database` (+ `gem install mysql2`)
-- PostgreSQL: `postgres://username:password@host:5432/database` (+ `gem install pg`)
+- MySQL: `mysql2://username:password@host:port/database` (+ `gem install mysql2`)
+- PostgreSQL: `postgres://username:password@host:port/database` (+ `gem install pg`)

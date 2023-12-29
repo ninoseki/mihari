@@ -148,7 +148,7 @@ module Mihari
     # @return [Boolean]
     #
     def sidekiq?
-      Dry::Monads::Try[StandardError] { Sidekiq::ProcessSet.new.any? }.recover { false }.value!
+      !Mihari.config.sidekiq_redis_url.nil?
     end
 
     def initialize_sentry
