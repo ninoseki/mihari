@@ -6,7 +6,7 @@ module Mihari
     # Analyzer schemas
     #
     module Analyzers
-      extend Schemas::Mixins
+      extend Concerns::Orrable
 
       # Analyzer with API key and pagination
       [

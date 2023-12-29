@@ -12,6 +12,7 @@ module Mihari
       has_many :tags, through: :rule
 
       include SearchCop
+      include Concerns::Searchable
 
       search_scope :search do
         attributes :id, :created_at, "rule.id", "rule.title", "rule.description"
@@ -23,8 +24,6 @@ module Mihari
       end
 
       class << self
-        include Searchable
-
         # @!method search_by_filter(filter)
         #   @param [Mihari::Structs::Filters::Search] filter
         #   @return [Array<Mihari::Models::Alert>]

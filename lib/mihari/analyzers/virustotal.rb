@@ -6,7 +6,7 @@ module Mihari
     # VirusTotal analyzer
     #
     class VirusTotal < Base
-      include Mixins::Refangable
+      include Concerns::Refangable
 
       # @return [String]
       attr_reader :type

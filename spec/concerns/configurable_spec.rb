@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class ConfigurableTest
-  include Mihari::Mixins::Configurable
+  include Mihari::Concerns::Configurable
 
   attr_reader :api_key
 
@@ -16,19 +16,19 @@ class ConfigurableTest
   end
 end
 
-RSpec.describe ConfigurableTest do
+RSpec.describe Mihari::Concerns::Configurable do
   describe "#configured?" do
     before do
       allow(Mihari.config).to receive(:shodan_api_key).and_return(nil)
     end
 
     it do
-      instance = described_class.new(nil)
+      instance = ConfigurableTest.new(nil)
       expect(instance.configured?).to be false
     end
 
     it do
-      instance = described_class.new("foo")
+      instance = ConfigurableTest.new("foo")
       expect(instance.configured?).to be true
     end
   end

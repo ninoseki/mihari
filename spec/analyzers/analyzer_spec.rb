@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class Test < Mihari::Analyzers::Base
+class AnalyzerTest < Mihari::Analyzers::Base
   public :normalized_artifacts
 
   def initialize(query = "dummy")
@@ -22,7 +22,7 @@ class Test < Mihari::Analyzers::Base
 end
 
 RSpec.describe Mihari::Analyzers::Base, :vcr do
-  subject(:test) { Test.new }
+  subject(:test) { AnalyzerTest.new }
 
   describe "#artifacts" do
     it do

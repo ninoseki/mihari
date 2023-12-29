@@ -6,7 +6,7 @@ module Mihari
     # Enricher schemas
     #
     module Enrichers
-      extend Schemas::Mixins
+      extend Concerns::Orrable
 
       MMDB = Dry::Schema.Params do
         required(:enricher).value(Types::String.enum(*Mihari::Enrichers::MMDB.class_keys))

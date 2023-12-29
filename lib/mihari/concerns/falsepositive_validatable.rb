@@ -1,11 +1,13 @@
 # frozen_string_literal: true
 
 module Mihari
-  module Mixins
+  module Concerns
     #
-    # False positive validatable mixins
+    # False positive validatable concern
     #
     module FalsePositiveValidatable
+      extend ActiveSupport::Concern
+
       prepend MemoWise
 
       #

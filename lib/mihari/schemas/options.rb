@@ -1,7 +1,5 @@
 # frozen_string_literal: true
 
-require "dry/schema"
-
 module Mihari
   module Schemas
     Options = Dry::Schema.Params do

@@ -50,13 +50,13 @@ require "mihari/errors"
 
 require "mihari/config"
 
-# Mixins
-require "mihari/mixins/autonomous_system_normalizable"
-require "mihari/mixins/configurable"
-require "mihari/mixins/falsepositive_validatable"
-require "mihari/mixins/refangable"
-require "mihari/mixins/retriable"
-require "mihari/mixins/error_unwrappable"
+# Concerns
+require "mihari/concerns/autonomous_system_normalizable"
+require "mihari/concerns/configurable"
+require "mihari/concerns/falsepositive_validatable"
+require "mihari/concerns/refangable"
+require "mihari/concerns/retriable"
+require "mihari/concerns/error_unwrappable"
 
 #
 # Mihari module
@@ -182,7 +182,7 @@ require "mihari/enrichers/shodan"
 require "mihari/enrichers/whois"
 
 # Models
-require "mihari/models/mixins"
+require "mihari/models/concerns/searchable"
 
 require "mihari/models/alert"
 require "mihari/models/artifact"
@@ -276,7 +276,7 @@ require "mihari/structs/virustotal_intelligence"
 
 # Schemas
 require "mihari/schemas/macros"
-require "mihari/schemas/mixins"
+require "mihari/schemas/concerns/orrable"
 
 require "mihari/schemas/options"
 

@@ -32,6 +32,7 @@ module Mihari
 
       include ActiveModel::Validations
       include SearchCop
+      include Concerns::Searchable
 
       search_scope :search do
         attributes :id, :data, :data_type, :source, :query, :created_at, "alert.id", "rule.id", "rule.title",
@@ -197,8 +198,6 @@ module Mihari
       end
 
       class << self
-        include Searchable
-
         # @!method search_by_filter(filter)
         #   @param [Mihari::Structs::Filters::Search] filter
         #   @return [Array<Mihari::Models::Alert>]

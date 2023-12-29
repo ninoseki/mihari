@@ -6,7 +6,7 @@ module Mihari
     # Pulsedive analyzer
     #
     class Pulsedive < Base
-      include Mixins::Refangable
+      include Concerns::Refangable
 
       # @return [String, nil]
       attr_reader :type

@@ -1,11 +1,11 @@
 # frozen_string_literal: true
 
-class Test
-  include Mihari::Mixins::FalsePositiveValidatable
+class FalsePositiveTest
+  include Mihari::Concerns::FalsePositiveValidatable
 end
 
-RSpec.describe Test do
-  subject(:subject) { described_class.new }
+RSpec.describe Mihari::Concerns::FalsePositiveValidatable do
+  subject(:subject) { FalsePositiveTest.new }
 
   describe "#normalize_falsepositive" do
     where(:value, :expected) do

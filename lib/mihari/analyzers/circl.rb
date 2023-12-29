@@ -6,7 +6,7 @@ module Mihari
     # CIRCL passive DNS/SSL analyzer
     #
     class CIRCL < Base
-      include Mixins::Refangable
+      include Concerns::Refangable
 
       # @return [String, nil]
       attr_reader :type

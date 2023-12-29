@@ -8,8 +8,6 @@ module Mihari
     class WhoisRecord < ActiveRecord::Base
       belongs_to :artifact
 
-      @memo = {}
-
       class << self
         #
         # Build whois record

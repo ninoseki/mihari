@@ -1,11 +1,13 @@
 # frozen_string_literal: true
 
 module Mihari
-  module Mixins
+  module Concerns
     #
-    # Retriable mixin
+    # Retriable concern
     #
     module Retriable
+      extend ActiveSupport::Concern
+
       DEFAULT_ON = [
         Errno::ECONNRESET,
         Errno::ECONNABORTED,

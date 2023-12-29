@@ -1,11 +1,11 @@
 # frozen_string_literal: true
 
-class Test
-  include Mihari::Mixins::AutonomousSystemNormalizable
+class AutonomousSystemTest
+  include Mihari::Concerns::AutonomousSystemNormalizable
 end
 
-RSpec.describe Test do
-  subject(:subject) { described_class.new }
+RSpec.describe Mihari::Concerns::AutonomousSystemNormalizable do
+  subject(:subject) { AutonomousSystemTest.new }
 
   describe "#normalize_asn" do
     where(:value, :expected) do

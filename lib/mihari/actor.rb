@@ -7,8 +7,8 @@ module Mihari
   class Actor
     include Dry::Monads[:result, :try]
 
-    include Mixins::Configurable
-    include Mixins::Retriable
+    include Concerns::Configurable
+    include Concerns::Retriable
 
     # @return [Hash]
     attr_reader :options

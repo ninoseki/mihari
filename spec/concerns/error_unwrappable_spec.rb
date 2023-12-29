@@ -1,17 +1,16 @@
 # frozen_string_literal: true
 
-class Test
-  include Dry::Monads[:try, :result]
-  include Mihari::Mixins::ErrorUnwrappable
+class ErrorTest
+  include Mihari::Concerns::ErrorUnwrappable
 
   def raise_try_error
-    Try do
+    Dry::Monads::Try[StandardError] do
       1 / 0
     end.value!
   end
 
   def raise_result_error
-    Try do
+    Dry::Monads::Try[StandardError] do
       1 / 0
     end.to_result.value!
   end
@@ -21,8 +20,8 @@ class Test
   end
 end
 
-RSpec.describe Test do
-  subject(:subject) { described_class.new }
+RSpec.describe Mihari::Concerns::ErrorUnwrappable do
+  subject(:subject) { ErrorTest.new }
 
   describe "#unwrap_error" do
     it do

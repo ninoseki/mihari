@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class RetriableTest
-  include Mihari::Mixins::Retriable
+  include Mihari::Concerns::Retriable
 
   attr_reader :count, :times, :interval
 
@@ -23,14 +23,14 @@ class RetriableTest
   end
 end
 
-RSpec.describe RetriableTest do
+RSpec.describe Mihari::Concerns::Retriable do
+  subject(:subject) { RetriableTest.new }
+
   before do
     allow(Net::HTTP).to receive(:get).and_raise(Net::OpenTimeout)
   end
 
   describe "#retry_on_error" do
-    subject(:subject) { described_class.new }
-
     it do
       expect { subject.foo }.to raise_error(Net::OpenTimeout)
       expect(subject.count).to eq(subject.times)

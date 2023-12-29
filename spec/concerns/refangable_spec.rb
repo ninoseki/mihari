@@ -1,12 +1,12 @@
 # frozen_string_literal: true
 
-class Test
-  include Mihari::Mixins::Refangable
+class RefangTest
+  include Mihari::Concerns::Refangable
 end
 
-RSpec.describe Test do
+RSpec.describe Mihari::Concerns::Refangable do
   describe "#refang" do
-    subject(:subject) { described_class.new }
+    subject(:subject) { RefangTest.new }
 
     where(:value, :expected) do
       [
