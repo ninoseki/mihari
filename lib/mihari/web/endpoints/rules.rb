@@ -7,35 +7,20 @@ module Mihari
       # Rule API endpoint
       #
       class Rules < Grape::API
-        class RuleCreator < Service
+        class RuleCreateUpdater < Service
           #
-          # @params [String]
-          #
-          # @return [Mihari::Models::Rule]
-          #
-          def call(yaml)
-            rule = Rule.from_yaml(yaml)
-
-            found = Mihari::Models::Rule.find_by_id(rule.id)
-            error!({ message: "ID:#{rule.id} is already registered" }, 400) unless found.nil?
-
-            rule.model.save
-            rule
-          end
-        end
-
-        class RuleUpdater < Service
-          #
-          # @params [String] id
           # @params [String] yaml
+          # @params [Boolean] overwrite
           #
           # @return [Mihari::Models::Rule]
           #
-          def call(id:, yaml:)
-            Mihari::Models::Rule.find(id)
-
+          def call(yaml, overwrite: true)
             rule = Rule.from_yaml(yaml)
-            rule.model.save
+
+            found = Models::Rule.find_by_id(rule.id)
+            raise IntegrityError, "ID:#{rule.id} is already registered" if found && !overwrite
+
+            rule.update_or_create
             rule
           end
         end
@@ -128,12 +113,16 @@ module Mihari
           post "/" do
             status 201
 
-            result = RuleCreator.result(params[:yaml])
+            yaml = params[:yaml].to_s
+
+            result = RuleCreateUpdater.result(yaml, overwrite: false)
             return present(result.value!.model, with: Entities::Rule) if result.success?
 
             failure = result.failure
             case failure
             when Psych::SyntaxError
+              error!({ message: failure.message }, 400)
+            when IntegrityError
               error!({ message: failure.message }, 400)
             when ValidationError
               error!({ message: "Rule format is invalid", detail: failure.errors.to_h }, 400)
@@ -154,7 +143,9 @@ module Mihari
             status 201
 
             id = params[:id].to_s
-            result = RuleUpdater.result(id: id, yaml: params[:yaml].to_s)
+            yaml = params[:yaml].to_s
+
+            result = RuleCreateUpdater.result(yaml, overwrite: true)
             return present(result.value!.model, with: Entities::Rule) if result.success?
 
             failure = result.failure
@@ -162,6 +153,8 @@ module Mihari
             when ActiveRecord::RecordNotFound
               error!({ message: "ID:#{id} not found" }, 404)
             when Psych::SyntaxError
+              error!({ message: failure.message }, 400)
+            when IntegrityError
               error!({ message: failure.message }, 400)
             when ValidationError
               error!({ message: "Rule format is invalid", detail: failure.errors.to_h }, 400)
