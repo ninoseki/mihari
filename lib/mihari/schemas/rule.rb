@@ -36,7 +36,7 @@ module Mihari
     # Rule schema contract
     #
     class RuleContract < Dry::Validation::Contract
-      include Mihari::Mixins::FalsePositiveValidatable
+      include Mihari::Concerns::FalsePositiveValidatable
 
       params(Rule)
 

@@ -1,11 +1,13 @@
 # frozen_string_literal: true
 
 module Mihari
-  module Mixins
+  module Concerns
     #
-    # Refangable mixin
+    # Refangable concern
     #
     module Refangable
+      extend ActiveSupport::Concern
+
       #
       # Refang defanged indicator
       #

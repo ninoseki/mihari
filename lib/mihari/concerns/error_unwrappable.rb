@@ -1,11 +1,13 @@
 # frozen_string_literal: true
 
 module Mihari
-  module Mixins
+  module Concerns
     #
-    # Error unwrappable mixins
+    # Error unwrappable concern
     #
     module ErrorUnwrappable
+      extend ActiveSupport::Concern
+
       def unwrap_error(err)
         return err unless err.is_a?(Dry::Monads::UnwrapError)
 

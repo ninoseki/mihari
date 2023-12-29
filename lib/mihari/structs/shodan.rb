@@ -41,7 +41,7 @@ module Mihari
       end
 
       class Match < Dry::Struct
-        include Mixins::AutonomousSystemNormalizable
+        include Concerns::AutonomousSystemNormalizable
 
         # @!attribute [r] asn
         #   @return [String, nil]

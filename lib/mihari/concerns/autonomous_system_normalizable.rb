@@ -1,11 +1,13 @@
 # frozen_string_literal: true
 
 module Mihari
-  module Mixins
+  module Concerns
     #
-    # Autonomous System mixin
+    # Autonomous System concern
     #
     module AutonomousSystemNormalizable
+      extend ActiveSupport::Concern
+
       #
       # Normalize ASN value
       #

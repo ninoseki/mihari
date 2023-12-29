@@ -6,7 +6,7 @@ module Mihari
     # Emitter schemas
     #
     module Emitters
-      extend Schemas::Mixins
+      extend Concerns::Orrable
 
       Database = Dry::Schema.Params do
         required(:emitter).value(Types::String.enum(*Mihari::Emitters::Database.class_keys))

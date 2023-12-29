@@ -10,7 +10,7 @@ module Dry
       class DSL
         def default(value)
           schema_dsl.before(:rule_applier) do |result|
-            result.update(name => value) unless result[name]
+            result.update(name => value) if result.output && !result[name]
           end
         end
       end

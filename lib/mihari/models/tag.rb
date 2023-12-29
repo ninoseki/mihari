@@ -9,14 +9,13 @@ module Mihari
       has_many :taggings, dependent: :destroy
 
       include SearchCop
+      include Concerns::Searchable
 
       search_scope :search do
         attributes :id, :name
       end
 
       class << self
-        include Searchable
-
         # @!method search_by_filter(filter)
         #   @param [Mihari::Structs::Filters::Search] filter
         #   @return [Array<Mihari::Models::Tag>]

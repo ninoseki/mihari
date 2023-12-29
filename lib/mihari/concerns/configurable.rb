@@ -1,9 +1,9 @@
 # frozen_string_literal: true
 
 module Mihari
-  module Mixins
+  module Concerns
     #
-    # Configurable mixin
+    # Configurable concern
     #
     module Configurable
       extend ActiveSupport::Concern

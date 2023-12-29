@@ -2,7 +2,7 @@
 
 module Mihari
   class Rule < Service
-    include Mixins::FalsePositiveValidatable
+    include Concerns::FalsePositiveValidatable
 
     # @return [Hash]
     attr_reader :data
@@ -210,14 +210,12 @@ module Mihari
     # @return [Mihari::Models::Rule]
     #
     def model
-      rule = Mihari::Models::Rule.find(id)
-
-      rule.title = title
-      rule.description = description
-      rule.data = data
-      rule.taggings = taggings
-
-      rule
+      Mihari::Models::Rule.find(id).tap do |rule|
+        rule.title = title
+        rule.description = description
+        rule.data = data
+        rule.taggings = taggings
+      end
     rescue ActiveRecord::RecordNotFound
       Mihari::Models::Rule.new(
         id: id,
