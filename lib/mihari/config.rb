@@ -167,7 +167,7 @@ module Mihari
     end
 
     def sidekiq_redis_url=(val)
-      super(URI(val.to_s))
+      super(val.nil? ? val : URI(val.to_s))
     end
 
     #
