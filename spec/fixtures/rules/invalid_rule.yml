@@ -1,8 +1,7 @@
 title:
 description: 1
 queries:
-  - analyzer: "foo"
-    query: "ip:1.1.1.1"
-
-  - analyzer: "bar"
-    query: "example.com"
+  - analyzer: foo
+    query: ip:1.1.1.1
+  - analyzer: bar
+    query: example.com
