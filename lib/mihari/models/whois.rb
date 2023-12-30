@@ -18,8 +18,7 @@ module Mihari
         # @return [WhoisRecord, nil]
         #
         def build_by_domain(domain, enricher: Enrichers::Whois.new)
-          result = enricher.result(domain)
-          result.value_or nil
+          enricher.result(domain).value_or nil
         end
       end
     end

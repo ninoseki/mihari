@@ -9,8 +9,6 @@ module Mihari
       belongs_to :artifact
 
       class << self
-        include Dry::Monads[:result]
-
         #
         # Build CPEs
         #
@@ -20,14 +18,9 @@ module Mihari
         # @return [Array<Mihari::CPE>]
         #
         def build_by_ip(ip, enricher: Enrichers::Shodan.new)
-          result = enricher.result(ip).bind do |res|
-            if res.nil?
-              Success []
-            else
-              Success(res.cpes.map { |cpe| new(cpe: cpe) })
-            end
-          end
-          result.value_or []
+          enricher.result(ip).fmap do |res|
+            res.nil? ? [] : res.cpes.map { |cpe| new(cpe: cpe) }
+          end.value_or []
         end
       end
     end

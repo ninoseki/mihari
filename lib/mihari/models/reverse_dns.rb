@@ -20,14 +20,9 @@ module Mihari
         # @return [Array<Mihari::Models::ReverseDnsName>]
         #
         def build_by_ip(ip, enricher: Enrichers::Shodan.new)
-          result = enricher.result(ip).bind do |res|
-            if res.nil?
-              Success []
-            else
-              Success(res.hostnames.map { |name| new(name: name) })
-            end
-          end
-          result.value_or []
+          enricher.result(ip).fmap do |res|
+            res.nil? ? [] : res.hostnames.map { |name| new(name: name) }
+          end.value_or []
         end
       end
     end

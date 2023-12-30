@@ -9,8 +9,6 @@ module Mihari
       belongs_to :artifact
 
       class << self
-        include Dry::Monads[:result]
-
         #
         # Build AS
         #
@@ -20,16 +18,10 @@ module Mihari
         # @return [Mihari::AutonomousSystem, nil]
         #
         def build_by_ip(ip, enricher: Enrichers::MMDB.new)
-          result = enricher.result(ip).bind do |res|
+          enricher.result(ip).fmap do |res|
             value = res&.asn
-            if value.nil?
-              Success nil
-            else
-              Success new(asn: value)
-            end
-          end
-          # result.value_or nil
-          result.value!
+            value.nil? ? nil : new(asn: value)
+          end.value_or nil
         end
       end
     end
