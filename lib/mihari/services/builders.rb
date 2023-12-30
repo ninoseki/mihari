@@ -18,7 +18,7 @@ module Mihari
         result = Try { Mihari::Models::Rule.find path_or_id }.to_result
         return result.value! if result.success?
 
-        raise ArgumentError, "#{path_or_id} does not exist" unless Pathname(path_or_id).exist?
+        raise ArgumentError, "#{path_or_id} not found" unless Pathname(path_or_id).exist?
 
         YAML.safe_load(
           ERB.new(File.read(path_or_id)).result,

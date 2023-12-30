@@ -13,7 +13,8 @@ module Mihari
 
             desc "search [PATH_OR_ID]", "Search by a rule"
             around :with_db_connection
-            method_option :force_overwrite, type: :boolean, aliases: "-f", desc: "Force overwriting a rule"
+            method_option :force_overwrite, type: :boolean, default: false, aliases: "-f",
+              desc: "Force overwriting a rule"
             #
             # Search by a rule
             #
@@ -21,7 +22,7 @@ module Mihari
             #
             def search(path_or_id)
               force_overwrite = options["force_overwrite"] || false
-              message = "There is a diff in the rule. Are you sure you want to overwrite the rule? (y/n)"
+              message = "Are you sure you want to overwrite this rule? (y/n)"
 
               # @type [Mihari::Models::Alert]
               alert = Dry::Monads::Try[StandardError] do

@@ -5,13 +5,11 @@ module Mihari
 
   class ValueError < Error; end
 
-  class TypeError < Error; end
-
   class RetryableError < Error; end
 
-  class FileNotFoundError < Error; end
-
   class ConfigurationError < Error; end
+
+  class IntegrityError < Error; end
 
   # errors for HTTP interactions
   class HTTPError < Error; end

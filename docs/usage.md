@@ -86,7 +86,7 @@ Mihari asks whether really you want to update a rule if there is a diff by defau
 
 ```bash
 $ mihari search /path/to/rule.yml
-There is a diff in the rule. Are you sure you want to overwrite the rule? (y/n)
+Are you sure you want to overwrite this rule? (y/n)
 ```
 
 It can be suppressed by providing `-f`.
