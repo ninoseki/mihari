@@ -15,10 +15,10 @@ class HTTPBin
     @req = Rack::Request.new(env)
   end
 
-  def_delegators :req, :content_type, :form_data?, :get?, :post?, :delete?, :url, :query_string, :path
+  def_delegators :req, :content_type, :form_data?, :get?, :post?, :delete?, :url, :query_string, :path, :path_info
 
   def call
-    case path
+    case path_info
     when "/get"
       get? ? ok_response : error_405
     when "/post"
