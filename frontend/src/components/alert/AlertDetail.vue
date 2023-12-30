@@ -71,7 +71,7 @@ export default defineComponent({
   },
   emits: ["delete"],
   setup(_, context) {
-    const error = ref<AxiosError | undefined>()
+    const error = ref<AxiosError>()
 
     const onSetError = (newError: AxiosError) => {
       error.value = newError

@@ -74,10 +74,10 @@ export default defineComponent({
       required: true
     }
   },
-  components: { ErrorMessage, ActionButtons },
+  components: { ErrorMessage, ActionButtons, Message },
   emits: ["delete"],
   setup(_, context) {
-    const error = ref<AxiosError | undefined>()
+    const error = ref<AxiosError>()
     const message = ref<QueueMessage>()
 
     const onSetError = (newError: AxiosError) => {

@@ -141,10 +141,10 @@ export default defineComponent({
   },
   emits: ["refresh", "delete"],
   setup(props, context) {
-    const googleMapSrc = ref<string | undefined>(undefined)
-    const countryCode = ref<string | undefined>(undefined)
+    const googleMapSrc = ref<string>()
+    const countryCode = ref<string>()
 
-    const error = ref<AxiosError | undefined>()
+    const error = ref<AxiosError>()
     const message = ref<QueueMessage>()
 
     const onSetError = (newError: AxiosError) => {
