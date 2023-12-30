@@ -9,12 +9,12 @@ export class GreyNoise extends BaseLink implements Link {
   public constructor() {
     super()
 
-    this.baseURL = "https://www.greynoise.io"
+    this.baseURL = "https://viz.greynoise.io"
     this.name = "GreyNoise"
     this.type = "ip"
   }
 
   public href(data: string): string {
-    return this.baseURL + `/viz/query?gnql=ip:${data}`
+    return this.baseURL + `/ip/${data}`
   }
 }
