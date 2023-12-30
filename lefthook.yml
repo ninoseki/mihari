@@ -15,3 +15,6 @@ pre-commit:
       glob: "*.{js,ts,vue}"
       run: npx prettier --write {staged_files}
       stage_fixed: true
+    actionlint:
+      glob: ".github/workflows/*.yaml"
+      run: actionlint
