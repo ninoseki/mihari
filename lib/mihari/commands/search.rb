@@ -9,7 +9,7 @@ module Mihari
       class << self
         def included(thor)
           thor.class_eval do
-            include Mixins
+            include Concerns::DatabaseConnectable
 
             desc "search [PATH_OR_ID]", "Search by a rule"
             around :with_db_connection

@@ -10,7 +10,7 @@ module Mihari
         # rubocop:disable Metrics/AbcSize
         def included(thor)
           thor.class_eval do
-            include Mixins
+            include Concerns::DatabaseConnectable
 
             desc "create [PATH]", "Create an alert"
             around :with_db_connection

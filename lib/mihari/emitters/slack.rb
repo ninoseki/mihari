@@ -214,9 +214,9 @@ module Mihari
       # @param [Array<Mihari::Models::Artifact>] artifacts
       #
       def call(artifacts)
-        @artifacts = artifacts
-
         return if artifacts.empty?
+
+        @artifacts = artifacts
 
         notifier.post(text: text, attachments: attachments, mrkdwn: true)
       end
