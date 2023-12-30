@@ -1,6 +1,6 @@
 require "forwardable"
 
-class FakeHTTPBin
+class HTTPBin
   extend Forwardable
 
   class << self
