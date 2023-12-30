@@ -52,20 +52,14 @@ Gemfile.lock
 # rspec
 .rspec_status
 
-# solargraph
-.solargraph.yml
-
 # SQLite
 *.db
 *.db-shm
 *.db-wal
 
-# Config
-mihari.yml
-
-# Rule
-rule.yml
-!lib/mihari/templates/rule.yml
-
 # Frontend assets
 lib/mihari/web/public/
+
+# Rules & Alerts
+rules/
+alerts/
