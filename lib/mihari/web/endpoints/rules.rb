@@ -103,7 +103,10 @@ module Mihari
 
           desc "Create a rule", {
             success: { code: 201, model: Entities::Rule },
-            failure: [{ code: 404, model: Entities::ErrorMessage }],
+            failure: [
+              { code: 400, model: Entities::ErrorMessage },
+              { code: 422, model: Entities::ErrorMessage }
+            ],
             summary: "Create a rule"
           }
           params do
@@ -120,18 +123,21 @@ module Mihari
             failure = result.failure
             case failure
             when Psych::SyntaxError
-              error!({ message: failure.message }, 400)
+              error!({ message: failure.message }, 422)
+            when ValidationError
+              error!({ message: "Rule format invalid", detail: failure.errors.to_h }, 422)
             when IntegrityError
               error!({ message: failure.message }, 400)
-            when ValidationError
-              error!({ message: "Rule format is invalid", detail: failure.errors.to_h }, 400)
             end
             raise failure
           end
 
           desc "Update a rule", {
             success: { code: 201, model: Entities::Rule },
-            failure: [{ code: 404, model: Entities::ErrorMessage }],
+            failure: [
+              { code: 404, model: Entities::ErrorMessage },
+              { code: 422, model: Entities::ErrorMessage }
+            ],
             summary: "Update a rule"
           }
           params do
@@ -152,9 +158,9 @@ module Mihari
             when ActiveRecord::RecordNotFound
               error!({ message: "ID:#{id} not found" }, 404)
             when Psych::SyntaxError
-              error!({ message: failure.message }, 400)
+              error!({ message: failure.message }, 422)
             when ValidationError
-              error!({ message: "Rule format is invalid", detail: failure.errors.to_h }, 400)
+              error!({ message: "Rule format is invalid", detail: failure.errors.to_h }, 422)
             end
             raise failure
           end

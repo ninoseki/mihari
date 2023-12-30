@@ -89,6 +89,20 @@ RSpec.describe Mihari::Web::Endpoints::Rules do
         expect(last_response.status).to eq(400)
       end
     end
+
+    context "with invalid YAML format" do
+      it "returns 422" do
+        post("/api/rules/", { yaml: { foo: "bar" }.to_yaml }.to_json, "CONTENT_TYPE" => "application/json")
+        expect(last_response.status).to eq(422)
+      end
+    end
+
+    context "without having YAML" do
+      it "returns 400" do
+        post("/api/rules/", { foo: "bar" }.to_json, "CONTENT_TYPE" => "application/json")
+        expect(last_response.status).to eq(400)
+      end
+    end
   end
 
   describe "post /api/rules/:id/search" do

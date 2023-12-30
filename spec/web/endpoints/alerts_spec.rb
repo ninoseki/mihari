@@ -61,9 +61,9 @@ RSpec.describe Mihari::Web::Endpoints::Alerts do
   end
 
   describe "post /api/alerts" do
-    context "with invalid params" do
+    context "with invalid format" do
       it "returns 400" do
-        post "/api/alerts", { foo: "bar" }
+        post("/api/alerts/", { foo: "bar" }.to_json, "CONTENT_TYPE" => "application/json")
         expect(last_response.status).to eq(400)
       end
     end
