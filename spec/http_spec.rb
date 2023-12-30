@@ -1,10 +1,7 @@
 # frozen_string_literal: true
 
 RSpec.describe Mihari::HTTP::Factory do
-  before(:all) do
-    @server = fake_httpbin_server
-    @server.boot
-  end
+  include_context "with fake HTTPBin"
 
   describe ".get" do
     context "with 200" do
@@ -20,6 +17,14 @@ RSpec.describe Mihari::HTTP::Factory do
         expect do
           described_class.build.get("#{@server.base_url}/status/404")
         end.to raise_error(Mihari::StatusCodeError)
+      end
+    end
+
+    context "with timeout" do
+      it do
+        expect do
+          described_class.build(timeout: -1).get("#{@server.base_url}/get")
+        end.to raise_error(Mihari::TimeoutError)
       end
     end
   end

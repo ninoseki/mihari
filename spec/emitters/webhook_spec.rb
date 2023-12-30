@@ -1,13 +1,9 @@
 # frozen_string_literal: true
 
 RSpec.describe Mihari::Emitters::Webhook do
-  before(:all) do
-    @server = fake_httpbin_server
-    @server.boot
-  end
+  include_context "with fake HTTPBin"
 
   let!(:url) { "#{@server.base_url}/post" }
-
   let!(:artifacts) do
     [
       Mihari::Models::Artifact.new(data: "1.1.1.1"),

@@ -118,7 +118,6 @@ VCR.configure do |config|
   end
 end
 
-require "test_prof/recipes/rspec/before_all"
 require "test_prof/recipes/rspec/let_it_be"
 
 # reload dummy/sanitized config values
@@ -126,6 +125,7 @@ Mihari.config.reload
 
 # require shared recipes & shared contexts
 require_relative "support/helpers"
+require_relative "support/shared_contexts/httpbin_context"
 require_relative "support/shared_contexts/logger_context"
 require_relative "support/shared_contexts/sidekiq_context"
 
