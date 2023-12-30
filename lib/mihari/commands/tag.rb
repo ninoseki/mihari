@@ -9,7 +9,7 @@ module Mihari
       class << self
         def included(thor)
           thor.class_eval do
-            include Mixins
+            include Concerns::DatabaseConnectable
 
             desc "list", "List/search tags"
             around :with_db_connection

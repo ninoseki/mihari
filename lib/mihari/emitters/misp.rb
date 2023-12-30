@@ -128,15 +128,6 @@ module Mihari
       def url?
         !url.nil? && !url.empty?
       end
-
-      #
-      # Check whether an API key is set or not
-      #
-      # @return [Boolean]
-      #
-      def api_key?
-        !api_key.nil? && !api_key.empty?
-      end
     end
   end
 end

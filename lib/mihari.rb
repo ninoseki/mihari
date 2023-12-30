@@ -53,10 +53,11 @@ require "mihari/config"
 # Concerns
 require "mihari/concerns/autonomous_system_normalizable"
 require "mihari/concerns/configurable"
+require "mihari/concerns/database_connectable"
+require "mihari/concerns/error_unwrappable"
 require "mihari/concerns/falsepositive_validatable"
 require "mihari/concerns/refangable"
 require "mihari/concerns/retriable"
-require "mihari/concerns/error_unwrappable"
 
 #
 # Mihari module

@@ -101,10 +101,6 @@ module Mihari
       def username?
         !username.nil?
       end
-
-      def api_key?
-        !api_key.nil?
-      end
     end
   end
 end

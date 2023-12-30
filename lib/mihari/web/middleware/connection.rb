@@ -7,6 +7,8 @@ module Mihari
       # DB connection adapter for Rack app
       #
       class Connection
+        include Concerns::DatabaseConnectable
+
         attr_reader :app
 
         def initialize(app)
@@ -14,7 +16,7 @@ module Mihari
         end
 
         def call(env)
-          Mihari::Database.with_db_connection { app.call env }
+          with_db_connection { app.call env }
         end
       end
     end

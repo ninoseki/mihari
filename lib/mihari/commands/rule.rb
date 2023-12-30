@@ -10,7 +10,7 @@ module Mihari
         # rubocop:disable Metrics/AbcSize
         def included(thor)
           thor.class_eval do
-            include Mixins
+            include Concerns::DatabaseConnectable
 
             desc "validate [PATH]", "Validate a rule file"
             #

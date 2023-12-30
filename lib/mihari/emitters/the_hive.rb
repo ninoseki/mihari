@@ -43,9 +43,9 @@ module Mihari
       # @param [Array<Mihari::Models::Artifact>] artifacts
       #
       def call(artifacts)
-        @artifacts = artifacts
-
         return if artifacts.empty?
+
+        @artifacts = artifacts
 
         client.alert payload
       end
@@ -85,15 +85,6 @@ module Mihari
       #
       def url?
         !url.nil?
-      end
-
-      #
-      # Check whether an API key is set or not
-      #
-      # @return [Boolean]
-      #
-      def api_key?
-        !api_key.nil?
       end
 
       #

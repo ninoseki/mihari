@@ -43,10 +43,6 @@ module Mihari
 
       private
 
-      def api_key?
-        !api_key.nil?
-      end
-
       def email?
         !email.nil?
       end
