@@ -1,8 +1,5 @@
 # frozen_string_literal: true
 
-require "mihari/feed/reader"
-require "mihari/feed/parser"
-
 module Mihari
   module Analyzers
     #
@@ -10,7 +7,7 @@ module Mihari
     #
     class Feed < Base
       # @return [Hash, nil]
-      attr_reader :data
+      attr_reader :form
 
       # @return [Hash, nil]
       attr_reader :json
@@ -37,37 +34,32 @@ module Mihari
       # @param [Hash, nil] headers
       # @param [Hash, nil] params
       # @param [Hash, nil] json
-      # @param [Hash, nil] data
+      # @param [form, nil] form
       # @param [String] selector
       #
-      def initialize(query, options: nil, method: "GET", headers: nil, params: nil, json: nil, data: nil, selector: "")
-        super(query, options: options)
+      # @param [Object] url
+      def initialize(url, options: nil, method: "GET", headers: nil, params: nil, json: nil, form: nil, selector: "")
+        super(url, options: options)
 
         @method = method
         @headers = headers || {}
         @params = params
         @json = json
-        @data = data
+        @form = form
         @selector = selector
       end
 
       def artifacts
-        Mihari::Feed::Parser.new(results).parse selector
+        data = Services::FeedReader.call(
+          url, headers: headers, method: method, params: params, json: json, form: form, timeout: timeout
+        )
+        Services::FeedParser.call(data, selector)
       end
 
       private
 
-      def results
-        reader = Mihari::Feed::Reader.new(
-          query,
-          method: method,
-          headers: headers,
-          timeout: timeout,
-          params: params,
-          json: json,
-          data: data
-        )
-        reader.read
+      def url
+        query
       end
     end
   end
