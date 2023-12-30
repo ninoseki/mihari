@@ -75,12 +75,15 @@ module Mihari
 
           desc "Create an alert", {
             success: { code: 201, model: Entities::Alert },
-            failure: [{ code: 404, model: Entities::ErrorMessage }],
+            failure: [
+              { code: 404, model: Entities::ErrorMessage }
+            ],
             summary: "Create an alert"
           }
           params do
             requires :ruleId, type: String, documentation: { param_type: "body" }
             requires :artifacts, type: Array, documentation: { type: String, is_array: true, param_type: "body" }
+            optional :source, type: String, documentation: { param_type: "body" }
           end
           post "/" do
             status 201
