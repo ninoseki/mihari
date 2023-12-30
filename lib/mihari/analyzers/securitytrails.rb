@@ -33,11 +33,11 @@ module Mihari
       def artifacts
         case type
         when "domain"
-          client.domain_search query
+          domain_search
         when "ip"
-          client.ip_search query
+          ip_search
         when "mail"
-          client.mail_search query
+          mail_search
         else
           raise ValueError, "#{query}(type: #{type || "unknown"}) is not supported." unless valid_type?
         end
@@ -57,6 +57,30 @@ module Mihari
       end
 
       private
+
+      def domain_search
+        client.get_all_dns_history(query, type: "a").map do |res|
+          (res["records"] || []).map do |record|
+            (record["values"] || []).map { |value| value["ip"] }
+          end.flatten.compact.uniq
+        end.flatten
+      end
+
+      def ip_search
+        res = client.ip_search(query)
+        (res["records"] || []).filter_map do |record|
+          data = record["hostname"]
+          Models::Artifact.new(data: data, metadata: record)
+        end
+      end
+
+      def mail_search
+        res = client.mail_search(query)
+        (res["records"] || []).filter_map do |record|
+          data = record["hostname"]
+          Models::Artifact.new(data: data, metadata: record)
+        end
+      end
 
       def client
         Clients::SecurityTrails.new(api_key: api_key, timeout: timeout)

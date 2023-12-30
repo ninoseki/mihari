@@ -29,12 +29,11 @@ module Mihari
       #
       # @param [String] query
       #
-      # @return [Array<String>]
+      # @return [Hash]
       #
       def passive_dns_search(query)
         params = { query: query }
-        res = get_json("/v2/dns/passive/unique", params: params)
-        res["results"] || []
+        get_json("/v2/dns/passive/unique", params: params)
       end
 
       #
@@ -42,19 +41,13 @@ module Mihari
       #
       # @param [String] query
       #
-      # @return [Array<Mihari::Models::Artifact>]
+      # @return [Hash]
       #
       def reverse_whois_search(query)
-        params = {
+        get_json("/v2/whois/search", params: {
           query: query,
           field: "email"
-        }.compact
-        res = get_json("/v2/whois/search", params: params)
-        results = res["results"] || []
-        results.map do |result|
-          data = result["domain"]
-          Models::Artifact.new(data: data, metadata: result)
-        end.flatten
+        }.compact)
       end
 
       #
@@ -62,16 +55,10 @@ module Mihari
       #
       # @param [String] query
       #
-      # @return [Array<Mihari::Models::Artifact>]
+      # @return [Hash]
       #
       def ssl_search(query)
-        params = { query: query }
-        res = get_json("/v2/ssl-certificate/history", params: params)
-        results = res["results"] || []
-        results.map do |result|
-          data = result["ipAddresses"]
-          data.map { |d| Models::Artifact.new(data: d, metadata: result) }
-        end.flatten
+        get_json("/v2/ssl-certificate/history", params: { query: query })
       end
     end
   end

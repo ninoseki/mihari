@@ -35,11 +35,11 @@ module Mihari
       def artifacts
         case type
         when "domain", "ip"
-          client.passive_dns_search query
+          passive_dns_search
         when "mail"
-          client.reverse_whois_search query
+          reverse_whois_search
         when "hash"
-          client.ssl_search query
+          ssl_search
         else
           raise ValueError, "#{query}(type: #{type || "unknown"}) is not supported." unless valid_type?
         end
@@ -53,9 +53,7 @@ module Mihari
         def configuration_keys
           %w[passivetotal_username passivetotal_api_key]
         end
-      end
 
-      class << self
         #
         # @return [Array<String>, nil]
         #
@@ -65,6 +63,27 @@ module Mihari
       end
 
       private
+
+      def passive_dns_search
+        res = client.passive_dns_search(query)
+        res["results"] || []
+      end
+
+      def reverse_whois_search
+        res = client.reverse_whois_search(query)
+        (res["results"] || []).map do |result|
+          data = result["domain"]
+          Models::Artifact.new(data: data, metadata: result)
+        end
+      end
+
+      def ssl_search
+        res = client.ssl_search(query)
+        (res["results"] || []).map do |result|
+          data = result["ipAddresses"]
+          data.map { |d| Models::Artifact.new(data: d, metadata: result) }
+        end.flatten
+      end
 
       def client
         Clients::PassiveTotal.new(username: username, api_key: api_key, timeout: timeout)

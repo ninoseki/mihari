@@ -22,7 +22,10 @@ module Mihari
 
       def artifacts
         exclude = exclude_expired ? "expired" : nil
-        client.search(query, exclude: exclude)
+        client.search(query, exclude: exclude).map do |result|
+          values = result["name_value"].to_s.lines.map(&:chomp).reject { |value| value.starts_with?("*.") }
+          values.map { |value| Models::Artifact.new(data: value, metadata: result) }
+        end.flatten
       end
 
       private

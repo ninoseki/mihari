@@ -21,32 +21,14 @@ module Mihari
       end
 
       #
-      # Domain search
-      #
-      # @param [String] query
-      #
-      # @return [Array<String>]
-      #
-      def domain_search(query)
-        records = get_all_dns_history(query, type: "a")
-        records.map do |record|
-          (record["values"] || []).map { |value| value["ip"] }
-        end.flatten.compact.uniq
-      end
-
-      #
       # IP search
       #
       # @param [String] query
       #
-      # @return [Array<Mihari::Models::Artifact>]
+      # @return [Hash]
       #
       def ip_search(query)
-        records = search_by_ip(query)
-        records.filter_map do |record|
-          data = record["hostname"]
-          Models::Artifact.new(data: data, metadata: record)
-        end
+        search_by_ip(query)
       end
 
       #
@@ -54,54 +36,48 @@ module Mihari
       #
       # @param [String] query
       #
-      # @return [Array<String>]
+      # @return [Hash]
       #
       def mail_search(query)
-        records = search_by_mail(query)
-        records.filter_map do |record|
-          data = record["hostname"]
-          Models::Artifact.new(data: data, metadata: record)
-        end
+        search_by_mail(query)
       end
 
       #
       # @param [String] mail
       #
-      # @return [Array<Hash>]
+      # @return [Hash]
       #
       def search_by_mail(mail)
-        res = post_json "/v1/domains/list", json: { filter: { whois_email: mail } }
-        res["records"] || []
+        post_json "/v1/domains/list", json: { filter: { whois_email: mail } }
       end
 
       #
       # @param [String] ip
       #
-      # @return [Array<Hash>]
+      # @return [Hash]
       #
       def search_by_ip(ip)
-        res = post_json "/v1/domains/list", json: { filter: { ipv4: ip } }
-        res["records"] || []
+        post_json "/v1/domains/list", json: { filter: { ipv4: ip } }
       end
 
       #
       # @param [String] domain
       # @param [String] type
+      # @param [Integer] page
       #
-      # @return [Array<Hash>]
+      # @return [Enumerable<Hash>]
       #
-      def get_all_dns_history(domain, type:)
-        first_page = get_dns_history(domain, type: type, page: 1)
+      def get_all_dns_history(domain, type:, page: 1)
+        Enumerator.new do |y|
+          res = get_dns_history(domain, type: type, page: page)
+          y.yield res
 
-        pages = first_page["pages"].to_i
-        records = first_page["records"] || []
+          pages = res["pages"].to_i
 
-        (2..pages).each do |page_idx|
-          next_page = get_dns_history(domain, type: type, page: page_idx)
-          records << next_page["records"]
+          (page + 1..pages).each do |page|
+            y.yield get_dns_history(domain, type: type, page: page)
+          end
         end
-
-        records.flatten
       end
 
       private
@@ -111,7 +87,7 @@ module Mihari
       # @param [String] type
       # @param [Integer] page
       #
-      # @return [Array<Hash>]
+      # @return [Hash]
       #
       def get_dns_history(domain, type:, page:)
         get_json "/v1/history/#{domain}/dns/#{type}", params: { page: page }

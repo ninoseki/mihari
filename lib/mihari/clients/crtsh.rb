@@ -22,17 +22,10 @@ module Mihari
       # @param [String, nil] match "=", "ILIKE", "LIKE", "single", "any" or nil
       # @param [String, nil] exclude "expired" or nil
       #
-      # @return [Array<Mihari::Models::Artifact>]
+      # @return [Array<Hash>]
       #
       def search(identity, match: nil, exclude: nil)
-        params = { identity: identity, match: match, exclude: exclude, output: "json" }.compact
-
-        # @type [Array[Hash]]
-        parsed = get_json("/", params: params)
-        parsed.map do |result|
-          values = result["name_value"].to_s.lines.map(&:chomp).reject { |value| value.starts_with?("*.") }
-          values.map { |value| Models::Artifact.new(data: value, metadata: result) }
-        end.flatten
+        get_json("/", params: { identity: identity, match: match, exclude: exclude, output: "json" }.compact)
       end
     end
   end
