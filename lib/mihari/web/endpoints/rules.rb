@@ -17,8 +17,7 @@ module Mihari
           def call(yaml, overwrite: true)
             rule = Rule.from_yaml(yaml)
 
-            found = Models::Rule.find_by_id(rule.id)
-            raise IntegrityError, "ID:#{rule.id} is already registered" if found && !overwrite
+            raise IntegrityError, "ID:#{rule.id} is already registered" if rule.exists? && !overwrite
 
             rule.update_or_create
             rule
@@ -85,7 +84,7 @@ module Mihari
               rule = Mihari::Rule.from_model(Mihari::Models::Rule.find(id))
 
               if Mihari.sidekiq?
-                Jobs::SearchJob.perform_async rule.id
+                Jobs::SearchJob.perform_async(rule.id)
               else
                 rule.call
                 queued = false
@@ -153,8 +152,6 @@ module Mihari
             when ActiveRecord::RecordNotFound
               error!({ message: "ID:#{id} not found" }, 404)
             when Psych::SyntaxError
-              error!({ message: failure.message }, 400)
-            when IntegrityError
               error!({ message: failure.message }, 400)
             when ValidationError
               error!({ message: "Rule format is invalid", detail: failure.errors.to_h }, 400)

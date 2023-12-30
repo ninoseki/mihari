@@ -20,7 +20,7 @@ module Mihari
             def create(path)
               # @type [Mihari::Models::Alert]
               alert = Dry::Monads::Try[StandardError] do
-                raise ArgumentError, "#{path} does not exist" unless Pathname(path).exist?
+                raise ArgumentError, "#{path} not found" unless Pathname(path).exist?
 
                 params = YAML.safe_load(
                   ERB.new(File.read(path)).result,

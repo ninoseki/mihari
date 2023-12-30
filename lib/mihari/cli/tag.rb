@@ -5,7 +5,7 @@ require "mihari/commands/tag"
 module Mihari
   module CLI
     #
-    # Tag CLI class (mihari rule ...)
+    # Tag CLI class (mihari tag ...)
     #
     class Tag < Base
       include Mihari::Commands::Tag

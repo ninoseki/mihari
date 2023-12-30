@@ -30,7 +30,7 @@ module Mihari
             # @param [String] path
             #
             def init(path = "./rule.yml")
-              warning = "#{path} exists. Do you want to overwrite it? (y/n)"
+              warning = "Do you want to overwrite it? (y/n)"
               return if Pathname(path).exist? && !(yes? warning)
 
               Services::RuleInitializer.call(path)

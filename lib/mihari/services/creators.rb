@@ -16,26 +16,5 @@ module Mihari
         emitter.call proxy.artifacts
       end
     end
-
-    #
-    # Rule creator
-    #
-    class RuleCreator < Service
-      #
-      # @params [String] yaml
-      # @params [Boolean] overwrite
-      #
-      # @return [Mihari::Models::Rule]
-      #
-      def call(yaml, overwrite: false)
-        rule = Rule.from_yaml(yaml)
-
-        found = Mihari::Models::Rule.find(rule.id)
-        raise if found && !overwrite
-
-        rule.model.save
-        rule
-      end
-    end
   end
 end

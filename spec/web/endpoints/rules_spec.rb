@@ -82,6 +82,13 @@ RSpec.describe Mihari::Web::Endpoints::Rules do
       post("/api/rules/", payload.to_json, "CONTENT_TYPE" => "application/json")
       expect(last_response.status).to eq(201)
     end
+
+    context "with existing ID" do
+      it "returns 400" do
+        post("/api/rules/", rule.data.deep_dup.to_json, "CONTENT_TYPE" => "application/json")
+        expect(last_response.status).to eq(400)
+      end
+    end
   end
 
   describe "post /api/rules/:id/search" do

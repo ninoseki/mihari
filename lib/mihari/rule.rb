@@ -236,6 +236,13 @@ module Mihari
       false
     end
 
+    #
+    # @return [Boolean]
+    #
+    def exists?
+      Mihari::Models::Rule.exists? id
+    end
+
     def update_or_create
       model.save
     end
