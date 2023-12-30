@@ -110,7 +110,7 @@ module Mihari
         optional(:method).value(Types::HTTPRequestMethods).default("GET")
         optional(:headers).value(:hash).default({})
         optional(:params).value(:hash)
-        optional(:data).value(:hash)
+        optional(:form).value(:hash)
         optional(:json).value(:hash)
         optional(:options).hash(AnalyzerOptions)
       end

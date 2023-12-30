@@ -8,9 +8,7 @@ RSpec.describe Mihari::Analyzers::Feed, :vcr do
           "https://threatfox-api.abuse.ch/api/v1/",
           method: "POST",
           json: { query: "get_iocs", days: 1 },
-          headers: {
-            "api-key": ENV["THREATFOX_API_KEY"]
-          },
+          headers: { "api-key": ENV["THREATFOX_API_KEY"] },
           selector: "map(&:data).unwrap.map(&:ioc)"
         )
       end
@@ -22,10 +20,7 @@ RSpec.describe Mihari::Analyzers::Feed, :vcr do
 
     context "with CSV" do
       subject(:analyzer) do
-        described_class.new(
-          "https://urlhaus.abuse.ch/feeds/country/JP/",
-          selector: "map { |v| v[1] }"
-        )
+        described_class.new("https://urlhaus.abuse.ch/feeds/country/JP/", selector: "map { |v| v[1] }")
       end
 
       it do
