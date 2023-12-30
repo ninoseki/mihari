@@ -11,8 +11,6 @@ module Mihari
       belongs_to :artifact
 
       class << self
-        include Dry::Monads[:result]
-
         #
         # Build Geolocation
         #
@@ -22,15 +20,10 @@ module Mihari
         # @return [Mihari::Geolocation, nil]
         #
         def build_by_ip(ip, enricher: Enrichers::MMDB.new)
-          result = enricher.result(ip).bind do |res|
+          enricher.result(ip).fmap do |res|
             value = res&.country_code
-            if value.nil?
-              Success nil
-            else
-              Success new(country: NormalizeCountry(value, to: :short), country_code: value)
-            end
-          end
-          result.value_or nil
+            value.nil? ? nil : new(country: NormalizeCountry(value, to: :short), country_code: value)
+          end.value_or nil
         end
       end
     end
