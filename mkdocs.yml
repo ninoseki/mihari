@@ -11,6 +11,7 @@ plugins:
 
 nav:
   - Requirements: requirements.md
+  - Overview: overview.md
   - Installation: installation.md
   - Rule: rule.md
   - Configuration: configuration.md
@@ -28,6 +29,7 @@ nav:
       - Emitters: emitters/index.md
       - Database: database.md
       - Tags: tags.md
+  - Development: dev.md
 
 markdown_extensions:
   - toc:

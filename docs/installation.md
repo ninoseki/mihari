@@ -1,7 +1,5 @@
 # Installation
 
-## Ruby Gem
-
 Mihari is packaged as a Ruby Gem. Thus you can install it via `gem` command.
 
 ```bash

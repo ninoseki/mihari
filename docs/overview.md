@@ -1,4 +1,4 @@
-# System Overview
+# Overview
 
 Mihari uses following components:
 
@@ -10,7 +10,7 @@ Mihari uses following components:
 
 ```mermaid
 flowchart LR
-    CLI["CLI\n(Thor)"] --> Database[("Datbase\n(SQLite3/MySLQ/PostgreSQL)")]
+    CLI["CLI\n(Thor)"] --> Database
     Web["Web App\n(Grape on Rack + Puma)"] --> Database
 ```
 
@@ -18,7 +18,7 @@ flowchart LR
 
 ```mermaid
 flowchart LR
-    CLI["CLI\n(Thor)"] --> Database[("Datbase\n(SQLite3/MySLQ/PostgreSQL)")]
+    CLI["CLI\n(Thor)"] --> Database
     CLI --> Sidekiq
     Web["Web App\n(Grape on Rack + Puma)"] --> Database
     Web --> Sidekiq["Job Queue\n(Sidekiq)"]
