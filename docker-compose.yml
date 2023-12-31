@@ -47,8 +47,7 @@ services:
     image: ghcr.io/ninoseki/mihari:latest
     environment:
       - DATABASE_URL=${DATABASE_URL:-postgresql://${POSTGRES_USER:-user}:${POSTGRES_PASSWORD:-password}@database:${POSTGRES_PORT:-5432}/${POSTGRES_DB:-mihari}}
-      - REDIS_URL=${REDIS_URL:-redis://redis:${REDIS_PORT:-6379}}
-      - USE_SIDEKIQ=true
+      - SIDEKIQ_REDIS_URL=${REDIS_URL:-redis://redis:${REDIS_PORT:-6379}}
     env_file:
       - .env
     entrypoint: ["mihari", "sidekiq"]
