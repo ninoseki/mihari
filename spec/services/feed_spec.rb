@@ -1,18 +1,18 @@
 RSpec.describe Mihari::Services::FeedParser do
   let!(:data) do
-    [{
+    {
       a: %w[a b c],
       b: [{ foo: "bar", bar: "foo" }, { foo: "foo", bar: "bar" }],
       c: [%w[1 2 3], %w[4 5 6], %w[7 8 9]]
-    }]
+    }
   end
 
   describe "#call" do
     where(:selector, :expected) do
       [
-        ["map(&:a).unwrap", %w[a b c]],
-        ["map(&:b).unwrap.map(&:foo)", %w[bar foo]],
-        ["map(&:c).unwrap.map { |v| v[1] }", %w[2 5 8]]
+        ["a", %w[a b c]],
+        ["b.map(&:foo)", %w[bar foo]],
+        ["c.map { |v| v[1] }", %w[2 5 8]]
       ]
     end
 
@@ -41,7 +41,7 @@ RSpec.describe Mihari::Services::FeedReader do
 
       it do
         data = described_class.call(uri)
-        expect(data).to be_an(Array)
+        expect(data).to be_an(Hash)
       end
     end
   end

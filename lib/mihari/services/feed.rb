@@ -43,13 +43,10 @@ module Mihari
       #
       # @param [String] text
       #
-      # @return [Array<Hash>]
+      # @return [Hash, Array<Object>]
       #
       def convert_as_json(text)
-        parsed = JSON.parse(text, symbolize_names: true)
-        return parsed if parsed.is_a?(Array)
-
-        [parsed]
+        JSON.parse(text).deep_symbolize_keys
       end
 
       #
@@ -57,7 +54,7 @@ module Mihari
       #
       # @param [String] text
       #
-      # @return [Array<Hash>]
+      # @return [Array<Object>]
       #
       def convert_as_csv(text)
         text_without_comments = text.lines.reject { |line| line.start_with? "#" }.join("\n")
@@ -70,7 +67,7 @@ module Mihari
       #
       # @param [String] path
       #
-      # @return [Array<Hash>]
+      # @return [Array<Object>]
       #
       def read_file(path)
         text = File.read(path)
@@ -85,21 +82,23 @@ module Mihari
     # Feed parser
     #
     class FeedParser < Service
-      #
       # Parse data by selector
       #
-      # @param [Array<Hash>, Array<Array<String>>] data
+      # @param [Hash, Array<Object>] input_enumerator
       # @param [String] selector
       #
       # @return [Array<String>]
       #
-      def call(data, selector)
-        parsed = data.instance_eval(selector)
+      # @param [Object] read_data
+      def call(input_enumerator, selector)
+        parsed = proc do
+          $SAFE = 1
+          input_enumerator.instance_eval(selector)
+        end.call
 
-        raise TypeError unless parsed.is_a?(Array) || parsed.is_a?(Enumerator)
         raise TypeError unless parsed.all?(String)
 
-        parsed.to_a
+        parsed
       end
     end
   end

@@ -9,7 +9,7 @@ RSpec.describe Mihari::Analyzers::Feed, :vcr do
           method: "POST",
           json: { query: "get_iocs", days: 1 },
           headers: { "api-key": ENV["THREATFOX_API_KEY"] },
-          selector: "map(&:data).unwrap.map(&:ioc)"
+          selector: "data.map(&:ioc)"
         )
       end
 
