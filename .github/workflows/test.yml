@@ -14,6 +14,8 @@ jobs:
         ruby-version: [3.1, 3.2, 3.3]
     steps:
       - uses: actions/checkout@v4
+      - name: Install dependencies
+        run: sudo apt-get -yqq install build-essential
       - name: Set up Ruby
         uses: ruby/setup-ruby@v1
         with:
@@ -53,7 +55,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - name: Install dependencies
-        run: sudo apt-get -yqq install libpq-dev
+        run: sudo apt-get -yqq install build-essential libpq-dev
       - name: Set up Ruby
         uses: ruby/setup-ruby@v1
         with:
@@ -91,7 +93,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - name: Install dependencies
-        run: sudo apt-get -yqq install libmysqlclient-dev
+        run: sudo apt-get -yqq install build-essential libmysqlclient-dev
       - name: Set up Ruby
         uses: ruby/setup-ruby@v1
         with:
