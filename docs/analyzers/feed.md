@@ -59,9 +59,8 @@ query: "https://threatfox-api.abuse.ch/api/v1/"
 method: POST
 json:
   query: get_iocs
-  days: 1
 headers:
-selector: "map(&:data).unwrap.map(&:ioc).map { |v| v.start_with?('http://', 'https://') ? v :  v.split(':').first }"
+selector: "data.map(&:ioc).map { |v| v.start_with?('http://', 'https://') ? v :  v.split(':').first }"
 ```
 
 ### URLhaus
