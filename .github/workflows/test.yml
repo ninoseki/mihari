@@ -15,9 +15,11 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - name: Install dependencies
-        run: sudo apt-get -yqq install jq
+        run: sudo apt-get -yqq install jq libjq-dev
       - name: Set up Ruby
         uses: ruby/setup-ruby@v1
+        env:
+          RUBYJQ_USE_SYSTEM_LIBRARIES: 1
         with:
           ruby-version: ${{ matrix.ruby-version }}
           bundler: latest
@@ -55,9 +57,11 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - name: Install dependencies
-        run: sudo apt-get -yqq install jq libpq-dev
+        run: sudo apt-get -yqq install jq libjq-dev libpq-dev
       - name: Set up Ruby
         uses: ruby/setup-ruby@v1
+        env:
+          RUBYJQ_USE_SYSTEM_LIBRARIES: 1
         with:
           ruby-version: ${{ matrix.ruby-version }}
           bundler: latest
@@ -93,9 +97,11 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - name: Install dependencies
-        run: sudo apt-get -yqq install jq libmysqlclient-dev
+        run: sudo apt-get -yqq install jq libjq-dev libmysqlclient-dev
       - name: Set up Ruby
         uses: ruby/setup-ruby@v1
+        env:
+          RUBYJQ_USE_SYSTEM_LIBRARIES: 1
         with:
           ruby-version: ${{ matrix.ruby-version }}
           bundler: latest
