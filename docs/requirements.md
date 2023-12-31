@@ -2,7 +2,7 @@
 
 ## Runtime
 
-Ruby 3.1+ (tested with 3.1 and 3.2)
+Ruby 3.1+ (tested with 3.1, 3.2 and 3.3)
 
 ## Database
 
