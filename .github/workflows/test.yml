@@ -15,7 +15,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - name: Install dependencies
-        run: sudo apt-get -yqq install build-essential
+        run: sudo apt-get -yqq install jq
       - name: Set up Ruby
         uses: ruby/setup-ruby@v1
         with:
@@ -55,7 +55,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - name: Install dependencies
-        run: sudo apt-get -yqq install build-essential libpq-dev
+        run: sudo apt-get -yqq install jq libpq-dev
       - name: Set up Ruby
         uses: ruby/setup-ruby@v1
         with:
@@ -93,7 +93,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - name: Install dependencies
-        run: sudo apt-get -yqq install build-essential libmysqlclient-dev
+        run: sudo apt-get -yqq install jq libmysqlclient-dev
       - name: Set up Ruby
         uses: ruby/setup-ruby@v1
         with:
