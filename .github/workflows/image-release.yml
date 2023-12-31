@@ -18,9 +18,10 @@ jobs:
           password: ${{ secrets.GITHUB_TOKEN }}
       - name: Build Docker image
         run: |
-          docker build --tag ghcr.io/$GITHUB_ACTOR/mihari:latest \
+          docker build . \
+          --tag ghcr.io/$GITHUB_ACTOR/mihari:latest \
           --tag ghcr.io/$GITHUB_ACTOR/mihari:${{ github.event.release.tag_name }} \
-          .
+          --build-arg MIHARI_VERSION=${{ github.event.release.tag_name }}
       - name: Push Docker image
         run: |
           docker push ghcr.io/$GITHUB_ACTOR/mihari:latest
