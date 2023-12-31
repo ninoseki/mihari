@@ -9,9 +9,6 @@ module Mihari
       # @return [String, nil]
       attr_reader :api_key
 
-      # @return [String, nil]
-      attr_reader :api_version
-
       # @return [Array<Mihari::Models::Artifact>]
       attr_accessor :artifacts
 
@@ -25,7 +22,6 @@ module Mihari
 
         @url = params[:url] || Mihari.config.thehive_url
         @api_key = params[:api_key] || Mihari.config.thehive_api_key
-        @api_version = params[:api_version] || Mihari.config.thehive_api_version
 
         @artifacts = []
       end
@@ -50,22 +46,6 @@ module Mihari
         client.alert payload
       end
 
-      #
-      # Normalize API version for API client
-      #
-      # @param [String] version
-      #
-      # @return [String, nil]
-      #
-      def normalized_api_version
-        @normalized_api_version ||= [].tap do |out|
-          # v4 does not have version prefix in path (/api/)
-          # v5 has version prefix in path (/api/v1/)
-          table = { "" => nil, "v4" => nil, "v5" => "v1" }
-          out << table[api_version.to_s.downcase]
-        end.first
-      end
-
       class << self
         def configuration_keys
           %w[thehive_url thehive_api_key]
@@ -75,7 +55,7 @@ module Mihari
       private
 
       def client
-        @client ||= Clients::TheHive.new(url, api_key: api_key, api_version: normalized_api_version, timeout: timeout)
+        Clients::TheHive.new(url, api_key: api_key, api_version: "v1", timeout: timeout)
       end
 
       #
@@ -93,29 +73,6 @@ module Mihari
       # @return [Hash]
       #
       def payload
-        return v4_payload if normalized_api_version.nil?
-
-        v5_payload
-      end
-
-      def v4_payload
-        {
-          title: rule.title,
-          description: rule.description,
-          artifacts: artifacts.map do |artifact|
-            {
-              data: artifact.data,
-              data_type: artifact.data_type,
-              message: rule.description
-            }
-          end,
-          tags: rule.tags,
-          type: "external",
-          source: "mihari"
-        }
-      end
-
-      def v5_payload
         {
           title: rule.title,
           description: rule.description,
@@ -129,7 +86,7 @@ module Mihari
           tags: rule.tags,
           type: "external",
           source: "mihari",
-          source_ref: "1"
+          source_ref: SecureRandom.uuid
         }
       end
     end

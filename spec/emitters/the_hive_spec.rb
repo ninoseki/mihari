@@ -17,10 +17,6 @@ RSpec.describe Mihari::Emitters::TheHive, :vcr do
       expect(emitter.configured?).to be(true)
     end
 
-    it do
-      expect(emitter.normalized_api_version).to be(nil)
-    end
-
     context "with THEHIVE_URL" do
       before do
         allow(Mihari.config).to receive(:thehive_url).and_return(nil)
@@ -32,28 +28,17 @@ RSpec.describe Mihari::Emitters::TheHive, :vcr do
     end
   end
 
-  describe "#normalized_api_version" do
-    context "with THEHIVE_API_VERSION" do
-      before do
-        allow(Mihari.config).to receive(:thehive_api_version).and_return("v5")
-      end
-
-      it do
-        expect(emitter.normalized_api_version).to eq("v1")
-      end
-    end
-  end
-
   describe "#call" do
     let!(:mock_client) { instance_double("client") }
+    let!(:mocked_emitter) { described_class.new(rule: rule) }
 
     before do
-      allow(emitter).to receive(:client).and_return(mock_client)
+      allow(mocked_emitter).to receive(:client).and_return(mock_client)
       allow(mock_client).to receive(:alert)
     end
 
     it do
-      emitter.call artifacts
+      mocked_emitter.call artifacts
       expect(mock_client).to have_received(:alert)
     end
   end
