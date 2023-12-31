@@ -54,7 +54,7 @@
 import "vue-json-pretty/lib/styles.css"
 
 import axios from "axios"
-import truncate from "truncate"
+import truncate from "just-truncate"
 import { computed, defineComponent, type PropType, ref } from "vue"
 import VueJsonPretty from "vue-json-pretty"
 

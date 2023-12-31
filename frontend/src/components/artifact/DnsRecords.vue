@@ -12,7 +12,7 @@
 </template>
 
 <script lang="ts">
-import truncate from "truncate"
+import truncate from "just-truncate"
 import { defineComponent, type PropType } from "vue"
 
 import type { DnsRecord } from "@/types"

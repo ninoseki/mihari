@@ -58,7 +58,7 @@
 
 <script lang="ts">
 import type { AxiosError } from "axios"
-import truncate from "truncate"
+import truncate from "just-truncate"
 import { defineComponent, type PropType, ref } from "vue"
 
 import ActionButtons from "@/components/artifact/ActionButtons.vue"
