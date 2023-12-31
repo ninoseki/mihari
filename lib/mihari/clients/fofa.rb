@@ -26,7 +26,7 @@ module Mihari
       #
       # @param [Object] email
       def initialize(
-        base_url = "https://fofa.info/",
+        base_url = "https://fofa.info",
         api_key:,
         email:,
         headers: {},
