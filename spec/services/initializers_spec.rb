@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 RSpec.describe Mihari::Services::RuleInitializer do
   describe "#call" do
     let!(:files) { Dry::Files.new(memory: true) }

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 RSpec.describe Mihari::Enrichers::GooglePublicDNS, :vcr do
   describe ".query_by_type" do
     subject(:enricher) { described_class.new }

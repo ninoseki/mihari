@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require "forwardable"
 
 class HTTPBin
@@ -32,8 +34,8 @@ class HTTPBin
 
   def headers
     http_headers = req.env.select { |k, _v| k.start_with?("HTTP_") }
-    http_headers.each_with_object({}) do |(k, v), a|
-      a[k.sub(/^HTTP_/, "").downcase.gsub(/(^|_)\w/) { |word| word.upcase }.tr("_", "-")] = v
+    http_headers.transform_keys do |k|
+      k.sub(/^HTTP_/, "").downcase.gsub(/(^|_)\w/, &:upcase).tr("_", "-")
     end
   end
 

@@ -55,6 +55,8 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency "rspec-parameterized", "~> 1.0"
   spec.add_development_dependency "rubocop-rspec", "~> 2.25"
   spec.add_development_dependency "rubocop-yard", "~> 0.9"
+  spec.add_development_dependency "rubocop-rake", "~> 0.6"
+  spec.add_development_dependency "rubocop-factory_bot", "~> 2.24"
   spec.add_development_dependency "simplecov-lcov", "~> 0.8"
   spec.add_development_dependency "standard", "~> 1.33"
   spec.add_development_dependency "test-prof", "~> 1.3"

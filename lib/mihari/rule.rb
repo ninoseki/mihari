@@ -320,7 +320,7 @@ module Mihari
 
     # @return [Array<Dry::Monads::Result::Success<Array<Mihari::Models::Artifact>>, Dry::Monads::Result::Failure>]
     def analyzer_results
-      parallel_results = Parallel.map(parallel_analyzers) { |analyzer| analyzer.result }
+      parallel_results = Parallel.map(parallel_analyzers, &:result)
       serial_results = serial_analyzers.map(&:result)
       parallel_results + serial_results
     end

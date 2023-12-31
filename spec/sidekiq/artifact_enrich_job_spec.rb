@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 RSpec.describe Mihari::Jobs::ArtifactEnrichJob do
   include_context "with faked Sidekiq configuration"
 

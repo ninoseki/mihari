@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 FactoryBot.define do
   factory :rule, class: "Mihari::Models::Rule" do
     id { Faker::Internet.unique.uuid }
