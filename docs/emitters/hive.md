@@ -2,13 +2,12 @@
 
 - [https://thehive-project.org/](https://thehive-project.org/)
 
-This emitter creates an alert on TheHive. TheHive v4 & v5 are supported.
+This emitter creates an alert on TheHive. TheHive v5 is supported.
 
 ```yaml
 emitter: thehive
 url: ...
 api_key: ...
-api_version: ...
 ```
 
 ## Components
@@ -20,7 +19,3 @@ api_version: ...
 ### API Key
 
 `api_key` (`string`) is an API key. Optional. Configurable via `THEHIVE_API_KEY` environment variable.
-
-### API Version
-
-`api_version` (`string`) is a version of The Hive API. Optional. `v4` or `v5`. Configurable via `THEHIVE_API_VERSION` environment variable.
