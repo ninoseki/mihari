@@ -16,7 +16,7 @@
 </template>
 
 <script lang="ts">
-import truncate from "truncate"
+import truncate from "just-truncate"
 import { defineComponent, type PropType, ref } from "vue"
 
 import { generateDeleteArtifactTask } from "@/api-helper"

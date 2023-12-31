@@ -1,23 +1,23 @@
 <template>
   <div class="field is-grouped is-grouped-multiline">
-    <ArtifactComponent
+    <ArtifactTag
       v-for="artifact in artifacts"
       :key="artifact.id"
       :artifact="artifact"
-    ></ArtifactComponent>
+    ></ArtifactTag>
   </div>
 </template>
 
 <script lang="ts">
 import { defineComponent, type PropType } from "vue"
 
-import ArtifactComponent from "@/components/artifact/ArtifactTag.vue"
+import ArtifactTag from "@/components/artifact/ArtifactTag.vue"
 import type { Artifact } from "@/types"
 
 export default defineComponent({
   name: "ArtifactTags",
   components: {
-    ArtifactComponent
+    ArtifactTag
   },
   props: {
     artifacts: {

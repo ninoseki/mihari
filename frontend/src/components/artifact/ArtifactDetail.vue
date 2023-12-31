@@ -100,7 +100,7 @@
 
 <script lang="ts">
 import type { AxiosError } from "axios"
-import truncate from "truncate"
+import truncate from "just-truncate"
 import { computed, defineComponent, onMounted, type PropType, ref } from "vue"
 
 import { generateGetAlertsTask, generateGetIPTask } from "@/api-helper"
