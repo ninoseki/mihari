@@ -214,7 +214,7 @@ module Mihari
       end
 
       def set_rule_id
-        @rule_id ||= nil
+        @set_rule_id ||= nil
       end
 
       def mmdb

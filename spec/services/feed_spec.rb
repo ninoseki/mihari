@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 RSpec.describe Mihari::Services::FeedParser do
   let!(:data) do
     {

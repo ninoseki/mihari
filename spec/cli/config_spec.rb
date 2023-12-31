@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 RSpec.describe Mihari::CLI::Config do
   let!(:key) { Mihari.config.keys.first }
 

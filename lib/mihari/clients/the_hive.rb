@@ -7,6 +7,7 @@ module Mihari
     #
     class TheHive < Base
       attr_reader :api_version
+
       #
       # @param [String] base_url
       # @param [String, nil] api_key

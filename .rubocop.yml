@@ -18,5 +18,7 @@ RSpec/MultipleMemoizedHelpers:
 RSpec/ExampleLength:
   Max: 20
 require:
+  - rubocop-factory_bot
+  - rubocop-rake
   - rubocop-rspec
   - rubocop-yard

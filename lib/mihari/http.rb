@@ -31,7 +31,7 @@ module Mihari
     #
     class Factory
       class << self
-        USER_AGENT = "mihari/#{Mihari::VERSION}"
+        USER_AGENT = "mihari/#{Mihari::VERSION}".freeze
         #
         # @param [Integer, nil] timeout
         # @param [Hash] headers
