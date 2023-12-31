@@ -47,10 +47,10 @@ module Mihari
       #
       # @param [String] path
       #
-      # @return [String]
+      # @return [URI]
       #
       def url_for(path)
-        base_url + path
+        URI.join base_url, path
       end
 
       #

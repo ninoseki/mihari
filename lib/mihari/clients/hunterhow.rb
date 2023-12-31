@@ -21,7 +21,7 @@ module Mihari
       # @param [Integer, nil] timeout
       #
       def initialize(
-        base_url = "https://api.hunter.how/",
+        base_url = "https://api.hunter.how",
         api_key:,
         headers: {},
         pagination_interval: Mihari.config.pagination_interval,

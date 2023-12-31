@@ -2,7 +2,7 @@
 http_interactions:
   - request:
       method: get
-      uri: https://api.hunter.how//search?api-key=<HUNTERHOW_API_KEY>&end_time=2023-08-31&page=1&page_size=100&query=aXA6IjEuMS4xLjEi&start_time=2023-08-01
+      uri: https://api.hunter.how/search?api-key=<HUNTERHOW_API_KEY>&end_time=2023-08-31&page=1&page_size=100&query=aXA6IjEuMS4xLjEi&start_time=2023-08-01
       body:
         encoding: US-ASCII
         string: ""

@@ -14,7 +14,7 @@ module Mihari
       # @param [Integer] pagination_interval
       #
       def initialize(
-        base_url = "https://api.binaryedge.io/v2",
+        base_url = "https://api.binaryedge.io",
         api_key:,
         headers: {},
         pagination_interval: Mihari.config.pagination_interval,
@@ -38,7 +38,7 @@ module Mihari
           page: page,
           only_ips: only_ips
         }.compact
-        Structs::BinaryEdge::Response.from_dynamic! get_json("/query/search", params: params)
+        Structs::BinaryEdge::Response.from_dynamic! get_json("/v2/query/search", params: params)
       end
 
       #
