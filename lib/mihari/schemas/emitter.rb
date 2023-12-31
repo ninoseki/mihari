@@ -24,7 +24,6 @@ module Mihari
         required(:emitter).value(Types::String.enum(*Mihari::Emitters::TheHive.class_keys))
         optional(:url).value(:string)
         optional(:api_key).value(:string)
-        optional(:api_version).value(Types::String.enum("v4", "v5")).default("v4")
         optional(:options).hash(Options)
       end
 

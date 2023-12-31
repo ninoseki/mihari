@@ -31,7 +31,6 @@ module Mihari
       slack_channel: nil,
       slack_webhook_url: nil,
       thehive_api_key: nil,
-      thehive_api_version: nil,
       thehive_url: nil,
       urlscan_api_key: nil,
       virustotal_api_key: nil,
@@ -115,9 +114,6 @@ module Mihari
     #   @return [String, nil]
 
     # @!attribute [r] thehive_api_key
-    #   @return [String, nil]
-
-    # @!attribute [r] thehive_api_version
     #   @return [String, nil]
 
     # @!attribute [r] urlscan_api_key
