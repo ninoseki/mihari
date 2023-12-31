@@ -30,9 +30,9 @@ module Mihari
       # @return [Boolean]
       #
       def errors?
-        return false if @errors.nil?
+        return false if errors.nil?
 
-        !@errors.empty?
+        !errors.empty?
       end
 
       def validate!

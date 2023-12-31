@@ -19,8 +19,7 @@ module Mihari
         #
         def build_by_ip(ip, enricher: Enrichers::MMDB.new)
           enricher.result(ip).fmap do |res|
-            value = res&.asn
-            value.nil? ? nil : new(asn: value)
+            new(asn: res.asn) if res.asn
           end.value_or nil
         end
       end
