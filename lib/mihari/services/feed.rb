@@ -1,6 +1,6 @@
 require "csv"
 
-require "jr/cli/core_ext"
+require "jq"
 
 module Mihari
   module Services
@@ -19,7 +19,7 @@ module Mihari
       # @param [String] selector
       # @param [Integer, nil] timeout
       #
-      # @return [Array<Hash>]
+      # @return [Hash, Array<Object>]
       #
       def call(url, headers: {}, method: "GET", params: nil, json: nil, form: nil, timeout: nil)
         url = Addressable::URI.parse(url)
@@ -43,13 +43,10 @@ module Mihari
       #
       # @param [String] text
       #
-      # @return [Array<Hash>]
+      # @return [Hash, Array<Hash>]
       #
       def convert_as_json(text)
-        parsed = JSON.parse(text, symbolize_names: true)
-        return parsed if parsed.is_a?(Array)
-
-        [parsed]
+        JSON.parse(text, symbolize_names: true)
       end
 
       #
@@ -57,7 +54,7 @@ module Mihari
       #
       # @param [String] text
       #
-      # @return [Array<Hash>]
+      # @return [Array<Object>]
       #
       def convert_as_csv(text)
         text_without_comments = text.lines.reject { |line| line.start_with? "#" }.join("\n")
@@ -88,18 +85,18 @@ module Mihari
       #
       # Parse data by selector
       #
-      # @param [Array<Hash>, Array<Array<String>>] data
+      # @param [Hash, Array<Object>] data
       # @param [String] selector
       #
       # @return [Array<String>]
       #
       def call(data, selector)
-        parsed = data.instance_eval(selector)
+        jq = JQ(data.to_json)
+        results = jq.search(selector)
 
-        raise TypeError unless parsed.is_a?(Array) || parsed.is_a?(Enumerator)
-        raise TypeError unless parsed.all?(String)
+        raise TypeError unless results.all?(String)
 
-        parsed.to_a
+        results
       end
     end
   end
