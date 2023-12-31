@@ -41,7 +41,7 @@ paths:
         "404":
           description: ""
           schema:
-            "$ref": "#/definitions/Mihari_Entities_Message"
+            "$ref": "#/definitions/Mihari_Entities_ErrorMessage"
       tags:
         - alerts
     get:
@@ -96,7 +96,7 @@ paths:
         "404":
           description: ""
           schema:
-            "$ref": "#/definitions/Mihari_Entities_Message"
+            "$ref": "#/definitions/Mihari_Entities_ErrorMessage"
       tags:
         - alerts
     get:
@@ -118,7 +118,7 @@ paths:
         "404":
           description: ""
           schema:
-            "$ref": "#/definitions/Mihari_Entities_Message"
+            "$ref": "#/definitions/Mihari_Entities_ErrorMessage"
       tags:
         - alerts
   "/api/artifacts/{id}":
@@ -141,7 +141,7 @@ paths:
         "404":
           description: ""
           schema:
-            "$ref": "#/definitions/Mihari_Entities_Message"
+            "$ref": "#/definitions/Mihari_Entities_ErrorMessage"
       tags:
         - artifacts
     get:
@@ -163,14 +163,16 @@ paths:
         "404":
           description: ""
           schema:
-            "$ref": "#/definitions/Mihari_Entities_Message"
+            "$ref": "#/definitions/Mihari_Entities_ErrorMessage"
       tags:
         - artifacts
   "/api/artifacts/{id}/enrich":
-    get:
+    post:
       summary: Enrich an artifact
       description: Enrich an artifact
       produces:
+        - application/json
+      consumes:
         - application/json
       parameters:
         - in: path
@@ -186,7 +188,7 @@ paths:
         "404":
           description: ""
           schema:
-            "$ref": "#/definitions/Mihari_Entities_Message"
+            "$ref": "#/definitions/Mihari_Entities_ErrorMessage"
       tags:
         - artifacts
   "/api/artifacts":
@@ -256,7 +258,7 @@ paths:
         "404":
           description: ""
           schema:
-            "$ref": "#/definitions/Mihari_Entities_Message"
+            "$ref": "#/definitions/Mihari_Entities_ErrorMessage"
       tags:
         - ip_addresses
   "/api/rules/{id}":
@@ -278,7 +280,7 @@ paths:
         "404":
           description: ""
           schema:
-            "$ref": "#/definitions/Mihari_Entities_Message"
+            "$ref": "#/definitions/Mihari_Entities_ErrorMessage"
       tags:
         - rules
     get:
@@ -299,7 +301,7 @@ paths:
         "404":
           description: ""
           schema:
-            "$ref": "#/definitions/Mihari_Entities_Message"
+            "$ref": "#/definitions/Mihari_Entities_ErrorMessage"
       tags:
         - rules
   "/api/rules":
@@ -324,7 +326,7 @@ paths:
         "404":
           description: ""
           schema:
-            "$ref": "#/definitions/Mihari_Entities_Message"
+            "$ref": "#/definitions/Mihari_Entities_ErrorMessage"
       tags:
         - rules
     post:
@@ -348,7 +350,7 @@ paths:
         "404":
           description: ""
           schema:
-            "$ref": "#/definitions/Mihari_Entities_Message"
+            "$ref": "#/definitions/Mihari_Entities_ErrorMessage"
       tags:
         - rules
     get:
@@ -384,10 +386,12 @@ paths:
       tags:
         - rules
   "/api/rules/{id}/search":
-    get:
+    post:
       summary: Run a rule
       description: Search by a rule
       produces:
+        - application/json
+      consumes:
         - application/json
       parameters:
         - in: path
@@ -398,11 +402,11 @@ paths:
         "201":
           description: Search by a rule
           schema:
-            "$ref": "#/definitions/Mihari_Entities_Message"
+            "$ref": "#/definitions/Mihari_Entities_QueueMessage"
         "404":
           description: ""
           schema:
-            "$ref": "#/definitions/Mihari_Entities_Message"
+            "$ref": "#/definitions/Mihari_Entities_ErrorMessage"
       tags:
         - rules
   "/api/tags/{id}":
@@ -425,7 +429,7 @@ paths:
         "404":
           description: ""
           schema:
-            "$ref": "#/definitions/Mihari_Entities_Message"
+            "$ref": "#/definitions/Mihari_Entities_ErrorMessage"
       tags:
         - tags
   "/api/tags":
@@ -514,11 +518,17 @@ definitions:
         type: string
       query:
         type: string
+      metadata:
+        type: object
+      createdAt:
+        type: string
+        format: date-time
     required:
       - id
       - data
       - dataType
       - source
+      - createdAt
   Mihari_Entities_Tag:
     type: object
     properties:
@@ -530,6 +540,16 @@ definitions:
     required:
       - id
       - name
+  Mihari_Entities_ErrorMessage:
+    type: object
+    properties:
+      message:
+        type: string
+      detail:
+        type: object
+    required:
+      - message
+    description: Mihari_Entities_ErrorMessage model
   Mihari_Entities_Message:
     type: object
     properties:
@@ -576,6 +596,9 @@ definitions:
         type: string
       metadata:
         type: object
+      createdAt:
+        type: string
+        format: date-time
       tags:
         type: array
         items:
@@ -607,6 +630,7 @@ definitions:
       - data
       - dataType
       - source
+      - createdAt
       - tags
     description: Mihari_Entities_Artifact model
   Mihari_Entities_AutonomousSystem:
@@ -624,9 +648,13 @@ definitions:
         type: string
       countryCode:
         type: string
+      createdAt:
+        type: string
+        format: date-time
     required:
       - country
       - countryCode
+      - createdAt
   Mihari_Entities_WhoisRecord:
     type: object
     properties:
@@ -647,16 +675,24 @@ definitions:
         type: array
         items:
           type: object
+      createdAt:
+        type: string
+        format: date-time
     required:
       - domain
       - contacts
+      - createdAt
   Mihari_Entities_ReverseDnsName:
     type: object
     properties:
       name:
         type: string
+      createdAt:
+        type: string
+        format: date-time
     required:
       - name
+      - createdAt
   Mihari_Entities_DnsRecord:
     type: object
     properties:
@@ -664,24 +700,36 @@ definitions:
         type: string
       value:
         type: string
+      createdAt:
+        type: string
+        format: date-time
     required:
       - resource
       - value
+      - createdAt
   Mihari_Entities_CPE:
     type: object
     properties:
       cpe:
         type: string
+      createdAt:
+        type: string
+        format: date-time
     required:
       - cpe
+      - createdAt
   Mihari_Entities_Port:
     type: object
     properties:
       port:
         type: integer
         format: int32
+      createdAt:
+        type: string
+        format: date-time
     required:
       - port
+      - createdAt
   Mihari_Entities_ArtifactsWithPagination:
     type: object
     properties:
@@ -711,36 +759,30 @@ definitions:
         type: string
       type:
         type: string
-      values:
+      items:
         type: array
         items:
-          type: string
-      isConfigured:
+          type: object
+      configured:
         type: boolean
     required:
       - name
       - type
-      - values
-      - isConfigured
+      - items
+      - configured
     description: Mihari_Entities_Config model
   Mihari_Entities_IPAddress:
     type: object
     properties:
-      ip:
-        type: string
       countryCode:
-        type: string
-      hostname:
-        type: string
-      loc:
         type: string
       asn:
         type: integer
         format: int32
+      loc:
+        type: string
     required:
-      - ip
       - countryCode
-      - loc
     description: Mihari_Entities_IPAddress model
   putApiRules:
     type: object
@@ -791,6 +833,17 @@ definitions:
     required:
       - yaml
     description: Create a rule
+  Mihari_Entities_QueueMessage:
+    type: object
+    properties:
+      message:
+        type: string
+      queued:
+        type: boolean
+    required:
+      - message
+      - queued
+    description: Mihari_Entities_QueueMessage model
   Mihari_Entities_RulesWithPagination:
     type: object
     properties:

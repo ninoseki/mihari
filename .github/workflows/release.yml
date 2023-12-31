@@ -1,4 +1,4 @@
-name: Release
+name: Release Gem and Docker image
 
 on:
   workflow_dispatch:
@@ -16,7 +16,7 @@ jobs:
         node-version:
           - 20
         ruby-version:
-          - 3.2
+          - 3.3
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -32,12 +32,12 @@ jobs:
           node-version: ${{ matrix.node-version }}
           cache: npm
           cache-dependency-path: frontend/package-lock.json
-      - name: Buld the frontend app
+      - name: Buld frontend
         run: |
           npm install
           npm run build
         working-directory: frontend
-      - name: Copy the forntend assets
+      - name: Copy forntend assets
         run: |
           mkdir -p lib/mihari/web/public/
           cp -r frontend/dist/* lib/mihari/web/public
@@ -45,8 +45,22 @@ jobs:
         run: |
           git config --global user.name "${GITHUB_ACTOR}"
           git config --global user.email "${GITHUB_ACTOR}@users.noreply.github.com"
-      - name: Release
+      - name: Release gem
         run: bundle exec rake release
         env:
           GEM_HOST_API_KEY: ${{ secrets.GEM_HOST_API_KEY }}
           GEM_HOST_OTP_CODE: ${{ inputs.rubygems-otp-code }}
+      - name: Login to GHCR
+        uses: docker/login-action@v3
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+      - name: Build Docker image
+        run: |
+          docker build --tag ghcr.io/$GITHUB_ACTOR/mihari:latest \
+          --tag ghcr.io/$GITHUB_ACTOR/mihari:${{ github.event.release.tag_name }}
+      - name: Push Docker image
+        run: |
+          docker push ghcr.io/$GITHUB_ACTOR/mihari:latest
+          docker push ghcr.io/$GITHUB_ACTOR/mihari:${{ github.event.release.tag_name }}
