@@ -21,8 +21,10 @@ module Mihari
         #
         def build_by_ip(ip, enricher: Enrichers::MMDB.new)
           enricher.result(ip).fmap do |res|
-            value = res&.country_code
-            value.nil? ? nil : new(country: NormalizeCountry(value, to: :short), country_code: value)
+            if res.country_code
+              new(country: NormalizeCountry(res.country_code, to: :short),
+                country_code: res.country_code)
+            end
           end.value_or nil
         end
       end

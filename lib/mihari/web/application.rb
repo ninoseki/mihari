@@ -49,10 +49,10 @@ module Mihari
         status, headers, body = API.call(env)
         return [status, headers, body] unless headers["x-cascade"] == "pass"
 
+        req = Rack::Request.new(env)
         # Check if the App wants us to pass the response along to others
-        request_path = env["PATH_INFO"]
         filenames.each do |path|
-          static_status, static_headers, static_body = rack_static.call(env.merge("PATH_INFO" => request_path + path))
+          static_status, static_headers, static_body = rack_static.call(env.merge("PATH_INFO" => req.path_info + path))
           return [static_status, static_headers, static_body] if static_status != 404
         end
 
@@ -85,13 +85,12 @@ module Mihari
         end
 
         def run!(port: 9292, host: "localhost", threads: "0:5", verbose: false, worker_timeout: 60, open: true)
-          url = "http://#{host}:#{port}"
-
           # set maximum number of threads to use as PARALLEL_PROCESSOR_COUNT (if it is not set)
           # ref. https://github.com/grosser/parallel#tips
           # TODO: is this the best way?
           _min_thread, max_thread = threads.split(":")
-          ENV["PARALLEL_PROCESSOR_COUNT"] = max_thread if ENV["PARALLEL_PROCESSOR_COUNT"].nil?
+          ENV["PARALLEL_PROCESSOR_COUNT"] ||= max_thread
+
           Rackup::Handler::Puma.run(
             instance,
             Port: port,
@@ -100,7 +99,7 @@ module Mihari
             Verbose: verbose,
             worker_timeout: worker_timeout
           ) do |_|
-            Launchy.open(url) if !Mihari.development? && open
+            Launchy.open("http://#{host}:#{port}") if !Mihari.development? && open
           rescue Launchy::CommandNotFoundError
             # ref. https://github.com/ninoseki/mihari/issues/477
             # do nothing
