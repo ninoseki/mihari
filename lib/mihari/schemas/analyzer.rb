@@ -91,6 +91,7 @@ module Mihari
         required(:analyzer).value(Types::String.enum(*Mihari::Analyzers::Crtsh.class_keys))
         required(:query).value(:string)
         optional(:exclude_expired).value(:bool).default(true)
+        optional(:match).value(Types::String.enum("=", "ILIKE", "LIKE", "single", "any", "FTS")).default(nil)
         optional(:options).hash(AnalyzerOptions)
       end
 
