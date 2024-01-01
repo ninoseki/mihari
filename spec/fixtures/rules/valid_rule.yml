@@ -1,8 +1,9 @@
 id: ad001daa-c7cd-4809-a5bd-0c3c64d765fa
 title: foo
 description: foo
-queries: []
-enrichers: []
+queries:
+  - analyzer: crtsh
+    query: example.com
 emitters:
   - emitter: database
 tags: []
