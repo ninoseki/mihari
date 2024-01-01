@@ -6,35 +6,18 @@ module Mihari
     # Rule builder
     #
     class RuleBuilder < Service
-      # @return [String]
-      attr_reader :path_or_id
-
-      #
-      # @param [String] path_or_id
-      #
-      # @return [Hash]
-      #
-      def data
-        result = Try { Mihari::Models::Rule.find path_or_id }.to_result
-        return result.value! if result.success?
-
-        raise ArgumentError, "#{path_or_id} not found" unless Pathname(path_or_id).exist?
-
-        YAML.safe_load(
-          ERB.new(File.read(path_or_id)).result,
-          permitted_classes: [Date, Symbol]
-        )
-      end
-
       #
       # @param [String] path_or_id
       #
       # @return [Mihari::Rule]
       #
       def call(path_or_id)
-        @path_or_id = path_or_id
+        res = Try { Rule.from_model Mihari::Models::Rule.find(path_or_id) }
+        return res.value! if res.value?
 
-        Rule.new(**data)
+        raise ArgumentError, "#{path_or_id} not found" unless Pathname(path_or_id).exist?
+
+        Rule.from_yaml ERB.new(File.read(path_or_id)).result
       end
     end
   end
