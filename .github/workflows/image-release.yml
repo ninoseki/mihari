@@ -1,8 +1,9 @@
 name: Release Docker image
 
 on:
-  release:
-    types: [published]
+  push:
+    tags:
+      - "v**"
 
 jobs:
   release:
