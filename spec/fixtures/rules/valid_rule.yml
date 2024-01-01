@@ -4,8 +4,6 @@ description: foo
 queries:
   - analyzer: crtsh
     query: example.com
-enrichers: []
 emitters:
   - emitter: database
-tags:
-  - foo
+tags: []
