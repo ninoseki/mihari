@@ -1,16 +1,12 @@
 # frozen_string_literal: true
 
-RSpec.describe Mihari::Rule, :vcr do
+RSpec.describe Mihari::Rule do
   include_context "with mocked logger"
 
   let!(:id) { "test" }
   let!(:title) { "test" }
   let!(:description) { "test" }
-  let(:queries) do
-    [
-      { analyzer: "crtsh", query: "www.example.com", exclude_expired: true }
-    ]
-  end
+  let(:queries) { [] }
   let!(:tags) { %w[test] }
   let(:falsepositives) { [] }
   let(:data_types) { Mihari::DEFAULT_DATA_TYPES }
@@ -28,12 +24,17 @@ RSpec.describe Mihari::Rule, :vcr do
     )
   end
 
-  describe "#artifacts", vcr: "Mihari_Rule/crt_sh:www.example.com" do
-    it do
-      artifacts = rule.artifacts
-      expect(artifacts).to be_an(Array)
-      expect(artifacts.length).to eq(1) # = www.example.com
-    end
+  let_it_be(:artifacts) do
+    FactoryBot.build_list(:artifact, 2, :domain)
+  end
+
+  let_it_be(:duplicated_artifacts) do
+    artifact = FactoryBot.build(:artifact, :domain)
+    [artifact, artifact]
+  end
+
+  before do
+    allow(Parallel).to receive(:processor_count).and_return(0)
   end
 
   describe "#model" do
@@ -49,54 +50,47 @@ RSpec.describe Mihari::Rule, :vcr do
   end
 
   context "with duplicated artifacts" do
-    let(:queries) do
-      [
-        { analyzer: "crtsh", query: "www.example.com", exclude_expired: true },
-        { analyzer: "crtsh", query: "www.example.com", exclude_expired: true }
-      ]
+    before do
+      allow(rule).to receive(:artifacts).and_return(duplicated_artifacts)
     end
 
     describe "#normalized_artifacts" do
       it do
-        artifacts = rule.normalized_artifacts
-        expect(artifacts).to be_an(Array)
-        expect(artifacts.length).to eq(1) # www.example.com
+        expect(rule.normalized_artifacts).to be_an(Array)
+      end
+
+      it do
+        expect(rule.normalized_artifacts.length).to eq(1)
       end
     end
   end
 
-  context "with string false positive", vcr: "Mihari_Rule/crt_sh:www.example.com" do
-    let(:falsepositives) { ["www.example.com"] }
+  context "with string false positive" do
+    let(:falsepositives) { artifacts.map(&:data) }
 
     describe "#normalized_artifacts" do
       it do
-        artifacts = rule.normalized_artifacts
-        expect(artifacts).to be_an(Array)
-        expect(artifacts.length).to eq(0)
+        expect(rule.normalized_artifacts).to be_empty
       end
     end
   end
 
-  context "with regexp false positive", vcr: "Mihari_Rule/crt_sh:www.example.com" do
+  context "with regexp false positive" do
     let(:falsepositives) { ["/[a-z.]+/"] }
 
     describe "#normalized_artifacts" do
       it do
-        artifacts = rule.normalized_artifacts
-        expect(artifacts).to be_an(Array)
-        expect(artifacts.length).to eq(0)
+        expect(rule.normalized_artifacts).to be_empty
       end
     end
   end
 
-  context "with data types", vcr: "Mihari_Rule/crt_sh:www.example.com" do
+  context "with data types" do
     let(:data_types) { ["ip"] }
 
     describe "#normalized_artifacts" do
       it do
-        artifacts = rule.normalized_artifacts
-        expect(artifacts).to be_an(Array)
-        expect(artifacts.length).to eq(0)
+        expect(rule.normalized_artifacts).to be_empty
       end
     end
   end
@@ -104,7 +98,7 @@ RSpec.describe Mihari::Rule, :vcr do
   context "with an invalid analyzer" do
     let(:queries) do
       [
-        { analyzer: "shodan", query: "ip:1.1.1.1" }
+        { analyzer: "shodan", query: "foo" }
       ]
     end
 
@@ -131,10 +125,8 @@ RSpec.describe Mihari::Rule, :vcr do
     before do
       allow(rule).to receive(:valid_emitters).and_return([])
       allow(rule).to receive(:enriched_artifacts).and_return([
-        Mihari::Models::Artifact.new(data: "1.1.1.1")
+        Mihari::Models::Artifact.new(data: Faker::Internet.ip_v4_address)
       ])
-
-      allow(Parallel).to receive(:processor_count).and_return(0)
     end
 
     it "does not raise any error" do
@@ -154,9 +146,8 @@ RSpec.describe Mihari::Rule, :vcr do
         # set mocked classes as emitters
         allow(rule).to receive(:emitters).and_return([emitter])
         allow(rule).to receive(:enriched_artifacts).and_return([
-          Mihari::Models::Artifact.new(data: "1.1.1.1")
+          Mihari::Models::Artifact.new(data: Faker::Internet.ip_v4_address)
         ])
-        allow(Parallel).to receive(:processor_count).and_return(0)
       end
 
       it do

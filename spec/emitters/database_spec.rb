@@ -6,7 +6,7 @@ RSpec.describe Mihari::Emitters::Database do
   let_it_be(:rule) { Mihari::Rule.from_model FactoryBot.create(:rule) }
   let!(:artifacts) { [Mihari::Models::Artifact.new(data: "1.1.1.1")] }
 
-  describe "#call", vcr: "Mihari_Enrichers_IPInfo/ip:1.1.1.1" do
+  describe "#call" do
     let!(:alert) { emitter.call artifacts }
 
     it do

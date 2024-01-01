@@ -4,20 +4,22 @@ class SearchCLI < Mihari::CLI::Base
   include Mihari::Commands::Search
 end
 
-RSpec.describe Mihari::Commands::Search, :vcr do
+RSpec.describe Mihari::Commands::Search do
   include_context "with mocked logger"
 
-  before do
-    allow(Parallel).to receive(:processor_count).and_return(0)
-  end
+  let!(:path) { File.expand_path("../fixtures/rules/valid_rule.yml", __dir__) }
+  let!(:yaml) { File.read path }
+  let!(:rule) { Mihari::Rule.from_yaml yaml }
 
   describe "#search" do
-    let!(:path) { File.expand_path("../fixtures/rules/valid_rule.yml", __dir__) }
-    let!(:data) { File.read path }
-    let!(:rule_id) { YAML.safe_load(data)["id"] }
+    before do
+      spy = spy(Mihari::Rule)
+      allow(spy).to receive(:call).and_return FactoryBot.build(:alert, rule: rule.model)
+      allow(Mihari::Rule).to receive(:new).and_return(spy)
+    end
 
     it do
-      expect { SearchCLI.start ["search", "-f", path] }.to output(include(rule_id)).to_stdout
+      expect { SearchCLI.start ["search", "-f", path] }.to output(include(rule.id)).to_stdout
     end
   end
 end
