@@ -12,8 +12,8 @@ RSpec.describe Mihari::Commands::Search, :vcr do
   let!(:rule) { Mihari::Rule.from_yaml yaml }
 
   before do
-    double = class_double(Mihari::Models::WhoisRecord)
-    allow(double).to receive(:build_by_domain).and_return(nil)
+    double = class_double(Mihari::Services::WhoisRecordBuilder)
+    allow(double).to receive(:call).and_return(nil)
 
     allow(Parallel).to receive(:processor_count).and_return(0)
   end

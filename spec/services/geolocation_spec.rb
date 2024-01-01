@@ -1,11 +1,11 @@
 # frozen_string_literal: true
 
-RSpec.describe Mihari::Models::Geolocation, vcr: "Mihari_Enrichers_MMDB/ip:1.1.1.1" do
-  describe ".build_by_ip" do
+RSpec.describe Mihari::Services::GeolocationBuilder, vcr: "Mihari_Enrichers_MMDB/ip:1.1.1.1" do
+  describe ".call" do
     let!(:ip) { "1.1.1.1" }
 
     it do
-      geolocation = described_class.build_by_ip(ip)
+      geolocation = described_class.call(ip)
       expect(geolocation.country_code).to eq("US")
       expect(geolocation.country).to eq("United States")
     end
