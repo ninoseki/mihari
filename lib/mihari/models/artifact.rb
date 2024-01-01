@@ -87,7 +87,7 @@ module Mihari
       def enrich_whois(enricher = Enrichers::Whois.new)
         return unless can_enrich_whois?
 
-        self.whois_record = WhoisRecord.build_by_domain(normalize_as_domain(data), enricher: enricher)
+        self.whois_record = Services::WhoisRecordBuilder.call(domain, enricher: enricher)
       end
 
       #
@@ -98,7 +98,7 @@ module Mihari
       def enrich_dns(enricher = Enrichers::GooglePublicDNS.new)
         return unless can_enrich_dns?
 
-        self.dns_records = DnsRecord.build_by_domain(normalize_as_domain(data), enricher: enricher)
+        self.dns_records = Services::DnsRecordBuilder.call(domain, enricher: enricher)
       end
 
       #
@@ -109,7 +109,7 @@ module Mihari
       def enrich_reverse_dns(enricher = Enrichers::Shodan.new)
         return unless can_enrich_reverse_dns?
 
-        self.reverse_dns_names = ReverseDnsName.build_by_ip(data, enricher: enricher)
+        self.reverse_dns_names = Services::ReverseDnsNameBuilder.call(data, enricher: enricher)
       end
 
       #
@@ -120,7 +120,7 @@ module Mihari
       def enrich_geolocation(enricher = Enrichers::MMDB.new)
         return unless can_enrich_geolocation?
 
-        self.geolocation = Geolocation.build_by_ip(data, enricher: enricher)
+        self.geolocation = Services::GeolocationBuilder.call(data, enricher: enricher)
       end
 
       #
@@ -131,7 +131,7 @@ module Mihari
       def enrich_autonomous_system(enricher = Enrichers::MMDB.new)
         return unless can_enrich_autonomous_system?
 
-        self.autonomous_system = AutonomousSystem.build_by_ip(data, enricher: enricher)
+        self.autonomous_system = Services::AutonomousSystemBuilder.call(data, enricher: enricher)
       end
 
       #
@@ -142,7 +142,7 @@ module Mihari
       def enrich_ports(enricher = Enrichers::Shodan.new)
         return unless can_enrich_ports?
 
-        self.ports = Port.build_by_ip(data, enricher: enricher)
+        self.ports = Services::PortBuilder.call(data, enricher: enricher)
       end
 
       #
@@ -153,7 +153,7 @@ module Mihari
       def enrich_cpes(enricher = Enrichers::Shodan.new)
         return unless can_enrich_cpes?
 
-        self.cpes = CPE.build_by_ip(data, enricher: enricher)
+        self.cpes = Services::CPEBuilder.call(data, enricher: enricher)
       end
 
       #
@@ -225,10 +225,16 @@ module Mihari
         @shodan ||= Enrichers::Shodan.new
       end
 
-      def normalize_as_domain(url_or_domain)
-        return url_or_domain if data_type == "domain"
-
-        Addressable::URI.parse(url_or_domain).host
+      #
+      # @return [String, nil]
+      #
+      def domain
+        case data_type
+        when "domain"
+          data
+        when "url"
+          Addressable::URI.parse(data).host
+        end
       end
 
       def can_enrich_whois?

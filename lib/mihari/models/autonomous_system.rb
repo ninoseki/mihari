@@ -7,22 +7,6 @@ module Mihari
     #
     class AutonomousSystem < ActiveRecord::Base
       belongs_to :artifact
-
-      class << self
-        #
-        # Build AS
-        #
-        # @param [String] ip
-        # @param [Mihari::Enrichers::MMDB] enricher
-        #
-        # @return [Mihari::AutonomousSystem, nil]
-        #
-        def build_by_ip(ip, enricher: Enrichers::MMDB.new)
-          enricher.result(ip).fmap do |res|
-            new(asn: res.asn) if res.asn
-          end.value_or nil
-        end
-      end
     end
   end
 end
