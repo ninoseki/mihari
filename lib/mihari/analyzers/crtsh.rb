@@ -9,20 +9,25 @@ module Mihari
       # @return [Boolean]
       attr_reader :exclude_expired
 
+      # @return [String, nil]
+      attr_reader :match
+
       #
       # @param [String] query
       # @param [Hash, nil] options
       # @param [Bool] exclude_expired
+      # @param [String, nil] match
       #
-      def initialize(query, options: nil, exclude_expired: true)
+      def initialize(query, options: nil, exclude_expired: true, match: nil)
         super(query, options: options)
 
         @exclude_expired = exclude_expired
+        @match = match
       end
 
       def artifacts
         exclude = exclude_expired ? "expired" : nil
-        client.search(query, exclude: exclude).map do |result|
+        client.search(query, exclude: exclude, match: match).map do |result|
           values = result["name_value"].to_s.lines.map(&:chomp).reject { |value| value.starts_with?("*.") }
           values.map { |value| Models::Artifact.new(data: value, metadata: result) }
         end.flatten

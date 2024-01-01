@@ -13,6 +13,7 @@ This analyzer uses [crt.sh](http://crt.sh)'s (unofficial?) REST API.
 analyzer: crtsh
 query: ...
 exclude_expired: ...
+match: ...
 ```
 
 ## Components
@@ -24,3 +25,7 @@ exclude_expired: ...
 ### Exclude Expired
 
 `exclude_expired` (`boolean`) determines whether to exclude expired domains or not. Optional. Defaults to `true`.
+
+### Match
+
+`match` (`string`) is an identity matching option. `=`, `ILIKE`, `LIKE`, `single`, `any` or `FTS`. Optional.

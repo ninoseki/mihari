@@ -19,7 +19,7 @@ module Mihari
       # Search crt.sh by a given identity
       #
       # @param [String] identity
-      # @param [String, nil] match "=", "ILIKE", "LIKE", "single", "any" or nil
+      # @param [String, nil] match "=", "ILIKE", "LIKE", "single", "any", "FTS" or nil
       # @param [String, nil] exclude "expired" or nil
       #
       # @return [Array<Hash>]
