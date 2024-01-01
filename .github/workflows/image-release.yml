@@ -16,13 +16,17 @@ jobs:
           registry: ghcr.io
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
+      - name: Strip v prefix
+        run: |
+          TAG=${{ github.event.release.tag_name }}
+          echo "MIHARI_VERSION=${TAG#v}" >> $GITHUB_ENV
       - name: Build Docker image
         run: |
           docker build . \
           --tag ghcr.io/$GITHUB_ACTOR/mihari:latest \
-          --tag ghcr.io/$GITHUB_ACTOR/mihari:${{ github.event.release.tag_name }} \
-          --build-arg MIHARI_VERSION=${{ github.event.release.tag_name }}
+          --tag ghcr.io/$GITHUB_ACTOR/mihari:${{ env.MIHARI_VERSION }} \
+          --build-arg MIHARI_VERSION=${{ env.MIHARI_VERSION }}
       - name: Push Docker image
         run: |
           docker push ghcr.io/$GITHUB_ACTOR/mihari:latest
-          docker push ghcr.io/$GITHUB_ACTOR/mihari:${{ github.event.release.tag_name }}
+          docker push ghcr.io/$GITHUB_ACTOR/mihari:${{ env.MIHARI_VERSION }}
