@@ -1,4 +1,4 @@
-name: Release Gem
+name: Release gem
 
 on:
   workflow_dispatch:
