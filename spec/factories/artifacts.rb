@@ -33,12 +33,26 @@ FactoryBot.define do
       data { Faker::Internet.unique.domain_name }
     end
 
+    trait :url do
+      data { Faker::Internet.unique.url }
+    end
+
+    trait :mail do
+      data { Faker::Internet.unique.email }
+    end
+
+    trait :hash do
+      data { Faker::Crypto.unique.md5 }
+    end
+
     after(:create) do |artifact|
       case artifact.data_type
       when "ip"
         create(:autonomous_system, artifact: artifact)
         create_list(:reverse_dns_name, 1, artifact: artifact)
       when "domain"
+        create_list(:dns_record, 1, artifact: artifact)
+      when "url"
         create_list(:dns_record, 1, artifact: artifact)
       end
     end

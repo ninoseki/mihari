@@ -43,8 +43,7 @@ export default defineComponent({
   setup(props) {
     const router = useRouter()
 
-    const rule = toRef(props, "rule")
-    const yaml = toRef(rule.value, "yaml")
+    const yaml = toRef(props.rule.yaml)
 
     const updateRuleTask = generateUpdateRuleTask()
 
@@ -54,7 +53,6 @@ export default defineComponent({
 
     const edit = async () => {
       const rule = await updateRuleTask.perform({
-        id: props.rule.id,
         yaml: yaml.value
       })
 

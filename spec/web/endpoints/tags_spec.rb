@@ -25,5 +25,10 @@ RSpec.describe Mihari::Web::Endpoints::Tags do
       delete "/api/tags/#{tag.id}"
       expect(last_response.status).to eq(204)
     end
+
+    it "returns 404" do
+      delete "/api/tags/0"
+      expect(last_response.status).to eq(404)
+    end
   end
 end
