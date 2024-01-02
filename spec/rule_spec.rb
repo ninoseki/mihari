@@ -152,13 +152,7 @@ RSpec.describe Mihari::Rule do
 
       it do
         rule.call
-
-        # read logger output
-        SemanticLogger.flush
-        sio.rewind
-        output = sio.read
-
-        expect(output).to include("Emission by")
+        expect(logger_output).to include("Emission by")
       end
     end
   end

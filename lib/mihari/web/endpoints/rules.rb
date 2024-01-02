@@ -17,7 +17,10 @@ module Mihari
           def call(yaml, overwrite: true)
             rule = Rule.from_yaml(yaml)
 
-            raise IntegrityError, "ID:#{rule.id} is already registered" if rule.exists? && !overwrite
+            # To invoke ActiveRecord::RecordNotFound
+            Models::Rule.find(rule.id) if overwrite
+
+            raise IntegrityError, "ID:#{rule.id} already registered" if rule.exists? && !overwrite
 
             rule.update_or_create
             rule
@@ -141,13 +144,11 @@ module Mihari
             summary: "Update a rule"
           }
           params do
-            requires :id, type: String, documentation: { param_type: "body" }
             requires :yaml, type: String, documentation: { param_type: "body" }
           end
           put "/" do
             status 201
 
-            id = params[:id].to_s
             yaml = params[:yaml].to_s
 
             result = RuleCreateUpdater.result(yaml, overwrite: true)
@@ -156,11 +157,11 @@ module Mihari
             failure = result.failure
             case failure
             when ActiveRecord::RecordNotFound
-              error!({ message: "ID:#{id} not found" }, 404)
+              error!({ message: "Rule not found" }, 404)
             when Psych::SyntaxError
               error!({ message: failure.message }, 422)
             when ValidationError
-              error!({ message: "Rule format is invalid", detail: failure.errors.to_h }, 422)
+              error!({ message: "Rule format invalid", detail: failure.errors.to_h }, 422)
             end
             raise failure
           end

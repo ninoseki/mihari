@@ -155,7 +155,6 @@ export interface CreateRule {
 }
 
 export interface UpdateRule {
-  id: string
   yaml: string
 }
 

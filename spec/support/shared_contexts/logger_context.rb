@@ -7,6 +7,11 @@ RSpec.shared_context "with mocked logger" do
     SemanticLogger.add_appender(io: sio, formatter: :color)
     SemanticLogger["Mihari"]
   end
+  let(:logger_output) do
+    SemanticLogger.flush
+    sio.rewind
+    sio.read
+  end
 
   before { allow(Mihari).to receive(:logger).and_return(logger) }
 

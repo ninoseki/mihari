@@ -53,12 +53,12 @@ RSpec.describe Mihari::Web::Endpoints::Rules do
 
   describe "put /api/rules/" do
     let!(:title) { "updated" }
-    let!(:data) do
-      data = rule.data.deep_dup
-      data["title"] = title
-      data
+    let(:data) do
+      rule.data.deep_dup.tap do |data|
+        data["title"] = title
+      end
     end
-    let!(:payload) { { id: rule.id, yaml: data.to_yaml } }
+    let(:payload) { { yaml: data.to_yaml } }
 
     it "returns 204" do
       put("/api/rules/", payload.to_json, "CONTENT_TYPE" => "application/json")
@@ -68,13 +68,26 @@ RSpec.describe Mihari::Web::Endpoints::Rules do
       data = YAML.safe_load(res["yaml"])
       expect(data["title"]).to eq(title)
     end
+
+    context "with non-existing ID" do
+      let(:data) do
+        rule.data.deep_dup.tap do |data|
+          data["id"] = Faker::Internet.unique.uuid
+        end
+      end
+
+      it "returns 404" do
+        put("/api/rules/", payload.to_json, "CONTENT_TYPE" => "application/json")
+        expect(last_response.status).to eq(404)
+      end
+    end
   end
 
   describe "post /api/rules/" do
     let!(:data) do
-      data = rule.data.deep_dup
-      data["id"] = SecureRandom.uuid
-      data
+      rule.data.deep_dup.tap do |data|
+        data["id"] = Faker::Internet.unique.uuid
+      end
     end
     let!(:payload) { { yaml: data.to_yaml } }
 
@@ -112,6 +125,11 @@ RSpec.describe Mihari::Web::Endpoints::Rules do
 
       json = JSON.parse(last_response.body.to_s)
       expect(json).to be_a(Hash)
+    end
+
+    it "returns 404" do
+      post "/api/rules/#{Faker::Internet.unique.uuid}/search"
+      expect(last_response.status).to eq(404)
     end
   end
 end

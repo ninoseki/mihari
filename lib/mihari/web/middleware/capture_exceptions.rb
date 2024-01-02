@@ -9,8 +9,6 @@ module Mihari
       class CaptureExceptions < Sentry::Rack::CaptureExceptions
         include Concerns::ErrorUnwrappable
 
-        private
-
         def capture_exception(exception, env)
           unwrapped = unwrap_error(exception)
           Mihari.logger.error unwrapped

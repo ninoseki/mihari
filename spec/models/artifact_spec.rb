@@ -23,14 +23,17 @@ RSpec.describe Mihari::Models::Artifact, :vcr do
 
   describe "#unique?" do
     it do
-      obj = described_class.new(data: artifact.data, alert_id: alert.id)
-      obj.rule_id = rule.id
-      expect(obj).not_to be_unique
+      not_unique = described_class.new(data: artifact.data, alert_id: alert.id).tap do |artifact|
+        artifact.rule_id = rule.id
+      end
+      expect(not_unique).not_to be_unique
     end
 
     it do
-      obj = described_class.new(data: Faker::Internet.unique.ip_v4_address, alert_id: alert.id)
-      expect(obj).to be_unique
+      unique = described_class.new(data: Faker::Internet.unique.ip_v4_address, alert_id: alert.id).tap do |artifact|
+        artifact.rule_id = rule.id
+      end
+      expect(unique).to be_unique
     end
 
     context "with artifact_lifetime" do
