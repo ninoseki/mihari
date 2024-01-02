@@ -8,7 +8,7 @@
               <div class="is-widget-label">
                 <h3 class="subtitle is-spaced">Rules</h3>
                 <h1 class="title">
-                  {{ getRulesTask.last?.value?.total || "N/A" }}
+                  {{ getRulesTask.last?.value?.total ?? "N/A" }}
                 </h1>
               </div>
             </div>
@@ -31,7 +31,7 @@
               <div class="is-widget-label">
                 <h3 class="subtitle is-spaced">Alerts</h3>
                 <h1 class="title">
-                  {{ getAlertsTask.last?.value?.total || "N/A" }}
+                  {{ getAlertsTask.last?.value?.total ?? "N/A" }}
                 </h1>
               </div>
             </div>
@@ -54,7 +54,7 @@
               <div class="is-widget-label">
                 <h3 class="subtitle is-spaced">Artifacts</h3>
                 <h1 class="title">
-                  {{ getArtifactsTask.last?.value?.total || "N/A" }}
+                  {{ getArtifactsTask.last?.value?.total ?? "N/A" }}
                 </h1>
               </div>
             </div>
