@@ -50,6 +50,7 @@
       :artifacts="getArtifactsTask.last.value"
       v-if="getArtifactsTask.last?.value"
       @update-page="onUpdatePage"
+      @refresh="onRefresh"
     ></Artifacts>
   </div>
 </template>
@@ -93,6 +94,8 @@ export default defineComponent({
       await getArtifacts()
     }
 
+    const onRefresh = search
+
     const toggleShowHelp = () => {
       showHelp.value = !showHelp.value
     }
@@ -112,7 +115,8 @@ export default defineComponent({
       search,
       showHelp,
       toggleShowHelp,
-      onUpdatePage
+      onUpdatePage,
+      onRefresh
     }
   }
 })

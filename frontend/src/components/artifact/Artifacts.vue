@@ -37,7 +37,7 @@ export default defineComponent({
     }
   },
   components: { Artifact, Pagination },
-  emits: ["update-page"],
+  emits: ["update-page", "refresh"],
   setup(props, context) {
     const hasArtifacts = computed(() => {
       return props.artifacts.results.length > 0
@@ -48,7 +48,7 @@ export default defineComponent({
     }
 
     const onDelete = () => {
-      context.emit("update-page", 1)
+      context.emit("refresh")
     }
 
     return { onUpdatePage, onDelete, hasArtifacts }

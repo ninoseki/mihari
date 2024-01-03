@@ -56,12 +56,13 @@
   <div class="block" v-if="getAlertsTask.performCount > 0">
     <Loading v-if="getAlertsTask.isRunning"></Loading>
     <ErrorMessage v-if="getAlertsTask.isError" :error="getAlertsTask.last?.error"></ErrorMessage>
-    <AlertsComponent
+    <Alerts
       :alerts="getAlertsTask.last.value"
       v-if="getAlertsTask.last?.value"
       :page="page"
       @update-page="onUpdatePage"
-    ></AlertsComponent>
+      @refresh="onRefresh"
+    ></Alerts>
   </div>
 </template>
 
@@ -70,7 +71,7 @@ import { useRouteQuery } from "@vueuse/router"
 import { defineComponent, onMounted, ref, watch } from "vue"
 
 import { generateGetAlertsTask } from "@/api-helper"
-import AlertsComponent from "@/components/alert/Alerts.vue"
+import Alerts from "@/components/alert/Alerts.vue"
 import ErrorMessage from "@/components/ErrorMessage.vue"
 import Loading from "@/components/Loading.vue"
 import type { SearchParams } from "@/types"
@@ -78,7 +79,7 @@ import type { SearchParams } from "@/types"
 export default defineComponent({
   name: "AlertsWrapper",
   components: {
-    AlertsComponent,
+    Alerts,
     Loading,
     ErrorMessage
   },
@@ -103,6 +104,10 @@ export default defineComponent({
       await getAlerts()
     }
 
+    // NOTE: Using onUpdatePage when deleting (= refreshing) does not work well if page equals to 1
+    //       (Because page is not changed & it does not trigger getAlerts)
+    const onRefresh = search
+
     const toggleShowHelp = () => {
       showHelp.value = !showHelp.value
     }
@@ -122,7 +127,8 @@ export default defineComponent({
       search,
       showHelp,
       toggleShowHelp,
-      onUpdatePage
+      onUpdatePage,
+      onRefresh
     }
   }
 })
