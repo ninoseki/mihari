@@ -84,6 +84,20 @@ module Mihari
     end
 
     #
+    # @return [Date, nil]
+    #
+    def created_on
+      data[:created_on]
+    end
+
+    #
+    # @return [Date, nil]
+    #
+    def updated_on
+      data[:updated_on]
+    end
+
+    #
     # @return [Array<Mihari::Models::Tag>]
     #
     def tags
@@ -279,8 +293,8 @@ module Mihari
       # data is serialized as JSON so dates (created_on & updated_on) are stringified in there
       # thus dates & (hash) keys have to be stringified when comparing
       data.deep_dup.tap do |data|
-        data[:created_on] = data[:created_on].to_s
-        data[:updated_on] = data[:updated_on].to_s
+        data[:created_on] = created_on.to_s unless created_on.nil?
+        data[:updated_on] = updated_on.to_s unless updated_on.nil?
       end.deep_stringify_keys
     end
 
