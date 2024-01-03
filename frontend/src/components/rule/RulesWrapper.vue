@@ -52,6 +52,7 @@
       :rules="getRulesTask.last.value"
       v-if="getRulesTask.last?.value"
       @update-page="onUpdatePage"
+      @refresh="onRefresh"
     ></Rules>
   </div>
 </template>
@@ -94,6 +95,8 @@ export default defineComponent({
       await getRules()
     }
 
+    const onRefresh = search
+
     const toggleShowHelp = () => {
       showHelp.value = !showHelp.value
     }
@@ -113,7 +116,8 @@ export default defineComponent({
       search,
       showHelp,
       toggleShowHelp,
-      onUpdatePage
+      onUpdatePage,
+      onRefresh
     }
   }
 })

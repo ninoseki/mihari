@@ -42,14 +42,14 @@ export default defineComponent({
       required: true
     }
   },
-  emits: ["update-page"],
+  emits: ["update-page", "refresh"],
   setup(props, context) {
     const onUpdatePage = (page: number) => {
       context.emit("update-page", page)
     }
 
     const onDelete = () => {
-      context.emit("update-page", 1)
+      context.emit("refresh")
     }
 
     const hasAlerts = computed(() => {

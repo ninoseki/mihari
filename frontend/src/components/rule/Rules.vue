@@ -49,7 +49,7 @@ export default defineComponent({
     }
 
     const onRefresh = () => {
-      context.emit("update-page", 1)
+      context.emit("refresh")
     }
 
     const hasRules = computed(() => {
