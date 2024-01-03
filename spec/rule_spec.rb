@@ -11,6 +11,9 @@ RSpec.describe Mihari::Rule do
   let(:falsepositives) { [] }
   let(:data_types) { Mihari::DEFAULT_DATA_TYPES }
   let!(:emitters) { [{ emitter: "database" }] }
+  let!(:created_on) { Date.today }
+  let!(:updated_on) { Date.today }
+  let!(:artifact_ttl) { 0 }
   let(:rule) do
     described_class.new(
       title: title,
@@ -20,7 +23,10 @@ RSpec.describe Mihari::Rule do
       id: id,
       data_types: data_types,
       falsepositives: falsepositives,
-      emitters: emitters
+      emitters: emitters,
+      created_on: created_on,
+      updated_on: updated_on,
+      artifact_ttl: artifact_ttl
     )
   end
 
@@ -102,16 +108,6 @@ RSpec.describe Mihari::Rule do
       ]
     end
 
-    let(:rule) do
-      described_class.new(
-        id: id,
-        title: title,
-        description: description,
-        tags: tags,
-        queries: queries
-      )
-    end
-
     before do
       allow(Mihari.config).to receive(:shodan_api_key).and_return(nil)
     end
@@ -121,7 +117,7 @@ RSpec.describe Mihari::Rule do
     end
   end
 
-  describe "#run" do
+  describe "#call" do
     before do
       allow(rule).to receive(:valid_emitters).and_return([])
       allow(rule).to receive(:enriched_artifacts).and_return([
@@ -158,8 +154,31 @@ RSpec.describe Mihari::Rule do
   end
 
   describe "#diff" do
+    before do
+      rule.update_or_create
+    end
+
     it do
       expect(rule.diff?).to eq(false)
+    end
+
+    context "with modified integer" do
+      it do
+        rule.tap { |rule| rule.data[:artifact_ttl] = -1 }
+        expect(rule.diff?).to eq(true)
+      end
+    end
+
+    context "with modified dates" do
+      it do
+        rule.tap { |rule| rule.data[:created_on] = Date.today.prev_day }
+        expect(rule.diff?).to eq(true)
+      end
+
+      it do
+        rule.tap { |rule| rule.data[:updated_on] = Date.today.prev_day }
+        expect(rule.diff?).to eq(true)
+      end
     end
   end
 end
