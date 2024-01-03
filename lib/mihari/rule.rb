@@ -231,7 +231,7 @@ module Mihari
     #
     def diff?
       model = Mihari::Models::Rule.find(id)
-      model.data != data.deep_stringify_keys
+      model.data != diff_comparable_data
     rescue ActiveRecord::RecordNotFound
       false
     end
@@ -271,6 +271,18 @@ module Mihari
     end
 
     private
+
+    #
+    # @return [Hash]
+    #
+    def diff_comparable_data
+      # data is serialized as JSON so dates (created_on & updated_on) are stringified in there
+      # thus dates & (hash) keys have to be stringified when comparing
+      data.deep_dup.tap do |data|
+        data[:created_on] = data[:created_on].to_s
+        data[:updated_on] = data[:updated_on].to_s
+      end.deep_stringify_keys
+    end
 
     #
     # Check whether a value is a falsepositive value or not
