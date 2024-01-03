@@ -11,8 +11,8 @@ plugins:
 
 nav:
   - Requirements: requirements.md
-  - Overview: overview.md
   - Installation: installation.md
+  - Architecture: architecture:.md
   - Rule: rule.md
   - Configuration: configuration.md
   - Usage: usage.md
