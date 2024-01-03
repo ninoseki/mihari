@@ -1,12 +1,12 @@
 <template>
   <Loading v-if="getArtifactTask.isRunning"></Loading>
   <ErrorMessage v-if="getArtifactTask.isError" :error="getArtifactTask.last?.error"></ErrorMessage>
-  <ArtifactComponent
+  <Artifact
     :artifact="getArtifactTask.last.value"
     @refresh="onRefresh"
     @delete="onDelete"
     v-if="getArtifactTask.last?.value"
-  ></ArtifactComponent>
+  ></Artifact>
 </template>
 
 <script lang="ts">
@@ -14,14 +14,14 @@ import { defineComponent, onMounted, watch } from "vue"
 import { useRouter } from "vue-router"
 
 import { generateGetArtifactTask } from "@/api-helper"
-import ArtifactComponent from "@/components/artifact/ArtifactDetail.vue"
+import Artifact from "@/components/artifact/ArtifactDetail.vue"
 import ErrorMessage from "@/components/ErrorMessage.vue"
 import Loading from "@/components/Loading.vue"
 
 export default defineComponent({
   name: "ArtifactDetailWrapper",
   components: {
-    ArtifactComponent,
+    Artifact,
     Loading,
     ErrorMessage
   },
