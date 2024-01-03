@@ -34,8 +34,6 @@ module Mihari
               return if Pathname(path).exist? && !(yes? warning)
 
               Services::RuleInitializer.call(path)
-
-              puts "A new rule file has been initialized: #{path}."
             end
 
             desc "list [QUERY]", "List/search rules"

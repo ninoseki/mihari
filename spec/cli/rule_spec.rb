@@ -11,7 +11,7 @@ RSpec.describe Mihari::CLI::Rule do
     it do
       expect do
         described_class.start ["init", path]
-      end.to output(include("A new rule file has been initialized")).to_stdout
+      end.to output("").to_stdout
     end
   end
 
