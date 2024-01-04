@@ -92,7 +92,15 @@ module Mihari
 
         return res.recover { [] } if ignore_error?
 
-        res.to_result
+        result = res.to_result
+        return result if result.success?
+
+        # Wrap failure with AnalyzerError to explicitly name a failed analyzer
+        Failure AnalyzerError.new(
+          result.failure.message,
+          self.class.class_key,
+          cause: result.failure
+        )
       end
 
       class << self

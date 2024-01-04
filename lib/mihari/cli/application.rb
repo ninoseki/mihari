@@ -41,17 +41,17 @@ module Mihari
         def safe_execute
           yield
         rescue StandardError => e
-          err = unwrap_error(e)
+          error = unwrap_error(e)
 
-          raise err if options["debug"]
+          raise error if options["debug"]
 
-          case err
-          when ValidationError
-            warn JSON.pretty_generate(err.errors.to_h)
-          when StandardError
-            Sentry.capture_exception(err) if Sentry.initialized?
-            warn err
-          end
+          data = Entities::ErrorMessage.represent(
+            message: error.message,
+            detail: error.respond_to?(:detail) ? error.detail : nil
+          )
+          warn JSON.pretty_generate(data.as_json)
+
+          Sentry.capture_exception(error) if Sentry.initialized? && !error.is_a?(ValidationError)
 
           exit 1
         end
