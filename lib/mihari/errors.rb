@@ -9,6 +9,31 @@ module Mihari
 
   class ConfigurationError < Error; end
 
+  class ResponseError < Error; end
+
+  class AnalyzerError < Error
+    # @return [StandardException, nil]
+    attr_reader :cause
+
+    #
+    # @param [String] msg
+    # @param [String] analyzer
+    # @param [StandardException, nil] cause
+    #
+    def initialize(msg, analyzer, cause: nil)
+      super("#{msg} (from #{analyzer})")
+
+      @cause = cause
+      set_backtrace(cause.backtrace) if cause
+    end
+
+    def detail
+      return nil unless cause.respond_to?(:detail)
+
+      cause.detail
+    end
+  end
+
   class IntegrityError < Error; end
 
   #
@@ -32,6 +57,10 @@ module Mihari
       @status_code = status_code
       @body = body
     end
+
+    def detail
+      { status_code: status_code, body: body }
+    end
   end
 
   #
@@ -48,6 +77,10 @@ module Mihari
       super(msg)
 
       @errors = errors
+    end
+
+    def detail
+      errors.to_h
     end
   end
 end
