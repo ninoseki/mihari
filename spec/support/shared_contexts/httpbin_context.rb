@@ -5,8 +5,9 @@ require "capybara"
 require_relative "../httpbin"
 
 RSpec.shared_context "with fake HTTPBin" do
-  before(:all) do
-    @server = Capybara::Server.new(HTTPBin)
-    @server.boot
+  let_it_be(:server) do
+    server = Capybara::Server.new(HTTPBin)
+    server.boot
+    server
   end
 end

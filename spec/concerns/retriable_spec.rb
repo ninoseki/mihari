@@ -11,29 +11,51 @@ class RetriableTest
     @interval = 0
   end
 
-  def foo
+  def retriable_get(url)
     retry_on_error(times: times, interval: interval) do
-      @count += 1
-      bar
+      get url
     end
   end
 
-  def bar
-    Net::HTTP.get("example.com", "/index.html")
+  def get(url)
+    @count += 1
+    http.get url
+  end
+
+  def http
+    Mihari::HTTP::Factory.build
   end
 end
 
 RSpec.describe Mihari::Concerns::Retriable do
   subject(:subject) { RetriableTest.new }
 
-  before do
-    allow(Net::HTTP).to receive(:get).and_raise(Net::OpenTimeout)
-  end
+  include_context "with fake HTTPBin"
 
   describe "#retry_on_error" do
-    it do
-      expect { subject.foo }.to raise_error(Net::OpenTimeout)
-      expect(subject.count).to eq(subject.times)
+    context "with 404" do
+      it do
+        expect { subject.retriable_get("#{server.base_url}/status/404") }.to raise_error(Mihari::StatusCodeError)
+        expect(subject.count).to eq(1)
+      end
+    end
+
+    context "with non-404" do
+      it do
+        expect { subject.retriable_get("#{server.base_url}/status/500") }.to raise_error(Mihari::StatusCodeError)
+        expect(subject.count).to eq(subject.times)
+      end
+    end
+
+    context "with HTTP::TimeoutError" do
+      before do
+        allow(subject).to receive(:http).and_return(Mihari::HTTP::Factory.build(timeout: -1))
+      end
+
+      it do
+        expect { subject.retriable_get("#{server.base_url}/get") }.to raise_error(HTTP::TimeoutError)
+        expect(subject.count).to eq(subject.times)
+      end
     end
   end
 end

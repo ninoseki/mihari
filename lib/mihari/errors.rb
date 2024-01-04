@@ -1,27 +1,20 @@
 # frozen_string_literal: true
 
+require "http"
+
 module Mihari
   class Error < StandardError; end
 
   class ValueError < Error; end
 
-  class RetryableError < Error; end
-
   class ConfigurationError < Error; end
 
   class IntegrityError < Error; end
 
-  # errors for HTTP interactions
-  class HTTPError < Error; end
-
-  class NetworkError < HTTPError; end
-
-  class TimeoutError < HTTPError; end
-
   #
   # HTTP status code error
   #
-  class StatusCodeError < HTTPError
+  class StatusCodeError < ::HTTP::Error
     # @return [Integer]
     attr_reader :status_code
 

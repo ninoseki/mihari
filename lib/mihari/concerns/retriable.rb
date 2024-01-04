@@ -8,17 +8,24 @@ module Mihari
     module Retriable
       extend ActiveSupport::Concern
 
-      DEFAULT_ON = [
-        Errno::ECONNRESET,
-        Errno::ECONNABORTED,
-        Errno::EPIPE,
+      RETRIABLE_ERRORS = [
         OpenSSL::SSL::SSLError,
         Timeout::Error,
-        RetryableError,
-        NetworkError,
-        TimeoutError,
-        StatusCodeError
+        ::HTTP::ConnectionError,
+        ::HTTP::ResponseError,
+        ::HTTP::TimeoutError
       ].freeze
+
+      DEFAULT_CONDITION = lambda do |error|
+        return true if RETRIABLE_ERRORS.any? { |klass| error.is_a? klass }
+
+        case error
+        when StatusCodeError
+          error.status_code != 404
+        else
+          false
+        end
+      end
 
       #
       # Retry on error
@@ -26,17 +33,23 @@ module Mihari
       # @param [Integer] times
       # @param [Integer] interval
       # @param [Boolean] exponential_backoff
-      # @param [Array<StandardError>] on
+      # @param [Proc] condition
       #
-      def retry_on_error(times: 3, interval: 5, exponential_backoff: true, on: DEFAULT_ON)
+      # @param [Object] on
+      def retry_on_error(times: 3, interval: 5, exponential_backoff: true, condition: DEFAULT_CONDITION)
         try = 0
         begin
           try += 1
           yield
-        rescue *on => e
+        rescue StandardError => e
+          # Raise error if it's not a retriable error
+          raise e unless condition.call(e)
+
           sleep_seconds = exponential_backoff ? interval * (2**(try - 1)) : interval
           sleep sleep_seconds
           retry if try < times
+
+          # Raise error if retry times exceed a given times
           raise e
         end
       end
