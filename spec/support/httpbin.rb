@@ -27,6 +27,9 @@ class HTTPBin
       post? ? ok_response : error_405
     when "/delete"
       delete? ? ok_response : error_405
+    when %r{^/status/[0-9]+$}
+      status = path_info.split("/").last
+      status_response status
     else
       error_404
     end
@@ -64,6 +67,10 @@ class HTTPBin
 
     ["200", { "Content-Type" => "application/json" }, [JSON.generate(payload)]]
     ["200", { "Content-Type" => "text/plain" }, [JSON.generate(payload)]]
+  end
+
+  def status_response(status)
+    [status, { "Content-Type" => "text/plain" }, [JSON.generate({})]]
   end
 
   def error_404

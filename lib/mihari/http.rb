@@ -18,11 +18,6 @@ module Mihari
         )
       end
 
-      def on_error(_request, error)
-        raise TimeoutError, error if error.is_a?(::HTTP::TimeoutError)
-        raise NetworkError, error if error.is_a?(::HTTP::Error)
-      end
-
       ::HTTP::Options.register_feature(:better_error, self)
     end
 
