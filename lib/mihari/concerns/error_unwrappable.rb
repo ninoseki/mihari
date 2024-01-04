@@ -17,9 +17,10 @@ module Mihari
         receiver = err.receiver
         case receiver
         when Dry::Monads::Try::Error
-          receiver.exception
+          # Error may be wrapped like Matryoshka
+          unwrap_error receiver.exception
         when Dry::Monads::Failure
-          receiver.failure
+          unwrap_error receiver.failure
         else
           err
         end
