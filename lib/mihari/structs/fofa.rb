@@ -8,6 +8,10 @@ module Mihari
         #   @return [Boolean]
         attribute :error, Types::Bool
 
+        # @!attribute [r] errmsg
+        #   @return [String, nil]
+        attribute? :errmsg, Types::String.optional
+
         # @!attribute [r] size
         #   @return [Integer, nil]
         attribute? :size, Types::Int.optional
@@ -35,6 +39,7 @@ module Mihari
           def from_dynamic!(d)
             new(
               error: d.fetch("error"),
+              errmsg: d["errmsg"],
               size: d["size"],
               page: d["page"],
               mode: d["mode"],

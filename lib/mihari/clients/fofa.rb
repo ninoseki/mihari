@@ -52,7 +52,10 @@ module Mihari
       def search(query, page:, size: PAGE_SIZE)
         qbase64 = Base64.urlsafe_encode64(query)
         params = { qbase64: qbase64, size: size, page: page, email: email, key: api_key }.compact
-        Structs::Fofa::Response.from_dynamic! get_json("/api/v1/search/all", params: params)
+        res = Structs::Fofa::Response.from_dynamic!(get_json("/api/v1/search/all", params: params))
+        raise ResponseError, res.errmsg if res.error
+
+        res
       end
 
       #
