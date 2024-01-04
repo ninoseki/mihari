@@ -3,7 +3,7 @@
 RSpec.describe Mihari::Emitters::Webhook do
   include_context "with fake HTTPBin"
 
-  let!(:url) { "#{@server.base_url}/post" }
+  let!(:url) { "#{server.base_url}/post" }
   let!(:artifacts) do
     [
       Mihari::Models::Artifact.new(data: "1.1.1.1"),

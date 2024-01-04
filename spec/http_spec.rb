@@ -6,7 +6,7 @@ RSpec.describe Mihari::HTTP::Factory do
   describe ".get" do
     context "with 200" do
       it do
-        res = described_class.build.get("#{@server.base_url}/get")
+        res = described_class.build.get("#{server.base_url}/status/200")
         json = JSON.parse(res.body.to_s)
         expect(json["headers"]["User-Agent"]).to start_with("mihari/")
       end
@@ -15,7 +15,7 @@ RSpec.describe Mihari::HTTP::Factory do
     context "with 404" do
       it do
         expect do
-          described_class.build.get("#{@server.base_url}/status/404")
+          described_class.build.get("#{server.base_url}/status/404")
         end.to raise_error(Mihari::StatusCodeError)
       end
     end
@@ -23,8 +23,8 @@ RSpec.describe Mihari::HTTP::Factory do
     context "with timeout" do
       it do
         expect do
-          described_class.build(timeout: -1).get("#{@server.base_url}/get")
-        end.to raise_error(Mihari::TimeoutError)
+          described_class.build(timeout: -1).get("#{server.base_url}/get")
+        end.to raise_error(::HTTP::TimeoutError)
       end
     end
   end
@@ -35,7 +35,7 @@ RSpec.describe Mihari::HTTP::Factory do
       let(:headers) { { "content-type": "application/x-www-form-urlencoded" } }
 
       it do
-        res = described_class.build(headers: headers).post("#{@server.base_url}/post", form: form)
+        res = described_class.build(headers: headers).post("#{server.base_url}/post", form: form)
         data = JSON.parse(res.body.to_s)
         expect(data.dig("form", "foo")).to eq("bar")
       end
@@ -46,7 +46,7 @@ RSpec.describe Mihari::HTTP::Factory do
       let(:headers) { { "content-type": "application/json" } }
 
       it do
-        res = described_class.build(headers: headers).post("#{@server.base_url}/post", json: json)
+        res = described_class.build(headers: headers).post("#{server.base_url}/post", json: json)
         data = JSON.parse(res.body.to_s)
         inner_data = JSON.parse(data["data"])
         expect(inner_data["foo"]).to eq("bar")
