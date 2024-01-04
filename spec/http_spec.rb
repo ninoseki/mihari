@@ -6,7 +6,7 @@ RSpec.describe Mihari::HTTP::Factory do
   describe ".get" do
     context "with 200" do
       it do
-        res = described_class.build.get("#{server.base_url}/status/200")
+        res = described_class.build.get("#{server.base_url}/get")
         json = JSON.parse(res.body.to_s)
         expect(json["headers"]["User-Agent"]).to start_with("mihari/")
       end
