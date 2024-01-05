@@ -35,14 +35,14 @@ RSpec.describe Mihari::Concerns::Retriable do
   describe "#retry_on_error" do
     context "with 404" do
       it do
-        expect { subject.retriable_get("#{server.base_url}/status/404") }.to raise_error(Mihari::StatusCodeError)
+        expect { subject.retriable_get("#{server.base_url}/status/404") }.to raise_error(Mihari::StatusError)
         expect(subject.count).to eq(1)
       end
     end
 
     context "with non-404" do
       it do
-        expect { subject.retriable_get("#{server.base_url}/status/500") }.to raise_error(Mihari::StatusCodeError)
+        expect { subject.retriable_get("#{server.base_url}/status/500") }.to raise_error(Mihari::StatusError)
         expect(subject.count).to eq(subject.times)
       end
     end

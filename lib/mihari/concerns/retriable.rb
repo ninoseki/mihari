@@ -20,7 +20,7 @@ module Mihari
         return true if RETRIABLE_ERRORS.any? { |klass| error.is_a? klass }
 
         case error
-        when StatusCodeError
+        when StatusError
           error.status_code != 404
         else
           false

@@ -11,7 +11,7 @@ module Mihari
       def wrap_response(response)
         return response if response.status.success?
 
-        raise StatusCodeError.new(
+        raise StatusError.new(
           "Unsuccessful response code returned: #{response.code}",
           response.code,
           response.body.to_s

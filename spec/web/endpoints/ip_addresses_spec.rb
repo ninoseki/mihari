@@ -23,7 +23,7 @@ RSpec.describe Mihari::Web::Endpoints::IPAddresses, vcr: "Mihari_Enrichers_MMDB/
       before do
         allow(Mihari::Services::IPGetter).to receive(:result).and_return(
           Dry::Monads::Result::Failure.new(
-            Mihari::StatusCodeError.new("dummy", 404, "")
+            Mihari::StatusError.new("dummy", 404, "")
           )
         )
       end
