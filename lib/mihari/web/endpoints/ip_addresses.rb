@@ -36,7 +36,7 @@ module Mihari
 
             failure = result.failure
             case failure
-            when Mihari::StatusCodeError
+            when Mihari::StatusError
               error!({ message: "IP:#{ip} not found" }, failure.status_code) if failure.status_code == 404
               error!({ message: "IP format invalid" }, failure.status_code) if failure.status_code == 422
             end

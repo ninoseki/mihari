@@ -16,7 +16,7 @@ RSpec.describe Mihari::HTTP::Factory do
       it do
         expect do
           described_class.build.get("#{server.base_url}/status/404")
-        end.to raise_error(Mihari::StatusCodeError)
+        end.to raise_error(Mihari::StatusError)
       end
     end
 

@@ -37,9 +37,9 @@ module Mihari
   class IntegrityError < Error; end
 
   #
-  # HTTP status code error
+  # HTTP status error
   #
-  class StatusCodeError < ::HTTP::Error
+  class StatusError < ::HTTP::Error
     # @return [Integer]
     attr_reader :status_code
 
