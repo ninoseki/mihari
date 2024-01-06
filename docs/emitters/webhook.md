@@ -26,12 +26,12 @@ template: ...
 
 ### Template
 
-`template` (`string`) is an [ERB](https://github.com/ruby/erb) template to customize the payload to sent. A template should generate a valid JSON.
+`template` (`string`) is a [Jbuilder](https://github.com/rails/jbuilder) template string (or a path to a Jbuilder template file) to customize JSON payload to send.
 
-You can use the following parameters inside an ERB template.
+You can use the following attributes inside a JBuilder template.
 
-- `rule`: a rule
-- `artifacts`: a list of artifacts
+- `rule`: a rule (= `Mihari::Rule`)
+- `artifacts`: a list of artifacts (= `Array<Mihari::Models::Artifact>`)
 
 ## Examples
 
@@ -42,22 +42,17 @@ You can use the following parameters inside an ERB template.
   url: https://threatfox-api.abuse.ch/api/v1/
   headers:
     api-key: YOUR_API_KEY
-  template: threatfox.erb
+  template: /path/to/threatfox.json.jbuilder
 ```
 
+**threatfox.json.jbuilder**
+
 ```ruby
-{
-	"query": "submit_ioc",
-	"threat_type": "payload_delivery",
-	"ioc_type": "ip:port",
-	"malware": "foobar",
-	"confidence_level": 100,
-	"anonymous": 0,
-	"iocs": [
-		<% @artifacts.select { |artifact| artifact.data_type == "ip" }.each_with_index do |artifact, idx| %>
-			"<%= artifact.data %>:80"
-			<%= ',' if idx < (@artifacts.length - 1) %>
-		<% end %>
-	]
-}
+json.query "submit_ioc"
+json.threat_type  "payload_delivery"
+json.ioc_type "domain"
+json.malware "foobar"
+json.confidence_level 100
+json.anonymous 0
+json.iocs artifacts.map(&:data)
 ```
