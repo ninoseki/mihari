@@ -4,14 +4,10 @@ RSpec.describe Mihari::Emitters::Webhook do
   include_context "with fake HTTPBin"
 
   let!(:url) { "#{server.base_url}/post" }
-  let!(:artifacts) do
-    [
-      Mihari::Models::Artifact.new(data: "1.1.1.1"),
-      Mihari::Models::Artifact.new(data: "github.com")
-    ]
-  end
 
-  let_it_be(:rule) { Mihari::Rule.from_model FactoryBot.create(:rule) }
+  let_it_be(:artifact) { FactoryBot.create(:artifact) }
+  let_it_be(:artifacts) { [artifact] }
+  let_it_be(:rule) { Mihari::Rule.from_model artifact.rule }
 
   describe "#configured?" do
     context "without URL" do
@@ -32,14 +28,37 @@ RSpec.describe Mihari::Emitters::Webhook do
   end
 
   describe "#call" do
-    subject(:emitter) { described_class.new(rule: rule, url: url, headers: { "Content-Type": "application/json" }) }
+    subject(:emitter) do
+      described_class.new(
+        rule: rule,
+        url: url,
+        headers: { "Content-Type": "application/json" }
+      )
+    end
 
     it do
-      res = emitter.call artifacts
+      res = emitter.call [artifact]
       json = JSON.parse(res)["json"]
       expect(json["rule"]["id"]).to eq(rule.id)
       expect(json["artifacts"]).to eq(artifacts.map(&:data))
       expect(json["tags"]).to eq(rule.tags.map(&:name))
+    end
+
+    context "with a template file" do
+      subject(:emitter) do
+        described_class.new(
+          rule: rule,
+          url: url,
+          template: "spec/fixtures/templates/test.json.jbuilder",
+          headers: { "Content-Type": "application/json" }
+        )
+      end
+
+      it do
+        res = emitter.call [artifact]
+        json = JSON.parse(res)["json"]
+        expect(json["id"]).to eq(rule.id)
+      end
     end
   end
 end

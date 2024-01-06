@@ -1,49 +1,9 @@
 # frozen_string_literal: true
 
-require "erb"
+require "tilt/jbuilder"
 
 module Mihari
   module Emitters
-    class ERBTemplate < ERB
-      class << self
-        def template
-          %{
-            {
-              "rule": {
-                "id": "<%= @rule.id %>",
-                "title": "<%= @rule.title %>",
-                "description": "<%= @rule.description %>"
-              },
-              "artifacts": [
-                <% @artifacts.each_with_index do |artifact, idx| %>
-                  "<%= artifact.data %>"
-                  <%= ',' if idx < (@artifacts.length - 1) %>
-                <% end %>
-              ],
-              "tags": [
-                <% @rule.tags.each_with_index do |tag, idx| %>
-                  "<%= tag.name %>"
-                  <%= ',' if idx < (@rule.tags.length - 1) %>
-                <% end %>
-              ]
-            }
-          }
-        end
-      end
-
-      def initialize(artifacts:, rule:, options: {})
-        @artifacts = artifacts
-        @rule = rule
-
-        @template = options.fetch(:template, self.class.template)
-        super(@template)
-      end
-
-      def result
-        super(binding)
-      end
-    end
-
     class Webhook < Base
       # @return [Addressable::URI, nil]
       attr_reader :url
@@ -54,11 +14,20 @@ module Mihari
       # @return [String]
       attr_reader :method
 
-      # @return [String, nil]
-      attr_reader :template
-
       # @return [Array<Mihari::Models::Artifact>]
       attr_accessor :artifacts
+
+      DEFAULT_TEMPLATE = %{
+          json.rule do
+          json.id rule.id
+          json.title rule.title
+          json.description rule.description
+        end
+
+        json.artifacts artifacts.map(&:data)
+
+        json.tags rule.tags.map(&:name)
+      }
 
       #
       # @param [Mihari::Rule] rule
@@ -71,7 +40,7 @@ module Mihari
         @url = Addressable::URI.parse(params[:url])
         @headers = params[:headers] || {}
         @method = params[:method] || "POST"
-        @template = params[:template]
+        @template = params[:template] || DEFAULT_TEMPLATE
 
         @artifacts = []
       end
@@ -109,20 +78,28 @@ module Mihari
       end
 
       #
+      # @return [String]
+      #
+      def template_string
+        return File.read(@template) if Pathname(@template).exist?
+
+        @template
+      end
+
+      #
+      # @return [Tilt::JbuilderTemplate]
+      #
+      def template
+        Tilt::JbuilderTemplate.new { template_string }
+      end
+
+      #
       # Render template
       #
       # @return [String]
       #
       def render
-        options = {}
-        options[:template] = File.read(template) unless template.nil?
-
-        erb_template = ERBTemplate.new(
-          artifacts: artifacts,
-          rule: rule,
-          options: options
-        )
-        erb_template.result
+        template.render(nil, rule: rule, artifacts: artifacts)
       end
 
       #
