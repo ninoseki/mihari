@@ -28,7 +28,7 @@ module Mihari
     def ip?
       Try[IPAddr::InvalidAddressError] do
         IPAddr.new(data).to_s == data
-      end.to_result.value_or(false)
+      end.recover { false }.value!
     end
 
     # @return [Boolean]
@@ -36,7 +36,7 @@ module Mihari
       Try[Addressable::URI::InvalidURIError] do
         uri = Addressable::URI.parse("http://#{data}")
         uri.host == data && PublicSuffix.valid?(uri.host)
-      end.to_result.value_or(false)
+      end.recover { false }.value!
     end
 
     # @return [Boolean]
@@ -44,7 +44,7 @@ module Mihari
       Try[Addressable::URI::InvalidURIError] do
         uri = Addressable::URI.parse(data)
         uri.scheme && uri.host && uri.path && PublicSuffix.valid?(uri.host)
-      end.to_result.value_or(false)
+      end.recover { false }.value!
     end
 
     # @return [Boolean]
