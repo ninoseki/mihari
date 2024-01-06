@@ -8,13 +8,21 @@ RSpec.describe Mihari::CLI::Alert do
 
   describe "#list" do
     it do
-      expect { described_class.start ["list"] }.to output(include(alert.id.to_s)).to_stdout
+      expect { described_class.new.invoke(:list) }.to output(include(alert.id.to_s)).to_stdout
+    end
+  end
+
+  describe "#list-transform" do
+    it do
+      expect do
+        described_class.new.invoke(:list_transform, [], { template: "json.array! results.map(&:id)" })
+      end.to output(include(alert.id.to_s)).to_stdout
     end
   end
 
   describe "#get" do
     it do
-      expect { described_class.start ["get", alert.id.to_s] }.to output(include(alert.id.to_s)).to_stdout
+      expect { described_class.new.invoke(:get, [alert.id.to_s]) }.to output(include(alert.id.to_s)).to_stdout
     end
   end
 
@@ -30,7 +38,7 @@ RSpec.describe Mihari::CLI::Alert do
     end
 
     it do
-      expect { described_class.start ["create", @file.path] }.to output(include(rule.id)).to_stdout
+      expect { described_class.new.invoke(:create, [@file.path]) }.to output(include(rule.id)).to_stdout
     end
   end
 end

@@ -43,6 +43,9 @@ module Mihari
         rescue StandardError => e
           error = unwrap_error(e)
 
+          # Raise error if it's a Thor::Error to follow Thor's manner
+          raise error if error.is_a?(Thor::Error)
+          # Raise error if debug is set as true
           raise error if options["debug"]
 
           data = Entities::ErrorMessage.represent(

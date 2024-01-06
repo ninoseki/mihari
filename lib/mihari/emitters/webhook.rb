@@ -1,7 +1,5 @@
 # frozen_string_literal: true
 
-require "tilt/jbuilder"
-
 module Mihari
   module Emitters
     class Webhook < Base
@@ -13,6 +11,9 @@ module Mihari
 
       # @return [String]
       attr_reader :method
+
+      # @return [String]
+      attr_reader :template
 
       # @return [Array<Mihari::Models::Artifact>]
       attr_accessor :artifacts
@@ -78,28 +79,12 @@ module Mihari
       end
 
       #
-      # @return [String]
-      #
-      def template_string
-        return File.read(@template) if Pathname(@template).exist?
-
-        @template
-      end
-
-      #
-      # @return [Tilt::JbuilderTemplate]
-      #
-      def template
-        Tilt::JbuilderTemplate.new { template_string }
-      end
-
-      #
       # Render template
       #
       # @return [String]
       #
       def render
-        template.render(nil, rule: rule, artifacts: artifacts)
+        Services::JbuilderRenderer.call(template, { rule: rule, artifacts: artifacts })
       end
 
       #

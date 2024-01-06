@@ -296,6 +296,7 @@ require "mihari/services/feed"
 require "mihari/services/getters"
 require "mihari/services/initializers"
 require "mihari/services/proxies"
+require "mihari/services/renderer"
 require "mihari/services/searchers"
 
 # Entities

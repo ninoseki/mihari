@@ -178,7 +178,44 @@ Searchable fields are
 **Examples**
 
 ```bash
+mihari rule list "description:foo OR title:bar"
 mihari alert list "rule.id:foo"
 mihari artifact list "rule.id: foo AND data_type:ip"
-mihari rule list "description:foo OR title:bar"
 ```
+
+### Search With Transformation
+
+Additionally you can search rules, alerts and artifacts with transformation by using [Jbuilder](https://github.com/rails/jbuilder).
+
+```bash
+mihari rule list-transform -t /path/to/json.jbuilder
+mihari alert list-transform -t /path/to/json.jbuilder
+mihari artifact list-transform -t /path/to/json.jbuilder
+```
+
+For example, you can combine IP addresses and ports by using the following template.
+
+**ip_port.json.jbuilder**
+
+```ruby
+artifacts = results.map(&:artifacts).flatten
+
+ip_ports = artifacts.map do |artifact|
+  artifact.ports.map do |port|
+    "#{artifact.data}:#{port.port}"
+  end
+end.flatten
+
+json.array! ip_ports
+```
+
+```bash
+mihari artifact list-transform -t test.json.jbuilder
+```
+
+A template can use the following attributes.
+
+- `results`: a list of search results (= `Array[Mihari::Models::Rule]`, `Array[Mihari::Models::Alert]`, `Array[Mihari::Models::Artifact]` or `Array[Mihari::Models::Tag]`)
+- `total`: a total number of search results
+- `page_size` a page size
+- `current_page` a current page number
