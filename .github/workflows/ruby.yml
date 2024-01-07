@@ -28,7 +28,7 @@ jobs:
           ruby-version: ${{ matrix.ruby-version }}
           bundler: latest
           bundler-cache: true
-      - name: Test
+      - name: Lint
         run: bundle exec standardrb
   test:
     runs-on: ubuntu-latest
