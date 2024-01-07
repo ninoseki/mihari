@@ -26,7 +26,7 @@ module Mihari
               end
             end
 
-            desc "validate PATH", "Validate a rule file"
+            desc "validate PATH", "Validate a rule"
             #
             # Validate format of a rule
             #
@@ -37,7 +37,7 @@ module Mihari
               puts rule.data.to_yaml
             end
 
-            desc "init PATH", "Initialize a new rule file"
+            desc "init PATH", "Initialize a new rule"
             #
             # Initialize a new rule file
             #
@@ -71,7 +71,7 @@ module Mihari
             desc "list-transform QUERY", "List/search rules with transformation"
             around :with_db_connection
             method_option :template, type: :string, required: true, aliases: "-t",
-              description: "Jbuilder template itself or a path to a template file"
+              desc: "Jbuilder template stringor a path to a template"
             method_option :page, type: :numeric, default: 1
             method_option :limit, type: :numeric, default: 10
             #
