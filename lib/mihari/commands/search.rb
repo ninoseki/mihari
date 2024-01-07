@@ -11,7 +11,7 @@ module Mihari
           thor.class_eval do
             include Concerns::DatabaseConnectable
 
-            desc "search [PATH_OR_ID]", "Search by a rule"
+            desc "search PATH_OR_ID", "Search by a rule"
             around :with_db_connection
             method_option :force_overwrite, type: :boolean, default: false, aliases: "-f",
               desc: "Force overwriting a rule"

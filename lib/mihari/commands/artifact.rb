@@ -25,7 +25,7 @@ module Mihari
               end
             end
 
-            desc "list [QUERY]", "List/search artifacts"
+            desc "list QUERY", "List/search artifacts"
             around :with_db_connection
             method_option :page, type: :numeric, default: 1
             method_option :limit, type: :numeric, default: 10
@@ -65,7 +65,7 @@ module Mihari
               )
             end
 
-            desc "get [ID]", "Get an artifact"
+            desc "get ID", "Get an artifact"
             around :with_db_connection
             #
             # @param [Integer] id
@@ -76,7 +76,7 @@ module Mihari
               puts JSON.pretty_generate(data.as_json)
             end
 
-            desc "enrich [ID]", "Enrich an artifact"
+            desc "enrich ID", "Enrich an artifact"
             around :with_db_connection
             #
             # @param [Integer] id
@@ -85,7 +85,7 @@ module Mihari
               Services::ArtifactEnricher.result(id).value!
             end
 
-            desc "delete [ID]", "Delete an artifact"
+            desc "delete ID", "Delete an artifact"
             around :with_db_connection
             #
             # @param [Integer] id
