@@ -25,7 +25,7 @@ module Mihari
               end
             end
 
-            desc "list", "List/search tags"
+            desc "list QUERY", "List/search tags"
             around :with_db_connection
             method_option :page, type: :numeric, default: 1
             method_option :limit, type: :numeric, default: 10
@@ -65,7 +65,7 @@ module Mihari
               )
             end
 
-            desc "delete [ID]", "Delete a tag"
+            desc "delete ID", "Delete a tag"
             around :with_db_connection
             #
             # @param [Integer] id

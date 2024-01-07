@@ -26,7 +26,7 @@ module Mihari
               end
             end
 
-            desc "validate [PATH]", "Validate a rule file"
+            desc "validate PATH", "Validate a rule file"
             #
             # Validate format of a rule
             #
@@ -37,7 +37,7 @@ module Mihari
               puts rule.data.to_yaml
             end
 
-            desc "init [PATH]", "Initialize a new rule file"
+            desc "init PATH", "Initialize a new rule file"
             #
             # Initialize a new rule file
             #
@@ -50,7 +50,7 @@ module Mihari
               Services::RuleInitializer.call(path)
             end
 
-            desc "list [QUERY]", "List/search rules"
+            desc "list QUERY", "List/search rules"
             around :with_db_connection
             method_option :page, type: :numeric, default: 1
             method_option :limit, type: :numeric, default: 10
@@ -90,7 +90,7 @@ module Mihari
               )
             end
 
-            desc "get [ID]", "Get a rule"
+            desc "get ID", "Get a rule"
             around :with_db_connection
             def get(id)
               value = Services::RuleGetter.result(id).value!
@@ -98,7 +98,7 @@ module Mihari
               puts JSON.pretty_generate(data.as_json)
             end
 
-            desc "delete [ID]", "Delete a rule"
+            desc "delete ID", "Delete a rule"
             around :with_db_connection
             #
             # @param [String] id

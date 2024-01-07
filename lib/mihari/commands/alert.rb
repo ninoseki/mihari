@@ -26,7 +26,7 @@ module Mihari
               end
             end
 
-            desc "create [PATH]", "Create an alert"
+            desc "create PATH", "Create an alert"
             around :with_db_connection
             #
             # @param [String] path
@@ -46,7 +46,7 @@ module Mihari
               puts JSON.pretty_generate(data.as_json)
             end
 
-            desc "list [QUERY]", "List/search alerts"
+            desc "list QUERY", "List/search alerts"
             around :with_db_connection
             method_option :page, type: :numeric, default: 1
             method_option :limit, type: :numeric, default: 10
@@ -86,7 +86,7 @@ module Mihari
               )
             end
 
-            desc "get [ID]", "Get an alert"
+            desc "get ID", "Get an alert"
             around :with_db_connection
             #
             # @param [Integer] id
@@ -97,7 +97,7 @@ module Mihari
               puts JSON.pretty_generate(data.as_json)
             end
 
-            desc "delete [ID]", "Delete an alert"
+            desc "delete ID", "Delete an alert"
             around :with_db_connection
             #
             # @param [Integer] id

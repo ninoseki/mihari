@@ -26,11 +26,12 @@ Options:
 ```bash
 $ mihari alert
 Commands:
-  mihari alert create [PATH]   # Create an alert
-  mihari alert delete [ID]     # Delete an alert
-  mihari alert get [ID]        # Get an alert
-  mihari alert help [COMMAND]  # Describe subcommands or one specific subcommand
-  mihari alert list [QUERY]    # List/search alerts
+  mihari alert create PATH                                   # Create an alert
+  mihari alert delete ID                                     # Delete an alert
+  mihari alert get ID                                        # Get an alert
+  mihari alert help [COMMAND]                                # Describe subcommands or one specific subcommand
+  mihari alert list QUERY                                    # List/search alerts
+  mihari alert list-transform QUERY -t, --template=TEMPLATE  # List/search alerts with transformation
 ```
 
 ### `mihari artifact`
@@ -38,11 +39,12 @@ Commands:
 ```bash
 $ mihari artifact
 Commands:
-  mihari artifact delete [ID]     # Delete an artifact
-  mihari artifact enrich [ID]     # Enrich an artifact
-  mihari artifact get [ID]        # Get an artifact
-  mihari artifact help [COMMAND]  # Describe subcommands or one specific subcommand
-  mihari artifact list [QUERY]    # List/search artifact
+  mihari artifact delete ID                                     # Delete an artifact
+  mihari artifact enrich ID                                     # Enrich an artifact
+  mihari artifact get ID                                        # Get an artifact
+  mihari artifact help [COMMAND]                                # Describe subcommands or one specific subcommand
+  mihari artifact list QUERY                                    # List/search artifacts
+  mihari artifact list-transform QUERY -t, --template=TEMPLATE  # List/search artifacts with transformation
 ```
 
 !!! note
@@ -65,13 +67,14 @@ See [Database](./emitters/database.md) for detailed database configuration.
 ```bash
 $ mihari rule
 Commands:
-  mihari rule delete [ID]          # Delete a rule
-  mihari rule get [ID]             # Get a rule
-  mihari rule help [COMMAND]       # Describe subcommands or one specific subcommand
-  mihari rule init [PATH]          # Initialize a new rule file
-  mihari rule list [QUERY]         # List/search rules
-  mihari rule search [PATH_OR_ID]  # Search by a rule
-  mihari rule validate [PATH]      # Validate a rule file
+  mihari rule delete ID                                     # Delete a rule
+  mihari rule get ID                                        # Get a rule
+  mihari rule help [COMMAND]                                # Describe subcommands or one specific subcommand
+  mihari rule init PATH                                     # Initialize a new rule file
+  mihari rule list QUERY                                    # List/search rules
+  mihari rule list-transform QUERY -t, --template=TEMPLATE  # List/search rules with transformation
+  mihari rule search PATH_OR_ID                             # Search by a rule
+  mihari rule validate PATH                                 # Validate a rule file
 ```
 
 ### `mihari search`
@@ -100,9 +103,10 @@ mihari search -f /path/to/rule.yml
 ```bash
 $ mihari tag
 Commands:
-  mihari tag delete [ID]     # Delete a tag
-  mihari tag help [COMMAND]  # Describe subcommands or one specific subcommand
-  mihari tag list            # List/search tags
+  mihari tag delete ID                                     # Delete a tag
+  mihari tag help [COMMAND]                                # Describe subcommands or one specific subcommand
+  mihari tag list QUERY                                    # List/search tags
+  mihari tag list-transform QUERY -t, --template=TEMPLATE  # List/search tags with transformation
 ```
 
 ### `mihari web`
@@ -215,7 +219,15 @@ mihari artifact list-transform -t test.json.jbuilder
 
 A template can use the following attributes.
 
-- `results`: a list of search results (= `Array[Mihari::Models::Rule]`, `Array[Mihari::Models::Alert]`, `Array[Mihari::Models::Artifact]` or `Array[Mihari::Models::Tag]`)
-- `total`: a total number of search results
-- `page_size` a page size
-- `current_page` a current page number
+| Key            | Type                                                                                                                             | Desc.                            |
+| -------------- | -------------------------------------------------------------------------------------------------------------------------------- | -------------------------------- |
+| `results`      | `Array[Mihari::Models::Rule]`, `Array[Mihari::Models::Alert]`, `Array[Mihari::Models::Artifact]` or `Array[Mihari::Models::Tag]` | A list of search results         |
+| `total`        | Integer                                                                                                                          | A total number of search results |
+| `page_size`    | Integer                                                                                                                          | A page size                      |
+| `current_page` | Integer                                                                                                                          | A current page number            |
+
+!!! warning
+
+    With great power comes great responsibility.
+
+    Jbuilder can execute anything with the same privilege Mihari has. Do not use untrusted template.
