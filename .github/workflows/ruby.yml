@@ -12,9 +12,24 @@ on:
     paths:
       - "lib/**"
       - "mihari.gemspec"
-      - ".github/workflows/**"
+      - ".github/workflows/ruby.yml"
 
 jobs:
+  lint:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        ruby-version: [3.3]
+    steps:
+      - uses: actions/checkout@v4
+      - name: Set up Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: ${{ matrix.ruby-version }}
+          bundler: latest
+          bundler-cache: true
+      - name: Lint
+        run: bundle exec standardrb
   test:
     runs-on: ubuntu-latest
     strategy:
