@@ -46,7 +46,7 @@ module Mihari
             desc "list-transform QUERY", "List/search artifacts with transformation"
             around :with_db_connection
             method_option :template, type: :string, required: true, aliases: "-t",
-              description: "Jbuilder template itself or a path to a template file"
+              desc: "Jbuilder template stringor a path to a template"
             method_option :page, type: :numeric, default: 1
             method_option :limit, type: :numeric, default: 10
             #
