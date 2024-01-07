@@ -1,7 +1,8 @@
 # mihari
 
 [![Gem Version](https://badge.fury.io/rb/mihari.svg)](https://badge.fury.io/rb/mihari)
-[![Ruby CI](https://github.com/ninoseki/mihari/actions/workflows/test.yml/badge.svg)](https://github.com/ninoseki/mihari/actions/workflows/test.yml)
+[![Ruby CI](https://github.com/ninoseki/mihari/actions/workflows/ruby.yml/badge.svg)](https://github.com/ninoseki/mihari/actions/workflows/ruby.yml)
+[![Node.js CI](https://github.com/ninoseki/mihari/actions/workflows/node.yml/badge.svg)](https://github.com/ninoseki/mihari/actions/workflows/node.yml)
 [![Coverage Status](https://coveralls.io/repos/github/ninoseki/mihari/badge.svg?branch=master)](https://coveralls.io/github/ninoseki/mihari?branch=master)
 [![CodeFactor](https://www.codefactor.io/repository/github/ninoseki/mihari/badge)](https://www.codefactor.io/repository/github/ninoseki/mihari)
 
