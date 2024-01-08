@@ -17,6 +17,8 @@ RSpec/MultipleMemoizedHelpers:
   Max: 10
 RSpec/ExampleLength:
   Max: 20
+RSpec/FilePath:
+  SpecSuffixOnly: true
 require:
   - rubocop-factory_bot
   - rubocop-rake
