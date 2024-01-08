@@ -192,9 +192,9 @@ mihari artifact list "rule.id: foo AND data_type:ip"
 Additionally you can search rules, alerts and artifacts with transformation by using [Jbuilder](https://github.com/rails/jbuilder).
 
 ```bash
-mihari rule list-transform -t /path/to/json.jbuilder
-mihari alert list-transform -t /path/to/json.jbuilder
-mihari artifact list-transform -t /path/to/json.jbuilder
+mihari rule list-transform -t /path/to/template
+mihari alert list-transform -t /path/to/template
+mihari artifact list-transform -t /path/to/template
 ```
 
 For example, you can combine IP addresses and ports by using the following template.
@@ -214,7 +214,7 @@ json.array! ip_ports
 ```
 
 ```bash
-mihari artifact list-transform -t test.json.jbuilder
+mihari artifact list-transform -t /path/to/ip_port.json.jbuilder
 ```
 
 A template can use the following attributes.
