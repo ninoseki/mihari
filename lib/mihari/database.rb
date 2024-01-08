@@ -156,7 +156,7 @@ module Mihari
         Mihari::Database.connect unless connected?
         yield
       rescue ActiveRecord::StatementInvalid
-        Mihari.logger.error("The DB migration is not yet complete. Please run 'mihari db migrate'.")
+        Mihari.logger.error("DB migration is not yet complete. Please run 'mihari db migrate'.")
       ensure
         Mihari::Database.close
       end

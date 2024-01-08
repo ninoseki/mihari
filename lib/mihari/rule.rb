@@ -188,20 +188,8 @@ module Mihari
     def bulk_emit
       return [] if enriched_artifacts.empty?
 
-      # NOTE: separate parallel execution and logging
-      #       because the logger does not work along with Parallel
-      results = Parallel.map(emitters) { |emitter| emitter.result enriched_artifacts }
-      results.zip(emitters).map do |result_and_emitter|
-        result, emitter = result_and_emitter
-
-        case result
-        when Success
-          Mihari.logger.info "Emission by #{emitter.class} succeed"
-        else
-          Mihari.logger.info "Emission by #{emitter.class} failed: #{result.failure}"
-        end
-
-        result.value_or nil
+      Parallel.map(emitters) do |emitter|
+        emitter.result(enriched_artifacts).value_or nil
       end.compact
     end
 

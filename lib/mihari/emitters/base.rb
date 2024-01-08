@@ -30,13 +30,17 @@ module Mihari
       # @return [Dry::Monads::Result::Success<Object>, Dry::Monads::Result::Failure]
       #
       def result(artifacts)
-        Try[StandardError] do
+        result = Try[StandardError] do
           retry_on_error(
             times: retry_times,
             interval: retry_interval,
             exponential_backoff: retry_exponential_backoff
           ) { call(artifacts) }
         end.to_result
+
+        Mihari.logger.warn("Emitter:#{self.class.class_key} failed - #{result.failure}") if result.failure?
+
+        result
       end
 
       class << self

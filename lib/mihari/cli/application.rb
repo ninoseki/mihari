@@ -38,6 +38,21 @@ module Mihari
       include Concerns::ErrorUnwrappable
 
       no_commands do
+        #
+        # @param [StandardError] error
+        #
+        # @return [String, Hash, nil]
+        #
+        def error_to_detail(error)
+          # Dirty hack to show the DB error message
+          # (NOTE: #safe_execute block suppress #with_db_connection's error message)
+          if error.is_a?(ActiveRecord::StatementInvalid)
+            return "DB migration is not yet complete. Please run 'mihari db migrate'."
+          end
+
+          error.respond_to?(:detail) ? error.detail : nil
+        end
+
         def safe_execute
           yield
         rescue StandardError => e
@@ -48,10 +63,7 @@ module Mihari
           # Raise error if debug is set as true
           raise error if options["debug"]
 
-          data = Entities::ErrorMessage.represent(
-            message: error.message,
-            detail: error.respond_to?(:detail) ? error.detail : nil
-          )
+          data = Entities::ErrorMessage.represent(message: error.message, detail: error_to_detail(error))
           warn JSON.pretty_generate(data.as_json)
 
           Sentry.capture_exception(error) if Sentry.initialized? && !error.is_a?(ValidationError)

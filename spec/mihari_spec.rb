@@ -8,4 +8,16 @@ RSpec.describe Mihari do
   it "has a config" do
     expect(described_class.config).not_to be nil
   end
+
+  describe "#sidekiq?" do
+    it "returns false in RSpec" do
+      expect(Mihari.sidekiq?).to eq(false)
+    end
+  end
+
+  describe "#puma?" do
+    it "returns false in RSpec" do
+      expect(Mihari.puma?).to eq(false)
+    end
+  end
 end
