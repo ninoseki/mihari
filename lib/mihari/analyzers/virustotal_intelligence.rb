@@ -34,14 +34,14 @@ module Mihari
         #
         # @return [String]
         #
-        def class_key
+        def key
           "virustotal_intelligence"
         end
 
         #
         # @return [Array<String>, nil]
         #
-        def class_key_aliases
+        def key_aliases
           ["vt_intel"]
         end
       end

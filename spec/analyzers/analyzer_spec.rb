@@ -14,7 +14,7 @@ class AnalyzerTest < Mihari::Analyzers::Base
   end
 
   class << self
-    def class_keys
+    def keys
       # NOTE: returns an empty array to prevent adding this class in Mihari#analyzer_to_class
       []
     end

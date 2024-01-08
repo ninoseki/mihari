@@ -46,7 +46,7 @@ module Mihari
         #
         # @return [Array<String>, nil]
         #
-        def class_key_aliases
+        def key_aliases
           ["vt"]
         end
       end
