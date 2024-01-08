@@ -65,7 +65,7 @@ module Mihari
           # It is set automatically in #initialize
           artifact = artifact.is_a?(Models::Artifact) ? artifact : Models::Artifact.new(data: artifact)
 
-          artifact.source = self.class.class_key
+          artifact.source = self.class.key
           artifact.query = query
 
           artifact
@@ -93,11 +93,11 @@ module Mihari
         return result if result.success?
 
         # Wrap failure with AnalyzerError to explicitly name a failed analyzer
-        error = AnalyzerError.new(result.failure.message, self.class.class_key, cause: result.failure)
+        error = AnalyzerError.new(result.failure.message, self.class.key, cause: result.failure)
         return Failure(error) unless ignore_error?
 
         # Return Success if ignore_error? is true with logging
-        Mihari.logger.warn("Analyzer:#{self.class.class_key} failed - #{result.failure}")
+        Mihari.logger.warn("Analyzer:#{self.class.key} failed - #{result.failure}")
         Success([])
       end
 

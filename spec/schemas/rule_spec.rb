@@ -32,7 +32,7 @@ RSpec.describe Mihari::Schemas::RuleContract do
             title: title,
             queries: [{ analyzer: analyzer, query: "foo" }]
           )
-          expect(result.errors.empty?).to be true
+          expect(result.errors.empty?).to eq true
         end
       end
     end

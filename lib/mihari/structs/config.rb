@@ -68,7 +68,7 @@ module Mihari
           begin
             instance = get_dummy(klass)
             new(
-              name: klass.class_key,
+              name: klass.key,
               items: klass.configuration_items,
               configured: instance.configured?,
               type: type

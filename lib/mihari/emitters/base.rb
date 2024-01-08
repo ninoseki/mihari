@@ -38,7 +38,7 @@ module Mihari
           ) { call(artifacts) }
         end.to_result
 
-        Mihari.logger.warn("Emitter:#{self.class.class_key} failed - #{result.failure}") if result.failure?
+        Mihari.logger.warn("Emitter:#{self.class.key} failed - #{result.failure}") if result.failure?
 
         result
       end

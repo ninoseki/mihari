@@ -10,12 +10,12 @@ module Mihari
 
       # Analyzer with API key and pagination
       [
-        Mihari::Analyzers::BinaryEdge.class_keys,
-        Mihari::Analyzers::GreyNoise.class_keys,
-        Mihari::Analyzers::Onyphe.class_keys,
-        Mihari::Analyzers::Shodan.class_keys,
-        Mihari::Analyzers::Urlscan.class_keys,
-        Mihari::Analyzers::VirusTotalIntelligence.class_keys
+        Mihari::Analyzers::BinaryEdge.keys,
+        Mihari::Analyzers::GreyNoise.keys,
+        Mihari::Analyzers::Onyphe.keys,
+        Mihari::Analyzers::Shodan.keys,
+        Mihari::Analyzers::Urlscan.keys,
+        Mihari::Analyzers::VirusTotalIntelligence.keys
       ].each do |keys|
         key = keys.first
         const_set(key.upcase, Dry::Schema.Params do
@@ -28,10 +28,10 @@ module Mihari
 
       # Analyzer with API key
       [
-        Mihari::Analyzers::OTX.class_keys,
-        Mihari::Analyzers::Pulsedive.class_keys,
-        Mihari::Analyzers::VirusTotal.class_keys,
-        Mihari::Analyzers::SecurityTrails.class_keys
+        Mihari::Analyzers::OTX.keys,
+        Mihari::Analyzers::Pulsedive.keys,
+        Mihari::Analyzers::VirusTotal.keys,
+        Mihari::Analyzers::SecurityTrails.keys
       ].each do |keys|
         key = keys.first
         const_set(key.upcase, Dry::Schema.Params do
@@ -43,13 +43,13 @@ module Mihari
       end
 
       DNSTwister = Dry::Schema.Params do
-        required(:analyzer).value(Types::String.enum(*Mihari::Analyzers::DNSTwister.class_keys))
+        required(:analyzer).value(Types::String.enum(*Mihari::Analyzers::DNSTwister.keys))
         required(:query).value(:string)
         optional(:options).hash(AnalyzerOptions)
       end
 
       Censys = Dry::Schema.Params do
-        required(:analyzer).value(Types::String.enum(*Mihari::Analyzers::Censys.class_keys))
+        required(:analyzer).value(Types::String.enum(*Mihari::Analyzers::Censys.keys))
         required(:query).value(:string)
         optional(:id).value(:string)
         optional(:secret).value(:string)
@@ -57,7 +57,7 @@ module Mihari
       end
 
       CIRCL = Dry::Schema.Params do
-        required(:analyzer).value(Types::String.enum(*Mihari::Analyzers::CIRCL.class_keys))
+        required(:analyzer).value(Types::String.enum(*Mihari::Analyzers::CIRCL.keys))
         required(:query).value(:string)
         optional(:username).value(:string)
         optional(:password).value(:string)
@@ -65,7 +65,7 @@ module Mihari
       end
 
       Fofa = Dry::Schema.Params do
-        required(:analyzer).value(Types::String.enum(*Mihari::Analyzers::Fofa.class_keys))
+        required(:analyzer).value(Types::String.enum(*Mihari::Analyzers::Fofa.keys))
         required(:query).value(:string)
         optional(:api_key).value(:string)
         optional(:email).value(:string)
@@ -73,7 +73,7 @@ module Mihari
       end
 
       PassiveTotal = Dry::Schema.Params do
-        required(:analyzer).value(Types::String.enum(*Mihari::Analyzers::PassiveTotal.class_keys))
+        required(:analyzer).value(Types::String.enum(*Mihari::Analyzers::PassiveTotal.keys))
         required(:query).value(:string)
         optional(:username).value(:string)
         optional(:api_key).value(:string)
@@ -81,14 +81,14 @@ module Mihari
       end
 
       ZoomEye = Dry::Schema.Params do
-        required(:analyzer).value(Types::String.enum(*Mihari::Analyzers::ZoomEye.class_keys))
+        required(:analyzer).value(Types::String.enum(*Mihari::Analyzers::ZoomEye.keys))
         required(:query).value(:string)
         required(:type).value(Types::String.enum("host", "web"))
         optional(:options).hash(AnalyzerPaginationOptions)
       end
 
       Crtsh = Dry::Schema.Params do
-        required(:analyzer).value(Types::String.enum(*Mihari::Analyzers::Crtsh.class_keys))
+        required(:analyzer).value(Types::String.enum(*Mihari::Analyzers::Crtsh.keys))
         required(:query).value(:string)
         optional(:exclude_expired).value(:bool).default(true)
         optional(:match).value(Types::String.enum("=", "ILIKE", "LIKE", "single", "any", "FTS")).default(nil)
@@ -96,7 +96,7 @@ module Mihari
       end
 
       HunterHow = Dry::Schema.Params do
-        required(:analyzer).value(Types::String.enum(*Mihari::Analyzers::HunterHow.class_keys))
+        required(:analyzer).value(Types::String.enum(*Mihari::Analyzers::HunterHow.keys))
         required(:query).value(:string)
         required(:start_time).value(:date)
         required(:end_time).value(:date)
@@ -105,7 +105,7 @@ module Mihari
       end
 
       Feed = Dry::Schema.Params do
-        required(:analyzer).value(Types::String.enum(*Mihari::Analyzers::Feed.class_keys))
+        required(:analyzer).value(Types::String.enum(*Mihari::Analyzers::Feed.keys))
         required(:query).value(:string)
         required(:selector).value(:string)
         optional(:method).value(Types::HTTPRequestMethods).default("GET")

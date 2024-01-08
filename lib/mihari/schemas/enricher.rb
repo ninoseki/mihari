@@ -9,22 +9,22 @@ module Mihari
       extend Concerns::Orrable
 
       MMDB = Dry::Schema.Params do
-        required(:enricher).value(Types::String.enum(*Mihari::Enrichers::MMDB.class_keys))
+        required(:enricher).value(Types::String.enum(*Mihari::Enrichers::MMDB.keys))
         optional(:options).hash(Options)
       end
 
       Whois = Dry::Schema.Params do
-        required(:enricher).value(Types::String.enum(*Mihari::Enrichers::Whois.class_keys))
+        required(:enricher).value(Types::String.enum(*Mihari::Enrichers::Whois.keys))
         optional(:options).hash(Options)
       end
 
       Shodan = Dry::Schema.Params do
-        required(:enricher).value(Types::String.enum(*Mihari::Enrichers::Shodan.class_keys))
+        required(:enricher).value(Types::String.enum(*Mihari::Enrichers::Shodan.keys))
         optional(:options).hash(Options)
       end
 
       GooglePublicDNS = Dry::Schema.Params do
-        required(:enricher).value(Types::String.enum(*Mihari::Enrichers::GooglePublicDNS.class_keys))
+        required(:enricher).value(Types::String.enum(*Mihari::Enrichers::GooglePublicDNS.keys))
         optional(:options).hash(Options)
       end
     end

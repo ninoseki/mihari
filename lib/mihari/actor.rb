@@ -55,7 +55,7 @@ module Mihari
 
       joined = self.class.configuration_keys.join(", ")
       be = (self.class.configuration_keys.length > 1) ? "are" : "is"
-      message = "#{self.class.class_key} is not configured correctly. #{joined} #{be} missing."
+      message = "#{self.class.key} is not configured correctly. #{joined} #{be} missing."
       raise ConfigurationError, message
     end
 
@@ -75,22 +75,22 @@ module Mihari
       #
       # @return [String]
       #
-      def class_key
+      def key
         to_s.split("::").last.downcase
       end
 
       #
       # @return [Array<String>, nil]
       #
-      def class_key_aliases
+      def key_aliases
         nil
       end
 
       #
       # @return [Array<String>]
       #
-      def class_keys
-        ([class_key] + [class_key_aliases]).flatten.compact.map(&:downcase)
+      def keys
+        ([key] + [key_aliases]).flatten.compact.map(&:downcase)
       end
     end
   end

@@ -21,7 +21,7 @@ module Mihari
         #
         # @return [String]
         #
-        def class_key
+        def key
           "google_public_dns"
         end
       end
