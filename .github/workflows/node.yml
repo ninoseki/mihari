@@ -5,7 +5,7 @@ on:
     branches: [master]
     paths:
       - "frontend/**"
-      - ".github/workflows/**"
+      - ".github/workflows/node.yml"
   pull_request:
     branches: [master]
     paths:
