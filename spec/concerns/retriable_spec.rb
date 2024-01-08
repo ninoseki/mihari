@@ -40,6 +40,13 @@ RSpec.describe Mihari::Concerns::Retriable do
       end
     end
 
+    context "with 401" do
+      it do
+        expect { subject.retriable_get("#{server.base_url}/status/401") }.to raise_error(Mihari::StatusError)
+        expect(subject.count).to eq(1)
+      end
+    end
+
     context "with non-404" do
       it do
         expect { subject.retriable_get("#{server.base_url}/status/500") }.to raise_error(Mihari::StatusError)
