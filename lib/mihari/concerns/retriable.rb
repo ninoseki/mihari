@@ -21,7 +21,7 @@ module Mihari
 
         case error
         when StatusError
-          error.status_code != 404
+          ![401, 404].include?(error.status_code)
         else
           false
         end
