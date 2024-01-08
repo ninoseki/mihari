@@ -6,7 +6,8 @@ on:
     paths:
       - "lib/**"
       - "mihari.gemspec"
-      - ".github/workflows/**"
+      - "Rakefile"
+      - ".github/workflows/ruby.yml"
   pull_request:
     branches: [master]
     paths:
