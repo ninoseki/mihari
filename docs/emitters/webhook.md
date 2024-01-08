@@ -28,10 +28,12 @@ template: ...
 
 `template` (`string`) is a [Jbuilder](https://github.com/rails/jbuilder) template string (or a path to a Jbuilder template file) to customize JSON payload to send.
 
-You can use the following attributes inside a JBuilder template.
+You can use the following attributes inside a Jbuilder template.
 
-- `rule`: a rule (= `Mihari::Rule`)
-- `artifacts`: a list of artifacts (= `Array<Mihari::Models::Artifact>`)
+| Key         | Type                              | Desc.               |
+| ----------- | --------------------------------- | ------------------- |
+| `rule`      | `Mihari::Rule`                    | A rule              |
+| `artifacts` | `Array[Mihari::Models::Artifact]` | A list of artifacts |
 
 ## Examples
 
@@ -56,3 +58,9 @@ json.confidence_level 100
 json.anonymous 0
 json.iocs artifacts.map(&:data)
 ```
+
+!!! warning
+
+    With great power comes great responsibility.
+
+    Jbuilder can execute anything with the same privilege Mihari has. Do not use untrusted template.

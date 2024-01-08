@@ -27,7 +27,7 @@ nav:
       - Analyzers: analyzers/index.md
       - Enrichers: enrichers/index.md
       - Emitters: emitters/index.md
-      - Database: database.md
+      - Diagrams: diagrams.md
       - Tags: tags.md
   - Development: dev.md
 
