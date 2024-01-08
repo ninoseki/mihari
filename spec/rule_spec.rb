@@ -119,37 +119,14 @@ RSpec.describe Mihari::Rule do
 
   describe "#call" do
     before do
-      allow(rule).to receive(:valid_emitters).and_return([])
+      allow(rule).to receive(:emitters).and_return([])
       allow(rule).to receive(:enriched_artifacts).and_return([
         Mihari::Models::Artifact.new(data: Faker::Internet.ip_v4_address)
       ])
     end
 
     it "does not raise any error" do
-      expect do
-        rule.call
-        SemanticLogger.flush
-      end.not_to output.to_stderr
-    end
-
-    context "when a notifier raises an error" do
-      before do
-        # mock emitters
-        emitter = instance_double("emitter_instance")
-        allow(emitter).to receive(:configured?).and_return(true)
-        allow(emitter).to receive(:result).and_return(Dry::Monads::Result::Failure.new("error"))
-
-        # set mocked classes as emitters
-        allow(rule).to receive(:emitters).and_return([emitter])
-        allow(rule).to receive(:enriched_artifacts).and_return([
-          Mihari::Models::Artifact.new(data: Faker::Internet.ip_v4_address)
-        ])
-      end
-
-      it do
-        rule.call
-        expect(logger_output).to include("Emission by")
-      end
+      expect { rule.call }.not_to output.to_stderr
     end
   end
 

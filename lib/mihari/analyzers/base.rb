@@ -80,7 +80,7 @@ module Mihari
       end
 
       def result(...)
-        res = Try[StandardError] do
+        result = Try[StandardError] do
           retry_on_error(
             times: retry_times,
             interval: retry_interval,
@@ -88,19 +88,17 @@ module Mihari
           ) do
             call(...)
           end
-        end
+        end.to_result
 
-        return res.recover { [] } if ignore_error?
-
-        result = res.to_result
         return result if result.success?
 
         # Wrap failure with AnalyzerError to explicitly name a failed analyzer
-        Failure AnalyzerError.new(
-          result.failure.message,
-          self.class.class_key,
-          cause: result.failure
-        )
+        error = AnalyzerError.new(result.failure.message, self.class.class_key, cause: result.failure)
+        return Failure(error) unless ignore_error?
+
+        # Return Success if ignore_error? is true with logging
+        Mihari.logger.warn("Analyzer:#{self.class.class_key} failed - #{result.failure}")
+        Success([])
       end
 
       class << self

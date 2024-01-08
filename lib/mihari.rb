@@ -125,6 +125,8 @@ module Mihari
     end
 
     def logger
+      SemanticLogger.sync! unless puma?
+
       SemanticLogger.default_level = :info
       SemanticLogger.add_appender(io: $stderr, formatter: :color)
       SemanticLogger["Mihari"]
@@ -150,6 +152,15 @@ module Mihari
     #
     def sidekiq?
       !Mihari.config.sidekiq_redis_url.nil?
+    end
+
+    #
+    # @return [Boolean]
+    #
+    def puma?
+      !Puma.stats.nil?
+    rescue StandardError
+      false
     end
 
     def initialize_sentry

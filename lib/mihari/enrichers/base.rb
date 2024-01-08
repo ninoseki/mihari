@@ -20,16 +20,22 @@ module Mihari
       end
 
       #
+      # @param [Mihari::Models::Artifact] value
+      #
       # @return [Dry::Monads::Result::Success<Object>, Dry::Monads::Result::Failure]
       #
       def result(value)
-        Try[StandardError] do
+        result = Try[StandardError] do
           retry_on_error(
             times: retry_times,
             interval: retry_interval,
             exponential_backoff: retry_exponential_backoff
           ) { call value }
         end.to_result
+
+        Mihari.logger.warn("Enricher:#{self.class.class_key} failed: #{result.failure}") if result.failure?
+
+        result
       end
 
       class << self
