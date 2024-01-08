@@ -27,5 +27,7 @@ coverage
 *.sln
 *.sw?
 
-# redoc
+# Swagger & ReDoc
+swagger.yaml
 public/redoc-static.html
+

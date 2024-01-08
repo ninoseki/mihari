@@ -7,9 +7,47 @@ RSpec::Core::RakeTask.new(:spec)
 
 task default: :spec
 
-desc "run rackup (via rerun)"
+desc "Run rackup (with rerun)"
 task :rackup do
   sh "rerun --pattern '{Gemfile.lock,lib/**/*.rb,lib/*.rb}' -- rackup config.ru"
+end
+
+def recursive_delete(hash, to_remove)
+  hash.delete(to_remove)
+  hash.each_value do |value|
+    recursive_delete(value, to_remove) if value.is_a? Hash
+  end
+end
+
+def build_swagger_doc(path)
+  require_relative "lib/mihari"
+  require_relative "lib/mihari/web/application"
+
+  require "rack/test"
+
+  app = Mihari::Web::App.new
+  session = Rack::Test::Session.new(app)
+
+  res = session.request("/api/swagger_doc")
+
+  json = JSON.parse(res.body.to_s)
+  # remove host because it can be varied
+  keys_to_remove = %w[host]
+  keys_to_remove.each do |key|
+    recursive_delete json, key
+  end
+
+  f = File.open(path, "w")
+  f.write json.to_yaml
+  f.close
+end
+
+namespace :build do
+  desc "Build Swagger doc"
+  task :swagger, [:path] do |_t, args|
+    args.with_defaults(path: "./frontend/swagger.yaml")
+    build_swagger_doc args.path
+  end
 end
 
 def ci?
