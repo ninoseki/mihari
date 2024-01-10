@@ -2,7 +2,7 @@
 tags:
   - Enrichment:Port
   - Enrichment:CPE
-  - Enrichment:DNS_Record
+  - Enrichment:Reverse_DNS_Name
 ---
 
 # Shodan (The InternetDB API)
