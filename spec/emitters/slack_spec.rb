@@ -72,4 +72,10 @@ RSpec.describe Mihari::Emitters::Slack do
       expect(mock).to have_received(:post).once
     end
   end
+
+  describe "#target" do
+    it do
+      expect(emitter.target).to be_a(String)
+    end
+  end
 end

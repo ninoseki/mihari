@@ -42,4 +42,10 @@ RSpec.describe Mihari::Emitters::TheHive, :vcr do
       expect(mock_client).to have_received(:alert)
     end
   end
+
+  describe "#target" do
+    it do
+      expect(emitter.target).to be_a(String)
+    end
+  end
 end

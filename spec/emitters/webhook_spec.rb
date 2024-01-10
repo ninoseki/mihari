@@ -11,7 +11,7 @@ RSpec.describe Mihari::Emitters::Webhook do
 
   describe "#configured?" do
     context "without URL" do
-      subject(:emitter) { described_class.new(rule: rule) }
+      let(:emitter) { described_class.new(rule: rule) }
 
       it do
         expect(emitter.configured?).to be false
@@ -19,7 +19,7 @@ RSpec.describe Mihari::Emitters::Webhook do
     end
 
     context "with URL" do
-      subject(:emitter) { described_class.new(rule: rule, url: url) }
+      let(:emitter) { described_class.new(rule: rule, url: url) }
 
       it do
         expect(emitter.configured?).to be true
@@ -28,7 +28,7 @@ RSpec.describe Mihari::Emitters::Webhook do
   end
 
   describe "#call" do
-    subject(:emitter) do
+    let(:emitter) do
       described_class.new(
         rule: rule,
         url: url,
@@ -45,7 +45,7 @@ RSpec.describe Mihari::Emitters::Webhook do
     end
 
     context "with a template file" do
-      subject(:emitter) do
+      let(:emitter) do
         described_class.new(
           rule: rule,
           url: url,
@@ -59,6 +59,14 @@ RSpec.describe Mihari::Emitters::Webhook do
         json = JSON.parse(res)["json"]
         expect(json["id"]).to eq(rule.id)
       end
+    end
+  end
+
+  describe "#target" do
+    let(:emitter) { described_class.new(rule: rule, url: url) }
+
+    it do
+      expect(emitter.target).to be_a(String)
     end
   end
 end

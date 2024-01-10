@@ -26,4 +26,10 @@ RSpec.describe Mihari::Emitters::MISP, :vcr do
       emitter.call artifacts
     end
   end
+
+  describe "#target" do
+    it do
+      expect(emitter.target).to be_a(String)
+    end
+  end
 end
