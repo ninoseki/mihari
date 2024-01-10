@@ -56,7 +56,10 @@ end
 
 unless ci?
   task :build do
-    sh "./build_frontend.sh"
+    sh "cd frontend && npm install && npm run build"
+    sh "rm -rf ./lib/mihari/web/public/"
+    sh "mkdir -p ./lib/mihari/web/public/"
+    sh "cp -r frontend/dist/* ./lib/mihari/web/public"
   end
 end
 

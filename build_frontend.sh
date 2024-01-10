@@ -3,7 +3,7 @@
 CURRENT_DIR=${PWD}
 
 cd frontend
-npm ci
+npm install
 npm run build
 
 trash -r ${CURRENT_DIR}/lib/mihari/web/public/
