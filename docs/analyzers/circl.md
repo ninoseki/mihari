@@ -12,8 +12,8 @@ tags:
 
 This analyzer uses CIRCL passive DNS API or passive SSL API:
 
-- Use passive DNS API if a query(input) is a domain
-- Use passive SSL API if a query(input) is a SHA1 certificate fingerprint
+- Use passive DNS API if a query is a domain
+- Use passive SSL API if a query is a SHA1 certificate fingerprint
 
 ```yaml
 analyzer: circl

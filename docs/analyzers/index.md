@@ -71,7 +71,7 @@ options:
 
 `ignore_error` (`bool`) controls whether to ignore an error or not. Optional. Defaults to `false`.
 
-Mihari uses fail-fast approach. For example, if Shodan returns an error, the Censys query next is not triggered because Mihari raises an error before it.
+Mihari uses fail-fast approach. For example, if the first Shodan analyzer fails, the second Censys analyzer will not be triggered because Mihari will fail before it.
 
 ```yaml
 queries:
@@ -81,7 +81,7 @@ queries:
     query: ip:8.8.8.8
 ```
 
-You can set `ignore_error` option to make it fault tolerance.
+You can set `ignore_error` option to make it fault-tolerant.
 
 ```yaml
 queries:
