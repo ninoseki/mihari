@@ -97,8 +97,17 @@ module Mihari
         return Failure(error) unless ignore_error?
 
         # Return Success if ignore_error? is true with logging
-        Mihari.logger.warn("Analyzer:#{self.class.key} failed - #{result.failure}")
+        Mihari.logger.warn("Analyzer:#{self.class.key} with #{truncated_query} failed - #{result.failure}")
         Success([])
+      end
+
+      #
+      # Truncate query for logging
+      #
+      # @return [String]
+      #
+      def truncated_query
+        query.truncate(32)
       end
 
       class << self
