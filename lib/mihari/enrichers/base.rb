@@ -33,7 +33,9 @@ module Mihari
           ) { call value }
         end.to_result
 
-        Mihari.logger.warn("Enricher:#{self.class.key} failed: #{result.failure}") if result.failure?
+        if result.failure?
+          Mihari.logger.warn("Enricher:#{self.class.key} for #{value.truncate(32)} failed: #{result.failure}")
+        end
 
         result
       end

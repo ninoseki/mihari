@@ -19,6 +19,14 @@ module Mihari
         @rule = rule
       end
 
+      # A target to emit the data
+      #
+      # @return [String]
+      #
+      def target
+        raise NotImplementedError, "You must implement #{self.class}##{__method__}"
+      end
+
       #
       # @param [Array<Mihari::Models::Artifact>] artifacts
       #
@@ -38,7 +46,9 @@ module Mihari
           ) { call(artifacts) }
         end.to_result
 
-        Mihari.logger.warn("Emitter:#{self.class.key} failed - #{result.failure}") if result.failure?
+        if result.failure?
+          Mihari.logger.warn("Emitter:#{self.class.key} for #{target.truncate(32)} failed - #{result.failure}")
+        end
 
         result
       end

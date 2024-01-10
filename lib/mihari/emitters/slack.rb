@@ -166,6 +166,13 @@ module Mihari
       end
 
       #
+      # @return [String]
+      #
+      def target
+        channel
+      end
+
+      #
       # @return [::Slack::Notifier]
       #
       def notifier

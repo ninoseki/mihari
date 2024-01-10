@@ -56,6 +56,13 @@ module Mihari
         })
       end
 
+      #
+      # @return [String]
+      #
+      def target
+        URI(url).host || "N/A"
+      end
+
       class << self
         def configuration_keys
           %w[misp_url misp_api_key]

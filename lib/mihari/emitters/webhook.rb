@@ -56,6 +56,13 @@ module Mihari
       end
 
       #
+      # @return [String]
+      #
+      def target
+        URI(url).host || "N/A"
+      end
+
+      #
       # @param [Array<Mihari::Models::Artifact>] artifacts
       #
       def call(artifacts)

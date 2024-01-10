@@ -39,4 +39,11 @@ RSpec.describe Mihari::Analyzers::Base, :vcr do
       expect(test.normalized_artifacts.map(&:data)).to eq(%w[1.1.1.1 2.2.2.2 example.com google.com])
     end
   end
+
+  describe "#truncated_query" do
+    it do
+      analyzer = AnalyzerTest.new(Faker::String.random(length: 64))
+      expect(analyzer.truncated_query.length).to eq(32)
+    end
+  end
 end

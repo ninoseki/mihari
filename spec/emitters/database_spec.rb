@@ -18,4 +18,10 @@ RSpec.describe Mihari::Emitters::Database do
       expect(created_artifacts.length).to eq(artifacts.length)
     end
   end
+
+  describe "#target" do
+    it do
+      expect(emitter.target).to be_a(String)
+    end
+  end
 end
