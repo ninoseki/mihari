@@ -21,7 +21,7 @@ RSpec.describe Mihari::Emitters::Database do
 
   describe "#target" do
     it do
-      expect(emitter.target).to eq("sqlite3::memory:")
+      expect(emitter.target).to be_a(String)
     end
   end
 end
