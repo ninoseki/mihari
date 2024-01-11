@@ -53,7 +53,7 @@ module Mihari
     def validate_configuration!
       return if configured?
 
-      joined = self.class.configuration_keys.join(", ")
+      joined = self.class.configuration_keys.map(&:upcase).join(", ")
       be = (self.class.configuration_keys.length > 1) ? "are" : "is"
       message = "#{self.class.key} is not configured correctly. #{joined} #{be} missing."
       raise ConfigurationError, message
