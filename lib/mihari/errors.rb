@@ -7,7 +7,20 @@ module Mihari
 
   class ValueError < Error; end
 
-  class ConfigurationError < Error; end
+  class ConfigurationError < Error
+    # @return [Array<String>, nil]
+    attr_reader :detail
+
+    #
+    # @param [String] msg
+    # @param [Array<String>, nil] detail
+    #
+    def initialize(msg, detail)
+      super(msg)
+
+      @detail = detail
+    end
+  end
 
   class ResponseError < Error; end
 

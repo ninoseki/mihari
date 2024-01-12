@@ -53,10 +53,10 @@ module Mihari
     def validate_configuration!
       return if configured?
 
-      joined = self.class.configuration_keys.map(&:upcase).join(", ")
-      be = (self.class.configuration_keys.length > 1) ? "are" : "is"
-      message = "#{self.class.key} is not configured correctly. #{joined} #{be} missing."
-      raise ConfigurationError, message
+      message = "#{self.class.type.capitalize}:#{self.class.key} is not configured correctly"
+      detail = self.class.configuration_keys.map { |key| "#{key.upcase} is missing" }
+
+      raise ConfigurationError.new(message, detail)
     end
 
     def call(*args, **kwargs)
@@ -91,6 +91,14 @@ module Mihari
       #
       def keys
         ([key] + [key_aliases]).flatten.compact.map(&:downcase)
+      end
+
+      def type
+        return "analyzer" if ancestors.include?(Mihari::Analyzers::Base)
+        return "emitter" if ancestors.include?(Mihari::Emitters::Base)
+        return "enricher" if ancestors.include?(Mihari::Enrichers::Base)
+
+        nil
       end
     end
   end

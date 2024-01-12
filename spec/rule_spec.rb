@@ -113,7 +113,9 @@ RSpec.describe Mihari::Rule do
     end
 
     it do
-      expect { rule.artifacts }.to raise_error(Mihari::ConfigurationError, /shodan is not configured correctly/)
+      expect do
+        rule.artifacts
+      end.to raise_error(Mihari::ConfigurationError, /Analyzer:shodan is not configured correctly/)
     end
   end
 
