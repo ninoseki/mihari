@@ -21,21 +21,6 @@ module Mihari
 
       class << self
         #
-        # Get a type of a class
-        #
-        # @param [Class<Mihari::Analyzers::Base>, Class<Mihari::Emitters::Base>, Class<Mihari::Enrichers::Base>] klass
-        #
-        # @return [String, nil]
-        #
-        def get_type(klass)
-          return "analyzer" if klass.ancestors.include?(Mihari::Analyzers::Base)
-          return "emitter" if klass.ancestors.include?(Mihari::Emitters::Base)
-          return "enricher" if klass.ancestors.include?(Mihari::Enrichers::Base)
-
-          nil
-        end
-
-        #
         # Get a dummy instance
         #
         # @param [Class<Mihari::Analyzers::Base>, Class<Mihari::Emitters::Base>, Class<Mihari::Enrichers::Base>] klass
@@ -43,8 +28,7 @@ module Mihari
         # @return [Mihari::Analyzers::Base, Mihari::Emitter::Base, Mihari::Enricher::Base] dummy
         #
         def get_dummy(klass)
-          type = get_type(klass)
-          case type
+          case klass.type
           when "analyzer"
             klass.new("dummy")
           when "emitter"
@@ -62,8 +46,7 @@ module Mihari
         def from_class(klass)
           return nil if klass == Mihari::Rule
 
-          type = get_type(klass)
-          return nil if type.nil?
+          return nil if klass.type.nil?
 
           begin
             instance = get_dummy(klass)
@@ -71,7 +54,7 @@ module Mihari
               name: klass.key,
               items: klass.configuration_items,
               configured: instance.configured?,
-              type: type
+              type: klass.type
             )
           rescue ArgumentError
             nil
