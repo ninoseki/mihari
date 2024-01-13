@@ -3,7 +3,7 @@
 RSpec.describe Mihari::Jobs::ArtifactEnrichJob do
   include_context "with faked Sidekiq configuration"
 
-  let!(:artifact) { FactoryBot.create(:artifact, :mail) }
+  let!(:artifact) { FactoryBot.create(:artifact, :unenrichable) }
 
   it do
     Sidekiq::Testing.inline! do

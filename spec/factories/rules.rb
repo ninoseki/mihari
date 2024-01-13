@@ -23,11 +23,7 @@ FactoryBot.define do
       end
 
       after(:create) do |rule, context|
-        create_list(
-          :alert_with_artifacts,
-          context.alerts_count,
-          rule: rule
-        )
+        create_list(:alert_with_artifacts, context.alerts_count, rule: rule)
       end
     end
   end
