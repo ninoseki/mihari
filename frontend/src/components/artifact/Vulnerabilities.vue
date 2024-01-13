@@ -1,8 +1,12 @@
 <template>
   <div class="tags are-medium">
-    <span class="tag" v-for="vuln in vulnerabilities" :key="vuln.name">
-      {{ vuln.name }}
-    </span>
+    <router-link
+      class="tag"
+      v-for="vuln in vulnerabilities"
+      :key="vuln.name"
+      :to="{ name: 'Artifacts', query: { q: getQuery(vuln.name) } }"
+      >{{ vuln.name }}</router-link
+    >
   </div>
 </template>
 
@@ -18,6 +22,12 @@ export default defineComponent({
       type: Array as PropType<Vulnerability[]>,
       required: true
     }
+  },
+  setup() {
+    const getQuery = (name: string) => {
+      return `vuln:"${name}"`
+    }
+    return { getQuery }
   }
 })
 </script>

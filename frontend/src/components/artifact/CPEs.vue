@@ -1,8 +1,12 @@
 <template>
   <div class="tags are-medium">
-    <span class="tag" v-for="cpe in cpes" :key="cpe.name">
-      {{ cpe.name }}
-    </span>
+    <router-link
+      class="tag"
+      v-for="cpe in cpes"
+      :key="cpe.name"
+      :to="{ name: 'Artifacts', query: { q: getQuery(cpe.name) } }"
+      >{{ cpe.name }}</router-link
+    >
   </div>
 </template>
 
@@ -18,6 +22,12 @@ export default defineComponent({
       type: Array as PropType<CPE[]>,
       required: true
     }
+  },
+  setup() {
+    const getQuery = (name: string) => {
+      return `cpe:"${name}"`
+    }
+    return { getQuery }
   }
 })
 </script>

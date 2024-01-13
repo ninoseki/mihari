@@ -1,8 +1,12 @@
 <template>
   <div class="tags are-medium">
-    <span class="tag" v-for="reverseDnsName in reverseDnsNames" :key="reverseDnsName.name">
-      {{ reverseDnsName.name }}
-    </span>
+    <router-link
+      class="tag"
+      v-for="reverseDnsName in reverseDnsNames"
+      :key="reverseDnsName.name"
+      :to="{ name: 'Artifacts', query: { q: getQuery(reverseDnsName.name) } }"
+      >{{ reverseDnsName.name }}</router-link
+    >
   </div>
 </template>
 
@@ -18,6 +22,13 @@ export default defineComponent({
       type: Array as PropType<ReverseDnsName[]>,
       required: true
     }
+  },
+  setup() {
+    const getQuery = (name: string) => {
+      return `reverse_dns_name:"${name}"`
+    }
+
+    return { getQuery }
   }
 })
 </script>
