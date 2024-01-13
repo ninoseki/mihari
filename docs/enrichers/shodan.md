@@ -3,6 +3,7 @@ tags:
   - Enrichment:Port
   - Enrichment:CPE
   - Enrichment:Reverse_DNS_Name
+  - Enrichment:Vulnerability
 ---
 
 # Shodan (The InternetDB API)
@@ -16,6 +17,13 @@ This enricher uses Shodan InternetDB API to enrich an artifact.
 ```yaml
 enricher: shodan
 ```
+
+This enricher can add the following components:
+
+- Ports
+- CPEs
+- Reverse DNS names
+- Vulnerabilities
 
 ## Supported Artifacts
 

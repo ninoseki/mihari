@@ -33,7 +33,7 @@ module Mihari
       #
       def call(ip, enricher: Enrichers::MMDB.new)
         enricher.result(ip).fmap do |res|
-          Models::AutonomousSystem.new(asn: res.asn) if res.asn
+          Models::AutonomousSystem.new(number: res.asn) if res.asn
         end.value_or nil
       end
     end
@@ -52,7 +52,7 @@ module Mihari
       #
       def call(ip, enricher: Enrichers::Shodan.new)
         enricher.result(ip).fmap do |res|
-          (res&.cpes || []).map { |cpe| Models::CPE.new(cpe: cpe) }
+          (res&.cpes || []).map { |cpe| Models::CPE.new(name: cpe) }
         end.value_or []
       end
     end
@@ -114,7 +114,7 @@ module Mihari
       #
       def call(ip, enricher: Enrichers::Shodan.new)
         enricher.result(ip).fmap do |res|
-          (res&.ports || []).map { |port| Models::Port.new(port: port) }
+          (res&.ports || []).map { |port| Models::Port.new(number: port) }
         end.value_or []
       end
     end
@@ -134,6 +134,25 @@ module Mihari
       def call(ip, enricher: Enrichers::Shodan.new)
         enricher.result(ip).fmap do |res|
           (res&.hostnames || []).map { |name| Models::ReverseDnsName.new(name: name) }
+        end.value_or []
+      end
+    end
+
+    #
+    # Vulnerability builder
+    #
+    class VulnerabilityBuilder < Service
+      #
+      # Build vulnerabilities
+      #
+      # @param [String] ip
+      # @param [Mihari::Enrichers::Shodan] enricher
+      #
+      # @return [Array<Mihari::Models::Vulnerability>]
+      #
+      def call(ip, enricher: Enrichers::Shodan.new)
+        enricher.result(ip).fmap do |res|
+          (res&.vulns || []).map { |name| Models::Vulnerability.new(name: name) }
         end.value_or []
       end
     end

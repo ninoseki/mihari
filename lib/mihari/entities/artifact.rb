@@ -36,6 +36,10 @@ module Mihari
         as: :ports do |status, _options|
         status.ports.empty? ? nil : status.ports
       end
+      expose :vulnerabilities, using: Vulnerability, documentation: { type: Vulnerability, is_array: true, required: false },
+        as: :vulnerabilities do |status, _options|
+        status.vulnerabilities.empty? ? nil : status.vulnerabilities
+      end
     end
 
     class ArtifactsWithPagination < Pagination

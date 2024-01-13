@@ -22,7 +22,7 @@ module Mihari
         # @return [Mihari::AutonomousSystem]
         #
         def as
-          Mihari::Models::AutonomousSystem.new(asn: normalize_asn(asn))
+          Mihari::Models::AutonomousSystem.new(number: normalize_asn(asn))
         end
 
         #

@@ -1,0 +1,55 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: https://internetdb.shodan.io/120.78.59.202
+    body:
+      encoding: ASCII-8BIT
+      string: ''
+    headers:
+      User-Agent:
+      - mihari/7.1.3
+      Connection:
+      - close
+      Host:
+      - internetdb.shodan.io
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Sat, 13 Jan 2024 06:25:25 GMT
+      Content-Type:
+      - application/json
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - close
+      Cache-Control:
+      - public, max-age=432000
+      Vary:
+      - Accept-Encoding
+      Last-Modified:
+      - Sat, 13 Jan 2024 06:12:59 GMT
+      Cf-Cache-Status:
+      - HIT
+      Age:
+      - '746'
+      Expires:
+      - Thu, 18 Jan 2024 06:25:25 GMT
+      Permissions-Policy:
+      - interest-cohort=()
+      Access-Control-Allow-Origin:
+      - "*"
+      Server:
+      - cloudflare
+      Cf-Ray:
+      - 844b8fd469e9e384-NRT
+      Alt-Svc:
+      - h3=":443"; ma=86400
+    body:
+      encoding: UTF-8
+      string: '{"cpes":["cpe:/a:mysql:mysql","cpe:/a:php:php:7.4.8","cpe:/a:apache:http_server:2.4.38","cpe:/a:php:php:7.0.19","cpe:/a:f5:nginx:1.11.13","cpe:/a:wordpress:wordpress","cpe:/a:openbsd:openssh:7.4","cpe:/a:jquery:jquery","cpe:/a:php:php"],"hostnames":["api02t.c.ylt100.cn"],"ip":"120.78.59.202","ports":[22,80,443,3306,8081,8090],"tags":["database","eol-product"],"vulns":["CVE-2019-9516","CVE-2017-11144","CVE-2017-16642","CVE-2019-9020","CVE-2018-17082","CVE-2019-9675","CVE-2019-10098","CVE-2016-1283","CVE-2017-9226","CVE-2017-9229","CVE-2021-26690","CVE-2019-6110","CVE-2023-25690","CVE-2017-12933","CVE-2019-17567","CVE-2018-14851","CVE-2017-7963","CVE-2022-22721","CVE-2020-7070","CVE-2023-27522","CVE-2018-20783","CVE-2019-20372","CVE-2023-38408","CVE-2022-31813","CVE-2020-9490","CVE-2021-44224","CVE-2021-36160","CVE-2020-7069","CVE-2018-10546","CVE-2018-15919","CVE-2017-7890","CVE-2019-6111","CVE-2015-9253","CVE-2017-9120","CVE-2022-28330","CVE-2019-9511","CVE-2019-0217","CVE-2021-40438","CVE-2019-9513","CVE-2020-1927","CVE-2021-39275","CVE-2018-14884","CVE-2022-37436","CVE-2022-31628","CVE-2021-26691","CVE-2021-33193","CVE-2022-37454","CVE-2017-12932","CVE-2018-14883","CVE-2020-11984","CVE-2016-20012","CVE-2019-10097","CVE-2022-26377","CVE-2017-20005","CVE-2019-0196","CVE-2017-9118","CVE-2017-12934","CVE-2022-31630","CVE-2021-44790","CVE-2022-31625","CVE-2020-11993","CVE-2018-16843","CVE-2018-19935","CVE-2022-28615","CVE-2020-7071","CVE-2021-21706","CVE-2022-31626","CVE-2018-7584","CVE-2020-15778","CVE-2019-10092","CVE-2017-9227","CVE-2021-21704","CVE-2021-21702","CVE-2021-21705","CVE-2017-11628","CVE-2019-9639","CVE-2019-10082","CVE-2015-8866","CVE-2019-9517","CVE-2018-19396","CVE-2022-22720","CVE-2022-30556","CVE-2017-11362","CVE-2020-14145","CVE-2022-23943","CVE-2017-9224","CVE-2019-6109","CVE-2021-3618","CVE-2019-0215","CVE-2018-10547","CVE-2019-10081","CVE-2017-9228","CVE-2021-21703","CVE-2018-20685","CVE-2022-31629","CVE-2018-15473","CVE-2019-9024","CVE-2017-7529","CVE-2019-9022","CVE-2019-9637","CVE-2021-34798","CVE-2022-28614","CVE-2019-9638","CVE-2021-36368","CVE-2018-10549","CVE-2021-21708","CVE-2019-9023","CVE-2022-29404","CVE-2018-16845","CVE-2017-11145","CVE-2021-23017","CVE-2020-1934","CVE-2022-36760","CVE-2019-9641","CVE-2018-19395","CVE-2020-35452","CVE-2006-20001","CVE-2019-0211","CVE-2019-9021","CVE-2019-0220","CVE-2020-13938","CVE-2018-10548","CVE-2021-21707","CVE-2017-7272","CVE-2021-41617","CVE-2023-44487","CVE-2018-15132","CVE-2020-7068","CVE-2018-10545","CVE-2019-0197","CVE-2022-22719","CVE-2017-15906","CVE-2018-16844","CVE-2018-19518"]}'
+  recorded_at: Sat, 13 Jan 2024 06:25:25 GMT
+recorded_with: VCR 6.2.0

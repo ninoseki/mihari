@@ -104,11 +104,28 @@ class V7Schema < ActiveRecord::Migration[7.1]
   end
 end
 
+class V72Schema < ActiveRecord::Migration[7.1]
+  def change
+    create_table :vulnerabilities, if_not_exists: true do |t|
+      t.string :name, null: false
+      t.datetime :created_at
+
+      t.belongs_to :artifact, foreign_key: true, null: false
+    end
+
+    rename_column :cpes, :cpe, :name if ActiveRecord::Base.connection.column_exists?(:cpes, :cpe)
+    rename_column :autonomous_systems, :asn, :number if ActiveRecord::Base.connection.column_exists?(
+      :autonomous_systems, :asn
+    )
+    rename_column :ports, :port, :number if ActiveRecord::Base.connection.column_exists?(:ports, :port)
+  end
+end
+
 #
 # @return [Array<ActiveRecord::Migration>] schemas
 #
 def schemas
-  [V7Schema]
+  [V7Schema, V72Schema]
 end
 
 module Mihari

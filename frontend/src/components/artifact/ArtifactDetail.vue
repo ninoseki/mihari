@@ -83,6 +83,10 @@
       <h4 class="is-size-4 mb-2">CPEs</h4>
       <CPEs :cpes="artifact.cpes"></CPEs>
     </div>
+    <div class="block" v-if="artifact.vulnerabilities">
+      <h4 class="is-size-4 mb-2">Vulnerabilities</h4>
+      <Vulnerabilities :vulnerabilities="artifact.vulnerabilities"></Vulnerabilities>
+    </div>
     <div class="block" v-if="artifact.ports">
       <h4 class="is-size-4 mb-2">Ports</h4>
       <Ports :ports="artifact.ports"></Ports>
@@ -111,6 +115,7 @@ import DnsRecords from "@/components/artifact/DnsRecords.vue"
 import Ports from "@/components/artifact/Ports.vue"
 import ReverseDnsNames from "@/components/artifact/ReverseDnsNames.vue"
 import Tags from "@/components/artifact/Tags.vue"
+import Vulnerabilities from "@/components/artifact/Vulnerabilities.vue"
 import WhoisRecord from "@/components/artifact/WhoisRecord.vue"
 import ErrorMessage from "@/components/ErrorMessage.vue"
 import Links from "@/components/link/Links.vue"
@@ -137,7 +142,8 @@ export default defineComponent({
     CPEs,
     Ports,
     ErrorMessage,
-    Message
+    Message,
+    Vulnerabilities
   },
   emits: ["refresh", "delete"],
   setup(props, context) {

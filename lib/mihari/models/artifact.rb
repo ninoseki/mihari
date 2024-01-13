@@ -28,6 +28,8 @@ module Mihari
       has_many :dns_records, dependent: :destroy
       has_many :ports, dependent: :destroy
       has_many :reverse_dns_names, dependent: :destroy
+      has_many :vulnerabilities, dependent: :destroy
+
       has_many :tags, through: :alert
 
       include ActiveModel::Validations
@@ -38,12 +40,13 @@ module Mihari
         attributes :id, :data, :data_type, :source, :query, :created_at, "alert.id", "rule.id", "rule.title",
           "rule.description"
         attributes tag: "tags.name"
-        attributes asn: "autonomous_system.asn"
+        attributes asn: "autonomous_system.number"
         attributes country_code: "geolocation.country_code"
         attributes "dns_record.value": "dns_records.value"
         attributes "dns_record.resource": "dns_records.resource"
         attributes reverse_dns_name: "reverse_dns_names.name"
         attributes cpe: "cpes.name"
+        attributes vuln: "vulnerabilities.name"
         attributes port: "ports.port"
       end
 
@@ -157,6 +160,17 @@ module Mihari
       end
 
       #
+      # Enrich vulnerabilities
+      #
+      # @param [Mihari::Enrichers::Shodan] enricher
+      #
+      def enrich_vulnerabilities(enricher = Enrichers::Shodan.new)
+        return unless can_enrich_vulnerabilities?
+
+        self.vulnerabilities = Services::VulnerabilityBuilder.call(data, enricher: enricher)
+      end
+
+      #
       # Enrich all the enrichable relationships of the artifact
       #
       def enrich_all
@@ -167,6 +181,7 @@ module Mihari
         enrich_whois
         enrich_ports shodan
         enrich_cpes shodan
+        enrich_vulnerabilities shodan
       end
 
       ENRICH_METHODS_BY_ENRICHER = {
@@ -181,6 +196,7 @@ module Mihari
           enrich_ports
           enrich_cpes
           enrich_reverse_dns
+          enrich_vulnerabilities
         ],
         Enrichers::GooglePublicDNS => %i[
           enrich_dns
@@ -263,6 +279,10 @@ module Mihari
 
       def can_enrich_cpes?
         data_type == "ip" && cpes.empty?
+      end
+
+      def can_enrich_vulnerabilities?
+        data_type == "ip" && vulnerabilities.empty?
       end
     end
   end

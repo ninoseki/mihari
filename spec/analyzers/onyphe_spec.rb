@@ -10,7 +10,7 @@ RSpec.describe Mihari::Analyzers::Onyphe, :vcr do
       artifacts = analyzer.artifacts
       expect(artifacts).to be_an(Array)
 
-      expect(artifacts.first.autonomous_system.asn).to eq(3462)
+      expect(artifacts.first.autonomous_system.number).to eq(3462)
       expect(artifacts.first.geolocation.country).to eq("Taiwan")
     end
   end

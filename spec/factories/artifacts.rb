@@ -4,7 +4,7 @@ FactoryBot.define do
   factory :autonomous_system, class: "Mihari::Models::AutonomousSystem" do
     artifact
 
-    asn { Faker::Number.unique.number(digits: 4) }
+    number { Faker::Number.unique.number(digits: 4) }
   end
 
   factory :reverse_dns_name, class: "Mihari::Models::ReverseDnsName" do

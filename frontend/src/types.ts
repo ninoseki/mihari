@@ -49,7 +49,7 @@ export interface WhoisRecord {
 }
 
 export interface AutonomousSystem {
-  asn: number
+  number: number
 }
 
 export interface Geolocation {
@@ -62,11 +62,15 @@ export interface ReverseDnsName {
 }
 
 export interface CPE {
-  cpe: string
+  name: string
+}
+
+export interface Vulnerability {
+  name: string
 }
 
 export interface Port {
-  port: string
+  number: string
 }
 
 export interface Artifact {
@@ -86,6 +90,7 @@ export interface Artifact {
   reverseDnsNames?: ReverseDnsName[]
   cpes?: CPE[]
   ports?: Port[]
+  vulnerabilities?: Vulnerability[]
 }
 
 export interface ArtifactWithTags extends Artifact {
