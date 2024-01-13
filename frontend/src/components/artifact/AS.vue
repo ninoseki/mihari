@@ -1,7 +1,7 @@
 <template>
   <div class="tags are-medium">
     <span class="tag">
-      {{ autonomousSystem.asn }}
+      {{ autonomousSystem.number }}
     </span>
   </div>
 </template>

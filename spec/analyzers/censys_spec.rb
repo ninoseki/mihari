@@ -15,7 +15,7 @@ RSpec.describe Mihari::Analyzers::Censys, :vcr do
       first = artifacts.first
       expect(first.data).to eq("1.1.1.1")
 
-      expect(first.autonomous_system.asn).to eq(13_335)
+      expect(first.autonomous_system.number).to eq(13_335)
       expect(first.ports.length).to be > 0
     end
   end

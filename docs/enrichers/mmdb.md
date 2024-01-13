@@ -14,6 +14,11 @@ This enricher uses public MMDB API to enrich an IP artifact.
 enricher: mmdb
 ```
 
+This enricher can add the following components:
+
+- Geolocation
+- Autonomous System
+
 ## Supported Artifacts
 
 - IP address

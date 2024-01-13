@@ -1,7 +1,7 @@
 <template>
   <div class="tags are-medium">
-    <span class="tag" v-for="port in ports" :key="port.port">
-      {{ port.port }}
+    <span class="tag" v-for="port in ports" :key="port.number">
+      {{ port.number }}
     </span>
   </div>
 </template>

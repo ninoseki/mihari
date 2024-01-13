@@ -173,12 +173,12 @@ Search query supports `AND`, `OR`, `:`, `=`, `!=`, `<`, `<=`, `>`, `>=`, `NOT` a
 
 Searchable fields are:
 
-| Type       | Searchable fields                                                                                                                                                                                                            |
-| ---------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `alert`    | `id`, `tag`, `created_at`, `rule.id`, `rule.title`, `rule.description`, `artifact.data`, `artifact.data_type`, `artifact.source` and `artifact.query`                                                                        |
-| `artifact` | `id`, `data`, `data_type`, `source`, `query`, `tag`, `rule.id`, `rule.title`, `rule.description`, `tag`,`created_at`, `asn`, `country_code`, `dns_record.value`, `dns_record.resource`, `reverse_dns_name`, `cpe` and `port` |
-| `rule`     | `id`, `title`, `description`, `tag`, `created_at` and `updated_at`                                                                                                                                                           |
-| `tag`      | `id` and `name`                                                                                                                                                                                                              |
+| Type       | Searchable fields                                                                                                                                                                                                                    |
+| ---------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `alert`    | `id`, `tag`, `created_at`, `rule.id`, `rule.title`, `rule.description`, `artifact.data`, `artifact.data_type`, `artifact.source` and `artifact.query`                                                                                |
+| `artifact` | `id`, `data`, `data_type`, `source`, `query`, `tag`, `rule.id`, `rule.title`, `rule.description`, `tag`,`created_at`, `asn`, `country_code`, `dns_record.value`, `dns_record.resource`, `reverse_dns_name`, `cpe`, `vuln` and `port` |
+| `rule`     | `id`, `title`, `description`, `tag`, `created_at` and `updated_at`                                                                                                                                                                   |
+| `tag`      | `id` and `name`                                                                                                                                                                                                                      |
 
 **Examples**
 

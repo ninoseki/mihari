@@ -158,7 +158,7 @@ RSpec.describe Mihari::Models::Artifact, :vcr do
 
     it do
       artifact.enrich_autonomous_system
-      expect(artifact.autonomous_system.asn).to eq(13_335)
+      expect(artifact.autonomous_system.number).to eq(13_335)
     end
   end
 

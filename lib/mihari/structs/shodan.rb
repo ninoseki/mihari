@@ -67,17 +67,25 @@ module Mihari
         #   @return [Integer]
         attribute :port, Types::Int
 
+        # @!attribute [r] cpe
+        #   @return [Array<String>]
+        attribute :cpe, Types::Array(Types::String)
+
+        # @!attribute [r] vulns
+        #   @return [Hash]
+        attribute :vulns, Types::Hash
+
         # @!attribute [r] metadata
         #   @return [Hash]
         attribute :metadata, Types::Hash
 
         #
-        # @return [Mihari::AutonomousSystem, nil]
+        # @return [Mihari::Models::AutonomousSystem, nil]
         #
-        def _asn
+        def autonomous_system
           return nil if asn.nil?
 
-          Mihari::Models::AutonomousSystem.new(asn: normalize_asn(asn))
+          Models::AutonomousSystem.new(number: normalize_asn(asn))
         end
 
         class << self
@@ -103,6 +111,8 @@ module Mihari
               domains: d.fetch("domains"),
               ip_str: d.fetch("ip_str"),
               port: d.fetch("port"),
+              cpe: d["cpe"] || [],
+              vulns: d["vulns"] || {},
               metadata: d
             )
           end
@@ -110,6 +120,8 @@ module Mihari
       end
 
       class Response < Dry::Struct
+        prepend MemoWise
+
         # @!attribute [r] matches
         #   @return [Array<Match>]
         attribute :matches, Types.Array(Match)
@@ -119,6 +131,16 @@ module Mihari
         attribute :total, Types::Int
 
         #
+        # @param [String] ip
+        #
+        # @return [Array<Mihari::Structs::Shodan::Match>]
+        #
+        def select_matches_by_ip(ip)
+          matches.select { |match| match.ip_str == ip }
+        end
+        memo_wise :select_matches_by_ip
+
+        #
         # Collect metadata from matches
         #
         # @param [String] ip
@@ -126,7 +148,7 @@ module Mihari
         # @return [Array<Hash>]
         #
         def collect_metadata_by_ip(ip)
-          matches.select { |match| match.ip_str == ip }.map(&:metadata)
+          select_matches_by_ip(ip).map(&:metadata)
         end
 
         #
@@ -137,7 +159,7 @@ module Mihari
         # @return [Array<String>]
         #
         def collect_ports_by_ip(ip)
-          matches.select { |match| match.ip_str == ip }.map(&:port)
+          select_matches_by_ip(ip).map(&:port)
         end
 
         #
@@ -148,7 +170,30 @@ module Mihari
         # @return [Array<String>]
         #
         def collect_hostnames_by_ip(ip)
-          matches.select { |match| match.ip_str == ip }.map(&:hostnames).flatten.uniq
+          select_matches_by_ip(ip).map(&:hostnames).flatten.uniq
+        end
+
+        #
+        # Collect CPE from matches
+        #
+        # @param [String] ip
+        #
+        # @return [Array<String>]
+        #
+        def collect_cpes_by_ip(ip)
+          select_matches_by_ip(ip).map(&:cpe).flatten.uniq
+        end
+
+        #
+        # Collect vulnerabilities from matches
+        #
+        # @param [String] ip
+        #
+        # @return [Array<String>]
+        #
+        def collect_vulns_by_ip(ip)
+          # NOTE: vuln keys = CVE IDs
+          select_matches_by_ip(ip).map { |match| match.vulns.keys }.flatten.uniq
         end
 
         #
@@ -158,20 +203,22 @@ module Mihari
           matches.map do |match|
             metadata = collect_metadata_by_ip(match.ip_str)
 
-            ports = collect_ports_by_ip(match.ip_str).map do |port|
-              Mihari::Models::Port.new(port: port)
-            end
+            ports = collect_ports_by_ip(match.ip_str).map { |port| Models::Port.new(number: port) }
             reverse_dns_names = collect_hostnames_by_ip(match.ip_str).map do |name|
-              Mihari::Models::ReverseDnsName.new(name: name)
+              Models::ReverseDnsName.new(name: name)
             end
+            cpes = collect_cpes_by_ip(match.ip_str).map { |name| Models::CPE.new(name: name) }
+            vulnerabilities = collect_vulns_by_ip(match.ip_str).map { |name| Models::Vulnerability.new(name: name) }
 
             Mihari::Models::Artifact.new(
               data: match.ip_str,
               metadata: metadata,
-              autonomous_system: match._asn,
+              autonomous_system: match.autonomous_system,
               geolocation: match.location.geolocation,
               ports: ports,
-              reverse_dns_names: reverse_dns_names
+              reverse_dns_names: reverse_dns_names,
+              cpes: cpes,
+              vulnerabilities: vulnerabilities
             )
           end
         end
@@ -231,15 +278,6 @@ module Mihari
               tags: d.fetch("tags"),
               vulns: d.fetch("vulns")
             )
-          end
-
-          #
-          # @param [String] json
-          #
-          # @return [InternetDBResponse]
-          #
-          def from_json!(json)
-            from_dynamic!(JSON.parse(json))
           end
         end
       end

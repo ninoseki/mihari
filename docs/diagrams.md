@@ -37,6 +37,7 @@ classDiagram
   }
   Artifact --* Alert
   Artifact *-- CPE
+  Artifact *-- Vulnerability
   Artifact *-- DnsRecord
   Artifact *-- Port
   Artifact *-- ReverseDnsName
@@ -48,7 +49,7 @@ classDiagram
 
   class AutonomousSystem {
     integer id
-    integer asn
+    integer number
     datetime created_at
     integer artifact_id
   }
@@ -56,7 +57,7 @@ classDiagram
 
   class Port {
     integer id
-    integer port
+    integer number
     datetime created_at
     integer artifact_id
   }
@@ -64,11 +65,19 @@ classDiagram
 
   class CPE {
     integer id
-    string cpe
+    string name
     datetime created_at
     integer artifact_id
   }
   CPE --* Artifact
+
+  class Vulnerability {
+    integer id
+    string name
+    datetime created_at
+    integer artifact_id
+  }
+  Vulnerability --* Artifact
 
   class DnsRecord {
     integer id
@@ -131,96 +140,103 @@ classDiagram
 ```mermaid
 erDiagram
     alerts {
-        datetime6 created_at
-        INTEGER id PK
+        datetime created_at
+        integer id PK
         varchar rule_id FK
     }
 
     artifacts {
-        INTEGER alert_id FK
-        datetime6 created_at
+        integer alert_id FK
+        datetime created_at
         varchar data
         varchar data_type
-        INTEGER id PK
+        integer id PK
         json metadata
         varchar query
         varchar source
     }
 
     autonomous_systems {
-        INTEGER artifact_id FK
-        INTEGER asn
-        datetime6 created_at
-        INTEGER id PK
+        integer artifact_id FK
+        integer number
+        datetime created_at
+        integer id PK
     }
 
     cpes {
-        INTEGER artifact_id FK
-        varchar cpe
-        datetime6 created_at
-        INTEGER id PK
+        integer artifact_id FK
+        varchar name
+        datetime created_at
+        integer id PK
+    }
+
+    vulnerabilities {
+        integer artifact_id FK
+        varchar name
+        datetime created_at
+        integer id PK
     }
 
     dns_records {
-        INTEGER artifact_id FK
-        datetime6 created_at
-        INTEGER id PK
+        integer artifact_id FK
+        datetime created_at
+        integer id PK
         varchar resource
         varchar value
     }
 
     geolocations {
-        INTEGER artifact_id FK
+        integer artifact_id FK
         varchar country
         varchar country_code
-        datetime6 created_at
-        INTEGER id PK
+        datetime created_at
+        integer id PK
     }
 
     ports {
-        INTEGER artifact_id FK
-        datetime6 created_at
-        INTEGER id PK
-        INTEGER port
+        integer artifact_id FK
+        datetime created_at
+        integer id PK
+        integer number
     }
 
     reverse_dns_names {
-        INTEGER artifact_id FK
-        datetime6 created_at
-        INTEGER id PK
+        integer artifact_id FK
+        datetime created_at
+        integer id PK
         varchar name
     }
 
     rules {
-        datetime6 created_at
+        datetime created_at
         json data
         varchar description
         varchar id PK
         varchar title
-        datetime6 updated_at
+        datetime updated_at
     }
 
     taggings {
-        datetime6 created_at
-        INTEGER id PK
+        datetime created_at
+        integer id PK
         varchar rule_id
-        INTEGER tag_id
+        integer tag_id
     }
 
     tags {
-        datetime6 created_at
-        INTEGER id PK
+        datetime created_at
+        integer id PK
         varchar name
     }
 
     whois_records {
-        INTEGER artifact_id FK
+        integer artifact_id FK
         json contacts
-        datetime6 created_at
+        datetime created_at
         date created_on
         varchar domain
         date expires_on
-        INTEGER id PK
+        integer id PK
         json registrar
         date updated_on
     }
@@ -229,6 +245,7 @@ erDiagram
     artifacts }o--|| alerts : "alert_id"
     autonomous_systems }o--|| artifacts : "artifact_id"
     cpes }o--|| artifacts : "artifact_id"
+    vulnerabilities }o--|| artifacts : "artifact_id"
     dns_records }o--|| artifacts : "artifact_id"
     geolocations }o--|| artifacts : "artifact_id"
     ports }o--|| artifacts : "artifact_id"

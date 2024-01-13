@@ -1,7 +1,7 @@
 <template>
   <div class="tags are-medium">
-    <span class="tag" v-for="cpe in cpes" :key="cpe.cpe">
-      {{ cpe.cpe }}
+    <span class="tag" v-for="cpe in cpes" :key="cpe.name">
+      {{ cpe.name }}
     </span>
   </div>
 </template>
