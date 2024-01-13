@@ -45,6 +45,12 @@ FactoryBot.define do
       data { Faker::Crypto.unique.md5 }
     end
 
+    trait :unenrichable do
+      # NOTE: hash type artifact is unenrichable
+      #       it's suitable to use when checking whether enrichment methods are called or not
+      data { Faker::Crypto.unique.md5 }
+    end
+
     after(:create) do |artifact|
       case artifact.data_type
       when "ip"

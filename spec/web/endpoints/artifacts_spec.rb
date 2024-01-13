@@ -3,7 +3,7 @@
 RSpec.describe Mihari::Web::Endpoints::Artifacts do
   include Rack::Test::Methods
 
-  let_it_be(:artifact) { FactoryBot.create(:artifact, :mail) }
+  let_it_be(:artifact) { FactoryBot.create(:artifact, :unenrichable) }
   let_it_be(:artifact_to_delete) { FactoryBot.create(:artifact) }
 
   def app
