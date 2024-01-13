@@ -125,26 +125,27 @@ Usage:
   mihari web
 
 Options:
-      [--port=N]                   # Hostname to listen on
+      [--port=N]                   # Port to listen on
                                    # Default: 9292
-      [--host=HOST]                # Port to listen on
+      [--host=HOST]                # Hostname to listen on
                                    # Default: localhost
       [--threads=THREADS]          # min:max threads to use
                                    # Default: 0:5
-      [--verbose], [--no-verbose]  # Report each request
-                                   # Default: true
+      [--verbose], [--no-verbose]  # Don't report each request
+                                   # Default: false
       [--worker-timeout=N]         # Worker timeout value (in seconds)
                                    # Default: 60
       [--open], [--no-open]        # Whether to open the app in browser or not
                                    # Default: true
       [--env=ENV]                  # Environment
                                    # Default: production
+  -d, [--debug], [--no-debug]      # Set up debug mode
 ```
 
 !!! tip
 
     The built-in web app offers API to interact with Mihari.
-    The API docs are available on `/redoc-static.html`
+    The API docs are available on `/redoc-static.html`.
 
 ### `mihari sidekiq`
 
@@ -170,7 +171,7 @@ Mihari provides listing/search feature via CLI & API.
 
 Search query supports `AND`, `OR`, `:`, `=`, `!=`, `<`, `<=`, `>`, `>=`, `NOT` and `()`.
 
-Searchable fields are
+Searchable fields are:
 
 | Type       | Searchable fields                                                                                                                                                                                                            |
 | ---------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |

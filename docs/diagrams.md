@@ -1,6 +1,6 @@
 # Diagrams
 
-## ActiveModel Class Diagram
+## Active Record Class Diagram
 
 ```mermaid
 classDiagram
