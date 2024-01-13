@@ -50,17 +50,15 @@ namespace :build do
   end
 end
 
-def ci?
-  ENV.fetch("CI", false)
-end
-
-unless ci?
-  task :build do
-    sh "cd frontend && npm install && npm run build"
-    sh "rm -rf ./lib/mihari/web/public/"
-    sh "mkdir -p ./lib/mihari/web/public/"
-    sh "cp -r frontend/dist/* ./lib/mihari/web/public"
-  end
+task :build do
+  # Build Swagger dos
+  Rake::Task["build:swagger"].invoke
+  # Build ReDocs docs & frontend assets
+  sh "cd frontend && npm install && npm run docs && npm run build-only"
+  # Copy built assets into ./lib/web/public/
+  sh "rm -rf ./lib/mihari/web/public/"
+  sh "mkdir -p ./lib/mihari/web/public/"
+  sh "cp -r frontend/dist/* ./lib/mihari/web/public"
 end
 
 # require it later enables doing pre-build step (= build the frontend app)
