@@ -47,7 +47,7 @@ module Mihari
         attributes reverse_dns_name: "reverse_dns_names.name"
         attributes cpe: "cpes.name"
         attributes vuln: "vulnerabilities.name"
-        attributes port: "ports.port"
+        attributes port: "ports.number"
       end
 
       validates_with ArtifactValidator
