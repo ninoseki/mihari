@@ -67,6 +67,9 @@
     </div>
   </div>
   <div class="block">
+    <Links :data="artifact.data" :type="artifact.dataType"></Links>
+  </div>
+  <div class="block">
     <div class="block" v-if="artifact.autonomousSystem">
       <h4 class="is-size-4 mb-2">AS</h4>
       <AS :autonomousSystem="artifact.autonomousSystem"></AS>
@@ -94,10 +97,6 @@
     <div class="block" v-if="artifact.whoisRecord">
       <h4 class="is-size-4 mb-2">Whois record</h4>
       <WhoisRecord :whoisRecord="artifact.whoisRecord"></WhoisRecord>
-    </div>
-    <div class="block">
-      <h4 class="is-size-4 mb-2">Links</h4>
-      <Links :data="artifact.data" :type="artifact.dataType"></Links>
     </div>
   </div>
 </template>

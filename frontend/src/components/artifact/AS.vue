@@ -1,8 +1,10 @@
 <template>
   <div class="tags are-medium">
-    <span class="tag">
-      {{ autonomousSystem.number }}
-    </span>
+    <router-link
+      class="tag"
+      :to="{ name: 'Artifacts', query: { q: getQuery(autonomousSystem.number) } }"
+      >{{ autonomousSystem.number }}</router-link
+    >
   </div>
 </template>
 
@@ -18,6 +20,12 @@ export default defineComponent({
       type: Object as PropType<AutonomousSystem>,
       required: true
     }
+  },
+  setup() {
+    const getQuery = (number: number) => {
+      return `asn:${number}`
+    }
+    return { getQuery }
   }
 })
 </script>

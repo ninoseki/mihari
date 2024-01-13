@@ -1,8 +1,12 @@
 <template>
   <div class="tags are-medium">
-    <span class="tag" v-for="port in ports" :key="port.number">
-      {{ port.number }}
-    </span>
+    <router-link
+      class="tag"
+      v-for="port in ports"
+      :key="port.number"
+      :to="{ name: 'Artifacts', query: { q: getQuery(port.number) } }"
+      >{{ port.number }}</router-link
+    >
   </div>
 </template>
 
@@ -18,6 +22,13 @@ export default defineComponent({
       type: Array as PropType<Port[]>,
       required: true
     }
+  },
+  setup() {
+    const getQuery = (port: number) => {
+      return `port:${port}`
+    }
+
+    return { getQuery }
   }
 })
 </script>

@@ -70,7 +70,7 @@ export interface Vulnerability {
 }
 
 export interface Port {
-  number: string
+  number: number
 }
 
 export interface Artifact {

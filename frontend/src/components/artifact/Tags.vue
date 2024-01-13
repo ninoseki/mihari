@@ -1,13 +1,10 @@
 <template>
   <div class="tags are-medium">
     <router-link
-      class="tag is-info is-light"
+      class="tag"
       v-for="tag in tags"
       :key="tag.id"
-      :to="{
-        name: 'Alerts',
-        query: { tag: tag.name }
-      }"
+      :to="{ name: 'Artifacts', query: { q: getQuery(tag.name) } }"
     >
       {{ tag.name }}
     </router-link>
@@ -26,6 +23,13 @@ export default defineComponent({
       type: Array as PropType<Tag[]>,
       required: true
     }
+  },
+  setup() {
+    const getQuery = (name: string) => {
+      return `tag:"${name}"`
+    }
+
+    return { getQuery }
   }
 })
 </script>
