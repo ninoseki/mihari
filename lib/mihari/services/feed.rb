@@ -98,7 +98,7 @@ module Mihari
           input_enumerator.instance_eval(selector)
         end.call
 
-        raise TypeError unless parsed.all?(String)
+        raise TypeError unless parsed.is_a?(Array) || parsed.all?(String)
 
         parsed
       end
