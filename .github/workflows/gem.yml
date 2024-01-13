@@ -32,7 +32,11 @@ jobs:
           node-version: ${{ matrix.node-version }}
           cache: npm
           cache-dependency-path: frontend/package-lock.json
+      - name: Configure NPM
+        # Disable audit to improve the build performance
+        run: npm set audit false
       - name: Configure Git
+        # Configure Git to push a tag
         run: |
           git config --global user.name "${GITHUB_ACTOR}"
           git config --global user.email "${GITHUB_ACTOR}@users.noreply.github.com"
