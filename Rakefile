@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require "time"
+
 require "rspec/core/rake_task"
 require "standard/rake"
 
@@ -46,13 +48,18 @@ namespace :build do
   desc "Build Swagger doc"
   task :swagger, [:path] do |_t, args|
     args.with_defaults(path: "./frontend/swagger.yaml")
+
+    started_at = Time.now
     build_swagger_doc args.path
+    elapsed = (Time.now - started_at).floor(2)
+
+    puts "Swagger doc is built in #{elapsed}s"
   end
 end
 
 task :build do
-  # Build Swagger dos
   Rake::Task["build:swagger"].invoke
+
   # Build ReDocs docs & frontend assets
   sh "cd frontend && npm install && npm run docs && npm run build-only"
   # Copy built assets into ./lib/web/public/
