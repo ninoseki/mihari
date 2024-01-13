@@ -47,7 +47,7 @@ json: ...
 
 ### JSON
 
-`json` (`hash`) is an JSON body. Optional.
+`json` (`hash`) is a JSON data. Optional.
 
 ## Examples
 
