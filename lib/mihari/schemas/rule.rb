@@ -45,6 +45,13 @@ module Mihari
           key.failure("#{v} is not a valid format.") unless valid_falsepositive?(v)
         end
       end
+
+      rule(:emitters) do
+        emitters = value.filter_map { |v| v[:emitter] }
+        unless emitters.include?(Mihari::Emitters::Database.key)
+          key.failure("Emitter:#{Mihari::Emitters::Database.key} should be included in emitters")
+        end
+      end
     end
   end
 end

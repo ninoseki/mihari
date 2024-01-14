@@ -13,7 +13,7 @@ FactoryBot.define do
         description: description,
         queries: [],
         tags: [],
-        emitters: []
+        emitters: [{ emitter: "database" }]
       }
     end
 
