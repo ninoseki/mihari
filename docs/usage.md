@@ -130,7 +130,7 @@ Options:
       [--host=HOST]                # Hostname to listen on
                                    # Default: localhost
       [--threads=THREADS]          # min:max threads to use
-                                   # Default: 0:5
+                                   # Default: 0:3
       [--verbose], [--no-verbose]  # Don't report each request
                                    # Default: false
       [--worker-timeout=N]         # Worker timeout value (in seconds)
