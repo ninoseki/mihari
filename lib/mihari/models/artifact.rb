@@ -221,6 +221,45 @@ module Mihari
         methods.each { |method| send(method, enricher) if respond_to?(method) }
       end
 
+      def can_enrich_whois?
+        %w[domain url].include?(data_type) && whois_record.nil?
+      end
+
+      def can_enrich_dns?
+        %w[domain url].include?(data_type) && dns_records.empty?
+      end
+
+      def can_enrich_reverse_dns?
+        data_type == "ip" && reverse_dns_names.empty?
+      end
+
+      def can_enrich_geolocation?
+        data_type == "ip" && geolocation.nil?
+      end
+
+      def can_enrich_autonomous_system?
+        data_type == "ip" && autonomous_system.nil?
+      end
+
+      def can_enrich_ports?
+        data_type == "ip" && ports.empty?
+      end
+
+      def can_enrich_cpes?
+        data_type == "ip" && cpes.empty?
+      end
+
+      def can_enrich_vulnerabilities?
+        data_type == "ip" && vulnerabilities.empty?
+      end
+
+      def enrichable?
+        enrich_methods = methods.map(&:to_s).select { |method| method.start_with?("can_enrich_") }
+        enrich_methods.map(&:to_sym).any? do |method|
+          send(method) if respond_to?(method)
+        end
+      end
+
       class << self
         # @!method search_by_filter(filter)
         #   @param [Mihari::Structs::Filters::Search] filter
@@ -259,38 +298,6 @@ module Mihari
         when "url"
           Addressable::URI.parse(data).host
         end
-      end
-
-      def can_enrich_whois?
-        %w[domain url].include?(data_type) && whois_record.nil?
-      end
-
-      def can_enrich_dns?
-        %w[domain url].include?(data_type) && dns_records.empty?
-      end
-
-      def can_enrich_reverse_dns?
-        data_type == "ip" && reverse_dns_names.empty?
-      end
-
-      def can_enrich_geolocation?
-        data_type == "ip" && geolocation.nil?
-      end
-
-      def can_enrich_autonomous_system?
-        data_type == "ip" && autonomous_system.nil?
-      end
-
-      def can_enrich_ports?
-        data_type == "ip" && ports.empty?
-      end
-
-      def can_enrich_cpes?
-        data_type == "ip" && cpes.empty?
-      end
-
-      def can_enrich_vulnerabilities?
-        data_type == "ip" && vulnerabilities.empty?
       end
     end
   end

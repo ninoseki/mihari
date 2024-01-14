@@ -7,6 +7,8 @@ module Mihari
 
   class ValueError < Error; end
 
+  class UnenrichableError < Error; end
+
   class ConfigurationError < Error
     # @return [Array<String>, nil]
     attr_reader :detail

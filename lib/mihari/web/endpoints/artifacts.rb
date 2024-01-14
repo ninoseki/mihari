@@ -53,7 +53,7 @@ module Mihari
 
           desc "Enrich an artifact", {
             success: { code: 201, model: Entities::Message },
-            failure: [{ code: 404, model: Entities::ErrorMessage }],
+            failure: [{ code: 400, model: Entities::ErrorMessage }, { code: 404, model: Entities::ErrorMessage }],
             summary: "Enrich an artifact"
           }
           params do
@@ -78,6 +78,8 @@ module Mihari
             return present({ message: message, queued: queued }, with: Entities::QueueMessage) if result.success?
 
             case result.failure
+            when UnenrichableError
+              error!({ message: result.failure.message }, 400)
             when ActiveRecord::RecordNotFound
               error!({ message: "ID:#{id} not found" }, 404)
             end

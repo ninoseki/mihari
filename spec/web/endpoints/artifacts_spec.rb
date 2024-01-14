@@ -1,9 +1,13 @@
 # frozen_string_literal: true
 
-RSpec.describe Mihari::Web::Endpoints::Artifacts do
+RSpec.describe Mihari::Web::Endpoints::Artifacts, vcr: "Mihari_Services_ArtifactEnricher/ip:1.1.1.1" do
   include Rack::Test::Methods
 
-  let_it_be(:artifact) { FactoryBot.create(:artifact, :unenrichable) }
+  let_it_be(:artifact) do
+    artifact = FactoryBot.build(:artifact, :ip).tap { |tapped| tapped.data = "1.1.1.1" }
+    artifact.save
+    artifact
+  end
   let_it_be(:artifact_to_delete) { FactoryBot.create(:artifact) }
 
   def app
@@ -42,9 +46,20 @@ RSpec.describe Mihari::Web::Endpoints::Artifacts do
   end
 
   describe "get /api/artifacts/:id/enrich" do
-    it "returns 201" do
-      post "/api/artifacts/#{artifact.id}/enrich"
-      expect(last_response.status).to eq(201)
+    context "with enrichable artifact" do
+      it "returns 201" do
+        post "/api/artifacts/#{artifact.id}/enrich"
+        expect(last_response.status).to eq(201)
+      end
+    end
+
+    context "with unenrichable artifact" do
+      let(:artifact) { FactoryBot.create(:artifact, :unenrichable) }
+
+      it "returns 400" do
+        post "/api/artifacts/#{artifact.id}/enrich"
+        expect(last_response.status).to eq(400)
+      end
     end
   end
 

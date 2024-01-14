@@ -7,8 +7,7 @@ RSpec.describe Mihari::Jobs::ArtifactEnrichJob do
 
   it do
     Sidekiq::Testing.inline! do
-      res = described_class.perform_async(artifact.id)
-      expect(res).not_to be nil
+      expect { described_class.perform_async(artifact.id) }.to raise_error(Mihari::UnenrichableError)
     end
   end
 end
