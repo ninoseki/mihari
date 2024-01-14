@@ -63,12 +63,10 @@ module Mihari
         artifacts.compact.sort.map do |artifact|
           # No need to set data_type manually
           # It is set automatically in #initialize
-          artifact = artifact.is_a?(Models::Artifact) ? artifact : Models::Artifact.new(data: artifact)
-
-          artifact.source = self.class.key
-          artifact.query = query
-
-          artifact
+          (artifact.is_a?(Models::Artifact) ? artifact : Models::Artifact.new(data: artifact)).tap do |normalized|
+            normalized.source = self.class.key
+            normalized.query = query
+          end
         end.select(&:valid?).uniq(&:data)
       end
 
@@ -118,18 +116,9 @@ module Mihari
         #
         # @return [Mihari::Analyzers::Base]
         #
-        def from_query(params)
-          copied = params.deep_dup
-
-          # convert params into arguments for initialization
-          query = copied[:query]
-
-          # delete analyzer and query
-          %i[analyzer query].each { |key| copied.delete key }
-
-          copied[:options] = copied[:options] || nil
-
-          new(query, **copied)
+        def from_params(params)
+          query = params.delete(:query)
+          new(query, **params)
         end
 
         def inherited(child)
