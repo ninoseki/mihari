@@ -57,6 +57,14 @@ module Mihari
       # @return [String, nil]
       attr_accessor :rule_id
 
+      before_destroy do
+        @alert = alert
+      end
+
+      after_destroy do
+        @alert.destroy unless @alert.artifacts.any?
+      end
+
       #
       # Check uniqueness
       #

@@ -267,4 +267,18 @@ RSpec.describe Mihari::Models::Artifact, :vcr do
       expect(count).to eq(0)
     end
   end
+
+  describe ".after_destroy" do
+    let(:artifact) { FactoryBot.create(:artifact) }
+    let(:alert) { artifact.alert }
+
+    it do
+      expect(Mihari::Models::Alert.exists?(alert.id)).to eq(true)
+    end
+
+    it do
+      artifact.destroy
+      expect(Mihari::Models::Alert.exists?(alert.id)).to eq(false)
+    end
+  end
 end
