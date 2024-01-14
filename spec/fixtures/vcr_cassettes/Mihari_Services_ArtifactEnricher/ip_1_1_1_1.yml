@@ -1,0 +1,100 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: https://ip.circl.lu/geolookup/1.1.1.1
+    body:
+      encoding: ASCII-8BIT
+      string: ''
+    headers:
+      User-Agent:
+      - mihari/7.1.3
+      Connection:
+      - close
+      Host:
+      - ip.circl.lu
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Sun, 14 Jan 2024 10:51:27 GMT
+      Server:
+      - WSGIServer/0.2 CPython/3.8.10
+      Strict-Transport-Security:
+      - max-age=15768000
+      Content-Type:
+      - application/json
+      Content-Length:
+      - '906'
+      Connection:
+      - close
+    body:
+      encoding: UTF-8
+      string: '[{"country": {"iso_code": "US"}, "meta": {"description": {"en": "Geo
+        Open MMDB database - https://github.com/adulau/mmdb-server"}, "build_db":
+        "2023-11-20 12:50:37", "db_source": "GeoOpen-Country", "nb_nodes": 1315572},
+        "ip": "1.1.1.1", "country_info": {"Country": "United States", "Alpha-2 code":
+        "US", "Alpha-3 code": "USA", "Numeric code": "840", "Latitude (average)":
+        "38", "Longitude (average)": "-97"}}, {"country": {"iso_code": "US", "AutonomousSystemNumber":
+        "13335", "AutonomousSystemOrganization": "CLOUDFLARENET"}, "meta": {"description":
+        {"en": "Geo Open MMDB database - https://github.com/adulau/mmdb-server"},
+        "build_db": "2023-11-20 15:49:14", "db_source": "GeoOpen-Country-ASN", "nb_nodes":
+        1316075}, "ip": "1.1.1.1", "country_info": {"Country": "United States", "Alpha-2
+        code": "US", "Alpha-3 code": "USA", "Numeric code": "840", "Latitude (average)":
+        "38", "Longitude (average)": "-97"}}]'
+  recorded_at: Sun, 14 Jan 2024 10:51:27 GMT
+- request:
+    method: get
+    uri: https://internetdb.shodan.io/1.1.1.1
+    body:
+      encoding: ASCII-8BIT
+      string: ''
+    headers:
+      User-Agent:
+      - mihari/7.1.3
+      Connection:
+      - close
+      Host:
+      - internetdb.shodan.io
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Sun, 14 Jan 2024 10:51:27 GMT
+      Content-Type:
+      - application/json
+      Content-Length:
+      - '138'
+      Connection:
+      - close
+      Cache-Control:
+      - public, max-age=432000
+      Last-Modified:
+      - Sat, 13 Jan 2024 22:12:04 GMT
+      Cf-Cache-Status:
+      - HIT
+      Age:
+      - '123'
+      Expires:
+      - Fri, 19 Jan 2024 10:51:27 GMT
+      Accept-Ranges:
+      - bytes
+      Permissions-Policy:
+      - interest-cohort=()
+      Access-Control-Allow-Origin:
+      - "*"
+      Server:
+      - cloudflare
+      Cf-Ray:
+      - 845552e9ab8eaf81-NRT
+      Alt-Svc:
+      - h3=":443"; ma=86400
+    body:
+      encoding: UTF-8
+      string: '{"cpes":[],"hostnames":["enegate.com","one.one.one.one"],"ip":"1.1.1.1","ports":[53,80,443,2082,2087,8080,8443,8880],"tags":[],"vulns":[]}'
+  recorded_at: Sun, 14 Jan 2024 10:51:27 GMT
+recorded_with: VCR 6.2.0

@@ -17,6 +17,8 @@ module Mihari
           :ports
         ).find(id)
 
+        raise UnenrichableError.new, "#{artifact.id} is already enriched or unenrichable" unless artifact.enrichable?
+
         artifact.enrich_all
         artifact.save
       end
