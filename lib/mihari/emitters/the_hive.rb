@@ -53,12 +53,6 @@ module Mihari
         client.alert payload
       end
 
-      class << self
-        def configuration_keys
-          %w[thehive_url thehive_api_key]
-        end
-      end
-
       private
 
       def client

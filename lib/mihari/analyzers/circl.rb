@@ -47,12 +47,6 @@ module Mihari
         configuration_keys? || (username? && password?)
       end
 
-      class << self
-        def configuration_keys
-          %w[circl_passive_password circl_passive_username]
-        end
-      end
-
       private
 
       def client

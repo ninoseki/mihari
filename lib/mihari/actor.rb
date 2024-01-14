@@ -93,6 +93,15 @@ module Mihari
         ([key] + [key_aliases]).flatten.compact.map(&:downcase)
       end
 
+      def configuration_keys
+        # Automatically generate configuration keys based on key
+        # For example,
+        # - Shodan analyzer's key is "shodan"
+        # - Mihari.config has "shodan_api_key"
+        # - Select "shodan_api_key" by using "#{key}_" prefix
+        Mihari.config.keys.select { |config_key| config_key.start_with?("#{key}_") }
+      end
+
       def type
         return "analyzer" if ancestors.include?(Mihari::Analyzers::Base)
         return "emitter" if ancestors.include?(Mihari::Emitters::Base)

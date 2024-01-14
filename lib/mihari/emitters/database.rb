@@ -24,12 +24,6 @@ module Mihari
       def target
         Mihari.config.database_url.host || Mihari.config.database_url.to_s
       end
-
-      class << self
-        def configuration_keys
-          %w[database_url]
-        end
-      end
     end
   end
 end

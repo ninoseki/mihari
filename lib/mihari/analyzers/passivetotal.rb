@@ -50,10 +50,6 @@ module Mihari
       end
 
       class << self
-        def configuration_keys
-          %w[passivetotal_username passivetotal_api_key]
-        end
-
         #
         # @return [Array<String>, nil]
         #

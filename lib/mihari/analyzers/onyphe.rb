@@ -29,12 +29,6 @@ module Mihari
         ).map(&:artifacts).flatten
       end
 
-      class << self
-        def configuration_keys
-          %w[onyphe_api_key]
-        end
-      end
-
       private
 
       def client

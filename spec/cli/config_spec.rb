@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 RSpec.describe Mihari::CLI::Config do
-  let!(:key) { Mihari.config.keys.first }
+  let!(:key) { Mihari.config.keys.first.upcase }
 
   describe "#list" do
     it do

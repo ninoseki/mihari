@@ -44,12 +44,6 @@ module Mihari
         end.flatten
       end
 
-      class << self
-        def configuration_keys
-          %w[hunterhow_api_key]
-        end
-      end
-
       private
 
       def client
