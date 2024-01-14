@@ -2,6 +2,7 @@
 
 module Mihari
   class Rule < Service
+    include Concerns::FalsePositiveNormalizable
     include Concerns::FalsePositiveValidatable
 
     # @return [Hash]
@@ -136,8 +137,7 @@ module Mihari
       analyzer_results.flat_map do |result|
         artifacts = result.value!
         artifacts.map do |artifact|
-          artifact.rule_id = id
-          artifact
+          artifact.tap { |tapped| tapped.rule_id = id }
         end
       end
     end
@@ -188,9 +188,7 @@ module Mihari
     def bulk_emit
       return [] if enriched_artifacts.empty?
 
-      Parallel.map(emitters) do |emitter|
-        emitter.result(enriched_artifacts).value_or nil
-      end.compact
+      Parallel.map(emitters) { |emitter| emitter.result(enriched_artifacts).value_or nil }.compact
     end
 
     #
@@ -315,12 +313,12 @@ module Mihari
     # @return [Array<Mihari::Analyzers::Base>]
     #
     def analyzers
-      @analyzers ||= queries.map do |params|
-        analyzer_name = params[:analyzer]
-        klass = get_analyzer_class(analyzer_name)
-        analyzer = klass.from_query(params)
-        analyzer.validate_configuration!
-        analyzer
+      @analyzers ||= queries.deep_dup.map do |params|
+        name = params.delete(:analyzer)
+        klass = get_analyzer_class(name)
+        klass.from_params(params).tap do |analyzer|
+          analyzer.validate_configuration!
+        end
       end
     end
 
@@ -356,16 +354,14 @@ module Mihari
     # @return [Array<Mihari::Emitters::Base>]
     #
     def emitters
-      @emitters ||= data[:emitters].map(&:deep_dup).map do |params|
-        name = params[:emitter]
-        options = params[:options]
-
-        %i[emitter options].each { |key| params.delete key }
+      @emitters ||= data[:emitters].deep_dup.map do |params|
+        name = params.delete(:emitter)
+        options = params.delete(:options)
 
         klass = get_emitter_class(name)
-        emitter = klass.new(rule: self, options: options, **params)
-        emitter.validate_configuration!
-        emitter
+        klass.new(rule: self, options: options, **params).tap do |emitter|
+          emitter.validate_configuration!
+        end
       end
     end
 
@@ -386,11 +382,9 @@ module Mihari
     # @return [Array<Mihari::Enrichers::Base>] enrichers
     #
     def enrichers
-      @enrichers ||= data[:enrichers].map(&:deep_dup).map do |params|
-        name = params[:enricher]
-        options = params[:options]
-
-        %i[enricher options].each { |key| params.delete key }
+      @enrichers ||= data[:enrichers].deep_dup.map do |params|
+        name = params.delete(:enricher)
+        options = params.delete(:options)
 
         klass = get_enricher_class(name)
         klass.new(options: options, **params)

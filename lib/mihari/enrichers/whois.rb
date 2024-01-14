@@ -53,13 +53,11 @@ module Mihari
       # @return [::Whois::Client]
       #
       def whois
-        @whois ||= [].tap do |out|
-          out << if timeout.nil?
-            ::Whois::Client.new
-          else
-            ::Whois::Client.new(timeout: timeout)
-          end
-        end.last
+        @whois ||= lambda do
+          return ::Whois::Client.new if timeout.nil?
+
+          ::Whois::Client.new(timeout: timeout)
+        end.call
       end
 
       #

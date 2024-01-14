@@ -74,7 +74,7 @@ module Mihari
               end
             end.to_result
 
-            message = queued ? "ID:#{id}'s enrichment has been queued" : "ID:#{id}'s enrichment has been succeeded"
+            message = queued ? "ID:#{id}'s enrichment is queued" : "ID:#{id}'s enrichment is successful"
             return present({ message: message, queued: queued }, with: Entities::QueueMessage) if result.success?
 
             case result.failure
