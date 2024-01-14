@@ -4,8 +4,8 @@ import { API } from "@/api"
 import type {
   Alert,
   Alerts,
+  Artifact,
   Artifacts,
-  ArtifactWithTags,
   Config,
   CreateRule,
   IPInfo,
@@ -42,8 +42,8 @@ export function generateDeleteTagTask(): Task<Message, [number]> {
   })
 }
 
-export function generateGetArtifactTask(): Task<ArtifactWithTags, [number]> {
-  return useAsyncTask<ArtifactWithTags, [number]>(async (_signal, id) => {
+export function generateGetArtifactTask(): Task<Artifact, [number]> {
+  return useAsyncTask<Artifact, [number]>(async (_signal, id) => {
     return await API.getArtifact(id)
   })
 }
