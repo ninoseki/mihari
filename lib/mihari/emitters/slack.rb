@@ -217,12 +217,6 @@ module Mihari
 
         notifier.post(text: text, attachments: attachments, mrkdwn: true)
       end
-
-      class << self
-        def configuration_keys
-          %w[slack_webhook_url slack_channel]
-        end
-      end
     end
   end
 end

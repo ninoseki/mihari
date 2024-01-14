@@ -41,15 +41,6 @@ module Mihari
         configuration_keys? || (id? && secret?)
       end
 
-      class << self
-        #
-        # @return [Array<String>]
-        #
-        def configuration_keys
-          %w[censys_id censys_secret]
-        end
-      end
-
       private
 
       #

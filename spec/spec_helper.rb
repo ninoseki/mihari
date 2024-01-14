@@ -84,13 +84,14 @@ VCR.configure do |config|
   config.hook_into :webmock
   config.ignore_localhost = true
 
-  api_keys = Mihari.config.keys.select { |key| key.end_with?("_API_KEY") }
-  passwords = Mihari.config.keys.select { |key| key.end_with?("_PASSWORD") }
-  secrets = Mihari.config.keys.select { |key| key.end_with?("_SECRET") }
-  usernames = Mihari.config.keys.select { |key| key.end_with?("_USERNAME") }
-  emails = Mihari.config.keys.select { |key| key.end_with?("_EMAIL") }
-  ids = Mihari.config.keys.select { |key| key.end_with?("_ID") }
-  api_urls = Mihari.config.keys.select do |key|
+  keys = Mihari.config.keys.map(&:upcase)
+  api_keys = keys.select { |key| key.end_with?("_API_KEY") }
+  passwords = keys.select { |key| key.end_with?("_PASSWORD") }
+  secrets = keys.select { |key| key.end_with?("_SECRET") }
+  usernames = keys.select { |key| key.end_with?("_USERNAME") }
+  emails = keys.select { |key| key.end_with?("_EMAIL") }
+  ids = keys.select { |key| key.end_with?("_ID") }
+  api_urls = keys.select do |key|
     key != "DATABASE_URL" && key != "SIDEKIQ_REDIS_URL" && key.end_with?("_URL")
   end
 

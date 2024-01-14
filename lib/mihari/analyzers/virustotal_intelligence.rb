@@ -25,12 +25,6 @@ module Mihari
       end
 
       class << self
-        def configuration_keys
-          %w[virustotal_api_key]
-        end
-      end
-
-      class << self
         #
         # @return [String]
         #
@@ -43,6 +37,13 @@ module Mihari
         #
         def key_aliases
           ["vt_intel"]
+        end
+
+        #
+        # @return [Array<String>]
+        #
+        def configuration_keys
+          %w[virustotal_api_key]
         end
       end
 

@@ -38,12 +38,6 @@ module Mihari
         end
       end
 
-      class << self
-        def configuration_keys
-          %w[otx_api_key]
-        end
-      end
-
       private
 
       def client

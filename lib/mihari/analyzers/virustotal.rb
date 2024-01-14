@@ -39,10 +39,6 @@ module Mihari
       end
 
       class << self
-        def configuration_keys
-          %w[virustotal_api_key]
-        end
-
         #
         # @return [Array<String>, nil]
         #

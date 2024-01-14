@@ -170,7 +170,7 @@ module Mihari
     # @return [Array<String>]
     #
     def keys
-      to_h.keys.map(&:to_s).map(&:upcase)
+      @keys ||= to_h.keys.map(&:to_s).map(&:downcase)
     end
   end
 end

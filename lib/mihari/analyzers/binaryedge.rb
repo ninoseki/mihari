@@ -24,12 +24,6 @@ module Mihari
         client.search_with_pagination(query, pagination_limit: pagination_limit).map(&:artifacts).flatten
       end
 
-      class << self
-        def configuration_keys
-          %w[binaryedge_api_key]
-        end
-      end
-
       private
 
       #
