@@ -2,7 +2,7 @@ FROM ruby:3.2.2-alpine3.19
 
 ARG MIHARI_VERSION=0.0.0
 
-RUN apk --no-cache add build-base ruby-dev libpq-dev && \
+RUN apk --no-cache add build-base ruby-dev libpq-dev whois && \
   echo 'gem: --no-document' >> /usr/local/etc/gemrc && \
   gem install pg && \
   gem install mihari -v ${MIHARI_VERSION} && \

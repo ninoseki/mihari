@@ -20,7 +20,7 @@ options:
 
 ### Timeout
 
-`timeout` (`integer`) is an HTTP timeout in seconds. Optional.
+`timeout` (`integer`) is an HTTP or Whois timeout in seconds. Optional.
 
 ### Retry Times
 
