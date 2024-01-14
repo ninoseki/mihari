@@ -8,23 +8,7 @@ module Mihari
     module FalsePositiveValidatable
       extend ActiveSupport::Concern
 
-      prepend MemoWise
-
-      #
-      # Normalize a falsepositive value
-      #
-      # @param [String] value
-      #
-      # @return [String, Regexp]
-      #
-      def normalize_falsepositive(value)
-        return value if !value.start_with?("/") || !value.end_with?("/")
-
-        # if a value is surrounded by slashes, take it as a regexp
-        value_without_slashes = value[1..-2]
-        Regexp.compile value_without_slashes.to_s
-      end
-      memo_wise :normalize_falsepositive
+      include FalsePositiveNormalizable
 
       #
       # Check whether a value is valid format as a disallowed data value
