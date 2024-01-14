@@ -109,6 +109,13 @@ export default defineComponent({
       await getRules()
     })
 
+    watch(q, async () => {
+      window.scrollTo({
+        top: 0,
+        behavior: "smooth"
+      })
+    })
+
     return {
       getRulesTask,
       page,

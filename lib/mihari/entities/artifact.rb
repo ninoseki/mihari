@@ -8,12 +8,12 @@ module Mihari
       expose :data_type, documentation: { type: String, required: true }, as: :dataType
       expose :source, documentation: { type: String, required: true }
       expose :query, documentation: { type: String, required: false }
-      expose :metadata, documentation: { type: Hash }
       expose :created_at, documentation: { type: DateTime, required: true }, as: :createdAt
+      expose :tags, using: Entities::Tag, documentation: { type: Entities::Tag, is_array: true, required: true }
     end
 
     class Artifact < BaseArtifact
-      expose :tags, using: Entities::Tag, documentation: { type: Entities::Tag, is_array: true, required: true }
+      expose :metadata, documentation: { type: Hash }
       expose :autonomous_system, using: Entities::AutonomousSystem,
         documentation: { type: Entities::AutonomousSystem, required: false }, as: :autonomousSystem
       expose :geolocation, using: Entities::Geolocation, documentation: { type: Entities::Geolocation, required: false }

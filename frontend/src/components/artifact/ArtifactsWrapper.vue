@@ -108,6 +108,13 @@ export default defineComponent({
       await getArtifacts()
     })
 
+    watch(q, async () => {
+      window.scrollTo({
+        top: 0,
+        behavior: "smooth"
+      })
+    })
+
     return {
       getArtifactsTask,
       page,

@@ -120,6 +120,13 @@ export default defineComponent({
       await getAlerts()
     })
 
+    watch(q, async () => {
+      window.scrollTo({
+        top: 0,
+        behavior: "smooth"
+      })
+    })
+
     return {
       getAlertsTask,
       page,

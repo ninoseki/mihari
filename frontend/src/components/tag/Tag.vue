@@ -5,7 +5,11 @@
       v-on:mouseover="showDeleteButton"
       v-on:mouseleave="hideDeleteButton"
     >
-      <span class="tag is-info is-light">{{ tag.name }}</span>
+      <router-link
+        class="tag is-info is-light"
+        :to="{ name: navigateTo, query: { q: getQuery(tag.name) } }"
+        >{{ tag.name }}</router-link
+      >
       <a class="tag is-delete" v-if="isDeleteButtonEnabled && deletable" @click="deleteTag"></a>
     </div>
   </div>
@@ -15,7 +19,7 @@
 import { defineComponent, type PropType, ref } from "vue"
 
 import { generateDeleteTagTask } from "@/api-helper"
-import type { Tag } from "@/types"
+import type { NavigateTo, Tag } from "@/types"
 
 export default defineComponent({
   name: "TagItem",
@@ -27,6 +31,10 @@ export default defineComponent({
     deletable: {
       type: Boolean,
       default: false
+    },
+    navigateTo: {
+      type: String as PropType<NavigateTo>,
+      required: true
     }
   },
   setup(props) {
@@ -54,12 +62,17 @@ export default defineComponent({
       isDeleteButtonEnabled.value = false
     }
 
+    const getQuery = (name: string) => {
+      return `tag:"${name}"`
+    }
+
     return {
       isDeleted,
       deleteTag,
       showDeleteButton,
       hideDeleteButton,
-      isDeleteButtonEnabled
+      isDeleteButtonEnabled,
+      getQuery
     }
   }
 })

@@ -3,8 +3,8 @@ import axios from "axios"
 import type {
   Alert,
   Alerts,
+  Artifact,
   Artifacts,
-  ArtifactWithTags,
   Config,
   CreateRule,
   IPInfo,
@@ -48,8 +48,8 @@ export const API = {
     return res.data
   },
 
-  async getArtifact(id: number): Promise<ArtifactWithTags> {
-    const res = await client.get<ArtifactWithTags>(`/api/artifacts/${id}`)
+  async getArtifact(id: number): Promise<Artifact> {
+    const res = await client.get<Artifact>(`/api/artifacts/${id}`)
     return res.data
   },
 

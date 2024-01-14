@@ -50,6 +50,12 @@
         <th>Query</th>
         <td>{{ truncate(artifact.query || "N/A", 64) }}</td>
       </tr>
+      <tr v-if="artifact.tags.length > 0">
+        <th>Tags</th>
+        <td>
+          <Tags :tags="artifact.tags" :navigate-to="'Artifacts'"></Tags>
+        </td>
+      </tr>
     </table>
     <p class="block is-clearfix"></p>
     <p class="help">Created at: {{ artifact.createdAt }}</p>
@@ -64,6 +70,7 @@ import { defineComponent, type PropType, ref } from "vue"
 import ActionButtons from "@/components/artifact/ActionButtons.vue"
 import ErrorMessage from "@/components/ErrorMessage.vue"
 import Message from "@/components/Message.vue"
+import Tags from "@/components/tag/Tags.vue"
 import type { Artifact, QueueMessage } from "@/types"
 
 export default defineComponent({
@@ -74,7 +81,7 @@ export default defineComponent({
       required: true
     }
   },
-  components: { ErrorMessage, ActionButtons, Message },
+  components: { ErrorMessage, ActionButtons, Message, Tags },
   emits: ["delete"],
   setup(_, context) {
     const error = ref<AxiosError>()

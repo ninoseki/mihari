@@ -60,7 +60,7 @@
         </tr>
         <tr v-if="artifact.tags.length > 0">
           <th>Tags</th>
-          <td><Tags :tags="artifact.tags"></Tags></td>
+          <td><Tags :tags="artifact.tags" :navigate-to="'Artifacts'"></Tags></td>
         </tr>
       </table>
       <p class="help">Created at: {{ artifact.createdAt }}</p>
@@ -113,20 +113,20 @@ import CPEs from "@/components/artifact/CPEs.vue"
 import DnsRecords from "@/components/artifact/DnsRecords.vue"
 import Ports from "@/components/artifact/Ports.vue"
 import ReverseDnsNames from "@/components/artifact/ReverseDnsNames.vue"
-import Tags from "@/components/artifact/Tags.vue"
 import Vulnerabilities from "@/components/artifact/Vulnerabilities.vue"
 import WhoisRecord from "@/components/artifact/WhoisRecord.vue"
 import ErrorMessage from "@/components/ErrorMessage.vue"
 import Links from "@/components/link/Links.vue"
 import Message from "@/components/Message.vue"
-import type { ArtifactWithTags, GCS, QueueMessage } from "@/types"
+import Tags from "@/components/tag/Tags.vue"
+import type { Artifact, GCS, QueueMessage } from "@/types"
 import { getGCSByCountryCode, getGCSByIPInfo } from "@/utils"
 
 export default defineComponent({
   name: "ArtifactDetail",
   props: {
     artifact: {
-      type: Object as PropType<ArtifactWithTags>,
+      type: Object as PropType<Artifact>,
       required: true
     }
   },
