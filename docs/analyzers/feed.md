@@ -33,6 +33,12 @@ json: ...
 
 `selector` (`string`) is a `jr` selector.
 
+!!! warning
+
+    With great power comes great responsibility.
+
+    `jr` can execute anything with the same privilege Mihari has. Do not use untrusted selector.
+
 ### Headers
 
 `headers` (`hash`) is an HTTP headers. Optional.
