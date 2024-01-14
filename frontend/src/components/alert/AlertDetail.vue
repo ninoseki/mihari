@@ -23,7 +23,7 @@
       <tr>
         <th>Artifacts</th>
         <td>
-          <Artifacts :artifacts="alert.artifacts"></Artifacts>
+          <Artifacts :artifacts="alert.artifacts" @delete="onArtifactsDeleted"></Artifacts>
         </td>
       </tr>
       <tr v-if="alert.tags.length > 0">
@@ -85,13 +85,16 @@ export default defineComponent({
       context.emit("delete")
     }
 
+    const onArtifactsDeleted = onDelete
+
     return {
       onDelete,
       getLocalDatetime,
       getHumanizedRelativeTime,
       onSetError,
       onDisposeError,
-      error
+      error,
+      onArtifactsDeleted
     }
   }
 })

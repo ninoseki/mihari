@@ -1,5 +1,5 @@
 <template>
-  <div class="box">
+  <div class="box" v-if="!isDeleted">
     <ErrorMessage
       class="block"
       :error="error"
@@ -25,7 +25,7 @@
       <tr>
         <th>Artifacts</th>
         <td>
-          <Artifacts :artifacts="alert.artifacts"></Artifacts>
+          <Artifacts :artifacts="alert.artifacts" @delete="onArtifactsDeleted"></Artifacts>
         </td>
       </tr>
       <tr v-if="alert.tags.length > 0">
@@ -66,6 +66,7 @@ export default defineComponent({
   },
   emits: ["delete"],
   setup(_, context) {
+    const isDeleted = ref(false)
     const error = ref<AxiosError>()
 
     const onSetError = (newError: AxiosError) => {
@@ -80,13 +81,19 @@ export default defineComponent({
       context.emit("delete")
     }
 
+    const onArtifactsDeleted = () => {
+      isDeleted.value = true
+    }
+
     return {
       onDelete,
       getLocalDatetime,
       getHumanizedRelativeTime,
       onSetError,
       onDisposeError,
-      error
+      error,
+      isDeleted,
+      onArtifactsDeleted
     }
   }
 })

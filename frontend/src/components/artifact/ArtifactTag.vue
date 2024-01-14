@@ -30,7 +30,8 @@ export default defineComponent({
       required: true
     }
   },
-  setup(props) {
+  emits: ["delete"],
+  setup(props, context) {
     const isDeleted = ref(false)
     const isDeleteButtonEnabled = ref(false)
 
@@ -42,6 +43,7 @@ export default defineComponent({
       if (confirmed) {
         await deleteArtifactTask.perform(props.artifact.id)
         isDeleted.value = true
+        context.emit("delete")
       }
     }
 
