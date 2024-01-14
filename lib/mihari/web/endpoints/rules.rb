@@ -94,7 +94,7 @@ module Mihari
               end
             end.to_result
 
-            message = queued ? "ID:#{id}'s search has been queued" : "ID:#{id}'s search has been succeed"
+            message = queued ? "ID:#{id}'s search is queued" : "ID:#{id}'s search is successful"
             return present({ message: message, queued: queued }, with: Entities::QueueMessage) if result.success?
 
             case result.failure
