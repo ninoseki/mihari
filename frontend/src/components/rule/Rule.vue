@@ -43,7 +43,7 @@
       <tr v-if="rule.tags.length > 0">
         <th>Tags</th>
         <td>
-          <Tags :tags="rule.tags" />
+          <Tags :tags="rule.tags" :navigate-to="'Rules'" />
         </td>
       </tr>
     </table>

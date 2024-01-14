@@ -29,7 +29,7 @@
       <tr v-if="alert.tags.length > 0">
         <th>Tags</th>
         <td>
-          <Tags :tags="alert.tags"></Tags>
+          <Tags :tags="alert.tags" :navigate-to="'Alerts'"></Tags>
         </td>
       </tr>
     </table>

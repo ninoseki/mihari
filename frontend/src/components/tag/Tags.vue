@@ -5,6 +5,7 @@
       :tag="tag"
       :key="tag.name"
       :deletable="deletable"
+      :navigate-to="navigateTo"
     ></TagComponent>
   </div>
 </template>
@@ -13,7 +14,7 @@
 import { defineComponent, type PropType } from "vue"
 
 import TagComponent from "@/components/tag/Tag.vue"
-import type { Tag } from "@/types"
+import type { NavigateTo, Tag } from "@/types"
 
 export default defineComponent({
   name: "TagsItem",
@@ -28,6 +29,10 @@ export default defineComponent({
     deletable: {
       type: Boolean,
       default: false
+    },
+    navigateTo: {
+      type: String as PropType<NavigateTo>,
+      required: true
     }
   },
   setup() {}

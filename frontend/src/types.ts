@@ -91,9 +91,7 @@ export interface Artifact {
   cpes?: CPE[]
   ports?: Port[]
   vulnerabilities?: Vulnerability[]
-}
 
-export interface ArtifactWithTags extends Artifact {
   tags: Tag[]
 }
 
@@ -187,3 +185,5 @@ export interface ErrorMessage extends Message {
 export interface QueueMessage extends Message {
   queued: boolean
 }
+
+export type NavigateTo = "Alerts" | "Rules" | "Artifacts"

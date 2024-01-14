@@ -67,6 +67,7 @@
 </template>
 
 <script lang="ts">
+import { watchThrottled } from "@vueuse/core"
 import { useRouteQuery } from "@vueuse/router"
 import { defineComponent, onMounted, ref, watch } from "vue"
 
@@ -118,6 +119,13 @@ export default defineComponent({
 
     watch(page, async () => {
       await getAlerts()
+    })
+
+    watch(q, async () => {
+      window.scrollTo({
+        top: 0,
+        behavior: "smooth"
+      })
     })
 
     return {

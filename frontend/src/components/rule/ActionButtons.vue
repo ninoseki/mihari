@@ -7,10 +7,13 @@
       <span>Alerts:</span>
       <span>{{ getAlertsTask.last?.value?.total }}</span>
     </router-link>
-    <a class="button is-small is-success is-rounded">
+    <router-link
+      class="button is-success is-small is-rounded"
+      :to="{ name: 'Artifacts', query: { q: q } }"
+    >
       <span>Artifacts:</span>
       <span>{{ getArtifactsTask.last?.value?.total }}</span>
-    </a>
+    </router-link>
     <a class="button is-link is-light is-small" :href="href" target="_blank">
       <span>JSON</span>
       <span class="icon is-small">
