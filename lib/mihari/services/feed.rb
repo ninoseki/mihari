@@ -93,10 +93,7 @@ module Mihari
       #
       # @param [Object] read_data
       def call(input_enumerator, selector)
-        parsed = proc do
-          $SAFE = 1
-          input_enumerator.instance_eval(selector)
-        end.call
+        parsed = input_enumerator.instance_eval(selector)
 
         raise TypeError unless parsed.is_a?(Array) || parsed.all?(String)
 
