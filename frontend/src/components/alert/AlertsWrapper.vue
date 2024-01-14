@@ -67,7 +67,6 @@
 </template>
 
 <script lang="ts">
-import { watchThrottled } from "@vueuse/core"
 import { useRouteQuery } from "@vueuse/router"
 import { defineComponent, onMounted, ref, watch } from "vue"
 
