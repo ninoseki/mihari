@@ -70,7 +70,7 @@ Gem::Specification.new do |spec|
     spec.add_development_dependency "solargraph", "~> 0.50"
   end
 
-  spec.add_dependency "activerecord", "7.1.2"
+  spec.add_dependency "activerecord", "7.1.3"
   spec.add_dependency "addressable", "~> 2.8"
   spec.add_dependency "anyway_config", "2.6.2"
   spec.add_dependency "awrence", "2.0.1"
