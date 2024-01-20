@@ -16,6 +16,7 @@ options:
   retry_times: ...
   retry_interval: ...
   retry_exponential_backoff: ...
+  parallel: ...
 ```
 
 ### Timeout
@@ -33,3 +34,7 @@ options:
 ### Retry Exponential Backoff
 
 `retry_exponential_backoff` (`bool`) controls whether to do exponential backoff. Optional. Defaults to `true`. Configurable via `RETRY_EXPONENTIAL_BACKOFF` environment variable.
+
+### Parallel
+
+`parallel` (`bool`) controls whether to allow parallel execution or not. Optional. Defaults to `false`. Configurable via `PARALLEL` environment variable.
