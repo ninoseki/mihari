@@ -15,31 +15,31 @@ module Mihari
 
       MISP = Dry::Schema.Params do
         required(:emitter).value(Types::String.enum(*Mihari::Emitters::MISP.keys))
-        optional(:url).value(:string)
-        optional(:api_key).value(:string)
+        optional(:url).filled(:string)
+        optional(:api_key).filled(:string)
         optional(:options).hash(Options)
       end
 
       TheHive = Dry::Schema.Params do
         required(:emitter).value(Types::String.enum(*Mihari::Emitters::TheHive.keys))
-        optional(:url).value(:string)
-        optional(:api_key).value(:string)
+        optional(:url).filled(:string)
+        optional(:api_key).filled(:string)
         optional(:options).hash(Options)
       end
 
       Slack = Dry::Schema.Params do
         required(:emitter).value(Types::String.enum(*Mihari::Emitters::Slack.keys))
-        optional(:webhook_url).value(:string)
-        optional(:channel).value(:string)
+        optional(:webhook_url).filled(:string)
+        optional(:channel).filled(:string)
         optional(:options).hash(Options)
       end
 
       Webhook = Dry::Schema.Params do
         required(:emitter).value(Types::String.enum(*Mihari::Emitters::Webhook.keys))
-        required(:url).value(:string)
+        required(:url).filled(:string)
         optional(:method).value(Types::HTTPRequestMethods).default("POST")
-        optional(:headers).value(:hash).default({})
-        optional(:template).value(:string)
+        optional(:headers).filled(:hash)
+        optional(:template).filled(:string)
         optional(:options).hash(Options)
       end
     end
