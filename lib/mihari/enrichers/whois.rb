@@ -18,7 +18,7 @@ module Mihari
       # @return [Mihari::Models::WhoisRecord, nil]
       #
       def call(artifact)
-        artifact.whois_record ||= memoized_call(PublicSuffix.domain(artifact.domain))
+        artifact.whois_record ||= memoized_call(PublicSuffix.domain(artifact.domain)).dup
       end
 
       private

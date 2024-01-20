@@ -174,11 +174,10 @@ module Mihari
     # @return [Array<Mihari::Models::Artifact>]
     #
     def enriched_artifacts
-      # TODO: same whois query can be issued multiple times
-      @enriched_artifacts ||= Parallel.map(unique_artifacts) do |artifact|
-        enrichers.each do |enricher|
-          enricher.result(artifact) if enricher.callable?(artifact)
-        end
+      @enriched_artifacts ||= unique_artifacts.map do |artifact|
+        serial_enrichers.each { |enricher| enricher.result(artifact) }
+        Parallel.each(parallel_enrichers) { |enricher| enricher.result(artifact) }
+
         artifact
       end
     end
@@ -191,7 +190,10 @@ module Mihari
     def bulk_emit
       return [] if enriched_artifacts.empty?
 
-      Parallel.map(emitters) { |emitter| emitter.result(enriched_artifacts).value_or nil }.compact
+      [].tap do |out|
+        out << serial_emitters.map { |emitter| emitter.result(enriched_artifacts).value_or(nil) }
+        out << Parallel.map(parallel_emitters) { |emitter| emitter.result(enriched_artifacts).value_or(nil) }
+      end.flatten.compact
     end
 
     #
@@ -368,6 +370,14 @@ module Mihari
       end
     end
 
+    def parallel_emitters
+      emitters.select(&:parallel?)
+    end
+
+    def serial_emitters
+      emitters.reject(&:parallel?)
+    end
+
     #
     # Get enricher class
     #
@@ -392,6 +402,14 @@ module Mihari
         klass = get_enricher_class(name)
         klass.new(options: options, **params)
       end
+    end
+
+    def parallel_enrichers
+      enrichers.select(&:parallel?)
+    end
+
+    def serial_enrichers
+      enrichers.reject(&:parallel?)
     end
 
     #
