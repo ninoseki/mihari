@@ -6,6 +6,18 @@ module Mihari
     # Alert model
     #
     class Alert < ActiveRecord::Base
+      # @!attribute [r] id
+      #   @return [Integer, nil]
+
+      # @!attribute [rw] created_at
+      #   @return [DateTime]
+
+      # @!attribute [r] rule
+      #   @return [Mihari::Models::Rule]
+
+      # @!attribute [r] artifacts
+      #   @return [Array<Mihari::Models::Artifact>]
+
       belongs_to :rule
 
       has_many :artifacts, dependent: :destroy

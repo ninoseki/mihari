@@ -51,7 +51,7 @@ module Mihari
       # @return [Mihari::Structs::MMDB::Response]
       #
       def call(ip)
-        Mihari::Enrichers::MMDB.new.call ip
+        Clients::MMDB.new.query ip
       end
     end
   end

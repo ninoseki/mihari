@@ -19,7 +19,7 @@ module Mihari
 
         raise UnenrichableError.new, "#{artifact.id} is already enriched or unenrichable" unless artifact.enrichable?
 
-        artifact.enrich_all
+        artifact.enrich
         artifact.save
       end
     end

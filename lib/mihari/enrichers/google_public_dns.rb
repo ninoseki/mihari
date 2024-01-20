@@ -7,14 +7,20 @@ module Mihari
     #
     class GooglePublicDNS < Base
       #
-      # Query Google Public DNS
+      # @param [Mihari::Models::Artifact] artifact
       #
-      # @param [String] name
+      # @return [Mihari::Models::Artifact]
       #
-      # @return [Mihari::Structs::GooglePublicDNS::Response]
-      #
-      def call(name)
-        client.query_all name
+      def call(artifact)
+        res = client.query_all(artifact.domain)
+
+        artifact.tap do |tapped|
+          if tapped.dns_records.empty?
+            tapped.dns_records = res.answers.map do |answer|
+              Models::DnsRecord.new(resource: answer.resource_type, value: answer.data)
+            end
+          end
+        end
       end
 
       class << self
@@ -28,8 +34,21 @@ module Mihari
 
       private
 
+      #
+      # @param [Mihari::Models::Artifact] artifact
+      #
+      # @return [Boolean]
+      #
+      def callable_relationships?(artifact)
+        artifact.dns_records.empty?
+      end
+
+      def supported_data_types
+        %w[url domain]
+      end
+
       def client
-        Clients::GooglePublicDNS.new(timeout: timeout)
+        @client ||= Clients::GooglePublicDNS.new(timeout: timeout)
       end
     end
   end

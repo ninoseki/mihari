@@ -17,6 +17,90 @@ module Mihari
     # Artifact model
     #
     class Artifact < ActiveRecord::Base
+      # @!attribute [r] id
+      #   @return [Integer, nil]
+
+      # @!attribute [rw] data
+      #   @return [String]
+
+      # @!attribute [rw] data_type
+      #   @return [String]
+
+      # @!attribute [rw] source
+      #   @return [String, nil]
+
+      # @!attribute [rw] query
+      #   @return [String, nil]
+
+      # @!attribute [rw] metadata
+      #   @return [Hash, nil]
+
+      # @!attribute [rw] created_at
+      #   @return [DateTime]
+
+      # @!attribute [r] alert
+      #   @return [Mihari::Models::Alert]
+
+      # @!attribute [r] rule
+      #   @return [Mihari::Models::Rule]
+
+      # @!attribute [rw] autonomous_system
+      #   @return [Mihari::Models::AutonomousSystem, nil]
+
+      # @!attribute [rw] geolocation
+      #   @return [Mihari::Models::Geolocation, nil]
+
+      # @!attribute [rw] whois_record
+      #   @return [Mihari::Models::WhoisRecord, nil]
+
+      # @!attribute [rw] cpes
+      #   @return [Array<Mihari::Models::CPE>]
+
+      # @!attribute [rw] dns_records
+      #   @return [Array<Mihari::Models::DnsRecord>]
+
+      # @!attribute [rw] ports
+      #   @return [Array<Mihari::Models::Port>]
+
+      # @!attribute [rw] reverse_dns_names
+      #   @return [Array<Mihari::Models::ReverseDnsName>]
+
+      # @!attribute [rw] vulnerabilities
+      #   @return [Array<Mihari::Models::Vulnerability>]
+
+      # @!attribute [r] alert
+      #   @return [Mihari::Models::Alert]
+
+      # @!attribute [r] rule
+      #   @return [Mihari::Models::Rule]
+
+      # @!attribute [rw] autonomous_system
+      #   @return [Mihari::Models::AutonomousSystem, nil]
+
+      # @!attribute [rw] geolocation
+      #   @return [Mihari::Models::Geolocation, nil]
+
+      # @!attribute [rw] whois_record
+      #   @return [Mihari::Models::WhoisRecord, nil]
+
+      # @!attribute [rw] cpes
+      #   @return [Array<Mihari::Models::CPE>]
+
+      # @!attribute [rw] dns_records
+      #   @return [Array<Mihari::Models::DnsRecord>]
+
+      # @!attribute [rw] ports
+      #   @return [Array<Mihari::Models::Port>]
+
+      # @!attribute [rw] reverse_dns_names
+      #   @return [Array<Mihari::Models::ReverseDnsName>]
+
+      # @!attribute [rw] vulnerabilities
+      #   @return [Array<Mihari::Models::Vulnerability>]
+
+      # @!attribute [rw] tags
+      #   @return [Array<Mihari::Models::Tag>]
+
       belongs_to :alert
 
       has_one :autonomous_system, dependent: :destroy
@@ -90,173 +174,23 @@ module Mihari
         artifact.created_at < decayed_at
       end
 
-      #
-      # Enrich whois record
-      #
-      # @param [Mihari::Enrichers::Whois] enricher
-      #
-      def enrich_whois(enricher = Enrichers::Whois.new)
-        return unless can_enrich_whois?
-
-        self.whois_record = Services::WhoisRecordBuilder.call(domain, enricher: enricher)
-      end
-
-      #
-      # Enrich DNS records
-      #
-      # @param [Mihari::Enrichers::GooglePublicDNS] enricher
-      #
-      def enrich_dns(enricher = Enrichers::GooglePublicDNS.new)
-        return unless can_enrich_dns?
-
-        self.dns_records = Services::DnsRecordBuilder.call(domain, enricher: enricher)
-      end
-
-      #
-      # Enrich reverse DNS names
-      #
-      # @param [Mihari::Enrichers::Shodan] enricher
-      #
-      def enrich_reverse_dns(enricher = Enrichers::Shodan.new)
-        return unless can_enrich_reverse_dns?
-
-        self.reverse_dns_names = Services::ReverseDnsNameBuilder.call(data, enricher: enricher)
-      end
-
-      #
-      # Enrich geolocation
-      #
-      # @param [Mihari::Enrichers::IPInfo] enricher
-      #
-      def enrich_geolocation(enricher = Enrichers::MMDB.new)
-        return unless can_enrich_geolocation?
-
-        self.geolocation = Services::GeolocationBuilder.call(data, enricher: enricher)
-      end
-
-      #
-      # Enrich AS
-      #
-      # @param [Mihari::Enrichers::IPInfo] enricher
-      #
-      def enrich_autonomous_system(enricher = Enrichers::MMDB.new)
-        return unless can_enrich_autonomous_system?
-
-        self.autonomous_system = Services::AutonomousSystemBuilder.call(data, enricher: enricher)
-      end
-
-      #
-      # Enrich ports
-      #
-      # @param [Mihari::Enrichers::Shodan] enricher
-      #
-      def enrich_ports(enricher = Enrichers::Shodan.new)
-        return unless can_enrich_ports?
-
-        self.ports = Services::PortBuilder.call(data, enricher: enricher)
-      end
-
-      #
-      # Enrich CPEs
-      #
-      # @param [Mihari::Enrichers::Shodan] enricher
-      #
-      def enrich_cpes(enricher = Enrichers::Shodan.new)
-        return unless can_enrich_cpes?
-
-        self.cpes = Services::CPEBuilder.call(data, enricher: enricher)
-      end
-
-      #
-      # Enrich vulnerabilities
-      #
-      # @param [Mihari::Enrichers::Shodan] enricher
-      #
-      def enrich_vulnerabilities(enricher = Enrichers::Shodan.new)
-        return unless can_enrich_vulnerabilities?
-
-        self.vulnerabilities = Services::VulnerabilityBuilder.call(data, enricher: enricher)
-      end
-
-      #
-      # Enrich all the enrichable relationships of the artifact
-      #
-      def enrich_all
-        enrich_autonomous_system mmdb
-        enrich_dns
-        enrich_geolocation mmdb
-        enrich_reverse_dns shodan
-        enrich_whois
-        enrich_ports shodan
-        enrich_cpes shodan
-        enrich_vulnerabilities shodan
-      end
-
-      ENRICH_METHODS_BY_ENRICHER = {
-        Enrichers::Whois => %i[
-          enrich_whois
-        ],
-        Enrichers::MMDB => %i[
-          enrich_autonomous_system
-          enrich_geolocation
-        ],
-        Enrichers::Shodan => %i[
-          enrich_ports
-          enrich_cpes
-          enrich_reverse_dns
-          enrich_vulnerabilities
-        ],
-        Enrichers::GooglePublicDNS => %i[
-          enrich_dns
-        ]
-      }.freeze
-
-      #
-      # Enrich by name of enricher
-      #
-      # @param [Mihari::Enrichers::Base] enricher
-      #
-      def enrich_by_enricher(enricher)
-        methods = ENRICH_METHODS_BY_ENRICHER[enricher.class] || []
-        methods.each { |method| send(method, enricher) if respond_to?(method) }
-      end
-
-      def can_enrich_whois?
-        %w[domain url].include?(data_type) && whois_record.nil?
-      end
-
-      def can_enrich_dns?
-        %w[domain url].include?(data_type) && dns_records.empty?
-      end
-
-      def can_enrich_reverse_dns?
-        data_type == "ip" && reverse_dns_names.empty?
-      end
-
-      def can_enrich_geolocation?
-        data_type == "ip" && geolocation.nil?
-      end
-
-      def can_enrich_autonomous_system?
-        data_type == "ip" && autonomous_system.nil?
-      end
-
-      def can_enrich_ports?
-        data_type == "ip" && ports.empty?
-      end
-
-      def can_enrich_cpes?
-        data_type == "ip" && cpes.empty?
-      end
-
-      def can_enrich_vulnerabilities?
-        data_type == "ip" && vulnerabilities.empty?
-      end
-
       def enrichable?
-        enrich_methods = methods.map(&:to_s).select { |method| method.start_with?("can_enrich_") }
-        enrich_methods.map(&:to_sym).any? do |method|
-          send(method) if respond_to?(method)
+        !callable_enrichers.empty?
+      end
+
+      def enrich
+        callable_enrichers.each { |enricher| enricher.result self }
+      end
+
+      #
+      # @return [String, nil]
+      #
+      def domain
+        case data_type
+        when "domain"
+          data
+        when "url"
+          Addressable::URI.parse(data).host
         end
       end
 
@@ -272,32 +206,21 @@ module Mihari
 
       private
 
+      #
+      # @return [Array<Mihari::Enrichers::Base>]
+      #
+      def callable_enrichers
+        @callable_enrichers ||= Mihari.enrichers.map(&:new).select do |enricher|
+          enricher.callable?(self)
+        end
+      end
+
       def set_data_type
         self.data_type = DataType.type(data)
       end
 
       def set_rule_id
         @set_rule_id ||= nil
-      end
-
-      def mmdb
-        @mmdb ||= Enrichers::MMDB.new
-      end
-
-      def shodan
-        @shodan ||= Enrichers::Shodan.new
-      end
-
-      #
-      # @return [String, nil]
-      #
-      def domain
-        case data_type
-        when "domain"
-          data
-        when "url"
-          Addressable::URI.parse(data).host
-        end
       end
     end
   end

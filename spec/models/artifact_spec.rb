@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
-RSpec.describe Mihari::Models::Artifact, :vcr do
-  let_it_be(:artifact) { FactoryBot.create(:artifact) }
+RSpec.describe Mihari::Models::Artifact do
+  let_it_be(:artifact) { FactoryBot.create(:artifact, :ip) }
   let_it_be(:tag) { artifact.tags.first }
   let_it_be(:alert) { artifact.alert }
   let_it_be(:rule) { artifact.rule }
@@ -63,173 +63,16 @@ RSpec.describe Mihari::Models::Artifact, :vcr do
     end
   end
 
-  describe "#enrich_whois" do
-    let!(:enricher) do
-      enricher = instance_double("whois_enricher")
-      allow(enricher).to receive(:result).and_return(
-        Dry::Monads::Result::Success.new(
-          Mihari::Models::WhoisRecord.new(domain: "example.com")
-        )
-      )
-      enricher
-    end
-
-    context "with domain" do
-      let(:data) { "example.com" }
-      let(:artifact) { described_class.new(data: data, alert_id: alert.id) }
-
-      it do
-        expect(artifact.whois_record).to be_nil
-      end
-
-      it do
-        artifact.enrich_whois enricher
-        expect(artifact.whois_record).not_to be_nil
-      end
-    end
-
-    context "with URL" do
-      let(:data) { "https://example.com" }
-      let(:artifact) { described_class.new(data: data, alert_id: alert.id) }
-
-      it do
-        expect(artifact.whois_record).to be_nil
-      end
-
-      it do
-        artifact.enrich_whois enricher
-        expect(artifact.whois_record).not_to be_nil
-      end
-    end
-  end
-
-  describe "#enrich_dns" do
-    context "with domain" do
-      let(:data) { "example.com" }
-      let(:artifact) { described_class.new(data: data, alert_id: alert.id) }
-
-      it do
-        expect(artifact.dns_records.length).to eq(0)
-      end
-
-      it do
-        artifact.enrich_dns
-        expect(artifact.dns_records.length).to be > 0
-      end
-    end
-
-    context "with URL" do
-      let(:data) { "https://example.com" }
-      let(:artifact) { described_class.new(data: data, alert_id: alert.id) }
-
-      it do
-        artifact = described_class.new(data: data, alert_id: alert.id)
-        expect(artifact.dns_records.length).to eq(0)
-      end
-
-      it do
-        artifact.enrich_dns
-        expect(artifact.dns_records.length).to be > 0
-      end
-    end
-  end
-
-  describe "#enrich_geolocation" do
-    let(:data) { "1.1.1.1" }
-    let(:artifact) { described_class.new(data: data, alert_id: alert.id) }
-
+  describe "#enrichable?" do
     it do
-      expect(artifact.geolocation).to eq(nil)
+      expect(artifact.enrichable?).to eq(true)
     end
 
-    it do
-      artifact.enrich_geolocation
-      expect(artifact.geolocation.country_code).to eq("US")
-    end
-  end
-
-  describe "#enrich_autonomous_system" do
-    let(:data) { "1.1.1.1" }
-    let(:artifact) { described_class.new(data: data, alert_id: alert.id) }
-
-    it do
-      expect(artifact.autonomous_system).to eq(nil)
-    end
-
-    it do
-      artifact.enrich_autonomous_system
-      expect(artifact.autonomous_system.number).to eq(13_335)
-    end
-  end
-
-  describe "#enrich_by_enricher" do
-    context "with IPInfo" do
-      let(:data) { "1.1.1.1" }
-      let(:artifact) { described_class.new(data: data, alert_id: alert.id) }
+    context "with unenrichable artifact" do
+      let(:artifact) { FactoryBot.build(:artifact, :unenrichable) }
 
       it do
-        expect(artifact.autonomous_system).to eq(nil)
-        expect(artifact.geolocation).to eq(nil)
-      end
-
-      it do
-        artifact.enrich_by_enricher Mihari::Enrichers::MMDB.new
-        expect(artifact.autonomous_system).not_to eq(nil)
-        expect(artifact.geolocation).not_to eq(nil)
-      end
-    end
-
-    context "with Shodan" do
-      let(:data) { "1.1.1.1" }
-      let(:artifact) { described_class.new(data: data, alert_id: alert.id) }
-
-      it do
-        expect(artifact.reverse_dns_names.empty?).to be true
-        expect(artifact.ports.empty?).to be true
-      end
-
-      it do
-        artifact.enrich_by_enricher Mihari::Enrichers::Shodan.new
-        expect(artifact.reverse_dns_names.empty?).to be false
-        expect(artifact.ports.empty?).to be false
-      end
-    end
-
-    context "with Google Public DNS" do
-      let(:data) { "example.com" }
-      let(:artifact) { described_class.new(data: data, alert_id: alert.id) }
-
-      it do
-        expect(artifact.dns_records.empty?).to be true
-      end
-
-      it do
-        artifact.enrich_by_enricher(Mihari::Enrichers::GooglePublicDNS.new)
-        expect(artifact.dns_records.empty?).to be false
-      end
-    end
-
-    context "with Whois" do
-      let(:data) { "example.com" }
-      let(:artifact) { described_class.new(data: data, alert_id: alert.id) }
-      let!(:enricher) do
-        enricher = instance_double("whois_enricher")
-        allow(enricher).to receive(:result).and_return(
-          Dry::Monads::Result::Success.new(
-            Mihari::Models::WhoisRecord.new(domain: data)
-          )
-        )
-        allow(enricher).to receive(:class).and_return(Mihari::Enrichers::Whois)
-        enricher
-      end
-
-      it do
-        expect(artifact.whois_record).to be_nil
-      end
-
-      it do
-        artifact.enrich_by_enricher(enricher)
-        expect(artifact.whois_record).not_to be_nil
+        expect(artifact.enrichable?).to eq(false)
       end
     end
   end
