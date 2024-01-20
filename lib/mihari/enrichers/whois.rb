@@ -8,25 +8,33 @@ module Mihari
     # Whois enricher
     #
     class Whois < Base
-      #
-      # @param [Hash, nil] options
-      #
-      def initialize(options: nil)
-        super(options: options)
-      end
+      prepend MemoWise
 
       #
       # Query IAIA Whois API
       #
-      # @param [String] domain
+      # @param [Mihari::Models::Artifact] artifact
       #
       # @return [Mihari::Models::WhoisRecord, nil]
       #
-      def call(domain)
-        memoized_call PublicSuffix.domain(domain)
+      def call(artifact)
+        artifact.whois_record ||= memoized_call(PublicSuffix.domain(artifact.domain))
       end
 
       private
+
+      #
+      # @param [Mihari::Models::Artifact] artifact
+      #
+      # @return [Boolean]
+      #
+      def callable_relationships?(artifact)
+        artifact.whois_record.nil?
+      end
+
+      def supported_data_types
+        %w[url domain]
+      end
 
       #
       # @param [String] domain

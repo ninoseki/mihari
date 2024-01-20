@@ -6,6 +6,27 @@ module Mihari
     # Rule model
     #
     class Rule < ActiveRecord::Base
+      # @!attribute [rw] id
+      #   @return [String]
+
+      # @!attribute [rw] title
+      #   @return [String]
+
+      # @!attribute [rw] description
+      #   @return [String]
+
+      # @!attribute [rw] data
+      #   @return [Hash]
+
+      # @!attribute [rw] created_at
+      #   @return [DateTime]
+
+      # @!attribute [rw] updated_at
+      #   @return [DateTime]
+
+      # @!attribute [r] alerts
+      #   @return [Array<Mihari::Models::Alert>]
+
       has_many :alerts, dependent: :destroy
       has_many :taggings, dependent: :destroy
       has_many :tags, through: :taggings

@@ -174,8 +174,11 @@ module Mihari
     # @return [Array<Mihari::Models::Artifact>]
     #
     def enriched_artifacts
+      # TODO: same whois query can be issued multiple times
       @enriched_artifacts ||= Parallel.map(unique_artifacts) do |artifact|
-        enrichers.each { |enricher| artifact.enrich_by_enricher enricher }
+        enrichers.each do |enricher|
+          enricher.result(artifact) if enricher.callable?(artifact)
+        end
         artifact
       end
     end
@@ -289,11 +292,11 @@ module Mihari
     #
     # @return [Boolean]
     #
-    def falsepositive?(value)
-      return true if falsepositives.include?(value)
+    def falsepositive?(artifact)
+      return true if falsepositives.include?(artifact)
 
       regexps = falsepositives.select { |fp| fp.is_a?(Regexp) }
-      regexps.any? { |fp| fp.match?(value) }
+      regexps.any? { |fp| fp.match?(artifact) }
     end
 
     #

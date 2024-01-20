@@ -9,16 +9,47 @@ module Mihari
       #
       # Query Shodan Internet DB
       #
-      # @param [String] ip
+      # @param [Mihari::Models::Artifact] artifact
       #
       # @return [Mihari::Structs::Shodan::InternetDBResponse, nil]
       #
-      def call(ip)
-        client.query ip
+      def call(artifact)
+        res = client.query(artifact.data)
+
+        artifact.tap do |tapped|
+          tapped.cpes = (res&.cpes || []).map { |cpe| Models::CPE.new(name: cpe) } if tapped.cpes.empty?
+          tapped.ports = (res&.ports || []).map { |port| Models::Port.new(number: port) } if tapped.ports.empty?
+          if tapped.reverse_dns_names.empty?
+            tapped.reverse_dns_names = (res&.hostnames || []).map do |name|
+              Models::ReverseDnsName.new(name: name)
+            end
+          end
+        end
       end
-      memo_wise :call
+
+      #
+      # @param [Mihari::Models::Artifact] artifact
+      #
+      # @return [Boolean]
+      #
+      def callable?(artifact)
+        false unless supported_data_types.include?(artifact.data_type)
+      end
 
       private
+
+      #
+      # @param [Mihari::Models::Artifact] artifact
+      #
+      # @return [Boolean]
+      #
+      def callable_relationships?(artifact)
+        artifact.cpes.empty? || artifact.ports.empty? || artifact.reverse_dns_names.empty?
+      end
+
+      def supported_data_types
+        %w[ip]
+      end
 
       def client
         @client ||= Clients::ShodanInternetDB.new(timeout: timeout)
