@@ -15,10 +15,21 @@ module Mihari
       #
       # @param [Mihari::Models::Artifact] artifact
       #
-      # @return [Mihari::Models::WhoisRecord, nil]
-      #
       def call(artifact)
-        artifact.whois_record ||= memoized_call(PublicSuffix.domain(artifact.domain)).dup
+        return if artifact.domain.nil?
+
+        domain = PublicSuffix.domain(artifact.domain)
+        record = memoized_lookup(domain)
+        return if record.parser.available?
+
+        artifact.whois_record ||= Models::WhoisRecord.new(
+          domain: domain,
+          created_on: get_created_on(record.parser),
+          updated_on: get_updated_on(record.parser),
+          expires_on: get_expires_on(record.parser),
+          registrar: get_registrar(record.parser),
+          contacts: get_contacts(record.parser)
+        )
       end
 
       private
@@ -41,21 +52,10 @@ module Mihari
       #
       # @return [Mihari::Models::WhoisRecord, nil]
       #
-      def memoized_call(domain)
-        record = whois.lookup(domain)
-        parser = record.parser
-        return nil if parser.available?
-
-        Models::WhoisRecord.new(
-          domain: domain,
-          created_on: get_created_on(parser),
-          updated_on: get_updated_on(parser),
-          expires_on: get_expires_on(parser),
-          registrar: get_registrar(parser),
-          contacts: get_contacts(parser)
-        )
+      def memoized_lookup(domain)
+        whois.lookup domain
       end
-      memo_wise :memoized_call
+      memo_wise :memoized_lookup
 
       #
       # @return [::Whois::Client]
