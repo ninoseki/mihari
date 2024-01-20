@@ -50,6 +50,13 @@ module Mihari
       options[:timeout]
     end
 
+    #
+    # @return [Boolean]
+    #
+    def parallel?
+      options[:parallel] || Mihari.config.parallel
+    end
+
     def validate_configuration!
       return if configured?
 

@@ -40,13 +40,6 @@ module Mihari
         options[:ignore_error] || Mihari.config.ignore_error
       end
 
-      #
-      # @return [Boolean]
-      #
-      def parallel?
-        options[:parallel] || Mihari.config.parallel
-      end
-
       # @return [Array<String>, Array<Mihari::Models::Artifact>]
       def artifacts
         raise NotImplementedError, "You must implement #{self.class}##{__method__}"

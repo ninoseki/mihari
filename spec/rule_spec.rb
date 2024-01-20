@@ -39,10 +39,6 @@ RSpec.describe Mihari::Rule do
     [artifact, artifact]
   end
 
-  before do
-    allow(Parallel).to receive(:processor_count).and_return(0)
-  end
-
   describe "#model" do
     it "returns a model" do
       expect(rule.model).to be_a Mihari::Models::Rule

@@ -13,7 +13,6 @@ RSpec.describe Mihari::Commands::Search, :vcr do
 
   before do
     allow(rule).to receive(:enrichers).and_return([])
-    allow(Parallel).to receive(:processor_count).and_return(0)
   end
 
   describe "#search" do

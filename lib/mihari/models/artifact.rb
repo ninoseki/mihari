@@ -190,7 +190,8 @@ module Mihari
         when "domain"
           data
         when "url"
-          Addressable::URI.parse(data).host
+          host = Addressable::URI.parse(data).host
+          (DataType.type(host) == "ip") ? nil : host
         end
       end
 

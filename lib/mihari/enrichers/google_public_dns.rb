@@ -12,6 +12,8 @@ module Mihari
       # @return [Mihari::Models::Artifact]
       #
       def call(artifact)
+        return if artifact.domain.nil?
+
         res = client.query_all(artifact.domain)
 
         artifact.tap do |tapped|

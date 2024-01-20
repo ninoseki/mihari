@@ -7,17 +7,14 @@ module Mihari
       optional(:retry_interval).value(:integer).default(Mihari.config.retry_interval)
       optional(:retry_exponential_backoff).value(:bool).default(Mihari.config.retry_exponential_backoff)
       optional(:timeout).value(:integer)
+      optional(:parallel).value(:bool).default(Mihari.config.parallel)
     end
 
     IgnoreErrorOptions = Dry::Schema.Params do
       optional(:ignore_error).value(:bool).default(Mihari.config.ignore_error)
     end
 
-    ParallelOptions = Dry::Schema.Params do
-      optional(:parallel).value(:bool).default(Mihari.config.parallel)
-    end
-
-    AnalyzerOptions = Options | IgnoreErrorOptions | ParallelOptions
+    AnalyzerOptions = Options | IgnoreErrorOptions
 
     PaginationOptions = Dry::Schema.Params do
       optional(:pagination_interval).value(:integer).default(Mihari.config.pagination_interval)
