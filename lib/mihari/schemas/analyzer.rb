@@ -20,8 +20,8 @@ module Mihari
         key = keys.first
         const_set(key.upcase, Dry::Schema.Params do
           required(:analyzer).value(Types::String.enum(*keys))
-          required(:query).value(:string)
-          optional(:api_key).value(:string)
+          required(:query).filled(:string)
+          optional(:api_key).filled(:string)
           optional(:options).hash(AnalyzerPaginationOptions)
         end)
       end
@@ -36,60 +36,60 @@ module Mihari
         key = keys.first
         const_set(key.upcase, Dry::Schema.Params do
           required(:analyzer).value(Types::String.enum(*keys))
-          required(:query).value(:string)
-          optional(:api_key).value(:string)
+          required(:query).filled(:string)
+          optional(:api_key).filled(:string)
           optional(:options).hash(AnalyzerOptions)
         end)
       end
 
       DNSTwister = Dry::Schema.Params do
         required(:analyzer).value(Types::String.enum(*Mihari::Analyzers::DNSTwister.keys))
-        required(:query).value(:string)
+        required(:query).filled(:string)
         optional(:options).hash(AnalyzerOptions)
       end
 
       Censys = Dry::Schema.Params do
         required(:analyzer).value(Types::String.enum(*Mihari::Analyzers::Censys.keys))
-        required(:query).value(:string)
-        optional(:id).value(:string)
-        optional(:secret).value(:string)
+        required(:query).filled(:string)
+        optional(:id).filled(:string)
+        optional(:secret).filled(:string)
         optional(:options).hash(AnalyzerPaginationOptions)
       end
 
       CIRCL = Dry::Schema.Params do
         required(:analyzer).value(Types::String.enum(*Mihari::Analyzers::CIRCL.keys))
-        required(:query).value(:string)
-        optional(:username).value(:string)
-        optional(:password).value(:string)
+        required(:query).filled(:string)
+        optional(:username).filled(:string)
+        optional(:password).filled(:string)
         optional(:options).hash(AnalyzerOptions)
       end
 
       Fofa = Dry::Schema.Params do
         required(:analyzer).value(Types::String.enum(*Mihari::Analyzers::Fofa.keys))
-        required(:query).value(:string)
-        optional(:api_key).value(:string)
-        optional(:email).value(:string)
+        required(:query).filled(:string)
+        optional(:api_key).filled(:string)
+        optional(:email).filled(:string)
         optional(:options).hash(AnalyzerPaginationOptions)
       end
 
       PassiveTotal = Dry::Schema.Params do
         required(:analyzer).value(Types::String.enum(*Mihari::Analyzers::PassiveTotal.keys))
-        required(:query).value(:string)
-        optional(:username).value(:string)
-        optional(:api_key).value(:string)
+        required(:query).filled(:string)
+        optional(:username).filled(:string)
+        optional(:api_key).filled(:string)
         optional(:options).hash(AnalyzerOptions)
       end
 
       ZoomEye = Dry::Schema.Params do
         required(:analyzer).value(Types::String.enum(*Mihari::Analyzers::ZoomEye.keys))
-        required(:query).value(:string)
+        required(:query).filled(:string)
         required(:type).value(Types::String.enum("host", "web"))
         optional(:options).hash(AnalyzerPaginationOptions)
       end
 
       Crtsh = Dry::Schema.Params do
         required(:analyzer).value(Types::String.enum(*Mihari::Analyzers::Crtsh.keys))
-        required(:query).value(:string)
+        required(:query).filled(:string)
         optional(:exclude_expired).value(:bool).default(true)
         optional(:match).value(Types::String.enum("=", "ILIKE", "LIKE", "single", "any", "FTS")).default(nil)
         optional(:options).hash(AnalyzerOptions)
@@ -97,22 +97,22 @@ module Mihari
 
       HunterHow = Dry::Schema.Params do
         required(:analyzer).value(Types::String.enum(*Mihari::Analyzers::HunterHow.keys))
-        required(:query).value(:string)
+        required(:query).filled(:string)
         required(:start_time).value(:date)
         required(:end_time).value(:date)
-        optional(:api_key).value(:string)
+        optional(:api_key).filled(:string)
         optional(:options).hash(AnalyzerPaginationOptions)
       end
 
       Feed = Dry::Schema.Params do
         required(:analyzer).value(Types::String.enum(*Mihari::Analyzers::Feed.keys))
-        required(:query).value(:string)
-        required(:selector).value(:string)
+        required(:query).filled(:string)
+        required(:selector).filled(:string)
         optional(:method).value(Types::HTTPRequestMethods).default("GET")
-        optional(:headers).value(:hash).default({})
-        optional(:params).value(:hash)
-        optional(:form).value(:hash)
-        optional(:json).value(:hash)
+        optional(:headers).filled(:hash)
+        optional(:params).filled(:hash)
+        optional(:form).filled(:hash)
+        optional(:json).filled(:hash)
         optional(:options).hash(AnalyzerOptions)
       end
     end

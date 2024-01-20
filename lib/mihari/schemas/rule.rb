@@ -7,27 +7,27 @@ require "mihari/schemas/enricher"
 module Mihari
   module Schemas
     Rule = Dry::Schema.Params do
-      required(:id).value(:string)
-      required(:title).value(:string)
-      required(:description).value(:string)
+      required(:id).filled(:string)
+      required(:title).filled(:string)
+      required(:description).filled(:string)
 
-      optional(:tags).value(array[:string]).default([])
+      optional(:author).filled(:string)
+      optional(:status).filled(:string)
 
-      optional(:author).value(:string)
-      optional(:references).value(array[:string])
-      optional(:related).value(array[:string])
-      optional(:status).value(:string)
+      optional(:tags).array { filled(:string) }.default([])
+      optional(:references).array { filled(:string) }
+      optional(:related).array { filled(:string) }
 
       optional(:created_on).value(:date)
       optional(:updated_on).value(:date)
 
       required(:queries).value(:array).each { Analyzer } # rubocop:disable Lint/Void
-
       optional(:emitters).value(:array).each { Emitter }.default(DEFAULT_EMITTERS) # rubocop:disable Lint/Void
       optional(:enrichers).value(:array).each { Enricher }.default(DEFAULT_ENRICHERS) # rubocop:disable Lint/Void
 
-      optional(:data_types).value(array[Types::DataTypes]).default(Mihari::Types::DataTypes.values)
-      optional(:falsepositives).value(array[:string]).default([])
+      optional(:data_types).filled(array[Types::DataTypes]).default(Mihari::Types::DataTypes.values)
+
+      optional(:falsepositives).array { filled(:string) }.default([])
 
       optional(:artifact_ttl).value(:integer)
     end
@@ -42,7 +42,7 @@ module Mihari
 
       rule(:falsepositives) do
         value.each do |v|
-          key.failure("#{v} is not a valid format.") unless valid_falsepositive?(v)
+          key.failure("#{v} is not a valid format") unless valid_falsepositive?(v)
         end
       end
 

@@ -3,9 +3,9 @@
 module Mihari
   module Schemas
     Alert = Dry::Schema.Params do
-      required(:rule_id).value(:string)
-      required(:artifacts).value(array[:string])
-      optional(:source).value(:string)
+      required(:rule_id).filled(:string)
+      required(:artifacts).array { filled(:string) }
+      optional(:source).filled(:string)
     end
 
     #
