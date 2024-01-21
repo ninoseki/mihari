@@ -37,13 +37,15 @@ options:
 
 Also the following analyzers can have pagination options.
 
-- [Shodan](./shodan.md)
-- [BinaryEdge](./binaryedge.md)
-- [Censys](./censys.md)
-- [ZoomEye](./zoomeye.md)
-- [urlscan.io](./urlscan.md)
-- [VirusTotal Intelligence](./virustotal_intelligence.md)
-- [HunterHow](./hunterhow.md)
+- [BinaryEdge](binaryedge.md)
+- [Censys](censys.md)
+- [Fofa](fofa.md)
+- [GreyNoise](greynoise.md)
+- [HunterHow](hunterhow.md)
+- [Onyphe](onyphe.md)
+- [Shodan](shodan.md)
+- [urlscan.io](urlscan.md)
+- [VirusTotal Intelligence](virustotal_intelligence.md)
 
 ```yaml
 options:
