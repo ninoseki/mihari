@@ -33,9 +33,9 @@ module Mihari
     # @return [Boolean]
     #
     def errors?
-      return false if @errors.nil?
+      return false if errors.nil?
 
-      !@errors.empty?
+      !errors.empty?
     end
 
     def [](key)
@@ -163,9 +163,7 @@ module Mihari
     # @return [Array<Mihari::Models::Artifact>]
     #
     def unique_artifacts
-      normalized_artifacts.select do |artifact|
-        artifact.unique?(base_time: base_time, artifact_ttl: artifact_ttl)
-      end
+      normalized_artifacts.select { |artifact| artifact.unique?(base_time: base_time, artifact_ttl: artifact_ttl) }
     end
 
     #
@@ -337,9 +335,10 @@ module Mihari
 
     # @return [Array<Dry::Monads::Result::Success<Array<Mihari::Models::Artifact>>, Dry::Monads::Result::Failure>]
     def analyzer_results
-      parallel_results = Parallel.map(parallel_analyzers, &:result)
-      serial_results = serial_analyzers.map(&:result)
-      parallel_results + serial_results
+      [].tap do |out|
+        out << Parallel.map(parallel_analyzers, &:result)
+        out << serial_analyzers.map(&:result)
+      end.flatten
     end
 
     #
