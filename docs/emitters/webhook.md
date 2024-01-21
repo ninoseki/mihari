@@ -1,6 +1,6 @@
 # Webhook
 
-This emitter creates an HTTP request payload based on the specified conditions.
+This emitter creates an HTTP request with a JSON body based on the specified conditions.
 
 ```yaml
 emitter: webhook
@@ -26,7 +26,7 @@ template: ...
 
 ### Template
 
-`template` (`string`) is a [Jbuilder](https://github.com/rails/jbuilder) template string (or a path to a Jbuilder template file) to customize JSON payload to send.
+`template` (`string`) is a [Jbuilder](https://github.com/rails/jbuilder) template string (or a path to a Jbuilder template file) to customize a JSON body to send.
 
 You can use the following attributes inside a Jbuilder template.
 
