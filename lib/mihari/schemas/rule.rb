@@ -21,9 +21,9 @@ module Mihari
       optional(:created_on).value(:date)
       optional(:updated_on).value(:date)
 
-      required(:queries).value(:array).each { Analyzer } # rubocop:disable Lint/Void
-      optional(:emitters).value(:array).each { Emitter }.default(DEFAULT_EMITTERS) # rubocop:disable Lint/Void
-      optional(:enrichers).value(:array).each { Enricher }.default(DEFAULT_ENRICHERS) # rubocop:disable Lint/Void
+      required(:queries).array { Analyzer }
+      optional(:emitters).array { Emitter }.default(DEFAULT_EMITTERS)
+      optional(:enrichers).array { Enricher }.default(DEFAULT_ENRICHERS)
 
       optional(:data_types).filled(array[Types::DataTypes]).default(Mihari::Types::DataTypes.values)
 

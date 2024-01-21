@@ -10,28 +10,28 @@ module Mihari
 
       Database = Dry::Schema.Params do
         required(:emitter).value(Types::String.enum(*Mihari::Emitters::Database.keys))
-        optional(:options).hash(Options)
+        optional(:options).hash(EmitterOptions)
       end
 
       MISP = Dry::Schema.Params do
         required(:emitter).value(Types::String.enum(*Mihari::Emitters::MISP.keys))
         optional(:url).filled(:string)
         optional(:api_key).filled(:string)
-        optional(:options).hash(Options)
+        optional(:options).hash(EmitterOptions)
       end
 
       TheHive = Dry::Schema.Params do
         required(:emitter).value(Types::String.enum(*Mihari::Emitters::TheHive.keys))
         optional(:url).filled(:string)
         optional(:api_key).filled(:string)
-        optional(:options).hash(Options)
+        optional(:options).hash(EmitterOptions)
       end
 
       Slack = Dry::Schema.Params do
         required(:emitter).value(Types::String.enum(*Mihari::Emitters::Slack.keys))
         optional(:webhook_url).filled(:string)
         optional(:channel).filled(:string)
-        optional(:options).hash(Options)
+        optional(:options).hash(EmitterOptions)
       end
 
       Webhook = Dry::Schema.Params do
@@ -40,10 +40,10 @@ module Mihari
         optional(:method).value(Types::HTTPRequestMethods).default("POST")
         optional(:headers).filled(:hash)
         optional(:template).filled(:string)
-        optional(:options).hash(Options)
+        optional(:options).hash(EmitterOptions)
       end
     end
 
-    Emitter = Schemas::Emitters.get_or_composition
+    Emitter = Schemas::Emitters.compose_by_or
   end
 end

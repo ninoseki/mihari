@@ -29,6 +29,6 @@ module Mihari
       end
     end
 
-    Enricher = Schemas::Enrichers.get_or_composition
+    Enricher = Schemas::Enrichers.compose_by_or
   end
 end

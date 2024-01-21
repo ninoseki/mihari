@@ -117,6 +117,6 @@ module Mihari
       end
     end
 
-    Analyzer = Schemas::Analyzers.get_or_composition
+    Analyzer = Schemas::Analyzers.compose_by_or
   end
 end
