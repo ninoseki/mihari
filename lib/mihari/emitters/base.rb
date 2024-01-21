@@ -19,6 +19,13 @@ module Mihari
         @rule = rule
       end
 
+      #
+      # @return [Boolean]
+      #
+      def parallel?
+        options[:parallel] || Mihari.config.parallel
+      end
+
       # A target to emit the data
       #
       # @return [String]

@@ -174,11 +174,11 @@ module Mihari
     # @return [Array<Mihari::Models::Artifact>]
     #
     def enriched_artifacts
-      @enriched_artifacts ||= unique_artifacts.map do |artifact|
-        serial_enrichers.each { |enricher| enricher.result(artifact) }
-        Parallel.each(parallel_enrichers) { |enricher| enricher.result(artifact) }
-
-        artifact
+      @enriched_artifacts ||= Parallel.map(unique_artifacts) do |artifact|
+        artifact.tap do |tapped|
+          # NOTE: To apply changes correctly, enrichers should be applied to an artifact serially
+          enrichers.each { |enricher| enricher.result(tapped) }
+        end
       end
     end
 
@@ -402,14 +402,6 @@ module Mihari
         klass = get_enricher_class(name)
         klass.new(options: options, **params)
       end
-    end
-
-    def parallel_enrichers
-      enrichers.select(&:parallel?)
-    end
-
-    def serial_enrichers
-      enrichers.reject(&:parallel?)
     end
 
     #

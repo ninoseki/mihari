@@ -9,7 +9,7 @@ module Mihari
       module Orrable
         extend ActiveSupport::Concern
 
-        def get_or_composition
+        def compose_by_or
           schemas = constants.map { |sym| const_get sym }
           return schemas.first if schemas.length <= 1
 
