@@ -207,7 +207,7 @@ artifacts = results.map(&:artifacts).flatten
 
 ip_ports = artifacts.map do |artifact|
   artifact.ports.map do |port|
-    "#{artifact.data}:#{port.port}"
+    "#{artifact.data}:#{port.number}"
   end
 end.flatten
 
