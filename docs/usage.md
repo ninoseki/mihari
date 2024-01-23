@@ -203,9 +203,7 @@ For example, you can combine IP addresses and ports by using the following templ
 **ip_port.json.jbuilder**
 
 ```ruby
-artifacts = results.map(&:artifacts).flatten
-
-ip_ports = artifacts.map do |artifact|
+ip_ports = results.map do |artifact|
   artifact.ports.map do |port|
     "#{artifact.data}:#{port.number}"
   end
