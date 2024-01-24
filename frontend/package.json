@@ -26,7 +26,7 @@
     "bulma-helpers": "^0.4.3",
     "dayjs": "^1.11.10",
     "font-awesome-animation": "^1.1.1",
-    "js-sha256": "^0.10.1",
+    "js-sha256": "^0.11.0",
     "just-truncate": "^2.2.0",
     "ts-dedent": "^2.2.0",
     "url-parse": "^1.5.10",
