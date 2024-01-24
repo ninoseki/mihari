@@ -40,6 +40,8 @@ Mihari supports the following services by default.
 
 See [documentation](https://ninoseki.github.io/mihari/) for more details.
 
+You can also refer to [JSAC2024 workshop materials](https://ninoseki.github.io/jsac_mihari_workshop/) to learn how Mihari works through some exercises.
+
 ## License
 
 The gem is available as open source under the terms of the [MIT License](https://opensource.org/licenses/MIT).

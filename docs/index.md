@@ -10,3 +10,5 @@ Mihari can aggregate multiple searches across multiple services in a single rule
 - [Rule](./rule.md)
 - [Configuration](./configuration.md)
 - [Usage](./usage.md)
+
+You can also refer to [JSAC2024 workshop materials](https://ninoseki.github.io/jsac_mihari_workshop/) to learn how Mihari works through some exercises.
