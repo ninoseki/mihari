@@ -19,21 +19,19 @@ module Mihari
         artifact.tap do |tapped|
           tapped.cpes = (res&.cpes || []).map { |cpe| Models::CPE.new(name: cpe) } if tapped.cpes.empty?
           tapped.ports = (res&.ports || []).map { |port| Models::Port.new(number: port) } if tapped.ports.empty?
+
           if tapped.reverse_dns_names.empty?
             tapped.reverse_dns_names = (res&.hostnames || []).map do |name|
               Models::ReverseDnsName.new(name: name)
             end
           end
-        end
-      end
 
-      #
-      # @param [Mihari::Models::Artifact] artifact
-      #
-      # @return [Boolean]
-      #
-      def callable?(artifact)
-        false unless supported_data_types.include?(artifact.data_type)
+          if tapped.vulnerabilities.empty?
+            tapped.vulnerabilities = (res&.vulns || []).map do |name|
+              Models::Vulnerability.new(name: name)
+            end
+          end
+        end
       end
 
       private
@@ -44,7 +42,7 @@ module Mihari
       # @return [Boolean]
       #
       def callable_relationships?(artifact)
-        artifact.cpes.empty? || artifact.ports.empty? || artifact.reverse_dns_names.empty?
+        artifact.cpes.empty? || artifact.ports.empty? || artifact.reverse_dns_names.empty? || artifact.vulnerabilities.empty?
       end
 
       def supported_data_types
