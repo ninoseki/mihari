@@ -65,7 +65,7 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency "webmock", "~> 3.19"
 
   unless ci_env?
-    spec.add_development_dependency "lefthook", "~> 1.5"
+    spec.add_development_dependency "lefthook", "~> 1.6"
     spec.add_development_dependency "ruby-lsp-rspec", "~> 0.1"
     spec.add_development_dependency "solargraph", "~> 0.50"
   end
