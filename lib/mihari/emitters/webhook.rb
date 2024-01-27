@@ -36,7 +36,7 @@ module Mihari
       # @param [Hash, nil] params
       #
       def initialize(rule:, options: nil, **params)
-        super(rule: rule, options: options)
+        super(rule:, options:)
 
         @url = Addressable::URI.parse(params[:url])
         @headers = params[:headers] || {}
@@ -75,14 +75,14 @@ module Mihari
         when "GET"
           http.get(url).body.to_s
         when "POST"
-          http.post(url, json: json).body.to_s
+          http.post(url, json:).body.to_s
         end
       end
 
       private
 
       def http
-        HTTP::Factory.build headers: headers, timeout: timeout
+        HTTP::Factory.build headers:, timeout:
       end
 
       #
@@ -91,7 +91,7 @@ module Mihari
       # @return [String]
       #
       def render
-        Services::JbuilderRenderer.call(template, { rule: rule, artifacts: artifacts })
+        Services::JbuilderRenderer.call(template, {rule:, artifacts:})
       end
 
       #

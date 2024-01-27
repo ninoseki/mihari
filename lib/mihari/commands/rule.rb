@@ -21,7 +21,7 @@ module Mihari
               # @return [Mihari::Services::ResultValue]
               #
               def _search(q, page: 1, limit: 10)
-                filter = Structs::Filters::Search.new(q: q, page: page, limit: limit)
+                filter = Structs::Filters::Search.new(q:, page:, limit:)
                 Services::RuleSearcher.result(filter).value!
               end
             end

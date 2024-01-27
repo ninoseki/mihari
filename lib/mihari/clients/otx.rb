@@ -16,7 +16,7 @@ module Mihari
         raise(ArgumentError, "api_key is required") unless api_key
 
         headers["x-otx-api-key"] = api_key
-        super(base_url, headers: headers, timeout: timeout)
+        super(base_url, headers:, timeout:)
       end
 
       #

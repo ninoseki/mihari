@@ -16,7 +16,7 @@ module Mihari
       # @param [Hash, nil] options
       #
       def initialize(query, options: nil)
-        super(refang(query), options: options)
+        super(refang(query), options:)
 
         @type = DataType.type(query)
       end
@@ -40,7 +40,7 @@ module Mihari
       end
 
       def client
-        Clients::DNSTwister.new(timeout: timeout)
+        Clients::DNSTwister.new(timeout:)
       end
 
       #

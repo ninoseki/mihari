@@ -15,7 +15,7 @@ RSpec.describe Mihari::CLI::Alert do
   describe "#list-transform" do
     it do
       expect do
-        described_class.new.invoke(:list_transform, [], { template: "json.array! results.map(&:id)" })
+        described_class.new.invoke(:list_transform, [], {template: "json.array! results.map(&:id)"})
       end.to output(include(alert.id.to_s)).to_stdout
     end
   end
@@ -29,7 +29,7 @@ RSpec.describe Mihari::CLI::Alert do
   describe "#create" do
     before do
       @file = Tempfile.new("dummy")
-      @file.write(YAML.dump({ rule_id: rule.id, artifacts: %w[1.1.1.1] }))
+      @file.write(YAML.dump({rule_id: rule.id, artifacts: %w[1.1.1.1]}))
       @file.rewind
     end
 

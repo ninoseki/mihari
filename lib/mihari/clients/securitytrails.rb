@@ -17,7 +17,7 @@ module Mihari
 
         headers["apikey"] = api_key
 
-        super(base_url, headers: headers, timeout: timeout)
+        super(base_url, headers:, timeout:)
       end
 
       #
@@ -48,7 +48,7 @@ module Mihari
       # @return [Hash]
       #
       def search_by_mail(mail)
-        post_json "/v1/domains/list", json: { filter: { whois_email: mail } }
+        post_json "/v1/domains/list", json: {filter: {whois_email: mail}}
       end
 
       #
@@ -57,7 +57,7 @@ module Mihari
       # @return [Hash]
       #
       def search_by_ip(ip)
-        post_json "/v1/domains/list", json: { filter: { ipv4: ip } }
+        post_json "/v1/domains/list", json: {filter: {ipv4: ip}}
       end
 
       #
@@ -69,13 +69,13 @@ module Mihari
       #
       def get_all_dns_history(domain, type:, page: 1)
         Enumerator.new do |y|
-          res = get_dns_history(domain, type: type, page: page)
+          res = get_dns_history(domain, type:, page:)
           y.yield res
 
           pages = res["pages"].to_i
 
           (page + 1..pages).each do |page|
-            y.yield get_dns_history(domain, type: type, page: page)
+            y.yield get_dns_history(domain, type:, page:)
           end
         end
       end
@@ -90,7 +90,7 @@ module Mihari
       # @return [Hash]
       #
       def get_dns_history(domain, type:, page:)
-        get_json "/v1/history/#{domain}/dns/#{type}", params: { page: page }
+        get_json "/v1/history/#{domain}/dns/#{type}", params: {page:}
       end
     end
   end

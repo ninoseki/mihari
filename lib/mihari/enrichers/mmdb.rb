@@ -39,7 +39,7 @@ module Mihari
       end
 
       def client
-        @client ||= Clients::MMDB.new(timeout: timeout)
+        @client ||= Clients::MMDB.new(timeout:)
       end
     end
   end

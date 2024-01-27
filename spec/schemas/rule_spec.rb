@@ -14,15 +14,15 @@ RSpec.describe Mihari::Schemas::RuleContract do
   let(:artifact_ttl) { nil }
   let(:data) do
     {
-      id: id,
-      description: description,
-      title: title,
-      queries: queries,
-      emitters: emitters,
-      enrichers: enrichers,
-      falsepositives: falsepositives,
-      data_types: data_types,
-      artifact_ttl: artifact_ttl
+      id:,
+      description:,
+      title:,
+      queries:,
+      emitters:,
+      enrichers:,
+      falsepositives:,
+      data_types:,
+      artifact_ttl:
     }.compact
   end
 
@@ -39,7 +39,7 @@ RSpec.describe Mihari::Schemas::RuleContract do
       let(:queries) do
         analyzers = Mihari.analyzer_to_class.keys - %w[zoomeye crtsh feed hunterhow]
         analyzers.map do |analyzer|
-          { analyzer: analyzer, query: "foo" }
+          {analyzer:, query: "foo"}
         end
       end
 
@@ -52,9 +52,9 @@ RSpec.describe Mihari::Schemas::RuleContract do
     context "with analyzers need additional options" do
       let(:queries) do
         [
-          { analyzer: "crtsh", query: "foo", exclude_expired: true },
-          { analyzer: "zoomeye", query: "foo", type: "host" },
-          { analyzer: "zoomeye", query: "foo", type: "host", options: { interval: 10 } }
+          {analyzer: "crtsh", query: "foo", exclude_expired: true},
+          {analyzer: "zoomeye", query: "foo", type: "host"},
+          {analyzer: "zoomeye", query: "foo", type: "host", options: {interval: 10}}
         ]
       end
 
@@ -75,7 +75,7 @@ RSpec.describe Mihari::Schemas::RuleContract do
   end
 
   context "with invalid analyzer name" do
-    let(:queries) { [{ analyzer: "foo", query: "foo" }] }
+    let(:queries) { [{analyzer: "foo", query: "foo"}] }
 
     it do
       result = contract.call(**data)
@@ -86,9 +86,9 @@ RSpec.describe Mihari::Schemas::RuleContract do
   context "with invalid options" do
     let(:queries) do
       [
-        { analyzer: "shodan", query: "foo" },
-        { analyzer: "crtsh", query: "foo", exclude_expired: 1 }, # should be bool
-        { analyzer: "zoomeye", query: "foo", type: "bar" } # should be any of host or web
+        {analyzer: "shodan", query: "foo"},
+        {analyzer: "crtsh", query: "foo", exclude_expired: 1}, # should be bool
+        {analyzer: "zoomeye", query: "foo", type: "bar"} # should be any of host or web
       ]
     end
 
@@ -144,7 +144,7 @@ RSpec.describe Mihari::Schemas::RuleContract do
   end
 
   context "with invalid emitter name" do
-    let(:emitters) { [{ emitter: "foo" }] }
+    let(:emitters) { [{emitter: "foo"}] }
 
     it do
       result = contract.call(**data)
@@ -153,11 +153,11 @@ RSpec.describe Mihari::Schemas::RuleContract do
   end
 
   context "without having database emitter" do
-    let(:emitters) { [{ emitter: "misp" }] }
+    let(:emitters) { [{emitter: "misp"}] }
 
     it do
       result = contract.call(**data)
-      expect(result.errors.to_h).to eq({ emitters: ["Emitter:database should be included in emitters"] })
+      expect(result.errors.to_h).to eq({emitters: ["Emitter:database should be included in emitters"]})
     end
   end
 end

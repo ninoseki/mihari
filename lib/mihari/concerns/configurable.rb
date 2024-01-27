@@ -40,7 +40,7 @@ module Mihari
           configuration_keys.map do |key|
             value = Mihari.config.send(key)
             value = "REDACTED" if value && Mihari.config.hide_config_values
-            { key: key.upcase, value: value }
+            {key: key.upcase, value:}
           end
         end
 

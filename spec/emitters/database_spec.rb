@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 RSpec.describe Mihari::Emitters::Database do
-  subject(:emitter) { described_class.new(rule: rule) }
+  subject(:emitter) { described_class.new(rule:) }
 
   let_it_be(:rule) { Mihari::Rule.from_model FactoryBot.create(:rule) }
   let!(:artifacts) { [Mihari::Models::Artifact.new(data: "1.1.1.1")] }

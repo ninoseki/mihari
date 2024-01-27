@@ -23,7 +23,7 @@ module Mihari
         return if record.parser.available?
 
         artifact.whois_record ||= Models::WhoisRecord.new(
-          domain: domain,
+          domain:,
           created_on: get_created_on(record.parser),
           updated_on: get_updated_on(record.parser),
           expires_on: get_expires_on(record.parser),
@@ -64,7 +64,7 @@ module Mihari
         @whois ||= lambda do
           return ::Whois::Client.new if timeout.nil?
 
-          ::Whois::Client.new(timeout: timeout)
+          ::Whois::Client.new(timeout:)
         end.call
       end
 

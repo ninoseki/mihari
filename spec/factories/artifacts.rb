@@ -54,12 +54,12 @@ FactoryBot.define do
     after(:create) do |artifact|
       case artifact.data_type
       when "ip"
-        create(:autonomous_system, artifact: artifact)
-        create_list(:reverse_dns_name, 1, artifact: artifact)
+        create(:autonomous_system, artifact:)
+        create_list(:reverse_dns_name, 1, artifact:)
       when "domain"
-        create_list(:dns_record, 1, artifact: artifact)
+        create_list(:dns_record, 1, artifact:)
       when "url"
-        create_list(:dns_record, 1, artifact: artifact)
+        create_list(:dns_record, 1, artifact:)
       end
     end
   end

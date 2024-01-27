@@ -41,7 +41,7 @@ module Mihari
         begin
           try += 1
           yield
-        rescue StandardError => e
+        rescue => e
           # Raise error if it's not a retriable error
           raise e unless condition.call(e)
 

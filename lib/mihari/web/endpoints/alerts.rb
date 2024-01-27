@@ -33,7 +33,7 @@ module Mihari
 
           desc "Get an alert", {
             success: Entities::Alert,
-            failure: [{ code: 404, model: Entities::ErrorMessage }],
+            failure: [{code: 404, model: Entities::ErrorMessage}],
             summary: "Get an alert"
           }
           params do
@@ -46,14 +46,14 @@ module Mihari
 
             case result.failure
             when ActiveRecord::RecordNotFound
-              error!({ message: "ID:#{id} not found" }, 404)
+              error!({message: "ID:#{id} not found"}, 404)
             end
             raise result.failure
           end
 
           desc "Delete an alert", {
-            success: { code: 204, model: Entities::Message },
-            failure: [{ code: 404, model: Entities::ErrorMessage }],
+            success: {code: 204, model: Entities::Message},
+            failure: [{code: 404, model: Entities::ErrorMessage}],
             summary: "Delete an alert"
           }
           params do
@@ -64,26 +64,26 @@ module Mihari
 
             id = params["id"].to_i
             result = Services::AlertDestroyer.result(id)
-            return present({ message: "" }, with: Entities::Message) if result.success?
+            return present({message: ""}, with: Entities::Message) if result.success?
 
             case result.failure
             when ActiveRecord::RecordNotFound
-              error!({ message: "ID:#{id} not found" }, 404)
+              error!({message: "ID:#{id} not found"}, 404)
             end
             raise result.failure
           end
 
           desc "Create an alert", {
-            success: { code: 201, model: Entities::Alert },
+            success: {code: 201, model: Entities::Alert},
             failure: [
-              { code: 404, model: Entities::ErrorMessage }
+              {code: 404, model: Entities::ErrorMessage}
             ],
             summary: "Create an alert"
           }
           params do
-            requires :ruleId, type: String, documentation: { param_type: "body" }
-            requires :artifacts, type: Array, documentation: { type: String, is_array: true, param_type: "body" }
-            optional :source, type: String, documentation: { param_type: "body" }
+            requires :ruleId, type: String, documentation: {param_type: "body"}
+            requires :artifacts, type: Array, documentation: {type: String, is_array: true, param_type: "body"}
+            optional :source, type: String, documentation: {param_type: "body"}
           end
           post "/" do
             status 201
@@ -93,7 +93,7 @@ module Mihari
 
             case result.failure
             when ActiveRecord::RecordNotFound
-              error!({ message: "Rule:#{params["ruleId"]} not found" }, 404)
+              error!({message: "Rule:#{params["ruleId"]} not found"}, 404)
             end
             raise result.failure
           end

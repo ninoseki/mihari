@@ -18,7 +18,7 @@ module Mihari
       # @param [Hash] params
       #
       def initialize(rule:, options: nil, **params)
-        super(rule: rule, options: options)
+        super(rule:, options:)
 
         @url = params[:url] || Mihari.config.thehive_url
         @api_key = params[:api_key] || Mihari.config.thehive_api_key
@@ -56,7 +56,7 @@ module Mihari
       private
 
       def client
-        Clients::TheHive.new(url, api_key: api_key, api_version: "v1", timeout: timeout)
+        Clients::TheHive.new(url, api_key:, api_version: "v1", timeout:)
       end
 
       #

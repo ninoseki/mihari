@@ -8,12 +8,12 @@ FactoryBot.define do
     tags { build_list :tag, 1 }
     data do
       {
-        id: id,
-        title: title,
-        description: description,
+        id:,
+        title:,
+        description:,
         queries: [],
         tags: [],
-        emitters: [{ emitter: "database" }]
+        emitters: [{emitter: "database"}]
       }
     end
 
@@ -23,7 +23,7 @@ FactoryBot.define do
       end
 
       after(:create) do |rule, context|
-        create_list(:alert_with_artifacts, context.alerts_count, rule: rule)
+        create_list(:alert_with_artifacts, context.alerts_count, rule:)
       end
     end
   end

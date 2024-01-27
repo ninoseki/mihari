@@ -12,7 +12,7 @@ RSpec.describe Mihari::CLI::Artifact do
   describe "#list-transform" do
     it do
       expect do
-        described_class.new.invoke(:list_transform, [], { template: "json.array! results.map(&:id)" })
+        described_class.new.invoke(:list_transform, [], {template: "json.array! results.map(&:id)"})
       end.to output(include(artifact.id.to_s)).to_stdout
     end
   end

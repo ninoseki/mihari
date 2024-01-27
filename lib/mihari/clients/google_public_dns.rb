@@ -12,7 +12,7 @@ module Mihari
       # @param [Integer, nil] timeout
       #
       def initialize(base_url = "https://dns.google", headers: {}, timeout: nil)
-        super(base_url, headers: headers, timeout: timeout)
+        super(base_url, headers:, timeout:)
       end
 
       #
@@ -24,7 +24,7 @@ module Mihari
       #
       def query_all(name)
         Structs::GooglePublicDNS::Response.from_dynamic! get_json("/resolve",
-          params: { name: name, type: "ALL" })
+          params: {name:, type: "ALL"})
       end
     end
   end

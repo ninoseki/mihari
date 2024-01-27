@@ -56,7 +56,7 @@ module Mihari
         # @return [Mihari::Models::Artifact]
         #
         def artifact
-          Models::Artifact.new(data: value, metadata: metadata)
+          Models::Artifact.new(data: value, metadata:)
         end
 
         class << self
@@ -74,7 +74,7 @@ module Mihari
             new(
               type: d.fetch("type"),
               id: d.fetch("id"),
-              context_attributes: context_attributes,
+              context_attributes:,
               metadata: d
             )
           end

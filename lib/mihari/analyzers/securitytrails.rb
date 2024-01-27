@@ -23,7 +23,7 @@ module Mihari
       # @param [String, nil] api_key
       #
       def initialize(query, options: nil, api_key: nil)
-        super(refang(query), options: options)
+        super(refang(query), options:)
 
         @type = DataType.type(query)
 
@@ -66,7 +66,7 @@ module Mihari
         res = client.ip_search(query)
         (res["records"] || []).filter_map do |record|
           data = record["hostname"]
-          Models::Artifact.new(data: data, metadata: record)
+          Models::Artifact.new(data:, metadata: record)
         end
       end
 
@@ -74,12 +74,12 @@ module Mihari
         res = client.mail_search(query)
         (res["records"] || []).filter_map do |record|
           data = record["hostname"]
-          Models::Artifact.new(data: data, metadata: record)
+          Models::Artifact.new(data:, metadata: record)
         end
       end
 
       def client
-        Clients::SecurityTrails.new(api_key: api_key, timeout: timeout)
+        Clients::SecurityTrails.new(api_key:, timeout:)
       end
 
       #

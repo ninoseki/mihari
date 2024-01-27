@@ -14,7 +14,7 @@ module Mihari
       # @param [Hash, nil] options
       #
       def initialize(rule:, options: nil)
-        super(options: options)
+        super(options:)
 
         @rule = rule
       end

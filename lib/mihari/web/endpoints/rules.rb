@@ -51,7 +51,7 @@ module Mihari
 
           desc "Get a rule", {
             success: Entities::Rule,
-            failure: [{ code: 404, model: Entities::ErrorMessage }],
+            failure: [{code: 404, model: Entities::ErrorMessage}],
             summary: "Get a rule"
           }
           params do
@@ -64,14 +64,14 @@ module Mihari
 
             case result.failure
             when ActiveRecord::RecordNotFound
-              error!({ message: "ID:#{id} not found" }, 404)
+              error!({message: "ID:#{id} not found"}, 404)
             end
             raise result.failure
           end
 
           desc "Search by a rule", {
-            success: { code: 201, model: Entities::QueueMessage },
-            failure: [{ code: 404, model: Entities::ErrorMessage }],
+            success: {code: 201, model: Entities::QueueMessage},
+            failure: [{code: 404, model: Entities::ErrorMessage}],
             summary: "Run a rule"
           }
           params do
@@ -95,25 +95,25 @@ module Mihari
             end.to_result
 
             message = queued ? "ID:#{id}'s search is queued" : "ID:#{id}'s search is successful"
-            return present({ message: message, queued: queued }, with: Entities::QueueMessage) if result.success?
+            return present({message:, queued:}, with: Entities::QueueMessage) if result.success?
 
             case result.failure
             when ActiveRecord::RecordNotFound
-              error!({ message: "ID:#{id} not found" }, 404)
+              error!({message: "ID:#{id} not found"}, 404)
             end
             raise result.failure
           end
 
           desc "Create a rule", {
-            success: { code: 201, model: Entities::Rule },
+            success: {code: 201, model: Entities::Rule},
             failure: [
-              { code: 400, model: Entities::ErrorMessage },
-              { code: 422, model: Entities::ErrorMessage }
+              {code: 400, model: Entities::ErrorMessage},
+              {code: 422, model: Entities::ErrorMessage}
             ],
             summary: "Create a rule"
           }
           params do
-            requires :yaml, type: String, documentation: { param_type: "body" }
+            requires :yaml, type: String, documentation: {param_type: "body"}
           end
           post "/" do
             status 201
@@ -126,25 +126,25 @@ module Mihari
             failure = result.failure
             case failure
             when Psych::SyntaxError
-              error!({ message: failure.message }, 422)
+              error!({message: failure.message}, 422)
             when ValidationError
-              error!({ message: "Rule format invalid", detail: failure.errors.to_h }, 422)
+              error!({message: "Rule format invalid", detail: failure.errors.to_h}, 422)
             when IntegrityError
-              error!({ message: failure.message }, 400)
+              error!({message: failure.message}, 400)
             end
             raise failure
           end
 
           desc "Update a rule", {
-            success: { code: 201, model: Entities::Rule },
+            success: {code: 201, model: Entities::Rule},
             failure: [
-              { code: 404, model: Entities::ErrorMessage },
-              { code: 422, model: Entities::ErrorMessage }
+              {code: 404, model: Entities::ErrorMessage},
+              {code: 422, model: Entities::ErrorMessage}
             ],
             summary: "Update a rule"
           }
           params do
-            requires :yaml, type: String, documentation: { param_type: "body" }
+            requires :yaml, type: String, documentation: {param_type: "body"}
           end
           put "/" do
             status 201
@@ -157,18 +157,18 @@ module Mihari
             failure = result.failure
             case failure
             when ActiveRecord::RecordNotFound
-              error!({ message: "Rule not found" }, 404)
+              error!({message: "Rule not found"}, 404)
             when Psych::SyntaxError
-              error!({ message: failure.message }, 422)
+              error!({message: failure.message}, 422)
             when ValidationError
-              error!({ message: "Rule format invalid", detail: failure.errors.to_h }, 422)
+              error!({message: "Rule format invalid", detail: failure.errors.to_h}, 422)
             end
             raise failure
           end
 
           desc "Delete a rule", {
-            success: { code: 204, model: Entities::Message },
-            failure: [{ code: 404, model: Entities::ErrorMessage }],
+            success: {code: 204, model: Entities::Message},
+            failure: [{code: 404, model: Entities::ErrorMessage}],
             summary: "Delete a rule"
           }
           params do
@@ -179,11 +179,11 @@ module Mihari
 
             id = params[:id].to_s
             result = Services::RuleDestroyer.result(id)
-            return present({ message: "ID:#{id} is deleted" }, with: Entities::Message) if result.success?
+            return present({message: "ID:#{id} is deleted"}, with: Entities::Message) if result.success?
 
             case result.failure
             when ActiveRecord::RecordNotFound
-              error!({ message: "ID:#{id} not found" }, 404)
+              error!({message: "ID:#{id} not found"}, 404)
             end
             raise result.failure
           end

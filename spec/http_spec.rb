@@ -31,22 +31,22 @@ RSpec.describe Mihari::HTTP::Factory do
 
   describe ".post" do
     context "with application/x-www-form-urlencoded" do
-      let!(:form) { { foo: "bar" } }
-      let(:headers) { { "content-type": "application/x-www-form-urlencoded" } }
+      let!(:form) { {foo: "bar"} }
+      let(:headers) { {"content-type": "application/x-www-form-urlencoded"} }
 
       it do
-        res = described_class.build(headers: headers).post("#{server.base_url}/post", form: form)
+        res = described_class.build(headers:).post("#{server.base_url}/post", form:)
         data = JSON.parse(res.body.to_s)
         expect(data.dig("form", "foo")).to eq("bar")
       end
     end
 
     context "with application/json" do
-      let!(:json) { { foo: "bar" } }
-      let(:headers) { { "content-type": "application/json" } }
+      let!(:json) { {foo: "bar"} }
+      let(:headers) { {"content-type": "application/json"} }
 
       it do
-        res = described_class.build(headers: headers).post("#{server.base_url}/post", json: json)
+        res = described_class.build(headers:).post("#{server.base_url}/post", json:)
         data = JSON.parse(res.body.to_s)
         inner_data = JSON.parse(data["data"])
         expect(inner_data["foo"]).to eq("bar")

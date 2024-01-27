@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 RSpec.describe Mihari::Emitters::TheHive, :vcr do
-  subject(:emitter) { described_class.new(rule: rule) }
+  subject(:emitter) { described_class.new(rule:) }
 
   include_context "with mocked logger"
 
@@ -30,7 +30,7 @@ RSpec.describe Mihari::Emitters::TheHive, :vcr do
 
   describe "#call" do
     let!(:mock_client) { instance_double("client") }
-    let!(:mocked_emitter) { described_class.new(rule: rule) }
+    let!(:mocked_emitter) { described_class.new(rule:) }
 
     before do
       allow(mocked_emitter).to receive(:client).and_return(mock_client)

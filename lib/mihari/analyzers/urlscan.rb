@@ -21,7 +21,7 @@ module Mihari
       # @param [Array<String>] allowed_data_types
       #
       def initialize(query, options: nil, api_key: nil, allowed_data_types: SUPPORTED_DATA_TYPES)
-        super(query, options: options)
+        super(query, options:)
 
         @api_key = api_key || Mihari.config.urlscan_api_key
         @allowed_data_types = allowed_data_types
@@ -33,7 +33,7 @@ module Mihari
 
       def artifacts
         # @type [Array<Mihari::Models::Artifact>]
-        artifacts = client.search_with_pagination(query, pagination_limit: pagination_limit).map(&:artifacts).flatten
+        artifacts = client.search_with_pagination(query, pagination_limit:).map(&:artifacts).flatten
         artifacts.select { |artifact| allowed_data_types.include? artifact.data_type }
       end
 
@@ -41,9 +41,9 @@ module Mihari
 
       def client
         Clients::Urlscan.new(
-          api_key: api_key,
-          pagination_interval: pagination_interval,
-          timeout: timeout
+          api_key:,
+          pagination_interval:,
+          timeout:
         )
       end
 

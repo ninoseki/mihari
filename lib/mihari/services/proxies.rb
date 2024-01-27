@@ -61,7 +61,7 @@ module Mihari
       #
       def artifacts
         @artifacts ||= data[:artifacts].map do |data|
-          artifact = Models::Artifact.new(data: data)
+          artifact = Models::Artifact.new(data:)
           artifact.rule_id = rule_id
           artifact.source = source
           artifact

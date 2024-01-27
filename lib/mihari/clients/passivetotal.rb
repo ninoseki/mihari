@@ -21,7 +21,7 @@ module Mihari
 
         headers["authorization"] = "Basic #{Base64.strict_encode64("#{username}:#{api_key}")}"
 
-        super(base_url, headers: headers, timeout: timeout)
+        super(base_url, headers:, timeout:)
       end
 
       #
@@ -32,8 +32,8 @@ module Mihari
       # @return [Hash]
       #
       def passive_dns_search(query)
-        params = { query: query }
-        get_json("/v2/dns/passive/unique", params: params)
+        params = {query:}
+        get_json("/v2/dns/passive/unique", params:)
       end
 
       #
@@ -45,7 +45,7 @@ module Mihari
       #
       def reverse_whois_search(query)
         get_json("/v2/whois/search", params: {
-          query: query,
+          query:,
           field: "email"
         }.compact)
       end
@@ -58,7 +58,7 @@ module Mihari
       # @return [Hash]
       #
       def ssl_search(query)
-        get_json("/v2/ssl-certificate/history", params: { query: query })
+        get_json("/v2/ssl-certificate/history", params: {query:})
       end
     end
   end

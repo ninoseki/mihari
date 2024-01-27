@@ -27,7 +27,7 @@ module Mihari
       )
         raise(ArgumentError, "api_key is required") if api_key.nil?
 
-        super(base_url, headers: headers, pagination_interval: pagination_interval, timeout: timeout)
+        super(base_url, headers:, pagination_interval:, timeout:)
 
         @api_key = api_key
       end
@@ -39,8 +39,8 @@ module Mihari
       # @return [Mihari::Structs::Onyphe::Response]
       #
       def datascan(query, page: 1)
-        params = { page: page, apikey: api_key }
-        Structs::Onyphe::Response.from_dynamic! get_json("/api/v2/simple/datascan/#{query}", params: params)
+        params = {page:, apikey: api_key}
+        Structs::Onyphe::Response.from_dynamic! get_json("/api/v2/simple/datascan/#{query}", params:)
       end
 
       #
@@ -52,7 +52,7 @@ module Mihari
       def datascan_with_pagination(query, pagination_limit: Mihari.config.pagination_limit)
         Enumerator.new do |y|
           (1..pagination_limit).each do |page|
-            res = datascan(query, page: page)
+            res = datascan(query, page:)
 
             y.yield res
 

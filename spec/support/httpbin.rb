@@ -56,28 +56,28 @@ class HTTPBin
 
   def body_payload
     return {} if body == ""
-    return { data: body, files: {}, form: {}, json: JSON.parse(body) } if json?
-    return { data: "", files: {}, form: Rack::Utils.parse_nested_query(body), json: nil } if form_data?
+    return {data: body, files: {}, form: {}, json: JSON.parse(body)} if json?
+    return {data: "", files: {}, form: Rack::Utils.parse_nested_query(body), json: nil} if form_data?
 
-    { data: body, files: {}, form: {}, json: nil }
+    {data: body, files: {}, form: {}, json: nil}
   end
 
   def ok_response
-    payload = body_payload.merge(args: query_string, headers: headers, origin: origin, url: url)
+    payload = body_payload.merge(args: query_string, headers:, origin:, url:)
 
-    ["200", { "Content-Type" => "application/json" }, [JSON.generate(payload)]]
-    ["200", { "Content-Type" => "text/plain" }, [JSON.generate(payload)]]
+    ["200", {"Content-Type" => "application/json"}, [JSON.generate(payload)]]
+    ["200", {"Content-Type" => "text/plain"}, [JSON.generate(payload)]]
   end
 
   def status_response(status)
-    [status, { "Content-Type" => "text/plain" }, [JSON.generate({})]]
+    [status, {"Content-Type" => "text/plain"}, [JSON.generate({})]]
   end
 
   def error_404
-    ["404", { "Content-Type" => "application/json" }, [JSON.generate({})]]
+    ["404", {"Content-Type" => "application/json"}, [JSON.generate({})]]
   end
 
   def error_405
-    ["405", { "Content-Type" => "application/json" }, [JSON.generate({})]]
+    ["405", {"Content-Type" => "application/json"}, [JSON.generate({})]]
   end
 end

@@ -20,7 +20,7 @@ module Mihari
       # @param [String, nil] api_key
       #
       def initialize(query, options: nil, api_key: nil)
-        super(refang(query), options: options)
+        super(refang(query), options:)
 
         @type = DataType.type(query)
 
@@ -38,7 +38,7 @@ module Mihari
             nil
           else
             data = property["value"]
-            Models::Artifact.new(data: data, metadata: property)
+            Models::Artifact.new(data:, metadata: property)
           end
         end
       end
@@ -46,7 +46,7 @@ module Mihari
       private
 
       def client
-        @client ||= Clients::PulseDive.new(api_key: api_key, timeout: timeout)
+        @client ||= Clients::PulseDive.new(api_key:, timeout:)
       end
 
       #

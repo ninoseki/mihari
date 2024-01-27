@@ -58,7 +58,7 @@ RSpec.describe Mihari::Web::Endpoints::Rules do
         data["title"] = title
       end
     end
-    let(:payload) { { yaml: data.to_yaml } }
+    let(:payload) { {yaml: data.to_yaml} }
 
     it "returns 204" do
       put("/api/rules/", payload.to_json, "CONTENT_TYPE" => "application/json")
@@ -89,7 +89,7 @@ RSpec.describe Mihari::Web::Endpoints::Rules do
         data["id"] = Faker::Internet.unique.uuid
       end
     end
-    let!(:payload) { { yaml: data.to_yaml } }
+    let!(:payload) { {yaml: data.to_yaml} }
 
     it "returns 201" do
       post("/api/rules/", payload.to_json, "CONTENT_TYPE" => "application/json")
@@ -105,14 +105,14 @@ RSpec.describe Mihari::Web::Endpoints::Rules do
 
     context "with invalid YAML format" do
       it "returns 422" do
-        post("/api/rules/", { yaml: { foo: "bar" }.to_yaml }.to_json, "CONTENT_TYPE" => "application/json")
+        post("/api/rules/", {yaml: {foo: "bar"}.to_yaml}.to_json, "CONTENT_TYPE" => "application/json")
         expect(last_response.status).to eq(422)
       end
     end
 
     context "without having YAML" do
       it "returns 400" do
-        post("/api/rules/", { foo: "bar" }.to_json, "CONTENT_TYPE" => "application/json")
+        post("/api/rules/", {foo: "bar"}.to_json, "CONTENT_TYPE" => "application/json")
         expect(last_response.status).to eq(400)
       end
     end

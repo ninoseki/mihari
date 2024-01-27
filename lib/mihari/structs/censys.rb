@@ -48,8 +48,8 @@ module Mihari
           return nil if country.nil?
 
           Mihari::Models::Geolocation.new(
-            country: country,
-            country_code: country_code
+            country:,
+            country_code:
           )
         end
 
@@ -126,10 +126,10 @@ module Mihari
         def artifact
           Models::Artifact.new(
             data: ip,
-            metadata: metadata,
+            metadata:,
             autonomous_system: autonomous_system.as,
             geolocation: location.geolocation,
-            ports: ports
+            ports:
           )
         end
 

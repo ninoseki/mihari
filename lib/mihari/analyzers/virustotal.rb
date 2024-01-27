@@ -20,7 +20,7 @@ module Mihari
       # @param [String, nil] api_key
       #
       def initialize(query, options: nil, api_key: nil)
-        super(refang(query), options: options)
+        super(refang(query), options:)
 
         @type = DataType.type(query)
 
@@ -50,7 +50,7 @@ module Mihari
       private
 
       def client
-        Clients::VirusTotal.new(api_key: api_key)
+        Clients::VirusTotal.new(api_key:)
       end
 
       #
@@ -73,7 +73,7 @@ module Mihari
         data = res["data"] || []
         data.filter_map do |item|
           data = item.dig("attributes", "ip_address")
-          data.nil? ? nil : Models::Artifact.new(data: data, metadata: item)
+          data.nil? ? nil : Models::Artifact.new(data:, metadata: item)
         end
       end
 
@@ -88,7 +88,7 @@ module Mihari
         data = res["data"] || []
         data.filter_map do |item|
           data = item.dig("attributes", "host_name")
-          Models::Artifact.new(data: data, metadata: item)
+          Models::Artifact.new(data:, metadata: item)
         end.uniq
       end
     end

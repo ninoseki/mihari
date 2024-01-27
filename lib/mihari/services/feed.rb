@@ -28,10 +28,10 @@ module Mihari
 
         return read_file(url.path) if url.scheme == "file"
 
-        http = HTTP::Factory.build(headers: headers, timeout: timeout)
+        http = HTTP::Factory.build(headers:, timeout:)
 
-        res = http.get(url, params: params) if method == "GET"
-        res = http.post(url, params: params, json: json, form: form) if method == "POST"
+        res = http.get(url, params:) if method == "GET"
+        res = http.post(url, params:, json:, form:) if method == "POST"
 
         body = res.body.to_s
         content_type = res["Content-Type"].to_s

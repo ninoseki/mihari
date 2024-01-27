@@ -18,7 +18,7 @@ module Mihari
         headers["authorization"] = api_key
         headers["accept"] = "application/json"
 
-        super(base_url, headers: headers, timeout: timeout)
+        super(base_url, headers:, timeout:)
       end
 
       #

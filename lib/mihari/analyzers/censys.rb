@@ -19,7 +19,7 @@ module Mihari
       # @param [String, nil] secret
       #
       def initialize(query, options: nil, id: nil, secret: nil)
-        super(query, options: options)
+        super(query, options:)
 
         @id = id || Mihari.config.censys_id
         @secret = secret || Mihari.config.censys_secret
@@ -29,7 +29,7 @@ module Mihari
       # @return [Array<Mihari::Models::Artifact>]
       #
       def artifacts
-        client.search_with_pagination(query, pagination_limit: pagination_limit).map do |res|
+        client.search_with_pagination(query, pagination_limit:).map do |res|
           res.result.artifacts
         end.flatten.uniq(&:data)
       end
@@ -48,10 +48,10 @@ module Mihari
       #
       def client
         Clients::Censys.new(
-          id: id,
-          secret: secret,
-          pagination_interval: pagination_interval,
-          timeout: timeout
+          id:,
+          secret:,
+          pagination_interval:,
+          timeout:
         )
       end
 

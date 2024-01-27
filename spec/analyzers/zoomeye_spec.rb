@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 RSpec.describe Mihari::Analyzers::ZoomEye, :vcr do
-  subject(:analyzer) { described_class.new(query, type: type) }
+  subject(:analyzer) { described_class.new(query, type:) }
 
   let(:type) { "host" }
 

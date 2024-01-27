@@ -24,7 +24,7 @@ module Mihari
 
         headers["x-apikey"] = api_key
 
-        super(base_url, headers: headers, pagination_interval: pagination_interval, timeout: timeout)
+        super(base_url, headers:, pagination_interval:, timeout:)
       end
 
       #
@@ -52,8 +52,8 @@ module Mihari
       # @return [Mihari::Structs::VirusTotalIntelligence::Response]
       #
       def intel_search(query, cursor: nil)
-        params = { query: query, cursor: cursor }.compact
-        Structs::VirusTotalIntelligence::Response.from_dynamic! get_json("/api/v3/intelligence/search", params: params)
+        params = {query:, cursor:}.compact
+        Structs::VirusTotalIntelligence::Response.from_dynamic! get_json("/api/v3/intelligence/search", params:)
       end
 
       #
@@ -67,7 +67,7 @@ module Mihari
 
         Enumerator.new do |y|
           pagination_limit.times do
-            res = intel_search(query, cursor: cursor)
+            res = intel_search(query, cursor:)
 
             y.yield res
 

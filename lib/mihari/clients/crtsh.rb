@@ -12,7 +12,7 @@ module Mihari
       # @param [Integer, nil] timeout
       #
       def initialize(base_url = "https://crt.sh", headers: {}, timeout: nil)
-        super(base_url, headers: headers, timeout: timeout)
+        super(base_url, headers:, timeout:)
       end
 
       #
@@ -25,7 +25,7 @@ module Mihari
       # @return [Array<Hash>]
       #
       def search(identity, match: nil, exclude: nil)
-        get_json("/", params: { identity: identity, match: match, exclude: exclude, output: "json" }.compact)
+        get_json("/", params: {identity:, match:, exclude:, output: "json"}.compact)
       end
     end
   end

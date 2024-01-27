@@ -5,8 +5,8 @@ module Mihari
   DEFAULT_DATA_TYPES = Types::DataTypes.values.freeze
 
   # @return [Array<Hash>]
-  DEFAULT_EMITTERS = Emitters::Database.keys.map { |name| { emitter: name.downcase } }.freeze
+  DEFAULT_EMITTERS = Emitters::Database.keys.map { |name| {emitter: name.downcase} }.freeze
 
   # @return [Array<Hash>]
-  DEFAULT_ENRICHERS = Mihari.enricher_to_class.keys.map { |name| { enricher: name.downcase } }.freeze
+  DEFAULT_ENRICHERS = Mihari.enricher_to_class.keys.map { |name| {enricher: name.downcase} }.freeze
 end

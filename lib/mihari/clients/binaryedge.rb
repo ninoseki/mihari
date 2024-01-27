@@ -22,7 +22,7 @@ module Mihari
       )
         headers["x-key"] = api_key
 
-        super(base_url, headers: headers, timeout: timeout, pagination_interval: pagination_interval)
+        super(base_url, headers:, timeout:, pagination_interval:)
       end
 
       #
@@ -34,11 +34,11 @@ module Mihari
       #
       def search(query, page: 1, only_ips: nil)
         params = {
-          query: query,
-          page: page,
-          only_ips: only_ips
+          query:,
+          page:,
+          only_ips:
         }.compact
-        Structs::BinaryEdge::Response.from_dynamic! get_json("/v2/query/search", params: params)
+        Structs::BinaryEdge::Response.from_dynamic! get_json("/v2/query/search", params:)
       end
 
       #
@@ -51,7 +51,7 @@ module Mihari
       def search_with_pagination(query, only_ips: nil, pagination_limit: Mihari.config.pagination_limit)
         Enumerator.new do |y|
           (1..pagination_limit).each do |page|
-            res = search(query, page: page, only_ips: only_ips)
+            res = search(query, page:, only_ips:)
 
             y.yield res
 

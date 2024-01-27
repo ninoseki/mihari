@@ -50,7 +50,7 @@ module Mihari
       end
 
       def client
-        @client ||= Clients::GooglePublicDNS.new(timeout: timeout)
+        @client ||= Clients::GooglePublicDNS.new(timeout:)
       end
     end
   end

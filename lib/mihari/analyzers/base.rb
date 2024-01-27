@@ -14,7 +14,7 @@ module Mihari
       # @param [Hash, nil] options
       #
       def initialize(query, options: nil)
-        super(options: options)
+        super(options:)
 
         @query = query
       end

@@ -103,7 +103,7 @@ module Mihari
     #
     def tags
       data[:tags].uniq.filter_map do |name|
-        Models::Tag.find_or_create_by(name: name)
+        Models::Tag.find_or_create_by(name:)
       end
     end
 
@@ -163,7 +163,7 @@ module Mihari
     # @return [Array<Mihari::Models::Artifact>]
     #
     def unique_artifacts
-      normalized_artifacts.select { |artifact| artifact.unique?(base_time: base_time, artifact_ttl: artifact_ttl) }
+      normalized_artifacts.select { |artifact| artifact.unique?(base_time:, artifact_ttl:) }
     end
 
     #
@@ -221,11 +221,11 @@ module Mihari
       end
     rescue ActiveRecord::RecordNotFound
       Mihari::Models::Rule.new(
-        id: id,
-        title: title,
-        description: description,
-        data: data,
-        taggings: taggings
+        id:,
+        title:,
+        description:,
+        data:,
+        taggings:
       )
     end
 
@@ -319,9 +319,7 @@ module Mihari
       @analyzers ||= queries.deep_dup.map do |params|
         name = params.delete(:analyzer)
         klass = get_analyzer_class(name)
-        klass.from_params(params).tap do |analyzer|
-          analyzer.validate_configuration!
-        end
+        klass.from_params(params).tap(&:validate_configuration!)
       end
     end
 
@@ -363,9 +361,7 @@ module Mihari
         options = params.delete(:options)
 
         klass = get_emitter_class(name)
-        klass.new(rule: self, options: options, **params).tap do |emitter|
-          emitter.validate_configuration!
-        end
+        klass.new(rule: self, options:, **params).tap(&:validate_configuration!)
       end
     end
 
@@ -399,7 +395,7 @@ module Mihari
         options = params.delete(:options)
 
         klass = get_enricher_class(name)
-        klass.new(options: options, **params)
+        klass.new(options:, **params)
       end
     end
 

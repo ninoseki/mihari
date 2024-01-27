@@ -3,7 +3,7 @@
 module Mihari
   module Entities
     class AutonomousSystem < Grape::Entity
-      expose :number, documentation: { type: Integer, required: true }
+      expose :number, documentation: {type: Integer, required: true}
     end
   end
 end

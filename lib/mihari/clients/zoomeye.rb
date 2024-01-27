@@ -27,14 +27,14 @@ module Mihari
         raise(ArgumentError, "api_key is required") unless api_key
 
         headers["api-key"] = api_key
-        super(base_url, headers: headers, pagination_interval: pagination_interval, timeout: timeout)
+        super(base_url, headers:, pagination_interval:, timeout:)
       end
 
       #
       # @return [::HTTP::Client]
       #
       def http
-        @http ||= HTTP::Factory.build(headers: headers, timeout: timeout, raise_exception: false)
+        @http ||= HTTP::Factory.build(headers:, timeout:, raise_exception: false)
       end
 
       #
@@ -48,11 +48,11 @@ module Mihari
       #
       def host_search(query, page: nil, facets: nil)
         params = {
-          query: query,
-          page: page,
-          facets: facets
+          query:,
+          page:,
+          facets:
         }.compact
-        get_json "/host/search", params: params
+        get_json "/host/search", params:
       end
 
       #
@@ -65,7 +65,7 @@ module Mihari
       def host_search_with_pagination(query, facets: nil, pagination_limit: Mihari.config.pagination_limit)
         Enumerator.new do |y|
           (1..pagination_limit).each do |page|
-            res = host_search(query, facets: facets, page: page)
+            res = host_search(query, facets:, page:)
 
             break if res.nil?
 
@@ -90,11 +90,11 @@ module Mihari
       #
       def web_search(query, page: nil, facets: nil)
         params = {
-          query: query,
-          page: page,
-          facets: facets
+          query:,
+          page:,
+          facets:
         }.compact
-        get_json "/web/search", params: params
+        get_json "/web/search", params:
       end
 
       #
@@ -107,7 +107,7 @@ module Mihari
       def web_search_with_pagination(query, facets: nil, pagination_limit: Mihari.config.pagination_limit)
         Enumerator.new do |y|
           (1..pagination_limit).each do |page|
-            res = web_search(query, facets: facets, page: page)
+            res = web_search(query, facets:, page:)
 
             break if res.nil?
 

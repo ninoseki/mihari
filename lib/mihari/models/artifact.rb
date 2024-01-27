@@ -159,8 +159,8 @@ module Mihari
       #
       def unique?(base_time: nil, artifact_ttl: nil)
         artifact = self.class.joins(:alert).where(
-          data: data,
-          alert: { rule_id: rule_id }
+          data:,
+          alert: {rule_id:}
         ).order(created_at: :desc).first
         return true if artifact.nil?
 

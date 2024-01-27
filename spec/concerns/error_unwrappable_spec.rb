@@ -26,21 +26,21 @@ RSpec.describe Mihari::Concerns::ErrorUnwrappable do
   describe "#unwrap_error" do
     it do
       subject.raise_try_error
-    rescue StandardError => e
+    rescue => e
       expect(e).not_to be_a ZeroDivisionError
       expect(subject.unwrap_error(e)).to be_a ZeroDivisionError
     end
 
     it do
       subject.raise_result_error
-    rescue StandardError => e
+    rescue => e
       expect(e).not_to be_a ZeroDivisionError
       expect(subject.unwrap_error(e)).to be_a ZeroDivisionError
     end
 
     it do
       subject.raise_error
-    rescue StandardError => e
+    rescue => e
       expect(e).to be_a ZeroDivisionError
       expect(subject.unwrap_error(e)).to be_a ZeroDivisionError
     end

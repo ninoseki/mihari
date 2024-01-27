@@ -25,7 +25,7 @@ module Mihari
         raise(ArgumentError, "api_key is required") unless api_key
 
         headers["key"] = api_key
-        super(base_url, headers: headers, pagination_interval: pagination_interval, timeout: timeout)
+        super(base_url, headers:, pagination_interval:, timeout:)
       end
 
       #
@@ -38,8 +38,8 @@ module Mihari
       # @return [Mihari::Structs::GreyNoise::Response]
       #
       def gnql_search(query, size: PAGE_SIZE, scroll: nil)
-        params = { query: query, size: size, scroll: scroll }.compact
-        Structs::GreyNoise::Response.from_dynamic! get_json("/v2/experimental/gnql", params: params)
+        params = {query:, size:, scroll:}.compact
+        Structs::GreyNoise::Response.from_dynamic! get_json("/v2/experimental/gnql", params:)
       end
 
       #
@@ -54,7 +54,7 @@ module Mihari
 
         Enumerator.new do |y|
           pagination_limit.times do
-            res = gnql_search(query, size: size, scroll: scroll)
+            res = gnql_search(query, size:, scroll:)
 
             y.yield res
 

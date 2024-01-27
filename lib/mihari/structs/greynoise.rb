@@ -30,8 +30,8 @@ module Mihari
         #
         def geolocation
           Mihari::Models::Geolocation.new(
-            country: country,
-            country_code: country_code
+            country:,
+            country_code:
           )
         end
 

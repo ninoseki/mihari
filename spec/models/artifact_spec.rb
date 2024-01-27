@@ -49,7 +49,7 @@ RSpec.describe Mihari::Models::Artifact do
         obj = described_class.new(data: artifact.data, alert_id: alert.id)
         obj.rule_id = rule.id
 
-        expect(obj.unique?(base_time: base_time, artifact_ttl: artifact_ttl)).to be false
+        expect(obj.unique?(base_time:, artifact_ttl:)).to be false
       end
 
       it do
@@ -58,7 +58,7 @@ RSpec.describe Mihari::Models::Artifact do
         end
 
         obj = described_class.new(data: artifact.data, alert_id: alert.id)
-        expect(obj.unique?(base_time: base_time, artifact_ttl: artifact_ttl)).to be true
+        expect(obj.unique?(base_time:, artifact_ttl:)).to be true
       end
     end
   end

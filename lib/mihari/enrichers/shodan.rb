@@ -22,13 +22,13 @@ module Mihari
 
           if tapped.reverse_dns_names.empty?
             tapped.reverse_dns_names = (res&.hostnames || []).map do |name|
-              Models::ReverseDnsName.new(name: name)
+              Models::ReverseDnsName.new(name:)
             end
           end
 
           if tapped.vulnerabilities.empty?
             tapped.vulnerabilities = (res&.vulns || []).map do |name|
-              Models::Vulnerability.new(name: name)
+              Models::Vulnerability.new(name:)
             end
           end
         end
@@ -50,7 +50,7 @@ module Mihari
       end
 
       def client
-        @client ||= Clients::ShodanInternetDB.new(timeout: timeout)
+        @client ||= Clients::ShodanInternetDB.new(timeout:)
       end
     end
   end
