@@ -9,8 +9,8 @@ module Mihari
       class Rules < Grape::API
         class RuleCreateUpdater < Service
           #
-          # @params [String] yaml
-          # @params [Boolean] overwrite
+          # @param [String] yaml
+          # @param [Boolean] overwrite
           #
           # @return [Mihari::Models::Rule]
           #
