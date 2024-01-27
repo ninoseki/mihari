@@ -35,7 +35,7 @@ module Mihari
 
     class RuleGetter < Service
       #
-      # @params [String] id
+      # @param [String] id
       #
       # @return [Mihari::Models::Rule]
       #
