@@ -29,7 +29,7 @@ module Mihari
       )
         raise(ArgumentError, "api_key is required") unless api_key
 
-        super(base_url, headers: headers, pagination_interval: pagination_interval, timeout: timeout)
+        super(base_url, headers:, pagination_interval:, timeout:)
 
         @api_key = api_key
       end
@@ -46,13 +46,13 @@ module Mihari
       def search(query, start_time:, end_time:, page: 1, page_size: PAGE_SIZE)
         params = {
           query: Base64.urlsafe_encode64(query),
-          page: page,
-          page_size: page_size,
-          start_time: start_time,
-          end_time: end_time,
+          page:,
+          page_size:,
+          start_time:,
+          end_time:,
           "api-key": api_key
         }.compact
-        Structs::HunterHow::Response.from_dynamic! get_json("/search", params: params)
+        Structs::HunterHow::Response.from_dynamic! get_json("/search", params:)
       end
 
       #
@@ -75,10 +75,10 @@ module Mihari
           (1..pagination_limit).each do |page|
             res = search(
               query,
-              start_time: start_time,
-              end_time: end_time,
-              page: page,
-              page_size: page_size
+              start_time:,
+              end_time:,
+              page:,
+              page_size:
             )
 
             y.yield res

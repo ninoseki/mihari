@@ -20,7 +20,7 @@ module Mihari
 
           Mihari::Models::Geolocation.new(
             country: country_name,
-            country_code: country_code
+            country_code:
           )
         end
 
@@ -106,7 +106,7 @@ module Mihari
 
             new(
               asn: d["asn"],
-              hostnames: hostnames,
+              hostnames:,
               location: Location.from_dynamic!(d.fetch("location")),
               domains: d.fetch("domains"),
               ip_str: d.fetch("ip_str"),
@@ -205,20 +205,20 @@ module Mihari
 
             ports = collect_ports_by_ip(match.ip_str).map { |port| Models::Port.new(number: port) }
             reverse_dns_names = collect_hostnames_by_ip(match.ip_str).map do |name|
-              Models::ReverseDnsName.new(name: name)
+              Models::ReverseDnsName.new(name:)
             end
-            cpes = collect_cpes_by_ip(match.ip_str).map { |name| Models::CPE.new(name: name) }
-            vulnerabilities = collect_vulns_by_ip(match.ip_str).map { |name| Models::Vulnerability.new(name: name) }
+            cpes = collect_cpes_by_ip(match.ip_str).map { |name| Models::CPE.new(name:) }
+            vulnerabilities = collect_vulns_by_ip(match.ip_str).map { |name| Models::Vulnerability.new(name:) }
 
             Mihari::Models::Artifact.new(
               data: match.ip_str,
-              metadata: metadata,
+              metadata:,
               autonomous_system: match.autonomous_system,
               geolocation: match.location.geolocation,
-              ports: ports,
-              reverse_dns_names: reverse_dns_names,
-              cpes: cpes,
-              vulnerabilities: vulnerabilities
+              ports:,
+              reverse_dns_names:,
+              cpes:,
+              vulnerabilities:
             )
           end
         end

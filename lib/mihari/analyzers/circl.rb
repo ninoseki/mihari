@@ -24,7 +24,7 @@ module Mihari
       # @param [String, nil] password
       #
       def initialize(query, options: nil, username: nil, password: nil)
-        super(refang(query), options: options)
+        super(refang(query), options:)
 
         @type = DataType.type(query)
 
@@ -50,7 +50,7 @@ module Mihari
       private
 
       def client
-        Clients::CIRCL.new(username: username, password: password, timeout: timeout)
+        Clients::CIRCL.new(username:, password:, timeout:)
       end
 
       def username?

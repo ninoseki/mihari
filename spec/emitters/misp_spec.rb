@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 RSpec.describe Mihari::Emitters::MISP, :vcr do
-  subject(:emitter) { described_class.new(rule: rule) }
+  subject(:emitter) { described_class.new(rule:) }
 
   include_context "with mocked logger"
 

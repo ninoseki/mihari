@@ -39,7 +39,7 @@ module Mihari
         @api_key = api_key
         @email = email
 
-        super(base_url, headers: headers, pagination_interval: pagination_interval, timeout: timeout)
+        super(base_url, headers:, pagination_interval:, timeout:)
       end
 
       #
@@ -51,8 +51,8 @@ module Mihari
       #
       def search(query, page:, size: PAGE_SIZE)
         qbase64 = Base64.urlsafe_encode64(query)
-        params = { qbase64: qbase64, size: size, page: page, email: email, key: api_key }.compact
-        res = Structs::Fofa::Response.from_dynamic!(get_json("/api/v1/search/all", params: params))
+        params = {qbase64:, size:, page:, email:, key: api_key}.compact
+        res = Structs::Fofa::Response.from_dynamic!(get_json("/api/v1/search/all", params:))
         raise ResponseError, res.errmsg if res.error
 
         res
@@ -68,7 +68,7 @@ module Mihari
       def search_with_pagination(query, size: PAGE_SIZE, pagination_limit: Mihari.config.pagination_limit)
         Enumerator.new do |y|
           (1..pagination_limit).each do |page|
-            res = search(query, page: page, size: size)
+            res = search(query, page:, size:)
 
             y.yield res
 

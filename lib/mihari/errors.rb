@@ -74,7 +74,7 @@ module Mihari
     end
 
     def detail
-      { status_code: status_code, body: body }
+      {status_code:, body:}
     end
   end
 

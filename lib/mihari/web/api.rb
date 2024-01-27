@@ -24,7 +24,7 @@ module Mihari
       mount Endpoints::Rules
       mount Endpoints::Tags
 
-      add_swagger_documentation(api_version: "v1", info: { title: "Mihari API" })
+      add_swagger_documentation(api_version: "v1", info: {title: "Mihari API"})
     end
   end
 end

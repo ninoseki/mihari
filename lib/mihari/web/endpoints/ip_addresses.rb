@@ -11,15 +11,15 @@ module Mihari
           desc "Get IP address data", {
             success: Entities::IPAddress,
             failure: [
-              { code: 404, model: Entities::ErrorMessage },
-              { code: 422, model: Entities::ErrorMessage }
+              {code: 404, model: Entities::ErrorMessage},
+              {code: 422, model: Entities::ErrorMessage}
             ],
             summary: "Get IP address data"
           }
           params do
             requires :ip, type: String
           end
-          get "/:ip", requirements: { ip: %r{[^/]+} } do
+          get "/:ip", requirements: {ip: %r{[^/]+}} do
             ip = params[:ip].to_s
             result = Services::IPGetter.result(ip)
             if result.success?
@@ -37,8 +37,8 @@ module Mihari
             failure = result.failure
             case failure
             when Mihari::StatusError
-              error!({ message: "IP:#{ip} not found" }, failure.status_code) if failure.status_code == 404
-              error!({ message: "IP format invalid" }, failure.status_code) if failure.status_code == 422
+              error!({message: "IP:#{ip} not found"}, failure.status_code) if failure.status_code == 404
+              error!({message: "IP format invalid"}, failure.status_code) if failure.status_code == 422
             end
             raise failure
           end

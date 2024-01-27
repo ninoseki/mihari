@@ -23,7 +23,7 @@ module Mihari
       # @param [String, nil] api_key
       #
       def initialize(query, start_time: nil, end_time: nil, options: nil, api_key: nil)
-        super(query, options: options)
+        super(query, options:)
 
         @api_key = api_key || Mihari.config.hunterhow_api_key
 
@@ -48,9 +48,9 @@ module Mihari
 
       def client
         Clients::HunterHow.new(
-          api_key: api_key,
-          pagination_interval: pagination_interval,
-          timeout: timeout
+          api_key:,
+          pagination_interval:,
+          timeout:
         )
       end
     end

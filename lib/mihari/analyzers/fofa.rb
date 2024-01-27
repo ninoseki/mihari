@@ -19,14 +19,14 @@ module Mihari
       # @param [String, nil] email
       #
       def initialize(query, options: nil, api_key: nil, email: nil)
-        super(query, options: options)
+        super(query, options:)
 
         @api_key = api_key || Mihari.config.fofa_api_key
         @email = email || Mihari.config.fofa_email
       end
 
       def artifacts
-        client.search_with_pagination(query, pagination_limit: pagination_limit).map do |res|
+        client.search_with_pagination(query, pagination_limit:).map do |res|
           (res.results || []).map { |result| result[1] }
         end.flatten.compact
       end
@@ -46,10 +46,10 @@ module Mihari
       #
       def client
         Clients::Fofa.new(
-          api_key: api_key,
-          email: email,
-          pagination_interval: pagination_interval,
-          timeout: timeout
+          api_key:,
+          email:,
+          pagination_interval:,
+          timeout:
         )
       end
     end

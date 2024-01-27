@@ -24,7 +24,7 @@ module Mihari
       # @param [Hash, nil] params
       #
       def initialize(rule:, options: nil, **params)
-        super(rule: rule, options: options)
+        super(rule:, options:)
 
         @url = params[:url] || Mihari.config.misp_url
         @api_key = params[:api_key] || Mihari.config.misp_api_key
@@ -51,7 +51,7 @@ module Mihari
           Event: {
             info: rule.title,
             Attribute: artifacts.map { |artifact| build_attribute(artifact) },
-            Tag: rule.tags.map { |tag| { name: tag } }
+            Tag: rule.tags.map { |tag| {name: tag} }
           }
         })
       end
@@ -66,7 +66,7 @@ module Mihari
       private
 
       def client
-        @client ||= Clients::MISP.new(url, api_key: api_key, timeout: timeout)
+        @client ||= Clients::MISP.new(url, api_key:, timeout:)
       end
 
       #
@@ -77,7 +77,7 @@ module Mihari
       # @return [Hash]
       #
       def build_attribute(artifact)
-        { value: artifact.data, type: to_misp_type(type: artifact.data_type, value: artifact.data) }
+        {value: artifact.data, type: to_misp_type(type: artifact.data_type, value: artifact.data)}
       end
 
       #

@@ -24,7 +24,7 @@ module Mihari
       # @param [String, nil] username
       #
       def initialize(query, options: nil, api_key: nil, username: nil)
-        super(refang(query), options: options)
+        super(refang(query), options:)
 
         @type = DataType.type(query)
 
@@ -69,7 +69,7 @@ module Mihari
         res = client.reverse_whois_search(query)
         (res["results"] || []).map do |result|
           data = result["domain"]
-          Models::Artifact.new(data: data, metadata: result)
+          Models::Artifact.new(data:, metadata: result)
         end
       end
 
@@ -82,7 +82,7 @@ module Mihari
       end
 
       def client
-        Clients::PassiveTotal.new(username: username, api_key: api_key, timeout: timeout)
+        Clients::PassiveTotal.new(username:, api_key:, timeout:)
       end
 
       #

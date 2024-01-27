@@ -29,7 +29,7 @@ module Mihari
 
         headers["authorization"] = "Basic #{Base64.strict_encode64("#{id}:#{secret}")}"
 
-        super(base_url, headers: headers, pagination_interval: pagination_interval, timeout: timeout)
+        super(base_url, headers:, pagination_interval:, timeout:)
       end
 
       #
@@ -45,8 +45,8 @@ module Mihari
       # @return [Mihari::Structs::Censys::Response]
       #
       def search(query, per_page: nil, cursor: nil)
-        params = { q: query, per_page: per_page, cursor: cursor }.compact
-        Structs::Censys::Response.from_dynamic! get_json("/api/v2/hosts/search", params: params)
+        params = {q: query, per_page:, cursor:}.compact
+        Structs::Censys::Response.from_dynamic! get_json("/api/v2/hosts/search", params:)
       end
 
       #
@@ -61,7 +61,7 @@ module Mihari
 
         Enumerator.new do |y|
           pagination_limit.times do
-            res = search(query, per_page: per_page, cursor: cursor)
+            res = search(query, per_page:, cursor:)
 
             y.yield res
 

@@ -1,7 +1,3 @@
-Style/HashSyntax:
-  EnforcedShorthandSyntax: either
-Style/StringLiterals:
-  EnforcedStyle: double_quotes
 Metrics/BlockLength:
   Max: 150
   Exclude:

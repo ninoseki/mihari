@@ -160,7 +160,7 @@ module Mihari
     #
     def puma?
       !Puma.stats.nil?
-    rescue StandardError
+    rescue
       false
     end
 

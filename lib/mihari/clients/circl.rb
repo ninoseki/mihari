@@ -21,7 +21,7 @@ module Mihari
 
         headers["authorization"] = "Basic #{Base64.strict_encode64("#{username}:#{password}")}"
 
-        super(base_url, headers: headers, timeout: timeout)
+        super(base_url, headers:, timeout:)
       end
 
       #
@@ -77,7 +77,7 @@ module Mihari
       # @param [Hash] params
       #
       def _get(path, params: {})
-        res = get(path, params: params)
+        res = get(path, params:)
         body = res.body.to_s
         content_type = res["Content-Type"].to_s
 

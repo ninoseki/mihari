@@ -30,25 +30,25 @@ module Mihari
       def vt_link
         return nil unless _vt_link
 
-        { type: "button", text: "VirusTotal", url: _vt_link }
+        {type: "button", text: "VirusTotal", url: _vt_link}
       end
 
       def urlscan_link
         return nil unless _urlscan_link
 
-        { type: "button", text: "urlscan.io", url: _urlscan_link }
+        {type: "button", text: "urlscan.io", url: _urlscan_link}
       end
 
       def censys_link
         return nil unless _censys_link
 
-        { type: "button", text: "Censys", url: _censys_link }
+        {type: "button", text: "Censys", url: _censys_link}
       end
 
       def shodan_link
         return nil unless _shodan_link
 
-        { type: "button", text: "Shodan", url: _shodan_link }
+        {type: "button", text: "Shodan", url: _shodan_link}
       end
 
       # @return [Array]
@@ -57,7 +57,7 @@ module Mihari
           {
             text: defanged_data,
             fallback: "VT & urlscan.io links",
-            actions: actions
+            actions:
           }
         ]
       end
@@ -140,7 +140,7 @@ module Mihari
       # @param [Hash, nil] params
       #
       def initialize(rule:, options: nil, **params)
-        super(rule: rule, options: options)
+        super(rule:, options:)
 
         @webhook_url = params[:webhook_url] || Mihari.config.slack_webhook_url
         @channel = params[:channel] || Mihari.config.slack_channel || DEFAULT_CHANNEL
@@ -177,9 +177,9 @@ module Mihari
       #
       def notifier
         @notifier ||= lambda do
-          return ::Slack::Notifier.new(webhook_url, channel: channel, username: username) if timeout.nil?
+          return ::Slack::Notifier.new(webhook_url, channel:, username:) if timeout.nil?
 
-          ::Slack::Notifier.new(webhook_url, channel: channel, username: username, http_options: { timeout: timeout })
+          ::Slack::Notifier.new(webhook_url, channel:, username:, http_options: {timeout:})
         end.call
       end
 
@@ -215,7 +215,7 @@ module Mihari
 
         @artifacts = artifacts
 
-        notifier.post(text: text, attachments: attachments, mrkdwn: true)
+        notifier.post(text:, attachments:, mrkdwn: true)
       end
     end
   end

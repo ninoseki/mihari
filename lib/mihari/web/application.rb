@@ -97,7 +97,7 @@ module Mihari
             Host: host,
             Threads: threads,
             Verbose: verbose,
-            worker_timeout: worker_timeout
+            worker_timeout:
           ) do |_|
             Launchy.open("http://#{host}:#{port}") if !Mihari.development? && open
           rescue Launchy::CommandNotFoundError

@@ -4,7 +4,7 @@ RSpec.describe Mihari::Services::FeedParser do
   let!(:data) do
     {
       a: %w[a b c],
-      b: [{ foo: "bar", bar: "foo" }, { foo: "foo", bar: "bar" }],
+      b: [{foo: "bar", bar: "foo"}, {foo: "foo", bar: "bar"}],
       c: [%w[1 2 3], %w[4 5 6], %w[7 8 9]]
     }
   end

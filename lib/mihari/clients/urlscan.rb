@@ -24,7 +24,7 @@ module Mihari
 
         headers["api-key"] = api_key
 
-        super(base_url, headers: headers, pagination_interval: pagination_interval, timeout: timeout)
+        super(base_url, headers:, pagination_interval:, timeout:)
       end
 
       #
@@ -35,8 +35,8 @@ module Mihari
       # @return [Mihari::Structs::Urlscan::Response]
       #
       def search(q, size: nil, search_after: nil)
-        params = { q: q, size: size, search_after: search_after }.compact
-        Structs::Urlscan::Response.from_dynamic! get_json("/api/v1/search/", params: params)
+        params = {q:, size:, search_after:}.compact
+        Structs::Urlscan::Response.from_dynamic! get_json("/api/v1/search/", params:)
       end
 
       #
@@ -51,7 +51,7 @@ module Mihari
 
         Enumerator.new do |y|
           pagination_limit.times do
-            res = search(q, size: size, search_after: search_after)
+            res = search(q, size:, search_after:)
 
             y.yield res
 

@@ -27,7 +27,7 @@ module Mihari
       )
         raise(ArgumentError, "api_key is required") unless api_key
 
-        super(base_url, headers: headers, pagination_interval: pagination_interval, timeout: timeout)
+        super(base_url, headers:, pagination_interval:, timeout:)
 
         @api_key = api_key
       end
@@ -41,12 +41,12 @@ module Mihari
       #
       def search(query, page: 1, minify: true)
         params = {
-          query: query,
-          page: page,
-          minify: minify,
+          query:,
+          page:,
+          minify:,
           key: api_key
         }
-        Structs::Shodan::Response.from_dynamic! get_json("/shodan/host/search", params: params)
+        Structs::Shodan::Response.from_dynamic! get_json("/shodan/host/search", params:)
       end
 
       #
@@ -59,7 +59,7 @@ module Mihari
       def search_with_pagination(query, minify: true, pagination_limit: Mihari.config.pagination_limit)
         Enumerator.new do |y|
           (1..pagination_limit).each do |page|
-            res = search(query, page: page, minify: minify)
+            res = search(query, page:, minify:)
 
             y.yield res
 

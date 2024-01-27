@@ -55,7 +55,7 @@ module Mihari
 
         def safe_execute
           yield
-        rescue StandardError => e
+        rescue => e
           error = unwrap_error(e)
 
           # Raise error if it's a Thor::Error to follow Thor's manner

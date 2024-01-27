@@ -39,7 +39,7 @@ RSpec.describe Mihari::Web::Endpoints::Alerts do
 
     context "with invalid page type" do
       it "returns 400" do
-        get "/api/alerts", { page: "foo" }
+        get "/api/alerts", {page: "foo"}
         expect(last_response.status).to eq(400)
       end
     end
@@ -63,13 +63,13 @@ RSpec.describe Mihari::Web::Endpoints::Alerts do
   describe "post /api/alerts" do
     context "with invalid format" do
       it "returns 400" do
-        post("/api/alerts/", { foo: "bar" }.to_json, "CONTENT_TYPE" => "application/json")
+        post("/api/alerts/", {foo: "bar"}.to_json, "CONTENT_TYPE" => "application/json")
         expect(last_response.status).to eq(400)
       end
     end
 
     context "with valid params" do
-      let!(:payload) { { ruleId: rule.id, artifacts: ["1.1.1.1"] } }
+      let!(:payload) { {ruleId: rule.id, artifacts: ["1.1.1.1"]} }
 
       it "returns 201" do
         post("/api/alerts/", payload.to_json, "CONTENT_TYPE" => "application/json")

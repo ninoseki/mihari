@@ -20,7 +20,7 @@ module Mihari
       # @param [String, nil] api_key
       #
       def initialize(query, options: nil, api_key: nil)
-        super(refang(query), options: options)
+        super(refang(query), options:)
 
         @type = DataType.type(query)
 
@@ -41,7 +41,7 @@ module Mihari
       private
 
       def client
-        Mihari::Clients::OTX.new(api_key: api_key, timeout: timeout)
+        Mihari::Clients::OTX.new(api_key:, timeout:)
       end
 
       #

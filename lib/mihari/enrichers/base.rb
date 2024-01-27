@@ -10,7 +10,7 @@ module Mihari
       # @param [Hash, nil] options
       #
       def initialize(options: nil)
-        super(options: options)
+        super(options:)
       end
 
       #

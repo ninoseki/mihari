@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 RSpec.describe Mihari::Analyzers::HunterHow, :vcr do
-  subject(:analyzer) { described_class.new(query, start_time: start_time, end_time: end_time) }
+  subject(:analyzer) { described_class.new(query, start_time:, end_time:) }
 
   let!(:query) { 'ip:"1.1.1.1"' }
   let!(:start_time) { Date.parse "2023-08-01" }

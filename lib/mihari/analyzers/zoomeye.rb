@@ -19,7 +19,7 @@ module Mihari
       # @param [String] type
       #
       def initialize(query, options: nil, api_key: nil, type: "host")
-        super(query, options: options)
+        super(query, options:)
 
         @type = type
         @api_key = api_key || Mihari.config.zoomeye_api_key
@@ -53,9 +53,9 @@ module Mihari
 
       def client
         Clients::ZoomEye.new(
-          api_key: api_key,
-          pagination_interval: pagination_interval,
-          timeout: timeout
+          api_key:,
+          pagination_interval:,
+          timeout:
         )
       end
 
@@ -74,7 +74,7 @@ module Mihari
           if data.is_a?(Array)
             data.map { |d| Models::Artifact.new(data: d, metadata: match) }
           else
-            Models::Artifact.new(data: data, metadata: match)
+            Models::Artifact.new(data:, metadata: match)
           end
         end.flatten
       end

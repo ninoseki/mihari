@@ -11,13 +11,13 @@ RSpec.describe Mihari do
 
   describe "#sidekiq?" do
     it "returns false in RSpec" do
-      expect(Mihari.sidekiq?).to eq(false)
+      expect(described_class.sidekiq?).to eq(false)
     end
   end
 
   describe "#puma?" do
     it "returns false in RSpec" do
-      expect(Mihari.puma?).to eq(false)
+      expect(described_class.puma?).to eq(false)
     end
   end
 end

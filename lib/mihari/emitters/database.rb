@@ -16,7 +16,7 @@ module Mihari
       def call(artifacts)
         return if artifacts.empty?
 
-        alert = Models::Alert.new(artifacts: artifacts, rule_id: rule.id)
+        alert = Models::Alert.new(artifacts:, rule_id: rule.id)
         alert.save
         alert
       end

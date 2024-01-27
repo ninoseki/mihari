@@ -7,8 +7,8 @@ RSpec.describe Mihari::Analyzers::Feed, :vcr do
         described_class.new(
           "https://threatfox-api.abuse.ch/api/v1/",
           method: "POST",
-          json: { query: "get_iocs", days: 1 },
-          headers: { "api-key": ENV["THREATFOX_API_KEY"] },
+          json: {query: "get_iocs", days: 1},
+          headers: {"api-key": ENV["THREATFOX_API_KEY"]},
           selector: "data.map(&:ioc)"
         )
       end

@@ -29,9 +29,9 @@ module Mihari
         def artifact
           Mihari::Models::Artifact.new(
             data: ip,
-            metadata: metadata,
+            metadata:,
             autonomous_system: as,
-            geolocation: geolocation
+            geolocation:
           )
         end
 
@@ -43,7 +43,7 @@ module Mihari
 
           Mihari::Models::Geolocation.new(
             country: NormalizeCountry(country_code, to: :short),
-            country_code: country_code
+            country_code:
           )
         end
 

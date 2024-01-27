@@ -20,7 +20,7 @@ module Mihari
 
         @api_key = api_key
 
-        super(base_url, headers: headers, timeout: timeout)
+        super(base_url, headers:, timeout:)
       end
 
       #
@@ -29,7 +29,7 @@ module Mihari
       # @return [Hash]
       #
       def get_indicator(ip_or_domain)
-        get_json "/api/info.php", params: { indicator: ip_or_domain, key: api_key }
+        get_json "/api/info.php", params: {indicator: ip_or_domain, key: api_key}
       end
 
       #
@@ -38,7 +38,7 @@ module Mihari
       # @return [Hash]
       #
       def get_properties(indicator_id)
-        get_json "/api/info.php", params: { iid: indicator_id, get: "properties", key: api_key }
+        get_json "/api/info.php", params: {iid: indicator_id, get: "properties", key: api_key}
       end
     end
   end

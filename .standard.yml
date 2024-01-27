@@ -1,4 +1,0 @@
-ignore:
-  - "**/*":
-      - Layout/SpaceInsideHashLiteralBraces
-      - Style/RescueStandardError

@@ -17,7 +17,7 @@ module Mihari
       # @param [String, nil] api_key
       #
       def initialize(query, options: nil, api_key: nil)
-        super(query, options: options)
+        super(query, options:)
 
         @api_key = api_key || Mihari.config.onyphe_api_key
       end
@@ -25,7 +25,7 @@ module Mihari
       def artifacts
         client.datascan_with_pagination(
           query,
-          pagination_limit: pagination_limit
+          pagination_limit:
         ).map(&:artifacts).flatten
       end
 
@@ -33,9 +33,9 @@ module Mihari
 
       def client
         Clients::Onyphe.new(
-          api_key: api_key,
-          pagination_interval: pagination_interval,
-          timeout: timeout
+          api_key:,
+          pagination_interval:,
+          timeout:
         )
       end
     end

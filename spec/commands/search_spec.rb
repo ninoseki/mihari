@@ -18,7 +18,7 @@ RSpec.describe Mihari::Commands::Search, :vcr do
 
   describe "#search" do
     it do
-      expect { SearchCLI.new.invoke(:search, [path], { force_overwrite: true }) }.to output(include(rule.id)).to_stdout
+      expect { SearchCLI.new.invoke(:search, [path], {force_overwrite: true}) }.to output(include(rule.id)).to_stdout
     end
   end
 end

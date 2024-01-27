@@ -19,7 +19,7 @@ module Mihari
         raise(ArgumentError, "api_key is required") unless api_key
 
         headers["authorization"] = "Bearer #{api_key}"
-        super(base_url, headers: headers, timeout: timeout)
+        super(base_url, headers:, timeout:)
 
         @api_version = api_version
       end
@@ -31,7 +31,7 @@ module Mihari
       #
       def alert(json)
         json = json.to_camelback_keys.compact
-        post_json("/api/#{api_version}/alert", json: json)
+        post_json("/api/#{api_version}/alert", json:)
       end
     end
   end

@@ -10,23 +10,23 @@ RSpec.describe Mihari::Rule do
   let!(:tags) { %w[test] }
   let(:falsepositives) { [] }
   let(:data_types) { Mihari::DEFAULT_DATA_TYPES }
-  let!(:emitters) { [{ emitter: "database" }] }
+  let!(:emitters) { [{emitter: "database"}] }
   let!(:created_on) { Date.today }
   let!(:updated_on) { Date.today }
   let!(:artifact_ttl) { 0 }
   let(:rule) do
     described_class.new(
-      title: title,
-      description: description,
-      tags: tags,
-      queries: queries,
-      id: id,
-      data_types: data_types,
-      falsepositives: falsepositives,
-      emitters: emitters,
-      created_on: created_on,
-      updated_on: updated_on,
-      artifact_ttl: artifact_ttl
+      title:,
+      description:,
+      tags:,
+      queries:,
+      id:,
+      data_types:,
+      falsepositives:,
+      emitters:,
+      created_on:,
+      updated_on:,
+      artifact_ttl:
     )
   end
 
@@ -100,7 +100,7 @@ RSpec.describe Mihari::Rule do
   context "with an invalid analyzer" do
     let(:queries) do
       [
-        { analyzer: "shodan", query: "foo" }
+        {analyzer: "shodan", query: "foo"}
       ]
     end
 

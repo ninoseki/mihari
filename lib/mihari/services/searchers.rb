@@ -35,7 +35,7 @@ module Mihari
         ResultValue.new(
           total: klass.count_by_filter(filter),
           results: klass.search_by_filter(filter),
-          filter: filter
+          filter:
         )
       end
 

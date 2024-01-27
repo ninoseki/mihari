@@ -19,7 +19,7 @@ module Mihari
         #
         def build_by_ip(ip, enricher: Enrichers::Shodan.new)
           enricher.result(ip).fmap do |res|
-            (res&.ports || []).map { |port| new(port: port) }
+            (res&.ports || []).map { |port| new(port:) }
           end.value_or []
         end
       end

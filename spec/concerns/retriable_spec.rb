@@ -12,7 +12,7 @@ class RetriableTest
   end
 
   def retriable_get(url)
-    retry_on_error(times: times, interval: interval) do
+    retry_on_error(times:, interval:) do
       get url
     end
   end

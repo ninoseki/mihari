@@ -33,7 +33,7 @@ module Mihari
 
           desc "Get an artifact", {
             success: Entities::Artifact,
-            failure: [{ code: 404, model: Entities::ErrorMessage }],
+            failure: [{code: 404, model: Entities::ErrorMessage}],
             summary: "Get an artifact"
           }
           params do
@@ -46,14 +46,14 @@ module Mihari
 
             case result.failure
             when ActiveRecord::RecordNotFound
-              error!({ message: "ID:#{id} not found" }, 404)
+              error!({message: "ID:#{id} not found"}, 404)
             end
             raise result.failure
           end
 
           desc "Enrich an artifact", {
-            success: { code: 201, model: Entities::Message },
-            failure: [{ code: 400, model: Entities::ErrorMessage }, { code: 404, model: Entities::ErrorMessage }],
+            success: {code: 201, model: Entities::Message},
+            failure: [{code: 400, model: Entities::ErrorMessage}, {code: 404, model: Entities::ErrorMessage}],
             summary: "Enrich an artifact"
           }
           params do
@@ -75,20 +75,20 @@ module Mihari
             end.to_result
 
             message = queued ? "ID:#{id}'s enrichment is queued" : "ID:#{id}'s enrichment is successful"
-            return present({ message: message, queued: queued }, with: Entities::QueueMessage) if result.success?
+            return present({message:, queued:}, with: Entities::QueueMessage) if result.success?
 
             case result.failure
             when UnenrichableError
-              error!({ message: result.failure.message }, 400)
+              error!({message: result.failure.message}, 400)
             when ActiveRecord::RecordNotFound
-              error!({ message: "ID:#{id} not found" }, 404)
+              error!({message: "ID:#{id} not found"}, 404)
             end
             raise result.failure
           end
 
           desc "Delete an artifact", {
-            success: { code: 204, model: Entities::Message },
-            failure: [{ code: 404, model: Entities::ErrorMessage }],
+            success: {code: 204, model: Entities::Message},
+            failure: [{code: 404, model: Entities::ErrorMessage}],
             summary: "Delete an artifact"
           }
           params do
@@ -99,11 +99,11 @@ module Mihari
 
             id = params["id"].to_i
             result = Services::ArtifactDestroyer.result(id)
-            return present({ message: "" }, with: Entities::Message) if result.success?
+            return present({message: ""}, with: Entities::Message) if result.success?
 
             case result.failure
             when ActiveRecord::RecordNotFound
-              error!({ message: "ID:#{id} not found" }, 404)
+              error!({message: "ID:#{id} not found"}, 404)
             end
             raise result.failure
           end

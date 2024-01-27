@@ -11,7 +11,7 @@ RSpec.describe Mihari::Emitters::Webhook do
 
   describe "#configured?" do
     context "without URL" do
-      let(:emitter) { described_class.new(rule: rule) }
+      let(:emitter) { described_class.new(rule:) }
 
       it do
         expect(emitter.configured?).to be false
@@ -19,7 +19,7 @@ RSpec.describe Mihari::Emitters::Webhook do
     end
 
     context "with URL" do
-      let(:emitter) { described_class.new(rule: rule, url: url) }
+      let(:emitter) { described_class.new(rule:, url:) }
 
       it do
         expect(emitter.configured?).to be true
@@ -30,9 +30,9 @@ RSpec.describe Mihari::Emitters::Webhook do
   describe "#call" do
     let(:emitter) do
       described_class.new(
-        rule: rule,
-        url: url,
-        headers: { "Content-Type": "application/json" }
+        rule:,
+        url:,
+        headers: {"Content-Type": "application/json"}
       )
     end
 
@@ -47,10 +47,10 @@ RSpec.describe Mihari::Emitters::Webhook do
     context "with a template file" do
       let(:emitter) do
         described_class.new(
-          rule: rule,
-          url: url,
+          rule:,
+          url:,
           template: "spec/fixtures/templates/test.json.jbuilder",
-          headers: { "Content-Type": "application/json" }
+          headers: {"Content-Type": "application/json"}
         )
       end
 
@@ -63,7 +63,7 @@ RSpec.describe Mihari::Emitters::Webhook do
   end
 
   describe "#target" do
-    let(:emitter) { described_class.new(rule: rule, url: url) }
+    let(:emitter) { described_class.new(rule:, url:) }
 
     it do
       expect(emitter.target).to be_a(String)

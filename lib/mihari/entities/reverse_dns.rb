@@ -3,8 +3,8 @@
 module Mihari
   module Entities
     class ReverseDnsName < Grape::Entity
-      expose :name, documentation: { type: String, required: true }
-      expose :created_at, documentation: { type: DateTime, required: true }, as: :createdAt
+      expose :name, documentation: {type: String, required: true}
+      expose :created_at, documentation: {type: DateTime, required: true}, as: :createdAt
     end
   end
 end
