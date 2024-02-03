@@ -4,16 +4,21 @@ on:
   push:
     branches: [master]
     paths:
+      - ".github/workflows/ruby.yml"
+      - "Gemfile"
       - "lib/**"
       - "mihari.gemspec"
       - "Rakefile"
-      - ".github/workflows/ruby.yml"
+      - "specs/**"
   pull_request:
     branches: [master]
     paths:
+      - ".github/workflows/ruby.yml"
+      - "Gemfile"
       - "lib/**"
       - "mihari.gemspec"
-      - ".github/workflows/ruby.yml"
+      - "Rakefile"
+      - "specs/**"
 
 jobs:
   lint:
