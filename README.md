@@ -6,14 +6,6 @@
 [![Coverage Status](https://coveralls.io/repos/github/ninoseki/mihari/badge.svg?branch=master)](https://coveralls.io/github/ninoseki/mihari?branch=master)
 [![CodeFactor](https://www.codefactor.io/repository/github/ninoseki/mihari/badge)](https://www.codefactor.io/repository/github/ninoseki/mihari)
 
----
-
-<p align="center">
-  <img src="https://github.com/ninoseki/mihari/raw/master/images/logo.png"/>
-</p>
-
----
-
 A query aggregator for OSINT based threat hunting.
 
 Mihari can aggregate multiple searches across multiple services in a single rule & persist findings in a database.
