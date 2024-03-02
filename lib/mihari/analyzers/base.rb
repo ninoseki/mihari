@@ -44,7 +44,7 @@ module Mihari
       # @return [Boolean]
       #
       def parallel?
-        options[:parallel] || Mihari.config.parallel
+        options[:parallel] || Mihari.config.analyzer_parallelism
       end
 
       # @return [Array<String>, Array<Mihari::Models::Artifact>]
