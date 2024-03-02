@@ -43,7 +43,7 @@
           <button class="delete" aria-label="close" @click="toggleShowMetadata"></button>
         </header>
         <section class="modal-card-body">
-          <VueJsonPretty :data="artifact.metadata"></VueJsonPretty>
+          <VueJsonPretty :data="artifact.metadata" />
         </section>
       </div>
     </div>

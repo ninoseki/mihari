@@ -6,14 +6,14 @@
       v-if="error"
       :disposable="true"
       @dispose="onDisposeError"
-    ></ErrorMessage>
+    />
     <Message
       class="block"
       :message="message"
       v-if="message"
       :disposable="true"
       @dispose="onDisposeMessage"
-    ></Message>
+    />
     <div class="block">
       <p>
         <ActionButtons

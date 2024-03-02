@@ -6,14 +6,14 @@
       v-if="error"
       :disposable="true"
       @dispose="onDisposeError"
-    ></ErrorMessage>
+    />
     <Message
       class="block"
       :message="message"
       v-if="message"
       :disposable="true"
       @dispose="onDisposeMessage"
-    ></Message>
+    />
     <div class="block">
       <p>
         <ActionButtons
@@ -21,7 +21,7 @@
           @delete="onDelete"
           @set-error="onSetError"
           @set-message="onSetMessage"
-        ></ActionButtons>
+        />
       </p>
       <router-link class="is-size-4" :to="{ name: 'Artifact', params: { id: artifact.id } }">{{
         artifact.id
@@ -53,7 +53,7 @@
       <tr v-if="artifact.tags.length > 0">
         <th>Tags</th>
         <td>
-          <Tags :tags="artifact.tags" :navigate-to="'Artifacts'"></Tags>
+          <Tags :tags="artifact.tags" :navigate-to="'Artifacts'" />
         </td>
       </tr>
     </table>

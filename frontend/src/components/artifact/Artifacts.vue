@@ -5,13 +5,13 @@
       v-for="artifact in artifacts.results"
       :key="artifact.id"
       @delete="onDelete"
-    ></Artifact>
+    />
     <Pagination
       :total="artifacts.total"
       :currentPage="artifacts.currentPage"
       :pageSize="artifacts.pageSize"
       @update-page="onUpdatePage"
-    ></Pagination>
+    />
     <p class="help">
       ({{ artifacts.total }} results in total, {{ artifacts.results.length }} shown)
     </p>

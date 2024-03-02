@@ -1,25 +1,25 @@
 <template>
   <div class="field is-grouped is-grouped-multiline">
-    <TagComponent
+    <Tag
       v-for="tag in tags"
       :tag="tag"
       :key="tag.name"
       :deletable="deletable"
       :navigate-to="navigateTo"
-    ></TagComponent>
+    />
   </div>
 </template>
 
 <script lang="ts">
 import { defineComponent, type PropType } from "vue"
 
-import TagComponent from "@/components/tag/Tag.vue"
+import Tag from "@/components/tag/Tag.vue"
 import type { NavigateToType, TagType } from "@/schemas"
 
 export default defineComponent({
   name: "TagsItem",
   components: {
-    TagComponent
+    Tag
   },
   props: {
     tags: {

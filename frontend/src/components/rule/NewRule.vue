@@ -1,7 +1,7 @@
 <template>
   <div class="block">
     <h2 class="is-size-2 block">New rule</h2>
-    <InputForm v-model:yaml="yaml" @update-yaml="updateYAML"></InputForm>
+    <InputForm v-model:yaml="yaml" @update-yaml="updateYAML" />
     <div class="field is-grouped is-grouped-centered">
       <p class="control">
         <a class="button is-primary" @click="create">
@@ -15,7 +15,7 @@
   </div>
   <div class="block" v-if="createRuleTask.last?.error">
     <hr />
-    <ErrorMessage :error="createRuleTask.last?.error"></ErrorMessage>
+    <ErrorMessage :error="createRuleTask.last?.error" />
   </div>
 </template>
 

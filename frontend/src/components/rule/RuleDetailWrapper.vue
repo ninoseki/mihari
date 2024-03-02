@@ -1,12 +1,12 @@
 <template>
-  <Loading v-if="getRuleTask.isRunning"></Loading>
-  <ErrorMessage v-if="getRuleTask.isError" :error="getRuleTask.last?.error"></ErrorMessage>
+  <Loading v-if="getRuleTask.isRunning" />
+  <ErrorMessage v-if="getRuleTask.isError" :error="getRuleTask.last?.error" />
   <Rule
     :rule="getRuleTask.last.value"
     @refresh="onRefresh"
     @delete="onDelete"
     v-if="getRuleTask.last?.value"
-  ></Rule>
+  />
 </template>
 
 <script lang="ts">

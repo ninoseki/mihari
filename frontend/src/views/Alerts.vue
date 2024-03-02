@@ -1,7 +1,7 @@
 <template>
   <OverviewCards></OverviewCards>
   <hr />
-  <Alerts></Alerts>
+  <Alerts />
 </template>
 
 <script lang="ts">

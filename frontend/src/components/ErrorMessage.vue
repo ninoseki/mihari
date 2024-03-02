@@ -6,7 +6,7 @@
   </div>
   <article class="message" v-if="data?.detail">
     <div class="message-body">
-      <VueJsonPretty :data="data.detail"></VueJsonPretty>
+      <VueJsonPretty :data="data.detail" />
     </div>
   </article>
 </template>

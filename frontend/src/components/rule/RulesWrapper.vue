@@ -46,14 +46,14 @@
     </div>
   </div>
   <div class="block" v-if="getRulesTask.performCount > 0">
-    <Loading v-if="getRulesTask.isRunning"></Loading>
-    <ErrorMessage v-if="getRulesTask.isError" :error="getRulesTask.last?.error"></ErrorMessage>
+    <Loading v-if="getRulesTask.isRunning" />
+    <ErrorMessage v-if="getRulesTask.isError" :error="getRulesTask.last?.error" />
     <Rules
       :rules="getRulesTask.last.value"
       v-if="getRulesTask.last?.value"
       @update-page="onUpdatePage"
       @refresh="onRefresh"
-    ></Rules>
+    />
   </div>
 </template>
 

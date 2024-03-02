@@ -6,9 +6,9 @@
       v-if="error"
       :disposable="true"
       @dispose="onDisposeError"
-    ></ErrorMessage>
+    />
     <p>
-      <ActionButtons :alert="alert" @delete="onDelete" @set-error="onSetError"></ActionButtons>
+      <ActionButtons :alert="alert" @delete="onDelete" @set-error="onSetError" />
     </p>
     <router-link class="is-size-4" :to="{ name: 'Alert', params: { id: alert.id } }">{{
       alert.id
@@ -25,13 +25,13 @@
       <tr>
         <th>Artifacts</th>
         <td>
-          <Artifacts :artifacts="alert.artifacts" @delete="onArtifactsDeleted"></Artifacts>
+          <Artifacts :artifacts="alert.artifacts" @delete="onArtifactsDeleted" />
         </td>
       </tr>
       <tr v-if="alert.tags.length > 0">
         <th>Tags</th>
         <td>
-          <Tags :tags="alert.tags" :navigate-to="'Alerts'"></Tags>
+          <Tags :tags="alert.tags" :navigate-to="'Alerts'" />
         </td>
       </tr>
     </table>

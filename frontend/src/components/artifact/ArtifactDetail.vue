@@ -5,14 +5,14 @@
     v-if="error"
     :disposable="true"
     @dispose="onDisposeError"
-  ></ErrorMessage>
+  />
   <Message
     class="block"
     :message="message"
     v-if="message"
     :disposable="true"
     @dispose="onDisposeMessage"
-  ></Message>
+  />
   <div class="block">
     <h2 class="is-size-2">{{ artifact.id }}</h2>
     <p class="is-clearfix">
@@ -21,7 +21,7 @@
         @delete="onDelete"
         @set-error="onSetError"
         @set-message="onSetMessage"
-      ></ActionButtons>
+      />
     </p>
   </div>
   <div class="columns">
@@ -60,43 +60,43 @@
         </tr>
         <tr v-if="artifact.tags.length > 0">
           <th>Tags</th>
-          <td><Tags :tags="artifact.tags" :navigate-to="'Artifacts'"></Tags></td>
+          <td><Tags :tags="artifact.tags" :navigate-to="'Artifacts'" />/td></td>
         </tr>
       </table>
       <p class="help">Created at: {{ artifact.createdAt }}</p>
     </div>
   </div>
   <div class="block">
-    <Links :data="artifact.data" :type="artifact.dataType"></Links>
+    <Links :data="artifact.data" :type="artifact.dataType" />
   </div>
   <div class="block">
     <div class="block" v-if="artifact.autonomousSystem">
       <h4 class="is-size-4 mb-2">AS</h4>
-      <AS :autonomousSystem="artifact.autonomousSystem"></AS>
+      <AS :autonomousSystem="artifact.autonomousSystem" />
     </div>
     <div class="block" v-if="artifact.reverseDnsNames">
       <h4 class="is-size-4 mb-2">Reverse DNS</h4>
-      <ReverseDnsNames :reverseDnsNames="artifact.reverseDnsNames"></ReverseDnsNames>
+      <ReverseDnsNames :reverseDnsNames="artifact.reverseDnsNames" />
     </div>
     <div class="block" v-if="artifact.dnsRecords">
       <h4 class="is-size-4 mb-2">DNS records</h4>
-      <DnsRecords :dnsRecords="artifact.dnsRecords"></DnsRecords>
+      <DnsRecords :dnsRecords="artifact.dnsRecords" />
     </div>
     <div class="block" v-if="artifact.cpes">
       <h4 class="is-size-4 mb-2">CPEs</h4>
-      <CPEs :cpes="artifact.cpes"></CPEs>
+      <CPEs :cpes="artifact.cpes" />
     </div>
     <div class="block" v-if="artifact.vulnerabilities">
       <h4 class="is-size-4 mb-2">Vulnerabilities</h4>
-      <Vulnerabilities :vulnerabilities="artifact.vulnerabilities"></Vulnerabilities>
+      <Vulnerabilities :vulnerabilities="artifact.vulnerabilities" />
     </div>
     <div class="block" v-if="artifact.ports">
       <h4 class="is-size-4 mb-2">Ports</h4>
-      <Ports :ports="artifact.ports"></Ports>
+      <Ports :ports="artifact.ports" />
     </div>
     <div class="block" v-if="artifact.whoisRecord">
       <h4 class="is-size-4 mb-2">Whois record</h4>
-      <WhoisRecord :whoisRecord="artifact.whoisRecord"></WhoisRecord>
+      <WhoisRecord :whoisRecord="artifact.whoisRecord" />
     </div>
   </div>
 </template>

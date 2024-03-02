@@ -1,13 +1,12 @@
 <template>
-  <Loading v-if="getAlertsTask.isRunning"></Loading>
-  <ErrorMessage v-if="getAlertsTask.isError" :error="getAlertsTask.last?.error"></ErrorMessage>
+  <Loading v-if="getAlertsTask.isRunning" />
+  <ErrorMessage v-if="getAlertsTask.isError" :error="getAlertsTask.last?.error" />
   <Alerts
     :page="page.toString()"
     :alerts="getAlertsTask.last.value"
     v-if="getAlertsTask.last?.value"
     @update-page="onUpdatePage"
-  >
-  </Alerts>
+  />
 </template>
 
 <script lang="ts">

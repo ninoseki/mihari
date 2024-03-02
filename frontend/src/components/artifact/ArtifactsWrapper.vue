@@ -41,17 +41,14 @@
     </div>
   </div>
   <div class="block" v-if="getArtifactsTask.performCount > 0">
-    <Loading v-if="getArtifactsTask.isRunning"></Loading>
-    <ErrorMessage
-      v-if="getArtifactsTask.isError"
-      :error="getArtifactsTask.last?.error"
-    ></ErrorMessage>
+    <Loading v-if="getArtifactsTask.isRunning" />
+    <ErrorMessage v-if="getArtifactsTask.isError" :error="getArtifactsTask.last?.error" />
     <Artifacts
       :artifacts="getArtifactsTask.last.value"
       v-if="getArtifactsTask.last?.value"
       @update-page="onUpdatePage"
       @refresh="onRefresh"
-    ></Artifacts>
+    />
   </div>
 </template>
 
