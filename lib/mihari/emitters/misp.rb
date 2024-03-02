@@ -12,6 +12,9 @@ module Mihari
       # @return [String, nil]
       attr_reader :api_key
 
+      # @return [Array<String>]
+      attr_reader :attribute_tags
+
       # @return [Mihari::Rule]
       attr_reader :rule
 
@@ -28,6 +31,7 @@ module Mihari
 
         @url = params[:url] || Mihari.config.misp_url
         @api_key = params[:api_key] || Mihari.config.misp_api_key
+        @attribute_tags = params[:attribute_tags] || []
 
         @artifacts = []
       end
@@ -51,7 +55,7 @@ module Mihari
           Event: {
             info: rule.title,
             Attribute: artifacts.map { |artifact| build_attribute(artifact) },
-            Tag: rule.tags.map { |tag| {name: tag} }
+            Tag: rule.tags.map { |tag| {name: tag.name} }
           }
         })
       end
@@ -77,7 +81,11 @@ module Mihari
       # @return [Hash]
       #
       def build_attribute(artifact)
-        {value: artifact.data, type: to_misp_type(type: artifact.data_type, value: artifact.data)}
+        {
+          value: artifact.data,
+          type: to_misp_type(type: artifact.data_type, value: artifact.data),
+          Tag: attribute_tags.map { |tag| {name: tag} }
+        }
       end
 
       #

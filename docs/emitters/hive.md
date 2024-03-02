@@ -19,3 +19,11 @@ api_key: ...
 ### API Key
 
 `api_key` (`string`) is an API key. Optional. Configurable via `THEHIVE_API_KEY` environment variable.
+
+### Observable Tags
+
+`observable_tags` (`array[:string]`) is a list of observable tags. Optional. Defaults to `[]`.
+
+!!! note
+
+    `tags` of a rule are set as tags of an alert.
