@@ -38,4 +38,4 @@ options:
 
 ### Parallel
 
-`parallel` (`bool`) controls whether to allow parallel execution or not. Optional. Defaults to `false`. Configurable via `PARALLEL` environment variable.
+`parallel` (`bool`) controls whether to allow parallel execution or not. Optional. Defaults to `true`. Configurable via `EMITTER_PARALLELISM` environment variable.

@@ -44,10 +44,11 @@ Alternatively you can set values through `.env` file. Values in `.env` file will
 
 | Environment Variable      | Type    | Description                               | Default |
 | ------------------------- | ------- | ----------------------------------------- | ------- |
+| ANALYZER_PARALLELISM      | Boolean | Whether to run analyzers in parallel      | `false` |
+| EMITTER_PARALLELISM       | Boolean | Whether to run emitters in parallel       | `true`  |
 | IGNORE_ERROR              | Boolean | Whether to ignore error while querying    | `false` |
 | PAGINATION_INTERVAL       | Integer | Pagination interval                       | `0`     |
 | PAGINATION_LIMIT          | Integer | Pagination limit                          | `100`   |
-| PARALLEL                  | Boolean | Whether to run queries in parallel        | `false` |
 | RETRY_EXPONENTIAL_BACKOFF | Boolean | Whether to use retry exponential back off | `true`  |
 | RETRY_INTERVAL            | Integer | Retry interval                            | `5`     |
 | RETRY_TIMES               | Integer | Retry times                               | `3`     |

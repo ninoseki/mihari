@@ -23,7 +23,7 @@ module Mihari
       # @return [Boolean]
       #
       def parallel?
-        options[:parallel] || Mihari.config.parallel
+        options[:parallel] || Mihari.config.emitter_parallelism
       end
 
       # A target to emit the data

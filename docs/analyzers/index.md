@@ -97,7 +97,7 @@ queries:
 
 ### Parallel
 
-`parallel` (`bool`) controls whether to allow parallel execution or not. Optional. Defaults to `false`. Configurable via `PARALLEL` environment variable.
+`parallel` (`bool`) controls whether to allow parallel execution or not. Optional. Defaults to `false`. Configurable via `ANALYZER_PARALLELISM` environment variable.
 
 ### Pagination Interval
 
