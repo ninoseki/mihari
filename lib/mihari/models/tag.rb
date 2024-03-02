@@ -6,6 +6,9 @@ module Mihari
     # Tag model
     #
     class Tag < ActiveRecord::Base
+      # @!attribute [rw] name
+      #   @return [String]
+
       has_many :taggings, dependent: :destroy
 
       include SearchCop

@@ -9,6 +9,9 @@ module Mihari
       # @return [String, nil]
       attr_reader :api_key
 
+      # @return [Array<String>]
+      attr_reader :observable_tags
+
       # @return [Array<Mihari::Models::Artifact>]
       attr_accessor :artifacts
 
@@ -22,6 +25,7 @@ module Mihari
 
         @url = params[:url] || Mihari.config.thehive_url
         @api_key = params[:api_key] || Mihari.config.thehive_api_key
+        @observable_tags = params[:observable_tags] || []
 
         @artifacts = []
       end
@@ -81,10 +85,11 @@ module Mihari
             {
               data: artifact.data,
               data_type: artifact.data_type,
-              message: rule.description
+              message: rule.description,
+              tags: observable_tags
             }
           end,
-          tags: rule.tags,
+          tags: rule.tags.map(&:name),
           type: "external",
           source: "mihari",
           source_ref: SecureRandom.uuid

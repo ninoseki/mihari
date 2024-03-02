@@ -19,3 +19,11 @@ api_key: ...
 ### API Key
 
 `api_key` (`string`) is an API key. Optional. Configurable via `MISP_API_KEY` environment variable.
+
+### Attribute Tags
+
+`attribute_tags` (`array[:string]`) is a list of attribute tags. Optional. Defaults to `[]`.
+
+!!! note
+
+    `tags` of a rule are set as tags of an event.

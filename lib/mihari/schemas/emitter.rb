@@ -17,6 +17,7 @@ module Mihari
         required(:emitter).value(Types::String.enum(*Mihari::Emitters::MISP.keys))
         optional(:url).filled(:string)
         optional(:api_key).filled(:string)
+        optional(:attribute_tags).array { filled(:string) }.default([])
         optional(:options).hash(EmitterOptions)
       end
 
@@ -24,6 +25,7 @@ module Mihari
         required(:emitter).value(Types::String.enum(*Mihari::Emitters::TheHive.keys))
         optional(:url).filled(:string)
         optional(:api_key).filled(:string)
+        optional(:observable_tags).array { filled(:string) }.default([])
         optional(:options).hash(EmitterOptions)
       end
 
