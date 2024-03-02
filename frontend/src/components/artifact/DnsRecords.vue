@@ -21,13 +21,13 @@
 import truncate from "just-truncate"
 import { defineComponent, type PropType } from "vue"
 
-import type { DnsRecord } from "@/types"
+import type { DnsRecordType } from "@/schemas"
 
 export default defineComponent({
   name: "DnsRecords",
   props: {
     dnsRecords: {
-      type: Array as PropType<DnsRecord[]>,
+      type: Array as PropType<DnsRecordType[]>,
       required: true
     }
   },

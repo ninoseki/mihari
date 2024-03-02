@@ -1,10 +1,10 @@
 import { BaseLink } from "@/links/base"
-import type { Link, LinkType } from "@/types"
+import type { LinkType, LinkTypeType } from "@/schemas"
 
 class Urlscan extends BaseLink {
   public baseURL: string
   public name: string
-  public type: LinkType
+  public type: LinkTypeType
 
   public constructor() {
     super()
@@ -15,7 +15,7 @@ class Urlscan extends BaseLink {
   }
 }
 
-export class UrlscanForDomain extends Urlscan implements Link {
+export class UrlscanForDomain extends Urlscan implements LinkType {
   public constructor() {
     super()
     this.type = "domain"
@@ -26,7 +26,7 @@ export class UrlscanForDomain extends Urlscan implements Link {
   }
 }
 
-export class UrlscanForIP extends Urlscan implements Link {
+export class UrlscanForIP extends Urlscan implements LinkType {
   public constructor() {
     super()
     this.type = "ip"
@@ -37,7 +37,7 @@ export class UrlscanForIP extends Urlscan implements Link {
   }
 }
 
-export class UrlscanForURL extends Urlscan implements Link {
+export class UrlscanForURL extends Urlscan implements LinkType {
   public constructor() {
     super()
     this.type = "url"

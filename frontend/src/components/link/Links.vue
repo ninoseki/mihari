@@ -9,7 +9,7 @@ import { computed, defineComponent } from "vue"
 
 import LinkComponent from "@/components/link/Link.vue"
 import { Links } from "@/links"
-import type { Link } from "@/types"
+import type { LinkType } from "@/schemas"
 
 export default defineComponent({
   name: "LinksItem",
@@ -27,7 +27,7 @@ export default defineComponent({
     }
   },
   setup(props) {
-    const selectedLinks = computed((): Link[] => {
+    const selectedLinks = computed((): LinkType[] => {
       return Links.filter((link) => link.type === props.type)
     })
 

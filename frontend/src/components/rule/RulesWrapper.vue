@@ -65,7 +65,7 @@ import { generateGetRulesTask } from "@/api-helper"
 import ErrorMessage from "@/components/ErrorMessage.vue"
 import Loading from "@/components/Loading.vue"
 import Rules from "@/components/rule/Rules.vue"
-import type { SearchParams } from "@/types"
+import type { SearchParamsType } from "@/schemas"
 
 export default defineComponent({
   name: "RulesWrapper",
@@ -82,7 +82,7 @@ export default defineComponent({
     const getRulesTask = generateGetRulesTask()
 
     const getRules = async () => {
-      const params: SearchParams = { q: q.value, page: parseInt(page.value) }
+      const params: SearchParamsType = { q: q.value, page: parseInt(page.value) }
       return await getRulesTask.perform(params)
     }
 

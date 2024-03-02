@@ -55,13 +55,13 @@ import {
   generateGetArtifactsTask,
   generateSearchRuleTask
 } from "@/api-helper"
-import type { Rule } from "@/types"
+import type { RuleType } from "@/schemas"
 
 export default defineComponent({
   name: "RuleActionButtons",
   props: {
     rule: {
-      type: Object as PropType<Rule>,
+      type: Object as PropType<RuleType>,
       required: true
     }
   },

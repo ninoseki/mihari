@@ -8,13 +8,13 @@
 <script lang="ts">
 import { defineComponent, type PropType } from "vue"
 
-import type { Message } from "@/types"
+import type { MessageType } from "@/schemas"
 
 export default defineComponent({
   name: "MessageItem",
   props: {
     message: {
-      type: Object as PropType<Message>,
+      type: Object as PropType<MessageType>,
       required: true
     },
     disposable: {

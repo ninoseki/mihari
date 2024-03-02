@@ -1,6 +1,6 @@
-import type { Country } from "@/types"
+import type { CountryType } from "@/schemas"
 
-const COUNTRIES: Country[] = [
+const COUNTRIES: CountryType[] = [
   { name: "Afghanistan", lat: 33.93911, long: 67.709953, code: "AF" },
   { name: "Albania", lat: 41.153332, long: 20.168331, code: "AL" },
   { name: "Algeria", lat: 28.033886, long: 1.659626, code: "DZ" },
@@ -344,7 +344,7 @@ const COUNTRIES: Country[] = [
   { name: "Zimbabwe", lat: -19.015438, long: 29.154857, code: "ZW" }
 ]
 
-export function getCountryByCode(code: string): Country | undefined {
+export function getCountryByCode(code: string): CountryType | undefined {
   const country = COUNTRIES.find((country) => country.code === code)
   return country
 }

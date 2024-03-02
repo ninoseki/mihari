@@ -20,13 +20,13 @@ import axios from "axios"
 import { computed, defineComponent, type PropType } from "vue"
 
 import { generateDeleteAlertTask } from "@/api-helper"
-import type { Alert } from "@/types"
+import type { AlertType } from "@/schemas"
 
 export default defineComponent({
   name: "AlertActionButtons",
   props: {
     alert: {
-      type: Object as PropType<Alert>,
+      type: Object as PropType<AlertType>,
       required: true
     }
   },

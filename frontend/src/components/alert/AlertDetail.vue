@@ -51,7 +51,7 @@ import Alerts from "@/components/alert/AlertsWithPagination.vue"
 import Artifacts from "@/components/artifact/ArtifactTags.vue"
 import ErrorMessage from "@/components/ErrorMessage.vue"
 import Tags from "@/components/tag/Tags.vue"
-import type { Alert } from "@/types"
+import type { AlertType } from "@/schemas"
 import { getHumanizedRelativeTime, getLocalDatetime } from "@/utils"
 
 export default defineComponent({
@@ -65,7 +65,7 @@ export default defineComponent({
   },
   props: {
     alert: {
-      type: Object as PropType<Alert>,
+      type: Object as PropType<AlertType>,
       required: true
     }
   },

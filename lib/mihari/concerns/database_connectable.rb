@@ -8,8 +8,8 @@ module Mihari
     module DatabaseConnectable
       extend ActiveSupport::Concern
 
-      def with_db_connection(&block)
-        Database.with_db_connection(&block)
+      def with_db_connection(&)
+        Database.with_db_connection(&)
       end
     end
   end

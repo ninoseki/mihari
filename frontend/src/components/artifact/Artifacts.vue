@@ -26,13 +26,13 @@ import { computed, defineComponent, type PropType } from "vue"
 
 import Artifact from "@/components/artifact/Artifact.vue"
 import Pagination from "@/components/Pagination.vue"
-import type { Artifacts } from "@/types"
+import type { ArtifactsType } from "@/schemas"
 
 export default defineComponent({
   name: "ArtifactsItem",
   props: {
     artifacts: {
-      type: Object as PropType<Artifacts>,
+      type: Object as PropType<ArtifactsType>,
       required: true
     }
   },

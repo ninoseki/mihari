@@ -1,4 +1,4 @@
-import type { Link } from "@/types"
+import type { LinkType } from "@/schemas"
 
 import { Censys } from "./links/censys"
 import { Crtsh } from "./links/crtsh"
@@ -7,7 +7,7 @@ import { Shodan } from "./links/shodan"
 import { UrlscanForDomain, UrlscanForIP } from "./links/urlscan"
 import { VirusTotalForDomain, VirusTotalForIP } from "./links/virustotal"
 
-export const Links: Link[] = [
+export const Links: LinkType[] = [
   new Censys(),
   new Crtsh(),
   new SecurityTrailsForDomain(),

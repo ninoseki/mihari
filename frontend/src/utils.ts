@@ -4,7 +4,7 @@ import timezone from "dayjs/plugin/timezone"
 import utc from "dayjs/plugin/utc"
 
 import { getCountryByCode } from "@/countries"
-import type { GCS, IPInfo } from "@/types"
+import type { GcsType, IpInfoType } from "@/schemas"
 
 dayjs.extend(relativeTime)
 dayjs.extend(timezone)
@@ -18,14 +18,14 @@ export function getHumanizedRelativeTime(datetime: string): string {
   return dayjs(datetime).local().fromNow()
 }
 
-export function getGCSByCountryCode(countryCode: string): GCS | undefined {
+export function getGCSByCountryCode(countryCode: string): GcsType | undefined {
   const country = getCountryByCode(countryCode)
   if (country) {
     return { lat: country.lat, long: country.long }
   }
 }
 
-export function getGCSByIPInfo(ipinfo: IPInfo): GCS | undefined {
+export function getGCSByIPInfo(ipinfo: IpInfoType): GcsType | undefined {
   if (ipinfo.loc) {
     const numbers = ipinfo.loc.split(",")
     if (numbers.length === 2) {

@@ -1,10 +1,10 @@
 import { BaseLink } from "@/links/base"
-import type { Link, LinkType } from "@/types"
+import type { LinkType, LinkTypeType } from "@/schemas"
 
 class SecurityTrails extends BaseLink {
   public baseURL: string
   public name: string
-  public type: LinkType
+  public type: LinkTypeType
 
   public constructor() {
     super()
@@ -15,7 +15,7 @@ class SecurityTrails extends BaseLink {
   }
 }
 
-export class SecurityTrailsForDomain extends SecurityTrails implements Link {
+export class SecurityTrailsForDomain extends SecurityTrails implements LinkType {
   public constructor() {
     super()
     this.type = "domain"
@@ -26,7 +26,7 @@ export class SecurityTrailsForDomain extends SecurityTrails implements Link {
   }
 }
 
-export class SecurityTrailsForIP extends SecurityTrails implements Link {
+export class SecurityTrailsForIP extends SecurityTrails implements LinkType {
   public constructor() {
     super()
     this.type = "ip"

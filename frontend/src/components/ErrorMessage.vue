@@ -18,7 +18,7 @@ import { AxiosError } from "axios"
 import { computed, defineComponent } from "vue"
 import VueJsonPretty from "vue-json-pretty"
 
-import type { ErrorMessage } from "@/types"
+import type { ErrorMessageType } from "@/schemas"
 
 export default defineComponent({
   name: "ErrorItem",
@@ -37,9 +37,9 @@ export default defineComponent({
   },
   emits: ["dispose"],
   setup(props, context) {
-    const data = computed<ErrorMessage | undefined>(() => {
+    const data = computed<ErrorMessageType | undefined>(() => {
       if (props.error.response) {
-        return props.error.response?.data as ErrorMessage
+        return props.error.response?.data as ErrorMessageType
       }
       return undefined
     })

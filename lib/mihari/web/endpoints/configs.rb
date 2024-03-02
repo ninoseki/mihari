@@ -10,12 +10,17 @@ module Mihari
         namespace :configs do
           desc "list configs", {
             is_array: true,
-            success: Entities::Config,
+            success: Entities::Configs,
             summary: "List configs"
           }
           get "/" do
             configs = Services::ConfigSearcher.call
-            present(configs, with: Entities::Config)
+            present(
+              {
+                results: configs
+              },
+              with: Entities::Configs
+            )
           end
         end
       end

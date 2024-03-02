@@ -119,14 +119,14 @@ import ErrorMessage from "@/components/ErrorMessage.vue"
 import Links from "@/components/link/Links.vue"
 import Message from "@/components/Message.vue"
 import Tags from "@/components/tag/Tags.vue"
-import type { Artifact, GCS, QueueMessage } from "@/types"
+import type { ArtifactType, GcsType, QueueMessageType } from "@/schemas"
 import { getGCSByCountryCode, getGCSByIPInfo } from "@/utils"
 
 export default defineComponent({
   name: "ArtifactDetail",
   props: {
     artifact: {
-      type: Object as PropType<Artifact>,
+      type: Object as PropType<ArtifactType>,
       required: true
     }
   },
@@ -150,7 +150,7 @@ export default defineComponent({
     const countryCode = ref<string>()
 
     const error = ref<AxiosError>()
-    const message = ref<QueueMessage>()
+    const message = ref<QueueMessageType>()
 
     const onSetError = (newError: AxiosError) => {
       error.value = newError
@@ -164,7 +164,7 @@ export default defineComponent({
       context.emit("delete")
     }
 
-    const onSetMessage = (newMessage: QueueMessage) => {
+    const onSetMessage = (newMessage: QueueMessageType) => {
       if (newMessage.queued) {
         message.value = newMessage
       } else {
@@ -189,7 +189,7 @@ export default defineComponent({
       return undefined
     })
 
-    const getGoogleMapSrc = (gcs: GCS | undefined): string | undefined => {
+    const getGoogleMapSrc = (gcs: GcsType | undefined): string | undefined => {
       if (gcs) {
         return `https://maps.google.co.jp/maps?output=embed&q=${gcs.lat},${gcs.long}&z=3`
       }
@@ -202,7 +202,7 @@ export default defineComponent({
 
     onMounted(async () => {
       if (props.artifact.dataType === "ip") {
-        let gcs: GCS | undefined = undefined
+        let gcs: GcsType | undefined = undefined
 
         if (!props.artifact.geolocation) {
           // Use IPInfo if an artifact does not have geolocation

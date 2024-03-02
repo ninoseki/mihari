@@ -13,7 +13,7 @@
 import { defineComponent, type PropType, ref, watch } from "vue"
 
 import ArtifactTag from "@/components/artifact/ArtifactTag.vue"
-import type { Artifact } from "@/types"
+import type { ArtifactType } from "@/schemas"
 
 export default defineComponent({
   name: "ArtifactTags",
@@ -22,7 +22,7 @@ export default defineComponent({
   },
   props: {
     artifacts: {
-      type: Array as PropType<Artifact[]>,
+      type: Array as PropType<ArtifactType[]>,
       required: true
     }
   },

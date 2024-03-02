@@ -8,7 +8,7 @@
 <script lang="ts">
 import { defineComponent, type PropType } from "vue"
 
-import type { Link } from "@/types"
+import type { LinkType } from "@/schemas"
 
 export default defineComponent({
   name: "LinkItem",
@@ -18,7 +18,7 @@ export default defineComponent({
       required: true
     },
     link: {
-      type: Object as PropType<Link>,
+      type: Object as PropType<LinkType>,
       required: true
     }
   }

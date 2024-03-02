@@ -13,13 +13,13 @@
 <script lang="ts">
 import { defineComponent, type PropType } from "vue"
 
-import type { Vulnerability } from "@/types"
+import type { VulnerabilityType } from "@/schemas"
 
 export default defineComponent({
   name: "VulnerabilitiesItem",
   props: {
     vulnerabilities: {
-      type: Array as PropType<Vulnerability[]>,
+      type: Array as PropType<VulnerabilityType[]>,
       required: true
     }
   },

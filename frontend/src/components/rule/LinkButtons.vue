@@ -15,13 +15,13 @@
 import { computed, defineComponent, onMounted, type PropType } from "vue"
 
 import { generateGetAlertsTask, generateGetArtifactsTask } from "@/api-helper"
-import type { Rule } from "@/types"
+import type { RuleType } from "@/schemas"
 
 export default defineComponent({
   name: "RuleLinkButtons",
   props: {
     rule: {
-      type: Object as PropType<Rule>,
+      type: Object as PropType<RuleType>,
       required: true
     }
   },

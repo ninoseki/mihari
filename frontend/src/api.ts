@@ -1,116 +1,126 @@
 import axios from "axios"
 
-import type {
-  Alert,
-  Alerts,
-  Artifact,
-  Artifacts,
-  Config,
-  CreateRule,
-  IPInfo,
-  Message,
-  QueueMessage,
-  Rule,
-  Rules,
-  SearchParams,
-  Tags,
-  UpdateRule
-} from "@/types"
+import {
+  AlertSchema,
+  AlertsSchema,
+  type AlertsType,
+  type AlertType,
+  ArtifactSchema,
+  ArtifactsSchema,
+  type ArtifactsType,
+  type ArtifactType,
+  ConfigsSchema,
+  type ConfigsType,
+  type CreateRuleType,
+  type IpInfoType,
+  MessageSchema,
+  type MessageType,
+  QueueMessageSchema,
+  type QueueMessageType,
+  RuleSchema,
+  RulesSchema,
+  type RulesType,
+  type RuleType,
+  type SearchParamsType,
+  TagsSchema,
+  type TagsType,
+  type UpdateRuleType
+} from "@/schemas"
 
 const client = axios.create()
 
 export const API = {
-  async getConfigs(): Promise<Config[]> {
-    const res = await client.get<Config[]>("/api/configs")
-    return res.data
+  async getConfigs(): Promise<ConfigsType> {
+    const res = await client.get("/api/configs")
+    return ConfigsSchema.parse(res.data)
   },
 
-  async getAlerts(params: SearchParams): Promise<Alerts> {
+  async getAlerts(params: SearchParamsType): Promise<AlertsType> {
     params.page = params.page || 1
-    const res = await client.get<Alerts>("/api/alerts", {
+    const res = await client.get("/api/alerts", {
       params: params
     })
-    return res.data
+    return AlertsSchema.parse(res.data)
   },
 
-  async getAlert(id: number): Promise<Alert> {
-    const res = await client.get<Alert>(`/api/alerts/${id}`)
-    return res.data
+  async getAlert(id: number): Promise<AlertType> {
+    const res = await client.get(`/api/alerts/${id}`)
+    return AlertSchema.parse(res.data)
   },
 
-  async getTags(): Promise<Tags> {
-    const res = await client.get<Tags>("/api/tags")
-    return res.data
+  async getTags(): Promise<TagsType> {
+    const res = await client.get("/api/tags")
+    return TagsSchema.parse(res.data)
   },
 
-  async deleteAlert(id: number): Promise<Message> {
-    const res = await client.delete<Message>(`/api/alerts/${id}`)
-    return res.data
+  async deleteAlert(id: number): Promise<MessageType> {
+    const res = await client.delete(`/api/alerts/${id}`)
+    return MessageSchema.parse(res.data)
   },
 
-  async getArtifact(id: number): Promise<Artifact> {
-    const res = await client.get<Artifact>(`/api/artifacts/${id}`)
-    return res.data
+  async getArtifact(id: number): Promise<ArtifactType> {
+    const res = await client.get(`/api/artifacts/${id}`)
+    return ArtifactSchema.parse(res.data)
   },
 
-  async getArtifacts(params: SearchParams): Promise<Artifacts> {
+  async getArtifacts(params: SearchParamsType): Promise<ArtifactsType> {
     params.page = params.page || 1
-    const res = await client.get<Artifacts>("/api/artifacts", {
+    const res = await client.get("/api/artifacts", {
       params: params
     })
-    return res.data
+    return ArtifactsSchema.parse(res.data)
   },
 
-  async enrichArtifact(id: number): Promise<QueueMessage> {
-    const res = await client.post<QueueMessage>(`/api/artifacts/${id}/enrich`)
-    return res.data
+  async enrichArtifact(id: number): Promise<QueueMessageType> {
+    const res = await client.post(`/api/artifacts/${id}/enrich`)
+    return QueueMessageSchema.parse(res.data)
   },
 
-  async deleteArtifact(id: number): Promise<Message> {
-    const res = await client.delete<Message>(`/api/artifacts/${id}`)
-    return res.data
+  async deleteArtifact(id: number): Promise<MessageType> {
+    const res = await client.delete(`/api/artifacts/${id}`)
+    return MessageSchema.parse(res.data)
   },
 
-  async getRules(params: SearchParams): Promise<Rules> {
+  async getRules(params: SearchParamsType): Promise<RulesType> {
     params.page = params.page || 1
-    const res = await client.get<Rules>("/api/rules", {
+    const res = await client.get("/api/rules", {
       params: params
     })
-    return res.data
+    return RulesSchema.parse(res.data)
   },
 
-  async getRule(id: string): Promise<Rule> {
-    const res = await client.get<Rule>(`/api/rules/${id}`)
-    return res.data
+  async getRule(id: string): Promise<RuleType> {
+    const res = await client.get(`/api/rules/${id}`)
+    return RuleSchema.parse(res.data)
   },
 
-  async searchRule(id: string): Promise<QueueMessage> {
-    const res = await client.post<QueueMessage>(`/api/rules/${id}/search`)
-    return res.data
+  async searchRule(id: string): Promise<QueueMessageType> {
+    const res = await client.post(`/api/rules/${id}/search`)
+    return QueueMessageSchema.parse(res.data)
   },
 
-  async createRule(payload: CreateRule): Promise<Rule> {
-    const res = await client.post<Rule>("/api/rules/", payload)
-    return res.data
+  async createRule(payload: CreateRuleType): Promise<RuleType> {
+    const res = await client.post("/api/rules/", payload)
+    return RuleSchema.parse(res.data)
   },
 
-  async updateRule(payload: UpdateRule): Promise<Rule> {
-    const res = await client.put<Rule>("/api/rules/", payload)
-    return res.data
+  async updateRule(payload: UpdateRuleType): Promise<RuleType> {
+    const res = await client.put("/api/rules/", payload)
+    return RuleSchema.parse(res.data)
   },
 
-  async deleteRule(id: string): Promise<Message> {
-    const res = await client.delete<Message>(`/api/rules/${id}`)
-    return res.data
+  async deleteRule(id: string): Promise<MessageType> {
+    const res = await client.delete(`/api/rules/${id}`)
+    return MessageSchema.parse(res.data)
   },
 
-  async deleteTag(id: number): Promise<Message> {
-    const res = await client.delete<Message>(`/api/tags/${id}`)
-    return res.data
+  async deleteTag(id: number): Promise<MessageType> {
+    const res = await client.delete(`/api/tags/${id}`)
+    return MessageSchema.parse(res.data)
   },
 
-  async getIPInfo(ipAddress: string): Promise<IPInfo> {
-    const res = await client.get<IPInfo>(`/api/ip_addresses/${ipAddress}`)
+  async getIpInfo(ipAddress: string): Promise<IpInfoType> {
+    const res = await client.get<IpInfoType>(`/api/ip_addresses/${ipAddress}`)
     return res.data
   }
 }
