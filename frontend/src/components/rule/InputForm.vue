@@ -10,7 +10,7 @@
         minLines: 6,
         maxLines: 10000
       }"
-    ></VAceEditor>
+    />
   </div>
 </template>
 

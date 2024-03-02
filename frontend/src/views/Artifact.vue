@@ -1,5 +1,5 @@
 <template>
-  <Artifact :id="parseInt(id)"></Artifact>
+  <Artifact :id="parseInt(id)" />
 </template>
 
 <script lang="ts">

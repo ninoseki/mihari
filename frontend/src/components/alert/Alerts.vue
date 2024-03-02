@@ -1,17 +1,12 @@
 <template>
   <div v-if="hasAlerts">
-    <Alert
-      v-for="alert in alerts.results"
-      :alert="alert"
-      :key="alert.id"
-      @delete="onDelete"
-    ></Alert>
+    <Alert v-for="alert in alerts.results" :alert="alert" :key="alert.id" @delete="onDelete" />
     <Pagination
       :total="alerts.total"
       :currentPage="alerts.currentPage"
       :pageSize="alerts.pageSize"
       @update-page="onUpdatePage"
-    ></Pagination>
+    />
     <p class="help">({{ alerts.total }} results in total, {{ alerts.results.length }} shown)</p>
   </div>
   <div v-else>

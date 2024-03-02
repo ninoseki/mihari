@@ -1,7 +1,7 @@
 <template>
-  <Loading v-if="getRuleTask.isRunning"></Loading>
-  <ErrorMessage v-if="getRuleTask.isError" :error="getRuleTask.last?.error"></ErrorMessage>
-  <EditRule :rule="getRuleTask.last.value" v-if="getRuleTask.last?.value"></EditRule>
+  <Loading v-if="getRuleTask.isRunning" />
+  <ErrorMessage v-if="getRuleTask.isError" :error="getRuleTask.last?.error" />
+  <EditRule :rule="getRuleTask.last.value" v-if="getRuleTask.last?.value" />
 </template>
 
 <script lang="ts">

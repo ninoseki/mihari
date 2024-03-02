@@ -63,3 +63,11 @@ lib/mihari/web/public/
 # Rules & Alerts
 rules/
 alerts/
+
+# Python Environments
+.venv
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/

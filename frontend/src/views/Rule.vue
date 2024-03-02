@@ -1,5 +1,5 @@
 <template>
-  <Rule :id="id"></Rule>
+  <Rule :id="id" />
 </template>
 
 <script lang="ts">

@@ -37,8 +37,7 @@ export const DnsRecordSchema = z.object({
 })
 
 export const ContactSchema = z.object({
-  name: z.string().nullish(),
-  organization: z.string().nullish()
+  name: z.string().nullish()
 })
 
 export const WhoisRecordSchema = z.object({
@@ -46,7 +45,7 @@ export const WhoisRecordSchema = z.object({
   updatedOn: z.string().nullish(),
   expiresOn: z.string().nullish(),
   registrar: ContactSchema.nullish(),
-  contacts: z.array(ConfigItemSchema)
+  contacts: z.array(ContactSchema)
 })
 
 export const AutonomousSystemSchema = z.object({

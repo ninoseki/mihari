@@ -1,7 +1,7 @@
 <template>
-  <Loading v-if="getConfigsTask.isRunning"></Loading>
-  <ErrorMessage v-if="getConfigsTask.isError" :error="getConfigsTask.last?.error"></ErrorMessage>
-  <Configs :configs="getConfigsTask.last.value" v-if="getConfigsTask.last?.value"></Configs>
+  <Loading v-if="getConfigsTask.isRunning" />
+  <ErrorMessage v-if="getConfigsTask.isError" :error="getConfigsTask.last?.error" />
+  <Configs :configs="getConfigsTask.last.value" v-if="getConfigsTask.last?.value" />
 </template>
 
 <script lang="ts">

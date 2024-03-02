@@ -54,15 +54,15 @@
     </div>
   </div>
   <div class="block" v-if="getAlertsTask.performCount > 0">
-    <Loading v-if="getAlertsTask.isRunning"></Loading>
-    <ErrorMessage v-if="getAlertsTask.isError" :error="getAlertsTask.last?.error"></ErrorMessage>
+    <Loading v-if="getAlertsTask.isRunning" />
+    <ErrorMessage v-if="getAlertsTask.isError" :error="getAlertsTask.last?.error" />
     <Alerts
       :alerts="getAlertsTask.last.value"
       v-if="getAlertsTask.last?.value"
       :page="page"
       @update-page="onUpdatePage"
       @refresh="onRefresh"
-    ></Alerts>
+    />
   </div>
 </template>
 

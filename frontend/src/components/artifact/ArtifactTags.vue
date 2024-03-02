@@ -5,7 +5,7 @@
       :key="artifact.id"
       :artifact="artifact"
       @delete="onDelete"
-    ></ArtifactTag>
+    />
   </div>
 </template>
 

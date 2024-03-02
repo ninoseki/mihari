@@ -7,14 +7,14 @@
       v-if="error"
       :disposable="true"
       @dispose="onDisposeError"
-    ></ErrorMessage>
+    />
     <Message
       class="block"
       :message="message"
       v-if="message"
       :disposable="true"
       @dispose="onDisposeMessage"
-    ></Message>
+    />
     <p class="block is-clearfix">
       <ActionButtons
         :rule="rule"
@@ -23,12 +23,12 @@
         @set-error="onSetError"
       />
     </p>
-    <YAML :yaml="rule.yaml"></YAML>
+    <YAML :yaml="rule.yaml" />
   </div>
   <hr />
   <div class="block">
     <h2 class="is-size-2 block">Alerts</h2>
-    <Alerts :ruleId="rule.id"></Alerts>
+    <Alerts :ruleId="rule.id" />
   </div>
 </template>
 

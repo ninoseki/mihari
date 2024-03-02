@@ -16,10 +16,7 @@ module Mihari
       # @return [Integer]
       #
       def normalize_asn(asn)
-        return asn if asn.is_a?(Integer)
-        return asn.to_i unless asn.start_with?("AS")
-
-        asn.delete_prefix("AS").to_i
+        asn.to_s.delete_prefix("AS").to_i
       end
     end
   end

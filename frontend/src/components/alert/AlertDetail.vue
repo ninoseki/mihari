@@ -5,7 +5,7 @@
     v-if="error"
     :disposable="true"
     @dispose="onDisposeError"
-  ></ErrorMessage>
+  />
   <div class="block">
     <h2 class="is-size-2">{{ alert.id }}</h2>
     <p class="is-clearfix">
@@ -23,7 +23,7 @@
       <tr>
         <th>Artifacts</th>
         <td>
-          <Artifacts :artifacts="alert.artifacts" @delete="onArtifactsDeleted"></Artifacts>
+          <Artifacts :artifacts="alert.artifacts" @delete="onArtifactsDeleted" />
         </td>
       </tr>
       <tr v-if="alert.tags.length > 0">
@@ -38,7 +38,7 @@
   <hr />
   <div class="block">
     <h2 class="is-size-2 block">Related Alerts</h2>
-    <Alerts :rule-id="alert.ruleId" :exclude-alert-id="alert.id"></Alerts>
+    <Alerts :rule-id="alert.ruleId" :exclude-alert-id="alert.id" />
   </div>
 </template>
 

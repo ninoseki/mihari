@@ -1,12 +1,12 @@
 <template>
-  <Loading v-if="getArtifactTask.isRunning"></Loading>
-  <ErrorMessage v-if="getArtifactTask.isError" :error="getArtifactTask.last?.error"></ErrorMessage>
+  <Loading v-if="getArtifactTask.isRunning" />
+  <ErrorMessage v-if="getArtifactTask.isError" :error="getArtifactTask.last?.error" />
   <Artifact
     :artifact="getArtifactTask.last.value"
     @refresh="onRefresh"
     @delete="onDelete"
     v-if="getArtifactTask.last?.value"
-  ></Artifact>
+  />
 </template>
 
 <script lang="ts">
