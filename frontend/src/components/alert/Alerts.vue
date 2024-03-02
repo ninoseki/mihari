@@ -24,7 +24,7 @@ import { computed, defineComponent, type PropType } from "vue"
 
 import Alert from "@/components/alert/Alert.vue"
 import Pagination from "@/components/Pagination.vue"
-import type { Alerts } from "@/types"
+import type { AlertsType } from "@/schemas"
 
 export default defineComponent({
   name: "AlertsItem",
@@ -38,7 +38,7 @@ export default defineComponent({
       required: true
     },
     alerts: {
-      type: Object as PropType<Alerts>,
+      type: Object as PropType<AlertsType>,
       required: true
     }
   },

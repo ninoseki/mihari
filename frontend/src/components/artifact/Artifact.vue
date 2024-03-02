@@ -71,13 +71,13 @@ import ActionButtons from "@/components/artifact/ActionButtons.vue"
 import ErrorMessage from "@/components/ErrorMessage.vue"
 import Message from "@/components/Message.vue"
 import Tags from "@/components/tag/Tags.vue"
-import type { Artifact, QueueMessage } from "@/types"
+import type { ArtifactType, QueueMessageType } from "@/schemas"
 
 export default defineComponent({
   name: "ArtifactsItem",
   props: {
     artifact: {
-      type: Object as PropType<Artifact>,
+      type: Object as PropType<ArtifactType>,
       required: true
     }
   },
@@ -85,7 +85,7 @@ export default defineComponent({
   emits: ["delete"],
   setup(_, context) {
     const error = ref<AxiosError>()
-    const message = ref<QueueMessage>()
+    const message = ref<QueueMessageType>()
 
     const onSetError = (newError: AxiosError) => {
       error.value = newError
@@ -99,7 +99,7 @@ export default defineComponent({
       context.emit("delete")
     }
 
-    const onSetMessage = (newMessage: QueueMessage) => {
+    const onSetMessage = (newMessage: QueueMessageType) => {
       if (newMessage.queued) {
         message.value = newMessage
       }

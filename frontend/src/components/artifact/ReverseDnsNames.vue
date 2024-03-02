@@ -13,13 +13,13 @@
 <script lang="ts">
 import { defineComponent, type PropType } from "vue"
 
-import type { ReverseDnsName } from "@/types"
+import type { ReverseDnsNameType } from "@/schemas"
 
 export default defineComponent({
   name: "ReverseDnsNames",
   props: {
     reverseDnsNames: {
-      type: Array as PropType<ReverseDnsName[]>,
+      type: Array as PropType<ReverseDnsNameType[]>,
       required: true
     }
   },

@@ -11,13 +11,13 @@
 <script lang="ts">
 import { defineComponent, type PropType } from "vue"
 
-import type { AutonomousSystem } from "@/types"
+import type { AutonomousSystemType } from "@/schemas"
 
 export default defineComponent({
   name: "AS",
   props: {
     autonomousSystem: {
-      type: Object as PropType<AutonomousSystem>,
+      type: Object as PropType<AutonomousSystemType>,
       required: true
     }
   },

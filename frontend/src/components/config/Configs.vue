@@ -11,7 +11,7 @@
           </tr>
         </thead>
         <tbody>
-          <tr v-for="config in configs" :key="config.name">
+          <tr v-for="config in configs.results" :key="config.name">
             <td>
               {{ config.name }}
             </td>
@@ -57,13 +57,13 @@
 <script lang="ts">
 import { defineComponent, type PropType } from "vue"
 
-import type { Config } from "@/types"
+import type { ConfigsType } from "@/schemas"
 
 export default defineComponent({
   name: "ConfigsItem",
   props: {
     configs: {
-      type: Array as PropType<Config[]>,
+      type: Object as PropType<ConfigsType>,
       required: true
     }
   }

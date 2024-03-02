@@ -14,7 +14,7 @@
 import { defineComponent, type PropType } from "vue"
 
 import TagComponent from "@/components/tag/Tag.vue"
-import type { NavigateTo, Tag } from "@/types"
+import type { NavigateToType, TagType } from "@/schemas"
 
 export default defineComponent({
   name: "TagsItem",
@@ -23,7 +23,7 @@ export default defineComponent({
   },
   props: {
     tags: {
-      type: Array as PropType<Tag[]>,
+      type: Array as PropType<TagType[]>,
       required: true
     },
     deletable: {
@@ -31,7 +31,7 @@ export default defineComponent({
       default: false
     },
     navigateTo: {
-      type: String as PropType<NavigateTo>,
+      type: String as PropType<NavigateToType>,
       required: true
     }
   },

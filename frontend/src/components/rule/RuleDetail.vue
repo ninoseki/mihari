@@ -41,13 +41,13 @@ import ErrorMessage from "@/components/ErrorMessage.vue"
 import Message from "@/components/Message.vue"
 import ActionButtons from "@/components/rule/ActionButtons.vue"
 import YAML from "@/components/rule/YAML.vue"
-import type { QueueMessage, Rule } from "@/types"
+import type { QueueMessageType, RuleType } from "@/schemas"
 
 export default defineComponent({
   name: "RuleDetailItem",
   props: {
     rule: {
-      type: Object as PropType<Rule>,
+      type: Object as PropType<RuleType>,
       required: true
     }
   },
@@ -61,7 +61,7 @@ export default defineComponent({
   emits: ["delete", "refresh"],
   setup(_, context) {
     const error = ref<AxiosError>()
-    const message = ref<QueueMessage>()
+    const message = ref<QueueMessageType>()
 
     const onDelete = () => {
       context.emit("delete")
@@ -75,7 +75,7 @@ export default defineComponent({
       error.value = undefined
     }
 
-    const onSetMessage = (newMessage: QueueMessage) => {
+    const onSetMessage = (newMessage: QueueMessageType) => {
       if (newMessage.queued) {
         message.value = newMessage
       } else {

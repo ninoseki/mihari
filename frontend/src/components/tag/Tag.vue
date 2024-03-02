@@ -19,13 +19,13 @@
 import { defineComponent, type PropType, ref } from "vue"
 
 import { generateDeleteTagTask } from "@/api-helper"
-import type { NavigateTo, Tag } from "@/types"
+import type { NavigateToType, TagType } from "@/schemas"
 
 export default defineComponent({
   name: "TagItem",
   props: {
     tag: {
-      type: Object as PropType<Tag>,
+      type: Object as PropType<TagType>,
       required: true
     },
     deletable: {
@@ -33,7 +33,7 @@ export default defineComponent({
       default: false
     },
     navigateTo: {
-      type: String as PropType<NavigateTo>,
+      type: String as PropType<NavigateToType>,
       required: true
     }
   },

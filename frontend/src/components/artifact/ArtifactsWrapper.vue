@@ -63,7 +63,7 @@ import { generateGetArtifactsTask } from "@/api-helper"
 import Artifacts from "@/components/artifact/Artifacts.vue"
 import ErrorMessage from "@/components/ErrorMessage.vue"
 import Loading from "@/components/Loading.vue"
-import type { SearchParams } from "@/types"
+import type { SearchParamsType } from "@/schemas"
 
 export default defineComponent({
   name: "ArtifactsWrapper",
@@ -80,7 +80,7 @@ export default defineComponent({
     const getArtifactsTask = generateGetArtifactsTask()
 
     const getArtifacts = async () => {
-      const params: SearchParams = { q: q.value, page: parseInt(page.value) }
+      const params: SearchParamsType = { q: q.value, page: parseInt(page.value) }
       return await getArtifactsTask.perform(params)
     }
 

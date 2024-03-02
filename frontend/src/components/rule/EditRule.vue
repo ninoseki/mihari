@@ -26,7 +26,7 @@ import { useRouter } from "vue-router"
 import { generateUpdateRuleTask } from "@/api-helper"
 import ErrorMessage from "@/components/ErrorMessage.vue"
 import InputForm from "@/components/rule/InputForm.vue"
-import type { Rule } from "@/types"
+import type { RuleType } from "@/schemas"
 
 export default defineComponent({
   name: "EditRule",
@@ -36,7 +36,7 @@ export default defineComponent({
   },
   props: {
     rule: {
-      type: Object as PropType<Rule>,
+      type: Object as PropType<RuleType>,
       required: true
     }
   },

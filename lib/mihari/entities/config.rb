@@ -8,5 +8,9 @@ module Mihari
       expose :items, documentation: {type: Hash, is_array: true, required: true}
       expose :configured, documentation: {type: Grape::API::Boolean, required: true}
     end
+
+    class Configs < Grape::Entity
+      expose :results, using: Config, documentation: {type: Config, is_array: true, required: true}
+    end
   end
 end

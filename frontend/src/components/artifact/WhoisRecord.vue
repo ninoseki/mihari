@@ -30,13 +30,13 @@
 <script lang="ts">
 import { defineComponent, type PropType } from "vue"
 
-import type { WhoisRecord } from "@/types"
+import type { WhoisRecordType } from "@/schemas"
 
 export default defineComponent({
   name: "WhoisRecord",
   props: {
     whoisRecord: {
-      type: Object as PropType<WhoisRecord>,
+      type: Object as PropType<WhoisRecordType>,
       required: true
     }
   }

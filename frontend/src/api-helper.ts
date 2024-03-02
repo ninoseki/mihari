@@ -2,120 +2,120 @@ import { type Task, useAsyncTask } from "vue-concurrency"
 
 import { API } from "@/api"
 import type {
-  Alert,
-  Alerts,
-  Artifact,
-  Artifacts,
-  Config,
-  CreateRule,
-  IPInfo,
-  Message,
-  QueueMessage,
-  Rule,
-  Rules,
-  SearchParams,
-  Tags,
-  UpdateRule
-} from "@/types"
+  AlertsType,
+  AlertType,
+  ArtifactsType,
+  ArtifactType,
+  ConfigsType,
+  CreateRuleType,
+  IpInfoType,
+  MessageType,
+  QueueMessageType,
+  RulesType,
+  RuleType,
+  SearchParamsType,
+  TagsType,
+  UpdateRuleType
+} from "@/schemas"
 
-export function generateGetAlertsTask(): Task<Alerts, [SearchParams]> {
-  return useAsyncTask<Alerts, [SearchParams]>(async (_signal, params) => {
+export function generateGetAlertsTask(): Task<AlertsType, [SearchParamsType]> {
+  return useAsyncTask<AlertsType, [SearchParamsType]>(async (_signal, params) => {
     return await API.getAlerts(params)
   })
 }
 
-export function generateDeleteAlertTask(): Task<Message, [number]> {
-  return useAsyncTask<Message, [number]>(async (_signal, id) => {
+export function generateDeleteAlertTask(): Task<MessageType, [number]> {
+  return useAsyncTask<MessageType, [number]>(async (_signal, id) => {
     return await API.deleteAlert(id)
   })
 }
 
-export function generateGetTagsTask(): Task<Tags, []> {
-  return useAsyncTask<Tags, []>(async () => {
+export function generateGetTagsTask(): Task<TagsType, []> {
+  return useAsyncTask<TagsType, []>(async () => {
     return await API.getTags()
   })
 }
 
-export function generateDeleteTagTask(): Task<Message, [number]> {
-  return useAsyncTask<Message, [number]>(async (_signal, tag) => {
+export function generateDeleteTagTask(): Task<MessageType, [number]> {
+  return useAsyncTask<MessageType, [number]>(async (_signal, tag) => {
     return await API.deleteTag(tag)
   })
 }
 
-export function generateGetArtifactTask(): Task<Artifact, [number]> {
-  return useAsyncTask<Artifact, [number]>(async (_signal, id) => {
+export function generateGetArtifactTask(): Task<ArtifactType, [number]> {
+  return useAsyncTask<ArtifactType, [number]>(async (_signal, id) => {
     return await API.getArtifact(id)
   })
 }
 
-export function generateDeleteArtifactTask(): Task<Message, [number]> {
-  return useAsyncTask<Message, [number]>(async (_signal, id) => {
+export function generateDeleteArtifactTask(): Task<MessageType, [number]> {
+  return useAsyncTask<MessageType, [number]>(async (_signal, id) => {
     return await API.deleteArtifact(id)
   })
 }
 
-export function generateEnrichArtifactTask(): Task<QueueMessage, [number]> {
-  return useAsyncTask<QueueMessage, [number]>(async (_signal, id) => {
+export function generateEnrichArtifactTask(): Task<QueueMessageType, [number]> {
+  return useAsyncTask<QueueMessageType, [number]>(async (_signal, id) => {
     return await API.enrichArtifact(id)
   })
 }
 
-export function generateGetConfigsTask(): Task<Config[], []> {
-  return useAsyncTask<Config[], []>(async () => {
+export function generateGetConfigsTask(): Task<ConfigsType, []> {
+  return useAsyncTask<ConfigsType, []>(async () => {
     return await API.getConfigs()
   })
 }
 
-export function generateGetIPTask(): Task<IPInfo, [string]> {
-  return useAsyncTask<IPInfo, [string]>(async (_signal, ipAddress: string) => {
-    return await API.getIPInfo(ipAddress)
+export function generateGetIPTask(): Task<IpInfoType, [string]> {
+  return useAsyncTask<IpInfoType, [string]>(async (_signal, ipAddress: string) => {
+    return await API.getIpInfo(ipAddress)
   })
 }
 
-export function generateGetRulesTask(): Task<Rules, [SearchParams]> {
-  return useAsyncTask<Rules, [SearchParams]>(async (_signal, params: SearchParams) => {
+export function generateGetRulesTask(): Task<RulesType, [SearchParamsType]> {
+  return useAsyncTask<RulesType, [SearchParamsType]>(async (_signal, params: SearchParamsType) => {
     return await API.getRules(params)
   })
 }
 
-export function generateGetRuleTask(): Task<Rule, [string]> {
-  return useAsyncTask<Rule, [string]>(async (_signal, id: string) => {
+export function generateGetRuleTask(): Task<RuleType, [string]> {
+  return useAsyncTask<RuleType, [string]>(async (_signal, id: string) => {
     return await API.getRule(id)
   })
 }
 
-export function generateDeleteRuleTask(): Task<Message, [string]> {
-  return useAsyncTask<Message, [string]>(async (_signal, id: string) => {
+export function generateDeleteRuleTask(): Task<MessageType, [string]> {
+  return useAsyncTask<MessageType, [string]>(async (_signal, id: string) => {
     return await API.deleteRule(id)
   })
 }
 
-export function generateSearchRuleTask(): Task<QueueMessage, [string]> {
-  return useAsyncTask<QueueMessage, [string]>(async (_signal, id) => {
+export function generateSearchRuleTask(): Task<QueueMessageType, [string]> {
+  return useAsyncTask<QueueMessageType, [string]>(async (_signal, id) => {
     return await API.searchRule(id)
   })
 }
 
-export function generateCreateRuleTask(): Task<Rule, [CreateRule]> {
-  return useAsyncTask<Rule, [CreateRule]>(async (_signal, payload) => {
+export function generateCreateRuleTask(): Task<RuleType, [CreateRuleType]> {
+  return useAsyncTask<RuleType, [CreateRuleType]>(async (_signal, payload) => {
     return await API.createRule(payload)
   })
 }
 
-export function generateUpdateRuleTask(): Task<Rule, [UpdateRule]> {
-  return useAsyncTask<Rule, [UpdateRule]>(async (_signal, payload) => {
+export function generateUpdateRuleTask(): Task<RuleType, [UpdateRuleType]> {
+  return useAsyncTask<RuleType, [UpdateRuleType]>(async (_signal, payload) => {
     return await API.updateRule(payload)
   })
 }
 
-export function generateGetArtifactsTask(): Task<Artifacts, [SearchParams]> {
-  return useAsyncTask<Artifacts, [SearchParams]>(async (_signal, params) => {
+export function generateGetArtifactsTask(): Task<ArtifactsType, [SearchParamsType]> {
+  return useAsyncTask<ArtifactsType, [SearchParamsType]>(async (_signal, params) => {
     return await API.getArtifacts(params)
   })
 }
 
-export function generateGetAlertTask(): Task<Alert, [number]> {
-  return useAsyncTask<Alert, [number]>(async (_signal, id) => {
+export function generateGetAlertTask(): Task<AlertType, [number]> {
+  return useAsyncTask<AlertType, [number]>(async (_signal, id) => {
     return await API.getAlert(id)
   })
 }

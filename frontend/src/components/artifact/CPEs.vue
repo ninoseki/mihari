@@ -13,13 +13,13 @@
 <script lang="ts">
 import { defineComponent, type PropType } from "vue"
 
-import type { CPE } from "@/types"
+import type { CpeType } from "@/schemas"
 
 export default defineComponent({
   name: "CPEsItem",
   props: {
     cpes: {
-      type: Array as PropType<CPE[]>,
+      type: Array as PropType<CpeType[]>,
       required: true
     }
   },

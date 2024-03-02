@@ -13,13 +13,13 @@
 <script lang="ts">
 import { defineComponent, type PropType } from "vue"
 
-import type { Port } from "@/types"
+import type { PortType } from "@/schemas"
 
 export default defineComponent({
   name: "PortsItem",
   props: {
     ports: {
-      type: Array as PropType<Port[]>,
+      type: Array as PropType<PortType[]>,
       required: true
     }
   },

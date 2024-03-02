@@ -60,13 +60,13 @@ import ErrorMessage from "@/components/ErrorMessage.vue"
 import Message from "@/components/Message.vue"
 import ActionButtons from "@/components/rule/ActionButtons.vue"
 import Tags from "@/components/tag/Tags.vue"
-import type { QueueMessage, Rule } from "@/types"
+import type { QueueMessageType, RuleType } from "@/schemas"
 
 export default defineComponent({
   name: "RuleItem",
   props: {
     rule: {
-      type: Object as PropType<Rule>,
+      type: Object as PropType<RuleType>,
       required: true
     }
   },
@@ -74,7 +74,7 @@ export default defineComponent({
   emits: ["delete"],
   setup(_, context) {
     const error = ref<AxiosError>()
-    const message = ref<QueueMessage>()
+    const message = ref<QueueMessageType>()
 
     const onSetError = (newError: AxiosError) => {
       error.value = newError
@@ -84,7 +84,7 @@ export default defineComponent({
       error.value = undefined
     }
 
-    const onSetMessage = (newMessage: QueueMessage) => {
+    const onSetMessage = (newMessage: QueueMessageType) => {
       message.value = newMessage
     }
 

@@ -2,12 +2,12 @@ import { sha256 } from "js-sha256"
 import URL from "url-parse"
 
 import { BaseLink } from "@/links/base"
-import type { Link, LinkType } from "@/types"
+import type { LinkType, LinkTypeType } from "@/schemas"
 
 class VirusTotal extends BaseLink {
   public baseURL: string
   public name: string
-  public type: LinkType
+  public type: LinkTypeType
 
   public constructor() {
     super()
@@ -18,7 +18,7 @@ class VirusTotal extends BaseLink {
   }
 }
 
-export class VirusTotalForDomain extends VirusTotal implements Link {
+export class VirusTotalForDomain extends VirusTotal implements LinkType {
   public constructor() {
     super()
     this.type = "domain"
@@ -29,7 +29,7 @@ export class VirusTotalForDomain extends VirusTotal implements Link {
   }
 }
 
-export class VirusTotalForIP extends VirusTotal implements Link {
+export class VirusTotalForIP extends VirusTotal implements LinkType {
   public constructor() {
     super()
     this.type = "ip"
@@ -40,7 +40,7 @@ export class VirusTotalForIP extends VirusTotal implements Link {
   }
 }
 
-export class VirusTotalForURL extends VirusTotal implements Link {
+export class VirusTotalForURL extends VirusTotal implements LinkType {
   public constructor() {
     super()
     this.type = "url"
@@ -60,7 +60,7 @@ export class VirusTotalForURL extends VirusTotal implements Link {
   }
 }
 
-export class VirusTotalForHash extends VirusTotal implements Link {
+export class VirusTotalForHash extends VirusTotal implements LinkType {
   public constructor() {
     super()
     this.type = "hash"

@@ -20,13 +20,13 @@ import truncate from "just-truncate"
 import { defineComponent, type PropType, ref } from "vue"
 
 import { generateDeleteArtifactTask } from "@/api-helper"
-import type { Artifact } from "@/types"
+import type { ArtifactType } from "@/schemas"
 
 export default defineComponent({
   name: "ArtifactTag",
   props: {
     artifact: {
-      type: Object as PropType<Artifact>,
+      type: Object as PropType<ArtifactType>,
       required: true
     }
   },

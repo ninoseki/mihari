@@ -74,7 +74,7 @@ import { generateGetAlertsTask } from "@/api-helper"
 import Alerts from "@/components/alert/Alerts.vue"
 import ErrorMessage from "@/components/ErrorMessage.vue"
 import Loading from "@/components/Loading.vue"
-import type { SearchParams } from "@/types"
+import type { SearchParamsType } from "@/schemas"
 
 export default defineComponent({
   name: "AlertsWrapper",
@@ -91,7 +91,7 @@ export default defineComponent({
     const getAlertsTask = generateGetAlertsTask()
 
     const getAlerts = async () => {
-      const params: SearchParams = { q: q.value, page: parseInt(page.value) }
+      const params: SearchParamsType = { q: q.value, page: parseInt(page.value) }
       return await getAlertsTask.perform(params)
     }
 

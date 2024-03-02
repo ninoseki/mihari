@@ -1,10 +1,10 @@
 import { BaseLink } from "@/links/base"
-import type { Link, LinkType } from "@/types"
+import type { LinkType, LinkTypeType } from "@/schemas"
 
-export class DNSlyticsForIP extends BaseLink implements Link {
+export class DNSlyticsForIP extends BaseLink implements LinkType {
   public baseURL: string
   public name: string
-  public type: LinkType
+  public type: LinkTypeType
 
   public constructor() {
     super()
@@ -19,10 +19,10 @@ export class DNSlyticsForIP extends BaseLink implements Link {
   }
 }
 
-export class DNSlyticsForDomain extends BaseLink implements Link {
+export class DNSlyticsForDomain extends BaseLink implements LinkType {
   public baseURL: string
   public name: string
-  public type: LinkType
+  public type: LinkTypeType
 
   public constructor() {
     super()

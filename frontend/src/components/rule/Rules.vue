@@ -26,13 +26,13 @@ import { computed, defineComponent, type PropType, ref } from "vue"
 
 import Pagination from "@/components/Pagination.vue"
 import Rule from "@/components/rule/Rule.vue"
-import type { Rules } from "@/types"
+import type { RulesType } from "@/schemas"
 
 export default defineComponent({
   name: "RulesItem",
   props: {
     rules: {
-      type: Object as PropType<Rules>,
+      type: Object as PropType<RulesType>,
       required: true
     }
   },
