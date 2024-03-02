@@ -244,6 +244,7 @@ require "mihari/clients/shodan"
 require "mihari/clients/the_hive"
 require "mihari/clients/urlscan"
 require "mihari/clients/virustotal"
+require "mihari/clients/whois"
 require "mihari/clients/zoomeye"
 
 # Analyzers
