@@ -29,6 +29,13 @@ module Mihari
         optional(:options).hash(EmitterOptions)
       end
 
+      Yeti = Dry::Schema.Params do
+        required(:emitter).value(Types::String.enum(*Mihari::Emitters::Yeti.keys))
+        optional(:url).filled(:string)
+        optional(:api_key).filled(:string)
+        optional(:options).hash(EmitterOptions)
+      end
+
       Slack = Dry::Schema.Params do
         required(:emitter).value(Types::String.enum(*Mihari::Emitters::Slack.keys))
         optional(:webhook_url).filled(:string)

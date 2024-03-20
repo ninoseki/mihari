@@ -87,11 +87,12 @@ module Mihari
       #
       # @param [String] path
       # @param [Hash, nil] json
+      # @param [Hash, nil] headers
       #
       # @return [Hash]
       #
-      def post_json(path, json: {})
-        res = http.post(url_for(path), json:)
+      def post_json(path, json: {}, headers: nil)
+        res = http.post(url_for(path), json:, headers: headers || {})
         JSON.parse res.body.to_s
       end
     end
