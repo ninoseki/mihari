@@ -34,6 +34,8 @@ module Mihari
       thehive_url: nil,
       urlscan_api_key: nil,
       virustotal_api_key: nil,
+      yeti_api_key: nil,
+      yeti_url: nil,
       zoomeye_api_key: nil,
       # sidekiq
       sidekiq_redis_url: nil,
@@ -121,6 +123,12 @@ module Mihari
     #   @return [String, nil]
 
     # @!attribute [r] virustotal_api_key
+    #   @return [String, nil]
+
+    # @!attribute [r] yeti_url
+    #   @return [String, nil]
+
+    # @!attribute [r] yeti_api_key
     #   @return [String, nil]
 
     # @!attribute [r] zoomeye_api_key

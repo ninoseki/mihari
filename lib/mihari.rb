@@ -219,6 +219,7 @@ require "mihari/emitters/misp"
 require "mihari/emitters/slack"
 require "mihari/emitters/the_hive"
 require "mihari/emitters/webhook"
+require "mihari/emitters/yeti"
 
 # Clients
 require "mihari/clients/base"
@@ -245,6 +246,7 @@ require "mihari/clients/the_hive"
 require "mihari/clients/urlscan"
 require "mihari/clients/virustotal"
 require "mihari/clients/whois"
+require "mihari/clients/yeti"
 require "mihari/clients/zoomeye"
 
 # Analyzers

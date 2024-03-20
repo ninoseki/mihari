@@ -1,10 +1,11 @@
 # Emitters
 
 - [Database](database.md)
-- [TheHive](hive.md)
 - [MISP](misp.md)
 - [Slack](slack.md)
+- [TheHive](hive.md)
 - [Webhook](webhook.md)
+- [Yeti](yeti.md)
 
 ## Options
 

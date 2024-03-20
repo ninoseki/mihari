@@ -26,9 +26,7 @@ module Mihari
 
     # @return [Boolean]
     def ip?
-      Try[IPAddr::InvalidAddressError] do
-        IPAddr.new(data).to_s == data
-      end.recover { false }.value!
+      Try[IPAddr::InvalidAddressError] { IPAddr.new(data).to_s == data }.recover { false }.value!
     end
 
     # @return [Boolean]
