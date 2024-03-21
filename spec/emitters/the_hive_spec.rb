@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-RSpec.describe Mihari::Emitters::TheHive, :vcr do
+RSpec.describe Mihari::Emitters::TheHive do
   subject(:emitter) { described_class.new(rule:) }
 
   include_context "with mocked logger"
@@ -17,7 +17,7 @@ RSpec.describe Mihari::Emitters::TheHive, :vcr do
       expect(emitter.configured?).to be(true)
     end
 
-    context "with THEHIVE_URL" do
+    context "without THEHIVE_URL" do
       before do
         allow(Mihari.config).to receive(:thehive_url).and_return(nil)
       end
