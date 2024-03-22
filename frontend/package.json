@@ -22,7 +22,7 @@
     "@vueuse/router": "^10.9.0",
     "ace-builds": "^1.32.7",
     "axios": "^1.6.8",
-    "bulma": "^0.9.4",
+    "bulma": "^1.0.0",
     "bulma-helpers": "^0.4.3",
     "dayjs": "^1.11.10",
     "font-awesome-animation": "^1.1.1",

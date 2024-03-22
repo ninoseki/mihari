@@ -1,5 +1,5 @@
 <template>
-  <Navbar></Navbar>
+  <Navbar />
   <section class="section is-medium">
     <div class="container">
       <router-view />
