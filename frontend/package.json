@@ -24,7 +24,6 @@
     "axios": "^1.6.8",
     "bulma": "^1.0.0",
     "bulma-helpers": "^0.4.3",
-    "bulma-switch": "^2.0.4",
     "dayjs": "^1.11.10",
     "font-awesome-animation": "^1.1.1",
     "js-sha256": "^0.11.0",
