@@ -4,8 +4,7 @@
       <a class="navbar-item"><h1 class="title">Mihari</h1></a>
     </div>
     <div class="navbar-menu">
-      <div class="navbar-start"></div>
-      <div class="navbar-end">
+      <div class="navbar-start">
         <router-link class="navbar-item" :to="{ name: 'Alerts' }">Alerts</router-link>
         <router-link class="navbar-item" :to="{ name: 'Artifacts' }">Artifacts</router-link>
         <router-link class="navbar-item" :to="{ name: 'Rules' }">Rules</router-link>
@@ -20,15 +19,33 @@
           ></a
         >
       </div>
+      <div class="navbar-end">
+        <div class="navbar-item">
+          <span class="icon" @click="toggleDark()">
+            <font-awesome-icon :icon="isDark ? 'moon' : 'sun'"></font-awesome-icon>
+          </span>
+        </div>
+      </div>
     </div>
   </nav>
 </template>
 
 <script lang="ts">
+import { useDark, useToggle } from "@vueuse/core"
 import { defineComponent } from "vue"
 
 export default defineComponent({
-  name: "NavbarItem"
+  name: "NavbarItem",
+  setup() {
+    const isDark = useDark({
+      selector: "html",
+      valueDark: "theme-dark",
+      valueLight: "theme-light"
+    })
+    const toggleDark = useToggle(isDark)
+
+    return { toggleDark, isDark }
+  }
 })
 </script>
 

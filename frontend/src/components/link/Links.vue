@@ -7,14 +7,14 @@
 <script lang="ts">
 import { computed, defineComponent } from "vue"
 
-import Link from "@/components/link/Link.vue"
+import LinkComponent from "@/components/link/Link.vue"
 import { Links } from "@/links"
 import type { LinkType } from "@/schemas"
 
 export default defineComponent({
   name: "LinksItem",
   components: {
-    LinkComponent: Link
+    LinkComponent
   },
   props: {
     data: {

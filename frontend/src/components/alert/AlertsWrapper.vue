@@ -7,7 +7,7 @@
       <p class="control">
         <a class="button is-primary" @click="search">
           <span class="icon is-small">
-            <font-awesome-icon icon="search"></font-awesome-icon>
+            <font-awesome-icon icon="search" />
           </span>
           <span>Search</span>
         </a>
@@ -15,7 +15,7 @@
       <p class="control">
         <a class="button is-info" @click="toggleShowHelp">
           <span class="icon is-small">
-            <font-awesome-icon icon="question"></font-awesome-icon>
+            <font-awesome-icon icon="question" />
           </span>
           <span>Help</span>
         </a>

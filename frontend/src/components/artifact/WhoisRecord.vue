@@ -3,25 +3,25 @@
     <div class="control">
       <div class="tags has-addons are-medium">
         <span class="tag is-dark">Registrar</span>
-        <span class="tag is-light">{{ whoisRecord.registrar?.name || "N/A" }}</span>
+        <span class="tag">{{ whoisRecord.registrar?.name || "N/A" }}</span>
       </div>
     </div>
     <div class="control">
       <div class="tags has-addons are-medium">
         <span class="tag is-dark">Created on</span>
-        <span class="tag is-light">{{ whoisRecord.createdOn || "N/A" }}</span>
+        <span class="tag">{{ whoisRecord.createdOn || "N/A" }}</span>
       </div>
     </div>
     <div class="control">
       <div class="tags has-addons are-medium">
         <span class="tag is-dark">Updated on</span>
-        <span class="tag is-light">{{ whoisRecord.updatedOn || "N/A" }}</span>
+        <span class="tag">{{ whoisRecord.updatedOn || "N/A" }}</span>
       </div>
     </div>
     <div class="control">
       <div class="tags has-addons are-medium">
         <span class="tag is-dark">Expires on</span>
-        <span class="tag is-light">{{ whoisRecord.expiresOn || "N/A" }}</span>
+        <span class="tag">{{ whoisRecord.expiresOn || "N/A" }}</span>
       </div>
     </div>
   </div>
