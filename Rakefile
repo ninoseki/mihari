@@ -55,17 +55,21 @@ namespace :build do
 
     puts "Swagger doc is built in #{elapsed}s"
   end
+
+  desc "Build frontend assets"
+  task :frontend do
+    # Build frontend assets
+    sh "cd frontend && npm install && npm run docs && npm run build-only"
+    # Copy built assets into ./lib/web/public/
+    sh "rm -rf ./lib/mihari/web/public/"
+    sh "mkdir -p ./lib/mihari/web/public/"
+    sh "cp -r frontend/dist/* ./lib/mihari/web/public"
+  end
 end
 
 task :build do
   Rake::Task["build:swagger"].invoke
-
-  # Build ReDocs docs & frontend assets
-  sh "cd frontend && npm install && npm run docs && npm run build-only"
-  # Copy built assets into ./lib/web/public/
-  sh "rm -rf ./lib/mihari/web/public/"
-  sh "mkdir -p ./lib/mihari/web/public/"
-  sh "cp -r frontend/dist/* ./lib/mihari/web/public"
+  Rake::Task["build:frontend"].invoke
 end
 
 # require it later enables doing pre-build step (= build the frontend app)
