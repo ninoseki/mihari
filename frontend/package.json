@@ -39,7 +39,7 @@
     "zod": "^3.22.4"
   },
   "devDependencies": {
-    "@redocly/cli": "1.10.5",
+    "@redocly/cli": "1.11.0",
     "@rushstack/eslint-patch": "^1.8.0",
     "@tsconfig/node20": "^20.1.2",
     "@types/jsdom": "^21.1.6",
