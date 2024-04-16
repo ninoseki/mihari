@@ -21,6 +21,7 @@ Alternatively you can set values through `.env` file. Values in `.env` file will
 | SECURITYTRAILS_API_KEY | String | SecurityTrails API key         |         |
 | SHODAN_API_KEY         | String | Shodan API key                 |         |
 | URLSCAN_API_KEY        | String | urlscan.io API key             |         |
+| VALIDIN_API_KEY        | String | Validin API key                |         |
 | VIRUSTOTAL_API_KEY     | String | VirusTotal API key             |         |
 | ZOOMEYE_API_KEY        | String | ZoomEye API key                |         |
 
