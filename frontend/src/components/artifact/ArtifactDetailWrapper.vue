@@ -1,3 +1,43 @@
+<script setup lang="ts">
+import { onMounted, watch } from "vue"
+import { useRouter } from "vue-router"
+
+import { generateGetArtifactTask } from "@/api-helper"
+import Artifact from "@/components/artifact/ArtifactDetail.vue"
+import ErrorMessage from "@/components/ErrorMessage.vue"
+import Loading from "@/components/LoadingItem.vue"
+
+const props = defineProps({
+  id: {
+    type: Number,
+    required: true
+  }
+})
+
+const getArtifactTask = generateGetArtifactTask()
+const router = useRouter()
+
+const getArtifact = async () => {
+  await getArtifactTask.perform(props.id)
+}
+
+const onRefresh = async () => {
+  await getArtifact()
+}
+
+const onDelete = async () => {
+  router.push("/")
+}
+
+onMounted(async () => {
+  await getArtifact()
+})
+
+watch(props, async () => {
+  await getArtifact()
+})
+</script>
+
 <template>
   <Loading v-if="getArtifactTask.isRunning" />
   <ErrorMessage v-if="getArtifactTask.isError" :error="getArtifactTask.last?.error" />
@@ -8,58 +48,3 @@
     v-if="getArtifactTask.last?.value"
   />
 </template>
-
-<script lang="ts">
-import { defineComponent, onMounted, watch } from "vue"
-import { useRouter } from "vue-router"
-
-import { generateGetArtifactTask } from "@/api-helper"
-import Artifact from "@/components/artifact/ArtifactDetail.vue"
-import ErrorMessage from "@/components/ErrorMessage.vue"
-import Loading from "@/components/Loading.vue"
-
-export default defineComponent({
-  name: "ArtifactDetailWrapper",
-  components: {
-    Artifact,
-    Loading,
-    ErrorMessage
-  },
-  props: {
-    id: {
-      type: Number,
-      required: true
-    }
-  },
-  setup(props) {
-    const getArtifactTask = generateGetArtifactTask()
-    const router = useRouter()
-
-    const getArtifact = async () => {
-      await getArtifactTask.perform(props.id)
-    }
-
-    const onRefresh = async () => {
-      await getArtifact()
-    }
-
-    const onDelete = async () => {
-      router.push("/")
-    }
-
-    onMounted(async () => {
-      await getArtifact()
-    })
-
-    watch(props, async () => {
-      await getArtifact()
-    })
-
-    return {
-      getArtifactTask,
-      onRefresh,
-      onDelete
-    }
-  }
-})
-</script>

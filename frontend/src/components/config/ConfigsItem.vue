@@ -1,3 +1,16 @@
+<script setup lang="ts">
+import { type PropType } from "vue"
+
+import type { ConfigsType } from "@/schemas"
+
+defineProps({
+  configs: {
+    type: Object as PropType<ConfigsType>,
+    required: true
+  }
+})
+</script>
+
 <template>
   <div class="box">
     <div class="table-container">
@@ -53,19 +66,3 @@
     </div>
   </div>
 </template>
-
-<script lang="ts">
-import { defineComponent, type PropType } from "vue"
-
-import type { ConfigsType } from "@/schemas"
-
-export default defineComponent({
-  name: "ConfigsItem",
-  props: {
-    configs: {
-      type: Object as PropType<ConfigsType>,
-      required: true
-    }
-  }
-})
-</script>

@@ -1,3 +1,20 @@
+<script setup lang="ts">
+import { type PropType } from "vue"
+
+import type { ReverseDnsNameType } from "@/schemas"
+
+defineProps({
+  reverseDnsNames: {
+    type: Array as PropType<ReverseDnsNameType[]>,
+    required: true
+  }
+})
+
+const getQuery = (name: string) => {
+  return `reverse_dns_name:"${name}"`
+}
+</script>
+
 <template>
   <div class="tags are-medium">
     <router-link
@@ -9,26 +26,3 @@
     >
   </div>
 </template>
-
-<script lang="ts">
-import { defineComponent, type PropType } from "vue"
-
-import type { ReverseDnsNameType } from "@/schemas"
-
-export default defineComponent({
-  name: "ReverseDnsNames",
-  props: {
-    reverseDnsNames: {
-      type: Array as PropType<ReverseDnsNameType[]>,
-      required: true
-    }
-  },
-  setup() {
-    const getQuery = (name: string) => {
-      return `reverse_dns_name:"${name}"`
-    }
-
-    return { getQuery }
-  }
-})
-</script>

@@ -1,3 +1,16 @@
+<script setup lang="ts">
+import { type PropType } from "vue"
+
+import type { WhoisRecordType } from "@/schemas"
+
+defineProps({
+  whoisRecord: {
+    type: Object as PropType<WhoisRecordType>,
+    required: true
+  }
+})
+</script>
+
 <template>
   <div class="field is-grouped is-grouped-multiline">
     <div class="control">
@@ -26,19 +39,3 @@
     </div>
   </div>
 </template>
-
-<script lang="ts">
-import { defineComponent, type PropType } from "vue"
-
-import type { WhoisRecordType } from "@/schemas"
-
-export default defineComponent({
-  name: "WhoisRecord",
-  props: {
-    whoisRecord: {
-      type: Object as PropType<WhoisRecordType>,
-      required: true
-    }
-  }
-})
-</script>

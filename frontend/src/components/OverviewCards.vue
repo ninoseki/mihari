@@ -1,3 +1,19 @@
+<script setup lang="ts">
+import { onMounted } from "vue"
+
+import { generateGetAlertsTask, generateGetArtifactsTask, generateGetRulesTask } from "@/api-helper"
+
+const getAlertsTask = generateGetAlertsTask()
+const getRulesTask = generateGetRulesTask()
+const getArtifactsTask = generateGetArtifactsTask()
+
+onMounted(() => {
+  getAlertsTask.perform({ q: "", page: 1, limit: 0 })
+  getRulesTask.perform({ q: "", page: 1, limit: 0 })
+  getArtifactsTask.perform({ q: "", page: 1, limit: 0 })
+})
+</script>
+
 <template>
   <div class="columns">
     <div class="column is-one-third">
@@ -65,26 +81,3 @@
     </div>
   </div>
 </template>
-
-<script lang="ts">
-import { defineComponent, onMounted } from "vue"
-
-import { generateGetAlertsTask, generateGetArtifactsTask, generateGetRulesTask } from "@/api-helper"
-
-export default defineComponent({
-  name: "OverviewCards",
-  setup() {
-    const getAlertsTask = generateGetAlertsTask()
-    const getRulesTask = generateGetRulesTask()
-    const getArtifactsTask = generateGetArtifactsTask()
-
-    onMounted(() => {
-      getAlertsTask.perform({ q: "", page: 1, limit: 0 })
-      getRulesTask.perform({ q: "", page: 1, limit: 0 })
-      getArtifactsTask.perform({ q: "", page: 1, limit: 0 })
-    })
-
-    return { getAlertsTask, getArtifactsTask, getRulesTask }
-  }
-})
-</script>

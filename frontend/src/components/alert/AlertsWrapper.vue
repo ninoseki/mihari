@@ -1,3 +1,56 @@
+<script setup lang="ts">
+import { useToggle } from "@vueuse/core"
+import { useRouteQuery } from "@vueuse/router"
+import { onMounted, ref, watch } from "vue"
+
+import { generateGetAlertsTask } from "@/api-helper"
+import Alerts from "@/components/alert/AlertsItem.vue"
+import ErrorMessage from "@/components/ErrorMessage.vue"
+import Loading from "@/components/LoadingItem.vue"
+import type { SearchParamsType } from "@/schemas"
+
+const page = useRouteQuery<string>("page", "1")
+const q = useRouteQuery<string>("q", "")
+const showHelp = ref(false)
+
+const getAlertsTask = generateGetAlertsTask()
+
+const getAlerts = async () => {
+  const params: SearchParamsType = { q: q.value, page: parseInt(page.value) }
+  return await getAlertsTask.perform(params)
+}
+
+const onUpdatePage = (newPage: number) => {
+  page.value = newPage.toString()
+}
+
+const search = async () => {
+  page.value = "1"
+  await getAlerts()
+}
+
+// NOTE: Using onUpdatePage when deleting (= refreshing) does not work well if page equals to 1
+//       (Because page is not changed & it does not trigger getAlerts)
+const onRefresh = search
+
+const toggleShowHelp = useToggle(showHelp)
+
+onMounted(async () => {
+  await getAlerts()
+})
+
+watch(page, async () => {
+  await getAlerts()
+})
+
+watch(q, async () => {
+  window.scrollTo({
+    top: 0,
+    behavior: "smooth"
+  })
+})
+</script>
+
 <template>
   <div class="block">
     <div class="field has-addons">
@@ -13,7 +66,7 @@
         </a>
       </p>
       <p class="control">
-        <a class="button is-info" @click="toggleShowHelp">
+        <a class="button is-info" @click="toggleShowHelp()">
           <span class="icon is-small">
             <font-awesome-icon icon="question" />
           </span>
@@ -65,78 +118,3 @@
     />
   </div>
 </template>
-
-<script lang="ts">
-import { useRouteQuery } from "@vueuse/router"
-import { defineComponent, onMounted, ref, watch } from "vue"
-
-import { generateGetAlertsTask } from "@/api-helper"
-import Alerts from "@/components/alert/Alerts.vue"
-import ErrorMessage from "@/components/ErrorMessage.vue"
-import Loading from "@/components/Loading.vue"
-import type { SearchParamsType } from "@/schemas"
-
-export default defineComponent({
-  name: "AlertsWrapper",
-  components: {
-    Alerts,
-    Loading,
-    ErrorMessage
-  },
-  setup() {
-    const page = useRouteQuery<string>("page", "1")
-    const q = useRouteQuery<string>("q", "")
-    const showHelp = ref(false)
-
-    const getAlertsTask = generateGetAlertsTask()
-
-    const getAlerts = async () => {
-      const params: SearchParamsType = { q: q.value, page: parseInt(page.value) }
-      return await getAlertsTask.perform(params)
-    }
-
-    const onUpdatePage = (newPage: number) => {
-      page.value = newPage.toString()
-    }
-
-    const search = async () => {
-      page.value = "1"
-      await getAlerts()
-    }
-
-    // NOTE: Using onUpdatePage when deleting (= refreshing) does not work well if page equals to 1
-    //       (Because page is not changed & it does not trigger getAlerts)
-    const onRefresh = search
-
-    const toggleShowHelp = () => {
-      showHelp.value = !showHelp.value
-    }
-
-    onMounted(async () => {
-      await getAlerts()
-    })
-
-    watch(page, async () => {
-      await getAlerts()
-    })
-
-    watch(q, async () => {
-      window.scrollTo({
-        top: 0,
-        behavior: "smooth"
-      })
-    })
-
-    return {
-      getAlertsTask,
-      page,
-      q,
-      search,
-      showHelp,
-      toggleShowHelp,
-      onUpdatePage,
-      onRefresh
-    }
-  }
-})
-</script>

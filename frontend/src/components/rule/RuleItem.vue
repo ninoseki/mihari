@@ -2,11 +2,10 @@
 import type { AxiosError } from "axios"
 import { type PropType, ref } from "vue"
 
-import Alerts from "@/components/alert/AlertsWithPagination.vue"
 import ErrorMessage from "@/components/ErrorMessage.vue"
 import Message from "@/components/MessageItem.vue"
 import ActionButtons from "@/components/rule/ActionButtons.vue"
-import Yaml from "@/components/rule/YamlItem.vue"
+import Tags from "@/components/tag/TagsItem.vue"
 import type { QueueMessageType, RuleType } from "@/schemas"
 
 defineProps({
@@ -18,15 +17,10 @@ defineProps({
 
 const emits = defineEmits<{
   (e: "delete"): void
-  (e: "refresh"): void
 }>()
 
 const error = ref<AxiosError>()
 const message = ref<QueueMessageType>()
-
-const onDelete = () => {
-  emits("delete")
-}
 
 const onSetError = (newError: AxiosError) => {
   error.value = newError
@@ -37,23 +31,22 @@ const onDisposeError = () => {
 }
 
 const onSetMessage = (newMessage: QueueMessageType) => {
-  if (newMessage.queued) {
-    message.value = newMessage
-  } else {
-    emits("refresh")
-  }
+  message.value = newMessage
 }
 
 const onDisposeMessage = () => {
   message.value = undefined
 }
+
+const onDelete = () => {
+  emits("delete")
+}
 </script>
 
 <template>
-  <div class="block">
-    <h2 class="is-size-2 block">{{ rule.id }}</h2>
+  <div class="box">
     <ErrorMessage
-      class="mt-3 mb-3"
+      class="block"
       :error="error"
       v-if="error"
       :disposable="true"
@@ -66,19 +59,40 @@ const onDisposeMessage = () => {
       :disposable="true"
       @dispose="onDisposeMessage"
     />
-    <p class="block is-clearfix">
-      <ActionButtons
-        :rule="rule"
-        @set-message="onSetMessage"
-        @delete="onDelete"
-        @set-error="onSetError"
-      />
-    </p>
-    <Yaml :yaml="rule.yaml" />
-  </div>
-  <hr />
-  <div class="block">
-    <h2 class="is-size-2 block">Alerts</h2>
-    <Alerts :ruleId="rule.id" />
+    <div class="block">
+      <p>
+        <ActionButtons
+          :rule="rule"
+          @set-error="onSetError"
+          @delete="onDelete"
+          @set-message="onSetMessage"
+        />
+      </p>
+      <router-link class="is-size-4" :to="{ name: 'Rule', params: { id: rule.id } }">{{
+        rule.id
+      }}</router-link>
+    </div>
+    <table class="table is-fullwidth is-completely-borderless">
+      <tr>
+        <th>Title</th>
+        <td>
+          {{ rule.title }}
+        </td>
+      </tr>
+      <tr>
+        <th>Description</th>
+        <td>
+          {{ rule.description }}
+        </td>
+      </tr>
+      <tr v-if="rule.tags.length > 0">
+        <th>Tags</th>
+        <td>
+          <Tags :tags="rule.tags" :navigate-to="'Rules'" />
+        </td>
+      </tr>
+    </table>
+    <p class="block is-clearfix"></p>
+    <p class="help">Created at: {{ rule.createdAt }}</p>
   </div>
 </template>

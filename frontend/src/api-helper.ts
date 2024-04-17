@@ -9,7 +9,6 @@ import type {
   ConfigsType,
   CreateRuleType,
   IpInfoType,
-  MessageType,
   QueueMessageType,
   RulesType,
   RuleType,
@@ -24,8 +23,8 @@ export function generateGetAlertsTask(): Task<AlertsType, [SearchParamsType]> {
   })
 }
 
-export function generateDeleteAlertTask(): Task<MessageType, [number]> {
-  return useAsyncTask<MessageType, [number]>(async (_signal, id) => {
+export function generateDeleteAlertTask(): Task<void, [number]> {
+  return useAsyncTask<void, [number]>(async (_signal, id) => {
     return await API.deleteAlert(id)
   })
 }
@@ -36,8 +35,8 @@ export function generateGetTagsTask(): Task<TagsType, []> {
   })
 }
 
-export function generateDeleteTagTask(): Task<MessageType, [number]> {
-  return useAsyncTask<MessageType, [number]>(async (_signal, tag) => {
+export function generateDeleteTagTask(): Task<void, [number]> {
+  return useAsyncTask<void, [number]>(async (_signal, tag) => {
     return await API.deleteTag(tag)
   })
 }
@@ -48,8 +47,8 @@ export function generateGetArtifactTask(): Task<ArtifactType, [number]> {
   })
 }
 
-export function generateDeleteArtifactTask(): Task<MessageType, [number]> {
-  return useAsyncTask<MessageType, [number]>(async (_signal, id) => {
+export function generateDeleteArtifactTask(): Task<void, [number]> {
+  return useAsyncTask<void, [number]>(async (_signal, id) => {
     return await API.deleteArtifact(id)
   })
 }
@@ -84,8 +83,8 @@ export function generateGetRuleTask(): Task<RuleType, [string]> {
   })
 }
 
-export function generateDeleteRuleTask(): Task<MessageType, [string]> {
-  return useAsyncTask<MessageType, [string]>(async (_signal, id: string) => {
+export function generateDeleteRuleTask(): Task<void, [string]> {
+  return useAsyncTask<void, [string]>(async (_signal, id: string) => {
     return await API.deleteRule(id)
   })
 }
