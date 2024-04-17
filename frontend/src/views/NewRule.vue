@@ -1,26 +1,18 @@
-<template>
-  <NewRule></NewRule>
-</template>
-
-<script lang="ts">
+<script setup lang="ts">
 import { useTitle } from "@vueuse/core"
-import { defineComponent, onMounted } from "vue"
+import { onMounted } from "vue"
 
 import NewRule from "@/components/rule/NewRule.vue"
 
-export default defineComponent({
-  name: "NewRuleView",
-  components: {
-    NewRule
-  },
-  setup() {
-    const updateTitle = () => {
-      useTitle(`New rule - Mihari`)
-    }
+const updateTitle = () => {
+  useTitle(`New rule - Mihari`)
+}
 
-    onMounted(() => {
-      updateTitle()
-    })
-  }
+onMounted(() => {
+  updateTitle()
 })
 </script>
+
+<template>
+  <NewRule />
+</template>

@@ -1,14 +1,14 @@
 import { createRouter, createWebHashHistory, type RouteRecordRaw } from "vue-router"
 
-import Alert from "@/views/Alert.vue"
-import Alerts from "@/views/Alerts.vue"
-import Artifact from "@/views/Artifact.vue"
+import Alerts from "@/views/AlertsView.vue"
+import Alert from "@/views/AlertView.vue"
 import Artifacts from "@/views/ArtifactsView.vue"
-import Config from "@/views/Config.vue"
+import Artifact from "@/views/ArtifactView.vue"
+import Config from "@/views/ConfigView.vue"
 import EditRule from "@/views/EditRule.vue"
 import NewRule from "@/views/NewRule.vue"
-import Rule from "@/views/Rule.vue"
-import Rules from "@/views/Rules.vue"
+import Rules from "@/views/RulesView.vue"
+import Rule from "@/views/RuleView.vue"
 
 const routes: Array<RouteRecordRaw> = [
   {

@@ -2,7 +2,7 @@
 import { useTitle } from "@vueuse/core"
 import { onMounted, watch } from "vue"
 
-import EditRule from "@/components/rule/EditRuleWrapper.vue"
+import Rule from "@/components/rule/RuleDetailWrapper.vue"
 
 const props = defineProps({
   id: {
@@ -12,7 +12,7 @@ const props = defineProps({
 })
 
 const updateTitle = () => {
-  useTitle(`Edit rule:${props.id} - Mihari`)
+  useTitle(`Rule:${props.id} - Mihari`)
 }
 
 onMounted(() => {
@@ -28,5 +28,5 @@ watch(
 </script>
 
 <template>
-  <EditRule :id="id" />
+  <Rule :id="id" />
 </template>

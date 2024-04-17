@@ -2,7 +2,7 @@
 import { useTitle } from "@vueuse/core"
 import { onMounted, watch } from "vue"
 
-import EditRule from "@/components/rule/EditRuleWrapper.vue"
+import Artifact from "@/components/artifact/ArtifactDetailWrapper.vue"
 
 const props = defineProps({
   id: {
@@ -10,9 +10,8 @@ const props = defineProps({
     required: true
   }
 })
-
 const updateTitle = () => {
-  useTitle(`Edit rule:${props.id} - Mihari`)
+  useTitle(`Artifact:${props.id} - Mihari`)
 }
 
 onMounted(() => {
@@ -28,5 +27,5 @@ watch(
 </script>
 
 <template>
-  <EditRule :id="id" />
+  <Artifact :id="parseInt(id)" />
 </template>
