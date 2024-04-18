@@ -27,6 +27,7 @@ Mihari supports the following services by default.
 - [SecurityTrails](https://securitytrails.com/)
 - [Shodan](https://shodan.io)
 - [urlscan.io](https://urlscan.io)
+- [Validin](https://validin.com)
 - [VirusTotal](http://virustotal.com) & [VirusTotal Intelligence](https://www.virustotal.com/gui/intelligence-overview)
 - [ZoomEye](https://zoomeye.org)
 
