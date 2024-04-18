@@ -34,7 +34,7 @@
     "vue": "^3.4.23",
     "vue-concurrency": "^5.0.0",
     "vue-json-pretty": "^2.4.0",
-    "vue-router": "^4.3.0",
+    "vue-router": "^4.3.2",
     "vue3-ace-editor": "^2.2.4",
     "zod": "^3.22.4"
   },
