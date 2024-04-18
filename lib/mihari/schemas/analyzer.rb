@@ -15,6 +15,7 @@ module Mihari
         Mihari::Analyzers::Onyphe.keys,
         Mihari::Analyzers::Shodan.keys,
         Mihari::Analyzers::Urlscan.keys,
+        Mihari::Analyzers::Validin.keys,
         Mihari::Analyzers::VirusTotalIntelligence.keys
       ].each do |keys|
         key = keys.first

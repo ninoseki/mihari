@@ -33,6 +33,7 @@ module Mihari
       thehive_api_key: nil,
       thehive_url: nil,
       urlscan_api_key: nil,
+      validin_api_key: nil,
       virustotal_api_key: nil,
       yeti_api_key: nil,
       yeti_url: nil,
@@ -120,6 +121,9 @@ module Mihari
     #   @return [String, nil]
 
     # @!attribute [r] urlscan_api_key
+    #   @return [String, nil]
+
+    # @!attribute [r] validin_api_key
     #   @return [String, nil]
 
     # @!attribute [r] virustotal_api_key

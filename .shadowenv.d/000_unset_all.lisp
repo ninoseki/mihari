@@ -35,5 +35,6 @@
 (env/set "THEHIVE_API_KEY" ())
 (env/set "THEHIVE_URL" ())
 (env/set "URLSCAN_API_KEY" ())
+(env/set "VALIDIN_API_KEY" ())
 (env/set "VIRUSTOTAL_API_KEY" ())
 (env/set "ZOOMEYE_API_KEY" ())

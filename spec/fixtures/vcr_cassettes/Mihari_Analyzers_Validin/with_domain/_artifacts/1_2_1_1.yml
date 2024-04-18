@@ -1,0 +1,50 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: https://app.validin.com/api/axon/domain/dns/history/example.com/A
+    body:
+      encoding: ASCII-8BIT
+      string: ''
+    headers:
+      Authorization:
+      - Bearer <VALIDIN_API_KEY>
+      User-Agent:
+      - mihari/7.5.0
+      Connection:
+      - close
+      Host:
+      - app.validin.com
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - nginx/1.18.0 (Ubuntu)
+      Date:
+      - Tue, 16 Apr 2024 23:16:41 GMT
+      Content-Type:
+      - application/json
+      Content-Length:
+      - '351'
+      Connection:
+      - close
+      Cache-Control:
+      - no-store
+      - no-store, no-cache, must-revalidate, proxy-revalidate, max-age=0
+      Content-Security-Policy:
+      - frame-ancestors 'none'
+      Strict-Transport-Security:
+      - max-age=63072000; includeSubDomains; preload
+      X-Content-Type-Options:
+      - nosniff
+      X-Frame-Options:
+      - DENY
+      Last-Modified:
+      - Tuesday, 16-Apr-2024 23:16:41 GMT
+    body:
+      encoding: UTF-8
+      string: '{"key":"example.com","effective_opts":{"type":"dom","limit":1000,"wildcard":false,"parent":false,"categories_include":["A"]},"status":"finished","query_key":"example.com","records":{"A":[{"key":"example.com","value":"93.184.216.34","value_type":"IP4","first_seen":1566777600,"last_seen":1713268800}]},"records_returned":1,"limited":false,"error":null}'
+  recorded_at: Tue, 16 Apr 2024 23:16:41 GMT
+recorded_with: VCR 6.2.0
