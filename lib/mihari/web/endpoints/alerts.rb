@@ -52,7 +52,7 @@ module Mihari
           end
 
           desc "Delete an alert", {
-            success: {code: 204, model: Entities::Message},
+            success: {code: 204},
             failure: [{code: 404, model: Entities::ErrorMessage}],
             summary: "Delete an alert"
           }
@@ -60,11 +60,9 @@ module Mihari
             requires :id, type: Integer
           end
           delete "/:id" do
-            status 204
-
             id = params["id"].to_i
             result = Services::AlertDestroyer.result(id)
-            return present({message: ""}, with: Entities::Message) if result.success?
+            return if result.success?
 
             case result.failure
             when ActiveRecord::RecordNotFound

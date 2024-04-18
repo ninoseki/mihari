@@ -74,7 +74,7 @@ RSpec.describe Mihari::Web::Endpoints::Artifacts, vcr: "Mihari_Services_Artifact
       expect(last_response.status).to eq(404)
     end
 
-    it "returns 201" do
+    it "returns 204" do
       delete "/api/artifacts/#{artifact_to_delete.id}"
       expect(last_response.status).to eq(204)
     end

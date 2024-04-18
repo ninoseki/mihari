@@ -32,7 +32,7 @@ module Mihari
           end
 
           desc "Delete a tag", {
-            success: {code: 204, model: Entities::Message},
+            success: {code: 204},
             failure: [{code: 404, model: Entities::ErrorMessage}],
             summary: "Delete a tag"
           }
@@ -44,7 +44,7 @@ module Mihari
 
             id = params[:id].to_i
             result = Services::TagDestroyer.result(id)
-            return present({message: ""}, with: Entities::Message) if result.success?
+            return if result.success?
 
             case result.failure
             when ActiveRecord::RecordNotFound

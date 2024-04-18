@@ -15,12 +15,7 @@ module Mihari
           }
           get "/" do
             configs = Services::ConfigSearcher.call
-            present(
-              {
-                results: configs
-              },
-              with: Entities::Configs
-            )
+            present({results: configs}, with: Entities::Configs)
           end
         end
       end
