@@ -16,6 +16,7 @@
 - [SecurityTrails](securitytrails.md)
 - [Shodan](shodan.md)
 - [urlscan.io](urlscan.md)
+- [Validin](validin.md)
 - [VirusTotal](virustotal.md)
 - [VirusTotal Intelligence](virustotal_intelligence.md)
 
