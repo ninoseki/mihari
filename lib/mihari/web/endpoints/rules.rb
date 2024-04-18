@@ -167,7 +167,7 @@ module Mihari
           end
 
           desc "Delete a rule", {
-            success: {code: 204, model: Entities::Message},
+            success: {code: 204},
             failure: [{code: 404, model: Entities::ErrorMessage}],
             summary: "Delete a rule"
           }
@@ -179,7 +179,7 @@ module Mihari
 
             id = params[:id].to_s
             result = Services::RuleDestroyer.result(id)
-            return present({message: "ID:#{id} is deleted"}, with: Entities::Message) if result.success?
+            return if result.success?
 
             case result.failure
             when ActiveRecord::RecordNotFound

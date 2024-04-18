@@ -87,7 +87,7 @@ module Mihari
           end
 
           desc "Delete an artifact", {
-            success: {code: 204, model: Entities::Message},
+            success: {code: 204},
             failure: [{code: 404, model: Entities::ErrorMessage}],
             summary: "Delete an artifact"
           }
@@ -99,7 +99,7 @@ module Mihari
 
             id = params["id"].to_i
             result = Services::ArtifactDestroyer.result(id)
-            return present({message: ""}, with: Entities::Message) if result.success?
+            return if result.success?
 
             case result.failure
             when ActiveRecord::RecordNotFound
