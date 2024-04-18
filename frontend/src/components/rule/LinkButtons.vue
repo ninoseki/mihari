@@ -1,3 +1,29 @@
+<script setup lang="ts">
+import { computed, onMounted, type PropType } from "vue"
+
+import { generateGetAlertsTask, generateGetArtifactsTask } from "@/api-helper"
+import type { RuleType } from "@/schemas"
+
+const props = defineProps({
+  rule: {
+    type: Object as PropType<RuleType>,
+    required: true
+  }
+})
+
+const q = computed(() => {
+  return `rule.id:"${props.rule.id}"`
+})
+
+const getAlertsTask = generateGetAlertsTask()
+const getArtifactsTask = generateGetArtifactsTask()
+
+onMounted(() => {
+  getAlertsTask.perform({ q: q.value, page: 1, limit: 0 })
+  getArtifactsTask.perform({ q: q.value, page: 1, limit: 0 })
+})
+</script>
+
 <template>
   <span class="buttons is-pulled-right">
     <a class="button is-small is-warning">
@@ -10,38 +36,3 @@
     </a>
   </span>
 </template>
-
-<script lang="ts">
-import { computed, defineComponent, onMounted, type PropType } from "vue"
-
-import { generateGetAlertsTask, generateGetArtifactsTask } from "@/api-helper"
-import type { RuleType } from "@/schemas"
-
-export default defineComponent({
-  name: "RuleLinkButtons",
-  props: {
-    rule: {
-      type: Object as PropType<RuleType>,
-      required: true
-    }
-  },
-  setup(props) {
-    const q = computed(() => {
-      return `rule.id:"${props.rule.id}"`
-    })
-
-    const getAlertsTask = generateGetAlertsTask()
-    const getArtifactsTask = generateGetArtifactsTask()
-
-    onMounted(() => {
-      getAlertsTask.perform({ q: q.value, page: 1, limit: 0 })
-      getArtifactsTask.perform({ q: q.value, page: 1, limit: 0 })
-    })
-
-    return {
-      getAlertsTask,
-      getArtifactsTask
-    }
-  }
-})
-</script>

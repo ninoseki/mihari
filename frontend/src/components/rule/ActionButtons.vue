@@ -1,3 +1,73 @@
+<script setup lang="ts">
+import axios, { AxiosError } from "axios"
+import { computed, onMounted, type PropType } from "vue"
+
+import {
+  generateDeleteRuleTask,
+  generateGetAlertsTask,
+  generateGetArtifactsTask,
+  generateSearchRuleTask
+} from "@/api-helper"
+import type { QueueMessageType, RuleType } from "@/schemas"
+
+const props = defineProps({
+  rule: {
+    type: Object as PropType<RuleType>,
+    required: true
+  }
+})
+
+const emits = defineEmits<{
+  (e: "delete"): void
+  (e: "set-error", value: AxiosError): void
+  (e: "set-message", value: QueueMessageType): void
+}>()
+
+const href = computed(() => {
+  return `/api/rules/${props.rule.id}`
+})
+
+const q = computed(() => {
+  return `rule.id:"${props.rule.id}"`
+})
+
+const deleteRuleTask = generateDeleteRuleTask()
+const searchRuleTask = generateSearchRuleTask()
+const getAlertsTask = generateGetAlertsTask()
+const getArtifactsTask = generateGetArtifactsTask()
+
+const deleteRule = async () => {
+  const confirmed = window.confirm(`Are you sure you want to delete ${props.rule.id}?`)
+
+  if (confirmed) {
+    try {
+      await deleteRuleTask.perform(props.rule.id)
+      emits("delete")
+    } catch (err) {
+      if (axios.isAxiosError(err)) {
+        emits("set-error", err)
+      }
+    }
+  }
+}
+
+const searchRule = async () => {
+  try {
+    const message = await searchRuleTask.perform(props.rule.id)
+    emits("set-message", message)
+  } catch (err) {
+    if (axios.isAxiosError(err)) {
+      emits("set-error", err)
+    }
+  }
+}
+
+onMounted(() => {
+  getAlertsTask.perform({ q: q.value, page: 1, limit: 0 })
+  getArtifactsTask.perform({ q: q.value, page: 1, limit: 0 })
+})
+</script>
+
 <template>
   <span class="buttons is-pulled-right">
     <router-link
@@ -44,82 +114,3 @@
     </button>
   </span>
 </template>
-
-<script lang="ts">
-import axios from "axios"
-import { computed, defineComponent, onMounted, type PropType } from "vue"
-
-import {
-  generateDeleteRuleTask,
-  generateGetAlertsTask,
-  generateGetArtifactsTask,
-  generateSearchRuleTask
-} from "@/api-helper"
-import type { RuleType } from "@/schemas"
-
-export default defineComponent({
-  name: "RuleActionButtons",
-  props: {
-    rule: {
-      type: Object as PropType<RuleType>,
-      required: true
-    }
-  },
-  emits: ["set-message", "set-error", "delete"],
-  setup(props, context) {
-    const href = computed(() => {
-      return `/api/rules/${props.rule.id}`
-    })
-
-    const q = computed(() => {
-      return `rule.id:"${props.rule.id}"`
-    })
-
-    const deleteRuleTask = generateDeleteRuleTask()
-    const searchRuleTask = generateSearchRuleTask()
-    const getAlertsTask = generateGetAlertsTask()
-    const getArtifactsTask = generateGetArtifactsTask()
-
-    const deleteRule = async () => {
-      const confirmed = window.confirm(`Are you sure you want to delete ${props.rule.id}?`)
-
-      if (confirmed) {
-        try {
-          await deleteRuleTask.perform(props.rule.id)
-          context.emit("delete")
-        } catch (err) {
-          if (axios.isAxiosError(err)) {
-            context.emit("set-error")
-          }
-        }
-      }
-    }
-
-    const searchRule = async () => {
-      try {
-        const message = await searchRuleTask.perform(props.rule.id)
-        context.emit("set-message", message)
-      } catch (err) {
-        if (axios.isAxiosError(err)) {
-          context.emit("set-error", err)
-        }
-      }
-    }
-
-    onMounted(() => {
-      getAlertsTask.perform({ q: q.value, page: 1, limit: 0 })
-      getArtifactsTask.perform({ q: q.value, page: 1, limit: 0 })
-    })
-
-    return {
-      deleteRule,
-      searchRule,
-      searchRuleTask,
-      href,
-      getAlertsTask,
-      getArtifactsTask,
-      q
-    }
-  }
-})
-</script>

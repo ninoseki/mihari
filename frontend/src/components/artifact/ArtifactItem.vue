@@ -1,3 +1,52 @@
+<script setup lang="ts">
+import type { AxiosError } from "axios"
+import truncate from "just-truncate"
+import { type PropType, ref } from "vue"
+
+import ActionButtons from "@/components/artifact/ActionButtons.vue"
+import ErrorMessage from "@/components/ErrorMessage.vue"
+import Message from "@/components/MessageItem.vue"
+import Tags from "@/components/tag/TagsItem.vue"
+import type { ArtifactType, QueueMessageType } from "@/schemas"
+
+defineProps({
+  artifact: {
+    type: Object as PropType<ArtifactType>,
+    required: true
+  }
+})
+
+const emits = defineEmits<{
+  (e: "delete"): void
+}>()
+
+const error = ref<AxiosError>()
+const message = ref<QueueMessageType>()
+
+const onSetError = (newError: AxiosError) => {
+  error.value = newError
+}
+
+const onDisposeError = () => {
+  error.value = undefined
+}
+
+const onDelete = () => {
+  emits("delete")
+  console.log("foo")
+}
+
+const onSetMessage = (newMessage: QueueMessageType) => {
+  if (newMessage.queued) {
+    message.value = newMessage
+  }
+}
+
+const onDisposeMessage = () => {
+  message.value = undefined
+}
+</script>
+
 <template>
   <div class="box">
     <ErrorMessage
@@ -61,64 +110,3 @@
     <p class="help">Created at: {{ artifact.createdAt }}</p>
   </div>
 </template>
-
-<script lang="ts">
-import type { AxiosError } from "axios"
-import truncate from "just-truncate"
-import { defineComponent, type PropType, ref } from "vue"
-
-import ActionButtons from "@/components/artifact/ActionButtons.vue"
-import ErrorMessage from "@/components/ErrorMessage.vue"
-import Message from "@/components/Message.vue"
-import Tags from "@/components/tag/Tags.vue"
-import type { ArtifactType, QueueMessageType } from "@/schemas"
-
-export default defineComponent({
-  name: "ArtifactsItem",
-  props: {
-    artifact: {
-      type: Object as PropType<ArtifactType>,
-      required: true
-    }
-  },
-  components: { ErrorMessage, ActionButtons, Message, Tags },
-  emits: ["delete"],
-  setup(_, context) {
-    const error = ref<AxiosError>()
-    const message = ref<QueueMessageType>()
-
-    const onSetError = (newError: AxiosError) => {
-      error.value = newError
-    }
-
-    const onDisposeError = () => {
-      error.value = undefined
-    }
-
-    const onDelete = () => {
-      context.emit("delete")
-    }
-
-    const onSetMessage = (newMessage: QueueMessageType) => {
-      if (newMessage.queued) {
-        message.value = newMessage
-      }
-    }
-
-    const onDisposeMessage = () => {
-      message.value = undefined
-    }
-
-    return {
-      onSetError,
-      onDisposeError,
-      onDelete,
-      error,
-      truncate,
-      message,
-      onSetMessage,
-      onDisposeMessage
-    }
-  }
-})
-</script>

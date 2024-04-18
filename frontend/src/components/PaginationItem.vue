@@ -1,3 +1,58 @@
+<script setup lang="ts">
+import { computed } from "vue"
+
+const props = defineProps({
+  currentPage: {
+    type: Number,
+    required: true
+  },
+  pageSize: {
+    type: Number,
+    required: true
+  },
+  total: {
+    type: Number,
+    required: true
+  }
+})
+
+const emits = defineEmits<{
+  (e: "update-page", value: number): void
+}>()
+
+const isNextPage = (page: number): boolean => {
+  return page === props.currentPage + 1 || page === props.currentPage - 1
+}
+
+const totalPageCount = computed(() => {
+  return Math.ceil(props.total / props.pageSize)
+})
+
+const hasOnlyOnePage = computed(() => {
+  return totalPageCount.value === 1
+})
+
+const hasPreviousPage = computed(() => {
+  return props.currentPage > 1
+})
+
+const isPreviousPageFirst = computed(() => {
+  return props.currentPage - 1 === 1
+})
+
+const hasNextPage = computed(() => {
+  return props.currentPage < totalPageCount.value
+})
+
+const isNextPageLast = computed(() => {
+  return props.currentPage + 1 === totalPageCount.value
+})
+
+const updatePage = (page: number) => {
+  emits("update-page", page)
+}
+</script>
+
 <template>
   <article class="message is-warning" v-if="total === 0">
     <div class="message-body">There is no result to show.</div>
@@ -39,70 +94,3 @@
     </ul>
   </nav>
 </template>
-
-<script lang="ts">
-import { computed, defineComponent } from "vue"
-
-export default defineComponent({
-  name: "PaginationItem",
-  props: {
-    currentPage: {
-      type: Number,
-      required: true
-    },
-    pageSize: {
-      type: Number,
-      required: true
-    },
-    total: {
-      type: Number,
-      required: true
-    }
-  },
-  emits: ["update-page"],
-  setup(props, context) {
-    const isNextPage = (page: number): boolean => {
-      return page === props.currentPage + 1 || page === props.currentPage - 1
-    }
-
-    const totalPageCount = computed(() => {
-      return Math.ceil(props.total / props.pageSize)
-    })
-
-    const hasOnlyOnePage = computed(() => {
-      return totalPageCount.value === 1
-    })
-
-    const hasPreviousPage = computed(() => {
-      return props.currentPage > 1
-    })
-
-    const isPreviousPageFirst = computed(() => {
-      return props.currentPage - 1 === 1
-    })
-
-    const hasNextPage = computed(() => {
-      return props.currentPage < totalPageCount.value
-    })
-
-    const isNextPageLast = computed(() => {
-      return props.currentPage + 1 === totalPageCount.value
-    })
-
-    const updatePage = (page: number) => {
-      context.emit("update-page", page)
-    }
-
-    return {
-      updatePage,
-      isNextPage,
-      hasNextPage,
-      hasOnlyOnePage,
-      hasPreviousPage,
-      isNextPageLast,
-      isPreviousPageFirst,
-      totalPageCount
-    }
-  }
-})
-</script>

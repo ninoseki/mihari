@@ -1,3 +1,55 @@
+<script setup lang="ts">
+import { useToggle } from "@vueuse/core"
+import { useRouteQuery } from "@vueuse/router"
+import { onMounted, ref, watch } from "vue"
+
+import { generateGetArtifactsTask } from "@/api-helper"
+import Artifacts from "@/components/artifact/ArtifactsItem.vue"
+import ErrorMessage from "@/components/ErrorMessage.vue"
+import Loading from "@/components/LoadingItem.vue"
+import type { SearchParamsType } from "@/schemas"
+
+const page = useRouteQuery<string>("page", "1")
+const q = useRouteQuery<string>("q", "")
+const showHelp = ref(false)
+
+const getArtifactsTask = generateGetArtifactsTask()
+
+const getArtifacts = async () => {
+  const params: SearchParamsType = { q: q.value, page: parseInt(page.value) }
+  return await getArtifactsTask.perform(params)
+}
+
+const onUpdatePage = (newPage: number) => {
+  console.log(newPage)
+  page.value = newPage.toString()
+}
+
+const search = async () => {
+  page.value = "1"
+  await getArtifacts()
+}
+
+const onRefresh = search
+
+const toggleShowHelp = useToggle(showHelp)
+
+onMounted(async () => {
+  await getArtifacts()
+})
+
+watch(page, async () => {
+  await getArtifacts()
+})
+
+watch(q, async () => {
+  window.scrollTo({
+    top: 0,
+    behavior: "smooth"
+  })
+})
+</script>
+
 <template>
   <div class="block">
     <div class="field has-addons">
@@ -13,7 +65,7 @@
         </a>
       </p>
       <p class="control">
-        <a class="button is-info" @click="toggleShowHelp">
+        <a class="button is-info" @click="toggleShowHelp()">
           <span class="icon is-small">
             <font-awesome-icon icon="question"></font-awesome-icon>
           </span>
@@ -51,77 +103,3 @@
     />
   </div>
 </template>
-
-<script lang="ts">
-import { useRouteQuery } from "@vueuse/router"
-import { defineComponent, onMounted, ref, watch } from "vue"
-
-import { generateGetArtifactsTask } from "@/api-helper"
-import Artifacts from "@/components/artifact/Artifacts.vue"
-import ErrorMessage from "@/components/ErrorMessage.vue"
-import Loading from "@/components/Loading.vue"
-import type { SearchParamsType } from "@/schemas"
-
-export default defineComponent({
-  name: "ArtifactsWrapper",
-  components: {
-    Artifacts,
-    Loading,
-    ErrorMessage
-  },
-  setup() {
-    const page = useRouteQuery<string>("page", "1")
-    const q = useRouteQuery<string>("q", "")
-    const showHelp = ref(false)
-
-    const getArtifactsTask = generateGetArtifactsTask()
-
-    const getArtifacts = async () => {
-      const params: SearchParamsType = { q: q.value, page: parseInt(page.value) }
-      return await getArtifactsTask.perform(params)
-    }
-
-    const onUpdatePage = (newPage: number) => {
-      console.log(newPage)
-      page.value = newPage.toString()
-    }
-
-    const search = async () => {
-      page.value = "1"
-      await getArtifacts()
-    }
-
-    const onRefresh = search
-
-    const toggleShowHelp = () => {
-      showHelp.value = !showHelp.value
-    }
-
-    onMounted(async () => {
-      await getArtifacts()
-    })
-
-    watch(page, async () => {
-      await getArtifacts()
-    })
-
-    watch(q, async () => {
-      window.scrollTo({
-        top: 0,
-        behavior: "smooth"
-      })
-    })
-
-    return {
-      getArtifactsTask,
-      page,
-      q,
-      search,
-      showHelp,
-      toggleShowHelp,
-      onUpdatePage,
-      onRefresh
-    }
-  }
-})
-</script>

@@ -13,8 +13,6 @@ import {
   type ConfigsType,
   type CreateRuleType,
   type IpInfoType,
-  MessageSchema,
-  type MessageType,
   QueueMessageSchema,
   type QueueMessageType,
   RuleSchema,
@@ -53,9 +51,8 @@ export const API = {
     return TagsSchema.parse(res.data)
   },
 
-  async deleteAlert(id: number): Promise<MessageType> {
-    const res = await client.delete(`/api/alerts/${id}`)
-    return MessageSchema.parse(res.data)
+  async deleteAlert(id: number): Promise<void> {
+    await client.delete(`/api/alerts/${id}`)
   },
 
   async getArtifact(id: number): Promise<ArtifactType> {
@@ -76,9 +73,8 @@ export const API = {
     return QueueMessageSchema.parse(res.data)
   },
 
-  async deleteArtifact(id: number): Promise<MessageType> {
-    const res = await client.delete(`/api/artifacts/${id}`)
-    return MessageSchema.parse(res.data)
+  async deleteArtifact(id: number): Promise<void> {
+    await client.delete(`/api/artifacts/${id}`)
   },
 
   async getRules(params: SearchParamsType): Promise<RulesType> {
@@ -109,14 +105,12 @@ export const API = {
     return RuleSchema.parse(res.data)
   },
 
-  async deleteRule(id: string): Promise<MessageType> {
-    const res = await client.delete(`/api/rules/${id}`)
-    return MessageSchema.parse(res.data)
+  async deleteRule(id: string): Promise<void> {
+    await client.delete(`/api/rules/${id}`)
   },
 
-  async deleteTag(id: number): Promise<MessageType> {
-    const res = await client.delete(`/api/tags/${id}`)
-    return MessageSchema.parse(res.data)
+  async deleteTag(id: number): Promise<void> {
+    await client.delete(`/api/tags/${id}`)
   },
 
   async getIpInfo(ipAddress: string): Promise<IpInfoType> {

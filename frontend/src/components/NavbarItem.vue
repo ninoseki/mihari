@@ -1,3 +1,14 @@
+<script setup lang="ts">
+import { useDark, useToggle } from "@vueuse/core"
+
+const isDark = useDark({
+  selector: "html",
+  valueDark: "theme-dark",
+  valueLight: "theme-light"
+})
+const toggleDark = useToggle(isDark)
+</script>
+
 <template>
   <nav role="navigation" aria-label="main navigation" class="navbar is-fixed-top">
     <div class="navbar-brand">
@@ -29,25 +40,6 @@
     </div>
   </nav>
 </template>
-
-<script lang="ts">
-import { useDark, useToggle } from "@vueuse/core"
-import { defineComponent } from "vue"
-
-export default defineComponent({
-  name: "NavbarItem",
-  setup() {
-    const isDark = useDark({
-      selector: "html",
-      valueDark: "theme-dark",
-      valueLight: "theme-light"
-    })
-    const toggleDark = useToggle(isDark)
-
-    return { toggleDark, isDark }
-  }
-})
-</script>
 
 <style scoped>
 .navbar {

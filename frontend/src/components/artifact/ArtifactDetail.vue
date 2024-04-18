@@ -1,3 +1,107 @@
+<script setup lang="ts">
+import type { AxiosError } from "axios"
+import truncate from "just-truncate"
+import { computed, onMounted, type PropType, ref } from "vue"
+
+import { generateGetIPTask } from "@/api-helper"
+import ActionButtons from "@/components/artifact/ActionButtons.vue"
+import AS from "@/components/artifact/AsItem.vue"
+import CPEs from "@/components/artifact/CpesItem.vue"
+import DnsRecords from "@/components/artifact/DnsRecordsItem.vue"
+import Ports from "@/components/artifact/PortsItem.vue"
+import ReverseDnsNames from "@/components/artifact/ReverseDnsNames.vue"
+import Vulnerabilities from "@/components/artifact/VulnerabilitiesItem.vue"
+import WhoisRecord from "@/components/artifact/WhoisRecord.vue"
+import ErrorMessage from "@/components/ErrorMessage.vue"
+import Links from "@/components/link/LinksItem.vue"
+import Message from "@/components/MessageItem.vue"
+import Tags from "@/components/tag/TagsItem.vue"
+import type { ArtifactType, GcsType, QueueMessageType } from "@/schemas"
+import { getGCSByCountryCode, getGCSByIPInfo } from "@/utils"
+
+const props = defineProps({
+  artifact: {
+    type: Object as PropType<ArtifactType>,
+    required: true
+  }
+})
+
+const emits = defineEmits<{
+  (e: "delete"): void
+  (e: "refresh"): void
+}>()
+
+const googleMapSrc = ref<string>()
+const countryCode = ref<string>()
+
+const error = ref<AxiosError>()
+const message = ref<QueueMessageType>()
+
+const onSetError = (newError: AxiosError) => {
+  error.value = newError
+}
+
+const onDisposeError = () => {
+  error.value = undefined
+}
+
+const onDelete = () => {
+  emits("delete")
+}
+
+const onSetMessage = (newMessage: QueueMessageType) => {
+  if (newMessage.queued) {
+    message.value = newMessage
+  } else {
+    emits("refresh")
+  }
+}
+
+const onDisposeMessage = () => {
+  message.value = undefined
+}
+
+const urlscanLiveshotSrc = computed<string | undefined>(() => {
+  if (props.artifact.dataType === "domain") {
+    const url = `http://${props.artifact.data}`
+    return `https://urlscan.io/liveshot/?url=${url}`
+  }
+
+  if (props.artifact.dataType === "url") {
+    return `https://urlscan.io/liveshot/?url=${props.artifact.data}`
+  }
+
+  return undefined
+})
+
+const getGoogleMapSrc = (gcs: GcsType | undefined): string | undefined => {
+  if (gcs) {
+    return `https://maps.google.co.jp/maps?output=embed&q=${gcs.lat},${gcs.long}&z=3`
+  }
+
+  return undefined
+}
+
+const getIPInfoTask = generateGetIPTask()
+
+onMounted(async () => {
+  if (props.artifact.dataType === "ip") {
+    let gcs: GcsType | undefined = undefined
+
+    if (!props.artifact.geolocation) {
+      // Use IPInfo if an artifact does not have geolocation
+      const ipinfo = await getIPInfoTask.perform(props.artifact.data)
+      gcs = getGCSByIPInfo(ipinfo)
+      countryCode.value = ipinfo.countryCode
+    } else {
+      gcs = getGCSByCountryCode(props.artifact.geolocation.countryCode)
+    }
+
+    googleMapSrc.value = getGoogleMapSrc(gcs)
+  }
+})
+</script>
+
 <template>
   <ErrorMessage
     class="block"
@@ -100,140 +204,6 @@
     </div>
   </div>
 </template>
-
-<script lang="ts">
-import type { AxiosError } from "axios"
-import truncate from "just-truncate"
-import { computed, defineComponent, onMounted, type PropType, ref } from "vue"
-
-import { generateGetAlertsTask, generateGetIPTask } from "@/api-helper"
-import ActionButtons from "@/components/artifact/ActionButtons.vue"
-import AS from "@/components/artifact/AS.vue"
-import CPEs from "@/components/artifact/CPEs.vue"
-import DnsRecords from "@/components/artifact/DnsRecords.vue"
-import Ports from "@/components/artifact/Ports.vue"
-import ReverseDnsNames from "@/components/artifact/ReverseDnsNames.vue"
-import Vulnerabilities from "@/components/artifact/Vulnerabilities.vue"
-import WhoisRecord from "@/components/artifact/WhoisRecord.vue"
-import ErrorMessage from "@/components/ErrorMessage.vue"
-import Links from "@/components/link/Links.vue"
-import Message from "@/components/Message.vue"
-import Tags from "@/components/tag/Tags.vue"
-import type { ArtifactType, GcsType, QueueMessageType } from "@/schemas"
-import { getGCSByCountryCode, getGCSByIPInfo } from "@/utils"
-
-export default defineComponent({
-  name: "ArtifactDetail",
-  props: {
-    artifact: {
-      type: Object as PropType<ArtifactType>,
-      required: true
-    }
-  },
-  components: {
-    AS,
-    DnsRecords,
-    Links,
-    ReverseDnsNames,
-    Tags,
-    ActionButtons,
-    WhoisRecord,
-    CPEs,
-    Ports,
-    ErrorMessage,
-    Message,
-    Vulnerabilities
-  },
-  emits: ["refresh", "delete"],
-  setup(props, context) {
-    const googleMapSrc = ref<string>()
-    const countryCode = ref<string>()
-
-    const error = ref<AxiosError>()
-    const message = ref<QueueMessageType>()
-
-    const onSetError = (newError: AxiosError) => {
-      error.value = newError
-    }
-
-    const onDisposeError = () => {
-      error.value = undefined
-    }
-
-    const onDelete = () => {
-      context.emit("delete")
-    }
-
-    const onSetMessage = (newMessage: QueueMessageType) => {
-      if (newMessage.queued) {
-        message.value = newMessage
-      } else {
-        context.emit("refresh")
-      }
-    }
-
-    const onDisposeMessage = () => {
-      message.value = undefined
-    }
-
-    const urlscanLiveshotSrc = computed<string | undefined>(() => {
-      if (props.artifact.dataType === "domain") {
-        const url = `http://${props.artifact.data}`
-        return `https://urlscan.io/liveshot/?url=${url}`
-      }
-
-      if (props.artifact.dataType === "url") {
-        return `https://urlscan.io/liveshot/?url=${props.artifact.data}`
-      }
-
-      return undefined
-    })
-
-    const getGoogleMapSrc = (gcs: GcsType | undefined): string | undefined => {
-      if (gcs) {
-        return `https://maps.google.co.jp/maps?output=embed&q=${gcs.lat},${gcs.long}&z=3`
-      }
-
-      return undefined
-    }
-
-    const getIPInfoTask = generateGetIPTask()
-    const getAlertsTask = generateGetAlertsTask()
-
-    onMounted(async () => {
-      if (props.artifact.dataType === "ip") {
-        let gcs: GcsType | undefined = undefined
-
-        if (!props.artifact.geolocation) {
-          // Use IPInfo if an artifact does not have geolocation
-          const ipinfo = await getIPInfoTask.perform(props.artifact.data)
-          gcs = getGCSByIPInfo(ipinfo)
-          countryCode.value = ipinfo.countryCode
-        } else {
-          gcs = getGCSByCountryCode(props.artifact.geolocation.countryCode)
-        }
-
-        googleMapSrc.value = getGoogleMapSrc(gcs)
-      }
-    })
-
-    return {
-      countryCode,
-      getAlertsTask,
-      googleMapSrc,
-      truncate,
-      urlscanLiveshotSrc,
-      onDelete,
-      onSetError,
-      error,
-      onDisposeError,
-      message,
-      onDisposeMessage,
-      onSetMessage
-    }
-  }
-})
-</script>
 
 <style scoped>
 img.liveshot {

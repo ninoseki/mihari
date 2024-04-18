@@ -1,24 +1,13 @@
 <script setup lang="ts">
 import "@/ace-config"
 
-import { toRef, watchEffect } from "vue"
 import { VAceEditor } from "vue3-ace-editor"
 
-const props = defineProps({
+defineProps({
   yaml: {
     type: String,
     required: true
   }
-})
-
-const emits = defineEmits<{
-  (e: "update-yaml", value: string): void
-}>()
-
-const yamlInput = toRef(props, "yaml")
-
-watchEffect(() => {
-  emits("update-yaml", yamlInput.value)
 })
 </script>
 
@@ -26,13 +15,14 @@ watchEffect(() => {
   <div class="block">
     <VAceEditor
       class="vue-ace-editor"
-      v-model:value="yamlInput"
+      :value="yaml"
       lang="yaml"
       theme="monokai"
       :options="{
+        readOnly: true,
         fontSize: 16,
-        minLines: 6,
-        maxLines: 10000
+        maxLines: 10000,
+        minLines: 6
       }"
     />
   </div>

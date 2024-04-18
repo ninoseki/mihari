@@ -2,10 +2,10 @@
 import { useTitle } from "@vueuse/core"
 import { onMounted } from "vue"
 
-import NewRule from "@/components/rule/NewRule.vue"
+import Artifacts from "@/components/artifact/ArtifactsWrapper.vue"
 
 const updateTitle = () => {
-  useTitle(`New rule - Mihari`)
+  useTitle(`Artifacts - Mihari`)
 }
 
 onMounted(() => {
@@ -14,5 +14,5 @@ onMounted(() => {
 </script>
 
 <template>
-  <NewRule />
+  <Artifacts />
 </template>
