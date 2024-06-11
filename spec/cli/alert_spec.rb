@@ -27,18 +27,19 @@ RSpec.describe Mihari::CLI::Alert do
   end
 
   describe "#create" do
-    before do
-      @file = Tempfile.new("dummy")
-      @file.write(YAML.dump({rule_id: rule.id, artifacts: %w[1.1.1.1]}))
-      @file.rewind
-    end
+    let(:file) {
+      file = Tempfile.new("dummy")
+      file.write(YAML.dump({rule_id: rule.id, artifacts: %w[1.1.1.1]}))
+      file.rewind
+      file
+    }
 
     after do
-      @file.unlink
+      file.unlink
     end
 
     it do
-      expect { described_class.new.invoke(:create, [@file.path]) }.to output(include(rule.id)).to_stdout
+      expect { described_class.new.invoke(:create, [file.path]) }.to output(include(rule.id)).to_stdout
     end
   end
 end

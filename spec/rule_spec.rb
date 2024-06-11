@@ -134,25 +134,25 @@ RSpec.describe Mihari::Rule do
     end
 
     it do
-      expect(rule.diff?).to eq(false)
+      expect(rule.diff?).to be(false)
     end
 
     context "with modified integer" do
       it do
         rule.tap { |rule| rule.data[:artifact_ttl] = -1 }
-        expect(rule.diff?).to eq(true)
+        expect(rule.diff?).to be(true)
       end
     end
 
     context "with modified dates" do
       it do
         rule.tap { |rule| rule.data[:created_on] = Date.today.prev_day }
-        expect(rule.diff?).to eq(true)
+        expect(rule.diff?).to be(true)
       end
 
       it do
         rule.tap { |rule| rule.data[:updated_on] = Date.today.prev_day }
-        expect(rule.diff?).to eq(true)
+        expect(rule.diff?).to be(true)
       end
     end
   end

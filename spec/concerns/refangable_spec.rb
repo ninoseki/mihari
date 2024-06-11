@@ -6,7 +6,7 @@ end
 
 RSpec.describe Mihari::Concerns::Refangable do
   describe "#refang" do
-    subject(:subject) { RefangTest.new }
+    subject(:test) { RefangTest.new }
 
     where(:value, :expected) do
       [
@@ -18,7 +18,7 @@ RSpec.describe Mihari::Concerns::Refangable do
 
     with_them do
       it do
-        expect(subject.refang(value)).to eq(expected)
+        expect(test.refang(value)).to eq(expected)
       end
     end
   end

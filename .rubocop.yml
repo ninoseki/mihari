@@ -1,5 +1,6 @@
-Style/StringLiterals:
-  EnforcedStyle: double_quotes
+AllCops:
+  TargetRubyVersion: 3.2
+  NewCops: enable
 Metrics/BlockLength:
   Max: 150
   Exclude:
@@ -12,13 +13,36 @@ Metrics/MethodLength:
 Metrics/AbcSize:
   Max: 50
 RSpec/MultipleMemoizedHelpers:
-  Max: 10
+  Max: 15
 RSpec/ExampleLength:
   Max: 20
 RSpec/FilePath:
   SpecSuffixOnly: true
+RSpec/NestedGroups:
+  Max: 5
+RSpec/RepeatedExampleGroupDescription:
+  Enabled: false
+RSpec/ReceiveMessages:
+  Enabled: false
+RSpec/MultipleExpectations:
+  Enabled: false
+RSpec/SpecFilePathFormat:
+  Enabled: false
+RSpecRails:
+  Enabled: false
+FactoryBot/SyntaxMethods:
+  Enabled: false
 require:
+  - rubocop-capybara
   - rubocop-factory_bot
+  - rubocop-performance
   - rubocop-rake
   - rubocop-rspec
   - rubocop-yard
+  - standard
+  - standard-custom
+  - standard-performance
+inherit_gem:
+  standard: config/base.yml
+  standard-custom: config/base.yml
+  standard-performance: config/base.yml

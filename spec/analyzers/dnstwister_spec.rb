@@ -7,7 +7,9 @@ RSpec.describe Mihari::Analyzers::DNSTwister, :vcr do
 
   describe "#artifacts" do
     before do
+      # rubocop:disable RSpec/SubjectStub
       allow(analyzer).to receive(:resolvable?).and_return(true)
+      # rubocop:enable RSpec/SubjectStub
     end
 
     it do

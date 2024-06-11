@@ -10,7 +10,7 @@ RSpec.describe Mihari::Services::ArtifactEnricher, vcr: "Mihari_Services_Artifac
       end
 
       it do
-        expect(described_class.call(artifact.id)).to eq(true)
+        expect(described_class.call(artifact.id)).to be(true)
       end
     end
 

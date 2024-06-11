@@ -28,40 +28,42 @@ class RetriableTest
 end
 
 RSpec.describe Mihari::Concerns::Retriable do
-  subject(:subject) { RetriableTest.new }
+  subject(:test) { RetriableTest.new }
 
   include_context "with fake HTTPBin"
 
   describe "#retry_on_error" do
     context "with 404" do
       it do
-        expect { subject.retriable_get("#{server.base_url}/status/404") }.to raise_error(Mihari::StatusError)
-        expect(subject.count).to eq(1)
+        expect { test.retriable_get("#{server.base_url}/status/404") }.to raise_error(Mihari::StatusError)
+        expect(test.count).to eq(1)
       end
     end
 
     context "with 401" do
       it do
-        expect { subject.retriable_get("#{server.base_url}/status/401") }.to raise_error(Mihari::StatusError)
-        expect(subject.count).to eq(1)
+        expect { test.retriable_get("#{server.base_url}/status/401") }.to raise_error(Mihari::StatusError)
+        expect(test.count).to eq(1)
       end
     end
 
     context "with non-404" do
       it do
-        expect { subject.retriable_get("#{server.base_url}/status/500") }.to raise_error(Mihari::StatusError)
-        expect(subject.count).to eq(subject.times)
+        expect { test.retriable_get("#{server.base_url}/status/500") }.to raise_error(Mihari::StatusError)
+        expect(test.count).to eq(test.times)
       end
     end
 
     context "with HTTP::TimeoutError" do
       before do
-        allow(subject).to receive(:http).and_return(Mihari::HTTP::Factory.build(timeout: -1))
+        # rubocop:disable RSpec/SubjectStub
+        allow(test).to receive(:http).and_return(Mihari::HTTP::Factory.build(timeout: -1))
+        # rubocop:enable RSpec/SubjectStub
       end
 
       it do
-        expect { subject.retriable_get("#{server.base_url}/get") }.to raise_error(HTTP::TimeoutError)
-        expect(subject.count).to eq(subject.times)
+        expect { test.retriable_get("#{server.base_url}/get") }.to raise_error(HTTP::TimeoutError)
+        expect(test.count).to eq(test.times)
       end
     end
   end

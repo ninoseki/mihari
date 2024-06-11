@@ -60,7 +60,7 @@ RSpec.describe Mihari::Emitters::Slack do
   end
 
   describe "#call" do
-    let!(:mock) { instance_double("notifier") }
+    let!(:mock) { instance_double(Slack::Notifier) }
 
     before do
       allow(::Slack::Notifier).to receive(:new).and_return(mock)

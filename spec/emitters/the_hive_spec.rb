@@ -29,7 +29,7 @@ RSpec.describe Mihari::Emitters::TheHive do
   end
 
   describe "#call" do
-    let!(:mock_client) { instance_double("client") }
+    let!(:mock_client) { instance_double(Mihari::Clients::TheHive) }
     let!(:mocked_emitter) { described_class.new(rule:) }
 
     before do

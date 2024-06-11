@@ -65,14 +65,14 @@ RSpec.describe Mihari::Models::Artifact do
 
   describe "#enrichable?" do
     it do
-      expect(artifact.enrichable?).to eq(true)
+      expect(artifact.enrichable?).to be(true)
     end
 
     context "with unenrichable artifact" do
       let(:artifact) { FactoryBot.build(:artifact, :unenrichable) }
 
       it do
-        expect(artifact.enrichable?).to eq(false)
+        expect(artifact.enrichable?).to be(false)
       end
     end
   end
@@ -116,12 +116,12 @@ RSpec.describe Mihari::Models::Artifact do
     let(:alert) { artifact.alert }
 
     it do
-      expect(Mihari::Models::Alert.exists?(alert.id)).to eq(true)
+      expect(Mihari::Models::Alert.exists?(alert.id)).to be(true)
     end
 
     it do
       artifact.destroy
-      expect(Mihari::Models::Alert.exists?(alert.id)).to eq(false)
+      expect(Mihari::Models::Alert.exists?(alert.id)).to be(false)
     end
   end
 end

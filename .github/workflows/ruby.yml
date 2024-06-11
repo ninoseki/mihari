@@ -35,7 +35,7 @@ jobs:
           bundler: latest
           bundler-cache: true
       - name: Lint
-        run: bundle exec standardrb
+        run: bundle exec rake rubocop
   test:
     runs-on: ubuntu-latest
     strategy:

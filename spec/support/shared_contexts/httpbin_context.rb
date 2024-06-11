@@ -1,12 +1,11 @@
 # frozen_string_literal: true
 
 require "capybara"
-
-require_relative "../httpbin"
+require "rspec/httpbin"
 
 RSpec.shared_context "with fake HTTPBin" do
   let_it_be(:server) do
-    server = Capybara::Server.new(HTTPBin)
+    server = Capybara::Server.new(RSpec::HTTPBin)
     server.boot
     server
   end

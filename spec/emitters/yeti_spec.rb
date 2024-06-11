@@ -25,7 +25,7 @@ RSpec.describe Mihari::Emitters::Yeti do
   end
 
   describe "#call" do
-    let!(:mock_client) { instance_double("client") }
+    let!(:mock_client) { instance_double(Mihari::Clients::Yeti) }
     let!(:mocked_emitter) { described_class.new(rule:) }
 
     before do

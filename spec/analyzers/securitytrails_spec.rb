@@ -44,7 +44,7 @@ RSpec.describe Mihari::Analyzers::SecurityTrails, :vcr do
   end
 
   context "without API credentials" do
-    let!(:query) { "1.1.1.1" }
+    let(:query) { "1.1.1.1" }
 
     before do
       allow(Mihari.config).to receive(:securitytrails_api_key).and_return(nil)
