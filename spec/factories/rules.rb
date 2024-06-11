@@ -5,7 +5,7 @@ FactoryBot.define do
     id { Faker::Internet.unique.uuid }
     title { Faker::Internet.unique.slug }
     description { Faker::Internet.unique.slug }
-    tags { build_list :tag, 1 }
+    tags { build_list(:tag, 1) }
     data do
       {
         id:,

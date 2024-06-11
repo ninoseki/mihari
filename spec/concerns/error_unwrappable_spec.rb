@@ -21,28 +21,28 @@ class ErrorTest
 end
 
 RSpec.describe Mihari::Concerns::ErrorUnwrappable do
-  subject(:subject) { ErrorTest.new }
+  subject(:test) { ErrorTest.new }
 
   describe "#unwrap_error" do
     it do
-      subject.raise_try_error
+      test.raise_try_error
     rescue => e
       expect(e).not_to be_a ZeroDivisionError
-      expect(subject.unwrap_error(e)).to be_a ZeroDivisionError
+      expect(test.unwrap_error(e)).to be_a ZeroDivisionError
     end
 
     it do
-      subject.raise_result_error
+      test.raise_result_error
     rescue => e
       expect(e).not_to be_a ZeroDivisionError
-      expect(subject.unwrap_error(e)).to be_a ZeroDivisionError
+      expect(test.unwrap_error(e)).to be_a ZeroDivisionError
     end
 
     it do
-      subject.raise_error
+      test.raise_error
     rescue => e
       expect(e).to be_a ZeroDivisionError
-      expect(subject.unwrap_error(e)).to be_a ZeroDivisionError
+      expect(test.unwrap_error(e)).to be_a ZeroDivisionError
     end
   end
 end

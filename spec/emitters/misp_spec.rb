@@ -23,7 +23,7 @@ RSpec.describe Mihari::Emitters::MISP, :vcr do
 
   describe "#call" do
     it do
-      emitter.call artifacts
+      expect(emitter.call(artifacts)).not_to be_nil
     end
   end
 

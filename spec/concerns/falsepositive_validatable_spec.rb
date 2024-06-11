@@ -5,7 +5,7 @@ class FalsePositiveTest
 end
 
 RSpec.describe Mihari::Concerns::FalsePositiveValidatable do
-  subject(:subject) { FalsePositiveTest.new }
+  subject(:test) { FalsePositiveTest.new }
 
   describe "#normalize_falsepositive" do
     where(:value, :expected) do
@@ -19,7 +19,7 @@ RSpec.describe Mihari::Concerns::FalsePositiveValidatable do
 
     with_them do
       it do
-        expect(subject.normalize_falsepositive(value)).to eq(expected)
+        expect(test.normalize_falsepositive(value)).to eq(expected)
       end
     end
   end
@@ -36,7 +36,7 @@ RSpec.describe Mihari::Concerns::FalsePositiveValidatable do
 
     with_them do
       it do
-        expect(subject.valid_falsepositive?(value)).to be expected
+        expect(test.valid_falsepositive?(value)).to be expected
       end
     end
   end

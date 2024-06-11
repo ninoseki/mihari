@@ -11,7 +11,7 @@ RSpec.describe Mihari::CLI::Rule do
     it do
       expect do
         described_class.new.invoke(:init, [path])
-      end.to output("").to_stdout
+      end.not_to output.to_stdout
     end
   end
 

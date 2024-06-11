@@ -3,8 +3,9 @@
 require "time"
 
 require "rspec/core/rake_task"
-require "standard/rake"
+require "rubocop/rake_task"
 
+RuboCop::RakeTask.new
 RSpec::Core::RakeTask.new(:spec)
 
 task default: :spec
@@ -67,6 +68,7 @@ namespace :build do
   end
 end
 
+desc "Build including Swagger doc and frontend assets"
 task :build do
   Rake::Task["build:swagger"].invoke
   Rake::Task["build:frontend"].invoke

@@ -45,7 +45,7 @@ RSpec.describe Mihari::Schemas::RuleContract do
 
       it do
         result = contract.call(**data)
-        expect(result.errors.empty?).to eq true
+        expect(result.errors.empty?).to be true
       end
     end
 

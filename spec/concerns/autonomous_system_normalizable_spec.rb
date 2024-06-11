@@ -5,7 +5,7 @@ class AutonomousSystemTest
 end
 
 RSpec.describe Mihari::Concerns::AutonomousSystemNormalizable do
-  subject(:subject) { AutonomousSystemTest.new }
+  subject(:test) { AutonomousSystemTest.new }
 
   describe "#normalize_asn" do
     where(:value, :expected) do
@@ -18,7 +18,7 @@ RSpec.describe Mihari::Concerns::AutonomousSystemNormalizable do
 
     with_them do
       it do
-        expect(subject.normalize_asn(value)).to eq(expected)
+        expect(test.normalize_asn(value)).to eq(expected)
       end
     end
   end
