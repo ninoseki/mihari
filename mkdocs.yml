@@ -12,7 +12,7 @@ plugins:
 nav:
   - Requirements: requirements.md
   - Installation: installation.md
-  - Architecture: architecture:.md
+  - Architecture: architecture.md
   - Rule: rule.md
   - Configuration: configuration.md
   - Usage: usage.md
