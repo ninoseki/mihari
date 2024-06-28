@@ -26,7 +26,6 @@ const onUpdatePage = (page: number) => {
 }
 
 const onDelete = () => {
-  console.log("bar")
   emits("refresh")
 }
 </script>

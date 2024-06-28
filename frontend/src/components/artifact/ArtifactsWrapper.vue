@@ -21,7 +21,6 @@ const getArtifacts = async () => {
 }
 
 const onUpdatePage = (newPage: number) => {
-  console.log(newPage)
   page.value = newPage.toString()
 }
 

@@ -87,9 +87,7 @@ const deleteArtifact = async () => {
 
   if (confirmed) {
     try {
-      console.log("baz?")
       await deleteArtifactTask.perform(props.artifact.id)
-      console.log("baz")
       emits("delete")
     } catch (err) {
       if (axios.isAxiosError(err)) {
