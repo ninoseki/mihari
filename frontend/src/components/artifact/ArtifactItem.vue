@@ -33,7 +33,6 @@ const onDisposeError = () => {
 
 const onDelete = () => {
   emits("delete")
-  console.log("foo")
 }
 
 const onSetMessage = (newMessage: QueueMessageType) => {
