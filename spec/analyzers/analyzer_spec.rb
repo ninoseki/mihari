@@ -4,7 +4,7 @@ class AnalyzerTest < Mihari::Analyzers::Base
   public :normalized_artifacts
 
   def initialize(query = "dummy")
-    super(query)
+    super
   end
 
   def artifacts

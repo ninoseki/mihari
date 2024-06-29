@@ -12,7 +12,7 @@ module Mihari
       # @param [Integer, nil] timeout
       #
       def initialize(base_url = "https://dnstwister.report", headers: {}, timeout: nil)
-        super(base_url, headers:, timeout:)
+        super
       end
 
       #

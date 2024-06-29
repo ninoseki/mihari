@@ -16,8 +16,6 @@ RSpec/MultipleMemoizedHelpers:
   Max: 15
 RSpec/ExampleLength:
   Max: 20
-RSpec/FilePath:
-  SpecSuffixOnly: true
 RSpec/NestedGroups:
   Max: 5
 RSpec/RepeatedExampleGroupDescription:
@@ -27,8 +25,6 @@ RSpec/ReceiveMessages:
 RSpec/MultipleExpectations:
   Enabled: false
 RSpec/SpecFilePathFormat:
-  Enabled: false
-RSpecRails:
   Enabled: false
 FactoryBot/SyntaxMethods:
   Enabled: false

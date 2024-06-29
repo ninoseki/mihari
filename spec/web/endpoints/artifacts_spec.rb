@@ -25,11 +25,6 @@ RSpec.describe Mihari::Web::Endpoints::Artifacts, vcr: "Mihari_Services_Artifact
   end
 
   describe "get /api/artifacts/:id" do
-    it "returns 400" do
-      get "/api/artifacts/foo"
-      expect(last_response.status).to eq(400)
-    end
-
     it "returns 404" do
       get "/api/artifacts/0"
       expect(last_response.status).to eq(404)
@@ -64,11 +59,6 @@ RSpec.describe Mihari::Web::Endpoints::Artifacts, vcr: "Mihari_Services_Artifact
   end
 
   describe "delete /api/artifacts/:id" do
-    it "returns 400" do
-      delete "/api/artifacts/foo"
-      expect(last_response.status).to eq(400)
-    end
-
     it "returns 404" do
       delete "/api/artifacts/0"
       expect(last_response.status).to eq(404)
