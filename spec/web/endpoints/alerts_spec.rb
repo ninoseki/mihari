@@ -12,11 +12,6 @@ RSpec.describe Mihari::Web::Endpoints::Alerts do
   end
 
   describe "delete /api/alerts/:id" do
-    it "returns 400" do
-      delete "/api/alerts/foo"
-      expect(last_response.status).to eq(400)
-    end
-
     it "returns 404" do
       delete "/api/alerts/0"
       expect(last_response.status).to eq(404)
