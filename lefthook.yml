@@ -19,5 +19,5 @@ pre-commit:
       glob: "*.{js,ts,vue}"
       run: npm run type-check
     actionlint:
-      glob: ".github/workflows/*.yaml"
-      run: actionlint
+      glob: ".github/workflows/*.{yaml,yml}"
+      run: actionlint {staged_files}
