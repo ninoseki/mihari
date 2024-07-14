@@ -26,8 +26,9 @@ RSpec.describe Mihari::CLI::Rule do
       let!(:path) { File.expand_path("../fixtures/rules/invalid_rule.yml", __dir__) }
 
       it do
-        # TODO: assert UnwrapError
-        expect { described_class.new.invoke(:validate, [path]) }.to output(include(path)).to_stderr
+        expect do
+          expect { described_class.new.invoke(:validate, [path]) }.to output(include(path)).to_stderr
+        end.to raise_error(SystemExit) # ref. https://pocke.hatenablog.com/entry/2016/07/17/085928
       end
     end
   end
