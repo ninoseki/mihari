@@ -26,14 +26,37 @@ module Mihari
               end
             end
 
-            desc "validate PATH", "Validate a rule"
+            desc "validate PATH", "Validate rule(s)"
             #
-            # Validate format of a rule
+            # Validate rule(s)
+            #
+            # @param [Array<String>] paths
+            #
+            def validate(*paths)
+              # @type [Array<Mihari::ValidationError>]
+              errors = paths.flat_map { |path| Dir.glob(path) }.map do |path|
+                Dry::Monads::Try[ValidationError] { Mihari::Rule.from_file(path) }
+              end.filter_map do |result|
+                result.exception if result.error?
+              end
+              return if errors.empty?
+
+              errors.each do |error|
+                data = Entities::ErrorMessage.represent(message: error.message, detail: error.detail)
+                warn JSON.pretty_generate(data.as_json)
+              end
+
+              exit 1
+            end
+
+            desc "format PATH", "format a rule"
+            #
+            # Format a rule file
             #
             # @param [String] path
             #
-            def validate(path)
-              rule = Dry::Monads::Try[ValidationError] { Mihari::Rule.from_yaml File.read(path) }.value!
+            def format(path)
+              rule = Dry::Monads::Try[ValidationError] { Mihari::Rule.from_file(path) }.value!
               puts rule.data.to_yaml
             end
 
