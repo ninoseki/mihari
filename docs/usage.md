@@ -68,13 +68,14 @@ See [Database](./emitters/database.md) for detailed database configuration.
 $ mihari rule
 Commands:
   mihari rule delete ID                                     # Delete a rule
+  mihari rule format PATH                                   # format a rule
   mihari rule get ID                                        # Get a rule
   mihari rule help [COMMAND]                                # Describe subcommands or one specific subcommand
-  mihari rule init PATH                                     # Initialize a new rule file
+  mihari rule init PATH                                     # Initialize a new rule
   mihari rule list QUERY                                    # List/search rules
   mihari rule list-transform QUERY -t, --template=TEMPLATE  # List/search rules with transformation
   mihari rule search PATH_OR_ID                             # Search by a rule
-  mihari rule validate PATH                                 # Validate a rule file
+  mihari rule validate PATH                                 # Validate rule(s)
 ```
 
 ### `mihari search`

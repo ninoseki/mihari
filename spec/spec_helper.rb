@@ -21,47 +21,18 @@ def ci_env?
   ENV["CI"]
 end
 
-# setup simplecov formatter for coveralls
-class InceptionFormatter
-  def format(result)
-    Coveralls::SimpleCov::Formatter.new.format(result)
-  end
-end
-
-def formatter
-  if ENV["CI"] || ENV["COVERALLS_REPO_TOKEN"]
-    if ENV["GITHUB_ACTIONS"]
-      SimpleCov::Formatter::MultiFormatter.new([InceptionFormatter, SimpleCov::Formatter::LcovFormatter])
-    else
-      InceptionFormatter
-    end
-  else
-    SimpleCov::Formatter::HTMLFormatter
-  end
-end
-
-def setup_formatter
-  if ENV["GITHUB_ACTIONS"]
+SimpleCov.start "rails" do
+  if ENV["CI"]
     require "simplecov-lcov"
 
     SimpleCov::Formatter::LcovFormatter.config do |c|
       c.report_with_single_file = true
       c.single_report_path = "coverage/lcov.info"
     end
+
+    formatter SimpleCov::Formatter::LcovFormatter
   end
-  SimpleCov.formatter = formatter
 end
-
-setup_formatter
-
-SimpleCov.start do
-  add_filter do |source_file|
-    source_file.filename.include?("spec") && !source_file.filename.include?("fixture")
-  end
-  add_filter %r{/.bundle/}
-end
-
-require "coveralls"
 
 # for Rack app / Sinatra controllers
 ENV["APP_ENV"] = "test"

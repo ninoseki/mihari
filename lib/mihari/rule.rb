@@ -5,6 +5,9 @@ module Mihari
     include Concerns::FalsePositiveNormalizable
     include Concerns::FalsePositiveValidatable
 
+    # @return [String, nil]
+    attr_reader :path_or_id
+
     # @return [Hash]
     attr_reader :data
 
@@ -19,9 +22,11 @@ module Mihari
     #
     # @param [Hash] data
     #
-    def initialize(**data)
+    # @param [Object] path_or_id
+    def initialize(path_or_id: nil, **data)
       super()
 
+      @path_or_id = path_or_id
       @data = data.deep_symbolize_keys
       @errors = nil
       @base_time = Time.now.utc
@@ -252,15 +257,28 @@ module Mihari
 
     class << self
       #
-      # Load rule from YAML string
+      # Load rule from YAML file
       #
-      # @param [String] yaml
+      # @param [String] path
       #
       # @return [Mihari::Rule]
       #
-      def from_yaml(yaml)
+      def from_file(path)
+        yaml = File.read(path)
+        from_yaml(yaml, path: path)
+      end
+
+      #
+      # Load rule from YAML string
+      #
+      # @param [String] yaml
+      # @param [String, nil] path
+      #
+      # @return [Mihari::Rule]
+      #
+      def from_yaml(yaml, path: nil)
         data = YAML.safe_load(ERB.new(yaml).result, permitted_classes: [Date, Symbol])
-        new(**data)
+        new(path_or_id: path, **data)
       end
 
       #
@@ -269,7 +287,7 @@ module Mihari
       # @return [Mihari::Rule]
       #
       def from_model(model)
-        new(**model.data)
+        new(path_or_id: model.id, **model.data)
       end
     end
 
@@ -409,7 +427,7 @@ module Mihari
       @data = result.to_h
       @errors = result.errors
 
-      raise ValidationError.new("Validation failed", errors) if errors?
+      raise ValidationError.new("#{path_or_id}: validation failed", errors) if errors?
     end
   end
 end

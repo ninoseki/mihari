@@ -17,19 +17,18 @@ RSpec.describe Mihari::CLI::Rule do
 
   describe "#validate" do
     let!(:path) { File.expand_path("../fixtures/rules/valid_rule.yml", __dir__) }
-    let!(:data) { File.read path }
-    let!(:rule_id) { YAML.safe_load(data)["id"] }
 
     it do
-      expect { described_class.new.invoke(:validate, [path]) }.to output(include(rule_id)).to_stdout
+      expect { described_class.new.invoke(:validate, [path]) }.not_to output.to_stdout
     end
 
     context "with invalid rule" do
       let!(:path) { File.expand_path("../fixtures/rules/invalid_rule.yml", __dir__) }
 
       it do
-        # TODO: assert UnwrapError
-        expect { described_class.new.invoke(:validate, [path]) }.to raise_error(Dry::Monads::UnwrapError)
+        expect do
+          expect { described_class.new.invoke(:validate, [path]) }.to output(include(path)).to_stderr
+        end.to raise_error(SystemExit) # ref. https://pocke.hatenablog.com/entry/2016/07/17/085928
       end
     end
   end
