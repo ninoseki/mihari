@@ -6,7 +6,7 @@ ActiveSupport::Inflector.inflections(:en) { |inflect| inflect.acronym "CPE" }
 #
 # Mihari v7 DB schema
 #
-class V7Schema < ActiveRecord::Migration[7.1]
+class V7Schema < ActiveRecord::Migration[7.2]
   def change
     create_table :rules, id: :string, if_not_exists: true do |t|
       t.string :title, null: false
