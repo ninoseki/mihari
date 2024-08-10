@@ -178,10 +178,7 @@ module Mihari
     #
     def enriched_artifacts
       @enriched_artifacts ||= Parallel.map(unique_artifacts) do |artifact|
-        artifact.tap do |tapped|
-          # NOTE: To apply changes correctly, enrichers should be applied to an artifact serially
-          enrichers.each { |enricher| enricher.result(tapped) }
-        end
+        artifact.enrich_by_enrichers enrichers
       end
     end
 
