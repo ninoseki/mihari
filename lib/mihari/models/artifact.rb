@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require "ostruct"
+
 module Mihari
   module Models
     #
@@ -158,10 +160,7 @@ module Mihari
       # @return [Boolean] true if it is unique. Otherwise false.
       #
       def unique?(base_time: nil, artifact_ttl: nil)
-        artifact = self.class.joins(:alert).where(
-          data:,
-          alert: {rule_id:}
-        ).order(created_at: :desc).first
+        artifact = self.class.joins(:alert).where(data:, alert: {rule_id:}).order(created_at: :desc).first
         return true if artifact.nil?
 
         # check whether the artifact is decayed or not
@@ -179,7 +178,32 @@ module Mihari
       end
 
       def enrich
-        callable_enrichers.each { |enricher| enricher.result self }
+        enrich_by_enrichers callable_enrichers
+      end
+
+      #
+      # @param [Array<Mihari::Enrichers::Base>] enrichers
+      # @param [Boolean] parallel
+      #
+      # @return [Mihari::Models::Artifact]
+      #
+      def enrich_by_enrichers(enrichers)
+        # NOTE: doing parallel with ActiveRecord objects is troublesome (e.g. connection issue, etc.)
+        #       so converting the object to an OpenStruct object
+        s = struct
+        results = Parallel.map(enrichers) { |enricher| enricher.result s }
+        enriched = results.compact.map { |result| result.value_or(nil) }.compact
+
+        self.dns_records = enriched.map(&:dns_records).flatten.compact
+        self.cpes = enriched.map(&:cpes).flatten.compact
+        self.ports = enriched.map(&:ports).flatten.compact
+        self.vulnerabilities = enriched.map(&:vulnerabilities).flatten.compact
+
+        self.autonomous_system = enriched.map(&:autonomous_system).compact.first
+        self.geolocation = enriched.map(&:geolocation).compact.first
+        self.whois_record = enriched.map(&:whois_record).compact.first
+
+        self
       end
 
       #
@@ -192,6 +216,18 @@ module Mihari
         when "url"
           host = Addressable::URI.parse(data).host
           (DataType.type(host) == "ip") ? nil : host
+        end
+      end
+
+      def struct
+        OpenStruct.new(attributes).tap do |s|
+          s.domain = domain
+          s.cpes ||= []
+          s.dns_records ||= []
+          s.ports ||= []
+          s.reverse_dns_names ||= []
+          s.vulnerabilities ||= []
+          s.tags ||= []
         end
       end
 
@@ -212,7 +248,7 @@ module Mihari
       #
       def callable_enrichers
         @callable_enrichers ||= Mihari.enrichers.map(&:new).select do |enricher|
-          enricher.callable?(self)
+          enricher.callable? self
         end
       end
 

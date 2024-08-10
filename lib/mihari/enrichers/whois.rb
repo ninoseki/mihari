@@ -16,7 +16,9 @@ module Mihari
       def call(artifact)
         return if artifact.domain.nil?
 
-        artifact.whois_record ||= memoized_lookup(PublicSuffix.domain(artifact.domain))
+        artifact.tap do |tapped|
+          tapped.whois_record ||= memoized_lookup(PublicSuffix.domain(artifact.domain))
+        end
       end
 
       private
