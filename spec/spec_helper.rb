@@ -2,6 +2,9 @@
 
 require "bundler/setup"
 
+# TODO: delete after factory_bot update
+require "active_support/inflector"
+
 require "base64"
 require "digest"
 require "factory_bot"
