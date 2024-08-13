@@ -93,7 +93,9 @@ VCR.configure do |config|
   end
 end
 
-require "test_prof/recipes/rspec/let_it_be"
+Mihari::Database.with_db_connection do
+  require "test_prof/recipes/rspec/let_it_be"
+end
 
 # reload dummy/sanitized config values
 Mihari.config.reload
