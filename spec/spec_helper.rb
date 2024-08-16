@@ -93,7 +93,10 @@ VCR.configure do |config|
   end
 end
 
-require "test_prof/recipes/rspec/let_it_be"
+# NOTE: since test-prof v1.4.0, it needs to be required with the connection
+Mihari::Database.with_db_connection do
+  require "test_prof/recipes/rspec/let_it_be"
+end
 
 # reload dummy/sanitized config values
 Mihari.config.reload
