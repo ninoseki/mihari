@@ -40,9 +40,7 @@ def build_swagger_doc(path)
     recursive_delete json, key
   end
 
-  f = File.open(path, "w")
-  f.write json.to_yaml
-  f.close
+  File.write(path, json.to_yaml)
 end
 
 namespace :build do
