@@ -56,9 +56,10 @@ Alternatively you can set values through `.env` file. Values in `.env` file will
 
 ## Sidekiq
 
-| Environment Variable | Type   | Description           | Default |
-| -------------------- | ------ | --------------------- | ------- |
-| SIDEKIQ_REDIS_URL    | String | Redis URL for Sidekiq |         |
+| Environment Variable | Type    | Description                  | Default |
+| -------------------- | ------- | ---------------------------- | ------- |
+| SIDEKIQ_REDIS_URL    | String  | Redis URL for Sidekiq        |         |
+| SIDEKIQ_RETRY        | Integer | Retry times for a failed job | `0`     |
 
 !!! tip
 
