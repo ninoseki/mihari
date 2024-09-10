@@ -40,6 +40,7 @@ module Mihari
       zoomeye_api_key: nil,
       # sidekiq
       sidekiq_redis_url: nil,
+      sidekiq_retry: 0,
       # others
       hide_config_values: true,
       ignore_error: false,
@@ -173,6 +174,9 @@ module Mihari
 
     # @!attribute [r] sidekiq_redis_url
     #   @return [URI, nil]
+
+    # @!attribute [r] sidekiq_retry
+    #   @return [Integer]
 
     def database_url=(val)
       super(URI(val.to_s))
