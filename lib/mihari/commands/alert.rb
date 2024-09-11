@@ -22,7 +22,7 @@ module Mihari
               #
               def _search(q, page: 1, limit: 10)
                 filter = Structs::Filters::Search.new(q:, page:, limit:)
-                Services::AlertSearcher.result(filter).value!
+                Services::AlertSearcher.call filter
               end
             end
 
@@ -33,15 +33,14 @@ module Mihari
             #
             def create(path)
               # @type [Mihari::Models::Alert]
-              alert = Dry::Monads::Try[StandardError] do
-                raise ArgumentError, "#{path} not found" unless Pathname(path).exist?
+              raise ArgumentError, "#{path} not found" unless Pathname(path).exist?
 
-                params = YAML.safe_load(
-                  ERB.new(File.read(path)).result,
-                  permitted_classes: [Date, Symbol]
-                )
-                Services::AlertCreator.call params
-              end.value!
+              params = YAML.safe_load(
+                ERB.new(File.read(path)).result,
+                permitted_classes: [Date, Symbol]
+              )
+              alert = Services::AlertCreator.call(params)
+
               data = Entities::Alert.represent(alert)
               puts JSON.pretty_generate(data.as_json)
             end
@@ -103,7 +102,7 @@ module Mihari
             # @param [Integer] id
             #
             def delete(id)
-              Services::AlertDestroyer.result(id).value!
+              Services::AlertDestroyer.call id
             end
           end
         end

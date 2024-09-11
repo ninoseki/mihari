@@ -24,16 +24,13 @@ module Mihari
               force_overwrite = options["force_overwrite"] || false
               message = "Are you sure you want to overwrite this rule? (y/n)"
 
-              # @type [Mihari::Models::Alert]
-              alert = Dry::Monads::Try[StandardError] do
-                # @type [Mihari::Rule]
-                rule = Services::RuleBuilder.call(path_or_id)
+              # @type [Mihari::Rule]
+              rule = Services::RuleBuilder.call(path_or_id)
+              exit 0 if rule.diff? && !force_overwrite && !yes?(message)
 
-                exit 0 if rule.diff? && !force_overwrite && !yes?(message)
+              rule.update_or_create
+              alert = rule.call
 
-                rule.update_or_create
-                rule.call
-              end.value!
               data = Entities::Alert.represent(alert)
               puts JSON.pretty_generate(data.as_json)
             end
