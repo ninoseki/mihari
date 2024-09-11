@@ -21,7 +21,7 @@ module Mihari
               #
               def _search(q, page: 1, limit: 10)
                 filter = Structs::Filters::Search.new(q:, page:, limit:)
-                Services::TagSearcher.result(filter).value!
+                Services::TagSearcher.call filter
               end
             end
 
@@ -71,7 +71,7 @@ module Mihari
             # @param [Integer] id
             #
             def delete(id)
-              Services::TagDestroyer.result(id).value!
+              Services::TagDestroyer.call id
             end
           end
         end

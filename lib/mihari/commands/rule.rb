@@ -22,7 +22,7 @@ module Mihari
               #
               def _search(q, page: 1, limit: 10)
                 filter = Structs::Filters::Search.new(q:, page:, limit:)
-                Services::RuleSearcher.result(filter).value!
+                Services::RuleSearcher.call filter
               end
             end
 
@@ -70,7 +70,7 @@ module Mihari
               warning = "Do you want to overwrite it? (y/n)"
               return if Pathname(path).exist? && !(yes? warning)
 
-              Services::RuleInitializer.call(path)
+              Services::RuleInitializer.call path
             end
 
             desc "list QUERY", "List/search rules"
@@ -127,7 +127,7 @@ module Mihari
             # @param [String] id
             #
             def delete(id)
-              Services::RuleDestroyer.result(id).value!
+              Services::RuleDestroyer.call id
             end
           end
         end

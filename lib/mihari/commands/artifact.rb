@@ -21,7 +21,7 @@ module Mihari
               #
               def _search(q, page: 1, limit: 10)
                 filter = Structs::Filters::Search.new(q:, page:, limit:)
-                Services::ArtifactSearcher.result(filter).value!
+                Services::ArtifactSearcher.call filter
               end
             end
 
@@ -82,7 +82,7 @@ module Mihari
             # @param [Integer] id
             #
             def enrich(id)
-              Services::ArtifactEnricher.result(id).value!
+              Services::ArtifactEnricher.call id
             end
 
             desc "delete ID", "Delete an artifact"
@@ -91,7 +91,7 @@ module Mihari
             # @param [Integer] id
             #
             def delete(id)
-              Services::ArtifactDestroyer.result(id).value!
+              Services::ArtifactDestroyer.call id
             end
           end
         end
