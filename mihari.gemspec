@@ -20,7 +20,7 @@ Gem::Specification.new do |spec|
   spec.homepage = "https://github.com/ninoseki/mihari"
   spec.license = "MIT"
 
-  spec.required_ruby_version = ">= 3.1"
+  spec.required_ruby_version = ">= 3.2"
 
   spec.metadata["rubygems_mfa_required"] = "true"
 
