@@ -1,5 +1,5 @@
 # frozen_string_literal: true
 
 module Mihari
-  VERSION = "7.6.4"
+  VERSION = "8.0.0"
 end
