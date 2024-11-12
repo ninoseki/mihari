@@ -2,13 +2,13 @@
 
 ## Runtime
 
-Ruby 3.1+ (tested with 3.1, 3.2 and 3.3)
+Ruby 3.2+ (tested with 3.2 and 3.3)
 
 ## Database
 
 - SQLite3
-- PostgreSQL (v16)
-- MySQL (v8)
+- PostgreSQL (v16+)
+- MySQL (v8+)
 
 You need a database to make the data persistent. See [Database](./emitters/database.md) for details.
 
