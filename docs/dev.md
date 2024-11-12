@@ -2,8 +2,8 @@
 
 ## Requirements
 
-- Ruby v3.1+
-- Node.js v20+
+- Ruby v3.2+
+- Node.js v22+
 - Python
 - Docker (Docker Compose)
 - [actionlint](https://github.com/rhysd/actionlint)
