@@ -11,7 +11,7 @@ module Mihari
       raise NotImplementedError, "You must implement #{self.class}##{__method__}"
     end
 
-    def result(...)
+    def get_result(...)
       Try[StandardError] { call(...) }.to_result
     end
 
@@ -20,8 +20,8 @@ module Mihari
         new.call(...)
       end
 
-      def result(...)
-        new.result(...)
+      def get_result(...)
+        new.get_result(...)
       end
     end
   end

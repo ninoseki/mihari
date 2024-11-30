@@ -191,7 +191,7 @@ module Mihari
         # NOTE: doing parallel with ActiveRecord objects is troublesome (e.g. connection issue, etc.)
         #       so converting the object to an OpenStruct object
         s = struct
-        results = Parallel.map(enrichers) { |enricher| enricher.result s }
+        results = Parallel.map(enrichers) { |enricher| enricher.get_result s }
         enriched = results.compact.map { |result| result.value_or(nil) }.compact
 
         self.dns_records = enriched.map(&:dns_records).flatten.compact

@@ -7,19 +7,19 @@ http_interactions:
       encoding: ASCII-8BIT
       string: ''
     headers:
+      User-Agent:
+      - mihari/8.0.0
       Connection:
       - close
       Host:
       - ip.circl.lu
-      User-Agent:
-      - http.rb/5.1.1
   response:
     status:
       code: 200
       message: OK
     headers:
       Date:
-      - Thu, 28 Dec 2023 11:08:58 GMT
+      - Sat, 30 Nov 2024 01:04:16 GMT
       Server:
       - WSGIServer/0.2 CPython/3.8.10
       Strict-Transport-Security:
@@ -44,5 +44,5 @@ http_interactions:
         1316075}, "ip": "1.1.1.1", "country_info": {"Country": "United States", "Alpha-2
         code": "US", "Alpha-3 code": "USA", "Numeric code": "840", "Latitude (average)":
         "38", "Longitude (average)": "-97"}}]'
-  recorded_at: Thu, 28 Dec 2023 11:08:58 GMT
-recorded_with: VCR 6.2.0
+  recorded_at: Sat, 30 Nov 2024 01:04:16 GMT
+recorded_with: VCR 6.3.1

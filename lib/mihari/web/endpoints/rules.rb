@@ -59,7 +59,7 @@ module Mihari
           end
           get "/:id" do
             id = params[:id].to_s
-            result = Services::RuleGetter.result(params[:id].to_s)
+            result = Services::RuleGetter.get_result(params[:id].to_s)
             return present(result.value!, with: Entities::Rule) if result.success?
 
             case result.failure
@@ -120,7 +120,7 @@ module Mihari
 
             yaml = params[:yaml].to_s
 
-            result = RuleCreateUpdater.result(yaml, overwrite: false)
+            result = RuleCreateUpdater.get_result(yaml, overwrite: false)
             return present(result.value!.model, with: Entities::Rule) if result.success?
 
             failure = result.failure
@@ -151,7 +151,7 @@ module Mihari
 
             yaml = params[:yaml].to_s
 
-            result = RuleCreateUpdater.result(yaml, overwrite: true)
+            result = RuleCreateUpdater.get_result(yaml, overwrite: true)
             return present(result.value!.model, with: Entities::Rule) if result.success?
 
             failure = result.failure
@@ -178,7 +178,7 @@ module Mihari
             status 204
 
             id = params[:id].to_s
-            result = Services::RuleDestroyer.result(id)
+            result = Services::RuleDestroyer.get_result(id)
             return if result.success?
 
             case result.failure

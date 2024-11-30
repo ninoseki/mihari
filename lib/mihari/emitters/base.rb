@@ -44,7 +44,7 @@ module Mihari
       #
       # @return [Dry::Monads::Result::Success<Object>, Dry::Monads::Result::Failure]
       #
-      def result(artifacts)
+      def get_result(artifacts)
         result = Try[StandardError] do
           retry_on_error(
             times: retry_times,

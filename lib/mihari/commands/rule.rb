@@ -116,7 +116,7 @@ module Mihari
             desc "get ID", "Get a rule"
             around :with_db_connection
             def get(id)
-              value = Services::RuleGetter.result(id).value!
+              value = Services::RuleGetter.get_result(id).value!
               data = Entities::Rule.represent(value)
               puts JSON.pretty_generate(data.as_json)
             end

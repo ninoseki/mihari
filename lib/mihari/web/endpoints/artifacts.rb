@@ -41,7 +41,7 @@ module Mihari
           end
           get "/:id" do
             id = params[:id].to_i
-            result = Services::ArtifactGetter.result(id)
+            result = Services::ArtifactGetter.get_result(id)
             return present(result.value!, with: Entities::Artifact) if result.success?
 
             case result.failure
@@ -98,7 +98,7 @@ module Mihari
             status 204
 
             id = params["id"].to_i
-            result = Services::ArtifactDestroyer.result(id)
+            result = Services::ArtifactDestroyer.get_result(id)
             return if result.success?
 
             case result.failure

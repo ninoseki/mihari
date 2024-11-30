@@ -29,7 +29,7 @@ module Mihari
       #
       # @return [Dry::Monads::Result::Success<Object>, Dry::Monads::Result::Failure]
       #
-      def result(artifact)
+      def get_result(artifact)
         return unless callable?(artifact)
 
         result = Try[StandardError] do

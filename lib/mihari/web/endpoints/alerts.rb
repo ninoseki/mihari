@@ -41,7 +41,7 @@ module Mihari
           end
           get "/:id" do
             id = params[:id].to_i
-            result = Services::AlertGetter.result(id)
+            result = Services::AlertGetter.get_result(id)
             return present(result.value!, with: Entities::Alert) if result.success?
 
             case result.failure
@@ -61,7 +61,7 @@ module Mihari
           end
           delete "/:id" do
             id = params["id"].to_i
-            result = Services::AlertDestroyer.result(id)
+            result = Services::AlertDestroyer.get_result(id)
             return if result.success?
 
             case result.failure
@@ -86,7 +86,7 @@ module Mihari
           post "/" do
             status 201
 
-            result = Services::AlertCreator.result(params)
+            result = Services::AlertCreator.get_result(params)
             return present(result.value!, with: Entities::Alert) if result.success?
 
             case result.failure

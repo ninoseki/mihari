@@ -18,7 +18,7 @@ module Mihari
         # @return [Array<Mihari::Port>]
         #
         def build_by_ip(ip, enricher: Enrichers::Shodan.new)
-          enricher.result(ip).fmap do |res|
+          enricher.get_result(ip).fmap do |res|
             (res&.ports || []).map { |port| new(port:) }
           end.value_or []
         end

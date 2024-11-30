@@ -77,7 +77,7 @@ module Mihari
         normalized_artifacts
       end
 
-      def result(...)
+      def get_result(...)
         result = Try[StandardError] do
           retry_on_error(
             times: retry_times,

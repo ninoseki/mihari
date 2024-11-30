@@ -71,7 +71,7 @@ module Mihari
             # @param [Integer] id
             #
             def get(id)
-              value = Services::ArtifactGetter.result(id).value!
+              value = Services::ArtifactGetter.get_result(id).value!
               data = Entities::Artifact.represent(value)
               puts JSON.pretty_generate(data.as_json)
             end
