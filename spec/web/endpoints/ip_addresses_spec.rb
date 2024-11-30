@@ -2,7 +2,7 @@
 
 require "json"
 
-RSpec.describe Mihari::Web::Endpoints::IPAddresses, vcr: "Mihari_Enrichers_MMDB/ip:1.1.1.1" do
+RSpec.describe Mihari::Web::Endpoints::IPAddresses, :vcr do
   include Rack::Test::Methods
 
   def app
@@ -28,9 +28,9 @@ RSpec.describe Mihari::Web::Endpoints::IPAddresses, vcr: "Mihari_Enrichers_MMDB/
         )
       end
 
-      it "returns 404" do
+      it "returns 422" do
         get "/api/ip_addresses/404"
-        expect(last_response.status).to eq(404)
+        expect(last_response.status).to eq(422)
       end
     end
   end

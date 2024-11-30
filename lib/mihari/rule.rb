@@ -191,8 +191,8 @@ module Mihari
       return [] if enriched_artifacts.empty?
 
       [].tap do |out|
-        out << serial_emitters.map { |emitter| emitter.result(enriched_artifacts).value_or(nil) }
-        out << Parallel.map(parallel_emitters) { |emitter| emitter.result(enriched_artifacts).value_or(nil) }
+        out << serial_emitters.map { |emitter| emitter.get_result(enriched_artifacts).value_or(nil) }
+        out << Parallel.map(parallel_emitters) { |emitter| emitter.get_result(enriched_artifacts).value_or(nil) }
       end.flatten.compact
     end
 
@@ -349,8 +349,8 @@ module Mihari
     # @return [Array<Dry::Monads::Result::Success<Array<Mihari::Models::Artifact>>, Dry::Monads::Result::Failure>]
     def analyzer_results
       [].tap do |out|
-        out << Parallel.map(parallel_analyzers, &:result)
-        out << serial_analyzers.map(&:result)
+        out << Parallel.map(parallel_analyzers, &:get_result)
+        out << serial_analyzers.map(&:get_result)
       end.flatten
     end
 

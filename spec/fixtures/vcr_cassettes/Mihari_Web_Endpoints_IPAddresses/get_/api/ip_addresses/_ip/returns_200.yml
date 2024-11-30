@@ -19,7 +19,7 @@ http_interactions:
       message: OK
     headers:
       Date:
-      - Sat, 30 Nov 2024 01:04:14 GMT
+      - Sat, 30 Nov 2024 01:07:41 GMT
       Server:
       - WSGIServer/0.2 CPython/3.8.10
       Strict-Transport-Security:
@@ -44,5 +44,5 @@ http_interactions:
         1316075}, "ip": "1.1.1.1", "country_info": {"Country": "United States", "Alpha-2
         code": "US", "Alpha-3 code": "USA", "Numeric code": "840", "Latitude (average)":
         "38", "Longitude (average)": "-97"}}]'
-  recorded_at: Sat, 30 Nov 2024 01:04:14 GMT
+  recorded_at: Sat, 30 Nov 2024 01:07:42 GMT
 recorded_with: VCR 6.3.1

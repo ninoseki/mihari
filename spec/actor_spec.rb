@@ -17,7 +17,7 @@ RSpec.describe Mihari::Actor do
 
   describe "#result" do
     it do
-      expect(actor.result.failure).to be_a(ZeroDivisionError)
+      expect(actor.get_result.failure).to be_a(ZeroDivisionError)
     end
   end
 end

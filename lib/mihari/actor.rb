@@ -63,7 +63,7 @@ module Mihari
       raise NotImplementedError, "You must implement #{self.class}##{__method__}"
     end
 
-    def result(...)
+    def get_result(...)
       Try[StandardError] do
         retry_on_error(times: retry_times, interval: retry_interval, exponential_backoff: retry_exponential_backoff) do
           call(...)

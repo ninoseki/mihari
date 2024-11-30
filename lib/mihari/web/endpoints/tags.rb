@@ -43,7 +43,7 @@ module Mihari
             status 204
 
             id = params[:id].to_i
-            result = Services::TagDestroyer.result(id)
+            result = Services::TagDestroyer.get_result(id)
             return if result.success?
 
             case result.failure

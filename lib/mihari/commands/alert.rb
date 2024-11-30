@@ -91,7 +91,7 @@ module Mihari
             # @param [Integer] id
             #
             def get(id)
-              value = Services::AlertGetter.result(id).value!
+              value = Services::AlertGetter.get_result(id).value!
               data = Entities::Alert.represent(value)
               puts JSON.pretty_generate(data.as_json)
             end

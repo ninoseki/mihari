@@ -21,7 +21,7 @@ module Mihari
           end
           get "/:ip", requirements: {ip: %r{[^/]+}} do
             ip = params[:ip].to_s
-            result = Services::IPGetter.result(ip)
+            result = Services::IPGetter.get_result(ip)
             if result.success?
               value = result.value!
               return present(
