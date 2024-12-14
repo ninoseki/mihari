@@ -23,7 +23,6 @@ export default tseslint.config(
     ...pluginVitest.configs.recommended,
     files: ["src/**/__tests__/*"]
   },
-  // @ts-expect-error there is not type definition
   skipFormatting,
   {
     plugins: {
