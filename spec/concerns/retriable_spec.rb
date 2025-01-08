@@ -57,7 +57,7 @@ RSpec.describe Mihari::Concerns::Retriable do
     context "with HTTP::TimeoutError" do
       before do
         # rubocop:disable RSpec/SubjectStub
-        allow(test).to receive(:http).and_return(Mihari::HTTP::Factory.build(timeout: -1))
+        allow(test).to receive(:http).and_return(Mihari::HTTP::Factory.build(timeout: 0))
         # rubocop:enable RSpec/SubjectStub
       end
 

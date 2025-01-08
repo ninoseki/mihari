@@ -23,7 +23,7 @@ RSpec.describe Mihari::HTTP::Factory do
     context "with timeout" do
       it do
         expect do
-          described_class.build(timeout: -1).get("#{server.base_url}/get")
+          described_class.build(timeout: 0).get("#{server.base_url}/get")
         end.to raise_error(::HTTP::TimeoutError)
       end
     end
