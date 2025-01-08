@@ -22,6 +22,8 @@ module Mihari
           # @param [Hash] d
           #
           def from_dynamic!(d)
+            return nil if d.nil?
+
             d = Types::Hash[d]
             new(
               asn: d.fetch("asn")
@@ -102,8 +104,8 @@ module Mihari
         attribute :location, Location
 
         # @!attribute [r] autonomous_system
-        #   @return [AutonomousSystem]
-        attribute :autonomous_system, AutonomousSystem
+        #   @return [AutonomousSystem, nil]
+        attribute :autonomous_system, AutonomousSystem.optional
 
         # @!attribute [r] metadata
         #   @return [Hash]
@@ -127,7 +129,7 @@ module Mihari
           Models::Artifact.new(
             data: ip,
             metadata:,
-            autonomous_system: autonomous_system.as,
+            autonomous_system: autonomous_system&.as,
             geolocation: location.geolocation,
             ports:
           )
@@ -142,7 +144,7 @@ module Mihari
             new(
               ip: d.fetch("ip"),
               location: Location.from_dynamic!(d.fetch("location")),
-              autonomous_system: AutonomousSystem.from_dynamic!(d.fetch("autonomous_system")),
+              autonomous_system: AutonomousSystem.from_dynamic!(d["autonomous_system"]),
               metadata: d,
               services: d.fetch("services", []).map { |x| Service.from_dynamic!(x) }
             )
