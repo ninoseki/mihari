@@ -1,14 +1,13 @@
 // @ts-check
 import pluginVitest from "@vitest/eslint-plugin"
 import skipFormatting from "@vue/eslint-config-prettier/skip-formatting"
-import vueTsEslintConfig from "@vue/eslint-config-typescript"
+import { defineConfigWithVueTs, vueTsConfigs } from "@vue/eslint-config-typescript"
 import simpleImportSort from "eslint-plugin-simple-import-sort"
 import pluginVue from "eslint-plugin-vue"
-import tseslint from "typescript-eslint"
 
 const mode = process.env.NODE_ENV === "production" ? "error" : "warn"
 
-export default tseslint.config(
+export default defineConfigWithVueTs(
   {
     name: "app/files-to-lint",
     files: ["**/*.{ts,mts,tsx,vue}"]
@@ -17,8 +16,8 @@ export default tseslint.config(
     name: "app/files-to-ignore",
     ignores: ["**/dist/**", "**/dist-ssr/**", "**/coverage/**"]
   },
-  ...pluginVue.configs["flat/essential"],
-  ...vueTsEslintConfig(),
+  pluginVue.configs["flat/essential"],
+  vueTsConfigs.recommended,
   {
     ...pluginVitest.configs.recommended,
     files: ["src/**/__tests__/*"]
