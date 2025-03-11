@@ -15,6 +15,7 @@ This analyzer uses [urlscan.io](http://urlscan.io) API (`/api/v1/search`) to sea
 analyzer: urlscan
 query: ...
 api_key: ...
+data_types: ...
 ```
 
 ## Components
@@ -26,3 +27,13 @@ api_key: ...
 ### API Key
 
 `api_key` (`string`) is an API key. Optional. Configurable via `URLSCAN_API_KEY` environment variable.
+
+### Data Types
+
+A list of data types allowed.
+
+Defaults to:
+
+- `ip`
+- `domain`
+- `url`

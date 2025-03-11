@@ -11,7 +11,7 @@ RSpec.describe Mihari::Analyzers::Urlscan, :vcr do
     end
 
     context "with allowed data types" do
-      subject(:analyzer) { described_class.new(query, allowed_data_types: %w[domain]) }
+      subject(:analyzer) { described_class.new(query, data_types: %w[domain]) }
 
       it do
         artifacts = analyzer.artifacts
@@ -23,7 +23,7 @@ RSpec.describe Mihari::Analyzers::Urlscan, :vcr do
   describe "#initialize" do
     context "with invalid allowed data types" do
       it do
-        expect { described_class.new(query, allowed_data_types: %w[foo bar]) }.to raise_error(Mihari::ValueError)
+        expect { described_class.new(query, data_types: %w[foo bar]) }.to raise_error(Mihari::ValueError)
       end
     end
   end

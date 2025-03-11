@@ -14,7 +14,6 @@ module Mihari
         Mihari::Analyzers::GreyNoise.keys,
         Mihari::Analyzers::Onyphe.keys,
         Mihari::Analyzers::Shodan.keys,
-        Mihari::Analyzers::Urlscan.keys,
         Mihari::Analyzers::Validin.keys,
         Mihari::Analyzers::VirusTotalIntelligence.keys
       ].each do |keys|
@@ -79,6 +78,13 @@ module Mihari
         optional(:username).filled(:string)
         optional(:api_key).filled(:string)
         optional(:options).hash(AnalyzerOptions)
+      end
+
+      Urlscan = Dry::Schema.Params do
+        required(:analyzer).value(Types::String.enum(*Mihari::Analyzers::Urlscan.keys))
+        required(:query).filled(:string)
+        optional(:data_types).filled(array[Types::NetworkDataTypes]).default(Types::NetworkDataTypes.values)
+        optional(:options).hash(AnalyzerPaginationOptions)
       end
 
       ZoomEye = Dry::Schema.Params do
