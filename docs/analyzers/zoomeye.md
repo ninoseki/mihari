@@ -13,6 +13,7 @@ This analyzer uses ZoomEye API v2 (`/v2/search`) to search.
 analyzer: zoomeye
 query: ...
 api_key: ...
+data_types: ...
 ```
 
 ## Components
@@ -24,3 +25,13 @@ api_key: ...
 ### API Key
 
 `api_key` (`string`) is an API key. Optional. Configurable via `ZOOMEYE_API_KEY` environment variable.
+
+### Data Types
+
+A list of data types allowed.
+
+Defaults to:
+
+- `ip`
+- `domain`
+- `url`
