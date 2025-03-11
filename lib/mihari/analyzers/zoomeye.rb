@@ -6,50 +6,38 @@ module Mihari
     # ZoomEye analyzer
     #
     class ZoomEye < Base
+      SUPPORTED_DATA_TYPES = %w[url domain ip].freeze
+
       # @return [String, nil]
       attr_reader :api_key
 
-      # @return [String]
-      attr_reader :type
+      # @return [Array<String>]
+      attr_reader :data_types
 
       #
       # @param [String] query
       # @param [Hash, nil] options
       # @param [String, nil] api_key
-      # @param [String] type
+      # @param [Array<String>] data_types
       #
-      def initialize(query, options: nil, api_key: nil, type: "host")
+      def initialize(query, options: nil, api_key: nil, data_types: SUPPORTED_DATA_TYPES)
         super(query, options:)
 
-        @type = type
         @api_key = api_key || Mihari.config.zoomeye_api_key
+        @data_types = data_types
+
+        return if valid_data_types?
+
+        raise ValueError, "data_types should be any of url, domain and ip."
       end
 
       def artifacts
-        case type
-        when "host"
-          client.host_search_with_pagination(query).map do |res|
-            convert(res)
-          end.flatten
-        when "web"
-          client.web_search_with_pagination(query).map do |res|
-            convert(res)
-          end.flatten
-        else
-          raise ValueError, "#{type} type is not supported." unless valid_type?
-        end
+        # @type [Array<Mihari::Models::Artifact>]
+        artifacts = client.search_with_pagination(query, pagination_limit:).map(&:artifacts).flatten
+        artifacts.select { |artifact| data_types.include? artifact.data_type }
       end
 
       private
-
-      #
-      # Check whether a type is valid or not
-      #
-      # @return [Boolean]
-      #
-      def valid_type?
-        %w[host web].include? type
-      end
 
       def client
         Clients::ZoomEye.new(
@@ -60,23 +48,12 @@ module Mihari
       end
 
       #
-      # Convert responses into an array of String
+      # Check whether a data type is valid or not
       #
-      # @param [Hash] res
+      # @return [Boolean]
       #
-      # @return [Array<Mihari::Models::Artifact>]
-      #
-      def convert(res)
-        matches = res["matches"] || []
-        matches.map do |match|
-          data = match["ip"]
-
-          if data.is_a?(Array)
-            data.map { |d| Models::Artifact.new(data: d, metadata: match) }
-          else
-            Models::Artifact.new(data:, metadata: match)
-          end
-        end.flatten
+      def valid_data_types?
+        data_types.all? { |type| SUPPORTED_DATA_TYPES.include? type }
       end
     end
   end

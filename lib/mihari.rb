@@ -293,6 +293,7 @@ require "mihari/structs/onyphe"
 require "mihari/structs/shodan"
 require "mihari/structs/urlscan"
 require "mihari/structs/virustotal_intelligence"
+require "mihari/structs/zoomeye"
 
 # Schemas
 require "mihari/schemas/macros"

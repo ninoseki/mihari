@@ -1,26 +1,13 @@
 # frozen_string_literal: true
 
 RSpec.describe Mihari::Analyzers::ZoomEye, :vcr do
-  subject(:analyzer) { described_class.new(query, type:) }
+  subject(:analyzer) { described_class.new(query) }
 
-  let(:type) { "host" }
+  let(:query) { 'ip="8.8.8.8" && hostname="dns.google"' }
 
   describe "#artifacts" do
-    let(:query) { "sagawa.apk" }
-
     it do
       expect(analyzer.artifacts).to be_an(Array)
-    end
-  end
-
-  context "with web type" do
-    let(:query) { "wordpress +wooo +en-US" }
-    let(:type) { "web" }
-
-    describe "#artifacts" do
-      it do
-        expect(analyzer.artifacts).to be_an(Array)
-      end
     end
   end
 

@@ -84,7 +84,7 @@ module Mihari
       ZoomEye = Dry::Schema.Params do
         required(:analyzer).value(Types::String.enum(*Mihari::Analyzers::ZoomEye.keys))
         required(:query).filled(:string)
-        required(:type).value(Types::String.enum("host", "web"))
+        optional(:data_types).filled(array[Types::NetworkDataTypes]).default(Types::NetworkDataTypes.values)
         optional(:options).hash(AnalyzerPaginationOptions)
       end
 

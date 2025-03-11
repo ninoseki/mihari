@@ -15,7 +15,10 @@ module Mihari
     Double = Strict::Float | Strict::Integer
     DateTime = Strict::DateTime
 
-    DataTypes = Types::String.enum("hash", "ip", "domain", "url", "mail")
+    NetworkDataTypes = Types::String.enum("ip", "domain", "url")
+    DataTypes = Types::String.enum(
+      *[NetworkDataTypes.values, "hash", "mail"].flatten
+    )
 
     HTTPRequestMethods = Types::String.enum("GET", "POST")
   end
