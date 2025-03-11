@@ -25,7 +25,7 @@ module Mihari
       optional(:emitters).array { Emitter }.default(DEFAULT_EMITTERS)
       optional(:enrichers).array { Enricher }.default(DEFAULT_ENRICHERS)
 
-      optional(:data_types).filled(array[Types::DataTypes]).default(Mihari::Types::DataTypes.values)
+      optional(:data_types).filled(array[Types::DataTypes]).default(Types::DataTypes.values)
 
       optional(:falsepositives).array { filled(:string) }.default([])
 

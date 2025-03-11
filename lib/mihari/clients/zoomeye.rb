@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require "base64"
+
 module Mihari
   module Clients
     #
@@ -18,7 +20,7 @@ module Mihari
       # @param [Integer, nil] timeout
       #
       def initialize(
-        base_url = "https://api.zoomeye.org",
+        base_url = "https://api.zoomeye.ai",
         api_key:,
         headers: {},
         pagination_interval: Mihari.config.pagination_interval,
@@ -38,83 +40,36 @@ module Mihari
       end
 
       #
-      # Search the Host devices
+      # Search
       #
       # @param [String] query Query string
       # @param [Integer, nil] page The page number to paging(default:1)
-      # @param [String, nil] facets A comma-separated list of properties to get summary information on query
       #
-      # @return [Hash]
+      # @return [Structs::ZoomEye::Response]
       #
-      def host_search(query, page: nil, facets: nil)
-        params = {
-          query:,
-          page:,
-          facets:
-        }.compact
-        get_json "/host/search", params:
+      # @param [Object, nil] facets
+      def search(query, page: nil)
+        qbase64 = Base64.urlsafe_encode64(query)
+        json = {qbase64:, page:}.compact
+        Structs::ZoomEye::Response.from_dynamic! post_json("/v2/search", json:)
       end
 
       #
       # @param [String] query
-      # @param [String, nil] facets
       # @param [Integer] pagination_limit
       #
-      # @return [Enumerable<Hash>]
+      # @return [Enumerable<Structs::ZoomEye::Response>]
       #
-      def host_search_with_pagination(query, facets: nil, pagination_limit: Mihari.config.pagination_limit)
+      def search_with_pagination(query, pagination_limit: Mihari.config.pagination_limit)
         Enumerator.new do |y|
           (1..pagination_limit).each do |page|
-            res = host_search(query, facets:, page:)
+            res = search(query, page:)
 
             break if res.nil?
 
             y.yield res
 
-            total = res["total"].to_i
-            break if total <= page * PAGE_SIZE
-
-            sleep_pagination_interval
-          end
-        end
-      end
-
-      #
-      # Search the Web technologies
-      #
-      # @param [String] query Query string
-      # @param [Integer, nil] page The page number to paging(default:1)
-      # @param [String, nil] facets A comma-separated list of properties to get summary information on query
-      #
-      # @return [Hash]
-      #
-      def web_search(query, page: nil, facets: nil)
-        params = {
-          query:,
-          page:,
-          facets:
-        }.compact
-        get_json "/web/search", params:
-      end
-
-      #
-      # @param [String] query
-      # @param [String, nil] facets
-      # @param [Integer] pagination_limit
-      #
-      # @return [Enumerable<Hash>]
-      #
-      def web_search_with_pagination(query, facets: nil, pagination_limit: Mihari.config.pagination_limit)
-        Enumerator.new do |y|
-          (1..pagination_limit).each do |page|
-            res = web_search(query, facets:, page:)
-
-            break if res.nil?
-
-            y.yield res
-
-            total = res["total"].to_i
-            break if total <= page * PAGE_SIZE
+            break if res.total <= page * PAGE_SIZE
 
             sleep_pagination_interval
           end
