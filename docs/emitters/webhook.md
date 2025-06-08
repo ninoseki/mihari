@@ -43,7 +43,7 @@ You can use the following attributes inside a Jbuilder template.
 - emitter: webhook
   url: https://threatfox-api.abuse.ch/api/v1/
   headers:
-    api-key: YOUR_API_KEY
+    auth-key: YOUR_AUTH_KEY
   template: /path/to/threatfox.json.jbuilder
 ```
 
