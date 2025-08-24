@@ -12,7 +12,6 @@ Mihari can aggregate multiple searches across multiple services in a single rule
 
 Mihari supports the following services by default.
 
-- [BinaryEdge](https://www.binaryedge.io/)
 - [Censys](http://censys.io)
 - [CIRCL passive DNS](https://www.circl.lu/services/passive-dns/) / [passive SSL](https://www.circl.lu/services/passive-ssl/)
 - [crt.sh](https://crt.sh/)

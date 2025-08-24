@@ -224,7 +224,6 @@ require "mihari/emitters/yeti"
 # Clients
 require "mihari/clients/base"
 
-require "mihari/clients/binaryedge"
 require "mihari/clients/censys"
 require "mihari/clients/circl"
 require "mihari/clients/crtsh"
@@ -252,7 +251,6 @@ require "mihari/clients/zoomeye"
 # Analyzers
 require "mihari/analyzers/base"
 
-require "mihari/analyzers/binaryedge"
 require "mihari/analyzers/censys"
 require "mihari/analyzers/circl"
 require "mihari/analyzers/crtsh"
@@ -280,7 +278,6 @@ require "mihari/types"
 require "mihari/constants"
 
 # Structs
-require "mihari/structs/binaryedge"
 require "mihari/structs/censys"
 require "mihari/structs/config"
 require "mihari/structs/filters"

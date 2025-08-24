@@ -1,6 +1,5 @@
 # Analyzers
 
-- [BinaryEdge](binaryedge.md)
 - [Censys](censys.md)
 - [Circle Passive DNS/SSL](circl.md)
 - [crt.sh](crtsh.md)
@@ -39,7 +38,6 @@ options:
 
 Also the following analyzers can have pagination options.
 
-- [BinaryEdge](binaryedge.md)
 - [Censys](censys.md)
 - [Fofa](fofa.md)
 - [GreyNoise](greynoise.md)

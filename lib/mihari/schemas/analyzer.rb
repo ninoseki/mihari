@@ -10,7 +10,6 @@ module Mihari
 
       # Analyzer with API key and pagination
       [
-        Mihari::Analyzers::BinaryEdge.keys,
         Mihari::Analyzers::GreyNoise.keys,
         Mihari::Analyzers::Onyphe.keys,
         Mihari::Analyzers::Shodan.keys,
