@@ -9,7 +9,6 @@ module Mihari
 
     attr_config(
       # analyzers, emitters & enrichers
-      binaryedge_api_key: nil,
       censys_id: nil,
       censys_secret: nil,
       circl_passive_password: nil,
@@ -54,9 +53,6 @@ module Mihari
       sentry_dsn: nil,
       sentry_trace_sample_rate: 0.25
     )
-
-    # @!attribute [r] binaryedge_api_key
-    #   @return [String, nil]
 
     # @!attribute [r] censys_id
     #   @return [String, nil]
