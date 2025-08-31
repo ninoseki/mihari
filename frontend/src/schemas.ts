@@ -140,8 +140,13 @@ export const LinkSchema = z.object({
   name: z.string(),
   type: z.string(),
   baseURL: z.string(),
-  favicon: z.function().returns(z.string()),
-  href: z.function().args(z.string()).returns(z.string())
+  favicon: z.function({
+    output: z.string()
+  }),
+  href: z.function({
+    input: [z.string()],
+    output: z.string()
+  })
 })
 
 export const RuleSchema = z.object({

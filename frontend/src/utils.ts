@@ -32,6 +32,10 @@ export function getGCSByIPInfo(ipinfo: IpInfoType): GcsType | undefined {
       const lat = numbers[0]
       const long = numbers[1]
 
+      if (!lat || !long) {
+        return undefined
+      }
+
       return { lat: parseFloat(lat), long: parseFloat(long) }
     }
   }
