@@ -43,6 +43,10 @@ def build_swagger_doc(path)
   File.write(path, json.to_yaml)
 end
 
+def latest_tag
+  `git describe --tags --abbrev=0`.strip.sub(/^v/, "")
+end
+
 namespace :build do
   desc "Build Swagger doc"
   task :swagger, [:path] do |_t, args|
@@ -63,10 +67,6 @@ namespace :build do
     sh "rm -rf ./lib/mihari/web/public/"
     sh "mkdir -p ./lib/mihari/web/public/"
     sh "cp -r frontend/dist/* ./lib/mihari/web/public"
-  end
-
-  def latest_tag
-    `git describe --tags --abbrev=0`.strip.sub(/^v/, "")
   end
 
   desc "Build version file"
@@ -94,6 +94,7 @@ Rake::Task["release:guard_clean"].clear
 # Disable tagging for `rake release`
 namespace :release do
   # allow dynamic versioning (updating version.rb) without committing
+  desc "Override guard_clean to do nothing"
   task :guard_clean do
     puts "Overriding guard_clean task"
   end
