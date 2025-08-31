@@ -1,3 +1,3 @@
 module Mihari
-  VERSION = "0.0.0"
+  VERSION = "8.2.0"
 end
