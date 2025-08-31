@@ -68,34 +68,13 @@ namespace :build do
     sh "mkdir -p ./lib/mihari/web/public/"
     sh "cp -r frontend/dist/* ./lib/mihari/web/public"
   end
-
-  desc "Build version file"
-  task :version do
-    File.write("lib/mihari/version.rb", <<~RUBY)
-      module Mihari
-        VERSION = "#{latest_tag}"
-      end
-    RUBY
-  end
 end
 
 desc "Build including Swagger doc and frontend assets"
 task :build do
   Rake::Task["build:swagger"].invoke
   Rake::Task["build:frontend"].invoke
-  Rake::Task["build:version"].invoke
 end
 
 # require it later enables doing pre-build step (= build the frontend app)
 require "bundler/gem_tasks"
-
-Rake::Task["release:guard_clean"].clear
-
-# Disable tagging for `rake release`
-namespace :release do
-  # allow dynamic versioning (updating version.rb) without committing
-  desc "Override guard_clean to do nothing"
-  task :guard_clean do
-    puts "Overriding guard_clean task"
-  end
-end
