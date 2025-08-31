@@ -29,13 +29,14 @@ RSpec/SpecFilePathFormat:
 FactoryBot/SyntaxMethods:
   Enabled: false
 require:
+  - standard
+plugins:
   - rubocop-capybara
   - rubocop-factory_bot
   - rubocop-performance
   - rubocop-rake
   - rubocop-rspec
   - rubocop-yard
-  - standard
   - standard-custom
   - standard-performance
 inherit_gem:
