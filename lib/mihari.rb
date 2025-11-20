@@ -225,6 +225,7 @@ require "mihari/emitters/yeti"
 require "mihari/clients/base"
 
 require "mihari/clients/censys"
+require "mihari/clients/censys_v2"
 require "mihari/clients/circl"
 require "mihari/clients/crtsh"
 require "mihari/clients/dnstwister"
@@ -252,6 +253,7 @@ require "mihari/clients/zoomeye"
 require "mihari/analyzers/base"
 
 require "mihari/analyzers/censys"
+require "mihari/analyzers/censys_v2"
 require "mihari/analyzers/circl"
 require "mihari/analyzers/crtsh"
 require "mihari/analyzers/dnstwister"
@@ -279,6 +281,7 @@ require "mihari/constants"
 
 # Structs
 require "mihari/structs/censys"
+require "mihari/structs/censys_v2"
 require "mihari/structs/config"
 require "mihari/structs/filters"
 require "mihari/structs/fofa"

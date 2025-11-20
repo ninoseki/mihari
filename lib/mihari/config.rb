@@ -51,7 +51,9 @@ module Mihari
       retry_interval: 5,
       retry_times: 3,
       sentry_dsn: nil,
-      sentry_trace_sample_rate: 0.25
+      sentry_trace_sample_rate: 0.25,
+      censys_v2_api_key: ENV["CENSYS_V2_API_KEY"],
+      censys_v2_org_id: ENV["CENSYS_V2_ORG_ID"],
     )
 
     # @!attribute [r] censys_id

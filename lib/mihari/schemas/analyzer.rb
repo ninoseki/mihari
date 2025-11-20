@@ -54,6 +54,15 @@ module Mihari
         optional(:secret).filled(:string)
         optional(:options).hash(AnalyzerPaginationOptions)
       end
+      
+      #NEW ANALYZER SCHEMA
+      CENSYS_V2 = Dry::Schema.Params do
+        required(:analyzer).value(Types::String.enum("censys_v2"))
+        required(:query).filled(:string)
+        optional(:api_key).filled(:string)
+        optional(:organization_id).filled(:string)
+        optional(:options).hash(AnalyzerPaginationOptions)
+      end
 
       CIRCL = Dry::Schema.Params do
         required(:analyzer).value(Types::String.enum(*Mihari::Analyzers::CIRCL.keys))
