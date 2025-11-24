@@ -26,6 +26,10 @@ module Mihari
 
     AnalyzerPaginationOptions = AnalyzerOptions & PaginationOptions
 
+    AnalyzerPaginationOptionsWithVersion = AnalyzerPaginationOptions & Dry::Schema.Params do
+      optional(:version).value(Types::Coercible::Integer.enum(2, 3))
+    end
+
     EmitterOptions = Options & ParallelOptions
   end
 end

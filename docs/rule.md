@@ -110,6 +110,10 @@ Also a rule can have `updated_on` that is a date of a rule modification. Optiona
 `queries` is a list of queries/analyzers.
 See [Analyzers](./analyzers/index.md) to know details of each analyzer.
 
+!!! note
+
+  `analyzer: censys` now accepts `options.version` to select the API backend. See [Censys Search API (Version 2)](./analyzers/censys.md) or [Censys Platform API (Version 3)](./analyzers/censys_v3.md) for credential details. Use `3` for the Platform API (PAT/organization ID) or rely on the default `2` for the legacy Search API if you still need it. A warning is emitted when the default is used so you know to migrate.
+
 ### Enrichers
 
 `enrichers` is a list of enrichers.

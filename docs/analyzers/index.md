@@ -1,6 +1,7 @@
 # Analyzers
 
-- [Censys](censys.md)
+- [Censys (Search API v2)](censys.md)
+- [Censys Platform API (v3)](censys_v3.md)
 - [Circle Passive DNS/SSL](circl.md)
 - [crt.sh](crtsh.md)
 - [dnstwister](dnstwister.md)
@@ -38,7 +39,8 @@ options:
 
 Also the following analyzers can have pagination options.
 
-- [Censys](censys.md)
+- [Censys (Search API v2)](censys.md)
+- [Censys Platform API (v3)](censys_v3.md)
 - [Fofa](fofa.md)
 - [GreyNoise](greynoise.md)
 - [HunterHow](hunterhow.md)
