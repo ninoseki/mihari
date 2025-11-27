@@ -8,7 +8,24 @@ RSpec.describe Mihari::Analyzers::Censys do
   let(:credentials) { {} }
 
   describe "#artifacts" do
-    context "with legacy API (default)", :vcr do
+    context "with legacy API (default)" do
+      let(:client) { instance_double(Mihari::Clients::Censys) }
+      let(:artifact) do
+        instance_double(
+          Mihari::Models::Artifact,
+          data: "1.1.1.1",
+          autonomous_system: instance_double(Mihari::Models::AutonomousSystem, number: 13_335),
+          ports: [80]
+        )
+      end
+      let(:result) { instance_double(Mihari::Structs::Censys::Result, artifacts: [artifact]) }
+      let(:response) { instance_double(Mihari::Structs::Censys::Response, result: result) }
+
+      before do
+        allow(Mihari::Clients::Censys).to receive(:new).and_return(client)
+        allow(client).to receive(:search_with_pagination).and_return([response])
+      end
+
       it "returns search results" do
         artifacts = analyzer.artifacts
 
@@ -28,7 +45,7 @@ RSpec.describe Mihari::Analyzers::Censys do
       let(:credentials) { {api_key: "token"} }
       let(:client) { instance_double(Mihari::Clients::CensysV3) }
       let(:artifact) { instance_double(Mihari::Models::Artifact, data: "1.1.1.1") }
-      let(:response) { instance_double("Response", artifacts: [artifact]) }
+      let(:response) { instance_double(Mihari::Structs::CensysV3::Response, artifacts: [artifact]) }
 
       before do
         allow(Mihari::Clients::CensysV3).to receive(:new).and_return(client)
@@ -43,8 +60,8 @@ RSpec.describe Mihari::Analyzers::Censys do
     context "when version is omitted" do
       let(:client) { instance_double(Mihari::Clients::Censys) }
       let(:artifact) { instance_double(Mihari::Models::Artifact, data: "1.1.1.1") }
-      let(:result) { instance_double("Result", artifacts: [artifact]) }
-      let(:response) { instance_double("Response", result: result) }
+      let(:result) { instance_double(Mihari::Structs::Censys::Result, artifacts: [artifact]) }
+      let(:response) { instance_double(Mihari::Structs::Censys::Response, result: result) }
 
       before do
         allow(Mihari::Clients::Censys).to receive(:new).and_return(client)

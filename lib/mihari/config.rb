@@ -55,7 +55,7 @@ module Mihari
       censys_v2_api_key: ENV["CENSYS_V2_API_KEY"],
       censys_v2_org_id: ENV["CENSYS_V2_ORG_ID"],
       censys_v3_api_key: ENV["CENSYS_V3_API_KEY"] || ENV["CENSYS_V2_API_KEY"],
-      censys_v3_org_id: ENV["CENSYS_V3_ORG_ID"] || ENV["CENSYS_V2_ORG_ID"],
+      censys_v3_org_id: ENV["CENSYS_V3_ORG_ID"] || ENV["CENSYS_V2_ORG_ID"]
     )
 
     # @!attribute [r] censys_id

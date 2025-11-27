@@ -17,7 +17,7 @@ module Mihari
       end
 
       def search(query, size: nil, cursor: nil)
-        params = { query: query, page_size: size, page_token: cursor }.compact
+        params = {query: query, page_size: size, page_token: cursor}.compact
         Structs::CensysV2::Response.from_dynamic! post_json("search/query", json: params)
       end
 
@@ -27,7 +27,7 @@ module Mihari
           pagination_limit.times do
             res = search(query, size: size, cursor: cursor)
             y.yield res
-            cursor = res.result.next_page_token rescue nil
+            cursor = res.result&.next_page_token
             break if cursor.nil? || cursor.empty?
             sleep_pagination_interval
           end
