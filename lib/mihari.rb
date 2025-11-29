@@ -225,7 +225,6 @@ require "mihari/emitters/yeti"
 require "mihari/clients/base"
 
 require "mihari/clients/censys"
-require "mihari/clients/censys_v3"
 require "mihari/clients/circl"
 require "mihari/clients/crtsh"
 require "mihari/clients/dnstwister"
@@ -280,7 +279,6 @@ require "mihari/constants"
 
 # Structs
 require "mihari/structs/censys"
-require "mihari/structs/censys_v3"
 require "mihari/structs/config"
 require "mihari/structs/filters"
 require "mihari/structs/fofa"

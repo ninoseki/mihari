@@ -64,9 +64,6 @@ lib/mihari/web/public/
 rules/
 alerts/
 
-# Local docker compose (use git rm --cached docker-compose.yml if already tracked)
-docker-compose.yml
-
 # Python Environments
 .venv
 env/

@@ -39,8 +39,7 @@ options:
 
 Also the following analyzers can have pagination options.
 
-- [Censys (Search API v2)](censys.md)
-- [Censys Platform API (v3)](censys_v3.md)
+- [Censys](censys.md)
 - [Fofa](fofa.md)
 - [GreyNoise](greynoise.md)
 - [HunterHow](hunterhow.md)

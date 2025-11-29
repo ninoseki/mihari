@@ -60,6 +60,7 @@ VCR.configure do |config|
 
   keys = Mihari.config.keys.map(&:upcase)
   api_keys = keys.select { |key| key.end_with?("_API_KEY") }
+  pats = keys.select { |key| key.end_with?("_PAT") }
   passwords = keys.select { |key| key.end_with?("_PASSWORD") }
   secrets = keys.select { |key| key.end_with?("_SECRET") }
   usernames = keys.select { |key| key.end_with?("_USERNAME") }
@@ -69,7 +70,7 @@ VCR.configure do |config|
     key != "DATABASE_URL" && key != "SIDEKIQ_REDIS_URL" && key.end_with?("_URL")
   end
 
-  (api_keys + passwords + secrets + usernames + ids + emails).each do |key|
+  (api_keys + pats + passwords + secrets + usernames + ids + emails).each do |key|
     ENV[key] = Digest::MD5.hexdigest(key) if ci_env? || !ENV.key?(key)
     config.filter_sensitive_data("<#{key}>") { ENV[key] }
   end

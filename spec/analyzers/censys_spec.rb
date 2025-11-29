@@ -1,32 +1,13 @@
 # frozen_string_literal: true
 
-RSpec.describe Mihari::Analyzers::Censys do
-  subject(:analyzer) { described_class.new(query, options: options, **credentials) }
+RSpec.describe Mihari::Analyzers::Censys, :vcr do
+  context "v2" do
+    subject(:analyzer) { described_class.new(query, version: 2) }
 
-  let(:query) { "ip:1.1.1.1" }
-  let(:options) { nil }
-  let(:credentials) { {} }
+    let(:query) { "ip:1.1.1.1" }
 
-  describe "#artifacts" do
-    context "with legacy API (default)" do
-      let(:client) { instance_double(Mihari::Clients::Censys) }
-      let(:artifact) do
-        instance_double(
-          Mihari::Models::Artifact,
-          data: "1.1.1.1",
-          autonomous_system: instance_double(Mihari::Models::AutonomousSystem, number: 13_335),
-          ports: [80]
-        )
-      end
-      let(:result) { instance_double(Mihari::Structs::Censys::Result, artifacts: [artifact]) }
-      let(:response) { instance_double(Mihari::Structs::Censys::Response, result: result) }
-
-      before do
-        allow(Mihari::Clients::Censys).to receive(:new).and_return(client)
-        allow(client).to receive(:search_with_pagination).and_return([response])
-      end
-
-      it "returns search results" do
+    describe "#artifacts" do
+      it do
         artifacts = analyzer.artifacts
 
         expect(artifacts).to be_an(Array)
@@ -40,50 +21,38 @@ RSpec.describe Mihari::Analyzers::Censys do
       end
     end
 
-    context "with Platform API" do
-      let(:options) { {version: 3} }
-      let(:credentials) { {api_key: "token"} }
-      let(:client) { instance_double(Mihari::Clients::CensysV3) }
-      let(:artifact) { instance_double(Mihari::Models::Artifact, data: "1.1.1.1") }
-      let(:response) { instance_double(Mihari::Structs::CensysV3::Response, artifacts: [artifact]) }
-
+    context "without API credentials" do
       before do
-        allow(Mihari::Clients::CensysV3).to receive(:new).and_return(client)
-        allow(client).to receive(:search_with_pagination).and_return([response])
+        allow(Mihari.config).to receive(:censys_id).and_return(nil)
+        allow(Mihari.config).to receive(:censys_secret).and_return(nil)
       end
 
+      it do
+        expect { analyzer.artifacts }.to raise_error(ArgumentError)
+      end
+    end
+  end
+
+  context "v3" do
+    subject(:analyzer) { described_class.new(query, version: 3) }
+
+    let(:query) { "host.ip:1.1.1.1" }
+
+    describe "#artifacts" do
       it "returns artifacts from the platform client" do
         expect(analyzer.artifacts).to eq([artifact])
       end
     end
 
-    context "when version is omitted" do
-      let(:client) { instance_double(Mihari::Clients::Censys) }
-      let(:artifact) { instance_double(Mihari::Models::Artifact, data: "1.1.1.1") }
-      let(:result) { instance_double(Mihari::Structs::Censys::Result, artifacts: [artifact]) }
-      let(:response) { instance_double(Mihari::Structs::Censys::Response, result: result) }
-
+    context "without API credentials" do
       before do
-        allow(Mihari::Clients::Censys).to receive(:new).and_return(client)
-        allow(client).to receive(:search_with_pagination).and_return([response])
-        allow(Mihari.logger).to receive(:warn)
+        allow(Mihari.config).to receive(:censys_api_key).and_return(nil)
+        allow(Mihari.config).to receive(:censys_organization_id).and_return(nil)
       end
 
-      it "logs a single deprecation warning" do
-        analyzer.artifacts
-        expect(Mihari.logger).to have_received(:warn).once
+      it do
+        expect { analyzer.artifacts }.to raise_error(ArgumentError)
       end
-    end
-  end
-
-  context "without API credentials" do
-    before do
-      allow(Mihari.config).to receive(:censys_id).and_return(nil)
-      allow(Mihari.config).to receive(:censys_secret).and_return(nil)
-    end
-
-    it "raises an error" do
-      expect { analyzer.artifacts }.to raise_error(ArgumentError)
     end
   end
 end

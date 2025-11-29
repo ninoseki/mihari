@@ -11,6 +11,9 @@ module Mihari
       # analyzers, emitters & enrichers
       censys_id: nil,
       censys_secret: nil,
+      censys_pat: nil,
+      censys_version: 2,
+      censys_organization_id: nil,
       circl_passive_password: nil,
       circl_passive_username: nil,
       database_url: URI("sqlite3:mihari.db"),
@@ -51,11 +54,7 @@ module Mihari
       retry_interval: 5,
       retry_times: 3,
       sentry_dsn: nil,
-      sentry_trace_sample_rate: 0.25,
-      censys_v2_api_key: ENV["CENSYS_V2_API_KEY"],
-      censys_v2_org_id: ENV["CENSYS_V2_ORG_ID"],
-      censys_v3_api_key: ENV["CENSYS_V3_API_KEY"] || ENV["CENSYS_V2_API_KEY"],
-      censys_v3_org_id: ENV["CENSYS_V3_ORG_ID"] || ENV["CENSYS_V2_ORG_ID"]
+      sentry_trace_sample_rate: 0.25
     )
 
     # @!attribute [r] censys_id
