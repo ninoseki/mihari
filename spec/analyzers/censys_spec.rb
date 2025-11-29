@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 RSpec.describe Mihari::Analyzers::Censys, :vcr do
-  context "v2" do
+  context "with v2" do
     subject(:analyzer) { described_class.new(query, version: 2) }
 
     let(:query) { "ip:1.1.1.1" }
@@ -33,7 +33,7 @@ RSpec.describe Mihari::Analyzers::Censys, :vcr do
     end
   end
 
-  context "v3" do
+  context "with v3" do
     subject(:analyzer) { described_class.new(query, version: 3) }
 
     let(:query) { "host.ip:1.1.1.1" }
