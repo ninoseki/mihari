@@ -6,7 +6,20 @@ module Mihari
     # Censys analyzer
     #
     class Censys < Base
-      attr_reader :id, :secret, :pat, :organization_id, :version
+      # @return [String, nil]
+      attr_reader :id
+
+      # @return [String, nil]
+      attr_reader :secret
+
+      # @return [String, nil]
+      attr_reader :pat
+
+      # @return [String, nil]
+      attr_reader :organization_id
+
+      # @return [Integer, nil]
+      attr_reader :version
 
       def initialize(query, version: nil, options: nil, id: nil, secret: nil, pat: nil, organization_id: nil)
         super(query, options:)

@@ -83,8 +83,6 @@ module Mihari
       class V3 < Base
         BASE_URL = "https://api.platform.censys.io"
 
-        attr_reader :api_key, :organization_id
-
         def initialize(pat:, organization_id: nil, headers: {}, pagination_interval: Mihari.config.pagination_interval, timeout: nil)
           raise(ArgumentError, "pat is required") if pat.nil?
           raise(ArgumentError, "organization_id is required") if organization_id.nil?
