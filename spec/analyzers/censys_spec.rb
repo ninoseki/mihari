@@ -39,7 +39,7 @@ RSpec.describe Mihari::Analyzers::Censys, :vcr do
     let(:query) { "host.ip:1.1.1.1" }
 
     describe "#artifacts" do
-      it "returns artifacts from the platform client" do
+      it do
         artifacts = analyzer.artifacts
 
         expect(artifacts).to be_an(Array)
