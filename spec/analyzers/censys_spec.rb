@@ -40,7 +40,15 @@ RSpec.describe Mihari::Analyzers::Censys, :vcr do
 
     describe "#artifacts" do
       it "returns artifacts from the platform client" do
-        expect(analyzer.artifacts).to eq([artifact])
+        artifacts = analyzer.artifacts
+
+        expect(artifacts).to be_an(Array)
+        expect(artifacts.length).to eq(1)
+
+        first = artifacts.first
+        expect(first.data).to eq("1.1.1.1")
+
+        expect(first.autonomous_system.number).to eq(13_335)
       end
     end
 
