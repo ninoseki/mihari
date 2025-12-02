@@ -1,0 +1,1447 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+        <link rel="prev" href="../configuration/">
+      
+      
+        <link rel="next" href="../tips/sidekiq/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.0">
+    
+    
+      
+        <title>Usage - Mihari</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.618322db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    <body dir="ltr">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#usage" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href=".." title="Mihari" class="md-header__button md-logo" aria-label="Mihari" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Mihari
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Usage
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="Mihari" class="md-nav__button md-logo" aria-label="Mihari" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Mihari
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../requirements/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Requirements
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../installation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Installation
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../architecture/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Architecture
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../rule/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Rule
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../configuration/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Configuration
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Usage
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Usage
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#cli" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        CLI
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="CLI">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#mihari-alert" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        mihari alert
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#mihari-artifact" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        mihari artifact
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#mihari-db" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        mihari db
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#mihari-rule" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        mihari rule
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#mihari-search" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        mihari search
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#mihari-tag" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        mihari tag
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#mihari-web" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        mihari web
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#mihari-sidekiq" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        mihari sidekiq
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#hints" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Hints
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Hints">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#search" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Search
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#search-with-transformation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Search With Transformation
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7" >
+        
+          
+          <label class="md-nav__link" for="__nav_7" id="__nav_7_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Tips
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Tips
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../tips/sidekiq/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sidekiq
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../tips/docker/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Docker
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../tips/github_actions/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    GitHub Actions
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../tips/superset/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Superset
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../tips/sentry/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sentry
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../tips/alternatives/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Alternatives
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_8" >
+        
+          
+          <label class="md-nav__link" for="__nav_8" id="__nav_8_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    References
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_8_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_8">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    References
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../analyzers/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Analyzers
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../enrichers/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Enrichers
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../emitters/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Emitters
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../diagrams/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Diagrams
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../tags/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Tags
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../dev/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Development
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#cli" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        CLI
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="CLI">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#mihari-alert" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        mihari alert
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#mihari-artifact" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        mihari artifact
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#mihari-db" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        mihari db
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#mihari-rule" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        mihari rule
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#mihari-search" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        mihari search
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#mihari-tag" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        mihari tag
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#mihari-web" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        mihari web
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#mihari-sidekiq" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        mihari sidekiq
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#hints" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Hints
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Hints">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#search" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Search
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#search-with-transformation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Search With Transformation
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="usage">Usage<a class="headerlink" href="#usage" title="Permanent link">&para;</a></h1>
+<h2 id="cli">CLI<a class="headerlink" href="#cli" title="Permanent link">&para;</a></h2>
+<div class="highlight"><pre><span></span><code>$<span class="w"> </span>mihari
+Commands:
+<span class="w">  </span>mihari<span class="w"> </span>--version,<span class="w"> </span>-v<span class="w">        </span><span class="c1"># Print the version</span>
+<span class="w">  </span>mihari<span class="w"> </span>alert<span class="w">                </span><span class="c1"># Sub commands for alert</span>
+<span class="w">  </span>mihari<span class="w"> </span>artifact<span class="w">             </span><span class="c1"># Sub commands for artifact</span>
+<span class="w">  </span>mihari<span class="w"> </span>config<span class="w">               </span><span class="c1"># Sub commands for config</span>
+<span class="w">  </span>mihari<span class="w"> </span>db<span class="w">                   </span><span class="c1"># Sub commands for DB</span>
+<span class="w">  </span>mihari<span class="w"> </span><span class="nb">help</span><span class="w"> </span><span class="o">[</span>COMMAND<span class="o">]</span><span class="w">       </span><span class="c1"># Describe available commands or one specific command</span>
+<span class="w">  </span>mihari<span class="w"> </span>rule<span class="w">                 </span><span class="c1"># Sub commands for rule</span>
+<span class="w">  </span>mihari<span class="w"> </span>search<span class="w"> </span><span class="o">[</span>PATH_OR_ID<span class="o">]</span><span class="w">  </span><span class="c1"># Search by a rule</span>
+<span class="w">  </span>mihari<span class="w"> </span>sidekiq<span class="w">              </span><span class="c1"># Start Sidekiq</span>
+<span class="w">  </span>mihari<span class="w"> </span>tag<span class="w">                  </span><span class="c1"># Sub commands for tag</span>
+<span class="w">  </span>mihari<span class="w"> </span>web<span class="w">                  </span><span class="c1"># Start the web app</span>
+
+Options:
+<span class="w">  </span>-d,<span class="w"> </span><span class="o">[</span>--debug<span class="o">]</span>,<span class="w"> </span><span class="o">[</span>--no-debug<span class="o">]</span><span class="w">  </span><span class="c1"># Set up debug mode</span>
+</code></pre></div>
+<h3 id="mihari-alert"><code>mihari alert</code><a class="headerlink" href="#mihari-alert" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code>$<span class="w"> </span>mihari<span class="w"> </span>alert
+Commands:
+<span class="w">  </span>mihari<span class="w"> </span>alert<span class="w"> </span>create<span class="w"> </span>PATH<span class="w">                                   </span><span class="c1"># Create an alert</span>
+<span class="w">  </span>mihari<span class="w"> </span>alert<span class="w"> </span>delete<span class="w"> </span>ID<span class="w">                                     </span><span class="c1"># Delete an alert</span>
+<span class="w">  </span>mihari<span class="w"> </span>alert<span class="w"> </span>get<span class="w"> </span>ID<span class="w">                                        </span><span class="c1"># Get an alert</span>
+<span class="w">  </span>mihari<span class="w"> </span>alert<span class="w"> </span><span class="nb">help</span><span class="w"> </span><span class="o">[</span>COMMAND<span class="o">]</span><span class="w">                                </span><span class="c1"># Describe subcommands or one specific subcommand</span>
+<span class="w">  </span>mihari<span class="w"> </span>alert<span class="w"> </span>list<span class="w"> </span>QUERY<span class="w">                                    </span><span class="c1"># List/search alerts</span>
+<span class="w">  </span>mihari<span class="w"> </span>alert<span class="w"> </span>list-transform<span class="w"> </span>QUERY<span class="w"> </span>-t,<span class="w"> </span>--template<span class="o">=</span>TEMPLATE<span class="w">  </span><span class="c1"># List/search alerts with transformation</span>
+</code></pre></div>
+<h3 id="mihari-artifact"><code>mihari artifact</code><a class="headerlink" href="#mihari-artifact" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code>$<span class="w"> </span>mihari<span class="w"> </span>artifact
+Commands:
+<span class="w">  </span>mihari<span class="w"> </span>artifact<span class="w"> </span>delete<span class="w"> </span>ID<span class="w">                                     </span><span class="c1"># Delete an artifact</span>
+<span class="w">  </span>mihari<span class="w"> </span>artifact<span class="w"> </span>enrich<span class="w"> </span>ID<span class="w">                                     </span><span class="c1"># Enrich an artifact</span>
+<span class="w">  </span>mihari<span class="w"> </span>artifact<span class="w"> </span>get<span class="w"> </span>ID<span class="w">                                        </span><span class="c1"># Get an artifact</span>
+<span class="w">  </span>mihari<span class="w"> </span>artifact<span class="w"> </span><span class="nb">help</span><span class="w"> </span><span class="o">[</span>COMMAND<span class="o">]</span><span class="w">                                </span><span class="c1"># Describe subcommands or one specific subcommand</span>
+<span class="w">  </span>mihari<span class="w"> </span>artifact<span class="w"> </span>list<span class="w"> </span>QUERY<span class="w">                                    </span><span class="c1"># List/search artifacts</span>
+<span class="w">  </span>mihari<span class="w"> </span>artifact<span class="w"> </span>list-transform<span class="w"> </span>QUERY<span class="w"> </span>-t,<span class="w"> </span>--template<span class="o">=</span>TEMPLATE<span class="w">  </span><span class="c1"># List/search artifacts with transformation</span>
+</code></pre></div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+</div>
+<h3 id="mihari-db"><code>mihari db</code><a class="headerlink" href="#mihari-db" title="Permanent link">&para;</a></h3>
+<p>This subcommand is for initializing/migrating database.</p>
+<div class="highlight"><pre><span></span><code>$<span class="w"> </span>mihari<span class="w"> </span>db
+Commands:
+<span class="w">  </span>mihari<span class="w"> </span>db<span class="w"> </span><span class="nb">help</span><span class="w"> </span><span class="o">[</span>COMMAND<span class="o">]</span><span class="w">  </span><span class="c1"># Describe subcommands or one specific subcommand</span>
+<span class="w">  </span>mihari<span class="w"> </span>db<span class="w"> </span>migrate<span class="w">         </span><span class="c1"># Migrate DB schemas</span>
+</code></pre></div>
+<p>See <a href="../emitters/database/">Database</a> for detailed database configuration.</p>
+<h3 id="mihari-rule"><code>mihari rule</code><a class="headerlink" href="#mihari-rule" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code>$<span class="w"> </span>mihari<span class="w"> </span>rule
+Commands:
+<span class="w">  </span>mihari<span class="w"> </span>rule<span class="w"> </span>delete<span class="w"> </span>ID<span class="w">                                     </span><span class="c1"># Delete a rule</span>
+<span class="w">  </span>mihari<span class="w"> </span>rule<span class="w"> </span>format<span class="w"> </span>PATH<span class="w">                                   </span><span class="c1"># format a rule</span>
+<span class="w">  </span>mihari<span class="w"> </span>rule<span class="w"> </span>get<span class="w"> </span>ID<span class="w">                                        </span><span class="c1"># Get a rule</span>
+<span class="w">  </span>mihari<span class="w"> </span>rule<span class="w"> </span><span class="nb">help</span><span class="w"> </span><span class="o">[</span>COMMAND<span class="o">]</span><span class="w">                                </span><span class="c1"># Describe subcommands or one specific subcommand</span>
+<span class="w">  </span>mihari<span class="w"> </span>rule<span class="w"> </span>init<span class="w"> </span>PATH<span class="w">                                     </span><span class="c1"># Initialize a new rule</span>
+<span class="w">  </span>mihari<span class="w"> </span>rule<span class="w"> </span>list<span class="w"> </span>QUERY<span class="w">                                    </span><span class="c1"># List/search rules</span>
+<span class="w">  </span>mihari<span class="w"> </span>rule<span class="w"> </span>list-transform<span class="w"> </span>QUERY<span class="w"> </span>-t,<span class="w"> </span>--template<span class="o">=</span>TEMPLATE<span class="w">  </span><span class="c1"># List/search rules with transformation</span>
+<span class="w">  </span>mihari<span class="w"> </span>rule<span class="w"> </span>search<span class="w"> </span>PATH_OR_ID<span class="w">                             </span><span class="c1"># Search by a rule</span>
+<span class="w">  </span>mihari<span class="w"> </span>rule<span class="w"> </span>validate<span class="w"> </span>PATH<span class="w">                                 </span><span class="c1"># Validate rule(s)</span>
+</code></pre></div>
+<h3 id="mihari-search"><code>mihari search</code><a class="headerlink" href="#mihari-search" title="Permanent link">&para;</a></h3>
+<p>This is a command to execute a rule. A shorthand for <code>mihari rule search</code>.</p>
+<div class="highlight"><pre><span></span><code>mihari<span class="w"> </span>search<span class="w"> </span>/path/to/rule.yml
+</code></pre></div>
+<p>Mihari asks whether really you want to update a rule if there is a diff by default.</p>
+<div class="highlight"><pre><span></span><code>$<span class="w"> </span>mihari<span class="w"> </span>search<span class="w"> </span>/path/to/rule.yml
+Are<span class="w"> </span>you<span class="w"> </span>sure<span class="w"> </span>you<span class="w"> </span>want<span class="w"> </span>to<span class="w"> </span>overwrite<span class="w"> </span>this<span class="w"> </span>rule?<span class="w"> </span><span class="o">(</span>y/n<span class="o">)</span>
+</code></pre></div>
+<p>It can be suppressed by providing <code>-f</code>.</p>
+<div class="highlight"><pre><span></span><code>mihari<span class="w"> </span>search<span class="w"> </span>-f<span class="w"> </span>/path/to/rule.yml
+</code></pre></div>
+<h3 id="mihari-tag"><code>mihari tag</code><a class="headerlink" href="#mihari-tag" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code>$<span class="w"> </span>mihari<span class="w"> </span>tag
+Commands:
+<span class="w">  </span>mihari<span class="w"> </span>tag<span class="w"> </span>delete<span class="w"> </span>ID<span class="w">                                     </span><span class="c1"># Delete a tag</span>
+<span class="w">  </span>mihari<span class="w"> </span>tag<span class="w"> </span><span class="nb">help</span><span class="w"> </span><span class="o">[</span>COMMAND<span class="o">]</span><span class="w">                                </span><span class="c1"># Describe subcommands or one specific subcommand</span>
+<span class="w">  </span>mihari<span class="w"> </span>tag<span class="w"> </span>list<span class="w"> </span>QUERY<span class="w">                                    </span><span class="c1"># List/search tags</span>
+<span class="w">  </span>mihari<span class="w"> </span>tag<span class="w"> </span>list-transform<span class="w"> </span>QUERY<span class="w"> </span>-t,<span class="w"> </span>--template<span class="o">=</span>TEMPLATE<span class="w">  </span><span class="c1"># List/search tags with transformation</span>
+</code></pre></div>
+<h3 id="mihari-web"><code>mihari web</code><a class="headerlink" href="#mihari-web" title="Permanent link">&para;</a></h3>
+<p>This command is for starting the built-in web app.</p>
+<div class="highlight"><pre><span></span><code>mihari<span class="w"> </span>web
+</code></pre></div>
+<p>It stars the app with <code>localhost:9292</code>. You can configure it by providing following options:</p>
+<div class="highlight"><pre><span></span><code>$<span class="w"> </span>mihari<span class="w"> </span><span class="nb">help</span><span class="w"> </span>web
+Usage:
+<span class="w">  </span>mihari<span class="w"> </span>web
+
+Options:
+<span class="w">      </span><span class="o">[</span>--port<span class="o">=</span>N<span class="o">]</span><span class="w">                   </span><span class="c1"># Port to listen on</span>
+<span class="w">                                   </span><span class="c1"># Default: 9292</span>
+<span class="w">      </span><span class="o">[</span>--host<span class="o">=</span>HOST<span class="o">]</span><span class="w">                </span><span class="c1"># Hostname to listen on</span>
+<span class="w">                                   </span><span class="c1"># Default: localhost</span>
+<span class="w">      </span><span class="o">[</span>--threads<span class="o">=</span>THREADS<span class="o">]</span><span class="w">          </span><span class="c1"># min:max threads to use</span>
+<span class="w">                                   </span><span class="c1"># Default: 0:3</span>
+<span class="w">      </span><span class="o">[</span>--verbose<span class="o">]</span>,<span class="w"> </span><span class="o">[</span>--no-verbose<span class="o">]</span><span class="w">  </span><span class="c1"># Don&#39;t report each request</span>
+<span class="w">                                   </span><span class="c1"># Default: false</span>
+<span class="w">      </span><span class="o">[</span>--worker-timeout<span class="o">=</span>N<span class="o">]</span><span class="w">         </span><span class="c1"># Worker timeout value (in seconds)</span>
+<span class="w">                                   </span><span class="c1"># Default: 60</span>
+<span class="w">      </span><span class="o">[</span>--open<span class="o">]</span>,<span class="w"> </span><span class="o">[</span>--no-open<span class="o">]</span><span class="w">        </span><span class="c1"># Whether to open the app in browser or not</span>
+<span class="w">                                   </span><span class="c1"># Default: true</span>
+<span class="w">      </span><span class="o">[</span>--env<span class="o">=</span>ENV<span class="o">]</span><span class="w">                  </span><span class="c1"># Environment</span>
+<span class="w">                                   </span><span class="c1"># Default: production</span>
+<span class="w">  </span>-d,<span class="w"> </span><span class="o">[</span>--debug<span class="o">]</span>,<span class="w"> </span><span class="o">[</span>--no-debug<span class="o">]</span><span class="w">      </span><span class="c1"># Set up debug mode</span>
+</code></pre></div>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>The built-in web app offers API to interact with Mihari.
+The API docs are available on <code>/redoc-static.html</code>.</p>
+</div>
+<h3 id="mihari-sidekiq"><code>mihari sidekiq</code><a class="headerlink" href="#mihari-sidekiq" title="Permanent link">&para;</a></h3>
+<p>This command is for starting Sidekiq. See <a href="../tips/sidekiq/">Sidekiq</a> for details.</p>
+<div class="highlight"><pre><span></span><code>$<span class="w"> </span>mihari<span class="w"> </span><span class="nb">help</span><span class="w"> </span>sidekiq
+Usage:
+<span class="w">  </span>mihari<span class="w"> </span>sidekiq
+
+Options:
+<span class="w">      </span><span class="o">[</span>--env<span class="o">=</span>ENV<span class="o">]</span><span class="w">              </span><span class="c1"># Environment</span>
+<span class="w">                               </span><span class="c1"># Default: production</span>
+<span class="w">  </span>-c,<span class="w"> </span><span class="o">[</span>--concurrency<span class="o">=</span>N<span class="o">]</span><span class="w">        </span><span class="c1"># Sidekiq concurrency</span>
+<span class="w">                               </span><span class="c1"># Default: 5</span>
+</code></pre></div>
+<h2 id="hints">Hints<a class="headerlink" href="#hints" title="Permanent link">&para;</a></h2>
+<h3 id="search">Search<a class="headerlink" href="#search" title="Permanent link">&para;</a></h3>
+<p>Mihari provides listing/search feature via CLI &amp; API.</p>
+<p>Search query supports <code>AND</code>, <code>OR</code>, <code>:</code>, <code>=</code>, <code>!=</code>, <code>&lt;</code>, <code>&lt;=</code>, <code>&gt;</code>, <code>&gt;=</code>, <code>NOT</code> and <code>()</code>.</p>
+<p>Searchable fields are:</p>
+<table>
+<thead>
+<tr>
+<th>Type</th>
+<th>Searchable fields</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>alert</code></td>
+<td><code>id</code>, <code>tag</code>, <code>created_at</code>, <code>rule.id</code>, <code>rule.title</code>, <code>rule.description</code>, <code>artifact.data</code>, <code>artifact.data_type</code>, <code>artifact.source</code> and <code>artifact.query</code></td>
+</tr>
+<tr>
+<td><code>artifact</code></td>
+<td><code>id</code>, <code>data</code>, <code>data_type</code>, <code>source</code>, <code>query</code>, <code>tag</code>, <code>rule.id</code>, <code>rule.title</code>, <code>rule.description</code>, <code>tag</code>,<code>created_at</code>, <code>asn</code>, <code>country_code</code>, <code>dns_record.value</code>, <code>dns_record.resource</code>, <code>reverse_dns_name</code>, <code>cpe</code>, <code>vuln</code> and <code>port</code></td>
+</tr>
+<tr>
+<td><code>rule</code></td>
+<td><code>id</code>, <code>title</code>, <code>description</code>, <code>tag</code>, <code>created_at</code> and <code>updated_at</code></td>
+</tr>
+<tr>
+<td><code>tag</code></td>
+<td><code>id</code> and <code>name</code></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Examples</strong></p>
+<div class="highlight"><pre><span></span><code>mihari<span class="w"> </span>rule<span class="w"> </span>list<span class="w"> </span><span class="s2">&quot;description:foo OR title:bar&quot;</span>
+mihari<span class="w"> </span>alert<span class="w"> </span>list<span class="w"> </span><span class="s2">&quot;rule.id:foo&quot;</span>
+mihari<span class="w"> </span>artifact<span class="w"> </span>list<span class="w"> </span><span class="s2">&quot;rule.id: foo AND data_type:ip&quot;</span>
+</code></pre></div>
+<h3 id="search-with-transformation">Search With Transformation<a class="headerlink" href="#search-with-transformation" title="Permanent link">&para;</a></h3>
+<p>Additionally you can search rules, alerts and artifacts with transformation by using <a href="https://github.com/rails/jbuilder">Jbuilder</a>.</p>
+<div class="highlight"><pre><span></span><code>mihari<span class="w"> </span>rule<span class="w"> </span>list-transform<span class="w"> </span>-t<span class="w"> </span>/path/to/template
+mihari<span class="w"> </span>alert<span class="w"> </span>list-transform<span class="w"> </span>-t<span class="w"> </span>/path/to/template
+mihari<span class="w"> </span>artifact<span class="w"> </span>list-transform<span class="w"> </span>-t<span class="w"> </span>/path/to/template
+</code></pre></div>
+<p>For example, you can combine IP addresses and ports by using the following template.</p>
+<p><strong>ip_port.json.jbuilder</strong></p>
+<div class="highlight"><pre><span></span><code><span class="n">ip_ports</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">results</span><span class="o">.</span><span class="n">map</span><span class="w"> </span><span class="k">do</span><span class="w"> </span><span class="o">|</span><span class="n">artifact</span><span class="o">|</span>
+<span class="w">  </span><span class="n">artifact</span><span class="o">.</span><span class="n">ports</span><span class="o">.</span><span class="n">map</span><span class="w"> </span><span class="k">do</span><span class="w"> </span><span class="o">|</span><span class="n">port</span><span class="o">|</span>
+<span class="w">    </span><span class="s2">&quot;</span><span class="si">#{</span><span class="n">artifact</span><span class="o">.</span><span class="n">data</span><span class="si">}</span><span class="s2">:</span><span class="si">#{</span><span class="n">port</span><span class="o">.</span><span class="n">number</span><span class="si">}</span><span class="s2">&quot;</span>
+<span class="w">  </span><span class="k">end</span>
+<span class="k">end</span><span class="o">.</span><span class="n">flatten</span>
+
+<span class="n">json</span><span class="o">.</span><span class="n">array!</span><span class="w"> </span><span class="n">ip_ports</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>mihari<span class="w"> </span>artifact<span class="w"> </span>list-transform<span class="w"> </span>-t<span class="w"> </span>/path/to/ip_port.json.jbuilder
+</code></pre></div>
+<p>A template can use the following attributes.</p>
+<table>
+<thead>
+<tr>
+<th>Key</th>
+<th>Type</th>
+<th>Desc.</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>results</code></td>
+<td><code>Array[Mihari::Models::Rule]</code>, <code>Array[Mihari::Models::Alert]</code>, <code>Array[Mihari::Models::Artifact]</code> or <code>Array[Mihari::Models::Tag]</code></td>
+<td>A list of search results</td>
+</tr>
+<tr>
+<td><code>total</code></td>
+<td>Integer</td>
+<td>A total number of search results</td>
+</tr>
+<tr>
+<td><code>page_size</code></td>
+<td>Integer</td>
+<td>A page size</td>
+</tr>
+<tr>
+<td><code>current_page</code></td>
+<td>Integer</td>
+<td>A current page number</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>With great power comes great responsibility.</p>
+<p>Jbuilder can execute anything with the same privilege Mihari has. Do not use untrusted template.</p>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "..", "features": [], "search": "../assets/javascripts/workers/search.7a47a382.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.e71a0d61.min.js"></script>
+      
+    
+  </body>
+</html>
