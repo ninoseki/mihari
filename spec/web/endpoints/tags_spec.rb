@@ -1,12 +1,19 @@
 # frozen_string_literal: true
 
+class Testable < Grape::API
+  prefix "api"
+  format :json
+
+  mount Mihari::Web::Endpoints::Tags
+end
+
 RSpec.describe Mihari::Web::Endpoints::Tags do
   include Rack::Test::Methods
 
   let_it_be(:tag) { FactoryBot.create(:tag) }
 
   def app
-    Mihari::Web::Endpoints::Tags
+    Testable
   end
 
   describe "get /api/tags" do
@@ -21,7 +28,7 @@ RSpec.describe Mihari::Web::Endpoints::Tags do
   end
 
   describe "delete /api/tags/:id" do
-    it "returns 201" do
+    it "returns 204" do
       delete "/api/tags/#{tag.id}"
       expect(last_response.status).to eq(204)
     end

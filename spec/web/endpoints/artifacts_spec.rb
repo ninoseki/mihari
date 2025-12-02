@@ -1,5 +1,12 @@
 # frozen_string_literal: true
 
+class Testable < Grape::API
+  prefix "api"
+  format :json
+
+  mount Mihari::Web::Endpoints::Artifacts
+end
+
 RSpec.describe Mihari::Web::Endpoints::Artifacts, vcr: "Mihari_Services_ArtifactEnricher/ip:1.1.1.1" do
   include Rack::Test::Methods
 
@@ -11,7 +18,7 @@ RSpec.describe Mihari::Web::Endpoints::Artifacts, vcr: "Mihari_Services_Artifact
   let_it_be(:artifact_to_delete) { FactoryBot.create(:artifact) }
 
   def app
-    Mihari::Web::Endpoints::Artifacts
+    Testable
   end
 
   describe "get /api/artifacts" do

@@ -42,7 +42,7 @@ module Mihari
           get "/:id" do
             id = params[:id].to_i
             result = Services::ArtifactGetter.get_result(id)
-            return present(result.value!, with: Entities::Artifact) if result.success?
+            next present(result.value!, with: Entities::Artifact) if result.success?
 
             case result.failure
             when ActiveRecord::RecordNotFound
@@ -75,7 +75,7 @@ module Mihari
             end.to_result
 
             message = queued ? "ID:#{id}'s enrichment is queued" : "ID:#{id}'s enrichment is successful"
-            return present({message:, queued:}, with: Entities::QueueMessage) if result.success?
+            next present({message:, queued:}, with: Entities::QueueMessage) if result.success?
 
             case result.failure
             when UnenrichableError
@@ -99,7 +99,7 @@ module Mihari
 
             id = params["id"].to_i
             result = Services::ArtifactDestroyer.get_result(id)
-            return if result.success?
+            next if result.success?
 
             case result.failure
             when ActiveRecord::RecordNotFound

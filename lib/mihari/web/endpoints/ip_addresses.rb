@@ -24,7 +24,7 @@ module Mihari
             result = Services::IPGetter.get_result(ip)
             if result.success?
               value = result.value!
-              return present(
+              next present(
                 {
                   country_code: value.country_code,
                   asn: value.asn,

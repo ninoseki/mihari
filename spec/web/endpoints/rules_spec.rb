@@ -1,5 +1,12 @@
 # frozen_string_literal: true
 
+class Testable < Grape::API
+  prefix "api"
+  format :json
+
+  mount Mihari::Web::Endpoints::Rules
+end
+
 RSpec.describe Mihari::Web::Endpoints::Rules do
   include Rack::Test::Methods
 
@@ -7,7 +14,7 @@ RSpec.describe Mihari::Web::Endpoints::Rules do
   let_it_be(:rule_to_delete) { FactoryBot.create(:rule) }
 
   def app
-    Mihari::Web::Endpoints::Rules
+    Testable
   end
 
   describe "get /api/rules" do

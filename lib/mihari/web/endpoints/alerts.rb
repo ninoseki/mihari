@@ -42,7 +42,7 @@ module Mihari
           get "/:id" do
             id = params[:id].to_i
             result = Services::AlertGetter.get_result(id)
-            return present(result.value!, with: Entities::Alert) if result.success?
+            next present(result.value!, with: Entities::Alert) if result.success?
 
             case result.failure
             when ActiveRecord::RecordNotFound
@@ -62,7 +62,7 @@ module Mihari
           delete "/:id" do
             id = params["id"].to_i
             result = Services::AlertDestroyer.get_result(id)
-            return if result.success?
+            next if result.success?
 
             case result.failure
             when ActiveRecord::RecordNotFound
@@ -87,7 +87,7 @@ module Mihari
             status 201
 
             result = Services::AlertCreator.get_result(params)
-            return present(result.value!, with: Entities::Alert) if result.success?
+            next present(result.value!, with: Entities::Alert) if result.success?
 
             case result.failure
             when ActiveRecord::RecordNotFound
