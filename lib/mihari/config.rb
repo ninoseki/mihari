@@ -11,6 +11,9 @@ module Mihari
       # analyzers, emitters & enrichers
       censys_id: nil,
       censys_secret: nil,
+      censys_pat: nil,
+      censys_version: 2,
+      censys_organization_id: nil,
       circl_passive_password: nil,
       circl_passive_username: nil,
       database_url: URI("sqlite3:mihari.db"),

@@ -1,6 +1,7 @@
 # Analyzers
 
-- [Censys](censys.md)
+- [Censys (Search API v2)](censys.md)
+- [Censys Platform API (v3)](censys_v3.md)
 - [Circle Passive DNS/SSL](circl.md)
 - [crt.sh](crtsh.md)
 - [dnstwister](dnstwister.md)

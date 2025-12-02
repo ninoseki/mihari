@@ -9,8 +9,11 @@ Alternatively you can set values through `.env` file. Values in `.env` file will
 | Environment Variable   | Type   | Description                    | Default |
 | ---------------------- | ------ | ------------------------------ | ------- |
 | BINARYEDGE_API_KEY     | String | BinaryEdge API key             |         |
-| CENSYS_ID              | String | Censys API ID                  |         |
-| CENSYS_SECRET          | String | Censys secret                  |         |
+| CENSYS_VERSION         | String | Censys API version (2 or 3)    | `2`     |
+| CENSYS_ID              | String | Censys API ID (v2)             |         |
+| CENSYS_SECRET          | String | Censys secret (v2)             |         |
+| CENSYS_PAT             | String | Censys PAT (v3)                |         |
+| CENSYS_ORGANIZATION_ID | String | Censys Organization ID (v3)    |         |
 | CIRCL_PASSIVE_PASSWORD | String | CIRCL passive DNS/SSL password |         |
 | CIRCL_PASSIVE_USERNAME | String | CIRCL passive DNS/SSL username |         |
 | ONYPHE_API_KEY         | String | Onyphe API key                 |         |
