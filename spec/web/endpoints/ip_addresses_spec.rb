@@ -2,11 +2,18 @@
 
 require "json"
 
+class Testable < Grape::API
+  prefix "api"
+  format :json
+
+  mount Mihari::Web::Endpoints::IPAddresses
+end
+
 RSpec.describe Mihari::Web::Endpoints::IPAddresses, :vcr do
   include Rack::Test::Methods
 
   def app
-    Mihari::Web::Endpoints::IPAddresses
+    Testable
   end
 
   let!(:ip) { "1.1.1.1" }
@@ -19,15 +26,7 @@ RSpec.describe Mihari::Web::Endpoints::IPAddresses, :vcr do
       expect(json).to be_a(Hash)
     end
 
-    context "when get 404 from upwards" do
-      before do
-        allow(Mihari::Services::IPGetter).to receive(:result).and_return(
-          Dry::Monads::Result::Failure.new(
-            Mihari::StatusError.new("dummy", 404, "")
-          )
-        )
-      end
-
+    context "when get 422 from upwards" do
       it "returns 422" do
         get "/api/ip_addresses/404"
         expect(last_response.status).to eq(422)

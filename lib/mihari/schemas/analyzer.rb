@@ -87,6 +87,7 @@ module Mihari
       Urlscan = Dry::Schema.Params do
         required(:analyzer).value(Types::String.enum(*Mihari::Analyzers::Urlscan.keys))
         required(:query).filled(:string)
+        optional(:api_key).filled(:string)
         optional(:data_types).filled(array[Types::NetworkDataTypes]).default(Types::NetworkDataTypes.values)
         optional(:options).hash(AnalyzerPaginationOptions)
       end
@@ -94,6 +95,7 @@ module Mihari
       ZoomEye = Dry::Schema.Params do
         required(:analyzer).value(Types::String.enum(*Mihari::Analyzers::ZoomEye.keys))
         required(:query).filled(:string)
+        optional(:api_key).filled(:string)
         optional(:data_types).filled(array[Types::NetworkDataTypes]).default(Types::NetworkDataTypes.values)
         optional(:options).hash(AnalyzerPaginationOptions)
       end

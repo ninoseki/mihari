@@ -1,5 +1,12 @@
 # frozen_string_literal: true
 
+class Testable < Grape::API
+  prefix "api"
+  format :json
+
+  mount Mihari::Web::Endpoints::Alerts
+end
+
 RSpec.describe Mihari::Web::Endpoints::Alerts do
   include Rack::Test::Methods
 
@@ -8,7 +15,7 @@ RSpec.describe Mihari::Web::Endpoints::Alerts do
   let_it_be(:alert_to_delete) { FactoryBot.create(:alert) }
 
   def app
-    Mihari::Web::Endpoints::Alerts
+    Testable
   end
 
   describe "delete /api/alerts/:id" do

@@ -44,7 +44,7 @@ module Mihari
 
             id = params[:id].to_i
             result = Services::TagDestroyer.get_result(id)
-            return if result.success?
+            next if result.success?
 
             case result.failure
             when ActiveRecord::RecordNotFound

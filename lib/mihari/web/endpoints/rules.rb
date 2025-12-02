@@ -60,7 +60,7 @@ module Mihari
           get "/:id" do
             id = params[:id].to_s
             result = Services::RuleGetter.get_result(params[:id].to_s)
-            return present(result.value!, with: Entities::Rule) if result.success?
+            next present(result.value!, with: Entities::Rule) if result.success?
 
             case result.failure
             when ActiveRecord::RecordNotFound
@@ -95,7 +95,7 @@ module Mihari
             end.to_result
 
             message = queued ? "ID:#{id}'s search is queued" : "ID:#{id}'s search is successful"
-            return present({message:, queued:}, with: Entities::QueueMessage) if result.success?
+            next present({message:, queued:}, with: Entities::QueueMessage) if result.success?
 
             case result.failure
             when ActiveRecord::RecordNotFound
@@ -121,7 +121,7 @@ module Mihari
             yaml = params[:yaml].to_s
 
             result = RuleCreateUpdater.get_result(yaml, overwrite: false)
-            return present(result.value!.model, with: Entities::Rule) if result.success?
+            next present(result.value!.model, with: Entities::Rule) if result.success?
 
             failure = result.failure
             case failure
@@ -152,7 +152,7 @@ module Mihari
             yaml = params[:yaml].to_s
 
             result = RuleCreateUpdater.get_result(yaml, overwrite: true)
-            return present(result.value!.model, with: Entities::Rule) if result.success?
+            next present(result.value!.model, with: Entities::Rule) if result.success?
 
             failure = result.failure
             case failure
@@ -179,7 +179,7 @@ module Mihari
 
             id = params[:id].to_s
             result = Services::RuleDestroyer.get_result(id)
-            return if result.success?
+            next if result.success?
 
             case result.failure
             when ActiveRecord::RecordNotFound
