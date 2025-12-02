@@ -54,7 +54,7 @@ RSpec.describe Mihari::Analyzers::Censys, :vcr do
 
     context "without API credentials" do
       before do
-        allow(Mihari.config).to receive(:censys_api_key).and_return(nil)
+        allow(Mihari.config).to receive(:censys_pat).and_return(nil)
         allow(Mihari.config).to receive(:censys_organization_id).and_return(nil)
       end
 
