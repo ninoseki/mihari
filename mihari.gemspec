@@ -45,7 +45,6 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency "faker", "~> 3.5.2"
   spec.add_development_dependency "fuubar", "~> 2.5.1"
   spec.add_development_dependency "mysql2", "~> 0.5.7"
-  spec.add_development_dependency "openssl", "~> 3.3.2"
   spec.add_development_dependency "pg", "~> 1.6.2"
   spec.add_development_dependency "rack-test", "~> 2.2"
   spec.add_development_dependency "rake", "~> 13.3.1"
