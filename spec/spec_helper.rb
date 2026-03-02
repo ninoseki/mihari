@@ -12,7 +12,6 @@ require "fakefs/safe"
 require "faker"
 require "rack/test"
 require "rspec-parameterized"
-require "sidekiq/testing"
 require "simplecov"
 require "timecop"
 require "vcr"
@@ -46,6 +45,9 @@ require "mihari"
 
 require "mihari/cli/application"
 require "mihari/web/application"
+
+# enable Sidekiq testing mode
+Sidekiq.testing!(:fake)
 
 def authorization_field(username, password)
   token = "#{username}:#{password}"
