@@ -291,6 +291,7 @@ module Mihari
           class << self
             def from_dynamic!(d)
               res = d.dig("host_v1", "resource") || {}
+              return nil if res["ip"].nil?
               new(
                 ip: res["ip"],
                 autonomous_system: res["autonomous_system"],
@@ -313,7 +314,7 @@ module Mihari
           class << self
             def from_dynamic!(d)
               new(
-                hits: (d["hits"] || []).map { |x| Hit.from_dynamic!(x) },
+                hits: (d["hits"] || []).filter_map { |x| Hit.from_dynamic!(x) },
                 next_page_token: d["next_page_token"]
               )
             end
