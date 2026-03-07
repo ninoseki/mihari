@@ -3,7 +3,12 @@
 lib = File.expand_path("lib", __dir__)
 $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
 
-require "mihari/version"
+begin
+  require 'mihari/version'
+rescue LoadError
+  nil
+end
+
 
 def ci_env?
   # CI=true in GitHub Actions
@@ -12,7 +17,7 @@ end
 
 Gem::Specification.new do |spec|
   spec.name = "mihari"
-  spec.version = Mihari::VERSION
+  spec.version = Mihari::VERSION rescue "0.0.0"
   spec.authors = ["Manabu Niseki"]
   spec.email = ["manabu.niseki@gmail.com"]
 
