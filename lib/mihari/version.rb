@@ -1,3 +1,8 @@
 module Mihari
-  VERSION = "8.3.0"
+  begin
+    require "git-version-bump"
+    VERSION = GVB.version(false, true)
+  rescue
+    VERSION = "0.0.0"
+  end
 end
