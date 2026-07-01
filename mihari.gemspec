@@ -65,7 +65,7 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency "rubocop-factory_bot", "~> 2.28.0"
   spec.add_development_dependency "rubocop-rake", "~> 0.7.1"
   spec.add_development_dependency "rubocop-rspec", "~> 3.10.2"
-  spec.add_development_dependency "rubocop-yard", "~> 1.3.0"
+  spec.add_development_dependency "rubocop-yard", "~> 1.1.0"
   spec.add_development_dependency "simplecov-lcov", "~> 0.9.0"
   spec.add_development_dependency "simplecov", "~> 0.22"
   spec.add_development_dependency "standard", "~> 1.55.0"
