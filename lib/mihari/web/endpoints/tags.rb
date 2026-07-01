@@ -8,11 +8,10 @@ module Mihari
       #
       class Tags < Grape::API
         namespace :tags do
-          desc "List tags", {
+          desc "List tags",
             is_array: true,
             success: Entities::TagsWithPagination,
             summary: "List tags"
-          }
           params do
             optional :q, type: String, default: ""
             optional :page, type: Integer, default: 1
@@ -31,11 +30,10 @@ module Mihari
             )
           end
 
-          desc "Delete a tag", {
+          desc "Delete a tag",
             success: {code: 204},
             failure: [{code: 404, model: Entities::ErrorMessage}],
             summary: "Delete a tag"
-          }
           params do
             requires :id, type: Integer
           end

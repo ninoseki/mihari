@@ -28,11 +28,10 @@ module Mihari
         end
 
         namespace :rules do
-          desc "List/search rules", {
+          desc "List/search rules",
             is_array: true,
             success: Entities::RulesWithPagination,
             summary: "List/search rules"
-          }
           params do
             optional :q, type: String, default: ""
             optional :page, type: Integer, default: 1
@@ -49,11 +48,10 @@ module Mihari
               with: Entities::RulesWithPagination)
           end
 
-          desc "Get a rule", {
+          desc "Get a rule",
             success: Entities::Rule,
             failure: [{code: 404, model: Entities::ErrorMessage}],
             summary: "Get a rule"
-          }
           params do
             requires :id, type: String
           end
@@ -69,11 +67,10 @@ module Mihari
             raise result.failure
           end
 
-          desc "Search by a rule", {
+          desc "Search by a rule",
             success: {code: 201, model: Entities::QueueMessage},
             failure: [{code: 404, model: Entities::ErrorMessage}],
             summary: "Run a rule"
-          }
           params do
             requires :id, type: String
           end
@@ -104,14 +101,13 @@ module Mihari
             raise result.failure
           end
 
-          desc "Create a rule", {
+          desc "Create a rule",
             success: {code: 201, model: Entities::Rule},
             failure: [
               {code: 400, model: Entities::ErrorMessage},
               {code: 422, model: Entities::ErrorMessage}
             ],
             summary: "Create a rule"
-          }
           params do
             requires :yaml, type: String, documentation: {param_type: "body"}
           end
@@ -135,14 +131,13 @@ module Mihari
             raise failure
           end
 
-          desc "Update a rule", {
+          desc "Update a rule",
             success: {code: 201, model: Entities::Rule},
             failure: [
               {code: 404, model: Entities::ErrorMessage},
               {code: 422, model: Entities::ErrorMessage}
             ],
             summary: "Update a rule"
-          }
           params do
             requires :yaml, type: String, documentation: {param_type: "body"}
           end
@@ -166,11 +161,10 @@ module Mihari
             raise failure
           end
 
-          desc "Delete a rule", {
+          desc "Delete a rule",
             success: {code: 204},
             failure: [{code: 404, model: Entities::ErrorMessage}],
             summary: "Delete a rule"
-          }
           params do
             requires :id, type: String
           end

@@ -8,11 +8,10 @@ module Mihari
       #
       class Configs < Grape::API
         namespace :configs do
-          desc "list configs", {
+          desc "list configs",
             is_array: true,
             success: Entities::Configs,
             summary: "List configs"
-          }
           get "/" do
             configs = Services::ConfigSearcher.call
             present({results: configs}, with: Entities::Configs)

@@ -34,7 +34,7 @@ module Mihari
         res = http.post(url, params:, json:, form:) if method == "POST"
 
         body = res.body.to_s
-        content_type = res["Content-Type"].to_s
+        content_type = res.headers["Content-Type"].to_s
         return convert_as_json(body) if content_type.include?("application/json")
 
         convert_as_csv(body)
