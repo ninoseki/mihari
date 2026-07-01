@@ -79,7 +79,7 @@ module Mihari
       def _get(path, params: {})
         res = get(path, params:)
         body = res.body.to_s
-        content_type = res["Content-Type"].to_s
+        content_type = res.headers["Content-Type"].to_s
 
         return JSON.parse(body) if content_type.include?("application/json")
 

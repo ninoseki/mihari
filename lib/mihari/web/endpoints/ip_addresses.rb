@@ -8,14 +8,13 @@ module Mihari
       #
       class IPAddresses < Grape::API
         namespace :ip_addresses do
-          desc "Get IP address data", {
+          desc "Get IP address data",
             success: Entities::IPAddress,
             failure: [
               {code: 404, model: Entities::ErrorMessage},
               {code: 422, model: Entities::ErrorMessage}
             ],
             summary: "Get IP address data"
-          }
           params do
             requires :ip, type: String
           end

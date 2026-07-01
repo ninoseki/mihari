@@ -8,11 +8,10 @@ module Mihari
       #
       class Alerts < Grape::API
         namespace :alerts do
-          desc "List/search alerts", {
+          desc "List/search alerts",
             is_array: true,
             success: Entities::AlertsWithPagination,
             summary: "List/search alerts"
-          }
           params do
             optional :q, type: String, default: ""
             optional :page, type: Integer, default: 1
@@ -31,11 +30,10 @@ module Mihari
             )
           end
 
-          desc "Get an alert", {
+          desc "Get an alert",
             success: Entities::Alert,
             failure: [{code: 404, model: Entities::ErrorMessage}],
             summary: "Get an alert"
-          }
           params do
             requires :id, type: Integer
           end
@@ -51,11 +49,10 @@ module Mihari
             raise result.failure
           end
 
-          desc "Delete an alert", {
+          desc "Delete an alert",
             success: {code: 204},
             failure: [{code: 404, model: Entities::ErrorMessage}],
             summary: "Delete an alert"
-          }
           params do
             requires :id, type: Integer
           end
@@ -71,13 +68,12 @@ module Mihari
             raise result.failure
           end
 
-          desc "Create an alert", {
+          desc "Create an alert",
             success: {code: 201, model: Entities::Alert},
             failure: [
               {code: 404, model: Entities::ErrorMessage}
             ],
             summary: "Create an alert"
-          }
           params do
             requires :ruleId, type: String, documentation: {param_type: "body"}
             requires :artifacts, type: Array, documentation: {type: String, is_array: true, param_type: "body"}

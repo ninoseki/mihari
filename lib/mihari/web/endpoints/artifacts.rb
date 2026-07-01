@@ -8,11 +8,10 @@ module Mihari
       #
       class Artifacts < Grape::API
         namespace :artifacts do
-          desc "List/search artifacts", {
+          desc "List/search artifacts",
             is_array: true,
             success: Entities::ArtifactsWithPagination,
             summary: "List/search artifacts"
-          }
           params do
             optional :q, type: String, default: ""
             optional :page, type: Integer, default: 1
@@ -31,11 +30,10 @@ module Mihari
             )
           end
 
-          desc "Get an artifact", {
+          desc "Get an artifact",
             success: Entities::Artifact,
             failure: [{code: 404, model: Entities::ErrorMessage}],
             summary: "Get an artifact"
-          }
           params do
             requires :id, type: Integer
           end
@@ -51,11 +49,10 @@ module Mihari
             raise result.failure
           end
 
-          desc "Enrich an artifact", {
+          desc "Enrich an artifact",
             success: {code: 201, model: Entities::Message},
             failure: [{code: 400, model: Entities::ErrorMessage}, {code: 404, model: Entities::ErrorMessage}],
             summary: "Enrich an artifact"
-          }
           params do
             requires :id, type: Integer
           end
@@ -86,11 +83,10 @@ module Mihari
             raise result.failure
           end
 
-          desc "Delete an artifact", {
+          desc "Delete an artifact",
             success: {code: 204},
             failure: [{code: 404, model: Entities::ErrorMessage}],
             summary: "Delete an artifact"
-          }
           params do
             requires :id, type: Integer
           end
