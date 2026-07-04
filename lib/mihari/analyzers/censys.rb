@@ -7,12 +7,6 @@ module Mihari
     #
     class Censys < Base
       # @return [String, nil]
-      attr_reader :id
-
-      # @return [String, nil]
-      attr_reader :secret
-
-      # @return [String, nil]
       attr_reader :pat
 
       # @return [String, nil]
@@ -21,15 +15,10 @@ module Mihari
       # @return [Integer, nil]
       attr_reader :version
 
-      def initialize(query, version: nil, options: nil, id: nil, secret: nil, pat: nil, organization_id: nil)
+      def initialize(query, version: nil, options: nil, pat: nil, organization_id: nil)
         super(query, options:)
 
         @version = version || Mihari.config.censys_version
-
-        # v2
-        @id = id || Mihari.config.censys_id
-        @secret = secret || Mihari.config.censys_secret
-        # v3
         @pat = pat || Mihari.config.censys_pat
         @organization_id = organization_id || Mihari.config.censys_organization_id
       end
@@ -42,8 +31,6 @@ module Mihari
 
       def configured?
         case version
-        when 2
-          v2_configured?
         when 3
           v3_configured?
         else
@@ -55,12 +42,10 @@ module Mihari
 
       def client
         case version
-        when 2
-          v2_client
         when 3
           v3_client
         else
-          raise "Unsupported Censys version: #{version}"
+          raise ValueError("Unsupported Censys version: #{version}")
         end
       end
 
@@ -73,29 +58,8 @@ module Mihari
         )
       end
 
-      def v2_client
-        Clients::Censys::V2.new(
-          id:,
-          secret:,
-          pagination_interval:,
-          timeout:
-        )
-      end
-
-      def v2_configured?
-        id? && secret?
-      end
-
       def v3_configured?
         pat? && organization_id?
-      end
-
-      def id?
-        !id.nil?
-      end
-
-      def secret?
-        !secret.nil?
       end
 
       def pat?
