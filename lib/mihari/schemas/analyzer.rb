@@ -50,11 +50,8 @@ module Mihari
       Censys = Dry::Schema.Params do
         required(:analyzer).value(Types::String.enum(*Mihari::Analyzers::Censys.keys))
         required(:query).filled(:string)
-        optional(:version).value(Types::Coercible::Integer.enum(2, 3)).default(2)
+        optional(:version).value(Types::Coercible::Integer.enum(3)).default(3)
         optional(:options).hash(AnalyzerPaginationOptions)
-        # v2
-        optional(:id).filled(:string)
-        optional(:secret).filled(:string)
         # v3
         optional(:pat).filled(:string)
         optional(:organization_id).filled(:string)
