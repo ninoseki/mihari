@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import type { AxiosError } from "axios"
+import type { HTTPError } from "ky"
 import { type PropType, ref } from "vue"
 
 import Alerts from "@/components/alert/AlertsWithPagination.vue"
@@ -21,14 +21,14 @@ const emits = defineEmits<{
   (e: "refresh"): void
 }>()
 
-const error = ref<AxiosError>()
+const error = ref<HTTPError>()
 const message = ref<QueueMessageType>()
 
 const onDelete = () => {
   emits("delete")
 }
 
-const onSetError = (newError: AxiosError) => {
+const onSetError = (newError: HTTPError) => {
   error.value = newError
 }
 

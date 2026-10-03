@@ -52,9 +52,8 @@
 
 <script setup lang="ts">
 import "vue-json-pretty/lib/styles.css"
-
 import { useToggle } from "@vueuse/core"
-import axios, { AxiosError } from "axios"
+import { type HTTPError, isHTTPError } from "ky"
 import { computed, type PropType, ref } from "vue"
 import VueJsonPretty from "vue-json-pretty"
 
@@ -70,7 +69,7 @@ const props = defineProps({
 
 const emits = defineEmits<{
   (e: "delete"): void
-  (e: "set-error", value: AxiosError): void
+  (e: "set-error", value: HTTPError): void
   (e: "set-message", value: QueueMessageType): void
 }>()
 
@@ -90,7 +89,7 @@ const deleteArtifact = async () => {
       await deleteArtifactTask.perform(props.artifact.id)
       emits("delete")
     } catch (err) {
-      if (axios.isAxiosError(err)) {
+      if (isHTTPError(err)) {
         emits("set-error", err)
       }
     }
@@ -102,7 +101,7 @@ const enrichArtifact = async () => {
     const message = await enrichArtifactTask.perform(props.artifact.id)
     emits("set-message", message)
   } catch (err) {
-    if (axios.isAxiosError(err)) {
+    if (isHTTPError(err)) {
       emits("set-error", err)
     }
   }

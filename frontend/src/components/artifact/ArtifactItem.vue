@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import type { AxiosError } from "axios"
 import truncate from "just-truncate"
+import type { HTTPError } from "ky"
 import { type PropType, ref } from "vue"
 
 import ActionButtons from "@/components/artifact/ActionButtons.vue"
@@ -20,10 +20,10 @@ const emits = defineEmits<{
   (e: "delete"): void
 }>()
 
-const error = ref<AxiosError>()
+const error = ref<HTTPError>()
 const message = ref<QueueMessageType>()
 
-const onSetError = (newError: AxiosError) => {
+const onSetError = (newError: HTTPError) => {
   error.value = newError
 }
 

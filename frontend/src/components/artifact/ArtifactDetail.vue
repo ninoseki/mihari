@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import type { AxiosError } from "axios"
 import truncate from "just-truncate"
+import type { HTTPError } from "ky"
 import { computed, onMounted, type PropType, ref } from "vue"
 
 import { generateGetIPTask } from "@/api-helper"
@@ -34,10 +34,10 @@ const emits = defineEmits<{
 const googleMapSrc = ref<string>()
 const countryCode = ref<string>()
 
-const error = ref<AxiosError>()
+const error = ref<HTTPError>()
 const message = ref<QueueMessageType>()
 
-const onSetError = (newError: AxiosError) => {
+const onSetError = (newError: HTTPError) => {
   error.value = newError
 }
 

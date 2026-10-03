@@ -1,4 +1,4 @@
-import axios from "axios"
+import ky from "ky"
 
 import {
   AlertSchema,
@@ -12,6 +12,7 @@ import {
   ConfigsSchema,
   type ConfigsType,
   type CreateRuleType,
+  IpInfoSchema,
   type IpInfoType,
   QueueMessageSchema,
   type QueueMessageType,
@@ -25,30 +26,28 @@ import {
   type UpdateRuleType
 } from "@/schemas"
 
-const client = axios.create()
+const client = ky.create()
 
 export const API = {
   async getConfigs(): Promise<ConfigsType> {
-    const res = await client.get("/api/configs")
-    return ConfigsSchema.parse(res.data)
+    return await client.get("/api/configs").json(ConfigsSchema)
   },
 
   async getAlerts(params: SearchParamsType): Promise<AlertsType> {
     params.page = params.page || 1
-    const res = await client.get("/api/alerts", {
-      params: params
-    })
-    return AlertsSchema.parse(res.data)
+    return await client
+      .get("/api/alerts", {
+        searchParams: params as Record<string, string | number | boolean>
+      })
+      .json(AlertsSchema)
   },
 
   async getAlert(id: number): Promise<AlertType> {
-    const res = await client.get(`/api/alerts/${id}`)
-    return AlertSchema.parse(res.data)
+    return await client.get(`/api/alerts/${id}`).json(AlertSchema)
   },
 
   async getTags(): Promise<TagsType> {
-    const res = await client.get("/api/tags")
-    return TagsSchema.parse(res.data)
+    return await client.get("/api/tags").json(TagsSchema)
   },
 
   async deleteAlert(id: number): Promise<void> {
@@ -56,21 +55,20 @@ export const API = {
   },
 
   async getArtifact(id: number): Promise<ArtifactType> {
-    const res = await client.get(`/api/artifacts/${id}`)
-    return ArtifactSchema.parse(res.data)
+    return await client.get(`/api/artifacts/${id}`).json(ArtifactSchema)
   },
 
   async getArtifacts(params: SearchParamsType): Promise<ArtifactsType> {
     params.page = params.page || 1
-    const res = await client.get("/api/artifacts", {
-      params: params
-    })
-    return ArtifactsSchema.parse(res.data)
+    return await client
+      .get("/api/artifacts", {
+        searchParams: params as Record<string, string | number | boolean>
+      })
+      .json(ArtifactsSchema)
   },
 
   async enrichArtifact(id: number): Promise<QueueMessageType> {
-    const res = await client.post(`/api/artifacts/${id}/enrich`)
-    return QueueMessageSchema.parse(res.data)
+    return await client.post(`/api/artifacts/${id}/enrich`).json(QueueMessageSchema)
   },
 
   async deleteArtifact(id: number): Promise<void> {
@@ -79,30 +77,27 @@ export const API = {
 
   async getRules(params: SearchParamsType): Promise<RulesType> {
     params.page = params.page || 1
-    const res = await client.get("/api/rules", {
-      params: params
-    })
-    return RulesSchema.parse(res.data)
+    return await client
+      .get("/api/rules", {
+        searchParams: params as Record<string, string | number | boolean>
+      })
+      .json(RulesSchema)
   },
 
   async getRule(id: string): Promise<RuleType> {
-    const res = await client.get(`/api/rules/${id}`)
-    return RuleSchema.parse(res.data)
+    return await client.get(`/api/rules/${id}`).json(RuleSchema)
   },
 
   async searchRule(id: string): Promise<QueueMessageType> {
-    const res = await client.post(`/api/rules/${id}/search`)
-    return QueueMessageSchema.parse(res.data)
+    return await client.post(`/api/rules/${id}/search`).json(QueueMessageSchema)
   },
 
   async createRule(payload: CreateRuleType): Promise<RuleType> {
-    const res = await client.post("/api/rules/", payload)
-    return RuleSchema.parse(res.data)
+    return await client.post("/api/rules/", { json: payload }).json(RuleSchema)
   },
 
   async updateRule(payload: UpdateRuleType): Promise<RuleType> {
-    const res = await client.put("/api/rules/", payload)
-    return RuleSchema.parse(res.data)
+    return await client.put("/api/rules/", { json: payload }).json(RuleSchema)
   },
 
   async deleteRule(id: string): Promise<void> {
@@ -114,7 +109,6 @@ export const API = {
   },
 
   async getIpInfo(ipAddress: string): Promise<IpInfoType> {
-    const res = await client.get<IpInfoType>(`/api/ip_addresses/${ipAddress}`)
-    return res.data
+    return await client.get(`/api/ip_addresses/${ipAddress}`).json(IpInfoSchema)
   }
 }

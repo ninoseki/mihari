@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import axios, { AxiosError } from "axios"
+import { type HTTPError, isHTTPError } from "ky"
 import { computed, onMounted, type PropType } from "vue"
 
 import {
@@ -19,7 +19,7 @@ const props = defineProps({
 
 const emits = defineEmits<{
   (e: "delete"): void
-  (e: "set-error", value: AxiosError): void
+  (e: "set-error", value: HTTPError): void
   (e: "set-message", value: QueueMessageType): void
 }>()
 
@@ -44,7 +44,7 @@ const deleteRule = async () => {
       await deleteRuleTask.perform(props.rule.id)
       emits("delete")
     } catch (err) {
-      if (axios.isAxiosError(err)) {
+      if (isHTTPError(err)) {
         emits("set-error", err)
       }
     }
@@ -56,7 +56,7 @@ const searchRule = async () => {
     const message = await searchRuleTask.perform(props.rule.id)
     emits("set-message", message)
   } catch (err) {
-    if (axios.isAxiosError(err)) {
+    if (isHTTPError(err)) {
       emits("set-error", err)
     }
   }
