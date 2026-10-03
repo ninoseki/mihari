@@ -1,7 +1,6 @@
 import "bulma/css/bulma.css"
 import "bulma-helpers/css/bulma-helpers.min.css"
 import "font-awesome-animation/css/font-awesome-animation.min.css"
-
 import { library } from "@fortawesome/fontawesome-svg-core"
 import {
   faArrowRight,

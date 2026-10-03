@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import "@/ace-config"
-
 import { toRef, watchEffect } from "vue"
 import { VAceEditor } from "vue3-ace-editor"
 

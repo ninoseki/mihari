@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import type { AxiosError } from "axios"
+import type { HTTPError } from "ky"
 import { type PropType, ref } from "vue"
 
 import ErrorMessage from "@/components/ErrorMessage.vue"
@@ -19,10 +19,10 @@ const emits = defineEmits<{
   (e: "delete"): void
 }>()
 
-const error = ref<AxiosError>()
+const error = ref<HTTPError>()
 const message = ref<QueueMessageType>()
 
-const onSetError = (newError: AxiosError) => {
+const onSetError = (newError: HTTPError) => {
   error.value = newError
 }
 

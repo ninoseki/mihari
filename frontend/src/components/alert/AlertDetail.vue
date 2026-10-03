@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import type { AxiosError } from "axios"
+import type { HTTPError } from "ky"
 import { type PropType, ref } from "vue"
 
 import ActionButtons from "@/components/alert/ActionButtons.vue"
@@ -20,9 +20,9 @@ const emits = defineEmits<{
   (e: "delete"): void
 }>()
 
-const error = ref<AxiosError>()
+const error = ref<HTTPError>()
 
-const onSetError = (newError: AxiosError) => {
+const onSetError = (newError: HTTPError) => {
   error.value = newError
 }
 

@@ -1,7 +1,6 @@
 <script setup lang="ts">
 import "vue-json-pretty/lib/styles.css"
-
-import { AxiosError } from "axios"
+import { HTTPError } from "ky"
 import { computed } from "vue"
 import VueJsonPretty from "vue-json-pretty"
 
@@ -9,7 +8,7 @@ import type { ErrorMessageType } from "@/schemas"
 
 const props = defineProps({
   error: {
-    type: AxiosError,
+    type: HTTPError,
     required: true
   },
   disposable: {
@@ -23,10 +22,7 @@ const emits = defineEmits<{
 }>()
 
 const data = computed<ErrorMessageType | undefined>(() => {
-  if (props.error.response) {
-    return props.error.response?.data as ErrorMessageType
-  }
-  return undefined
+  return props.error.data as ErrorMessageType | undefined
 })
 
 const dispose = () => {

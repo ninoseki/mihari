@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import "@/ace-config"
-
 import { VAceEditor } from "vue3-ace-editor"
 
 defineProps({

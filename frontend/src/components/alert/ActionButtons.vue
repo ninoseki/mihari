@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import axios, { AxiosError } from "axios"
+import { type HTTPError, isHTTPError } from "ky"
 import { computed, type PropType } from "vue"
 
 import { generateDeleteAlertTask } from "@/api-helper"
@@ -14,7 +14,7 @@ const props = defineProps({
 
 const emits = defineEmits<{
   (e: "delete"): void
-  (e: "set-error", value: AxiosError): void
+  (e: "set-error", value: HTTPError): void
 }>()
 
 const href = computed(() => {
@@ -31,7 +31,7 @@ const deleteAlert = async () => {
       await deleteAlertTask.perform(props.alert.id)
       emits("delete")
     } catch (err) {
-      if (axios.isAxiosError(err)) {
+      if (isHTTPError(err)) {
         emits("set-error", err)
       }
     }
